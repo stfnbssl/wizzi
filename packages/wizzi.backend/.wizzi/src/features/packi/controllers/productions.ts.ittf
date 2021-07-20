@@ -148,26 +148,31 @@ module
                                 catch_fail( features.packi.controllers.production.transformModel )
 
             handler( executeJob )
-                const files
+                const req_files
                     :ref PackiFiles
                     = request.body
-                log 'ProductionsController.executeJob.received files', Object.keys(files)
-                _ wizziProds.executeJobs(files).then
-                    async=>
-                        param fsJson
-                        const files
-                            await
-                                _ WizziFactory.extractGeneratedFiles(fsJson)
-                        log 'features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files)
-                        _ sendSuccess
-                            @ response
-                            {
-                                @ generatedArtifacts files
-                    ._ catch
+                log 'ProductionsController.executeJob.received files', Object.keys(req_files)
+                _ artifactApi.prepareGenerationFromWizziJson
+                    @ req_files
+                    ._ then
                         =>
-                            param err
-                            log 'features.packi.controllers.production.executeJob.err', err
-                            _ sendFailure(response, err, 501)
+                            param result
+                                :any
+                            _ wizziProds.executeJobs
+                                @ result.packiFiles
+                                @ result.context
+                                ._ then
+                                    async=>
+                                        param fsJson
+                                        const files
+                                            await
+                                                _ WizziFactory.extractGeneratedFiles(fsJson)
+                                        log 'features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files)
+                                        _ sendSuccess
+                                            @ response
+                                            {
+                                                @ generatedArtifacts files
+                                catch_fail( features.packi.controllers.production.executeJob )
             
             handler( wizzify )
                 const id = request.params.id

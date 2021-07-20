@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\EditorView\EditorToolbar.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 import {StyleSheet, css} from 'aphrodite';
 import * as React from 'react';
@@ -23,6 +23,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 export type EditorToolbarProps = { 
     name: string;
     description: string;
+    packiProduction: PackiProduction;
     createdAt: string | undefined;
     saveStatus: SaveStatus;
     saveHistory: SaveHistory;
@@ -54,6 +55,7 @@ export function EditorToolbar(props: EditorToolbarProps) {
         description, 
         mainIttf, 
         wizziSchema, 
+        packiProduction, 
         createdAt, 
         saveHistory, 
         saveStatus, 
@@ -106,14 +108,42 @@ export function EditorToolbar(props: EditorToolbarProps) {
             </ToolbarTitleShell>
             <div
              className={css(styles.buttons)}>
-                <IconButton
-                 responsive title="Browse generated" onClick={() => 
+                {
+                    packiProduction == 'artifact'
+                     &&  (
+                        <IconButton
+                         responsive title="Browse generated" onClick={() => 
+                            
+                                window.open(generatedPreviewURL)
+                        }>
+                            <BrowserIcon
+                             />
+                        </IconButton>
+                        )
                     
-                        window.open(generatedPreviewURL)
-                }>
-                    <BrowserIcon
-                     />
-                </IconButton>
+                }
+                {
+                    packiProduction == 'package'
+                     &&  (
+                        <IconButton
+                         responsive title="Generate package" onClick={onExecuteWizziJob}>
+                            <svg 
+                                width="20px"
+                                height="18px"
+                                viewBox="0 0 20 18"
+                                fill="none"
+                            >
+                                <path 
+                                    d="M13.333 15l5-5-5-5M6.667 5l-5 5 5 5"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                 />
+                            </svg>
+                        </IconButton>
+                        )
+                    
+                }
                 <IconButton 
                     responsive
                     title="Download as zip"

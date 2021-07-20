@@ -4,3 +4,8 @@ text
         added missing callback. Regenerate and republish package.
     24/4
         folders *\.wizzi\dist2 and files *\.wizzi\generate.js are obsolete and should be deleted
+
+
+    git add .
+    git commit -m "dev 18 07 21"
+    git push origin master

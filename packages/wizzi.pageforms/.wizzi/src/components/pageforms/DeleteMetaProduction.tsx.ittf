@@ -1,0 +1,23 @@
+module
+    $
+        var md = {
+            styled: true,
+            name: "DeleteMetaProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "mp_name", type: "string" },
+                { name: "mp_description", type: "string" },
+            ]
+        }
+    v08/ts/react/component(&md)
+        +
+        m handleChangeName
+        +
+        m componentDidMount
+        +
+        m render
+            return
+                h1
+                    + Delete meta production

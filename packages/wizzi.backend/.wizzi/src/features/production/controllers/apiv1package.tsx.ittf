@@ -64,7 +64,7 @@ module
                     @ request.params.owner
                     @ request.params.name
                     @ request.body.description
-                    @ request.body.packiFiles
+                    @ JSON.stringify(request.body.packiFiles)
                     ._ then
                         =>
                             param result

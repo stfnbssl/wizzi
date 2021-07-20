@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateTFolder.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:04:16 GMT
+    utc time: Tue, 20 Jul 2021 08:45:17 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -217,7 +217,7 @@ export class CreateTFolder extends Component<CreateTFolderProps, CreateTFolderSt
                     <HR
                      />
                     <FormCheckBox 
-                        label='Add a context packi'
+                        label='Add a data context'
                         name='tfolder_add_context'
                         id='tfolder_add_context'
                         value={this.state.tfolder_add_context}

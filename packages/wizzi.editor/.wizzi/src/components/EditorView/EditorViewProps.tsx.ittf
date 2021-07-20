@@ -67,6 +67,8 @@ module
                     :string
                 :p wizziSchema
                     :string
+                :p packiProduction
+                    :ref PackiProduction                    
                 :p dependencies
                     :ref PackiDependencies
                 :p missingDependencies

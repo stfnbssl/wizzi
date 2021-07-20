@@ -1,0 +1,84 @@
+module
+    
+    $
+        var md = {
+            styled: true,
+            name: "UpdatePackageProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "pp_name", type: "string" },
+                { name: "pp_description", type: "string" },
+                { name: "pp_add_context", type: "boolean" },
+                { name: "pp_contexts", type: "array" },
+                { name: "pp_add_tfolder", type: "boolean" },
+                { name: "pp_dependencies", type: "array" },
+            ]
+        }
+
+    v08/ts/react/component(&md)
+        
+        $append imports
+            $include common_imports
+        
+        $append styles
+            :interface RootStyleProps
+            styled StyledRoot .div<RootStyleProps>
+                display flex
+
+        +
+        $include handle_input_change
+        +
+        
+        m componentDidMount
+            log 'UpdatePackageProduction.componentDidMount.props', this.props
+            const
+                {
+                    @ name
+                    @ description
+                    @ contexts
+                    @ dependencies
+                = this.props.data
+            
+            const pp_contexts = contexts || []
+            const pp_dependencies = dependencies || []
+            
+            _ this.setState
+                {
+                    @ pp_name name
+                    @ pp_description description
+                    @ pp_add_context pp_contexts.length > 0
+                    @ pp_contexts
+                    @ pp_add_tfolder pp_dependencies.length > 0
+                    @ pp_dependencies 
+
+        +
+        m render
+            log 'UpdatePacki.render', 'state', this.state
+            return
+                < FormContainer
+                    < FormTitle
+                        @ title 'Update package production'
+                        @ subtitle 'An package production contains the ittf documents 
+                            \b for a single software package.'
+                    < HR
+                    < FormGroup
+                        @ label 'Package name'
+                        @ name 'pp_name'
+                        @ id 'pp_name'
+                        @ required {true}
+                        @ value {this.state.pp_name}
+                        @ onChange {this.handleInputChange}
+                    < HR
+                    < FormGroup
+                        @ label 'Description'
+                        @ name 'pp_description'
+                        @ id 'pp_description'
+                        @ required {true}
+                        @ value {this.state.pp_description}
+                        @ onChange {this.handleInputChange}
+                    < HR
+                    < FormButton
+                        @ label 'Update package production'
+                        @ id 'btn_update_ap'

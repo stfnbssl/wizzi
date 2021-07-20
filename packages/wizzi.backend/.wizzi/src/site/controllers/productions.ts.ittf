@@ -4,7 +4,7 @@ module
         var ctrl = {
             name: 'Productions',
             path: '/productions'
-        } 
+        }
 
     controller( &ctrl )
         
@@ -13,11 +13,14 @@ module
             import
                 @ artifactApi
                 @ packageApi
+                @ metaApi
+                @ tFolderApi
                 from '../../features/production'
-
+        
         _ this.router.get('/artifacts', this.artifacts)
         _ this.router.get('/packages', this.packages)
         _ this.router.get('/metas', this.metas)
+        _ this.router.get('/tfolders', this.tfolders)
 
         $append handlers
             handler( artifacts )
@@ -44,7 +47,6 @@ module
                                                 { 
                                                     @ quotes 'double'
                                                     @ isScriptContext true
-
                     catch_fail( artifact productions )
 
             handler( packages )
@@ -57,11 +59,72 @@ module
                                 {
                                     @ title 'Package productions · Wizzi'
                                     @ packages result.item
+                                    @ __INITIAL_DATA__
+                                        `lit 
+                                            + &nbsp; window.__INITIAL_DATA__ =&nbsp;
+                                            _ jsesc
+                                                { 
+                                                    { data
+                                                        @ type 'success'
+                                                        @ formName 'ListPackageProduction'
+                                                        { formData 
+                                                            @ packages result.item
+                                                    { queryParams
+                                                { 
+                                                    @ quotes 'double'
+                                                    @ isScriptContext true
+
                     catch_fail( package productions )
 
             handler( metas )
-            
-                _ response.render
-                    @ 'productions/metas.html.ittf'
-                    {
-                        @ title 'Meta productions · Wizzi'
+                _ metaApi.getListMetaProduction
+                    ._ then
+                        =>
+                            param result
+                            _ response.render
+                                @ 'productions/metas.html.ittf'
+                                {
+                                    @ title 'Meta productions · Wizzi'
+                                    @ metas result.item
+                                    @ __INITIAL_DATA__
+                                        `lit 
+                                            + &nbsp; window.__INITIAL_DATA__ =&nbsp;
+                                            _ jsesc
+                                                { 
+                                                    { data
+                                                        @ type 'success'
+                                                        @ formName 'ListMetaProduction'
+                                                        { formData 
+                                                            @ metas result.item
+                                                    { queryParams
+                                                { 
+                                                    @ quotes 'double'
+                                                    @ isScriptContext true
+
+                    catch_fail( meta productions )
+
+            handler( tfolders )
+                _ tFolderApi.getListTFolder
+                    ._ then
+                        =>
+                            param result
+                            _ response.render
+                                @ 'tfolders/tfolders.html.ittf'
+                                {
+                                    @ title 'tFolder · Wizzi'
+                                    @ tfolders result.item
+                                    @ __INITIAL_DATA__
+                                        `lit 
+                                            + &nbsp; window.__INITIAL_DATA__ =&nbsp;
+                                            _ jsesc
+                                                { 
+                                                    { data
+                                                        @ type 'success'
+                                                        @ formName 'ListTFolder'
+                                                        { formData 
+                                                            @ tfolders result.item
+                                                    { queryParams
+                                                { 
+                                                    @ quotes 'double'
+                                                    @ isScriptContext true
+                    catch_fail( tFolders )

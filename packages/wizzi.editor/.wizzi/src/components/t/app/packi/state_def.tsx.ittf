@@ -35,7 +35,3 @@ $group
             :ref FileSystemEntry
     :p isWizziJobWaiting
         :boolean 
-    :p lastJobfileEntries
-        :[ 
-            :ref FileSystemEntry
-

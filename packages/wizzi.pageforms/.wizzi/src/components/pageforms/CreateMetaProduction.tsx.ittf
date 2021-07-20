@@ -1,0 +1,151 @@
+module
+    $
+        var md = {
+            styled: true,
+            name: "CreateMetaProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "mp_name", type: "string" },
+                { name: "mp_description", type: "string" },
+                { name: "mp_type", type: "string" },
+                { name: "mp_add_context", type: "boolean" },
+                { name: "mp_contexts", type: "array" },
+                { name: "mp_add_tfolder", type: "boolean" },
+                { name: "mp_dependencies", type: "array" },
+                { name: "mp_upload_files", type: "array" },
+            ]
+        }
+
+    v08/ts/react/component(&md)
+        $append imports
+            import debounce from 'lodash/debounce'
+            import nullthrows from 'nullthrows'        
+            $include common_imports
+        
+        $append styles
+            :interface RootStyleProps
+            styled StyledRoot .div<RootStyleProps>
+                display flex
+
+        p formRef 
+            = React.createRef()
+        +
+        m _checkAvalibleMetaName
+            async
+            const mp_checked = this.state.mp_name
+            const endpoint
+                `lit
+                    _ nullthrows(process.env.API_SERVER_URL)
+                    + /production/meta/checkname/
+                    @ mp_checked
+            log 'CreateMeta._checkAvalibleMetaName.endpoint', endpoint
+            const response
+                await 
+                    _ fetch(endpoint)
+            if !response.ok
+                throw 
+                    new Error
+                        `lit 
+                            + checkAvalibleMetaName error
+                            + &nbsp;-&nbsp;
+                            @ response.status
+                            + &nbsp;-&nbsp;
+                            @ response.statusText
+            const result
+                await 
+                    _ response.json()
+            log 'CreateMeta._checkAvalibleMetaName.result', result
+            _ this.setState
+                {
+                    @ mp_name_available result.isValid
+                    @ mp_name_checked mp_checked
+        
+        m componentDidMount
+
+            set this._checkAvalibleMetaName
+                _ debounce
+                    @ this._checkAvalibleMetaName
+                    @ 100
+        
+        $include handle_input_change
+        add_context_handlers( mp )
+        add_tfolder_handlers( mp )
+
+        +
+        => handleMetaNameChange
+            param ev
+                :ref React.ChangeEvent
+                    :param 
+                        :ref HTMLInputElement
+            log 'handleMetaNameChange', ev.target.type, ev.target.checked, ev.target.value
+            _ this.setState
+                { 
+                    @ mp_name ev.target.value
+            _ this._checkAvalibleMetaName
+        +
+        => handleSubmitCreate
+            param ev
+                :ref React.MouseEvent
+                    :param 
+                        :ref HTMLElement
+            _ ev.preventDefault();
+            if this.state.mp_name_available
+                _ this.formRef.dispatchEvent(new Event('submit'))
+        
+        +
+        m render
+            log 'CreateMetaProduction.render', 'state', this.state
+            return
+                < FormContainer
+                    < FormTitle
+                        @ title 'Create a new meta production'
+                        @ subtitle 'A meta production contains ittf documents 
+                            \b for a production setup.'
+                    < HR
+                    form
+                        action /meta/new
+                        @ acceptCharset UTF-8
+                        method POST
+                        @ ref
+                            =>
+                                param ref
+                                set this.formRef = ref                        
+                        < FormGroup
+                            @ label 'Meta name'
+                            @ name 'mp_name'
+                            @ id 'mp_name'
+                            @ required {true}
+                            @ value {this.state.mp_name}
+                            @ onChange {this.handleMetaNameChange}
+                        {
+                            &&
+                                + this.state.mp_name.length > 0 && this.state.mp_name_available
+                                < Para
+                                    + {'Meta name ' + this.state.mp_name_checked + ' is available'}
+                        {
+                            &&
+                                + this.state.mp_name.length > 0 && !this.state.mp_name_available
+                                < Para
+                                    @ color '#ff0000'
+                                    + {'Meta name ' + this.state.mp_name_checked + ' is not available'}
+                        < HR
+                        < FormGroup
+                            @ label 'Description'
+                            @ name 'mp_description'
+                            @ id 'mp_description'
+                            @ required {true}
+                            @ value {this.state.mp_description}
+                            @ onChange {this.handleInputChange}
+                        
+                        add_context_render( mp )
+                        add_tfolder_render( mp )
+                        
+                        < HR
+                        < FormButton
+                            @ label 'Create meta production'
+                            @ id 'btn_create_mp'
+                            @ variant 'submit'
+                            @ type submit
+                            @ onClick {this.handleSubmitCreate}

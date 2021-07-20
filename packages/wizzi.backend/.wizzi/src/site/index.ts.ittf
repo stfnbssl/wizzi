@@ -11,10 +11,6 @@ module
             import
                 @ ProductionsController
                 from './controllers/productions'
-            import
-                @ TFoldersController
-                from './controllers/tfolders'
-
             $*
             import
                 @ PackiController
@@ -24,5 +20,4 @@ module
         $append controllers
             @ new HomeController()
             @ new ProductionsController()
-            @ new TFoldersController()
             $$ @ new PackiController()

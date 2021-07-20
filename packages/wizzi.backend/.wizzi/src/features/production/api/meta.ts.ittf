@@ -1,0 +1,79 @@
+module
+
+    $
+        var md = {
+            Name: 'MetaProduction',
+            descr: 'meta production',
+            query: [
+                { name: 'owner', type: 'string' },
+                { name: 'name', type: 'string' },
+            ],
+            fields: [
+                { name: 'owner', type: 'string' },
+                { name: 'name', type: 'string' },
+                { name: 'description', type: 'string' },
+                { name: 'packiFiles', type: 'string' },
+            ],
+            created_at: true,
+            updated_at: true
+        }
+    
+    import NodeCache from 'node-cache'        
+    import
+        @ GetMetaProductionModel
+        from '../mongo/meta'
+    import
+        @ IMetaProductionModel
+        from '../types'
+    import
+        @ ValidateResult
+        @ CRUDResult
+        from '../../types'
+    import
+        @ packiTypes
+        from '../../packi'
+    +
+    const myname = 'features.production.api.meta'
+    +
+    const metaCache
+        new NodeCache
+            { 
+                @ stdTTL 120
+                @ checkperiod 60
+    +
+    export
+        async-function validateMetaProduction
+            param owner
+                :string
+            param name
+                :string
+            const MetaProduction = GetMetaProductionModel()
+            return
+                new Promise
+                    =>
+                        param resolve
+                        param reject
+                        let query = { owner: owner, name: name }
+                        _ MetaProduction.find
+                            @ query
+                            =>
+                                param err
+                                param result
+                                log myname, 'validateMetaProduction', 'MetaProduction.find', 'error', err
+                                if err
+                                    return reject(err)
+                                if result.length == 1
+                                    return 
+                                        _ resolve
+                                            {
+                                                @ isValid false
+                                                @ message 'meta production already exists'
+                                _ resolve
+                                    {
+                                        @ isValid true
+    
+    mongo/get_list_api(&md)
+    mongo/get_api(&md)
+    mongo/create_api(&md)
+    mongo/update_api(&md)
+    $include meta/cached_get_save

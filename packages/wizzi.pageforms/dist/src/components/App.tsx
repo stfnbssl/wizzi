@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\App.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:04:16 GMT
+    utc time: Tue, 20 Jul 2021 08:45:17 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -17,6 +17,14 @@ import ListArtifactProduction from './pageforms/ListArtifactProduction';
 import CreateArtifactProduction from './pageforms/CreateArtifactProduction';
 import UpdateArtifactProduction from './pageforms/UpdateArtifactProduction';
 import DeleteArtifactProduction from './pageforms/DeleteArtifactProduction';
+import ListPackageProduction from './pageforms/ListPackageProduction';
+import CreatePackageProduction from './pageforms/CreatePackageProduction';
+import UpdatePackageProduction from './pageforms/UpdatePackageProduction';
+import DeletePackageProduction from './pageforms/DeletePackageProduction';
+import ListMetaProduction from './pageforms/ListMetaProduction';
+import CreateMetaProduction from './pageforms/CreateMetaProduction';
+import UpdateMetaProduction from './pageforms/UpdateMetaProduction';
+import DeleteMetaProduction from './pageforms/DeleteMetaProduction';
 import ListTFolder from './pageforms/ListTFolder';
 import CreateTFolder from './pageforms/CreateTFolder';
 import UpdateTFolder from './pageforms/UpdateTFolder';
@@ -68,6 +76,30 @@ export class App extends Component<AppProps, {}> {
         }
         else if (this.props.formName == 'UpdateArtifactProduction') {
             Comp = UpdateArtifactProduction;
+        }
+        else if (this.props.formName == 'ListPackageProduction') {
+            Comp = ListPackageProduction;
+        }
+        else if (this.props.formName == 'CreatePackageProduction') {
+            Comp = CreatePackageProduction;
+        }
+        else if (this.props.formName == 'DeletePackageProduction') {
+            Comp = DeletePackageProduction;
+        }
+        else if (this.props.formName == 'UpdatePackageProduction') {
+            Comp = UpdatePackageProduction;
+        }
+        else if (this.props.formName == 'ListMetaProduction') {
+            Comp = ListMetaProduction;
+        }
+        else if (this.props.formName == 'CreateMetaProduction') {
+            Comp = CreateMetaProduction;
+        }
+        else if (this.props.formName == 'DeleteMetaProduction') {
+            Comp = DeleteMetaProduction;
+        }
+        else if (this.props.formName == 'UpdateMetaProduction') {
+            Comp = UpdateMetaProduction;
         }
         else if (this.props.formName == 'ListTFolder') {
             Comp = ListTFolder;

@@ -15,6 +15,7 @@ module
             import
                 @ artifactApi
                 @ packageApi
+                @ metaApi
                 @ tFolderApi
                 from '../../production' 
             import EditorDocument 
@@ -51,6 +52,8 @@ module
         _ this.router.get('/a/:userid/:name/*', this.getPackiArtifactProductionByUsername_Name)
         _ this.router.get('/p/:userid/:name', this.getPackiPackageProductionByUsername_Name)
         _ this.router.get('/p/:userid/:name/*', this.getPackiPackageProductionByUsername_Name)
+        _ this.router.get('/m/:userid/:name', this.getPackiMetaProductionByUsername_Name)
+        _ this.router.get('/m/:userid/:name/*', this.getPackiMetaProductionByUsername_Name)
         _ this.router.get('/t/:userid/:name', this.getPackiTFolderByUsername_Name)
         _ this.router.get('/t/:userid/:name/*', this.getPackiTFolderByUsername_Name)
         
@@ -136,6 +139,43 @@ module
                                 @ loggedUser
                                 @ queryParams
                     catch_fail( getPackiPackageProductionByUsername_Name )
+
+            handler( getPackiMetaProductionByUsername_Name )
+                # TODO
+                log myname + '.getPackiMetaProductionByUsername_Name', request.path 
+                const queryParams = {}
+                const parts = request.path.split('/')
+                log myname + '.getPackiMetaProductionByUsername_Name', parts[1], parts.slice(2).join('/')
+                _ metaApi.getMetaProductionObject
+                    @ parts[2]
+                    @ parts.slice(3).join('/')
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log myname + '.getPackiMetaProductionByUsername_Name.result', result
+                            const user = (request.session as any).user
+                            const loggedUser
+                                {
+                                    @ id user._id
+                                    @ username user.username
+                                    @ displayName user.name
+                                    @ picture user.avatar_url
+                            _ renderPackiEditor
+                                @ request
+                                @ response
+                                {
+                                    @ type 'success'
+                                    { packi
+                                        @ _id result._id
+                                        @ owner result.owner
+                                        @ name result.name
+                                        @ description result.description
+                                        @ packiFiles result.packiFiles
+                                        @ packiProduction 'meta'
+                                @ loggedUser
+                                @ queryParams
+                    catch_fail( getPackiMetaProductionByUsername_Name )
 
             handler( getPackiTFolderByUsername_Name )
                 # TODO

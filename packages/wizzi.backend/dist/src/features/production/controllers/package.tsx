@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\production\controllers\package.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:08:53 GMT
+    utc time: Tue, 20 Jul 2021 18:38:15 GMT
 */
 import {Router, Request, Response} from 'express';
 import {ControllerType, AppInitializerType} from '../../../features/app/types';
@@ -69,7 +69,7 @@ export class PackageProductionController implements ControllerType {
     
         console.log(myname + '.postNewPackage.request.body', JSON.stringify(request.body, null, 2));
         console.log(myname + '.postNewPackage.request.session.user', JSON.stringify((request.session as any).user, null, 2));
-        createPackageProduction((request.session as any).user.username, request.body.ap_name, request.body.ap_description, JSON.stringify(getPackiFiles(request.body.ap_main_ittf))).then((result: CRUDResult) => {
+        createPackageProduction((request.session as any).user.username, request.body.pp_name, request.body.pp_description, JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))).then((result: CRUDResult) => {
         
             console.log(myname + '.postNewPackage.createPackageProduction.result', JSON.stringify(result, null, 2));
             if (result.ok) {

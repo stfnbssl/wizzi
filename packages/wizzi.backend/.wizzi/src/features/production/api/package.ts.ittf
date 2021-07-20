@@ -29,6 +29,9 @@ module
         @ ValidateResult
         @ CRUDResult
         from '../../types'
+    import
+        @ packiTypes
+        from '../../packi'
     +
     const myname = 'features.production.api.package'
     +

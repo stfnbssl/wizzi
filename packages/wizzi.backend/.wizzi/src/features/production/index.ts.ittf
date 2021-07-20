@@ -15,6 +15,10 @@ module
         @ GetPackageProductionModel
         from './mongo/package'
     import
+        @ MetaProductionModelBuilder
+        @ GetMetaProductionModel
+        from './mongo/meta'
+    import
         @ TFolderModelBuilder
         @ GetTFolderModel
         from './mongo/tfolder'
@@ -31,6 +35,12 @@ module
         @ ApiV1PackageProductionController
         from './controllers/apiv1package'
     import
+        @ MetaProductionController
+        from './controllers/meta'
+    import
+        @ ApiV1MetaProductionController
+        from './controllers/apiv1meta'
+    import
         @ TFolderController
         from './controllers/tfolder'
     import
@@ -43,6 +53,9 @@ module
         as packageApi
         from './api/package'
     import
+        as metaApi
+        from './api/meta'
+    import
         as tFolderApi
         from './api/tfolder'
     +
@@ -50,6 +63,7 @@ module
         {
             @ GetArtifactProductionModel
             @ GetPackageProductionModel
+            @ GetMetaProductionModel
             @ GetTFolderModel
     +
     const productionModelBuilders
@@ -59,6 +73,7 @@ module
             [
                 @ ArtifactProductionModelBuilder
                 @ PackageProductionModelBuilder
+                @ MetaProductionModelBuilder
                 @ TFolderModelBuilder
     +
     const productionControllers
@@ -70,6 +85,8 @@ module
                 @ new ApiV1ArtifactProductionController()
                 @ new PackageProductionController()
                 @ new ApiV1PackageProductionController()
+                @ new MetaProductionController()
+                @ new ApiV1MetaProductionController()
                 @ new TFolderController()
                 @ new ApiV1TFolderController()
 
@@ -80,4 +97,5 @@ module
         @ productionControllers
         @ artifactApi
         @ packageApi
+        @ metaApi
         @ tFolderApi

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\assets\AddDocumentIcon.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:04:16 GMT
+    utc time: Tue, 20 Jul 2021 08:45:17 GMT
 */
 import * as React from "react";
 export const AddDocumentIcon = ({

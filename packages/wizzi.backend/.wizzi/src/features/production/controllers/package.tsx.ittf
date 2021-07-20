@@ -78,8 +78,8 @@ module
                 log myname + '.postNewPackage.request.session.user', JSON.stringify((request.session as any).user, null, 2)
                 _ createPackageProduction
                     @ (request.session as any).user.username
-                    @ request.body.ap_name
-                    @ request.body.ap_description
+                    @ request.body.pp_name
+                    @ request.body.pp_description
                     @ JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))
                     ._ then
                         =>

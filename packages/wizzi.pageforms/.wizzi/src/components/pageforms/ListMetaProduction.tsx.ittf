@@ -1,0 +1,132 @@
+module
+    $
+        var md = {
+            styled: true,
+            name: "ListMetaProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "l_metas", type: "array" },
+                { name: "l_search", type: "string" },
+                { name: "l_sort", type: "string" },
+            ]
+        }
+
+    v08/ts/react/component(&md)
+        $append imports
+            import debounce from 'lodash/debounce'
+            import nullthrows from 'nullthrows'        
+            $include common_imports
+            import
+                @ AddDocumentIcon
+                from '../../assets/AddDocumentIcon'
+        
+        $append styles
+            :interface RootStyleProps
+            styled StyledRoot .div<RootStyleProps>
+                display flex
+
+        m componentDidMount
+            log 'ListMetaProduction.componentDidMount', this.props.data
+            _ this.setState
+                {
+                    @ l_metas this.props.data.metas
+                    @ l_search ''
+                    @ l_sort 'none'
+
+        m filterItem
+            param item
+            if this.state.l_search.length > 0
+                if (item.name + ' ' + item.description).indexOf(this.state.l_search) < 0
+                    return false
+            return true
+        
+        $include handle_input_change
+
+        m render
+            log 'ListMetaProduction.render', this.state
+            return
+                div
+                    @ className flex-column width-full
+                    div
+                        @ className flex-row flex-items-start
+                        form 
+                            class width-full
+                            @ aria-label Meta productions
+                            @ role search
+                            @ acceptCharset UTF-8
+                            method get
+                            div
+                                @ className flex-row m-xxl
+                                div
+                                    @ className flex-column width-full
+                                    div
+                                        @ className m-s 
+                                        input 
+                                            type search
+                                            class form-control width-full
+                                            placeholder Find a meta production…
+                                            autocomplete off
+                                            @ aria-label Find a meta production…
+                                            @ value {this.state.l_search}
+                                            @ onChange {this.handleInputChange}
+                                            @ name 'l_search'
+                                div
+                                    @ className flex-row
+                                    div
+                                        @ className flex-column
+                                        div
+                                            @ className m-s
+                                            select
+                                                @ onChange {this.handleInputChange}
+                                                @ name 'l_sort'
+                                                @ value {this.state.l_sort}
+                                                option &nbsp;
+                                                    value none
+                                                option Last updated
+                                                    value last-updated
+                                                option Stars
+                                                    value stars
+                                                
+                        div
+                            @ className flex-row m-xxl
+                            div
+                                @ className flex-column m-s
+                                a_icon( New, /meta/new
+                                    < AddDocumentIcon
+                                        @ height 16
+                                        @ width 16
+                    {
+                        && 
+                            + this.state.l_metas  
+                            _ this.state.l_metas.map
+                                =>
+                                    param item
+                                        :any
+                                    param ndx
+                                        :number
+                                    if this.filterItem(item)
+                                        return
+                                            div
+                                                @ className flex-row flex-items-start m-m
+                                                @ key {ndx}
+                                                div
+                                                    @ className flex-column border-b-s p-b-s width-full m-w-xxl
+                                                    div
+                                                        @ className font-xl
+                                                        a {item.name}
+                                                            href {'/~~/m/stfnbssl/' + item.name}
+                                                    div
+                                                        @ className font-m m-b-m
+                                                        + {item.description}
+                                                    $*
+                                                    div
+                                                        @ className flex-row 
+                                                        div
+                                                            @ className font-m m-r-s
+                                                            + main ittf:
+                                                        div
+                                                            @ className font-m m-r-xl
+                                                            + {item.mainIttf}
+                                                    *$

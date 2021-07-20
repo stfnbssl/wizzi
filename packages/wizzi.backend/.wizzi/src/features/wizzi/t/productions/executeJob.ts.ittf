@@ -6,6 +6,8 @@ $group
                 :string
             param files
                 :ref packiTypes.PackiFiles
+            param context
+                :any
             :return
                 :ref Promise
                     :param
@@ -30,6 +32,7 @@ $group
                                 @ name ''
                                 @ path ittfDocumentUri
                                 { productionOptions
+                                @ globalContext context || {}
                             =>
                                 param err
                                 param result
@@ -42,6 +45,8 @@ $group
         async-function executeJobs
             param files
                 :ref packiTypes.PackiFiles
+            param context
+                :any
             :return
                 :ref Promise
                     :param
@@ -76,6 +81,7 @@ $group
                                         @ name ''
                                         @ path ittfDocumentUri
                                         { productionOptions
+                                        @ globalContext context || {}
                                     =>
                                         param err
                                         param result

@@ -50,6 +50,8 @@ module
                     :string 
                 :p description
                     :string 
+                :p packiProduction
+                    :ref PackiProduction                    
                 :p createdAt
                     :union 
                         :string 
@@ -161,6 +163,7 @@ module
                     @ description
                     @ mainIttf
                     @ wizziSchema
+                    @ packiProduction
                     @ createdAt
                     @ saveHistory
                     @ saveStatus
@@ -253,15 +256,35 @@ module
                                 < MenuItem 
                                     @ value {'both'}
                                     + Both
-                        < IconButton 
-                            @ responsive
-                            @ title "Browse generated"
-                            @ onClick
-                                =>
-                                    _ window.open
-                                        @ generatedPreviewURL
-                            $$ @ disabled {isDownloading || isPublishing}
-                            < BrowserIcon
+                        {
+                            &&
+                                + packiProduction == 'artifact'
+                                < IconButton 
+                                    @ responsive
+                                    @ title "Browse generated"
+                                    @ onClick
+                                        =>
+                                            _ window.open
+                                                @ generatedPreviewURL
+                                    $$ @ disabled {isDownloading || isPublishing}
+                                    < BrowserIcon
+                        {
+                            &&
+                                + packiProduction == 'package'
+                                < IconButton 
+                                    @ responsive
+                                    @ title "Generate package"
+                                    @ onClick {onExecuteWizziJob}
+                                    svg 
+                                        @ width "20px"
+                                        @ height "18px"
+                                        @ viewBox "0 0 20 18"
+                                        @ fill "none"
+                                        path 
+                                            @ d "M13.333 15l5-5-5-5M6.667 5l-5 5 5 5"
+                                            @ strokeWidth "2"
+                                            @ strokeLinecap "round"
+                                            @ strokeLinejoin "round"
                         < IconButton 
                             @ responsive
                             @ title "Download as zip"

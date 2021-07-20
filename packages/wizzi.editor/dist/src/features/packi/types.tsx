@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\features\packi\types.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 import {ThemeName} from '../preferences/index';
 import {SDKVersion} from './sdks/types';
@@ -267,7 +267,7 @@ export type RouterData = {
 
 export type PackiFilesOrKind = PackiFiles | string;
 
-export type PackiProduction = 'artifact' | 'package' | 'meta';
+export type PackiProduction = 'artifact' | 'package' | 'meta' | 'tfolder';
 
 export type PackiUploadPayload = { 
     name?: string;

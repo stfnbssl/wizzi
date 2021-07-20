@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\App.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 import * as React from 'react';
 // Redux
@@ -186,7 +186,6 @@ type State = PackiStateProps & {
     params: Params;
     fileEntries: FileSystemEntry[];
     isWizziJobWaiting: boolean;
-    lastJobfileEntries: FileSystemEntry[];
 };
 class AppMain extends React.Component<AppProps, State> {
     constructor(props: AppProps) {
@@ -259,8 +258,7 @@ class AppMain extends React.Component<AppProps, State> {
             generatedArtifact: undefined, 
             jobGeneratedArtifacts: undefined, 
             jobError: undefined, 
-            isWizziJobWaiting: false, 
-            lastJobfileEntries: []
+            isWizziJobWaiting: false
          };
     }
     _previewRef = React.createRef<Window>();
@@ -269,6 +267,7 @@ class AppMain extends React.Component<AppProps, State> {
     _PackiStateListener?: PackiListenerSubscription;
     _isFocused: boolean = false;
     _focusTimer: number | undefined;
+    
     _initializePackiSession() {
         async () => 
         
@@ -292,23 +291,15 @@ class AppMain extends React.Component<AppProps, State> {
     }
     
     _executeJobNotDebounced = () => {
-    
-        const jobEntries = this.state.fileEntries.filter(e => 
-        
-            e.item.path.endsWith('.wfjob.ittf')
-        );
-        if (jobEntries.length > 0) {
+        console.log('App._executeJobNotDebounced');
+        const files = this.state.session.files;
+        if (Object.keys(files).length) {
             this.setState({
-                lastJobfileEntries: this.state.fileEntries, 
                 isWizziJobWaiting: false
              })
-            this.props.dispatchExecuteJob(// 20/4 entryArrayToPacki(this.state.fileEntries.filter(e => e.item.path.endsWith('.ittf')))
-            entryArrayToPacki(this.state.fileEntries))
+            this.props.dispatchExecuteJob(fileConversions.packiFilterIttf(files))
         }
-    }
-    ;
-    _executeJob = debounce(this._executeJobNotDebounced, 5000);
-    
+    };
     static getDerivedStateFromProps(_props: Props, state: State) {
         return null;
     }
@@ -672,6 +663,7 @@ class AppMain extends React.Component<AppProps, State> {
                                     description={this.state.session.description}
                                     mainIttf={this.state.session.mainIttf}
                                     wizziSchema={this.state.session.wizziSchema}
+                                    packiProduction={this.state.session.packiProduction}
                                     experienceURL={experienceURL}
                                     files={this.state.session.files}
                                     isDownloading={this.state.isDownloading}

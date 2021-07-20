@@ -1,0 +1,16 @@
+html
+    $
+        var md = {}
+
+    +
+    layout(&md)
+        $append head-scripts
+            < script
+                + ${__INITIAL_DATA__}
+        . flex-row flex-justify-center
+            profile-sidebar(s)
+            . flex-column width-full
+                # root
+
+        script
+            src "/static/pageforms/main.bundle.js"

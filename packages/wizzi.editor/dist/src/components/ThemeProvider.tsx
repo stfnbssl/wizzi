@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\ThemeProvider.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 // taken from https://github.com/expo/snack/blob/main/website/src/client/components/ThemeProvider.tsx
 // modified

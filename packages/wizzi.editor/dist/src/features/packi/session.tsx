@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\features\packi\session.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 import mapValues from 'lodash/mapValues';
 import nullthrows from 'nullthrows';
@@ -688,7 +688,7 @@ export default class PackiSession {
                 name, 
                 packiProduction
              } = this.state;
-            const url = `${this.apiURL}/api/v1/production/artifact/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`;
+            const url = `${this.apiURL}/api/v1/production/${packiProduction}/${encodeURIComponent(owner)}/${encodeURIComponent(name)}`;
             console.log('PackiSession.uploadUpdates', url);
             const response = await fetch(url, {
                     method: 'PUT', 

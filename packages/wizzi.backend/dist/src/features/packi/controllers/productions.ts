@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\packi\controllers\productions.ts.ittf
-    utc time: Sun, 18 Jul 2021 15:08:53 GMT
+    utc time: Tue, 20 Jul 2021 18:38:14 GMT
 */
 import {Router, Request, Response} from 'express';
 import {ControllerType, AppInitializerType} from '../../../features/app/types';
@@ -152,21 +152,27 @@ export class ProductionsController implements ControllerType {
     
     private executeJob = async (request: Request, response: Response) => {
     
-        const files: PackiFiles = request.body;
-        console.log('ProductionsController.executeJob.received files', Object.keys(files));
-        wizziProds.executeJobs(files).then(async (fsJson) => {
+        const req_files: PackiFiles = request.body;
+        console.log('ProductionsController.executeJob.received files', Object.keys(req_files));
+        artifactApi.prepareGenerationFromWizziJson(req_files).then((result: any) => 
         
-            const files = await WizziFactory.extractGeneratedFiles(fsJson);
-            console.log('features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files));
-            sendSuccess(response, {
-                generatedArtifacts: files
-             })
-        }
-        ).catch((err) => {
+            wizziProds.executeJobs(result.packiFiles, result.context).then(async (fsJson) => {
+            
+                const files = await WizziFactory.extractGeneratedFiles(fsJson);
+                console.log('features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files));
+                sendSuccess(response, {
+                    generatedArtifacts: files
+                 })
+            }
+            ).catch((err: any) => {
+            
+                console.log('features.packi.controllers.production.executeJob.error', err);
+                sendFailure(response, {
+                    err: err
+                 }, 501)
+            }
+            )
         
-            console.log('features.packi.controllers.production.executeJob.err', err);
-            sendFailure(response, err, 501);
-        }
         )
     }
     ;

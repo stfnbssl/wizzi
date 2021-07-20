@@ -1,0 +1,84 @@
+module
+    
+    $
+        var md = {
+            styled: true,
+            name: "UpdateMetaProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "mp_name", type: "string" },
+                { name: "mp_description", type: "string" },
+                { name: "mp_add_context", type: "boolean" },
+                { name: "mp_contexts", type: "array" },
+                { name: "mp_add_tfolder", type: "boolean" },
+                { name: "mp_dependencies", type: "array" },
+            ]
+        }
+
+    v08/ts/react/component(&md)
+        
+        $append imports
+            $include common_imports
+        
+        $append styles
+            :interface RootStyleProps
+            styled StyledRoot .div<RootStyleProps>
+                display flex
+
+        +
+        $include handle_input_change
+        +
+        
+        m componentDidMount
+            log 'UpdateMetaProduction.componentDidMount.props', this.props
+            const
+                {
+                    @ name
+                    @ description
+                    @ contexts
+                    @ dependencies
+                = this.props.data
+            
+            const mp_contexts = contexts || []
+            const mp_dependencies = dependencies || []
+            
+            _ this.setState
+                {
+                    @ mp_name name
+                    @ mp_description description
+                    @ mp_add_context mp_contexts.length > 0
+                    @ mp_contexts
+                    @ mp_add_tfolder mp_dependencies.length > 0
+                    @ mp_dependencies 
+
+        +
+        m render
+            log 'UpdatePacki.render', 'state', this.state
+            return
+                < FormContainer
+                    < FormTitle
+                        @ title 'Update meta production'
+                        @ subtitle 'A meta production contains ittf documents 
+                            \b for a production setup.'
+                    < HR
+                    < FormGroup
+                        @ label 'Meta name'
+                        @ name 'mp_name'
+                        @ id 'mp_name'
+                        @ required {true}
+                        @ value {this.state.mp_name}
+                        @ onChange {this.handleInputChange}
+                    < HR
+                    < FormGroup
+                        @ label 'Description'
+                        @ name 'mp_description'
+                        @ id 'mp_description'
+                        @ required {true}
+                        @ value {this.state.mp_description}
+                        @ onChange {this.handleInputChange}
+                    < HR
+                    < FormButton
+                        @ label 'Update meta production'
+                        @ id 'btn_update_ap'

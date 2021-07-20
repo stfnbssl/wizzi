@@ -56,7 +56,9 @@ $group
         const url
             `lit
                 @ this.apiURL
-                + /api/v1/production/artifact/
+                + /api/v1/production/
+                @ packiProduction
+                + /
                 @ encodeURIComponent(owner)
                 + /
                 @ encodeURIComponent(name)

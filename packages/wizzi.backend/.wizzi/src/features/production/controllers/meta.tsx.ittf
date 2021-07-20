@@ -1,0 +1,126 @@
+module
+    $
+        var ctrl = {
+            name: 'MetaProduction',
+            path: '/meta',
+        }
+    
+    controller( &ctrl )
+            
+        $append imports
+            import ReactDOMServer 
+                from 'react-dom/server'
+            import PageFormDocument 
+                from '../../../pages/PageFormDocument' 
+            import
+                @ CRUDResult
+                from '../../types'
+            import
+                @ createMetaProduction
+                from '../api/meta'
+            +
+            const myname = 'features/production/controllers/meta'
+            +
+            function renderPageForm
+                param req
+                    :ref Request
+                param res
+                    :ref Response
+                param data
+                    :object
+                param queryParams
+                    :object
+
+                const index
+                    op+
+                        + '<!DOCTYPE html>'
+                        _ ReactDOMServer.renderToStaticMarkup
+                            < PageFormDocument 
+                                @ data {data}
+                                @ queryParams {queryParams}
+                _ res.set('Content-Type', 'text/html')
+                _ res.set('Content-Length', index.length.toString())
+                _ res.send(index)
+
+            function getPackiFiles
+                param mainIttf
+                    :string
+                return
+                    {
+                        { [mainIttf]
+                            @ type 'CODE'
+                            @ contents ''
+
+        _ this.router.get('/new', this.getNewMetaForm)
+        _ this.router.post('/new', this.postNewMeta)
+        _ this.router.get('/update', this.getUpdateMetaForm)
+        _ this.router.post('/update', this.postUpdateMeta)
+        _ this.router.get('/delete', this.getDeleteMetaForm)
+        _ this.router.delete('/delete', this.deleteMeta)
+        
+        $append handlers
+            
+            handler( getNewMetaForm )
+                log myname, 'getNewMetaForm', JSON.stringify(request.query, null, 2)
+                _ renderPageForm
+                    @ request
+                    @ response
+                    {
+                        @ type 'success'
+                        @ formName 'CreateMetaProduction'
+                        { formData 
+                            @ owner request.query.owner
+                            @ name request.query.name
+                    {
+
+            handler( postNewMeta )
+                log myname + '.postNewMeta.request.body', JSON.stringify(request.body, null, 2)
+                log myname + '.postNewMeta.request.session.user', JSON.stringify((request.session as any).user, null, 2)
+                _ createMetaProduction
+                    @ (request.session as any).user.username
+                    @ request.body.mp_name
+                    @ request.body.mp_description
+                    @ JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))
+                    ._ then
+                        =>
+                            param result
+                                :ref CRUDResult
+                            log myname + '.postNewMeta.createMetaProduction.result', JSON.stringify(result, null, 2)
+                            if result.ok
+                                _ response.redirect('/productions/metas')
+                            else
+                                _ response.render
+                                    @ 'error.html.ittf'
+                                    {
+                                        @ message 'creating a new meta production'
+                                        @ error result
+                    ._ catch
+                        =>
+                            param err
+                                :any
+                            _ response.render
+                                @ 'error.html.ittf'
+                                {
+                                    @ message 'creating a new meta production'
+                                    @ error err
+
+            handler( getUpdateMetaForm )
+                # log myname + '.getUpdateMetaForm', 
+                _ renderPageForm
+                    @ request
+                    @ response
+                    {
+                        @ type 'success'
+                        @ formName 'UpdateMeta'
+                        { formData 
+                            @ website 'http://dummy.com'
+                    {
+
+            handler( postUpdateMeta )
+                # log myname + '.postUpdateMeta', 
+
+            handler( getDeleteMetaForm )
+                # log myname + '.getDeleteMetaForm', 
+
+            handler( deleteMeta )
+                # log myname + '.deleteMeta', 

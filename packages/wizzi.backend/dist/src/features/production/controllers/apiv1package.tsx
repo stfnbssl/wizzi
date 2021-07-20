@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\production\controllers\apiv1package.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:08:53 GMT
+    utc time: Tue, 20 Jul 2021 18:38:15 GMT
 */
 import {Router, Request, Response} from 'express';
 import {ControllerType, AppInitializerType} from '../../../features/app/types';
@@ -68,7 +68,7 @@ export class ApiV1PackageProductionController implements ControllerType {
     
         console.log('putPackageProduction.request.params', request.params);
         console.log('putPackageProduction.request.body', request.body);
-        updatePackageProduction(request.params.owner, request.params.name, request.body.description, request.body.packiFiles).then((result: any) => {
+        updatePackageProduction(request.params.owner, request.params.name, request.body.description, JSON.stringify(request.body.packiFiles)).then((result: any) => {
         
             console.log('putPackageProduction.result', result);
             sendSuccess(response, result)

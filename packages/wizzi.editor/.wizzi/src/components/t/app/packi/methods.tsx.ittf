@@ -1,5 +1,6 @@
 $group
 
+    +
     m _initializePackiSession
         async=> 
             _ this.setState
@@ -20,38 +21,15 @@ $group
                     @ filePath
                     _ fileConversions.packiFilterIttf
                         @ this.state.session.files
+
     +
-    p _executeJobNotDebounced
-        => 
-            const jobEntries
-                _ this.state.fileEntries.filter
-                    => 
-                        param e
-                        _ e.item.path.endsWith('.wfjob.ittf')
-            if jobEntries.length > 0
-                _ this.setState
-                    { 
-                        @ lastJobfileEntries this.state.fileEntries
-                        @ isWizziJobWaiting false
-                _ this.props.dispatchExecuteJob
-                    _ entryArrayToPacki(this.state.fileEntries)
-                        # 20/4 entryArrayToPacki(this.state.fileEntries.filter(e => e.item.path.endsWith('.ittf')))
-    p _executeJob
-        _ debounce(this._executeJobNotDebounced, 5000)
-    +
-    $*
-    p _saveCodeNotDebounced
-        => 
-            _ this.props.dispatchSavePacki
-                @expr this.state.packiStoreId
-                    :as 
-                        :string 
-                _ entryArrayToPacki
-                    _ this.state.fileEntries.filter
-                        => 
-                            param e
-                            @expr !e.item.virtual && !e.item.generated
-                _ entryArrayToPacki(this.state.fileEntries)
-    p _saveCode
-        _ debounce(this._saveCodeNotDebounced, 1000)
-    *$
+    => _executeJobNotDebounced
+        log 'App._executeJobNotDebounced'
+        const files = this.state.session.files
+        if Object.keys(files).length
+            _ this.setState
+                { 
+                    @ isWizziJobWaiting false
+            _ this.props.dispatchExecuteJob
+                _ fileConversions.packiFilterIttf
+                    @ files

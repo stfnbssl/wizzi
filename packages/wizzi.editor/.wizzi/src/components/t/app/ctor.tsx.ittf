@@ -96,4 +96,3 @@ $group
                 @ jobGeneratedArtifacts undefined
                 @ jobError undefined
                 @ isWizziJobWaiting false
-                @ lastJobfileEntries []

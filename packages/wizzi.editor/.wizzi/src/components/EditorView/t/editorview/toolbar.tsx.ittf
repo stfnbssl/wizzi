@@ -3,6 +3,7 @@
     @ description {description}
     @ mainIttf {mainIttf}
     @ wizziSchema {wizziSchema}
+    @ packiProduction {packiProduction}
     @ createdAt {createdAt}
     @ saveHistory {saveHistory}
     @ saveStatus {saveStatus}

@@ -304,13 +304,6 @@ $group
                     if this.props.preferences.autoGenSingleDoc
                         _ this._generateArtifact
                             @ path
-                        $* VIA
-                        if path.endsWith('.ittf') && ('/'+path).indexOf('/t/') < 0
-                            # TODO filter *.ittf of type == 'CODE'
-                            _ this.props.dispatchGenerateArtifact
-                                @ path
-                                @ this.state.session.files
-                        *$
                     return
                         { 
                             @ selectedFile path

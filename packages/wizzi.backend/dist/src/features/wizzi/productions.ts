@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\wizzi\productions.ts.ittf
-    utc time: Sun, 18 Jul 2021 15:08:53 GMT
+    utc time: Tue, 20 Jul 2021 18:38:14 GMT
 */
 import path from 'path';
 import fs from 'fs';
@@ -335,7 +335,7 @@ export async function transformModelFs(filePath: string, context?: any, options?
         );
 }
 
-export async function executeJob(filePath: string, files: packiTypes.PackiFiles):  Promise<FsJson> {
+export async function executeJob(filePath: string, files: packiTypes.PackiFiles, context: any):  Promise<FsJson> {
 
     return new Promise(async (resolve, reject) => {
         
@@ -352,7 +352,8 @@ export async function executeJob(filePath: string, files: packiTypes.PackiFiles)
                 path: ittfDocumentUri, 
                 productionOptions: {
                     
-                 }
+                 }, 
+                globalContext: context || {}
              }, (err, result) => {
             
                 if (err) {
@@ -366,7 +367,7 @@ export async function executeJob(filePath: string, files: packiTypes.PackiFiles)
         );
 }
 
-export async function executeJobs(files: packiTypes.PackiFiles):  Promise<FsJson> {
+export async function executeJobs(files: packiTypes.PackiFiles, context: any):  Promise<FsJson> {
 
     return new Promise(async (resolve, reject) => {
         
@@ -389,7 +390,8 @@ export async function executeJobs(files: packiTypes.PackiFiles):  Promise<FsJson
                     path: ittfDocumentUri, 
                     productionOptions: {
                         
-                     }
+                     }, 
+                    globalContext: context || {}
                  }, (err, result) => {
                 
                     if (err) {

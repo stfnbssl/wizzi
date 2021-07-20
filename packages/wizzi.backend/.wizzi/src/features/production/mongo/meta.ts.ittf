@@ -1,0 +1,23 @@
+module
+
+    $
+        var md = {
+            Name: 'MetaProduction'
+        }
+
+    mongo/model(&md)
+        $append fields
+            @ owner String
+            @ name String
+            @ description String
+            @ sdkVersion String
+            @ packiFiles String
+            @ created_at Date
+            @ updated_at Date
+
+        _ MetaProductionSchema.index
+            {
+                @ owner 1
+                @ name 1
+            {
+                @ unique true            

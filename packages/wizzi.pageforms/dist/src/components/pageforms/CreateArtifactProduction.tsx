@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateArtifactProduction.tsx.ittf
-    utc time: Sun, 18 Jul 2021 15:04:16 GMT
+    utc time: Tue, 20 Jul 2021 08:45:17 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -236,7 +236,7 @@ export class CreateArtifactProduction extends Component<CreateArtifactProduction
                     <HR
                      />
                     <FormCheckBox 
-                        label='Add a context packi'
+                        label='Add a data context'
                         name='ap_add_context'
                         id='ap_add_context'
                         value={this.state.ap_add_context}

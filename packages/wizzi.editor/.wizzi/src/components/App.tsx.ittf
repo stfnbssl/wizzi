@@ -279,6 +279,7 @@ module
                                             @ description {this.state.session.description}
                                             @ mainIttf {this.state.session.mainIttf}
                                             @ wizziSchema {this.state.session.wizziSchema}
+                                            @ packiProduction {this.state.session.packiProduction}
                                             @ experienceURL {experienceURL}
                                             @ files {this.state.session.files}
                                             @ isDownloading {this.state.isDownloading}

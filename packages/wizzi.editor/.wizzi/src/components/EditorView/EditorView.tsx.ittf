@@ -14,6 +14,7 @@ module
     import 
         @ SDKVersion
         @ PackiFiles
+        @ PackiProduction
         from '../../features/packi'
     $if wzCtx.Build.usePackiAspects        
         import 
@@ -435,6 +436,7 @@ module
                     @ description
                     @ mainIttf
                     @ wizziSchema
+                    @ packiProduction
                     @ previewRef
                     @ previewURL
                     @ previewShown

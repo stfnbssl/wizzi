@@ -101,7 +101,7 @@ module
                 < FormContainer
                     < FormTitle
                         @ title 'Create a new package production'
-                        @ subtitle 'An package production contains the ittf documents 
+                        @ subtitle 'A package production contains the ittf documents 
                             \b for a package.'
                     < HR
                     form

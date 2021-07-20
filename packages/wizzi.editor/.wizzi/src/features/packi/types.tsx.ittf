@@ -552,6 +552,7 @@ module
                 :literal 'artifact'
                 :literal 'package'
                 :literal 'meta'
+                :literal 'tfolder'
     +
     export
         :type PackiUploadPayload

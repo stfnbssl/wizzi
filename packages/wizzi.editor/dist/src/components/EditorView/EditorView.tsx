@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\EditorView\EditorView.tsx.ittf
-    utc time: Sat, 17 Jul 2021 06:24:07 GMT
+    utc time: Tue, 20 Jul 2021 18:56:29 GMT
 */
 import {StyleSheet, css} from 'aphrodite';
 import debounce from 'lodash/debounce';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import Split from 'react-split';
-import {SDKVersion, PackiFiles} from '../../features/packi';
+import {SDKVersion, PackiFiles, PackiProduction} from '../../features/packi';
 import {GeneratedArtifact, JobError} from '../../features/wizzi';
 import {LoggedUser} from '../../features/app';
 import {Annotation} from '../../features/annotations';
@@ -239,6 +239,7 @@ class EditorViewComp extends React.Component<EditorViewProps, State> {
             description, 
             mainIttf, 
             wizziSchema, 
+            packiProduction, 
             previewRef, 
             previewURL, 
             previewShown, 
@@ -289,6 +290,7 @@ class EditorViewComp extends React.Component<EditorViewProps, State> {
                     description={description}
                     mainIttf={mainIttf}
                     wizziSchema={wizziSchema}
+                    packiProduction={packiProduction}
                     createdAt={createdAt}
                     saveHistory={saveHistory}
                     saveStatus={saveStatus}

@@ -1,0 +1,76 @@
+module
+    
+    $
+        var ctrl = {
+            name: 'ApiV1MetaProduction',
+            path: '/api/v1/production/meta',
+        }
+    
+    controller( &ctrl )
+            
+        $append imports
+            import
+                @ validateMetaProduction
+                @ getMetaProduction
+                @ updateMetaProduction
+                from '../api/meta'
+            +
+            const myname = 'features/production/controllers/apiv1metaproduction'
+
+        _ this.router.get('/checkname/:name', this.getCheckMetaName)
+        _ this.router.get('/:owner/:name', this.getMetaProduction)
+        _ this.router.put('/:owner/:name', this.putMetaProduction)
+        
+        $append handlers
+            
+            handler( getCheckMetaName )
+
+                log 'getCheckMetaName.request.params', request.params
+                log 'getCheckMetaName.request.session.user.username', (request.session as any).user.username
+                _ validateMetaProduction
+                    @ (request.session as any).user.username
+                    @ request.params.name
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'getCheckMetaName.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    catch_fail( getCheckMetaName )
+
+            handler( getMetaProduction )
+
+                log 'getMetaProduction.request.params', request.params
+                _ getMetaProduction
+                    @ request.params.owner
+                    @ request.params.name
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'getMetaProduction.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    catch_fail( getMetaProduction )
+
+            handler( putMetaProduction )
+
+                log 'putMetaProduction.request.params', request.params
+                log 'putMetaProduction.request.body', request.body
+                _ updateMetaProduction
+                    @ request.params.owner
+                    @ request.params.name
+                    @ request.body.description
+                    @ JSON.stringify(request.body.packiFiles)
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'putMetaProduction.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    catch_fail( putMetaProduction )

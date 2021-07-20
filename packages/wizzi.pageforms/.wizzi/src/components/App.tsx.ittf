@@ -12,8 +12,8 @@ module
         var comps = [
             'User',
             'ArtifactProduction',
-            // 'PackageProduction',
-            // 'MetaProduction',
+            'PackageProduction',
+            'MetaProduction',
             'TFolder',
         ]
         

@@ -1,0 +1,23 @@
+module
+    $
+        var md = {
+            styled: true,
+            name: "DeletePackageProduction",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "ap_name", type: "string" },
+                { name: "ap_description", type: "string" },
+            ]
+        }
+    v08/ts/react/component(&md)
+        +
+        m handleChangeName
+        +
+        m componentDidMount
+        +
+        m render
+            return
+                h1
+                    + Delete package production
