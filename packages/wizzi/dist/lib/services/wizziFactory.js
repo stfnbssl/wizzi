@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -101,11 +101,12 @@ var WizziFactory = (function () {
             this.__is_test = true;
             this.testOptions = {
                 dumps: options.test.dumps
-            };
+             };
             this.testOnlyMockBaseDir = options.test.testOnlyMockBaseDir;
         }
         if (options.globalContext) {
-            this.globalContext = Object.assign({}, this.globalContext, options.globalContext);
+            this.globalContext = Object.assign({}, this.globalContext, options.globalContext)
+            ;
         }
         // log 'wizzi.wizziFactory.initialize.globalContext', this.globalContext
         var repoOptions = options.repo;
@@ -123,30 +124,38 @@ var WizziFactory = (function () {
             }
             that.fileService = pool.fileService;
             that.createStore = pool.createStore;
-            that.__loadMTree = mtree.createLoadMTree(that.createStore);
+            that.__loadMTree = mtree.createLoadMTree(that.createStore)
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTree
             if (that.__loadMTree && that.__loadMTree.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', that.__loadMTree
                 return callback(that.__loadMTree);
             }
             that.__loadMTreeFrontMatter = mtree.createLoadMTree(that.createStore, {
                 frontMatter: true
-            });
+             })
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeFrontMatter
             if (that.__loadMTreeFrontMatter && that.__loadMTreeFrontMatter.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeFrontMatter
                 return callback(that.__loadMTreeFrontMatter);
             }
             that.__loadMTreeRaw = mtree.createLoadMTree(that.createStore, {
                 raw: true
-            });
+             })
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeRaw
             if (that.__loadMTreeRaw && that.__loadMTreeRaw.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeRaw
                 return callback(that.__loadMTreeRaw);
             }
             that.__loadMTreeDebugInfo = mtree.createLoadMTree(that.createStore, {
                 debugInfo: true
-            });
+             })
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeDebugInfo
             if (that.__loadMTreeDebugInfo && that.__loadMTreeDebugInfo.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeDebugInfo
                 return callback(that.__loadMTreeDebugInfo);
             }
             that.createStore(function(err, store) {
@@ -171,8 +180,9 @@ var WizziFactory = (function () {
     //
     WizziFactory.prototype.createLoadContext = function(loadContext) {
         
+        
+        // Already a valid request context
         if (verify.isObject(loadContext) && verify.isObject(loadContext.__productionManager)) {
-            // Already a valid request context
             return loadContext;
         }
         
@@ -183,7 +193,7 @@ var WizziFactory = (function () {
         return {
                 __productionManager: this.createProductionManager(), 
                 mTreeBuildUpContext: mTreeBuildUpContext
-            };
+             };
     }
     //
     WizziFactory.prototype.createProductionManager = function(userProductionOptions, globalContext) {
@@ -204,7 +214,8 @@ var WizziFactory = (function () {
         
         var options = productionOptions(userProductionOptions || {});
         if (this.__is_test) {
-            options = Object.assign(options, this.testOptions);
+            options = Object.assign(options, this.testOptions)
+            ;
         }
         // log '*=*=*=*= temporary wizzi.wizziFactory.createProductionManager. options : ', options
         var ProductionManager = getProductionManager();
@@ -239,7 +250,7 @@ var WizziFactory = (function () {
         
         this.__loadMTree(ittfDocumentUri, this.createLoadContext({
             mTreeBuildUpContext: mTreeBuildUpContext
-        }), callback)
+         }), callback)
     }
     //
     WizziFactory.prototype.loadMTreeFrontMatter = function(ittfDocumentUri, callback) {
@@ -291,7 +302,7 @@ var WizziFactory = (function () {
         
         this.__loadMTreeDebugInfo(ittfDocumentUri, this.createLoadContext({
             mTreeBuildUpContext: mTreeBuildUpContext
-        }), callback)
+         }), callback)
     }
     WizziFactory.prototype.loadMTreeDebugInfoFromText = function(ittfContent, mTreeBuildUpContext, callback) {
         if (typeof(callback) !== 'function') {
@@ -335,21 +346,25 @@ var WizziFactory = (function () {
         
         // log 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
         var loadModel = this.modelLoaders[schemaName] || null;
+        
+        // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+        
+        // log 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
+        
+        // log 'getLoadModel.loadModel', loadModel
         if (loadModel == null) {
             var factory = this.pluginsManager.getModelFactory(schemaName, (testOnlyMockBaseDir || this.testOnlyMockBaseDir));
             if (factory && factory.__is_error) {
                 return factory;
             }
-            // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
-            // log 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
             loadModel = factory.createLoadModel({
                 loadMTree: this.__loadMTree, 
                 file: file, 
                 verify: verify, 
                 errors: errors, 
                 wizziFactory: this
-            }, globalContext);
-            // log 'getLoadModel.loadModel', loadModel
+             }, globalContext)
+            ;
             this.modelLoaders[schemaName] = loadModel;
         }
         return loadModel;
@@ -362,12 +377,15 @@ var WizziFactory = (function () {
             );
         }
         var loadModel = this.modelLoaders[schemaName + 'FromMTree'] || null;
+        
+        // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+        
+        // log 'getLoadModel.loadModel', loadModel
         if (loadModel == null) {
             var factory = this.pluginsManager.getModelFactory(schemaName, null);
             if (factory && factory.__is_error) {
                 return factory;
             }
-            // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
             loadModel = factory.createLoadModel({
                 loadMTree: this.__loadMTree, 
                 file: file, 
@@ -376,9 +394,9 @@ var WizziFactory = (function () {
                 wizziFactory: this, 
                 options: {
                     loadFromMTree: true
-                }
-            }, {});
-            // log 'getLoadModel.loadModel', loadModel
+                 }
+             }, {})
+            ;
             this.modelLoaders[schemaName + 'FromMTree'] = loadModel;
         }
         return loadModel;
@@ -399,8 +417,10 @@ var WizziFactory = (function () {
         }
         if (schemaName == null) {
             schemaName = detectSchema(ittfDocumentUri);
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', schemaName
             if (schemaName && schemaName.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', schemaName
                 return callback(schemaName);
             }
         }
@@ -410,7 +430,7 @@ var WizziFactory = (function () {
             return callback(error('InvalidArgument', 'loadModel', {
                     parameter: 'ittfDocumentUri', 
                     message: "'ittfDocumentUri' must be a not empty string. Received: " + util.inspect(ittfDocumentUri, { depth: null })
-                }));
+                 }));
         }
         else {
             ittfDocumentUri = resolved_ittfDocumentUri;
@@ -601,6 +621,7 @@ var WizziFactory = (function () {
         var transformer = this.modelTransformers[transformerName] || null;
         if (transformer == null) {
             transformer = this.pluginsManager.getModelTransformer(transformerName);
+            ;
             if (transformer && transformer.__is_error) {
                 return transformer;
             }
@@ -688,7 +709,7 @@ var WizziFactory = (function () {
         // load the wizzi model from an ittfDocument
         this.loadModel(ittfDocumentUri, {
             mTreeBuildUpContext: requestContext.modelRequestContext
-        }, function(err, wizziModel) {
+         }, function(err, wizziModel) {
             if (err) {
                 return callback(err);
             }
@@ -751,7 +772,7 @@ var WizziFactory = (function () {
         // load the wizzi model from an ittfDocument
         this.loadModel(ittfDocumentUri, {
             mTreeBuildUpContext: requestContext.modelRequestContext
-        }, function(err, wizziModel) {
+         }, function(err, wizziModel) {
             if (err) {
                 return callback(err);
             }
@@ -783,6 +804,7 @@ var WizziFactory = (function () {
         var generator = this.artifactGenerators[artifactName] || null;
         if (generator == null) {
             generator = this.pluginsManager.getArtifactGenerator(artifactName);
+            ;
             if (generator && generator.__is_error) {
                 return generator;
             }
@@ -843,24 +865,30 @@ var WizziFactory = (function () {
         var genContext = new GenContext({
             options: productionOptions(artifactRequestContext, {
                 data: artifactRequestContext
-            }), 
+             }), 
             pman: this.createProductionManager()
-        });
+         });
         // log 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
         generator.gen(artifactModel, genContext, function(err, result) {
+            
+            /**
+                * err.artifactName = artifactName
+                * err.artifactIttfDocumentUri = ittfDocumentUri
+                * 
+                    * callback(err)
+            */
+            
+            // 
+            
+            // log 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
             if (err) {
-                /**
-                    err.artifactName = artifactNameerr.artifactIttfDocumentUri = ittfDocumentUrireturn callback(err);
-                */
-                //
-                // log 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                 return callback(error('WizziFactoryError', 'generateArtifact', {
                         message: 'See inner error', 
                         parameter: {
                             artifactName: artifactName, 
                             artifactIttfDocumentUri: ittfDocumentUri
-                        }
-                    }, err));
+                         }
+                     }, err));
             }
             var sw = new StringWriter();
             result.toStream(sw);
@@ -910,7 +938,7 @@ var WizziFactory = (function () {
         // load the wizzi model from an ittfDocument
         this.loadModel(ittfDocumentUri, {
             mTreeBuildUpContext: requestContext.modelRequestContext
-        }, function(err, artifactModel) {
+         }, function(err, artifactModel) {
             if (err) {
                 return callback(err);
             }
@@ -1057,7 +1085,7 @@ var WizziFactory = (function () {
             lab: path.join(wizziSchemaLabFolder, wfschemaName + '-test.g.js'), 
             jsondocs: path.join(wizziModelFolder, wfschemaName + '-schema.g.json'), 
             htmldocs: path.join(wizziModelFolder, wfschemaName + '-schema.g.html')
-        };
+         };
         
         this.generateModelTypesArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, function(err, generatedArtifacts) {
             if (err) {
@@ -1078,7 +1106,7 @@ var WizziFactory = (function () {
                 factoryPath: paths.factory, 
                 jsondocsPath: paths.jsondocs, 
                 htmldocsPath: paths.htmldocs
-            })
+             })
         })
     }
     //
@@ -1086,7 +1114,7 @@ var WizziFactory = (function () {
         
         var loadContext = {
             mTreeBuildUpContext: mTreeBuildUpContext
-        };
+         };
         
         var that = this;
         
@@ -1134,7 +1162,7 @@ var WizziFactory = (function () {
                                     test: wizziTestArtifact, 
                                     jsondocs: jsondocsJson, 
                                     htmldocs: wizziHtmlDocsArtifact
-                                })
+                                 })
                             })
                         })
                     })
@@ -1162,12 +1190,13 @@ var WizziFactory = (function () {
         
         console.log('wizzi.wizziFactory.executeJob.jobRequest', jobRequest);
         
+        
+        // jobRequest type 1
         if (verify.isNotEmpty(jobRequest.path)) {
-            // jobRequest type 1
             this._executeJob_by_path(jobRequest, callback)
         }
+        // jobRequest type 2
         else {
-            // jobRequest type 2
             this._executeJob_by_wfjobModel(jobRequest, callback)
         }
     }
@@ -1195,8 +1224,8 @@ var WizziFactory = (function () {
                     var notUsed = pman.addJobRequest({
                         wfjob: {
                             ittfDocumentUri: jobRequest.path
-                        }
-                    });
+                         }
+                     });
                     if (notUsed && notUsed.__is_error) {
                         console.log('__is_error ', notUsed);
                         return callback(notUsed);
@@ -1217,7 +1246,7 @@ var WizziFactory = (function () {
                             var result = {
                                 persistResult: persistResult, 
                                 productionContext: pman.productionContext
-                            };
+                             };
                             pman.terminate();
                             return callback(null, result);
                         })
@@ -1240,9 +1269,10 @@ var WizziFactory = (function () {
             {
                 path: tempIttfDocumentUri, 
                 content: ittfContent
-            }
+             }
         ];
         JsonComponents.createJsonFsData(documents, (err, jsonFsData) => {
+        
             if (err) {
                 return callback(err);
             }
@@ -1254,9 +1284,10 @@ var WizziFactory = (function () {
                 return callback(null, {
                         wizziFactory: wf, 
                         ittfDocumentUri: tempIttfDocumentUri
-                    });
+                     });
             })
-        })
+        }
+        )
     }
     WizziFactory.prototype.createJsonFactory = function(options, callback) {
         var wf = new WizziFactory(this.user, this.role);
@@ -1264,10 +1295,10 @@ var WizziFactory = (function () {
             repo: {
                 storeKind: 'json', 
                 storeJsonFsData: options.jsonFsData
-            }, 
+             }, 
             plugins: this.pluginsOptions, 
             globalContext: options.globalContext || {}
-        }, callback)
+         }, callback)
     }
     WizziFactory.prototype.getInfo = function() {
         return {
@@ -1279,7 +1310,7 @@ var WizziFactory = (function () {
                 globalContext: this.globalContext, 
                 __is_test: this.__is_test, 
                 testOptions: this.testOptions
-            };
+             };
     }
     return WizziFactory;
 })();
@@ -1310,8 +1341,9 @@ function getProductionManager() {
 module.exports = {
     createFactory: function(user, role, options, callback) {
         // log 'wizzi.wizziFactory.createFactory.options', options
+        
+        // no ACL required
         if (typeof(callback) === 'undefined' && typeof(options) === 'undefined') {
-            // no ACL required
             options = user;
             callback = role;
             user = 'stefi';
@@ -1321,7 +1353,7 @@ module.exports = {
         var wf = new WizziFactory(user, role);
         wf.initialize(options, callback)
     }
-};
+ };
 /**
   params
     string code
@@ -1340,7 +1372,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.22.wizziFactory.' + method,
+        method: 'wizzi@0.7.23.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

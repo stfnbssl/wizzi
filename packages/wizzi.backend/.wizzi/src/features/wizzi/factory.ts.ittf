@@ -210,25 +210,35 @@ module
                         param reject
                         _ fsJson.toFiles
                             {
-                                @ removeRoot packiFilePrefix
+                                @ removeRoot ''
                             =>
                                 param err
-                                param result
-                                if err
-                                    _ reject(err)
-                                _ result.forEach
+                                param rfiles
+                                log 'wizzi.factory.extractGeneratedFiles.rfiles', rfiles
+                                log 'wizzi.factory.extractGeneratedFiles.packiFilePrefix', packiFilePrefix
+                                _ fsJson.toFiles
+                                    {
+                                        @ removeRoot packiFilePrefix
                                     =>
-                                        param value
-                                        if value.relPath.endsWith('.ittf') == false
-                                            set files[value.relPath] =
-                                                {
-                                                    @ type 'CODE'
-                                                    @ contents
-                                                        @expr value.content
-                                                            :as
-                                                                :string
-                                                    @ generated true
-                                _ resolve(files)
+                                        param err
+                                        param result
+                                        if err
+                                            _ reject(err)
+                                        _ result.forEach
+                                            =>
+                                                param value
+                                                log 'wizzi.factory.extractGeneratedFiles.value.fullPath', value.fullPath,
+                                                    \b value.fullPath.substr(packiFilePrefix.length)
+                                                if value.relPath.endsWith('.ittf') == false
+                                                    set files[value.relPath] =
+                                                        {
+                                                            @ type 'CODE'
+                                                            @ contents
+                                                                @expr value.content
+                                                                    :as
+                                                                        :string
+                                                            @ generated true
+                                        _ resolve(files)
     +
     const schemaPluginMap
         :{

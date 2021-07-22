@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\artifact\artifactInfo.js.ittf
 */
 'use strict';
@@ -65,7 +65,8 @@ var ArtifactInfo = (function () {
                 item.productionManager(productionManager)
             }
         }
-        this.options = _.merge({}, productionManager.options || {}, this.options || {});
+        this.options = _.merge({}, productionManager.options || {}, this.options || {})
+        ;
     }
     ArtifactInfo.prototype.addGenContext = function(genContext) {
         this.genContexts.push(genContext);
@@ -115,7 +116,7 @@ var ArtifactInfo = (function () {
                 }
                 var filepath = interpolate(destUri, ipcontext, {
                     delimiter: '{}'
-                });
+                 });
                 logme('ArtifactInfo.getItemsToPersistToFile.ipcontext', ipcontext, 'filepath', filepath);
                 if (check[filepath]) {
                     return callback(this.error("Duplicated destination filepath: " + filepath, "getItemsToPersistToFile"));
@@ -125,7 +126,7 @@ var ArtifactInfo = (function () {
                     artifactInfo: this, 
                     genContext: genContext, 
                     filepath: filepath
-                };
+                 };
                 items.push(persisteable);
             }
             else {
@@ -138,7 +139,7 @@ var ArtifactInfo = (function () {
                     artifactInfo: this, 
                     genContext: genContext, 
                     filepath: destUri
-                };
+                 };
                 items.push(persisteable);
             }
         }
@@ -236,7 +237,7 @@ var ArtifactInfo = (function () {
             message: message, 
             source: "wizzi/lib/production/artifactInfo.js/" + method, 
             modelInfo: this.modelInfo
-        };
+         };
         logme(err);
         return err;
     }

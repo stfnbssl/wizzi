@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\artifact\asyncArtifactGenerator.js.ittf
 */
 'use strict';
@@ -20,8 +20,22 @@ function logme() {
 
 //
 
-var AsyncArtifactGenerator = {
-    //
+var AsyncArtifactGenerator = 
+/**
+    * params
+    * { artifactInfo
+    * api-ref wizzi.artifact.artifactInfo
+    * { generator
+    * api-ref wizzi-plugin.artifactGenerator
+    * [ modelInfos
+    * { modelInfo
+    * api-ref wizzi.model.modelInfo
+    * [ mainSourceModels
+    * { mainSourceModel
+    * # wizzi model or POJO
+    * # 1 context model for each modelInfo
+*/
+{
     generate: function(artifactInfo, generator, modelInfos, mainSourceModels, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -82,12 +96,12 @@ var AsyncArtifactGenerator = {
                 srcFullPath: modelInfo.srcFullPath(), 
                 options: artifactInfo.options, 
                 pman: artifactInfo.productionManager
-            });
+             });
             genItems.push({
                 generator: generator, 
                 mainSourceModel: mainSourceModel, 
                 genContext: genContext
-            })
+             })
         }
         async.map(genItems, AsyncArtifactGenerator._gen_item, function(err, genContexts) {
             if (err) {
@@ -102,7 +116,7 @@ var AsyncArtifactGenerator = {
                 oper: 'AsyncArtifactGenerator.generate', 
                 status: 'success', 
                 item: 'genContexts.count: ' + genContexts.length
-            })
+             })
         })
     }, 
     generateModelCollection: function(artifactInfo, generator, modelInfos, mainSourceModelsOfModelCollection, callback) {
@@ -168,12 +182,12 @@ var AsyncArtifactGenerator = {
                     srcFullPath: modelInfo.srcFullPath(), 
                     options: artifactInfo.options, 
                     pman: artifactInfo.productionManager
-                });
+                 });
                 genItems.push({
                     generator: generator, 
                     mainSourceModel: mainSourceModel, 
                     genContext: genContext
-                })
+                 })
             }
         }
         async.map(genItems, AsyncArtifactGenerator._gen_item, function(err, genContexts) {
@@ -189,7 +203,7 @@ var AsyncArtifactGenerator = {
                 oper: 'AsyncArtifactGenerator.generate', 
                 status: 'success', 
                 item: 'genContexts.count: ' + genContexts.length
-            })
+             })
         })
     }, 
     generateCodeWrite: function(artifactInfo, generator, contextModels, callback) {
@@ -248,13 +262,13 @@ var AsyncArtifactGenerator = {
             srcFullPath: null, 
             options: artifactInfo.options, 
             pman: artifactInfo.productionManager
-        });
+         });
         new generator.gen(mainSourceModel, genContext);
         artifactInfo.addGenContext(genContext);
         callback(null, {
             oper: 'AsyncArtifactGenerator.generateCodeWrite', 
             status: 'success'
-        })
+         })
     }, 
     _gen_item: function(genInfo, callback) {
         logme('AsyncArtifactGenerator._gen_item', 'genInfo.mainSourceModel', genInfo.mainSourceModel)
@@ -264,6 +278,7 @@ var AsyncArtifactGenerator = {
         }
         var gNum = ++g_generationsCheckCounter;
         g_generationsCheck['timer' + gNum] = setTimeout(checkCallback, 2000);
+        ;
         new genInfo.generator.gen(genInfo.mainSourceModel, genInfo.genContext, function(err, result) {
             if (err) {
                 return callback(err);
@@ -273,7 +288,7 @@ var AsyncArtifactGenerator = {
             return callback(null, result);
         });
     }
-};
+ };
 
 module.exports = {
     AsyncArtifactGenerator: AsyncArtifactGenerator

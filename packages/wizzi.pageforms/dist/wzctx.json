@@ -234,7 +234,8 @@
             "useSelect": true,
             "useRange": true,
             "useDate": true,
-            "useSyntaxHighlighter": true
+            "useSyntaxHighlighter": true,
+            "useObjectEditor": true
         },
         "useHoistNonReactStatic": true,
         "styles": {

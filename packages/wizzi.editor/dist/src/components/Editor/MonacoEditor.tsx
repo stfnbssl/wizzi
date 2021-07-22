@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\Editor\MonacoEditor.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:56:29 GMT
+    utc time: Wed, 21 Jul 2021 08:44:38 GMT
 */
 import {StyleSheet, css} from 'aphrodite';
 import classnames from 'classnames';
@@ -43,24 +43,7 @@ SimpleEditorModelResolverService.prototype.findModel = function(_: any, resource
 
 
 // @ts-ignore
-global.MonacoEnvironment = { getWorker(_: string, label: string) { switch (label) { case 'json': {  // @ts-ignore return new Worker('monaco-editor/esm/vs/language/json/json.worker', { type: 'module'  }); 
-            }
-            case 'typescript':
-            case 'javascript': {
-                
-                // @ts-ignore
-                return new Worker('monaco-editor/esm/vs/language/typescript/ts.worker', { type: 'module'  }); 
-            }
-            default: {
-                
-                // @ts-ignore
-                return new Worker('monaco-editor/esm/vs/editor/editor.worker', { type: 'module'  }); 
-            }
-        }
-    }
-    
- };
-
+global.MonacoEnvironment = { getWorkerUrl(moduleId: string, label: string) { switch (label) { case 'json': { return '/static/packi/json.worker.bundle.js'; } case 'html': { return '/static/packi/html.worker.bundle.js'; } case 'css': case 'scss': case 'less': { return '/static/packi/css.worker.bundle.js'; } case 'typescript': case 'javascript': { return '/static/packi/ts.worker.bundle.js'; } default: { return '/static/packi/editor.worker.bundle.js'; } } }   }; 
 monaco.languages.register({
     id: 'ittf'
  })

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\services\storePool.js.ittf
 */
 'use strict';
@@ -39,11 +39,13 @@ var StorePool = (function () {
         
         if (this.storeKind === 'json' && !repoOptions.storeFsJson && repoOptions.storeJsonFsData) {
             this._initializeFsJson((err, notUsed) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 this.initialize_next_1(callback)
-            })
+            }
+            )
         }
         else {
             this.initialize_next_1(callback)
@@ -58,12 +60,14 @@ var StorePool = (function () {
         };
         var JsonComponents = repo.JsonComponents;
         JsonComponents.createFsJsonByJsonFsData(this.repoOptions.storeJsonFsData, (err, fsJson) => {
+        
             if (err) {
                 return callback(err);
             }
             this.repoOptions.storeFsJson = fsJson;
             return callback(null);
-        })
+        }
+        )
     }
     StorePool.prototype.initialize_next_1 = function(callback) {
         if (typeof(callback) !== 'function') {
@@ -72,19 +76,23 @@ var StorePool = (function () {
             );
         };
         this._initializeFileService((err, notUsed) => {
+        
             if (err) {
                 return callback(err);
             }
             this._initializeStoreService((err, notUsed) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 return callback(null, {
                         fileService: this.fileService, 
                         createStore: this.getCreateStore_hof()
-                    });
-            })
-        })
+                     });
+            }
+            )
+        }
+        )
     }
     StorePool.prototype._initializeFileService = function(callback) {
         if (typeof(callback) !== 'function') {
@@ -107,7 +115,7 @@ var StorePool = (function () {
             repo.dbfile({
                 mongoUri: repoOptions.storeUri, 
                 mongodbBaseFolder: repoOptions.storeBaseFolder
-            }, function(err, file) {
+             }, function(err, file) {
                 if (err) {
                     return callback(err);
                 }
@@ -115,11 +123,12 @@ var StorePool = (function () {
                 return callback(null, null);
             })
         }
+        
+        // log 'repoOptions', repoOptions
         else if (this.storeKind === 'json') {
-            // log 'repoOptions', repoOptions
             repo.jsonfile({
                 fsJson: this.repoOptions.storeFsJson
-            }, function(err, file) {
+             }, function(err, file) {
                 if (err) {
                     return callback(err);
                 }
@@ -127,8 +136,9 @@ var StorePool = (function () {
                 return callback(null, null);
             })
         }
+        
+        // log 'repoOptions', repoOptions
         else if (this.storeKind === 'browser') {
-            // log 'repoOptions', repoOptions
             repo.browserfile(function(err, file) {
                 if (err) {
                     return callback(err);
@@ -227,7 +237,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.22.storePool.' + method,
+        method: 'wizzi@0.7.23.storePool.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

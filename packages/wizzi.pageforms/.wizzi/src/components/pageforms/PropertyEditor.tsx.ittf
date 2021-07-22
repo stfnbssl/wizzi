@@ -1,0 +1,95 @@
+module
+    
+    $
+        var md = {
+            styled: true,
+            name: "PropertyEditor",
+            props: [
+                { name: "data", type: "any", ref: true },
+            ],
+            stateProps: [
+                { name: "pe_values", type: "any" },
+            ]
+        }
+
+    v08/ts/react/component(&md)
+        $append imports
+            import lodashSet from 'lodash/set'
+            common_imports( top )
+            import FormObject from './widgets/FormObject'
+
+        $append styles
+            :interface RootStyleProps
+            styled StyledRoot .div<RootStyleProps>
+                display flex
+
+        $append ctor
+            const values
+                :any
+                {
+            const properties = this.props.data.schema.properties
+            foreach prop in properties
+                if prop.type == 'string' || prop.type == 'number'
+                    set values[prop.name] = prop.defaultValue || ''
+                elif prop.type == 'array'
+                    set values[prop.name] = []
+                elif prop.type == 'object'
+                    set values[prop.name] = {}
+            set this.state
+                {
+                    @ pe_values values
+
+        => handleValuesChange
+            param valuePath
+            param value
+            _ this.setState
+                =>
+                    param state
+                    const newValues
+                        _ lodashSet
+                            @ state.pe_values
+                            @ valuePath
+                            @ value
+                    return
+                        {
+                            @ pe_values newValues
+
+        m render
+            log 'PropertyEditor.render', 'state', this.state
+            const properties = this.props.data.schema.properties
+            return
+                < FormContainer
+                    < FormTitle
+                        @ title 'Property editor'
+                    {
+                        _ properties.map
+                            =>
+                                param p
+                                    :any
+                                param ndx
+                                if p.type == 'string' || p.type == 'number'
+                                    return
+                                        < FormGroup
+                                            @ key {ndx}
+                                            @ label {p.label || p.name}
+                                            @ name {p.name}
+                                            @ id {p.name}
+                                            @ value {this.state.pe_values[p.name]}
+                                            @ onChange
+                                                =>
+                                                    param ev
+                                                    _ this.handleValuesChange
+                                                        @ p.name
+                                                        @ ev.target.value
+                                if p.type == 'object'
+                                    return
+                                        < FormObject
+                                            @ key {ndx}
+                                            @ label {p.label || p.name}
+                                            @ name {p.name}
+                                            @ id {p.name}
+                                            @ path {p.name}
+                                            @ values {this.state.pe_values[p.name] || {}}
+                                            @ properties {p.properties}
+                                            @ onChange {this.handleValuesChange}
+

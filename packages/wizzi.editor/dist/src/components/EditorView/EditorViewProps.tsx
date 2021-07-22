@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\EditorView\EditorViewProps.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:56:29 GMT
+    utc time: Wed, 21 Jul 2021 08:44:38 GMT
 */
 import {SDKVersion, SaveStatus, SaveHistory, PackiSaveOptions, PackiFiles, PackiFile, PackiDependencies, PackiDependency, PackiMissingDependencies} from '../../features/packi';
 import {GeneratedArtifact, JobError} from '../../features/wizzi';

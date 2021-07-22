@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\wizzi\factory.ts.ittf
-    utc time: Tue, 20 Jul 2021 18:38:14 GMT
+    utc time: Thu, 22 Jul 2021 16:33:13 GMT
 */
 import path from 'path';
 import wizzi from 'wizzi';
@@ -153,24 +153,33 @@ export async function extractGeneratedFiles(fsJson: FsJson):  Promise<packiTypes
     return new Promise((resolve, reject) => 
         
             fsJson.toFiles({
-                removeRoot: packiFilePrefix
-             }, (err, result) => {
+                removeRoot: ''
+             }, (err, rfiles) => {
             
-                if (err) {
-                    reject(err);
-                }
-                result.forEach((value) => {
+                console.log('wizzi.factory.extractGeneratedFiles.rfiles', rfiles);
+                console.log('wizzi.factory.extractGeneratedFiles.packiFilePrefix', packiFilePrefix);
+                fsJson.toFiles({
+                    removeRoot: packiFilePrefix
+                 }, (err, result) => {
                 
-                    if (value.relPath.endsWith('.ittf') == false) {
-                        files[value.relPath] = {
-                            type: 'CODE', 
-                            contents: value.content as string, 
-                            generated: true
-                         };
+                    if (err) {
+                        reject(err);
                     }
+                    result.forEach((value) => {
+                    
+                        console.log('wizzi.factory.extractGeneratedFiles.value.fullPath', value.fullPath, value.fullPath.substr(packiFilePrefix.length));
+                        if (value.relPath.endsWith('.ittf') == false) {
+                            files[value.relPath] = {
+                                type: 'CODE', 
+                                contents: value.content as string, 
+                                generated: true
+                             };
+                        }
+                    }
+                    )
+                    resolve(files);
                 }
                 )
-                resolve(files);
             }
             )
         );

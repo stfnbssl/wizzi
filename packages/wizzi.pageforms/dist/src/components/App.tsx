@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\App.tsx.ittf
-    utc time: Tue, 20 Jul 2021 08:45:17 GMT
+    utc time: Thu, 22 Jul 2021 20:20:24 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -30,6 +30,7 @@ import CreateTFolder from './pageforms/CreateTFolder';
 import UpdateTFolder from './pageforms/UpdateTFolder';
 import DeleteTFolder from './pageforms/DeleteTFolder';
 import ThemeDemo from './pageforms/widgets/ThemeDemo';
+import PropertyEditor from './pageforms/PropertyEditor';
 
 export interface AppProps {
     formName: string;
@@ -123,6 +124,9 @@ export class App extends Component<AppProps, {}> {
                 ;
             }
             ;
+        }
+        else if (this.props.formName == 'PropertyEditor') {
+            Comp = PropertyEditor;
         }
         else {
             Comp = () => {

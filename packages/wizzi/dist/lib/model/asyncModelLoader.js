@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\model\asyncModelLoader.js.ittf
 */
 'use strict';
@@ -48,12 +48,19 @@ function _load_item(masterModelInfo, callback) {
     // log '+ asyncModelLoader._load_item, masterModelInfo', masterModelInfo
     logme('AsyncModelLoader._load_item.masterModelInfo.config', util.inspect(masterModelInfo.config, {
         depth: 3
-    }))
+     }))
+    
+    // The master modelInfo has context ModelInfos, so it is a 'templated model'.
+    
+    // First of all recursively load and evaluate its 'context models'
+    
+    // (obsolete VIA) step 1 - set the production state on each contextModelInfo
+    
+    // log '====== ++++++ masterModelInfo.contexts', masterModelInfo.contexts
+    
+    // step 2 - recurse contextModelInfo loading
     if (masterModelInfo.contexts && masterModelInfo.contexts.length > 0) {
-        // The master modelInfo has context ModelInfos, so it is a 'templated model'.
-        // First of all recursively load and evaluate its 'context models'
         
-        // (obsolete VIA) step 1 - set the production state on each contextModelInfo
         var i, i_items=masterModelInfo.contexts, i_len=masterModelInfo.contexts.length, contextModelInfo;
         for (i=0; i<i_len; i++) {
             contextModelInfo = masterModelInfo.contexts[i];
@@ -61,15 +68,13 @@ function _load_item(masterModelInfo, callback) {
             logme('AsyncModelLoader._load_item.context', contextModelInfo.id, contextModelInfo.srcFullPath())
         }
         
-        // log '====== ++++++ masterModelInfo.contexts', masterModelInfo.contexts
         
-        // step 2 - recurse contextModelInfo loading
         async.map(masterModelInfo.contexts, _load_item, function(err, contextWizziModels) {
             // log '+ asyncModelLoader._load_item, after load contexts.contextWizziModels', contextWizziModels
             if (err) {
                 log.error('Error.AsyncModelLoader._load_item', util.inspect(err, {
                     depth: null
-                }))
+                 }))
                 return callback(err, null);
             }
             // log '====== ++++++ contextWizziModels.length', contextWizziModels.length
@@ -87,39 +92,48 @@ function _load_item(masterModelInfo, callback) {
                 }
             }
             // log '====== ++++++ modelCollectionContextWizziModelIndex', modelCollectionContextWizziModelIndex
+            
+            // Yes one of the loaded context models is a model collection.
+            
+            // step 3.b - Prepare the context object of each item of the model collection.
+            
+            // This is quite complex:
+            
+            // . We must create a context object for each item in the model collection.
+            
+            // . Every context object must contain (as properties) all the loaded contextWizziModels
+            
+            // plus the item itself of the model collection.
             if (modelCollectionContextWizziModelIndex > -1) {
-                // Yes one of the loaded context models is a model collection.
-                // step 3.b - Prepare the context object of each item of the model collection.
-                // This is quite complex:
-                // . We must create a context object for each item in the model collection.
-                // . Every context object must contain (as properties) all the loaded contextWizziModels
-                // plus the item itself of the model collection.
                 var collectionItemsContextObjects = prepareCollectionItemsContextObjects(masterModelInfo, contextWizziModels, wizziModelWithModelCollection, masterLoadingContext);
                 if (collectionItemsContextObjects && collectionItemsContextObjects.__is_error) {
                     console.log('__is_error ', collectionItemsContextObjects);
                     return callback(collectionItemsContextObjects);
                 }
+                
+                // There is no source document for the artifact to be generated.
+                
+                // The ArtifactGenerator simply requires a context object.
+                
+                // So collect the loaded contexts in an array and pass them back.
                 if (masterModelInfo.generatorRequireContextOnly) {
-                    // There is no source document for the artifact to be generated.
-                    // The ArtifactGenerator simply requires a context object.
-                    // So collect the loaded contexts in an array and pass them back.
                     var collModelInstances = [];
                     var i, i_items=collectionItemsContextObjects, i_len=collectionItemsContextObjects.length, itemContextObject;
                     for (i=0; i<i_len; i++) {
                         itemContextObject = collectionItemsContextObjects[i];
                         collModelInstances.push(_.assign({}, itemContextObject.context, {
                             ___collItem: itemContextObject.itemObject
-                        }))
+                         }))
                     }
                     return callback(null, collModelInstances);
                 }
+                // step 4.b - load a context for each item of the collection context
                 else {
-                    // step 4.b - load a context for each item of the collection context
                     return async.map(collectionItemsContextObjects, load_collection_item, callback);
                 }
             }
+            // step 3.1 - load the context model
             else {
-                // step 3.1 - load the context model
                 masterModelInfo.getLoadModel(function(err, wizziModelFactory) {
                     if (err) {
                         return callback(err);
@@ -129,8 +143,8 @@ function _load_item(masterModelInfo, callback) {
                         __productionManager: masterModelInfo.productionManager(), 
                         options: {
                             isCompile: masterModelInfo.isCompile
-                        }
-                    };
+                         }
+                     };
                     // log '====== ++++++ wizziModelFactory, masterModelInfo.srcFullPath()', wizziModelFactory, masterModelInfo.srcFullPath(), Object.keys(masterLoadingContext)
                     wizziModelFactory(masterModelInfo.srcFullPath(), loadContext, function(err, wizziModel) {
                         if (err) {
@@ -148,9 +162,9 @@ function _load_item(masterModelInfo, callback) {
             }
         })
     }
+    // The master modelInfo has no context ModelInfos
+    // simply load it.
     else {
-        // The master modelInfo has no context ModelInfos
-        // simply load it.
         var srcFullPath = masterModelInfo.srcFullPath();
         masterModelInfo.getLoadModel(function(err, wizziModelFactory) {
             if (err) {
@@ -161,8 +175,8 @@ function _load_item(masterModelInfo, callback) {
                 __productionManager: masterModelInfo.productionManager(), 
                 options: {
                     isCompile: masterModelInfo.isCompile
-                }
-            };
+                 }
+             };
             wizziModelFactory(srcFullPath, loadContext, function(err, wizziModel) {
                 if (err) {
                     return callback(err);
@@ -173,10 +187,13 @@ function _load_item(masterModelInfo, callback) {
                             return callback(err);
                         }
                         transformedWizziModel.___exportName = (masterModelInfo.exportName || masterModelInfo.schema);
+                        
+                        // this wizziModel is a context model from which
+                        
+                        // will be extracted a collection context,
+                        
+                        // when bubbling up from the recursive loading
                         if (masterModelInfo.coll) {
-                            // this wizziModel is a context model from which
-                            // will be extracted a collection context,
-                            // when bubbling up from the recursive loading
                             transformedWizziModel.___coll = masterModelInfo.coll;
                         }
                         // cache the loaded model, one day, may be, will be useful
@@ -186,15 +203,18 @@ function _load_item(masterModelInfo, callback) {
                         return callback(null, transformedWizziModel);
                     })
                 }
+                // cache the loaded model, one day, may be, will be useful
                 else {
                     wizziModel.___exportName = (masterModelInfo.exportName || masterModelInfo.schema);
+                    
+                    // this wizziModel is a context model from which
+                    
+                    // will be extracted a collection context,
+                    
+                    // when bubbling up from the recursive loading
                     if (masterModelInfo.coll) {
-                        // this wizziModel is a context model from which
-                        // will be extracted a collection context,
-                        // when bubbling up from the recursive loading
                         wizziModel.___coll = masterModelInfo.coll;
                     }
-                    // cache the loaded model, one day, may be, will be useful
                     masterModelInfo.productionManager().setStateModel(srcFullPath, wizziModel);
                     logme('AsyncModelLoader._load_item', 'success, masterModelInfo', masterModelInfo.id, 'exportName', wizziModel.___exportName)
                     return callback(null, wizziModel);
@@ -216,7 +236,7 @@ function recurseTransform(modelTransformers, instance, modelInfo, callback) {
             }
             modelTransformer.trans(instance, {
                 wizziFactory: modelInfo.getWizziFactory()
-            }, function(err, transformedWizziModel) {
+             }, function(err, transformedWizziModel) {
                 if (err) {
                     return callback(err);
                 }
@@ -244,13 +264,14 @@ function prepareCollectionItemsContextObjects(modelInfo, wizziModelContexts, wiz
     var i, i_items=collectionArray, i_len=collectionArray.length, itemObject;
     for (i=0; i<i_len; i++) {
         itemObject = collectionArray[i];
-        context = _.assign({}, masterLoadingContext);
+        context = _.assign({}, masterLoadingContext)
+        ;
         context[collItemExportName] = itemObject;
         itemContextObjects.push({
             modelInfo: modelInfo, 
             itemObject: itemObject, 
             context: context
-        })
+         })
         if (itemContextObjects.length == 1) {
             for (var k in context) {
                 logme('prepareCollectionItemsContextObjects', 'context exportName', k);
@@ -275,8 +296,8 @@ function load_collection_item(collectionLoadData, callback) {
             __productionManager: modelInfo.productionManager(), 
             options: {
                 isCompile: modelInfo.isCompile
-            }
-        };
+             }
+         };
         // log 'asyncModelLoader.load_collection_item.loadContext', loadContext
         wizziModelFactory(modelInfo.srcFullPath(), loadContext, function(err, wizziModel) {
             if (err) {
@@ -293,7 +314,7 @@ function error(message, method) {
         __is_error: true, 
         message: message, 
         source: "wizzi/lib/model/asyncModelLoader/" + method
-    };
+     };
     logme(err);
     return err;
 }

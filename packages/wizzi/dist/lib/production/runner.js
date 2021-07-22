@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\runner.js.ittf
 */
 'use strict';
@@ -76,7 +76,7 @@ var Runner = (function () {
         // log 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
         modelInfo.getModelInfos({
             final: false
-        }, function(err, modelInfos) {
+         }, function(err, modelInfos) {
             if (err) {
                 return callback(err);
             }
@@ -94,7 +94,7 @@ var Runner = (function () {
                 schemaName: schemaName, 
                 wfschemaIttfDocumentUri: wfschemaIttfDocumentUri, 
                 outputPackageFolder: outputPackageFolder
-            };
+             };
             AsyncWizziModelTypesRunner.run(wmtRequest, function(err, result) {
                 if (err) {
                     return callback(err);
@@ -108,7 +108,7 @@ var Runner = (function () {
         var that = this;
         modelInfo.getModelInfos({
             final: false
-        }, function(err, modelInfos) {
+         }, function(err, modelInfos) {
             if (err) {
                 return callback(err);
             }
@@ -137,7 +137,7 @@ var Runner = (function () {
         var that = this;
         modelInfo.getModelInfos({
             final: false
-        }, function(err, modelInfos) {
+         }, function(err, modelInfos) {
             if (err) {
                 return callback(err);
             }
@@ -195,7 +195,7 @@ var Runner = (function () {
             if (isDirectory) {
                 modelInfo.getFiles({
                     final: true
-                }, function(err, files) {
+                 }, function(err, files) {
                     if (err) {
                         return callback(err);
                     }
@@ -208,7 +208,7 @@ var Runner = (function () {
                             srcFullPath: fileInfo.fullpath, 
                             options: that.artifactInfo.options, 
                             pman: modelInfo.productionManager()
-                        });
+                         });
                         genContext.writeFile(fileInfo.fullpath)
                         that.artifactInfo.addGenContext(genContext);
                     }
@@ -222,7 +222,7 @@ var Runner = (function () {
                     srcFullPath: modelInfo.srcFullPath(), 
                     options: that.artifactInfo.options, 
                     pman: modelInfo.productionManager()
-                });
+                 });
                 modelInfo.getSource(function(err, content) {
                     if (err) {
                         return callback(err);
@@ -238,33 +238,39 @@ var Runner = (function () {
         if (this.artifactInfo.modelInfo) {
             this.artifactInfo.modelInfo.getModelInfos({
                 final: false
-            }, (err, modelInfos) => {
+             }, (err, modelInfos) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 // log 'runFrontMatter.modelInfos', modelInfos.length
                 AsyncFrontMatterLoader.loadMany(modelInfos, (err, frontMatters) => {
+                
                     if (err) {
                         return callback(err);
                     }
                     return callback(null, {
                             collection: this.artifactInfo.collection, 
                             items: frontMatters
-                        });
-                })
-            })
+                         });
+                }
+                )
+            }
+            )
         }
+        // log 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
         else {
-            // log 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
             AsyncFrontMatterLoader.loadMany(this.artifactInfo.contextInfos, (err, frontMatters) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 return callback(null, {
                         collection: this.artifactInfo.collection, 
                         items: frontMatters
-                    });
-            })
+                     });
+            }
+            )
         }
     }
     return Runner;
@@ -276,7 +282,7 @@ function error(code, method, message, innerError) {
             name: ( verify.isNumber(code) ? 'Err-' + code : code ), 
             method: 'wizzi.production.runner.' + method, 
             sourcePath: __filename
-        }, message || 'Error message unavailable');
+         }, message || 'Error message unavailable');
 }
 
 module.exports = {

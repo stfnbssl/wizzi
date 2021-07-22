@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\all\services\pluginsManager_internal_1.js.ittf
 */
 'use strict';
@@ -23,6 +23,7 @@ describe("pluginsManager internals 1", function() {
     
     before(function() {
         pluginsManagerInstance = new pluginsManager.PluginsManager();
+        ;
     });
     
     it("should resolve a plugin module", function(done) {

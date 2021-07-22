@@ -81,34 +81,25 @@ module
         # @ts-ignore
     set global.MonacoEnvironment =
         { 
-            m getWorker
-                param _
+            m getWorkerUrl
+                param moduleId
                     :string 
                 param label
                     :string 
                 switch label
                     case 'json'
-                        return 
-                            new Worker
-                                @ 'monaco-editor/esm/vs/language/json/json.worker'
-                                { 
-                                    @ type 'module'
-                            # @ts-ignore
+                        return '/static/packi/json.worker.bundle.js';
+                    case 'html'
+                        return '/static/packi/html.worker.bundle.js';
+                    case 'css'
+                    case 'scss'
+                    case 'less'
+                        return '/static/packi/css.worker.bundle.js';
                     case 'typescript'
                     case 'javascript'
-                        return 
-                            new Worker
-                                @ 'monaco-editor/esm/vs/language/typescript/ts.worker'
-                                { 
-                                    @ type 'module'
-                            # @ts-ignore
+                        return '/static/packi/ts.worker.bundle.js';
                     default 
-                        return 
-                            new Worker
-                                @ 'monaco-editor/esm/vs/editor/editor.worker'
-                                { 
-                                    @ type 'module'
-                            # @ts-ignore
+                        return '/static/packi/editor.worker.bundle.js';
         # @ts-ignore
     _ monaco.languages.register
         {
@@ -563,292 +554,9 @@ module
                                         @ type 'CODE'
                                         @ contents value
         $if wzCtx.Build.useExpo
-            => _handleProvideHover
-                param model
-                    :ref monaco.editor.ITextModel
-                param position
-                    :ref monaco.Position
-                :return
-                    :ref monaco.languages.ProviderResult
-                        :param 
-                            :ref monaco.languages.Hover
-                const line = model.getLineContent(position.lineNumber)
-                    # Get the current line
-                const language = getFileLanguage(this.props.selectedFile)
-                if !language
-                    return null
-                const tokens = monaco.editor.tokenize(line, language)[0]
-                    # Tokenize the line
-                for let i = 0, l = tokens.length; i < l; i++
-                    const current = tokens[i]
-                    const next = tokens[i + 1]
-                    const end
-                        iif next
-                            then next.offset
-                            else line.length
-                    if (current.type === 'string.js' || current.type === 'string.ts') && position.column > current.offset && position.column < end
-                        const string = line.slice(current.offset + 1, end - 1)
-                            # Get the string for the token and strip quotes
-                            # If the string refers to a dependency show the version
-                        const dep = this.state.allDependencies[string]
-                            # If the string refers to a dependency show the version
-                        if dep
-                            const isResolving = this.state.dependencies[string] && !this.state.dependencies[string].handle
-                            const resolvedVersion = this.state.dependencies[string]?.handle?.split?.('@')?.pop?.() ?? dep.version
-                            return 
-                                { 
-                                    @ range new monaco.Range(position.lineNumber, current.offset + 1, position.lineNumber, end)
-                                    [ contents
-                                        { 
-                                            @ value
-                                                iif isResolving
-                                                    then
-                                                        `lit 
-                                                            + Resolving "
-                                                            @ string
-                                                            + @
-                                                            @ dep.version
-                                                            + " ...
-                                                    else
-                                                        `lit 
-                                                            + version "
-                                                            @ resolvedVersion
-                                                            + "
-                return null
-        $if wzCtx.Build.useExpo
-            m _getImportAtPosition
-                param model
-                    :ref monaco.editor.ITextModel
-                param position
-                    :ref monaco.Position
-                param untilPosition
-                    :boolean 
-                    :optional 
-                :return
-                    :union 
-                        :ref monaco.IRange
-                        :void 
-                const textUntilPosition
-                    _ model.getValueInRange
-                        { 
-                            @ startLineNumber 1
-                            @ startColumn 1
-                            @ endLineNumber position.lineNumber
-                            @ endColumn position.column
-                    # Get editor content before the pointer
-                    # Find the import name
-                const matches = textUntilPosition.match(/(([\s|\n]+(import|from)\s+)|(\brequire\b\s*\())["|'][^'^"]*$/)
-                    # Find the import name
-                if !matches
-                    return undefined
-                const line
-                    _ model.getValueInRange
-                        { 
-                            @ startLineNumber position.lineNumber
-                            @ startColumn 1
-                            @ endLineNumber position.lineNumber
-                            @ endColumn position.column + 1000
-                const startOfName = matches[0].replace(/(\s|'|"|from |require\()/g, '')
-                const startIndex = line.indexOf(startOfName)
-                const endIndex = Math.max(line.indexOf("'", startIndex), 0) || Math.max(line.indexOf('"', startIndex), 0) || line.length
-                    # Return the range within the current line
-                return 
-                    { 
-                        @ startLineNumber position.lineNumber
-                        @ endLineNumber position.lineNumber
-                        @ startColumn startIndex + 1
-                        @ endColumn
-                            iif untilPosition
-                                then position.column
-                                else endIndex + 1
-                    # Return the range within the current line
-            => _handleProvideCompletionItems
-                param model
-                    :ref monaco.editor.ITextModel
-                param position
-                    :ref monaco.Position
-                param _context
-                    :ref monaco.languages.CompletionContext
-                param _token
-                    :ref monaco.CancellationToken
-                const range = this._getImportAtPosition(model, position, true)
-                if range
-                    const text = model.getValueInRange(range)
-                        # User is trying to import a file
-                    if text.startsWith('.')
-                        const prefix = getAbsolutePath(text, this.props.selectedFile)
-                        const suggestions
-                            :[ 
-                                :ref monaco.languages.CompletionItem
-                            =
-                                _ Object.keys(this.props.files).filter
-                                    => 
-                                        param path
-                                        @expr path !== this.props.selectedFile && path.startsWith(prefix)
-                                    ._ map
-                                        => 
-                                            param path
-                                            :return
-                                                :ref monaco.languages.CompletionItem
-                                            const relativePath = getRelativePath(path, this.props.selectedFile)
-                                            return 
-                                                { 
-                                                    @ label relativePath
-                                                    @ insertText
-                                                        `lit 
-                                                            + 
-                                                            _ relativePath.replace(/\.(js|tsx?)$/, '')
-                                                            + 
-                                                        # Don't keep extension for JS files
-                                                    @ kind monaco.languages.CompletionItemKind.File
-                                                    @ range
-                        return 
-                            { 
-                                @ suggestions
-                    else
-                        const deps = this.state.allDependencies
-                        return 
-                            { 
-                                @ suggestions
-                                    _ Object.keys(deps).map
-                                        => 
-                                            param name
-                                            (
-                                                { 
-                                                    @ label name
-                                                    @ insertText name
-                                                    @ detail deps[name].version
-                                                    @ kind monaco.languages.CompletionItemKind.Module
-                                                    @ range
-                                    # User is trying to import a dependency
-                return undefined
-            => _fetchTypings
-                const deps = this.state.allDependencies
-                _ Object.keys(deps).forEach
-                    => 
-                        param qualifier
-                        const 
-                            { 
-                                @ version
-                            = deps[qualifier]
-                        if !isValidSemver(version)
-                            return 
-                        const match = /^(?:@([^/?]+)\/)?([^@/?]+)(?:\/([^@]+))?/.exec(qualifier)
-                            # Parse the qualifier to get the package name
-                            # This will handle qualifiers with deep imports
-                        if !match
-                            return 
-                        const name
-                            op+ 
-                                ( 
-                                    iif match[1]
-                                        then
-                                            `lit 
-                                                + @
-                                                @ match[1]
-                                                + /
-                                        else ''
-                                + match[2]
-                        if requestedTypings.get(name) === version
-                            return 
-                                # Typing already loaded
-                        _ requestedTypings.set(name, version)
-                        _ this._typingsWorker?.postMessage?.
-                            { 
-                                @ name
-                                @ version
-            => _addTypings
-                { 
-                    @ typings
-                    :{ 
-                        :p typings
-                            :{ 
-                                :index 
-                                    :string 
-                                    param key
-                                        :string 
-                _ Object.keys(typings).forEach
-                    => 
-                        param path
-                        const extraLib = extraLibs.get(path)
-                        if extraLib
-                            _ extraLib.js.dispose()
-                            _ extraLib.ts.dispose()
-                        let uri
-                            _ monaco.Uri.from
-                                { 
-                                    @ scheme 'file'
-                                    @ path
-                                ._ toString
-                            # Monaco Uri parsing contains a bug which escapes characters unwantedly.
-                            # This causes package-names such as `@expo/vector-icons` to not work.
-                            # https://github.com/Microsoft/monaco-editor/issues/1375
-                        if path.includes('@')
-                            set uri = uri.replace('%40', '@')
-                        const js = monaco.languages.typescript.javascriptDefaults.addExtraLib(typings[path], uri)
-                        const ts = monaco.languages.typescript.typescriptDefaults.addExtraLib(typings[path], uri)
-                        _ extraLibs.set
-                            @ path
-                            { 
-                                @ js
-                                @ ts
-            => _annotationToMarker
-                param annotation
-                    :ref Annotation
-                :return
-                    :ref monaco.editor.IMarker
-                const 
-                    { 
-                        @ severity annotationSeverity
-                        @ location
-                        @ action
-                        ... rest
-                    = annotation
-                let severity
-                    :ref monaco.MarkerSeverity
-                if annotationSeverity < 0
-                    set severity = monaco.MarkerSeverity.Info
-                else
-                    if annotationSeverity === 1
-                        set severity = monaco.MarkerSeverity.Hint
-                    else
-                        if annotationSeverity >= 3
-                            set severity = monaco.MarkerSeverity.Error
-                        else
-                            set severity = monaco.MarkerSeverity.Warning
-                return 
-                    @expr
-                        { 
-                            @ ...rest
-                            ... 
-                                ( 
-                                    iif location
-                                        then
-                                            { 
-                                                @ ...location
-                                        else
-                                            { 
-                            @ severity
-                                # owner: 'expo',
-                                # resource: fileName,
-                        :as 
-                            :any 
-            => _updateMarkers
-                param annotations
-                    :[ 
-                        :ref Annotation
-                param path
-                    :string 
-                _ monaco.editor.setModelMarkers
-                    _ this._editor.getModel()
-                        # @ts-ignore
-                    @ null
-                    _ annotations.filter
-                        => 
-                            param a
-                            set a.location?.fileName === path
-                        ._ map
-                            @expr this._annotationToMarker
+            monaco/hover()
+            monaco/completion()
+            monaco/markers()
         p _handleResize
             _ debounce
                 => 

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\examples\fromText\step_2.js.ittf
 */
 'use strict';
@@ -22,7 +22,8 @@ var mocks = wizziUtils.mocks;
 var async = require('async');
 var pluginsBaseFolder = null;
 var wizziIndex = require('../../index');
-pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..');
+pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
+;
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsnoaclFactory({
         plugins: {
@@ -31,9 +32,9 @@ function createWizziFactory(globalContext, callback) {
                 'wizzi-web', 
                 'wizzi-core'
             ]
-        }, 
+         }, 
         globalContext: globalContext || {}
-    }, callback)
+     }, callback)
 }
 var fromText_step_2 = function(step_callback) {
     heading1('EXAMPLE')
@@ -44,7 +45,7 @@ var fromText_step_2 = function(step_callback) {
     ].join('\n');
     wizziIndex.genFromText(jsIttf, {}, {
         artifactName: 'js/module'
-    }, function(err, artifactText) {
+     }, function(err, artifactText) {
         if (err) {
             return callback(err);
         }
@@ -62,12 +63,14 @@ var fromText_step_2 = function(step_callback) {
                 'alfa', 
                 'beta'
             ]
-        }, {
+         }, {
             artifactName: 'js/module'
-        }, (err, result) => {
+         }, (err, result) => {
+        
             console.log('err', err);
             console.log('result', result);
-        })
+        }
+        )
     })
 };
 fromText_step_2.__name = 'fromText_step_2';
@@ -108,12 +111,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -210,9 +214,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

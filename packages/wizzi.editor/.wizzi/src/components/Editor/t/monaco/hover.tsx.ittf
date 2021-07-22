@@ -1,0 +1,54 @@
+$group
+    +
+    => _handleProvideHover
+        param model
+            :ref monaco.editor.ITextModel
+        param position
+            :ref monaco.Position
+        :return
+            :ref monaco.languages.ProviderResult
+                :param 
+                    :ref monaco.languages.Hover
+        const line = model.getLineContent(position.lineNumber)
+            # Get the current line
+        const language = getFileLanguage(this.props.selectedFile)
+        if !language
+            return null
+        const tokens = monaco.editor.tokenize(line, language)[0]
+            # Tokenize the line
+        for let i = 0, l = tokens.length; i < l; i++
+            const current = tokens[i]
+            const next = tokens[i + 1]
+            const end
+                iif next
+                    then next.offset
+                    else line.length
+            if (current.type === 'string.js' || current.type === 'string.ts') && position.column > current.offset && position.column < end
+                const string = line.slice(current.offset + 1, end - 1)
+                    # Get the string for the token and strip quotes
+                    # If the string refers to a dependency show the version
+                const dep = this.state.allDependencies[string]
+                    # If the string refers to a dependency show the version
+                if dep
+                    const isResolving = this.state.dependencies[string] && !this.state.dependencies[string].handle
+                    const resolvedVersion = this.state.dependencies[string]?.handle?.split?.('@')?.pop?.() ?? dep.version
+                    return 
+                        { 
+                            @ range new monaco.Range(position.lineNumber, current.offset + 1, position.lineNumber, end)
+                            [ contents
+                                { 
+                                    @ value
+                                        iif isResolving
+                                            then
+                                                `lit 
+                                                    + Resolving "
+                                                    @ string
+                                                    + @
+                                                    @ dep.version
+                                                    + " ...
+                                            else
+                                                `lit 
+                                                    + version "
+                                                    @ resolvedVersion
+                                                    + "
+        return null

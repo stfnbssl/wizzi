@@ -1,0 +1,61 @@
+$group
+
+    +
+    => _annotationToMarker
+        param annotation
+            :ref Annotation
+        :return
+            :ref monaco.editor.IMarker
+        const 
+            { 
+                @ severity annotationSeverity
+                @ location
+                @ action
+                ... rest
+            = annotation
+        let severity
+            :ref monaco.MarkerSeverity
+        if annotationSeverity < 0
+            set severity = monaco.MarkerSeverity.Info
+        else
+            if annotationSeverity === 1
+                set severity = monaco.MarkerSeverity.Hint
+            else
+                if annotationSeverity >= 3
+                    set severity = monaco.MarkerSeverity.Error
+                else
+                    set severity = monaco.MarkerSeverity.Warning
+        return 
+            @expr
+                { 
+                    @ ...rest
+                    ... 
+                        ( 
+                            iif location
+                                then
+                                    { 
+                                        @ ...location
+                                else
+                                    { 
+                    @ severity
+                        # owner: 'expo',
+                        # resource: fileName,
+                :as 
+                    :any 
+    +
+    => _updateMarkers
+        param annotations
+            :[ 
+                :ref Annotation
+        param path
+            :string 
+        _ monaco.editor.setModelMarkers
+            _ this._editor.getModel()
+                # @ts-ignore
+            @ null
+            _ annotations.filter
+                => 
+                    param a
+                    set a.location?.fileName === path
+                ._ map
+                    @expr this._annotationToMarker

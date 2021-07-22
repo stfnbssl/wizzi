@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\model\asyncModelLoader.js.ittf
 */
 'use strict';
@@ -30,7 +30,7 @@ describe("asyncModelLoader", function() {
             cwd: path.join(__dirname, 'ittf'), 
             src: 'simple.tests.ittf', 
             schema: 'tests'
-        });
+         });
         mi.productionManager(mocks.getProductionManager(path.join(__dirname, 'ittf'), modelPaths))
         asyncModelLoader.load(mi, function(err, result) {
             if (err) {
@@ -47,7 +47,7 @@ describe("asyncModelLoader", function() {
             cwd: path.join(__dirname, 'data'), 
             src: 'simple.tests.json', 
             format: 'json'
-        });
+         });
         mi.productionManager(mocks.getProductionManager(path.join(__dirname, 'ittf'), modelPaths))
         asyncModelLoader.load(mi, function(err, result) {
             if (err) {

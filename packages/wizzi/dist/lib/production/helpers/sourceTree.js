@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\helpers\sourceTree.js.ittf
 */
 'use strict';
@@ -18,7 +18,7 @@ module.exports = function(wzmodel, filepath, wzrepoRootPath) {
             kind: '$sourcetree', 
             filepath: filepath, 
             sources: []
-        };
+         };
     var sources = wzmodel.loadHistory.sources;
     for (var k in sources) {
         fullpath = sources[k].filepath;
@@ -33,8 +33,9 @@ module.exports = function(wzmodel, filepath, wzrepoRootPath) {
             filepath: fullpath, 
             relpath: relpath, 
             wzpath: wzpath
-        };
+         };
         ret.sources.push(source);
     }
     return ret;
-};
+}
+;

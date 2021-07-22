@@ -24,5 +24,5 @@ module
         if props.margin
             set ret.margin = props.margin
         if props.padding
-            set ret.margin = props.padding
+            set ret.padding = props.padding
         return ret

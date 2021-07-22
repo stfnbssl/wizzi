@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\examples\light\genfolder\step_2.js.ittf
 */
 'use strict';
@@ -22,7 +22,8 @@ var mocks = wizziUtils.mocks;
 var async = require('async');
 var pluginsBaseFolder = null;
 var wizziIndex = require('../../../index');
-pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..', '..');
+pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..', '..')
+;
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsnoaclFactory({
         plugins: {
@@ -31,9 +32,9 @@ function createWizziFactory(globalContext, callback) {
                 'wizzi-web', 
                 'wizzi-core'
             ]
-        }, 
+         }, 
         globalContext: globalContext || {}
-    }, callback)
+     }, callback)
 }
 var light_genfolder_step_1 = function(step_callback) {
     heading1('EXAMPLE')
@@ -43,19 +44,19 @@ var light_genfolder_step_1 = function(step_callback) {
         author: {
             name: "Stefano Bassoli", 
             email: "stfn.bssl@gmail.com"
-        }, 
+         }, 
         license: {
             type: "MIT", 
             url: "https://opensource.org/licenses/MIT"
-        }
-    };
+         }
+     };
     wizziIndex.genFolder(path.join(__dirname, '..', 'templates', pkg.type), {
         pkg: pkg
-    }, {
+     }, {
         destFolder: path.join(__dirname, pkg.name), 
         copyInclude: ['*'], 
         copyExclude: []
-    }, function(err, genFolderResult) {
+     }, function(err, genFolderResult) {
         if (err) {
             console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log('err', err);
@@ -102,12 +103,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -204,9 +206,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

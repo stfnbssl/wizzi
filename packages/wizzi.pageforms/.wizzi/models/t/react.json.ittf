@@ -28,4 +28,5 @@ $group
         useRange true
         useDate true
         useSyntaxHighlighter true
+        useObjectEditor true
     useHoistNonReactStatic true

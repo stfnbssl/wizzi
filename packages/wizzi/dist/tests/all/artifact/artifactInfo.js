@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\all\artifact\artifactInfo.js.ittf
 */
 'use strict';
@@ -32,22 +32,23 @@ describe("artifactInfo", function() {
             options: {
                 basedir: __dirname, 
                 dotgExtensionPrefix: false
-            }, 
+             }, 
             model: mocks.getModelInfo('mock1'), 
             contexts: null, 
             isWfJob: false, 
             transformers: [], 
             gen: {
                 generator: 'js/module'
-            }, 
+             }, 
             dest: {
                 fullpath: null, 
                 folder: null, 
                 baseFolder: null, 
                 path: null, 
                 extension: null
-            }
-        });
+             }
+         });
+        ;
         done();
     });
     it("shoul check properties", function() {

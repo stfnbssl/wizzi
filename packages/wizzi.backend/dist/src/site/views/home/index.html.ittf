@@ -16,6 +16,7 @@ html
                 { title: 'Packi', items: [
                     { title: 'Html packi starter', href: '/~-/html.starter' },
                     { title: 'Packi editor', href: '/~~/stfnbssl' },
+                    { title: 'Property editor', href: '/package/props' },
                 ]}, 
                 { title: 'Demos', items: [
                     { title: 'Pure html', href: '/static/pure.html' },

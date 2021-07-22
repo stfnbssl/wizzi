@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\pages\EditorDocument.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:38:15 GMT
+    utc time: Thu, 22 Jul 2021 16:33:14 GMT
 */
 import jsesc from 'jsesc';
 import React from 'react';
@@ -148,7 +148,7 @@ export default function EditorDocument(props: EditorDocumentProps) {
                     <section
                      id="root" />
                     <script
-                     src="/static/packi/main.bundle.js" />
+                     src="/static/packi/app.bundle.js" />
                 </body>
             </html>
             )

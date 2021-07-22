@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\features\packi\session.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:56:29 GMT
+    utc time: Wed, 21 Jul 2021 08:44:38 GMT
 */
 import mapValues from 'lodash/mapValues';
 import nullthrows from 'nullthrows';
@@ -661,6 +661,13 @@ export default class PackiSession {
                 }
                 );
         }
+        updateJobGeneratedFiles(jobGeneratedFiles: PackiFiles) {
+            console.log('PackiSession.updateJobGeneratedFiles.jobGeneratedFiles', jobGeneratedFiles);
+            this.updatePackiFiles(jobGeneratedFiles, () => {
+            
+            }
+            )
+        }
         updatePackiFiles(files: PackiFiles, done: () => any) {
             console.log('PackiSession.updatePackiFiles.files', files);
             return this.setState((state) => {
@@ -700,7 +707,9 @@ export default class PackiSession {
             const data = await response.json();
             console.log('PackiSession.uploadUpdates.response.data', data);
             this.state.saveCount++;
-            done();
+            if (done) {
+                done();
+            }
             this.setPreviewUrl();
         }
     }

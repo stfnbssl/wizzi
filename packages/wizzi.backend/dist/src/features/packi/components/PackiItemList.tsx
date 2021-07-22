@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\packi\components\PackiItemList.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:38:15 GMT
+    utc time: Thu, 22 Jul 2021 16:33:14 GMT
 */
 import React from 'react';
 type PackiItemListProps = { 

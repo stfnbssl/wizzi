@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\mocks\wizziModels.js.ittf
 */
 'use strict';
@@ -22,7 +22,8 @@ md.getModels = function(schema, mockBaseDir) {
         ret[tests_mock2_path] = tests_mock2();
     }
     return ret;
-};
+}
+;
 function wfjob_mock1() {
     var ret = {
         destBaseFolder: path.join(__dirname, 'result'), 
@@ -41,22 +42,22 @@ function wfjob_mock1() {
                                 isWfJob: true, 
                                 modelRefs: [], 
                                 transformers: []
-                            }, 
+                             }, 
                             {
                                 wzName: 'artifactMock1', 
                                 src: 'mock1.tests.ittf', 
                                 generator: {
                                     gen: 'tests/gen1'
-                                }, 
+                                 }, 
                                 modelRefs: [], 
                                 transformers: []
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }
+             }
         ]
-    };
+     };
     return ret;
 }
 function wfjob_mock2() {
@@ -76,16 +77,16 @@ function wfjob_mock2() {
                                 src: 'mock2.tests.ittf', 
                                 generator: {
                                     gen: 'tests/gen1'
-                                }, 
+                                 }, 
                                 modelRefs: [], 
                                 transformers: []
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }
+             }
         ]
-    };
+     };
     return ret;
 }
 function tests_mock1() {
@@ -96,13 +97,13 @@ function tests_mock1() {
             {
                 wzElement: 'item', 
                 wzName: 'item1'
-            }, 
+             }, 
             {
                 wzElement: 'item', 
                 wzName: 'item2'
-            }
+             }
         ]
-    };
+     };
     return ret;
 }
 function tests_mock2() {
@@ -113,12 +114,12 @@ function tests_mock2() {
             {
                 wzElement: 'item', 
                 wzName: 'item2_1'
-            }, 
+             }, 
             {
                 wzElement: 'item', 
                 wzName: 'item2_2'
-            }
+             }
         ]
-    };
+     };
     return ret;
 }

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\mocks\plugin_ex\plugin_ex.js.ittf
 */
 'use strict';
@@ -47,7 +47,8 @@ var FactoryPlugin = (function () {
         var factory = this.modelFactories[schemaName] || null;
         if (factory == null) {
             var models = require('./wizziModels');
-            factory = this.getMockFactory(schemaName, mockBaseDir);
+            factory = this.getMockFactory(schemaName, mockBaseDir)
+            ;
             this.modelFactories[schemaName] = factory;
         }
         return factory;
@@ -66,11 +67,11 @@ var FactoryPlugin = (function () {
                                 callback({
                                     __is_error: true, 
                                     message: 'Wizzi model not found. IttfDocumentUri: ' + ittfDocumentUri
-                                })
+                                 })
                             }
                         };
                 }
-            };
+             };
     }
     //
     FactoryPlugin.prototype.getModelTransformer = function(transformerName) {
@@ -80,7 +81,8 @@ var FactoryPlugin = (function () {
         if (transformer == null) {
             var transformers = require('./transformers');
             console.log('wizzi.tests.plugin.getModelTransformer transformers: ' + transformers);
-            transformer = transformers.getTransformer(transformerName);
+            transformer = transformers.getTransformer(transformerName)
+            ;
             console.log('wizzi.tests.plugin.getModelTransformer transformer: ' + transformer);
             this.modelTransformers[transformerName] = transformer;
         }
@@ -92,7 +94,8 @@ var FactoryPlugin = (function () {
         var generator = this.artifactGenerators[generationName] || null;
         if (generator == null) {
             var generators = require('./generators');
-            generator = generators.getGenerator(generationName);
+            generator = generators.getGenerator(generationName)
+            ;
             this.artifactGenerators[generationName] = generator;
         }
         return generator;
@@ -102,7 +105,8 @@ var FactoryPlugin = (function () {
         var definition = this.schemaDefinitions[schemaName] || null;
         if (definition == null) {
             var definitions = require('./definitions');
-            definition = definitions.getSchemaDefinition(schemaName);
+            definition = definitions.getSchemaDefinition(schemaName)
+            ;
             this.schemaDefinitions[schemaName] = definition;
         }
         return definition;
@@ -117,7 +121,7 @@ function error(code, message) {
             source: 'mock1-plugin/FactoryPlugin', 
             code: code, 
             message: message
-        };
+         };
 }
 
 module.exports = {
@@ -131,7 +135,7 @@ module.exports = {
         artifactGenerators: [
             'tests/gen1'
         ]
-    }, 
+     }, 
     createFactoryPlugin: function(wizziPackage, options, callback) {
         var plugin = new FactoryPlugin(wizziPackage, this.provides);
         plugin.initialize(options, function(err, notUsed) {
@@ -141,5 +145,5 @@ module.exports = {
             return callback(null, plugin);
         })
     }
-};
+ };
 

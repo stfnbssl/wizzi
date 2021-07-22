@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -87,8 +87,9 @@ var PluginsManager = (function () {
         var packagePathCache = this.packagePathCache;
         
         function resolveNext(i) {
+            
+            // log 'itemsOptions', itemsOptions
             if (i >= itemsOptions.length) {
-                // log 'itemsOptions', itemsOptions
                 return callback(null, itemsOptions);
             }
             var plugin = itemsOptions[i];
@@ -101,9 +102,10 @@ var PluginsManager = (function () {
                             return callback(err);
                         }
                         Object.keys(moduleObject).forEach(function(key) {
+                            
+                            // log 'plugin key', key
                             if (!plugin.hasOwnProperty(key)) {
                                 plugin[key] = moduleObject[key];
-                                // log 'plugin key', key
                             }
                         })
                         plugin.packageName = plugin.packagePath;
@@ -172,8 +174,9 @@ var PluginsManager = (function () {
             if (cache.hasOwnProperty(packagePath)) {
                 return callback(null, cache[packagePath]);
             }
+            
+            // local folder plugin module
             if (packagePath[0] === "." || packagePath[0] === "/") {
-                // local folder plugin module
                 var newPath = path.resolve(pluginsBaseFolder, packagePath);
                 exists(newPath, function(exists) {
                     if (exists) {
@@ -190,8 +193,8 @@ var PluginsManager = (function () {
                     }
                 })
             }
+            // npm (node_modules folder) plugin module
             else {
-                // npm (node_modules folder) plugin module
                 tryNext(pluginsBaseFolder);
             }
             function tryNext(base) {
@@ -262,7 +265,7 @@ var PluginsManager = (function () {
     PluginsManager.prototype.createWizziForPlugin = function() {
         return {
                 file: file
-            };
+             };
     }
     PluginsManager.prototype.validateFactoryPlugin = function(factoryPlugin) {
         if (verify.isObject(factoryPlugin) === false) {
@@ -312,7 +315,7 @@ var PluginsManager = (function () {
         // log 'validateFactoryPlugin', factoryPlugin.getName(), true
         return {
                 __is_error: false
-            };
+             };
     }
     PluginsManager.prototype.addPluginProvides = function(factoryPlugin) {
         if (verify.isObject(factoryPlugin) === false) {
@@ -346,14 +349,15 @@ var PluginsManager = (function () {
             item = factoryPlugin.provides.schemas[i];
             found = _.find(this.providedSchemas, {
                 name: item
-            });
+             })
+            ;
             if (found) {
                 return error('DuplicatedPluginResource', 'addPluginProvides', 'Schema ' + item + ' already provided');
             }
             else {
                 this.providedSchemas.push({
                     name: item
-                })
+                 })
             }
         }
         
@@ -362,14 +366,15 @@ var PluginsManager = (function () {
             item = factoryPlugin.provides.modelTransformers[i];
             found = _.find(this.providedModelTransformers, {
                 name: item
-            });
+             })
+            ;
             if (found) {
                 return error('DuplicatedPluginResource', 'addPluginProvides', 'Model transformer ' + item + ' already provided');
             }
             else {
                 this.providedModelTransformers.push({
                     name: item
-                })
+                 })
             }
         }
         
@@ -378,14 +383,15 @@ var PluginsManager = (function () {
             item = factoryPlugin.provides.artifactGenerators[i];
             found = _.find(this.providedArtifactGenerators, {
                 name: item
-            });
+             })
+            ;
             if (found) {
                 return error('DuplicatedPluginResource', 'addPluginProvides', 'Artifact generator ' + item + ' already provided');
             }
             else {
                 this.providedArtifactGenerators.push({
                     name: item
-                })
+                 })
             }
         }
     }
@@ -433,7 +439,8 @@ var PluginsManager = (function () {
         for (i=0; i<i_len; i++) {
             item = this.factoryPlugins[i];
             // log 'wizzi.pluginsManager.getModelFactory.searching model loader', schemaName, ' in plugin ', item.getName()
-            found = item.getModelFactory(schemaName, textOnlyMockBaseDir);
+            found = item.getModelFactory(schemaName, textOnlyMockBaseDir)
+            ;
             if (found && found.__is_error) {
                 return found;
             }
@@ -473,6 +480,7 @@ var PluginsManager = (function () {
             item = this.factoryPlugins[i];
             // log 'searching transformer ', transformerName, ' in plugin', item.getName()
             found = item.getModelTransformer(transformerName);
+            ;
             if (found && found.__is_error) {
                 return found;
             }
@@ -513,6 +521,7 @@ var PluginsManager = (function () {
             item = this.factoryPlugins[i];
             // log 'searching artifact ', artifactName, ' in module', item.getName()
             found = item.getArtifactGenerator(artifactName);
+            ;
             if (found && found.__is_error) {
                 return found;
             }
@@ -552,6 +561,7 @@ var PluginsManager = (function () {
             item = this.factoryPlugins[i];
             // log 'searching wizzi schema definition', schemaName, ' in plugin ', item.getName()
             found = item.getSchemaDefinition(schemaName);
+            ;
             if (found && found.__is_error) {
                 return found;
             }
@@ -580,14 +590,14 @@ var PluginsManager = (function () {
                 packageName: item.packageName, 
                 packagePath: item.packagePath, 
                 provides: item.provides
-            })
+             })
         }
         return {
                 providedSchemas: this.providedSchemas, 
                 providedModelTransformers: this.providedModelTransformers, 
                 providedArtifactGenerators: this.providedArtifactGenerators, 
                 factoryPlugins: factoryPluginsInfo
-            };
+             };
     }
     return PluginsManager;
 })();
@@ -650,8 +660,9 @@ function resolvePackage(pluginsBaseFolder, packagePath, callback) {
     if (cache.hasOwnProperty(packagePath)) {
         return callback(null, cache[packagePath]);
     }
+    
+    // local folder plugin module
     if (packagePath[0] === "." || packagePath[0] === "/") {
-        // local folder plugin module
         var newPath = path.resolve(pluginsBaseFolder, packagePath);
         exists(newPath, function(exists) {
             if (exists) {
@@ -668,8 +679,8 @@ function resolvePackage(pluginsBaseFolder, packagePath, callback) {
             }
         })
     }
+    // npm (node_modules folder) plugin module
     else {
-        // npm (node_modules folder) plugin module
         tryNext(pluginsBaseFolder);
     }
     function tryNext(base) {
@@ -718,7 +729,7 @@ module.exports = {
     PluginsManager: PluginsManager, 
     resolveModule: resolveModule, 
     resolvePackage: resolvePackage
-};
+ };
 /**
   params
     string code
@@ -737,7 +748,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.22.pluginsManager.' + method,
+        method: 'wizzi@0.7.23.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

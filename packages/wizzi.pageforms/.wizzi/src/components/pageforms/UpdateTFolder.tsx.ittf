@@ -21,7 +21,7 @@ module
     v08/ts/react/component(&md)
         
         $append imports
-            $include common_imports
+            common_imports( top )
         
         $append styles
             :interface RootStyleProps

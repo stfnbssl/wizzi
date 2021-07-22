@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\wizzi\models\bootstrap\wfschema-boot-modelDef.js.ittf
 */
 'use strict';
@@ -381,9 +381,10 @@ md.createInstance = function() {
         error: function(msg, node) {
             throw new Error(msg + '\n' + util.inspect(node, { depth: 2}));
         }
-    };
+     };
     wfschema.wzSetup(ctx);
     wfschema.wzVerify(ctx);
     wfschema.wzInitialize(ctx);
     return wfschema;
-};
+}
+;

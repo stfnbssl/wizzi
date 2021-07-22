@@ -41,6 +41,7 @@
         "monaco-editor": "^0.23.0",
         "nanoid": "^3.1.22",
         "nullthrows": "^1.1.1",
+        "object-editor-react": "^1.1.0",
         "palx": "^1.0.3",
         "prismjs": "^1.21.0",
         "query-string": "^7.0.0",

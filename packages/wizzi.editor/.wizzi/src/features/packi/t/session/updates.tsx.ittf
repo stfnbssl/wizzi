@@ -11,6 +11,25 @@ $group
                         @ packiData
                     return packiData
 
+    m updateJobGeneratedFiles
+        param jobGeneratedFiles
+            :ref PackiFiles
+        log 'PackiSession.updateJobGeneratedFiles.jobGeneratedFiles', jobGeneratedFiles
+        _ this.updatePackiFiles
+            @ jobGeneratedFiles
+            =>
+        
+        $*
+        return
+            _ this.setState
+                =>
+                    param state
+                    const newFiles
+                        _ fileConversions.mixPreviousAndGeneratedPackiFiles
+                            @ state.files
+                            @ jobGeneratedFiles
+        *$
+
     m updatePackiFiles
         param files
             :ref PackiFiles
@@ -77,6 +96,7 @@ $group
                 _ response.json()
         log 'PackiSession.uploadUpdates.response.data', data
         set this.state.saveCount++
-        _ done
+        if done
+            _ done
         _ this.setPreviewUrl
         

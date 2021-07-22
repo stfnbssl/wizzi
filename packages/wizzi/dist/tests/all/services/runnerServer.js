@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\all\services\runnerServer.js.ittf
 */
 'use strict';
@@ -28,17 +28,17 @@ describe("runnerServer", function() {
         runnerServer.instance.registerPlugin('../mocks/plugin')
         runnerServer.instance.registerGlobalContext({
             myname: 'stefi'
-        })
+         })
         runnerServer.instance.registerGlobalContext({
             hername: 'annie'
-        })
+         })
         runnerServer.instance.registerGlobalContext();
         runnerServer.instance.initializeFactory('stefi', 'admin', {
             storeKind: 'filesystem', 
             test: {
                 testOnlyMockBaseDir: __dirname
-            }
-        }, function(err, wf) {
+             }
+         }, function(err, wf) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);

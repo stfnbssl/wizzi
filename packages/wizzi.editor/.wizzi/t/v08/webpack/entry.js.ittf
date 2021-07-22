@@ -2,14 +2,14 @@ $group
     
     $if wzCtx.Build.useTypescript
         $if wzCtx.Build.isClientServer
-            @ './src/client/index.tsx'
+            @ app './src/client/index.tsx'
         $else
-            @ './src/index.tsx'
+            @ app './src/index.tsx'
     $else
         $if wzCtx.Build.isClientServer
-            @ './src/client/index.js'
+            @ app './src/client/index.js'
         $else
-            @ './src/index.js'
+            @ app './src/index.js'
     $if wzCtx.Build.useServiceWorker
         $if wzCtx.Build.useTypescript
             $if wzCtx.Build.isClientServer
@@ -25,3 +25,9 @@ $group
             $else
                 @ sw './src/sw.js'
                     # Service worker
+    $if wzCtx.Build.useMonacoEditor
+        @ "editor.worker" 'monaco-editor/esm/vs/editor/editor.worker.js'
+        @ "json.worker" 'monaco-editor/esm/vs/language/json/json.worker'
+        @ "css.worker" 'monaco-editor/esm/vs/language/css/css.worker'
+        @ "html.worker" 'monaco-editor/esm/vs/language/html/html.worker'
+        @ "ts.worker" 'monaco-editor/esm/vs/language/typescript/ts.worker'

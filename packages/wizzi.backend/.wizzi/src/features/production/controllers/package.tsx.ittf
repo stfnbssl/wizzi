@@ -57,6 +57,7 @@ module
         _ this.router.post('/update', this.postUpdatePackage)
         _ this.router.get('/delete', this.getDeletePackageForm)
         _ this.router.delete('/delete', this.deletePackage)
+        _ this.router.get('/props', this.getPackageProperties)
         
         $append handlers
             
@@ -124,3 +125,48 @@ module
 
             handler( deletePackage )
                 # log myname + '.deletePackage', 
+
+            handler( getPackageProperties )
+                log myname, 'getPackageProperties', JSON.stringify(request.query, null, 2)
+                _ renderPageForm
+                    @ request
+                    @ response
+                    {
+                        @ type 'success'
+                        @ formName 'PropertyEditor'
+                        { formData 
+                            @ owner request.query.owner
+                            @ name request.query.name
+                            { schema
+                                [ properties
+                                    { 
+                                        @ name 'name'
+                                        @ type 'string'
+                                    { 
+                                        @ name 'age'
+                                        @ type 'number'
+                                    { 
+                                        @ name 'jobs'
+                                        @ type 'array'
+                                        [ properties
+                                            { 
+                                                @ name 'title'
+                                                @ type 'string'
+                                            { 
+                                                @ name 'year'
+                                                @ type 'number'
+                                    { 
+                                        @ name 'react'
+                                        @ type 'object'
+                                        [ properties
+                                            { 
+                                                @ name 'useReact'
+                                                @ type 'boolean'
+                                                @ isCondition true
+                                            { 
+                                                @ name 'useRouter'
+                                                @ type 'boolean'
+                                            { 
+                                                @ name 'useRedux'
+                                                @ type 'boolean'
+                    {

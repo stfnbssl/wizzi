@@ -158,7 +158,9 @@ $group
         node-fetch "^2.6.1"
     $if wzCtx.Build.utils.useNullThrows
         nullthrows "^1.1.1"
-    
+    $if wzCtx.Build.useReact
+        $if wzCtx.Build.react.useObjectEditor
+            object-editor-react "^1.1.0"
     $if wzCtx.Build.styles.usePalx || wzCtx.Build.useStorybook
         palx '^1.0.3'
     $if wzCtx.Build.utils.useParseUrl

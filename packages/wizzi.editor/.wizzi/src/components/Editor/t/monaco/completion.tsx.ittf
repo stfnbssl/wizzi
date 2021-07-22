@@ -1,0 +1,182 @@
+$group
+    +
+    m _getImportAtPosition
+        param model
+            :ref monaco.editor.ITextModel
+        param position
+            :ref monaco.Position
+        param untilPosition
+            :boolean 
+            :optional 
+        :return
+            :union 
+                :ref monaco.IRange
+                :void 
+        const textUntilPosition
+            _ model.getValueInRange
+                { 
+                    @ startLineNumber 1
+                    @ startColumn 1
+                    @ endLineNumber position.lineNumber
+                    @ endColumn position.column
+            # Get editor content before the pointer
+            # Find the import name
+        const matches = textUntilPosition.match(/(([\s|\n]+(import|from)\s+)|(\brequire\b\s*\())["|'][^'^"]*$/)
+            # Find the import name
+        if !matches
+            return undefined
+        const line
+            _ model.getValueInRange
+                { 
+                    @ startLineNumber position.lineNumber
+                    @ startColumn 1
+                    @ endLineNumber position.lineNumber
+                    @ endColumn position.column + 1000
+        const startOfName = matches[0].replace(/(\s|'|"|from |require\()/g, '')
+        const startIndex = line.indexOf(startOfName)
+        const endIndex = Math.max(line.indexOf("'", startIndex), 0) || Math.max(line.indexOf('"', startIndex), 0) || line.length
+            # Return the range within the current line
+        return 
+            { 
+                @ startLineNumber position.lineNumber
+                @ endLineNumber position.lineNumber
+                @ startColumn startIndex + 1
+                @ endColumn
+                    iif untilPosition
+                        then position.column
+                        else endIndex + 1
+            # Return the range within the current line
+    +
+    => _handleProvideCompletionItems
+        param model
+            :ref monaco.editor.ITextModel
+        param position
+            :ref monaco.Position
+        param _context
+            :ref monaco.languages.CompletionContext
+        param _token
+            :ref monaco.CancellationToken
+        const range = this._getImportAtPosition(model, position, true)
+        if range
+            const text = model.getValueInRange(range)
+                # User is trying to import a file
+            if text.startsWith('.')
+                const prefix = getAbsolutePath(text, this.props.selectedFile)
+                const suggestions
+                    :[ 
+                        :ref monaco.languages.CompletionItem
+                    =
+                        _ Object.keys(this.props.files).filter
+                            => 
+                                param path
+                                @expr path !== this.props.selectedFile && path.startsWith(prefix)
+                            ._ map
+                                => 
+                                    param path
+                                    :return
+                                        :ref monaco.languages.CompletionItem
+                                    const relativePath = getRelativePath(path, this.props.selectedFile)
+                                    return 
+                                        { 
+                                            @ label relativePath
+                                            @ insertText
+                                                `lit 
+                                                    + 
+                                                    _ relativePath.replace(/\.(js|tsx?)$/, '')
+                                                    + 
+                                                # Don't keep extension for JS files
+                                            @ kind monaco.languages.CompletionItemKind.File
+                                            @ range
+                return 
+                    { 
+                        @ suggestions
+            else
+                const deps = this.state.allDependencies
+                return 
+                    { 
+                        @ suggestions
+                            _ Object.keys(deps).map
+                                => 
+                                    param name
+                                    (
+                                        { 
+                                            @ label name
+                                            @ insertText name
+                                            @ detail deps[name].version
+                                            @ kind monaco.languages.CompletionItemKind.Module
+                                            @ range
+                            # User is trying to import a dependency
+        return undefined
+    +
+    => _fetchTypings
+        const deps = this.state.allDependencies
+        _ Object.keys(deps).forEach
+            => 
+                param qualifier
+                const 
+                    { 
+                        @ version
+                    = deps[qualifier]
+                if !isValidSemver(version)
+                    return 
+                const match = /^(?:@([^/?]+)\/)?([^@/?]+)(?:\/([^@]+))?/.exec(qualifier)
+                    # Parse the qualifier to get the package name
+                    # This will handle qualifiers with deep imports
+                if !match
+                    return 
+                const name
+                    op+ 
+                        ( 
+                            iif match[1]
+                                then
+                                    `lit 
+                                        + @
+                                        @ match[1]
+                                        + /
+                                else ''
+                        + match[2]
+                if requestedTypings.get(name) === version
+                    return 
+                        # Typing already loaded
+                _ requestedTypings.set(name, version)
+                _ this._typingsWorker?.postMessage?.
+                    { 
+                        @ name
+                        @ version
+    +
+    => _addTypings
+        { 
+            @ typings
+            :{ 
+                :p typings
+                    :{ 
+                        :index 
+                            :string 
+                            param key
+                                :string 
+        _ Object.keys(typings).forEach
+            => 
+                param path
+                const extraLib = extraLibs.get(path)
+                if extraLib
+                    _ extraLib.js.dispose()
+                    _ extraLib.ts.dispose()
+                let uri
+                    _ monaco.Uri.from
+                        { 
+                            @ scheme 'file'
+                            @ path
+                        ._ toString
+                    # Monaco Uri parsing contains a bug which escapes characters unwantedly.
+                    # This causes package-names such as `@expo/vector-icons` to not work.
+                    # https://github.com/Microsoft/monaco-editor/issues/1375
+                if path.includes('@')
+                    set uri = uri.replace('%40', '@')
+                const js = monaco.languages.typescript.javascriptDefaults.addExtraLib(typings[path], uri)
+                const ts = monaco.languages.typescript.typescriptDefaults.addExtraLib(typings[path], uri)
+                _ extraLibs.set
+                    @ path
+                    { 
+                        @ js
+                        @ ts
+

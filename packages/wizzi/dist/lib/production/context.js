@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\context.js.ittf
 */
 'use strict';
@@ -45,14 +45,14 @@ var ProductionContext = (function () {
                 uri: uri, 
                 content: content, 
                 cacheCount: 0
-            };
+             };
         }
     }
     ProductionContext.prototype.addMTreeBuildUpScript = function(uri, ittfEvalScript) {
         this.ittfEvaluationScripts[uri] = {
             uri: uri, 
             ittfEvalScript: ittfEvalScript
-        };
+         };
         // log '*=*=*=*= temporary wizzi.production.productionContext. this.dumps : ', this.dumps
         if (this.dumps && this.dumps.mTreeBuildupJsWizziScript && this.dumps.mTreeBuildupJsWizziScript.dump) {
             var dumpsFolder = this.dumps.mTreeBuildupJsWizziScript.dumpsBaseFolder || this.dumps.dumpsBaseFolder;
@@ -76,7 +76,7 @@ var ProductionContext = (function () {
         this.mTrees[uri] = {
             uri: uri, 
             loadHistory: loadHistory
-        };
+         };
     }
     ProductionContext.prototype.addGlobalModel = function(uri, exportName, model) {
         this.globalModels[exportName] = model;
@@ -84,7 +84,7 @@ var ProductionContext = (function () {
             uri: uri, 
             exportName: exportName, 
             wizziModel: model
-        };
+         };
     }
     ProductionContext.prototype.addArtifactCollection = function(artifactInfo, frontMatters) {
         // log 'wizzi.ProductionContext.addArtifactCollection.artifactName', artifactInfo.name
@@ -104,7 +104,7 @@ var ProductionContext = (function () {
         this.wizziModels[uri] = {
             uri: uri, 
             wizziModel: wizziModel
-        };
+         };
     }
     ProductionContext.prototype.addArtifact = function(artifact) {
         this.artifacts.push(artifact);
@@ -115,7 +115,7 @@ var ProductionContext = (function () {
     ProductionContext.prototype.getArtifactCollections = function() {
         return {
                 collection: this.artifactCollections
-            };
+             };
     }
     ProductionContext.prototype.raiseIttfEvaluationScriptError = function(uri, exception) {
         var script = this.ittfEvaluationScripts[uri];

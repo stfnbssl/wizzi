@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\preLoader.js.ittf
 */
 'use strict';
@@ -35,25 +35,29 @@ var PreLoader = (function () {
         this.wizziFactory.loadModel(this.loadInfo.schema, this.loadInfo.srcFullPath(), {
             mTreeBuildUpContext: {}, 
             globalContext: {}
-        }, (err, wizziModel) => {
+         }, (err, wizziModel) => {
+        
             if (err) {
                 return callback(err);
             }
             this.productionContext.addGlobalModel(this.loadInfo.srcFullPath(), this.loadInfo.exportName, wizziModel)
             return callback(null, wizziModel);
-        })
+        }
+        )
     }
     PreLoader.prototype.runArtifactCollection = function(callback) {
         // loadInfo alias of ArtifactInfo
         // log 'wizzi.production.preLoader.runArtifact.start.artifactInfo.name', this.loadInfo.name
         AsyncRunner.runFrontMatter(this.loadInfo, (err, result) => {
+        
             if (err) {
                 return callback(err);
             }
             // log 'wizzi.production.preLoader.runArtifact.runFrontMatter.result', result
             this.productionContext.addArtifactCollection(this.loadInfo, result)
             return callback(null, result);
-        })
+        }
+        )
     }
     return PreLoader;
 })();
@@ -64,9 +68,10 @@ var AsyncRunner = {
         log.info('Started async run artifact: ' + artifactInfo.name);
         var runner = new Runner(artifactInfo);
         runner.run(function(err, operResult) {
+            
+            // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
             if (err) {
                 err.artifactInfo = artifactInfo.toString();
-                // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
                 return callback(err);
             }
             log.info('Ended async run artifact: ' + artifactInfo.name);
@@ -77,16 +82,17 @@ var AsyncRunner = {
         log.info('Started async runFrontMatter artifact: ' + artifactInfo.name);
         var runner = new Runner(artifactInfo);
         runner.runFrontMatter(function(err, operResult) {
+            
+            // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
             if (err) {
                 err.artifactInfo = artifactInfo.toString();
-                // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
                 return callback(err);
             }
             log.info('Ended async runFrontMatter artifact: ' + artifactInfo.name);
             callback(null, operResult);
         })
     }
-};
+ };
 
 module.exports = {
     PreLoader: PreLoader

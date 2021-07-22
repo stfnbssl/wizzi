@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\examples\jobs\index.js.ittf
 */
 'use strict';
@@ -21,19 +21,19 @@ function execute(jobName, callback) {
     // Execute a wizzi job
     wizzi.job(path.join(jobsPath, 'index.wfjob.ittf'), {
         friends: friendsArray
-    }, {
+     }, {
         name: jobName, 
         jobContext: {
             options: {
                 destFolder: 'output'
-            }
-        }, 
+             }
+         }, 
         globalContext: {
             options: {
                 destFolder: 'output'
-            }
-        }
-    }, function(err, jobResults) {
+             }
+         }
+     }, function(err, jobResults) {
         if (err) {
             console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log('err', err);

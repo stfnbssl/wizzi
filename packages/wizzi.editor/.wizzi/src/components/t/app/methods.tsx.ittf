@@ -1,5 +1,6 @@
 $group
 
+    +
     m getDerivedStateFromProps
         static
         param _props
@@ -65,7 +66,6 @@ $group
 
         if this.props.preferences.autoGenSingleDoc
             _ this._generateArtifact
-
     +
     m componentWillUnmount
         _ this._PackiStateListener?.()
@@ -83,4 +83,6 @@ $group
             :ref Props
         param prevState
             :ref State
-
+        if prevProps.jobGeneratedArtifacts !== this.props.jobGeneratedArtifacts
+            _ this._PackiSession.updateJobGeneratedFiles
+                @ this.props.jobGeneratedArtifacts

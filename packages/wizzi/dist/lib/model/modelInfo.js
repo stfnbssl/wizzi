@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\model\modelInfo.js.ittf
 */
 'use strict';
@@ -206,11 +206,11 @@ var ModelInfo = (function () {
         if (typeof (value) === 'undefined') {
             return this.productionManagerInstance;
         }
+        // log 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
         else {
             if (verify.isObject(value) === false) {
                 throw new Error("value parameter must be an object. Instead is: " + value);
             }
-            // log 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
             this.productionManagerInstance = value;
             var i, i_items=this.contexts, i_len=this.contexts.length, modelInfo;
             for (i=0; i<i_len; i++) {
@@ -289,7 +289,7 @@ var ModelInfo = (function () {
             contexts: this.config.contexts, 
             transformers: this.config.transformers, 
             coll: this.config.coll
-        };
+         };
         var ret = new ModelInfo(newconfig);
         return ret;
     }
@@ -361,7 +361,7 @@ var ModelInfo = (function () {
                                     fullpath: fileInfo.fullpath, 
                                     relpath: fileInfo.relpath, 
                                     content: content
-                                });
+                                 });
                         })
                     }, function(err, fileContents) {
                         if (err) {
@@ -432,7 +432,7 @@ var ModelInfo = (function () {
                         ret.push({
                             fullpath: fullpath, 
                             relpath: relpath
-                        })
+                         })
                     }
                     return callback(null, ret);
                 })

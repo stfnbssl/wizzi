@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\all\artifact\genContext.js.ittf
 */
 'use strict';
@@ -22,11 +22,11 @@ describe("genContext", function() {
                 CRLF: '\n', 
                 isDebugLine: false, 
                 indent: 0
-            }, 
+             }, 
             model: null, 
             srcPath: null, 
             pman: null
-        });
+         });
         ctx.write('alfa');
         ctx.w(' beta');
         ctx.a('x', 'gamma');
@@ -45,11 +45,11 @@ describe("genContext", function() {
                 CRLF: '\n', 
                 isDebugLine: false, 
                 indent: 0
-            }, 
+             }, 
             model: null, 
             srcPath: null, 
             pman: null
-        });
+         });
         ctx.write('alfa');
         ctx.w(' beta');
         ctx.a('x', 'gamma');
@@ -74,11 +74,11 @@ describe("genContext", function() {
                 CRLF: '\n', 
                 isDebugLine: false, 
                 indent: 0
-            }, 
+             }, 
             model: null, 
             srcPath: null, 
             pman: null
-        });
+         });
         ctx.write('alfa');
         ctx.w(' beta');
         ctx.a('x', 'gamma');
@@ -104,11 +104,11 @@ describe("genContext", function() {
                 CRLF: '\n', 
                 isDebugLine: false, 
                 indent: 0
-            }, 
+             }, 
             model: null, 
             srcPath: null, 
             pman: null
-        });
+         });
         ctx.writeFile(path.join(__dirname, 'ittf', 'gc_one.ittf'))
         var sw = new StringWriter();
         ctx.toStream(sw);
@@ -124,11 +124,11 @@ describe("genContext", function() {
                 CRLF: '\n', 
                 isDebugLine: false, 
                 indent: 0
-            }, 
+             }, 
             model: null, 
             srcPath: null, 
             pman: null
-        });
+         });
         ctx.writeFile(path.join(__dirname, 'ittf', 'gc_one.ittf'))
         var sw = new StringWriter();
         ctx.toStream(sw);

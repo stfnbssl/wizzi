@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\all\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -27,17 +27,17 @@ describe("wizziFactory", function() {
         wizziFactory.createFactory({
             repo: {
                 storeKind: 'filesystem'
-            }, 
+             }, 
             plugins: {
                 items: [
                     '../mocks/plugin'
                 ], 
                 pluginsBaseFolder: __dirname
-            }, 
+             }, 
             test: {
                 testOnlyMockBaseDir: __dirname
-            }
-        }, function(err, wf) {
+             }
+         }, function(err, wf) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -52,7 +52,7 @@ describe("wizziFactory", function() {
         var pman = wizziFactoryInstance.createProductionManager();
         wizziFactoryInstance.loadModel('tests', path.join(__dirname, 'ittf', 'mock1.tests.ittf'), {
             __productionManager: pman
-        }, function(err, wizziModel) {
+         }, function(err, wizziModel) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -78,7 +78,7 @@ describe("wizziFactory", function() {
     it("should transform a model from a pre loaded wizzimodel", function(done) {
         wizziFactoryInstance.transformModel(testsMock1Model, 'tests/trans1', {
             from: 'stefi'
-        }, function(err, transformedModel) {
+         }, function(err, transformedModel) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -98,7 +98,7 @@ describe("wizziFactory", function() {
     it("should generate an artifact from a pre loaded wizzimodel", function(done) {
         wizziFactoryInstance.generateArtifact(testsMock1Model, path.join(__dirname, 'ittf', 'mock1.tests.ittf'), 'tests/gen1', {
             from: 'stefi'
-        }, function(err, artifact) {
+         }, function(err, artifact) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -113,8 +113,8 @@ describe("wizziFactory", function() {
             modelContext: {}, 
             artifactContext: {
                 from: 'stefi'
-            }
-        }, 'tests/gen1', function(err, artifact) {
+             }
+         }, 'tests/gen1', function(err, artifact) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -134,7 +134,7 @@ describe("wizziFactory", function() {
         console.log('wizziFactoryInstance.__loadMTree', wizziFactoryInstance.__loadMTree);
         wizziFactoryInstance.loadMTree(path.join(__dirname, 'ittf', 'html', 'simple.html.ittf'), {
             from: 'stefi'
-        }, function(err, mTree) {
+         }, function(err, mTree) {
             if (err) {
                 return callback(err);
             }

@@ -35,6 +35,8 @@ module
                     from './pageforms/Delete${comp}'
             import ThemeDemo
                 from './pageforms/widgets/ThemeDemo'
+            import PropertyEditor
+                from './pageforms/PropertyEditor'
         
         $append styles
             :interface RootStyleProps
@@ -60,6 +62,8 @@ module
                     =>
                         return
                             < ThemeDemo
+            elif this.props.formName == 'PropertyEditor'
+                set Comp = PropertyEditor
             else
                 set Comp 
                     =>

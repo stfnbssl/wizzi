@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\options.js.ittf
 */
 'use strict';
@@ -13,5 +13,6 @@ module.exports = function(userdefaults, genoptions) {
             indentSpaces: 4, 
             dotgExtensionPrefix: false, 
             dumps: {}
-        }, userdefaults || {}, genoptions || {});
-};
+         }, userdefaults || {}, genoptions || {});
+}
+;

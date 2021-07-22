@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\wizzi\models\bootstrap\wfschema-boot-model.js.ittf
 */
 'use strict';
@@ -899,7 +899,7 @@ var Element = (function (Node) {
                 inheritedFrom: (inherited ? this.wzId : null), 
                 restricts: [], 
                 comments: []
-            };
+             };
             var j, j_items=attribute.restricts, j_len=attribute.restricts.length, restrict;
             for (j=0; j<j_len; j++) {
                 restrict = attribute.restricts[j];
@@ -922,7 +922,7 @@ var Element = (function (Node) {
         var restrictCloned = {
             facets: [], 
             comments: []
-        };
+         };
         var i, i_items=model.facets, i_len=model.facets.length, facet;
         for (i=0; i<i_len; i++) {
             facet = model.facets[i];
@@ -930,7 +930,7 @@ var Element = (function (Node) {
                 type: facet.wzElement, 
                 value: facet.wzName, 
                 comments: []
-            };
+             };
             var j, j_items=facet.comments, j_len=facet.comments.length, comment;
             for (j=0; j<j_len; j++) {
                 comment = facet.comments[j];
@@ -969,7 +969,7 @@ var Element = (function (Node) {
                 flags: flags, 
                 inheritedFrom: (inherited ? this.wzId : null), 
                 comments: []
-            };
+             };
             var j, j_items=relation.comments, j_len=relation.comments.length, comment;
             for (j=0; j<j_len; j++) {
                 comment = relation.comments[j];
@@ -1216,7 +1216,7 @@ var Declare = (function (Node) {
             n: wizziNode.wzTag, 
             v: wizziNode.wzName, 
             children: []
-        };
+         };
         if (wizziNode.params && wizziNode.params.length > 0) {
             var i, i_items=wizziNode.params, i_len=wizziNode.params.length, p;
             for (i=0; i<i_len; i++) {
@@ -1225,7 +1225,7 @@ var Declare = (function (Node) {
                     n: 'param', 
                     v: p.wzName, 
                     children: []
-                })
+                 })
             }
         }
         var i, i_items=wizziNode.statements, i_len=wizziNode.statements.length, s;
@@ -1309,7 +1309,7 @@ var Method = (function (Node) {
             n: wizziNode.wzTag, 
             v: wizziNode.wzName, 
             children: []
-        };
+         };
         var i, i_items=wizziNode.statements, i_len=wizziNode.statements.length, s;
         for (i=0; i<i_len; i++) {
             s = wizziNode.statements[i];
@@ -1686,7 +1686,7 @@ var WizziSchema = (function (Node) {
             error: function(msg, node) {
                 throw new Error(msg + '\n' + util.inspect(node, { depth: 2}));
             }
-        };
+         };
         this.wzSetup(ctx);
         this.wzVerify(ctx);
         this.wzInitialize(ctx);

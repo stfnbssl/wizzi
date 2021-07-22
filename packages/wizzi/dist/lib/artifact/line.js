@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\artifact\line.js.ittf
 */
 'use strict';
@@ -20,7 +20,7 @@ var Line = (function () {
             this.text.push({
                 k: 0, 
                 t: textOrPath
-            })
+             })
         }
         else {
             this.text.push(textOrPath);
@@ -33,7 +33,7 @@ var Line = (function () {
             this.text.push({
                 k: 1, 
                 t: text
-            })
+             })
         }
         else {
             this.text.push(text);
@@ -44,19 +44,19 @@ var Line = (function () {
             this.text.push({
                 k: 0, 
                 t: filePath
-            })
+             })
         }
         else {
             for (var i = 0; i < text.length; i++) {
                 text[i] = {
                     k: 1, 
                     t: text[i]
-                };
+                 };
             }
             this.text.push({
                 k: 0, 
                 t: filePath
-            })
+             })
         }
     }
     Line.prototype.toStream = function(stream, ctx) {

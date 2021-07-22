@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\root\index.js.ittf
 */
 'use strict';
@@ -55,7 +55,8 @@ md.createFactory = function createFactory(userid, role, options, callback) {
     // check_cb_object( options, createFactory )
     
     wizziFactory.createFactory(userid, role, options, callback)
-};
+}
+;
 
 md.fsnoaclFactory = function(options, callback) {
     
@@ -73,9 +74,10 @@ md.fsnoaclFactory = function(options, callback) {
     
     options.repo = {
         storeKind: 'filesystem'
-    };
+     };
     md.createFactory('stefi', 'admin', options, callback)
-};
+}
+;
 md.fsFactory = md.fsnoaclFactory;
 
 md.dbnoaclFactory = function(storeUri, storeBaseFolder, options, callback) {
@@ -106,9 +108,10 @@ md.dbnoaclFactory = function(storeUri, storeBaseFolder, options, callback) {
         storeKind: 'mongodb', 
         storeUri: storeUri, 
         storeBaseFolder: storeBaseFolder
-    };
+     };
     md.createFactory('stefi', 'admin', options, callback)
-};
+}
+;
 md.mongoFactory = md.dbnoaclFactory;
 
 md.jsonnoaclFactory = function(options, callback) {
@@ -133,9 +136,10 @@ md.jsonnoaclFactory = function(options, callback) {
     options.repo = {
         storeKind: 'json', 
         storeFsJson: options.fsJson
-    };
+     };
     md.createFactory('stefi', 'admin', options, callback)
-};
+}
+;
 md.jsonFactory = md.jsonnoaclFactory;
 
 md.browsernoaclFactory = function(options, callback) {
@@ -154,9 +158,10 @@ md.browsernoaclFactory = function(options, callback) {
     
     options.repo = {
         storeKind: 'browser'
-    };
+     };
     md.createFactory('stefi', 'admin', options, callback)
-};
+}
+;
 md.browserFactory = md.browsernoaclFactory;
 
 //
@@ -234,7 +239,8 @@ md.startRunnerServer = function(options, callback) {
             }
         }
     })
-};
+}
+;
 md.loadWizzifile = function(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -262,7 +268,8 @@ md.loadWizzifile = function(options, callback) {
             return callback(null);
         }
     }
-};
+}
+;
 //
 md.executeWizziJob = function(request, callback) {
     if (typeof(callback) !== 'function') {
@@ -320,10 +327,13 @@ md.executeWizziJob = function(request, callback) {
     var requestConfig = Object.assign({}, request.config);
     
     var wfBaseFolder = requestConfig.wfBaseFolder;
+    
+    // FIXME property wfBaseFolder in module wizzi/config
+    
+    // should be part of the wizzi.wizziFactory instance.
+    
+    // Find where it is referenced.
     if (wfBaseFolder && wfBaseFolder.length > 0) {
-        // FIXME property wfBaseFolder in module wizzi/config
-        // should be part of the wizzi.wizziFactory instance.
-        // Find where it is referenced.
         md.config.set('wfBaseFolder', wfBaseFolder);
     }
     
@@ -344,14 +354,15 @@ md.executeWizziJob = function(request, callback) {
             storeKind: storeKind, 
             storeUri: requestConfig.storeUri, 
             storeBaseFolder: requestConfig.storeBaseFolder
-        }, 
+         }, 
         plugins: {
             items: plugins, 
             pluginsBaseFolder: requestConfig.pluginsBaseFolder || process.cwd()
-        }, 
+         }, 
         globalContext: request.job.globalContext || {}
-    }, executeWizziJob_step2(request.job, callback))
-};
+     }, executeWizziJob_step2(request.job, callback))
+}
+;
 function executeWizziJob_step2(jobRequest, callback) {
     return function(err, wizziFactoryInstance) {
             if (err) {
@@ -373,8 +384,8 @@ function executeWizziJob_step2(jobRequest, callback) {
             var notUsed = pman.addJobRequest({
                 wfjob: {
                     ittfDocumentUri: jobPath
-                }
-            });
+                 }
+             });
             if (notUsed && notUsed.__is_error) {
                 console.log('__is_error ', notUsed);
                 return callback(notUsed);
@@ -423,7 +434,8 @@ md.printWizziJobError = function(jobName, err) {
     console.log("====================================================================================================\n");
     console.log("\n");
     process.exit(999);
-};
+}
+;
 //
 md.generateWizziModelTypes = function(request, callback) {
     
@@ -486,13 +498,13 @@ md.generateWizziModelTypes = function(request, callback) {
     wizziFactory.createFactory(user, role, {
         repo: {
             storeKind: storeKind
-        }, 
+         }, 
         plugins: {
             items: plugins, 
             pluginsBaseFolder: request.configOptions.pluginsBaseFolder || process.cwd()
-        }, 
+         }, 
         globalContext: request.globalContext
-    }, function(err, wizziFactory) {
+     }, function(err, wizziFactory) {
         if (err) {
             return callback(err);
         }
@@ -507,7 +519,8 @@ md.generateWizziModelTypes = function(request, callback) {
             return callback(null, request.wfschema.name);
         })
     })
-};
+}
+;
 
 function DEFAULT_PLUGINS() {
     return [
@@ -529,7 +542,7 @@ var DEFAULT_ARTIFACTS = {
     ittf: 'ittf/document', 
     vtt: 'vtt/document', 
     vue: 'vue/document'
-};
+ };
 var DEFAULT_ARTIFACTS_FROM_SCHEMA_ROOT = {
     css: 'css/document', 
     graphql: 'graphql/docs', 
@@ -542,7 +555,7 @@ var DEFAULT_ARTIFACTS_FROM_SCHEMA_ROOT = {
     xml: 'xml/document', 
     vtt: 'vtt/document', 
     vue: 'vue/document'
-};
+ };
 var DEFAULT_MIME = {
     css: 'css', 
     graphql: 'graphql', 
@@ -556,7 +569,7 @@ var DEFAULT_MIME = {
     ittf: 'ittf', 
     vtt: 'vtt', 
     vue: 'vue'
-};
+ };
 md.createFactoryLight = function(options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
@@ -566,10 +579,11 @@ md.createFactoryLight = function(options, callback) {
     md.fsnoaclFactory({
         plugins: {
             items: pluginItems
-        }, 
+         }, 
         globalContext: options.globalContext || {}
-    }, callback)
-};
+     }, callback)
+}
+;
 md.createJsonFactoryLight = function(options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
@@ -579,11 +593,12 @@ md.createJsonFactoryLight = function(options, callback) {
     md.jsonnoaclFactory({
         plugins: {
             items: pluginItems
-        }, 
+         }, 
         fsJson: options.fsJson, 
         globalContext: options.globalContext || {}
-    }, callback)
-};
+     }, callback)
+}
+;
 //
 //
 // params
@@ -649,7 +664,8 @@ md.loadMTree = function(ittfDocumentPath, context, options, callback) {
             wf.loadMTree(ittfDocumentPath, context, callback)
         }
     })
-};
+}
+;
 md.mtree = md.loadMTree;
 //
 //
@@ -713,7 +729,7 @@ md.loadMTreeFromText = function(ittfContent, context, options, callback) {
         {
             path: tempIttfUri, 
             content: ittfContent
-        }
+         }
     ];
     md.JsonComponents.createFsJson(documents, function(err, fsJson) {
         if (err) {
@@ -733,7 +749,8 @@ md.loadMTreeFromText = function(ittfContent, context, options, callback) {
             }
         })
     })
-};
+}
+;
 md.mtreeFromText = md.loadMTreeFromText;
 //
 //
@@ -795,7 +812,8 @@ md.loadMTreeDebug = function(ittfDocumentPath, context, options, callback) {
         }
         wf.loadMTreeDebugInfo(ittfDocumentPath, context, callback)
     })
-};
+}
+;
 md.mtreeDebug = md.loadMTreeDebug;
 //
 //
@@ -859,7 +877,7 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
         {
             path: tempIttfUri, 
             content: ittfContent
-        }
+         }
     ];
     md.JsonComponents.createFsJson(documents, function(err, fsJson) {
         if (err) {
@@ -874,7 +892,8 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
             wf.loadMTreeDebugInfo(ittfDocumentPath, context, callback)
         })
     })
-};
+}
+;
 md.mtreeDebugFromText = md.loadMTreeDebugFromText;
 //
 //
@@ -941,10 +960,11 @@ md.loadModel = function(ittfDocumentPath, context, options, callback) {
             wf.loadModel(schema, ittfDocumentPath, {
                 mTreeBuildUpContext: context, 
                 globalContext: {}
-            }, callback)
+             }, callback)
         }
     })
-};
+}
+;
 md.model = md.loadModel;
 //
 // params
@@ -1007,7 +1027,7 @@ md.transformModel = function(ittfDocumentPath, context, options, callback) {
             return callback({
                     is_error: true, 
                     message: "wizzi.transformModel operation requires a transformName string in the context object"
-                });
+                 });
         }
         md.loadModel(ittfDocumentPath, context, options, function(err, wizziModel) {
             if (err) {
@@ -1016,7 +1036,8 @@ md.transformModel = function(ittfDocumentPath, context, options, callback) {
             wf.transformModel(wizziModel, context.transformName, context, callback)
         })
     })
-};
+}
+;
 md.trans = md.transformModel;
 //
 //
@@ -1080,7 +1101,7 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
         {
             path: tempIttfUri, 
             content: ittfContent
-        }
+         }
     ];
     md.JsonComponents.createFsJson(documents, function(err, fsJson) {
         if (err) {
@@ -1095,10 +1116,11 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
             wf.loadModel(schema, ittfDocumentPath, {
                 mTreeBuildUpContext: context, 
                 globalContext: {}
-            }, callback)
+             }, callback)
         })
     })
-};
+}
+;
 md.modelFromText = md.loadModelFromText;
 //
 //
@@ -1167,10 +1189,11 @@ md.generateArtifact = function(ittfDocumentPath, context, options, callback) {
             wf.loadModelAndGenerateArtifact(ittfDocumentPath, {
                 modelRequestContext: context, 
                 artifactRequestContext: options.artifactContext
-            }, artifactName, callback)
+             }, artifactName, callback)
         }
     })
-};
+}
+;
 md.gen = md.generateArtifact;
 md.artifact = md.generateArtifact;
 //
@@ -1235,7 +1258,7 @@ md.generateArtifactFromText = function(ittfContent, context, options, callback) 
         {
             path: tempIttfUri, 
             content: ittfContent
-        }
+         }
     ];
     md.JsonComponents.createFsJson(documents, function(err, fsJson) {
         if (err) {
@@ -1251,10 +1274,11 @@ md.generateArtifactFromText = function(ittfContent, context, options, callback) 
             wf.loadModelAndGenerateArtifact(ittfDocumentPath, {
                 modelRequestContext: context, 
                 artifactRequestContext: options.artifactContext
-            }, artifactName, callback)
+             }, artifactName, callback)
         })
     })
-};
+}
+;
 md.genFromText = md.generateArtifactFromText;
 //
 // params
@@ -1315,7 +1339,8 @@ md.generateWizziSchema = function(ittfDocumentPath, context, options, callback) 
         }
         wf.generateModelTypes(ittfDocumentPath, options.outputPackagePath, name, context, callback)
     })
-};
+}
+;
 md.schema = md.generateWizziSchema;
 //
 //
@@ -1382,12 +1407,13 @@ md.executeWizziJob2 = function(ittfDocumentPath, context, options, callback) {
                 indentSpaces: options.indentSpaces || 4, 
                 basedir: __dirname, 
                 verbose: options.verbose || 2
-            }), 
+             }), 
             modelContext: context, 
             jobContext: options.jobContext || {}
-        }, callback)
+         }, callback)
     })
-};
+}
+;
 md.job = md.executeWizziJob2;
 //
 //
@@ -1443,6 +1469,7 @@ md.generateFolderArtifacts = function(ittfDocumentPath, context, options, callba
         }
         var ittfFolderPath = ittfDocumentPath;
         folderFilesInfoByPath(ittfFolderPath, wf.fileService, (err, items) => {
+        
             if (err) {
                 return callback(err);
             }
@@ -1482,9 +1509,11 @@ md.generateFolderArtifacts = function(ittfDocumentPath, context, options, callba
                 // log 'result', result
                 return callback(null, result);
             })
-        })
+        }
+        )
     })
-};
+}
+;
 md.genFolder = md.generateFolderArtifacts;
 md.artifactsFolder = md.generateFolderArtifacts;
 function getDefaultArtifact(schema) {
@@ -1495,7 +1524,7 @@ function getDefaultArtifact(schema) {
 function folderFilesInfoByPath(folderPath, fileService, callback) {
     fileService.getFilesAsync(folderPath, {
         deep: true
-    }, function(err, files) {
+     }, function(err, files) {
         if (err) {
             return callback(err);
         }
@@ -1517,7 +1546,7 @@ function ittfDocumentInfoByPath(filePath) {
         return {
                 is_error: true, 
                 message: 'The file is not an ittfdocument: ' + result.fullPath
-            };
+             };
     }
 }
 function fileInfoByPath(filePath, baseFolder) {
@@ -1545,7 +1574,7 @@ function fileInfoByPath(filePath, baseFolder) {
                 fullPath: filePath, 
                 destBasename: name + '.' + mime, 
                 destRelPath: relFolder.length > 0 ? verify.replaceAll(relFolder, '__dot__', '.') + '/' + name + '.' + mime : name + '.' + mime
-            };
+             };
     }
     else {
         var name = verify.replaceAll(basename, '__dot__', '.');
@@ -1559,7 +1588,7 @@ function fileInfoByPath(filePath, baseFolder) {
                 fullPath: filePath, 
                 destBasename: basename, 
                 destRelPath: relFolder.length > 0 ? verify.replaceAll(relFolder, '__dot__', '.') + '/' + name : name
-            };
+             };
     }
 }
 function normalize(filepath) {

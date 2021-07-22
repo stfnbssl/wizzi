@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\tests\model\modelInfo.js.ittf
 */
 'use strict';
@@ -25,17 +25,17 @@ describe("modelInfo", function() {
         wizziFactory.createFactory({
             repo: {
                 storeKind: 'filesystem'
-            }, 
+             }, 
             plugins: {
                 items: [
                     '../mocks/plugin'
                 ], 
                 pluginsBaseFolder: __dirname
-            }, 
+             }, 
             test: {
                 testOnlyMockBaseDir: __dirname
-            }
-        }, function(err, wf) {
+             }
+         }, function(err, wf) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);
@@ -43,12 +43,13 @@ describe("modelInfo", function() {
             var pman = wf.createProductionManager({
                 indentSpaces: 4, 
                 basedir: __dirname
-            }, {});
+             }, {});
             mi = new modelInfo({
                 cwd: path.join(__dirname, 'ittf'), 
                 src: 'mock1.tests.ittf', 
                 schema: 'tests'
-            });
+             });
+            ;
             mi.productionManager(pman)
             done();
         })
@@ -132,7 +133,7 @@ describe("modelInfo", function() {
     it("should get source files", function(done) {
         mi.getFiles({
             final: false
-        }, function(err, files) {
+         }, function(err, files) {
             expect(err.__is_error).to.be(true);
             done();
         })
@@ -140,7 +141,7 @@ describe("modelInfo", function() {
     it("should get modelInfos", function(done) {
         mi.getModelInfos({
             final: false
-        }, function(err, modelInfos) {
+         }, function(err, modelInfos) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err);

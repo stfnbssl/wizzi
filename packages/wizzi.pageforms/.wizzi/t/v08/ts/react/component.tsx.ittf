@@ -92,6 +92,7 @@ $group
                                     \b prop.type == 'date' ? 'Date.now()' : 
                                     \b prop.type == 'object' ? '{}' : 
                                     \b prop.type == 'array' ? '[]' : '""'}
+                    $hook ctor
 
             $hook
     $if md.connected

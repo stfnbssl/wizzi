@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\services\runnerServer.js.ittf
 */
 'use strict';
@@ -52,7 +52,8 @@ var RunnerServer = (function () {
         if (this.wizziFactory != null) {
             throw new Error('wizzi/runnerServer/registerPlugin error: Cannot register a global context. The WizziFactory has been already initialized.');
         }
-        this.globalContext = _.merge(this.globalContext, context);
+        this.globalContext = _.merge(this.globalContext, context)
+        ;
     }
     RunnerServer.prototype.registerFsNoAclFactory = function(name, options) {
         if (verify.isNotEmpty(name) === false) {
@@ -82,7 +83,7 @@ var RunnerServer = (function () {
         options.role = 'admin';
         options.repo = {
             storeKind: 'filesystem'
-        };
+         };
         this.registerFactory(name, options)
     }
     RunnerServer.prototype.registerFactory = function(name, options) {
@@ -102,7 +103,7 @@ var RunnerServer = (function () {
         this.wizziFactoryDatas.push({
             name: name, 
             options: options
-        })
+         })
         console.log(chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name));
     }
     RunnerServer.prototype.getWizziFactory = function(name) {
@@ -277,8 +278,9 @@ module.exports = {
             throw new Error('wizzi/services/runnerServer/init error: The runner server has already been instantiated.');
         }
         this.instance = new RunnerServer(cwd, user, role);
+        ;
     }
-};
+ };
 /**
   params
     string code
@@ -297,7 +299,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.22.runnerServer.' + method,
+        method: 'wizzi@0.7.23.runnerServer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

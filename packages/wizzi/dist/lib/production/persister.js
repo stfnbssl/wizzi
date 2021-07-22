@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\persister.js.ittf
 */
 'use strict';
@@ -30,20 +30,25 @@ var ArtifactPersister = (function () {
     }
     ArtifactPersister.prototype.toFile = function(callback) {
         var that = this;
+        
+        // TODO
+        
+        // Write here model type artifacts ?
+        
+        // The wizzi model artifacts could be generated in memory and retrieved
+        
+        // by the this.artifactInfo.getItemsToPersistToFile() method
+        
+        // TODO Add more info to result info ?
         if (this.artifactInfo.isWizziModelTypesArtifact()) {
-            // TODO
-            // Write here model type artifacts ?
-            // The wizzi model artifacts could be generated in memory and retrieved
-            // by the this.artifactInfo.getItemsToPersistToFile() method
-            // TODO Add more info to result info ?
             return callback(null, [
                     {
                         oper: 'generate-schema', 
                         status: 'success', 
                         item: {
                             filepath: 'Unavailable'
-                        }
-                    }
+                         }
+                     }
                 ]);
         }
         else {
@@ -67,7 +72,7 @@ var ArtifactPersister = (function () {
                 ret.push({
                     filepath: item.filepath, 
                     content: item.genContext.getContent()
-                })
+                 })
             }
         })
         return ret;
@@ -80,11 +85,13 @@ function asyncArtifactFilePersister_hof(artifactInfo) {
     return function(genInfo, callback) {
             logme('AsyncArtifactFilePersister.persist', genInfo.filepath, genInfo.genContext.getContent())
             fileService.openWrite(genInfo.filepath, (err, stream) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 genInfo.genContext.toStream(stream);
                 stream.end((err, notUsed) => {
+                
                     if (err) {
                         return callback(err);
                     }
@@ -93,11 +100,13 @@ function asyncArtifactFilePersister_hof(artifactInfo) {
                         oper: 'persist-to-file', 
                         item: {
                             filepath: genInfo.filepath
-                        }, 
+                         }, 
                         status: 'success'
-                    })
-                })
-            })
+                     })
+                }
+                )
+            }
+            )
         };
 }
 

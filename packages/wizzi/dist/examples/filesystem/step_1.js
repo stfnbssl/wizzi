@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\examples\filesystem\step_1.js.ittf
 */
 'use strict';
@@ -22,7 +22,8 @@ var mocks = wizziUtils.mocks;
 var async = require('async');
 var pluginsBaseFolder = null;
 var wizziIndex = require('../../index');
-pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..');
+pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
+;
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsnoaclFactory({
         plugins: {
@@ -31,9 +32,9 @@ function createWizziFactory(globalContext, callback) {
                 'wizzi-web', 
                 'wizzi-core'
             ]
-        }, 
+         }, 
         globalContext: globalContext || {}
-    }, callback)
+     }, callback)
 }
 var filesystem_step_1 = function(step_callback) {
     heading1('EXAMPLE')
@@ -168,7 +169,7 @@ var filesystem_step_1 = function(step_callback) {
                 sourceItemPath: 'folderB_moved', 
                 destProjectId: projectId, 
                 destItemPath: 'folderE_batch'
-            }, 
+             }, 
             {
                 actionType: 'move', 
                 itemKind: 0, 
@@ -176,14 +177,14 @@ var filesystem_step_1 = function(step_callback) {
                 sourceItemPath: 'folderToDelete', 
                 destProjectId: projectId, 
                 destItemPath: 'folderF_batch'
-            }, 
+             }, 
             {
                 actionType: 'delete', 
                 userId: userId, 
                 itemKind: 0, 
                 projectId: projectId, 
                 itemPath: 'folderF_batch'
-            }, 
+             }, 
             {
                 actionType: 'copy', 
                 itemKind: 1, 
@@ -191,7 +192,7 @@ var filesystem_step_1 = function(step_callback) {
                 sourceItemPath: 'folderC/docC1.js.ittf', 
                 destProjectId: projectId, 
                 destItemPath: 'folderG_batch/docC1.js.ittf'
-            }, 
+             }, 
             {
                 actionType: 'move', 
                 itemKind: 1, 
@@ -199,14 +200,14 @@ var filesystem_step_1 = function(step_callback) {
                 sourceItemPath: 'folderC/docC1.js.ittf', 
                 destProjectId: projectId, 
                 destItemPath: 'folderH_batch/docC1.js.ittf'
-            }, 
+             }, 
             {
                 actionType: 'delete', 
                 itemKind: 1, 
                 userId: userId, 
                 projectId: projectId, 
                 itemPath: 'folderA/docA1.js.ittf'
-            }
+             }
         ], function(err, notUsed) {
             if (err) {
                 console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
@@ -254,12 +255,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -356,9 +358,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

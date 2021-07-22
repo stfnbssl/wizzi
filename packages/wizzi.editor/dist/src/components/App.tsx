@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.editor\.wizzi\src\components\App.tsx.ittf
-    utc time: Tue, 20 Jul 2021 18:56:29 GMT
+    utc time: Wed, 21 Jul 2021 08:44:38 GMT
 */
 import * as React from 'react';
 // Redux
@@ -300,6 +300,7 @@ class AppMain extends React.Component<AppProps, State> {
             this.props.dispatchExecuteJob(fileConversions.packiFilterIttf(files))
         }
     };
+    
     static getDerivedStateFromProps(_props: Props, state: State) {
         return null;
     }
@@ -323,6 +324,9 @@ class AppMain extends React.Component<AppProps, State> {
     }
     
     componentDidUpdate(prevProps: Props, prevState: State) {
+        if (prevProps.jobGeneratedArtifacts !== this.props.jobGeneratedArtifacts) {
+            this._PackiSession.updateJobGeneratedFiles(this.props.jobGeneratedArtifacts)
+        }
     }
     _handleFocusChangeInterval = () => {
         const isFocused = document.hasFocus();

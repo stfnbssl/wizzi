@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\wizzi\models\bootstrap\util.js.ittf
 */
 'use strict';
@@ -23,28 +23,35 @@ md.getIdentifier = function(str, checkKeyword) {
     else {
         return ret;
     }
-};
+}
+;
 md.isNotEmpty = function(str) {
     return typeof str === 'string' && str.trim().length > 0;
-};
+}
+;
 md.isEmpty = function(str) {
     return typeof str === 'undefined' || str == null || ( typeof str === 'string' && str.trim().length === 0 );
-};
+}
+;
 md.endsWith = function(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
-};
+}
+;
 md.startsWith = function(str, prefix) {
     return str.indexOf(prefix) === 0;
-};
+}
+;
 md.replaceAll = function(str, find, replace) {
     if (typeof str === 'undefined' || str == null) {
         return str;
     }
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-};
+}
+;
 md.pluralize = function(str) {
     return inflect.pluralize(str);
-};
+}
+;
 md.capitalize = function(str) {
     // do not use inflect ( in inflect titleName becames Titlename non TitleName )
     if (str && str.length > 0) {
@@ -53,13 +60,15 @@ md.capitalize = function(str) {
     else {
         return str;
     }
-};
+}
+;
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 md.escapeString = function(str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
-};
+}
+;
 function isIdentifierChar(str) {
     return isAlphaNumeric(str) || str === '_';
 }

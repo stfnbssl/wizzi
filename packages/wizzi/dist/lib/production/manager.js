@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\production\manager.js.ittf
 */
 'use strict';
@@ -61,7 +61,7 @@ var ProductionManager = (function () {
             models: {}, 
             pman: this, 
             pcx: this.productionContext
-        };
+         };
         // set this.logger = new Logger()
         this.productionName = 'production';
     }
@@ -141,7 +141,8 @@ var ProductionManager = (function () {
             );
         }
         wfJobConfig.__pman = this;
-        wfJobConfig.options = Object.assign({}, this.options, wfJobConfig.options || {});
+        wfJobConfig.options = Object.assign({}, this.options, wfJobConfig.options || {})
+        ;
         this.jobRequests.push(wfJobConfig);
     }
     //
@@ -163,7 +164,8 @@ var ProductionManager = (function () {
         }
         // log 'wizzi.productionManager.addJobRequest.jobRequest', jobRequest
         jobRequest.__pman = this;
-        jobRequest.options = Object.assign({}, this.options, jobRequest.options || {});
+        jobRequest.options = Object.assign({}, this.options, jobRequest.options || {})
+        ;
         this.jobRequests.push(jobRequest);
     }
     ProductionManager.prototype.initialize = function(callback) {
@@ -173,11 +175,13 @@ var ProductionManager = (function () {
             );
         };
         async.mapSeries(this.jobRequests, AsyncInitializeJobRequests.run, (err, notUsed) => {
+        
             if (err) {
                 return callback(err);
             }
             this.preLoad(callback)
-        })
+        }
+        )
     }
     ProductionManager.prototype.preLoad = function(callback) {
         if (typeof(callback) !== 'function') {
@@ -186,16 +190,20 @@ var ProductionManager = (function () {
             );
         };
         async.mapSeries(this.globalModelInfos, AsyncGlobalModelPreLoader.run, (err, notUsed) => {
+        
             if (err) {
                 return callback(err);
             }
             async.mapSeries(this.artifactInfos, AsyncArtifactCollectionPreLoader.run, (err, notUsed) => {
+            
                 if (err) {
                     return callback(err);
                 }
                 callback(null);
-            })
-        })
+            }
+            )
+        }
+        )
     }
     ProductionManager.prototype.run = function(callback) {
         if (typeof(callback) !== 'function') {
@@ -301,9 +309,11 @@ var ProductionManager = (function () {
         // called by WfjobLoader
         // log 'wizzi.production.productionManager.loadWfjob.ittfDocumentUri', ittfDocumentUri
         if (!this.wfjobLoadModel) {
-            this.wfjobLoadModel = this.getLoadModel('wfjob');
+            this.wfjobLoadModel = this.getLoadModel('wfjob')
+            ;
+            
+            // log 'wizzi.checked_call_set.__is_error ', this.wfjobLoadModel
             if (this.wfjobLoadModel && this.wfjobLoadModel.__is_error) {
-                // log 'wizzi.checked_call_set.__is_error ', this.wfjobLoadModel
                 return callback(this.wfjobLoadModel);
             }
         }
@@ -334,7 +344,7 @@ var ProductionManager = (function () {
     ProductionManager.prototype.getLogState = function() {
         var logState = {
             models: {}
-        };
+         };
         // log 'wizzi-factory/productionManager/state models length', this.___state.models.length
         for (var m in this.___state.models) {
             var mo = this.___state.models[m];
@@ -342,6 +352,8 @@ var ProductionManager = (function () {
             logState[m] = modelState;
             for (var k in mo) {
                 // log 'wizzi-factory/productionManager/state model prop', k
+                
+                // set modelState.ittfDocumentDatas = mo.loadHistory.ittfDocumentDatas
                 if (mo.loadHistory) {
                     modelState.ittfSources = mo.loadHistory.getIttfDocuments();
                     var i, i_items=mo.loadHistory.ittfDocumentDatas, i_len=mo.loadHistory.ittfDocumentDatas.length, idm;
@@ -353,7 +365,6 @@ var ProductionManager = (function () {
                             // log 'wizzi-factory/productionManager/state model loadHistory ittfDocumentData prop', idm_k
                         }
                     }
-                    // set modelState.ittfDocumentDatas = mo.loadHistory.ittfDocumentDatas
                     for (var z in mo.loadHistory) {
                         // log 'wizzi-factory/productionManager/state model loadHistory prop', z
                     }
@@ -485,9 +496,9 @@ var AsyncInitializeJobRequests = {
         var wfjobLoadRequest = {
             model: {
                 src: wfjobIttfDocumentUri
-            }, 
+             }, 
             wfjobLoader: wfjobLoader
-        };
+         };
         AsyncRecurseWfjobLoad(wfjobLoadRequest, function(err, result) {
             if (err) {
                 return callback(err);
@@ -516,7 +527,7 @@ var AsyncInitializeJobRequests = {
             callback(null);
         })
     }
-};
+ };
 // async global model pre loader
 var AsyncGlobalModelPreLoader = {
     run: function(globalModelInfo, callback) {
@@ -531,10 +542,10 @@ var AsyncGlobalModelPreLoader = {
             callback(null, {
                 exportName: globalModelInfo.exportName, 
                 modelInstance: modelInstance
-            })
+             })
         })
     }
-};
+ };
 // async artifact collection pre loader
 var AsyncArtifactCollectionPreLoader = {
     run: function(artifactInfo, callback) {
@@ -554,16 +565,17 @@ var AsyncArtifactCollectionPreLoader = {
             callback(null, operResult);
         })
     }
-};
+ };
 // async run an artifact production
 var AsyncRunner = {
     run: function(artifactInfo, callback) {
         log.info('Started async run artifact: ' + artifactInfo.name);
         var runner = new Runner(artifactInfo);
         runner.run(function(err, operResult) {
+            
+            // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
             if (err) {
                 err.artifactInfo = artifactInfo.toString();
-                // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
                 return callback(err);
             }
             log.info('Ended async run artifact: ' + artifactInfo.name);
@@ -574,16 +586,17 @@ var AsyncRunner = {
         log.info('Started async runFrontMatter artifact: ' + artifactInfo.name);
         var runner = new Runner(artifactInfo);
         runner.runFrontMatter(function(err, operResult) {
+            
+            // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
             if (err) {
                 err.artifactInfo = artifactInfo.toString();
-                // set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
                 return callback(err);
             }
             log.info('Ended async runFrontMatter artifact: ' + artifactInfo.name);
             callback(null, operResult);
         })
     }
-};
+ };
 // async persist one or more artifact productions
 var AsyncPersisterToFile = {
     run: function(artifactInfo, callback) {
@@ -617,7 +630,7 @@ var AsyncPersisterToFile = {
             callback(null, operResult);
         })
     }
-};
+ };
 module.exports = ProductionManager;
 /**
   params

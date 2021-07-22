@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\util\log.js.ittf
 */
 'use strict';
@@ -92,7 +92,7 @@ function getFileLogger(filename) {
     fileLoggers[dirname] = {
         logger: logger, 
         stream: stream
-    };
+     };
     logFlushSetup();
     return logger;
 }
@@ -137,4 +137,5 @@ module.exports = function(module, options) {
         logger = consoleLogger;
     }
     return new Log(path.basename(module.filename), logger);
-};
+}
+;

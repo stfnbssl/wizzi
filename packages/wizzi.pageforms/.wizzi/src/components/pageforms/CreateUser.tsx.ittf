@@ -18,7 +18,7 @@ module
         $append imports
             import debounce from 'lodash/debounce'
             import nullthrows from 'nullthrows'        
-            $include common_imports
+            common_imports( top )
             import FormAvatar from './widgets/FormAvatar'
             import FormStatic from './widgets/FormStatic'
         

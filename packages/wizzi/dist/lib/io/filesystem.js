@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\io\filesystem.js.ittf
 */
 'use strict';
@@ -34,69 +34,76 @@ var FsStat = (function () {
 var md = module.exports = {};
 md.isMounted = function() {
     return isMounted;
-};
+}
+;
 md.mount = function(baseFolderPath, callback) {
     fsBaseFolderPath = baseFolderPath;
     isMounted = true;
     // log 'wizzi-io.filesystem mounted. BaseFolderPath: ' + baseFolderPath
     return callback(null);
-};
+}
+;
 md.unmount = function(callback) {
     isMounted = false;
     fsBaseFolderPath = null;
     callback(null);
-};
+}
+;
 md.fullPathForHash = function(userId, projectId, path_string) {
     if (isMounted == false) {
         throw new Error('IO wizzi repository not mounted. Review your start procedure.');
     }
     return normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-};
+}
+;
 md.exists = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.exists.fsPath', fsPath
     var exists = file.exists(fsPath);
     // log 'wizzi-io.filesystem.exists.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
-};
+}
+;
 md.isFile = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.isFile.fsPath', fsPath
     var exists = file.isFile(fsPath);
     // log 'wizzi-io.filesystem.isFile.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
-};
+}
+;
 md.isFolder = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.isFolder.fsPath', fsPath
     var exists = file.isDirectory(fsPath);
     // log 'wizzi-io.filesystem.isFolder.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
-};
+}
+;
 md.readFile = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.readFile.fsPath', fsPath
@@ -107,13 +114,14 @@ md.readFile = function(userId, projectId, path_string, callback) {
         // log 'wizzi-io.filesystem.readFile.fsPath', fsPath, 'content', content
         return callback(null, content);
     })
-};
+}
+;
 md.writeFile = function(userId, projectId, path_string, content, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.writeFile.fsPath', fsPath
@@ -124,26 +132,28 @@ md.writeFile = function(userId, projectId, path_string, content, callback) {
         // log 'wizzi-io.filesystem.writeFile.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
-};
+}
+;
 md.mkdir = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.mkdir.fsPath', fsPath
     file.mkdir(fsPath)
     // log 'wizzi-io.filesystem.createFolder.fsPath', fsPath
     return callback(null);
-};
+}
+;
 md.readDir = function(userId, projectId, dirPath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = path.join(fsBaseFolderPath, userId);
     if (projectId != null) {
@@ -162,13 +172,14 @@ md.readDir = function(userId, projectId, dirPath, callback) {
         // log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
         return callback(null, fsitems);
     })
-};
+}
+;
 md._readDir = function(dirPath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(dirPath);
     // log 'wizzi-io.filesystem.readDir.fsPath', fsPath
@@ -180,13 +191,14 @@ md._readDir = function(dirPath, callback) {
         // log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
         return callback(null, fsitems);
     })
-};
+}
+;
 md.stat = function(userId, projectId, filePath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, filePath));
     // log 'wizzi-io.filesystem.stat.fsPath', fsPath
@@ -199,20 +211,21 @@ md.stat = function(userId, projectId, filePath, callback) {
             return callback({
                     er: {
                         code: 'ENOENT'
-                    }
-                });
+                     }
+                 });
         }
         else {
             return callback(null, new FsStat(fsitem));
         }
     })
-};
+}
+;
 md._stat = function(filePath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(filePath);
     // log 'wizzi-io.filesystem.stat.fsPath', fsPath
@@ -220,19 +233,20 @@ md._stat = function(filePath, callback) {
         return callback({
                 err: {
                     code: 'ENOENT'
-                }
-            });
+                 }
+             });
     }
     else {
         return callback(null, new FsStat(fileToFsItem(fsPath)));
     }
-};
+}
+;
 md.glob = function(userId, projectId, pattern, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPattern = normalize(path.join(fsBaseFolderPath, userId, projectId, pattern));
     // log 'wizzi-io.filesystem.glob.fsPattern', fsPattern
@@ -243,13 +257,14 @@ md.glob = function(userId, projectId, pattern, callback) {
         // log 'wizzi-io.filesystem.glob.fsPattern', fsPattern, 'fsitems', fsitems
         return callback(null, fsitems);
     })
-};
+}
+;
 md.deleteFile = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.deleteFile.fsPath', fsPath
@@ -260,13 +275,14 @@ md.deleteFile = function(userId, projectId, path_string, callback) {
         // log 'wizzi-io.filesystem.deleteFile.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
-};
+}
+;
 md.copyFile = function(userId, source_projectId, source_path_string, dest_projectId, dest_path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_path_string));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_path_string));
@@ -274,13 +290,14 @@ md.copyFile = function(userId, source_projectId, source_path_string, dest_projec
     file.copy(sourceFsPath, destFsPath)
     // log 'wizzi-io.filesystem.copyFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     return callback(null);
-};
+}
+;
 md.moveFile = function(userId, source_projectId, source_path_string, dest_projectId, dest_path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_path_string));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_path_string));
@@ -292,13 +309,14 @@ md.moveFile = function(userId, source_projectId, source_path_string, dest_projec
         // log 'wizzi-io.filesystem.moveFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
-};
+}
+;
 md.deleteFolder = function(userId, projectId, path_string, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
     // log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath
@@ -309,13 +327,14 @@ md.deleteFolder = function(userId, projectId, path_string, callback) {
         // log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
-};
+}
+;
 md.copyFolder = function(userId, source_projectId, source_itemPath, dest_projectId, dest_itemPath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_itemPath));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_itemPath));
@@ -327,13 +346,14 @@ md.copyFolder = function(userId, source_projectId, source_itemPath, dest_project
         // log 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
-};
+}
+;
 md.moveFolder = function(userId, source_projectId, source_itemPath, dest_projectId, dest_itemPath, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_itemPath));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_itemPath));
@@ -345,13 +365,14 @@ md.moveFolder = function(userId, source_projectId, source_itemPath, dest_project
         // log 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
-};
+}
+;
 md.duplicateFile = function(userId, projectId, itemPath, newName, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var duplicatedItemPath = parentPath(itemPath) + '/' + newName;
     // log 'wizzi-io.filesystem.duplicateFile', userId, projectId, itemPath, duplicatedItemPath
@@ -363,7 +384,7 @@ md.duplicateFile = function(userId, projectId, itemPath, newName, callback) {
             return callback({
                     __is_error: true, 
                     message: "duplicated file name already exists"
-                });
+                 });
         }
         md.copyFile(userId, projectId, itemPath, projectId, duplicatedItemPath, callback, function(err, result) {
             if (err) {
@@ -371,16 +392,17 @@ md.duplicateFile = function(userId, projectId, itemPath, newName, callback) {
             }
             return callback(null, {
                     message: "file duplicated"
-                });
+                 });
         })
     })
-};
+}
+;
 md.renameFile = function(userId, projectId, itemPath, newName, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var renamedItemPath = parentPath(itemPath) + '/' + newName;
     // log 'wizzi-io.filesystem.renameFile', userId, projectId, itemPath, renamedItemPath
@@ -392,7 +414,7 @@ md.renameFile = function(userId, projectId, itemPath, newName, callback) {
             return callback({
                     __is_error: true, 
                     message: "renamed file name already exists"
-                });
+                 });
         }
         var oldPath = normalize(path.join(fsBaseFolderPath, userId, projectId, itemPath));
         var newPath = normalize(path.join(fsBaseFolderPath, userId, projectId, renamedItemPath));
@@ -402,16 +424,17 @@ md.renameFile = function(userId, projectId, itemPath, newName, callback) {
             }
             return callback(null, {
                     message: "file renamed"
-                });
+                 });
         })
     })
-};
+}
+;
 md.duplicateFolder = function(userId, projectId, itemPath, newName, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var duplicatedItemPath = parentPath(itemPath) + '/' + newName;
     // log 'wizzi-io.filesystem.duplicateFolder', userId, projectId, itemPath, duplicatedItemPath
@@ -423,7 +446,7 @@ md.duplicateFolder = function(userId, projectId, itemPath, newName, callback) {
             return callback({
                     __is_error: true, 
                     message: "duplicated folder name already exists"
-                });
+                 });
         }
         md.copyFolder(userId, projectId, itemPath, projectId, duplicatedItemPath, callback, function(err, result) {
             if (err) {
@@ -431,16 +454,17 @@ md.duplicateFolder = function(userId, projectId, itemPath, newName, callback) {
             }
             return callback(null, {
                     message: "file duplicated"
-                });
+                 });
         })
     })
-};
+}
+;
 md.renameFolder = function(userId, projectId, itemPath, newName, callback) {
     if (isMounted == false) {
         return callback({
                 __is_error: true, 
                 message: 'IO wizzi repository not mounted. Review your start procedure'
-            });
+             });
     }
     var renamedItemPath = parentPath(itemPath) + '/' + newName;
     // log 'wizzi-io.filesystem.renameFolder', userId, projectId, itemPath, renamedItemPath
@@ -452,7 +476,7 @@ md.renameFolder = function(userId, projectId, itemPath, newName, callback) {
             return callback({
                     __is_error: true, 
                     message: "renamed folder name already exists"
-                });
+                 });
         }
         var oldPath = normalize(path.join(fsBaseFolderPath, userId, projectId, itemPath));
         var newPath = normalize(path.join(fsBaseFolderPath, userId, projectId, renamedItemPath));
@@ -462,10 +486,11 @@ md.renameFolder = function(userId, projectId, itemPath, newName, callback) {
             }
             return callback(null, {
                     message: "file renamed"
-                });
+                 });
         })
     })
-};
+}
+;
 md.copyFsItem = function(userId, action, callback) {
     if (action.itemKind == 0) {
         md.copyFolder(userId, action.sourceProjectId, action.sourceItemPath, action.destProjectId, action.destItemPath, callback)
@@ -473,7 +498,8 @@ md.copyFsItem = function(userId, action, callback) {
     else {
         md.copyFile(userId, action.sourceProjectId, action.sourceItemPath, action.destProjectId, action.destItemPath, callback)
     }
-};
+}
+;
 md.moveFsItem = function(userId, action, callback) {
     if (action.itemKind == 0) {
         md.moveFolder(userId, action.sourceProjectId, action.sourceItemPath, action.destProjectId, action.destItemPath, callback)
@@ -481,7 +507,8 @@ md.moveFsItem = function(userId, action, callback) {
     else {
         md.moveFile(userId, action.sourceProjectId, action.sourceItemPath, action.destProjectId, action.destItemPath, callback)
     }
-};
+}
+;
 md.deleteFsItem = function(userId, action, callback) {
     console.log('wizzi.FileSystem.deleteFsItem.action', action);
     if (action.itemKind == 0) {
@@ -490,7 +517,8 @@ md.deleteFsItem = function(userId, action, callback) {
     else {
         md.deleteFile(action.userId || userId, action.projectId, action.itemPath, callback)
     }
-};
+}
+;
 md.batch = function(userId, actions, callback) {
     async.mapSeries(actions, function(action, callback) {
         if (action.actionType === 'copy') {
@@ -506,7 +534,8 @@ md.batch = function(userId, actions, callback) {
             callback('Filesystem.batch. Invalid parameter "action.actionType":' + action.actionType);
         }
     }, callback)
-};
+}
+;
 function normalize(path) {
     return path.trim().replace(/\\/g,'/').toLowerCase();
 }
@@ -527,14 +556,14 @@ function fileToFsItem(filePath) {
             dirname: path.dirname(filePath), 
             path: filePath, 
             kind: ( file.isDirectory(filePath) ? 0 : 1 )
-        };
+         };
 }
 function fileToDocument(filePath) {
     return {
             _id: filePath, 
             content: file.read(filePath), 
             lastModified: file.lastModified(filePath)
-        };
+         };
 }
 function parentPath(itemPath) {
     itemPath = normalize(itemPath);

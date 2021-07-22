@@ -11,7 +11,7 @@ module
                 iif process.env.NODE_ENV === 'production'
                     then 'source-map'
                     else 'cheap-module-source-map'
-            [ entry
+            { entry
                 v08/webpack/entry(&jobCtx)
             { module
                 [ rules
