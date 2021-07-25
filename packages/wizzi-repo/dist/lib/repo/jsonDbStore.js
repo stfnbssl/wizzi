@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\repo\jsonDbStore.js.ittf
 */
 'use strict';
@@ -49,13 +49,15 @@ var JsonDbStore = (function () {
         var that = this;
         if (!options.fsJson && options.jsonFsData) {
             this.fsimpl = new JsonFsImpl(options.jsonFsData);
+            ;
         }
         else {
             this.fsimpl = new JsonFsImpl({});
+            ;
         }
         this.fsimpl.open({
             fsJson: options.fsJson
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -89,7 +91,7 @@ var JsonDbStore = (function () {
                 return callback(error('RepoIOError', 'documentExists', {
                         parameter: 'documentPath', 
                         message: 'Checking existence of document: ' + documentPath
-                    }, err));
+                     }, err));
             }
             return callback(null, result);
         })
@@ -110,7 +112,7 @@ var JsonDbStore = (function () {
                 return callback(error('RepoIOError', 'getModelContent', {
                         parameter: 'documentPath', 
                         message: 'Getting content of document: ' + documentPath
-                    }, err));
+                     }, err));
             }
             // log 'getModelContent.received', result
             return callback(null, result);

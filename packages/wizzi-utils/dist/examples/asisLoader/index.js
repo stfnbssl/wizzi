@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\asisLoader\index.js.ittf
 */
 'use strict';
@@ -35,7 +35,7 @@ function step_1(file) {
         '            @ name "stefi"'
     ].join('\n'), {
         clean: true
-    }, function(err, tree) {
+     }, function(err, tree) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -54,7 +54,7 @@ function step_2(file) {
         '            @ name "stefi"'
     ].join('\n'), {
         clean_remove: true
-    }, function(err, tree) {
+     }, function(err, tree) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -68,7 +68,7 @@ function step_3(file) {
     asIsLoader(path.join(__dirname, 'ittf', 'root.sample.ittf'), {
         clean_remove: true, 
         file: file
-    }, function(err, tree) {
+     }, function(err, tree) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);

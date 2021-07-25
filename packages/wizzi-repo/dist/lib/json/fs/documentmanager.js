@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\json\fs\documentmanager.js.ittf
 */
 'use strict';
@@ -73,7 +73,7 @@ var DocumentManager = (function () {
                 dirname: dirnameS, 
                 path: pathS, 
                 kind: 0
-            }, function(err, r) {
+             }, function(err, r) {
                 if (err) {
                     return callback(err);
                 }
@@ -264,7 +264,7 @@ var DocumentManager = (function () {
                             path: files[i], 
                             fullPath: files[i], 
                             content: contents[i]
-                        })
+                         })
                     }
                     return callback(null, ret);
                 })
@@ -407,7 +407,7 @@ var DocumentManager = (function () {
                         console.log('wizzi-repo.fs.json.document.copyFile.r', r);
                         return callback(null, {
                                 code: "DOCUMENT_COPIED"
-                            });
+                             });
                     })
                 }
             })
@@ -440,7 +440,7 @@ var DocumentManager = (function () {
         console.log('wizzi-repo.t.fscommon.document.getFiles.before');
         this.getFiles(sourcePath, {
             deep: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 return callback(err);
             }
@@ -575,7 +575,7 @@ var DocumentManager = (function () {
             return callback(null, {
                     renamed: false, 
                     message: 'oldPath and newPath are the same'
-                });
+                 });
         }
         var that = this;
         this.fsCommon.getItemByPath(oldPath, function(err, fsitem) {
@@ -606,7 +606,7 @@ var DocumentManager = (function () {
                         return callback(null, {
                                 code: "DOCUMENT_RENAMED", 
                                 id: r.item._id
-                            });
+                             });
                     })
                 }
             })
@@ -644,7 +644,7 @@ var DocumentManager = (function () {
             return callback(null, {
                     renamed: false, 
                     message: 'oldPath and newPath are the same'
-                });
+                 });
         }
         var that = this;
         this.fsCommon.getItemByPath(oldPath, function(err, fsitem) {
@@ -778,7 +778,7 @@ var DocumentManager = (function () {
             var documents = file.getFiles(sourcePath, {
                 deep: true, 
                 documentContent: true
-            });
+             });
             // log 'wizzi-repo.fs.json.document.uploadFolder.documents', sourcePath, options, documents
             var d, destFilePath, len = documents.length;
             var uploaded = [];
@@ -787,7 +787,8 @@ var DocumentManager = (function () {
                     return callback(null, uploaded);
                 }
                 d = documents[index];
-                destFilePath = path.join(destPath, d.relPath);
+                destFilePath = path.join(destPath, d.relPath)
+                ;
                 if (d.content && d.content.length > 0) {
                     that.writeFile(destFilePath, d.content, function(err, r) {
                         if (err) {
@@ -797,7 +798,7 @@ var DocumentManager = (function () {
                             relPath: d.relPath, 
                             dest: destFilePath, 
                             result: r
-                        })
+                         })
                         process.nextTick(function() {
                             repeater(index + 1);
                         })
@@ -838,12 +839,12 @@ var DocumentManager = (function () {
                 return callback(null, {
                         path: singleFilePath, 
                         content: content
-                    });
+                     });
             })
         }
         this.getFiles(folderPath, {
             deep: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 return callback(err);
             }
@@ -870,7 +871,7 @@ var DocumentManager = (function () {
             dirname: dirname, 
             path: normalize(path.join(dirname, basename)), 
             kind: 1
-        }, function(err, r) {
+         }, function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -913,23 +914,25 @@ var DocumentManager = (function () {
             if (err) {
                 return callback(err);
             }
+            
+            // log 'wizzi-repo.fs.json.document.writeFile.writeFile.1.exists, so update', filePath
             if (fsitem != null) {
-                // log 'wizzi-repo.fs.json.document.writeFile.writeFile.1.exists, so update', filePath
                 return that._updateFile(fsitem._id, content, callback);
             }
+            // log 'wizzi-repo.fs.json.document.writeFile.writeFile.2.not exists. try get dirname', dirname
             else {
                 var dirname = path.dirname(filePath);
-                // log 'wizzi-repo.fs.json.document.writeFile.writeFile.2.not exists. try get dirname', dirname
                 that.fsCommon.getItemByPath(dirname, function(err, fsitem) {
                     if (err) {
                         return callback(err);
                     }
+                    
+                    // log 'wizzi-repo.fs.json.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                     if (fsitem != null) {
-                        // log 'wizzi-repo.fs.json.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                         return that._createFile(fsitem._id, dirname, path.basename(filePath), content, callback);
                     }
+                    // log 'wizzi-repo.fs.json.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                     else {
-                        // log 'wizzi-repo.fs.json.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                         that.createFolder(dirname, function(err, fsitem) {
                             if (err) {
                                 return callback(err);
@@ -1012,7 +1015,7 @@ var DocumentManager = (function () {
                         isFile: function() {
                             return false;
                         }
-                    });
+                     });
             }
             else {
                 return callback(null, {
@@ -1022,7 +1025,7 @@ var DocumentManager = (function () {
                         isFile: function() {
                             return fsitem.kind == 1;
                         }
-                    });
+                     });
             }
         })
     }
@@ -1050,13 +1053,14 @@ DocumentManager.create = function(fsJsonData, callback) {
         FsJson = require('./fsjson');
     }
     return callback(null, new DocumentManager(new FsJson(fsJsonData)));
-};
+}
+;
 function errorMsg(method, message) {
     return {
             __is_error: true, 
             method: 'Json.Fs.DocumentManager.' + method, 
             message: message
-        };
+         };
 }
 function normalize(path, stripEndingSlash) {
     if (stripEndingSlash) {

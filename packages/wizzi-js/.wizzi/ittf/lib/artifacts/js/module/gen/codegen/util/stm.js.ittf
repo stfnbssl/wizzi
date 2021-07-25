@@ -264,6 +264,8 @@
                 return false
             # log 'model.params', model.params
             # log 'model.params[0]', model.params[0]
+            if model.params[0].wzName.startsWith('...')
+                return false
             var ss = md.nonCommentStatements(model.params[0])
             # log 'return', ss.length == 0
             return ss.length == 0

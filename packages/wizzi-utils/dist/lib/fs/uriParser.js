@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fs\uriParser.js.ittf
 */
 'use strict';
@@ -19,7 +19,7 @@ module.exports = function parse(uri, callback) {
     var ret = {
         originalUri: uri, 
         browser: false
-    };
+     };
     var parsedUri = url.parse(uri);
     // log 'wizzi-utils.uriParser.parsedUri', '\n', JSON.stringify(parsedUri, null, 2)
     ret._protocol = parsedUri.protocol;
@@ -53,7 +53,8 @@ module.exports = function parse(uri, callback) {
     setParsed(ret, parsedUri)
     // log 'parsed.result', ret
     return returnOrCb(ret, callback);
-};
+}
+;
 function setParsed(parsed, parsedUri) {
     var name,
         parts = parsed.pathname ? parsed.pathname.split('/') : [];

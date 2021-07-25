@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\mocks\artifact\genContext.js.ittf
 */
 'use strict';
@@ -97,8 +97,9 @@ var GenContext = (function () {
         this.writeFilePath = filePath;
     }
     GenContext.prototype.toStream = function(stream) {
+        
+        // log 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
         if (this.writeFilePath != null) {
-            // log 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
             stream.write(file.read(this.writeFilePath))
         }
         else {
@@ -142,7 +143,7 @@ var GenContext = (function () {
         }
         var gw = new GenContext({
             options: options
-        });
+         });
         gw.block.hydrate(block.lines, options)
         return gw.getContent();
     }

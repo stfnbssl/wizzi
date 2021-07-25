@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\json\jsonFsimpl.js.ittf
 */
 'use strict';
@@ -56,10 +56,12 @@ var JsonFsImpl = (function () {
         return callback(null, that.docManager);
     }
     JsonFsImpl.prototype.close = function() {
+        
+        // log '***** json start closing'
+        
+        // log '***** json closed'
         if (this.docManager) {
-            // log '***** json start closing'
             this.docManager = null;
-            // log '***** json closed'
         }
     }
     JsonFsImpl.prototype.stat = function(documentUri, callback) {
@@ -71,7 +73,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'stat', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -101,7 +103,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'lstat', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -135,7 +137,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'readFile', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -169,7 +171,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'writeFile', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -203,7 +205,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'readdir', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -244,7 +246,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'mkdir', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
@@ -274,7 +276,7 @@ var JsonFsImpl = (function () {
             return callback(error('InvalidArgument', 'unlink', {
                     parameter: 'documentUri', 
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
-                }));
+                 }));
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {

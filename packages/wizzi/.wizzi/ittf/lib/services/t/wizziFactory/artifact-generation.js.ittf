@@ -184,12 +184,3 @@ $group
 		#     boolean copyNonIttf
 		#   function callback
 
-	m generateFolderArtifacts
-		string ittfFolderUri
-		{ requestContext
-			{ modelRequestContext
-				optional
-			{ artifactRequestContext
-				optional
-		{ options
-		callback

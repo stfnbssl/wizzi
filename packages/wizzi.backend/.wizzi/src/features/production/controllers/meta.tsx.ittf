@@ -42,14 +42,7 @@ module
                 _ res.set('Content-Length', index.length.toString())
                 _ res.send(index)
 
-            function getPackiFiles
-                param mainIttf
-                    :string
-                return
-                    {
-                        { [mainIttf]
-                            @ type 'CODE'
-                            @ contents ''
+            $include defaults/meta_packifiles
 
         _ this.router.get('/new', this.getNewMetaForm)
         _ this.router.post('/new', this.postNewMeta)
@@ -80,7 +73,8 @@ module
                     @ (request.session as any).user.username
                     @ request.body.mp_name
                     @ request.body.mp_description
-                    @ JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))
+                    _ JSON.stringify
+                        _ getPackiFiles
                     ._ then
                         =>
                             param result

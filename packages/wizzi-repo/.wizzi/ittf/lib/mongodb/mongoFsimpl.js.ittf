@@ -21,6 +21,7 @@
 			set this.mongodbBaseFolder = mongodbBaseFolder
 			set this.mongoDb = null
 			set this.connecting = false
+            set this.classType = 'wizzi-repo.mongodb.MongoFsImpl'
 		
 		m db
 			callback

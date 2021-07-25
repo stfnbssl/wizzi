@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\ittfTree\index.js.ittf
 */
 'use strict';
@@ -41,7 +41,7 @@ function step_2() {
     ].join('\n'), {
         fromString: true, 
         clean: true
-    }, function(err, result) {
+     }, function(err, result) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -78,13 +78,13 @@ function ittfFinder_step_1() {
     var ittfFinder = new IttfFinder(vfile());
     ittfFinder.resolvePath({
         ittfDocumentUri: path.join(__dirname, 'ittf', 'basic.sample.ittf')
-    }, function(err, result) {
+     }, function(err, result) {
         console.log('ittfFinder_step_1.result.1', err, result);
         var callerFullPath = path.join(__dirname, 'ittf', 'basic.sample.ittf');
         ittfFinder.resolvePath({
             callerFullPath: callerFullPath, 
             fragmentName: 'frag_1'
-        }, function(err, result) {
+         }, function(err, result) {
             console.log('ittfFinder_step_1.result.2', err, result);
         })
     })

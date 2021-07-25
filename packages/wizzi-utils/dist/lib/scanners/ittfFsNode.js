@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\scanners\ittfFsNode.js.ittf
 */
 'use strict';
@@ -44,19 +44,20 @@ var IttfFsNode = (function () {
             schemas: {}, 
             lib: {
                 documents: []
-            }, 
+             }, 
             test: {
                 documents: []
-            }, 
+             }, 
             example: {
                 documents: []
-            }, 
+             }, 
             util: {
                 documents: []
-            }
-        };
+             }
+         };
+        
+        // mixed or included ittf fragments that are outside (up) of root.ittfBasePath
         if (this.parent == null) {
-            // mixed or included ittf fragments that are outside (up) of root.ittfBasePath
             this.ittfBasePath = unixifyPath(nodePath);
             this.jsCodeBasePath = null;
             this.externalFragments = [];
@@ -74,16 +75,17 @@ var IttfFsNode = (function () {
         }
         if (!this.isDirectory && !this.isFragment) {
             var schema = r.info.schemas[this.schema];
+            
+            // log 'created schema', schema, r.info.schemas
             if (!schema) {
                 schema = {
                     name: this.schema, 
                     documents: []
-                };
+                 };
                 r.info.schemas[this.schema] = schema;
-                // log 'created schema', schema, r.info.schemas
             }
+            // log 'found', schema, r.info.schemas
             else {
-                // log 'found', schema, r.info.schemas
             }
             schema.documents.push(this);
             if (this.isTest) {
@@ -124,34 +126,39 @@ var IttfFsNode = (function () {
         if (parts.length <= this.parts.length) {
             return null;
         }
+        
+        // log 'addDocument this.match(parts) == false return null'
         if (this.match(parts) == false) {
-            // log 'addDocument this.match(parts) == false return null'
             return null;
         }
+        
+        // log 'addDocument could be a document try match'
         if (parts.length == this.parts.length + 1) {
-            // log 'addDocument could be a document try match'
+            
+            // log 'addDocument match ok added document', relPath, 'to', this.path
             if (this.match(parts)) {
                 var dnode = new IttfFsNode(relPath, this, {
                     isDirectory: false, 
                     file: r.file
-                });
+                 });
                 this.documents.push(dnode);
-                // log 'addDocument match ok added document', relPath, 'to', this.path
                 return dnode;
             }
             else {
                 return null;
             }
         }
+        // log 'addDocument try subfolder', subfolderPath
+        // log 'addDocument created subfolder', subfolderPath
         else {
             var subfolderPath = parts.slice(0, this.parts.length + 1).join('/');
-            // log 'addDocument try subfolder', subfolderPath
             var added;
             var i, i_items=this.folders, i_len=this.folders.length, f;
             for (i=0; i<i_len; i++) {
                 f = this.folders[i];
                 if (f.path === subfolderPath) {
                     added = f.addDocument(relPath, options);
+                    ;
                     if (added) {
                         return added;
                     }
@@ -160,10 +167,10 @@ var IttfFsNode = (function () {
             var fnode = new IttfFsNode(subfolderPath, this, {
                 isDirectory: true, 
                 file: r.file
-            });
+             });
             this.folders.push(fnode);
-            // log 'addDocument created subfolder', subfolderPath
             added = fnode.addDocument(relPath, options);
+            ;
             return added;
         }
     }
@@ -175,18 +182,20 @@ var IttfFsNode = (function () {
         var relPath = path.relative(this.ittfBasePath, fullPath);
         // log 'addExternalDocument.relPath', relPath, 'fullPath', fullPath
         var dnode = this.searchDocument(relPath);
+        
+        // log 'addExternalDocument.relPath already exists', relPath,
         if (dnode) {
-            // log 'addExternalDocument.relPath already exists', relPath,
             return dnode;
         }
+        // log 'addExternalDocument.relPath added', relPath
         else {
             dnode = new IttfFsNode(relPath, this, {
                 isDirectory: false, 
                 file: r.file
-            });
+             });
+            ;
             dnode.isExternal = true;
             this.documents.push(dnode);
-            // log 'addExternalDocument.relPath added', relPath
             return dnode;
         }
     }
@@ -265,12 +274,12 @@ var IttfFsNode = (function () {
             return ittfHtmlPrettifier(path.join(r.ittfBasePath, this.parts.join('/')), {
                     ittfFsNode: this, 
                     ittfBasePath: (r.ittfBasePath)
-                });
+                 });
         }
         else {
             return {
                     __is_error: true
-                };
+                 };
         }
     }
     IttfFsNode.prototype.getJsCode = function() {
@@ -359,16 +368,17 @@ var IttfFsNode = (function () {
         }
         if (!this.isDirectory && !this.isFragment) {
             var schema = r.info.schemas[this.schema];
+            
+            // log 'created schema', schema, r.info.schemas
             if (!schema) {
                 schema = {
                     name: this.schema, 
                     documents: []
-                };
+                 };
                 r.info.schemas[this.schema] = schema;
-                // log 'created schema', schema, r.info.schemas
             }
+            // log 'found', schema, r.info.schemas
             else {
-                // log 'found', schema, r.info.schemas
             }
             schema.documents.push(this);
             if (this.isTest) {
@@ -405,7 +415,7 @@ var IttfFsNode = (function () {
         else {
             IttfMTreeEx.createFrom(path.join(r.ittfBasePath, this.parts.join('/')), {
                 file: r.file
-            }, function(err, mTreeEx) {
+             }, function(err, mTreeEx) {
                 if (err) {
                     return callback(err);
                 }
@@ -416,7 +426,7 @@ var IttfFsNode = (function () {
                     ittfReferences: {}, 
                     ittfFsNode: this, 
                     ittfBasePath: r.ittfBasePath
-                };
+                 };
                 mTreeEx.analize(ctx, function(err, notUsed) {
                     if (err) {
                         return callback(err);
@@ -467,41 +477,60 @@ var IttfFsNode = (function () {
         var kexample = "example";
         var r = this;
         var comment = ittf.add('#', '`fs-base-uri` is the dirname of `package-base-uri`' + kempty);
-        comment = ittf.add('#', '`rel-dirname(s)` and `rel-uri(s)` of `f` and `d` nodes are relative to `fs-base-uri`' + kempty);
+        comment = ittf.add('#', '`rel-dirname(s)` and `rel-uri(s)` of `f` and `d` nodes are relative to `fs-base-uri`' + kempty)
+        ;
         var fsBaseUri = ittf.add('fs-base-uri', r.ittfBasePath);
         var packageBaseUri = ittf.add('package-base-uri', r.ittfBasePath + '/' + this.basename);
         var gitBaseUri = ittf.add('git-base-uri', r.jsCodeBasePath);
         var inf = ittf.add('fs-info', kempty);
         var dg, t, any;
         for (var k in r.info.schemas) {
-            dg = inf.add('d-group', k);
-            t = dg.add('type', kschema);
+            dg = inf.add('d-group', k)
+            ;
+            t = dg.add('type', kschema)
+            ;
             // foreach d in r.info.schemas[k].documents
             // addset(any, dg, d, d.path)
         }
+        
+        // foreach d in r.info.lib.documents
+        
+        // addset(any, dg, d, d.path)
         if (r.info.lib.documents.length > 0) {
-            dg = inf.add('d-group', klib);
-            t = dg.add('type', kfolder);
-            // foreach d in r.info.lib.documents
-            // addset(any, dg, d, d.path)
+            dg = inf.add('d-group', klib)
+            ;
+            t = dg.add('type', kfolder)
+            ;
         }
+        
+        // foreach d in r.info.util.documents
+        
+        // addset(any, dg, d, d.path)
         if (r.info.util.documents.length > 0) {
-            dg = inf.add('d-group', kutil);
-            t = dg.add('type', kfolder);
-            // foreach d in r.info.util.documents
-            // addset(any, dg, d, d.path)
+            dg = inf.add('d-group', kutil)
+            ;
+            t = dg.add('type', kfolder)
+            ;
         }
+        
+        // foreach d in r.info.test.documents
+        
+        // addset(any, dg, d, d.path)
         if (r.info.test.documents.length > 0) {
-            dg = inf.add('d-group', ktest);
-            t = dg.add('type', kfolder);
-            // foreach d in r.info.test.documents
-            // addset(any, dg, d, d.path)
+            dg = inf.add('d-group', ktest)
+            ;
+            t = dg.add('type', kfolder)
+            ;
         }
+        
+        // foreach d in r.info.example.documents
+        
+        // addset(any, dg, d, d.path)
         if (r.info.example.documents.length > 0) {
-            dg = inf.add('d-group', kexample);
-            t = dg.add('type', kfolder);
-            // foreach d in r.info.example.documents
-            // addset(any, dg, d, d.path)
+            dg = inf.add('d-group', kexample)
+            ;
+            t = dg.add('type', kfolder)
+            ;
         }
     }
     IttfFsNode.prototype.toIttf2 = function(ittf) {

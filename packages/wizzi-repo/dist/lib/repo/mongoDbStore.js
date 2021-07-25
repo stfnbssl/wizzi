@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\repo\mongoDbStore.js.ittf
 */
 'use strict';
@@ -44,6 +44,7 @@ var MongoDbStore = (function () {
         }
         var that = this;
         this.fsimpl = new MongoFsImpl(options.mongoUri, options.mongodbBaseFolder);
+        ;
         this.fsimpl.open(function(err, notUsed) {
             if (err) {
                 return callback(err);
@@ -78,7 +79,7 @@ var MongoDbStore = (function () {
                 return callback(error('RepoIOError', 'documentExists', {
                         parameter: 'documentPath', 
                         message: 'Checking existence of document: ' + documentPath
-                    }, err));
+                     }, err));
             }
             return callback(null, result);
         })
@@ -99,7 +100,7 @@ var MongoDbStore = (function () {
                 return callback(error('RepoIOError', 'getModelContent', {
                         parameter: 'documentPath', 
                         message: 'Getting content of document: ' + documentPath
-                    }, err));
+                     }, err));
             }
             // log 'getModelContent.received', result
             return callback(null, result);

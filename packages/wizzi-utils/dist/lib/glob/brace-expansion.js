@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\brace-expansion.js.ittf
 */
 'use strict';
@@ -18,6 +18,7 @@ var escComma = ((('\0COMMA' + Math.random())) + '\0');
 var escPeriod = ((('\0PERIOD' + Math.random())) + '\0');
 function numeric(str) {
     return parseInt(str, 10) == str ? parseInt(str, 10) : str.charCodeAt(0);
+    ;
 }
 function escapeBraces(str) {
     return str.split('\\\\').join(escSlash).split('\\{').join(escOpen).split('\\}').join(escClose).split('\\,').join(escComma).split('\\.').join(escPeriod)
@@ -178,7 +179,8 @@ function expand(str, isTop) {
     else {
         N = concatMap(n, function(el) {
             return expand(el, false);
-        });
+        })
+        ;
     }
     for (var j = 0; j < N.length; j++) {
         for (var k = 0; k < post.length; k++) {

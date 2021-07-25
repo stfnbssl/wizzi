@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\scanners\index.js.ittf
 */
 'use strict';
@@ -35,7 +35,7 @@ function ittfFsNode_step_1() {
     var options = {
         name: 'first', 
         gitPath: 'c:/blabla'
-    };
+     };
     var removeRoot = path.dirname(folderPath);
     console.log('folderPath, removeRoot', folderPath, removeRoot);
     var baseFolder = path.basename(folderPath);
@@ -48,7 +48,7 @@ function ittfFsNode_step_1() {
             removeRoot: removeRoot, 
             dot: true, 
             ignore: path.join(folderPath, '**/node_modules/**/*.*')
-        }, function(err, ittfs) {
+         }, function(err, ittfs) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -58,11 +58,11 @@ function ittfFsNode_step_1() {
             var root = new IttfFsNode(baseFolder, null, {
                 isDirectory: true, 
                 file: file
-            });
+             });
             root.setSourcePaths({
                 ittfBasePath: removeRoot, 
                 jsCodeBasePath: options.gitPath
-            })
+             })
             // create the IttfFsNode tree structure of the scanned folder
             var i, i_items=ittfs, i_len=ittfs.length, ittf;
             for (i=0; i<i_len; i++) {
@@ -70,7 +70,7 @@ function ittfFsNode_step_1() {
                 root.addDocument(( ittf[0] === '/' ? ittf.substr(1) : ittf ), {
                     basePath: removeRoot, 
                     gitPath: options.gitPath
-                })
+                 })
             }
             // analize all IttfFsNode(s) starting from root
             // this also searches mixed or included ittf fragments that are
@@ -92,7 +92,7 @@ function folderBrowse_step_1() {
     console.log('wizzi-utils.examples.folderBrowse_step_1 START');
     folderBrowse.scan(path.join(__dirname, 'ittf', 'first'), {
         rootFolder: path.join(__dirname, 'ittf')
-    }, function(err, result) {
+     }, function(err, result) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -104,7 +104,7 @@ function ittfDocumentScanner_step_1() {
     console.log('wizzi-utils.examples.ittfDocumentScanner_step_1 START');
     ittfDocumentScanner.scan(path.join(wizziStudioFolder, "dist/server/ittf/demo/ttech/css/layouts/step_1", 'index.html.ittf'), {
         rootFolder: path.join(wizziStudioFolder, 'dist/server')
-    }, function(err, result) {
+     }, function(err, result) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -125,7 +125,7 @@ var scanners_Step_1 = function(step_callback) {
         folderScanner.scan(path.join(__dirname, 'ittf', 'first'), {
             name: 'first', 
             gitPath: 'c:/blabla'
-        }, function(err, ittfMTreeEx) {
+         }, function(err, ittfMTreeEx) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -145,7 +145,7 @@ var scanners_Step_1 = function(step_callback) {
         folderScanner.scan(path.join(__dirname, 'ittf', 'first', 'deep'), {
             name: 'second', 
             gitPath: 'c:/blabla'
-        }, function(err, ittfMTreeEx) {
+         }, function(err, ittfMTreeEx) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -163,7 +163,7 @@ var scanners_Step_1 = function(step_callback) {
     function step_4() {
         ittfDocumentScanner.scan(path.join(wizziStudioFolder, 'dist/server/ittf/demo/ttech/css/layouts/step_1', 'index.html.ittf'), {
             rootFolder: path.join(wizziStudioFolder, 'dist/server')
-        }, function(err, result) {
+         }, function(err, result) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -178,7 +178,7 @@ var scanners_Step_1 = function(step_callback) {
     function step_5() {
         textDocumentScanner.scan(path.join(wizziStudioFolder, "dist/server/ittf/labs/netlify", 'config.yml'), {
             baseFolder: path.join(wizziStudioFolder, 'dist/server')
-        }, function(err, result) {
+         }, function(err, result) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -227,12 +227,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -329,9 +330,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

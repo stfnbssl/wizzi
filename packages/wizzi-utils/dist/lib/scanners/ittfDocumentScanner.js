@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\scanners\ittfDocumentScanner.js.ittf
 */
 'use strict';
@@ -42,7 +42,8 @@ md.scan = function(documentPath, options, callback) {
             scanExec(file, documentPath, options, callback)
         })
     }
-};
+}
+;
 function scanMTree(file, documentPath, options, callback) {
     file.isFile(documentPath, function(err, result) {
         if (err) {
@@ -53,13 +54,13 @@ function scanMTree(file, documentPath, options, callback) {
         }
         IttfMTreeEx.createFrom(documentPath, {
             file: file
-        }, function(err, mTree) {
+         }, function(err, mTree) {
             if (err) {
                 return callback(err);
             }
             mTree.analize({
                 rootFolder: options.rootFolder
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -71,7 +72,7 @@ function scanMTree(file, documentPath, options, callback) {
                         fragments: mTree.fragments, 
                         ittfReferences: mTree.ittfReferences, 
                         errorFragments: mTree.errorFragments
-                    });
+                     });
             })
         })
     })
@@ -83,7 +84,8 @@ function scanExec(file, documentPath, options, callback) {
     var documentUri = '';
     var breadCrumbs = [];
     if (options.rootFolder) {
-        documentUri = verify.unixifyPath(documentPath.substr(options.rootFolder.length));
+        documentUri = verify.unixifyPath(documentPath.substr(options.rootFolder.length))
+        ;
         var parts = documentUri.split('/');
         var partUri = '';
         var i, i_items=parts, i_len=parts.length, item;
@@ -94,7 +96,7 @@ function scanExec(file, documentPath, options, callback) {
                 breadCrumbs.push({
                     uri: partUri, 
                     name: item
-                })
+                 })
             }
         }
         breadCrumbs[breadCrumbs.length-1].isLast = true;
@@ -171,7 +173,7 @@ function scanExec(file, documentPath, options, callback) {
                 scanExec(file, reference.uri, {
                     rootFolder: options.rootFolder, 
                     baseIdCounter: ++idCounter
-                }, function(err, documentState) {
+                 }, function(err, documentState) {
                     if (err) {
                         console.log('err', err);
                         throw new Error(err.message);

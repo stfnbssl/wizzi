@@ -398,7 +398,7 @@ md.load = function(cnt) {
         if (ctx.__is_react_class && model.wzParent.wzElement == 'reactComponent') {
             var implicitReturn = u.isImplicitReturn(model);
             var firstChildIsTemplate = u.firstChildIs(model, ['template']);
-            ctx.w(async_str + model.wzName + ' = (');
+            ctx.w(model.wzName + ' = ' + async_str + ' = (');
             u.genTSParams(model, ctx, cnt, (err, notUsed) => {
             
                 if (err) {
@@ -423,7 +423,12 @@ md.load = function(cnt) {
             )
         }
         else if (u.onlyChildIs(model, 'callOnValue') || u.onlyChildIsHtmlElement(model)) {
-            ctx.write(async_str + '(');
+            if (model.wzName.length > 0) {
+                ctx.write(model.wzName + async_str + ' = (');
+            }
+            else {
+                ctx.write(async_str + '(');
+            }
             u.genTSParams(model, ctx, cnt, (err, notUsed) => {
             
                 if (err) {
@@ -449,7 +454,12 @@ md.load = function(cnt) {
             )
         }
         else if (u.onlyChildIs(model, 'arrowfunction')) {
-            ctx.write(async_str + '(');
+            if (model.wzName.length > 0) {
+                ctx.write(model.wzName + async_str + ' = (');
+            }
+            else {
+                ctx.write(async_str + '(');
+            }
             u.genTSParams(model, ctx, cnt, (err, notUsed) => {
             
                 if (err) {
@@ -482,7 +492,12 @@ md.load = function(cnt) {
         else if (u.isImplicitReturn(model)) {
             var isSingleParam = u.isSingleParamForArrowFunction(model);
             var firstChildIsTemplate = u.firstChildIs(model, ['template']);
-            ctx.write(async_str + (isSingleParam ? '' : '('));
+            if (model.wzName.length > 0) {
+                ctx.write(model.wzName + ' = ' + async_str + (isSingleParam ? '' : '('));
+            }
+            else {
+                ctx.write(async_str + (isSingleParam ? '' : '('));
+            }
             u.genTSParams(model, ctx, cnt, (err, notUsed) => {
             
                 if (err) {
@@ -507,7 +522,12 @@ md.load = function(cnt) {
             )
         }
         else {
-            ctx.write(async_str + '(');
+            if (model.wzName.length > 0) {
+                ctx.write(model.wzName + ' = ' + async_str + '(');
+            }
+            else {
+                ctx.write(async_str + '(');
+            }
             u.genTSParams(model, ctx, cnt, (err, notUsed) => {
             
                 if (err) {

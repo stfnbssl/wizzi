@@ -30,8 +30,9 @@ $group
     ---    
     ${'$'}if wzCtx.Build.useReact && !!wzCtx.Build.useReactCreateApp == false
         classnames "^2.2.6"
+        
     ${'$'}if wzCtx.Build.useMongoDb
-        connect-mongo "^3.2.0"
+        connect-mongo "^4.4.1"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useRouter && wzCtx.Build.react.useRedux
         connected-react-router "^6.9.1"
     ${'$'}if wzCtx.Build.useExpress
@@ -165,6 +166,8 @@ $group
     $include ./dependencies/react.json
     ---    
     $include ./dependencies/redux.json
+    ${'$'}if wzCtx.Build.useReact
+        recompose "^0.30.0"
     ${'$'}if wzCtx.Build.useRegeneratorRuntime
         regenerator-runtime "^0.13.7"
     ---    

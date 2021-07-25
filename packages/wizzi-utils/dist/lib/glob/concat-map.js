@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\concat-map.js.ittf
 */
 'use strict';
@@ -20,7 +20,8 @@ module.exports = function(xs, fn) {
         }
     }
     return res;
-};
+}
+;
 var isArray = Array.isArray || function(xs) {
     return Object.prototype.toString.call(xs) === '[object Array]';
 };

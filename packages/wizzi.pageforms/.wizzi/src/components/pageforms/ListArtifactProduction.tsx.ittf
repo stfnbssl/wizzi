@@ -152,25 +152,28 @@ module
                                                 @ className flex-row flex-items-start m-m
                                                 @ key {ndx}
                                                 div
-                                                    @ className flex-column border-b-s p-b-s width-full m-w-xxl
+                                                    @ className flex-row border-b-s p-b-s width-full m-w-xxl
                                                     div
-                                                        @ className font-xl
-                                                        a {item.name}
-                                                            href {'/~~/a/stfnbssl/' + item.name}
-                                                    div
-                                                        @ className font-m m-b-m
-                                                        + {item.description}
-                                                    div
-                                                        @ className flex-row 
+                                                        @ className flex-column width-full
                                                         div
-                                                            @ className font-m m-r-s
-                                                            + main ittf:
+                                                            @ className font-xl
+                                                            a {item.name}
+                                                                href {'/~~/a/stfnbssl/' + item.name}
                                                         div
-                                                            @ className font-m m-r-xl
-                                                            + {item.mainIttf}
+                                                            @ className font-m m-b-m
+                                                            + {item.description}
                                                         div
-                                                            @ className font-m m-r-s
-                                                            + schema:
-                                                        div
-                                                            @ className font-m
-                                                            + {item.wizziSchema}
+                                                            @ className flex-row 
+                                                            div
+                                                                @ className font-m m-r-s
+                                                                + main ittf:
+                                                            div
+                                                                @ className font-m m-r-xl
+                                                                + {item.mainIttf}
+                                                            div
+                                                                @ className font-m m-r-s
+                                                                + schema:
+                                                            div
+                                                                @ className font-m
+                                                                + {item.wizziSchema}
+                                                    list_update_delete_icons( artifact )

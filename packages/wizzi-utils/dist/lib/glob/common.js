@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\common.js.ittf
 */
 'use strict';
@@ -49,9 +49,9 @@ function ignoreMap(pattern) {
     return {
             matcher: new Minimatch(pattern, {
                 dot: true
-            }), 
+             }), 
             gmatcher: gmatcher
-        };
+         };
 }
 function setopts(self, pattern, options) {
     if (! (options)) {
@@ -115,6 +115,7 @@ function setopts(self, pattern, options) {
 function finish(self) {
     var nou = self.nounique;
     var all = nou ? [] : Object.create(null);
+    ;
     for (var i = 0, l = self.matches.length; i < l; i++) {
         var matches = self.matches[i];
         if (!matches || Object.keys(matches).length === 0) {
@@ -158,13 +159,15 @@ function finish(self) {
                     notDir = ((c !== 'DIR') && ! (Array.isArray(c)));
                 }
                 return notDir;
-            });
+            })
+            ;
         }
     }
     if (self.ignore.length) {
         all = all.filter(function(m) {
             return ! (isIgnored(self, m));
-        });
+        })
+        ;
     }
     self.found = all;
 }

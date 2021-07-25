@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListArtifactProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -13,6 +13,8 @@ import nullthrows from 'nullthrows';
 import FormContainer from './widgets/FormContainer';
 import FormTitle from './widgets/FormTitle';
 import FormGroup from './widgets/FormGroup';
+import FormText from './widgets/FormText';
+import FormSelect from './widgets/FormSelect';
 import FormCheckBox from './widgets/FormCheckBox';
 import FormRadioBox from './widgets/FormRadioBox';
 import FormRow from './widgets/FormRow';
@@ -210,35 +212,65 @@ export class ListArtifactProduction extends Component<ListArtifactProductionProp
                                 <div
                                  className="flex-row flex-items-start m-m" key={ndx}>
                                     <div
-                                     className="flex-column border-b-s p-b-s width-full m-w-xxl">
+                                     className="flex-row border-b-s p-b-s width-full m-w-xxl">
                                         <div
-                                         className="font-xl">
-                                            <a
-                                             href={'/~~/a/stfnbssl/' + item.name}>
-                                            {item.name}
-                                            </a>
-                                        </div>
-                                        <div
-                                         className="font-m m-b-m">
-                                            {item.description}
+                                         className="flex-column width-full">
+                                            <div
+                                             className="font-xl">
+                                                <a
+                                                 href={'/~~/a/stfnbssl/' + item.name}>
+                                                {item.name}
+                                                </a>
+                                            </div>
+                                            <div
+                                             className="font-m m-b-m">
+                                                {item.description}
+                                            </div>
+                                            <div
+                                             className="flex-row">
+                                                <div
+                                                 className="font-m m-r-s">
+                                                    main ittf:
+                                                </div>
+                                                <div
+                                                 className="font-m m-r-xl">
+                                                    {item.mainIttf}
+                                                </div>
+                                                <div
+                                                 className="font-m m-r-s">
+                                                    schema:
+                                                </div>
+                                                <div
+                                                 className="font-m">
+                                                    {item.wizziSchema}
+                                                </div>
+                                            </div>
                                         </div>
                                         <div
                                          className="flex-row">
                                             <div
-                                             className="font-m m-r-s">
-                                                main ittf:
+                                             className="flex-column m-s">
+                                                <a
+                                                 className="button p-s radius-m bg-warning color-white border-s font-m font-w-xxl" href={'/artifact/update/' + item.owner + '/' + item.name}>
+                                                    <div
+                                                     className="flex-row">
+                                                        <AddDocumentIcon
+                                                         height="16" width="16" />
+                                                         Update 
+                                                    </div>
+                                                </a>
                                             </div>
                                             <div
-                                             className="font-m m-r-xl">
-                                                {item.mainIttf}
-                                            </div>
-                                            <div
-                                             className="font-m m-r-s">
-                                                schema:
-                                            </div>
-                                            <div
-                                             className="font-m">
-                                                {item.wizziSchema}
+                                             className="flex-column m-s">
+                                                <a
+                                                 className="button p-s radius-m bg-error color-white border-s font-m font-w-xxl" href={'/artifact/delete/' + item.owner + '/' + item.name}>
+                                                    <div
+                                                     className="flex-row">
+                                                        <AddDocumentIcon
+                                                         height="16" width="16" />
+                                                         Delete 
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

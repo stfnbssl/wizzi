@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\ittfTree\ittfMTreeEx.js.ittf
 */
 'use strict';
@@ -95,7 +95,8 @@ var IttfMTreeEx = (function () {
             var i, i_items=children, i_len=children.length, node;
             for (i=0; i<i_len; i++) {
                 node = children[i];
-                added = this.add((node.name || node.n) + (node.tagSuffix || ''), node.value || node.v || '');
+                added = this.add((node.name || node.n) + (node.tagSuffix || ''), node.value || node.v || '')
+                ;
                 added.row = node.row || node.r || '';
                 added.col = node.col || node.c || '';
                 if (node.id) {
@@ -111,8 +112,8 @@ var IttfMTreeEx = (function () {
             this.file = options.file;
             return callback(null, options.file);
         }
+        // load the default vfile (filesystem or browser)
         else {
-            // load the default vfile (filesystem or browser)
             var that = this;
             return vfile(function(err, file) {
                     if (err) {
@@ -130,8 +131,9 @@ var IttfMTreeEx = (function () {
                 return callback(err);
             }
             options.file = file;
+            
+            // log 'ittfMTreeEx.__loadMTree. objFrom is an object'
             if (verify.isObject(objFrom)) {
-                // log 'ittfMTreeEx.__loadMTree. objFrom is an object'
                 if (verify.isArray(objFrom.nodes) && objFrom.nodes.length == 1) {
                     that.loadFromNode(objFrom.nodes[0], objFrom.$params);
                 }
@@ -143,18 +145,20 @@ var IttfMTreeEx = (function () {
                             __is_error: true, 
                             method: 'wizzi-utils.ittfMTreeEx.__loadMTree', 
                             message: 'Invalid object parameter: objFrom. The object is not an mTree object.'
-                        });
+                         });
                 }
                 return callback(null, that);
             }
+            
+            // log 'ittfMTreeEx.__loadMTree. objFrom is a string'
             else if (verify.isNotEmpty(objFrom)) {
-                // log 'ittfMTreeEx.__loadMTree. objFrom is a string'
                 that.model = {
                     uri: (options.fromString ? 'string://' : objFrom), 
                     dirname: (options.fromString ? '' : path.dirname(objFrom))
-                };
+                 };
+                
+                // log 'ittfMTreeEx.__loadMTree. Loading from text string'
                 if (options.fromString) {
-                    // log 'ittfMTreeEx.__loadMTree. Loading from text string'
                     asIsLoader.createFromString(objFrom, options, function(err, asisMTree) {
                         if (err) {
                             return callback(err);
@@ -165,9 +169,9 @@ var IttfMTreeEx = (function () {
                         return callback(null, that);
                     })
                 }
+                // log 'ittfMTreeEx.__loadMTree. Loading from file'
+                // load from file using the vfile class
                 else {
-                    // log 'ittfMTreeEx.__loadMTree. Loading from file'
-                    // load from file using the vfile class
                     file.isFile(objFrom, function(err, isFile) {
                         if (err) {
                             return callback(err);
@@ -177,7 +181,7 @@ var IttfMTreeEx = (function () {
                                     __is_error: true, 
                                     method: 'wizzi-utils.ittfMTreeEx.__loadMTree', 
                                     message: 'Document not found: ' + objFrom
-                                });
+                                 });
                         }
                         else {
                             asIsLoader(objFrom, options, function(err, asisMTree) {
@@ -194,7 +198,8 @@ var IttfMTreeEx = (function () {
                                     that.model.schema = ss[ss.length-2].toLowerCase();
                                     that.model.seedName = ss.slice(0,-2).join('.');
                                     if (that.model.schema !== 'json') {
-                                        that.model.jsonTwinUri = path.join(that.model.dirname, that.model.seedName + '.json.ittf');
+                                        that.model.jsonTwinUri = path.join(that.model.dirname, that.model.seedName + '.json.ittf')
+                                        ;
                                     }
                                 }
                                 // log 'ittfMTreeEx.loadFrom.ittf.model', that.model
@@ -209,7 +214,7 @@ var IttfMTreeEx = (function () {
                         __is_error: true, 
                         method: 'wizzi-utils.ittfMTreeEx.__loadMTree', 
                         message: 'Invalid parameter: objFrom'
-                    });
+                     });
             }
         })
     }
@@ -252,7 +257,7 @@ var IttfMTreeEx = (function () {
                 name: this.name, 
                 value: this.value, 
                 children: []
-            };
+             };
         }
         var i, i_items=this.children, i_len=this.children.length, item;
         for (i=0; i<i_len; i++) {
@@ -262,7 +267,7 @@ var IttfMTreeEx = (function () {
                 name: item.name, 
                 value: item.value, 
                 children: []
-            };
+             };
             item.toMTreePiece(child);
             parent.children.push(child);
         }
@@ -297,8 +302,9 @@ var IttfMTreeEx = (function () {
         return this.name === '$include';
     }
     IttfMTreeEx.prototype.isReferenceToIttf = function() {
+        
+        // log 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
         if (verify.isNotEmpty(this.getValueStripComments())) {
-            // log 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
             return verify.endsWith(this.getValueStripComments(), '.ittf');
         }
         else {
@@ -391,13 +397,13 @@ var IttfMTreeEx = (function () {
                     parts.push({
                         t: 0, 
                         v: text.join('')
-                    })
+                     })
                     text = [];
                 }
                 parts.push({
                     t: 1, 
                     v: expr.join('')
-                })
+                 })
                 expr = [];
                 state = 0;
             }
@@ -417,7 +423,7 @@ var IttfMTreeEx = (function () {
             parts.push({
                 t: 0, 
                 v: text.join('')
-            })
+             })
             text = [];
         }
         return parts;
@@ -479,7 +485,7 @@ var IttfMTreeEx = (function () {
                         uri: r.model.jsonTwinUri, 
                         id: 'unknown', 
                         relUri: verify.unixifyPath(path.relative(ctx.rootFolder, r.model.jsonTwinUri))
-                    };
+                     };
                     r.ittfReferences[fragment.name] = fragment;
                 }
                 return callback();
@@ -501,8 +507,9 @@ var IttfMTreeEx = (function () {
         if (typeof r.model === 'undefined') {
             return callback(new Error('wizzi-utils.ittfMTreeEx.analize require a `model` object in the root node. For example when created calling ittfMTreeEx.createFrom(documentUri)'));
         }
+        
+        // TODO why false ???
         if (r.model.uri.indexOf('__copy') > -1) {
-            // TODO why false ???
             return callback(null, false);
         }
         if (this.isMixinCall()) {
@@ -520,7 +527,7 @@ var IttfMTreeEx = (function () {
             name: this.fragmentName, 
             uri: 'unknown', 
             id: 'unknown'
-        };
+         };
         var that = this;
         this.__getFragmentPath(ctx, function(err, fragmentPath) {
             if (err) {
@@ -562,16 +569,18 @@ var IttfMTreeEx = (function () {
                     }
                 }
                 if (ctx && ctx.rootFolder) {
-                    fragment.relUri = verify.unixifyPath(path.relative(ctx.rootFolder, fragmentPath));
+                    fragment.relUri = verify.unixifyPath(path.relative(ctx.rootFolder, fragmentPath))
+                    ;
                 }
+                
+                // do not override
                 if (that.isReferenceToIttf()) {
-                    // do not override
                     if (!r.ittfReferences[that.fragmentName]) {
                         r.ittfReferences[that.fragmentName] = fragment;
                     }
                 }
+                // do not override
                 else {
-                    // do not override
                     if (!r.fragments[that.fragmentName]) {
                         r.fragments[that.fragmentName] = fragment;
                     }
@@ -583,15 +592,19 @@ var IttfMTreeEx = (function () {
     IttfMTreeEx.prototype.__getFragmentPath = function(ctx, callback) {
         var r = this.root(),
             fragmentPath;
+        
+        // log "ittfMTreeEx.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
+        
+        // log '__getFragmentPath.fragmentPath', fragmentPath
         if (this.isReferenceToIttf() && ctx && verify.isNotEmpty(ctx.rootFolder)) {
-            // log "ittfMTreeEx.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
             if (this.fragmentName[0] === '/') {
-                fragmentPath = path.join(ctx.rootFolder, this.fragmentName);
+                fragmentPath = path.join(ctx.rootFolder, this.fragmentName)
+                ;
             }
             else {
-                fragmentPath = path.resolve(r.model.dirname, this.fragmentName);
+                fragmentPath = path.resolve(r.model.dirname, this.fragmentName)
+                ;
             }
-            // log '__getFragmentPath.fragmentPath', fragmentPath
             r.file.isFile(fragmentPath, function(err, isFile) {
                 if (err) {
                     return callback(err);
@@ -603,7 +616,7 @@ var IttfMTreeEx = (function () {
                     return callback(null, {
                             __is_error: true, 
                             uri: fragmentPath
-                        });
+                         });
                 }
             })
         }
@@ -613,13 +626,13 @@ var IttfMTreeEx = (function () {
             ittfFinder.resolvePath({
                 callerFullPath: r.model.uri, 
                 fragmentName: this.fragmentName
-            }, function(err, result) {
+             }, function(err, result) {
                 if (err) {
                     return callback(null, {
                             __is_error: true, 
                             fragment: that.fragmentName, 
                             message: err.message
-                        });
+                         });
                 }
                 else {
                     return callback(null, result);

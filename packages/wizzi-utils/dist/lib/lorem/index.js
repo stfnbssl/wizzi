@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\lorem\index.js.ittf
 */
 'use strict';
@@ -15,7 +15,7 @@ function randomSentence(lowerBound, upperBound) {
         bounds = {
             min: 0, 
             max: randomInteger(lowerBound, upperBound)
-        };
+         };
     while (bounds.min < bounds.max) {
         sentence += ' ' + randomWord();
         bounds.min++;
@@ -31,7 +31,7 @@ function randomParagraph(lowerBound, upperBound, sentenceLowerBound, sentenceUpp
         bounds = {
             min: 0, 
             max: randomInteger(lowerBound, upperBound)
-        };
+         };
     while (bounds.min < bounds.max) {
         paragraph += '. ' + randomSentence(sentenceLowerBound, sentenceUpperBound);
         bounds.min++;

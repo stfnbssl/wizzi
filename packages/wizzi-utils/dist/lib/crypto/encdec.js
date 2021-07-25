@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\crypto\encdec.js.ittf
 */
 'use strict';
@@ -25,7 +25,8 @@ function encrypt(text) {
     encrypted = Buffer.concat([
         encrypted, 
         cipher.final()
-    ]);
+    ])
+    ;
     return iv.toString('hex') + ':' + encrypted.toString('hex');
 }
 function decrypt(text) {
@@ -37,7 +38,8 @@ function decrypt(text) {
     decrypted = Buffer.concat([
         decrypted, 
         decipher.final()
-    ]);
+    ])
+    ;
     return decrypted.toString();
 }
 function encryptSimple(text) {
@@ -53,4 +55,4 @@ module.exports = {
     encrypt: encrypt, 
     decryptSimple: decryptSimple, 
     encryptSimple: encryptSimple
-};
+ };

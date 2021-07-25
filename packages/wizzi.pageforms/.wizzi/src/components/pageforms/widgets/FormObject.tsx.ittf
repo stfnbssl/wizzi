@@ -4,6 +4,8 @@ module
             styled: true,
             name: "FormObject",
             props: [
+                { name: 'id', type: 'string'},
+                { name: 'name', type: 'string'},
                 { name: "path", type: "string" },
                 { name: 'properties', type: 'any' },
                 { name: 'values', type: 'any' },
@@ -112,6 +114,6 @@ module
                                                         @ name {p.name}
                                                         @ id {p.name}
                                                         @ path {this.props.path + '.' + p.name}
-                                                        @ value {this.props.values[p.name] || {}}
+                                                        @ values {this.props.values[p.name] || {}}
                                                         @ properties {p.properties}
                                                         @ onChange {this.props.onChange}

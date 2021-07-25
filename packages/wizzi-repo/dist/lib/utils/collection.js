@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\utils\collection.js.ittf
 */
 'use strict';
@@ -14,33 +14,38 @@ const errors = require('./errors');
 const ObjectID = require('./objectId');
 function match(key, item) {
     // log 'wizzi-repo.utils.collection.match', key, item
+    
+    // log 'wizzi-repo.utils.collection.match: true'
     if (!key) {
-        // log 'wizzi-repo.utils.collection.match: true'
         return true;
     }
     else if (key.hasOwnProperty('_id')) {
         if (item._id == null && key._id == null) {
             return true;
         }
+        
+        // log 'wizzi-repo.utils.collection.match: true'
         if (item._id && item._id.equals(key._id)) {
-            // log 'wizzi-repo.utils.collection.match: true'
             return true;
         }
     }
     else if (key.hasOwnProperty('path')) {
+        
+        // log 'wizzi-repo.utils.collection.match: true'
         if (item.path == normalize(key.path)) {
-            // log 'wizzi-repo.utils.collection.match: true'
             return true;
         }
     }
     else if (key.hasOwnProperty('basename') && key.hasOwnProperty('parentId')) {
         if (item.basename === key.basename) {
+            
+            // log 'wizzi-repo.utils.collection.match: true'
             if (item.parentId == null && key.parentId == null) {
-                // log 'wizzi-repo.utils.collection.match: true'
                 return true;
             }
+            
+            // log 'wizzi-repo.utils.collection.match: true'
             if (item.parentId && item.parentId.equals(key.parentId)) {
-                // log 'wizzi-repo.utils.collection.match: true'
                 return true;
             }
         }
@@ -49,8 +54,9 @@ function match(key, item) {
         if (item.parentId == null && key.parentId == null) {
             return true;
         }
+        
+        // log 'wizzi-repo.utils.collection.match: true'
         if (item.parentId && item.parentId.equals(key.parentId)) {
-            // log 'wizzi-repo.utils.collection.match: true'
             return true;
         }
     }
@@ -74,12 +80,14 @@ var Collection = (function () {
         var i, i_items=this.items, i_len=this.items.length, item;
         for (i=0; i<i_len; i++) {
             item = this.items[i];
+            
+            // log 'restoreIds._id', item._id, item._id.length
             if (item._id && item._id.length) {
-                // log 'restoreIds._id', item._id, item._id.length
                 item._id = ObjectID.createFromHexString(item._id);
             }
+            
+            // log 'restoreIds.parentId', item.parentId, item.parentId.length
             if (item.parentId && item.parentId.length) {
-                // log 'restoreIds.parentId', item.parentId, item.parentId.length
                 item.parentId = ObjectID.createFromHexString(item.parentId);
             }
         }
@@ -111,7 +119,7 @@ var Collection = (function () {
         else {
             var items = this.find({
                 _id: doc._id
-            });
+             });
             if (items.count() > 0) {
                 callback(new errors.RepoCollectionError('Duplicated key'))
             }
@@ -126,8 +134,8 @@ var Collection = (function () {
                 result: {
                     ok: 1, 
                     n: 1
-                }
-            });
+                 }
+             });
     }
     Collection.prototype.replaceOne = function(key, doc, options, callback) {
         if (typeof(callback) == 'undefined') {
@@ -176,14 +184,14 @@ var Collection = (function () {
                 upsertedCount: upsertedCount, 
                 upsertedId: {
                     _id: (upsertedCount > 0 ? doc._id : null )
-                }, 
+                 }, 
                 ops: ops, 
                 result: {
                     ok: 1, 
                     n: scannedCount, 
                     nModified: (modifiedCount + upsertedCount)
-                }
-            });
+                 }
+             });
     }
     Collection.prototype.deleteOne = function(key, callback) {
         var temp = [];
@@ -209,8 +217,8 @@ var Collection = (function () {
                 result: {
                     ok: 1, 
                     n: deletedCount
-                }
-            });
+                 }
+             });
     }
     Collection.prototype.deleteMany = function(key, callback) {
         var temp = [];
@@ -231,8 +239,8 @@ var Collection = (function () {
                 result: {
                     ok: 1, 
                     n: deletedCount
-                }
-            });
+                 }
+             });
     }
     Collection.prototype.toArray = function(callback) {
         if (typeof(callback) !== 'function') {

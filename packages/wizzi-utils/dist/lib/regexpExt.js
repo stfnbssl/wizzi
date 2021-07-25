@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\regexpExt.js.ittf
 */
 'use strict';
@@ -20,12 +20,15 @@ md.getAllRegExp = function(regexp) {
             }
             checkLoop = this.lastIndex;
             results.push(result[0]);
-            result = RegExp.prototype.exec.call(this, string);
+            result = RegExp.prototype.exec.call(this, string)
+            ;
         }
         return results.length > 0 || results.loop ? results : null;
-    };
+    }
+    ;
     return ret;
-};
+}
+;
 md.namedRegExp = function(regexp) {
     // taken from to https://github.com/cho45/named-regexp.js
     // (c) cho45 http://cho45.github.com/mit-license
@@ -51,13 +54,15 @@ md.namedRegExp = function(regexp) {
         matched.captures = captures;
         matched.capture = function(name) {
             return captures[name][ captures[name].length - 1 ];
-        };
+        }
+        ;
         return matched;
     };
     // override RegExp#exec
     ret.exec = function(string) {
         return captures(RegExp.prototype.exec.call(this, string));
-    };
+    }
+    ;
     // like String#replace
     ret.replace = function(string, replace) {
         if (typeof replace == 'function') {
@@ -68,6 +73,8 @@ md.namedRegExp = function(regexp) {
         else {
             return string.replace(this, replace);
         }
-    };
+    }
+    ;
     return ret;
-};
+}
+;

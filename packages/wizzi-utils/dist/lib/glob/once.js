@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\once.js.ittf
 */
 'use strict';
@@ -17,14 +17,15 @@ once.proto = once(function() {
             return once(this);
         }, 
         configurable: true
-    })
+     })
     Object.defineProperty(Function.prototype, 'onceStrict', {
         value: function() {
             return onceStrict(this);
         }, 
         configurable: true
-    })
-});
+     })
+})
+;
 function once(fn) {
     var f = function() {
         if (f.called) {

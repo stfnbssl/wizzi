@@ -4,6 +4,7 @@
 	var util = require('util')
 	var path = require('path')
 	var stringify = require('json-stringify-safe')
+    var async = require('async')
 	+
 	var repo = require('wizzi-repo')
 	var mtree = require('wizzi-mtree')
@@ -57,6 +58,7 @@
 		$include wizziFactory/model-loading
 		$include wizziFactory/model-transformation
 		$include wizziFactory/artifact-generation
+        $include wizziFactory/folder-generation
 		$include wizziFactory/schema-definition
 		$include wizziFactory/modelTypes-generation
 		$include wizziFactory/wizzi-job-execution
@@ -69,6 +71,25 @@
 		if ProductionManager == null
 			set ProductionManager = require('../production/manager')
 		return ProductionManager
+
+	var DEFAULT_ARTIFACTS
+		{
+			@ css 'css/document'
+			@ graphql 'graphql/docs'
+			@ html 'html/document'
+			@ js 'js/module'
+			@ json 'json/document'
+			@ scss 'scss/document'
+			@ text 'text/document'
+			@ ts 'ts/module'
+			@ xml 'xml/document'
+            @ ittf 'ittf/document'
+			@ vtt 'vtt/document'
+			@ vue 'vue/document'
+
+	function getDefaultArtifact
+		param schema
+		return DEFAULT_ARTIFACTS[schema]
 
 	set module.exports
 		{

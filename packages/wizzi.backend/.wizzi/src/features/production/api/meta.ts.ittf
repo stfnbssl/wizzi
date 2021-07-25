@@ -32,6 +32,12 @@ module
     import
         @ packiTypes
         from '../../packi'
+    import
+        @ wizziProds
+        from '../../wizzi'
+    import
+        @ prepareGenerationFromWizziJson
+        from './artifact'
     +
     const myname = 'features.production.api.meta'
     +
@@ -77,3 +83,4 @@ module
     mongo/create_api(&md)
     mongo/update_api(&md)
     $include meta/cached_get_save
+    $include meta/get_templatePackiFiles

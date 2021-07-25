@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\prettifiers\utils\htmlwriter.js.ittf
 */
 'use strict';
@@ -19,8 +19,9 @@ var HtmlWriter = (function () {
         this.lfPending = false;
     }
     HtmlWriter.prototype.writeElement = function(node) {
+        
+        // TODO _ this.sw.write(new Texter(node.text).toString())
         if (node.tag === '_text') {
-            // TODO _ this.sw.write(new Texter(node.text).toString())
             this.sw.write(node.text);
             return ;
         }
@@ -31,8 +32,9 @@ var HtmlWriter = (function () {
             this.writeAttribute(a);
         }
         this.sw.write('>');
+        
+        // _ this.sw.write(new Texter(node.text).toString())
         if (node.text) {
-            // _ this.sw.write(new Texter(node.text).toString())
             this.sw.write(node.text);
         }
         if (node.children.length > 0) {

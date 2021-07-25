@@ -1,8 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\demo.js.react\.wizzi\src\state\middlewares.js.ittf
-    utc time: Tue, 20 Jul 2021 12:30:24 GMT
+    utc time: Fri, 23 Jul 2021 09:36:12 GMT
 */
 'use strict';
 export const asyncer = (dispatch, state) => action => 

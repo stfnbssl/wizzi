@@ -2,13 +2,15 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\production\api\meta.ts.ittf
-    utc time: Thu, 22 Jul 2021 16:33:13 GMT
+    utc time: Sun, 25 Jul 2021 19:40:41 GMT
 */
 import NodeCache from 'node-cache';
 import {GetMetaProductionModel} from '../mongo/meta';
 import {IMetaProductionModel} from '../types';
 import {ValidateResult, CRUDResult} from '../../types';
 import {packiTypes} from '../../packi';
+import {wizziProds} from '../../wizzi';
+import {prepareGenerationFromWizziJson} from './artifact';
 
 const myname = 'features.production.api.meta';
 
@@ -303,4 +305,63 @@ export function invalidateCache(owner: string, name: string) {
 
     var cacheKey = owner + '|' + name;
     metaCache.del(cacheKey);
+}
+
+export async function getTemplatePackiFiles(metaId: string, cliCtx: any):  Promise<packiTypes.PackiFiles> {
+
+    console.log(myname, 'getTemplatePackiFiles', metaId, cliCtx);
+    function getPackiFiles(mainIttf: string):  packiTypes.PackiFiles {
+    
+        const ret: packiTypes.PackiFiles = {};
+        ret[mainIttf] = {
+            type: 'CODE', 
+            contents: ''
+         };
+        return ret;
+    }
+    return new Promise((resolve, reject) => {
+        
+            if (metaId.length == 0 || metaId.split('|').length != 2) {
+                return resolve(getPackiFiles('index.js.ittf'));
+            }
+            const parts = metaId.split('|');
+            getMetaProduction(parts[0], parts[1]).then((result) => {
+            
+                if (!result.ok) {
+                    return reject(result);
+                }
+                const tf: IMetaProductionModel = result.item;
+                console.log(myname, 'getTemplatePackiFiles.getMetaProduction.tf', tf);
+                const tf_packiFiles_object: packiTypes.PackiFiles = JSON.parse(tf.packiFiles);
+                prepareGenerationFromWizziJson(tf_packiFiles_object).then((result: any) => {
+                
+                    const context = Object.assign({}, result.context, {
+                        cliCtx: cliCtx
+                     });
+                    wizziProds.generateFolderArtifacts('template', 'output', result.packiFiles, context).then((packiFiles: packiTypes.PackiFiles) => 
+                    
+                        resolve(packiFiles)
+                    )
+                    .catch((err: any) => {
+                    
+                        console.log('getTemplatePackiFiles.generateFolderArtifacts.error', err);
+                        return reject(err);
+                    }
+                    )
+                }
+                ).catch((err: any) => {
+                
+                    console.log('getTemplatePackiFiles.prepareGenerationFromWizziJson.error', err);
+                    return reject(err);
+                }
+                )
+            }
+            ).catch((err: any) => {
+            
+                console.log('getTemplatePackiFiles.getMetaProduction.error', err);
+                return reject(err);
+            }
+            )
+        }
+        );
 }

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\utils\objectId.js.ittf
 */
 'use strict';
@@ -78,13 +78,16 @@ ObjectID.prototype.toHexString = function() {
         this.__id = hexString;
     }
     return hexString;
-};
+}
+;
 ObjectID.prototype.get_inc = function() {
     return ObjectID.index = (ObjectID.index + 1) % 0xffffff;
-};
+}
+;
 ObjectID.prototype.getInc = function() {
     return this.get_inc();
-};
+}
+;
 ObjectID.prototype.generate = function(time) {
     if ('number' !== typeof (time)) {
         time = ~ (~ (Date.now() / 1000));
@@ -105,17 +108,20 @@ ObjectID.prototype.generate = function(time) {
     buffer[10] = (((inc >> 8)) & 0xff);
     buffer[9] = (((inc >> 16)) & 0xff);
     return buffer;
-};
+}
+;
 ObjectID.prototype.toString = function(format) {
     if (this.id && this.id.copy) {
         return this.id.toString(typeof (format) === 'string' ? format : 'hex');
     }
     return this.toHexString();
-};
+}
+;
 ObjectID.prototype.inspect = ObjectID.prototype.toString;
 ObjectID.prototype.toJSON = function() {
     return this.toHexString();
-};
+}
+;
 ObjectID.prototype.equals = function equals(otherId) {
     if (otherId instanceof ObjectID) {
         return this.toString() === otherId.toString();
@@ -135,17 +141,20 @@ ObjectID.prototype.equals = function equals(otherId) {
     else {
         return false;
     }
-};
+}
+;
 ObjectID.prototype.getTimestamp = function() {
     var timestamp = new Date();
     var time = (((this.id[3] | (this.id[2] << 8)) | (this.id[1] << 16))) | (this.id[0] << 24);
     timestamp.setTime(Math.floor(time) * 1000);
     return timestamp;
-};
+}
+;
 ObjectID.index = ~ (~ (Math.random() * 0xffffff));
 ObjectID.createPk = function createPk() {
     return new ObjectID();
-};
+}
+;
 ObjectID.createFromTime = function createFromTime(time) {
     var buffer = new Buffer([
         0, 
@@ -166,7 +175,8 @@ ObjectID.createFromTime = function createFromTime(time) {
     buffer[1] = (((time >> 16)) & 0xff);
     buffer[0] = (((time >> 24)) & 0xff);
     return new ObjectID(buffer);
-};
+}
+;
 var decodeLookup = [];
 i = 0;
 while (i < 10) {
@@ -193,7 +203,8 @@ ObjectID.createFromHexString = function createFromHexString(string) {
         array[n++] = ((decodeLookup[string.charCodeAt(i++)] << 4) | decodeLookup[string.charCodeAt(i++)]);
     }
     return new ObjectID(array);
-};
+}
+;
 ObjectID.isValid = function isValid(id) {
     if (id == null) {
         return false;
@@ -214,7 +225,8 @@ ObjectID.isValid = function isValid(id) {
         return ((id.id.length === 12) || (((id.id.length === 24) && checkForHexRegExp.test(id.id))));
     }
     return false;
-};
+}
+;
 Object.defineProperty(ObjectID.prototype, 'generationTime', {
     enumerable: true, 
     get: function() {
@@ -226,7 +238,7 @@ Object.defineProperty(ObjectID.prototype, 'generationTime', {
         this.id[1] = (((value >> 16)) & 0xff);
         this.id[0] = (((value >> 24)) & 0xff);
     }
-})
+ })
 module.exports = ObjectID;
 module.exports.ObjectID = ObjectID;
 module.exports.ObjectId = ObjectID;

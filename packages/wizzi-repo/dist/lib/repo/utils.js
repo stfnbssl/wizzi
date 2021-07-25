@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\repo\utils.js.ittf
 */
 'use strict';
@@ -12,9 +12,11 @@ md.getSrcPathInfo = function(srcPath) {
     if (srcPath && (typeof (srcPath) === 'object')) {
         var msg = md.getSrcPathInfoFromNode(srcPath);
         return msg ? msg : srcPath.toString();
+        ;
     }
     return 'unavailable';
-};
+}
+;
 md.getSrcPathInfoFromNode = function(node) {
     var msg = [];
     if (node) {
@@ -31,4 +33,6 @@ md.getSrcPathInfoFromNode = function(node) {
         }
     }
     return msg.length == 0 ? null : msg.join('');
-};
+    ;
+}
+;

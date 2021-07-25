@@ -5552,7 +5552,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\assets\AddDocumentIcon.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const AddDocumentIcon = _ref => {
@@ -5610,7 +5610,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\assets\AddIcon.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const AddIcon = _ref => {
@@ -5672,7 +5672,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\assets\DeleteIcon.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const DeleteIcon = _ref => {
@@ -5770,7 +5770,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\App.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -5904,7 +5904,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\NonExistent.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 
@@ -5985,7 +5985,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\ThemeProvider.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 // taken from https://github.com/expo/snack/blob/main/website/src/client/components/ThemeProvider.tsx
 // modified
@@ -6162,7 +6162,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateArtifactProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -6457,7 +6457,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateMetaProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -6697,7 +6697,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var nullthrows__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nullthrows */ "./node_modules/nullthrows/nullthrows.js");
@@ -6705,11 +6705,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _widgets_FormContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./widgets/FormContainer */ "./src/components/pageforms/widgets/FormContainer.tsx");
 /* harmony import */ var _widgets_FormTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./widgets/FormTitle */ "./src/components/pageforms/widgets/FormTitle.tsx");
 /* harmony import */ var _widgets_FormGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widgets/FormGroup */ "./src/components/pageforms/widgets/FormGroup.tsx");
-/* harmony import */ var _widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widgets/FormCheckBox */ "./src/components/pageforms/widgets/FormCheckBox.tsx");
-/* harmony import */ var _widgets_FormRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./widgets/FormRow */ "./src/components/pageforms/widgets/FormRow.tsx");
-/* harmony import */ var _widgets_FormButton__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widgets/FormButton */ "./src/components/pageforms/widgets/FormButton.tsx");
-/* harmony import */ var _widgets_HR__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widgets/HR */ "./src/components/pageforms/widgets/HR.tsx");
-/* harmony import */ var _widgets_styles_Para__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./widgets/styles/Para */ "./src/components/pageforms/widgets/styles/Para.tsx");
+/* harmony import */ var _widgets_FormText__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widgets/FormText */ "./src/components/pageforms/widgets/FormText.tsx");
+/* harmony import */ var _widgets_FormSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./widgets/FormSelect */ "./src/components/pageforms/widgets/FormSelect.tsx");
+/* harmony import */ var _widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widgets/FormCheckBox */ "./src/components/pageforms/widgets/FormCheckBox.tsx");
+/* harmony import */ var _widgets_FormRow__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widgets/FormRow */ "./src/components/pageforms/widgets/FormRow.tsx");
+/* harmony import */ var _widgets_FormButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./widgets/FormButton */ "./src/components/pageforms/widgets/FormButton.tsx");
+/* harmony import */ var _widgets_HR__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./widgets/HR */ "./src/components/pageforms/widgets/HR.tsx");
+/* harmony import */ var _widgets_styles_Para__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widgets/styles/Para */ "./src/components/pageforms/widgets/styles/Para.tsx");
+/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lodash/set */ "./node_modules/lodash/set.js");
+/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(lodash_set__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _widgets_FormObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widgets/FormObject */ "./src/components/pageforms/widgets/FormObject.tsx");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../fetch */ "./src/fetch.tsx");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -6736,7 +6746,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreatePackageProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -6751,7 +6761,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-const StyledRoot = styled_components__WEBPACK_IMPORTED_MODULE_11__.default.div`
+
+
+
+
+
+const StyledRoot = styled_components__WEBPACK_IMPORTED_MODULE_16__.default.div`
     display: -ms-flexbox;
     display: -webkit-box;
     display: -webkit-flex;
@@ -6828,6 +6843,52 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
       };
     }));
 
+    _defineProperty(_assertThisInitialized(_this), "handleMetaChange", async value => {
+      const parts = value.split('|');
+
+      if (parts.length == 2) {
+        const result = await (0,_fetch__WEBPACK_IMPORTED_MODULE_15__.getData)('production/meta/props/' + parts[0] + '/' + parts[1]);
+        console.log('handleMetaChange.result', result, result.meta.properties);
+        const properties = result.meta.properties;
+        const values = {};
+        var i,
+            i_items = properties,
+            i_len = properties.length,
+            prop;
+
+        for (i = 0; i < i_len; i++) {
+          prop = properties[i];
+
+          if (prop.type == 'string' || prop.type == 'number') {
+            values[prop.name] = prop.defaultValue || '';
+          } else if (prop.type == 'array') {
+            values[prop.name] = [];
+          } else if (prop.type == 'object') {
+            values[prop.name] = {};
+          }
+        }
+
+        _this.setState({
+          meta_id: value,
+          meta_props: result.meta.properties,
+          meta_propsValues: values
+        });
+      } else {
+        _this.setState({
+          meta_id: value,
+          meta_props: [],
+          meta_propsValues: {}
+        });
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleMetaPropsValuesChange", (valuePath, value) => _this.setState(state => {
+      const newValues = lodash_set__WEBPACK_IMPORTED_MODULE_13___default()(state.meta_propsValues, valuePath, value);
+      return {
+        meta_propsValues: newValues
+      };
+    }));
+
     _defineProperty(_assertThisInitialized(_this), "handlePackageNameChange", ev => {
       console.log('handlePackageNameChange', ev.target.type, ev.target.checked, ev.target.value);
 
@@ -6854,8 +6915,18 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
       pp_contexts: [],
       pp_add_tfolder: false,
       pp_dependencies: [],
-      pp_upload_files: []
+      pp_upload_files: [],
+      meta_id: "",
+      meta_listOptions: "",
+      meta_props: "",
+      meta_propsValues: ""
     };
+    _this.state = _objectSpread(_objectSpread({}, _this.state), {}, {
+      meta_propsValues: {},
+      meta_props: [],
+      meta_id: '',
+      meta_listOptions: []
+    });
     return _this;
   }
 
@@ -6880,8 +6951,30 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "componentDidMount",
-    value: function componentDidMount() {
+    value: async function componentDidMount() {
       this._checkAvaliblePackageName = lodash_debounce__WEBPACK_IMPORTED_MODULE_1___default()(this._checkAvaliblePackageName, 100);
+      const metas = await (0,_fetch__WEBPACK_IMPORTED_MODULE_15__.getData)('production/meta/list');
+      console.log('componentDidMount.metas', metas);
+      const options = [{
+        name: '',
+        value: ''
+      }];
+      var i,
+          i_items = metas,
+          i_len = metas.length,
+          item;
+
+      for (i = 0; i < i_len; i++) {
+        item = metas[i];
+        options.push({
+          name: item.owner + '/' + item.name,
+          value: item.owner + '|' + item.name
+        });
+      }
+
+      this.setState({
+        meta_listOptions: options
+      });
     }
   }, {
     key: "render",
@@ -6890,7 +6983,7 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormContainer__WEBPACK_IMPORTED_MODULE_3__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormTitle__WEBPACK_IMPORTED_MODULE_4__.default, {
         title: "Create a new package production",
         subtitle: "A package production contains the ittf documents for a package."
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_9__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         action: "/package/new",
         acceptCharset: "UTF-8",
         method: "POST",
@@ -6902,16 +6995,16 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
         required: true,
         value: this.state.pp_name,
         onChange: this.handlePackageNameChange
-      }), this.state.pp_name.length > 0 && this.state.pp_name_available && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_styles_Para__WEBPACK_IMPORTED_MODULE_10__.default, null, 'Package name ' + this.state.pp_name_checked + ' is available'), this.state.pp_name.length > 0 && !this.state.pp_name_available && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_styles_Para__WEBPACK_IMPORTED_MODULE_10__.default, {
+      }), this.state.pp_name.length > 0 && this.state.pp_name_available && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_styles_Para__WEBPACK_IMPORTED_MODULE_12__.default, null, 'Package name ' + this.state.pp_name_checked + ' is available'), this.state.pp_name.length > 0 && !this.state.pp_name_available && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_styles_Para__WEBPACK_IMPORTED_MODULE_12__.default, {
         color: "#ff0000"
-      }, 'Package name ' + this.state.pp_name_checked + ' is not available'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_9__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormGroup__WEBPACK_IMPORTED_MODULE_5__.default, {
+      }, 'Package name ' + this.state.pp_name_checked + ' is not available'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormGroup__WEBPACK_IMPORTED_MODULE_5__.default, {
         label: "Description",
         name: "pp_description",
         id: "pp_description",
         required: true,
         value: this.state.pp_description,
         onChange: this.handleInputChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_9__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_8__.default, {
         label: "Add a data context",
         name: "pp_add_context",
         id: "pp_add_context",
@@ -6921,15 +7014,15 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
         console.log('Createpp.context', context);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: ndx
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_9__.default, {
           type: "delete",
           value: context,
           onDelete: this.handleContextDelete
         }));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_9__.default, {
         type: "add",
         onAdd: this.handleContextAdd
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_9__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_6__.default, {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormCheckBox__WEBPACK_IMPORTED_MODULE_8__.default, {
         label: "Add a tfolder dependency",
         name: "pp_add_tfolder",
         id: "pp_add_tfolder",
@@ -6939,15 +7032,52 @@ let CreatePackageProduction = /*#__PURE__*/function (_Component) {
         console.log('Createpp.tfolder', tfolder);
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: ndx
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_9__.default, {
           type: "delete",
           value: tfolder,
           onDelete: this.handleTFolderDelete
         }));
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormRow__WEBPACK_IMPORTED_MODULE_9__.default, {
         type: "add",
         onAdd: this.handleTFolderAdd
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_9__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormButton__WEBPACK_IMPORTED_MODULE_8__.default, {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormSelect__WEBPACK_IMPORTED_MODULE_7__.default, {
+        label: 'Use meta production',
+        name: "meta_id",
+        id: "meta_id",
+        value: this.state.meta_id,
+        options: this.state.meta_listOptions,
+        onChange: ev => this.handleMetaChange(ev.target.value)
+      }), this.state.meta_props && this.state.meta_props.map((p, ndx) => {
+        if (p.type == 'string' || p.type == 'number') {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormGroup__WEBPACK_IMPORTED_MODULE_5__.default, {
+            key: ndx,
+            label: p.label || p.name,
+            name: p.name,
+            id: p.name,
+            value: this.state.meta_propsValues[p.name],
+            onChange: ev => this.handleMetaPropsValuesChange(p.name, ev.target.value)
+          });
+        }
+
+        if (p.type == 'object') {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormObject__WEBPACK_IMPORTED_MODULE_14__.default, {
+            key: ndx,
+            label: p.label || p.name,
+            name: p.name,
+            id: p.name,
+            path: p.name,
+            values: this.state.meta_propsValues[p.name] || {},
+            properties: p.properties,
+            onChange: this.handleMetaPropsValuesChange
+          });
+        }
+      }), this.state.meta_id.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormText__WEBPACK_IMPORTED_MODULE_6__.default, {
+        label: "Values",
+        name: "meta_propsValues",
+        id: "meta_propsValues",
+        required: true,
+        value: JSON.stringify(this.state.meta_propsValues, null, 4)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_HR__WEBPACK_IMPORTED_MODULE_11__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormButton__WEBPACK_IMPORTED_MODULE_10__.default, {
         label: "Create package production",
         id: "btn_create_pp",
         variant: "submit",
@@ -7015,7 +7145,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateTFolder.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -7325,7 +7455,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateUser.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -7521,7 +7651,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\DeleteArtifactProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 let DeleteArtifactProduction = /*#__PURE__*/function (_Component) {
@@ -7600,7 +7730,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\DeleteMetaProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 let DeleteMetaProduction = /*#__PURE__*/function (_Component) {
@@ -7677,7 +7807,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\DeletePackageProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 let DeletePackageProduction = /*#__PURE__*/function (_Component) {
@@ -7754,7 +7884,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\DeleteTFolder.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 let DeleteTFolder = /*#__PURE__*/function (_Component) {
@@ -7833,7 +7963,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\DeleteUser.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 let DeleteUser = /*#__PURE__*/function (_Component) {
@@ -7904,7 +8034,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListArtifactProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8064,7 +8194,9 @@ let ListArtifactProduction = /*#__PURE__*/function (_Component) {
             className: "flex-row flex-items-start m-m",
             key: ndx
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-            className: "flex-column border-b-s p-b-s width-full m-w-xxl"
+            className: "flex-row border-b-s p-b-s width-full m-w-xxl"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column width-full"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-xl"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -8081,7 +8213,29 @@ let ListArtifactProduction = /*#__PURE__*/function (_Component) {
             className: "font-m m-r-s"
           }, "schema:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-m"
-          }, item.wizziSchema))));
+          }, item.wizziSchema))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-warning color-white border-s font-m font-w-xxl",
+            href: '/artifact/update/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Update"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-error color-white border-s font-m font-w-xxl",
+            href: '/artifact/delete/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Delete"))))));
         }
       }));
     }
@@ -8134,7 +8288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListMetaProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8259,14 +8413,38 @@ let ListMetaProduction = /*#__PURE__*/function (_Component) {
             className: "flex-row flex-items-start m-m",
             key: ndx
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-            className: "flex-column border-b-s p-b-s width-full m-w-xxl"
+            className: "flex-row border-b-s p-b-s width-full m-w-xxl"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column width-full"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-xl"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             href: '/~~/m/stfnbssl/' + item.name
           }, item.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-m m-b-m"
-          }, item.description)));
+          }, item.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-warning color-white border-s font-m font-w-xxl",
+            href: '/meta/update/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Update"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-error color-white border-s font-m font-w-xxl",
+            href: '/meta/delete/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Delete"))))));
         }
       }));
     }
@@ -8319,7 +8497,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListPackageProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8444,14 +8622,38 @@ let ListPackageProduction = /*#__PURE__*/function (_Component) {
             className: "flex-row flex-items-start m-m",
             key: ndx
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-            className: "flex-column border-b-s p-b-s width-full m-w-xxl"
+            className: "flex-row border-b-s p-b-s width-full"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column width-full"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-xl"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             href: '/~~/p/stfnbssl/' + item.name
           }, item.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-m m-b-m"
-          }, item.description)));
+          }, item.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-warning color-white border-s font-m font-w-xxl",
+            href: '/package/update/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Update"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-error color-white border-s font-m font-w-xxl",
+            href: '/package/delete/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Delete"))))));
         }
       }));
     }
@@ -8504,7 +8706,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListTFolder.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8628,14 +8830,38 @@ let ListTFolder = /*#__PURE__*/function (_Component) {
             className: "flex-row flex-items-start m-m",
             key: ndx
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-            className: "flex-column border-b-s p-b-s width-full m-w-xxl"
+            className: "flex-row border-b-s p-b-s width-full m-w-xxl"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column width-full"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-xl"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
             href: '/~~/t/stfnbssl/' + item.name
           }, item.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
             className: "font-m m-b-m"
-          }, item.description)));
+          }, item.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-warning color-white border-s font-m font-w-xxl",
+            href: '/tfolder/update/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Update"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-column m-s"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            className: "button p-s radius-m bg-error color-white border-s font-m font-w-xxl",
+            href: '/tfolder/delete/' + item.owner + '/' + item.name
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "flex-row"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_assets_AddDocumentIcon__WEBPACK_IMPORTED_MODULE_1__.AddDocumentIcon, {
+            height: "16",
+            width: "16"
+          }), "Delete"))))));
         }
       }));
     }
@@ -8686,7 +8912,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\ListUser.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8826,13 +9052,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 /* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/set */ "./node_modules/lodash/set.js");
 /* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_set__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _widgets_FormContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./widgets/FormContainer */ "./src/components/pageforms/widgets/FormContainer.tsx");
 /* harmony import */ var _widgets_FormTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./widgets/FormTitle */ "./src/components/pageforms/widgets/FormTitle.tsx");
 /* harmony import */ var _widgets_FormGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./widgets/FormGroup */ "./src/components/pageforms/widgets/FormGroup.tsx");
-/* harmony import */ var _widgets_FormObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widgets/FormObject */ "./src/components/pageforms/widgets/FormObject.tsx");
+/* harmony import */ var _widgets_FormSelect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widgets/FormSelect */ "./src/components/pageforms/widgets/FormSelect.tsx");
+/* harmony import */ var _widgets_FormObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widgets/FormObject */ "./src/components/pageforms/widgets/FormObject.tsx");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../fetch */ "./src/fetch.tsx");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -8859,7 +9087,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\PropertyEditor.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -8869,7 +9097,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-const StyledRoot = styled_components__WEBPACK_IMPORTED_MODULE_6__.default.div`
+
+
+const StyledRoot = styled_components__WEBPACK_IMPORTED_MODULE_8__.default.div`
     display: -ms-flexbox;
     display: -webkit-box;
     display: -webkit-flex;
@@ -8888,6 +9118,45 @@ let PropertyEditor = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
 
+    _defineProperty(_assertThisInitialized(_this), "handleMetaChange", async value => {
+      const parts = value.split('|');
+
+      if (parts.length == 2) {
+        const result = await (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.getData)('production/meta/props/' + parts[0] + '/' + parts[1]);
+        console.log('handleMetaChange.result', result, result.meta.properties);
+        const properties = result.meta.properties;
+        const values = {};
+        var i,
+            i_items = properties,
+            i_len = properties.length,
+            prop;
+
+        for (i = 0; i < i_len; i++) {
+          prop = properties[i];
+
+          if (prop.type == 'string' || prop.type == 'number') {
+            values[prop.name] = prop.defaultValue || '';
+          } else if (prop.type == 'array') {
+            values[prop.name] = [];
+          } else if (prop.type == 'object') {
+            values[prop.name] = {};
+          }
+        }
+
+        _this.setState({
+          pe_metaProduction: value,
+          pe_properties: result.meta.properties,
+          pe_values: values
+        });
+      } else {
+        _this.setState({
+          pe_metaProduction: value,
+          pe_properties: [],
+          pe_values: {}
+        });
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleValuesChange", (valuePath, value) => _this.setState(state => {
       const newValues = lodash_set__WEBPACK_IMPORTED_MODULE_1___default()(state.pe_values, valuePath, value);
       return {
@@ -8896,41 +9165,64 @@ let PropertyEditor = /*#__PURE__*/function (_Component) {
     }));
 
     _this.state = {
-      pe_values: ""
+      pe_values: "",
+      pe_metas: "",
+      pe_metaProduction: "",
+      pe_properties: ""
     };
-    const values = {};
-    const properties = _this.props.data.schema.properties;
-    var i,
-        i_items = properties,
-        i_len = properties.length,
-        prop;
-
-    for (i = 0; i < i_len; i++) {
-      prop = properties[i];
-
-      if (prop.type == 'string' || prop.type == 'number') {
-        values[prop.name] = prop.defaultValue || '';
-      } else if (prop.type == 'array') {
-        values[prop.name] = [];
-      } else if (prop.type == 'object') {
-        values[prop.name] = {};
-      }
-    }
-
+    const _values = {};
     _this.state = {
-      pe_values: values
+      pe_values: _values,
+      pe_metas: [],
+      pe_meta: null,
+      pe_properties: [],
+      pe_metaProduction: ''
     };
     return _this;
   }
 
   _createClass(PropertyEditor, [{
+    key: "componentDidMount",
+    value: async function componentDidMount() {
+      const metas = await (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.getData)('production/meta/list');
+      console.log('componentDidMount.metas', metas);
+      const options = [{
+        name: '',
+        value: ''
+      }];
+      var i,
+          i_items = metas,
+          i_len = metas.length,
+          item;
+
+      for (i = 0; i < i_len; i++) {
+        item = metas[i];
+        options.push({
+          name: item.owner + '/' + item.name,
+          value: item.owner + '|' + item.name
+        });
+      }
+
+      this.setState({
+        pe_metas: options
+      });
+    }
+  }, {
     key: "render",
-    value: function render() {
+    value: // const properties = this.props.data.schema.properties
+    function render() {
       console.log('PropertyEditor.render', 'state', this.state);
-      const properties = this.props.data.schema.properties;
+      const properties = this.state.pe_properties;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormContainer__WEBPACK_IMPORTED_MODULE_2__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormTitle__WEBPACK_IMPORTED_MODULE_3__.default, {
         title: "Property editor"
-      }), properties.map((p, ndx) => {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormSelect__WEBPACK_IMPORTED_MODULE_5__.default, {
+        label: 'Meta production',
+        name: "pe_meta_production",
+        id: "pe_meta_production",
+        value: this.state.pe_metaProduction,
+        options: this.state.pe_metas,
+        onChange: ev => this.handleMetaChange(ev.target.value)
+      }), properties && properties.map((p, ndx) => {
         if (p.type == 'string' || p.type == 'number') {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormGroup__WEBPACK_IMPORTED_MODULE_4__.default, {
             key: ndx,
@@ -8943,7 +9235,7 @@ let PropertyEditor = /*#__PURE__*/function (_Component) {
         }
 
         if (p.type == 'object') {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormObject__WEBPACK_IMPORTED_MODULE_5__.default, {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_widgets_FormObject__WEBPACK_IMPORTED_MODULE_6__.default, {
             key: ndx,
             label: p.label || p.name,
             name: p.name,
@@ -9009,7 +9301,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\UpdateArtifactProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -9177,7 +9469,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\UpdateMetaProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -9325,7 +9617,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\UpdatePackageProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -9473,7 +9765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\UpdateTFolder.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -9636,7 +9928,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\UpdateUser.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -9726,7 +10018,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormAvatar.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -9777,7 +10069,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormButton.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -9838,7 +10130,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormCheckBox.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -9906,7 +10198,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormContainer.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -9953,7 +10245,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormFile.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10058,7 +10350,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormGroup.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10143,7 +10435,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormHidden.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const FormHidden = ({
@@ -10203,7 +10495,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormObject.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -10296,7 +10588,7 @@ let FormObject = /*#__PURE__*/function (_Component) {
             name: p.name,
             id: p.name,
             path: this.props.path + '.' + p.name,
-            value: this.props.values[p.name] || {},
+            values: this.props.values[p.name] || {},
             properties: p.properties,
             onChange: this.props.onChange
           });
@@ -10354,7 +10646,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormRow.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
@@ -10489,6 +10781,99 @@ let FormRow = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/components/pageforms/widgets/FormSelect.tsx":
+/*!*********************************************************!*\
+  !*** ./src/components/pageforms/widgets/FormSelect.tsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormSelect": () => (/* binding */ FormSelect),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ThemeProvider */ "./src/components/ThemeProvider.tsx");
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
+    package: wizzi-js@0.7.9
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormSelect.tsx.ittf
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
+*/
+ // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
+
+
+
+const StyledFormGroup = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dl`
+    
+`;
+const StyledInputLabel = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dt`
+    font-weight: 600;
+    
+`;
+const StyledLabelSpan = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.span`
+    color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('secondary-text')};
+    font-size: 12px;
+    margin: 4px 4px 2px;
+    min-height: 17px;
+`;
+const StyledInputBox = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dd`
+    margin: 2px 0;
+    
+`;
+const StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.select`
+    background-color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('background')};
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    border: ${props => '1px solid ' + (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('border')};
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    -moz-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    -o-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('primary-text')};
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    padding: 5px 12px;
+    vertical-align: middle;
+`;
+const FormSelect = ({
+  id,
+  name,
+  label,
+  required,
+  value,
+  options,
+  onChange
+}) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledFormGroup, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInputLabel, {
+    autocomplete: "off",
+    htmlFor: name
+  }, label, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledLabelSpan, null, required ? '(*)' : '(optional)')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInputBox, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInput, {
+    autocomplete: "off",
+    type: "text",
+    name: name,
+    id: name,
+    value: value,
+    onChange: onChange
+  }, options.map((item, ndx) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      key: ndx,
+      value: item.value
+    }, item.name);
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormSelect);
+
+/***/ }),
+
 /***/ "./src/components/pageforms/widgets/FormStatic.tsx":
 /*!*********************************************************!*\
   !*** ./src/components/pageforms/widgets/FormStatic.tsx ***!
@@ -10508,7 +10893,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormStatic.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10562,6 +10947,95 @@ const FormStatic = ({
 
 /***/ }),
 
+/***/ "./src/components/pageforms/widgets/FormText.tsx":
+/*!*******************************************************!*\
+  !*** ./src/components/pageforms/widgets/FormText.tsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormText": () => (/* binding */ FormText),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ThemeProvider */ "./src/components/ThemeProvider.tsx");
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
+    package: wizzi-js@0.7.9
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormText.tsx.ittf
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
+*/
+ // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
+
+
+
+const StyledFormGroup = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dl`
+    
+`;
+const StyledInputLabel = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dt`
+    font-weight: 600;
+    
+`;
+const StyledLabelSpan = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.span`
+    color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('secondary-text')};
+    font-size: 12px;
+    margin: 4px 4px 2px;
+    min-height: 17px;
+`;
+const StyledInputBox = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.dd`
+    margin: 2px 0;
+    
+`;
+const StyledInput = styled_components__WEBPACK_IMPORTED_MODULE_2__.default.textarea`
+    background-color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('background')};
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    border: ${props => '1px solid ' + (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('border')};
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    -moz-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    -o-box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    box-shadow: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.s)('small')};
+    color: ${props => (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_1__.c)('primary-text')};
+    font-size: 14px;
+    line-height: 20px;
+    outline: none;
+    padding: 5px 12px;
+    vertical-align: middle;
+`;
+const FormText = ({
+  id,
+  name,
+  label,
+  required,
+  value,
+  rows,
+  onChange
+}) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledFormGroup, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInputLabel, {
+    autocomplete: "off",
+    htmlFor: name
+  }, label, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledLabelSpan, null, required ? '(*)' : '(optional)')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInputBox, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(StyledInput, {
+    autocomplete: "off",
+    type: "text",
+    name: name,
+    id: name,
+    value: value,
+    rows: rows || 20,
+    onChange: onChange
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormText);
+
+/***/ }),
+
 /***/ "./src/components/pageforms/widgets/FormTitle.tsx":
 /*!********************************************************!*\
   !*** ./src/components/pageforms/widgets/FormTitle.tsx ***!
@@ -10580,7 +11054,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormTitle.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10636,7 +11110,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\HR.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10676,7 +11150,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\ThemeDemo.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
  // see https://mxstbr.blog/2016/11/styled-components-magic-explained/
 
@@ -10850,7 +11324,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\styles\Box.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const Box = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.div(props => {
@@ -10899,7 +11373,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\styles\FlexRow.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const FlexRow = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.div(props => {
@@ -10930,7 +11404,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\styles\Link.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const Link = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.a(props => {
@@ -10961,7 +11435,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\styles\Para.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const Para = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.p(props => {
@@ -11006,7 +11480,7 @@ __webpack_require__.r(__webpack_exports__);
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\styles\Text.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 const Text = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.span(props => {
@@ -11029,6 +11503,41 @@ const Text = styled_components__WEBPACK_IMPORTED_MODULE_0__.default.span(props =
   return ret;
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Text);
+
+/***/ }),
+
+/***/ "./src/fetch.tsx":
+/*!***********************!*\
+  !*** ./src/fetch.tsx ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getData": () => (/* binding */ getData)
+/* harmony export */ });
+/* harmony import */ var nullthrows__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nullthrows */ "./node_modules/nullthrows/nullthrows.js");
+/* harmony import */ var nullthrows__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nullthrows__WEBPACK_IMPORTED_MODULE_0__);
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
+    package: wizzi-js@0.7.9
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\fetch.tsx.ittf
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
+*/
+
+async function getData(path) {
+  const endpoint = `${nullthrows__WEBPACK_IMPORTED_MODULE_0___default()("http://localhost:5000/api/v1")}/${path}`;
+  console.log('Fetch.getData.endpoint', endpoint);
+  const response = await fetch(endpoint);
+
+  if (!response.ok) {
+    throw new Error(`fetch.getData error - ${response.status} - ${response.statusText}`);
+  }
+
+  const result = await response.json();
+  return result;
+}
 
 /***/ }),
 
@@ -47690,7 +48199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/is-prop-valid */ "./node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! hoist-non-react-statics */ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js");
 /* harmony import */ var hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6__);
-function v(){return(v=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var g=function(e,t){for(var n=[e[0]],r=0,o=t.length;r<o;r+=1)n.push(t[r],e[r+1]);return n},S=function(t){return null!==t&&"object"==typeof t&&"[object Object]"===(t.toString?t.toString():Object.prototype.toString.call(t))&&!(0,react_is__WEBPACK_IMPORTED_MODULE_0__.typeOf)(t)},w=Object.freeze([]),E=Object.freeze({});function b(e){return"function"==typeof e}function _(e){return true&&"string"==typeof e&&e||e.displayName||e.name||"Component"}function N(e){return e&&"string"==typeof e.styledComponentId}var A="undefined"!=typeof process&&(({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).REACT_APP_SC_ATTR||({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).SC_ATTR)||"data-styled",C="5.3.0",I="undefined"!=typeof window&&"HTMLElement"in window,P=Boolean("boolean"==typeof SC_DISABLE_SPEEDY?SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).REACT_APP_SC_DISABLE_SPEEDY&&""!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).REACT_APP_SC_DISABLE_SPEEDY?"false"!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).REACT_APP_SC_DISABLE_SPEEDY&&({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).REACT_APP_SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).SC_DISABLE_SPEEDY&&""!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).SC_DISABLE_SPEEDY?"false"!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).SC_DISABLE_SPEEDY&&({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1626985230381}).SC_DISABLE_SPEEDY:"production"!=="development"),O={},R= true?{1:"Cannot create styled-component for component: %s.\n\n",2:"Can't collect styles once you've consumed a `ServerStyleSheet`'s styles! `ServerStyleSheet` is a one off instance for each server-side render cycle.\n\n- Are you trying to reuse it across renders?\n- Are you accidentally calling collectStyles twice?\n\n",3:"Streaming SSR is only supported in a Node.js environment; Please do not try to call this method in the browser.\n\n",4:"The `StyleSheetManager` expects a valid target or sheet prop!\n\n- Does this error occur on the client and is your target falsy?\n- Does this error occur on the server and is the sheet falsy?\n\n",5:"The clone method cannot be used on the client!\n\n- Are you running in a client-like environment on the server?\n- Are you trying to run SSR on the client?\n\n",6:"Trying to insert a new style tag, but the given Node is unmounted!\n\n- Are you using a custom target that isn't mounted?\n- Does your document not have a valid head element?\n- Have you accidentally removed a style tag manually?\n\n",7:'ThemeProvider: Please return an object from your "theme" prop function, e.g.\n\n```js\ntheme={() => ({})}\n```\n\n',8:'ThemeProvider: Please make your "theme" prop an object.\n\n',9:"Missing document `<head>`\n\n",10:"Cannot find a StyleSheet instance. Usually this happens if there are multiple copies of styled-components loaded at once. Check out this issue for how to troubleshoot and fix the common cases where this situation can happen: https://github.com/styled-components/styled-components/issues/1941#issuecomment-417862021\n\n",11:"_This error was replaced with a dev-time warning, it will be deleted for v4 final._ [createGlobalStyle] received children which will not be rendered. Please use the component without passing children elements.\n\n",12:"It seems you are interpolating a keyframe declaration (%s) into an untagged string. This was supported in styled-components v3, but is not longer supported in v4 as keyframes are now injected on-demand. Please wrap your string in the css\\`\\` helper which ensures the styles are injected correctly. See https://www.styled-components.com/docs/api#css\n\n",13:"%s is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details.\n\n",14:'ThemeProvider: "theme" prop is required.\n\n',15:"A stylis plugin has been supplied that is not named. We need a name for each plugin to be able to prevent styling collisions between different stylis configurations within the same app. Before you pass your plugin to `<StyleSheetManager stylisPlugins={[]}>`, please make sure each plugin is uniquely-named, e.g.\n\n```js\nObject.defineProperty(importedPlugin, 'name', { value: 'some-unique-name' });\n```\n\n",16:"Reached the limit of how many styled components may be created at group %s.\nYou may only create up to 1,073,741,824 components. If you're creating components dynamically,\nas for instance in your render method then you may be running into this limitation.\n\n",17:"CSSStyleSheet could not be found on HTMLStyleElement.\nHas styled-components' style tag been unmounted or altered by another script?\n"}:0;function D(){for(var e=arguments.length<=0?void 0:arguments[0],t=[],n=1,r=arguments.length;n<r;n+=1)t.push(n<0||arguments.length<=n?void 0:arguments[n]);return t.forEach((function(t){e=e.replace(/%[a-z]/,t)})),e}function j(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];throw false?0:new Error(D.apply(void 0,[R[e]].concat(n)).trim())}var T=function(){function e(e){this.groupSizes=new Uint32Array(512),this.length=512,this.tag=e}var t=e.prototype;return t.indexOfGroup=function(e){for(var t=0,n=0;n<e;n++)t+=this.groupSizes[n];return t},t.insertRules=function(e,t){if(e>=this.groupSizes.length){for(var n=this.groupSizes,r=n.length,o=r;e>=o;)(o<<=1)<0&&j(16,""+e);this.groupSizes=new Uint32Array(o),this.groupSizes.set(n),this.length=o;for(var i=r;i<o;i++)this.groupSizes[i]=0}for(var s=this.indexOfGroup(e+1),a=0,c=t.length;a<c;a++)this.tag.insertRule(s,t[a])&&(this.groupSizes[e]++,s++)},t.clearGroup=function(e){if(e<this.length){var t=this.groupSizes[e],n=this.indexOfGroup(e),r=n+t;this.groupSizes[e]=0;for(var o=n;o<r;o++)this.tag.deleteRule(n)}},t.getGroup=function(e){var t="";if(e>=this.length||0===this.groupSizes[e])return t;for(var n=this.groupSizes[e],r=this.indexOfGroup(e),o=r+n,i=r;i<o;i++)t+=this.tag.getRule(i)+"/*!sc*/\n";return t},e}(),k=new Map,x=new Map,V=1,B=function(e){if(k.has(e))return k.get(e);for(;x.has(V);)V++;var t=V++;return true&&((0|t)<0||t>1<<30)&&j(16,""+t),k.set(e,t),x.set(t,e),t},M=function(e){return x.get(e)},z=function(e,t){k.set(e,t),x.set(t,e)},L="style["+A+'][data-styled-version="5.3.0"]',G=new RegExp("^"+A+'\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'),F=function(e,t,n){for(var r,o=n.split(","),i=0,s=o.length;i<s;i++)(r=o[i])&&e.registerName(t,r)},Y=function(e,t){for(var n=t.innerHTML.split("/*!sc*/\n"),r=[],o=0,i=n.length;o<i;o++){var s=n[o].trim();if(s){var a=s.match(G);if(a){var c=0|parseInt(a[1],10),u=a[2];0!==c&&(z(u,c),F(e,u,a[3]),e.getTag().insertRules(c,r)),r.length=0}else r.push(s)}}},q=function(){return"undefined"!=typeof window&&void 0!==window.__webpack_nonce__?window.__webpack_nonce__:null},H=function(e){var t=document.head,n=e||t,r=document.createElement("style"),o=function(e){for(var t=e.childNodes,n=t.length;n>=0;n--){var r=t[n];if(r&&1===r.nodeType&&r.hasAttribute(A))return r}}(n),i=void 0!==o?o.nextSibling:null;r.setAttribute(A,"active"),r.setAttribute("data-styled-version","5.3.0");var s=q();return s&&r.setAttribute("nonce",s),n.insertBefore(r,i),r},$=function(){function e(e){var t=this.element=H(e);t.appendChild(document.createTextNode("")),this.sheet=function(e){if(e.sheet)return e.sheet;for(var t=document.styleSheets,n=0,r=t.length;n<r;n++){var o=t[n];if(o.ownerNode===e)return o}j(17)}(t),this.length=0}var t=e.prototype;return t.insertRule=function(e,t){try{return this.sheet.insertRule(t,e),this.length++,!0}catch(e){return!1}},t.deleteRule=function(e){this.sheet.deleteRule(e),this.length--},t.getRule=function(e){var t=this.sheet.cssRules[e];return void 0!==t&&"string"==typeof t.cssText?t.cssText:""},e}(),W=function(){function e(e){var t=this.element=H(e);this.nodes=t.childNodes,this.length=0}var t=e.prototype;return t.insertRule=function(e,t){if(e<=this.length&&e>=0){var n=document.createTextNode(t),r=this.nodes[e];return this.element.insertBefore(n,r||null),this.length++,!0}return!1},t.deleteRule=function(e){this.element.removeChild(this.nodes[e]),this.length--},t.getRule=function(e){return e<this.length?this.nodes[e].textContent:""},e}(),U=function(){function e(e){this.rules=[],this.length=0}var t=e.prototype;return t.insertRule=function(e,t){return e<=this.length&&(this.rules.splice(e,0,t),this.length++,!0)},t.deleteRule=function(e){this.rules.splice(e,1),this.length--},t.getRule=function(e){return e<this.length?this.rules[e]:""},e}(),J=I,X={isServer:!I,useCSSOMInjection:!P},Z=function(){function e(e,t,n){void 0===e&&(e=E),void 0===t&&(t={}),this.options=v({},X,{},e),this.gs=t,this.names=new Map(n),!this.options.isServer&&I&&J&&(J=!1,function(e){for(var t=document.querySelectorAll(L),n=0,r=t.length;n<r;n++){var o=t[n];o&&"active"!==o.getAttribute(A)&&(Y(e,o),o.parentNode&&o.parentNode.removeChild(o))}}(this))}e.registerId=function(e){return B(e)};var t=e.prototype;return t.reconstructWithOptions=function(t,n){return void 0===n&&(n=!0),new e(v({},this.options,{},t),this.gs,n&&this.names||void 0)},t.allocateGSInstance=function(e){return this.gs[e]=(this.gs[e]||0)+1},t.getTag=function(){return this.tag||(this.tag=(n=(t=this.options).isServer,r=t.useCSSOMInjection,o=t.target,e=n?new U(o):r?new $(o):new W(o),new T(e)));var e,t,n,r,o},t.hasNameForId=function(e,t){return this.names.has(e)&&this.names.get(e).has(t)},t.registerName=function(e,t){if(B(e),this.names.has(e))this.names.get(e).add(t);else{var n=new Set;n.add(t),this.names.set(e,n)}},t.insertRules=function(e,t,n){this.registerName(e,t),this.getTag().insertRules(B(e),n)},t.clearNames=function(e){this.names.has(e)&&this.names.get(e).clear()},t.clearRules=function(e){this.getTag().clearGroup(B(e)),this.clearNames(e)},t.clearTag=function(){this.tag=void 0},t.toString=function(){return function(e){for(var t=e.getTag(),n=t.length,r="",o=0;o<n;o++){var i=M(o);if(void 0!==i){var s=e.names.get(i),a=t.getGroup(o);if(void 0!==s&&0!==a.length){var c=A+".g"+o+'[id="'+i+'"]',u="";void 0!==s&&s.forEach((function(e){e.length>0&&(u+=e+",")})),r+=""+a+c+'{content:"'+u+'"}/*!sc*/\n'}}}return r}(this)},e}(),K=/(a)(d)/gi,Q=function(e){return String.fromCharCode(e+(e>25?39:97))};function ee(e){var t,n="";for(t=Math.abs(e);t>52;t=t/52|0)n=Q(t%52)+n;return(Q(t%52)+n).replace(K,"$1-$2")}var te=function(e,t){for(var n=t.length;n;)e=33*e^t.charCodeAt(--n);return e},ne=function(e){return te(5381,e)};function re(e){for(var t=0;t<e.length;t+=1){var n=e[t];if(b(n)&&!N(n))return!1}return!0}var oe=ne("5.3.0"),ie=function(){function e(e,t,n){this.rules=e,this.staticRulesId="",this.isStatic= false&&0,this.componentId=t,this.baseHash=te(oe,t),this.baseStyle=n,Z.registerId(t)}return e.prototype.generateAndInjectStyles=function(e,t,n){var r=this.componentId,o=[];if(this.baseStyle&&o.push(this.baseStyle.generateAndInjectStyles(e,t,n)),this.isStatic&&!n.hash)if(this.staticRulesId&&t.hasNameForId(r,this.staticRulesId))o.push(this.staticRulesId);else{var i=Ne(this.rules,e,t,n).join(""),s=ee(te(this.baseHash,i.length)>>>0);if(!t.hasNameForId(r,s)){var a=n(i,"."+s,void 0,r);t.insertRules(r,s,a)}o.push(s),this.staticRulesId=s}else{for(var c=this.rules.length,u=te(this.baseHash,n.hash),l="",d=0;d<c;d++){var h=this.rules[d];if("string"==typeof h)l+=h, true&&(u=te(u,h+d));else if(h){var p=Ne(h,e,t,n),f=Array.isArray(p)?p.join(""):p;u=te(u,f+d),l+=f}}if(l){var m=ee(u>>>0);if(!t.hasNameForId(r,m)){var y=n(l,"."+m,void 0,r);t.insertRules(r,m,y)}o.push(m)}}return o.join(" ")},e}(),se=/^\s*\/\/.*$/gm,ae=[":","[",".","#"];function ce(e){var t,n,r,o,i=void 0===e?E:e,s=i.options,a=void 0===s?E:s,c=i.plugins,u=void 0===c?w:c,l=new _emotion_stylis__WEBPACK_IMPORTED_MODULE_3__.default(a),d=[],h=function(e){function t(t){if(t)try{e(t+"}")}catch(e){}}return function(n,r,o,i,s,a,c,u,l,d){switch(n){case 1:if(0===l&&64===r.charCodeAt(0))return e(r+";"),"";break;case 2:if(0===u)return r+"/*|*/";break;case 3:switch(u){case 102:case 112:return e(o[0]+r),"";default:return r+(0===d?"/*|*/":"")}case-2:r.split("/*|*/}").forEach(t)}}}((function(e){d.push(e)})),f=function(e,r,i){return 0===r&&-1!==ae.indexOf(i[n.length])||i.match(o)?e:"."+t};function m(e,i,s,a){void 0===a&&(a="&");var c=e.replace(se,""),u=i&&s?s+" "+i+" { "+c+" }":c;return t=a,n=i,r=new RegExp("\\"+n+"\\b","g"),o=new RegExp("(\\"+n+"\\b){2,}"),l(s||!i?"":i,u)}return l.use([].concat(u,[function(e,t,o){2===e&&o.length&&o[0].lastIndexOf(n)>0&&(o[0]=o[0].replace(r,f))},h,function(e){if(-2===e){var t=d;return d=[],t}}])),m.hash=u.length?u.reduce((function(e,t){return t.name||j(15),te(e,t.name)}),5381).toString():"",m}var ue=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),le=ue.Consumer,de=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),he=(de.Consumer,new Z),pe=ce();function fe(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ue)||he}function me(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(de)||pe}function ye(e){var t=(0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(e.stylisPlugins),n=t[0],i=t[1],c=fe(),u=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){var t=c;return e.sheet?t=e.sheet:e.target&&(t=t.reconstructWithOptions({target:e.target},!1)),e.disableCSSOMInjection&&(t=t.reconstructWithOptions({useCSSOMInjection:!1})),t}),[e.disableCSSOMInjection,e.sheet,e.target]),l=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){return ce({options:{prefix:!e.disableVendorPrefixes},plugins:n})}),[e.disableVendorPrefixes,n]);return (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)((function(){shallowequal__WEBPACK_IMPORTED_MODULE_2___default()(n,e.stylisPlugins)||i(e.stylisPlugins)}),[e.stylisPlugins]),react__WEBPACK_IMPORTED_MODULE_1__.createElement(ue.Provider,{value:u},react__WEBPACK_IMPORTED_MODULE_1__.createElement(de.Provider,{value:l}, true?react__WEBPACK_IMPORTED_MODULE_1__.Children.only(e.children):0))}var ve=function(){function e(e,t){var n=this;this.inject=function(e,t){void 0===t&&(t=pe);var r=n.name+t.hash;e.hasNameForId(n.id,r)||e.insertRules(n.id,r,t(n.rules,r,"@keyframes"))},this.toString=function(){return j(12,String(n.name))},this.name=e,this.id="sc-keyframes-"+e,this.rules=t}return e.prototype.getName=function(e){return void 0===e&&(e=pe),this.name+e.hash},e}(),ge=/([A-Z])/,Se=/([A-Z])/g,we=/^ms-/,Ee=function(e){return"-"+e.toLowerCase()};function be(e){return ge.test(e)?e.replace(Se,Ee).replace(we,"-ms-"):e}var _e=function(e){return null==e||!1===e||""===e};function Ne(e,n,r,o){if(Array.isArray(e)){for(var i,s=[],a=0,c=e.length;a<c;a+=1)""!==(i=Ne(e[a],n,r,o))&&(Array.isArray(i)?s.push.apply(s,i):s.push(i));return s}if(_e(e))return"";if(N(e))return"."+e.styledComponentId;if(b(e)){if("function"!=typeof(l=e)||l.prototype&&l.prototype.isReactComponent||!n)return e;var u=e(n);return true&&(0,react_is__WEBPACK_IMPORTED_MODULE_0__.isElement)(u)&&console.warn(_(e)+" is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details."),Ne(u,n,r,o)}var l;return e instanceof ve?r?(e.inject(r,o),e.getName(o)):e:S(e)?function e(t,n){var r,o,i=[];for(var s in t)t.hasOwnProperty(s)&&!_e(t[s])&&(S(t[s])?i.push.apply(i,e(t[s],s)):b(t[s])?i.push(be(s)+":",t[s],";"):i.push(be(s)+": "+(r=s,null==(o=t[s])||"boolean"==typeof o||""===o?"":"number"!=typeof o||0===o||r in _emotion_unitless__WEBPACK_IMPORTED_MODULE_4__.default?String(o).trim():o+"px")+";"));return n?[n+" {"].concat(i,["}"]):i}(e):e.toString()}function Ae(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];return b(e)||S(e)?Ne(g(w,[e].concat(n))):0===n.length&&1===e.length&&"string"==typeof e[0]?e:Ne(g(e,n))}var Ce=/invalid hook call/i,Ie=new Set,Pe=function(e,t){if(true){var n="The component "+e+(t?' with the id of "'+t+'"':"")+" has been created dynamically.\nYou may see this warning because you've called styled inside another component.\nTo resolve this only create new StyledComponents outside of any render method and function component.";try{(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(),Ie.has(n)||(console.warn(n),Ie.add(n))}catch(e){Ce.test(e.message)&&Ie.delete(n)}}},Oe=function(e,t,n){return void 0===n&&(n=E),e.theme!==n.theme&&e.theme||t||n.theme},Re=/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,De=/(^-|-$)/g;function je(e){return e.replace(Re,"-").replace(De,"")}var Te=function(e){return ee(ne(e)>>>0)};function ke(e){return"string"==typeof e&&( false||e.charAt(0)===e.charAt(0).toLowerCase())}var xe=function(e){return"function"==typeof e||"object"==typeof e&&null!==e&&!Array.isArray(e)},Ve=function(e){return"__proto__"!==e&&"constructor"!==e&&"prototype"!==e};function Be(e,t,n){var r=e[n];xe(t)&&xe(r)?Me(r,t):e[n]=t}function Me(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];for(var o=0,i=n;o<i.length;o++){var s=i[o];if(xe(s))for(var a in s)Ve(a)&&Be(e,s[a],a)}return e}var ze=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),Le=ze.Consumer;function Ge(e){var t=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),n=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){return function(e,t){if(!e)return j(14);if(b(e)){var n=e(t);return false||null!==n&&!Array.isArray(n)&&"object"==typeof n?n:j(7)}return Array.isArray(e)||"object"!=typeof e?j(8):t?v({},t,{},e):e}(e.theme,t)}),[e.theme,t]);return e.children?react__WEBPACK_IMPORTED_MODULE_1__.createElement(ze.Provider,{value:n},e.children):null}var Fe={};function Ye(e,t,n){var o=N(e),s=!ke(e),a=t.attrs,c=void 0===a?w:a,d=t.componentId,h=void 0===d?function(e,t){var n="string"!=typeof e?"sc":je(e);Fe[n]=(Fe[n]||0)+1;var r=n+"-"+Te("5.3.0"+n+Fe[n]);return t?t+"-"+r:r}(t.displayName,t.parentComponentId):d,p=t.displayName,f=void 0===p?function(e){return ke(e)?"styled."+e:"Styled("+_(e)+")"}(e):p,g=t.displayName&&t.componentId?je(t.displayName)+"-"+t.componentId:t.componentId||h,S=o&&e.attrs?Array.prototype.concat(e.attrs,c).filter(Boolean):c,A=t.shouldForwardProp;o&&e.shouldForwardProp&&(A=t.shouldForwardProp?function(n,r,o){return e.shouldForwardProp(n,r,o)&&t.shouldForwardProp(n,r,o)}:e.shouldForwardProp);var C,I=new ie(n,g,o?e.componentStyle:void 0),P=I.isStatic&&0===c.length,O=function(e,t){return function(e,t,n,r){var o=e.attrs,s=e.componentStyle,a=e.defaultProps,c=e.foldedComponentIds,d=e.shouldForwardProp,h=e.styledComponentId,p=e.target; true&&(0,react__WEBPACK_IMPORTED_MODULE_1__.useDebugValue)(h);var f=function(e,t,n){void 0===e&&(e=E);var r=v({},t,{theme:e}),o={};return n.forEach((function(e){var t,n,i,s=e;for(t in b(s)&&(s=s(r)),s)r[t]=o[t]="className"===t?(n=o[t],i=s[t],n&&i?n+" "+i:n||i):s[t]})),[r,o]}(Oe(t,(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),a)||E,t,o),y=f[0],g=f[1],S=function(e,t,n,r){var o=fe(),i=me(),s=t?e.generateAndInjectStyles(E,o,i):e.generateAndInjectStyles(n,o,i);return true&&(0,react__WEBPACK_IMPORTED_MODULE_1__.useDebugValue)(s), true&&!t&&r&&r(s),s}(s,r,y, true?e.warnTooManyClasses:0),w=n,_=g.$as||t.$as||g.as||t.as||p,N=ke(_),A=g!==t?v({},t,{},g):t,C={};for(var I in A)"$"!==I[0]&&"as"!==I&&("forwardedAs"===I?C.as=A[I]:(d?d(I,_emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_5__.default,_):!N||(0,_emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_5__.default)(I))&&(C[I]=A[I]));return t.style&&g.style!==t.style&&(C.style=v({},t.style,{},g.style)),C.className=Array.prototype.concat(c,h,S!==h?S:null,t.className,g.className).filter(Boolean).join(" "),C.ref=w,(0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(_,C)}(C,e,t,P)};return O.displayName=f,(C=react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(O)).attrs=S,C.componentStyle=I,C.displayName=f,C.shouldForwardProp=A,C.foldedComponentIds=o?Array.prototype.concat(e.foldedComponentIds,e.styledComponentId):w,C.styledComponentId=g,C.target=o?e.target:e,C.withComponent=function(e){var r=t.componentId,o=function(e,t){if(null==e)return{};var n,r,o={},i=Object.keys(e);for(r=0;r<i.length;r++)n=i[r],t.indexOf(n)>=0||(o[n]=e[n]);return o}(t,["componentId"]),i=r&&r+"-"+(ke(e)?e:je(_(e)));return Ye(e,v({},o,{attrs:S,componentId:i}),n)},Object.defineProperty(C,"defaultProps",{get:function(){return this._foldedDefaultProps},set:function(t){this._foldedDefaultProps=o?Me({},e.defaultProps,t):t}}), true&&(Pe(f,g),C.warnTooManyClasses=function(e,t){var n={},r=!1;return function(o){if(!r&&(n[o]=!0,Object.keys(n).length>=200)){var i=t?' with the id of "'+t+'"':"";console.warn("Over 200 classes were generated for component "+e+i+".\nConsider using the attrs method, together with a style object for frequently changed styles.\nExample:\n  const Component = styled.div.attrs(props => ({\n    style: {\n      background: props.background,\n    },\n  }))`width: 100%;`\n\n  <Component />"),r=!0,n={}}}}(f,g)),C.toString=function(){return"."+C.styledComponentId},s&&hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6___default()(C,e,{attrs:!0,componentStyle:!0,displayName:!0,foldedComponentIds:!0,shouldForwardProp:!0,styledComponentId:!0,target:!0,withComponent:!0}),C}var qe=function(e){return function e(t,r,o){if(void 0===o&&(o=E),!(0,react_is__WEBPACK_IMPORTED_MODULE_0__.isValidElementType)(r))return j(1,String(r));var i=function(){return t(r,o,Ae.apply(void 0,arguments))};return i.withConfig=function(n){return e(t,r,v({},o,{},n))},i.attrs=function(n){return e(t,r,v({},o,{attrs:Array.prototype.concat(o.attrs,n).filter(Boolean)}))},i}(Ye,e)};["a","abbr","address","area","article","aside","audio","b","base","bdi","bdo","big","blockquote","body","br","button","canvas","caption","cite","code","col","colgroup","data","datalist","dd","del","details","dfn","dialog","div","dl","dt","em","embed","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","iframe","img","input","ins","kbd","keygen","label","legend","li","link","main","map","mark","marquee","menu","menuitem","meta","meter","nav","noscript","object","ol","optgroup","option","output","p","param","picture","pre","progress","q","rp","rt","ruby","s","samp","script","section","select","small","source","span","strong","style","sub","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","title","tr","track","u","ul","var","video","wbr","circle","clipPath","defs","ellipse","foreignObject","g","image","line","linearGradient","marker","mask","path","pattern","polygon","polyline","radialGradient","rect","stop","svg","text","textPath","tspan"].forEach((function(e){qe[e]=qe(e)}));var He=function(){function e(e,t){this.rules=e,this.componentId=t,this.isStatic=re(e),Z.registerId(this.componentId+1)}var t=e.prototype;return t.createStyles=function(e,t,n,r){var o=r(Ne(this.rules,t,n,r).join(""),""),i=this.componentId+e;n.insertRules(i,i,o)},t.removeStyles=function(e,t){t.clearRules(this.componentId+e)},t.renderStyles=function(e,t,n,r){e>2&&Z.registerId(this.componentId+e),this.removeStyles(e,n),this.createStyles(e,t,n,r)},e}();function $e(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var s=Ae.apply(void 0,[e].concat(n)),a="sc-global-"+Te(JSON.stringify(s)),u=new He(s,a);function l(e){var t=fe(),n=me(),o=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),l=(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(t.allocateGSInstance(a)).current;return true&&react__WEBPACK_IMPORTED_MODULE_1__.Children.count(e.children)&&console.warn("The global style component "+a+" was given child JSX. createGlobalStyle does not render children."), true&&s.some((function(e){return"string"==typeof e&&-1!==e.indexOf("@import")}))&&console.warn("Please do not use @import CSS syntax in createGlobalStyle at this time, as the CSSOM APIs we use in production do not handle it well. Instead, we recommend using a library such as react-helmet to inject a typical <link> meta tag to the stylesheet, or simply embedding it manually in your index.html <head> section for a simpler app."),(0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)((function(){return h(l,e,t,o,n),function(){return u.removeStyles(l,t)}}),[l,e,t,o,n]),null}function h(e,t,n,r,o){if(u.isStatic)u.renderStyles(e,O,n,o);else{var i=v({},t,{theme:Oe(t,r,l.defaultProps)});u.renderStyles(e,i,n,o)}}return true&&Pe(a),react__WEBPACK_IMPORTED_MODULE_1__.memo(l)}function We(e){ true&&"undefined"!=typeof navigator&&"ReactNative"===navigator.product&&console.warn("`keyframes` cannot be used on ReactNative, only on the web. To do animation in ReactNative please use Animated.");for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];var o=Ae.apply(void 0,[e].concat(n)).join(""),i=Te(o);return new ve(i,o)}var Ue=function(){function e(){var e=this;this._emitSheetCSS=function(){var t=e.instance.toString(),n=q();return"<style "+[n&&'nonce="'+n+'"',A+'="true"','data-styled-version="5.3.0"'].filter(Boolean).join(" ")+">"+t+"</style>"},this.getStyleTags=function(){return e.sealed?j(2):e._emitSheetCSS()},this.getStyleElement=function(){var t;if(e.sealed)return j(2);var n=((t={})[A]="",t["data-styled-version"]="5.3.0",t.dangerouslySetInnerHTML={__html:e.instance.toString()},t),o=q();return o&&(n.nonce=o),[react__WEBPACK_IMPORTED_MODULE_1__.createElement("style",v({},n,{key:"sc-0-0"}))]},this.seal=function(){e.sealed=!0},this.instance=new Z({isServer:!0}),this.sealed=!1}var t=e.prototype;return t.collectStyles=function(e){return this.sealed?j(2):react__WEBPACK_IMPORTED_MODULE_1__.createElement(ye,{sheet:this.instance},e)},t.interleaveWithNodeStream=function(e){return j(3)},e}(),Je=function(e){var t=react__WEBPACK_IMPORTED_MODULE_1__.forwardRef((function(t,n){var o=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),s=e.defaultProps,a=Oe(t,o,s);return true&&void 0===a&&console.warn('[withTheme] You are not using a ThemeProvider nor passing a theme prop or a theme in defaultProps in component class "'+_(e)+'"'),react__WEBPACK_IMPORTED_MODULE_1__.createElement(e,v({},t,{theme:a,ref:n}))}));return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6___default()(t,e),t.displayName="WithTheme("+_(e)+")",t},Xe=function(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze)},Ze={StyleSheet:Z,masterSheet:he}; true&&"undefined"!=typeof navigator&&"ReactNative"===navigator.product&&console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), true&&(window["__styled-components-init__"]=window["__styled-components-init__"]||0,1===window["__styled-components-init__"]&&console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."),window["__styled-components-init__"]+=1);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (qe);
+function v(){return(v=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var g=function(e,t){for(var n=[e[0]],r=0,o=t.length;r<o;r+=1)n.push(t[r],e[r+1]);return n},S=function(t){return null!==t&&"object"==typeof t&&"[object Object]"===(t.toString?t.toString():Object.prototype.toString.call(t))&&!(0,react_is__WEBPACK_IMPORTED_MODULE_0__.typeOf)(t)},w=Object.freeze([]),E=Object.freeze({});function b(e){return"function"==typeof e}function _(e){return true&&"string"==typeof e&&e||e.displayName||e.name||"Component"}function N(e){return e&&"string"==typeof e.styledComponentId}var A="undefined"!=typeof process&&(({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).REACT_APP_SC_ATTR||({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).SC_ATTR)||"data-styled",C="5.3.0",I="undefined"!=typeof window&&"HTMLElement"in window,P=Boolean("boolean"==typeof SC_DISABLE_SPEEDY?SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).REACT_APP_SC_DISABLE_SPEEDY&&""!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).REACT_APP_SC_DISABLE_SPEEDY?"false"!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).REACT_APP_SC_DISABLE_SPEEDY&&({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).REACT_APP_SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).SC_DISABLE_SPEEDY&&""!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).SC_DISABLE_SPEEDY?"false"!==({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).SC_DISABLE_SPEEDY&&({"NODE_ENV":"development","API_SERVER_URL":"http://localhost:5000/api/v1","BUILD_TIMESTAMP":1627238959644}).SC_DISABLE_SPEEDY:"production"!=="development"),O={},R= true?{1:"Cannot create styled-component for component: %s.\n\n",2:"Can't collect styles once you've consumed a `ServerStyleSheet`'s styles! `ServerStyleSheet` is a one off instance for each server-side render cycle.\n\n- Are you trying to reuse it across renders?\n- Are you accidentally calling collectStyles twice?\n\n",3:"Streaming SSR is only supported in a Node.js environment; Please do not try to call this method in the browser.\n\n",4:"The `StyleSheetManager` expects a valid target or sheet prop!\n\n- Does this error occur on the client and is your target falsy?\n- Does this error occur on the server and is the sheet falsy?\n\n",5:"The clone method cannot be used on the client!\n\n- Are you running in a client-like environment on the server?\n- Are you trying to run SSR on the client?\n\n",6:"Trying to insert a new style tag, but the given Node is unmounted!\n\n- Are you using a custom target that isn't mounted?\n- Does your document not have a valid head element?\n- Have you accidentally removed a style tag manually?\n\n",7:'ThemeProvider: Please return an object from your "theme" prop function, e.g.\n\n```js\ntheme={() => ({})}\n```\n\n',8:'ThemeProvider: Please make your "theme" prop an object.\n\n',9:"Missing document `<head>`\n\n",10:"Cannot find a StyleSheet instance. Usually this happens if there are multiple copies of styled-components loaded at once. Check out this issue for how to troubleshoot and fix the common cases where this situation can happen: https://github.com/styled-components/styled-components/issues/1941#issuecomment-417862021\n\n",11:"_This error was replaced with a dev-time warning, it will be deleted for v4 final._ [createGlobalStyle] received children which will not be rendered. Please use the component without passing children elements.\n\n",12:"It seems you are interpolating a keyframe declaration (%s) into an untagged string. This was supported in styled-components v3, but is not longer supported in v4 as keyframes are now injected on-demand. Please wrap your string in the css\\`\\` helper which ensures the styles are injected correctly. See https://www.styled-components.com/docs/api#css\n\n",13:"%s is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details.\n\n",14:'ThemeProvider: "theme" prop is required.\n\n',15:"A stylis plugin has been supplied that is not named. We need a name for each plugin to be able to prevent styling collisions between different stylis configurations within the same app. Before you pass your plugin to `<StyleSheetManager stylisPlugins={[]}>`, please make sure each plugin is uniquely-named, e.g.\n\n```js\nObject.defineProperty(importedPlugin, 'name', { value: 'some-unique-name' });\n```\n\n",16:"Reached the limit of how many styled components may be created at group %s.\nYou may only create up to 1,073,741,824 components. If you're creating components dynamically,\nas for instance in your render method then you may be running into this limitation.\n\n",17:"CSSStyleSheet could not be found on HTMLStyleElement.\nHas styled-components' style tag been unmounted or altered by another script?\n"}:0;function D(){for(var e=arguments.length<=0?void 0:arguments[0],t=[],n=1,r=arguments.length;n<r;n+=1)t.push(n<0||arguments.length<=n?void 0:arguments[n]);return t.forEach((function(t){e=e.replace(/%[a-z]/,t)})),e}function j(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];throw false?0:new Error(D.apply(void 0,[R[e]].concat(n)).trim())}var T=function(){function e(e){this.groupSizes=new Uint32Array(512),this.length=512,this.tag=e}var t=e.prototype;return t.indexOfGroup=function(e){for(var t=0,n=0;n<e;n++)t+=this.groupSizes[n];return t},t.insertRules=function(e,t){if(e>=this.groupSizes.length){for(var n=this.groupSizes,r=n.length,o=r;e>=o;)(o<<=1)<0&&j(16,""+e);this.groupSizes=new Uint32Array(o),this.groupSizes.set(n),this.length=o;for(var i=r;i<o;i++)this.groupSizes[i]=0}for(var s=this.indexOfGroup(e+1),a=0,c=t.length;a<c;a++)this.tag.insertRule(s,t[a])&&(this.groupSizes[e]++,s++)},t.clearGroup=function(e){if(e<this.length){var t=this.groupSizes[e],n=this.indexOfGroup(e),r=n+t;this.groupSizes[e]=0;for(var o=n;o<r;o++)this.tag.deleteRule(n)}},t.getGroup=function(e){var t="";if(e>=this.length||0===this.groupSizes[e])return t;for(var n=this.groupSizes[e],r=this.indexOfGroup(e),o=r+n,i=r;i<o;i++)t+=this.tag.getRule(i)+"/*!sc*/\n";return t},e}(),k=new Map,x=new Map,V=1,B=function(e){if(k.has(e))return k.get(e);for(;x.has(V);)V++;var t=V++;return true&&((0|t)<0||t>1<<30)&&j(16,""+t),k.set(e,t),x.set(t,e),t},M=function(e){return x.get(e)},z=function(e,t){k.set(e,t),x.set(t,e)},L="style["+A+'][data-styled-version="5.3.0"]',G=new RegExp("^"+A+'\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'),F=function(e,t,n){for(var r,o=n.split(","),i=0,s=o.length;i<s;i++)(r=o[i])&&e.registerName(t,r)},Y=function(e,t){for(var n=t.innerHTML.split("/*!sc*/\n"),r=[],o=0,i=n.length;o<i;o++){var s=n[o].trim();if(s){var a=s.match(G);if(a){var c=0|parseInt(a[1],10),u=a[2];0!==c&&(z(u,c),F(e,u,a[3]),e.getTag().insertRules(c,r)),r.length=0}else r.push(s)}}},q=function(){return"undefined"!=typeof window&&void 0!==window.__webpack_nonce__?window.__webpack_nonce__:null},H=function(e){var t=document.head,n=e||t,r=document.createElement("style"),o=function(e){for(var t=e.childNodes,n=t.length;n>=0;n--){var r=t[n];if(r&&1===r.nodeType&&r.hasAttribute(A))return r}}(n),i=void 0!==o?o.nextSibling:null;r.setAttribute(A,"active"),r.setAttribute("data-styled-version","5.3.0");var s=q();return s&&r.setAttribute("nonce",s),n.insertBefore(r,i),r},$=function(){function e(e){var t=this.element=H(e);t.appendChild(document.createTextNode("")),this.sheet=function(e){if(e.sheet)return e.sheet;for(var t=document.styleSheets,n=0,r=t.length;n<r;n++){var o=t[n];if(o.ownerNode===e)return o}j(17)}(t),this.length=0}var t=e.prototype;return t.insertRule=function(e,t){try{return this.sheet.insertRule(t,e),this.length++,!0}catch(e){return!1}},t.deleteRule=function(e){this.sheet.deleteRule(e),this.length--},t.getRule=function(e){var t=this.sheet.cssRules[e];return void 0!==t&&"string"==typeof t.cssText?t.cssText:""},e}(),W=function(){function e(e){var t=this.element=H(e);this.nodes=t.childNodes,this.length=0}var t=e.prototype;return t.insertRule=function(e,t){if(e<=this.length&&e>=0){var n=document.createTextNode(t),r=this.nodes[e];return this.element.insertBefore(n,r||null),this.length++,!0}return!1},t.deleteRule=function(e){this.element.removeChild(this.nodes[e]),this.length--},t.getRule=function(e){return e<this.length?this.nodes[e].textContent:""},e}(),U=function(){function e(e){this.rules=[],this.length=0}var t=e.prototype;return t.insertRule=function(e,t){return e<=this.length&&(this.rules.splice(e,0,t),this.length++,!0)},t.deleteRule=function(e){this.rules.splice(e,1),this.length--},t.getRule=function(e){return e<this.length?this.rules[e]:""},e}(),J=I,X={isServer:!I,useCSSOMInjection:!P},Z=function(){function e(e,t,n){void 0===e&&(e=E),void 0===t&&(t={}),this.options=v({},X,{},e),this.gs=t,this.names=new Map(n),!this.options.isServer&&I&&J&&(J=!1,function(e){for(var t=document.querySelectorAll(L),n=0,r=t.length;n<r;n++){var o=t[n];o&&"active"!==o.getAttribute(A)&&(Y(e,o),o.parentNode&&o.parentNode.removeChild(o))}}(this))}e.registerId=function(e){return B(e)};var t=e.prototype;return t.reconstructWithOptions=function(t,n){return void 0===n&&(n=!0),new e(v({},this.options,{},t),this.gs,n&&this.names||void 0)},t.allocateGSInstance=function(e){return this.gs[e]=(this.gs[e]||0)+1},t.getTag=function(){return this.tag||(this.tag=(n=(t=this.options).isServer,r=t.useCSSOMInjection,o=t.target,e=n?new U(o):r?new $(o):new W(o),new T(e)));var e,t,n,r,o},t.hasNameForId=function(e,t){return this.names.has(e)&&this.names.get(e).has(t)},t.registerName=function(e,t){if(B(e),this.names.has(e))this.names.get(e).add(t);else{var n=new Set;n.add(t),this.names.set(e,n)}},t.insertRules=function(e,t,n){this.registerName(e,t),this.getTag().insertRules(B(e),n)},t.clearNames=function(e){this.names.has(e)&&this.names.get(e).clear()},t.clearRules=function(e){this.getTag().clearGroup(B(e)),this.clearNames(e)},t.clearTag=function(){this.tag=void 0},t.toString=function(){return function(e){for(var t=e.getTag(),n=t.length,r="",o=0;o<n;o++){var i=M(o);if(void 0!==i){var s=e.names.get(i),a=t.getGroup(o);if(void 0!==s&&0!==a.length){var c=A+".g"+o+'[id="'+i+'"]',u="";void 0!==s&&s.forEach((function(e){e.length>0&&(u+=e+",")})),r+=""+a+c+'{content:"'+u+'"}/*!sc*/\n'}}}return r}(this)},e}(),K=/(a)(d)/gi,Q=function(e){return String.fromCharCode(e+(e>25?39:97))};function ee(e){var t,n="";for(t=Math.abs(e);t>52;t=t/52|0)n=Q(t%52)+n;return(Q(t%52)+n).replace(K,"$1-$2")}var te=function(e,t){for(var n=t.length;n;)e=33*e^t.charCodeAt(--n);return e},ne=function(e){return te(5381,e)};function re(e){for(var t=0;t<e.length;t+=1){var n=e[t];if(b(n)&&!N(n))return!1}return!0}var oe=ne("5.3.0"),ie=function(){function e(e,t,n){this.rules=e,this.staticRulesId="",this.isStatic= false&&0,this.componentId=t,this.baseHash=te(oe,t),this.baseStyle=n,Z.registerId(t)}return e.prototype.generateAndInjectStyles=function(e,t,n){var r=this.componentId,o=[];if(this.baseStyle&&o.push(this.baseStyle.generateAndInjectStyles(e,t,n)),this.isStatic&&!n.hash)if(this.staticRulesId&&t.hasNameForId(r,this.staticRulesId))o.push(this.staticRulesId);else{var i=Ne(this.rules,e,t,n).join(""),s=ee(te(this.baseHash,i.length)>>>0);if(!t.hasNameForId(r,s)){var a=n(i,"."+s,void 0,r);t.insertRules(r,s,a)}o.push(s),this.staticRulesId=s}else{for(var c=this.rules.length,u=te(this.baseHash,n.hash),l="",d=0;d<c;d++){var h=this.rules[d];if("string"==typeof h)l+=h, true&&(u=te(u,h+d));else if(h){var p=Ne(h,e,t,n),f=Array.isArray(p)?p.join(""):p;u=te(u,f+d),l+=f}}if(l){var m=ee(u>>>0);if(!t.hasNameForId(r,m)){var y=n(l,"."+m,void 0,r);t.insertRules(r,m,y)}o.push(m)}}return o.join(" ")},e}(),se=/^\s*\/\/.*$/gm,ae=[":","[",".","#"];function ce(e){var t,n,r,o,i=void 0===e?E:e,s=i.options,a=void 0===s?E:s,c=i.plugins,u=void 0===c?w:c,l=new _emotion_stylis__WEBPACK_IMPORTED_MODULE_3__.default(a),d=[],h=function(e){function t(t){if(t)try{e(t+"}")}catch(e){}}return function(n,r,o,i,s,a,c,u,l,d){switch(n){case 1:if(0===l&&64===r.charCodeAt(0))return e(r+";"),"";break;case 2:if(0===u)return r+"/*|*/";break;case 3:switch(u){case 102:case 112:return e(o[0]+r),"";default:return r+(0===d?"/*|*/":"")}case-2:r.split("/*|*/}").forEach(t)}}}((function(e){d.push(e)})),f=function(e,r,i){return 0===r&&-1!==ae.indexOf(i[n.length])||i.match(o)?e:"."+t};function m(e,i,s,a){void 0===a&&(a="&");var c=e.replace(se,""),u=i&&s?s+" "+i+" { "+c+" }":c;return t=a,n=i,r=new RegExp("\\"+n+"\\b","g"),o=new RegExp("(\\"+n+"\\b){2,}"),l(s||!i?"":i,u)}return l.use([].concat(u,[function(e,t,o){2===e&&o.length&&o[0].lastIndexOf(n)>0&&(o[0]=o[0].replace(r,f))},h,function(e){if(-2===e){var t=d;return d=[],t}}])),m.hash=u.length?u.reduce((function(e,t){return t.name||j(15),te(e,t.name)}),5381).toString():"",m}var ue=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),le=ue.Consumer,de=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),he=(de.Consumer,new Z),pe=ce();function fe(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ue)||he}function me(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(de)||pe}function ye(e){var t=(0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(e.stylisPlugins),n=t[0],i=t[1],c=fe(),u=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){var t=c;return e.sheet?t=e.sheet:e.target&&(t=t.reconstructWithOptions({target:e.target},!1)),e.disableCSSOMInjection&&(t=t.reconstructWithOptions({useCSSOMInjection:!1})),t}),[e.disableCSSOMInjection,e.sheet,e.target]),l=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){return ce({options:{prefix:!e.disableVendorPrefixes},plugins:n})}),[e.disableVendorPrefixes,n]);return (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)((function(){shallowequal__WEBPACK_IMPORTED_MODULE_2___default()(n,e.stylisPlugins)||i(e.stylisPlugins)}),[e.stylisPlugins]),react__WEBPACK_IMPORTED_MODULE_1__.createElement(ue.Provider,{value:u},react__WEBPACK_IMPORTED_MODULE_1__.createElement(de.Provider,{value:l}, true?react__WEBPACK_IMPORTED_MODULE_1__.Children.only(e.children):0))}var ve=function(){function e(e,t){var n=this;this.inject=function(e,t){void 0===t&&(t=pe);var r=n.name+t.hash;e.hasNameForId(n.id,r)||e.insertRules(n.id,r,t(n.rules,r,"@keyframes"))},this.toString=function(){return j(12,String(n.name))},this.name=e,this.id="sc-keyframes-"+e,this.rules=t}return e.prototype.getName=function(e){return void 0===e&&(e=pe),this.name+e.hash},e}(),ge=/([A-Z])/,Se=/([A-Z])/g,we=/^ms-/,Ee=function(e){return"-"+e.toLowerCase()};function be(e){return ge.test(e)?e.replace(Se,Ee).replace(we,"-ms-"):e}var _e=function(e){return null==e||!1===e||""===e};function Ne(e,n,r,o){if(Array.isArray(e)){for(var i,s=[],a=0,c=e.length;a<c;a+=1)""!==(i=Ne(e[a],n,r,o))&&(Array.isArray(i)?s.push.apply(s,i):s.push(i));return s}if(_e(e))return"";if(N(e))return"."+e.styledComponentId;if(b(e)){if("function"!=typeof(l=e)||l.prototype&&l.prototype.isReactComponent||!n)return e;var u=e(n);return true&&(0,react_is__WEBPACK_IMPORTED_MODULE_0__.isElement)(u)&&console.warn(_(e)+" is not a styled component and cannot be referred to via component selector. See https://www.styled-components.com/docs/advanced#referring-to-other-components for more details."),Ne(u,n,r,o)}var l;return e instanceof ve?r?(e.inject(r,o),e.getName(o)):e:S(e)?function e(t,n){var r,o,i=[];for(var s in t)t.hasOwnProperty(s)&&!_e(t[s])&&(S(t[s])?i.push.apply(i,e(t[s],s)):b(t[s])?i.push(be(s)+":",t[s],";"):i.push(be(s)+": "+(r=s,null==(o=t[s])||"boolean"==typeof o||""===o?"":"number"!=typeof o||0===o||r in _emotion_unitless__WEBPACK_IMPORTED_MODULE_4__.default?String(o).trim():o+"px")+";"));return n?[n+" {"].concat(i,["}"]):i}(e):e.toString()}function Ae(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];return b(e)||S(e)?Ne(g(w,[e].concat(n))):0===n.length&&1===e.length&&"string"==typeof e[0]?e:Ne(g(e,n))}var Ce=/invalid hook call/i,Ie=new Set,Pe=function(e,t){if(true){var n="The component "+e+(t?' with the id of "'+t+'"':"")+" has been created dynamically.\nYou may see this warning because you've called styled inside another component.\nTo resolve this only create new StyledComponents outside of any render method and function component.";try{(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(),Ie.has(n)||(console.warn(n),Ie.add(n))}catch(e){Ce.test(e.message)&&Ie.delete(n)}}},Oe=function(e,t,n){return void 0===n&&(n=E),e.theme!==n.theme&&e.theme||t||n.theme},Re=/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,De=/(^-|-$)/g;function je(e){return e.replace(Re,"-").replace(De,"")}var Te=function(e){return ee(ne(e)>>>0)};function ke(e){return"string"==typeof e&&( false||e.charAt(0)===e.charAt(0).toLowerCase())}var xe=function(e){return"function"==typeof e||"object"==typeof e&&null!==e&&!Array.isArray(e)},Ve=function(e){return"__proto__"!==e&&"constructor"!==e&&"prototype"!==e};function Be(e,t,n){var r=e[n];xe(t)&&xe(r)?Me(r,t):e[n]=t}function Me(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];for(var o=0,i=n;o<i.length;o++){var s=i[o];if(xe(s))for(var a in s)Ve(a)&&Be(e,s[a],a)}return e}var ze=react__WEBPACK_IMPORTED_MODULE_1__.createContext(),Le=ze.Consumer;function Ge(e){var t=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),n=(0,react__WEBPACK_IMPORTED_MODULE_1__.useMemo)((function(){return function(e,t){if(!e)return j(14);if(b(e)){var n=e(t);return false||null!==n&&!Array.isArray(n)&&"object"==typeof n?n:j(7)}return Array.isArray(e)||"object"!=typeof e?j(8):t?v({},t,{},e):e}(e.theme,t)}),[e.theme,t]);return e.children?react__WEBPACK_IMPORTED_MODULE_1__.createElement(ze.Provider,{value:n},e.children):null}var Fe={};function Ye(e,t,n){var o=N(e),s=!ke(e),a=t.attrs,c=void 0===a?w:a,d=t.componentId,h=void 0===d?function(e,t){var n="string"!=typeof e?"sc":je(e);Fe[n]=(Fe[n]||0)+1;var r=n+"-"+Te("5.3.0"+n+Fe[n]);return t?t+"-"+r:r}(t.displayName,t.parentComponentId):d,p=t.displayName,f=void 0===p?function(e){return ke(e)?"styled."+e:"Styled("+_(e)+")"}(e):p,g=t.displayName&&t.componentId?je(t.displayName)+"-"+t.componentId:t.componentId||h,S=o&&e.attrs?Array.prototype.concat(e.attrs,c).filter(Boolean):c,A=t.shouldForwardProp;o&&e.shouldForwardProp&&(A=t.shouldForwardProp?function(n,r,o){return e.shouldForwardProp(n,r,o)&&t.shouldForwardProp(n,r,o)}:e.shouldForwardProp);var C,I=new ie(n,g,o?e.componentStyle:void 0),P=I.isStatic&&0===c.length,O=function(e,t){return function(e,t,n,r){var o=e.attrs,s=e.componentStyle,a=e.defaultProps,c=e.foldedComponentIds,d=e.shouldForwardProp,h=e.styledComponentId,p=e.target; true&&(0,react__WEBPACK_IMPORTED_MODULE_1__.useDebugValue)(h);var f=function(e,t,n){void 0===e&&(e=E);var r=v({},t,{theme:e}),o={};return n.forEach((function(e){var t,n,i,s=e;for(t in b(s)&&(s=s(r)),s)r[t]=o[t]="className"===t?(n=o[t],i=s[t],n&&i?n+" "+i:n||i):s[t]})),[r,o]}(Oe(t,(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),a)||E,t,o),y=f[0],g=f[1],S=function(e,t,n,r){var o=fe(),i=me(),s=t?e.generateAndInjectStyles(E,o,i):e.generateAndInjectStyles(n,o,i);return true&&(0,react__WEBPACK_IMPORTED_MODULE_1__.useDebugValue)(s), true&&!t&&r&&r(s),s}(s,r,y, true?e.warnTooManyClasses:0),w=n,_=g.$as||t.$as||g.as||t.as||p,N=ke(_),A=g!==t?v({},t,{},g):t,C={};for(var I in A)"$"!==I[0]&&"as"!==I&&("forwardedAs"===I?C.as=A[I]:(d?d(I,_emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_5__.default,_):!N||(0,_emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_5__.default)(I))&&(C[I]=A[I]));return t.style&&g.style!==t.style&&(C.style=v({},t.style,{},g.style)),C.className=Array.prototype.concat(c,h,S!==h?S:null,t.className,g.className).filter(Boolean).join(" "),C.ref=w,(0,react__WEBPACK_IMPORTED_MODULE_1__.createElement)(_,C)}(C,e,t,P)};return O.displayName=f,(C=react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(O)).attrs=S,C.componentStyle=I,C.displayName=f,C.shouldForwardProp=A,C.foldedComponentIds=o?Array.prototype.concat(e.foldedComponentIds,e.styledComponentId):w,C.styledComponentId=g,C.target=o?e.target:e,C.withComponent=function(e){var r=t.componentId,o=function(e,t){if(null==e)return{};var n,r,o={},i=Object.keys(e);for(r=0;r<i.length;r++)n=i[r],t.indexOf(n)>=0||(o[n]=e[n]);return o}(t,["componentId"]),i=r&&r+"-"+(ke(e)?e:je(_(e)));return Ye(e,v({},o,{attrs:S,componentId:i}),n)},Object.defineProperty(C,"defaultProps",{get:function(){return this._foldedDefaultProps},set:function(t){this._foldedDefaultProps=o?Me({},e.defaultProps,t):t}}), true&&(Pe(f,g),C.warnTooManyClasses=function(e,t){var n={},r=!1;return function(o){if(!r&&(n[o]=!0,Object.keys(n).length>=200)){var i=t?' with the id of "'+t+'"':"";console.warn("Over 200 classes were generated for component "+e+i+".\nConsider using the attrs method, together with a style object for frequently changed styles.\nExample:\n  const Component = styled.div.attrs(props => ({\n    style: {\n      background: props.background,\n    },\n  }))`width: 100%;`\n\n  <Component />"),r=!0,n={}}}}(f,g)),C.toString=function(){return"."+C.styledComponentId},s&&hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6___default()(C,e,{attrs:!0,componentStyle:!0,displayName:!0,foldedComponentIds:!0,shouldForwardProp:!0,styledComponentId:!0,target:!0,withComponent:!0}),C}var qe=function(e){return function e(t,r,o){if(void 0===o&&(o=E),!(0,react_is__WEBPACK_IMPORTED_MODULE_0__.isValidElementType)(r))return j(1,String(r));var i=function(){return t(r,o,Ae.apply(void 0,arguments))};return i.withConfig=function(n){return e(t,r,v({},o,{},n))},i.attrs=function(n){return e(t,r,v({},o,{attrs:Array.prototype.concat(o.attrs,n).filter(Boolean)}))},i}(Ye,e)};["a","abbr","address","area","article","aside","audio","b","base","bdi","bdo","big","blockquote","body","br","button","canvas","caption","cite","code","col","colgroup","data","datalist","dd","del","details","dfn","dialog","div","dl","dt","em","embed","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","iframe","img","input","ins","kbd","keygen","label","legend","li","link","main","map","mark","marquee","menu","menuitem","meta","meter","nav","noscript","object","ol","optgroup","option","output","p","param","picture","pre","progress","q","rp","rt","ruby","s","samp","script","section","select","small","source","span","strong","style","sub","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","title","tr","track","u","ul","var","video","wbr","circle","clipPath","defs","ellipse","foreignObject","g","image","line","linearGradient","marker","mask","path","pattern","polygon","polyline","radialGradient","rect","stop","svg","text","textPath","tspan"].forEach((function(e){qe[e]=qe(e)}));var He=function(){function e(e,t){this.rules=e,this.componentId=t,this.isStatic=re(e),Z.registerId(this.componentId+1)}var t=e.prototype;return t.createStyles=function(e,t,n,r){var o=r(Ne(this.rules,t,n,r).join(""),""),i=this.componentId+e;n.insertRules(i,i,o)},t.removeStyles=function(e,t){t.clearRules(this.componentId+e)},t.renderStyles=function(e,t,n,r){e>2&&Z.registerId(this.componentId+e),this.removeStyles(e,n),this.createStyles(e,t,n,r)},e}();function $e(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),o=1;o<t;o++)n[o-1]=arguments[o];var s=Ae.apply(void 0,[e].concat(n)),a="sc-global-"+Te(JSON.stringify(s)),u=new He(s,a);function l(e){var t=fe(),n=me(),o=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),l=(0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(t.allocateGSInstance(a)).current;return true&&react__WEBPACK_IMPORTED_MODULE_1__.Children.count(e.children)&&console.warn("The global style component "+a+" was given child JSX. createGlobalStyle does not render children."), true&&s.some((function(e){return"string"==typeof e&&-1!==e.indexOf("@import")}))&&console.warn("Please do not use @import CSS syntax in createGlobalStyle at this time, as the CSSOM APIs we use in production do not handle it well. Instead, we recommend using a library such as react-helmet to inject a typical <link> meta tag to the stylesheet, or simply embedding it manually in your index.html <head> section for a simpler app."),(0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)((function(){return h(l,e,t,o,n),function(){return u.removeStyles(l,t)}}),[l,e,t,o,n]),null}function h(e,t,n,r,o){if(u.isStatic)u.renderStyles(e,O,n,o);else{var i=v({},t,{theme:Oe(t,r,l.defaultProps)});u.renderStyles(e,i,n,o)}}return true&&Pe(a),react__WEBPACK_IMPORTED_MODULE_1__.memo(l)}function We(e){ true&&"undefined"!=typeof navigator&&"ReactNative"===navigator.product&&console.warn("`keyframes` cannot be used on ReactNative, only on the web. To do animation in ReactNative please use Animated.");for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];var o=Ae.apply(void 0,[e].concat(n)).join(""),i=Te(o);return new ve(i,o)}var Ue=function(){function e(){var e=this;this._emitSheetCSS=function(){var t=e.instance.toString(),n=q();return"<style "+[n&&'nonce="'+n+'"',A+'="true"','data-styled-version="5.3.0"'].filter(Boolean).join(" ")+">"+t+"</style>"},this.getStyleTags=function(){return e.sealed?j(2):e._emitSheetCSS()},this.getStyleElement=function(){var t;if(e.sealed)return j(2);var n=((t={})[A]="",t["data-styled-version"]="5.3.0",t.dangerouslySetInnerHTML={__html:e.instance.toString()},t),o=q();return o&&(n.nonce=o),[react__WEBPACK_IMPORTED_MODULE_1__.createElement("style",v({},n,{key:"sc-0-0"}))]},this.seal=function(){e.sealed=!0},this.instance=new Z({isServer:!0}),this.sealed=!1}var t=e.prototype;return t.collectStyles=function(e){return this.sealed?j(2):react__WEBPACK_IMPORTED_MODULE_1__.createElement(ye,{sheet:this.instance},e)},t.interleaveWithNodeStream=function(e){return j(3)},e}(),Je=function(e){var t=react__WEBPACK_IMPORTED_MODULE_1__.forwardRef((function(t,n){var o=(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze),s=e.defaultProps,a=Oe(t,o,s);return true&&void 0===a&&console.warn('[withTheme] You are not using a ThemeProvider nor passing a theme prop or a theme in defaultProps in component class "'+_(e)+'"'),react__WEBPACK_IMPORTED_MODULE_1__.createElement(e,v({},t,{theme:a,ref:n}))}));return hoist_non_react_statics__WEBPACK_IMPORTED_MODULE_6___default()(t,e),t.displayName="WithTheme("+_(e)+")",t},Xe=function(){return (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(ze)},Ze={StyleSheet:Z,masterSheet:he}; true&&"undefined"!=typeof navigator&&"ReactNative"===navigator.product&&console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), true&&(window["__styled-components-init__"]=window["__styled-components-init__"]||0,1===window["__styled-components-init__"]&&console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."),window["__styled-components-init__"]+=1);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (qe);
 //# sourceMappingURL=styled-components.browser.esm.js.map
 
 
@@ -47818,7 +48327,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\index.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 
 

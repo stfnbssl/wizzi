@@ -245,7 +245,7 @@
         if ctx.__is_react_class && model.wzParent.wzElement == 'reactComponent'
             var implicitReturn = u.isImplicitReturn(model)
             var firstChildIsTemplate = u.firstChildIs(model, ['template'])
-            _ ctx.w(async_str + model.wzName + ' = (')
+            _ ctx.w(model.wzName + ' = ' + async_str + ' = (')
 			_ u.genTSParams
 				@ model
 				@ ctx
@@ -274,7 +274,10 @@
                             @ firstChildIsTemplate
                             @ callback
 		elif u.onlyChildIs(model, 'callOnValue') || u.onlyChildIsHtmlElement(model)
-            _ ctx.write(async_str + '(')
+            if model.wzName.length > 0
+                _ ctx.write(model.wzName + async_str + ' = (')
+            else
+                _ ctx.write(async_str + '(')
 			_ u.genTSParams
 				@ model
 				@ ctx
@@ -304,7 +307,10 @@
                             @ false
                             @ callback
 		elif u.onlyChildIs(model, 'arrowfunction')
-            _ ctx.write(async_str + '(')
+            if model.wzName.length > 0
+                _ ctx.write(model.wzName + async_str + ' = (')
+            else
+                _ ctx.write(async_str + '(')
 			_ u.genTSParams
 				@ model
 				@ ctx
@@ -338,7 +344,10 @@
             var firstChildIsTemplate = u.firstChildIs(model, ['template'])
             # log 'function.isSingleParam', isSingleParam
             # log 'function.firstChildIs template', firstChildIsTemplate
-            _ ctx.write(async_str + (isSingleParam ? '' : '('))
+            if model.wzName.length > 0
+                _ ctx.write(model.wzName + ' = ' + async_str + (isSingleParam ? '' : '('))
+            else
+                _ ctx.write(async_str + (isSingleParam ? '' : '('))
 			_ u.genTSParams
 				@ model
 				@ ctx
@@ -367,7 +376,10 @@
                             @ firstChildIsTemplate
                             @ callback
 		else 
-            _ ctx.write(async_str + '(')
+            if model.wzName.length > 0
+                _ ctx.write(model.wzName + ' = ' + async_str + '(')
+            else
+                _ ctx.write(async_str + '(')
 			_ u.genTSParams
 				@ model
 				@ ctx

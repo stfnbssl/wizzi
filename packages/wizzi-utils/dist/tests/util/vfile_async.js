@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\util\vfile_async.js.ittf
 */
 'use strict';
@@ -26,7 +26,7 @@ describe("vfile", function() {
             path.join(__dirname, 'ittf')
         ], {
             force: true
-        })
+         })
     });
     it("should async create the first file in the ittf folder", function(done) {
         file.write(path.join(__dirname, 'ittf', 'gc_one.ittf'), 'first one\nsecond one', function(err, result) {
@@ -195,12 +195,12 @@ describe("vfile", function() {
             friends: [
                 {
                     name: 'arth'
-                }, 
+                 }, 
                 {
                     name: 'marilu'
-                }
+                 }
             ]
-        };
+         };
         file.writeJSON(path.join(__dirname, 'ittf', 'abrac.json'), obj, function(err, result) {
             if (err) {
                 console.log('err', err);
@@ -224,7 +224,7 @@ describe("vfile", function() {
             deep: false, 
             extension: null, 
             documentContent: false
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -240,7 +240,7 @@ describe("vfile", function() {
             deep: false, 
             extension: null, 
             documentContent: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -265,7 +265,7 @@ describe("vfile", function() {
             deep: false, 
             tFoldersOnly: false, 
             documentNames: false
-        }, function(err, folders) {
+         }, function(err, folders) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -283,7 +283,7 @@ describe("vfile", function() {
             deep: true, 
             tFoldersOnly: false, 
             documentNames: false
-        }, function(err, folders) {
+         }, function(err, folders) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -309,7 +309,7 @@ describe("vfile", function() {
             deep: true, 
             tFoldersOnly: false, 
             documentNames: true
-        }, function(err, folders) {
+         }, function(err, folders) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -343,7 +343,7 @@ describe("vfile", function() {
             expect(result.length).to.be(3);
             file.getGlobbedFilesEx(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), {
                 removeRoot: path.join(__dirname, 'ittf')
-            }, function(err, result) {
+             }, function(err, result) {
                 if (err) {
                     console.log('err', err);
                     throw new Error(err.message);

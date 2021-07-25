@@ -9,6 +9,9 @@ module
             ],
             stateProps: [
                 { name: "pe_values", type: "any" },
+                { name: "pe_metas", type: "any" },
+                { name: "pe_metaProduction", type: "string" },
+                { name: "pe_properties", type: "any" },
             ]
         }
 
@@ -17,6 +20,9 @@ module
             import lodashSet from 'lodash/set'
             common_imports( top )
             import FormObject from './widgets/FormObject'
+            import
+                @ getData
+                from '../../fetch'
 
         $append styles
             :interface RootStyleProps
@@ -27,6 +33,7 @@ module
             const values
                 :any
                 {
+            $*
             const properties = this.props.data.schema.properties
             foreach prop in properties
                 if prop.type == 'string' || prop.type == 'number'
@@ -35,9 +42,67 @@ module
                     set values[prop.name] = []
                 elif prop.type == 'object'
                     set values[prop.name] = {}
+            *$
             set this.state
                 {
                     @ pe_values values
+                    @ pe_metas []
+                    @ pe_meta null
+                    @ pe_properties []
+                    @ pe_metaProduction ''
+
+        m componentDidMount
+            async
+            const metas
+                await
+                    _ getData
+                        @ 'production/meta/list'
+            log 'componentDidMount.metas', metas
+            const options 
+                [
+                    {
+                        @ name ''
+                        @ value ''
+            foreach item in metas
+                _ options.push
+                    {
+                        @ name item.owner + '/' + item.name
+                        @ value item.owner + '|' + item.name
+            _ this.setState
+                {
+                    @ pe_metas options
+
+        async=> handleMetaChange
+            param value
+            const parts = value.split('|')
+            if parts.length == 2
+                const result
+                    await
+                        _ getData
+                            @ 'production/meta/props/' + parts[0] + '/' + parts[1]
+                log 'handleMetaChange.result', result, result.meta.properties
+                const properties = result.meta.properties
+                const values
+                    :any
+                    {
+                foreach prop in properties
+                    if prop.type == 'string' || prop.type == 'number'
+                        set values[prop.name] = prop.defaultValue || ''
+                    elif prop.type == 'array'
+                        set values[prop.name] = []
+                    elif prop.type == 'object'
+                        set values[prop.name] = {}
+                _ this.setState
+                    {
+                        @ pe_metaProduction value
+                        @ pe_properties result.meta.properties
+                        @ pe_values values
+            else
+                _ this.setState
+                    {
+                        @ pe_metaProduction value
+                        @ pe_properties []
+                        @ pe_values {}
 
         => handleValuesChange
             param valuePath
@@ -56,40 +121,53 @@ module
 
         m render
             log 'PropertyEditor.render', 'state', this.state
-            const properties = this.props.data.schema.properties
+            # const properties = this.props.data.schema.properties
+            const properties = this.state.pe_properties
             return
                 < FormContainer
                     < FormTitle
                         @ title 'Property editor'
-                    {
-                        _ properties.map
+                    < FormSelect
+                        @ label {'Meta production'}
+                        @ name 'pe_meta_production'
+                        @ id 'pe_meta_production'
+                        @ value {this.state.pe_metaProduction}
+                        @ options {this.state.pe_metas}
+                        @ onChange
                             =>
-                                param p
-                                    :any
-                                param ndx
-                                if p.type == 'string' || p.type == 'number'
-                                    return
-                                        < FormGroup
-                                            @ key {ndx}
-                                            @ label {p.label || p.name}
-                                            @ name {p.name}
-                                            @ id {p.name}
-                                            @ value {this.state.pe_values[p.name]}
-                                            @ onChange
-                                                =>
-                                                    param ev
-                                                    _ this.handleValuesChange
-                                                        @ p.name
-                                                        @ ev.target.value
-                                if p.type == 'object'
-                                    return
-                                        < FormObject
-                                            @ key {ndx}
-                                            @ label {p.label || p.name}
-                                            @ name {p.name}
-                                            @ id {p.name}
-                                            @ path {p.name}
-                                            @ values {this.state.pe_values[p.name] || {}}
-                                            @ properties {p.properties}
-                                            @ onChange {this.handleValuesChange}
-
+                                param ev
+                                _ this.handleMetaChange
+                                    @ ev.target.value
+                    {
+                        &&
+                            + properties
+                            _ properties.map
+                                =>
+                                    param p
+                                        :any
+                                    param ndx
+                                    if p.type == 'string' || p.type == 'number'
+                                        return
+                                            < FormGroup
+                                                @ key {ndx}
+                                                @ label {p.label || p.name}
+                                                @ name {p.name}
+                                                @ id {p.name}
+                                                @ value {this.state.pe_values[p.name]}
+                                                @ onChange
+                                                    =>
+                                                        param ev
+                                                        _ this.handleValuesChange
+                                                            @ p.name
+                                                            @ ev.target.value
+                                    if p.type == 'object'
+                                        return
+                                            < FormObject
+                                                @ key {ndx}
+                                                @ label {p.label || p.name}
+                                                @ name {p.name}
+                                                @ id {p.name}
+                                                @ path {p.name}
+                                                @ values {this.state.pe_values[p.name] || {}}
+                                                @ properties {p.properties}
+                                                @ onChange {this.handleValuesChange}

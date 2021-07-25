@@ -18,8 +18,6 @@ $group
                 from 'react-router-dom'
     $if wzCtx.useNextjs
         import withRoot from '../lib/withRoot'
-    $if !(wzCtx.useNextjs) && (md.withWidth || md.withStyles || md.withRouter || md.connect || md.pure)
-        import compose from 'recompose/compose'
     $if md.withContext
         import { ${md.withContext.name} } from '${md.withContext.path}'
     $if md.connect
@@ -51,6 +49,20 @@ $group
             @ RichUtils
             from 'draft-js'
     $hook imports
+    $if !(wzCtx.useNextjs) && (md.withWidth || md.withStyles || md.withRouter || md.connect || md.pure)
+        const compose
+            =>
+                param ...funcs
+                _ funcs.reduce
+                    =>
+                        param a
+                        param b
+                        =>
+                            param ...args
+                            _ a(b(...args))
+                    =>
+                        param arg
+                        + arg
     react ${md.name}
         ctor
             $hook ctor

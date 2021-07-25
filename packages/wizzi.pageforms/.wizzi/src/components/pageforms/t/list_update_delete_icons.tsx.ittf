@@ -1,0 +1,17 @@
+$group
+    $params prod
+
+    div
+        @ className flex-row
+        div
+            @ className flex-column m-s
+            a_icon( Update, {'/${prod}/update/' + item.owner + '/' + item.name}, warning
+                < AddDocumentIcon
+                    @ height 16
+                    @ width 16
+        div
+            @ className flex-column m-s
+            a_icon( Delete, {'/${prod}/delete/' + item.owner + '/' + item.name}, error
+                < AddDocumentIcon
+                    @ height 16
+                    @ width 16

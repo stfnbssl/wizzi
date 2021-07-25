@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\json\index.js.ittf
 */
 'use strict';
@@ -22,7 +22,8 @@ md.createDocumentManager = function(fsJsonDataOrFsJson) {
         jsonFsData.documents = jsonFsData.documents || [];
         return new md.DocumentManager(new md.FsJson(jsonFsData));
     }
-};
+}
+;
 md.createFsJson = function(documents, callback) {
     md.createJsonFsData(documents, function(err, jsonFsData) {
         if (err) {
@@ -31,28 +32,36 @@ md.createFsJson = function(documents, callback) {
         var fsJson = new md.FsJson(jsonFsData);
         return callback(null, fsJson);
     })
-};
+}
+;
 md.createFsJsonByJsonFsData = function(jsonFsData, callback) {
     var fsJson = new md.FsJson(jsonFsData);
     return callback(null, fsJson);
-};
+}
+;
 md.createJsonFsData = function(documents, callback) {
     const doc = this.createDocumentManager();
-    async.map(documents, (document, callback) =>
-        doc.writeFile(document.path, document.content, callback), function(err, notUsed) {
+    async.map(documents, (document, callback) => 
+    
+        doc.writeFile(document.path, document.content, callback)
+    , function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         doc.toJson(callback)
     })
-};
+}
+;
 md.addToJsonFsData = function(jsonFsData, documents, callback) {
     const doc = this.createDocumentManager(jsonFsData);
-    async.map(documents, (document, callback) =>
-        doc.writeFile(document.path, document.content, callback), function(err, notUsed) {
+    async.map(documents, (document, callback) => 
+    
+        doc.writeFile(document.path, document.content, callback)
+    , function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         doc.toJson(callback)
     })
-};
+}
+;

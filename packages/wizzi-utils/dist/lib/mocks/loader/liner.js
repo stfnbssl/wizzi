@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\mocks\loader\liner.js.ittf
 */
 'use strict';
@@ -15,14 +15,14 @@ var COMMENT = {
     MULTI_LINE: 2, 
     MULTI_LINE_SEEN_ASTER: 3, 
     SINGLE_LINE: 21
-};
+ };
 // https://hacks.mozilla.org/2015/05/es6-in-depth-template-strings-2/
 var MACRO = {
     NONE: 0, 
     INSIDE_TEMPLATE: 1, 
     INSIDE_TEMPLATE_SEEN_ESCAPE: 2, 
     INSIDE_TEMPLATE_SEEN_DOLLAR: 10
-};
+ };
 var CP = {
     TAB: 9, 
     LF: 10, 
@@ -38,8 +38,9 @@ var CP = {
     DOUBLE_QUOTE: 34, 
     BACKTICK: 96, 
     MACRO_REPLACE: 198
-};
+ };
 module.exports = function(textContent, ittfDocumentData) {
+    // TODO ensure textContent is red as utf-8 and avoid this
     var sourceKey = ittfDocumentData.sourceKey,
         lines = [],
         leadingWhiteSpaces = 0,
@@ -50,7 +51,6 @@ module.exports = function(textContent, ittfDocumentData) {
         commentState = COMMENT.NONE,
         macroState = MACRO.NONE,
         quote = null,
-        // TODO ensure textContent is red as utf-8 and avoid this
         chunk = textContent.toString('utf-8'),
         ch,
         cp,
@@ -75,8 +75,9 @@ module.exports = function(textContent, ittfDocumentData) {
             i += 1;
         }
         colpos++;
+        
+        // log '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
         if (cp == CP.SLASH) {
-            // log '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
         }
         if (quote != null) {
             if (quote == cp) {
@@ -86,12 +87,13 @@ module.exports = function(textContent, ittfDocumentData) {
         }
         else {
             if (commentState == COMMENT.MULTI_LINE) {
+                
+                // could be start of end of comment
                 if (cp == CP.ASTER) {
-                    // could be start of end of comment
                     commentState = COMMENT.MULTI_LINE_SEEN_ASTER;
                 }
+                // skip comment char
                 else {
-                    // skip comment char
                     if (cp == CP.LF) {
                         linepos++;
                         colpos = 0;
@@ -99,21 +101,24 @@ module.exports = function(textContent, ittfDocumentData) {
                 }
             }
             else if (commentState == COMMENT.SINGLE_LINE) {
+                
+                // end of line comment
+                
+                // delegate end of comment to processChar
                 if (cp == CP.LF) {
-                    // end of line comment
-                    // delegate end of comment to processChar
                     processMacro(cp);
                 }
             }
             else if (commentState == COMMENT.MULTI_LINE_SEEN_ASTER) {
+                
+                // ok, really is end of comment
                 if (cp == CP.DOLLAR) {
-                    // ok, really is end of comment
                     commentState = COMMENT.NONE;
                 }
+                // no, multi line comments continue
+                // check if it is eol
                 else {
-                    // no, multi line comments continue
                     commentState = COMMENT.MULTI_LINE;
-                    // check if it is eol
                     if (cp == CP.LF) {
                         linepos++;
                         colpos = 0;
@@ -121,30 +126,36 @@ module.exports = function(textContent, ittfDocumentData) {
                 }
             }
             else if (commentState == COMMENT.NONE_SEEN_DOLLAR) {
+                
+                // ok, is start of multi line comment
                 if (cp == CP.ASTER) {
-                    // ok, is start of multi line comment
                     commentState = COMMENT.MULTI_LINE;
                 }
+                
+                // ok, is a single line comment
                 else if (cp == CP.DOLLAR) {
-                    // ok, is a single line comment
                     commentState = COMMENT.SINGLE_LINE;
                 }
+                // no, it was not a comment, reset
                 else {
-                    // no, it was not a comment, reset
                     commentState = COMMENT.NONE;
                     processMacro(CP.DOLLAR);
                     processMacro(cp);
                 }
             }
+            
+            // start of literal
+            
+            // a literal suspend comments strip
+            
+            // comment delimiters inside quotes are normal characters.
             else if (commentState == COMMENT.NONE && ( cp == CP.SINGLE_QUOTE || cp == CP.DOUBLE_QUOTE )) {
-                // start of literal
-                // a literal suspend comments strip
-                // comment delimiters inside quotes are normal characters.
                 quote = cp;
                 processMacro(cp);
             }
+            
+            // could be start of comment
             else if (commentState == COMMENT.NONE && cp == CP.DOLLAR) {
-                // could be start of comment
                 commentState = COMMENT.NONE_SEEN_DOLLAR;
             }
             else if (cp == CP.SLASH && i+3 < l && chunk[i+1] == '$' && chunk[i+2] == '\\' && chunk[i+3] == '{') {
@@ -157,67 +168,78 @@ module.exports = function(textContent, ittfDocumentData) {
             }
         }
     }
+    
+    // log 'last push line', line
     if (line) {
         if (typeof (line.value) !== 'undefined') {
             line.value = line.value.trim();
         }
         line.hasMacro = lineHasMacro;
-        // log 'last push line', line
         lines.push(line);
         lineHasMacro = false;
     }
     return lines;
     function processMacro(cp) {
+        
+        // remove escape state
+        
+        // log 'macroState', macroState, String.fromCodePoint(cp)
         if (macroState == MACRO.INSIDE_TEMPLATE_SEEN_ESCAPE) {
-            // remove escape state
             macroState = MACRO.INSIDE_TEMPLATE;
             processChar(cp);
-            // log 'macroState', macroState, String.fromCodePoint(cp)
         }
+        
+        // log 'macroState', macroState, String.fromCodePoint(cp)
         else if (macroState == MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR) {
+            
+            // ok - really it was a start of macro
+            
+            // Alt+146 = Æ
             if (cp == CP.OPEN_GRAPH) {
-                // ok - really it was a start of macro
-                // Alt+146 = Æ
                 processChar(CP.MACRO_REPLACE);
                 processChar(CP.OPEN_GRAPH);
                 lineHasMacro = true;
             }
+            // no - it was not a start of macro
             else {
-                // no - it was not a start of macro
                 processChar(CP.DOLLAR);
                 processChar(cp);
             }
             macroState = MACRO.INSIDE_TEMPLATE;
-            // log 'macroState', macroState, String.fromCodePoint(cp)
         }
         else {
             if (cp == CP.BACKTICK) {
+                
+                // log 'macroState', macroState, String.fromCodePoint(cp)
                 if (macroState > MACRO.NONE) {
                     macroState = MACRO.NONE;
                     processChar(cp);
-                    // log 'macroState', macroState, String.fromCodePoint(cp)
                 }
+                // log 'macroState', macroState, String.fromCodePoint(cp)
                 else {
                     macroState = MACRO.INSIDE_TEMPLATE;
                     processChar(cp);
-                    // log 'macroState', macroState, String.fromCodePoint(cp)
                 }
             }
             else {
                 if (macroState == MACRO.INSIDE_TEMPLATE) {
+                    
+                    // could be start of macro
+                    
+                    // log 'macroState', macroState, String.fromCodePoint(cp)
                     if (cp == CP.DOLLAR) {
-                        // could be start of macro
                         macroState = MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR;
-                        // log 'macroState', macroState, String.fromCodePoint(cp)
                     }
+                    
+                    // could be an escape of a template start inside a template
+                    
+                    // log 'macroState', macroState, String.fromCodePoint(cp)
                     else if (cp == CP.SLASH) {
-                        // could be an escape of a template start inside a template
                         macroState = MACRO.INSIDE_TEMPLATE_SEEN_ESCAPE;
                         processChar(cp);
-                        // log 'macroState', macroState, String.fromCodePoint(cp)
                     }
+                    // log 'process char macroState', macroState, String.fromCodePoint(cp)
                     else {
-                        // log 'process char macroState', macroState, String.fromCodePoint(cp)
                         processChar(cp);
                     }
                 }
@@ -238,8 +260,8 @@ module.exports = function(textContent, ittfDocumentData) {
                 line = null;
                 lineHasMacro = false;
             }
+            // Allow blank line. Do nothing
             else {
-                // Allow blank line. Do nothing
             }
             leadingWhiteSpaces = 0;
             colpos = 0;
@@ -290,11 +312,13 @@ module.exports = function(textContent, ittfDocumentData) {
                     row: linepos, 
                     col: colpos, 
                     sourceKey: sourceKey
-                };
+                 };
             }
         }
+        
+        // log 'line.name, value', line.name, line.value
         if (line) {
-            // log 'line.name, value', line.name, line.value
         }
     }
-};
+}
+;

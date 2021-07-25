@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fs\utils.js.ittf
 */
 'use strict';
@@ -32,7 +32,7 @@ md.fileInfoByPath = function(filePath, baseFolder) {
                 fullPath: filePath, 
                 destBasename: name + '.' + mime, 
                 destRelPath: relFolder.length > 0 ? relFolder + '/' + name + '.' + mime : name + '.' + mime
-            };
+             };
     }
     else {
         return {
@@ -45,9 +45,10 @@ md.fileInfoByPath = function(filePath, baseFolder) {
                 fullPath: filePath, 
                 destBasename: basename, 
                 destRelPath: relFolder.length > 0 ? relFolder + '/' + basename : basename
-            };
+             };
     }
-};
+}
+;
 function normalize(filepath) {
     return verify.replaceAll(filepath, '\\', '/');
 }
@@ -63,4 +64,4 @@ var DEFAULT_MIME = {
     xml: 'xml', 
     vtt: 'vtt', 
     vue: 'vue'
-};
+ };

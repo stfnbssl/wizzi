@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\errors.js.ittf
 */
 'use strict';
@@ -17,7 +17,8 @@ function NotImplementedError(message) {
 }
 NotImplementedError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 NotImplementedError.prototype = Object.create(Error.prototype);
 NotImplementedError.prototype.constructor = NotImplementedError;
 md.NotImplementedError = NotImplementedError;
@@ -32,7 +33,8 @@ function InvalidRequestError(message, code) {
 }
 InvalidRequestError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 InvalidRequestError.prototype = Object.create(Error.prototype);
 InvalidRequestError.prototype.constructor = InvalidRequestError;
 md.InvalidRequestError = InvalidRequestError;
@@ -44,7 +46,8 @@ function FsItemNotFoundError(resourceType, uri) {
 }
 FsItemNotFoundError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 FsItemNotFoundError.prototype = Object.create(Error.prototype);
 FsItemNotFoundError.prototype.constructor = FsItemNotFoundError;
 md.FsItemNotFoundError = FsItemNotFoundError;
@@ -56,7 +59,8 @@ function IttfNotFoundError(resourceType, name, sourceUri) {
 }
 IttfNotFoundError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 IttfNotFoundError.prototype = Object.create(Error.prototype);
 IttfNotFoundError.prototype.constructor = IttfNotFoundError;
 md.IttfNotFoundError = IttfNotFoundError;

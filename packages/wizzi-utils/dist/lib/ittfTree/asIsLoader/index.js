@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\ittfTree\asIsLoader\index.js.ittf
 */
 'use strict';
@@ -19,27 +19,28 @@ function AsisLoader(ittfDocumentUri, options, callback) {
                 getNewNodeId: function() {
                     return ++count;
                 }
-            }, 
+             }, 
             uri: ittfDocumentUri, 
             content: content
-        };
-        asisMTree.nodes = nodifier(lines, asisMTree);
+         };
+        asisMTree.nodes = nodifier(lines, asisMTree)
+        ;
         if (asisMTree.nodes.__is_error) {
             asisMTree.nodes = [
                 {
                     name: 'Cannot load this ittf document: ' + asisMTree.nodes.message
-                }
+                 }
             ];
         }
+        // log 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
         else {
-            // log 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
             if (asisMTree.nodes.length != 1) {
                 var message = 'wizzi-utils.asIsLoader.error. The ittf source document must have one node. Found: ' + asisMTree.nodes.length + ' in document: ' + ittfDocumentUri;
                 if (callback) {
                     return callback({
                             __is_error: true, 
                             message: message
-                        });
+                         });
                 }
                 else {
                     throw new Error(message);
@@ -51,7 +52,8 @@ function AsisLoader(ittfDocumentUri, options, callback) {
                 clean(asisMTree.nodes[0])
             }
             else if (options.clean_remove) {
-                asisMTree = clean(asisMTree.nodes[0]);
+                asisMTree = clean(asisMTree.nodes[0])
+                ;
             }
         }
         if (callback) {
@@ -87,7 +89,8 @@ AsisLoader.createFromString = function(text, options, callback) {
                 return text;
             }
         }
-    };
+     };
     return AsisLoader('dummy', options, callback);
-};
+}
+;
 module.exports = AsisLoader;

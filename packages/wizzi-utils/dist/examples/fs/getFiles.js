@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\fs\getFiles.js.ittf
 */
 'use strict';
@@ -21,7 +21,7 @@ file.getFiles(path.join(__dirname, 'ittf', 'samples'), {
     deep: false, 
     extension: null, 
     documentContent: false
-}, function(err, files) {
+ }, function(err, files) {
     if (err) {
         console.log('err', err);
         throw new Error(err.message);
@@ -31,7 +31,7 @@ file.getFiles(path.join(__dirname, 'ittf', 'samples'), {
         deep: false, 
         extension: null, 
         documentContent: true
-    }, function(err, files) {
+     }, function(err, files) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);
@@ -41,7 +41,7 @@ file.getFiles(path.join(__dirname, 'ittf', 'samples'), {
             deep: true, 
             extension: null, 
             documentContent: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);

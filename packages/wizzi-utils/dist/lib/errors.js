@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\errors.js.ittf
 */
 'use strict';
@@ -15,7 +15,8 @@ function FileError(message, ex) {
 }
 FileError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 FileError.prototype = Object.create(Error.prototype);
 FileError.prototype.constructor = FileError;
 md.FileError = FileError;
@@ -53,7 +54,8 @@ function NodeError(message, node) {
 }
 NodeError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 NodeError.prototype = Object.create(Error.prototype);
 NodeError.prototype.constructor = NodeError;
 md.NodeError = NodeError;
@@ -64,13 +66,14 @@ md.getErrorLinesFromMTreeNode = function(node, description) {
         row: node.r, 
         col: node.c, 
         description: description
-    };
+     };
     while (node.parent) {
         node = node.parent;
     }
     var data = node.__mTree.loadHistory.ittfDocumentDatas[node.u];
     return md.getErrorLines(errorData, data.content, true);
-};
+}
+;
 //
 md.getErrorLines = function(errorData, source, json) {
     var statements = source.split('\n');
@@ -85,7 +88,8 @@ md.getErrorLines = function(errorData, source, json) {
         }
     }
     return json ? ret : ret.join('\n');
-};
+}
+;
 function spaces(num) {
     if (num > 0 && num < 100) {
         return Array(num + 1).join(" ");

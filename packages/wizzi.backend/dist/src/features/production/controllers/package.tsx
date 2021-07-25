@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\production\controllers\package.tsx.ittf
-    utc time: Thu, 22 Jul 2021 16:33:14 GMT
+    utc time: Sun, 25 Jul 2021 19:40:42 GMT
 */
 import {Router, Request, Response} from 'express';
 import {ControllerType, AppInitializerType} from '../../../features/app/types';
@@ -10,7 +10,9 @@ import {sendHtml, sendSuccess, sendPromiseResult, sendFailure} from '../../../ut
 import ReactDOMServer from 'react-dom/server';
 import PageFormDocument from '../../../pages/PageFormDocument';
 import {CRUDResult} from '../../types';
+import {getTemplatePackiFiles} from '../api/meta';
 import {createPackageProduction} from '../api/package';
+import {packiTypes} from '../../packi';
 
 const myname = 'features/production/controllers/package';
 
@@ -45,10 +47,10 @@ export class PackageProductionController implements ControllerType {
         console.log('Entering PackageProductionController.initialize');
         this.router.get('/new', this.getNewPackageForm);
         this.router.post('/new', this.postNewPackage);
-        this.router.get('/update', this.getUpdatePackageForm);
-        this.router.post('/update', this.postUpdatePackage);
-        this.router.get('/delete', this.getDeletePackageForm);
-        this.router.delete('/delete', this.deletePackage);
+        this.router.get('/update/:userid/*', this.getUpdatePackageForm);
+        this.router.post('/update/:userid/*', this.postUpdatePackage);
+        this.router.get('/delete/:userid/*', this.getDeletePackageForm);
+        this.router.delete('/delete/:userid/*', this.deletePackage);
         this.router.get('/props', this.getPackageProperties);
     };
     
@@ -70,33 +72,45 @@ export class PackageProductionController implements ControllerType {
     
         console.log(myname + '.postNewPackage.request.body', JSON.stringify(request.body, null, 2));
         console.log(myname + '.postNewPackage.request.session.user', JSON.stringify((request.session as any).user, null, 2));
-        createPackageProduction((request.session as any).user.username, request.body.pp_name, request.body.pp_description, JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))).then((result: CRUDResult) => {
+        getTemplatePackiFiles(request.body.meta_id, request.body.meta_propsValues ? JSON.parse(request.body.meta_propsValues) : {}).then((packiFiles: packiTypes.PackiFiles) => 
         
-            console.log(myname + '.postNewPackage.createPackageProduction.result', JSON.stringify(result, null, 2));
-            if (result.ok) {
-                response.redirect('/productions/packages');
+            createPackageProduction((request.session as any).user.username, request.body.pp_name, request.body.pp_description, JSON.stringify(packiFiles)).then((result: CRUDResult) => {
+            
+                console.log(myname + '.postNewPackage.createPackageProduction.result', JSON.stringify(result, null, 2));
+                if (result.ok) {
+                    response.redirect('/productions/packages');
+                }
+                else {
+                    response.render('error.html.ittf', {
+                        message: 'creating a new package production', 
+                        error: result
+                     })
+                }
             }
-            else {
+            ).catch((err: any) => 
+            
                 response.render('error.html.ittf', {
                     message: 'creating a new package production', 
-                    error: result
+                    error: err
                  })
-            }
-        }
+            )
+        
         ).catch((err: any) => 
         
             response.render('error.html.ittf', {
-                message: 'creating a new package production', 
+                message: 'getting template packi files while creating a new package production', 
                 error: err
              })
         )
     }
     ;
     
-    private getUpdatePackageForm = 
-    // log myname + '.getUpdatePackageForm',
-    async (request: Request, response: Response) => 
+    private getUpdatePackageForm = async (request: Request, response: Response) => {
     
+        console.log(myname + '.getUpdatePackageForm', request.path);
+        const parts = request.path.split('/');
+        console.log(myname + '.getUpdatePackageForm', parts[1], parts.slice(2).join('/'));
+        console.log(myname + '.getUpdatePackageForm', parts[2], parts.slice(3).join('/'));
         renderPageForm(request, response, {
             type: 'success', 
             formName: 'UpdatePackage', 
@@ -104,7 +118,7 @@ export class PackageProductionController implements ControllerType {
                 website: 'http://dummy.com'
              }
          }, {})
-    
+    }
     ;
     
     private postUpdatePackage = 

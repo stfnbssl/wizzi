@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\old.js.ittf
 */
 'use strict';
@@ -45,6 +45,7 @@ function rethrow() {
 }
 function maybeCallback(cb) {
     return typeof (cb) === 'function' ? cb : rethrow();
+    ;
 }
 var normalize = pathModule.normalize;
 if (isWindows) {
@@ -132,7 +133,8 @@ exports.realpathSync = function realpathSync(p, cache) {
         cache[original] = p;
     }
     return p;
-};
+}
+;
 exports.realpath = function realpath(p, cache, cb) {
     if (typeof (cb) !== 'function') {
         cb = maybeCallback(cache);
@@ -233,4 +235,5 @@ exports.realpath = function realpath(p, cache, cb) {
         p = pathModule.resolve(resolvedLink, p.slice(pos));
         start();
     }
-};
+}
+;

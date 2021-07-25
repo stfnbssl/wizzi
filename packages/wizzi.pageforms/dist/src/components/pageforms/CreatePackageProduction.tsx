@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreatePackageProduction.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -13,6 +13,8 @@ import nullthrows from 'nullthrows';
 import FormContainer from './widgets/FormContainer';
 import FormTitle from './widgets/FormTitle';
 import FormGroup from './widgets/FormGroup';
+import FormText from './widgets/FormText';
+import FormSelect from './widgets/FormSelect';
 import FormCheckBox from './widgets/FormCheckBox';
 import FormRadioBox from './widgets/FormRadioBox';
 import FormRow from './widgets/FormRow';
@@ -25,6 +27,9 @@ import Para from './widgets/styles/Para';
 import Text from './widgets/styles/Text';
 import Link from './widgets/styles/Link';
 import Box from './widgets/styles/Box';
+import lodashSet from 'lodash/set';
+import FormObject from './widgets/FormObject';
+import {getData} from '../../fetch';
 
 export interface CreatePackageProductionProps {
     data: any;
@@ -39,6 +44,10 @@ type CreatePackageProductionState = {
     pp_add_tfolder: boolean;
     pp_dependencies: any[];
     pp_upload_files: any[];
+    meta_id: any;
+    meta_listOptions: any;
+    meta_props: any;
+    meta_propsValues: any;
 };
 
 interface RootStyleProps {
@@ -62,7 +71,18 @@ export class CreatePackageProduction extends Component<CreatePackageProductionPr
             pp_contexts: [], 
             pp_add_tfolder: false, 
             pp_dependencies: [], 
-            pp_upload_files: []
+            pp_upload_files: [], 
+            meta_id: "", 
+            meta_listOptions: "", 
+            meta_props: "", 
+            meta_propsValues: ""
+         };
+        this.state = {
+            ...this.state, 
+            meta_propsValues: {}, 
+            meta_props: [], 
+            meta_id: '', 
+            meta_listOptions: []
          };
     }
     formRef = React.createRef();
@@ -82,9 +102,28 @@ export class CreatePackageProduction extends Component<CreatePackageProductionPr
             pp_name_checked: pp_checked
          })
     }
-    componentDidMount() {
+    async componentDidMount() {
         this._checkAvaliblePackageName = debounce(this._checkAvaliblePackageName, 100)
         ;
+        const metas = await getData('production/meta/list');
+        console.log('componentDidMount.metas', metas);
+        const options = [
+            {
+                name: '', 
+                value: ''
+             }
+        ];
+        var i, i_items=metas, i_len=metas.length, item;
+        for (i=0; i<i_len; i++) {
+            item = metas[i];
+            options.push({
+                name: item.owner + '/' + item.name, 
+                value: item.owner + '|' + item.name
+             })
+        }
+        this.setState({
+            meta_listOptions: options
+         })
     }
     handleInputChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
         console.log('handleInputChange', ev.target.type, ev.target.checked, ev.target.value);
@@ -135,6 +174,50 @@ export class CreatePackageProduction extends Component<CreatePackageProductionPr
             }
             return {
                     pp_dependencies: tfolders
+                 };
+        }
+        );
+    handleMetaChange = async (value) => {
+    
+        const parts = value.split('|');
+        if (parts.length == 2) {
+            const result = await getData('production/meta/props/' + parts[0] + '/' + parts[1]);
+            console.log('handleMetaChange.result', result, result.meta.properties);
+            const properties = result.meta.properties;
+            const values: any = {};
+            var i, i_items=properties, i_len=properties.length, prop;
+            for (i=0; i<i_len; i++) {
+                prop = properties[i];
+                if (prop.type == 'string' || prop.type == 'number') {
+                    values[prop.name] = prop.defaultValue || '';
+                }
+                else if (prop.type == 'array') {
+                    values[prop.name] = [];
+                }
+                else if (prop.type == 'object') {
+                    values[prop.name] = {};
+                }
+            }
+            this.setState({
+                meta_id: value, 
+                meta_props: result.meta.properties, 
+                meta_propsValues: values
+             })
+        }
+        else {
+            this.setState({
+                meta_id: value, 
+                meta_props: [], 
+                meta_propsValues: {}
+             })
+        }
+    }
+    handleMetaPropsValuesChange = (valuePath, value) => 
+        this.setState((state) => {
+        
+            const newValues = lodashSet(state.meta_propsValues, valuePath, value);
+            return {
+                    meta_propsValues: newValues
                  };
         }
         );
@@ -277,6 +360,70 @@ export class CreatePackageProduction extends Component<CreatePackageProductionPr
                                 <FormRow
                                  type='add' onAdd={this.handleTFolderAdd} />
                             </div>
+                            )
+                        
+                    }
+                    <HR
+                     />
+                    <FormSelect 
+                        label={'Use meta production'}
+                        name='meta_id'
+                        id='meta_id'
+                        value={this.state.meta_id}
+                        options={this.state.meta_listOptions}
+                        onChange={ev => 
+                            
+                                this.handleMetaChange(ev.target.value)
+                        }
+                     />
+                    {
+                        this.state.meta_props
+                         && this.state.meta_props.map((p: any, ndx) => {
+                        
+                            if (p.type == 'string' || p.type == 'number') {
+                                return  (
+                                    <FormGroup 
+                                        key={ndx}
+                                        label={p.label || p.name}
+                                        name={p.name}
+                                        id={p.name}
+                                        value={this.state.meta_propsValues[p.name]}
+                                        onChange={ev => 
+                                            
+                                                this.handleMetaPropsValuesChange(p.name, ev.target.value)
+                                        }
+                                     />
+                                    )
+                                ;
+                            }
+                            if (p.type == 'object') {
+                                return  (
+                                    <FormObject 
+                                        key={ndx}
+                                        label={p.label || p.name}
+                                        name={p.name}
+                                        id={p.name}
+                                        path={p.name}
+                                        values={this.state.meta_propsValues[p.name] || {}}
+                                        properties={p.properties}
+                                        onChange={this.handleMetaPropsValuesChange}
+                                     />
+                                    )
+                                ;
+                            }
+                        }
+                        )
+                    }
+                    {
+                        this.state.meta_id.length > 0
+                         &&  (
+                            <FormText 
+                                label='Values'
+                                name='meta_propsValues'
+                                id='meta_propsValues'
+                                required={true}
+                                value={JSON.stringify(this.state.meta_propsValues, null, 4)}
+                             />
                             )
                         
                     }

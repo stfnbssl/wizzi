@@ -14,6 +14,7 @@ var verify = require('wizzi-utils').verify;
 var util = require('util');
 var path = require('path');
 var stringify = require('json-stringify-safe');
+var async = require('async');
 
 var repo = require('wizzi-repo');
 var mtree = require('wizzi-mtree');
@@ -1030,6 +1031,58 @@ var WizziFactory = (function () {
                 'InvalidArgument', 'generateFolderArtifacts', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
             ));
         }
+        console.log('generateFolderArtifacts', ittfFolderUri);
+        repo.folderFilesInfoByPath(ittfFolderUri, this.fileService, (err, items) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            console.log('generateFolderArtifacts\n', stringify(items, null, 2));
+            async.mapSeries(items, (item, callback) => {
+            
+                if (item.isIttfDocument) {
+                    console.log('generating', item.fullPath);
+                    var artifactName = getDefaultArtifact(item.schema);
+                    this.loadModelAndGenerateArtifact(item.fullPath, {
+                        modelRequestContext: requestContext.modelRequestContext, 
+                        artifactRequestContext: requestContext.artifactRequestContext
+                     }, artifactName, (err, artifactText) => {
+                    
+                        if (err) {
+                            return callback(err);
+                        }
+                        console.log('generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText);
+                        this.fileService.write(path.join(options.destFolder, item.destRelPath), artifactText, function(err, notUsed) {
+                            if (err) {
+                                return callback(err);
+                            }
+                            console.log('generateFolderArtifacts.written', item.destRelPath);
+                            callback(null, path.join(options.destFolder, item.destRelPath))
+                        })
+                    }
+                    )
+                }
+                else {
+                    console.log('generateFolderArtifacts.copying', item.fullPath);
+                    this.fileService.copyFile(item.fullPath, path.join(options.destFolder, item.destRelPath), function(err, notUsed) {
+                        if (err) {
+                            return callback(err);
+                        }
+                        callback(null, path.join(options.destFolder, item.destRelPath))
+                    })
+                }
+            }
+            , function(err, result) {
+                if (err) {
+                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log('err', err);
+                    throw new Error(err.message);
+                }
+                console.log('generateFolderArtifacts.result', result);
+                return callback(null, result);
+            })
+        }
+        )
     }
     //
     WizziFactory.prototype.getSchemaDefinition = function(schemaName) {
@@ -1337,6 +1390,23 @@ function getProductionManager() {
         ProductionManager = require('../production/manager');
     }
     return ProductionManager;
+}
+var DEFAULT_ARTIFACTS = {
+    css: 'css/document', 
+    graphql: 'graphql/docs', 
+    html: 'html/document', 
+    js: 'js/module', 
+    json: 'json/document', 
+    scss: 'scss/document', 
+    text: 'text/document', 
+    ts: 'ts/module', 
+    xml: 'xml/document', 
+    ittf: 'ittf/document', 
+    vtt: 'vtt/document', 
+    vue: 'vue/document'
+ };
+function getDefaultArtifact(schema) {
+    return DEFAULT_ARTIFACTS[schema];
 }
 module.exports = {
     createFactory: function(user, role, options, callback) {

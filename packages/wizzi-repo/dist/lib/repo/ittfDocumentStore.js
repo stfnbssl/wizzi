@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\repo\ittfDocumentStore.js.ittf
 */
 'use strict';
@@ -64,7 +64,7 @@ var IttfDocumentStore = (function () {
             this.storeImpl.init({
                 mongoUri: storeInfo.storeUri, 
                 mongodbBaseFolder: storeInfo.storeBaseFolder
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -72,14 +72,15 @@ var IttfDocumentStore = (function () {
                 return callback(null);
             })
         }
+        
+        // log 'storeInfo', storeInfo
         else if (storeInfo.storeKind === 'json') {
-            // log 'storeInfo', storeInfo
             this.storeImpl = new JsonDbStore();
             var that = this;
             this.storeImpl.init({
                 jsonFsData: storeInfo.storeJsonFsData, 
                 fsJson: storeInfo.storeFsJson
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -91,7 +92,7 @@ var IttfDocumentStore = (function () {
             return callback(error('InvalidArgument', 'init', {
                     parameter: 'storeKind', 
                     message: "Unknown storeKind: " + storeInfo.storeKind
-                }));
+                 }));
         }
     }
     IttfDocumentStore.prototype.initSync = function(storeInfo) {
@@ -112,7 +113,7 @@ var IttfDocumentStore = (function () {
             return callback(error('InvalidArgument', 'initSync', {
                     parameter: 'storeInfo.storeKind', 
                     message: 'Method "initSync" is for storeKind "filesystem" only. ' + 'Received: ' + storeInfo.storeKind
-                }));
+                 }));
         }
         this.storeKind = this.storeImpl.storeKind;
     }
@@ -178,7 +179,7 @@ var IttfDocumentStore = (function () {
         var ret = new IttfDocumentStore();
         ret.initSync({
             storeKind: "filesystem"
-        })
+         })
         return ret;
     }
     IttfDocumentStore.prototype.getInfo = function() {
@@ -188,7 +189,7 @@ var IttfDocumentStore = (function () {
         else {
             return {
                     storeKind: this.storeKind
-                };
+                 };
         }
     }
     return IttfDocumentStore;

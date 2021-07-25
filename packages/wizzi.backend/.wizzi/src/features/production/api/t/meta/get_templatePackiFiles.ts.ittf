@@ -1,0 +1,79 @@
+$group
+
+    +
+    export
+        async-function getTemplatePackiFiles
+            param metaId
+                :string
+            param cliCtx
+                :any
+            :return
+                :ref Promise
+                    :param 
+                        :ref packiTypes.PackiFiles
+            log myname, 'getTemplatePackiFiles', metaId, cliCtx
+            function getPackiFiles
+                param mainIttf
+                    :string
+                :return
+                    :ref packiTypes.PackiFiles
+                const ret
+                    :ref packiTypes.PackiFiles
+                    = {}
+                set ret[mainIttf]
+                    {
+                        @ type 'CODE'
+                        @ contents ''
+                return ret
+            return 
+                new Promise
+                    => 
+                        param resolve
+                        param reject
+                        if metaId.length == 0 || metaId.split('|').length != 2
+                            return
+                                _ resolve
+                                    _ getPackiFiles
+                                        @ 'index.js.ittf'
+                        const parts = metaId.split('|')
+                        _ getMetaProduction
+                            @ parts[0]
+                            @ parts[1]
+                            ._ then
+                                =>
+                                    param result
+                                    if !result.ok
+                                        return reject(result)
+                                    const tf
+                                        :ref IMetaProductionModel
+                                        = result.item
+                                    log myname, 'getTemplatePackiFiles.getMetaProduction.tf', tf
+                                    const tf_packiFiles_object
+                                        :ref packiTypes.PackiFiles
+                                        _ JSON.parse(tf.packiFiles)
+                                    _ prepareGenerationFromWizziJson
+                                        @ tf_packiFiles_object
+                                        ._ then
+                                            =>
+                                                param result
+                                                    :any
+                                                const context
+                                                    _ Object.assign
+                                                        {
+                                                        @ result.context
+                                                        {
+                                                            @ cliCtx cliCtx
+                                                _ wizziProds.generateFolderArtifacts
+                                                    @ 'template'
+                                                    @ 'output'
+                                                    @ result.packiFiles
+                                                    @ context
+                                                    ._ then
+                                                        =>
+                                                            param packiFiles
+                                                                :ref packiTypes.PackiFiles
+                                                            _ resolve
+                                                                @ packiFiles
+                                                catch_reject( getTemplatePackiFiles.generateFolderArtifacts )
+                                        catch_reject( getTemplatePackiFiles.prepareGenerationFromWizziJson )
+                            catch_reject( getTemplatePackiFiles.getMetaProduction )

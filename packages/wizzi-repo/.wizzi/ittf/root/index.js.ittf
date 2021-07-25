@@ -118,15 +118,20 @@
 		function
 			param folderPath
 			param fileService
-			_ fileService.getFilesAsync
-				@ folderPath
-				f_cb( files )
-					var result = []
-					foreach f in files
-						_ result.push
-							_ fileInfoByPath
-								@ f.fullPath
-					return result
+            param callback
+            log 'wizzi-repo.folderFilesInfoByPath', folderPath
+            _ fileService.getFilesAsync
+                @ folderPath
+                {
+                    @ deep true
+                f_cb( files )
+                    var result = []
+                    foreach f in files
+                        _ result.push
+                            _ fileInfoByPath
+                                @ f.fullPath
+                                @ folderPath
+                    r_cb( result )
 
 	set md.ittfDocumentInfoByPath
 		function
@@ -139,3 +144,5 @@
 					{
 						@ is_error true
 						@ message 'The file is not an ittfdocument: ' + result.fullPath
+
+

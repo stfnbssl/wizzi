@@ -107,6 +107,12 @@
 		ctor
 			param fsimpl
 			set this.fsimpl = fsimpl
+            if fsimpl.classType == 'wizzi-repo.json.JsonFsImpl'
+                set this.storeKind = 'json'
+            elif this.classType == 'wizzi-repo.mongodb.MongoFsImpl'
+                set this.storeKind = 'mongodb'
+            else
+                set this.storeKind = 'filesystem'
 
 		m unixifyPath
 			param path_string
@@ -192,7 +198,7 @@
 					@ path_string
 					f_cb( contents )
 						# TODO OLD VIA if parsedUri.storeKind === 'filesystem'
-						if that.fsimpl.kind === 'filesystem'
+						if that.storeKind === 'filesystem'
 							if options.encoding !== null
 								set contents = iconv.decode(contents, (options.encoding || DEFAULT_DECODING))
 								if !PRESERVE_BOM && contents.charCodeAt(0) === 0xFEFF
@@ -207,7 +213,7 @@
 				var parsedUri = uriParser(path_string)
 				# read buffer (no options)
 				var contents = this.fsimpl.readFileSync(path_string)
-				if this.fsimpl.kind === 'filesystem'
+				if this.storeKind === 'filesystem'
 					if options.encoding !== null
 						set contents = iconv.decode(contents, (options.encoding || DEFAULT_DECODING))
 						if !PRESERVE_BOM && contents.charCodeAt(0) === 0xFEFF
@@ -219,8 +225,10 @@
 			if !options
 				set options = {}
 			# log 'wizzi-utils.vfile.write.contents 1', contents
-			if parsedUri.storeKind === 'filesystem'
-				if !Buffer.isBuffer(contents)
+			$$ 24/7/21 if parsedUri.storeKind === 'filesystem'
+            if this.storeKind === 'filesystem'
+				$$ 24/7/21 if !Buffer.isBuffer(contents) 
+                if !Buffer.isBuffer(contents) && options.encoding !== null
 					set contents = iconv.encode(contents, (options.encoding || DEFAULT_DECODING))
 			# log 'wizzi-utils.vfile.write.contents 2', contents
 			

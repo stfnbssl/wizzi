@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\json\fs\fsjson.js.ittf
 */
 'use strict';
@@ -25,13 +25,13 @@ var FsJson = (function () {
                 throw new Error(error('InvalidArgument', 'ctor', {
                         parameter: 'fsJsonData.items', 
                         message: 'The fsJsonData.items parameter must be an array. Received: ' + fsJsonData.items
-                    }));
+                     }));
             }
             if (verify.isArray(fsJsonData.documents) === false) {
                 throw new Error(error('InvalidArgument', 'ctor', {
                         parameter: 'fsJsonData.documents', 
                         message: 'The fsJsonData.documents parameter must be an array. Received: ' + fsJsonData.documents
-                    }));
+                     }));
             }
             this.items = new Collection(fsJsonData.items);
             this.documents = new Collection(fsJsonData.documents);
@@ -84,7 +84,7 @@ var FsJson = (function () {
         }
         this.getItem({
             _id: id
-        }, callback)
+         }, callback)
     }
     FsJson.prototype.getItemByPath = function(path, callback) {
         if (typeof(callback) !== 'function') {
@@ -99,7 +99,7 @@ var FsJson = (function () {
         }
         this.getItem({
             path: path
-        }, callback)
+         }, callback)
     }
     FsJson.prototype.getItemByNameAndParent = function(basename, parentId, callback) {
         if (typeof(callback) !== 'function') {
@@ -122,7 +122,7 @@ var FsJson = (function () {
         this.getItem({
             basename: basename, 
             parentId: parentId
-        }, callback)
+         }, callback)
     }
     FsJson.prototype.getItemChildren = function(parentId, callback) {
         if (typeof(callback) !== 'function') {
@@ -138,7 +138,7 @@ var FsJson = (function () {
         // log 'wizzi-repo.json.FsJson.getItemChildren.enter', parentId
         this.items.find({
             parentId: parentId
-        }).toArray(function(err, r) {
+         }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -177,8 +177,9 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
+            
+            // log 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
             if (item == null) {
-                // log 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
                 that.items.insertOne(fsItem, function(err, r) {
                     if (err) {
                         return callback(err);
@@ -191,15 +192,15 @@ var FsJson = (function () {
                             insertedId: r.insertedId, 
                             insertedCount: r.insertedCount, 
                             item: r.ops[0]
-                        });
+                         });
                 })
             }
+            // log 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
             else {
-                // log 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
                 return callback(null, {
                         code: 'FSITEM_EXISTS', 
                         item: item
-                    });
+                     });
             }
         })
     }
@@ -223,7 +224,7 @@ var FsJson = (function () {
         upd_item.path = fsitem.dirname ? normalize(path.join(fsitem.dirname, fsitem.basename)) : fsitem.basename;
         this.items.replaceOne({
             _id: upd_item._id
-        }, upd_item, function(err, r_upd) {
+         }, upd_item, function(err, r_upd) {
             if (err) {
                 return callback(err);
             }
@@ -233,7 +234,7 @@ var FsJson = (function () {
                         code: 'FSITEM_UPDATED', 
                         updatedCount: r_upd.modifiedCount, 
                         item: r_upd.ops[0]
-                    });
+                     });
             }
             else {
                 return callback(error('JsonRepoError', 'updateItem', util.inspect( r_upd.result )));
@@ -260,7 +261,7 @@ var FsJson = (function () {
                 r.lastModified = lastModified;
                 that.items.replaceOne({
                     _id: id
-                }, r, function(err, r_upd) {
+                 }, r, function(err, r_upd) {
                     if (err) {
                         return callback(err);
                     }
@@ -270,7 +271,7 @@ var FsJson = (function () {
                                 code: 'FSITEM_LASTMODIFIED_UPDATED', 
                                 updatedCount: r_upd.modifiedCount, 
                                 item: r_upd.ops[0]
-                            });
+                             });
                     }
                     else {
                         return callback(error('JsonRepoError', 'updateItemLastModified', util.inspect( r_upd.result )));
@@ -307,7 +308,7 @@ var FsJson = (function () {
                 }
                 that.items.deleteOne({
                     _id: id
-                }, function(err, r) {
+                 }, function(err, r) {
                     if (err) {
                         return callback(err);
                     }
@@ -317,7 +318,7 @@ var FsJson = (function () {
                                 code: 'FSITEM_DELETED', 
                                 deletedCount: r.deletedCount, 
                                 ok: r.ok
-                            });
+                             });
                     }
                     else {
                         return callback(error('JsonRepoError', 'deleteItem', 'FsJson error deleting item. Result: ' + util.inspect( r )));
@@ -329,17 +330,18 @@ var FsJson = (function () {
     FsJson.prototype._deleteDocument = function(id, callback) {
         this.documents.deleteOne({
             _id: id
-        }, function(err, r) {
+         }, function(err, r) {
             if (err) {
                 return callback(err);
             }
             // log '*** wizzi-repo.json.FsJson._deleteDocument.r', r
+            
+            // log 'wizzi-repo.json.FsJson._deleteDocument', true
             if (r.deletedCount == 1 && r.result.ok == 1) {
-                // log 'wizzi-repo.json.FsJson._deleteDocument', true
                 return callback(null, true);
             }
+            // log 'wizzi-repo.json.FsJson._deleteDocument', false
             else {
-                // log 'wizzi-repo.json.FsJson._deleteDocument', false
                 return callback(null, false);
             }
         })
@@ -357,7 +359,7 @@ var FsJson = (function () {
         }
         this.documents.find({
             _id: id
-        }).toArray(function(err, r) {
+         }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -394,23 +396,24 @@ var FsJson = (function () {
                 return callback(err);
             }
             // log 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
+            
+            // log 'wizzi-repo.json.FsJson.writeDocument not modified', f
             if (f === content) {
-                // log 'wizzi-repo.json.FsJson.writeDocument not modified', f
                 return callback(null, {
                         code: 'DOCUMENT_NOT_MODIFIED'
-                    });
+                     });
             }
             // log 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
             var lastModified = new Date();
             that.documents.replaceOne({
                 _id: id
-            }, {
+             }, {
                 _id: id, 
                 content: content, 
                 lastModified: lastModified
-            }, {
+             }, {
                 upsert: true
-            }, function(err, r) {
+             }, function(err, r) {
                 if (err) {
                     return callback(err);
                 }
@@ -425,7 +428,7 @@ var FsJson = (function () {
                     return callback(null, {
                             code: 'DOCUMENT_WRITTEN', 
                             item: r.ops[0]
-                        });
+                         });
                 })
             })
         })
@@ -448,7 +451,7 @@ var FsJson = (function () {
                 callback(null, {
                     items: items, 
                     documents: documents
-                })
+                 })
             })
         })
     }
@@ -471,10 +474,12 @@ var FsJson = (function () {
             }
         }
         this.items.toArray((err, items) => {
+        
             if (err) {
                 return callback(err);
             }
             this.documents.toArray((err, documents) => {
+            
                 if (err) {
                     return callback(err);
                 }
@@ -490,13 +495,15 @@ var FsJson = (function () {
                                 fullPath: item.path, 
                                 relPath: options.removeRoot ? item.path.substr(options.removeRoot.length) : '', 
                                 content: d.content
-                            })
+                             })
                         }
                     }
                 }
                 callback(null, ret)
-            })
-        })
+            }
+            )
+        }
+        )
     }
     FsJson.prototype.close = function() {
         // nothing to do
@@ -516,7 +523,7 @@ FsJson.create = function(fsJsonData, callback) {
         fsJsonData = {
             items: [], 
             documents: []
-        };
+         };
     }
     else {
         if (verify.isObject(fsJsonData) == false) {
@@ -531,13 +538,14 @@ FsJson.create = function(fsJsonData, callback) {
     }
     
     return callback(null, new FsJson(fsJsonData));
-};
+}
+;
 function errorMsg(method, message) {
     return {
             __is_error: true, 
             method: 'Json.JsonDb.' + method, 
             message: message
-        };
+         };
 }
 function normalize(path) {
     return path.trim().replace(/\\/g,'/').toLowerCase();

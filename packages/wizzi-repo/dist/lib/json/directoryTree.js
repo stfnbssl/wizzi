@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\json\directoryTree.js.ittf
 */
 'use strict';
@@ -10,15 +10,16 @@ const PATH = require('path');
 const constants = {
     DIRECTORY: 1, 
     FILE: 2
-};
+ };
 function safeReadDirSync(path) {
     let dirData = {};
     try {
         dirData = FS.readdirSync(path);
     } 
     catch (ex) {
+        
+        // User does not have permissions, ignore directory
         if (ex.code == "EACCES") {
-            // User does not have permissions, ignore directory
             return null;
         }
         else {
@@ -39,7 +40,7 @@ function directoryTree(path) {
     const item = {
         path, 
         name
-    };
+     };
     let stats;
     try {
         stats = FS.statSync(path);
@@ -48,16 +49,21 @@ function directoryTree(path) {
         return null;
     } 
     // log 'stats', stats
+    
+    // Skip if it does not match the extension regex
+    
+    // log 'ext', ext
+    
+    // File size in bytes
+    
+    // set item.size = stats.size
+    
+    // set item.extension = ext
     if (stats.isFile()) {
         const ext = PATH.extname(path).toLowerCase();
-        // Skip if it does not match the extension regex
-        // log 'ext', ext
         if (ext != '.ittf') {
             return null;
         }
-        // File size in bytes
-        // set item.size = stats.size
-        // set item.extension = ext
         item.type = constants.FILE;
     }
     else if (stats.isDirectory()) {

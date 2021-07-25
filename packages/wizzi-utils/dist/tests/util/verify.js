@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\util\verify.js.ittf
 */
 'use strict';
@@ -23,18 +23,22 @@ describe("verify", function() {
     
     it("should check valid email address", function() {
         test = verify.isEmail('bongo@');
+        ;
         expect(test).to.be(false);
         test = verify.isEmail('bongo@it');
+        ;
         expect(test).to.be(false);
         test = verify.isEmail('stfn.nssl@gmail.com');
+        ;
         expect(test).to.be(true);
         test = verify.isEmail('stfn@do.com');
+        ;
         expect(test).to.be(true);
     });
     it("should create a wzError", function() {
         var err1 = verify.error({
             name: 'ArgumentError'
-        }, 'Parameter %s must be a string', 'ittfDocumentUri');
+         }, 'Parameter %s must be a string', 'ittfDocumentUri');
         expect(err1.toString()).to.be.a('string');
         expect(err1.toString()).to.be('ArgumentError: Parameter ittfDocumentUri must be a string');
     });

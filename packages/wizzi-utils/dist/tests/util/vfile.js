@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\util\vfile.js.ittf
 */
 'use strict';
@@ -25,7 +25,7 @@ describe("vfile", function() {
             path.join(__dirname, 'ittf')
         ], {
             force: true
-        })
+         })
     });
     it("should create the first file in the ittf folder", function() {
         file.write(path.join(__dirname, 'ittf', 'gc_one.ittf'), 'first one\nsecond one')
@@ -34,13 +34,16 @@ describe("vfile", function() {
     it("should check existence of file", function() {
         var exists = file.exists(path.join(__dirname, 'ittf', 'gc_one.ittf'));
         expect(exists).to.be(true);
-        exists = file.exists(path.join(__dirname, 'ittf', 'astrumb.ittf'));
+        exists = file.exists(path.join(__dirname, 'ittf', 'astrumb.ittf'))
+        ;
         expect(exists).to.be(false);
         var isFile = file.isFile(path.join(__dirname, 'ittf', 'gc_one.ittf'));
         expect(isFile).to.be(true);
-        isFile = file.isFile(path.join(__dirname, 'ittf', 'astrumb.ittf'));
+        isFile = file.isFile(path.join(__dirname, 'ittf', 'astrumb.ittf'))
+        ;
         expect(isFile).to.be(false);
-        isFile = file.isFile(path.join(__dirname, 'ittf', 'folder_one'));
+        isFile = file.isFile(path.join(__dirname, 'ittf', 'folder_one'))
+        ;
         expect(isFile).to.be(false);
         var isDirectory = file.isDirectory(path.join(__dirname, 'ittf', 'gc_one.ittf'));
         expect(isDirectory).to.be(false);
@@ -48,11 +51,13 @@ describe("vfile", function() {
     it("should check existence of folder", function() {
         var exists = file.exists(path.join(__dirname, 'ittf', 'folder_one'));
         expect(exists).to.be(true);
-        exists = file.exists(path.join(__dirname, 'ittf', 'folder_astrumb'));
+        exists = file.exists(path.join(__dirname, 'ittf', 'folder_astrumb'))
+        ;
         expect(exists).to.be(false);
         var isDirectory = file.isDirectory(path.join(__dirname, 'ittf', 'folder_one'));
         expect(isDirectory).to.be(true);
-        isDirectory = file.isDirectory(path.join(__dirname, 'ittf', 'astrumb.ittf'));
+        isDirectory = file.isDirectory(path.join(__dirname, 'ittf', 'astrumb.ittf'))
+        ;
         expect(isDirectory).to.be(false);
         var isFile = file.isFile(path.join(__dirname, 'ittf', 'folder_one'));
         expect(isFile).to.be(false);
@@ -83,12 +88,12 @@ describe("vfile", function() {
             friends: [
                 {
                     name: 'arth'
-                }, 
+                 }, 
                 {
                     name: 'marilu'
-                }
+                 }
             ]
-        };
+         };
         file.writeJSON(path.join(__dirname, 'ittf', 'abrac.json'), obj)
         var obj_read = file.readJSON(path.join(__dirname, 'ittf', 'abrac.json'));
         // loose equality works for objects
@@ -101,7 +106,7 @@ describe("vfile", function() {
             deep: false, 
             extension: null, 
             documentContent: false
-        });
+         });
         // log 'should get files in a basefolder - files', files
         expect(files).to.be.an('array');
         expect(files.length).to.be(2);
@@ -111,7 +116,7 @@ describe("vfile", function() {
             deep: false, 
             extension: null, 
             documentContent: true
-        });
+         });
         expect(files).to.be.an('array');
         expect(files.length).to.be(2);
         expect(files[0].content).to.be.a('string');
@@ -131,7 +136,7 @@ describe("vfile", function() {
             tFoldersOnly: false, 
             documentNames: false, 
             documentContents: false
-        });
+         });
         // log 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(2);
@@ -143,7 +148,7 @@ describe("vfile", function() {
             deep: true, 
             tFoldersOnly: false, 
             documentNames: false
-        });
+         });
         // log 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
@@ -164,7 +169,7 @@ describe("vfile", function() {
             tFoldersOnly: false, 
             documentNames: true, 
             documentContents: false
-        });
+         });
         // log 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
@@ -182,7 +187,7 @@ describe("vfile", function() {
             deep: true, 
             tFoldersOnly: false, 
             documentNames: true
-        });
+         });
         // log 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
@@ -204,7 +209,7 @@ describe("vfile", function() {
         expect(result.length).to.be(3);
         var result = file.getGlobbedFilesEx(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), {
             removeRoot: path.join(__dirname, 'ittf')
-        });
+         });
         expect(result).to.be.an('array');
         expect(result.length).to.be(3);
         expect(result[0]).to.be.a('string');

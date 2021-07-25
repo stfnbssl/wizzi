@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\prettifiers\utils\htmlbuilder.js.ittf
 */
 'use strict';
@@ -39,7 +39,7 @@ var HtmlBuilder = (function () {
             this.nodes.push({
                 tag: '_text', 
                 text: text
-            })
+             })
         }
         else {
             this.currentNode.text += (text || '');
@@ -49,7 +49,7 @@ var HtmlBuilder = (function () {
         this.currentNode.attribs.push({
             name: name, 
             value: value
-        })
+         })
     }
     HtmlBuilder.prototype.createNode = function(tag, parent, options) {
         return {
@@ -59,7 +59,7 @@ var HtmlBuilder = (function () {
                 attribs: [], 
                 text: '', 
                 inline: options.inline
-            };
+             };
     }
     HtmlBuilder.prototype.toLines = function() {
         var hw = new HtmlWriter(this.noLF);

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\wizzi\factory.ts.ittf
-    utc time: Thu, 22 Jul 2021 16:33:13 GMT
+    utc time: Sun, 25 Jul 2021 19:40:41 GMT
 */
 import path from 'path';
 import wizzi from 'wizzi';
@@ -11,6 +11,8 @@ import {packiFilePrefix} from '../config/env';
 import {packiTypes} from '../packi';
 import {config as appConfig} from '../config';
 import {JsonWizziFactory, FilesystemWizziFactory} from './types';
+
+const myname = 'features/wizzi/factory';
 
 export function packiFilesToJsonDocuments(files: packiTypes.PackiFiles):  JsonDocumentDto[] {
 
@@ -85,7 +87,7 @@ export async function createFsJsonAndFactory(files: packiTypes.PackiFiles):  Pro
         }
     }
     )
-    console.log('createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length);
+    console.log(myname, 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length);
     return new Promise((resolve, reject) => 
         
             JsonComponents.createFsJson(jsonDocuments, (err, fsJson) => {
@@ -109,6 +111,7 @@ export async function createFsJsonAndFactory(files: packiTypes.PackiFiles):  Pro
                     if (err) {
                         return reject(err);
                     }
+                    console.log(myname, 'createFactory', 'done');
                     resolve({
                         wf, 
                         fsJson

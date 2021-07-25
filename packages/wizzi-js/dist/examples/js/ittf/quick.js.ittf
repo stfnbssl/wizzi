@@ -1,29 +1,15 @@
 module
     kind es6
-    const source
-        `lit 
-            + &nbsp;   <html>&lf;
-            + &nbsp;     <head>&lf;
-            + &nbsp;      &nbsp;
-            && 
-                + css
-                `lit 
-                    + <link rel="stylesheet" type="text/css" href="
-                    @ cssURL
-                    + " />
-            + &lf;
-            && 
-                + js
-                `lit 
-                    + <script src="
-                    @ jsURL
-                    + "></script>
-            + &lf;
-            + &nbsp;     </head>&lf;
-            + &nbsp;     <body>&lf;
-            + &nbsp;      &nbsp;
-            @ html || ''
-            + &lf;
-            + &nbsp;     </body>&lf;
-            + &nbsp;   </html>&lf;
-            + &nbsp;&nbsp;
+    const compose
+        => 
+            param ...funcs
+            _ funcs.reduce
+                => 
+                    param a
+                    param b
+                    => 
+                        param ...args
+                        _ a(b(...args))
+                => 
+                    param arg
+                    + arg

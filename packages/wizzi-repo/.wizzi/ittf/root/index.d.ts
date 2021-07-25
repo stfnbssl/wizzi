@@ -8,6 +8,13 @@
 } from 'wizzi-utils';
 type cb<T> = (err: any, result: T) => void;
 
+/**
+ * The json store types
+ * FsJson: implements an in-memory set of documents organized in a tree of folders
+ * FsJsonDocumentManager: wraps FsJson and exposes filesystem-like methods
+ * FsJsonImpl: wraps FsJsonDocumentManager and implements the VFile interface
+ */
+
 interface Collection {
 }
 
@@ -126,10 +133,13 @@ interface CreateStoreFactoryOptions {
     storeKind: string;
     storeUri: string;
     storeBaseFolder: string;
-    storeJsonFsData: JsonFsData;
+    storeJsonFsData?: JsonFsData;
 }
 
 interface Store {
+    init(options: any, callback: cb<VFile>): void;
+    documentExists(filePath: string, callback: cb<boolean>): void;
+    getModelContent(filePath: string, callback: cb<string>): void;
 }
 
 type createStoreFn = (callback: cb<Store>) => void;

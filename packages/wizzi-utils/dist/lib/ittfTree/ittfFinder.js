@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\ittfTree\ittfFinder.js.ittf
 */
 'use strict';
@@ -58,7 +58,7 @@ var ittfFinder = (function () {
                     return callback(error('IttfNotFound', 'resolvePath', {
                             parameter: ittfDocumentUri, 
                             message: 'Cannot resolve ittf document: ' + ittfDocumentUri
-                        }));
+                         }));
                 }
                 that.resolvePathInTFolders(path.dirname(ittfDocumentUri), fragmentName, schema, function(err, tresult) {
                     if (err) {
@@ -67,8 +67,8 @@ var ittfFinder = (function () {
                     if (tresult.found) {
                         return callback(null, tresult.ittfDocumentUri);
                     }
+                    // log 'ittfFinder.resolvePath options', options, schema
                     else {
-                        // log 'ittfFinder.resolvePath options', options, schema
                         return callback(error('IttfNotFound', 'resolvePath', 'Cannot find ittf document: ' + ittfDocumentUri));
                     }
                 })
@@ -85,15 +85,18 @@ var ittfFinder = (function () {
                         if (err) {
                             return callback(err);
                         }
+                        
+                        // return callback(null, result)
+                        
+                        // log 'recurserTFolder resolve found', result
                         if (result.found) {
-                            // return callback(null, result)
-                            // log 'recurserTFolder resolve found', result
                             return resolve(result);
                         }
                         else {
                             basePath = path.dirname(basePath);
+                            
+                            // log 'recurserTFolder try parent', basePath
                             if (basePath.length > 3) {
-                                // log 'recurserTFolder try parent', basePath
                                 return recurserTFolder(basePath, relPath, schema).then(function(result) {
                                         // log 'recurserTFolder transmit resolve result', basePath, result
                                         resolve(result);
@@ -103,11 +106,11 @@ var ittfFinder = (function () {
                                     })
                                 ;
                             }
+                            // log 'recurserTFolder resolve not found', basePath
                             else {
-                                // log 'recurserTFolder resolve not found', basePath
                                 return resolve({
                                         found: false
-                                    });
+                                     });
                             }
                         }
                     })
@@ -129,7 +132,7 @@ var ittfFinder = (function () {
                 return callback(null, {
                         found: true, 
                         ittfDocumentUri: test
-                    });
+                     });
             }
             else {
                 if (test.toLowerCase().substr(-5, 5) !== '.ittf') {
@@ -142,7 +145,7 @@ var ittfFinder = (function () {
                                 return callback(null, {
                                         found: true, 
                                         ittfDocumentUri: test + '.' + schema + '.ittf'
-                                    });
+                                     });
                             }
                             else {
                                 that.file.isFile(test + '.ittf', function(err, result) {
@@ -153,12 +156,12 @@ var ittfFinder = (function () {
                                         return callback(null, {
                                                 found: true, 
                                                 ittfDocumentUri: test + '.ittf'
-                                            });
+                                             });
                                     }
                                     else {
                                         return callback(null, {
                                                 found: false
-                                            });
+                                             });
                                     }
                                 })
                             }
@@ -167,13 +170,13 @@ var ittfFinder = (function () {
                     else {
                         return callback(null, {
                                 found: false
-                            });
+                             });
                     }
                 }
                 else {
                     return callback(null, {
                             found: false
-                        });
+                         });
                 }
             }
         })
@@ -192,7 +195,7 @@ var ittfFinder = (function () {
                 return callback(null, {
                         __is_error: true, 
                         message: 'Cannot resolve ittf reference ' + referenceName + ' from base path ' + baseFullPath
-                    });
+                     });
             }
         })
     }

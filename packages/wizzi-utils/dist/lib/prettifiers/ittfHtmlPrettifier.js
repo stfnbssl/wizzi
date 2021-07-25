@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\prettifiers\ittfHtmlPrettifier.js.ittf
 */
 'use strict';
@@ -25,13 +25,13 @@ module.exports = function(rootNode, options, callback) {
             __ittfNode: {
                 line: 0, 
                 indent: 0
-            }, 
+             }, 
             hb: new HtmlBuilder(true), 
             fragments: {}, 
             ittfFsNode: options.ittfFsNode, 
             ittfBasePath: options.ittfBasePath, 
             indentSpaces: options.indentSpaces || 2
-        };
+         };
         rootNode.analize(ctx, function(err, notUsed) {
             if (err) {
                 return callback(err);
@@ -41,14 +41,17 @@ module.exports = function(rootNode, options, callback) {
                     prettyLines: ctx.hb.toLines(), 
                     ittfMTreeEx: rootNode, 
                     fragments: ctx.fragments
-                });
+                 });
         })
     })
-};
+}
+;
 function getRootNode(rootNode, options, callback) {
+    
+    // 'rootNode' should be an ittf document uri
+    
+    // load from source ittf document
     if (verify.isObject(rootNode) == false && verify.isNotEmpty(rootNode)) {
-        // 'rootNode' should be an ittf document uri
-        // load from source ittf document
         IttfMTreeEx.createFrom(rootNode, options, callback)
     }
     else {
@@ -97,8 +100,9 @@ function toHtmlPretty(node, ctx) {
             ctx.hb.writeAttribute('class', name_style);
         }
     }
+    
+    // log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
     if (node.isMixinCall()) {
-        // log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
         var dId = ctx.fragments[node.fragmentName] ? ctx.fragments[node.fragmentName].id : null;
         if (dId) {
             ctx.hb.writeAttribute('data-frag-id', dId);

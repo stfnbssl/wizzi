@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\mongodb\fs\fsmongo.js.ittf
 */
 'use strict';
@@ -66,7 +66,7 @@ var FsMongo = (function () {
         }
         this.getItem({
             _id: id
-        }, callback)
+         }, callback)
     }
     FsMongo.prototype.getItemByPath = function(path, callback) {
         if (typeof(callback) !== 'function') {
@@ -81,7 +81,7 @@ var FsMongo = (function () {
         }
         this.getItem({
             path: path
-        }, callback)
+         }, callback)
     }
     FsMongo.prototype.getItemByNameAndParent = function(basename, parentId, callback) {
         if (typeof(callback) !== 'function') {
@@ -104,7 +104,7 @@ var FsMongo = (function () {
         this.getItem({
             basename: basename, 
             parentId: parentId
-        }, callback)
+         }, callback)
     }
     FsMongo.prototype.getItemChildren = function(parentId, callback) {
         if (typeof(callback) !== 'function') {
@@ -119,7 +119,7 @@ var FsMongo = (function () {
         }
         this.db.collection(FSITEMS).find({
             parentId: parentId
-        }).toArray(function(err, r) {
+         }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -174,14 +174,14 @@ var FsMongo = (function () {
                             insertedId: r.insertedId, 
                             insertedCount: r.insertedCount, 
                             item: r.ops[0]
-                        });
+                         });
                 })
             }
             else {
                 return callback(null, {
                         code: 'FSITEM_EXISTS', 
                         item: item
-                    });
+                     });
             }
         })
     }
@@ -208,7 +208,7 @@ var FsMongo = (function () {
         }
         this.db.collection(FSITEMS).replaceOne({
             _id: fsitem._id
-        }, fsitem, function(err, r_upd) {
+         }, fsitem, function(err, r_upd) {
             if (err) {
                 return callback(err);
             }
@@ -220,7 +220,7 @@ var FsMongo = (function () {
                         code: 'FSITEM_UPDATED', 
                         updatedCount: r_upd.result.nModified, 
                         item: r_upd.ops[0]
-                    });
+                     });
             }
             else {
                 return callback(error('MongoRepoError', 'updateItem', util.inspect( r_upd.result )));
@@ -248,7 +248,7 @@ var FsMongo = (function () {
                 r.lastModified = lastModified;
                 that.db.collection(FSITEMS).replaceOne({
                     _id: id
-                }, r, function(err, r_upd) {
+                 }, r, function(err, r_upd) {
                     if (err) {
                         return callback(err);
                     }
@@ -260,7 +260,7 @@ var FsMongo = (function () {
                                 code: 'FSITEM_LASTMODIFIED_UPDATED', 
                                 updatedCount: r_upd.result.nModified, 
                                 item: r_upd.ops[0]
-                            });
+                             });
                     }
                     else {
                         return callback(error('MongoRepoError', 'updateItemLastModified', util.inspect( r_upd.result )));
@@ -297,7 +297,7 @@ var FsMongo = (function () {
                 }
                 that.db.collection(FSITEMS).deleteOne({
                     _id: id
-                }, function(err, r) {
+                 }, function(err, r) {
                     if (err) {
                         return callback(err);
                     }
@@ -308,7 +308,7 @@ var FsMongo = (function () {
                         return callback(null, {
                                 code: 'FSITEM_DELETED', 
                                 deletedCount: r.deletedCount
-                            });
+                             });
                     }
                     else {
                         return callback(error('MongoRepoError', 'deleteItem', 'FsMongo error deleting item. Result: ' + util.inspect( r.result )));
@@ -320,19 +320,20 @@ var FsMongo = (function () {
     FsMongo.prototype._deleteDocument = function(id, callback) {
         this.db.collection(DOCUMENTS).deleteOne({
             _id: id
-        }, function(err, r) {
+         }, function(err, r) {
             if (err) {
                 return callback(err);
             }
             delete r.connection
             delete r.message
             // log 'wizzi-repo.mongodb.FsMongo._deleteDocument.r', r
+            
+            // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
             if (r.deletedCount == 1 && r.result.ok == 1) {
-                // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
                 return callback(null, true);
             }
+            // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
             else {
-                // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
                 return callback(null, false);
             }
         })
@@ -350,7 +351,7 @@ var FsMongo = (function () {
         }
         this.db.collection(DOCUMENTS).find({
             _id: id
-        }).toArray(function(err, r) {
+         }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -387,24 +388,25 @@ var FsMongo = (function () {
             if (err && err.code == 'MongoRepoError') {
             }
             else {
+                
+                // log 'wizzi-repo.mongodb.FsMongo.writeDocument not modified', f
                 if (f === content) {
-                    // log 'wizzi-repo.mongodb.FsMongo.writeDocument not modified', f
                     return callback(null, {
                             code: 'DOCUMENT_NOT_MODIFIED'
-                        });
+                         });
                 }
             }
             // log 'wizzi-repo.mongodb.FsMongo.writeDocument.readDocument.upsert', id, content, lastModified
             var lastModified = new Date();
             that.db.collection(DOCUMENTS).replaceOne({
                 _id: id
-            }, {
+             }, {
                 _id: id, 
                 content: content, 
                 lastModified: lastModified
-            }, {
+             }, {
                 upsert: true
-            }, function(err, r) {
+             }, function(err, r) {
                 if (err) {
                     return callback(err);
                 }
@@ -421,17 +423,19 @@ var FsMongo = (function () {
                     return callback(null, {
                             code: 'DOCUMENT_WRITTEN', 
                             item: r.ops[0]
-                        });
+                         });
                 })
             })
         })
     }
     FsMongo.prototype.close = function() {
+        
+        // log '***** wizzi-repo.mongodb.FsMongo start closing'
+        
+        // log '***** wizzi-repo.mongodb.FsMongo closed'
         if (this.db) {
-            // log '***** wizzi-repo.mongodb.FsMongo start closing'
             this.db.close();
             this.db = null;
-            // log '***** wizzi-repo.mongodb.FsMongo closed'
         }
     }
     return FsMongo;
@@ -455,13 +459,14 @@ FsMongo.create = function(mongoUri, callback) {
         }
         return callback(null, new FsMongo(mongoDb));
     })
-};
+}
+;
 function error(method, message) {
     return {
             __is_error: true, 
             method: 'Mongo.FsMongo.' + method, 
             message: message
-        };
+         };
 }
 function normalize(path) {
     return path.trim().replace(/\\/g,'/').toLowerCase();

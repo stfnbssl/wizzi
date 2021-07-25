@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\prettifiers\mTreeHtmlPrettifier.js.ittf
 */
 'use strict';
@@ -36,15 +36,16 @@ module.exports = function(ittfMTreeExRoot) {
         __ittfNode: {
             line: 0, 
             indent: 0
-        }, 
+         }, 
         hb: new HtmlBuilder(true), 
         fragments: ittfMTreeExRoot.fragments
-    };
+     };
     toHtmlPretty(ittfMTreeExRoot, ctx)
     return {
             prettyLines: ctx.hb.toLines()
-        };
-};
+         };
+}
+;
 function toHtmlPretty(node, ctx) {
     ctx.__ittfNode.line++;
     var name = node.n || node.name,
@@ -87,8 +88,9 @@ function toHtmlPretty(node, ctx) {
             ctx.hb.writeAttribute('class', name_style);
         }
     }
+    
+    // log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
     if (node.isMixinCall()) {
-        // log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
         var dId = ctx.fragments[node.fragmentName] ? ctx.fragments[node.fragmentName].id : null;
         if (dId) {
             ctx.hb.writeAttribute('data-frag-id', dId);

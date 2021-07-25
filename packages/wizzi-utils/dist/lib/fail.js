@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fail.js.ittf
 */
 'use strict';
@@ -18,7 +18,7 @@ md.code = {
     MISSING_MODELTRANSFORMER: 8, 
     MISSING_ARTIFACTGENERATOR: 9, 
     WARNING: 10
-};
+ };
 function dumpStack(e) {
     if (option('stack')) {
         if (e.origError && e.origError.stack) {
@@ -36,7 +36,8 @@ md.fatal = function(e, errcode) {
     var code = typeof(errcode) === 'number' ? errcode : md.code.FATAL_ERROR;
     ;
     process.exit(code)
-};
+}
+;
 md.errorcount = 0;
 md.warncount = 0;
 md.warn = function(e, errcode) {
@@ -53,7 +54,8 @@ md.warn = function(e, errcode) {
             process.exit(code)
         }
     }
-};
+}
+;
 md.report = function() {
     if (md.warncount > 0) {
         logerror('Done, but with warnings.');
@@ -61,7 +63,8 @@ md.report = function() {
     else {
         logsuccess('Done, without errors.');
     }
-};
+}
+;
 function loginfo(msg) {
     console.log(msg);
 }

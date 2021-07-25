@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\minimatch.js.ittf
 */
 'use strict';
@@ -12,7 +12,7 @@ module.exports = minimatch;
 minimatch.Minimatch = Minimatch;
 var path = {
     sep: '/'
-};
+ };
 try {
     path = require('path');
 } 
@@ -24,24 +24,24 @@ var plTypes = {
     '!': {
         open: '(?:(?!(?:', 
         close: '))[^/]*?)'
-    }, 
+     }, 
     '?': {
         open: '(?:', 
         close: ')?'
-    }, 
+     }, 
     '+': {
         open: '(?:', 
         close: ')+'
-    }, 
+     }, 
     '*': {
         open: '(?:', 
         close: ')*'
-    }, 
+     }, 
     '@': {
         open: '(?:', 
         close: ')'
-    }
-};
+     }
+ };
 var qmark = '[^/]';
 var star = (qmark + '*?');
 var twoStarDot = '(?:(?!(?:\\\/|^)(?:\\.{1,2})($|\\\/)).)*?';
@@ -84,16 +84,19 @@ minimatch.defaults = function(def) {
     };
     m.Minimatch = function Minimatch(pattern, options) {
         return new orig.Minimatch(pattern, ext(def, options));
-    };
+    }
+    ;
     return m;
-};
+}
+;
 Minimatch.defaults = function(def) {
     if (! (def) || ! (Object.keys(def).length)) {
         return Minimatch;
     }
     return minimatch.defaults(def).Minimatch
     ;
-};
+}
+;
 function minimatch(p, pattern, options) {
     if (typeof (pattern) !== 'string') {
         throw new TypeError('glob pattern string required');
@@ -133,7 +136,8 @@ function Minimatch(pattern, options) {
     this.make();
 }
 Minimatch.prototype.debug = function() {
-};
+}
+;
 Minimatch.prototype.make = make;
 function make() {
     if (this._made) {
@@ -157,15 +161,19 @@ function make() {
     this.debug(this.pattern, set)
     set = this.globParts = set.map(function(s) {
         return s.split(slashSplit);
-    });
+    })
+    ;
+    ;
     this.debug(this.pattern, set)
     set = set.map(function(s, si, set) {
         return s.map(this.parse, this);
-    }, this);
+    }, this)
+    ;
     this.debug(this.pattern, set)
     set = set.filter(function(s) {
         return s.indexOf(false) === - (1);
-    });
+    })
+    ;
     this.debug(this.pattern, set)
     this.set = set;
 }
@@ -189,7 +197,8 @@ function parseNegate() {
 }
 minimatch.braceExpand = function(pattern, options) {
     return braceExpand(pattern, options);
-};
+}
+;
 Minimatch.prototype.braceExpand = braceExpand;
 function braceExpand(pattern, options) {
     if (! (options)) {
@@ -310,7 +319,7 @@ function parse(pattern, isSub) {
                     reStart: re.length, 
                     open: plTypes[stateChar].open, 
                     close: plTypes[stateChar].close
-                })
+                 })
                 re += stateChar === '!' ? '(?:(?!(?:' : '(?:';
                 this.debug('plType %j %j', stateChar, re);
                 stateChar = false;
@@ -403,7 +412,8 @@ function parse(pattern, isSub) {
                 $2 = '\\';
             }
             return ((((($1 + $1)) + $2)) + '|');
-        });
+        })
+        ;
         this.debug('tail=%j\n   %s', tail, tail, pl, re);
         var t = pl.type === '*' ? star : pl.type === '?' ? qmark : ('\\' + pl.type);
         hasMagic = true;
@@ -469,7 +479,8 @@ function parse(pattern, isSub) {
 }
 minimatch.makeRe = function(pattern, options) {
     return new Minimatch(pattern, (options || {})).makeRe();
-};
+}
+;
 Minimatch.prototype.makeRe = makeRe;
 function makeRe() {
     if (this.regexp || (this.regexp === false)) {
@@ -508,12 +519,14 @@ minimatch.match = function(list, pattern, options) {
     var mm = new Minimatch(pattern, options);
     list = list.filter(function(f) {
         return mm.match(f);
-    });
+    })
+    ;
     if (mm.options.nonull && ! (list.length)) {
         list.push(pattern);
     }
     return list;
-};
+}
+;
 Minimatch.prototype.match = match;
 function match(f, partial) {
     this.debug('match', f, this.pattern)
@@ -567,7 +580,7 @@ Minimatch.prototype.matchOne = function(file, pattern, partial) {
         'this': this, 
         file: file, 
         pattern: pattern
-    })
+     })
     this.debug('matchOne', file.length, pattern.length)
     for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; ((fi < fl) && (pi < pl)); fi++, pi++) {
         this.debug('matchOne loop');
@@ -647,7 +660,8 @@ Minimatch.prototype.matchOne = function(file, pattern, partial) {
         return emptyFileEnd;
     }
     throw new Error('wtf?');
-};
+}
+;
 function globUnescape(s) {
     return s.replace(/\\(.)/g, '$1');
 }

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\ittfTree\ittfMTreeEx.js.ittf
 */
 'use strict';
@@ -50,19 +50,19 @@ describe("ittfMTreeEx", function() {
                         {
                             n: '$$', 
                             v: 'beta'
-                        }, 
+                         }, 
                         {
                             n: 'gamma', 
                             children: [
                                 {
                                     n: 'a'
-                                }
+                                 }
                             ]
-                        }
+                         }
                     ]
-                }
+                 }
             ]
-        }, function(err, result) {
+         }, function(err, result) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -91,17 +91,17 @@ describe("ittfMTreeEx", function() {
                 {
                     name: '$$', 
                     value: 'beta'
-                }, 
+                 }, 
                 {
                     name: 'gamma', 
                     children: [
                         {
                             name: 'a'
-                        }
+                         }
                     ]
-                }
+                 }
             ]
-        }, function(err, result) {
+         }, function(err, result) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -130,9 +130,9 @@ describe("ittfMTreeEx", function() {
                 {
                     name: 'beta', 
                     value: 'i am:${name}.'
-                }
+                 }
             ]
-        }, function(err, result) {
+         }, function(err, result) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);

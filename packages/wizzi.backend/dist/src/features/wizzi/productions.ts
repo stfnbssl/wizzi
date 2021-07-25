@@ -2,13 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.backend\.wizzi\src\features\wizzi\productions.ts.ittf
-    utc time: Thu, 22 Jul 2021 16:33:13 GMT
+    utc time: Sun, 25 Jul 2021 19:40:41 GMT
 */
 import path from 'path';
 import fs from 'fs';
 import wizzi from 'wizzi';
 import wizziTools from 'wizzi-tools';
 import {ittfDocumentScanner, folderBrowse, IttfMTreeState, FolderBrowseResult, verify} from 'wizzi-utils';
+import {packiFilePrefix} from '../config/env';
 import {packiTypes} from '../packi';
 import {config} from '../config';
 import {createFsJsonAndFactory, ensurePackiFilePrefix, createFilesystemFactory} from './factory';
@@ -240,6 +241,62 @@ export async function generateArtifactFs(filePath: string, context?: any, option
             else {
                 reject('No artifact generator available for document ' + filePath);
             }
+        }
+        );
+}
+
+export async function generateFolderArtifacts(sourceFolderUri: string, destFolderUri: string, files: packiTypes.PackiFiles, context?: any):  Promise<packiTypes.PackiFiles> {
+
+    return new Promise(async (resolve, reject) => {
+        
+            if (!verify.isObject(files)) {
+                return reject({
+                        message: 'files parameter must be an object of type PackiFiles', 
+                        files
+                     });
+            }
+            console.log(myname, 'generateFolderArtifacts.sourceFolderUri,destFolderUri', sourceFolderUri, destFolderUri);
+            let jsonwf: any = {};
+            try {
+                jsonwf = await createFsJsonAndFactory(files);
+                ;
+                jsonwf.wf.generateFolderArtifacts(packiFilePrefix + sourceFolderUri, {
+                    modelRequestContext: context, 
+                    artifactRequestContext: context
+                 }, {
+                    destFolder: packiFilePrefix + destFolderUri
+                 }, (err: any, result: string) => {
+                
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log(myname, 'generateFolderArtifacts.result', result);
+                    jsonwf.wf.fileService.getFiles(packiFilePrefix + destFolderUri, {
+                        deep: true, 
+                        documentContent: true
+                     }, (err: any, files: any) => {
+                    
+                        if (err) {
+                            return reject(err);
+                        }
+                        const packiFiles: packiTypes.PackiFiles = {};
+                        var i, i_items=files, i_len=files.length, file;
+                        for (i=0; i<i_len; i++) {
+                            file = files[i];
+                            packiFiles[file.relPath] = {
+                                type: 'CODE', 
+                                contents: file.content
+                             };
+                        }
+                        resolve(packiFiles)
+                    }
+                    )
+                }
+                )
+            } 
+            catch (ex) {
+                return reject(ex);
+            } 
         }
         );
 }

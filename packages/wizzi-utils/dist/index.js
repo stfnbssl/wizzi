@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\root\index.js.ittf
 */
 'use strict';
@@ -83,7 +83,7 @@ md.ittfHtmlPrettifier = ittfHtmlPrettifier;
 md.prettifyFromString = function(ittfContent, callback) {
     ittfMTreeEx.createFrom(ittfContent, {
         fromString: true
-    }, function(err, mTree) {
+     }, function(err, mTree) {
         if (err) {
             return callback(err);
         }
@@ -94,4 +94,5 @@ md.prettifyFromString = function(ittfContent, callback) {
             return callback(null, pretty.prettyLines.join('\n'));
         })
     })
-};
+}
+;

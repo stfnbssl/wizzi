@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\root\index.js.ittf
 */
 'use strict';
@@ -30,7 +30,8 @@ md.fsfile = function fsfile(callback) {
     // vfile default
     var fsfile = vfile();
     return callback(null, fsfile);
-};
+}
+;
 
 //
 md.mongoDbDocumentManager = function mongoDbDocumentManager(mongoUri, callback) {
@@ -50,7 +51,8 @@ md.mongoDbDocumentManager = function mongoDbDocumentManager(mongoUri, callback) 
         }
         return callback(null, docman);
     })
-};
+}
+;
 
 //
 md.dbfile = function dbfile(options, callback) {
@@ -86,7 +88,8 @@ md.dbfile = function dbfile(options, callback) {
             return callback(null, dbfile);
         })
     })
-};
+}
+;
 
 //
 md.jsonDirectoryTreeFromFilesystem = JsonFsImpl.directoryTree;
@@ -121,7 +124,7 @@ md.jsonfile = function jsonfile(options, callback) {
         var fsimpl = new JsonFsImpl({});
         fsimpl.open({
             fsJson: options.fsJson
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -147,7 +150,8 @@ md.jsonfile = function jsonfile(options, callback) {
             })
         })
     }
-};
+}
+;
 
 
 md.JsonComponents = require('./lib/json/index');
@@ -179,7 +183,7 @@ md.createStoreFactory = function createStoreFactory(options, callback) {
         return callback(error('InvalidArgument', 'createStoreFactory', {
                 parameter: 'storeKind', 
                 message: 'invalid storeKind: ' + storeKind + '. Received: ' + storeKind
-            }));
+             }));
     }
     
     if (storeKind == 'mongodb') {
@@ -196,7 +200,8 @@ md.createStoreFactory = function createStoreFactory(options, callback) {
         }
     }
     return callback(null, getCreateStore(storeKind, options));
-};
+}
+;
 function getCreateStore(storeKind, options) {
     if (verify.isNotEmpty(storeKind) === false) {
         return error(
@@ -216,7 +221,7 @@ function getCreateStore(storeKind, options) {
                 storeBaseFolder: options.storeBaseFolder, 
                 storeJsonFsData: options.storeJsonFsData, 
                 storeFsJson: options.storeFsJson
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -228,8 +233,11 @@ function checkStoreKind(kind) {
     return ['filesystem', 'mongodb', 'json', 'browser'].indexOf(kind) > -1;
 }
 // TODO fileService.getFilesAsync
-md.folderFilesInfoByPath = function(folderPath, fileService) {
-    fileService.getFilesAsync(folderPath, function(err, files) {
+md.folderFilesInfoByPath = function(folderPath, fileService, callback) {
+    console.log('wizzi-repo.folderFilesInfoByPath', folderPath);
+    fileService.getFilesAsync(folderPath, {
+        deep: true
+     }, function(err, files) {
         if (err) {
             return callback(err);
         }
@@ -237,11 +245,12 @@ md.folderFilesInfoByPath = function(folderPath, fileService) {
         var i, i_items=files, i_len=files.length, f;
         for (i=0; i<i_len; i++) {
             f = files[i];
-            result.push(fileInfoByPath(f.fullPath))
+            result.push(fileInfoByPath(f.fullPath, folderPath))
         }
-        return result;
+        return callback(null, result);
     })
-};
+}
+;
 md.ittfDocumentInfoByPath = function(filePath) {
     var result = fileInfoByPath(filePath);
     if (result.isIttfDocument) {
@@ -251,9 +260,10 @@ md.ittfDocumentInfoByPath = function(filePath) {
         return {
                 is_error: true, 
                 message: 'The file is not an ittfdocument: ' + result.fullPath
-            };
+             };
     }
-};
+}
+;
 /**
   params
     string code

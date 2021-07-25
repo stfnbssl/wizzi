@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\fs\vfile.js.ittf
 */
 'use strict';
@@ -22,5 +22,5 @@ var result = file.getGlobbedFilesEx(path.join(__dirname, 'ittf', 'globs2', '**/*
 console.log('vfile.result', result);
 var result = file.getGlobbedFilesEx(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), {
     removeRoot: path.join(__dirname, 'ittf')
-});
+ });
 console.log('vfile.result', result);

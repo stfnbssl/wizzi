@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\mongodb\fs\document.js.ittf
 */
 'use strict';
@@ -58,7 +58,7 @@ var Document = (function () {
             var documents = file.getFiles(sourcePath, {
                 deep: true, 
                 documentContent: true
-            });
+             });
             // log 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
             var d, destFilePath, len = documents.length;
             var uploaded = [];
@@ -67,7 +67,8 @@ var Document = (function () {
                     return callback(null, uploaded);
                 }
                 d = documents[index];
-                destFilePath = path.join(destPath, d.relPath);
+                destFilePath = path.join(destPath, d.relPath)
+                ;
                 if (d.content && d.content.length > 0) {
                     that.writeFile(destFilePath, d.content, function(err, r) {
                         if (err) {
@@ -77,7 +78,7 @@ var Document = (function () {
                             relPath: d.relPath, 
                             dest: destFilePath, 
                             result: r
-                        })
+                         })
                         process.nextTick(function() {
                             repeater(index + 1);
                         })
@@ -130,7 +131,7 @@ var Document = (function () {
                 dirname: dirnameS, 
                 path: pathS, 
                 kind: 0
-            }, function(err, r) {
+             }, function(err, r) {
                 if (err) {
                     return callback(err);
                 }
@@ -321,7 +322,7 @@ var Document = (function () {
                             path: files[i], 
                             fullPath: files[i], 
                             content: contents[i]
-                        })
+                         })
                     }
                     return callback(null, ret);
                 })
@@ -464,7 +465,7 @@ var Document = (function () {
                         console.log('wizzi-repo.fs.mongodb.document.copyFile.r', r);
                         return callback(null, {
                                 code: "DOCUMENT_COPIED"
-                            });
+                             });
                     })
                 }
             })
@@ -497,7 +498,7 @@ var Document = (function () {
         console.log('wizzi-repo.t.fscommon.document.getFiles.before');
         this.getFiles(sourcePath, {
             deep: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 return callback(err);
             }
@@ -632,7 +633,7 @@ var Document = (function () {
             return callback(null, {
                     renamed: false, 
                     message: 'oldPath and newPath are the same'
-                });
+                 });
         }
         var that = this;
         this.fsCommon.getItemByPath(oldPath, function(err, fsitem) {
@@ -663,7 +664,7 @@ var Document = (function () {
                         return callback(null, {
                                 code: "DOCUMENT_RENAMED", 
                                 id: r.item._id
-                            });
+                             });
                     })
                 }
             })
@@ -701,7 +702,7 @@ var Document = (function () {
             return callback(null, {
                     renamed: false, 
                     message: 'oldPath and newPath are the same'
-                });
+                 });
         }
         var that = this;
         this.fsCommon.getItemByPath(oldPath, function(err, fsitem) {
@@ -835,7 +836,7 @@ var Document = (function () {
             var documents = file.getFiles(sourcePath, {
                 deep: true, 
                 documentContent: true
-            });
+             });
             // log 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
             var d, destFilePath, len = documents.length;
             var uploaded = [];
@@ -844,7 +845,8 @@ var Document = (function () {
                     return callback(null, uploaded);
                 }
                 d = documents[index];
-                destFilePath = path.join(destPath, d.relPath);
+                destFilePath = path.join(destPath, d.relPath)
+                ;
                 if (d.content && d.content.length > 0) {
                     that.writeFile(destFilePath, d.content, function(err, r) {
                         if (err) {
@@ -854,7 +856,7 @@ var Document = (function () {
                             relPath: d.relPath, 
                             dest: destFilePath, 
                             result: r
-                        })
+                         })
                         process.nextTick(function() {
                             repeater(index + 1);
                         })
@@ -895,12 +897,12 @@ var Document = (function () {
                 return callback(null, {
                         path: singleFilePath, 
                         content: content
-                    });
+                     });
             })
         }
         this.getFiles(folderPath, {
             deep: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 return callback(err);
             }
@@ -927,7 +929,7 @@ var Document = (function () {
             dirname: dirname, 
             path: normalize(path.join(dirname, basename)), 
             kind: 1
-        }, function(err, r) {
+         }, function(err, r) {
             if (err) {
                 return callback(err);
             }
@@ -970,23 +972,25 @@ var Document = (function () {
             if (err) {
                 return callback(err);
             }
+            
+            // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.1.exists, so update', filePath
             if (fsitem != null) {
-                // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.1.exists, so update', filePath
                 return that._updateFile(fsitem._id, content, callback);
             }
+            // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.2.not exists. try get dirname', dirname
             else {
                 var dirname = path.dirname(filePath);
-                // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.2.not exists. try get dirname', dirname
                 that.fsCommon.getItemByPath(dirname, function(err, fsitem) {
                     if (err) {
                         return callback(err);
                     }
+                    
+                    // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                     if (fsitem != null) {
-                        // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                         return that._createFile(fsitem._id, dirname, path.basename(filePath), content, callback);
                     }
+                    // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                     else {
-                        // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                         that.createFolder(dirname, function(err, fsitem) {
                             if (err) {
                                 return callback(err);
@@ -1069,7 +1073,7 @@ var Document = (function () {
                         isFile: function() {
                             return false;
                         }
-                    });
+                     });
             }
             else {
                 return callback(null, {
@@ -1079,7 +1083,7 @@ var Document = (function () {
                         isFile: function() {
                             return fsitem.kind == 1;
                         }
-                    });
+                     });
             }
         })
     }
@@ -1111,13 +1115,14 @@ Document.create = function(mongoUri, callback) {
         }
         return callback(null, new Document(new FsMongo(mongoDb)));
     })
-};
+}
+;
 function error(method, message) {
     return {
             __is_error: true, 
             method: 'Mongo.Document.' + method, 
             message: message
-        };
+         };
 }
 function normalize(path) {
     return path.trim().replace(/\\/g,'/').toLowerCase();

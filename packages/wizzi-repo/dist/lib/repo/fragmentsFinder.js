@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\repo\fragmentsFinder.js.ittf
 */
 'use strict';
@@ -65,7 +65,7 @@ var FragmentsFinder = (function () {
             deep: true, 
             tFoldersOnly: true, 
             documentNames: true
-        });
+         });
         var i, i_items=folders, i_len=folders.length, item;
         for (i=0; i<i_len; i++) {
             item = folders[i];
@@ -96,7 +96,7 @@ var FragmentsFinder = (function () {
             deep: false, 
             tFoldersOnly: true, 
             documentNames: true
-        });
+         });
         var i, i_items=folders, i_len=folders.length, item;
         for (i=0; i<i_len; i++) {
             item = folders[i];

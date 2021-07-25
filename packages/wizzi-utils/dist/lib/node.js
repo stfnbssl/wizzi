@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\node.js.ittf
 */
 'use strict';
@@ -23,7 +23,8 @@ md.nodeToTextLine = function(node) {
         }
     }
     return acc.join(work.lineSep);
-};
+}
+;
 function textline(node, acc, indent) {
     var open = node.tagSuffix == '(' ? '(' : ' ';
     acc.push(indent + node.name + open + (node.value || ''))
@@ -44,7 +45,7 @@ md.inlinedTextToTextLines = function(text, options) {
             return {
                     text: text, 
                     lines: null
-                };
+                 };
         }
     }
     var text = verify.replaceAll(text, work.textSep, '\n');
@@ -57,7 +58,7 @@ md.inlinedTextToTextLines = function(text, options) {
             return {
                     text: ss[0], 
                     lines: null
-                };
+                 };
         }
     }
     else {
@@ -71,13 +72,15 @@ md.inlinedTextToTextLines = function(text, options) {
             return {
                     text: ss[0], 
                     lines: lines
-                };
+                 };
         }
     }
-};
+}
+;
 md.replace = function(item, replacers) {
+    
+    // log 'util/node/replace/item', item
     if (!item.parent) {
-        // log 'util/node/replace/item', item
         var i, i_items=replacers, i_len=replacers.length, repl;
         for (i=0; i<i_len; i++) {
             repl = replacers[i];
@@ -101,7 +104,8 @@ md.replace = function(item, replacers) {
             item.parent.children.push(child);
         }
     }
-};
+}
+;
 md.remove = function(item) {
     var nodes = item.parent.children;
     item.parent.children = [];
@@ -112,4 +116,5 @@ md.remove = function(item) {
             item.parent.children.push(child);
         }
     }
-};
+}
+;

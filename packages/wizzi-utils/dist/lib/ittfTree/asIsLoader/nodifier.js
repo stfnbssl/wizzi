@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\ittfTree\asIsLoader\nodifier.js.ittf
 */
 'use strict';
@@ -64,7 +64,8 @@ module.exports = function(lines, mTreeBrick) {
         current.children = [];
     }
     return nodes;
-};
+}
+;
 function local_error(name, method, message, line, mTreeBrick) {
     if (line) {
         message = message + '\nIn node: ' + line.name + ' ' + (line.value || '') + ' row: ' + line.row + ' col: ' + line.col + ' file: ' + mTreeBrick.uri;
@@ -83,5 +84,5 @@ function error(code, method, message, innerError) {
             method: 'wizzi-utils.ittfTree.asIsLoader.nodifier.' + method, 
             parameter: parameter, 
             sourcePath: __filename
-        }, message || 'Error message unavailable');
+         }, message || 'Error message unavailable');
 }

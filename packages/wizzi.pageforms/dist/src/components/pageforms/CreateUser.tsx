@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\CreateUser.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -13,6 +13,8 @@ import nullthrows from 'nullthrows';
 import FormContainer from './widgets/FormContainer';
 import FormTitle from './widgets/FormTitle';
 import FormGroup from './widgets/FormGroup';
+import FormText from './widgets/FormText';
+import FormSelect from './widgets/FormSelect';
 import FormCheckBox from './widgets/FormCheckBox';
 import FormRadioBox from './widgets/FormRadioBox';
 import FormRow from './widgets/FormRow';

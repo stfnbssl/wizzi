@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\scanner\scanner.js.ittf
 */
 'use strict';
@@ -18,7 +18,7 @@ describe("the folderScanner module", function() {
         folderScanner.scan(path.join(__dirname, 'ittf', 'first'), {
             name: 'first', 
             gitPath: 'c:/blabla'
-        }, function(err, ittfMTreeEx) {
+         }, function(err, ittfMTreeEx) {
             if (err) {
                 return callback(err);
             }

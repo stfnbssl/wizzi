@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\verify.js.ittf
 */
 'use strict';
@@ -21,46 +21,57 @@ md.namedRegExp = regexpExt.namedRegExp;
 var isAbsolutePathRegExp = new RegExp('^(?:[a-z]+:)?/', 'i');
 md.isDefined = function(test) {
     return !(typeof(test) === 'undefined');
-};
+}
+;
 md.isUndefined = function(test) {
     return typeof(test) === 'undefined';
-};
+}
+;
 md.isNullOrUndefined = function(test) {
     return test === null || (typeof(test) === 'undefined');
-};
+}
+;
 md.isString = function(test) {
     return test !== null && typeof(test) === 'string';
-};
+}
+;
 md.isEmpty = function(test) {
     return md.isString(test) == false || test.length == 0;
-};
+}
+;
 md.isNotEmpty = function(test) {
     return md.isString(test) && test.length > 0;
-};
+}
+;
 md.isNumber = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return !md.isArray(test) && (test - parseFloat(test) + 1) >= 0;
-};
+}
+;
 md.isBoolean = function(test) {
     return typeof(test) === 'boolean';
-};
+}
+;
 md.isDate = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return Object.prototype.toString.call(test) === '[object Date]';
-};
+}
+;
 md.isPrimitive = function(test) {
     return md.isString(test) || md.isNumber(test) || md.isBoolean(test) || md.isDate(test);
-};
+}
+;
 md.isObject = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return {}.toString.call(test) === '[object Object]';
-};
+}
+;
 md.isArray = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
@@ -69,28 +80,33 @@ md.isArray = function(test) {
         return Array.isArray(test);
     }
     return {}.toString.call(test) === '[object Array]';
-};
+}
+;
 md.isArrayOrObject = function(test) {
     return md.isArray(test) || md.isObject(test);
-};
+}
+;
 md.isFunction = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return {}.toString.call(test) === '[object Function]' || {}.toString.call(test) === '[object AsyncFunction]';
-};
+}
+;
 md.isRegExp = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return {}.toString.call(test) === '[object RegExp]';
-};
+}
+;
 md.isError = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
     return ({}.toString.call(test) === '[object Error]') || (test instanceof Error);
-};
+}
+;
 md.isAbsolutePath = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
@@ -102,28 +118,32 @@ md.isAbsolutePath = function(test) {
         }
         return path.resolve(test) == path.normalize(test);
     */
-};
+}
+;
 md.isIttfMacro = function(test) {
     if (md.isEmpty(test)) {
         return false;
     }
     test = test.trim();
     return test.indexOf('$' + '{') > -1 && test.indexOf('}') > -1;
-};
+}
+;
 md.isSingleQuoteLiteral = function(test) {
     if (md.isEmpty(test)) {
         return false;
     }
     test = test.trim();
     return test[0] === "'" && test.substr(-1, 1) === "'";
-};
+}
+;
 md.isDoubleQuoteLiteral = function(test) {
     if (md.isEmpty(test)) {
         return false;
     }
     test = test.trim();
     return test[0] === '"' && test.substr(-1, 1) === '"';
-};
+}
+;
 md.isCssLength = function(test) {
     if (md.isEmpty(test)) {
         return false;
@@ -140,7 +160,8 @@ md.isCssLength = function(test) {
         }
     }
     return num > 0 && ['px', 'em', 'rem', 'vh', 'vw'].indexOf(unit) > -1;
-};
+}
+;
 //
 var ipRegex = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i,
     emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -149,7 +170,8 @@ var ipRegex = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4]
     urlRegex = /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 md.isEmail = function(value) {
     return md.isNotEmpty(value) && emailRegex.test(value);
-};
+}
+;
 md.isEmails = function(value) {
     if (md.isNotEmpty(value) == false) {
         return false;
@@ -162,43 +184,56 @@ md.isEmails = function(value) {
         }
     }
     return true;
-};
+}
+;
 md.isMinLength = function(value, length) {
     return _hasLength(value) && value.length >= length;
-};
+}
+;
 md.isMaxLength = function(value, length) {
     return _hasLength(value) && value.length <= length;
-};
+}
+;
 md.isExactLength = function(value, length) {
     return _hasLength(value) && value.length == length;
-};
+}
+;
 md.isGreaterThan = function(value, test) {
     return md.isNumber(value) && value > test;
-};
+}
+;
 md.isLessThan = function(value, test) {
     return md.isNumber(value) && value < test;
-};
+}
+;
 md.isGreaterEqualThan = function(value, test) {
     return md.isNumber(value) && value >= test;
-};
+}
+;
 md.isLessEqualThan = function(value, test) {
     return md.isNumber(value) && value <= test;
-};
+}
+;
 md.isAlpha = function(value) {
     return md.isNotEmpty(value) && /^[a-z]+$/i.test(value);
-};
+}
+;
 md.isAlphaNumeric = function(value) {
     return md.isNotEmpty(value) && /^[a-z0-9]+$/i.test(value);
-};
+}
+;
 md.isIp = function(value) {
     return md.isNotEmpty(value) && ipRegex.test(value);
-};
+}
+;
 md.isBase64 = function(value) {
     return md.isNotEmpty(value) && base64Regex.test(value);
-};
+}
+;
 md.isUrl = function(value) {
     return md.isNotEmpty(value) && urlRegex.test(value);
-};
+}
+;
 md.isCreditCard = function(value) {
     if (!numericDashRegex.test(value)) {
         return false;
@@ -219,7 +254,8 @@ md.isCreditCard = function(value) {
         bEven = !bEven;
     }
     return nCheck % 10 === 0;
-};
+}
+;
 md.isGreaterThanDate = function(value, date) {
     var enteredDate = this._getValidDate(value),
         validDate = this._getValidDate(date);
@@ -227,7 +263,8 @@ md.isGreaterThanDate = function(value, date) {
         return false;
     }
     return enteredDate > validDate;
-};
+}
+;
 md.isLessThanDate = function(value, date) {
     var enteredDate = this._getValidDate(value),
         validDate = this._getValidDate(date);
@@ -235,7 +272,8 @@ md.isLessThanDate = function(value, date) {
         return false;
     }
     return enteredDate < validDate;
-};
+}
+;
 md.isGreaterEqualDate = function(value, date) {
     var enteredDate = this._getValidDate(value),
         validDate = this._getValidDate(date);
@@ -243,7 +281,8 @@ md.isGreaterEqualDate = function(value, date) {
         return false;
     }
     return enteredDate >= validDate;
-};
+}
+;
 md.isLessEqualDate = function(value, date) {
     var enteredDate = this._getValidDate(value),
         validDate = this._getValidDate(date);
@@ -251,7 +290,8 @@ md.isLessEqualDate = function(value, date) {
         return false;
     }
     return enteredDate <= validDate;
-};
+}
+;
 function _getValidDate(date) {
     if (md.isDate(date)) {
         return date;
@@ -351,7 +391,8 @@ md.convert = function convert(value, type, unquote) {
         }
     }
     return error('TypeError', 'convert', 'Invalid type: "' + type + '", expected (string, integer, float, boolean, date)');
-};
+}
+;
 // means can convert a not empty string value to a given type
 md.canConvertTo = function(type, value) {
     if (type === 'boolean') {
@@ -369,14 +410,16 @@ md.canConvertTo = function(type, value) {
     else if (type === 'string') {
         return true;
     }
-};
+}
+;
 md.escapeQuotes = function(text) {
     if (!text) {
         return ;
     }
     text = md.replaceAll(text, "'", "\\'");
     return md.replaceAll(text, '"', '\\"');
-};
+}
+;
 md.splitLines = function(text, options) {
     if (!text) {
         return [];
@@ -392,14 +435,15 @@ md.splitLines = function(text, options) {
                 num: i, 
                 numFmt: i < 10 ? '000' + i : i <100 ? '00' + i : '0' + i, 
                 text: line
-            })
+             })
         }
         return ret;
     }
     else {
         return text.split(/\r?\n/);
     }
-};
+}
+;
 md.stripIttfExtension = function(path_string) {
     if (!path_string) {
         return path_string;
@@ -410,20 +454,23 @@ md.stripIttfExtension = function(path_string) {
     else {
         return path_string;
     }
-};
+}
+;
 md.stripExtension = function(path_string) {
     if (!path_string) {
         return path_string;
     }
     var pos = path_string.lastIndexOf('.');
     return path_string.substr(0, pos);
-};
+}
+;
 md.replaceExtension = function(path_string, newExtension) {
     if (!path_string) {
         return path_string;
     }
     return md.stripExtension(path_string) + '.' + newExtension;
-};
+}
+;
 var STATE_WAIT_NAME = 0;
 var STATE_NAME = 1;
 var STATE_WAIT_VALUE = 2;
@@ -460,16 +507,17 @@ md.parseNameValue = function(text, node, options) {
                 state = STATE_NAME_BRACKET;
                 bracketLevel++;
             }
+            
+            // state MUST BE STATE_NAME or STATE_VALUE
             else if (q != null) {
-                // state MUST BE STATE_NAME or STATE_VALUE
                 if (state === STATE_NAME) {
                     name_buf.push(ch);
                 }
                 else if (state === STATE_VALUE) {
                     value_buf.push(ch);
                 }
+                // this is a bug
                 else {
-                    // this is a bug
                     throw new Error('BUG. parseNameValue invalid state ' + state);
                 }
                 if (ch == '\\') {
@@ -489,8 +537,9 @@ md.parseNameValue = function(text, node, options) {
                     }
                 }
             }
+            
+            // state MUST BE STATE_WAIT_NAME or STATE_WAIT_VALUE
             else if (ch == '"' || ch == '\'') {
-                // state MUST BE STATE_WAIT_NAME or STATE_WAIT_VALUE
                 if (state === STATE_NAME) {
                     throw new errors.NodeError("parseNameValue error. Invalid use of quote inside a name part. Source: " + text, node);
                 }
@@ -518,8 +567,8 @@ md.parseNameValue = function(text, node, options) {
                 else if (state === STATE_VALUE) {
                     value_buf.push(ch);
                 }
+                // ok. no action.
                 else {
-                    // ok. no action.
                 }
             }
             else if (ch == '\r' || ch == '\n') {
@@ -546,8 +595,9 @@ md.parseNameValue = function(text, node, options) {
             }
         }
     }
+    
+    // This almost surely is an error, but we cannot judge.
     if (q !== null && state === STATE_NAME) {
-        // This almost surely is an error, but we cannot judge.
     }
     return {
             name: function() {
@@ -559,8 +609,9 @@ md.parseNameValue = function(text, node, options) {
             hasValue: function() {
                 return value_buf.length > 0;
             }
-        };
-};
+         };
+}
+;
 md.isArtifact = function(test) {
     if (!md.isDefined(test) || test === null) {
         return false;
@@ -575,10 +626,12 @@ md.isArtifact = function(test) {
         return false;
     }
     return true;
-};
+}
+;
 md.getInterfaceMessage = function() {
     return "generate(...), toFile(...), generateToFile(...)";
-};
+}
+;
 md.startsWith = function(str, prefix) {
     if (md.isEmpty(str) || md.isEmpty(prefix)) {
         return false;
@@ -586,7 +639,8 @@ md.startsWith = function(str, prefix) {
     else {
         return str.indexOf(prefix) === 0;
     }
-};
+}
+;
 md.endsWith = function(str, suffix) {
     if (md.isEmpty(str) || md.isEmpty(suffix)) {
         return false;
@@ -594,7 +648,8 @@ md.endsWith = function(str, suffix) {
     else {
         return str.indexOf(suffix, str.length - suffix.length) !== -1;
     }
-};
+}
+;
 md.unquote = function(str) {
     if (md.isString(str) === false) {
         return str;
@@ -608,13 +663,15 @@ md.unquote = function(str) {
     else {
         return str;
     }
-};
+}
+;
 md.capitalize = function(str) {
     if (md.isEmpty(str)) {
         return str;
     }
     return str.substr(0, 1).toUpperCase() + str.substr(1);
-};
+}
+;
 md.dashToCamelCase = function(str) {
     if (md.isEmpty(str)) {
         return str;
@@ -622,20 +679,23 @@ md.dashToCamelCase = function(str) {
     return str.replace(/-([a-z])/g, function(g) {
             return g[1].toUpperCase();
         });
-};
+}
+;
 md.replaceAll = function(text, find, replace) {
     if (md.isEmpty(text)) {
         return text;
     }
     // log 'replaceAll', text, '-', find, '-', md.escapeRegExp(find), '-', replace
     return text.replace(new RegExp(md.escapeRegExp(find), 'g'), replace);
-};
+}
+;
 md.escapeRegExp = function(text) {
     if (md.isEmpty(text)) {
         return text;
     }
     return text.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-};
+}
+;
 md.htmlEscape = function escape(value) {
     if (md.isEmpty(value)) {
         return value;
@@ -643,7 +703,8 @@ md.htmlEscape = function escape(value) {
     value = md.replaceAll(value, '<', '&lt;');
     value = md.replaceAll(value, '>', '&gt;');
     return value;
-};
+}
+;
 md.resolveToString = function(paramValue) {
     if (md.isNotEmpty(paramValue)) {
         return paramValue;
@@ -655,11 +716,13 @@ md.resolveToString = function(paramValue) {
         }
     }
     return null;
-};
+}
+;
 md.makeInline = function(text) {
     // 192: └ , 191: ┐ , 190: ¥
     return md.replaceAll(md.replaceAll(md.replaceAll(text, '\n', '¥'), '\r', '┐'), '$', '└');
-};
+}
+;
 var win32 = process.platform === 'win32';
 md.unixifyPath = function(path_string) {
     if (win32) {
@@ -668,7 +731,8 @@ md.unixifyPath = function(path_string) {
     else {
         return path_string;
     }
-};
+}
+;
 var wzError = (function (Error) {
     _inherits(wzError, Error);
     function wzError(name, inner, shortmessage, message, info, stack) {
@@ -709,8 +773,9 @@ var wzError = (function (Error) {
                 ret.push(l);
             }
         }
+        
+        // log 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
         if (this.inner) {
-            // log 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
             var inner = this.inner;
             while (inner) {
                 var stack = inner.stack;
@@ -761,11 +826,11 @@ md.assert = {
             md.fatal(message)
         }
     }
-};
+ };
 md.code = {
     FATAL_ERROR: 1, 
     WARNING: 10
-};
+ };
 md.error = function() {
     var args = Array.prototype.slice.call(arguments, 0),
         name = null,
@@ -778,8 +843,9 @@ md.error = function() {
     var i, i_items=args, i_len=args.length, arg;
     for (i=0; i<i_len; i++) {
         arg = args[i];
+        
+        // log 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
         if (md.isError(arg)) {
-            // log 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
             inner = arg;
         }
         else if (typeof (arg) === 'object' && sprintf_args.length == 0) {
@@ -794,8 +860,9 @@ md.error = function() {
             }
         }
         else {
+            
+            // skip empty inner error or empty object
             if (sprintf_args.length == 0 && arg === null || typeof(arg) === 'undefined') {
-                // skip empty inner error or empty object
             }
             else {
                 sprintf_args.push(arg);
@@ -812,7 +879,8 @@ md.error = function() {
         stack = inner.stack;
     }
     return new wzError(name, inner, shortmessage, message, info, stack);
-};
+}
+;
 md.fatal = function(err, errcode) {
     console.log('wizzi-utils.errors.fatal', util.inspect(err, { depth: null }));
     throw new Error(err);
@@ -821,25 +889,35 @@ md.fatal = function(err, errcode) {
     var code = typeof(errcode) === 'number' ? errcode : md.code.FATAL_ERROR;
     ;
     process.exit(code)
-};
+}
+;
 md.logInfo = function() {
     var sb = [];
-    Array.from(arguments).forEach((item) =>
-        sb.push(item && item.toString()))
+    Array.from(arguments).forEach(item => 
+    
+        sb.push(item && item.toString())
+    )
     console.log(chalk.gray(sb.join(' ')))
-};
+}
+;
 md.logWarning = function() {
     var sb = [];
-    Array.from(arguments).forEach((item) =>
-        sb.push(item && item.toString()))
+    Array.from(arguments).forEach(item => 
+    
+        sb.push(item && item.toString())
+    )
     console.log(chalk.yellow(sb.join(' ')))
-};
+}
+;
 md.logError = function() {
     var sb = [];
-    Array.from(arguments).forEach((item) =>
-        sb.push(item && item.toString()))
+    Array.from(arguments).forEach(item => 
+    
+        sb.push(item && item.toString())
+    )
     console.log(chalk.red(sb.join(' ')))
-};
+}
+;
 function dumpStack(e) {
     if (e.origError && e.origError.stack) {
         md.logInfo(e.origError.stack)
@@ -862,5 +940,5 @@ function error(code, method, message, innerError) {
             method: 'wizzi-utils.verify.' + method, 
             parameter: parameter, 
             sourcePath: __filename
-        }, message || 'Error message unavailable');
+         }, message || 'Error message unavailable');
 }

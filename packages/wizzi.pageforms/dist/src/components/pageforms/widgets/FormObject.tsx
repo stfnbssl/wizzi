@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\ts\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.pageforms\.wizzi\src\components\pageforms\widgets\FormObject.tsx.ittf
-    utc time: Thu, 22 Jul 2021 20:20:24 GMT
+    utc time: Sun, 25 Jul 2021 18:49:11 GMT
 */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -12,6 +12,8 @@ import {c, s} from '../../ThemeProvider';
 import FormContainer from './FormContainer';
 import FormTitle from './FormTitle';
 import FormGroup from './FormGroup';
+import FormText from './FormText';
+import FormSelect from './FormSelect';
 import FormCheckBox from './FormCheckBox';
 import FormRadioBox from './FormRadioBox';
 import FormRow from './FormRow';
@@ -26,6 +28,8 @@ import Link from './styles/Link';
 import Box from './styles/Box';
 
 export interface FormObjectProps {
+    id: string;
+    name: string;
     path: string;
     properties: any;
     values: any;
@@ -143,7 +147,7 @@ export class FormObject extends Component<FormObjectProps, FormObjectState> {
                                                 name={p.name}
                                                 id={p.name}
                                                 path={this.props.path + '.' + p.name}
-                                                value={this.props.values[p.name] || {}}
+                                                values={this.props.values[p.name] || {}}
                                                 properties={p.properties}
                                                 onChange={this.props.onChange}
                                              />

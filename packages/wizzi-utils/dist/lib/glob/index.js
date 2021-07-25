@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\glob\index.js.ittf
 */
 'use strict';
@@ -258,6 +258,7 @@ var Glob  = (function ( EE) {
             return ;
         }
         var abs = isAbsolute(ePath) ? ePath : this._makeAbs(ePath);
+        ;
         if (this.mark) {
             ePath = this._mark(ePath);
         }
@@ -287,8 +288,9 @@ var Glob  = (function ( EE) {
         var lstatkey = ('lstat\0' + abs);
         var self = this;
         var lstatcb = inflight(lstatkey, lstatcb_);
+        
+        // log 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
         if (lstatcb) {
-            // log 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
             this.virtFS.stat(abs, lstatcb);
         }
         function lstatcb_(er, lstat) {
@@ -441,10 +443,10 @@ var Glob  = (function ( EE) {
             if (prefix.charAt(0) === '/') {
                 prefix = path.join(this.root, prefix);
             }
+            // log '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
+            // log '***** wizzi-utils.Glob._processSimple2.prefix', prefix
             else {
-                // log '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
                 prefix = path.resolve(this.root, prefix);
-                // log '***** wizzi-utils.Glob._processSimple2.prefix', prefix
                 if (trail) {
                     prefix += '/';
                 }
@@ -493,8 +495,9 @@ var Glob  = (function ( EE) {
         }
         var self = this;
         var statcb = inflight('stat\0' + abs, lstatcb_);
+        
+        // log 'wizzi-utils.Glob._stat.abs', abs
         if (statcb) {
-            // log 'wizzi-utils.Glob._stat.abs', abs
             this.virtFS.stat(abs, statcb);
         }
         function lstatcb_(er, lstat) {

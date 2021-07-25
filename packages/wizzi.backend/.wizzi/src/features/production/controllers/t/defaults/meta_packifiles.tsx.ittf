@@ -1,0 +1,28 @@
+$group
+
+    function getPackiFiles
+        return
+            {
+                { ['properties/index.json.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ '{'
+                            @ '    [ properties'
+                            @ '        {'
+                            @ '            name "name"'
+                            @ '            type "string"'
+                            ._ join
+                                @ '\n'
+
+                { ['template/index.html.ittf.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ 'html'
+                            @ '    body'
+                            @ '        div'
+                            @ '            h1'
+                            @ '                + Hello ${'$'}{cliCtx.name}'
+                            ._ join
+                                @ '\n'

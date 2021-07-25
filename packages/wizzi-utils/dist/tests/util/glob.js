@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\tests\util\glob.js.ittf
 */
 'use strict';
@@ -37,7 +37,7 @@ describe("glob", function() {
     it("should sync glob a folder", function() {
         var result = glob(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), file, {
             sync: true
-        });
+         });
         expect(result).to.be.an('array');
         expect(result.length).to.be(3);
     });

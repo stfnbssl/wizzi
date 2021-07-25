@@ -1,16 +1,25 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\demo.js.react\.wizzi\src\components\App.js.ittf
-    utc time: Tue, 20 Jul 2021 12:30:24 GMT
+    utc time: Fri, 23 Jul 2021 09:36:12 GMT
 */
 'use strict';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core';
-import compose from 'recompose/compose';
 import {FormControl, InputLabel, Select, MenuItem} from '@material-ui/core';
+const compose = (...funcs) => 
+
+    funcs.reduce((a, b) => (...args) => 
+        
+            a(b(...args))
+    , arg => 
+    
+        arg
+    )
+;
 const styles = theme => (
     {
         root: {

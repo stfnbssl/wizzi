@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fs\vfile.js.ittf
 */
 'use strict';
@@ -38,39 +38,46 @@ var GET_FILES_DEFAULTS = {
     deep: true, 
     extension: null, 
     documentContent: false
-};
+ };
 var GET_FOLDERS_DEFAULTS = {
     deep: true, 
     tFoldersOnly: false, 
     documentNames: false
-};
+ };
 
 //
 module.exports = function(options, callback) {
     if (typeof callback === 'undefined') {
+        
+        // options is fsimpl
+        
+        // allow this sync call:
+        
+        // var file = vfile(fsimpl)
         if (verify.isObject(options) && verify.isFunction(options.stat)) {
-            // options is fsimpl
-            // allow this sync call:
-            // var file = vfile(fsimpl)
             return new VFile(options);
         }
+        // not used yet
         else {
             callback = options;
-            // not used yet
             options = {};
         }
     }
+    
+    // allow this sync call defaulting to storeKind 'filesystem'
+    
+    // var file = vfile()
     if (typeof callback === 'undefined') {
-        // allow this sync call defaulting to storeKind 'filesystem'
-        // var file = vfile()
         return new VFile(build_default_fsimpl(fs, 'filesystem'));
     }
+    
+    // options is fsimpl
     if (verify.isObject(options) && verify.isFunction(options.stat)) {
-        // options is fsimpl
         return callback(null, new VFile(options));
     }
+    
+    // options has storename for browserFS
     else if (verify.isObject(options) && verify.isNotEmpty(options.storeName)) {
-        // options has storename for browserFS
         default_fs(options, function(err, fsimpl) {
             if (err) {
                 return callback(err);
@@ -88,11 +95,21 @@ module.exports = function(options, callback) {
             callback(null, new VFile(fsimpl))
         })
     }
-};
+}
+;
 var VFile = (function () {
     function VFile(fsimpl) {
         _classCallCheck(this, VFile);
         this.fsimpl = fsimpl;
+        if (fsimpl.classType == 'wizzi-repo.json.JsonFsImpl') {
+            this.storeKind = 'json';
+        }
+        else if (this.classType == 'wizzi-repo.mongodb.MongoFsImpl') {
+            this.storeKind = 'mongodb';
+        }
+        else {
+            this.storeKind = 'filesystem';
+        }
     }
     VFile.prototype.unixifyPath = function(path_string) {
         if (win32) {
@@ -159,7 +176,7 @@ var VFile = (function () {
         if (!options) {
             options = {
                 encoding: DEFAULT_DECODING
-            };
+             };
         }
         if (verify.isFunction(callback)) {
             return this.readAsync(path_string, options, callback);
@@ -177,7 +194,7 @@ var VFile = (function () {
                 return callback(err);
             }
             // TODO OLD VIA if parsedUri.storeKind === 'filesystem'
-            if (that.fsimpl.kind === 'filesystem') {
+            if (that.storeKind === 'filesystem') {
                 if (options.encoding !== null) {
                     contents = iconv.decode(contents, (options.encoding || DEFAULT_DECODING));
                     if (!PRESERVE_BOM && contents.charCodeAt(0) === 0xFEFF) {
@@ -202,7 +219,7 @@ var VFile = (function () {
         var parsedUri = uriParser(path_string);
         // read buffer (no options)
         var contents = this.fsimpl.readFileSync(path_string);
-        if (this.fsimpl.kind === 'filesystem') {
+        if (this.storeKind === 'filesystem') {
             if (options.encoding !== null) {
                 contents = iconv.decode(contents, (options.encoding || DEFAULT_DECODING));
                 if (!PRESERVE_BOM && contents.charCodeAt(0) === 0xFEFF) {
@@ -223,8 +240,8 @@ var VFile = (function () {
             options = {};
         }
         // log 'wizzi-utils.vfile.write.contents 1', contents
-        if (parsedUri.storeKind === 'filesystem') {
-            if (!Buffer.isBuffer(contents)) {
+        if (this.storeKind === 'filesystem') {
+            if (!Buffer.isBuffer(contents) && options.encoding !== null) {
                 contents = iconv.encode(contents, (options.encoding || DEFAULT_DECODING));
             }
         }
@@ -381,23 +398,24 @@ var VFile = (function () {
     VFile.prototype.mkdirAsync = function(path_string, callback) {
         var curpath, subpath, parts, len;
         var parsedUri = uriParser(path_string);
+        
+        // set parts = parsedUri.path.split(PATH_SEPARATOR_RE)
         if (parsedUri.protocol === 'db') {
             curpath = parsedUri.protocol + '://' + parsedUri.userId;
             if (parsedUri.projectId) {
                 curpath += '/' + parsedUri.projectId;
             }
-            // set parts = parsedUri.path.split(PATH_SEPARATOR_RE)
             parts = parsedUri.parts;
         }
         else if (parsedUri.protocol === 'ixdb') {
             curpath = '/' + parsedUri.protocol;
             parts = parsedUri.parts;
         }
+        // set curpath = ''
+        // protocol will be the root folder
+        // set parts = path_string.split(PATH_SEPARATOR_RE)
         else {
-            // set curpath = ''
-            // protocol will be the root folder
             curpath = parsedUri.protocol + ':';
-            // set parts = path_string.split(PATH_SEPARATOR_RE)
             parts = parsedUri.parts;
         }
         len = parts.length;
@@ -647,15 +665,19 @@ var VFile = (function () {
         var that = this;
         var busyTries = 0;
         this.rimraf_try(path_string, options, function tryCallback(err) {
+            
+            // already gone
             if (err) {
+                
+                // try again, with the same exact callback as this one.
                 if (err.code === 'EBUSY' || err.code === 'ENOTEMPTY' || err.code === 'EPERM' && busyTries < options.maxBusyTries) {
                     busyTries++;
                     const time = busyTries * 100;
-                    // try again, with the same exact callback as this one.
-                    return setTimeout(() =>
-                            that.rimraf_try(path_string, options, tryCallback), time);
+                    return setTimeout(() => 
+                        
+                            that.rimraf_try(path_string, options, tryCallback)
+                        , time);
                 }
-                // already gone
                 if (err.code === 'ENOENT') {
                     err = null;
                 }
@@ -697,6 +719,7 @@ var VFile = (function () {
         // if we guessed wrong, and it's not a directory, then
         // raise the original error.
         this.fsimpl.rmdir(path_string, (err) => {
+        
             if (err && (err.code === 'ENOTEMPTY' || err.code === 'EEXIST' || err.code === 'EPERM')) {
                 this.rimraf_rmchildren(path_string, options, callback);
             }
@@ -708,7 +731,8 @@ var VFile = (function () {
                     callback(err);
                 }
             }
-        })
+        }
+        )
     }
     VFile.prototype.rimraf_rmchildren = function(path_string, options, callback) {
         var that = this;
@@ -721,7 +745,8 @@ var VFile = (function () {
             if (n === 0) {
                 return that.fsimpl.rmdir(path_string, callback);
             }
-            files.forEach((file) =>
+            files.forEach(file => 
+            
                 that.rimraf(path.join(path_string, file), options, function(err, notUsed) {
                     if (errState) {
                         return ;
@@ -730,8 +755,10 @@ var VFile = (function () {
                         return callback(errState = err);
                     }
                     if (--n === 0) {
-                        that.fsimpl.rmdir(path_string, callback)}
-                }))
+                        that.fsimpl.rmdir(path_string, callback);
+                    }
+                })
+            )
         })
     }
     VFile.prototype.rimraf_fixWinEPERM = function(path_string, options, tofixErr, callback) {
@@ -789,9 +816,9 @@ var VFile = (function () {
                     if (src === dest) {
                         return callback(null, new Error(`Source '${src}' and destination '${dest}' are the same file.`));
                     }
+                    // no need to ensure parent dir
+                    // write method always ensures
                     else {
-                        // no need to ensure parent dir
-                        // write method always ensures
                         return that.exec_copyFile(src, dest, options, callback);
                     }
                 }
@@ -864,14 +891,14 @@ var VFile = (function () {
                     if (isSrcSubdir(src, dest)) {
                         return callback(null, new Error(`Cannot copy source '${src}' to subdir destination '${dest}'.`));
                     }
+                    // no need to ensure parent dir
+                    // write method always ensures
                     else {
-                        // no need to ensure parent dir
-                        // write method always ensures
                         return that.exec_copyFolder(src, dest, options, callback);
                     }
                 }
+                // do not allow folder overwrite
                 else {
-                    // do not allow folder overwrite
                     return callback(null, new Error(`Destination '${dest}' already exists.`));
                 }
             })
@@ -1000,7 +1027,7 @@ var VFile = (function () {
         if (verify.isString(options) && verify.isNotEmpty(options)) {
             options = {
                 encoding: options
-            };
+             };
         }
         else {
             options = options || {};
@@ -1080,7 +1107,8 @@ var VFile = (function () {
             callback = options;
             options = null;
         }
-        options = Object.assign({}, GET_FILES_DEFAULTS, options || {});
+        options = Object.assign({}, GET_FILES_DEFAULTS, options || {})
+        ;
         if (verify.isFunction(callback)) {
             return this.getFilesAsync(path_string, options, callback);
         }
@@ -1119,7 +1147,7 @@ var VFile = (function () {
                                     {
                                         fullPath: unixifyPath(path_string), 
                                         relPath: path.basename(path_string)
-                                    }
+                                     }
                                 ]);
                         }
                         else {
@@ -1144,7 +1172,7 @@ var VFile = (function () {
                                 fullPath: item.fullPath, 
                                 relPath: item.relPath, 
                                 content: content
-                            });
+                             });
                     })
                 }, function(err, itemsWithContent) {
                     if (err) {
@@ -1178,7 +1206,7 @@ var VFile = (function () {
                 {
                     fullPath: unixifyPath(path_string), 
                     relPath: path.basename(path_string)
-                }
+                 }
             ];
         }
         else {
@@ -1190,12 +1218,13 @@ var VFile = (function () {
             var i, i_items=result, i_len=result.length, item;
             for (i=0; i<i_len; i++) {
                 item = result[i];
-                content = this.read(item.fullPath);
+                content = this.read(item.fullPath)
+                ;
                 resultWithContents.push({
                     fullPath: item.fullPath, 
                     relPath: item.relPath, 
                     content: content
-                })
+                 })
             }
             return resultWithContents;
         }
@@ -1241,7 +1270,7 @@ var VFile = (function () {
                             files.push({
                                 fullPath: filePath, 
                                 relPath: unixifyPath(path.join(relPath.join('/'), item))
-                            })
+                             })
                         }
                         return callback(null, null);
                     }
@@ -1258,11 +1287,12 @@ var VFile = (function () {
                     }
                     var item = items[index];
                     // log '*** item', item
+                    
+                    // log '*** item', item, filePath
                     if (item !== null) {
                         var filePath = path.join(path_string, item);
                         var newRelPath = relPath.slice(0);
                         newRelPath.push(item);
-                        // log '*** item', item, filePath
                         that._appendFiles(filePath, files, newRelPath, options, function(err, result) {
                             if (err) {
                                 return callback(err);
@@ -1304,7 +1334,7 @@ var VFile = (function () {
                     files.push({
                         fullPath: filePath, 
                         relPath: unixifyPath(path.join(relPath.join('/'), item))
-                    })
+                     })
                 }
             }
         }
@@ -1323,7 +1353,8 @@ var VFile = (function () {
             callback = options;
             options = null;
         }
-        options = Object.assign({}, GET_FOLDERS_DEFAULTS, options || {});
+        options = Object.assign({}, GET_FOLDERS_DEFAULTS, options || {})
+        ;
         if (verify.isFunction(callback)) {
             return this.getFoldersAsync(path_string, options, callback);
         }
@@ -1366,7 +1397,7 @@ var VFile = (function () {
                     if (item !== null) {
                         that.getFiles(item.fullPath, {
                             deep: false
-                        }, function(err, files) {
+                         }, function(err, files) {
                             if (err) {
                                 return callback(err);
                             }
@@ -1374,14 +1405,14 @@ var VFile = (function () {
                                     fullPath: item.fullPath, 
                                     relPath: item.relPath, 
                                     documents: files
-                                });
+                                 });
                         })
                     }
                     else {
                         return callback(null, {
                                 fullPath: item.fullPath, 
                                 relPath: item.relPath
-                            });
+                             });
                     }
                 }, function(err, itemsWithNames) {
                     if (err) {
@@ -1424,7 +1455,7 @@ var VFile = (function () {
                     folderFullPath: item.fullPath, 
                     folderRelPath: item.relPath, 
                     documents: files
-                })
+                 })
             }
             return resultWithFileNames;
         }
@@ -1463,7 +1494,7 @@ var VFile = (function () {
                         folders.push({
                             fullPath: filePath, 
                             relPath: unixifyPath(path.join(relPath.join('/'), item))
-                        })
+                         })
                     }
                     callback(null, ( isDirectory && options.deep ? item : null ))
                 })
@@ -1516,7 +1547,7 @@ var VFile = (function () {
                         folders.push({
                             fullPath: filePath, 
                             relPath: unixifyPath(path.join(relPath.join('/'), item))
-                        })
+                         })
                         return ;
                     }
                 }
@@ -1524,7 +1555,7 @@ var VFile = (function () {
                     folders.push({
                         fullPath: filePath, 
                         relPath: unixifyPath(path.join(relPath.join('/'), item))
-                    })
+                     })
                 }
                 if (options.deep) {
                     var newRelPath = relPath.slice(0);
@@ -1587,28 +1618,30 @@ var VFile = (function () {
                         path_string
                     ]);
             }
+            // log 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
             else {
-                // log 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
                 glob(path_string, this, options, function(err, files) {
                     if (err) {
                         return callback(err);
                     }
                     // log 'wizzi-utils.fs.vfile.glob.after_glob.path_string ', path_string, 'files', files.length
+                    
+                    // log 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
                     if (removeRoot) {
-                        // log 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
                         files = files.map(function(file) {
                             if (_.isArray(removeRoot)) {
                                 for (var i in removeRoot) {
                                     file = file.replace(removeRoot[i], '');
                                 }
                             }
+                            // log unixifyPath(file), removeRoot
                             else {
-                                // log unixifyPath(file), removeRoot
                                 file = unixifyPath(file).replace(unixifyPath(removeRoot), '')
                                 ;
                             }
                             return file;
-                        });
+                        })
+                        ;
                         return callback(null, files);
                     }
                     else {
@@ -1632,33 +1665,36 @@ var VFile = (function () {
             var i, i_items=path_string, i_len=path_string.length, globPattern;
             for (i=0; i<i_len; i++) {
                 globPattern = path_string[i];
-                output = _.union(output, this.getGlobbedFiles(globPattern, removeRoot, options));
+                output = _.union(output, this.getGlobbedFiles(globPattern, removeRoot, options))
+                ;
             }
         }
         else if (verify.isString(path_string)) {
             if (urlRegex.test(path_string)) {
                 output.push(path_string);
             }
+            // log 'path_string, options', path_string, options
+            // log 'wizzi-meta.file.path_string ', path_string, 'files', files.length
             else {
                 options.sync = true;
-                // log 'path_string, options', path_string, options
                 var files = glob(path_string, this, options);
-                // log 'wizzi-meta.file.path_string ', path_string, 'files', files.length
+                
+                // log 'removeRoot', removeRoot
                 if (removeRoot) {
-                    // log 'removeRoot', removeRoot
                     files = files.map(function(file) {
                         if (_.isArray(removeRoot)) {
                             for (var i in removeRoot) {
                                 file = file.replace(removeRoot[i], '');
                             }
                         }
+                        // log unixifyPath(file), removeRoot
                         else {
-                            // log unixifyPath(file), removeRoot
                             file = unixifyPath(file).replace(unixifyPath(removeRoot), '')
                             ;
                         }
                         return file;
-                    });
+                    })
+                    ;
                 }
                 output = _.union(output, files);
             }
@@ -1683,8 +1719,10 @@ function isSrcSubdir(src, dest) {
     const srcArray = path.resolve(src).split(path.sep);
     const destArray = path.resolve(dest).split(path.sep);
     return srcArray.reduce((acc, current, i) => {
+        
             return acc && destArray[i] === current;
-        }, true);
+        }
+        , true);
 }
 function stringify(obj, options) {
     var spaces;
@@ -1738,7 +1776,7 @@ function build_default_fsimpl(fs, kind) {
             copyFile: fs.copyFile, 
             copyFileSync: fs.copyFileSync, 
             createWriteStream: fs.createWriteStream
-        };
+         };
 }
 function error(code, method, message, innerError) {
     var parameter = null;
@@ -1752,5 +1790,5 @@ function error(code, method, message, innerError) {
             method: 'wizzi-utils.fs.vfile.' + method, 
             parameter: parameter, 
             sourcePath: __filename
-        }, message || 'Error message unavailable');
+         }, message || 'Error message unavailable');
 }

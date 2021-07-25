@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\tests\mocks\misc.js.ittf
 */
 'use strict';
@@ -20,8 +20,8 @@ module.exports = {
             }, 
             addIttfModelBuildUpScript: function(uri, jsScriptCoder) {
             }
-        }
-    }, 
+         }
+     }, 
     ProductionContext: {
         IttfDocumentStoreType: IttfDocumentStore, 
         dump: true, 
@@ -34,7 +34,7 @@ module.exports = {
             this.ittfModelBuildUpScripts[uri] = {
                 uri: uri, 
                 script: script
-            };
+             };
             if (this.dump) {
                 file.write(path.join(path.dirname(uri), '_debug', path.basename(uri) + '.js.dump'), script)
             }
@@ -52,5 +52,5 @@ module.exports = {
             // In case of --force proceed inside the try/catch flow
             throw exception;
         }
-    }
-};
+     }
+ };

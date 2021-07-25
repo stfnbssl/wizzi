@@ -21,6 +21,8 @@ $group
                         :string 
                     :p mongoPath
                         :string 
+                    :p mongoConnectUrl
+                        :string 
                 ${'$'}if wzCtx.Build.useAuthentication
                     :p auth0Domain
                         :string 

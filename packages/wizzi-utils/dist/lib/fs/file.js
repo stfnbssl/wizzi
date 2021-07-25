@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fs\file.js.ittf
 */
 'use strict';
@@ -23,7 +23,8 @@ md.unixifyPath = function(path_string) {
     else {
         return path_string;
     }
-};
+}
+;
 // sync read
 md.read = function(path_string, options) {
     if (!(options)) {
@@ -37,7 +38,8 @@ md.read = function(path_string, options) {
         }
     }
     return contents;
-};
+}
+;
 // sync readJSON
 md.readJSON = function(path_string, options) {
     var src = md.read(path_string, options);
@@ -49,7 +51,8 @@ md.readJSON = function(path_string, options) {
     catch (ex) {
         throw new errors.FileError('Unable to parse "' + path_string + '" file (' + ex.message + ').', ex);
     } 
-};
+}
+;
 // async read
 md.readFile = function(path_string, options, callback) {
     if (typeof(callback) == 'undefined') {
@@ -59,7 +62,7 @@ md.readFile = function(path_string, options, callback) {
     if (!options) {
         options = {
             encoding: md.defaultEncoding
-        };
+         };
     }
     fs.readFile(path_string, function(err, contents) {
         if (err) {
@@ -67,8 +70,9 @@ md.readFile = function(path_string, options, callback) {
         }
         // log 'readFile.contents', contents
         if (options.encoding !== null) {
+            
+            // log 'wizzi-utils.file.read.isString', path_string, content
             if (verify.isString(contents)) {
-                // log 'wizzi-utils.file.read.isString', path_string, content
             }
             contents = iconv.decode(contents, (options.encoding || md.defaultEncoding));
             if (!md.preserveBOM && contents.charCodeAt(0) === 0xFEFF) {
@@ -77,11 +81,13 @@ md.readFile = function(path_string, options, callback) {
         }
         return callback(null, contents);
     })
-};
+}
+;
 md.readLines = function(path_string, options) {
     var contents = md.read(path_string, options);
     return md.splitLines(contents);
-};
+}
+;
 md.splitLines = function(contents) {
     var i,
         l = contents.length,
@@ -106,7 +112,8 @@ md.splitLines = function(contents) {
         result.push(line.join(''))
     }
     return result;
-};
+}
+;
 md.openWrite = function(path_string, callback) {
     var stream;
     if (md.exists(path_string)) {
@@ -123,7 +130,8 @@ md.openWrite = function(path_string, callback) {
         stream = fs.createWriteStream(path_string);
         return callback(null, stream);
     }
-};
+}
+;
 md.write = function(path_string, contents, options) {
     if (!options) {
         options = {};
@@ -140,7 +148,8 @@ md.write = function(path_string, contents, options) {
         ex.message = 'Writing file ' + path_string + '.\n' + ex.message;
         throw ex;
     } 
-};
+}
+;
 md.writeFile = function(path_string, contents, options, callback) {
     if (typeof(callback) === 'undefined') {
         callback = options;
@@ -154,14 +163,17 @@ md.writeFile = function(path_string, contents, options, callback) {
         contents = iconv.encode(contents, (options.encoding || md.defaultEncoding));
     }
     fs.writeFile(path_string, contents, callback)
-};
+}
+;
 md.writeJSON = function(path_string, contentObject) {
     md.write(path_string, JSON.stringify(contentObject, null, 2))
-};
+}
+;
 md.mkpath = function(path_string) {
     var dir = path.dirname(path_string);
     md.mkdir(dir);
-};
+}
+;
 md.mkdir = function(dirpath, mode) {
     if (mode == null) {
         mode = parseInt('0777', 8) & ~ (process.umask());
@@ -179,7 +191,8 @@ md.mkdir = function(dirpath, mode) {
         }
         return parts;
     }, '')
-};
+}
+;
 md.copy = function(src, dest) {
     try {
         md.mkpath(dest);
@@ -189,13 +202,14 @@ md.copy = function(src, dest) {
         ex.message += '\nfile.copy from ' + src + ' to ' + dest;
         throw ex;
     } 
-};
+}
+;
 md.copyFile = function(sourcepath_string, destpath_string, callback) {
     if (!md.isFile(sourcepath_string)) {
         return callback(null, {
                 copied: false, 
                 reason: 'Source file does not exists or is not a file'
-            });
+             });
     }
     fs.copy(String(sourcepath_string), String(destpath_string), function(err, notUsed) {
         if (err) {
@@ -203,15 +217,16 @@ md.copyFile = function(sourcepath_string, destpath_string, callback) {
         }
         return callback(null, {
                 copied: true
-            });
+             });
     })
-};
+}
+;
 md.moveFile = function(sourcepath_string, destpath_string, callback) {
     if (!md.isFile(sourcepath_string)) {
         return callback(null, {
                 moved: false, 
                 reason: 'Source file does not exists or is not a file'
-            });
+             });
     }
     fs.move(String(sourcepath_string), String(destpath_string), function(err, notUsed) {
         if (err) {
@@ -219,14 +234,15 @@ md.moveFile = function(sourcepath_string, destpath_string, callback) {
         }
         return callback(null, {
                 moved: true
-            });
+             });
     })
-};
+}
+;
 var getFilesDefaults = {
     deep: true, 
     extension: null, 
     documentContent: false
-};
+ };
 md.getFiles = function(path_string, options) {
     // log 'wizzi-utils.file.getFiles', path_string, options
     options = _.assign({}, getFilesDefaults, (options || {}));
@@ -253,12 +269,13 @@ md.getFiles = function(path_string, options) {
             newResult.push({
                 file: item, 
                 content: content
-            })
+             })
         }
         return newResult;
     }
     return result;
-};
+}
+;
 md._appendFiles = function(path_string, files, relPath, options) {
     var dir = fs.readdirSync(String(path_string));
     // log 'wizzi-utils.file.appendFiles', dir
@@ -286,13 +303,14 @@ md._appendFiles = function(path_string, files, relPath, options) {
         newRelPath.push(item);
         md._appendFiles(filePath, files, newRelPath, options);
     }
-};
+}
+;
 var getFoldersDefaults = {
     deep: true, 
     tFoldersOnly: false, 
     documentNames: false, 
     documentContents: false
-};
+ };
 md.getFolders = function(path_string, options) {
     options = _.assign({}, getFoldersDefaults, options);
     var result;
@@ -324,12 +342,13 @@ md.getFolders = function(path_string, options) {
             newResult.push({
                 folder: item, 
                 documents: files
-            })
+             })
         }
         return newResult;
     }
     return result;
-};
+}
+;
 md._appendFolders = function(path_string, folders, relPath, options) {
     var dir = fs.readdirSync(String(path_string));
     var i, i_items=dir, i_len=dir.length, item;
@@ -353,28 +372,31 @@ md._appendFolders = function(path_string, folders, relPath, options) {
             }
         }
     }
-};
+}
+;
 md.getGlobbedFilesEx = function(globPatterns, options) {
     var options = (options || {});
     return md.getGlobbedFiles(globPatterns, options.removeRoot, options);
-};
+}
+;
 md.getGlobbedFiles = function(globPatterns, removeRoot, options) {
     var _this = this;
     var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
     var output = [];
     if (verify.isArray(globPatterns)) {
         globPatterns.forEach(function(globPattern) {
-            output = _.union(output, this.getGlobbedFiles(globPattern, removeRoot, options));
+            output = _.union(output, this.getGlobbedFiles(globPattern, removeRoot, options))
+            ;
         })
     }
     else if (verify.isString(globPatterns)) {
         if (urlRegex.test(globPatterns)) {
             output.push(globPatterns);
         }
+        // log 'wizzi-utils.globPatterns, options', globPatterns, options
+        // log 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
         else {
-            // log 'wizzi-utils.globPatterns, options', globPatterns, options
             var files = glob.sync(globPatterns, options);
-            // log 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
             if (removeRoot) {
                 console.log('removeRoot', removeRoot);
                 files = files.map(function(file) {
@@ -383,19 +405,21 @@ md.getGlobbedFiles = function(globPatterns, removeRoot, options) {
                             file = file.replace(removeRoot[i], '');
                         }
                     }
+                    // log md.unixifyPath(file), removeRoot
                     else {
-                        // log md.unixifyPath(file), removeRoot
                         file = md.unixifyPath(file).replace(md.unixifyPath(removeRoot), '')
                         ;
                     }
                     return file;
-                });
+                })
+                ;
             }
             output = _.union(output, files);
         }
     }
     return output;
-};
+}
+;
 md.exists = function(path_string) {
     try {
         var stat = fs.lstatSync(String(path_string));
@@ -404,7 +428,8 @@ md.exists = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;
 md.isDirectory = function(path_string) {
     try {
         return fs.lstatSync(String(path_string)).isDirectory()
@@ -413,7 +438,8 @@ md.isDirectory = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;
 md.isFile = function(path_string) {
     try {
         return fs.lstatSync(String(path_string)).isFile()
@@ -422,7 +448,8 @@ md.isFile = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;
 md.isFilePath = function(path) {
     if (verify.isString(path)) {
         var protocol = _protocol(url.parse(path).protocol
@@ -430,7 +457,8 @@ md.isFilePath = function(path) {
         return protocol.length === 1 || protocol === 'file';
     }
     return false;
-};
+}
+;
 function _protocol(value) {
     return value.substr(-1, 1) === ':' ? value.substr(0, value.length - 1) : value;
 }
@@ -441,13 +469,14 @@ md.emptyDirectory = function(path, fn) {
         }
         fn(!files || !files.length);
     })
-};
+}
+;
 md.deleteFile = function(path_string, callback) {
     if (!md.isFile(path_string)) {
         return callback(null, {
                 deleted: false, 
                 reason: 'Source file does not exists or is not a file'
-            });
+             });
     }
     fs.unlink(String(path_string), function(err) {
         if (err) {
@@ -455,9 +484,10 @@ md.deleteFile = function(path_string, callback) {
         }
         return callback(null, {
                 deleted: true
-            });
+             });
     })
-};
+}
+;
 md.getDir = function(path_string, callback) {
     var dir = fs.readdirSync(String(path_string));
     var ret = [];
@@ -467,14 +497,15 @@ md.getDir = function(path_string, callback) {
         ret.push(path.join(path_string, item))
     }
     return callback(null, ret);
-};
+}
+;
 // async deleteFolder
 md.deleteFolder = function(path_string, callback) {
     if (!md.isDirectory(path_string)) {
         return callback(null, {
                 deleted: false, 
                 reason: 'Source folder does not exists or is not a folder'
-            });
+             });
     }
     fs.remove(String(path_string), function(err) {
         if (err) {
@@ -482,16 +513,17 @@ md.deleteFolder = function(path_string, callback) {
         }
         callback(null, {
             deleted: true
-        })
+         })
     })
-};
+}
+;
 // async copyFolder
 md.copyFolder = function(sourcepath_string, destpath_string, callback) {
     if (!md.isDirectory(sourcepath_string)) {
         return callback(null, {
                 copied: false, 
                 reason: 'Source folder does not exists or is not a folder'
-            });
+             });
     }
     fs.copy(String(sourcepath_string), String(destpath_string), function(err, notUsed) {
         if (err) {
@@ -499,16 +531,17 @@ md.copyFolder = function(sourcepath_string, destpath_string, callback) {
         }
         return callback(null, {
                 copied: true
-            });
+             });
     })
-};
+}
+;
 // async moveFolder
 md.moveFolder = function(sourcepath_string, destpath_string, callback) {
     if (!md.isDirectory(sourcepath_string)) {
         return callback(null, {
                 moved: false, 
                 reason: 'Source folder does not exists or is not a folder'
-            });
+             });
     }
     fs.move(String(sourcepath_string), String(destpath_string), function(err, notUsed) {
         if (err) {
@@ -516,16 +549,17 @@ md.moveFolder = function(sourcepath_string, destpath_string, callback) {
         }
         callback(null, {
             moved: true
-        })
+         })
     })
-};
+}
+;
 // async rename
 md.rename = function(oldpath_string, newpath_string, callback) {
     if (!md.exists(oldpath_string)) {
         return callback(null, {
                 renamed: false, 
                 reason: 'Source item does not exists'
-            });
+             });
     }
     fs.rename(String(oldpath_string), String(newpath_string), function(err, notUsed) {
         if (err) {
@@ -533,22 +567,23 @@ md.rename = function(oldpath_string, newpath_string, callback) {
         }
         return callback(null, {
                 renamed: true
-            });
+             });
     })
-};
+}
+;
 // async duplicate
 md.duplicate = function(oldpath_string, newpath_string, callback) {
     if (!md.exists(oldpath_string)) {
         return callback(null, {
                 duplicated: false, 
                 reason: 'Source item does not exists'
-            });
+             });
     }
     if (md.exists(newpath_string)) {
         return callback(null, {
                 duplicated: false, 
                 reason: 'Destination item already exists'
-            });
+             });
     }
     if (md.isFile(oldpath_string)) {
         md.copyFile(oldpath_string, newpath_string, function(err, notUsed) {
@@ -557,7 +592,7 @@ md.duplicate = function(oldpath_string, newpath_string, callback) {
             }
             return callback(null, {
                     duplicated: true
-                });
+                 });
         })
     }
     else {
@@ -567,7 +602,8 @@ md.duplicate = function(oldpath_string, newpath_string, callback) {
             }
             return callback(null, {
                     duplicated: true
-                });
+                 });
         })
     }
-};
+}
+;

@@ -11,6 +11,9 @@ module
         @ verify
         from 'wizzi-utils'
     import
+        @ packiFilePrefix
+        from '../config/env'
+    import
         @ packiTypes
         from '../packi'
     import
@@ -35,6 +38,7 @@ module
     $include productions/debugInfo
     $include productions/mTree
     $include productions/generateArtifact
+    $include productions/generateFolderArtifacts
     $include productions/transformModel
     $include productions/executeJob
     $include productions/inferAndLoadContext

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\scanners\folderScanner.js.ittf
 */
 'use strict';
@@ -43,7 +43,8 @@ md.scan = function(folderPath, options, callback) {
             md.scanExec(file, folderPath, options, callback)
         })
     }
-};
+}
+;
 md.scanExec = function(file, folderPath, options, callback) {
     file.isDirectory(folderPath, function(err, result) {
         if (err) {
@@ -59,7 +60,7 @@ md.scanExec = function(file, folderPath, options, callback) {
             removeRoot: removeRoot, 
             dot: true, 
             ignore: path.join(folderPath, '**/node_modules/**/*.*')
-        }, function(err, ittfs) {
+         }, function(err, ittfs) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -69,11 +70,11 @@ md.scanExec = function(file, folderPath, options, callback) {
             var root = new IttfFsNode(baseFolder, null, {
                 isDirectory: true, 
                 file: file
-            });
+             });
             root.setSourcePaths({
                 ittfBasePath: removeRoot, 
                 jsCodeBasePath: options.gitPath
-            })
+             })
             // create the IttfFsNode tree structure of the scanned folder
             var i, i_items=ittfs, i_len=ittfs.length, ittf;
             for (i=0; i<i_len; i++) {
@@ -81,7 +82,7 @@ md.scanExec = function(file, folderPath, options, callback) {
                 root.addDocument(( ittf[0] === '/' ? ittf.substr(1) : ittf ), {
                     basePath: removeRoot, 
                     gitPath: options.gitPath
-                })
+                 })
             }
             // analize all IttfFsNode(s) starting from root
             // this also searches mixed or included ittf fragments that are
@@ -99,7 +100,8 @@ md.scanExec = function(file, folderPath, options, callback) {
             })
         })
     })
-};
+}
+;
 /**
   params
     string code

@@ -16,8 +16,14 @@ module
                 @ CRUDResult
                 from '../../types'
             import
+                @ getTemplatePackiFiles
+                from '../api/meta'
+            import
                 @ createPackageProduction
                 from '../api/package'
+            import
+                @ packiTypes
+                from '../../packi'
             +
             const myname = 'features/production/controllers/package'
             +
@@ -53,10 +59,10 @@ module
 
         _ this.router.get('/new', this.getNewPackageForm)
         _ this.router.post('/new', this.postNewPackage)
-        _ this.router.get('/update', this.getUpdatePackageForm)
-        _ this.router.post('/update', this.postUpdatePackage)
-        _ this.router.get('/delete', this.getDeletePackageForm)
-        _ this.router.delete('/delete', this.deletePackage)
+        _ this.router.get('/update/:userid/*', this.getUpdatePackageForm)
+        _ this.router.post('/update/:userid/*', this.postUpdatePackage)
+        _ this.router.get('/delete/:userid/*', this.getDeletePackageForm)
+        _ this.router.delete('/delete/:userid/*', this.deletePackage)
         _ this.router.get('/props', this.getPackageProperties)
         
         $append handlers
@@ -77,45 +83,56 @@ module
             handler( postNewPackage )
                 log myname + '.postNewPackage.request.body', JSON.stringify(request.body, null, 2)
                 log myname + '.postNewPackage.request.session.user', JSON.stringify((request.session as any).user, null, 2)
-                _ createPackageProduction
-                    @ (request.session as any).user.username
-                    @ request.body.pp_name
-                    @ request.body.pp_description
-                    @ JSON.stringify(getPackiFiles('.wizzi/generate.wfjob.ittf'))
+                _ getTemplatePackiFiles
+                    @ request.body.meta_id
+                    @ request.body.meta_propsValues ? JSON.parse(request.body.meta_propsValues) : {}
+                    ._ then
+                        =>
+                            param packiFiles
+                                :ref packiTypes.PackiFiles
+                            _ createPackageProduction
+                                @ (request.session as any).user.username
+                                @ request.body.pp_name
+                                @ request.body.pp_description
+                                @ JSON.stringify(packiFiles)
+                                ._ then
+                                    =>
+                                        param result
+                                            :ref CRUDResult
+                                        log myname + '.postNewPackage.createPackageProduction.result', JSON.stringify(result, null, 2)
+                                        if result.ok
+                                            _ response.redirect('/productions/packages')
+                                        else
+                                            _ response.render
+                                                @ 'error.html.ittf'
+                                                {
+                                                    @ message 'creating a new package production'
+                                                    @ error result
+                                catch_error_page( creating a new package production )
+                    catch_error_page( getting template packi files while creating a new package production )
+
+            handler( getUpdatePackageForm )
+                log myname + '.getUpdatePackageForm', request.path 
+                const parts = request.path.split('/')
+                log myname + '.getUpdatePackageForm', parts[2], parts.slice(3).join('/')
+                _ packageApi.getPackageProductionObject
+                    @ parts[2]
+                    @ parts.slice(3).join('/')
                     ._ then
                         =>
                             param result
-                                :ref CRUDResult
-                            log myname + '.postNewPackage.createPackageProduction.result', JSON.stringify(result, null, 2)
-                            if result.ok
-                                _ response.redirect('/productions/packages')
-                            else
-                                _ response.render
-                                    @ 'error.html.ittf'
-                                    {
-                                        @ message 'creating a new package production'
-                                        @ error result
-                    ._ catch
-                        =>
-                            param err
-                                :any
-                            _ response.render
-                                @ 'error.html.ittf'
+                            _ renderPageForm
+                                @ request
+                                @ response
                                 {
-                                    @ message 'creating a new package production'
-                                    @ error err
-
-            handler( getUpdatePackageForm )
-                # log myname + '.getUpdatePackageForm', 
-                _ renderPageForm
-                    @ request
-                    @ response
-                    {
-                        @ type 'success'
-                        @ formName 'UpdatePackage'
-                        { formData 
-                            @ website 'http://dummy.com'
-                    {
+                                    @ type 'success'
+                                    @ formName 'UpdatePackage'
+                                    { formData 
+                                        @ website 'http://dummy.com'
+                                        @ owner parts[2]
+                                        @ name parts.slice(3).join('/')
+                                        @ _id result._id
+                                {
 
             handler( postUpdatePackage )
                 # log myname + '.postUpdatePackage', 

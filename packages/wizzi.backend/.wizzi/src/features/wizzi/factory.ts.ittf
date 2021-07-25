@@ -22,6 +22,8 @@ module
         @ FilesystemWizziFactory
         from './types'
     +
+    const myname = 'features/wizzi/factory'
+    +
     export
         function packiFilesToJsonDocuments
             param files
@@ -124,7 +126,7 @@ module
                                 param item
                                 if plugins.indexOf(item) < 0
                                     _ plugins.push(item)
-            _ console.log('createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length)
+            log myname, 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length
             return
                 new Promise
                     =>
@@ -150,6 +152,7 @@ module
                                         param wf
                                         if err
                                             return reject(err)
+                                        log myname, 'createFactory', 'done'
                                         _ resolve
                                             {
                                                 @ wf
