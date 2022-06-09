@@ -1,0 +1,12 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Wizzi jobs'
+        };
+
+    section(&sect)
+
+        table-doc()
+            tr( The wfjob Wizzi Schema definition, wizzi-core, lib/wizzi/schemas/wfjob.wfschema.ittf )
+
+

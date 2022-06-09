@@ -1,0 +1,48 @@
+wfjob
+
+    $
+		var ittf_models_folder    = path.join(__dirname, 'ittf', 'models');
+		var ittf_src_folder  = path.join(__dirname, 'ittf', 'src');
+        var ittf_posts_folder  = path.join(__dirname, 'ittf', 'posts');
+		var dest_folder      = path.join(__dirname, 'dist');
+
+	title example job with global models
+
+    models-base-folder ${ittf_models_folder}
+
+	model
+        export-name members
+        src members.json.ittf
+        schema json
+
+	line src
+		cwd-folder ${ittf_src_folder}
+
+		# Generates a single javascript module
+		artifact step_1_javascript_module
+			src step_1.js.ittf
+			schema js
+			generator js/module
+			extension js
+
+		# Generates a single text document
+		artifact step_1_text_document
+			src step_1.text.ittf
+			schema text
+			generator text/document
+			extension @@null
+
+	line posts
+		cwd-folder ${ittf_posts_folder}
+
+		artifact posts
+            src ./**/*.html.ittf
+			schema html
+			generator html/document
+			extension html
+            collection posts
+
+	production
+		dest-folder ${dest_folder}
+		line-ref src      
+        line-ref posts      

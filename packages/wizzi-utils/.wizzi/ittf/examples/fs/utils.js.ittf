@@ -1,0 +1,33 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'fsUtils_Step_1',
+            title: 'fsUtils - step - 1 - fileInfoByPath',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+        var fname
+            _ path.join
+                @ __dirname
+                @ 'test.html.ittf'
+        var fi  
+            _ fsUtils.fileInfoByPath
+                @ fname
+        _ printObject
+            @ fi
+        set fname
+            _ path.join
+                @ __dirname
+                @ 'folder1'
+                @ 'test.html.ittf'
+        _ printObject
+            _ fsUtils.fileInfoByPath
+                @ fname
+                @ __dirname
+
+

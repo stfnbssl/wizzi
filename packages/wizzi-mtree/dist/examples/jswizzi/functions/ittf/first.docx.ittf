@@ -1,0 +1,103 @@
+docx first
+
+    $
+        var H2_Size = 42;
+        var Big_Size = 36;
+        var Normal_Size = 28;
+        var P_spacing_before = 20 * 72 * 0.05;
+        var P_spacing_before_h2 = 20 * 72 * 0.3;
+        var P_spacing_after = 20 * 72 * 0.025;
+        var P_spacing_after_h2 = 20 * 72 * 0.05;
+    
+    styles
+        default
+            style-def heading1
+                run
+                    size 56
+                    bold
+
+            style-def heading2
+                run
+                    size 38
+                    bold
+
+            style-def heading3
+                run
+                    size 24
+                    bold
+                    italic
+
+	$function itemText
+		$param node
+        $param style
+        $if node.name == 'p'
+            p
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style
+        $if node.name == 'h2'
+            $if node.value && node.value.length > 0
+                + ${node.value}
+                    size 28
+                    bold true
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_h2' : 'h2'
+            $else
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_h2' : 'h2'
+        $if node.name == 'strong'
+            $if node.value && node.value.length > 0
+                + ${node.value}
+                    bold true
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_strong' : 'strong'
+            $else
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_strong' : 'strong'
+        $if node.name == 'big'
+            $if node.value && node.value.length > 0
+                + ${node.value}
+                    size 28
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_big' : 'big'
+            $else
+                $foreach nodeChild in node.children
+                    $_ itemText
+                        $@ nodeChild
+                        $@ style.length > 0 ? style + '_big' : 'big'
+        $if node.name == '+'
+            + ${node.value}
+                $if style.indexOf('h2')
+                    size ${H2_Size}
+                $elif style.indexOf('big')
+                    size ${Big_Size}
+                $else
+                    size ${Normal_Size}
+                $if style.indexOf('strong')
+                    bold true
+
+    section
+        h1 ${beba.category}
+        $foreach item in beba.items
+            $if item.Categoria == "Bambino"
+                h2 ${item.Titolo}
+                h3 Dalla settimana ${item.SettimanaDal} alla ${item.SettimanaAl}
+                p ${item.Abstract}
+                $$ p ${_.replace(_.replace(item.Testo,'"','\\"'),'\n','')}
+                p Url ${item.url}
+                $foreach child in item.TestoJson.children
+                    $ _.log("A0", child_index, '/', child_count)
+                    $_ itemText
+                        $@ child
+                        $@ ''

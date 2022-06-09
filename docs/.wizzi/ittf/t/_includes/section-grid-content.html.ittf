@@ -1,0 +1,11 @@
+﻿$group
+    $params name, title|@@null
+    section
+        id ${name}
+        class grid
+        . content-wrap
+            $if title != null
+                h2 ${title}
+                    class content-title
+            . content-text
+                $hook

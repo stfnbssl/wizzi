@@ -1,0 +1,14 @@
+$group
+    $params &features
+    ul
+        class scream-features
+        $foreach item in features.items
+            li 
+                class scream-feature
+                span 
+                    class scream-feature-span
+                    $if item.svg == 'incremental-builds'
+                        $include icons/incremental-builds
+                em ${item.em}Incremental Builds
+                    class scream-feature-em
+                + ${item.text}1000x faster builds

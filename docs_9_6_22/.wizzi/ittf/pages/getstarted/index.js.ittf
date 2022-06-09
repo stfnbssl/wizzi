@@ -1,0 +1,81 @@
+﻿module
+    kind react
+    
+    $include _js/wz/core
+
+    function m1_reset
+        $foreach menuGroup in mpage.Nav1.menuGroups
+            $foreach menu in menuGroup.menus
+                $if menu.panels && menu.panels.length > 0
+                    _ wz.removeClass
+                        @ '#${menu.title}-dropdown'
+                        @ 'css-1ropak3'
+                    _ wz.addClass
+                        @ '#${menu.title}-dropdown'
+                        @ 'css-1sg6jvm'
+
+    function eco_reset
+        $foreach content in mpage.Main.contents
+            $foreach panel in content.panels
+                $if panel.kind == 'eco'
+                    $foreach item in panel.items
+                        _ wz.removeClass
+                            @ '#eco${item.title}-dropdown'
+                            @ 'css-17502ce'
+                        _ wz.addClass
+                            @ '#eco${item.title}-dropdown'
+                            @ 'css-1ds30p3'
+
+    _ wz.contentLoaded
+        =>
+            log 'contentLoaded'
+            $foreach menuGroup in mpage.Nav1.menuGroups
+                $foreach menu in menuGroup.menus
+                    $if menu.panels && menu.panels.length > 0            
+                        _ wz.click
+                            @ '#${menu.title}'
+                            =>
+                                param ev
+                                log "Clicked ${menu.title}"
+                                _ m1_reset
+                                _ eco_reset
+                                _ wz.addClass
+                                    @ '#${menu.title}-dropdown'
+                                    @ 'css-1ropak3'
+                                _ wz.removeClass
+                                    @ '#${menu.title}-dropdown'
+                                    @ 'css-1sg6jvm'
+                                _ ev.stopPropagation();
+
+            $foreach content in mpage.Main.contents
+                $foreach panel in content.panels
+                    $if panel.kind == 'eco'
+                        $foreach item in panel.items
+                            _ wz.click
+                                @ '#eco${item.title}'
+                                =>
+                                    param ev
+                                    log "Clicked ${item.title}"
+                                    _ eco_reset
+                                    _ wz.removeClass
+                                        @ '#eco${item.title}-dropdown'
+                                        @ 'css-1ds30p3'                                        
+                                    _ wz.addClass
+                                        @ '#eco${item.title}-dropdown'
+                                        @ 'css-17502ce'
+                                    _ ev.stopPropagation();
+                            $if item_index == 0
+                                _ wz.removeClass
+                                    @ '#eco${item.title}-dropdown'
+                                    @ 'css-1ds30p3'                                        
+                                _ wz.addClass
+                                    @ '#eco${item.title}-dropdown'
+                                    @ 'css-17502ce'
+
+
+            _ wz.click
+                @ document.body
+                =>
+                    log "Clicked document.body"
+                    _ m1_reset
+

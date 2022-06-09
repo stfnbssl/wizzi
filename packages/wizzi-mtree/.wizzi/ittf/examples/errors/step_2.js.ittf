@@ -1,0 +1,51 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Evaluator_Step_1',
+            title: 'Evaluator - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'evaluator_1.js.ittf'
+
+        var productionContext 
+            _ mocks.createProductionContext
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ MTreeBrickProvider.createFromUri
+                    @ ittfUri
+                    {
+                        @ mTreeBuildUpContext
+                            {
+                        @ productionContext productionContext
+                        @ __ittfDocumentStore fsStore
+                    f_cb_throw( provider )
+                        var mTree = provider.getPrimaryMTreeBrick()
+                        _ printNodes(mTree.nodes, 'Before evaluate')
+                        _ mixer
+                            @ mTree
+                            @ provider
+                            f_cb_throw( mixedModel )
+                                _ appender
+                                    @ mixedModel
+                                    f_cb_test( appendedModel )
+                                        var loadContext
+                                            {
+                                                @ mTreeBuildUpContext
+                                                    {
+                                                @ productionContext productionContext
+                                                @ __ittfDocumentStore fsStore
+                                        _ evaluator
+                                            @ appendedModel
+                                            @ loadContext
+                                            f_cb_no_err( evaluatedModel )
+                                                _ printObject('error', err)

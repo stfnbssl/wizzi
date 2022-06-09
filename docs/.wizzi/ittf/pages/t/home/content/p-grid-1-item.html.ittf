@@ -1,0 +1,30 @@
+$group
+    $params &item
+    . css-7zq4fr
+        id page-header-cta-Build
+        div 
+            h2 ${item.title}
+                class css-mqq84m
+        div 
+            h3 ${item.subtitle}
+                class css-td8qak
+        . css-17khnmj
+            aria-hidden true
+        div 
+            . css-14d0z92
+                id page-header-cta-Build-content
+                p ${item.text}
+        div 
+            a ${item.button.label}
+                class css-14z3878
+                href ${item.button.href}
+                svg 
+                    stroke currentColor
+                    fill currentColor
+                    stroke-width 0
+                    viewBox 0 0 24 24
+                    height 1em
+                    width 1em
+                    xmlns http://www.w3.org/2000/svg
+                    path 
+                        d M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z

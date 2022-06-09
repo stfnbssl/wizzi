@@ -1,0 +1,24 @@
+﻿$group
+
+	# async artifact collection pre loader
+		# Pre loads
+        # . artifact front matters (wfjob "artifact" elements with a "collection" attribute)
+	var AsyncArtifactCollectionPreLoader
+		{
+			@ run
+				function
+					param artifactInfo
+					param callback
+                    # log 'Started async artifact collection pre load', artifactInfo.collection
+                    _ log.info('Started async artifact collection pre load: ' + artifactInfo.collection)
+                    if verify.isEmpty(artifactInfo.collection)
+                        r_cb()
+					_ log.info('Started async artifact collection pre load: ' + artifactInfo.name)
+					var preloader = new PreLoader(artifactInfo)
+					_ preloader.runArtifactCollection
+						f_cb_no_err( operResult )
+							if err
+								set err.artifactInfo = artifactInfo.toString()
+								r_cb_err()
+							_ log.info('Ended async artifact collection pre load: ' + artifactInfo.name)
+							_ callback(null, operResult)

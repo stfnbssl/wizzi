@@ -1,0 +1,9 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
+    primary source IttfDocument: c:\my\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\tests\js\ittf\mixed.js.ittf
+    utc time: Thu, 21 Jan 2021 08:51:02 GMT
+*/
+'use strict';
+var user = {
+    name: Wizzi
+};

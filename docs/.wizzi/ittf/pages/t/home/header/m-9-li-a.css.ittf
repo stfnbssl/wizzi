@@ -1,0 +1,41 @@
+$group
+    . css-1o1w4xb
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+    . css-1o1w4xb:hover
+        + .css-1o1w4xb:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-1o1w4xb:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem
+    . css-17mmtw1
+        align-items center
+        color ${mpage.Colors.primary}
+        display inline-flex
+        text-decoration none
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+    . css-17mmtw1:focus
+        + .css-17mmtw1:hover
+        color var(--theme-ui-colors-purple-40,#b17acc)
+        text-decoration underline
+    . css-17mmtw1:hover
+        + .css-17mmtw1:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-17mmtw1:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem

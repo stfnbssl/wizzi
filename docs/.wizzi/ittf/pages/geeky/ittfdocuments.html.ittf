@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Geeky',
+            title: 'Ittf documents'
+        };
+    
+    _layouts/geeky-layout(&art)
+
+        $include ./ittfdocuments/introduction

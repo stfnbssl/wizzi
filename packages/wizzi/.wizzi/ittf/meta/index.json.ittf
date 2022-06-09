@@ -1,0 +1,8 @@
+{
+    $include versions
+    
+    name '@wizzi'
+    version '${versions['wizzi@next']}'
+	title 'The wizzi factory.'
+    license 'MIT'
+    [ schemas

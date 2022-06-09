@@ -1,0 +1,34 @@
+$group
+    . scream-button $$ .css-zzgy
+        display flex
+        flex-direction column
+        align-items center
+        margin-top auto
+    . scream-button-a
+        align-items center
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+        justify-content center
+        transition background 250ms ease 0s, border 250ms ease 0s, color 250ms ease 0s
+        line-height 1
+        text-decoration none
+        background rgb(102, 51, 153)
+        border 1px solid rgb(102, 51, 153)
+        color var(--theme-ui-colors-white,#ffffff)
+        font-weight 600
+        font-size 1.125rem
+        min-height 3rem
+        min-width 3rem
+        padding 0.5rem 1.25rem
+        border-radius 8px
+        margin-bottom 0.5rem
+        margin-top 2rem
+    . scream-button-p
+        font-size 0.75rem
+        color var(--theme-ui-colors-grey-50,#78757a)
+        margin 0px
+        text-align center
+
+

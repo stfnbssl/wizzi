@@ -1,0 +1,51 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'light_genfolder_step_1',
+            title: 'Generate all the ittf documents in a folder',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+                @ 'wizzi-core'
+
+        var genFolderPath
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1'
+
+        var genFolderDest
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1_out'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        # Generate all the artifacts in a folder 
+        _ wizziIndex.genFolder
+            @ genFolderPath
+            {
+                @ friends friendsArray
+            {
+                @ destFolder genFolderDest
+                @ copyInclude ['*']
+                @ copyExclude []
+            f_cb_test(genFolderResult)
+                _ printValue
+                    @ 'genFolderResult'
+                    @ genFolderResult                
+

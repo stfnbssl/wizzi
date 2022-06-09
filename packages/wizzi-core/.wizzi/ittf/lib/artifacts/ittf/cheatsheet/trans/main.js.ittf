@@ -1,0 +1,297 @@
+﻿module
+    kind jsfile
+    $
+        var md = {
+            plugin: 'wizzi-core',
+            schema: 'ittf',
+            name: 'cheatsheet',
+            Name: 'Cheatsheet',
+            checkSchema: true
+        }
+
+    common/v07/artifacts/trans(&md)
+
+        $append imports
+            var stringify = require('json-stringify-safe')
+            var prettify = require('wizzi-utils').prettifyFromString
+
+        $append main
+            _ executeTrans
+                @ model
+                @ ctx
+                @ callback
+
+        function executeTrans
+            param model
+            param ctx
+            param callback
+            
+            # log 'Starting transform ittf/cheatsheet'
+            var workObj
+                {
+                    [ elements
+                    [ _all_items
+
+            _ loadCheats
+                @ model
+                @ workObj
+
+            _ generateArtifacts
+                @ ctx
+                @ workObj
+                f_cb( result )
+                    # log 'executeTrans.result', result
+                    _ callback
+                        @ null
+                        @ result
+                    
+        function loadCheats
+            param model
+            param workObj
+
+            foreach itemTop in model.children
+                if itemTop.name !== 'element'
+                    set workObj[itemTop.name] = itemTop.value
+                        
+            foreach itemTop in model.children
+                # log 'name, value', itemTop.name, itemTop.value
+                if itemTop.name === 'element'
+                    var elementResult
+                        {
+                            @ name itemTop.value
+                            [ items
+                    foreach itemEl in itemTop.children
+                        if itemEl.name === 'item'
+                            var itemResult
+                                {
+                                    @ schema workObj.schema
+                                    @ render 'artifact'
+                            foreach item in itemEl.children
+                                if item.name === 'ittf'
+                                    # log 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
+                                    if item.children.length == 1
+                                        if (workObj.schema === 'json' && (item.children[0].name === '{' || item.children[0].name === '[')) ||
+                                            \b item.children[0].name === ittfRootFromSchema(workObj.schema) ||
+                                            \b ittfRootFromSchema(workObj.schema) === 'any'
+                                            # is already ok, has the correct root
+                                            # ??? set itemResult[item.name] = toIttf(item.children[0])
+                                            set itemResult[item.name] = toIttf(item.children[0])
+                                            set itemResult[item.name + 'Wrapped'] = itemResult[item.name]
+                                        else
+                                            # wrap it
+                                            var ittfNode
+                                                _ wrapperForSchema
+                                                    @ workObj.schema
+                                            foreach node in item.children
+                                                _ ittfNode.children.push
+                                                    @ node
+                                            set itemResult[item.name] = toIttf(item.children[0])
+                                            set itemResult[item.name + 'Wrapped'] = toIttf(ittfNode)
+                                    else
+                                        # wrap them
+                                        var ittfNode
+                                            _ wrapperForSchema
+                                                @ workObj.schema
+                                        foreach node in item.children
+                                            _ ittfNode.children.push
+                                                @ node
+                                        set itemResult[item.name] = toIttf(item.children)
+                                        set itemResult[item.name + 'Wrapped'] = toIttf(ittfNode)
+                                else
+                                    set itemResult[item.name] = item.value
+                                    # log item.name, item.value
+                            _ elementResult.items.push
+                                @ itemResult
+                            _ workObj._all_items.push
+                                @ itemResult
+                        else
+                            set elementResult[itemEl.name] = itemEl.value
+                    _ workObj.elements.push
+                        @ elementResult
+            
+            var dump
+                _ stringify
+                    @ workObj
+                    @ null
+                    @ 2
+            # log 'loadCheats, _all_items.length', workObj._all_items.length
+            # log 'loadCheats, workObj\n', dump
+            
+        function generateArtifacts
+            param ctx
+            param workObj
+            param callback_main
+
+            var counter = 0
+            _ async.mapSeries
+                @ workObj._all_items
+                function
+                    param item
+                    param callback
+                    # log 'counter', ++counter
+                    _ process.nextTick
+                        function
+                            _ prettify
+                                @ item.ittfWrapped
+                                f_cb( pretty )
+                                    set item.ittfPretty = pretty
+                                    # log 'pretty', pretty
+                                    # log 'ittf.cheatsheet.ctx', ctx
+                                    # log 'counter.prettified', counter
+                                    if item.render === 'script'
+                                        # log 'ctx.wizziFactory.loadMTreeDebugInfoFromText', ctx.wizziFactory.loadMTreeDebugInfoFromText
+                                        _ ctx.wizziFactory.loadMTreeDebugInfoFromText
+                                            @ item.ittfWrapped
+                                            {
+                                            f_cb_no_err(script)
+                                                # log 'counter', --counter
+                                                if err
+                                                    set item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2))
+                                                else
+                                                    set item.generated = '\n' + verify.htmlEscape(script.mTreeBuildUpScript)
+                                                _ callback
+                                                    @ null
+                                    else
+                                        # log 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
+                                        _ ctx.wizziFactory.loadModelAndGenerateArtifactFromText
+                                            @ item.ittfWrapped
+                                            {
+                                                { artifactRequestContext
+                                                    @ noUseStrict true
+                                                    @ noGeneratorComments true
+                                            @ artifactNameFromSchema(item.schema)
+                                            f_cb_no_err(artifactText)
+                                                # log 'err, artifactText', err, artifactText
+                                                # log 'counter', --counter
+                                                if err
+                                                    set item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2))
+                                                else
+                                                    set artifactText = verify.htmlEscape(artifactText)
+                                                    set item.generated = '\n' + artifactText
+                                                _ callback
+                                                    @ null
+                f_cb()
+                    var dump
+                        _ stringify
+                            @ workObj
+                            @ null
+                            @ 2
+                    # log 'workObj final\n', dump
+                    # log 'Ending transform ittf/cheatsheet'
+                    _ callback_main
+                        @ null
+                        {
+                            @ schema workObj.schema
+                            @ elements workObj.elements
+
+        function toIttf
+            param node
+            var buffer
+                [ 
+            if verify.isArray(node)
+                foreach item in node
+                    if item.children
+                        _ _toIttfNodeDeep(item, 0, buffer)
+                    else
+                        _ item.nodes.forEach
+                            function 
+                                param node
+                                _ _toIttfNodeDeep(node, 0, buffer)
+
+            else
+                if node && node.children
+                    _ _toIttfNodeDeep(node, 0, buffer)
+                else
+                    _ node.nodes.forEach
+                        function 
+                            param node
+                            _ _toIttfNodeDeep(node, 0, buffer)
+            return buffer.join('\n')
+
+        function _toIttfNodeDeep
+            param node
+            param indent
+            param buffer
+            if node.name
+                _ buffer.push
+                    @ spaces(indent * 4) + node.name + ' ' + (node.value || '')
+            else
+                _ buffer.push
+                    @ spaces(indent * 4) + node.n + ' ' + (node.v || '')
+            foreach child in node.children
+                _ _toIttfNodeDeep(child, indent + 1, buffer)
+
+        function spaces
+            param num
+            return 
+                _ Array(num + 1)
+                    ._ join(" ")
+
+        function wrapperForSchema
+            param schema
+            if schema === 'js' || schema === 'jsx'
+                return
+                    {
+                        @ n 'module'
+                        [ children
+                            {
+                                @ n 'kind'
+                                @ v 'react'
+                                [ children
+            elif schema === 'ts'
+                return
+                    {
+                        @ n 'module'
+                        [ children
+            else
+                return
+                    {
+                        @ n schema
+                        [ children
+
+        var schemaArtifactMap
+            {
+                @ js 'js/module'
+                @ jsx 'js/module'
+                @ ts 'ts/module'
+                @ html 'html/document'
+                @ css 'css/document'
+                @ scss 'scss/document'
+                @ svg 'svg/document'
+                @ vtt 'vtt/document'
+                @ md 'md/document'
+                @ vue 'vue/document'
+                @ graphql 'graphql/document'
+                @ json 'json/document'
+                @ yaml 'yaml/document'
+                @ ittf 'ittf/document'
+                @ xml 'xml/document'
+                @ text 'text/document'
+
+        function artifactNameFromSchema
+            param schema
+            # log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
+            return schemaArtifactMap[schema]
+
+        var schemaIttfRootMap
+            {
+                @ js 'module'
+                @ jsx 'module'
+                @ html 'html'
+                @ css 'css'
+                @ scss 'scss'
+                @ svg 'svg'
+                @ md 'md'
+                @ vtt 'vtt'
+                @ vue 'vue'
+                @ graphql 'graphql'
+                @ json '{'
+                @ yaml 'yaml'
+                @ ittf 'any'
+                @ text 'text'
+                @ xml 'xml'
+
+        function ittfRootFromSchema
+            param schema
+            # log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+            return schemaIttfRootMap[schema]

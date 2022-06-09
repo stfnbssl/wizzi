@@ -1,0 +1,14 @@
+$group
+
+    . hint-link
+        font-size 0.75rem
+        color var(--theme-ui-colors-grey-50,#78757a)
+        margin 0
+        text-align center
+        font-size 0.875rem
+    . hint-link-a
+        align-items center
+        color var(--theme-ui-colors-purple-60,#663399)
+        display inline-flex
+        text-decoration none
+        font-weight 600

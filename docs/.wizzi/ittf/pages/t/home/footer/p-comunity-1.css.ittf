@@ -1,0 +1,89 @@
+$group
+
+    . css-zhgq71
+        display flex
+        flex-direction column
+        justify-content flex-end
+        margin-bottom 1.25rem
+        margin-top 3rem
+        align-items center
+        order 2
+    
+    media (min-width: 750px)
+        . css-zhgq71
+            flex-direction row
+            justify-content flex-end
+            align-items flex-end
+            margin-top 0
+            margin-bottom 4rem
+            order 1
+
+    . css-g7lqkh
+        align-items center
+        display flex
+        flex-direction column
+
+    media (min-width: 750px)
+        . css-g7lqkh
+            margin-right auto
+            align-items flex-start
+
+    . css-j6vqkv
+        fill black
+        height 1.5rem
+        width auto
+
+    . css-1vym0s9
+        font-size 0.75rem
+        color var(--theme-ui-colors-grey-50,#78757a)
+        margin 0
+        margin-top 1.25rem
+        text-align center
+
+    media (min-width: 750px)
+        . css-1vym0s9
+            text-align left
+
+    . css-1ozgqm8
+        margin-top 1.25rem
+
+    media (min-width: 750px)
+        . css-1ozgqm8
+            margin-top 0
+
+    . css-78568f
+        display -webkit-box
+        display -webkit-flex
+        display -ms-flexbox
+        display flex
+        list-style none
+        margin 0
+        -webkit-transform translateY(0.25rem)
+        -ms-transform translateY(0.25rem)
+        transform translateY(0.25rem)
+
+    media (min-width: 750px)
+        . css-78568f
+            margin-right 2rem
+
+    . css-gpva5v
+        width 16rem
+        display flex
+        justify-content flex-end
+
+    . css-xhrqf7
+        -webkit-align-items flex-end
+        -webkit-box-align flex-end
+        -ms-flex-align flex-end
+        align-items flex-end
+        display -webkit-box
+        display -webkit-flex
+        display -ms-flexbox
+        display flex
+        margin 0
+        margin-top 1.5rem
+        position relative
+
+    media (min-width: 750px)
+        . css-xhrqf7
+            margin-top 0

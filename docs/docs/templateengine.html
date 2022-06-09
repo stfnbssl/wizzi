@@ -1,0 +1,353 @@
+<!--
+    artifact generator: C:\My\wizzi\wizzifactory\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.9
+    primary source IttfDocument: C:\My\wizzi\wizzifactory\wizzi\docs\.wizzi\ittf\pages\docs\templateengine.html.ittf
+    utc time: Wed, 08 Jun 2022 13:40:54 GMT
+-->
+<!doctype html>
+<html>
+<!-- root layout for wizzi /pages -->
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://127.0.0.1:5501/wizzi/docs/styles/docs.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
+    <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+    <style></style>
+</head>
+<body>
+    <div id="___wizzi">
+        <div style="outline:none" tabindex="-1" id="wizzi-focus-wrapper">
+            <div class="main-container">
+                <div id="main-container">
+                    <div id="header">
+                        <div id="logo">
+                            <a aria-label="Link to home" class="logo-a" href="/"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
+                                    <rect fill='none' stroke='none' x='0' y='0' width='700' height='280'></rect>
+                                    <polyline fill='#eee' stroke='#eee' points='1.121212121212121 28.03030303030303 5.045454545454546 1.121212121212121 6.7272727272727275 1.121212121212121 8.409090909090908 14.575757575757576 13.454545454545455 23.545454545454547 13.454545454545455 14.575757575757576 19.62121212121212 23.545454545454547 19.62121212121212 12.333333333333334 25.78787878787879 23.545454545454547 25.78787878787879 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='30.272727272727273 28.03030303030303 31.393939393939394 10.09090909090909 34.75757575757576 10.09090909090909 35.87878787878788 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M33.63636363636364, 3.3636363636363633 C37,5.6060606060606055 30.272727272727273,7.848484848484849 33.63636363636364, 9.418181818181818' style='stroke-width:2;'></path>
+                                    <polyline fill='#eee' stroke='#eee' points='40.36363636363637 28.03030303030303 40.36363636363637 25.78787878787879 51.57575757575758 14.575757575757576 49.333333333333336 12.333333333333334 49.333333333333336 10.090909090909092 54.939393939393945 10.090909090909092 48.21212121212122 25.78787878787879 53.81818181818182 25.78787878787879 53.81818181818182 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='57.18181818181818 28.03030303030303 57.18181818181818 25.78787878787879 68.39393939393939 14.575757575757576 66.15151515151516 12.333333333333334 66.15151515151516 10.090909090909092 71.75757575757575 10.090909090909092 65.03030303030303 25.78787878787879 70.63636363636364 25.78787878787879 70.63636363636364 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='75.12121212121212 28.03030303030303 76.24242424242425 10.09090909090909 79.60606060606061 10.09090909090909 80.72727272727273 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M78.48484848484848, 3.3636363636363633 C81.84848484848486,5.6060606060606055 75.12121212121212,7.848484848484849 78.48484848484848, 9.418181818181818' style='stroke-width:2;'></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <nav id="top-nav">
+                            <ul>
+                                <li class="current"><a href="http://127.0.0.1:5501/wizzi/docs/docs/overview.html">Documentation</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/howto/overview.html">How to</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/samplecode/overview.html">Sample code</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/geeky/overview.html">Geeky</a>
+                                </li>
+                                <li><a href="https://github.com/stfnbssl/wizzi">Github</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div id="middle-container">
+                        <div id="content">
+                            <article>
+                                <div id class="doc-title">
+                                    Template engine</div>
+                                <div class="doc-summary">
+                                    <p>ITTF Documents are composable templates, and their nodes can contain template commands and
+                                        <a><a href="http://127.0.0.1:5501/wizzi/docs/docs/jswizzi.html">JsWizzi</a>
+                                        </a>
+                                        expressions.</p>
+                                    <p>The buildup of an
+                                        <a><a href="http://127.0.0.1:5501/wizzi/docs/docs/mtrees.html">mTree</a>
+                                        </a>
+                                        can repeat node branches using commands like '$foreach', '$backeach' and '$while' and can include or exclude node branches using '$if', '$elif' and '$else' commands.</p>
+                                    <p>JsWizzi statements and expressions are executed in the evaluation context of an ITTF Document code unit (file) and may access global context variables.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $foreach command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$foreach</span><span class="pp-pln"> item-name in collection-name</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div></div>
+                                    </code></pre></div>
+                                    <p>Descendant nodes of this command are a repeat template; item-name is user defined and collection-name is a JsWizzi expression that must evaluate to an iterable javascript object, in the fragment or global scope.</p>
+                                    <p>The var statement that declares item-name is auto-generated.</p>
+                                    <p>Descendant nodes are repeated having item-name as a value in scope.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $while command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$while</span><span class="pp-pln"> jswizzi-expression</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-kwd">$</span><span class="pp-pln"> jswizzi-exit-condition-change</span></div></div>
+                                    </code></pre></div>
+                                    <p>Descendant nodes are repeated until the jswizzi-expression evaluates to false.</p>
+                                    <p>$ or $global commands must be used to modify the context values of the exit condition. There is a limit of 10000 iterations to guard against accidental loops, after that an exception is raised.</p>
+                                    <p>TODO make the limit of 10000 iterations configurable and an optional parameter of the loadMTree function.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $break, $continue commands</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$foreach</span><span class="pp-pln"> ...</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-kwd">$break</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">...</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-kwd">$continue</span></div></div>
+                                    </code></pre></div>
+                                    <p>This statements have the same meaning than in javascript and operate breaking or continuing the template repetition. Labels for continuation are not implemented.</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Ittf commands</div>
+                                <div class="doc-summary">
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $include command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$include</span><span class="pp-mix frag-to-link-a"> fragment-path</span></div></div>
+                                    </code></pre></div>
+                                    <p>The node value (
+                                        <span> </span>
+                                        <code class="highlight-code">
+fragment-path</code>
+                                        <span> </span>
+                                        ) is the relative path to the ITTF Fragment that must be included. The folder uri of the includer document is the base path for the path resolution of the included documents.</p>
+                                    <p>The fragment will be included replacing
+                                        the $include command, and the JsWizzi expressions of its nodes will become part of the evaluation scope of the includer.</p>
+                                    <p>An $include command cannot have children nodes. The included
+                                        fragment cannot have the $params node (cannot have composition parameters).</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The Mix action</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-mix frag-to-link-a">fragment-path(</span><span class="pp-arg"> arg-1 [</span><span class="pp-pln">,</span><span class="pp-arg">  arg-2 ... [</span><span class="pp-pln">,</span><span class="pp-arg">  arg-n]]</span><span class="pp-mix">)</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> optional child branch nodes</span></div></div>
+                                    </code></pre></div>
+                                    <p>A Mix action is recognized by the ITTF Parser when a node name ends with an open parenthesis. The chars before the open parenthesis are the relative path to the mixed ITTF Document. The folder uri of the mixer ITTF Document is the base path. No whitechar must separate the mixed fragment path and the open paren.</p>
+                                    <p>The mixed fragment is inserted in the mixer document replacing the Mix action. If the mix node has children, by default they are appended to the root node of the mixed fragment. But if the mixed fragment has a descendant node that is a '$hook' command of name 'default', than the children of the mix node will replace it.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>ITTF Fragment with an $hook command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">table</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$hook</span></div></div>
+                                    </code></pre></div>
+                                    <p>The hook-name when not declared, is assumed to be 'default'.</p>
+                                    <p>The root node of a mixed ITTF Document can be a template
+                                        <span> </span>
+                                        <code class="highlight-code">
+Mix action</code>
+                                        <span> </span>
+                                        . A fragment can mix its container and append nodes to its hooks:</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-mix frag-to-link-a">mylayout(</span><span class="pp-arg"> home</span><span class="pp-pln">,</span><span class="pp-arg">  </span><span class="pp-mix">)</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$append</span><span class="pp-pln"> scripts</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">js</span><span class="pp-pln"> dialogs.js</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">div</span><span class="pp-pln"> My content</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $params command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">rootnode</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$params</span><span class="pp-pln"> param1 [,param2 [,param-n]]</span></div></div>
+                                    </code></pre></div>
+                                    <p>ITTF Fragments designed to be mixed can declare composition parameters.
+                                        The `$params` node must be the first child of the root node.</p>
+                                    <p>A parameter has format: [&]name[:type][|default]</p>
+                                    <table>
+                                        <tr>
+                                            <td>&</td>
+                                            <td>
+                                                Optional. A paramater name prededed by `&` means an object passed by reference</td>
+                                        </tr>
+                                        <tr>
+                                            <td>name</td>
+                                            <td>
+                                                the name of the parameter to be used in jsWizzi expressions</td>
+                                        </tr>
+                                        <tr>
+                                            <td>type</td>
+                                            <td>
+                                                the parameter type<p>one-of: string(default), integer, float, boolean, date, object (implicit
+                                                    when '&' declared), macro (implicit, detected from IttfMacro delimiterscontained in the default value)</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>default</td>
+                                            <td>
+                                                typed-value | @@null | @@undefined<p>warning! `title|null` becomes title = "null" (the quoted string null).</p>
+                                                If you want title to be null then : `title|@@null`</td>
+                                        </tr>
+                                        <tr>
+                                            <td>string</td>
+                                            <td>
+                                                quotes are optional</td>
+                                        </tr>
+                                        <tr>
+                                            <td>boolean</td>
+                                            <td>
+                                                true | false</td>
+                                        </tr>
+                                        <tr>
+                                            <td>date</td>
+                                            <td>
+                                                yyyy/mm/dd</td>
+                                        </tr>
+                                        <tr>
+                                            <td>macro</td>
+                                            <td>
+                                                <p>an IttfMacro can be passed as a parameter to a mixin, when the parameter
+                                                    is referenced we have a double macro substitution</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p>This list item fragment, lia.html.ittf, ...</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">li</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$params</span><span class="pp-pln"> text, href</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">a</span><span class="pp-kwd"> ${</span><span class="pp-expr">text</span><span class="pp-kwd">}</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">href</span><span class="pp-kwd"> ${</span><span class="pp-expr">href</span><span class="pp-kwd">}</span></div></div>
+                                    </code></pre></div>
+                                    <p>.. can be mixed in this way</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">ul</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-mix frag-to-link-a">lia(</span><span class="pp-arg"> my home page</span><span class="pp-pln">,</span><span class="pp-arg">  http://hello.it</span><span class="pp-mix">)</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $hook command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$hook</span><span class="pp-pln"> name</span></div></div>
+                                    </code></pre></div>
+                                    <p>An $hook command is a named insertion point where node branches can
+                                        be appended. The name is optional, when missing its value is 'default'.</p>
+                                    <p>It has to be replaced and must not have children nodes.</p>
+                                    <p>See the statements `Mix` and `$append`, for how to append
+                                        node branches to an $hook node.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $append command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$append</span><span class="pp-pln"> hook-name</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div></div>
+                                    </code></pre></div>
+                                    <p>An $append command is the root of a node branch that will be
+                                        appended to an ancestor $hook of `hook-name`.The children nodes of $append will replace the $hook node.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $group command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$group</span><span class="pp-pln"> empty-value</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">node</span><span class="pp-pln"> branch ...</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">node</span><span class="pp-pln"> branch ...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">...</span></div></div>
+                                    </code></pre></div>
+                                    <p>An ITTF Document must have one and only one root node.</p>
+                                    <p>The $group command is a convenience node that may be used as the root of
+                                        a fragment that must have more than one root node.</p>
+                                    <p>The $group node has no meaningful value. It disappear in the builded mTree.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $if, $elif, $else commands</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$if</span><span class="pp-expr"> jswizzi-expression</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-kwd">$elif</span><span class="pp-pln"> jswizzi-expression</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">  </span><span class="pp-kwd">$else</span><span class="pp-pln"> empty-value</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div></div>
+                                    </code></pre></div>
+                                    <p>Children nodes of these commands are included/excluded from the builded mTree
+                                        depending on the value of the expression.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $foreach and $backeach commands</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$foreach</span><span class="pp-pln"> item-name in collection-name</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div></div>
+                                    </code></pre></div>
+                                    <p>Descendant nodes of this command are a repeat template; item-name
+                                        is user defined and collection-name is a JsWizzi expression that evaluatesto an iterable javascript object, that must be in scope in the fragment or in the globaljsWizziContext.</p>
+                                    <p>The var statement that declares item-name is auto-generated.</p>
+                                    <p>Descendant nodes are repeated having item-name as a value in scope.</p>
+                                    <p>The $backeach command iterates the collection backword.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $break, $continue commands</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$break</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-kwd">$continue</span></div></div>
+                                    </code></pre></div>
+                                    <p>This statements have the same meaning than in javascript but operate breaking or continuing
+                                        the template repetition.</p>
+                                    <p>A label for continuation is not implemented.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>the $while command</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$while</span><span class="pp-pln"> jswizzi-expression</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">...</span><span class="pp-pln"> node branch ...</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-kwd">$</span><span class="pp-pln"> jswizzi-exit-condition-change</span></div></div>
+                                    </code></pre></div>
+                                    <p>This is a repeat template statement where descendant nodes are repeated
+                                        until the jswizzi-expression evaluates to false.</p>
+                                    <p>$ or $global commands must be used to modify the context values of the exit condition.
+                                        There is a limit of 10,000 iterations to guard against accidental loops, after that an exception is raised.</p>
+                                    <p>Example</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$</span><span class="pp-pln"> i = 0</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-kwd">$while</span><span class="pp-pln"> i &lt; 256</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">p</span><span class="pp-pln"> Item </span><span class="pp-kwd">${</span><span class="pp-expr">i</span><span class="pp-kwd">}</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-kwd">$</span><span class="pp-pln"> i++</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $ command - single line</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$</span><span class="pp-pln"> jswizzi-statement</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $ command - multi line</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-expr">jswizzi-statement</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-expr">jswizzi-statement</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-expr">...</span></div></div>
+                                    </code></pre></div>
+                                    <p>Descendant nodes of this command can contain JsWizzi expressions that,
+                                        during the evaluation step, are executed in the fragment scopeto wich the command belongs.</p>
+                                    <p>They may declare and modify variables that have fragment scope, and
+                                        modify variables that have global scope.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $global command - single line</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$global</span><span class="pp-pln"> jswizzi-statement</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The $global command - multi line</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$global</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">jswizzi-statement</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">jswizzi-statement</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">...</span></div></div>
+                                    </code></pre></div>
+                                    <p>Descendant nodes of this command can contain JsWizzi expressions that,
+                                        during the evaluation step, are executed in the global scope of the jsWizziContext.They may declare or modify variables in the global scope.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The text container node: $.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$.</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">free</span><span class="pp-pln"> content</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">free</span><span class="pp-pln"> content</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">...</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The single line comment: $$</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">ul</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-kwd">$$</span><span class="pp-pln"> &lt;rest-of-line is comment&gt;</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">li</span><span class="pp-pln"> item $$ &lt;rest-of-line is comment&gt;</span></div></div>
+                                    </code></pre></div>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>The multiline comment: $* ... *$</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$*</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">ul</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">li</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">*$</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                        </div>
+                        <nav>
+                            <div id="right-nav">
+                                <div class="aside-right">
+                                    <div style="padding-top: 40px;"></div>
+                                    <ul>
+                                        <li><a href="./overview.html">Overview</a>
+                                        </li>
+                                        <li><a href="./ittfdocuments.html">Ittf Documents</a>
+                                        </li>
+                                        <li class="current"><a href="./templateengine.html">Template engine</a>
+                                        </li>
+                                        <li><a href="./jswizzi.html">JsWizzi</a>
+                                        </li>
+                                        <li><a href="./mtrees.html">mTrees</a>
+                                        </li>
+                                        <li><a href="./wizzischemas.html">Wizzi Schemas</a>
+                                        </li>
+                                        <li><a href="./wizzimodeldom.html">Wizzi Model DOM</a>
+                                        </li>
+                                        <li><a href="./wizzimodelinstances.html">Wizzi Model instances</a>
+                                        </li>
+                                        <li><a href="./modeltransformers.html">Model transformers</a>
+                                        </li>
+                                        <li><a href="./artifactgenerators.html">Artifact generators</a>
+                                        </li>
+                                        <li><a href="./wizzijobs.html">Wizzi Jobs</a>
+                                        </li>
+                                        <li><a href="./wizziplugins.html">Wizzi Plugins</a>
+                                        </li>
+                                        <li><a href="./wizziapi.html">Wizzi API</a>
+                                        </li>
+                                        <li><a href="./glossary.html">Glossary</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

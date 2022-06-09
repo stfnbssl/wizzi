@@ -1,0 +1,46 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'fromText_step_1',
+            title: 'Ittf docomuent as a text string - step 1 - load and generate',
+            folderLevel: 2
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+                @ 'wizzi-core'
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                _ wf.loadModelFromText
+                    [
+                        @ 'html'
+                        @ '    head'
+                        @ '    body'
+                        ._ join('\n')
+                    @ 'html'
+                    f_cb_throw( result )
+                        _ printEvaluatedNodes
+                            @ result
+                            @ 'html wizziModel'
+                        _ wf.loadModelAndGenerateArtifactFromText
+                            [
+                                @ 'html'
+                                @ '    head'
+                                @ '    body'
+                                ._ join('\n')
+                            {
+                            @ 'html/document'
+                            f_cb_throw( result )
+                                _ printValue
+                                    @ result
+                                    @ 'html/document'

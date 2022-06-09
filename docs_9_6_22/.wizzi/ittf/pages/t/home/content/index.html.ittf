@@ -1,0 +1,21 @@
+$group
+    
+    . css-a2s10c
+        $foreach content in mpage.Main.contents
+            $foreach panel in content.panels
+                $if panel.kind == 'splash'
+                    p-splash-1(&panel)
+                $elif panel.kind == 'grid'
+                    p-grid-1(&panel)
+                        $foreach item in panel.items
+                            p-grid-1-item(&item)
+                $elif panel.kind == 'getstarted'
+                    p-getstarted-1(&panel)
+                $elif panel.kind == 'eco'
+                    p-eco-1(&panel)
+                        $foreach item in panel.items
+                            p-eco-1-item(&item)
+                $elif panel.kind == 'cloud'
+                    cloud-1(&panel)
+                        $foreach item in panel.items
+                            cloud-1-item(&item)

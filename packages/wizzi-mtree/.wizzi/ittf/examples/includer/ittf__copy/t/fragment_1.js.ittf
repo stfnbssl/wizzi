@@ -1,0 +1,4 @@
+﻿m sayHello
+    param ok
+    if ok
+        _ say.hello()

@@ -1,0 +1,53 @@
+module 
+    kind jsfile
+    var assert = require('assert')
+    var path = require('path')
+    var util = require('util')
+	var verify = require('wizzi-utils').verify
+    var log = require('../util/log')(module)
+    var Runner = require('./runner').Runner
+	+
+    # The PreLoader is called by the ProductionManager (AsyncGlobalModelPreLoader.run and 
+    # AsyncArtifactCollectionPreLoader.run), in the preload step.
+    # It executes the pre load of global models and front matter data of artifact models,
+    # and adds them to the ProductionContext instance.
+    +
+	wz-class PreLoader
+        ctor
+            param loadInfo
+            set this.loadInfo = loadInfo
+            set this.productionManager = loadInfo.productionManager
+            set this.productionContext = this.productionManager.productionContext
+            set this.wizziFactory = this.productionManager.wizziFactory
+
+		m runGlobalModel
+            param callback
+            # loadInfo alias of ModelInfo
+            # log 'wizzi.production.preLoader.runGlobalModel.start', this.loadInfo
+            _ this.wizziFactory.loadModel
+                @ this.loadInfo.schema
+                _ this.loadInfo.srcFullPath
+                {
+                    @ mTreeBuildUpContext {}
+                    @ globalContext {}
+                a_cb( wizziModel )
+                    _ this.productionContext.addGlobalModel
+                        _ this.loadInfo.srcFullPath
+                        @ this.loadInfo.exportName
+                        @ wizziModel
+                    r_cb( wizziModel )
+
+		m runArtifactCollection
+            param callback
+            # loadInfo alias of ArtifactInfo
+            # log 'wizzi.production.preLoader.runArtifact.start.artifactInfo.name', this.loadInfo.name
+            _ AsyncRunner.runFrontMatter
+                @ this.loadInfo
+                a_cb( result )
+                    # log 'wizzi.production.preLoader.runArtifact.runFrontMatter.result', result
+                    _ this.productionContext.addArtifactCollection
+                        @ this.loadInfo
+                        @ result
+                    r_cb( result )
+
+    $include manager/async_runner                    

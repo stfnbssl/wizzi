@@ -1,0 +1,57 @@
+$group
+    
+    . scream-panel-1 $$ css-uapkau
+        max-width 90rem
+        padding 1.5rem 2rem 1.25rem
+        margin-left auto
+        margin-right auto
+        width 100%
+        align-items center
+        display flex
+        flex-direction column
+        justify-content center
+        position relative
+    . scream-panel-1-header
+        text-align center
+        margin-bottom 4rem
+    . scream-panel-1-h1
+        margin 0px 0px 0.5rem
+        line-height 1.25
+        font-weight 100
+        text-transform uppercase
+        font-family "Futura PT", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+        color var(--theme-ui-colors-grey-50,#78757a)
+        font-size 1rem
+        letter-spacing 0.075em
+    . scream-panel-1-h2
+        margin 0px
+        color rgb(35, 33, 41)
+        font-weight 800
+        font-family "Futura PT", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+        font-size 2.25rem
+        line-height 1.25
+    . scream-panel-1-span 
+        color var(--theme-ui-colors-purple-60,#663399)
+        display block
+
+    media (min-width: 550px)
+        . scream-panel-1
+            width 90%
+
+    media (min-width: 1000px)
+        . scream-panel-1
+            padding-top 6rem
+            padding-bottom 2rem
+            < header
+                < h2
+                    font-size 2.25rem
+
+    . scream-panel-1-grid $$ css-r12daq
+        display grid
+        grid-template-columns 1fr
+        gap 3rem 6rem
+        position relative
+
+    media (min-width: 1000px)
+        . scream-panel-1-grid
+            grid-template-columns 1fr 1fr

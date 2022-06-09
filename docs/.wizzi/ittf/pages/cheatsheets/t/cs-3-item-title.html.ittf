@@ -1,0 +1,9 @@
+$group
+    $params &item
+    
+    h3 ${item.title}
+        class cs-item-title
+        a
+            $$ href #${item.title}
+            id ${item.title}
+            class anchor

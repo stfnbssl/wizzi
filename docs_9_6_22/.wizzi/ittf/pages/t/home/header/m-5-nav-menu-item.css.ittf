@@ -1,0 +1,243 @@
+$group
+    . m-5-nav-menu-item
+        padding 0.25rem 2rem
+    media (min-width: 1000px)
+        . m-5-nav-menu-item
+            padding 0
+    . css-1hrzjy2
+        color var(--theme-ui-colors-grey-50,#78757a)
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-size 0.75rem
+        margin-bottom 1rem
+        text-transform uppercase
+        text-decoration none
+        display block
+    . css-1hrzjy2:hover
+        + .css-1hrzjy2:focus
+        text-decoration none
+    media (min-width: 1000px)
+        . css-1hrzjy2
+            $$ BAX-M display none
+    . css-1enu353
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 700
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        color var(--theme-ui-colors-grey-50,#78757a)
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-size 0.75rem
+        margin-bottom 1rem
+        text-transform uppercase
+        text-decoration none
+        display block
+    . css-1enu353:hover
+        + .css-1enu353:focus
+        text-decoration none
+    media (min-width: 1000px)
+        . css-1enu353
+            $$ BAX-M
+            display none
+    . css-3q8779
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background transparent
+        border 1px solid transparent
+        color ${mpage.Colors.primary}
+        font-size 0.875rem
+        min-height 2rem
+        min-width 2rem
+        padding 0.25rem 0.75rem
+        color var(--theme-ui-colors-${mpage.Colors.gray70})
+        $$ BAX-M display none
+    . css-3q8779[disabled]
+        + .css-3q8779[disabled]:hover
+        cursor not-allowed
+        opacity 0.5
+    . css-3q8779 svg
+        flex-shrink 0
+        margin 0 0.25rem
+        transform scale(1)
+        margin-right -0.25rem
+    . css-3q8779:hover:not([disabled]) svg
+        + .css-3q8779:focus:not([disabled]) svg
+        animation animation-5yo8zs 1s linear infinite
+    . css-3q8779:hover
+        background #fcfaff
+        color #362066
+    media (min-width: 1000px)
+        . css-3q8779
+            display inline-flex
+    keyframes animation-5yo8zs
+        vendor -webkit-
+        keyframe 33%
+            transform scale(1)
+        keyframe 66%
+            transform scale(0.8)
+    keyframes animation-5yo8zs
+        vendor
+        keyframe 33%
+            transform scale(1)
+        keyframe 66%
+            transform scale(0.8)
+    media (min-width: 1000px)
+        . css-1sg6jvm
+            display none
+            left 50%
+            padding-top 0.75rem
+            position absolute
+            top 100%
+            visibility visible
+            z-index 10
+            transform translateX(calc(-50% + 0px))
+        . css-1sg6jvm:after
+            position absolute
+            top 0.25rem
+            left 50%
+            width 1rem
+            height 1rem
+            content " "
+            $$ BAX-M bright
+            transform translateX(calc(-50% - 0px)) rotate(45deg)
+            border-top-left-radius 4px
+            background ${mpage.Colors.themeBack}
+            will-change transform
+            transition-property transform
+    media (min-width: 1000px)
+    . css-i6otxs
+        display grid
+    media (min-width: 1000px)
+        . css-i6otxs
+            display none
+            left 50%
+            padding-top 0.75rem
+            position absolute
+            top 100%
+            visibility visible
+            z-index 10
+            transform translateX(calc(-50% + 0px))
+    media (min-width: 1000px)
+        . css-y86b6k
+            background ${mpage.Colors.themeBack}
+            border-radius 8px
+            box-shadow 0px 4px 16px rgba(46,41,51,0.08),0px 8px 24px rgba(71,63,79,0.16)
+            width 32.5rem
+    media (min-width: 1000px)
+        . css-1ropak3
+            display grid
+            left 50%
+            padding-top 0.75rem
+            position absolute
+            top 100%
+            visibility visible
+            z-index 10
+            transform translateX(calc(-50% + 58.2344px))
+    . css-jebqk6
+        padding 0.25rem 2rem
+        display block
+    media (min-width: 1000px)
+        . css-jebqk6
+            padding 0
+    media (min-width: 1000px)
+        . css-jebqk6
+            display none
+
+    . css-1r69p41
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background transparent
+        border 1px solid transparent
+        color ${mpage.Colors.primary}
+        font-size 0.875rem
+        min-height 2rem
+        min-width 2rem
+        padding 0.25rem 0.75rem
+        color var(--theme-ui-colors-${mpage.Colors.gray70})
+        display none
+    . css-1r69p41[disabled]
+        + .css-1r69p41[disabled]:hover
+        cursor not-allowed
+        opacity 0.5
+    . css-1r69p41 svg
+        flex-shrink 0
+        margin 0 0.25rem
+        transform scale(1)
+    . css-1r69p41:hover:not([disabled]) svg
+        + .css-1r69p41:focus:not([disabled]) svg
+        animation animation-5yo8zs 1s linear infinite
+    . css-1r69p41:hover
+        background #fcfaff
+        color #362066
+    media (min-width: 1000px)
+        . css-1r69p41
+            display inline-flex
+    keyframes animation-5yo8zs
+        vendor -webkit-
+        keyframe 33%
+            transform scale(1)
+        keyframe 66%
+            transform scale(0.8)
+    keyframes animation-5yo8zs
+        vendor
+        keyframe 33%
+            transform scale(1)
+        keyframe 66%
+            transform scale(0.8)
+
+    . m-btn-1-li
+        margin 0
+        position relative
+        padding 1rem 0
+        display none
+    media (min-width: 1000px)
+        . m-btn-1-li
+            display block
+            padding 0
+
+    . m-btn-1-li-a
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background ${mpage.Colors.primary}
+        border 1px solid ${mpage.Colors.primary}
+        color var(--theme-ui-colors-white,#ffffff)
+        font-weight 600
+        font-size 0.875rem
+        min-height 2rem
+        min-width 2rem
+        padding 0.25rem 0.75rem
+        color var(--theme-ui-colors-grey-70,#48434f)
+        color var(--theme-ui-colors-white,#ffffff)
+        margin-left 0.75rem
+        display none
+
+    media (min-width: 1000px)
+        . m-btn-1-li-a
+            display inline-flex
+

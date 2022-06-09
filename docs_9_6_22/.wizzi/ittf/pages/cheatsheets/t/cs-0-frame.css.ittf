@@ -1,0 +1,22 @@
+$group
+
+    . cs-frame
+        position relative
+        z-index 1
+        margin 0px auto
+        max-width 96rem
+        padding-left 2rem
+        padding-right 2rem
+
+    media screen and (min-width: 750px)
+        . cs-frame
+            padding-left 16.5rem
+            padding-top 6.25rem
+
+    media screen and (min-width: 1000px)
+        . cs-frame
+            padding-left 18rem
+
+
+
+

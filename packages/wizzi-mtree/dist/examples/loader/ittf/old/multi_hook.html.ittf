@@ -1,0 +1,34 @@
+html
+
+    $
+        var data1 = {
+            num: 1
+        }
+        var data2 = {
+            num: 2
+        }
+        var data3 = {
+            num: 3
+        }
+        var data4 = {
+            num: 4
+        }
+    
+    body
+        p data 1
+        $ var data = data1
+        hooks(&data)
+            h3 sub 1
+        p data 2
+        $ var data = data2
+        hooks(&data)
+            h3 sub 2
+        p data 3
+        $ var data = data3
+        hooks(&data)
+            h3 sub 3
+        p data 4
+        $ var data = data4
+        hooks(&data)
+            h3 sub 4
+        

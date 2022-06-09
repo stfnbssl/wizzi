@@ -1,0 +1,23 @@
+module
+
+    var j = 0
+    let resultContext = sysContext
+    iife next
+        var contextItem = contextItems[j++]
+        if !contextItem
+            log 'getArtifactContext.done.keys', Object.keys(resultContext)
+            return resolve(resultContext)
+        _ getArtifactContextItem
+            @ owner
+            @ contextItem
+            @ sysContext
+            ._ then
+                => 
+                    param resultItemContext
+                        :any
+                    set resultContext
+                        _ Object.assign
+                            { 
+                            @ resultContext
+                            @ resultItemContext
+                    _ next()

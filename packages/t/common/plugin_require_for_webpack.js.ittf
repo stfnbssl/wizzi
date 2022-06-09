@@ -1,0 +1,10 @@
+$group
+
+    $if isWebpackTarget
+		$foreach schema in wfpackage.schemas
+            var __dummy_${schema}_model = require("lib/wizzi/models/${schema}-model.g")
+            var __dummy_${schema}_model = require("lib/wizzi/models/${schema}-factory.g")
+            $foreach transformer in schema.transformers
+                var __dummy_${schema}_model = require("lib/artifacts/${schema}/${transformer}/trans/main")
+            $foreach artifact in schema.artifacts
+                var __dummy_${schema}_model = require("lib/artifacts/${schema}/${artifact}/gen/main")

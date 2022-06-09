@@ -1,0 +1,11 @@
+﻿base_test( mocks )
+
+	$append imports
+		var mocks = require('../../lib/mocks')
+
+	it should get FactoryWizziObject
+        var hr = mocks.getFactoryWizziObject()
+        tobe_not_null(hr.loadMTree)
+
+    $$ TODO
+

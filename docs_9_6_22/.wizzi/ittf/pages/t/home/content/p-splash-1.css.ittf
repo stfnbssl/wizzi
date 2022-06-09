@@ -1,0 +1,68 @@
+$group
+
+    . css-1wu77zb
+        display -webkit-box
+        display -webkit-flex
+        display -ms-flexbox
+        display flex
+        -webkit-flex-direction column
+        -ms-flex-direction column
+        flex-direction column
+        -webkit-align-items center
+        -webkit-box-align center
+        -ms-flex-align center
+        align-items center
+        -webkit-box-pack center
+        -webkit-justify-content center
+        -ms-flex-pack center
+        justify-content center
+        min-height 23.75rem
+
+    media (min-width: 1000px)
+        . css-1wu77zb
+            margin-top calc((6.25rem / 2 - .25rem) * -1)
+    
+    media (min-width: 750px)
+        . css-1wu77zb
+            -webkit-box-pack center
+            -webkit-justify-content center
+            -ms-flex-pack center
+            justify-content center
+            min-height 42rem
+            max-width 56.25rem
+            margin -6.25rem auto 0
+
+    . css-c88mhq
+        z-index 1
+        text-align center
+
+    . css-13exkxi
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 700
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-size 3.375rem
+        font-weight 800
+        -webkit-letter-spacing -0.015em
+        -moz-letter-spacing -0.015em
+        -ms-letter-spacing -0.015em
+        letter-spacing -0.015em
+        color ${mpage.Colors.primary}
+        line-height 1.1
+
+    media (min-width: 750px)
+        . css-13exkxi
+            font-size 4.25rem
+
+    media (min-width: 1000px)
+        . css-13exkxi
+            font-size 5.75rem  
+
+    . css-1skvk8x
+        margin-top 1rem
+
+    media (min-width: 750px)
+        . css-1skvk8x
+            font-size 1.5rem
+            margin-top 3rem

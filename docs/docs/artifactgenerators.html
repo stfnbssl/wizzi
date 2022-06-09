@@ -1,0 +1,263 @@
+<!--
+    artifact generator: C:\My\wizzi\wizzifactory\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.9
+    primary source IttfDocument: C:\My\wizzi\wizzifactory\wizzi\docs\.wizzi\ittf\pages\docs\artifactgenerators.html.ittf
+    utc time: Wed, 08 Jun 2022 13:40:54 GMT
+-->
+<!doctype html>
+<html>
+<!-- root layout for wizzi /pages -->
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://127.0.0.1:5501/wizzi/docs/styles/docs.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
+    <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+    <style></style>
+</head>
+<body>
+    <div id="___wizzi">
+        <div style="outline:none" tabindex="-1" id="wizzi-focus-wrapper">
+            <div class="main-container">
+                <div id="main-container">
+                    <div id="header">
+                        <div id="logo">
+                            <a aria-label="Link to home" class="logo-a" href="/"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
+                                    <rect fill='none' stroke='none' x='0' y='0' width='700' height='280'></rect>
+                                    <polyline fill='#eee' stroke='#eee' points='1.121212121212121 28.03030303030303 5.045454545454546 1.121212121212121 6.7272727272727275 1.121212121212121 8.409090909090908 14.575757575757576 13.454545454545455 23.545454545454547 13.454545454545455 14.575757575757576 19.62121212121212 23.545454545454547 19.62121212121212 12.333333333333334 25.78787878787879 23.545454545454547 25.78787878787879 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='30.272727272727273 28.03030303030303 31.393939393939394 10.09090909090909 34.75757575757576 10.09090909090909 35.87878787878788 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M33.63636363636364, 3.3636363636363633 C37,5.6060606060606055 30.272727272727273,7.848484848484849 33.63636363636364, 9.418181818181818' style='stroke-width:2;'></path>
+                                    <polyline fill='#eee' stroke='#eee' points='40.36363636363637 28.03030303030303 40.36363636363637 25.78787878787879 51.57575757575758 14.575757575757576 49.333333333333336 12.333333333333334 49.333333333333336 10.090909090909092 54.939393939393945 10.090909090909092 48.21212121212122 25.78787878787879 53.81818181818182 25.78787878787879 53.81818181818182 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='57.18181818181818 28.03030303030303 57.18181818181818 25.78787878787879 68.39393939393939 14.575757575757576 66.15151515151516 12.333333333333334 66.15151515151516 10.090909090909092 71.75757575757575 10.090909090909092 65.03030303030303 25.78787878787879 70.63636363636364 25.78787878787879 70.63636363636364 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='75.12121212121212 28.03030303030303 76.24242424242425 10.09090909090909 79.60606060606061 10.09090909090909 80.72727272727273 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M78.48484848484848, 3.3636363636363633 C81.84848484848486,5.6060606060606055 75.12121212121212,7.848484848484849 78.48484848484848, 9.418181818181818' style='stroke-width:2;'></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <nav id="top-nav">
+                            <ul>
+                                <li class="current"><a href="http://127.0.0.1:5501/wizzi/docs/docs/overview.html">Documentation</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/howto/overview.html">How to</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/samplecode/overview.html">Sample code</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/geeky/overview.html">Geeky</a>
+                                </li>
+                                <li><a href="https://github.com/stfnbssl/wizzi">Github</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div id="middle-container">
+                        <div id="content">
+                            <article>
+                                <div id class="doc-title">
+                                    Artifact generators</div>
+                                <div class="doc-summary">
+                                    <p>Artifact generators are contained in Wizzi Plugins and are exposed to the Wizzi factory implementing the wizzi-plugin.factoryPlugin API.</p>
+                                    <p>The wizzi-plugin.factoryPlugin.getArtifactGenerator(artifactKey) method returns a wizzi-plugin.artifactGenerator interface for generating the requested `artifactName`.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>wizzi-plugin.artifactGenerator API</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">{</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">func</span><span class="pp-pln"> gen</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">{</span><span class="pp-pln"> model</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">      </span><span class="pp-tag">|</span><span class="pp-pln"> api-ref wizzi-plugin.wizziModel</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">      </span><span class="pp-tag">|</span><span class="pp-pln"> POJO</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">{</span><span class="pp-pln"> ctx</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">      </span><span class="pp-tag">api-ref</span><span class="pp-pln"> wizzi.artifact.genContext</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">    </span><span class="pp-tag">callback</span></div></div>
+                                    </code></pre></div>
+                                    <p>Plugins authors are free to implement this interface with their preferred tools.</p>
+                                    <p>In this documentation section we describe solutions that the wizzi factory has taken for its own artifact generators.</p>
+                                    <h4>File location of artifact generators</h4>
+                                    <p>Artifact generators must have a standard file location in the plugin package.</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">{package-name}</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">package.json</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">...</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">lib</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">      </span><span class="pp-tag">artifacts</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">        </span><span class="pp-tag">{wfschema-name}</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">          </span><span class="pp-tag">{artifact-name}</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">            </span><span class="pp-tag">gen</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">              </span><span class="pp-tag">main.js</span></div></div>
+                                    </code></pre></div>
+                                    <p>The file 'main.js' is the module that exposes the wizzi-plugin.artifactGenerator interface for the artifact of key: {wfschema-name}/{artifact-name}.</p>
+                                    <p>This artifact key must be unique in the plugins configuration of the wizzi.WizziFactory instance that is executing the generation.</p>
+                                    <h4>Example of 'generator' attribute in a 'wfjob'</h4>
+                                    <p>The artifact key must be the value to be declared in the `generator` attribute of the `artifact` element of a Wizzi Job.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Use of an artifact generator in a Wizzi job</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">wfjob</span><span class="pp-pln"> {job-name}</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">...</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">line</span><span class="pp-pln"> {line-name}</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">artifact</span><span class="pp-pln"> {artifact-generation-description}</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">      </span><span class="pp-tag">...</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">      </span><span class="pp-tag">generator</span><span class="pp-pln"> {wfschema-name}/{artifact-name}</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">      </span><span class="pp-tag">...</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Implementation</div>
+                                <div class="doc-summary">
+                                    <p>An artifact generator produces a buffer of text characters. The production is driven by models contained in the parameters passed to the generator.</p>
+                                    <p>An artifact generator receives three parameters:</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">func</span><span class="pp-pln"> gen</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">{</span><span class="pp-pln"> model</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">|</span><span class="pp-pln"> api-ref wizzi-plugin.wizziModel</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">|</span><span class="pp-pln"> POJO</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">{</span><span class="pp-pln"> ctx</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">api-ref</span><span class="pp-pln"> wizzi.artifact.genContext</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">  </span><span class="pp-tag">callback</span></div></div>
+                                    </code></pre></div>
+                                    <ul>
+                                        <li>A model can be a Wizzi Model instance or a POJO, and represent the main context of the artifact generation.</li>
+                                        <li>An instance of the wizzi.artifact.genContext class that contains<ul>
+                                            <li>An in-memory buffer where the generated text is written sequentially using write and write line methods.</li>
+                                            <li>A data context that may contain zero or many secondary context models, Wizzi Models or POJO.</li>
+                                            <li>Some helper functions for text indentation, interpolation and error management.</li>
+                                        </ul>
+                                        </li>
+                                        <li>A callback function that a succesfull generation must call passing, as a second parameter, an instance of the wizzi.artifact.genContext with the text buffer containing the generated artifact</li>
+                                    </ul>
+                                    <p>Artifact generations are write based, using the write statements of the wizzi.artifact.genContext, or template based.</p>
+                                    <div class="doc-title-2">
+                                        Code generation by term rewriting</div>
+                                    <p>The mTree loader, implemented by the wizzi-mtree.loader.loadMTree API, is a powerfull model composer and transformer. Model transformations can be chained: an output mTree can become the input context for the next mTree loading. A 'wfjob' model can orchestrate any number of cascading transformations. The models passed to the artifact generator are the final models, ready for generating the textual artifact.</p>
+                                    <p>A template based generation, that uses the mTree loader, can be, indeed, more a code generation by term rewriting than a textual code generation. When mTrees are loaded into Wizzi Models, that can apply types and validations, and can programmatically modify the model, we have a tool for efficiently enabling any extension of the target language, easily implementing partial classes or any other modular aspect or rewrite rule.</p>
+                                    <div class="doc-title-2">
+                                        Language schemas and language artifact generators</div>
+                                    <p>Focusing on the generation of the textual content of an artifact, we must treat of a class of Wizzi Model types that is specific for the production of code targeting the synthax of a programming languages (PL).</p>
+                                    <p>A language schema defines a tree structure that an associated language artifact generator can transform in a targeting PL code. It can be viewd as a profile of a PL Grammar that can be implemented partially, with some of its symbols stereotyped. The schema developer should try to find the optimal balance between ease of use and completeness and define the proper approximation of the schema in respect to the PL grammar.</p>
+                                    <p>Must be said that language schema is a concept. A language schema is like any other wizzi schema and a language artifact is like any other artifact generator. The production of specific tools for creating language schemas and artifacts could be undertaken in the future.</p>
+                                    <p>The wizzi factory, that is generated by the wizzi factory, uses some language schemas for its generations:</p>
+                                    <ul>
+                                        <li>The `js` schema in the wizzi-js plugin.</li>
+                                        <li>The `html`, `css` and `md` schemas in the wizzi-html plugin.</li>
+                                    </ul>
+                                    <div class="doc-title-2">
+                                        Template based artifact generation</div>
+                                    <p>Language schema Wizzi Models are template formats for Wizzi factory template based artifact generations.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>`js` ITTF Document</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">module</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">kind</span><span class="pp-pln"> jsfile</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">class</span><span class="pp-pln"> Horse</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">super</span><span class="pp-pln"> Animal</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">ctor</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">      </span><span class="pp-tag">param</span><span class="pp-pln"> name</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">      </span><span class="pp-tag">base</span><span class="pp-pln"> name</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">    </span><span class="pp-tag">m</span><span class="pp-pln"> say</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">      </span><span class="pp-tag">log</span><span class="pp-pln"> 'Hiiii i am ', this.name</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">    </span><span class="pp-tag">m</span><span class="pp-pln"> create</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">      </span><span class="pp-tag">static</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">      </span><span class="pp-tag">param</span><span class="pp-pln"> name</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">      </span><span class="pp-tag">return</span></div><div class="L4"><span class="pp-ln">  14 </span><span class="pp-pln">        </span><span class="pp-tag">new</span><span class="pp-pln"> Horse</span></div><div class="L5"><span class="pp-ln">  15 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> name</span></div></div>
+                                    </code></pre></div>
+                                    <p>Almost every ittf node maps to a node type of the javascripts AST. And ittf nodes can be template commands and can contain expressions.</p>
+                                    <div class="doc-title-2">
+                                        Example of template based implementation of the wizzi-plugin.artifactGenerator API</div>
+                                    <p>In this dummy example, a 'js' ITTF Document template, named 'datalayer/adapters.js.ittf' is transformed in the javascript textual code of a fictitious datalayer adapter component.</p>
+                                    <p>This example artifact generator makes use internaly of a 'js' language artifact generator, named 'js/module'. The Wizzi Model that it receives as first parameter, has been loaded in previous steps, and becomes the mTreeBuilUpContext object for loading the mTree of the `js` ITTF Document template. It must be a Wizzi Model of type 'rdbms' otherwise an error is returned in the callback.</p>
+                                    <p>The `js` source ITTF Document is loaded, and transformed in a textual artifact, calling the 'loadModelAndGenerateArtifact' method of the wizzi.WizziFactory class, exposed in the property 'wizziFactory' of the 'ctx' parameter (an instance of the wizzi.artifact.genContext class).</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">module</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">kind</span><span class="pp-pln"> jsfile</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">var</span><span class="pp-pln"> path = require('path')</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">var</span><span class="pp-pln"> md = module.exports = {}</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">var</span><span class="pp-pln"> myname = 'artifact rdbms.adapters.main';</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">  </span><span class="pp-tag">set</span><span class="pp-pln"> md.gen</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">function</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">      </span><span class="pp-tag">{</span><span class="pp-pln"> model</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">      </span><span class="pp-tag">{</span><span class="pp-pln"> ctx</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">      </span><span class="pp-tag">callback</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> check the model is a Wizzi Model of type 'rdbms'</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">      </span><span class="pp-tag">if</span><span class="pp-pln"> model.wzElement !== 'rdbms'</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">        </span><span class="pp-tag">return</span></div><div class="L4"><span class="pp-ln">  14 </span><span class="pp-pln">          </span><span class="pp-tag">callback</span></div><div class="L5"><span class="pp-ln">  15 </span><span class="pp-pln">            </span><span class="pp-tag">_ctx.error</span></div><div class="L6"><span class="pp-ln">  16 </span><span class="pp-pln">              </span><span class="pp-tag">@</span><span class="pp-pln"> myname + " error: the model paramater should be an 'rdbms' Wizzi Model"</span></div><div class="L7"><span class="pp-ln">  17 </span><span class="pp-pln">              </span><span class="pp-tag">@</span><span class="pp-pln"> model</span></div><div class="L8"><span class="pp-ln">  18 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> build the artifact template path, it is a js ITTF Document in a sub folder</span></div><div class="L9"><span class="pp-ln">  19 </span><span class="pp-pln">      </span><span class="pp-tag">var</span><span class="pp-pln"> ittfTemplatePath</span></div><div class="L0"><span class="pp-ln">  20 </span><span class="pp-pln">        </span><span class="pp-tag">_</span><span class="pp-pln"> path.join</span></div><div class="L1"><span class="pp-ln">  21 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> __dirname</span></div><div class="L2"><span class="pp-ln">  22 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> 'ittf'</span></div><div class="L3"><span class="pp-ln">  23 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> 'datalayer'</span></div><div class="L4"><span class="pp-ln">  24 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> 'adapters.js.ittf'</span></div><div class="L5"><span class="pp-ln">  25 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> call the wizzifactory method for loading a language Wizzi Model and</span></div><div class="L6"><span class="pp-ln">  26 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> generate a language artifact from it. Pass the input model in the</span></div><div class="L7"><span class="pp-ln">  27 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> mTreeBuildUpContext property of the request object argument.</span></div><div class="L8"><span class="pp-ln">  28 </span><span class="pp-pln">      </span><span class="pp-tag">#</span><span class="pp-pln"> The 'js' schema of the template model is detected by its filename.</span></div><div class="L9"><span class="pp-ln">  29 </span><span class="pp-pln">      </span><span class="pp-tag">_</span><span class="pp-pln"> ctx.wizziFactory.loadModelAndGenerateArtifact</span></div><div class="L0"><span class="pp-ln">  30 </span><span class="pp-pln">        </span><span class="pp-tag">@</span><span class="pp-pln"> ittfTemplatePath</span></div><div class="L1"><span class="pp-ln">  31 </span><span class="pp-pln">        </span><span class="pp-tag">{</span></div><div class="L2"><span class="pp-ln">  32 </span><span class="pp-pln">          </span><span class="pp-tag">@</span><span class="pp-pln"> mTreeBuildUpContext model</span></div><div class="L3"><span class="pp-ln">  33 </span><span class="pp-pln">        </span><span class="pp-tag">@</span><span class="pp-pln"> 'js/module'</span></div><div class="L4"><span class="pp-ln">  34 </span><span class="pp-pln">        </span><span class="pp-tag">function</span></div><div class="L5"><span class="pp-ln">  35 </span><span class="pp-pln">          </span><span class="pp-tag">param</span><span class="pp-pln"> err</span></div><div class="L6"><span class="pp-ln">  36 </span><span class="pp-pln">          </span><span class="pp-tag">param</span><span class="pp-pln"> artifactText</span></div><div class="L7"><span class="pp-ln">  37 </span><span class="pp-pln">          </span><span class="pp-tag">if</span><span class="pp-pln"> err</span></div><div class="L8"><span class="pp-ln">  38 </span><span class="pp-pln">            </span><span class="pp-tag">#</span><span class="pp-pln"> invoke the callback on error, passing back the loadModelAndGenerateArtifact error</span></div><div class="L9"><span class="pp-ln">  39 </span><span class="pp-pln">            </span><span class="pp-tag">return</span></div><div class="L0"><span class="pp-ln">  40 </span><span class="pp-pln">              </span><span class="pp-tag">_</span><span class="pp-pln"> callback</span></div><div class="L1"><span class="pp-ln">  41 </span><span class="pp-pln">                </span><span class="pp-tag">err</span></div><div class="L2"><span class="pp-ln">  42 </span><span class="pp-pln">          </span><span class="pp-tag">#</span><span class="pp-pln"> write the artifactText into the genContext buffer</span></div><div class="L3"><span class="pp-ln">  43 </span><span class="pp-pln">          </span><span class="pp-tag">_</span><span class="pp-pln"> ctx.write(artifactText)</span></div><div class="L4"><span class="pp-ln">  44 </span><span class="pp-pln">          </span><span class="pp-tag">#</span><span class="pp-pln"> invoke the callback on success, passing back the genContext</span></div><div class="L5"><span class="pp-ln">  45 </span><span class="pp-pln">          </span><span class="pp-tag">_</span><span class="pp-pln"> callback(null, ctx)</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    The genContext object</div>
+                                <div class="doc-summary">
+                                    <h4>The interface of the gencontext object</h4>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">class</span><span class="pp-pln"> genContext</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Set line indentation to a given value</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> forceIndent</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> value</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Increase line indentation</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> indent</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> value</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Decrease line indentation</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> deindent</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> value</span></div><div class="L4"><span class="pp-ln">  14 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L5"><span class="pp-ln">  15 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Add a named value to the interpolation context</span></div><div class="L6"><span class="pp-ln">  16 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> a</span></div><div class="L7"><span class="pp-ln">  17 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> name</span></div><div class="L8"><span class="pp-ln">  18 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> value</span></div><div class="L9"><span class="pp-ln">  19 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L0"><span class="pp-ln">  20 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Add a named value from the interpolation context</span></div><div class="L1"><span class="pp-ln">  21 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> g</span></div><div class="L2"><span class="pp-ln">  22 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> name</span></div><div class="L3"><span class="pp-ln">  23 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L4"><span class="pp-ln">  24 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Remove a named value from the interpolation context</span></div><div class="L5"><span class="pp-ln">  25 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> r</span></div><div class="L6"><span class="pp-ln">  26 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> name</span></div><div class="L7"><span class="pp-ln">  27 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L8"><span class="pp-ln">  28 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Write a text with interpolation and line feed</span></div><div class="L9"><span class="pp-ln">  29 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> w</span></div><div class="L0"><span class="pp-ln">  30 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> text</span></div><div class="L1"><span class="pp-ln">  31 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L2"><span class="pp-ln">  32 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> Write a text with interpolation without line feed</span></div><div class="L3"><span class="pp-ln">  33 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> write</span></div><div class="L4"><span class="pp-ln">  34 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> text</span></div><div class="L5"><span class="pp-ln">  35 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L6"><span class="pp-ln">  36 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> throw a NodeError exception</span></div><div class="L7"><span class="pp-ln">  37 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> error</span></div><div class="L8"><span class="pp-ln">  38 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> message</span></div><div class="L9"><span class="pp-ln">  39 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> node</span></div><div class="L0"><span class="pp-ln">  40 </span><span class="pp-pln">  </span><span class="pp-tag">#</span></div><div class="L1"><span class="pp-ln">  41 </span><span class="pp-pln">    </span><span class="pp-tag">#</span><span class="pp-pln"> throw an ArtifactGenerationError exception</span></div><div class="L2"><span class="pp-ln">  42 </span><span class="pp-pln">  </span><span class="pp-tag">m</span><span class="pp-pln"> artifactGenerationError</span></div><div class="L3"><span class="pp-ln">  43 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> message</span></div><div class="L4"><span class="pp-ln">  44 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> location</span></div><div class="L5"><span class="pp-ln">  45 </span><span class="pp-pln">    </span><span class="pp-tag">param</span><span class="pp-pln"> node</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Sample artifact generator</div>
+                                <div class="doc-summary">
+                                    <h4>Code write artifact generator sample</h4>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">module</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">kind</span><span class="pp-pln"> jsfile</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">var</span><span class="pp-pln"> md = module.exports = {}</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">var</span><span class="pp-pln"> myname = 'artifact rdbms.sqltables.main';</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">set</span><span class="pp-pln"> md.gen</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">function</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">      </span><span class="pp-tag">param</span><span class="pp-pln"> model</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">      </span><span class="pp-tag">param</span><span class="pp-pln"> ctx</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">      </span><span class="pp-tag">param</span><span class="pp-pln"> callback</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">      </span><span class="pp-tag">if</span><span class="pp-pln"> model.wzElement !== 'rdbms'</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">        </span><span class="pp-tag">return</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">          </span><span class="pp-tag">callback</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">            </span><span class="pp-tag">_ctx.error</span></div><div class="L4"><span class="pp-ln">  14 </span><span class="pp-pln">              </span><span class="pp-tag">@</span><span class="pp-pln"> myname + " error: the model paramater should be an 'rdbms' Wizzi Model"</span></div><div class="L5"><span class="pp-ln">  15 </span><span class="pp-pln">              </span><span class="pp-tag">@</span><span class="pp-pln"> model</span></div><div class="L6"><span class="pp-ln">  16 </span><span class="pp-pln">      </span><span class="pp-kwd">$foreach</span><span class="pp-pln"> table in model.tables</span></div><div class="L7"><span class="pp-ln">  17 </span><span class="pp-pln">        </span><span class="pp-tag">_</span><span class="pp-pln"> ctx.a('TABLE', table.wzName)</span></div><div class="L8"><span class="pp-ln">  18 </span><span class="pp-pln">        </span><span class="pp-tag">_</span><span class="pp-pln"> ctx.w('declare table TABLE')</span></div><div class="L9"><span class="pp-ln">  19 </span><span class="pp-pln">        </span><span class="pp-tag">...</span></div><div class="L0"><span class="pp-ln">  20 </span><span class="pp-pln">      </span><span class="pp-tag">_</span><span class="pp-pln"> callback(null, ctx)</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Built-in artifacts</div>
+                                <div class="doc-summary">
+                                    <div>
+                                        The <a href="https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-core/dist"> wizzi-core </a>
+                                        plugin exports some useful artifacts:<ul>
+                                            <li>json/document</li>
+                                            <li>json/export</li>
+                                            <li>xml/document</li>
+                                            <li>xml/export</li>
+                                            <li>text/document</li>
+                                            <li>ittf/document</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    "json/export" builtin artifact</div>
+                                <div class="doc-summary">
+                                    <p>The json/export builtin artifact can be used in a Wizzi Job,
+                                        to save the JSON representation ofa Wizzi Model instance, when its Wizzi Schemadeclares the `export-to json` element.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Sample wfjob artifact element using the json/export artifact.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">wfjob</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">...</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">artifact</span><span class="pp-pln"> json export of model sample.form.ittf</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">src</span><span class="pp-pln"> sample.form.ittf</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">schema</span><span class="pp-pln"> form</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">generator</span><span class="pp-pln"> json/export</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">extension</span><span class="pp-pln"> json</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    "xml/export" builtin artifact</div>
+                                <div class="doc-summary">
+                                    <p>The xml/export builtin artifact can be used in a Wizzi Job,
+                                        to save the xml representation ofa Wizzi Model instance when its Wizzi Schemadeclares the `export-to xml` element.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Sample wfjob artifact element using the xml/export artifact.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">wfjob</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">...</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">artifact</span><span class="pp-pln"> xml export of model sample.form.ittf</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">src</span><span class="pp-pln"> sample.form.ittf</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">schema</span><span class="pp-pln"> form</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">generator</span><span class="pp-pln"> xml/export</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">extension</span><span class="pp-pln"> xml</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    "ittf/document" builtin artifact</div>
+                                <div class="doc-summary">
+                                    <p>The 'ittf/document' builtin artifact exports the ittf representation of a loaded mTree. This allow the buildup of ITTF Documents using the mTree loader for merging sources and contexts.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Sample Wizzi Job using the 'ittf/document' artifact.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">wfjob</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">model</span><span class="pp-pln"> styles</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">src</span><span class="pp-pln"> styles.json.ittf</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">schema</span><span class="pp-pln"> json</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">model</span><span class="pp-pln"> layout</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">    </span><span class="pp-tag">src</span><span class="pp-pln"> layout.json.ittf</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">schema</span><span class="pp-pln"> json</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">  </span><span class="pp-tag">model</span><span class="pp-pln"> optionsforms</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">    </span><span class="pp-tag">src</span><span class="pp-pln"> options.form.ittf</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">    </span><span class="pp-tag">schema</span><span class="pp-pln"> form</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">  </span><span class="pp-tag">line</span><span class="pp-pln"> ui</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">    </span><span class="pp-tag">artifact</span><span class="pp-pln"> ITTF Document of model options-page.html.ittf</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">      </span><span class="pp-tag">src</span><span class="pp-pln"> options-page.html.ittf</span></div><div class="L4"><span class="pp-ln">  14 </span><span class="pp-pln">      </span><span class="pp-tag">schema</span><span class="pp-pln"> ittf</span></div><div class="L5"><span class="pp-ln">  15 </span><span class="pp-pln">      </span><span class="pp-tag">generator</span><span class="pp-pln"> ittf/document</span></div><div class="L6"><span class="pp-ln">  16 </span><span class="pp-pln">      </span><span class="pp-tag">extension</span><span class="pp-pln"> ittf</span></div><div class="L7"><span class="pp-ln">  17 </span><span class="pp-pln">      </span><span class="pp-tag">model-ref</span><span class="pp-pln"> styles</span></div><div class="L8"><span class="pp-ln">  18 </span><span class="pp-pln">      </span><span class="pp-tag">model-ref</span><span class="pp-pln"> layout</span></div><div class="L9"><span class="pp-ln">  19 </span><span class="pp-pln">      </span><span class="pp-tag">model-ref</span><span class="pp-pln"> optionsforms</span></div></div>
+                                    </code></pre></div>
+                                </div>
+                            </article>
+                        </div>
+                        <nav>
+                            <div id="right-nav">
+                                <div class="aside-right">
+                                    <div style="padding-top: 40px;"></div>
+                                    <ul>
+                                        <li><a href="./overview.html">Overview</a>
+                                        </li>
+                                        <li><a href="./ittfdocuments.html">Ittf Documents</a>
+                                        </li>
+                                        <li><a href="./templateengine.html">Template engine</a>
+                                        </li>
+                                        <li><a href="./jswizzi.html">JsWizzi</a>
+                                        </li>
+                                        <li><a href="./mtrees.html">mTrees</a>
+                                        </li>
+                                        <li><a href="./wizzischemas.html">Wizzi Schemas</a>
+                                        </li>
+                                        <li><a href="./wizzimodeldom.html">Wizzi Model DOM</a>
+                                        </li>
+                                        <li><a href="./wizzimodelinstances.html">Wizzi Model instances</a>
+                                        </li>
+                                        <li><a href="./modeltransformers.html">Model transformers</a>
+                                        </li>
+                                        <li class="current"><a href="./artifactgenerators.html">Artifact generators</a>
+                                        </li>
+                                        <li><a href="./wizzijobs.html">Wizzi Jobs</a>
+                                        </li>
+                                        <li><a href="./wizziplugins.html">Wizzi Plugins</a>
+                                        </li>
+                                        <li><a href="./wizziapi.html">Wizzi API</a>
+                                        </li>
+                                        <li><a href="./glossary.html">Glossary</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

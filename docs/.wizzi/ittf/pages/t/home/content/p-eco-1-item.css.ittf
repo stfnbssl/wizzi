@@ -1,0 +1,80 @@
+$group
+    . css-1nbv0ht
+        position relative
+        padding-left 3rem
+
+    . css-1o3fnh5
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 800
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-size 1.75rem
+        position relative
+
+    . css-17502ce
+        align-items flex-start
+        color var(--theme-ui-colors-grey-70,#48434f)
+        display none
+        flex-direction column
+        margin-top 0.75rem
+        margin-bottom 3rem
+        display flex
+
+    . css-x6y73b
+        position absolute
+        left 0
+        top 0.75rem
+        transform translateX(-3rem)
+        height 2rem
+        width 2rem
+
+    . css-11zrbhq
+        outline none
+        align-items center
+        background none
+        border none
+        cursor pointer
+        display flex
+        justify-content flex-start
+        width 100%
+        padding 0.75rem 0
+
+    . css-1ds30p3
+        align-items flex-start
+        color var(--theme-ui-colors-${mpage.Colors.gray70})
+        display none
+        flex-direction column
+        margin-top 0.75rem
+        margin-bottom 3rem
+    
+    . css-1o3fnh5 small
+        font-size 1rem
+        color var(--theme-ui-colors-orange-90,#db3a00)
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-weight 400
+        margin-left 0.25rem
+        transform translateY(-20%)
+
+    . css-1cqxiz5
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background ${mpage.Colors.primary}
+        border 1px solid ${mpage.Colors.primary}
+        color ${mpage.Colors.themeBack}
+        font-weight 600
+        font-size 1.125rem
+        min-height 3rem
+        min-width 3rem
+        padding 0.5rem 1.25rem
+        margin-top 1.5rem
+        border-radius 8px

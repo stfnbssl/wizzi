@@ -1,0 +1,24 @@
+html
+    $
+        var page = {
+            sectionTitle: 'Resources',
+            mainCss : pkg.Params.baseUrl + '/styles/article.css'
+        };
+
+	_layouts/default(&page)
+
+        . doc-container
+            article
+                h1 Resources
+                h3 Starters
+                ul
+                    $foreach item in pkg.Starter.items
+                        li
+                            a ${item.title}
+                                href ${item.url}
+                h3 Plugins
+                ul
+                    $foreach item in pkg.Plugin.items
+                        li
+                            a ${item.title}
+                                href ${item.url}

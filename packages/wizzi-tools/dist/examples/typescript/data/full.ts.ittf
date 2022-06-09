@@ -1,0 +1,8 @@
+module
+    export 
+        :type RootState
+            :ref StateType
+                :param 
+                    :ref ReturnType
+                        :param 
+                            :typeof import('./root-reducer').default

@@ -1,0 +1,4 @@
+root
+	mixin_2_appender()
+		$append alpha
+			leaf 1.1.1

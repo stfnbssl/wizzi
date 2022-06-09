@@ -1,0 +1,45 @@
+$group
+
+    $if opt.useGoogleFonts
+        $foreach item in opt.googleFonts
+            css https://fonts.googleapis.com/css?family=${item}
+
+    $if opt.useReact
+        link 
+            rel stylesheet
+            href https://fonts.googleapis.com/icon?family=Material+Icons
+
+    $if opt.useBootstrap
+		css /static/lib/bootstrap/dist/css/bootstrap.min.css
+	
+	$if opt.usePrism
+	    $if isWizziStudio
+		    css /static/lib/prism/prism.css
+		$else
+		    css https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css
+
+    $if opt.useHighlight
+        $*
+        link 
+            rel stylesheet
+            href https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css
+        *$
+        link 
+            rel stylesheet
+            href /static/lib/highlightjs-master/dracula.css
+
+	$if opt.useCodemirror
+        css /static/lib/codemirror/lib/codemirror.css
+		css /static/lib/codemirror/addon/display/fullscreen.css
+
+    $if opt.mainCss && opt.mainCss.length > 0
+        link 
+            rel stylesheet
+            href ${opt.mainCss}
+
+    $if opt.useFontAwesome
+        $ 
+            var fontAwesomeKey = 'eab461efef';
+        script
+            src https://kit.fontawesome.com/${fontAwesomeKey}.js
+            crossorigin anonymous            

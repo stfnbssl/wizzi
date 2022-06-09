@@ -1,0 +1,41 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            name: 'jsWizzi_Step_1',
+            title: 'jsWizzi - step - 1 - global variables',
+            folderLevel: 3
+        }
+
+    common\example\mtree(&opt)
+
+        var context
+            _ file.readJSON
+                _ path.join
+                    @ __dirname
+                    @ 'first.docx.json'
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'first.docx.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTree
+                    @ ittfUri
+                    {
+                        { mTreeBuildUpContext
+                            @ beba context
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                    f_cb_test( mTree )
+                        # log 'mTree', mTree
+                        _ printEvaluatedNodes(mTree, 'After evaluate')
+
+

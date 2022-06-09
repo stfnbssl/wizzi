@@ -1,0 +1,28 @@
+$group
+    $params &item, &opt
+    
+    . cs-item
+        $if item.expected && item.expected.length > 0
+            . cs-item-code
+                . cs-item-code-label
+                    + expected *.${opt.schema}
+                pre
+                    class cs-item-code-expected
+                    code
+                        class ${opt.language}
+                        + ${item.expected}
+        . cs-item-code
+            . cs-item-code-ittf
+                . cs-item-code-label
+                    + *.${opt.schema}.ittf
+                pre
+                    class code-prettyprint prettyprint
+                    + ${item.ittfPretty}
+            . cs-item-code-generated
+                . cs-item-code-label
+                    + *.${opt.schema}
+                pre
+                    class  code-prettyprint prettyprint
+                    code 
+                        class ${opt.language}
+                        + ${item.generated}

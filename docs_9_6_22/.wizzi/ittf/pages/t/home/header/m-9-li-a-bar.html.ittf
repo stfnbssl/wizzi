@@ -1,0 +1,10 @@
+$group
+    $params label, href
+    li 
+        class css-w6ak5y
+        a 
+            target _blank
+            rel noopener noreferrer
+            href ${href}
+            class css-17mmtw1
+            + ${label}

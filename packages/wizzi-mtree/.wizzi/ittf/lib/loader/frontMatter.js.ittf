@@ -1,0 +1,65 @@
+﻿module wizzi-mtree.loader.frontMatter
+    kind jsfile
+    
+	var util = require('util')
+    var path = require('path')
+	var async = require('async')
+    var errors = require('../errors')
+	var verify = require('wizzi-utils').verify
+    var utilnode = require('../util/node')
+
+	#
+		# Ittf commands
+        #   $---       // the front-matter root node. 
+        #              // Children nodes are front-matter named values
+        #              // Name - value syntax is the same of a json ittf document
+    
+    set module.exports =
+        function 
+            { primaryMTreeBrick
+            callback
+            
+            var frontmatters
+                [ 
+
+            foreach node in primaryMTreeBrick.nodes
+                _ searchCommands
+                    @ node
+                    @ frontmatters
+
+            foreach item in frontmatters
+                foreach node in item.children
+                    var prop
+                        _ utilnode.jsonifyProperty
+                            @ node
+                    if prop.__is_error
+                        log 'wizzi-mtree.includer.jsonifyProperty.err', prop
+                        var errItem = prop.__errItem ? prop.__errItem : node
+                        set prop.errorLines
+                            _ item.model.loadHistory.getIttfDocumentErrorLines
+                                @ item.sourceKey
+                                {
+                                    @ row errItem.row
+                                    @ col errItem.col + errItem.name.length + 1
+                                    @ description 'jsonify error in front matter'
+                                @ true
+                        log 'wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines
+                        return
+                            _ callback(prop)
+
+                    set primaryMTreeBrick.frontMatter[prop.name] = prop.value
+                _ utilnode.remove
+                    @ item
+            _ callback(null, primaryMTreeBrick)
+
+	function searchCommands
+        param item
+        param frontmatters
+        if item.name === '$---'
+            _ frontmatters.push(item)
+        else
+            foreach child in item.children
+                _ searchCommands
+                    @ child
+                    @ frontmatters 
+	

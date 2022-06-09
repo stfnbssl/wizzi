@@ -1,0 +1,53 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_model_step_2',
+            title: 'Wizzi factory - load and generate from text',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ './wizzi-web/dist/index'
+                @ './wizzi-core/dist/index'
+            @ pluginsBaseFolder pluginsBaseFolder
+
+        var htmlFriendsPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'friends.html.ittf'
+        
+        var htmlFriendsPathIttf
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'friends.ittf.ittf'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                # Generate the html document artifact.
+                    # No options, the default artifact generator
+                    # for the html schema will be used.
+                _ wf.loadModelAndGenerateArtifactFromText
+                    @ "html\n\th1 Hello world"
+                    {
+                    @ 'ittf/tojson'
+                    f_cb_test(artifactText)
+                        _ printValue
+                            @ 'artifact'
+                            @ artifactText
+                        

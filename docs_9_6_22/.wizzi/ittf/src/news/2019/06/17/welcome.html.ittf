@@ -1,0 +1,10 @@
+html
+    $
+        var post = {
+            title: 'Welcome',
+            category: 'release',
+            date: '17 June 2019',
+            authorCode: 'stfnbssl',
+        }
+    
+    post(&post)

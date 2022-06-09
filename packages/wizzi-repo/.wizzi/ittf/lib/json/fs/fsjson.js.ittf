@@ -1,0 +1,162 @@
+﻿module wizzi-repo.json.FsJson
+	kind jsfile
+
+	import assert
+	import path
+	import util
+	var verify = require('wizzi-utils').verify
+	var Collection = require('../../utils/collection')
+
+	#
+		# class FsJson 
+        # implements an in-memory json Filesystem (a set of documents organized in a tree of folders)
+		#
+		# Filesystem item
+		# { fsitem
+		#   ObjectId _id
+		#   string basename
+		#   ObjectId parentId
+		#   string dirname
+		#   string path
+		#   integer kind
+		#     one-of 0 (directory), 1 (file)
+		#
+		# Document
+		# { document
+		#   ObjectId _id
+		#   string content
+		#   ISODate lastModified
+        #
+		# ctor params
+		#  { fsJsonData
+		#    [ items
+		#    [ documents
+
+	class FsJson
+		ctor
+			param fsJsonData
+			set this.classType = 'wizzi-repo.json.FsJson'
+			if verify.isObject(fsJsonData)
+				if verify.isArray(fsJsonData.items) === false
+					throw
+						new Error
+							_ error
+								@ 'InvalidArgument'
+								@ 'ctor'
+								{
+									@ parameter 'fsJsonData.items'
+									@ message 'The fsJsonData.items parameter must be an array. Received: ' + fsJsonData.items
+				if verify.isArray(fsJsonData.documents) === false
+					throw
+						new Error
+							_ error
+								@ 'InvalidArgument'
+								@ 'ctor'
+								{
+									@ parameter 'fsJsonData.documents'
+									@ message 'The fsJsonData.documents parameter must be an array. Received: ' + fsJsonData.documents
+				set this.items = new Collection(fsJsonData.items)
+				set this.documents = new Collection(fsJsonData.documents)
+			else
+				set this.items = new Collection([])
+				set this.documents = new Collection([])
+
+		$include fsjson/getItem
+		$include fsjson/insertItem
+		$include fsjson/updateItem
+		$include fsjson/deleteItem
+		$include fsjson/read
+		$include fsjson/write
+
+		m toJson
+			callback
+			var that = this
+			_ that.items.toArray
+				f_cb( items )
+					_ that.documents.toArray
+						f_cb( documents )
+							_ callback
+								@ null
+								{
+									@ items items
+									@ documents documents
+		
+		m toFiles
+			{ options
+				string removeRoot
+					optional
+			callback
+			_ this.items.toArray
+				a_cb( items )
+					_ this.documents.toArray
+						a_cb( documents )
+							var ret = []
+							foreach d in documents
+								foreach item in items
+									if item._id === d._id
+										_ ret.push
+											{
+												@ fullPath item.path
+												@ relPath options.removeRoot ? item.path.substr(options.removeRoot.length) : ''
+												@ content d.content
+							_ callback
+								@ null
+								@ ret
+
+		m close
+			# nothing to do
+
+	#
+		# Creates a FsJson instance
+		# params
+		#  { fsJsonData
+		#    [ items
+		#    [ documents
+        #  callback
+	set FsJson.create
+		function
+			param fsJsonData
+			param callback
+			+
+			if verify.isUndefined(callback)
+				set callback = fsJsonData
+				set fsJsonData = null
+			+
+			if fsJsonData == null
+				set fsJsonData
+					{
+						@ items []
+						@ documents []
+			else
+				if verify.isObject(fsJsonData) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter fsJsonData must be an object')
+				if verify.isArray(fsJsonData.items) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter fsJsonData must contain an items property')
+				if verify.isArray(fsJsonData.documents) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter fsJsonData must contain a documents property')
+			+
+			return
+				_ callback
+					@ null
+					new FsJson(fsJsonData)
+
+	function errorMsg
+		param method
+		param message
+		return
+			{
+				@ __is_error true
+				@ method 'Json.JsonDb.' + method
+				@ message message
+
+	function normalize
+		param path
+		return path.trim().replace(/\\/g,'/').toLowerCase()
+					
+	set module.exports = FsJson

@@ -1,0 +1,47 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'light_job_step_1',
+            title: 'Wizzi job - execute',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+                @ 'wizzi-core'
+
+        var jobPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'step_1.wfjob.ittf'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ wizziIndex.job
+            @ jobPath
+            {
+                @ friends friendsArray
+            {
+                @ name 'step_1'
+                { jobContext
+                    { options
+                        @ destFolder 'output'
+                { globalContext
+                    { options
+                        @ destFolder 'output'
+            f_cb_test(jobResults)
+                _ printObject
+                    @ 'jobResults'
+                    @ jobResults

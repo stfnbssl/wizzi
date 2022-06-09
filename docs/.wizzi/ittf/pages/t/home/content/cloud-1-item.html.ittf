@@ -1,0 +1,17 @@
+$group
+    $params &item
+    . css-1efvhw7
+        span
+            @ idx 0
+            class css-8wbphe
+            svg 
+                xmlns http://www.w3.org/2000/svg
+                viewBox 0 0 14 20
+                path 
+                    d M2.4 19.97l2.92-8.01-4.45-1.62L11.8.21l-2.91 8 4.28 1.57L2.4 19.97z
+        h3 ${item.title}
+            @ idx 1
+            class css-5ta006
+        . css-12cu1vf
+            @ idx 2
+            p ${item.text}

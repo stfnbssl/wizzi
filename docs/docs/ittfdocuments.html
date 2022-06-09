@@ -1,0 +1,183 @@
+<!--
+    artifact generator: C:\My\wizzi\wizzifactory\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.9
+    primary source IttfDocument: C:\My\wizzi\wizzifactory\wizzi\docs\.wizzi\ittf\pages\docs\ittfdocuments.html.ittf
+    utc time: Wed, 08 Jun 2022 13:40:54 GMT
+-->
+<!doctype html>
+<html>
+<!-- root layout for wizzi /pages -->
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://127.0.0.1:5501/wizzi/docs/styles/docs.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
+    <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+    <style></style>
+</head>
+<body>
+    <div id="___wizzi">
+        <div style="outline:none" tabindex="-1" id="wizzi-focus-wrapper">
+            <div class="main-container">
+                <div id="main-container">
+                    <div id="header">
+                        <div id="logo">
+                            <a aria-label="Link to home" class="logo-a" href="/"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
+                                    <rect fill='none' stroke='none' x='0' y='0' width='700' height='280'></rect>
+                                    <polyline fill='#eee' stroke='#eee' points='1.121212121212121 28.03030303030303 5.045454545454546 1.121212121212121 6.7272727272727275 1.121212121212121 8.409090909090908 14.575757575757576 13.454545454545455 23.545454545454547 13.454545454545455 14.575757575757576 19.62121212121212 23.545454545454547 19.62121212121212 12.333333333333334 25.78787878787879 23.545454545454547 25.78787878787879 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='30.272727272727273 28.03030303030303 31.393939393939394 10.09090909090909 34.75757575757576 10.09090909090909 35.87878787878788 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M33.63636363636364, 3.3636363636363633 C37,5.6060606060606055 30.272727272727273,7.848484848484849 33.63636363636364, 9.418181818181818' style='stroke-width:2;'></path>
+                                    <polyline fill='#eee' stroke='#eee' points='40.36363636363637 28.03030303030303 40.36363636363637 25.78787878787879 51.57575757575758 14.575757575757576 49.333333333333336 12.333333333333334 49.333333333333336 10.090909090909092 54.939393939393945 10.090909090909092 48.21212121212122 25.78787878787879 53.81818181818182 25.78787878787879 53.81818181818182 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='57.18181818181818 28.03030303030303 57.18181818181818 25.78787878787879 68.39393939393939 14.575757575757576 66.15151515151516 12.333333333333334 66.15151515151516 10.090909090909092 71.75757575757575 10.090909090909092 65.03030303030303 25.78787878787879 70.63636363636364 25.78787878787879 70.63636363636364 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <polyline fill='#eee' stroke='#eee' points='75.12121212121212 28.03030303030303 76.24242424242425 10.09090909090909 79.60606060606061 10.09090909090909 80.72727272727273 28.03030303030303' style='stroke-width:2;'></polyline>
+                                    <path fill='#eee' stroke='white' d='M78.48484848484848, 3.3636363636363633 C81.84848484848486,5.6060606060606055 75.12121212121212,7.848484848484849 78.48484848484848, 9.418181818181818' style='stroke-width:2;'></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <nav id="top-nav">
+                            <ul>
+                                <li class="current"><a href="http://127.0.0.1:5501/wizzi/docs/docs/overview.html">Documentation</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/howto/overview.html">How to</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/samplecode/overview.html">Sample code</a>
+                                </li>
+                                <li><a href="http://127.0.0.1:5501/wizzi/docs/geeky/overview.html">Geeky</a>
+                                </li>
+                                <li><a href="https://github.com/stfnbssl/wizzi">Github</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div id="middle-container">
+                        <div id="content">
+                            <article>
+                                <div id class="doc-title">
+                                    Ittf documents</div>
+                                <div class="doc-summary">
+                                    <p>Ittf, Indented Text Tree Format, is a document type for declaring a textual representation of a tree structure of name-valued nodes.</p>
+                                    <p>Ittf documents are building blocks, made to be loaded and composed into a javascript tree structure, named mTree.</p>
+                                    <p>A single ITTF Document, when loaded, becomes an mTreeBrick, a composition element that can include or mix other mTreeBricks and can in turn be included or mixed.</p>
+                                    <p>Ittf documents also can be templates or pieces of templates. They can contain conditional or repeat template commands and can use context objects, passed to the mTree load function, for creating new nodes of the composed mTree.</p>
+                                    <p>Further ITTF Documents may be seen as code units. They can codify statements and expressions using a sandboxed subset of the ECMA-262 javascript standard named 'jsWizzi'. Statements can create, and modify, variables (in the evaluation context of an mTreeBrick or in the global evaluation context) that template commands can use to select or create nodes.</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Ittf notation</div>
+                                <div class="doc-summary">
+                                    <p>Documents are made of text lines separated by a:
+                                        <ul>
+                                            <li>x'000a' char or</li>
+                                            <li>x'000d' char or</li>
+                                            <li>x'000a' \b x'000d' couple of chars</li>
+                                        </ul>
+                                    </p>
+                                    <p>A line is made of a node-name and a node-value separated by a white-char (space or tab).</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">name</span><span class="pp-pln"> value</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">name</span><span class="pp-pln"> value</span></div></div>
+                                    </code></pre></div>
+                                    <p>Node-values always are trimmed, you cannot have a node-value that starts or ends with a white-char sequence.</p>
+                                    <p>When loaded, both these nodes will containg the 'value' string in the node-value.</p>
+                                    <div class='ittf-panel'>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">name1</span><span class="pp-pln"> value</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">name2</span><span class="pp-pln"> value</span></div></div>
+                                    </code></pre></div>
+                                    <p>The node hierarchy is built calculating the indentation of node-names in a text line. Every tab or every 4 space chars preeceding a node-name count for one level of indentation.</p>
+                                    <p>The node-name of the first line (the root node-name) must have indentation zero. The root node-name must start at column 1 (1-based) of the first row.</p>
+                                    <p>An ITTF Document cannot have more than one root node. If the semantic of a document require more than one root node, a convenience '$group' command can be used. It must be the root node of a composed document (included or mixed) and is ignored during the mTree build up, so that all its childs become root nodes of the included document.</p>
+                                    <p>Example. Ittf document with two root nodes.</p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Sample ITTF document with two root nodes.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$group</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">root1</span><span class="pp-pln"> value1</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-tag">root2</span><span class="pp-pln"> value2</span></div></div>
+                                    </code></pre></div>
+                                    <p>A line becomes a node which parent is the first preceeding line with a lesser indentation.</p>
+                                    <p>Phisical text lines may have line continuatios and a 'logical' line may contain many phisical lines. There are three pre-defined node-names that allow line continuation:
+                                        <ul>
+                                            <li>'\' means that the node-value is joined to the node-value of the parent node without separation.</li>
+                                            <li>'\b' means that the node-value is joined to the node-value of the parent node with one space char separator.</li>
+                                            <li>'\n' means that the node-value is joined to the node-value of the parent node with one Line Feed char separator.</li>
+                                        </ul>
+                                    </p>
+                                    <div class='ittf-panel'>
+                                    <div class='ittf-panel-title'>Line continuation sample.  Both 'name1' and 'name2' have the same value.</div>
+                                    <pre class='prettyprint'><code>
+                                    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">-</span><span class="pp-pln"> root</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">-</span><span class="pp-pln"> name1 I am</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">-</span><span class="pp-pln"> a single</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">-</span><span class="pp-pln"> line</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">  </span><span class="pp-tag">-</span><span class="pp-pln"> name2 I am a single line</span></div></div>
+                                    </code></pre></div>
+                                    <p>Node names and values are text strings by design, and never require quotes (they are unquoted by the lexer). The wizzi factory is a text manipulator. If the semantic of a node-value require that it is treated as a different type (boolean, integer, float or date), that can be done using wizzi schemas, that apply types to the tree structure resulting from loading an ittf document (see mTrees).</p>
+                                    <p>One exception to this rule is when an argument is passed to a mixed ITTF Document, and will become part of its evaluation context. Types different from string can be usefull in JsWizzi expessions. The '$params' command, that declares the parameters received by a mixed ITTF Document, may assign a type to passed arguments.</p>
+                                    <p>In any case the lexer do not detect types. When needed they must be declared.</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div id class="doc-title">
+                                    Xml document comparision</div>
+                                <div class="doc-summary">
+                                    <h4>Content model</h4>
+                                    <p>XML differentiates two types: elements containing only element content (no character data) and mixed content (elements that may contain character data, optionally interspersed with child elements).</p>
+                                    <p>Ittf documents have no mixed content. They have ittf nodes only. They do not have the concept of element or attribute or text.</p>
+                                    <p>Only the application of a wizzi schema to an mTree, when loading a Wizzi Model, can trasform an ittf node in an element or attribute or text, depending on the schema declarations.</p>
+                                    <h4>Document types and document type definitions</h4>
+                                    <p>A wizzi schema is actually a documemnt type definition, but it applies to loaded mTrees not to ITTF Documents. Ittf documents creators must design their documents to obtain a valid mTree after composition and evaluation, just before loading it in a Wizzi Model.</p>
+                                    <p>An ITTF Document, when created for composing an mTree for a specific wizzi schema, can be considered to have the type of that wizzi schema. The type of an ITTF Document must be recognizable from its name, that must end with '.`schema`.ittf'. Example of ITTF Document of type 'js': 'index.js.ittf'.</p>
+                                    <h4>Markup declaration and markup model</h4>
+                                    <p>In XML a markup declaration is a syntactical construct within a DTD declaring an entity or defining a markup structure.</p>
+                                    <p>Wizzi Schemas do not need to declare entities, because ITTF Document can contain expressions and template commands. But, like DTDs, they declare an elements and attributes structure, and like DTDs they define a model (Wizzi Model) of an mTree content.</p>
+                                    <p>In the wizzi factory, Wizzi Models are implemented as javascript module, generated from a wizzi schema declaration. They can load valid mTrees, and may be used as a context object by the mTree loader, model transformers and artifact generators.</p>
+                                    <h4>Elements and element types</h4>
+                                    <p>Wizzi Schema elements and XML DTD element types have the same goal. Wizzi Model elements are such only after the mTree loading of an ITTF Document. In ITTF Documents we have potential model elements, attributes and texts.</p>
+                                    <h4>Valid characters</h4>
+                                    <p>Ittf documents accept any character. The wizzi factory ignores the content of documents and has no concept of data type. Wizzi Schemas only can constrain node names and values.</p>
+                                    <p>When generating the javascript of a Wizzi Model the names of classes and attributes are checked and invalid chars for javascript names are replaced with the '_' char. Class names colliding with javascript keywords are prefixed with the letter 'x'.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <nav>
+                            <div id="right-nav">
+                                <div class="aside-right">
+                                    <div style="padding-top: 40px;"></div>
+                                    <ul>
+                                        <li><a href="./overview.html">Overview</a>
+                                        </li>
+                                        <li><a href="./ittfdocuments.html">Ittf Documents</a>
+                                        </li>
+                                        <li><a href="./templateengine.html">Template engine</a>
+                                        </li>
+                                        <li><a href="./jswizzi.html">JsWizzi</a>
+                                        </li>
+                                        <li><a href="./mtrees.html">mTrees</a>
+                                        </li>
+                                        <li><a href="./wizzischemas.html">Wizzi Schemas</a>
+                                        </li>
+                                        <li><a href="./wizzimodeldom.html">Wizzi Model DOM</a>
+                                        </li>
+                                        <li><a href="./wizzimodelinstances.html">Wizzi Model instances</a>
+                                        </li>
+                                        <li><a href="./modeltransformers.html">Model transformers</a>
+                                        </li>
+                                        <li><a href="./artifactgenerators.html">Artifact generators</a>
+                                        </li>
+                                        <li><a href="./wizzijobs.html">Wizzi Jobs</a>
+                                        </li>
+                                        <li><a href="./wizziplugins.html">Wizzi Plugins</a>
+                                        </li>
+                                        <li><a href="./wizziapi.html">Wizzi API</a>
+                                        </li>
+                                        <li><a href="./glossary.html">Glossary</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

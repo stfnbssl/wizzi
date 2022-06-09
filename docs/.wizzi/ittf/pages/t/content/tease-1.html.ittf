@@ -1,0 +1,28 @@
+$group
+    $params &tease
+
+    . tease-1
+        $$ x-svg()
+        h3 ${tease.h3}
+            class tease-1-h3
+        p ${tease.p.label}
+            class tease-1-p
+            strong ${tease.p.strong}
+            + ${tease.p.text}
+        $foreach teasePanel in tease.teasePanels
+            $if teasePanel.kind == 'github-honors'
+                $ var honors = teasePanel
+                github-honors(&honors)
+            $elif teasePanel.kind == 'code-hint'
+                $ var code = teasePanel
+                code-hint(&code)
+            $elif teasePanel.kind == 'hint-link'
+                $ var hint = teasePanel
+                hint-link(&hint)
+            $elif teasePanel.kind == 'scream-features'
+                $ var features = teasePanel
+                scream-features(&features)
+            $elif teasePanel.kind == 'scream-button'
+                $ var button = teasePanel
+                scream-button(&button)
+            

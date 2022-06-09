@@ -1,0 +1,31 @@
+$group
+    
+    . css-a2s10c
+        display grid
+        grid-template-columns minmax(0,1fr)
+        @ gap 6rem
+        margin-top 3rem
+
+    . css-1oo42pv
+        max-width 90rem
+        position relative
+        padding-left 2rem
+        padding-right 2rem
+        margin-left auto
+        margin-right auto
+        width 100%
+
+    media (min-width: 550px)
+        . css-1oo42pv
+            width 90%
+
+    $include p-splash-1
+    $include p-grid-1
+    $include p-grid-1-item
+    $include p-getstarted-1
+    $include p-eco-1
+    $include p-eco-1-item
+    $include p-eco-1-image
+    $include cloud-1
+    $include cloud-1-item
+    $include cloud-1-start

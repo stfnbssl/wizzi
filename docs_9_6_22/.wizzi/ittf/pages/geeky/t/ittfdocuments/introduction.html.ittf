@@ -1,0 +1,8 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Ittf documents'
+        };
+
+    section(&sect)
+

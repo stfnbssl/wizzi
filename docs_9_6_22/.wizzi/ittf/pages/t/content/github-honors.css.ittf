@@ -1,0 +1,15 @@
+$group
+    
+    . github-honors
+        font-size 0.75rem
+        color var(--theme-ui-colors-grey-50,#78757a)
+        margin 0
+        text-align center
+        < svg
+            vertical-align middle
+            fill var(--theme-ui-colors-grey-40,#b7b5bd)
+        < span
+            font-size 0.75rem
+            color var(--theme-ui-colors-grey-50,#78757a)
+            margin 0
+            text-align center

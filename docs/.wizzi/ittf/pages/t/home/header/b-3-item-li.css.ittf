@@ -1,0 +1,53 @@
+$group
+    . css-jebqk6
+        padding 0.25rem 2rem
+        display block
+    media (min-width: 1000px)
+        . css-jebqk6
+            padding 0
+    media (min-width: 1000px)
+        . css-jebqk6
+            $$ BAX-M display none
+    . css-1fos0w3
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+        font-size 1rem
+        display inline-flex
+    . css-1fos0w3:hover
+        + .css-1fos0w3:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-1fos0w3:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem
+    . css-ntw0hb
+        align-items center
+        color ${mpage.Colors.primary}
+        display inline-flex
+        text-decoration underline
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+        font-size 1rem
+        display inline-flex
+    . css-ntw0hb:focus
+        + .css-ntw0hb:hover
+        color ${mpage.Colors.primary}
+        text-decoration underline
+    . css-ntw0hb:hover
+        + .css-ntw0hb:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-ntw0hb:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))

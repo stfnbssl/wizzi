@@ -1,0 +1,7 @@
+module
+    kind es6
+    import
+        @ sayHello
+        from ./src/components
+    _ sayHello
+        @ "John"

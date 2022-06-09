@@ -1,0 +1,68 @@
+{
+  "type": "File",
+  "errors": [],
+  "program": {
+    "type": "Program",
+    "sourceType": "module",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "ExportNamedDeclaration",
+        "exportKind": "type",
+        "specifiers": [],
+        "source": null,
+        "declaration": {
+          "type": "TSTypeAliasDeclaration",
+          "id": {
+            "type": "Identifier",
+            "name": "RootState"
+          },
+          "typeAnnotation": {
+            "type": "TSTypeReference",
+            "typeName": {
+              "type": "Identifier",
+              "name": "StateType"
+            },
+            "typeParameters": {
+              "type": "TSTypeParameterInstantiation",
+              "params": [
+                {
+                  "type": "TSTypeReference",
+                  "typeName": {
+                    "type": "Identifier",
+                    "name": "ReturnType"
+                  },
+                  "typeParameters": {
+                    "type": "TSTypeParameterInstantiation",
+                    "params": [
+                      {
+                        "type": "TSTypeQuery",
+                        "exprName": {
+                          "type": "TSImportType",
+                          "argument": {
+                            "type": "StringLiteral",
+                            "extra": {
+                              "rawValue": "./root-reducer",
+                              "raw": "'./root-reducer'"
+                            },
+                            "value": "./root-reducer"
+                          },
+                          "qualifier": {
+                            "type": "Identifier",
+                            "name": "default"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "directives": []
+  },
+  "comments": []
+}

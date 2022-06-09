@@ -1,0 +1,65 @@
+$group
+	$params &opt
+
+    $$
+    $$ Example skeleton specific for the 'wizzi-utils' kernel package
+    $$
+
+	#
+		# Example: ${opt.name}
+		#
+	
+    $include example_includes
+    
+    $if opt.folderLevel == 1
+        var vfile = require('../lib/fs/vfile')
+        var uriParser = require('../lib/fs/uriParser')
+        var fsUtils = require('../lib/fs/utils')
+        var IttfMTreeEx = require('../lib/ittfTree/ittfMTreeEx')
+        var IttfFsNode = require('../lib/scanners/ittfFsNode')
+        var folderBrowse = require('../lib/scanners/folderBrowse')
+        var folderScanner = require('../lib/scanners/folderScanner')
+        var ittfDocumentScanner = require('../lib/scanners/ittfDocumentScanner')
+        var textDocumentScanner = require('../lib/scanners/textDocumentScanner')
+
+    $elif opt.folderLevel == 2
+        var vfile = require('../../lib/fs/vfile')    
+        var uriParser = require('../../lib/fs/uriParser')
+        var fsUtils = require('../../lib/fs/utils')
+        var IttfMTreeEx = require('../../lib/ittfTree/ittfMTreeEx')
+        var IttfFsNode = require('../../lib/scanners/ittfFsNode')
+        var folderBrowse = require('../../lib/scanners/folderBrowse')
+        var folderScanner = require('../../lib/scanners/folderScanner')
+        var ittfDocumentScanner = require('../../lib/scanners/ittfDocumentScanner')
+        var textDocumentScanner = require('../../lib/scanners/textDocumentScanner')
+
+    $elif opt.folderLevel == 3
+        var vfile = require('../../../lib/fs/vfile')    
+        var uriParser = require('../../../lib/fs/uriParser')
+        var fsUtils = require('../../../lib/fs/utils')
+        var IttfMTreeEx = require('../../../lib/ittfTree/ittfMTreeEx')
+        var IttfFsNode = require('../../../lib/scanners/ittfFsNode')
+        var folderBrowse = require('../../../lib/scanners/folderBrowse')
+        var folderScanner = require('../../../lib/scanners/folderScanner')
+        var ittfDocumentScanner = require('../../../lib/scanners/ittfDocumentScanner')
+        var textDocumentScanner = require('../../../lib/scanners/textDocumentScanner')
+
+	$hook imports
+
+    $hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'
+    
+	example_prints( ${opt.name}, ${opt.level}, ${opt.step} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

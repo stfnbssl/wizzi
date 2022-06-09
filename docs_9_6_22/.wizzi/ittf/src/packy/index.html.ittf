@@ -1,0 +1,13 @@
+html
+
+    $
+        var page = {
+            sectionTitle: 'Packy',
+            mainCss : pkg.Params.baseUrl + '/styles/article.css'
+        };
+
+	_layouts/default(&page)
+
+        . doc-container
+            article
+                h1 Packy

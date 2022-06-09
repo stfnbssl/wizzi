@@ -1,0 +1,53 @@
+html
+
+    $global
+        var gName = 'stefi';
+        var gData = {
+            name: 'stefi'
+        }
+    
+    $$ param by value
+    $fragment hello_1
+        $params name
+        h1 hello_1
+        h3 ${name}
+    
+    $$ param by ref is string
+    $fragment hello_2
+        $params &name
+        h1 hello_2
+        h3 ${name}
+
+    $$ default param is literal value
+    $fragment hello_3
+        $params name|stefi
+        h1 hello_3
+        h3 ${name}
+
+    $$ default param is global context value (string)
+    $fragment hello_4
+        $params name|&gName
+        h1 hello_4
+        h3 ${name}
+    
+    $$ param by ref is object
+    $fragment hello_5
+        $params &data
+        h1 hello_5
+        h3 ${data.name}
+
+    $$ default param is global context value (object)
+    $fragment hello_6
+        $params data|&gData
+        h1 hello_6
+        h3 ${data.name}
+
+    body
+        hello_1(stefi)
+        $ var name = 'stefi'
+        hello_2(&name)
+        hello_3()
+        hello_4()
+        $ var data = { name: 'stefi' }
+        hello_5(&data)
+        hello_6()

@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Geeky',
+            title: 'mTrees'
+        };
+    
+    _layouts/docs-layout(&art)
+    
+        $include ./mtrees/introduction

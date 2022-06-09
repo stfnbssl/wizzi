@@ -1,0 +1,28 @@
+$group
+    
+    . css-1sncdea:not(:last-of-type)
+        margin-bottom 0.25rem
+
+    . css-1sncdea
+        font-size 0.875rem
+        line-height 1.25
+
+    . css-tu9on4
+        align-items center
+        color ${mpage.Colors.primary}
+        display inline-flex
+        text-decoration none
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+
+    . css-1hrdhpc
+        font-size 0.875rem
+        line-height 1.25
+        margin-top 1.25rem
+
+    . css-f0hjtx
+        fill var(--theme-ui-colors-grey-50,#78757a)
+        font-size 0.9em
+        margin-right 0.5rem

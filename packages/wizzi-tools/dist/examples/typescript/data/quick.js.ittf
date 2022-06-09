@@ -1,0 +1,8 @@
+module
+    export 
+        class Counter
+            super Component
+                :param 
+                    :ref CounterProps
+                :param 
+                    :ref CounterState

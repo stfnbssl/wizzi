@@ -1,0 +1,44 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_transform_step_1',
+            title: 'Wizzi factory - load model and transform',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ './wizzi-web/dist/index'
+                @ './wizzi-core/dist/index'
+            @ pluginsBaseFolder pluginsBaseFolder
+
+        var csPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'cheatsheet.ittf.ittf'
+        
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+
+                # Load the model and transform.
+                _ wf.loadAndTransformModel
+                    @ csPath
+                    {
+                        { modelRequestContext
+                    @ 'ittf/cheatsheet'
+                    f_cb_test(wizziModel)
+                        _ printValue
+                            @ 'transformed cheatsheet'
+                            _ stringify
+                                @ wizziModel
+                                @ null
+                                @ 2

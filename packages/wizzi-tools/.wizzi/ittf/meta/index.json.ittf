@@ -1,0 +1,8 @@
+{
+    $include versions
+    
+    name '@wizzi/tools'
+    version '${versions['wizzi-tools@next']}'
+	title 'Tools library for the wizzi factory.'
+    license 'MIT'
+    [ schemas

@@ -1,0 +1,43 @@
+html
+    $include options-init
+	$
+        // _.log('cs', cs);
+        opt.mainCss = 'cheatsheet.css';
+        opt.mainJs = null;
+		opt.logo_w = 70;
+		opt.logo_h = 30;
+		opt.sidebar_1 = true;
+		opt.sb_1_min_w = 80;
+		opt.title = 'Schema <b>' + cs.schema.toUpperCase() + '</b> cheat sheet';
+        opt.schema = cs.schema;
+        opt.SCHEMA = cs.schema.toUpperCase();
+		opt.usePrism = false;
+        opt.useHighlight = true;
+		if (opt.usePrism) {
+            if (cs.schema === 'js') {
+                opt.language = 'language-javascript';
+            } else {
+                opt.language = 'language-' + cs.schema;
+            }
+        } else {
+            opt.language = cs.schema;
+        }
+
+    _layouts/page-layout(&opt)
+
+        $include home/header/index
+        cs-0-frame()
+            cs-1-bar(&opt)
+            cs-1-content(&opt)
+                $foreach el in cs.elements
+                    $foreach item in el.items
+                        cs-3-item-title(&item)
+                        cs-3-item-code(&item, &opt)
+            div &nbsp;
+                style margin-bottom: 50px;
+
+        cs-2-sb-left()
+            $foreach el in cs.elements
+                cs-2-sb-element(&el)
+                    $foreach item in el.items
+                        cs-2-sb-item(&item)

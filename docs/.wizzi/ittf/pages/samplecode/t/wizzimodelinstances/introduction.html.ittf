@@ -1,0 +1,8 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Wizzi Model instances'
+        };
+
+    section(&sect)
+

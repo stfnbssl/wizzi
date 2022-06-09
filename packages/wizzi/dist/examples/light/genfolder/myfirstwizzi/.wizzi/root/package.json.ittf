@@ -1,0 +1,12 @@
+{
+    name "myfirstwizzi"
+    version ""
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    private false
+    [ licenses
+        {
+            type "MIT"
+            url "https://opensource.org/licenses/MIT"
+    main ""

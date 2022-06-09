@@ -1,0 +1,19 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Documentation',
+            title: 'Artifact generators'
+        };
+    
+    _layouts/docs-layout(&art)
+    
+        $include ./artifactgenerators/introduction
+        $include ./artifactgenerators/implementation
+        $include ./artifactgenerators/gencontext
+        $include ./artifactgenerators/sample
+        $include ./artifactgenerators/built-in
+        $include ./artifactgenerators/jsonexport
+        $include ./artifactgenerators/xmlexport
+        $include ./artifactgenerators/ittfdocument

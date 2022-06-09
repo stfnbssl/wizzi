@@ -1,0 +1,42 @@
+{
+    "name": "wizzi-monorepo",
+    "version": "0.7.1",
+    "description": "The wizzi factory monorepo package",
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "sbassoli.dev@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/wizzifactory/wizzi/blob/master/license.txt"
+        }
+    ],
+    "homepage": "https://github.com/wizzifactory/wizzi#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wizzifactory/wizzi.git"
+    },
+    "bugs": {
+        "url": "https://github.com/wizzifactory/wizzi/issues"
+    },
+    "engines": {
+        "node": ">=0.10.28",
+        "npm": ">=1.4.28"
+    },
+    "scripts": {
+        "test": "mocha tests/**/*.js --full-trace"
+    },
+    "devDependencies": {
+        "del": "^2.2.2",
+        "expect.js": "^0.3.1",
+        "mocha": "^5.2.0",
+        "wizzi": "^0.7.22",
+        "wizzi-core": "^0.7.3",
+        "wizzi-js": "^0.7.8",
+        "wizzi-utils": "^0.7.13",
+        "wizzi-web": "^0.7.9",
+        "wizzi.proto": "./packages/wizzi.proto"
+    }
+}

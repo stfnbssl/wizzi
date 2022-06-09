@@ -1,0 +1,8 @@
+{
+    $include versions
+    
+    name '@wizzi/mtree'
+    version '${versions['wizzi-mtree@next']}'
+	title 'Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup.'
+    license 'MIT'
+    [ schemas

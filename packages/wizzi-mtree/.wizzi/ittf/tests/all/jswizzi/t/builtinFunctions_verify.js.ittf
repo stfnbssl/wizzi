@@ -1,0 +1,7 @@
+﻿$group
+
+	var builtinFunctions_verify
+		[
+			{
+				@ code 'var x = "lady"; return _.pluralize(x)'
+				@ expected 'ladies'

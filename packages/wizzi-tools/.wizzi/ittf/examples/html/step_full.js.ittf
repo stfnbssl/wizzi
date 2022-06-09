@@ -1,0 +1,54 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wizzify_html_step_1',
+            title: 'wizzify html step 1',
+            schema: 'html',
+            folderLevel: 2
+        }
+
+    common\example\wizzify(&opt)
+
+        _ heading2
+            @ 'wizzify html'     
+
+        const example_htmls
+            [
+                @ 'full'
+
+   		_ async.mapSeries
+			@ example_htmls
+            function
+                param name
+                param callback
+                log '======================================================================================'
+                log 'wizzify file', name + '.html'
+                log '--------------------------------------------------------------------------------------'
+                _ htmlwizzifier.getWizziIttf
+                    _ file.read
+                        _ path.join
+                            @ __dirname
+                            @ 'data'
+                            @ name + '.html'
+                    {
+                        $$ @ embedTag 'vue'
+                        $$ @ isForVue true
+                        @ dumpfile
+                            _ path.join
+                                @ __dirname
+                                @ '__dumps'
+                                @ name + '.html.dump'
+                    f_cb_test( ittf )
+                        # _ printValue(name, ittf)
+                        _ file.write
+                            _ path.join
+                                @ __dirname
+                                @ 'outputs'
+                                @ name + '.html.ittf'
+                            @ ittf
+            f_cb_test( result )
+                log 'result', result

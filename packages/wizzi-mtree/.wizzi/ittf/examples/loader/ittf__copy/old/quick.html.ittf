@@ -1,0 +1,6 @@
+html
+    $
+        var useBabel = false
+
+    $if useBabel && babel.register
+        "BabelRegister"

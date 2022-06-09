@@ -1,0 +1,152 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'loadCompile_Step_1',
+            title: 'loadCompile - step - 1 - basic',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'basic.html.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTree
+                    @ ittfUri
+                    {
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                        @ mTreeBuildUpContext
+                            {
+                                @ tree
+                                    {
+                                        @ id 1
+                                        @ title 'root node 1'
+                                        [ children
+                                            {
+                                                @ id 11
+                                                @ title 'node 1.1'
+                                                [ children
+                                            {
+                                                @ id 12
+                                                @ title 'node 1.3'
+                                                [ children
+                        @ options
+                            {
+                                @ isCompile false $$ true
+                    f_cb_test( mTree )
+                        # log 'mTree', mTree
+                        _ printEvaluatedNodes(mTree, 'After evaluate')
+
+$*
+    
+    $append imports
+	    var packageIndex = require('../index')
+	
+    _ step_1
+        @ file
+        f_cb_throw()
+            _ sample_load
+                @ file
+                @ 'load_frontmatter.html.ittf'
+                f_cb_throw()
+
+	function step_1
+		param file
+        param callback
+        log 'EXAMPLE.loader.start'
+		var loadMTree
+			_ packageIndex.createLoadMTree
+				_ repo.getCreateFilesystemStore
+
+		log 'EXAMPLE.loader.loading ittf/load_compile.html.ittf'
+        _ loadMTree
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ 'load_compile.html.ittf'
+			{
+				@ __productionManager
+					_ mocks.getProductionManager
+				@ mTreeBuildUpContext
+					{
+						@ tree
+							{
+								@ id 1
+								@ title 'root node 1'
+								[ children
+									{
+										@ id 11
+										@ title 'node 1.1'
+										[ children
+									{
+										@ id 12
+										@ title 'node 1.3'
+										[ children
+				@ options
+					{
+						@ isCompile true
+			f_cb_throw( mTree )
+				log 'EXAMPLE.loader.loaded.succesfully ittf/load_compile.html.ittf'
+                log "EXAMPLE.loader.mTree.loadHistory", mTree.loadHistory
+				var el
+					_ mTree.loadHistory.getIttfDocumentErrorLines
+						@ 'f1'
+						{
+							@ row 7
+							@ col 19
+							@ description 'dummy error for test'
+						@ true
+				log "EXAMPLE.loader.mTree.loadHistory.getIttfDocumentErrorLines", el
+				_ file.write
+					_ path.join
+						@ __dirname
+						@ 'outputs'
+						@ 'load_compile.html.ittf'
+					_ mTree.toIttf
+                log "EXAMPLE.loader.written outputs/ittf/load_compile.html.ittf"
+                _ callback(null)
+
+	function sample_load
+		param file
+        param ittfDocumentBasename
+        param callback
+        
+        log 'EXAMPLE.loader.sample_load.start', ittfDocumentBasename
+		
+        var loadMTree
+			_ packageIndex.createLoadMTree
+				_ repo.getCreateFilesystemStore
+                {
+                    @ frontMatter true
+
+		_ loadMTree
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ ittfDocumentBasename
+			{
+				@ __productionManager
+					_ mocks.getProductionManager
+				{ mTreeBuildUpContext
+            f_cb_throw( mTree )
+                log 'EXAMPLE.loader.sample_load.result\n', mTree.toIttf()
+                log 'EXAMPLE.loader.sample_load.frontmatter\n', JSON.stringify(mTree.frontMatter, null, 2)
+				_ file.write
+					_ path.join
+						@ __dirname
+						@ 'outputs'
+						@ ittfDocumentBasename
+					_ mTree.toIttf
+                _ callback(null)
+*$

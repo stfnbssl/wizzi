@@ -1,0 +1,51 @@
+$group
+    
+    . m-2-search
+        display flex
+        flex-direction row-reverse
+        position absolute
+        right 2.5rem
+        bottom 0.75rem
+        min-height 2.5rem
+
+        < span
+            clip rect(1px,1px,1px,1px)
+            height 1px
+            overflow hidden
+            position absolute !important
+            width 1px
+
+    media (min-width: 1000px)
+        . m-2-search
+            right 0
+            left auto
+            min-height 2rem
+
+    . m-2-search-btn
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        -webkit-transition background 250ms,border 250ms,color 250ms
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background transparent
+        border 1px solid transparent
+        color ${mpage.Colors.primary}
+        font-size 0.875rem
+        min-height 2rem
+        min-width 2rem
+        padding 0.25rem 0.75rem
+        padding-left 0.5rem
+        padding-right 0.5rem
+
+    . m-2-search-form
+        border-radius 8px
+        display none
+        margin-right 0.25rem
+        width 100%

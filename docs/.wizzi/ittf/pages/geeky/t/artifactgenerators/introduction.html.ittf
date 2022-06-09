@@ -1,0 +1,13 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Artifact generators'
+        };
+
+    section(&sect)
+
+        table-doc()
+            tr( The genContext class, wizzi, lib/artifact/genContext.js.ittf, lib/artifact/genContext.js )
+            tr( The Artifact Generation function, wizzi, lib/artifact/asyncArtifactGenerator.js.ittf, lib/artifact/asyncArtifactGenerator.js )
+
+

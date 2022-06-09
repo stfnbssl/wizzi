@@ -1,0 +1,60 @@
+$group
+    $params &panel
+    li 
+        class css-1szfju1
+        $if panel.kind != 'bar'
+            a 
+                class css-5w7k2g
+                href /docs/
+                svg 
+                    width 32
+                    height 32
+                    viewBox 0 0 32 32
+                    fill none
+                    xmlns http://www.w3.org/2000/svg
+                    class css-1ppz169
+                    path 
+                        d M6 10C6 8.4 7.4 7 9 7H12V12H6V10Z
+                        fill #F67300
+                        stroke ${mpage.Colors.primary}
+                        @ stroke-width 1.5
+                    path 
+                        d M9 7C10.6 7 12 8.4 12 10V22C12 23.6 13.3 25 15 25C16.7 25 18 23.6 18 22H24V10C24 8.4 22.6 7 21 7H9Z
+                        fill white
+                    path 
+                        d M9 7H21C22.6 7 24 8.4 24 10V22
+                        stroke ${mpage.Colors.primary}
+                        @ stroke-width 1.5
+                    path 
+                        d M15 25C13.3 25 12 23.6 12 22V10C12 8.4 10.6 7 9 7
+                        stroke ${mpage.Colors.primary}
+                        @ stroke-width 1.5
+                    path 
+                        d M15 25H24C25.6 25 27 23.6 27 22V21H18V22C18 23.6 16.6 25 15 25Z
+                        fill #F1DEFA
+                        stroke ${mpage.Colors.primary}
+                        @ stroke-width 1.5
+                    circle 
+                        cx 20.2002
+                        cy 11.6
+                        r 1
+                        fill ${mpage.Colors.primary}
+                    circle 
+                        cx 16
+                        cy 11.6
+                        r 1
+                        fill ${mpage.Colors.primary}
+                    path 
+                        d M21.2002 14.5C21.2002 14.5 21.2002 15.6 21.2002 15.8C21.2002 16.4 20.9002 16.9 20.4002 17.4C19.9002 17.9 19.1002 18.3 18.2002 18.3C17.3002 18.3 16.5002 17.9 16.0002 17.4C15.5002 16.9 15.2002 16.4 15.2002 15.8C15.2002 15.5 15.2002 14.5 15.2002 14.5C16.9002 14.5 19.6002 14.5 21.2002 14.5Z
+                        fill ${mpage.Colors.primary}
+                span ${panel.title}
+                    class css-ovr08e
+                h2 ${panel.title}
+                    class css-a2l7qn
+                $if panel.subtitle 
+                    p ${panel.subtitle}
+                        class css-9wr7tw
+        $if panel.kind != 'singleitem'
+            ul 
+                class css-kqnhvk
+                $hook

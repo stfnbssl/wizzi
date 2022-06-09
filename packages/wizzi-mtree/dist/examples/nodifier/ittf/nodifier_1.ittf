@@ -1,0 +1,36 @@
+alpha
+    $params id, name
+	$$ single line comment, should be skipped
+    $* multi line comment should be skipped
+	< *
+        margin 0
+		padding 0
+	*$
+	$* multi line comment should be skipped and 'beta 1' should be at column 15
+    bla bla *$beta 1
+	beta 2
+		gamma 2.1
+    < body
+        margin 0
+		padding 0
+
+    $$ A mixin call should be reported on tagSuffix property of line
+    insert_me(bye)
+
+    $$ This should be detected as macro, '$' should be replaced with 'Æ'
+    give `${name}`
+
+    i am
+        \b multiline but not in liner, the nodifier will inline me, 
+        \b this with
+        \ -noSpace
+        \n inlined with a break line char
+
+    $fragment inlineFragmentHello
+        $params name
+        hello ${name}
+
+    inlineFragmentHello(stefi)
+
+
+

@@ -1,0 +1,17 @@
+﻿wfjob wizzi/docs/dumps/job
+	
+    $
+        var src = __dirname;
+		var dest = path.join(__dirname, '..', '.dumps');
+
+    line dump-jobs
+        cwd-folder ${src}
+        artifact any_ittf
+            src ./**/*.wfjob.ittf
+            schema ittf
+            generator ittf/document
+            extension ittf
+
+	production
+		dest-folder ${dest}
+        line-ref dump-jobs

@@ -1,0 +1,4 @@
+﻿module
+    kind jsfile
+    
+    fragment_1( sayHello )

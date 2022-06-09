@@ -1,0 +1,25 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 2,
+            name: 'Json_Step_1',
+            title: 'Json - step - 1 - FsImpl',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        _ heading1('start')
+
+        var jsonDirectoryTree
+            _ json.directoryTree
+                _ path.join
+                    @ __dirname
+                    @ '..'
+
+        _ printValue
+            @ 'json DirectoryTree'
+            @ jsonDirectoryTree

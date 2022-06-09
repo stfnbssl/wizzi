@@ -1,0 +1,58 @@
+example( scriptBuilder, 1 )
+
+	# 
+		# EXAMPLE: mTreeBuildUpScripter
+
+	$append imports
+        var packageIndex = require('../../index')
+		var JsWizziScriptCoder = require('../../lib/jswizzi/JsWizziScriptCoder')
+        var mTreeBuildUpScripter = require('../../lib/loader/mTreeBuildUpScripter')
+
+    var loadMTree
+        _ packageIndex.createLoadMTree
+            _ repo.getCreateFilesystemStore
+            {
+                @ raw true
+
+	_ exec
+        @ 'scriptBuilder_1'
+        =>
+
+	function exec
+		param name
+        param callback
+
+        log 'exec', name
+
+        var ctx
+            { 
+                @ brickKey null
+                @ counter 0
+                @ startTime Date.now()
+                @ isCompile false
+
+        var scriptCoder
+            new JsWizziScriptCoder()
+
+		_ loadMTree
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ name + '.html.ittf'
+			{
+				@ __productionManager
+					_ mocks.getProductionManager
+				{ mTreeBuildUpContext
+            f_cb_throw( mTree )
+
+                foreach item in mTree.nodes
+                    _ mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx)
+
+                _ heading1
+                    @ 'Script ' + name
+                
+                _ printValue
+                    @ 'mTree'
+                    @ mTree
+                
+                log scriptCoder.toCode()

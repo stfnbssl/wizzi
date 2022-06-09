@@ -1,0 +1,10 @@
+$group
+    media (min-width: 1000px)
+        . css-y86b6k
+            background ${mpage.Colors.themeBack}
+            border-radius 8px
+            box-shadow 0px 4px 16px rgba(46,41,51,0.08),0px 8px 24px rgba(71,63,79,0.16)
+            width 32.5rem
+    . css-lqt4hu
+        display grid
+        grid-template-columns repeat(2,1fr)

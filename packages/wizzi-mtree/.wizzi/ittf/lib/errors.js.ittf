@@ -1,0 +1,174 @@
+﻿module 
+    kind es6
+
+    var util = require('util')
+    var chalk = require('chalk')
+
+    var md
+        set module.exports =
+            { 
+
+	error( Node, message, node )
+        var msg
+            [ 
+                @ message
+        if node
+            if node.wzSourceLineInfo
+                var info = node.wzSourceLineInfo
+                var filePath = 'TODO'
+                if node.wzSourceFilepath
+                    set filePath = node.wzSourceFilepath(info.sourceKey)
+                _ msg.push(' at row: ' + info.row)
+                _ msg.push(', col: ' + info.col)
+                _ msg.push(', source: ' + info.sourceKey)
+                _ msg.push(', in file: ' + filePath)
+            elif node.row
+                _ msg.push(' at row: ' + node.row)
+                _ msg.push(', col: ' + node.col)
+                _ msg.push(', source: ' + node.sourceKey)
+                _ msg.push(', in file: ' + (node.model ? node.model.uri : 'unavailable'))
+        set this.message = msg.join('')
+
+	error( IttfNotFound, resourceType, name, sourceUri )
+		set this.message = resourceType + ': ' + name + 
+			\ ' not found, processing document ' + md.getSrcPathInfo(sourceUri)
+
+    error( IttfLoad, message, srcPath, node, ex )
+        $* 22/10/18
+		if !(ex)
+            set ex = node
+            set node = null
+		*$
+        set this.message = message
+		if srcPath
+			set this.message += '\nLoading ittf document ' + md.getSrcPathInfo(srcPath)
+        if node
+			# TODO set this.nodeInfo = new NodeError('', node)
+            set this.message += ('\n' + new NodeError('', node).message)
+		# TODO set this.inner = ex ???
+
+	error( RepoIO, message, uri, innerEx )
+		set this.message = message + '\nuri: ' + uri
+
+    class WizziError
+        super Error
+        ctor
+            param message
+            param node
+            param mTreeBrick
+            param other
+            base message
+            # legacy error test
+            
+            set this.name = "WizziError"
+            set this.__is_error = true
+            set this.data
+                {
+                    @ ...other||{}
+            
+            if node
+                set this.data.node
+                    {
+                        @ name node.name 
+                        @ row node.row
+                        @ col node.col
+                        @ sourceKey node.sourceKey
+                if node.wzSourceLineInfo
+					var info = node.wzSourceLineInfo
+                    set this.node.filePath = node.wzRoot().wzSourceFilepath(info.sourceKey)
+
+            _ Error.captureStackTrace(this, this.constructor)
+            
+            if mTreeBrick 
+                set this.data.mTreeBrick
+                    {
+                        @ uri mTreeBrick.uri
+                set this.errorLines
+                    _ mTreeBrick.loadHistory.getIttfDocumentErrorLines
+                        @ node.sourceKey
+                        {
+                            @ row node.row
+                            @ col node.col
+                            @ pos node.col + node.name.length + 1
+                            @ description message
+                        @ true
+
+        m toString
+            var msg = []
+            _ msg.push(chalk.red('Error: ' + this.message))
+            _ msg.push(chalk.red('  name: ' + this.data.errorName))
+            if this.data.node
+                _ msg.push(chalk.yellow('  row: ' + this.data.node.row + ', col: ' + this.data.node.col))
+            if this.data.mTreeBrick
+                _ msg.push(chalk.yellow('  uri: ' + this.data.mTreeBrick.uri))
+            elif this.data.uri
+                _ msg.push(chalk.yellow('  uri: ' + this.data.uri))
+            else
+                _ msg.push(chalk.yellow('  uri: unknown'))
+            if this.errorLines
+                foreach line in this.errorLines
+                    _ msg.push(chalk.yellow('  ' + line))
+            if this.data.errorName === 'JsWizziError'
+                _ msg.push(chalk.yellow('  onStatement: ' + this.data.onStatement))
+            if this.data.inner
+                _ msg.push(chalk.magenta('  Inner error: ' + this.data.inner.name + ': ' + this.data.inner.message))
+            return msg.join('\n')
+    set md.WizziError = WizziError
+    
+    class InternalError
+        super WizziError
+        ctor
+            param error
+            base error.message
+            set this.data
+                {
+                    @ error
+    set md.InternalError = InternalError
+
+	set md.getSrcPathInfo
+		function
+			param srcPath
+			if typeof (srcPath) === 'string'
+				return srcPath
+			if (srcPath && (typeof (srcPath) === 'object'))
+				var msg = md.getSrcPathInfoFromNode(srcPath)
+				return 
+					iif msg
+						then msg
+						else 
+							_ srcPath.toString()
+			return 'unavailable'
+    
+	set md.getSrcPathInfoFromNode
+		function
+			param node
+			var msg
+				[ 
+			if node
+				if node.WmtSourceLineInfo
+					var info = node.WmtSourceLineInfo
+					_ msg.push((' at row: ' + info.row))
+					_ msg.push((', col: ' + info.col))
+					_ msg.push((', source: ' + info.source))
+					_ msg.push((', in file: ' + 'TODO'))
+				elif node.wzSourceLineInfo
+					var info = node.wzSourceLineInfo
+					var filePath = 'TODO'
+					if node.wzSourceFilepath
+						set filePath = node.wzSourceFilepath(info.sourceKey)
+					_ msg.push((' at row: ' + info.row))
+					_ msg.push((', col: ' + info.col))
+					_ msg.push((', source: ' + info.sourceKey))
+					_ msg.push((', in file: ' + filePath))
+			return 
+				iif msg.length == 0
+					then null
+					else 
+						_ msg.join('')
+
+
+
+
+
+
+

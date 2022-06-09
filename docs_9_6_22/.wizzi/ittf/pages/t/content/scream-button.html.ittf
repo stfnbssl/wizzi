@@ -1,0 +1,12 @@
+$group
+    $params &button
+    . scream-button $$ . css-zzgy
+        a ${button.label}
+            href ${button.href}
+            class scream-button-a
+            $include icons/arrow-right-1
+        p
+            class scream-button-p
+            $if button.hint.svg == 'mit'
+                $include icons/mit
+            + ${button.hint.label}

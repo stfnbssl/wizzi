@@ -1,0 +1,35 @@
+$group
+    $params &panel
+    . scream-panel-1
+        header 
+            class scream-panel-1-header
+            h1 ${panel.h1}
+                class scream-panel-1-h1
+            h2 
+                class scream-panel-1-h2
+                span ${panel.h2.span}
+                + ${panel.h2.text}
+        . scream-panel-1-grid
+            $foreach tease in panel.teases
+                tease-1(&tease)
+        
+        $*
+        p-tease-img-btn-1()
+
+            . css-oj1xjt
+                $include images/gatsby-cloud
+                h3 Gatsby Cloud
+                    class css-1wz6qkk
+                p Gatsby Cloud is the best place to build, deploy, and collaborate on your Gatsby site.
+                    class css-mnvzyn
+                ul 
+                    class css-5r9ei
+                    { item
+                        svg ""
+                        { label
+                            em "Incremental Builds"
+                            text "1000x faster builds"
+                    $foreach item in tease.screamItems
+                        scream-item-li-img(&item)
+                scream-btn-1(&btn)
+        *$

@@ -1,0 +1,94 @@
+$group
+    . css-1jx4yha
+        display flex
+        align-items center
+        background linear-gradient(to right,${mpage.Colors.grad1},${mpage.Colors.grad2})
+        justify-content center
+        height 100%
+        width 100%
+        border-bottom-left-radius 8px
+        border-bottom-right-radius 8px
+    media (min-width: 1000px)
+        . css-1jx4yha
+            white-space nowrap
+            min-width 0
+            width auto
+    . css-fec2ul
+        display flex
+        align-items center
+        justify-content center
+        justify-content flex-start
+        height 100%
+        white-space nowrap
+        min-width 0
+    . css-1sz4een
+        align-items center
+        color var(--theme-ui-colors-${mpage.Colors.gray70})
+        display flex
+        flex-grow 1
+        margin-left -1.25rem
+        margin-right -1.25rem
+        padding-left 1.25rem
+        padding-right 1.25rem
+        overflow-x auto
+        width 100%
+        -webkit-mask-image linear-gradient(to right,transparent,var(--theme-ui-colors-purple-90,#362066) 1.25rem,var(--theme-ui-colors-purple-90,#362066) 96%,transparent)
+        @ mask-image linear-gradient(to right,transparent,var(--theme-ui-colors-purple-90,#362066) 1.25rem,var(--theme-ui-colors-purple-90,#362066) 96%,transparent)
+    . css-1sz4een p
+        margin 0
+    . css-1sz4een a
+        color var(--theme-ui-colors-purple-50,#8a4baf)
+        font-weight 600
+        -webkit-text-decoration underline
+        text-decoration underline
+    . css-1sz4een::-webkit-scrollbar
+        width 0
+        height 0
+        background transparent
+    media (min-width: 1000px)
+        . css-1sz4een
+            min-width 0
+            flex-grow 0
+            width auto
+            margin-right 4rem
+        . css-1sz4een p
+            padding-right 1.25rem
+
+    . css-1orjk4a
+        align-items center
+        color var(--theme-ui-colors-${mpage.Colors.scheme1Fade90})
+        display flex
+        flex-grow 1
+        margin-left 0
+        margin-right 0
+        padding-left 1.25rem
+        padding-right 1.25rem
+        padding-top 0.75rem
+        padding-bottom 0.75rem
+        justify-content center
+        overflow-x auto
+        width 100%
+        text-align center
+        mask-image linear-gradient(to right,transparent,var(--theme-ui-colors-purple-90,#362066) 1.25rem,var(--theme-ui-colors-purple-90,#362066) 96%,transparent)
+    . css-1orjk4a p
+        margin 0
+    . css-1orjk4a a
+        color ${mpage.Colors.themeBack}
+        font-weight 600
+        -webkit-text-decoration underline
+        text-decoration underline
+    . css-1orjk4a::-webkit-scrollbar
+        width 0
+        height 0
+        background transparent
+    media (min-width: 1000px)
+        . css-1orjk4a
+            min-width 0
+            -webkit-box-flex 0
+            -webkit-flex-grow 0
+            -ms-flex-positive 0
+            flex-grow 0
+            width auto
+            padding-top 0
+            padding-bottom 0
+

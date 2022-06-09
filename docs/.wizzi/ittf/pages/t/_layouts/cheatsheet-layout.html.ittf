@@ -1,0 +1,16 @@
+$group
+    $params &opt
+    
+    head
+        
+        $include ./head-styles
+        $hook head-styles
+    
+    body
+        
+        $include home/header/index
+        $hook
+        
+        $include ./body-scripts
+        $hook body-scripts
+        

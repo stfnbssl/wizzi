@@ -1,0 +1,24 @@
+﻿$group
+
+	# async global model pre loader
+		# Pre loads
+        # . global models (wfjob "model" elements with an "exportName" attribute)
+	var AsyncGlobalModelPreLoader
+		{
+			@ run
+				function
+					param globalModelInfo
+					param callback
+					_ log.info('Started async global model preload: ' + globalModelInfo.name)
+					var loader = new PreLoader(globalModelInfo)
+					_ loader.runGlobalModel
+						f_cb_no_err( modelInstance )
+							if err
+								set err.modelInfo = globalModelInfo.toString()
+								r_cb_err()
+							_ log.info('Ended async global model preload: ' + globalModelInfo.name)
+							_ callback
+                                @ null
+                                {
+                                    @ exportName globalModelInfo.exportName
+                                    @ modelInstance modelInstance

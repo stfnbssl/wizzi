@@ -1,0 +1,13 @@
+﻿html
+    $global
+        var dollar = '$';
+    
+    $
+        var art = {
+            section: 'Geeky',
+            title: 'Wizzi Schemas'
+        };
+    
+    _layouts/geeky-layout(&art)
+
+        $include ./wizzischemas/introduction

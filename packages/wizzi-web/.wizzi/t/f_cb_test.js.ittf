@@ -1,0 +1,17 @@
+﻿$group
+	$params result|notUsed
+
+	function
+		param err
+		param ${result}
+		if err
+			log '-------------------------------------------------------------------'
+            log '--- Test error ----------------------------------------------------'
+            log 'err', err
+            log 'err.toString()', err.toString()
+            if err.inner
+                log 'err.inner.toString()', err.inner.toString()
+            log '-------------------------------------------------------------------'
+            log '-------------------------------------------------------------------'
+			throw 'Test error'
+		$hook

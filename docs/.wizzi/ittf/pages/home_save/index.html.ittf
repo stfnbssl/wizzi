@@ -1,0 +1,12 @@
+html
+    $
+        var opt = {
+            mainCss: 'index.css',
+            mainJs: 'index.js',
+        }
+
+    _layouts/page-layout(&opt)
+        
+        $include home/header/index
+        $include home/content/index
+        $include home/footer/index

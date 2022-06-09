@@ -1,0 +1,7 @@
+// 7/6/2019:15:15:16  by C:\My\wizzi\wizzi\packages\wizzi-mtree\dist\lib\loader\evaluator.js
+$.n(); // set the context state to NodeContext
+var $0 = {}; // the root node of the MTree buildup
+var $1 = { n: "test", v: "", r: 1, c: 1, s: "f1", u: "f1",  }; //3
+$.a($0, $1, 5);
+var $2 = { n: "team", v: $.ip("f1", "${ notexistent.toUpperCase() }", "string", 6, false), r: 2, c: 5, s: "f1", u: "f1",  }; //4
+$.a($1, $2, 7);

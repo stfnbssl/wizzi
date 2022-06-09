@@ -1,0 +1,212 @@
+﻿$group
+	$params name, level|0, step|1
+
+	function heading1
+		param text
+		log ''
+		log '*'.repeat(120)
+		log '** level ${level} - step ${step} - ${name} - ' + text
+		log '*'.repeat(120)
+		log ''
+	
+	function heading2
+		param text
+		log ''
+		log '   ', '-'.repeat(100)
+		log '   ','-- ${name} - ' + text
+		log '   ', '-'.repeat(100)
+		log ''
+
+	function printArray
+		param name
+		param arr
+		param fields
+		param format
+		if format === 'dashes'
+			log '   ', '-'.repeat(100)
+		log '   ', '* array ' + name + ' : '
+		foreach item in arr
+			log '    {', i
+			var keys = fields || Object.keys(item)
+			foreach k in keys
+				_ printValue
+					@ k
+					@ item[k]
+
+	function printValue
+		param k
+		param v
+		param format
+		param p1
+        log '--- value ------------------------------------------------------ start'
+		if format === 'dashes' || format === 'meter'
+			log '   ', '-'.repeat(100)
+		if format === 'json'
+			set v
+				_ stringify
+					@ v
+					@ null
+					@ 4
+		if verify.isNotEmpty(v)
+			var lines
+				_ verify.splitLines
+					@ v
+					{
+						@ numbered true
+			if lines.length === 1
+				log '   ', k, ':', lines[0].text
+			else
+				for var i=0; i<lines.length; i++
+					if i === 0
+						log '   ', k, ':', lines[0].numFmt, lines[0].text
+					else
+						log '   ', spaces(k.length+1), ' ', lines[i].numFmt, lines[i].text
+		elif verify.isObject(v)
+			log '   ', k, ':', util.inspect(v)
+		else
+			log '   ', k, ':', v
+		if format === 'meter'
+			_ meterLine(p1, '     ' + new Array(1 + k.length).join(' '))
+        log '--- value ------------------------------------------------------ end'
+
+	function printObject
+		param k
+		param v
+		param format
+		param p1
+        log '--- object ------------------------------------------------------ start'
+		if format === 'dashes' || format === 'meter'
+			log '   ', '-'.repeat(100)
+		log '   ', k, '{'
+		
+		_ __printObject(v, 2, 6)
+		
+		if format === 'meter'
+			_ meterLine(p1, '     ' + new Array(1 + k.length).join(' '))
+        log '--- object ------------------------------------------------------ end'
+
+	function __printObject
+		param v
+		param level
+		param limit
+		if level < limit
+			var indent = new Array(1 + level * 4).join(' ')
+			var prop
+			for var k in v
+				set prop = v[k]
+				if verify.isObject(prop)
+					log indent, k, '{'
+					_ __printObject(prop, level+1, limit)
+				elif verify.isFunction(prop)
+					log indent, k, 'function'
+				elif verify.isArray(prop)
+					log indent, k, '['
+					var indent2 = new Array(1 + (level+1) * 4).join(' ')
+					foreach item in prop
+						if verify.isObject(item)
+							_ __printObject(item, level+1, limit)
+						elif verify.isFunction(item)
+							log indent2, 'function'
+						else
+							log indent2, item
+				else
+					log indent, k, prop
+
+    function printLines
+        param lines
+        log 'lines from liner ----------------------------------- start'
+        foreach l in lines
+            log 'line', 'indent: ' + l.indent, 'r,c: ' + l.row + ',' + l.col, 
+                \b l.name + ' / ' + l.value, 
+                \b (l.hasMacro ? 'hasMacro' : ''),
+                \b (l.tagSuffix ? 'tagSuffix: ' + l.tagSuffix : '')
+        log 'lines from liner ------------------------------------- end'
+
+    function printNodes_deep
+        param n
+        param indent
+        var mTreeModel = n.model || n.mTreeBrick
+        log ' ', new Array(indent).join('  '), 'r,c: ' + n.row + ',' + n.col, 
+            \b n.name + ' / ' + n.value, 
+            \b (n.hasMacro ? 'hasMacro' : ''),
+            \b (n.tagSuffix ? 'tagSuffix: ' + n.tagSuffix : ''),
+            \b (mTreeModel.$params ? '$params: ' + mTreeModel.$params : ''),
+            \b (mTreeModel.sourceKey ? 'sk: ' + mTreeModel.sourceKey : '')
+        foreach c in n.children
+            _ printNodes_deep
+                @ c
+                @ indent + 1
+    
+    function printNodes
+        param nodes
+        param title
+        log '--- nodes ' + (title || '') + ' ------------------------------------------------- start'
+        if nodes.length != 1
+            log 'Invalid nodes array, must be of length == 1'
+        else
+            # log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+            # log 'nodes[0]', nodes[0]
+            var mTreeModel = nodes[0].model || nodes[0].mTreeBrick
+            if mTreeModel
+                log ' ', 'nodes.uri', mTreeModel.uri
+                log ' ', 'nodes.$schema', mTreeModel.$schema
+                log ' ', 'nodes.sourceKey', mTreeModel.sourceKey
+                if mTreeModel.$params
+                    log ' ', 'nodes.$params', mTreeModel.$params
+                if mTreeModel.frontMatter
+                    log ' ', 'nodes.frontMatter', mTreeModel.frontMatter
+            _ printNodes_deep
+                @ nodes[0]
+                @ 1
+        log '--- nodes ' + (title || '') + ' --------------------------------------------------- end'
+
+    function printEvaluatedNodes_deep
+        param n
+        param indent
+        log ' ', new Array(indent).join('  '), 'r,c: ' + n.r + ',' + n.c, 
+            \b n.n + ' / ' + n.v, 
+            \b 'sk: ' + n.s,
+            \b 'u: ' + n.u
+        foreach c in n.children
+            _ printEvaluatedNodes_deep
+                @ c
+                @ indent + 1
+
+    function printEvaluatedNodes
+        param evaluated
+        param title
+        log '--- evaluated nodes ' + (title || '') + ' ------------------------------------------------- start'
+        if evaluated && evaluated.nodes && evaluated.nodes.length == 1
+            if evaluated.frontMatter
+                log ' ', 'evaluated.frontMatter', evaluated.frontMatter
+            _ printEvaluatedNodes_deep
+                @ evaluated.nodes[0]
+                @ 1
+        else
+            log 'Invalid evaluated object', evaluated
+        log '--- evaluated nodes ' + (title || '') + ' --------------------------------------------------- end'
+
+	function spaces
+		param len
+		return new Array(len).join(' ')
+
+	function meterLine
+		param len
+		param indent
+		var sb = []
+		var numW = len < 10 ? 1 : ( len < 100 ? 2 : 3 )
+		var x
+		for var i=0; i<numW; i++
+			for var j=0; j<len; j++
+				set x = formatNum(j, numW)
+				_ sb.push(x.substr(i,1))
+			log indent, sb.join('')
+			set sb = []
+
+	function formatNum
+		param num
+		param len
+		var x = num.toString()
+		return new Array(1 + len-x.length).join(' ') + x
+				
+

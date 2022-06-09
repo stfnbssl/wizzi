@@ -1,0 +1,52 @@
+﻿module 
+    kind es6
+
+	var path = require('path')
+    var util = require('util')
+    var async = require('async')
+	var verify = require('wizzi-utils').verify
+    +
+	wz-function loadMany
+        param modelInfos
+        param callback
+
+		# log '+ asyncFrontMatterLoader.loadMany, modelInfos', modelInfos
+		_ async.map
+            @ modelInfos
+            @ _load_item
+			f_cb( frontMatters )
+				# log 'asyncFrontMatterLoader.loadMany, frontMatters', frontMatters
+				r_cb( frontMatters )
+
+	wz-function load
+        param modelInfo
+        param callback
+		_ _load_item
+			@ modelInfo
+			f_cb( frontMatter )
+				# log 'asyncFrontMatterLoader.load, frontMatter', frontMatter
+				r_cb( frontMatter )
+
+	#
+		# Load a single front matter using ModelInfo data
+		# params
+		#   { masterModelInfo
+		#     func srcFullPath
+	wz-function _load_item
+        param masterModelInfo
+        param callback
+		# log '+ asyncFrontMatterLoader._load_item, masterModelInfo', masterModelInfo.srcFullPath()
+        var srcFullPath = masterModelInfo.srcFullPath()
+        _ masterModelInfo.getLoadFrontMatter
+            f_cb( frontMatterLoader )
+                _ frontMatterLoader
+                    @ srcFullPath
+                    f_cb( mTree )
+                        _ callback
+                            @ null
+                            {
+                                @ kind 'frontMatter'
+                                @ sourceRelPath masterModelInfo.srcRelPath()
+                                @ sourceUri srcFullPath
+                                @ sourceSchema masterModelInfo.schema
+                                @ ...mTree.frontMatter

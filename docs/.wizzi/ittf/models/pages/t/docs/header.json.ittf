@@ -1,0 +1,30 @@
+$group
+    $params &ctx
+    
+    common/banner( &ctx )
+    
+    { Nav1
+        
+        { section
+            title "docs"
+            ariaLabel "Link to Docs home"
+            href "${wzConfigBaseUrl}/docs/concepts.html"
+        
+        [ menuGroups
+            {
+                [ menus
+                    {
+                        title "Resources"
+                        url "${wzConfigBaseUrl}/docs/resources/index.html"
+                    {
+                        title "Packy"
+                        url "${wzConfigBaseUrl}/docs/packy/index.html"
+                    {
+                        title "News"
+                        url "${wzConfigBaseUrl}/docs/news/index.html"
+            {
+                [ menus
+                    {
+                        kind "button"
+                        title "Get started"
+                        href "${wzConfigBaseUrl}/get-started/"

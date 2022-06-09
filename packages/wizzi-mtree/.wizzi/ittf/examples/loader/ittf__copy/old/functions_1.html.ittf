@@ -1,0 +1,13 @@
+html
+
+    $
+        var gName = 'stefi';
+        function sayHello(name) {
+            var name = name ? name : gName;
+            return "Hello " + name;
+        }
+    
+    body
+        h1 ${ sayHello() }
+        h1 ${ sayHello('annie') }
+        

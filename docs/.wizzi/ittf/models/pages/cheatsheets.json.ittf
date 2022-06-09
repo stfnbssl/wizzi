@@ -1,0 +1,11 @@
+{
+
+    $
+        var ctx = {
+            page: 'cheatsheets'
+        }
+
+    name "cheatsheets"
+    common/styles( &ctx )
+    cheatsheets/header( &ctx )
+    

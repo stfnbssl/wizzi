@@ -1,0 +1,7 @@
+﻿set md.trans
+    function 
+        param model
+        param ctx
+        param callback
+		var transformedModel = {}
+		$hook

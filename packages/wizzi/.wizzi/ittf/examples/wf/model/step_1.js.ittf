@@ -1,0 +1,97 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_model_step_1',
+            title: 'Wizzi factory - load and generate',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ './wizzi-web/dist/index'
+                @ './wizzi-core/dist/index'
+            @ pluginsBaseFolder pluginsBaseFolder
+
+        var htmlFriendsPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'friends.html.ittf'
+        
+        var htmlFriendsPathIttf
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'friends.ittf.ittf'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+
+                # Generate the html model.
+                    # The html schema is detected from the path.
+                _ wf.loadModel
+                    @ 'html'
+                    @ htmlFriendsPath
+                    {
+                        { mTreeBuildUpContext                    
+                            @ friends friendsArray
+                    f_cb_test(wizziModel)
+                        _ printValue
+                            @ 'wizziModel friends'
+                            _ stringify
+                                @ wizziModel.elements
+                                @ null
+                                @ 2
+                        # Generate the html document artifact.
+                            # No options, the default artifact generator
+                            # for the html schema will be used.
+                        _ wf.loadModelAndGenerateArtifact
+                            @ htmlFriendsPath
+                            {
+                                { modelRequestContext
+                                    @ friends friendsArray
+                            @ 'html/document'
+                            f_cb_test(artifactText)
+                                _ printValue
+                                    @ 'artifact'
+                                    @ artifactText
+                                
+                                _ wf.loadModel
+                                    @ 'ittf'
+                                    @ htmlFriendsPathIttf
+                                    {
+                                        { mTreeBuildUpContext                    
+                                            @ friends friendsArray
+                                    f_cb_test(wizziModel)
+                                        _ wf.transformModel
+                                            @ wizziModel
+                                            @ 'ittf/html-pretty'
+                                            {
+                                            f_cb_test(prettyfied)
+                                                _ printValue
+                                                    @ 'ittf/html-pretty'
+                                                    @ prettyfied      
+
+                                                $* TODO
+                                                _ wf.loadAndTransformModelAndGenerateArtifact
+                                                    @ 'html'
+                                                    @ htmlFriendsPathIttf
+                                                    {
+                                                        { modelRequestContext
+                                                            @ friends friendsArray
+                                                    @ 'html/stilize'
+                                                    @ 'html/document'
+                                                *$

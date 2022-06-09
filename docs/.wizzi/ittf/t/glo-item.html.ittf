@@ -1,0 +1,7 @@
+﻿$group
+    $params name
+    tr
+        td ${name}
+        td
+            $hook
+		

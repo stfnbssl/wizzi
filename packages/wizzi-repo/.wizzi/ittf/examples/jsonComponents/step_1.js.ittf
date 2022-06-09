@@ -1,0 +1,33 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'JsonComponents_Step_1',
+            title: 'JsonComponents - step - 1 - createJsonFsData',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+            
+        _ heading1('start')
+
+        _ repoIndex.JsonComponents.createJsonFsData
+            [
+                {
+                    @ path 'c:\\folder1\\test.html.ittf'
+                    @ content
+                        [
+                            @ 'html'
+                            @ '    head'
+                            @ '    body'
+                            ._ join('\n')
+            f_cb_test( jsonFsData )
+                _ printObject
+                    @ 'jsonFsData'
+                    @ jsonFsData
+                    

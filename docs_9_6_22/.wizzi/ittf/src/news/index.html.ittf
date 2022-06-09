@@ -1,0 +1,16 @@
+html
+
+    $
+        var page = {
+            sectionTitle: 'News',
+            mainCss : pkg.Params.baseUrl + '/styles/article.css'
+        };
+
+	_layouts/default(&page)
+
+        . doc-container
+            article
+                h1 News
+                ul
+                    link( Welcome, ./2019/06/17/welcome.html)
+

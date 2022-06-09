@@ -1,0 +1,8 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Template engine'
+        };
+
+    section(&sect)
+

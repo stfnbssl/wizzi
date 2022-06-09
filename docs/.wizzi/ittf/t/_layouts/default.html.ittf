@@ -1,0 +1,21 @@
+$group
+    $params &page
+	head
+		meta
+			charset UTF-8
+		meta
+			name viewport
+			content width=device-width, initial-scale=1.0
+		meta
+			http-equiv X-UA-Compatible
+		title ${page.title}
+        link
+            href http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext
+            rel stylesheet
+            type text/css   
+		link
+			rel stylesheet
+			href ${page.mainCss ? page.mainCss : pkg.Params.baseUrl + '/styles/main.css'}
+	body
+        _includes/header(&page)
+        $hook

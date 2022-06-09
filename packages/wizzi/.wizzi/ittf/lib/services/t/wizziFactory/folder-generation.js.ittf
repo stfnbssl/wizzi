@@ -1,0 +1,63 @@
+$group
+
+	m generateFolderArtifacts
+		string ittfFolderUri
+		{ requestContext
+			{ modelRequestContext
+				optional
+			{ artifactRequestContext
+				optional
+		{ options
+		callback
+
+		log 'generateFolderArtifacts', ittfFolderUri
+        _ repo.folderFilesInfoByPath
+			@ ittfFolderUri
+			@ this.fileService
+			a_cb( items )
+				log 'generateFolderArtifacts\n', stringify(items, null, 2)
+				_ async.mapSeries
+					@ items
+					=>
+						param item
+						param callback
+						if item.isIttfDocument
+                            log 'generating', item.fullPath
+                            var artifactName = getDefaultArtifact(item.schema)
+                            _ this.loadModelAndGenerateArtifact
+                                @ item.fullPath
+                                {
+                                    @ modelRequestContext requestContext.modelRequestContext
+                                    @ artifactRequestContext requestContext.artifactRequestContext
+                                @ artifactName
+								a_cb(artifactText)
+                                    log 'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
+									_ this.fileService.write
+										_ path.join
+											@ options.destFolder
+											@ item.destRelPath
+										@ artifactText
+										f_cb()
+                                            log 'generateFolderArtifacts.written', item.destRelPath
+											_ callback
+												@ null
+												_ path.join
+													@ options.destFolder
+													@ item.destRelPath
+						else
+                            log 'generateFolderArtifacts.copying', item.fullPath
+							_ this.fileService.copyFile
+								@ item.fullPath
+								_ path.join
+									@ options.destFolder
+									@ item.destRelPath
+								f_cb()
+									_ callback
+										@ null
+										_ path.join
+											@ options.destFolder
+											@ item.destRelPath
+
+			        f_cb_test(result)
+				        log 'generateFolderArtifacts.result', result
+                        r_cb( result )

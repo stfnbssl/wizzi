@@ -1,0 +1,11 @@
+html
+    $---
+        author   "stefi"
+        category "test"
+        isDraft  true
+        { map
+            name "A"
+            value 0
+            $$ wrong zaza
+    body
+        h1 Hello

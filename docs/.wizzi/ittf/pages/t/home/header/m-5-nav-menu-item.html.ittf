@@ -1,0 +1,48 @@
+$group
+    $params &menu
+    
+    $if menu.panels && menu.panels.length > 0
+        li 
+            class css-1wgu51w
+            . m-5-nav-menu-item
+                $$ BAX-ADD 
+                id ${menu.title}
+                h3 ${menu.title}
+                    class css-1enu353
+                button ${menu.title}
+                    type button
+                    aria-expanded false
+                    aria-controls ${menu.title}-dropdown
+                    class css-3q8779
+                    svg 
+                        stroke currentColor
+                        fill currentColor
+                        @ stroke-width 0
+                        viewBox 0 0 24 24
+                        height 1em
+                        width 1em
+                        xmlns http://www.w3.org/2000/svg
+                        path 
+                            d M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z
+                . css-1sg6jvm
+                    id ${menu.title}-dropdown
+                    ul 
+                        class css-y86b6k
+                        $hook
+    $else
+        li 
+            $if menu.kind == 'button'
+                class m-btn-1-li
+            $else
+                class css-1wgu51w
+            . css-jebqk6
+                a ${menu.title}
+                    class css-ntw0hb
+                    href ${menu.href}
+            a ${menu.title}
+                $if menu.kind == 'button'
+                    class m-btn-1-li-a
+                $else
+                    class css-1r69p41
+                href ${menu.href}
+

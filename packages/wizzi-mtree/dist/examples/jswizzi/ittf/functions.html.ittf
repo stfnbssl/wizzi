@@ -1,0 +1,23 @@
+html
+
+    $
+        var items = [
+            '/alpha',
+            '/beta',
+            '/gamma'
+        ];
+
+    $function lia
+        $param href
+        li
+            a hello
+                href ${href}
+
+    ul
+        $_ lia
+            $@ 'www.me.org'
+
+    ul
+        $foreach item in items
+            $_ lia
+                $@ item

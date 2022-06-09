@@ -1,0 +1,16 @@
+﻿element yaml base
+	tag
+	ast
+	category
+	
+	item
+		title
+		ittf
+            # this is a comment
+            : name 'stefi'
+            : age 62
+            : order
+                - first
+                - second
+            surname: bassoli
+            title: dott

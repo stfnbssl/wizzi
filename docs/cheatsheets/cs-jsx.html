@@ -1,0 +1,415 @@
+<!--
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\cheatsheets\cheatsheet.html.ittf
+-->
+<!doctype html>
+<html>
+<!-- root layout for wizzi /pages -->
+<head>
+    <title>Schema <b>JSX</b> cheat sheet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/docs/scripts/highlightjs-master/dracula.css" />
+    <link rel="stylesheet" href="cheatsheet.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
+    <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+    <style></style>
+</head>
+<body>
+    <div id="___wizzi">
+        <div style="outline:none" tabindex="-1" id="wizzi-focus-wrapper">
+            <div class="main-container">
+                <div class="main-header">
+                    <aside class="banner css-wknud9" aria-label="banner">
+                        <div class="css-1jx4yha">
+                            <div class="css-1orjk4a">
+                                <p>
+                                    <strong>The Future Web is Here:</strong>
+                                    Join us at WizziConf!&nbsp;<a href="https://wizziconf.com/">Register for free now.</a>
+                                </p>
+                            </div>
+                        </div>
+                        <nav class="css-7jmlzq">
+                            <ul class="css-c7ectl">
+                                <li class="css-1wgu51w"><div class="css-jebqk6">
+                                    <a class="css-ntw0hb" href="https://github.com/stfnbssl/wizzi">Github</a>
+                                </div>
+                                <a class="css-1r69p41" href="https://github.com/stfnbssl/wizzi">Github</a>
+                                </li>
+                                <li class="css-1wgu51w"><div class="css-jebqk6">
+                                    <a class="css-ntw0hb" href="/support/">Support</a>
+                                </div>
+                                <a class="css-1r69p41" href="/support/">Support</a>
+                                </li>
+                                <li class="css-1wgu51w"><div class="css-jebqk6">
+                                    <a class="css-ntw0hb" href="/contact/">Contact</a>
+                                </div>
+                                <a class="css-1r69p41" href="/contact/">Contact</a>
+                                </li>
+                                <li class="css-1wgu51w"><div class="css-jebqk6">
+                                    <a class="css-ntw0hb" href="/login/">Login</a>
+                                </div>
+                                <a class="css-1r69p41" href="/login/">Login</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </aside>
+                    <header class="page-header css-1wue1ai">
+                        <nav class="navigation m-2-nav">
+                            <div class="m-3-logo">
+                                <a aria-label="Link to home" class="m-3-logo-a" href="/"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
+                                        <rect x='0' y='0' width='700' height='280' style='fill:none;stroke:none;'></rect>
+                                        <polyline points='1.121212121212121 28.03030303030303 5.045454545454546 1.121212121212121 6.7272727272727275 1.121212121212121 8.409090909090908 14.575757575757576 13.454545454545455 23.545454545454547 13.454545454545455 14.575757575757576 19.62121212121212 23.545454545454547 19.62121212121212 12.333333333333334 25.78787878787879 23.545454545454547 25.78787878787879 28.03030303030303' style='fill:#01579b;stroke:#01579b;stroke-width:2;'></polyline>
+                                        <polyline points='30.272727272727273 28.03030303030303 31.393939393939394 10.09090909090909 34.75757575757576 10.09090909090909 35.87878787878788 28.03030303030303' style='fill:#01579b;stroke:#01579b;stroke-width:2;'></polyline>
+                                        <path d='M33.63636363636364, 3.3636363636363633 C37,5.6060606060606055 30.272727272727273,7.848484848484849 33.63636363636364, 9.418181818181818' style='fill:#01579b;stroke:white;stroke-width:2;'></path>
+                                        <polyline points='40.36363636363637 28.03030303030303 40.36363636363637 25.78787878787879 51.57575757575758 14.575757575757576 49.333333333333336 12.333333333333334 49.333333333333336 10.090909090909092 54.939393939393945 10.090909090909092 48.21212121212122 25.78787878787879 53.81818181818182 25.78787878787879 53.81818181818182 28.03030303030303' style='fill:#01579b;stroke:#01579b;stroke-width:2;'></polyline>
+                                        <polyline points='57.18181818181818 28.03030303030303 57.18181818181818 25.78787878787879 68.39393939393939 14.575757575757576 66.15151515151516 12.333333333333334 66.15151515151516 10.090909090909092 71.75757575757575 10.090909090909092 65.03030303030303 25.78787878787879 70.63636363636364 25.78787878787879 70.63636363636364 28.03030303030303' style='fill:#01579b;stroke:#01579b;stroke-width:2;'></polyline>
+                                        <polyline points='75.12121212121212 28.03030303030303 76.24242424242425 10.09090909090909 79.60606060606061 10.09090909090909 80.72727272727273 28.03030303030303' style='fill:#01579b;stroke:#01579b;stroke-width:2;'></polyline>
+                                        <path d='M78.48484848484848, 3.3636363636363633 C81.84848484848486,5.6060606060606055 75.12121212121212,7.848484848484849 78.48484848484848, 9.418181818181818' style='fill:#01579b;stroke:white;stroke-width:2;'></path>
+                                    </svg>
+                                </a>
+                                <a aria-current="page" aria-label="Link to Cheatsheets home" class="m-3-logo-a-section" href="/docs/cheatsheets/cs-ittf.html"><span class="m-3-logo-a-section-sep"></span>
+                                <span class="m-3-logo-a-section-title">cheatsheets</span>
+                                </a>
+                            </div>
+                            <div class="m-3-nav-bar">
+                                <ul class="css-pucg4a">
+                                    <li class="m-4-nav-bar-group"><ul class="css-qg23q3">
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-ittf.html">Ittf</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-ittf.html">Ittf</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-js.html">Js</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-js.html">Js</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-jsx.html">Jsx</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-jsx.html">Jsx</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-ts.html">Ts</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-ts.html">Ts</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-html.html">Html</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-html.html">Html</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-css.html">Css</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-css.html">Css</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-scss.html">Scss</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-scss.html">Scss</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-svg.html">Svg</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-svg.html">Svg</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-graphql.html">Graphql</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-graphql.html">Graphql</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-json.html">Json</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-json.html">Json</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-xml.html">Xml</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-xml.html">Xml</a>
+                                        </li>
+                                        <li class="css-1wgu51w"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/docs/cheatsheets/cs-text.html">Text</a>
+                                        </div>
+                                        <a class="css-1r69p41" href="/docs/cheatsheets/cs-text.html">Text</a>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                    <li class="m-4-nav-bar-group"><ul class="css-qg23q3">
+                                        <li class="m-btn-1-li"><div class="css-jebqk6">
+                                            <a class="css-ntw0hb" href="/get-started/">Get started</a>
+                                        </div>
+                                        <a class="m-btn-1-li-a" href="/get-started/">Get started</a>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="m-2-search">
+                            <button type="button" aria-expanded="false" class="m-2-search-btn">
+                                <span class="css-7v2lmy">Show Search Form</span>
+                                    <svg xmlns='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24' style='fill:currentColor;stroke:currentColor;stroke-width:0;'>
+                                        <path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'></path>
+                                    </svg>
+                            </button>
+                            <div class="m-2-search-form">
+                                <form></form>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+                <div class="cs-frame">
+                    <div class="cs-1-bar">
+                        <div class="cs-1-bar-title">
+                            Schema JSX&nbsp;<span class="cs-1-bar-title-dark">cheat sheet</span>
+                        </div>
+                    </div>
+                    <div class="cs-content">
+                        <h3 class="cs-item-title">class
+                            <a id="class" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">react</span><span class="pp-pln"> MyComponent</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">render</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">return</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">      </span><span class="pp-tag">h1</span><span class="pp-pln"> Hello world</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+class MyComponent extends React.Component {
+    render() {
+        return  (
+                &lt;h1&gt;
+                Hello world
+                &lt;/h1&gt;
+            )
+        ;
+    }
+}
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="cs-item-title">var
+                            <a id="var" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">var</span><span class="pp-pln"> Hello</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">div</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">p</span><span class="pp-pln"> sicut amet nequi abisse</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+var Hello =  (
+    &lt;div&gt;
+        &lt;p&gt;
+        sicut amet nequi abisse
+        &lt;/p&gt;
+    
+    &lt;/div&gt;
+)
+;
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="cs-item-title">var svg
+                            <a id="var svg" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">var</span><span class="pp-pln"> Hello</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">div</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">svg</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">      </span><span class="pp-tag">rect</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">        </span><span class="pp-tag">stroke-dashoffset</span><span class="pp-pln"> 10</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+var Hello =  (
+    &lt;div&gt;
+        &lt;svg&gt;
+            &lt;rect strokeDashoffset="10"&gt;
+            &lt;/rect&gt;
+        
+        &lt;/svg&gt;
+    
+    &lt;/div&gt;
+)
+;
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="cs-item-title">class
+                            <a id="class" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">react</span><span class="pp-pln"> MyComponent</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">render</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">return</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">      </span><span class="pp-tag">div</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">        </span><span class="pp-tag">@</span><span class="pp-pln"> onClick</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">          </span><span class="pp-tag">=></span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">            </span><span class="pp-tag">_</span><span class="pp-pln"> this.handleClose()</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">        </span><span class="pp-tag">h1</span><span class="pp-pln"> Hello world</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+class MyComponent extends React.Component {
+    render() {
+        return  (
+                &lt;div onClick={() =&gt;
+                    this.handleClose()}&gt;
+                    &lt;h1&gt;
+                    Hello world
+                    &lt;/h1&gt;
+                
+                &lt;/div&gt;
+            )
+        ;
+    }
+}
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="cs-item-title">var
+                            <a id="var" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">var</span><span class="pp-pln"> Hello</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">div</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">p</span><span class="pp-pln"> sicut amet nequi abisse</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+var Hello =  (
+    &lt;div&gt;
+        &lt;p&gt;
+        sicut amet nequi abisse
+        &lt;/p&gt;
+    
+    &lt;/div&gt;
+)
+;
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="cs-item-title">full component
+                            <a id="full component" class="anchor"></a>
+                        </h3>
+                        <div class="cs-item">
+                            <div class="cs-item-code">
+                                <div class="cs-item-code-ittf">
+                                    <div class="cs-item-code-label">
+                                        *.jsx.ittf</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">react</span><span class="pp-pln"> MyComponent</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-tag">state</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">@</span><span class="pp-pln"> open false</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">  </span><span class="pp-tag">did-mount</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-tag">_</span><span class="pp-pln"> window.addEventListener('scroll', this.handlePaperScroll)</span></div><div class="L6"><span class="pp-ln">   6 </span><span class="pp-pln">  </span><span class="pp-tag">will-unmount</span></div><div class="L7"><span class="pp-ln">   7 </span><span class="pp-pln">    </span><span class="pp-tag">_</span><span class="pp-pln"> window.removeEventListener('scroll', this.handlePaperScroll)</span></div><div class="L8"><span class="pp-ln">   8 </span><span class="pp-pln">  </span><span class="pp-tag">render</span></div><div class="L9"><span class="pp-ln">   9 </span><span class="pp-pln">    </span><span class="pp-tag">prop</span><span class="pp-pln"> jsonData</span></div><div class="L0"><span class="pp-ln">  10 </span><span class="pp-pln">    </span><span class="pp-tag">const</span></div><div class="L1"><span class="pp-ln">  11 </span><span class="pp-pln">      </span><span class="pp-tag">{</span></div><div class="L2"><span class="pp-ln">  12 </span><span class="pp-pln">        </span><span class="pp-tag">@</span><span class="pp-pln"> open</span></div><div class="L3"><span class="pp-ln">  13 </span><span class="pp-pln">      </span><span class="pp-tag">=</span><span class="pp-pln"> this.state</span></div></pre>
+                                </div>
+                                <div class="cs-item-code-generated">
+                                    <div class="cs-item-code-label">
+                                        *.jsx</div>
+                                    <pre class="code-prettyprint prettyprint">
+                                        <code class="jsx">
+
+class MyComponent extends React.Component {
+    state = {
+        open: false
+    };
+    componentDidMount() {
+        window.addEventListener('scroll', this.handlePaperScroll);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handlePaperScroll);
+    }
+    render() {
+        const {
+            jsonData
+        } = this.props;
+        const {
+            open
+        } = this.state;
+    }
+}
+</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 50px;">&nbsp;</div>
+                </div>
+                <div class="cs-sb-left">
+                    <ul class="cs-sb-left-ul">
+                        <li class="cs-sb-element"><a class="cs-sb-element-label" href="#react">react</a>
+                        <ul class="cs-sb-items">
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#class">class</a>
+                            </li>
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#var">var</a>
+                            </li>
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#var svg">var svg</a>
+                            </li>
+                        </ul>
+                        </li>
+                        <li class="cs-sb-element"><a class="cs-sb-element-label" href="#react">react</a>
+                        <ul class="cs-sb-items">
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#class">class</a>
+                            </li>
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#var">var</a>
+                            </li>
+                            <li class="cs-sb-item"><a class="cs-sb-item-label" href="#full component">full component</a>
+                            </li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) =>
+            document.querySelectorAll('pre code').forEach((block) =>
+                hljs.highlightBlock(block)))
+    </script>
+</body>
+
+</html>

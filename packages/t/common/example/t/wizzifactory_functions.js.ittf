@@ -1,0 +1,143 @@
+﻿$group
+
+    function createWizziFactory
+        param globalContext
+        param callback
+
+        if wizzi == null
+            # The wizzi package will be a previous version from wizzi/node_modules
+            $virtual requireWizzi
+                set wizzi = require('wizzi')
+        log '"wizzi" package version', wizzi.version
+        
+        _ wizzi.fsnoaclFactory
+            {
+                { plugins
+                    $hook plugins
+                @ globalContext globalContext || {}
+            @ callback
+
+    function loadMTree
+        param ittfDocumentUri
+        param context
+        param callback
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.loadMTree
+                    @ ittfDocumentUri
+                    @ context
+                    @ callback
+
+    function loadWizziModel
+        param ittfDocumentUri
+        param context
+        param callback
+        var fi = fileInfoByPath(ittfDocumentUri)
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.loadModel
+                    @ fi.schema
+                    @ ittfDocumentUri
+                    {
+                        @ mTreeBuildUpContext context
+                        @ globalContext {}
+                    @ callback
+    
+    function loadModelAndGenerateArtifact
+        param ittfDocumentUri
+        param context
+        param artifactName
+        param callback
+        var fi = fileInfoByPath(ittfDocumentUri)
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.loadModelAndGenerateArtifact
+                    @ ittfDocumentUri
+                    {
+                        @ modelRequestContext context
+                        @ artifactRequestContext {}
+                    @ artifactName
+                    f_cb( artifact )
+                        _ callback(null, artifact)
+
+    function loadAndTransformModel
+        param ittfDocumentUri
+        param context
+        param transformerName
+        param callback
+        var fi = fileInfoByPath(ittfDocumentUri)
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.loadModel
+                    @ fi.schema
+                    @ ittfDocumentUri
+                    {
+                        @ mTreeBuildUpContext context
+                        @ globalContext {}
+                    f_cb( wizziModel )
+                        _ wf.transformModel
+                            @ wizziModel
+                            @ transformerName
+                            @ context
+                            @ callback
+
+    function executeWizziJob
+        param ittfDocumentUri
+        param context
+        param callback
+
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.executeJob
+                    {
+                        @ name path.basename(ittfDocumentUri)
+                        @ path ittfDocumentUri
+                        @ productionOptions
+                            _ wizzi.productionOptions
+                                {
+                                    @ indentSpaces 4
+                                    @ basedir __dirname
+                                    @ verbose 2
+                        @ modelContext context || {}
+                        @ jobContext {}
+                    @ callback
+
+    function executeGenerateModelTypes
+        param wfschemaIttfDocumentUri
+        param outputPackagePath
+        param wfschemaName
+        param mTreeBuildUpContext
+        param callback
+
+        _ createWizziFactory
+            {
+            f_cb( wf )
+                _ wf.generateModelTypes
+                    @ wfschemaIttfDocumentUri
+                    @ outputPackagePath
+                    @ wfschemaName
+                    @ mTreeBuildUpContext
+                    @ callback
+
+	function getFiles
+		param srcpath
+		param schema
+		return
+			_ fs.readdirSync
+				@ srcpath
+				._ filter
+					=>
+						param file
+						return 
+							&&
+								_ fs.lstatSync(path.join(srcpath, file)).isFile()
+								_ verify.endsWith
+									@ file
+									iif schema === 'ittf'
+										then '.ittf'
+										else '.' + schema + '.ittf'

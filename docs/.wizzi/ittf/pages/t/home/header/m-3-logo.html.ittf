@@ -1,0 +1,17 @@
+$group
+    . m-3-logo
+        a 
+            aria-label Link to home
+            class m-3-logo-a
+            href /
+            logo/index( 74 )
+        $if mpage.Nav1.section
+            a 
+                aria-current page
+                aria-label ${mpage.Nav1.section.ariaLabel}
+                class m-3-logo-a-section
+                href ${mpage.Nav1.section.href}
+                span 
+                    class m-3-logo-a-section-sep
+                span ${mpage.Nav1.section.title}
+                    class m-3-logo-a-section-title

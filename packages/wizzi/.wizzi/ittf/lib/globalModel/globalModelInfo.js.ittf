@@ -1,0 +1,48 @@
+module wizzi.globalModel.globalModelInfo
+    kind jsfile
+
+    var util = require("util")
+	var assert = require("assert")
+    var path = require("path")
+	var async = require("async")
+	var errors = require('../errors')
+	var verify = require('wizzi-utils').verify
+
+	wz-class GlobalModelInfo
+        ctor
+            { config
+				string cwd
+					optional
+                string src
+				string exportName
+                string schema
+            set this.config = config
+            set this.schema = config.schema
+            set this.exportName = config.exportName
+
+		m initialize
+            param productionManager
+            set this.productionManager = productionManager
+
+		m srcFullPath
+            return 
+                iif verify.isAbsolutePath(this.config.src)
+                    then 
+                        set this.config.src
+                    else 
+                        _ path.join
+                            @ this.config.cwd
+                            @ this.config.src
+
+        m toString
+            return 'globalModelInfo.config: ' + util.inspect(this.config, {depth: 2})
+
+		m isGlobalModelConfig
+            static
+            param item
+            return verify.isNotEmpty(item.src) &&
+				\b verify.isNotEmpty(item.exportName)
+
+
+
+

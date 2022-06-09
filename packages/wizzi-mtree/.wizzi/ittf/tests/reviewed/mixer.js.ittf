@@ -1,0 +1,90 @@
+﻿base_test( mixer )
+	
+	$append imports
+		var mocks = require('../../mocks/misc')
+		var MTreeBrickProvider = require('../../../lib/loader/mTreeBrickProvider')
+		var mixer = require('../../../lib/loader/mixer')
+
+	var
+		decl store
+		decl node
+    
+	before-async
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                set store = fsStore
+                _ done
+	
+    it-async should mix a fragment
+            
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'mixer_1.tests.ittf'
+            
+		_ MTreeBrickProvider.createFromUri
+			@ content_filepath
+            {
+				@ mTreeBuildUpContext
+					{
+				@ productionContext mocks.ProductionContext
+				@ __ittfDocumentStore store
+			f_cb_throw( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+				_ mixer
+					@ mTree
+					@ provider
+					f_cb_throw( mixedModel )
+						$*
+						_  console.log
+							@ 'err'
+							@ err
+							@ 'mixer.mixedModel'
+							_ util.inspect
+								@ mixedModel.nodes
+								{ 
+									@ depth null
+                        *$
+						set node = mixedModel.nodes[0]
+						tobe_number( node.row, 1 )
+						tobe_number( node.col, 1 )
+						tobe_string( node.name, sigma )
+						tobe_undefined( node.value )
+
+						set node = mixedModel.nodes[0].children[0]
+						tobe_number( node.row, 1 )
+						tobe_number( node.col, 1 )
+						tobe_string( node.name, tau )
+						tobe_string( node.value, 1 )
+
+						_ done()
+
+	it-async should throw an error for fragment to mix not found
+            
+		var uri
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'mixer_error_1.tests.ittf'
+            
+		_ MTreeBrickProvider.createFromUri
+			@ uri
+            {
+				@ mTreeBuildUpContext
+					{
+				@ productionContext mocks.ProductionContext
+				@ __ittfDocumentStore store
+			f_cb_throw( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+				_ mixer
+					@ mTree
+					@ provider
+					f_cb_no_err( includedModel )
+                        log 'should throw an error for fragment to mix not found', '\n' + err.toString()
+                        tobe_error( err, IttfMixError )                    
+                        _ done
+

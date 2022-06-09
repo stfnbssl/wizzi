@@ -1,0 +1,37 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Nodifier_Step_1',
+            title: 'Nodifier - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'nodifier_1.ittf'
+
+        var lines
+            _ liner
+                _ file.read
+                    @ ittfUri
+                {
+                    @ sourceKey 'f1'
+
+        var loadHistory = new LoadHistory()
+        var mTree
+			new MTreeBrick
+				@ ittfUri
+				@ loadHistory
+
+		var nodes = nodifier(lines, mTree)
+
+		log 'nodifier nodes', nodes
+
+        _ printNodes(nodes)
+

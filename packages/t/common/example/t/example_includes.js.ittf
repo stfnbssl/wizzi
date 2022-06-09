@@ -1,0 +1,16 @@
+﻿$group
+
+    var util = require('util')
+    var path = require('path')
+	var fs = require('fs')
+	var stringify = require('json-stringify-safe')
+	var wizziUtils = require('wizzi-utils')
+    # local disk filesystem
+    var file = wizziUtils.file
+	# virtual filesystem
+    var vfile = require('wizzi-utils').vfile
+	# defaults to local disk filesystem
+	var fsfile = vfile()
+    # utilities
+    var verify = wizziUtils.verify
+    var mocks = wizziUtils.mocks

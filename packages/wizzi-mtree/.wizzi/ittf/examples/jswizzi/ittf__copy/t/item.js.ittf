@@ -1,0 +1,11 @@
+﻿$group
+
+	container
+		
+		item ${gcount} (..should be 0)
+
+        $global
+			gcount++;
+		
+		item ${gcount} (..should be 1)
+

@@ -1,0 +1,53 @@
+{
+  "type": "File",
+  "errors": [],
+  "program": {
+    "type": "Program",
+    "sourceType": "module",
+    "interpreter": null,
+    "body": [
+      {
+        "type": "ExportNamedDeclaration",
+        "exportKind": "value",
+        "specifiers": [],
+        "source": null,
+        "declaration": {
+          "type": "ClassDeclaration",
+          "id": {
+            "type": "Identifier",
+            "name": "Counter"
+          },
+          "superClass": {
+            "type": "Identifier",
+            "name": "Component"
+          },
+          "superTypeParameters": {
+            "type": "TSTypeParameterInstantiation",
+            "params": [
+              {
+                "type": "TSTypeReference",
+                "typeName": {
+                  "type": "Identifier",
+                  "name": "CounterProps"
+                }
+              },
+              {
+                "type": "TSTypeReference",
+                "typeName": {
+                  "type": "Identifier",
+                  "name": "CounterState"
+                }
+              }
+            ]
+          },
+          "body": {
+            "type": "ClassBody",
+            "body": []
+          }
+        }
+      }
+    ],
+    "directives": []
+  },
+  "comments": []
+}

@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Sample code',
+            title: 'Ittf documents'
+        };
+    
+    _layouts/samplecode-layout(&art)
+
+        $include ./ittfdocuments/introduction

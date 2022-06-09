@@ -1,0 +1,39 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Appender_Step_1',
+            title: 'Appender - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'appender_1.js.ittf'
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ MTreeBrickProvider.createFromUri
+                    @ ittfUri
+                    {
+                        @ mTreeBuildUpContext
+                            {
+                        @ productionContext 
+                            _ mocks.createProductionContext
+                        @ __ittfDocumentStore fsStore
+                    f_cb_throw( provider )
+                        var mTree = provider.getPrimaryMTreeBrick()
+                        _ printNodes(mTree.nodes, 'Before append')
+                        _ mixer
+                            @ mTree
+                            @ provider
+                            f_cb_throw( mixedModel )
+                                _ appender
+                                    @ mixedModel
+                                    f_cb_test( appendedModel )
+                                        _ printNodes(appendedModel.nodes, 'After append')

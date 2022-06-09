@@ -1,0 +1,10 @@
+$group
+    $params &promo
+    $if promo.title
+        . css-1jx4yha
+            . css-1orjk4a
+                p
+                    strong ${promo.title}
+                    + ${promo.subtitle}
+                    a ${promo.link.label} 
+                        href ${promo.link.href}

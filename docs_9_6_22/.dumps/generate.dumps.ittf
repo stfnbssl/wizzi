@@ -1,0 +1,11 @@
+wfjob wizzi/docs/dumps/job
+    line dump-jobs
+        cwd-folder C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi
+        artifact any_ittf
+            src ./**/*.wfjob.ittf
+            schema ittf
+            generator ittf/document
+            extension ittf
+    production
+        dest-folder C:\My\wizzi\stfnbssl\wizzi\docs\.dumps
+        line-ref dump-jobs

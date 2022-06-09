@@ -1,0 +1,14 @@
+$group
+    
+    $if mpage.Footer
+        p-footer-1()
+            $foreach content in mpage.Footer.contents
+                $foreach panel in content.panels
+                    $if panel.kind == 'comunity'
+                        p-comunity-1(&panel)
+                    $elif panel.kind == 'nav'
+                        m-1-nav-ul(&panel)         
+                            $foreach group in panel.groups
+                                m-2-li-ul-group(&group)
+                                    $foreach item in group.items
+                                        m-3-li-item(&item)

@@ -1,0 +1,59 @@
+$group
+
+	$if opt.useReact
+        js https://unpkg.com/react@latest/umd/react.development.js
+        js https://unpkg.com/react-dom@latest/umd/react-dom.development.js
+        js https://unpkg.com/prop-types@latest/prop-types.min.js
+        js https://unpkg.com/@material-ui/core/umd/material-ui.development.js
+        js https://unpkg.com/babel-standalone@latest/babel.min.js
+        $if opt.react.useRouter
+            js https://unpkg.com/react-router-dom/umd/react-router-dom.min.js
+        js /docs/scripts/classnames/classnames@2.2.5.js
+
+	$if opt.useJQuery || opt.useBootstrap
+		js /docs/scripts/jquery/dist/jquery.js
+
+	$if opt.useBootstrap
+		js /docs/scripts/bootstrap/dist/js/bootstrap.min.js
+
+	$if opt.useUnderscore
+		js /docs/scripts/underscore/underscore.js
+	
+	$if opt.usePrism
+		$if isWizziStudio
+		    js /docs/scripts/prism/prism.js
+		$else
+            js https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js		
+	
+	$if opt.useSplit
+		js /docs/scripts/controls/split.js
+	
+	$if opt.useAce
+		js /docs/scripts/ace/src-noconflict/ace.js
+
+    $if opt.useHighlight
+        js https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js
+
+	$if opt.useCodemirror
+        js /docs/scripts/codemirror/lib/codemirror.js
+		js /docs/scripts/codemirror/mode/javascript/javascript.js
+		js /docs/scripts/codemirror/mode/yaml/yaml.js
+		js /docs/scripts/codemirror/addon/display/fullscreen.js
+
+    $if opt.usePubSub
+        js /docs/scripts/pubsub/pubsub.js
+
+    $if opt.useAxios
+        js /docs/scripts/axios/axios.js
+
+	$if opt.useJss
+        js /docs/scripts/jss/jss.js
+		js /docs/scripts/jss/jss-preset-default.js
+
+    $if opt.mainJs && opt.mainJs.length > 0
+        $if opt.useReact
+            script
+                src ${opt.mainJs}
+                type text/babel         
+        $else
+            js ${opt.mainJs}

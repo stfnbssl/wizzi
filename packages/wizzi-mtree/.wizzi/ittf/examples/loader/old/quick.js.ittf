@@ -1,0 +1,45 @@
+example( quick, 1 )
+
+	# 
+		# EXAMPLE: quick
+
+	$append imports
+        var packageIndex = require('../../index')
+
+    var loadMTree
+        _ packageIndex.createLoadMTree
+            _ repo.getCreateFilesystemStore
+            {
+                @ raw false
+
+	_ exec
+        @ 'quick'
+        =>
+
+	function exec
+		param name
+        param callback
+
+        log 'exec', name
+
+        var ctx
+            { 
+                @ brickKey null
+                @ counter 0
+                @ startTime Date.now()
+                @ isCompile false
+
+		_ loadMTree
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ name + '.html.ittf'
+			{
+				@ __productionManager
+					_ mocks.getProductionManager
+				{ mTreeBuildUpContext
+            f_cb_throw( mTree )
+
+                _ printValue
+                    @ 'mTree.nodes[0]'
+                    @ mTree.nodes[0]

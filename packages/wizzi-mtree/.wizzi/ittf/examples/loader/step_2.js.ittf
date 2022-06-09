@@ -1,0 +1,33 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Evaluator_Step_2',
+            title: 'Evaluator - step - 2 - load frontmatter',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'frontmatter_1.html.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTreeFrontMatter
+                    @ ittfUri
+                    {
+                        @ mTreeBuildUpContext
+                            {
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                    f_cb_test( mTree )
+                        log 'mTree', mTree
+                        _ printNodes(mTree.nodes, 'After evaluate')

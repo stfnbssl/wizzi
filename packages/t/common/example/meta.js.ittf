@@ -1,0 +1,64 @@
+$group
+	$params &opt
+
+    #
+    # Example skeleton specific for the 'wizzi-meta' plugin package
+    #
+
+	#
+		# Examples: ${opt.name}
+		#
+	
+    $include example_includes
+    var wizziRepo = require('wizzi-repo')
+    var fileInfoByPath = wizziUtils.fileInfoByPath
+    var async = require('async')
+    var wizzi = null
+    
+    $if opt.folderLevel == 1
+        var jsIndex = require('../index')
+    $elif opt.folderLevel == 2
+        var jsIndex = require('../../index')
+    $elif opt.folderLevel == 3
+        var jsIndex = require('../../../index')
+
+	$hook imports
+
+    $include wizzifactory_functions
+
+    $append plugins
+        [ items
+            @ 'wizzi-core'
+            @ 'wizzi-js'
+            @ 'wizzi-web'
+            @ './index'
+        @ pluginsBaseFolder
+            _ path.resolve
+                @ __dirname
+                $if opt.folderLevel == 1
+                    @ '..'
+                $if opt.folderLevel == 2
+                    @ '..'
+                    @ '..'
+                $if opt.folderLevel == 3
+                    @ '..'
+                    @ '..'
+                    @ '..'
+
+    $hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'
+    
+	example_prints( ${opt.name}, ${opt.level}, ${opt.step} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

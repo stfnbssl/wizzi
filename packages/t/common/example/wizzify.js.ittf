@@ -1,0 +1,29 @@
+$group
+	$params &opt
+
+    #
+    # Example skeleton specific for the 'wizzify' executions
+    #
+
+	#
+		# Examples: ${opt.name}
+		#
+	
+    var util = require('util')
+    var async = require('async')
+    var path = require('path')
+	var fs = require('fs')
+	var stringify = require('json-stringify-safe')
+	var wizziUtils = require('wizzi-utils')
+    var file = wizziUtils.file
+    var verify = wizziUtils.verify
+    $if opt.folderLevel == 1
+        var ${opt.schema}wizzifier = require('../lib/wizzifiers/${opt.schema}parser/wizzi/wizzifier')
+    $elif opt.folderLevel == 2
+        var ${opt.schema}wizzifier = require('../../lib/wizzifiers/${opt.schema}parser/wizzi/wizzifier')
+    $elif opt.folderLevel == 3
+        var ${opt.schema}wizzifier = require('../../../lib/wizzifiers/${opt.schema}parser/wizzi/wizzifier')
+
+    $hook
+    
+    example_prints( ${opt.name}, ${opt.level}, ${opt.step} )

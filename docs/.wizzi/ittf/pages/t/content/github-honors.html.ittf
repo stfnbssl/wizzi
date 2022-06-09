@@ -1,0 +1,12 @@
+$group
+    $params &honors
+    p 
+        class github-honors $$ css-116uxdu
+        $foreach item in honors.items
+            $if item.kind == "icon-label"
+                span
+                    $if item.svg == 'github-stars'
+                        $include icons/github-stars
+                    $elif item.svg == 'contributors'
+                        $include icons/contributors
+                    + ${item.label}

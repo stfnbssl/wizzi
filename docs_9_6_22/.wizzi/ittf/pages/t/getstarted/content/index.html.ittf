@@ -1,0 +1,6 @@
+$group
+
+    $foreach content in mpage.Main.contents
+        $foreach panel in content.panels
+            $if panel.kind == 'scream'
+                content/scream-panel-1(&panel)

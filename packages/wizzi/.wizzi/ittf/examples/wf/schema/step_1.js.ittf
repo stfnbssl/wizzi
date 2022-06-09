@@ -1,0 +1,44 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'light_schema_step_1',
+            title: 'Wizzi Schema - generate',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+                @ 'wizzi-core'
+
+        var schemaFriendsPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'friends.wfschema.ittf'
+
+        var schemaFriendsOutputPath
+            _ path.join 
+                @ __dirname
+                @ 'plugins'
+                @ 'friends'
+
+        # Generate the javascript modules for the wizzi schema
+        # of a new wizzi plugin.
+        _ wizziIndex.schema
+            @ schemaFriendsPath
+            {
+                @ comments true
+            {
+                @ outputPackagePath schemaFriendsOutputPath
+            f_cb_test(schemaPaths)
+                _ printValue
+                    @ 'schemaPaths'
+                    @ schemaPaths

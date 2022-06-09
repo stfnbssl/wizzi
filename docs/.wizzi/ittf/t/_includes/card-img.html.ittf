@@ -1,0 +1,11 @@
+﻿$group
+    $params title, img
+    li
+        
+        . card
+            img
+                src ${img}
+            . card-content
+                h3 ${title}
+                    class card-title
+                $hook

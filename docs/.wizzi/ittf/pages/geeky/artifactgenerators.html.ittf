@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Geeky',
+            title: 'Artifact generators'
+        };
+    
+    _layouts/geeky-layout(&art)
+    
+        $include ./artifactgenerators/introduction

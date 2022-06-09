@@ -1,0 +1,8 @@
+﻿$group
+	$params name, errorName|@@null
+	
+	_ expect(${name}.__is_error).to.be(true)
+    $if errorName != null
+        _ expect(${name}.data).to.be.an('object')
+        _ expect(${name}.data.errorName).to.be('${errorName}')
+

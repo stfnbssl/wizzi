@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Sample code',
+            title: 'Wizzi jobs'
+        };
+    
+    _layouts/samplecode-layout(&art)
+    
+        $include ./wizzijobs/introduction

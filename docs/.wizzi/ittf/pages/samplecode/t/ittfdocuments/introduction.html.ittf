@@ -1,0 +1,28 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Ittf documents'
+        };
+
+    section(&sect)
+
+        table-doc()
+            tr( The ITTF Document finder, wizzi-repo, lib/repo/ittfDocumentFinder.js.ittf, lib/repo/ittfDocumentFinder.js )
+            
+            tr( The WizziFactory class, wizzi, lib/services, lib/services/wizziFactory.js )
+            tr( The PluginsManager class, lib/services/pluginsManager.js.ittf, lib/services/pluginsManager.js)
+            tr( The ProductionContext class, wizzi, lib/production/context.js.ittf, lib/production/context.js )
+            tr( The ProductionManager class, wizzi, lib/production/manager.js.ittf, lib/production/manager.js )
+            
+            tr( The mTree Loader, wizzi-mtree, lib/loader/index.js.ittf, lib/loader/index.js )
+            tr( The wfschema Wizzi Schema definition, wizzi-core, lib/wizzi/schemas/wfschema.wfschema.ittf )
+            tr( The Wizzi Model Loader function, wizzi, lib/model/asyncModelLoader.js.ittf, lib/model/asyncModelLoader.js)
+            tr( The genContext class, wizzi, lib/artifact/genContext.js.ittf, lib/artifact/genContext.js )
+            tr( The Artifact Generation function, wizzi, lib/artifact/asyncArtifactGenerator.js.ittf, lib/artifact/asyncArtifactGenerator.js )
+            tr( The wfjob Wizzi Schema definition, wizzi-core, lib/wizzi/schemas/wfjob.wfschema.ittf )
+            tr( The ITTF html prettifier, wizzi-utils, lib/prettifiers/ittfHtmlPrettifier.js.ittf, lib/prettifiers/ittfHtmlPrettifier.js )
+            tr( The file helper module, wizzi-utils, lib/fs/file.js.ittf, lib/fs/file.js )
+            tr( The vfile helper module, wizzi-utils, lib/fs/vfile.js.ittf, lib/fs/vfile.js )
+                
+
+

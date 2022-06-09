@@ -1,0 +1,19 @@
+﻿html
+    $global
+        var dollar = '$';
+    
+    $
+        var art = {
+            section: 'Documentation',
+            title: 'Wizzi Schemas'
+        };
+    
+    _layouts/docs-layout(&art)
+
+        $include ./wizzischemas/introduction
+        $include ./wizzischemas/wfschema
+        $include ./wizzischemas/pseudoschemas
+        $include ./wizzischemas/json
+        $include ./wizzischemas/xml
+        $include ./wizzischemas/text
+        $include ./wizzischemas/ittf        

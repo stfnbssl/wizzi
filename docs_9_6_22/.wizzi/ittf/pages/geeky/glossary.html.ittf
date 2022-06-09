@@ -1,0 +1,12 @@
+html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Documentation',
+            title: 'Wizzi Glossary'
+        };
+    
+    _layouts/docs-layout(&art)
+    
+        $include ./glossary/introduction

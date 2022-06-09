@@ -1,0 +1,93 @@
+$group
+    . css-gslvhy
+        background url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEwNSIgaGVpZ2h0PSIyMTkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgb3BhY2l0eT0iLjUiIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPgogICAgPGNpcmNsZSBjeD0iMjE2IiBjeT0iNzguMDAyIiBmaWxsPSIjOTBDREY5IiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMjk2IiBjeT0iLTIiIHRyYW5zZm9ybT0icm90YXRlKC0xODAgMjk2IC0yKSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjE3NiIgY3k9Ii0xLjk5NiIgcj0iMTYiIGZpbGw9IiNEQkYwRkYiLz4KICAgIDxjaXJjbGUgY3g9IjE3NiIgY3k9IjExOC4wMDIiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSIzMzYiIGN5PSItMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCAzMzYgLTIpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iNDE2IiBjeT0iMTE4LjAwNCIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9Ijk2IiBjeT0iLTIiIHRyYW5zZm9ybT0icm90YXRlKC0xODAgOTYgLTIpIiBmaWxsPSIjZmZmIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMzM2IiBjeT0iNzguMDA0IiBmaWxsPSIjZmZmIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iNTYiIGN5PSItMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA1NiAtMikiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSIzNzYiIGN5PSI3OC4wMDQiIGZpbGw9IiM5MENERjkiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSIzNzYiIGN5PSIxMTguMDA0IiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMTM2IiBjeT0iMTE4LjAwMiIgZmlsbD0iIzkwQ0RGOSIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9Ijk2IiBjeT0iNzciIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI1NiIgY3k9Ijc3LjAwNCIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICA8L2c+CiAgPGcgb3BhY2l0eT0iLjUiPgogICAgPGNpcmNsZSBjeD0iODQ0IiBjeT0iLTMiIHRyYW5zZm9ybT0icm90YXRlKC0xODAgODQ0IC0zKSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjgwNCIgY3k9Ijc4LjAwMiIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9Ijg4NCIgY3k9Ii0yIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDg4NCAtMikiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI3NjQiIGN5PSIzNy4wMDQiIHI9IjE2IiBmaWxsPSIjREJGMEZGIi8+CiAgICA8Y2lyY2xlIGN4PSI3NjQiIGN5PSIxMTguMDAyIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iODg0IiBjeT0iMzciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgODg0IDM3KSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjcyNCIgY3k9IjM3IiBmaWxsPSIjOTBDREY5IiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iNjQ0IiBjeT0iMzciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgNjQ0IDM3KSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjEwMDQiIGN5PSI3NyIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjY4NCIgY3k9Ii0yIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDY4NCAtMikiIGZpbGw9IiNmZmYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI5MjQiIGN5PSIzNyIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9Ijk2NCIgY3k9Ii0zIiBmaWxsPSIjOTBDREY5IiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iOTY0IiBjeT0iMTU3IiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iNzI0IiBjeT0iMTE4LjAwMiIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjY0NCIgY3k9Ijc3IiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDAiPgogICAgICA8cGF0aCBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0xMzkpIiBkPSJNMCAwaDUxN3YzNThIMHoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4K) repeat-x center top,url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEwNSIgaGVpZ2h0PSIxNzgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgb3BhY2l0eT0iLjUiIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiPgogICAgPGNpcmNsZSBjeD0iMjU2IiBjeT0iNTcuMDAyIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDI1NiA1Ny4wMDIpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMjk2IiBjeT0iMTM3IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDI5NiAxMzcpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMTc2IiBjeT0iMTM3LjAwNCIgcj0iMTYiIGZpbGw9IiNEQkYwRkYiLz4KICAgIDxjaXJjbGUgY3g9IjI5NiIgY3k9IjE3LjAwMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCAyOTYgMTcuMDAyKSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjMzNiIgY3k9IjEzNyIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCAzMzYgMTM3KSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjEzNiIgY3k9Ijk3LjAwMiIgZmlsbD0iIzkwQ0RGOSIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjE2IiBjeT0iOTciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgMTYgOTcpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iOTYiIGN5PSIxMzciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgOTYgMTM3KSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjU2IiBjeT0iMTM3IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDU2IDEzNykiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI1NiIgY3k9Ijk3IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDU2IDk3KSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjMzNiIgY3k9IjE3LjAwMiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCAzMzYgMTcuMDAyKSIgZmlsbD0iIzkwQ0RGOSIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjM3NiIgY3k9IjUxIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDM3NiA1MSkiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI0MTYiIGN5PSI1MSIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA0MTYgNTEpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogIDwvZz4KICA8ZyBvcGFjaXR5PSIuNSI+CiAgICA8Y2lyY2xlIGN4PSI4NDQiIGN5PSIxMzYiIHRyYW5zZm9ybT0icm90YXRlKC0xODAgODQ0IDEzNikiIGZpbGw9IiNmZmYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI4ODQiIGN5PSIxMzciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgODg0IDEzNykiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI3NjQiIGN5PSIxNzYuMDA0IiByPSIxNiIgZmlsbD0iI0RCRjBGRiIvPgogICAgPGNpcmNsZSBjeD0iODQ0IiBjeT0iOTciIHRyYW5zZm9ybT0icm90YXRlKC0xODAgODQ0IDk3KSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9Ijg4NCIgY3k9IjE3NiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA4ODQgMTc2KSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjcyNCIgY3k9IjE3NiIgZmlsbD0iIzkwQ0RGOSIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjY0NCIgY3k9IjE3NiIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA2NDQgMTc2KSIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjY4NCIgY3k9IjEzNyIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA2ODQgMTM3KSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjkyNCIgY3k9IjE3NiIgZmlsbD0iI0RCRjBGRiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjgwNCIgY3k9Ijk3IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDgwNCA5NykiIGZpbGw9IiNEQkYwRkYiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI5NjQiIGN5PSIxMzYiIGZpbGw9IiM5MENERjkiIHI9IjE2Ii8+CiAgICA8Y2lyY2xlIGN4PSI2NDQiIGN5PSI5NyIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCA2NDQgOTcpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iOTY0IiBjeT0iNTEiIHRyYW5zZm9ybT0icm90YXRlKC0xODAgOTY0IDUxKSIgZmlsbD0iI2ZmZiIgcj0iMTYiLz4KICAgIDxjaXJjbGUgY3g9IjY4NCIgY3k9IjU2IiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogICAgPGNpcmNsZSBjeD0iMTAwNCIgY3k9IjUxIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDEwMDQgNTEpIiBmaWxsPSIjREJGMEZGIiByPSIxNiIvPgogIDwvZz4KICA8ZGVmcz4KICAgIDxjbGlwUGF0aCBpZD0iY2xpcDAiPgogICAgICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDUxN3YzNThIMHoiLz4KICAgIDwvY2xpcFBhdGg+CiAgPC9kZWZzPgo8L3N2Zz4K) repeat-x center bottom
+        border 1px solid var(--theme-ui-colors-blue-10,#dbf0ff)
+        border-radius 16px
+        display flex
+        flex-direction column
+        justify-content center
+        align-items center
+        padding 3.5rem 1.25rem
+    media (min-width: 1000px)
+        . css-gslvhy
+            padding 6rem
+    . css-o9j89p
+        align-items center
+        display flex
+        flex-direction column
+        text-align center
+    . css-2fjqwl
+        font-size 3rem
+        letter-spacing -0.015em
+        line-height 1
+    . css-2fjqwl span
+        color var(--theme-ui-colors-blue-70,#047bd3)
+        background linear-gradient(0deg,${mpage.Colors.primary},var(--theme-ui-colors-blue-60,#0e8de6) )
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+    media (min-width: 1000px)
+        . css-2fjqwl
+            font-size 3.375rem
+    . css-6bzo2
+        position relative
+        font-size 3rem
+        letter-spacing -0.015em
+        line-height 1
+    . css-6bzo2 span
+        color var(--theme-ui-colors-blue-70,#047bd3)
+        background linear-gradient(0deg,${mpage.Colors.primary},var(--theme-ui-colors-blue-60,#0e8de6) )
+        -webkit-background-clip text
+        -webkit-text-fill-color transparent
+    media (min-width: 1000px)
+        . css-6bzo2
+            font-size 3.375rem
+    . css-19ibzfj
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 800
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        position relative
+        font-size 3rem
+        letter-spacing -0.015em
+        line-height 1
+    . css-19ibzfj span
+        color var(--theme-ui-colors-blue-70,#047bd3)
+        $$ background linear-gradient(0deg,${mpage.Colors.themeBack},var(--theme-ui-colors-blue-60,#0e8de6) )
+        -webkit-background-clip text
+        $$ -webkit-text-fill-color transparent
+    media (min-width: 1000px)
+        . css-19ibzfj
+            font-size 3.375rem
+    . css-prgquq
+        color var(--theme-ui-colors-grey-90,#232129)
+        font-size 1rem
+        max-width 40rem
+        margin 0 auto
+        margin-top 1rem
+    media (min-width: 1000px)
+        . css-prgquq
+            font-size 1.5rem
+    . css-19t245r
+        margin 0
+        white-space pre-wrap
+        color var(--theme-ui-colors-grey-90,#232129)
+        font-size 1rem
+        max-width 40rem
+        margin 0 auto
+        margin-top 1rem
+    . css-19t245r p:last-of-type
+        margin-bottom 0
+    media (min-width: 1000px)
+        . css-19t245r
+            font-size 1.5rem
+    . css-1xzvdzg
+        display grid
+        grid-row-gap 3rem
+        margin 3rem 0
+    media (min-width: 1000px)
+        . css-1xzvdzg
+            grid-template-columns 1fr 1fr
+            grid-row-gap 6rem
+            grid-column-gap 6rem
+            margin 6rem 0

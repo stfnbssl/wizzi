@@ -1,0 +1,1719 @@
+{
+  "type": "stylesheet",
+  "content": [
+    {
+      "type": "singlelineComment",
+      "content": "/ Grid system",
+      "syntax": "scss"
+    },
+    {
+      "type": "singlelineComment",
+      "content": "",
+      "syntax": "scss"
+    },
+    {
+      "type": "singlelineComment",
+      "content": " Generate semantic grid columns with these mixins.",
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-container",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "padding-x",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "container-padding-x",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "width",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "percentage",
+                      "content": [
+                        {
+                          "type": "number",
+                          "content": "100",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "padding-right",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "padding-x",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "padding-left",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "padding-x",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "margin-right",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "auto",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "margin-left",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "auto",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    },
+    {
+      "type": "singlelineComment",
+      "content": " For each breakpoint, define the maximum width of the container in a media query",
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-container-max-widths",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "max-widths",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "container-max-widths",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "delimiter",
+              "content": ",",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "breakpoints",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "grid-breakpoints",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "loop",
+              "content": [
+                {
+                  "type": "atkeyword",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "each",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "variable",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "breakpoint",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "operator",
+                  "content": ",",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "variable",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "container-max-width",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "ident",
+                  "content": "in",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "variable",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "max-widths",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "block",
+                  "content": [
+                    {
+                      "type": "include",
+                      "content": [
+                        {
+                          "type": "atkeyword",
+                          "content": [
+                            {
+                              "type": "ident",
+                              "content": "include",
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "ident",
+                          "content": "media-breakpoint-up",
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "arguments",
+                          "content": [
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "breakpoint",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "delimiter",
+                              "content": ",",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "breakpoints",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "block",
+                          "content": [
+                            {
+                              "type": "declaration",
+                              "content": [
+                                {
+                                  "type": "property",
+                                  "content": [
+                                    {
+                                      "type": "ident",
+                                      "content": "max-width",
+                                      "syntax": "scss"
+                                    }
+                                  ],
+                                  "syntax": "scss"
+                                },
+                                {
+                                  "type": "propertyDelimiter",
+                                  "content": ":",
+                                  "syntax": "scss"
+                                },
+                                {
+                                  "type": "value",
+                                  "content": [
+                                    {
+                                      "type": "variable",
+                                      "content": [
+                                        {
+                                          "type": "ident",
+                                          "content": "container-max-width",
+                                          "syntax": "scss"
+                                        }
+                                      ],
+                                      "syntax": "scss"
+                                    }
+                                  ],
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "declarationDelimiter",
+                              "content": ";",
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-row",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "grid-gutter-width",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "display",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "flex",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "flex-wrap",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "wrap",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "margin-right",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "operator",
+                      "content": "-",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "operator",
+                      "content": "/",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "number",
+                      "content": "2",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "margin-left",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "operator",
+                      "content": "-",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "operator",
+                      "content": "/",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "number",
+                      "content": "2",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-col-ready",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "grid-gutter-width",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "position",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "relative",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " Prevent columns from becoming too narrow when at smaller grid tiers by",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " always setting `width: 100%;`. This works because we use `flex` values",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " later on to override this initial width.",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "width",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "percentage",
+                      "content": [
+                        {
+                          "type": "number",
+                          "content": "100",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "padding-right",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "operator",
+                      "content": "/",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "number",
+                      "content": "2",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "padding-left",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "gutter",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "operator",
+                      "content": "/",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "number",
+                      "content": "2",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-col",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "variable",
+              "content": [
+                {
+                  "type": "ident",
+                  "content": "size",
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "delimiter",
+              "content": ",",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "columns",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "grid-columns",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "flex",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "number",
+                      "content": "0",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "number",
+                      "content": "0",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "function",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "percentage",
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "arguments",
+                          "content": [
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "size",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "operator",
+                              "content": "/",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "columns",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " Add a `max-width` to ensure content within each column does not blow out",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " the width of the column. Applies to IE10+ and Firefox. Chrome and Safari",
+              "syntax": "scss"
+            },
+            {
+              "type": "singlelineComment",
+              "content": " do not appear to require this.",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "max-width",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "function",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "percentage",
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "arguments",
+                          "content": [
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "size",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "operator",
+                              "content": "/",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "columns",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    },
+    {
+      "type": "mixin",
+      "content": [
+        {
+          "type": "atkeyword",
+          "content": [
+            {
+              "type": "ident",
+              "content": "mixin",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "ident",
+          "content": "make-col-offset",
+          "syntax": "scss"
+        },
+        {
+          "type": "arguments",
+          "content": [
+            {
+              "type": "variable",
+              "content": [
+                {
+                  "type": "ident",
+                  "content": "size",
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "delimiter",
+              "content": ",",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "columns",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "grid-columns",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        },
+        {
+          "type": "block",
+          "content": [
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "num",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "size",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "operator",
+                      "content": "/",
+                      "syntax": "scss"
+                    },
+                    {
+                      "type": "variable",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "columns",
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            },
+            {
+              "type": "declaration",
+              "content": [
+                {
+                  "type": "property",
+                  "content": [
+                    {
+                      "type": "ident",
+                      "content": "margin-left",
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                },
+                {
+                  "type": "propertyDelimiter",
+                  "content": ":",
+                  "syntax": "scss"
+                },
+                {
+                  "type": "value",
+                  "content": [
+                    {
+                      "type": "function",
+                      "content": [
+                        {
+                          "type": "ident",
+                          "content": "if",
+                          "syntax": "scss"
+                        },
+                        {
+                          "type": "arguments",
+                          "content": [
+                            {
+                              "type": "variable",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "num",
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "operator",
+                              "content": "==",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "number",
+                              "content": "0",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "delimiter",
+                              "content": ",",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "number",
+                              "content": "0",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "delimiter",
+                              "content": ",",
+                              "syntax": "scss"
+                            },
+                            {
+                              "type": "function",
+                              "content": [
+                                {
+                                  "type": "ident",
+                                  "content": "percentage",
+                                  "syntax": "scss"
+                                },
+                                {
+                                  "type": "arguments",
+                                  "content": [
+                                    {
+                                      "type": "variable",
+                                      "content": [
+                                        {
+                                          "type": "ident",
+                                          "content": "num",
+                                          "syntax": "scss"
+                                        }
+                                      ],
+                                      "syntax": "scss"
+                                    }
+                                  ],
+                                  "syntax": "scss"
+                                }
+                              ],
+                              "syntax": "scss"
+                            }
+                          ],
+                          "syntax": "scss"
+                        }
+                      ],
+                      "syntax": "scss"
+                    }
+                  ],
+                  "syntax": "scss"
+                }
+              ],
+              "syntax": "scss"
+            },
+            {
+              "type": "declarationDelimiter",
+              "content": ";",
+              "syntax": "scss"
+            }
+          ],
+          "syntax": "scss"
+        }
+      ],
+      "syntax": "scss"
+    }
+  ],
+  "syntax": "scss"
+}

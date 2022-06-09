@@ -1,0 +1,67 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'Json_Step_1',
+            title: 'Json - step - 1 - FsJson',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+            
+            function dump
+                param fsJson
+                _ printValue
+                    @ 'fsJson.items'
+                    @ fsJson.items
+
+                _ printValue
+                    @ 'fsJson.documents'
+                    @ fsJson.documents    
+
+        _ heading1('start')
+
+        
+        var fsJson = new json.FsJson()
+        _ dump
+            @ fsJson
+
+        _ fsJson.insertItem
+            {
+                @ basename 'alpha.js.ittf'
+                @ dirname 'w:/zero'
+                @ kind 1
+            f_cb_test( result )
+                log 'insert.alpha.js.ittf.result', result
+                var insertedId = result.insertedId
+                _ dump
+                    @ fsJson
+                set result.item.basename = 'beta.js.ittf'
+                _ fsJson.updateItem
+                    @ result.item
+                    f_cb_test( result )
+                        log 'update.beta.js.ittf.result', result
+                        _ dump
+                            @ fsJson
+                        _ fsJson.writeDocument
+                            @ result.item._id
+                            @ 'My content'
+                            f_cb_test( result )
+                                log 'write.beta.js.ittf.result', result
+                                _ dump
+                                    @ fsJson
+                                _ fsJson.readDocument
+                                    @ result.item._id
+                                    f_cb_test( result )
+                                        log 'read.beta.js.ittf.result', result
+                                        _ fsJson.deleteItem
+                                            @ insertedId
+                                            f_cb_test( result )
+                                                log 'delete.beta.js.ittf.result', result
+                                                _ dump
+                                                    @ fsJson
