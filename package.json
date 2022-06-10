@@ -36,7 +36,6 @@
         "wizzi-core": "^0.7.3",
         "wizzi-js": "^0.7.8",
         "wizzi-utils": "^0.7.13",
-        "wizzi-web": "^0.7.9",
-        "wizzi.proto": "./packages/wizzi.proto"
+        "wizzi-web": "^0.7.9"
     }
 }
