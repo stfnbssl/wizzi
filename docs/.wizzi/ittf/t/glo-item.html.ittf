@@ -1,7 +1,9 @@
 ﻿$group
     $params name
     tr
-        td ${name}
+        td
+            . title
+                + ${name}
         td
             $hook
 		

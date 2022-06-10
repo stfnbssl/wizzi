@@ -1,6 +1,8 @@
 ﻿tr
 	$params name, value|@@null
-	td ${name}
+	td 
+        . title
+            + ${name}
 	td
 		$if value != null
 			+ ${value}

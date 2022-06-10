@@ -238,3 +238,5 @@
 
     $ var opt = pkg.Fonts
     css/fonts(&opt)
+
+    $include tables

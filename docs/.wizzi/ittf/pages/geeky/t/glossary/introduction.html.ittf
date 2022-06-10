@@ -19,15 +19,23 @@
                 glo-item( ITTF Main Document )
                     span TODO
                 
-                glo-item( ITTF Fragment )
-                    span TODO
+                glo-item( ITTF Node )
+                    span
+                        + An ITTF Node is a node of the tree structure of an ITTF Document.
+                            \b It is a logical line of code that can be broken in many
+                            \b phisical lines with line continuations chars. 
+                            \b It is a name value pair of text strings, with children ITTF Nodes, and
+                            \b one parent ITTF Node, but the ITTF Root Node.
 
-                glo-item( ITTF Parser )
+                glo-item( ITTF Fragment )
                     span TODO
 
                 glo-item( ITTF Loader )
                     span TODO
 
+                glo-item( ITTF Parser )
+                    span TODO
+                
                 glo-item( ITTF Processor )
                     span TODO
 

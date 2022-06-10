@@ -26,7 +26,7 @@ $group
                     a 
                         aria-label Link to home
                         class logo-a
-                        href /
+                        href ${pkg.Params.baseUrl}
                         logo/index( 74,0,0,#eee )
                 nav 
                     id top-nav
