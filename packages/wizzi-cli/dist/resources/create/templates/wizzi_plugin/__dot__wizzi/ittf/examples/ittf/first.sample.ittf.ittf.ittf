@@ -1,0 +1,7 @@
+sample first
+    ---
+    $if cliCtx.wizzi_plugin_type == 'prettify'
+        $include wz/v08/wizzi/plugin/artifacts/types/prettify/first.sample
+    ---
+    $if cliCtx.wizzi_plugin_type == 'syntax_structure'
+        $include wz/v08/wizzi/plugin/artifacts/types/syntax_structure/first.sample

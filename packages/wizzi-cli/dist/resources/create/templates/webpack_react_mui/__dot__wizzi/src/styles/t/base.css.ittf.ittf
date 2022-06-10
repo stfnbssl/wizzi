@@ -1,0 +1,48 @@
+${'$'}group
+    < *
+        + ::after
+        + ::before
+        box-sizing border-box
+    < body
+        margin 0
+        font-family ${'$'}{base_font_family}
+        font-size 1rem
+        font-weight 400
+        line-height 1.5
+        color ${'$'}{base_color}
+        text-align left
+        background-color ${'$'}{base_bg_color}
+    < code
+        font-family source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace
+
+    # main
+        width 80%
+        margin 0 auto
+
+    # header
+        width 90%
+        margin 0 auto
+
+    # header ul
+        list-style-type none
+    
+    # header ul li
+        background-color #cdcdcd
+        margin 5px 10px
+        padding 10px 20px
+        border 1px solid #dedede
+        border-radius 10%
+        & ::hover
+            background-color #cecece
+        float left
+        < a 
+            text-decoration none
+            color #125699
+
+    . mainRoute            
+        background-color #ededed
+        width 70%
+        margin 100px auto 100px auto
+
+    . clear
+        clear both

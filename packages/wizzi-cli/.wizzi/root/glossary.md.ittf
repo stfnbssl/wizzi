@@ -1,0 +1,44 @@
+﻿md
+    h1 Glossary
+    
+    h2 wizzi-cli
+    p The wizzi factory command line interface.
+    
+    h2 Command 'create'
+    p The CLI command for creating the package of a Wizzi production from an available starter.
+        \b Executes a meta production.
+
+    h2 Production starter
+    p A meta production for generating a type of Wizzi production ('webpack',
+        \b 'gatsby', 'express', ...).
+    
+    h3 Meta production
+    p A Wizzi production that processes meta ittf documents into artifact ittf documents.
+
+    h3 Meta ittf document
+    p A templated ittf document of schema 'ittf' (.js.ittf.ittf, .html.ittf.ittf, ...) that in a meta production
+        \b is processed for generating an ittf document (.js.ittf, .html.ittf, ...) of an artifact production.
+    
+    h3 Artifact ittf document
+    p An ittf document (.js.ittf, .html.ittf, ...) that in a Wizzi production generates a software artifact
+        \b (.js, .html, ...).
+
+    h3 Wizzi production (artifacts production)
+    p The generation of a set of software artifacts 
+        \b processed from a set of ittf documents.
+
+    h3 Wizzi production type
+    p A set of meta ittf documents targeting a specific technology ('webpack',
+        \b 'gatsby', 'express', ...). Is selected and configured through the 
+        \b Wizzi CLI interactive 'inquirer'.
+
+    h3 object 'answersCtx'
+    p The context object created by the Wizzi CLI interactive 'inquirer'. Is preprocessed 
+        \b for creating the cliCtx object.
+    
+    h3 object 'cliCtx'
+    p The context object of a wizzi-cli meta production. Is preprocessed
+        \b for creating the wzCtx object.
+    
+    h3 object 'wzCtx'
+    p The context object of an artifact production (Wizzi production).

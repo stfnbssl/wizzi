@@ -1,0 +1,193 @@
+$group
+
+    import passport from 'passport'
+    import jwt from 'express-jwt'
+    ${'$'}if wzCtx.Build.useMongoDb
+        import 
+            @ GetUserModel
+            from './mongo/user'
+        import 
+            @ GetAccountModel
+            @ AccountModelType
+            from './mongo/account'
+    import 
+        @ IAccount
+        from './types'
+    import 
+        @ createStrategy
+            as createLocalStrategy
+        from './strategies/local'
+    import 
+        @ createStrategy
+            as createGithubStrategy
+        from './strategies/github'
+    import 
+        @ resolve
+        from 'path'
+    import 
+        @ rejects
+        from 'assert'
+    let initialized = false
+    +
+    function initPassport
+        # https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
+        ${'$'}if wzCtx.Build.useMongoDb
+            const userModel = GetUserModel()
+        _ passport.use(createLocalStrategy())
+        _ passport.use(createGithubStrategy())
+        _ passport.serializeUser
+            function 
+                param user
+                    :any
+                param done
+                    :any
+                log '============================================================'
+                log 'features.auth.manager.serializeUser', 'user', user
+                $$ _ done(null, user.id)
+                _ done(null, user)
+        _ passport.deserializeUser
+            function 
+                param id
+                    :string
+                param done
+                    :any
+                log '============================================================'
+                log 'features.auth.manager.deserializeUser', 'id', id
+                ${'$'}if wzCtx.Build.useMongoDb
+                    return
+                        _ done(null, id)
+                    _ userModel.findById
+                        @ id
+                        function 
+                            param err
+                                :any
+                            param user
+                                :any
+                            log 'features.auth.manager.deserializeUser', 'err', err,
+                                \b 'user', user
+                            _ done(err, user || false)
+                ${'$'}else 
+                    _ done(null, { id: id })
+        set initialized = true
+    +
+    function getTokenFromHeaders
+        param req
+            :any 
+        const 
+            { 
+                { headers
+                    @ authorization
+            = req
+        if authorization && authorization.split(' ')[0] === 'Token'
+            return authorization.split(' ')[1]
+        return null
+    +
+    export 
+        function getPassport
+            if initialized == false
+                _ initPassport()
+            return passport
+    +
+    export 
+        function authenticate
+            param strategyName
+                :string 
+            param options
+                :ref passport.AuthenticateOptions
+            param callback
+                :any 
+                :optional 
+            log '============================================================'
+            log 'auth.manager.authenticate', 'strategyName', strategyName,
+                \b 'options', options
+            return passport.authenticate(strategyName, options, callback)
+    ${'$'}if wzCtx.Build.useMongoDb
+        +
+        export 
+            async-function getAccessTokenFromAccount
+                param uid
+                    :string 
+                param domain
+                    :string 
+                :return
+                    :ref Promise
+                        :param string
+                const AccountModel = GetAccountModel()
+                return 
+                    new Promise
+                        => 
+                            param resolve
+                            param reject
+                            _ AccountModel.findOne
+                                { 
+                                    @ uid
+                                    @ domain
+                                => 
+                                    param err
+                                        :any
+                                    param account
+                                        :ref IAccount
+                                    if err
+                                        return reject(err)
+                                    if account
+                                        return resolve(account.tokens[0].token)
+                                    else
+                                        return reject('Token not found')
+        +
+        export 
+            async-function getLoggedUserFromAccount
+                param uid
+                    :string 
+                param domain
+                    :string 
+                :return
+                    :ref Promise
+                        :param any
+                const AccountModel = GetAccountModel()
+                return 
+                    new Promise
+                        => 
+                            param resolve
+                            param reject
+                            _ AccountModel.findOne
+                                { 
+                                    @ uid
+                                    @ domain
+                                => 
+                                    param err
+                                        :any
+                                    param account
+                                        :ref IAccount
+                                    if err
+                                        return reject(err)
+                                    if account
+                                        return 
+                                            _ resolve
+                                                { 
+                                                    @ _id 'Unavailable'
+                                                    @ uid
+                                                    @ username account.username
+                                                    @ displayName account.displayName
+                                                    @ picture account.avatar_url
+                                    else
+                                        return reject('Account not found')
+    export 
+        const jwtAuth
+            { 
+                @ required
+                    _ jwt
+                        { 
+                            @ secret 'secret'
+                            @ userProperty 'payload'
+                            @ getToken getTokenFromHeaders
+                            [ algorithms
+                                @ 'HS256'
+                @ optional
+                    _ jwt
+                        { 
+                            @ secret 'secret'
+                            @ userProperty 'payload'
+                            @ getToken getTokenFromHeaders
+                            @ credentialsRequired false
+                            [ algorithms
+                                @ 'HS256'

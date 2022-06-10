@@ -1,0 +1,11 @@
+{
+    $
+        var md = {
+        }
+    v08/root/package(&md)
+        $append scripts
+            examples "node examples"
+            docx "node examples/dist/first.sample"
+        $append dependencies
+            docx "^5.5.0"
+        $append devDependencies

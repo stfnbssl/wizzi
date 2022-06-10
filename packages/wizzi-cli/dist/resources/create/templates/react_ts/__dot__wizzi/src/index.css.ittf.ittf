@@ -1,0 +1,9 @@
+css
+
+    $
+        var call = '(&md)';
+
+	${'$'}
+		var md = {};
+
+	v08/ts/react/basic/index${call}    

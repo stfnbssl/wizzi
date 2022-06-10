@@ -1,0 +1,31 @@
+css
+    $include v08/css/index
+    . code-panel
+        margin-bottom 1em
+        margin-top 1em
+    . prettyprint
+        font-size 13px
+        border 1px solid #ddd
+        border-radius 3px
+        box-shadow 0 1px 3px hsla(0, 0%, 0%, 0.05)
+        overflow auto
+    . prettyprint.source
+        width inherit
+    . prettyprint > code
+        padding 15px
+    . prettyprint code
+        font-size 100%
+        line-height 18px
+        display block
+        background-color #fff
+        color #4D4E53
+    < pre
+        background #fff
+        padding 0px
+    < pre code
+        padding 0
+        font-size inherit
+        color inherit
+        white-space pre-wrap
+        background-color transparent
+        border-radius 0

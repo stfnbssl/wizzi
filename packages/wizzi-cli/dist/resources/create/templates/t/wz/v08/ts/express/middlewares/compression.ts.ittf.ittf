@@ -1,0 +1,27 @@
+$group
+
+    ${'$'}if wzCtx.Build.useCompression
+
+        import 
+            @ Application
+            from 'express'
+        import compression from 'compression'
+        import 
+            @ MiddlewareType
+            from '../features/app/types'
+        +
+        # see other options here http://expressjs.com/en/resources/middleware/compression.html
+        const options
+            {
+                @ filter shouldCompress
+        +
+        export 
+            const CompressionMiddleware
+                :ref MiddlewareType
+                =
+                    => 
+                        param app
+                            :ref Application
+                        _ app.use
+                            _ compression
+                                @ options

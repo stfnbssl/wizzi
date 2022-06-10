@@ -1,0 +1,26 @@
+$group
+    
+    const path = require('path')
+    const resolve = path.resolve
+    const webpack = require('webpack')
+    
+    $if wzCtx.Build.useMonaco
+        # const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+        const MonacoWebpackPlugin = require('monaco-editor-webpack-3-plugin')
+    
+    $if wzCtx.Build.useMonaco2
+        const MonacoEditorPlugin = require('monaco-editor-webpack-plugin')
+    
+    $if wzCtx.Build.webpack.useHtml
+        const HtmlWebpackPlugin = require('html-webpack-plugin')
+    $if wzCtx.Build.useVue
+        const VueLoaderPlugin = require('vue-loader/lib/plugin')
+    
+    $if wzCtx.Build.webpack.useMerge
+        const merge = require("webpack-merge")
+    
+    $if wzCtx.Build.webpack.useCopy
+        const CopyWebpackPlugin = require('copy-webpack-plugin');
+    
+    $if wzCtx.Build.webpack.useMiniCssExtract
+        const MiniCssExtractPlugin = require("mini-css-extract-plugin");

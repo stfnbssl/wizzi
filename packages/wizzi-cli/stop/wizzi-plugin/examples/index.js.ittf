@@ -1,0 +1,54 @@
+v07/plugin/examples/withMonoRepoWizziFactory()
+
+    $append plugins
+        [ items
+            @ './index.js'
+        @ pluginsBaseFolder
+            _ path.resolve
+                @ __dirname
+                @ '..'
+
+    _ executeGenerateModules
+        [
+            @ 'first'
+        f_cb_no_throw(result)
+            if err
+                log 'sample.examples.executeGenerateModules.err', err
+                log 'sample.examples.executeGenerateModules.err.toString()', err.toString()
+                if err.inner
+                    log 'sample.examples.executeGenerateModules.err.inner.toString()', err.inner.toString()
+            else
+                log 'sample.examples.executeGenerateModules.result', result
+
+    function executeGenerateModules
+        param modules
+        param callback
+
+        _ async.mapSeries
+            @ modules
+            =>
+                param module
+                param callback
+        
+                var ittfDocumentUri
+                    _ path.join
+                        @ __dirname
+                        @ 'ittf'
+                        @ module + '.sample.ittf'
+                
+                var outputPath
+                    _ path.join
+                        @ __dirname
+                        @ 'dist'
+                        @ module + '.sample'
+                
+                _ loadModelAndGenerateArtifact
+                    @ ittfDocumentUri
+                    {
+                    @ 'sample/document'
+                    f_cb( artifactText )
+                        _ file.write
+                            @ outputPath
+                            @ artifactText
+                        r_cb( artifactText )
+            @ callback                

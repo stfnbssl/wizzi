@@ -1,0 +1,7 @@
+{
+    $
+        var call = '(&md)';
+	${'$'}
+		var md = {};
+	
+    v08/ts/react/tsconfig${call}    

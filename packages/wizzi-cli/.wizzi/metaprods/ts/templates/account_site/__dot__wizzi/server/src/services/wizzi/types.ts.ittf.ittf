@@ -1,0 +1,9 @@
+module
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    v08/express/services/wizzi/types${call}

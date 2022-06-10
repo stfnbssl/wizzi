@@ -1,0 +1,17 @@
+$group
+    $global
+        var fidia = 1.6180339887;
+        // Colours
+        var white = "#FFF";
+        var black = "#000";
+        var red = "#FA4D73";
+        var orange = "#FA9968";
+        var grey_1 = "#FAFAFA";
+        var grey_2 = "#807A7A";
+        var grey_3 = "#ECEDF2";
+        var grey_4 = "#2A201F";
+        var grey_5 = "#C0BCBC";
+        // Base
+        var base_font_family = "'Raleway', sans-serif";
+        var base_bg_color = "grey_3";
+        var base_color = "grey_4";

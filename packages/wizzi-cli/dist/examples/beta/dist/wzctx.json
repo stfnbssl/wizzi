@@ -1,0 +1,40 @@
+{
+    "name": "",
+    "version": "",
+    "description": "",
+    "Build": {
+        "useWebpack": true,
+        "webpack": {
+            "useCss": true,
+            "css": {},
+            "useSass": false,
+            "useHtml": true,
+            "html": {},
+            "useDevServer": true,
+            "devServer": {}
+        },
+        "useHotReplacement": true,
+        "hotReplacement": {},
+        "useBabel": true,
+        "babel": {}
+    },
+    "Keys": {
+        "fontAwesome": "eab461efef"
+    },
+    "Css": {
+        "useReset": true,
+        "reset": {
+            "useMeyer": true
+        },
+        "useFontAwesome": true,
+        "fontAwesome": {},
+        "useBootstrap": false,
+        "bootstrap": {
+            "v4": false
+        }
+    },
+    "Code": {
+        "useHighlight": true,
+        "highlight": {}
+    }
+}

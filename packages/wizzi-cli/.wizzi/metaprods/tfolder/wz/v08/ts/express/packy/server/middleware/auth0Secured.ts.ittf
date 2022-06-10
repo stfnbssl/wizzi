@@ -1,0 +1,44 @@
+module
+    import 
+        @ Request
+        @ Response
+        from 'express'
+        #
+            # *
+            # * This is an example middleware that checks if the user is logged in.
+            # *
+            # * If the user is not logged in, it stores the requested url in `returnTo` attribute
+            # * and then redirects to `/account/login`.
+            # *
+            # 
+    export-default 
+        function getSecured
+            _ console.log('getSecured called')
+            return 
+                function secured
+                    param req
+                        :ref Request
+                    param res
+                        :ref Response
+                    param next
+                        :ref Function
+                    _ console.log('secured called', req.user)
+                    if req.user
+                        return next()
+                    set =
+                        @expr 
+                            ( 
+                                @expr req.session
+                                    :as 
+                                        :any 
+                            . returnTo
+                        @expr req.originalUrl
+                    _ res.redirect('/account/login')
+        #
+            # *
+            # * This is an example middleware that checks if the user is logged in.
+            # *
+            # * If the user is not logged in, it stores the requested url in `returnTo` attribute
+            # * and then redirects to `/account/login`.
+            # *
+            # 

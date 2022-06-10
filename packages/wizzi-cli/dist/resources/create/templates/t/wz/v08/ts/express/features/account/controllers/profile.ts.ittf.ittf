@@ -1,0 +1,46 @@
+$group
+
+    $
+        var lparen = '(';
+    
+    ${'$'}
+        var ctrl = {
+            name: 'Profile',
+            path: '/account/profile'
+        }
+
+    controller${lparen} &ctrl )
+
+        _ this.router.get
+            @ `/`
+            ${'$'}if wzCtx.Build.useAuthentication
+                ${'$'}if wzCtx.Build.authentication.useEoic
+                    _ requiresAuth
+            @ this.get
+            ._ bind
+                @ this
+        
+        ${'$'}append imports
+            ${'$'}if wzCtx.Build.useAuthentication
+                ${'$'}if wzCtx.Build.authentication.useEoic
+                        import eoic from 'express-openid-connect'
+                        const { requiresAuth } = eoic
+
+        ${'$'}append handlers
+            handler${lparen} get )
+                _ response.render
+                    @ 'account/profile/index.html.ittf'
+                    {
+                        @ title 'Profile page'
+                        ${'$'}if wzCtx.Build.useAuthentication
+                            ${'$'}if wzCtx.Build.authentication.useEoic
+                                @ user request.oidc.user
+                                @ userProfile JSON.stringify(request.oidc.user, null, 2)
+                            ${'$'}else
+                                @ user request.user
+                                @ userProfile JSON.stringify(request.user, null, 2)
+                        ${'$'}else
+                            { user
+                                @ name "unavailable"
+                                @ nickname "unavailable"
+                            @ userProfile "User profile unavailable, the App needs Auth configuration."

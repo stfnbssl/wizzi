@@ -1,0 +1,45 @@
+module
+    import 
+        as mongoose
+        from 'mongoose'
+    import 
+        @ ModelBuilderType
+        from '../features/app'
+    import 
+        @ ConfigType
+        from '../features/config'
+    export-default 
+        function start
+            param config
+                :ref ConfigType
+            param modelBuilders
+                :[ 
+                    :ref ModelBuilderType
+            const 
+                { 
+                    @ mongoUser
+                    @ mongoPassword
+                    @ mongoPath
+                = config
+            const connectUrl
+                `lit 
+                    + mongodb://
+                    @ mongoUser
+                    + :
+                    @ mongoPassword
+                    + 
+                    @ mongoPath
+                    + 
+            _ console.log('Connecting to ', mongoPath)
+            _ mongoose.connect
+                @ connectUrl
+                { 
+                    @ useNewUrlParser true
+            _ modelBuilders.forEach
+                => 
+                    param builder
+                    _ builder.buildModel()
+    export 
+        const close
+            => 
+                _ mongoose.connection.close()

@@ -1,0 +1,126 @@
+module
+    kind react
+
+    import React
+        @ useRef
+        from 'react'
+    import
+        @ useItems
+        ${'$'}if wzCtx.App.useLogin
+            @ useLogin
+        from '../../state/hooks'
+    import 
+        @ Button
+        from '../widgets'
+
+    const Item
+        => 
+            param props
+            const 
+                { 
+                    @ completeItem
+                =
+                    _ useItems
+            const handleComplete
+                => 
+                    _ completeItem(props.id)
+            return 
+                div 
+                    @ className 'item-item'
+                    input 
+                        @ id
+                            _ props.id.toString
+                        @ type 'checkbox'
+                        @ checked {props.completed}
+                        @ onChange {handleComplete}
+                    label 
+                        @ htmlFor
+                            _ props.id.toString
+                        @ className
+                            op+ 
+                                + 'item-item-text'
+                                iif props.completed
+                                    then ' completed'
+                                    else ''
+                        + {props.text}
+    
+    const AddItem
+        => 
+            const itemInput
+                _ useRef
+                    @ null
+            const 
+                { 
+                    @ addItem
+                =
+                    _ useItems
+            const handleSubmit
+                => 
+                    param event
+                    _ event.preventDefault
+                    if itemInput.current
+                        _ addItem
+                            @ itemInput.current.value
+                        set itemInput.current.value = ''
+            return 
+                div 
+                    @ className 'item-add'
+                    < form 
+                        @ onSubmit {handleSubmit}
+                        input 
+                            @ type 'text'
+                            @ ref {itemInput}
+                            @ className 'form-field'
+                            @ placeholder 'e.g. Buy Tickets'
+
+    const ItemList
+        => 
+            const 
+                { 
+                    @ items
+                =
+                    _ useItems
+            return 
+                div 
+                    @ className 'item-visible-list'
+                    { 
+                        _ items.map
+                            => 
+                                param item
+                                < Item 
+                                    @ key {item.id}
+                                    @ {...item}
+
+    export
+        const Items
+            => 
+                const 
+                    { 
+                        @ resetItems
+                    =
+                        _ useItems
+                ${'$'}if wzCtx.App.useLogin
+                    const 
+                        { 
+                            @ userName
+                            @ handleLogout
+                        =
+                            _ useLogin
+                const handleBack
+                    => 
+                        ${'$'}if wzCtx.App.useLogin
+                            _ handleLogout
+                        _ resetItems
+                return 
+                    div 
+                        @ className 'item-list'
+                        div 
+                            < Button 
+                                @ text 'Back'
+                                @ onClick {handleBack}
+                        ${'$'}if wzCtx.App.useLogin
+                            h1
+                                + Hi, \b
+                                + {userName}
+                        < AddItem
+                        < ItemList

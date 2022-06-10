@@ -1,0 +1,61 @@
+$group
+	
+    function newpkg
+        param callback
+        _ promptPkgType
+            f_cb(type_answers)
+                if type_answers.pkg_type == 'wizzi_plugin'
+                    _ promptWizziPlugin
+                        f_cb(plugin_answers)
+                            set type_answers.__template = 'wizzi_plugin'
+                            return
+                                _ promptNext
+                                    @ promptPkgName
+                                    _ Object.assign
+                                        {
+                                        @ type_answers
+                                        @ plugin_answers
+                                    @ callback
+                elif type_answers.pkg_type == 'webpack'
+                    _ promptWebpack
+                        f_cb(webpack_answers)
+                            if webpack_answers.webpack_type == 'react'
+                                set type_answers.__template = 'webpack_react'
+                            elif webpack_answers.webpack_type == 'react_materialui'
+                                set type_answers.__template = 'webpack_react_mui'
+                            else
+                                set type_answers.__template = 'webpack'
+                            return
+                                _ promptNext
+                                    @ promptPkgName
+                                    _ Object.assign
+                                        {
+                                        @ type_answers
+                                        @ webpack_answers
+                                    @ callback
+                else
+                    set type_answers.__template = type_answers.pkg_type
+                    return
+                        _ promptNext
+                            @ promptPkgName
+                            @ type_answers
+                            @ callback
+
+    function promptNext
+        param fPrompt
+        param prevAnswers
+        param callback
+        _ fPrompt
+            f_cb(answers)
+                return 
+                    _ callback
+                        @ null
+                        _ Object.assign
+                            {
+                            @ prevAnswers
+                            @ answers
+            
+    $include ./pkgType
+    $include ./wizziPlugin
+    $include ./webpack
+    $include ./pkgInfo

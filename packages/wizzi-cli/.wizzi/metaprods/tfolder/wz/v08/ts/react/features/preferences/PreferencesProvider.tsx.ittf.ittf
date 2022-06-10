@@ -1,0 +1,199 @@
+$group
+
+    import debounce from 'lodash/debounce'
+    import 
+        as React
+        from 'react'
+   
+    ${'$'}if wzCtx.Build.useExpo
+        import 
+            @ connect
+            from 'react-redux'
+        :import-type 
+            @ Platform
+            from '../../types'
+        import 
+            @ isMobile
+            from '../../utils/detectPlatform'
+        :import-type 
+            @ ConnectionMethod
+            from '../DeviceInstructions/DeviceInstructionsModal'
+    ${'$'}else
+        :import-type 
+            @ QueryStateParams
+            from '../packi'
+    
+    :import-type 
+        @ PanelType
+        @ ThemeName
+        @ PreferencesType
+        @ SetPreferencesType
+        from './types'
+    
+    import
+        @ PreferencesContext
+        from './types'
+    +
+    :type Props
+        :{ 
+            :p queryParams
+                :ref QueryStateParams
+            :p cookies
+                :{ 
+                    :p get
+                        :=> 
+                            :union 
+                                :string 
+                                :undefined 
+                            param key
+                                :string 
+                    :p set
+                        :optional 
+                        :=> 
+                            :void 
+                            param key
+                                :string 
+                            param value
+                                :string 
+            
+            ${'$'}if wzCtx.Build.useExpo
+                :p testConnectionMethod
+                    :optional 
+                    :ref ConnectionMethod
+                :p testPreviewPlatform
+                    :optional 
+                    :ref Platform
+            :p children
+                :ref React.ReactNode
+    +
+    :type State
+        :{ 
+            :p preferences
+                :ref PreferencesType
+    +
+    const EDITOR_CONFIG_KEY = 'packi-editor-config'
+    +
+    const defaults
+        :ref PreferencesType
+        =
+            { 
+                ${'$'}if wzCtx.Build.useExpo
+                    @ deviceConnectionMethod 'device-id'
+                    @ devicePreviewPlatform 'web'
+                    @ editorMode 'normal'
+                @ devicePreviewShown true
+                ${'$'}if wzCtx.Build.useExpo
+                    @ fileTreeShown !isMobile()
+                ${'$'}else
+                    @ fileTreeShown true
+                @ panelsShown false
+                @ panelType 'errors'
+                @ theme 'light'
+                ${'$'}if wzCtx.Build.usePackiAspects
+                    @ autoGenSingleDoc false
+                    @ autoExecJob false
+                    @ loggedUid undefined
+                    @ connectGithubRepos false
+                    @ trustLocalStorage false
+    +
+    class PreferencesProvider
+        super React.Component
+            :param 
+                :ref Props
+            :param 
+                :ref State
+        ctor 
+            param props
+                :ref Props
+            _ super(props)
+            const 
+                { 
+                    @ cookies
+                    @ queryParams
+                = this.props
+            let overrides
+                :ref Partial
+                    :param 
+                        :ref PreferencesType
+                =
+                    { 
+            try 
+                set overrides =
+                    || 
+                        + JSON.parse(cookies.get(EDITOR_CONFIG_KEY) ?? '')
+                        { 
+                    # Restore editor preferences from saved data
+                ${'$'}if wzCtx.Build.useExpo
+                    if overrides.devicePreviewPlatform !== 'mydevice'
+                        set overrides.devicePreviewPlatform = undefined
+            catch e
+            try 
+                const 
+                    { 
+                        @ theme
+                        ${'$'}if wzCtx.Build.useExpo
+                            @ platform
+                    = queryParams
+                    # Set theme if passed in query params
+                if theme === 'light' || theme === 'dark'
+                    set overrides.theme = theme
+                ${'$'}if wzCtx.Build.useExpo
+                    if platform === 'android' || platform === 'ios' || platform === 'mydevice' || platform === 'web'
+                        set overrides.devicePreviewPlatform = platform
+            catch e
+            set this.state =
+                { 
+                    { preferences
+                        @ ...defaults
+                        @ ...overrides
+                        ${'$'}if wzCtx.Build.useExpo
+                            @ deviceConnectionMethod overrides.deviceConnectionMethod ?? this.props.testConnectionMethod ?? defaults.deviceConnectionMethod
+                                # Set the values according to the priority: saved preference, test value, default value
+                            @ devicePreviewPlatform overrides.devicePreviewPlatform ?? this.props.testPreviewPlatform ?? defaults.devicePreviewPlatform
+        p _persistPreferences
+            _ debounce
+                => 
+                    const 
+                        { 
+                            @ cookies
+                        = this.props
+                    try 
+                        _ cookies.set?.(EDITOR_CONFIG_KEY, JSON.stringify(this.state.preferences))
+                    catch e
+                @ 1000
+        => _setPreferences
+            param overrides
+                :ref Partial
+                    :param 
+                        :ref PreferencesType
+            _ this.setState
+                => 
+                    param state
+                    (
+                        { 
+                            { preferences
+                                @ ...state.preferences
+                                @ ...overrides
+                @expr this._persistPreferences
+        m render
+            return 
+                < PreferencesContext.Provider 
+                    @ value
+                        { 
+                            @ setPreferences this._setPreferences
+                            @ preferences this.state.preferences
+                    + {this.props.children}
+    +
+    ${'$'}if wzCtx.Build.useExpo
+        export-default 
+            _ connect
+                => 
+                    param state
+                        :any 
+                    (
+                        { 
+                            @ testConnectionMethod state.splitTestSettings.defaultConnectionMethod
+                (
+                    @ PreferencesProvider
+    ${'$'}else
+        export-default PreferencesProvider

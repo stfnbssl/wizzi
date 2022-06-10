@@ -1,0 +1,74 @@
+$group
+
+    import 
+        @ Application
+        @ Request
+        @ Response
+        @ NextFunction
+        from 'express'
+    
+    import 
+        @ MiddlewareType
+        from '../features/app/types'
+
+    import HttpException from '../httpException'
+
+    export 
+        const ErrorsMiddleware
+            :ref MiddlewareType
+            =
+                => 
+                    param app
+                        :ref Application
+                    # catch 404 and forward to error handler
+                    _ app.use
+                        function 
+                            param req
+                                :ref Request
+                            param res
+                                :ref Response
+                            param next
+                                :ref NextFunction
+                            var err
+                                new HttpException
+                                    @ 404
+                                    @ 'Not Found'
+                            _ next(err)
+                    # development error handler
+                    # will print stacktrace
+                    if app.get('env') === 'development'
+                        _ app.use
+                            function 
+                                param err
+                                    :ref HttpException
+                                param req
+                                    :ref Request
+                                param res
+                                    :ref Response
+                                param next
+                                    :ref NextFunction
+                                _ res.status(err.status || 500)
+                                _ res.render
+                                    @ 'error.html.ittf'
+                                    { 
+                                        @ message err.message
+                                        @ error err
+                    # production error handler
+                    # no stacktraces leaked to user
+                    _ app.use
+                        function 
+                            param err
+                                :ref HttpException
+                            param req
+                                :ref Request
+                            param res
+                                :ref Response
+                            param next
+                                :ref NextFunction
+                            _ res.status(err.status || 500)
+                            _ res.render
+                                @ 'error.html.ittf'
+                                { 
+                                    @ message err.message
+                                    $$ TODO @ error {}
+                                    @ error err

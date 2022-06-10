@@ -1,0 +1,92 @@
+module
+    import 
+        as express
+        from 'express'
+    import 
+        as http
+        from 'http'
+    import 
+        as socketio
+        from 'socket.io'
+    import 
+        @ ConfigType
+        from './features/config'
+    import 
+        @ AppInitializerType
+        from './features/app/types'
+    class App
+        p app
+            :public 
+            :ref express.Application
+        p config
+            :public 
+            :ref ConfigType
+        p port
+            :public 
+            :number 
+        p server
+            :public 
+            :any 
+        ctor 
+            param initValues
+                :ref AppInitializerType
+            set this.config = initValues.config
+            set this.port = this.config.port
+            set this.app = express()
+            set this.server = http.createServer(this.app)
+            _ initValues.middlewares.forEach
+                => 
+                    param middleware
+                    _ middleware(this.app)
+            _ initValues.controllers.forEach
+                => 
+                    param controller
+                    _ console.log('installing router on path: ', controller.path)
+                    _ controller.initialize(initValues)
+                    _ this.app.use('/', controller.router)
+                # Connecting sockets to the server and adding them to the request
+                # so that we can access them later in the controller
+            const io = socketio(this.server)
+                # Connecting sockets to the server and adding them to the request
+                # so that we can access them later in the controller
+                # FIX ME: reinstalling package the set definition is missing. WHY?
+                # io.set('transports', [
+            _ 
+                ( 
+                    + io
+                        :as 
+                            :any 
+                ._ set
+                    @ 'transports'
+                    [ 
+                        @ 'websocket'
+                        @ 'polling'
+                # FIX ME: reinstalling package the set definition is missing. WHY?
+                # io.set('transports', [
+            _ this.app.set('io', io)
+                # Catch a start up request so that a sleepy server instance (p.e. Heroku) can
+                # be responsive as soon as possible
+            _ this.app.get
+                @ '/wake-up'
+                => 
+                    param req
+                    param res
+                    _ res.send('👍')
+                # Catch a start up request so that a sleepy server instance (p.e. Heroku) can
+                # be responsive as soon as possible
+        m listen
+            :public 
+            _ this.server.listen
+                @expr this.port
+                => 
+                    _ console.log
+                        `lit 
+                            + App listening at http://localhost:
+                            @ this.port
+                            + 
+                #
+                    # if there are no socket
+                    # this.app.listen(this.port, () => {
+                    # console.log(`App listening at http://localhost:${this.port}`);
+                    # });
+    export-default App

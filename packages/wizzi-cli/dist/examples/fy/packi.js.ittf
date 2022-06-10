@@ -1,0 +1,25 @@
+module
+    kind jsfile
+
+    $
+        var baseSource = "C:/My/wizzi/stfnbssl/packi/src";
+        var srcClient = baseSource + "/client";
+        var srcServer = baseSource + "/server";
+        var srcCommon = baseSource + "/common";
+        var baseDest = "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/.wizzi/resources/create/templates/t/wz/v08/ts/express";
+        var destClient = baseDest + "/client";
+        var destServer = baseDest + "/packy/server";
+        var destCommon = baseDest + "/packy/common";
+
+    var fy = require('../../cmds/fy');
+    
+    $if false
+        _ fy
+            {
+                @ s "${srcServer}"
+                @ d "${destServer}"
+
+    _ fy
+        {
+            @ s "${srcCommon}"
+            @ d "${destCommon}"

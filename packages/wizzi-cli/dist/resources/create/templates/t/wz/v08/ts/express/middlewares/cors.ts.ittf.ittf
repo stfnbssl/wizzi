@@ -1,0 +1,17 @@
+$group
+
+    import 
+        @ Application
+        from 'express'
+    import cors from 'cors'
+    import 
+        @ MiddlewareType
+        from '../features/app/types'
+    export 
+        const CorsMiddleware
+            :ref MiddlewareType
+            =
+                => 
+                    param app
+                        :ref Application
+                    _ app.use(cors())

@@ -1,0 +1,4 @@
+html
+    body
+        h1 Hello from a Wizzi generated Html document 
+        p I am pre-generated and served by 'express.static' from the "static" folder.

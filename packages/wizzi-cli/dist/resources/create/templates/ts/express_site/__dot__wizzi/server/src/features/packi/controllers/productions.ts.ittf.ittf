@@ -1,0 +1,6 @@
+module
+    $
+        var call = '()';
+
+    ${'$'}if wzCtx.Build.useConfig
+        v08/express/features/packi/controllers/productions${call}

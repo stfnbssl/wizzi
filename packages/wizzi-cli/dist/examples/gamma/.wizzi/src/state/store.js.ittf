@@ -1,0 +1,140 @@
+module
+    kind react
+    import React
+        @ createContext
+        @ useContext
+        @ useReducer
+        @ useCallback
+        from 'react'
+    import
+        @ asyncer
+        @ logger
+        from './middlewares'
+    import
+        @ ITEMS
+        from './types'
+    #
+    # Actions
+    #
+    export
+        const itemsActions
+            {
+                @ addItem
+                    =>
+                        param text
+                        return
+                            {
+                                @ type ITEMS.ADD
+                                @ payload text
+                @ resetItems
+                    =>
+                        return
+                            {
+                                @ type ITEMS.RESET
+                @ completeItem
+                    =>
+                        param id
+                        return
+                            {
+                                @ type ITEMS.COMPLETE
+                                @ payload id
+    #
+    # Reducers
+    #
+    const itemsInitialState
+        [
+    $if wzCtx.Build.useLocalStorage
+        var initialState
+        if !!(window.localStorage.getItem('${wzCtx.Build.localStorage.key}'))
+            set initialState
+                _ JSON.parse
+                    _ window.localStorage.getItem
+                        @ '${wzCtx.Build.localStorage.key}'
+        else
+            set initialState
+                {
+                    @ items itemsInitialState
+    $else
+        const initialState
+            {
+                @ items itemsInitialState
+    export
+        function itemsReducer
+            param state = initialState
+            param action
+            log 'store.itemsReducer.state,action', state, action
+            switch action.type
+                case ITEMS.RESET
+                    return []
+                case ITEMS.ADD
+                    return
+                        [
+                            @ ...state
+                            {
+                                @ id
+                                    _ Date.now
+                                @ text action.payload
+                                @ completed false
+                case ITEMS.COMPLETE
+                    return
+                        _ state.map
+                            =>
+                                param item
+                                if item.id === action.payload
+                                    return
+                                        {
+                                            @ ...item
+                                            @ completed !item.completed
+                                return item
+                default
+                    return state
+    function mainReducer
+        param state
+        param action
+        # Receiving previous state here
+        const
+            {
+                @ items
+            = state
+        # Receiving current state here
+        const currentState
+            {
+                @ items itemsReducer(items, action)
+        $if wzCtx.Build.useLocalStorage
+            # Storage
+            _ window.localStorage.setItem
+                @ '${wzCtx.Build.localStorage.key}'
+                _ JSON.stringify
+                    @ currentState
+        # Middlewares
+        _ logger(action, state, currentState)
+        return currentState
+    #
+    # Global store
+    #
+    const GlobalStore = createContext({});
+    export
+        const useGlobalStore
+            =>
+                _ useContext(GlobalStore)
+    #
+    # Provider
+    #
+    export-default
+        function Provider
+            param {children}
+            const [ state, dispatchBase ]
+                _ useReducer
+                    @ mainReducer
+                    @ initialState
+            log 'store.Provider.state', state
+            const dispatch
+                _ useCallback
+                    _ asyncer
+                        @ dispatchBase
+                        @ state
+                    [
+            return
+                < GlobalStore.Provider
+                    @ value {{ state, dispatch }}
+                    + {children}

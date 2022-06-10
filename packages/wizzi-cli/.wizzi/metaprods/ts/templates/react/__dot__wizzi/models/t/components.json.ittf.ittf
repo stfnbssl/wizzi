@@ -1,0 +1,8 @@
+${'$'}group
+
+    [ Components
+        {
+            name "Button"
+            [ props
+                $$ prop( radius, number, 50
+                $$ prop( color, string, yellow

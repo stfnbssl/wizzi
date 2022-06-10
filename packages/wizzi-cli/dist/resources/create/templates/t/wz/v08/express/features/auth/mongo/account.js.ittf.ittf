@@ -1,0 +1,42 @@
+$group
+
+    import 
+        @ Schema
+        @ Model
+        @ model
+        from "mongoose"
+    
+    import 
+        @ TokenSchema
+        from "./token"
+    
+    const AccountSchema
+        new Schema
+            { 
+                { domain
+                    @ type String
+                { uid
+                    @ type String
+                { username
+                    @ type String
+                { displayName
+                    @ type String
+                { avatar_url
+                    @ type String
+                @ tokens [null]
+    
+    let accountModel
+    
+    export 
+        function GetAccountModel
+            return accountModel
+    
+    export 
+        const AccountModelBuilder
+            { 
+                @ buildModel
+                    => 
+                        set accountModel =
+                            _ model
+                                @ 'Account'
+                                @ AccountSchema

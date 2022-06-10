@@ -1,0 +1,30 @@
+$group
+
+	function promptPkgType
+        param callback
+        var questions
+                { 
+                    @ type 'list'
+                    @ name 'pkg_type'
+                    @ message 'What package type do you want create?'
+                    [ choices
+                        @ 'Pure_NodeJs'
+                        @ 'Pure_Html_Js_Css_Svg'
+                        @ 'Webpack'
+                        @ 'Angular'
+                        @ 'Gatsby'
+                        @ 'Express'
+                        @ 'Wizzi_plugin'
+                        @ 'Empty'
+                        @ 'Go_Back'
+                    @ filter
+                        function 
+                            param val
+                            return 
+                                _ val.toLowerCase
+        _ inquirer.prompt(questions).then
+            => 
+                param answers
+                _ console.log('\nNew package type:')
+                _ console.log(JSON.stringify(answers, null, '  '))
+                r_cb(answers)

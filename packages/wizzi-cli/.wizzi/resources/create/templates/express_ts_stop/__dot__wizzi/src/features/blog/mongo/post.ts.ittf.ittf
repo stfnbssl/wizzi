@@ -1,0 +1,14 @@
+module
+    kind es6
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {};
+        if (wzCtx.Build.useBlog && wzCtx.Build.useMongoDb) {
+            md.tobeIncluded = true;
+            md.schema = wzCtx.Build.blog.dataModels[0];
+        }
+
+    ${'$'}if md.tobeIncluded
+        v08/express/features/dataModels/mongoseSchema${call}

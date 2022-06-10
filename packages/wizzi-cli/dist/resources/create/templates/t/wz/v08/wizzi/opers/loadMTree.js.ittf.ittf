@@ -1,0 +1,16 @@
+$group
+
+    $ 
+        var openPar = '(';
+
+    function loadMTree
+        param ittfDocumentUri
+        param context
+        param callback
+        _ createWizziFactory
+            {
+            f_cb${openPar} wf )
+                _ wf.loadMTree
+                    @ ittfDocumentUri
+                    @ context
+                    @ callback

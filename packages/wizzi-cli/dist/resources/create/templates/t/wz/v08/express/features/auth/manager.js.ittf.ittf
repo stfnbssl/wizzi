@@ -1,0 +1,176 @@
+$group
+    
+    import passport from 'passport'
+    import jwt from 'express-jwt'
+    ${'$'}if wzCtx.Build.useMongoDb
+        import 
+            @ GetUserModel
+            from './mongo/user.js'
+        import 
+            @ GetAccountModel
+            @ AccountModelType
+            from './mongo/account.js'
+    ${'$'}if wzCtx.Build.useAuthentication
+        ${'$'}if wzCtx.Build.authentication.useLocal
+            import 
+                @ createStrategy
+                    as createLocalStrategy
+                from './strategies/local.js'
+        ${'$'}if wzCtx.Build.authentication.useGithub
+            import 
+                @ createStrategy
+                    as createGithubStrategy
+                from './strategies/github.js'
+    import 
+        @ resolve
+        from 'path'
+    import 
+        @ rejects
+        from 'assert'
+    
+    let initialized = false
+    function initPassport
+        
+        ${'$'}if wzCtx.Build.useMongoDb
+            const userModel
+                _ GetUserModel
+
+        ${'$'}if wzCtx.Build.useAuthentication
+            ${'$'}if wzCtx.Build.authentication.useLocal
+                _ passport.use
+                    _ createLocalStrategy
+        
+        ${'$'}if wzCtx.Build.useAuthentication
+            ${'$'}if wzCtx.Build.authentication.useGithub
+                _ passport.use
+                    _ createGithubStrategy
+        
+        _ passport.serializeUser
+            function 
+                param user
+                param done
+                log 'features.auth.manager.serializeUser.user', user
+                _ done(null, user.id)
+        
+        _ passport.deserializeUser
+            function 
+                param id
+                param done
+                log 'features.auth.manager.deserializeUser.id', id
+                ${'$'}if wzCtx.Build.useMongoDb
+                    _ userModel.findById
+                        @ id
+                        function 
+                            param err
+                            param user
+                            log 'features.auth.manager.deserializeUser.err, user', err, user
+                            _ done(err, user || false)
+                ${'$'}else
+                    _ done
+                        @ null
+                        {
+                            @ id id
+        log 'features.auth.manager.initPassport', 'done'
+        set initialized = true
+
+    function getTokenFromHeaders
+        param req
+        const 
+            { 
+                { headers
+                    @ authorization
+            = req
+        if authorization && authorization.split(' ')[0] === 'Token'
+            return authorization.split(' ')[1]
+        return null
+    
+    export 
+        function getPassport
+            if initialized == false
+                _ initPassport
+            return passport
+    
+    export 
+        function authenticate
+            param strategyName
+            param options
+            param callback
+            return passport.authenticate(strategyName, options, callback)
+    
+    ${'$'}if wzCtx.Build.useMongoDb
+        export 
+            async-function getAccessTokenFromAccount
+                param uid
+                param domain
+                const AccountModel
+                    _ GetAccountModel
+                return 
+                    new Promise
+                        => 
+                            param resolve
+                            param reject
+                            _ AccountModel.findOne
+                                { 
+                                    @ uid
+                                    @ domain
+                                => 
+                                    param err
+                                    param account
+                                    if err
+                                        return reject(err)
+                                    if account
+                                        return resolve(account.tokens[0].token)
+                                    else
+                                        return reject('Token not found')
+        export 
+            async-function getLoggedUserFromAccount
+                param uid
+                param domain
+                const AccountModel
+                    _ GetAccountModel
+                return 
+                    new Promise
+                        => 
+                            param resolve
+                            param reject
+                            _ AccountModel.findOne
+                                { 
+                                    @ uid
+                                    @ domain
+                                => 
+                                    param err
+                                    param account
+                                    if err
+                                        return reject(err)
+                                    if account
+                                        return 
+                                            _ resolve
+                                                { 
+                                                    @ _id 'Unavailable'
+                                                    @ uid
+                                                    @ username account.username
+                                                    @ displayName account.displayName
+                                                    @ picture account.avatar_url
+                                    else
+                                        return reject('Account not found')
+    export 
+        const jwtAuth
+            { 
+                @ required
+                    _ jwt
+                        { 
+                            @ secret 'secret'
+                            @ userProperty 'payload'
+                            [ algorithms
+                                @ 'HS256'
+                            @ getToken getTokenFromHeaders
+                @ optional
+                    _ jwt
+                        { 
+                            @ secret 'secret'
+                            @ userProperty 'payload'
+                            [ algorithms
+                                @ 'HS256'
+                            @ getToken getTokenFromHeaders
+                            @ credentialsRequired false
+

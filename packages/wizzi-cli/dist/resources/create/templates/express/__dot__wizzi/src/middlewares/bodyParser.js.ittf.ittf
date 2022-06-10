@@ -1,0 +1,10 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    v08/express/middlewares/bodyParser${call}

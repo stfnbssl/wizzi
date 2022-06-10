@@ -1,0 +1,5 @@
+div
+	$params title, href
+	style text-align: left
+	a ${title}
+		href ${href}

@@ -1,0 +1,56 @@
+$group
+    
+    $if wzCtx.Build.useWebpack && wzCtx.Build.webpack.useNodePolifills
+        new webpack.ProvidePlugin
+            {
+                @ process 'process/browser.js'
+                @ Buffer
+                    [
+                        @ 'buffer'
+                        @ 'Buffer'
+                @ console 'console-browserify'
+    
+    $if wzCtx.Build.useEnv
+        new webpack.DefinePlugin
+            {
+                @ 'process.env.VERSION' JSON.stringify(env.VERSION)
+                @ 'process.env.PLATFORM' JSON.stringify(env.PLATFORM)
+    
+    $if wzCtx.Build.useMonaco
+        new MonacoWebpackPlugin()
+        #
+            _ new webpack.DefinePlugin
+                {
+                    @ 'process.browser' true
+    
+    $if wzCtx.Build.useMonaco2
+        $$ https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+        new MonacoEditorPlugin
+            {
+                [ languages
+                    @ 'javascript'
+                    @ 'typescript'
+                    @ 'css'
+                    @ 'html'
+    
+    $if wzCtx.Build.webpack.useHtml
+        new HtmlWebpackPlugin
+            {
+                $if wzCtx.Build.webpack.html.template
+                    @ template '${wzCtx.Build.webpack.html.template}'
+                $if wzCtx.Build.webpack.html.filename
+                    @ filename '${wzCtx.Build.webpack.html.filename}'
+                $else
+                    @ filename './index.html'
+    
+    $if wzCtx.Build.useVue
+        new VueLoaderPlugin()
+    
+    $if wzCtx.Build.useHotReplacement
+        new webpack.HotModuleReplacementPlugin()
+    
+    $if wzCtx.Build.webpack.useCopy
+        new CopyWebpackPlugin
+            [
+                {
+                    @ from 'src/static'

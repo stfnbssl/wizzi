@@ -1,0 +1,76 @@
+$group
+
+    export 
+        :type ConfigType
+            :{ 
+                :p port
+                    :number 
+                :p sessionSecret
+                    :string 
+                :p noCache
+                    :boolean
+                ${'$'}if wzCtx.Build.useCors
+                    :p corsClientOrigin
+                        :string 
+                ${'$'}if wzCtx.Build.useMongoDb
+                    :p mongoHost
+                        :string 
+                    :p mongoUser
+                        :string 
+                    :p mongoPassword
+                        :string 
+                    :p mongoPath
+                        :string 
+                    :p mongoConnectUrl
+                        :string 
+                ${'$'}if wzCtx.Build.useAuthentication
+                    :p auth0Domain
+                        :string 
+                    ${'$'}if wzCtx.Build.usePacki
+                        :p auth0PackiClientId
+                            :string 
+                        :p auth0PackiClientSecret
+                            :string 
+                        :p auth0PackiCallbackUrl
+                            :string 
+                        :p auth0PackiBackendAppId
+                            :string 
+                        :p auth0PackiBackendAppSecret
+                            :string 
+                        :p auth0PackiApiId
+                            :string 
+                    :p auth0IssuerBaseURL
+                        :string 
+                    :p auth0ClientId
+                        :string 
+                    :p auth0BaseURL
+                        :string 
+                    :p auth0Secret
+                        :string 
+                    ${'$'}if wzCtx.Build.authentication.useGithub
+                        :p githubClientId
+                            :string 
+                        :p githubClientSecret
+                            :string 
+                        :p githubCallbackURL
+                            :string 
+                ${'$'}if wzCtx.Build.useWizzi
+                    :p isWizziDev
+                        :boolean 
+                    :p ittfPath
+                        :string 
+                    :p dataPath
+                        :string 
+                    :p metaHtmlIttfPath
+                        :string 
+                    :p metaFolderIttfPath
+                        :string 
+                    :p metaHtmlTextPath
+                        :string 
+                ${'$'}if wzCtx.Build.usePacki
+                    :p packiStoreFolder
+                        :string 
+                    :p packiTemplatesFolder
+                        :string 
+                    :p packiApiEndpoint
+                        :string 

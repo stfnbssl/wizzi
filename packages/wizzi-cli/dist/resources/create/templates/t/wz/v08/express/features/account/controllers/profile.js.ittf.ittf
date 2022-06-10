@@ -1,0 +1,41 @@
+$group
+
+    import { Router } from 'express'
+    ${'$'}if wzCtx.Build.useAuthentication
+        import eoic from 'express-openid-connect'
+        const { requiresAuth } = eoic
+    import { sendFailure, sendSuccess } from '../../../utils/response.js'
+
+    export
+        class ProfileController
+            ctor
+                set this.path = '/account/profile'
+                set this.router = Router()
+
+            m initialize
+                param initValues
+                log 'Entering ProfileController.initialize'
+                _ this.router.get
+                    @ `/`
+                    ${'$'}if wzCtx.Build.useAuthentication
+                        _ requiresAuth
+                    @ this.get
+                    ._ bind
+                        @ this
+            
+            m get
+                param request
+                param response
+                param next
+                _ response.render
+                    @ 'account/profile/index.html.ittf'
+                    {
+                        @ title 'Profile page'
+                        ${'$'}if wzCtx.Build.useAuthentication
+                            @ user request.oidc.user
+                            @ userProfile JSON.stringify(request.oidc.user, null, 2)
+                        ${'$'}else
+                            { user
+                                @ name "unavailable"
+                                @ nickname "unavailable"
+                            @ userProfile "User profile unavailable, the App needs Auth configuration."

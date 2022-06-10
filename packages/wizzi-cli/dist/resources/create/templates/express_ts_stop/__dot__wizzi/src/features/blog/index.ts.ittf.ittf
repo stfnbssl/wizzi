@@ -1,0 +1,14 @@
+module
+    kind es6
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {};
+        if (wzCtx.Build.useBlog) {
+            md.tobeIncluded = true;
+            md.feature = wzCtx.Build.blog;
+        }
+
+    ${'$'}if md.tobeIncluded
+        v08/express/features/dataModels/index${call}

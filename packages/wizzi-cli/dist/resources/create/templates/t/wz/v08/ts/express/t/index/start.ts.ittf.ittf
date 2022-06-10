@@ -1,0 +1,81 @@
+$group
+
+    ${'$'}if wzCtx.Build.useMongoDb
+        let modelBuilders
+            :[ 
+                :ref ModelBuilderType
+            =
+                [ 
+                    ${'$'}if wzCtx.Build.useAuthentication
+                        @ ...authenticationModelBuilders
+                    ${'$'}if wzCtx.Build.useAuthorization
+                        @ ...authorizationModelBuilders
+                    ${'$'}if wzCtx.Build.useAccount
+                        @ ...accountModelBuilders
+                    ${'$'}if wzCtx.Build.useBlog
+                        @ ...postModelBuilders
+        await mongodbStart(config, modelBuilders)
+        +
+    let middlewaresPre
+        :[ 
+            :ref MiddlewareType
+        =
+            [ 
+                @ ...appMiddlewaresPre
+    let middlewaresPost
+        :[ 
+            :ref MiddlewareType
+        =
+            [ 
+                @ ...appMiddlewaresPost
+        +
+    let controllers
+        :[ 
+            :ref ControllerType
+        =
+            [ 
+                ${'$'}if wzCtx.Build.useSite
+                    @ ...siteControllers
+                $$ For now auth needs MongoDb
+                ${'$'}if wzCtx.Build.useMongoDb
+                    ${'$'}if wzCtx.Build.useAuthentication
+                        @ ...authenticationControllers
+                    ${'$'}if wzCtx.Build.useAuthorization
+                        @ ...authorizationControllers
+                ${'$'}if wzCtx.Build.useAccount
+                    @ ...accountControllers
+                ${'$'}if wzCtx.Build.useBlog
+                    @ ...postControllers
+                ${'$'}if wzCtx.Build.usePacki
+                    @ ...packiControllers
+                ${'$'}if wzCtx.Build.useWizzi
+                    @ ...wizziControllers
+
+        +
+    log 'Starting app. Config:', config
+    
+    ${'$'}if wzCtx.Build.useFilesystem
+        const fsDb
+            await 
+                _ filesystemStart(config)
+    
+    ${'$'}if wzCtx.Build.useWizzi
+        await 
+            _ wizziStart(config)
+
+    const appInitializer
+        :ref AppInitializerType
+        =
+            { 
+                @ config
+                @ middlewaresPre
+                @ controllers
+                @ middlewaresPost
+                ${'$'}if wzCtx.Build.useFilesystem
+                    @ fsDb
+                ${'$'}if wzCtx.Build.useAuthentication
+                    @ auth0Secured
+
+    const app = new App(appInitializer)
+
+

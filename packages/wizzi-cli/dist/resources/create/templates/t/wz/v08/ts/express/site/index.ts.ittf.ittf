@@ -1,0 +1,36 @@
+$group
+
+    import 
+        @ ControllerType
+        from '../features/app'
+
+    ${'$'}if wzCtx.Build.useSite
+        ${'$'}if wzCtx.Build.useDemoControllers
+            import 
+                @ DemoHomeController
+                from './controllers/demoHome'
+            ${'$'}if wzCtx.Build.useWizziViewEngine
+                import 
+                    @ DemoWizziController
+                    from './controllers/demoWizzi'
+            ${'$'}if wzCtx.Build.useAuthentication
+                import 
+                    @ DemoAccountController
+                    from './controllers/demoAccount'
+        ${'$'}hook imports
+    
+    const siteControllers
+        :[ 
+            :ref ControllerType
+        =
+            [ 
+                ${'$'}if wzCtx.Build.useSite
+                    ${'$'}if wzCtx.Build.useDemoControllers
+                        @ new DemoHomeController()
+                        ${'$'}if wzCtx.Build.useWizziViewEngine
+                            @ new DemoWizziController()
+                        ${'$'}if wzCtx.Build.useAuthentication
+                            @ new DemoAccountController()
+                ${'$'}hook controllers
+    export
+        @ siteControllers

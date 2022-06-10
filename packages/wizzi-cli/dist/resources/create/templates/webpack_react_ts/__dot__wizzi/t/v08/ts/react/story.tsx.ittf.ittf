@@ -1,0 +1,5 @@
+${'$'}group
+	${'$'}params name
+
+    $include wz/v08/ts/react/story.tsx
+

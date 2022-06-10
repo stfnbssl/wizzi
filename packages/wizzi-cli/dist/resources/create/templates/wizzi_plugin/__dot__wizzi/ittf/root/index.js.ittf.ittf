@@ -1,0 +1,55 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    v08/root/index${call}
+
+        ${'$'}append model-transform-artifacts
+            # window(s) vars must be declared even if empty
+            var window_modelFactories
+                {
+                    @ '${cliCtx.Schemas[0].name}' require('./lib/wizzi/models/${cliCtx.Schemas[0].name}-factory.g')
+            var window_artifactGenerators
+                {
+                    @ '${cliCtx.Schemas[0].name}/document' require('./lib/artifacts/${cliCtx.Schemas[0].name}/document/gen/main')
+            var window_transformers
+                {
+                    @ '${cliCtx.Schemas[0].name}/extended' require('./lib/artifacts/${cliCtx.Schemas[0].name}/extended/trans/main')
+            var window_schemaDefinitions
+                {
+
+        @ provides
+            {
+                @ schemas
+                    [
+                        @ '${cliCtx.Schemas[0].name}'
+                @ modelTransformers
+                    [
+                        @ '${cliCtx.Schemas[0].name}/extended'
+                @ artifactGenerators
+                    [
+                        @ '${cliCtx.Schemas[0].name}/document'
+
+        @ provides
+            {
+                @ schemas
+                    [
+                        ${'$'}foreach schema in wzCtx.Schemas
+                            @ '${'$'}{schema.name}'
+                @ modelTransformers
+                    [
+                        ${'$'}foreach schema in wzCtx.Schemas
+                            ${'$'}foreach trans in schema.modelTransformers
+                                @ '${'$'}{schema.name}/${'$'}{trans.name}'
+                @ artifactGenerators
+                    [
+                        ${'$'}foreach schema in wzCtx.Schemas
+                            ${'$'}foreach artifact in schema.artifactGenerators
+                                @ '${'$'}{schema.name}/${'$'}{artifact.name}'
+
+

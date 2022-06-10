@@ -1,0 +1,30 @@
+module
+    import 
+        @ StyleSheet
+        @ css
+        from 'aphrodite'
+    import 
+        as React
+        from 'react'
+    :type Props
+        :{ 
+            :p children
+                :ref React.ReactNode
+    export-default 
+        function ToolbarTitleShell
+            { 
+                @ children
+                :ref Props
+            return 
+                div 
+                    @ className {css(styles.left)}
+                    + {children}
+    const styles
+        _ StyleSheet.create
+            { 
+                { left
+                    @ display 'flex'
+                    @ flexDirection 'row'
+                    @ alignItems 'center'
+                    @ minWidth 0
+                    @ flex 1

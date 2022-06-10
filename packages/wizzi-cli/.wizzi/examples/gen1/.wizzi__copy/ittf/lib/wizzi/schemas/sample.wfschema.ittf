@@ -1,0 +1,9 @@
+wfschema sample
+
+	e basic
+		is-root
+
+		r item/s
+		
+	e item
+		a value

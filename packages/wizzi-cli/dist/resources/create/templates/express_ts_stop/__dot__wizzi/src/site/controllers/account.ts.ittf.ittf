@@ -1,0 +1,13 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useSite
+        ${'$'}if wzCtx.Build.useAuthentication
+            ${'$'}if wzCtx.Build.useAccount
+                v08/express/site/controllers/account${call}

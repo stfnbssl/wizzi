@@ -1,0 +1,25 @@
+$group
+
+	function promptWebpack
+        param callback
+        var questions
+                { 
+                    @ type 'list'
+                    @ name 'webpack_type'
+                    @ message 'What kind of webpack package do you want create?'
+                    [ choices
+                        @ 'Pure_Js_Html_Css'
+                        @ 'React'
+                        @ 'React_MaterialUI'
+                        @ 'Go_Back'
+                    @ filter
+                        function 
+                            param val
+                            return 
+                                _ val.toLowerCase
+        _ inquirer.prompt(questions).then
+            => 
+                param answers
+                _ console.log('\nNew webpack package type:')
+                _ console.log(JSON.stringify(answers, null, '  '))
+                r_cb(answers)

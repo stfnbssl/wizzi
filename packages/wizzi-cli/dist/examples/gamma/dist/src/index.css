@@ -1,0 +1,60 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\node_modules\wizzi-web\lib\artifacts\css\document\gen\main.js
+    package: wizzi-web@0.7.7
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\examples\gamma\.wizzi\src\index.css.ittf
+    utc time: Mon, 15 Feb 2021 13:37:11 GMT
+*/
+body {
+    background-color: #e3f7b2;
+}
+.main {
+    margin: 50px;
+}
+.code-panel {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+.prettyprint {
+    font-size: 13px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+    -moz-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+    -o-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.05);
+    overflow: auto;
+}
+.prettyprint.source {
+    width: inherit;
+}
+.prettyprint > code {
+    padding: 15px;
+}
+.prettyprint code {
+    font-size: 100%;
+    line-height: 18px;
+    display: block;
+    background-color: #fff;
+    color: #4D4E53;
+}
+pre {
+    background: #fff;
+    padding: 0px;
+}
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    -webkit-border-radius: 0;
+    -khtml-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+}
+

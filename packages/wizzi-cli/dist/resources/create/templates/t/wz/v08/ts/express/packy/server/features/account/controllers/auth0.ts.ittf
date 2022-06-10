@@ -1,0 +1,78 @@
+module
+    import 
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    import 
+        as bodyParser
+        from 'body-parser'
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        from '../../app/types'
+    import 
+        @ auth0ApiCalls
+        from '../../auth0'
+    import 
+        @ sendPromiseResult
+        @ sendSuccess
+        from '../../../utils/response'
+    import 
+        @ file
+        from 'wizzi'
+    var jsonParser = bodyParser.json()
+    export 
+        class Auth0Controller
+            :implements ControllerType
+            p path
+                :public 
+                = '/api/v1/auth0'
+            p router
+                :public 
+                _ Router()
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /users
+                    @expr this.getUsers
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /users/:id
+                    @expr this.getUser
+            p getUsers
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    const users
+                        await 
+                            _ auth0ApiCalls.getUsers()
+                    _ console.log('getUsers.received users', JSON.stringify(users, null, 2))
+                    _ sendSuccess
+                        @ response
+                        { 
+                            @ users
+            p getUser
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    const user
+                        await 
+                            _ auth0ApiCalls.getUser(request.params.id)
+                    _ console.log('getUser.received user', JSON.stringify(user, null, 2))
+                    _ sendSuccess
+                        @ response
+                        { 
+                            @ user

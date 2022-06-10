@@ -1,0 +1,48 @@
+$group
+
+    import 
+        @ Schema
+        @ Model
+        @ model
+        from "mongoose"
+    import 
+        @ ModelBuilderType
+        from "../../app/types"
+    import 
+        @ ITokenModel
+        from "../types"
+    +
+    export 
+        const TokenSchema
+            new Schema
+                :param ITokenModel
+                { 
+                    { kind
+                        @ type String
+                    { token
+                        @ type String
+                    { attributes
+                        @ type Map
+                        @ of String
+    +
+    export 
+        :type TokenModelType
+            :ref Model
+                :param 
+                    :ref ITokenModel
+    +
+    let tokenModel
+        :ref TokenModelType
+    +
+    export 
+        function GetTokenModel
+            return tokenModel
+    +
+    export 
+        const TokenModelBuilder
+            :ref ModelBuilderType
+            =
+                { 
+                    @ buildModel
+                        => 
+                            set tokenModel = model('Token', TokenSchema)

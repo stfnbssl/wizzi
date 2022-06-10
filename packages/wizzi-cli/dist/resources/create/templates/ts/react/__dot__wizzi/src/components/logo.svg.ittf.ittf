@@ -1,0 +1,10 @@
+svg
+
+    $
+        var call = '(&md)';
+
+	${'$'}
+		var md = {};
+
+	v08/ts/react/basic/logo${call}    
+

@@ -1,0 +1,96 @@
+$group
+
+    import 
+        @ Schema
+        @ Model
+        @ model
+        from "mongoose"
+    import 
+        @ ModelBuilderType
+        from "../../app/types"
+    import 
+        @ IUserModel
+        from "../types"
+    const crypto = require('crypto')
+    const jwt = require('jsonwebtoken')
+    +
+    const UserSchema
+        new Schema
+            :param IUserModel
+            { 
+                { userName
+                    @ type String
+                { realName
+                    @ type String
+                { email
+                    @ type String
+                { hash
+                    @ type String
+                { salt
+                    @ type String
+            { 
+                @ collection 'users'
+    set UserSchema.methods.setPassword =
+        function 
+            param password
+                :string 
+            set this.salt = crypto.randomBytes(16).toString('hex')
+            set this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
+            _ console.log('features.auth.mongo.user.setPassword.salt,hash', this.salt, this.hash)
+    set UserSchema.methods.validatePassword =
+        function 
+            param password
+                :string 
+            :return
+                :boolean 
+            const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
+            _ console.log('features.auth.mongo.user.validatePassword.hash,this.hash', hash, this.hash)
+            return this.hash === hash
+    set UserSchema.methods.generateJWT =
+        function 
+            const today = new Date()
+            const expirationDate = new Date(today)
+            _ expirationDate.setDate(today.getDate() + 60)
+            return 
+                _ jwt.sign
+                    { 
+                        @ email this.email
+                        @ id this._id
+                        @ exp parseInt(String(expirationDate.getTime() / 1000), 10)
+                    @ 'secret'
+    set UserSchema.methods.toAuthJSON =
+        function 
+            return 
+                { 
+                    @ _id this._id
+                    @ email this.email
+                    @ token this.generateJWT()
+    +
+    export 
+        :type UserModelType
+            :ref Model
+                :param 
+                    :ref IUserModel
+    +
+    let userModel
+        :ref UserModelType
+    +
+    export 
+        function GetUserModel
+            :return
+                :ref UserModelType
+            return userModel
+    +
+    export 
+        const UserModelBuilder
+            :ref ModelBuilderType
+            =
+                { 
+                    @ buildModel
+                        => 
+                            set userModel =
+                                _ model
+                                    :param 
+                                        :ref IUserModel
+                                    @ "User"
+                                    @ UserSchema

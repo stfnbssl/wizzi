@@ -1,0 +1,33 @@
+module
+    kind react
+
+    export-default 
+        function bindActions
+            param actions
+            param dispatch
+            const bindAction
+                => 
+                    param action
+                    param dispatch
+                    return 
+                        function 
+                            return dispatch(action.apply(null, arguments))
+            # if it's a single action
+            if typeof actions === 'function'
+                return bindAction(actions, dispatch)
+            if typeof actions !== 'object' || actions === null
+                throw 
+                    new Error
+                        `lit 
+                            + bindActions expected an object or a function, instead received\b
+                            iif actions === null
+                                then 'null'
+                                else typeof actions
+                            + .\b
+            const boundActions
+                { 
+            for var key in actions
+                const action = actions[key]
+                if typeof action === 'function'
+                    set boundActions[key] = bindAction(action, dispatch)
+            return boundActions

@@ -1,0 +1,16 @@
+html
+    $
+        var md = {
+        }
+    layout(&md)
+        h1 Hello world from site/views/home/index.html
+        . w3-container
+            $if locals.user
+                h4 You are logged in!
+            $else
+                h4 You are not logged in! Please 
+                    a Log In 
+                        href /account/login
+                    + to continue.
+        h1 Test
+        p ${mpage.test.path}

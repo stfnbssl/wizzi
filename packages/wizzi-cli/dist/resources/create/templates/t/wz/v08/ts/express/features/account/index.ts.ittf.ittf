@@ -1,0 +1,31 @@
+$group
+
+    import 
+        @ ModelBuilderType
+        @ ControllerType
+        from '../app/types'
+
+    import
+        @ ProfileController
+        from './controllers/profile'
+    
+    const accountModelGetters
+        {
+
+    const accountModelBuilders
+        :[ 
+            :ref ModelBuilderType
+        =
+            [
+    
+    const accountControllers
+        :[ 
+            :ref ControllerType
+        =
+            [
+                new ProfileController
+    
+    export
+        @ accountModelGetters
+        @ accountModelBuilders
+        @ accountControllers

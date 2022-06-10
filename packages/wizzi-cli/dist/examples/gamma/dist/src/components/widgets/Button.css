@@ -1,0 +1,88 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\node_modules\wizzi-web\lib\artifacts\css\document\gen\main.js
+    package: wizzi-web@0.7.7
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\examples\gamma\.wizzi\src\components\widgets\Button.css.ittf
+    utc time: Mon, 15 Feb 2021 13:37:11 GMT
+*/
+.button {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #fff;
+    color: #444;
+    font-weight: 500;
+    -webkit-box-shadow: 1px 2px 4px 0 rgba(#000, 0.15);
+    -moz-box-shadow: 1px 2px 4px 0 rgba(#000, 0.15);
+    -o-box-shadow: 1px 2px 4px 0 rgba(#000, 0.15);
+    box-shadow: 1px 2px 4px 0 rgba(#000, 0.15);
+    border: none;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    outline: none;
+}
+.button:active {
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(#000, 0.15);
+    -moz-box-shadow: 1px 1px 2px 0 rgba(#000, 0.15);
+    -o-box-shadow: 1px 1px 2px 0 rgba(#000, 0.15);
+    box-shadow: 1px 1px 2px 0 rgba(#000, 0.15);
+}
+.button[type=button]:not(:disabled), .button[type=reset]:not(:disabled), .button[type=submit]:not(:disabled), .button:not(:disabled) {
+    cursor: pointer;
+}
+.button-primary {
+    background-color: #f80;
+    color: #fff;
+    -webkit-box-shadow: 1px 2px 4px 0 rgba(#f00, 0.5);
+    -moz-box-shadow: 1px 2px 4px 0 rgba(#f00, 0.5);
+    -o-box-shadow: 1px 2px 4px 0 rgba(#f00, 0.5);
+    box-shadow: 1px 2px 4px 0 rgba(#f00, 0.5);
+}
+.button-large {
+    min-width: 100px;
+    height: 50px;
+    font-weight: 300;
+    font-size: inherit;
+}
+.button-fill {
+    min-width: 100%;
+}
+.button-loading {
+    cursor: not-allowed;
+}
+.button-loading .button-text, .button-loading .button-icon {
+    display: none;
+}
+.button-spinner {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    -webkit-border-radius: 50%;
+    -khtml-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    border-top: 2px solid #f80;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% {
+    }
+    100% {
+    }
+}
+

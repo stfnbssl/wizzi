@@ -1,0 +1,15 @@
+module
+    kind es6
+    const hljs = require('highlight.js/lib/core')
+    _ hljs.registerLanguage('js', require('highlight.js/lib/languages/javascript'))
+    _ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'))
+    _ hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'))
+    _ hljs.registerLanguage('html', require('highlight.js/lib/languages/xml'))
+    function hjsMe
+        param code
+        param lang
+        set lang = lang || 'js'
+        const highlightedCode = hljs.highlight(lang, code).value
+        log 'highlightedCode', highlightedCode
+        return highlightedCode
+    set module.exports = hjsMe

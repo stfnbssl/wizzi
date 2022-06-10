@@ -1,0 +1,45 @@
+${'$'}group
+    ${'$'}params &md
+
+    var stylesInjected = false
+
+    export
+        function createList
+            param listDef
+            param elementId
+
+            const jq2
+                _ jQuery.noConflict
+            _ jq2
+                function 
+                    param $
+                    
+                    if !stylesInjected
+                        _ injectListStyles
+                        set stylesInjected = true
+
+                    set document.getElementById(elementId).innerHTML
+                        _ getContainer
+                            @ listDef
+                    
+                    _ startList
+                        @ $
+                        @ listDef
+
+                    _ startListValidation
+                        @ $
+                        @ listDef
+
+    html_f getContainer
+        
+        _ listHtml
+            @ __html
+            @ ctx
+
+    $include wz/v08/js/page/injectStyles.js
+    $include wz/v08/js/lists/listStyles.js
+    $include wz/v08/js/lists/listHtml.js
+    $include wz/v08/js/lists/listUlHtml.js
+    $include wz/v08/js/lists/listTableHtml.js
+    $include wz/v08/js/lists/startList.js
+    $include wz/v08/js/lists/startListValidation.js

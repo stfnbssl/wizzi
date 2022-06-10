@@ -1,0 +1,10 @@
+module
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useData
+        v08/api/fetch${call}

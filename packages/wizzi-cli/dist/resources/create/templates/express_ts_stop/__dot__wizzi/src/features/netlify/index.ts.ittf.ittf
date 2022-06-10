@@ -1,0 +1,11 @@
+module
+    kind es6
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useNetlify
+        v08/express/features/netlify/index${call}

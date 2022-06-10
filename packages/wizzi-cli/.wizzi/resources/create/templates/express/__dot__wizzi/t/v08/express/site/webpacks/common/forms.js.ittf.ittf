@@ -1,0 +1,43 @@
+${'$'}group
+    ${'$'}params &md
+
+    var stylesInjected = false
+
+    export
+        function createForm
+            param formDef
+            param elementId
+
+            const jq2
+                _ jQuery.noConflict
+            _ jq2
+                function 
+                    param $
+                    
+                    if !stylesInjected
+                        _ injectFormStyles
+                        set stylesInjected = true
+
+                    set document.getElementById(elementId).innerHTML
+                        _ getContainer
+                            @ formDef
+                    
+                    _ startForm
+                        @ $
+                        @ formDef
+
+                    _ startFormValidation
+                        @ $
+                        @ formDef
+
+    html_f getContainer
+        
+        _ formHtml
+            @ __html
+            @ ctx
+
+    $include wz/v08/js/page/injectStyles.js
+    $include wz/v08/js/forms/formHtml.js
+    $include wz/v08/js/forms/formStyles.js
+    $include wz/v08/js/forms/startForm.js
+    $include wz/v08/js/forms/startFormValidation.js

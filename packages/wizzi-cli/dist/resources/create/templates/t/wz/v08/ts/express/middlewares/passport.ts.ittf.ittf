@@ -1,0 +1,16 @@
+$group
+
+    import 
+        @ Application
+        from 'express'
+    import 
+        @ authManager
+        from '../features/auth'
+    export 
+        const PassportMiddleware
+            => 
+                param app
+                    :ref Application
+                const passport = authManager.getPassport()
+                _ app.use(passport.initialize())
+                _ app.use(passport.session())

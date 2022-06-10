@@ -1,0 +1,12 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useSite
+        ${'$'}if wzCtx.Build.site.useIttfStatic
+            v08/express/middlewares/ittfStatic${call}

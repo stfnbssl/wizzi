@@ -1,0 +1,8 @@
+{
+    $include cli/v08/wzctx-info.json
+    type "module"
+
+    { Build
+    { Styles
+    { Code   
+    { App

@@ -1,0 +1,45 @@
+{
+    "name": "beta",
+    "version": "0.0.1",
+    "description": "",
+    "author": {
+        "name": "",
+        "email": ""
+    },
+    "license": {
+        "type": "",
+        "url": ""
+    },
+    "Build": {
+        "useWebpack": true,
+        "webpack": {
+            "useCss": true,
+            "useSass": false,
+            "useHtml": true,
+            "useDevServer": true
+        },
+        "useHotReplacement": true,
+        "hotReplacement": {},
+        "useBabel": true,
+        "babel": {}
+    },
+    "Keys": {
+        "fontAwesome": "eab461efef"
+    },
+    "Css": {
+        "useReset": true,
+        "reset": {
+            "useMeyer": true
+        },
+        "useFontAwesome": true,
+        "fontAwesome": {},
+        "useBootstrap": false,
+        "bootstrap": {
+            "v4": false
+        }
+    },
+    "Code": {
+        "useHighlight": true,
+        "highlight": {}
+    }
+}

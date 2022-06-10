@@ -1,0 +1,3 @@
+﻿${'$'}group
+    
+    $include wz/v08/webpack/module.rules.js

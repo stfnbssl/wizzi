@@ -1,0 +1,151 @@
+module
+    import 
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    import 
+        as passport
+        from 'passport'
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        from '../../features/app/types'
+    import 
+        @ githubApiCalls
+        from '../../features/github'
+    export 
+        class RepoController
+            :implements ControllerType
+            p path
+                :public 
+                = '/repo'
+            p router
+                :public 
+                _ Router()
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /list
+                    _ initValues.auth0Secured()
+                    @expr this.list
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /view/:owner/:repo
+                    _ initValues.auth0Secured()
+                    @expr this.view
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /clone/:owner/:repo
+                    _ initValues.auth0Secured()
+                    @expr this.clone
+            p list
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    param next
+                        :ref Function
+                    const repos
+                        await 
+                            _ githubApiCalls.getRepositories
+                                @expr 
+                                    ( 
+                                        @expr request.session
+                                            :as 
+                                                :any 
+                                    . github_accessToken
+                    const 
+                        { 
+                            @ _raw
+                            @ _json
+                            ... user
+                        = request.user
+                    _ response.render
+                        @ 'repo/list.html.ittf'
+                        { 
+                            @ user
+                            @ userProfile JSON.stringify(user, null, 2)
+                            @ repos
+                            @ title 'Repositories page'
+            p view
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    param next
+                        :ref Function
+                    const repo
+                        await 
+                            _ githubApiCalls.getRepository
+                                @expr request.params.owner
+                                @expr request.params.repo
+                                @expr 
+                                    ( 
+                                        @expr request.session
+                                            :as 
+                                                :any 
+                                    . github_accessToken
+                    const 
+                        { 
+                            @ _raw
+                            @ _json
+                            ... user
+                        = request.user
+                    _ response.render
+                        @ 'repo/view.html.ittf'
+                        { 
+                            @ user
+                            @ userProfile JSON.stringify(user, null, 2)
+                            @ repo
+                            @ title 'Repository page'
+            p clone
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    param next
+                        :ref Function
+                    const clonedBranch
+                        await 
+                            _ githubApiCalls.cloneBranch
+                                { 
+                                    @ name request.params.repo
+                                    @ owner request.params.owner
+                                    @ token
+                                        @expr 
+                                            ( 
+                                                @expr request.session
+                                                    :as 
+                                                        :any 
+                                            . github_accessToken
+                                @ 'master'
+                    const 
+                        { 
+                            @ _raw
+                            @ _json
+                            ... user
+                        = request.user
+                    _ response.render
+                        @ 'repo/clone.html.ittf'
+                        { 
+                            @ user
+                            @ userProfile JSON.stringify(user, null, 2)
+                            @ repo request.params.repo
+                            @ cloned clonedBranch.files
+                            @ commitHistory clonedBranch.commitHistory
+                            @ title 'Repository page'

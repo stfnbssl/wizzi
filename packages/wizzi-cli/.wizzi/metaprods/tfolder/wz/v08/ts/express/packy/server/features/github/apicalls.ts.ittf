@@ -1,0 +1,726 @@
+module
+    import fetch from 'node-fetch'
+    import 
+        as path
+        from 'path'
+    import 
+        as git
+        from 'isomorphic-git'
+    import 
+        @ createFsFromVolume
+        @ Volume
+        from 'memfs'
+        # import { fs } from 'memfs';
+    import 
+        @ vfile
+        @ FsImpl
+        @ FileDef
+        from 'wizzi-utils'
+        # import { fs } from 'memfs';
+    import 
+        @ FileDiff
+        @ FileDiffItem
+        from '../repo/types'
+    import 
+        @ PackiFiles
+        from '../packi/types'
+    import 
+        @ GithubRepoOptions
+        @ CreateGithubRepoOptions
+        @ CreateGithubBranchOptions
+        @ ClonedGitRepository
+        @ GithubApiRepository
+        from './types'
+    const volume = new Volume()
+    const fs = createFsFromVolume(volume)
+    set =
+        @expr 
+            ( 
+                + fs
+                    :as 
+                        :any 
+            . kind
+        literal 'filesystem'
+    const wizzifs
+        _ vfile
+            + fs
+                :as 
+                    :ref FsImpl
+    :type cb
+        :< T
+        :=> 
+            :void 
+            param err
+                :any 
+            param result
+                :ref T
+        # const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'test-'));
+    export 
+        async-function getRepositories
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param 
+                        :[ 
+                            :ref GithubApiRepository
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/user/repos
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('getRepositories.responseData', responseData)
+                            return responseData
+        # const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'test-'));
+    export 
+        async-function getRepository
+            param owner
+                :string 
+            param repo
+                :string 
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + 
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        async=> 
+                            param responseData
+                            _ console.log('getRepository.responseData', responseData)
+                            set responseData._revisions =
+                                await 
+                                    _ getRevisions(owner, repo, accessToken)
+                            set responseData._commits =
+                                await 
+                                    _ getCommits(owner, repo, accessToken)
+                            set responseData._contents =
+                                await 
+                                    _ getContents(owner, repo, accessToken)
+                            return responseData
+    export 
+        async-function getPackiTemplateRepositories
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/users/stfnbssl/repos
+                    _ getOptions()
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                                :[ 
+                                    :ref GithubApiRepository
+                            _ console.log('getRepositories.responseData', responseData)
+                            return 
+                                _ responseData.filter
+                                    => 
+                                        param value
+                                        _ value.name.startsWith('packi-template-')
+    export 
+        async-function createRepository
+            param accessToken
+                :string 
+            param options
+                :ref CreateGithubRepoOptions
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/user/repos
+                    _ postOptions(accessToken, options)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('createRepository.responseData', responseData)
+                            return responseData
+    export 
+        async-function getRevisions
+            param owner
+                :string 
+            param repo
+                :string 
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /git/refs/heads
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('getRevisions.responseData', responseData)
+                            return responseData
+    export 
+        async-function getBranches
+            param owner
+                :string 
+            param repo
+                :string 
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /branches
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('getBranches.responseData', responseData)
+                            return responseData
+    export 
+        async-function createBranch
+            param accessToken
+                :string 
+            param owner
+                :string 
+            param repo
+                :string 
+            param options
+                :ref CreateGithubBranchOptions
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /git/refs
+                    _ postOptions
+                        @ accessToken
+                        { 
+                            @ ref
+                                `lit 
+                                    + refs/heads/
+                                    @ options.name
+                                    + >
+                            @ sha options.revisionFromHash
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('createBranch.responseData', responseData)
+                            return responseData
+    export 
+        async-function cloneBranch
+            param repo
+                :ref GithubRepoOptions
+            param branch
+                :string 
+                = 'master'
+            param kind
+                :string 
+                = 'all'
+            :return
+                :ref Promise
+                    :param 
+                        :ref ClonedGitRepository
+            _ volume.reset()
+            const dir = '/' + repo.name
+            return 
+                new Promise
+                    => 
+                        param resolve
+                        param reject
+                        _ fs.mkdir
+                            @ dir
+                            async=> 
+                                param err
+                                if err
+                                    return reject(err)
+                                await 
+                                    _ git.clone
+                                        { 
+                                            @ fs
+                                            @ dir
+                                            @ url
+                                                `lit 
+                                                    + https://github.com/
+                                                    @ repo.owner
+                                                    + /
+                                                    @ repo.name
+                                                    + 
+                                            @ ref
+                                                `lit 
+                                                    + 
+                                                    @ branch
+                                                    + 
+                                            @ singleBranch true
+                                            @ depth 10
+                                            @ token repo.token
+                                let files
+                                    _ wizzifs.getFiles
+                                        @ dir
+                                        { 
+                                            @ deep true
+                                            @ documentContent true
+                                const packies
+                                    :ref PackiFiles
+                                    =
+                                        { 
+                                _ files.forEach
+                                    => 
+                                        param file
+                                        if file.relPath.startsWith('.git/') == false
+                                            if kind === 'all' || kind === 'ittf' && file.relPath.endsWith('.ittf') == true
+                                                set packies[file.relPath] =
+                                                    { 
+                                                        @ type "CODE"
+                                                        @ contents
+                                                            @expr file.content
+                                                                :as 
+                                                                    :string 
+                                const log
+                                    await 
+                                        _ git.log
+                                            { 
+                                                @ fs
+                                                @ dir
+                                _ resolve
+                                    { 
+                                        @ owner
+                                            @expr repo.owner
+                                                :as 
+                                                    :string 
+                                        @ name repo.name
+                                        @ description ''
+                                        @ branch
+                                        @ files packies
+                                        @ commitHistory log
+    export 
+        async-function updateBranch
+            param packiFiles
+                :ref PackiFiles
+            param repo
+                :ref GithubRepoOptions
+            param branch
+                :string 
+                = 'master'
+            _ volume.reset()
+            const dir = '/' + repo.name
+            _ fs.mkdir
+                @ dir
+                async=> 
+                    param err
+                    await 
+                        _ git.clone
+                            { 
+                                @ fs
+                                @ dir
+                                @ url
+                                    `lit 
+                                        + https://github.com/
+                                        @ repo.owner
+                                        + /
+                                        @ repo.name
+                                        + 
+                                @ ref
+                                    `lit 
+                                        + 
+                                        @ branch
+                                        + 
+                                @ singleBranch true
+                                @ depth 10
+                    let files = fs.readdirSync(dir)
+                    _ console.log('updateBranch - packiFiles', Object.keys(packiFiles))
+                    _ console.log('updateBranch - cloned files', files)
+                        #
+                            # 
+                            # Object.keys(packiFiles).forEach(filePath=> {
+                            # if (packiFiles[filePath].type === "CODE") {
+                            # fs.writeFileSync(path.join(dir, filePath), packiFiles[filePath].contents);
+                            # }
+                            # })
+                            # 
+                        # let msg = await git.log({fs, dir});
+                        # console.log(msg);
+                    _ filesDiff
+                        @ dir
+                        @ packiFiles
+                        async=> 
+                            param err
+                            param result
+                            try 
+                                _ Object.keys(result).forEach
+                                    => 
+                                        param entryName
+                                        if result[entryName].kind === '+' || result[entryName].kind === '<>'
+                                            _ console.log('updateBranch - write file', path.join(dir, entryName))
+                                            _ wizzifs.write
+                                                _ path.join(dir, entryName)
+                                                @expr 
+                                                    ( 
+                                                        @expr result[entryName].b
+                                                            :as 
+                                                                :ref FileDiffItem
+                                                    . content
+                                                # fs.writeFileSync(path.join(dir, entryName), (result[entryName].b as FileDiffItem).content);
+                                        else
+                                            if 
+                                                test
+                                                    op< 
+                                                        [ 
+                                                            @ '.gitignore'
+                                                            @ 'LICENSE'
+                                                            @ 'README.md'
+                                                            ._ indexOf
+                                                                @ entryName
+                                                        + 0
+                                                _ console.log('updateBranch - delete file', path.join(dir, entryName))
+                                                _ fs.unlinkSync(path.join(dir, entryName))
+                                _ console.log('updateBranch - 1 - status of files in work area')
+                                await 
+                                    _ printStatus(dir)
+                                _ Object.keys(result).forEach
+                                    async=> 
+                                        param entryName
+                                        if result[entryName].kind === '+' || result[entryName].kind === '<>'
+                                            await 
+                                                _ git.add
+                                                    { 
+                                                        @ fs
+                                                        @ dir
+                                                        @ filepath entryName
+                                        else
+                                            if 
+                                                test
+                                                    op< 
+                                                        [ 
+                                                            @ '.gitignore'
+                                                            @ 'LICENSE'
+                                                            @ 'README.md'
+                                                            ._ indexOf
+                                                                @ entryName
+                                                        + 0
+                                                await 
+                                                    _ git.remove
+                                                        { 
+                                                            @ fs
+                                                            @ dir
+                                                            @ filepath entryName
+                                _ console.log('updateBranch - 2 - status of files in work area')
+                                await 
+                                    _ printStatus(dir)
+                                let msg
+                                    await 
+                                        _ git.commit
+                                            { 
+                                                @ fs
+                                                @ dir
+                                                @ message 'Packi git export ' + new Date().toDateString()
+                                                { author
+                                                    @ name 'packi'
+                                                    @ email 'packi@gmail.com'
+                                _ console.log(msg)
+                                await 
+                                    _ printStatus(dir)
+                                    # let msg = await git.listFiles({fs, dir});
+                                _ console.log('before push. repo,branch', repo, branch)
+                                    # let msg = await git.listFiles({fs, dir});
+                                let pushResponse
+                                    await 
+                                        _ git.push
+                                            { 
+                                                @ fs
+                                                @ dir
+                                                @ remote 'origin'
+                                                @ ref
+                                                    `lit 
+                                                        + 
+                                                        @ branch
+                                                        + 
+                                                @ token repo.token
+                                                    # username: repo.owner,
+                                                    # password: repo.password,
+                                                    # username: 'stfnbssl',
+                                                    # password: 'gi++++01',
+                                                @ oauth2format 'github'
+                                _ console.log(pushResponse)
+                            catch ex
+                                _ console.log('push. err', ex)
+                        #
+                            # 
+                            # Object.keys(packiFiles).forEach(filePath=> {
+                            # if (packiFiles[filePath].type === "CODE") {
+                            # fs.writeFileSync(path.join(dir, filePath), packiFiles[filePath].contents);
+                            # }
+                            # })
+                            # 
+                        # let msg = await git.log({fs, dir});
+                        # console.log(msg);
+    export 
+        async-function getCommits
+            param owner
+                :string 
+            param repo
+                :string 
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /commits
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('getCommits.responseData', responseData)
+                            return responseData
+    export 
+        async-function getContents
+            param owner
+                :string 
+            param repo
+                :string 
+            param accessToken
+                :string 
+            :return
+                :ref Promise
+                    :param any
+            return 
+                _ fetch
+                    `lit 
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /contents
+                    _ getOptions(accessToken)
+                    ._ then
+                        => 
+                            param response
+                            _ response.json()
+                    ._ then
+                        => 
+                            param responseData
+                            _ console.log('getContents.responseData', responseData)
+                            return responseData
+    function filesDiff
+        param dir
+            :string 
+        param packiFiles
+            :ref PackiFiles
+        param callback
+            :ref cb
+                :param 
+                    :{ 
+                        :index 
+                            :ref FileDiff
+                            param k
+                                :string 
+        :return
+            :void 
+        _ wizzifs.getFiles
+            @ dir
+            { 
+                @ deep true
+                @ documentContent true
+            => 
+                param err
+                param result
+                const diff
+                    :{ 
+                        :index 
+                            :ref FileDiff
+                            param k
+                                :string 
+                    =
+                        { 
+                _ result.forEach
+                    => 
+                        param entry
+                        if entry.relPath.startsWith('.git/') == false
+                            _ console.log('diff -', entry.relPath)
+                            set diff[entry.relPath] =
+                                { 
+                                    @ kind '-'
+                                    { a
+                                        @ path entry.relPath
+                                        @ content
+                                            @expr entry.content
+                                                :as 
+                                                    :string 
+                _ Object.keys(packiFiles).forEach
+                    => 
+                        param entryName
+                        if diff[entryName]
+                            if 
+                                test
+                                    && 
+                                        + diff[entryName].a
+                                        === 
+                                            @expr 
+                                                ( 
+                                                    @expr diff[entryName].a
+                                                        :as 
+                                                            :ref FileDiffItem
+                                                . content
+                                            + packiFiles[entryName].contents
+                                _ console.log('delete', entryName)
+                                delete diff[entryName]
+                            else
+                                _ console.log('diff <>', entryName)
+                                set diff[entryName].kind = '<>'
+                                set diff[entryName].b =
+                                    { 
+                                        @ path entryName
+                                        @ content packiFiles[entryName].contents
+                        else
+                            _ console.log('diff +', entryName)
+                            set diff[entryName] =
+                                { 
+                                    @ kind '+'
+                                    { b
+                                        @ path entryName
+                                        @ content packiFiles[entryName].contents
+                _ callback(null, diff)
+    async-function printStatus
+        param dir
+            :string 
+        :return
+            :ref Promise
+                :param void
+        return 
+            new Promise
+                => 
+                    param resolve
+                    param reject
+                    _ wizzifs.getFiles
+                        @ dir
+                        { 
+                            @ deep true
+                            @ documentContent false
+                        async=> 
+                            param err
+                            param files
+                            if err
+                                return reject(err)
+                            for 
+                                left
+                                    let file
+                                of files
+                                if file.relPath.startsWith('.git/') == false
+                                    let msg
+                                        await 
+                                            _ git.status
+                                                { 
+                                                    @ fs
+                                                    @ dir
+                                                    @ filepath file.relPath
+                                    _ console.log('path', file.relPath, 'status', msg)
+                            _ resolve()
+    function getOptions
+        param accessToken
+            :string 
+            :optional 
+        return 
+            { 
+                @ method 'GET'
+                @ headers headers(accessToken)
+    function postOptions
+        param accessToken
+            :string 
+        param body
+            :any 
+        return 
+            { 
+                @ method 'POST'
+                @ headers headers(accessToken)
+                @ body JSON.stringify(body)
+    function headers
+        param accessToken
+            :string 
+            :optional 
+        :return
+            :{ 
+                :index 
+                    :string 
+                    param k
+                        :string 
+        const ret
+            :{ 
+                :index 
+                    :string 
+                    param k
+                        :string 
+            =
+                { 
+                    @ 'Accept' 'application/vnd.github.v3+json'
+                    @ 'Content-Type' 'application/json'
+        if accessToken
+            set 'token ' + accessToken
+                :as 
+                    :string 
+        return ret

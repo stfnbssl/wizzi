@@ -1,0 +1,83 @@
+$group
+
+    ${'$'} var baseDir = wzCtx.Build.useNetlify ? '..' : '.'
+
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        @ MiddlewareType
+        from '${'$'}{baseDir}/features/app/types'
+    
+    import 
+        @ ModelBuilderType
+        from '${'$'}{baseDir}/features/app'
+
+    import 
+        @ config
+        from '${'$'}{baseDir}/features/config/index'
+
+    ${'$'}if wzCtx.Build.useFilesystem
+        import filesystemStart from '${'$'}{baseDir}/services/filesystem'
+    
+    ${'$'}if wzCtx.Build.useMongoDb
+        import { mongodbStart } from '${'$'}{baseDir}/services/mongodb'
+    
+    ${'$'}if wzCtx.Build.useWizzi
+        import wizziStart from '${'$'}{baseDir}/services/wizzi'
+        ${'$'}if wzCtx.Build.wizzi.useSite
+            import { siteControllers } from './site/index'
+
+    ${'$'}if wzCtx.Build.useAuthentication
+        $$ For now auth needs MongoDb
+        ${'$'}if wzCtx.Build.useMongoDb
+            import 
+                @ authenticationControllers
+                ${'$'}if wzCtx.Build.useMongoDb
+                    @ authenticationModelBuilders
+                from './features/auth/index'
+    
+    ${'$'}if wzCtx.Build.useAuthorization
+        $$ For now auth needs MongoDb
+        ${'$'}if wzCtx.Build.useMongoDb
+            import 
+                @ authorizationControllers
+                ${'$'}if wzCtx.Build.useMongoDb
+                    @ authorizationModelBuilders
+                from './features/auth/index'
+    
+    ${'$'}if wzCtx.Build.useAccount
+        import 
+            @ accountControllers
+            @ accountModelBuilders
+            from './features/account/index'
+    
+    ${'$'}if wzCtx.Build.useBlog
+        import 
+            @ postControllers
+            @ postModelBuilders
+            from './features/post/index'
+    
+    ${'$'}if wzCtx.Build.useSite
+        import 
+            @ siteControllers
+            from './site/index'
+    
+    ${'$'}if wzCtx.Build.usePacki
+        import 
+            @ packiControllers
+            from './features/packi/index'
+
+    ${'$'}if wzCtx.Build.useWizzi
+        import 
+            @ wizziControllers
+            from './features/wizzi/index'
+
+    import 
+        @ appMiddlewaresPre
+        @ appMiddlewaresPost
+        ${'$'}if wzCtx.Build.useAuthentication
+            @ auth0Secured
+        from '${'$'}{baseDir}/middlewares/index'
+    
+    ${'$'}if wzCtx.Build.useNetlify == false
+        import App from './App'

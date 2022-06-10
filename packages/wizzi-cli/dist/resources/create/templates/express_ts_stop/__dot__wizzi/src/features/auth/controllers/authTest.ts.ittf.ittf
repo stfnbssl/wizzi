@@ -1,0 +1,11 @@
+module
+    kind es6
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useAuthorization
+        v08/express/features/auth/controllers/authTest${call}

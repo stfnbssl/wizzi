@@ -62,5 +62,4 @@ typings/
 .next
 
 # labs packages
-packages/wizzi-cli/
 packages/wizzi-proto/

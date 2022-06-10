@@ -1,0 +1,13 @@
+$group
+    
+    name "${answers.pkg_name}"
+    version "0.0.1"
+	description "${answers.pkg_description}"
+    $if answers.author
+        { author
+            name "${answers.author}"
+            email "${answers.author_email}"
+	$if answers.license
+        { license
+            type "${answers.license}"
+            url "${answers.license_url}"

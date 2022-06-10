@@ -1,0 +1,47 @@
+$group
+
+    $
+        var lparen = '(';
+    
+    ${'$'}
+        var ctrl = {
+            name: 'DemoAccount',
+            path: '/demo/account'
+        }
+
+    controller${lparen} &ctrl )
+        
+        ${'$'}append imports
+
+        _ this.router.get
+            @ `/login`
+            @ this.login
+        _ this.router.get
+            @ `/profile`
+            @ this.profile
+        _ this.router.get
+            @ `/logout`
+            @ this.logout
+
+        ${'$'}append handlers
+
+            handler${lparen} login )
+                _ response.render
+                    @ 'demoAccount/login.html.ittf'
+                    {
+                        @ title 'Login page'
+
+            handler${lparen} profile )
+                const { _raw, _json, ...user } = (request as any).user as any
+                _ response.render
+                    @ 'demoAccount/profile.html.ittf'
+                    {
+                        @ user user
+                        @ rawProfile JSON.stringify(_raw, null, 2)
+                        @ jsonProfile JSON.stringify(_json, null, 2)
+                        @ userProfile JSON.stringify(user, null, 2)
+                        @ title 'Profile page'
+
+            handler${lparen} logout )
+                _ (request as any).logout()
+                _ response.redirect('/')

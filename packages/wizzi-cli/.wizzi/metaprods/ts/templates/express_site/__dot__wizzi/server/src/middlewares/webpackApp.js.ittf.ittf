@@ -1,0 +1,11 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useWebpackApp
+        v08/express/middlewares/webpackApp${call}

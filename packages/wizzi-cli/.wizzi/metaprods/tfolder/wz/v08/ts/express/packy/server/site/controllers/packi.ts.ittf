@@ -1,0 +1,39 @@
+module
+    import 
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        from '../../features/app/types'
+    export 
+        class PackiController
+            :implements ControllerType
+            p path
+                :public 
+                = '/packi'
+            p router
+                :public 
+                _ Router()
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + 
+                    @expr this.app
+            p app
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    _ response.render
+                        @ 'packi/app.html.ittf'
+                        { 
+                            @ title 'Packi client app'

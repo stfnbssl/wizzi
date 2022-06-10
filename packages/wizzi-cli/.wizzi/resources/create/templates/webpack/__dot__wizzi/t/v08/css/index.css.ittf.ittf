@@ -1,0 +1,7 @@
+${'$'}group
+
+    < body
+        background-color #e3f7b2
+
+    . main
+        margin 50px

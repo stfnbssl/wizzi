@@ -1,0 +1,4 @@
+{
+
+    $include wz/v08/ts/react/features/lint/eslint.json
+

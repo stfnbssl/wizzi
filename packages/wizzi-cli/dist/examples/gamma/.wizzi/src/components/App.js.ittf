@@ -1,0 +1,63 @@
+module
+    kind react
+    $
+        var md = {};
+        md.name = "App";
+        md.withStyles = true;
+        md.components = ['select'];
+    v08/react/component(&md)
+        => handleChangeUserState
+            param event
+            $if wzCtx.Build.react.useRedux
+                _ this.props.onChangeUserState
+                    @ event.target.name
+                    @ event.target.value
+        $append imports
+            import
+                @ FormControl
+                @ InputLabel
+                @ Select
+                @ MenuItem
+                from '@material-ui/core'
+        render
+            prop classes
+            $if wzCtx.Build.react.useRedux
+                prop userState
+            $if wzCtx.Build.react.useRedux
+                log 'components/App.userState', userState, userState.themeName
+            return
+                . { classes.root }
+                    $if wzCtx.Build.react.useRedux
+                        h1 {'Theme name: ' + userState.themeName}
+                    . { classes.form }
+                        < FormControl
+                            @ className {classes.formControl}
+                            < InputLabel
+                                @ htmlFor "themeName"
+                                + Theme
+                            < Select
+                                $if wzCtx.Build.react.useRedux
+                                    @ value {userState.themeName}
+                                @ onChange {this.handleChangeUserState}
+                                @ inputProps
+                                    {
+                                        @ name 'themeName'
+                                        @ id 'themeName'
+                                < MenuItem
+                                    @ value "dark"
+                                    em
+                                        + Dark
+                                < MenuItem
+                                    @ value "light"
+                                    em
+                                        + Light
+        $append styles
+            { root
+                @ backgroundColor "#222"
+                @ color "#ddd"
+                @ margin "50px"
+                @ padding "30px"
+            { form
+                @ backgroundColor "#444"
+                @ padding "10px"
+            { formControl

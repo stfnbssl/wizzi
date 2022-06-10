@@ -1,0 +1,33 @@
+$group
+
+    import 
+        @ Application
+        @ Request
+        @ Response
+        @ RequestHandler
+        from 'express'
+    import 
+        @ MiddlewareType
+        from '../features/app/types'
+    export 
+        const LoggerMiddleware
+            :ref MiddlewareType
+            =
+                => 
+                    param app
+                        :ref Application
+                    _ app.use
+                        => 
+                            param request
+                                :ref Request
+                            param response
+                                :ref Response
+                            param next
+                            _ console.log
+                                `lit 
+                                    + 
+                                    @ request.method
+                                    + &nbsp;
+                                    @ request.path
+                                    + 
+                            _ next()

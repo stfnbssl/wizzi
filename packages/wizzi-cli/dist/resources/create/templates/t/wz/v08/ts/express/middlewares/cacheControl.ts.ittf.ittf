@@ -1,0 +1,32 @@
+$group
+
+    import 
+        @ Application
+        from 'express'
+    
+    import 
+        @ MiddlewareType
+        from '../features/app/types'
+
+    import 
+        @ config
+        from '../features/config/index'
+
+    ${'$'}hook imports
+    
+    export 
+        const CacheControlMiddleware
+            :ref MiddlewareType
+            =
+                => 
+                    param app
+                        :ref Application
+                    if config.noCache
+                        _ app.use
+                            => 
+                                param req
+                                param res
+                                param next
+                                _ res.set('Cache-Control', 'no-store')
+                                _ next
+                    ${'$'}hook

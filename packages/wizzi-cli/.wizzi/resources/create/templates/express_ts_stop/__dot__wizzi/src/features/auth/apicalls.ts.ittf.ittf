@@ -1,0 +1,11 @@
+module
+    kind es6
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useAuth_stop
+        v08/express/features/auth/apicalls${call}

@@ -1,0 +1,27 @@
+${'$'}group
+    ${'$'}params &md
+
+    const postPageDef
+        {
+            @ kind "app"
+            @ reset "default"
+            @ elementId "page_container"
+            [ items
+                {
+                    @ kind "header"
+                    @ height 40
+                    [ items
+                        {
+                            @ kind "menu"
+                            @ direction "row"
+                            [ items
+                                {
+                                    @ label "Wizzi"
+                                {
+                                    @ label "Blog"
+                                {
+                                    @ label "Github"
+                $include wz/v08/express/site/webpacks/dataModels/pageDef.js
+                {
+                    @ kind "footer"
+                    [ items

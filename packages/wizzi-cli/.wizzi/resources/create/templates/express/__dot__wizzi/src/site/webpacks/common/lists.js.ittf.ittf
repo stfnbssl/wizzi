@@ -1,0 +1,12 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+            hasBorderedControls: true
+        }
+
+    ${'$'}if wzCtx.Build.useWebpackApp
+        v08/express/site/webpacks/common/lists${call}

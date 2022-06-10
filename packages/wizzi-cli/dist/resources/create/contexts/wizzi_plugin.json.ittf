@@ -1,0 +1,12 @@
+{
+    
+    $include pkginfo
+    
+    { github
+        { userid ${answers.github.userid}
+    
+    wizzi_plugin_type "${answers.wizzi_plugin_type}"
+
+    [ Schemas
+        {
+            name "sample"

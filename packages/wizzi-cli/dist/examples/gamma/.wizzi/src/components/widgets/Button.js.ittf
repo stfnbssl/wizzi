@@ -1,0 +1,56 @@
+module
+    kind react
+    import React from 'react'
+    import './Button.css'
+    const Button
+        =>
+            param props
+            let buttonClasses = 'button'
+            set buttonClasses +=
+                `lit
+                    + ${' '}button-
+                    @ props.theme
+            if props.large
+                set buttonClasses += ' button-large'
+            if props.fill
+                set buttonClasses += ' button-fill'
+            if props.loading
+                set buttonClasses += ' button-loading'
+            return
+                button
+                    @ type {props.type}
+                    @ disabled {props.loading}
+                    @ className {buttonClasses}
+                    @ onClick {props.onClick}
+                    {
+                        &&
+                            + props.loading
+                            span
+                                @ className 'button-spinner'
+                    {
+                        &&
+                            + props.icon
+                            span
+                                @ className 'button-icon'
+                                + Icon
+                    span
+                        @ className 'button-text'
+                        + {props.text}
+    set Button.defaultProps
+        {
+            # Button Text
+            @ text ''
+            # Button Theme
+            @ theme 'primary'
+            # Button Type
+            @ type 'button'
+            # Button Size
+            @ large false
+            # Button Filled
+            @ fill false
+            # Button Loading
+            @ loading false
+            # Button onClick
+            @ onClick
+                =>
+    export-default Button

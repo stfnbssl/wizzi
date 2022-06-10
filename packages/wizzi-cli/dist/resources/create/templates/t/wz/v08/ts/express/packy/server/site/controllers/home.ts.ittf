@@ -1,0 +1,37 @@
+module
+    import 
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        from '../../features/app/types'
+    export 
+        class HomeController
+            :implements ControllerType
+            p path
+                :public 
+                = ''
+            p router
+                :public 
+                _ Router()
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                _ this.router.get
+                    `lit 
+                        + /
+                    @expr this.home
+            p home
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    _ response.render
+                        @ 'home/index.html.ittf'
+                        { 
+                            @ title 'Site Home'

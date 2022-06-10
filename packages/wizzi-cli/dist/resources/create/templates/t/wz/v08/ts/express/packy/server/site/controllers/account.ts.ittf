@@ -1,0 +1,149 @@
+module
+    import 
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    import 
+        as passport
+        from 'passport'
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        from '../../features/app/types'
+    import 
+        @ auth0ApiCalls
+        from '../../features/auth0'
+    export 
+        class AccountController
+            :implements ControllerType
+            p path
+                :public 
+                = '/account'
+            p router
+                :public 
+                _ Router()
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /login
+                    _ passport.authenticate
+                        @ 'auth0'
+                        { 
+                            @ scope 'openid email profile'
+                    => 
+                        param req
+                        param res
+                        _ res.redirect('/')
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /callback
+                    @expr this.callback
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /logout
+                    @expr this.logout
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /user
+                    _ initValues.auth0Secured()
+                    @expr this.user
+            p callback
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    param next
+                        :ref Function
+                    _ passport.authenticate
+                        @ 'auth0'
+                        => 
+                            param err
+                            param user
+                            param info
+                            if err
+                                return next(err)
+                            if !user
+                                return 
+                                    _ response.redirect
+                                        `lit 
+                                            + 
+                                            @ this.path
+                                            + /login
+                            _ request.logIn
+                                @ user
+                                async=> 
+                                    param err
+                                    if err
+                                        return next(err)
+                                    const full_user
+                                        await 
+                                            _ auth0ApiCalls.getUser(user.user_id)
+                                    _ console.log('full_user', full_user)
+                                    set =
+                                        @expr 
+                                            ( 
+                                                @expr request.session
+                                                    :as 
+                                                        :any 
+                                            . github_accessToken
+                                        @expr full_user.identities[0].access_token
+                                    let returnTo
+                                        `lit 
+                                            + 
+                                            @ this.path
+                                            + /user
+                                    if request.session
+                                        set returnTo = request.session.returnTo
+                                        delete request.session.returnTo
+                                    _ response.redirect
+                                        || 
+                                            + returnTo
+                                            `lit 
+                                                + 
+                                                @ this.path
+                                                + /user
+                        (
+                            @ request
+                            @ response
+                            @ next
+            p logout
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    _ request.logout()
+                    _ response.redirect('/')
+            p user
+                :private 
+                async=> 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    const 
+                        { 
+                            @ _raw
+                            @ _json
+                            ... user
+                        = request.user
+                    _ response.render
+                        @ 'account/user.html.ittf'
+                        { 
+                            @ user
+                            @ userProfile JSON.stringify(user, null, 2)
+                            @ title 'Profile page'

@@ -1,0 +1,18 @@
+$group
+
+    import
+        @ Request
+        @ Response
+        from 'express'
+
+    export
+        function ensureAuthenticated
+            param req
+                :ref Request
+            param res
+                :ref Response
+            param next
+                :ref Function
+            if req.isAuthenticated()
+                return next()
+            _ res.redirect('/login')

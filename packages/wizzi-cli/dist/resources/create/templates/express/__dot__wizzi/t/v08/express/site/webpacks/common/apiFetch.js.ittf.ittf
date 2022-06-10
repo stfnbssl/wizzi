@@ -1,0 +1,21 @@
+${'$'}group
+    ${'$'}params &md
+
+    +
+    export
+        $include wz/v08/js/fetch/getData.js
+
+    +
+    export
+        $include wz/v08/js/fetch/postData.js
+
+    +
+    export
+        $include wz/v08/js/fetch/putData.js
+
+    +
+    export
+        $include wz/v08/js/fetch/deleteData.js
+
+    +
+    $include wz/v08/js/fetch/executeFetch.js

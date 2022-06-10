@@ -1,0 +1,65 @@
+wfjob ${cliCtx.name}/job
+    $
+        var mix = '(';
+
+    ---
+	${'$'}
+        var jobCtx = {
+		    ittf_models_folder: path.join(__dirname, 'ittf', 'models'),
+            ittf_lib_folder: path.join(__dirname, 'ittf', 'lib'),
+		    ittf_root_folder: path.join(__dirname, 'ittf', 'root'),
+            ittf_examples_folder: path.join(__dirname, 'ittf', 'examples'),
+            ittf_tests_folder: path.join(__dirname, 'ittf', 'tests'),
+		    dest_folder: path.join(__dirname, '..', 'dist'),
+            job_model: 'wzCtx'
+        }
+    ---
+    model ${'$'}{jobCtx.job_model}
+        schema json
+        src ${'$'}{jobCtx.ittf_models_folder}/wzctx.json.ittf
+    ---
+    line ittf-models
+        cwd-folder ${'$'}{jobCtx.ittf_models_folder}
+        wfjobs${mix}any_json, &jobCtx)
+    ---
+	line ittf-root
+		cwd-folder ${'$'}{jobCtx.ittf_root_folder}
+
+		wfjobs${mix}any_js, &jobCtx)
+        wfjobs${mix}any_json, &jobCtx)
+        wfjobs${mix}any_md, &jobCtx)
+        wfjobs${mix}any_text, &jobCtx)
+        wfjobs${mix}.gitignore, &jobCtx)
+        wfjobs${mix}any_plain, &jobCtx, ts)
+	---
+    line ittf-lib
+		cwd-folder ${'$'}{jobCtx.ittf_lib_folder}
+		dest-folder ${'$'}{jobCtx.dest_folder}/lib
+
+        wfjobs${mix}any_js, &jobCtx)
+	---
+    line ittf-examples
+        cwd-folder ${'$'}{jobCtx.ittf_examples_folder}
+        dest-folder ${'$'}{jobCtx.dest_folder}/examples
+
+        wfjobs${mix}any_js, &jobCtx)
+        wfjobs${mix}any_html, &jobCtx)
+        wfjobs${mix}any_css, &jobCtx)
+        wfjobs${mix}any_ittf, &jobCtx)
+        wfjobs${mix}any_plain, &jobCtx, html)
+        wfjobs${mix}any_plain, &jobCtx, css)
+        wfjobs${mix}any_plain, &jobCtx, js)
+	---
+    line ittf-tests
+        cwd-folder ${'$'}{jobCtx.ittf_tests_folder}
+        dest-folder ${'$'}{jobCtx.dest_folder}/tests
+
+        wfjobs${mix}any_plain, &jobCtx, ittf)
+    ---
+    production
+		dest-folder ${'$'}{jobCtx.dest_folder}
+        line-ref ittf-models
+        line-ref ittf-root
+        line-ref ittf-examples
+        $$ line-ref ittf-tests
+		line-ref ittf-lib

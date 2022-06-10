@@ -1,0 +1,136 @@
+$group
+
+    import 
+        @ Router
+        from 'express'
+    
+    $if false $$ TODO
+        import 
+            @ GetAccountModel
+            @ AccountModelType
+            from '../mongo/account.js'
+        
+        import 
+            @ authenticate
+            @ jwtAuth
+            @ getLoggedUserFromAccount
+            from '../manager.js'
+    
+    import
+        @ sendPromiseResult
+        @ sendSuccess
+        @ sendFailure
+        from '../../../utils/response.js'
+    
+    export 
+        class AuthorizationController
+            p path '/api/v1/auth'
+            p router _ Router
+            => initialize
+                param initValues
+                log 'Entering AuthorizationController.initialize'
+                _ this.router.use
+                    function 
+                        param req
+                        param res
+                        param next
+                        if req.query.socketId
+                            log 'features.auth.controllers.auth.middleware.req.originalUrl,query', req.originalUrl, req.query
+                            log 'features.auth.controllers.auth.middleware.req.sessionID, session', req.sessionID, req.session
+                            set req.session.socketId = req.query.socketId
+                            set req.session.socketUserId = req.query.socketUserId
+                        _ next
+                _ this.router.get
+                    `lit 
+                        + /auth/github
+                    _ authenticate
+                        @ 'github'
+                        { 
+                            [ scope
+                                @ 'user:email'
+                                @ 'public_repo'
+                    _ this.githubConnect.bind(this)
+                _ this.router.get
+                    `lit 
+                        + /auth/github/callback
+                    _ authenticate
+                        @ 'github'
+                        { 
+                            @ failureRedirect
+                                `lit 
+                                    + 
+                                    @ this.path
+                                    + /account
+                    _ this.githubConnectCallback.bind(this)
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /github/loggedin/:uid
+                    @ this.getGithubLoggedIn
+            
+            m githubConnect
+                param req
+                param res
+            
+            p githubConnectCallback
+                async=> 
+                    param req
+                    param res
+                    # Successful authentication
+                    log 'features.auth.controllers.auth.githubCallback.req.originalUrl,session.socketId,socketUserId', req.originalUrl, req.session.socketId, req.session.socketUserId
+                    log 'features.auth.controllers.auth.githubCallback.req.sessionID,session', req.sessionID, req.session
+                    log 'features.auth.controllers.auth.githubCallback.req.user', req.user
+                    const io = req.app.get('io')
+                    const user
+                        { 
+                            @ id req.user._id
+                            @ uid req.user.uid
+                            @ username req.user.username
+                            @ displayName req.user.displayName
+                            @ picture req.user.avatar_url
+                    log 'features.auth.controllers.auth.githubCallback.sending user via socket', 'github', req.session.socketId, req.user
+                    _ io.in(req.session.socketId).emit('github', user)
+                    set req.session.token = req.user.tokens[0]
+                    const account
+                        { 
+                            @ domain 'github.com'
+                            @ uid req.user.uid
+                            @ username req.user.username
+                            @ displayName req.user.displayName
+                            @ avatar_url req.user.avatar_url
+                            [ tokens
+                                { 
+                                    @ kind req.user.tokens[0].kind
+                                    @ token req.user.tokens[0].token
+                                    @ attributes req.user.tokens[0].attributes
+                    const AccountModel
+                        _ GetAccountModel
+                    const result
+                        await 
+                            _ AccountModel.update
+                                { 
+                                    @ uid req.user.uid
+                                    @ domain 'github.com'
+                                @ account
+                                { 
+                                    @ upsert true
+                    log 'features.auth.controllers.auth.githubCallback.account.save.result', result
+                    _ res.end
+            
+            p getGithubLoggedIn
+                async=> 
+                    param req
+                    param res
+                    const uid = req.params.uid
+                    log 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
+                    const user
+                        await 
+                            _ getLoggedUserFromAccount(uid, 'github.com').then
+                                => 
+                                    param user
+                                    _ sendSuccess(res, user)
+                                ._ catch
+                                    => 
+                                        param err
+                                        _ sendFailure(res, err, 501)

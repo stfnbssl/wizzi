@@ -1,0 +1,6 @@
+{
+    $include cli/v08/wzctx-info.json
+
+    { Build
+        useGatsby true
+        { gatsby

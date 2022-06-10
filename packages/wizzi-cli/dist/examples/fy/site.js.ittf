@@ -1,0 +1,15 @@
+module
+    kind jsfile
+
+    $
+        var baseSource = "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi.site/resources/quick";
+        var baseDest = "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/resources";
+
+    var fy = require('../../cmds/fy');
+    
+    $if false
+
+    _ fy
+        {
+            @ s "${baseSource}"
+            @ d "${baseDest}"

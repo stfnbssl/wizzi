@@ -1,0 +1,4 @@
+${'$'}group
+    ${'$'}params name, &jobCtx, ext|@@null
+
+    $include wz/v08/wfjob/commons.wfjob

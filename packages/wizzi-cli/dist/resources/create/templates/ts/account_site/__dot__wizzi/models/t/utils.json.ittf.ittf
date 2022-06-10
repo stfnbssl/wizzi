@@ -1,0 +1,21 @@
+${'$'}group
+        
+    { utils
+        useLodash true
+        $*
+        useEscapeRegexp true
+        useEscapeHtml true
+        useNullThrows true
+        useStringifySafe true
+        useParseUrl true
+        useEs6Error true
+        useJsCookie true
+        useQueryString true
+        useSanitizeHtml true
+        useDateFns true
+        useFetchPonyfill true
+        useNanoId true
+        useGitUrlParse true
+        useJsonToAst true
+        useWebVitals true
+        *$

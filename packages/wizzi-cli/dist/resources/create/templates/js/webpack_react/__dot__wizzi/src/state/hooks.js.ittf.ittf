@@ -1,0 +1,44 @@
+module
+    kind react
+    import 
+        @ useGlobalStore
+        @ itemsActions
+        from './store'
+    import bindActions from './bindActions'
+  
+    # 
+    # useItems Custom Hook
+    # 
+    export 
+        const useItems
+            => 
+                const
+                    { 
+                        @ state
+                        @ dispatch
+                    =
+                        _ useGlobalStore
+                # List of Props
+                const 
+                    { 
+                        @ items
+                    = state
+                # List of Actions
+                const 
+                    { 
+                        @ addItem
+                        @ resetItems
+                        @ completeItem
+                    = itemsActions
+                # Bind Actions
+                const boundItemsActions
+                    _ bindActions
+                        { 
+                            @ addItem
+                            @ resetItems
+                            @ completeItem
+                        @ dispatch
+                return 
+                    { 
+                        @ items
+                        @ ...boundItemsActions

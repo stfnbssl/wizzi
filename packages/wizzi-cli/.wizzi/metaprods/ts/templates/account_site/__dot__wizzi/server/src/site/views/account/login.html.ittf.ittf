@@ -1,0 +1,7 @@
+html
+    ${'$'}
+        var md = {
+            title: 'Profile'
+        }
+
+    $include wz/v08/ts/express/site/views/account/login.html

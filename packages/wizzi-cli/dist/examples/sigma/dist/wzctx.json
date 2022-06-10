@@ -1,0 +1,9 @@
+{
+    "name": "sigma",
+    "version": "0.0.1",
+    "description": "",
+    "Build": {
+        "useGatsby": true,
+        "gatsby": {}
+    }
+}

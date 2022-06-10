@@ -1,0 +1,9 @@
+module
+    kind es6
+    $
+        var call_md = '(&md)';
+
+    ${'$'}
+		var md = {};
+	
+    v08/postcss/tailwind.config.js${call_md}

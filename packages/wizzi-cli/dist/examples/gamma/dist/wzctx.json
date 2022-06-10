@@ -1,0 +1,85 @@
+{
+    "name": "gamma",
+    "version": "0.0.1",
+    "description": "",
+    "Build": {
+        "useWebpack": true,
+        "webpack": {
+            "useCss": true,
+            "css": {},
+            "useSass": false,
+            "useHtml": true,
+            "html": {
+                "template": "./src/index.html",
+                "filename": "index.html"
+            },
+            "useDevServer": true,
+            "devServer": {}
+        },
+        "useHotReplacement": true,
+        "hotReplacement": {},
+        "useBabel": true,
+        "babel": {},
+        "useReact": true,
+        "react": {
+            "rootContainer": "AppContainer",
+            "rootElementId": "root",
+            "useRouter": true,
+            "router": {},
+            "useRedux": false,
+            "useStateHooks": true,
+            "stateHooks": {},
+            "redux": {
+                "useInitialLoad": true,
+                "initialLoad": {},
+                "useThunk": true,
+                "thunk": {
+                    "useExtraArgument": true
+                },
+                "useFirestore": false,
+                "firestore": {},
+                "useAuth": false,
+                "auth": {},
+                "useForm": false,
+                "form": {}
+            },
+            "useMaterialUI": true,
+            "materialUI": {
+                "useAutocomplete": false,
+                "autocomplete": {
+                    "useReactSelect": false
+                },
+                "usePickers": false,
+                "useLab": false,
+                "useIcons": true
+            }
+        },
+        "useLocalStorage": true,
+        "localStorage": {
+            "key": "wr-state"
+        }
+    },
+    "Styles": {
+        "theme": {
+            "dark": true
+        },
+        "colors": {
+            "primary": "green",
+            "secondary": "orange",
+            "white": "#fff",
+            "black": "#000",
+            "red": "#f00",
+            "orange": "#f80",
+            "grey_2": "#444"
+        },
+        "useMainCss": true,
+        "mainCss": {
+            "path": "./styles/main.css"
+        }
+    },
+    "Code": {},
+    "App": {
+        "useLogin": false,
+        "login": {}
+    }
+}

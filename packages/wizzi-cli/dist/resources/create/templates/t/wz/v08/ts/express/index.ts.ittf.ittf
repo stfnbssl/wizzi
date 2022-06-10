@@ -1,0 +1,22 @@
+$group
+    $
+        var call = '(&md)';
+
+    ${'$'}if wzCtx.Build.useNetlify == false
+        index/imports${call}
+    
+    ${'$'}if wzCtx.Build.useNetlify
+        index/start${call}
+    ${'$'}else
+        async-function start
+            index/start${call}
+            _ app.listen
+    
+        try 
+            _ start
+        catch ex
+            log ex
+
+    ${'$'}if wzCtx.Build.useNetlify
+        set module.exports = app
+        set module.exports.handler = serverless(app)

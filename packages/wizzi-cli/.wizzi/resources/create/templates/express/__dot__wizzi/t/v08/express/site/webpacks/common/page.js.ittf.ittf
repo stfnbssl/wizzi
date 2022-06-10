@@ -1,0 +1,41 @@
+${'$'}group
+    ${'$'}params &md
+
+    var stylesInjected = false
+
+    export
+        function createPage
+            param pageDef
+            param elementId
+
+            const jq2
+                _ jQuery.noConflict
+            _ jq2
+                function 
+                    param $
+                    
+                    if !stylesInjected
+                        _ injectPageStyles
+                        _ injectMenuStyles
+                        set stylesInjected = true
+
+                    set document.getElementById(elementId).innerHTML
+                        _ getContainer
+                            @ pageDef
+                    
+                    _ startPage
+                        @ $
+                        @ pageDef
+
+    html_f getContainer
+
+        _ pageHtml
+            @ __html
+            @ ctx
+
+    $include wz/v08/js/page/injectStyles.js
+    $include wz/v08/js/page/pageStyles.js
+    $include wz/v08/js/page/menuStyles.js
+    $include wz/v08/js/page/pageHtml.js
+    $include wz/v08/js/page/menuBarHtml.js
+    $include wz/v08/js/page/startPage.js

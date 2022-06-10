@@ -1,0 +1,55 @@
+module
+    kind es6
+    $
+        var md = {
+            plugin: '',
+            name: 'document',
+            schema: 'sample',
+            checkSchema: true,
+            isAsync: true,
+        };
+    v08/lib/artifacts/gen(&md)
+        $append imports
+        $append main
+            _ md.sample
+                @ model
+                @ ctx
+                f_cb( )
+                    if ctx.artifactGenerationErrors.length > 0
+                        r_cb_err( ctx.artifactGenerationErrors )
+                    else
+                        # generation OK
+                        r_cb( ctx )
+        +
+        async-md( sample )
+            _ ctx.w('sample ' + model.wzName)
+            _ md.genItems
+                @ model.items
+                @ ctx
+                {
+                    @ indent false
+                a_cb()
+                    _ md.genItems
+                        @ model.nodes
+                        @ ctx
+                        {
+                            @ indent false
+                        @ callback
+        +
+        async-md( h1 )
+            _ ctx.w('. h1 ' + model.wzName)
+            if model.value
+                _ ctx.w('  - value ' + model.value)
+            r_cb()
+        +
+        async-md( p )
+            _ ctx.w('. p ' + model.wzName)
+            if model.value
+                _ ctx.w('  - value ' + model.value)
+            r_cb()
+        +
+        async-md( text )
+            _ ctx.w('+ ' + model.wzName)
+            if model.value
+                _ ctx.w('  - value ' + model.value)
+            r_cb()

@@ -1,0 +1,100 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\node_modules\wizzi-web\lib\artifacts\css\document\gen\main.js
+    package: wizzi-web@0.7.7
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\dist\examples\gamma\.wizzi\src\styles\main.css.ittf
+    utc time: Mon, 15 Feb 2021 13:37:11 GMT
+*/
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: grey_4;
+    text-align: left;
+    background-color: grey_3;
+}
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+#main {
+    width: 80%;
+    margin: 0 auto;
+}
+#header {
+    width: 90%;
+    margin: 0 auto;
+}
+#header ul {
+    list-style-type: none;
+}
+#header ul li {
+    background-color: #cdcdcd;
+    margin: 5px 10px;
+    padding: 10px 20px;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 10%;
+    -khtml-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -o-border-radius: 10%;
+    border-radius: 10%;
+    float: left;
+}
+#header ul li::hover {
+    background-color: #cecece;
+}
+#header ul li a {
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    color: #125699;
+}
+.mainRoute {
+    background-color: #ededed;
+    width: 70%;
+    margin: 100px auto 100px auto;
+}
+.clear {
+    clear: both;
+}
+.item-list {
+    padding: 20px;
+}
+.item-item {
+    padding: 10px;
+    border-top: 1px solid #dedede;
+}
+.item-item-text {
+    padding-left: 5px;
+}
+form {
+    margin: 10px;
+}
+.form-field {
+    display: block;
+    width: 100%;
+    background-color: #FFF;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: inherit;
+    font-weight: 300;
+}
+.form-fieldplaceholder {
+    color: #C0BCBC;
+}
+.form-error {
+    font-size: 10px;
+    font-weight: 600;
+    color: #FA4D73;
+    margin-top: 16px;
+}
+

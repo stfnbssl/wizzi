@@ -1,0 +1,42 @@
+module
+    import 
+        @ StyleSheet
+        @ css
+        from 'aphrodite'
+    import 
+        as React
+        from 'react'
+    import 
+        @ c
+        from '../ThemeProvider'
+    :type Props
+        :{ 
+            :p children
+                :optional 
+                :ref React.ReactNode
+    export-default 
+        function EmbeddedToolbarShell
+            { 
+                @ children
+                :ref Props
+            return 
+                div 
+                    @ className {css(styles.toolbar)}
+                    + {children}
+    const styles
+        _ StyleSheet.create
+            { 
+                { toolbar
+                    @ display 'flex'
+                    @ flexDirection 'row'
+                    @ alignItems 'center'
+                    @ justifyContent 'space-between'
+                    @ padding 4
+                    @ height 48
+                    @ backgroundColor c('content')
+                    @ borderBottom
+                        `lit 
+                            + 1px solid&nbsp;
+                            _ c('border')
+                            + 
+                    @ color c('text')

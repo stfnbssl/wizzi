@@ -1,0 +1,55 @@
+$group
+
+    $*
+        @babel properties for "package.json" ittf documents.
+        The "ctx" context object (if present) is set by wizzi-cli/cmds/create.
+    *$
+
+	${'$'}if wzCtx.Build.useBabelNode
+		@babel/cli "^7.2.0"
+		@babel/preset-env "^7.2.0"
+
+	${'$'}if wzCtx.Build.useBabel
+
+		${'$'}if wzCtx.Build.useVue
+			@babel/core "^7.2.2"
+			${'$'}if wzCtx.Build.useDinamicImport
+				@babel/plugin-syntax-dynamic-import "^7.2.0"
+			@babel/polyfill "^7.2.5"
+			@babel/preset-env "^7.3.1"
+		
+		${'$'}else
+			${'$'}${'$'} STOP @babel/cli "^7.2.0"
+			@babel/core "^7.2.2"
+			@babel/plugin-proposal-class-properties "^7.3.0"
+			@babel/plugin-proposal-object-rest-spread "^7.3.1"
+			@babel/preset-env "^7.2.0"
+			${'$'}if wzCtx.Build.useFlow
+				@babel/preset-flow "7.0.0-beta.42"
+			${'$'}if wzCtx.Build.useReact
+				@babel/preset-react "7.0.0-beta.42"
+			${'$'}if wzCtx.Build.useTypescript
+				@babel/preset-typescript "^7.1.0"
+		
+			${'$'}if wzCtx.Build.useReact
+				${'$'}${'$'} ??? @babel/node "7.0.0-beta.42"
+				
+				${'$'}* STOP
+				@babel/plugin-transform-object-assign "7.0.0-beta.42"
+				@babel/plugin-transform-runtime "7.0.0-beta.42"
+				@babel/preset-stage-1 "7.0.0-beta.42"
+				@babel/register "7.0.0-beta.42"
+				${'$'}if wzCtx.Build.useMaterialUIIcons
+					@babel/runtime "latest"
+				# https://github.com/DefinitelyTyped/DefinitelyTyped
+				@types/react "^16.3.14"
+				# https://github.com/postcss/autoprefixer
+				autoprefixer "^8.0.0"
+				# https://github.com/moroshko/autosuggest-highlight
+				autosuggest-highlight "^3.1.1"
+				*${'$'} 
+
+			${'$'}else
+				rimraf "^2.6.1"
+
+

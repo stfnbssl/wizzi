@@ -1,0 +1,21 @@
+${'$'}group
+    ${'$'}params &md
+
+    +
+    export
+        $include wz/v08/ts/fetch/getData.tsx
+
+    +
+    export
+        $include wz/v08/ts/fetch/postData.tsx
+
+    +
+    export
+        $include wz/v08/ts/fetch/putData.tsx
+
+    +
+    export
+        $include wz/v08/ts/fetch/deleteData.tsx
+
+    +
+    $include wz/v08/ts/fetch/executeFetch.tsx

@@ -1,0 +1,9 @@
+text
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    v08/root/license${call}

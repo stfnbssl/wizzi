@@ -1,0 +1,48 @@
+module
+	kind es6
+
+    $
+        var mix = '()';
+
+	v08/js/index${mix}
+
+        ${'$'}append functions
+            function codePanel
+                param innerHTML
+                const element = document.createElement('div')
+                set element.className = 'code-panel'
+                var e_pre = document.createElement('pre')
+                set e_pre.className = 'prettyprint source'
+                var e_code = document.createElement('code')
+                set e_code.innerHTML = innerHTML
+                _ e_pre.appendChild
+                    @ e_code
+                _ element.appendChild
+                    @ e_pre
+                return element
+
+        ${'$'}append page
+
+            var jsCode
+                _ hjsMe
+                    [
+                        @ 'function alpha(a, b) {'
+                        @ '    return a + b;'
+                        @ '}'
+                        ._ join('\n')
+                    @ 'js'
+            _ element.appendChild
+                _ codePanel
+                    @ jsCode
+
+            var htmlCode
+                _ hjsMe
+                    [
+                        @ '<div class="main">'
+                        @ '    <span>return a + b;</span>'
+                        @ '</div>'
+                        ._ join('\n')
+                    @ 'html'
+            _ element.appendChild
+                _ codePanel
+                    @ htmlCode                    

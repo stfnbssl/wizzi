@@ -1,0 +1,65 @@
+module
+    import 
+        @ Response
+        from 'express'
+    export 
+        const sendFailure
+            => 
+                param res
+                    :ref Response
+                param error
+                    :any 
+                param status
+                    :number 
+                _ res.status
+                    iif error && error.status
+                        then error.status
+                        else status
+                _ res.type('application/json')
+                _ res.send(error)
+    export 
+        const sendSuccess
+            => 
+                param res
+                    :ref Response
+                param message
+                    :any 
+                _ res.status(200)
+                _ res.type('application/json')
+                _ res.send(message)
+    export 
+        function sendPromiseResult
+            :< T
+            param res
+                :ref Response
+            param message
+                :ref Promise
+                    :param 
+                        :ref T
+            _ message.then
+                => 
+                    param result
+                        :ref T
+                    _ sendSuccess(res, result)
+                        # console.log('sendPromiseResult.ok', result);
+                ._ catch
+                    => 
+                        param err
+                            :any 
+                        _ console.log('sendPromiseResult.err', err)
+                        _ sendFailure(res, err, 500)
+    export 
+        function sendPromiseLikeResult
+            :< T
+            param res
+                :ref Response
+            param message
+                :ref PromiseLike
+                    :param 
+                        :ref T
+            _ message.then
+                => 
+                    param result
+                        :ref T
+                    _ sendSuccess(res, result)
+                        # console.log('sendPromiseLikeResult.ok', result);

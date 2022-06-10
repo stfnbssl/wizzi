@@ -1,0 +1,11 @@
+module
+    kind es6
+    $
+        var call = '(&md)'
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useCors
+        v08/express/middlewares/cors${call}

@@ -1,0 +1,15 @@
+﻿md
+
+    h1 React State Management with Hooks and without Redux
+
+	p
+		a see this github example
+			href https://github.com/pourya7/react-without-redux
+
+	p
+		a see this github example
+			href https://github.com/pourya7/react-without-redux
+        + linked to 
+        a this article
+            href https://medium.com/strands-tech-corner/react-state-management-without-redux-d39c7087039d
+

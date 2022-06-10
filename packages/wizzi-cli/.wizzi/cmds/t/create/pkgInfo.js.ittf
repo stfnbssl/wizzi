@@ -1,0 +1,127 @@
+$group
+
+	function promptPkgName
+        param callback
+        var questions
+            [ 
+                { 
+                    @ type 'input'
+                    @ name 'pkg_name'
+                    @ message "Which project name?"
+                    @ validate
+                        function 
+                            param value
+                            var pass = value.match(/^[a-zA-Z0-9_]/i)
+                            if pass
+                                return true
+                            return 'Please enter a valid project name'
+                {
+                    @ type 'confirm'
+                    @ name 'pkg_enterinfo'
+                    @ message 'Whould you like to enter package info? Otherwise defaults are used'
+                    @ default false
+        _ inquirer.prompt(questions).then
+            => 
+                param answers
+                _ console.log('\nNew package name:')
+                _ console.log(JSON.stringify(answers, null, '  '))
+                if answers.pkg_enterinfo
+                    delete answers.pkg_enterinfo
+                    _ promptPkgInfo
+                        f_cb(info_answers)
+                            return 
+                                _ callback
+                                    @ null
+                                    _ Object.assign
+                                        {
+                                        @ answers
+                                        @ info_answers
+                else
+                    delete answers.pkg_enterinfo
+                    r_cb(answers)
+
+	function promptPkgInfo
+        param callback
+        var questions
+            [ 
+                { 
+                    @ type 'input'
+                    @ name 'author'
+                    @ message "Who is the author?"
+                { 
+                    @ type 'input'
+                    @ name 'author_email'
+                    @ message "The author has an e-mail?"
+                { 
+                    @ type 'list'
+                    @ name 'license_type'
+                    @ message 'What license do you want to apply?'
+                    [ choices
+                        @ 'MIT'
+                        @ 'other1'
+                        @ 'other2'
+                    @ filter
+                        function 
+                            param val
+                            return 
+                                _ val.toLowerCase
+                $*
+                { 
+                    @ type 'input'
+                    @ name 'quantity'
+                    @ message 'How many do you need?'
+                    @ validate
+                        function 
+                            param value
+                            var valid = !isNaN(parseFloat(value))
+                            return valid || 'Please enter a number'
+                    @ filter Number
+                { 
+                    @ type 'expand'
+                    @ name 'toppings'
+                    @ message 'What about the toppings?'
+                    [ choices
+                        { 
+                            @ key 'p'
+                            @ name 'Pepperoni and cheese'
+                            @ value 'PepperoniCheese'
+                        { 
+                            @ key 'a'
+                            @ name 'All dressed'
+                            @ value 'alldressed'
+                        { 
+                            @ key 'w'
+                            @ name 'Hawaiian'
+                            @ value 'hawaiian'
+                { 
+                    @ type 'rawlist'
+                    @ name 'beverage'
+                    @ message 'You also get a free 2L beverage'
+                    [ choices
+                        @ 'Pepsi'
+                        @ '7up'
+                        @ 'Coke'
+                { 
+                    @ type 'input'
+                    @ name 'comments'
+                    @ message 'Any comments on your purchase experience?'
+                    @ default 'Nope, all good!'
+                { 
+                    @ type 'list'
+                    @ name 'prize'
+                    @ message 'For leaving a comment, you get a freebie'
+                    [ choices
+                        @ 'cake'
+                        @ 'fries'
+                    @ when
+                        function 
+                            param answers
+                            return answers.comments !== 'Nope, all good!'
+                *$
+        _ inquirer.prompt(questions).then
+            => 
+                param answers
+                _ console.log('\nNew package info:')
+                _ console.log(JSON.stringify(answers, null, '  '))
+                r_cb(answers)
+

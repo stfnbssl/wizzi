@@ -1,0 +1,56 @@
+$group
+    
+    import path from 'path'
+    import 
+        @ Application
+        from 'express'
+    import 
+        @ MiddlewareType
+        from '../features/app/types'
+    import 
+        @ wizziProds
+        from '../features/wizzi'
+    export 
+        const WizziViewEngineMiddleware
+            :ref MiddlewareType
+            =
+                => 
+                    param app
+                        :ref Application
+                    _ app.engine
+                        @ 'ittf'
+                        async-function 
+                            param filePath
+                                :string 
+                            param options
+                                :any 
+                            param callback
+                                :any 
+                            try 
+                                const twinJsonContext
+                                    await 
+                                        _ wizziProds.inferAndLoadContextFs(filePath, 'mpage')
+                                const context
+                                    { 
+                                        @ ...options
+                                        @ locals options._locals
+                                        @ ...twinJsonContext
+                                    # console.log('WizziViewEngineMiddleware.context', JSON.stringify(context, null, 2));
+                                _ wizziProds.generateArtifactFs(filePath, context).then
+                                    => 
+                                        param generated
+                                        return callback(null, generated.artifactContent)
+                                    ._ catch
+                                        => 
+                                            param err
+                                            return callback(err)
+                                    # console.log('WizziViewEngineMiddleware.context', JSON.stringify(context, null, 2));
+                            catch ex
+                                _ callback(ex)
+                    const viewsFolder = path.resolve(__dirname, '..', 'site', 'views')
+                    _ console.log('WizziViewEngineMiddleware.views folder', viewsFolder)
+                    _ app.set('views', viewsFolder)
+                        # specify the views directory
+                    _ app.set('view engine', 'ittf')
+                        # specify the views directory
+                        # register the template engine

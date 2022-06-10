@@ -1,0 +1,48 @@
+module
+    kind jsfile
+
+    const minimist = require('minimist')
+    const create = require('./cmds/create')
+
+	const args = minimist(process.argv.slice(2))
+	
+	let cmd = args._[0]
+    log 'args', args, 'cmd', cmd
+
+    if cmd == 'ui'
+        _ create
+            {
+                @ template 'ts/react'
+                @ pkgName 'wizzi.ui'
+    elif cmd == 'account'
+        _ create
+            {
+                @ template 'ts/account_site'
+                @ pkgName 'wizzi.account'
+    elif cmd == 'site'
+        _ create
+            {
+                @ template 'ts/express_site'
+                @ pkgName 'wizzi.site'
+    elif cmd == 'backend'
+        _ create
+            {
+                @ template 'ts/express_backend'
+                @ pkgName 'wizzi.backend'
+    elif cmd == 'editor'
+        _ create
+            {
+                @ template 'ts/webpack_editor'
+                @ pkgName 'wizzi.editor'
+    elif cmd == 'pageforms'
+        _ create
+            {
+                @ template 'ts/webpack_pageforms'
+                @ pkgName 'wizzi.pageforms'
+    elif cmd == 'js-react'
+        _ create
+            {
+                @ template 'js/webpack_react'
+                @ pkgName 'demo.js.react'
+    else
+        _ create

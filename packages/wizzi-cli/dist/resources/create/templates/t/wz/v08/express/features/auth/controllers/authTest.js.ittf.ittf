@@ -1,0 +1,50 @@
+$group
+    
+    import 
+        @ Router
+        from 'express'
+    
+    import 
+        @ checkJwt
+        @ checkScopes
+        from '../../../middleware/index.js'
+    
+    export 
+        class AuthTestController
+            p path '/api/v1/auth0test'
+            p router Router()
+            
+            => initialize
+                param initValues
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /public
+                    @ this.getPublic
+                _ this.router.get
+                    `lit 
+                        + 
+                        @ this.path
+                        + /private
+                    @ checkJwt
+                    _ checkScopes
+                        [ 
+                            @ 'read:messages'
+                    @ this.getPrivate
+            
+            p getPublic
+                async=> 
+                    param request
+                    param response
+                    _ response.json
+                        { 
+                            @ message "Hello from a public endpoint! You don't need to be authenticated to see this."
+            
+            p getPrivate
+                async=> 
+                    param request
+                    param response
+                    _ response.json
+                        { 
+                            @ message "Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this."

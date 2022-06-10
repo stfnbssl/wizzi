@@ -1,0 +1,17 @@
+module
+    kind jsfile
+    const path = require('path')
+    set module.exports
+        { 
+            @ wfjobName "${cliCtx.pkg_name}/job"
+            @ wfjobPath path.join(__dirname, '.wizzi', 'generate.wfjob.ittf')
+            @ destPath path.join(__dirname, 'dist')
+            [ plugins
+                @ 'wizzi-core'
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+            [ schemas
+                $foreach schema in cliCtx.Schemas
+                    @ "${schema.name}"
+            { globalContext
+                @ wzConfigIsDevelopment true

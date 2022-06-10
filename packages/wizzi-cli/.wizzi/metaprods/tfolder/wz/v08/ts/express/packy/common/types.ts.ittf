@@ -1,0 +1,49 @@
+module
+    :type RequiredPackiFileAttributes
+        :{ 
+            :p contents
+                :string 
+            :p type
+                :union 
+                    :literal 'ASSET'
+                    :literal 'CODE'
+            :p generated
+                :optional 
+                :boolean 
+            :p bothRealAndGenerated
+                :optional 
+                :boolean 
+    export 
+        :type PackiFiles
+            :{ 
+                :index 
+                    :ref RequiredPackiFileAttributes
+                    param x
+                        :string 
+    export 
+        :type GitRepositoryMeta
+            :{ 
+                :p owner
+                    :string 
+                :p name
+                    :string 
+                :p description
+                    :string 
+                :p branches
+                    :[ 
+                        :string 
+    export 
+        :type ClonedGitRepository
+            :{ 
+                :p owner
+                    :string 
+                :p name
+                    :string 
+                :p description
+                    :string 
+                :p branch
+                    :string 
+                :p commitHistory
+                    :any 
+                :p files
+                    :ref PackiFiles

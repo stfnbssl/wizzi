@@ -1,0 +1,8 @@
+module
+    kind react
+
+    import Button from './Button'
+
+    export
+        {
+            @ Button

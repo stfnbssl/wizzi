@@ -1,0 +1,23 @@
+{
+	name "wizzi-starter-wizzi-plugin"
+	version "0.0.1"
+	description "Wizzi starter template for Wizzi plugin packages"
+	{ author
+        name  "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { github
+        userId "stfnbssl"
+    { license
+        name "MIT"
+        copy "stfn.bssl - 2019"
+    
+    { Schema
+        [ items
+            {
+                name "sample"
+                [ artifactGenerators
+                    {
+                        name "document"
+                [ modelTransformers
+                    {
+                        name "extended"

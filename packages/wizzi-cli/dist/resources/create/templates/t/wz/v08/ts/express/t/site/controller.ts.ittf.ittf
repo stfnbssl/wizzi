@@ -1,0 +1,71 @@
+$group
+    $params level:integer|2, isAuth:boolean|false
+
+    import
+        @ Router
+        @ Request
+        @ Response
+        from 'express'
+    
+    import 
+        @ ControllerType
+        @ AppInitializerType
+        $if level == 2
+            from '../../features/app/types'
+        $elif level == 3
+            from '../../../features/app/types'
+
+    $if isAuth
+        import 
+            @ AuthRequest
+            $if level == 2
+                from '../../features/auth/types'
+            $elif level == 3
+                from '../../../features/auth/types'
+
+    import
+        @ sendHtml
+        @ sendSuccess
+        @ sendPromiseResult
+        @ sendFailure
+        $if level == 2
+            from '../../utils/sendResponse'
+        $elif level == 3
+            from '../../../utils/sendResponse'
+
+    ${'$'}if ctrl.modelName
+        import
+            @ I${'$'}{ctrl.modelName}
+            from '../types'
+    
+    ${'$'}hook imports
+    +
+    export
+        class ${'$'}{ctrl.name}Controller
+            :implements ControllerType
+            +
+            p path
+                :public
+                = '${'$'}{ctrl.path}'
+            +
+            p router
+                :public 
+                _ Router()
+            ${'$'}if ctrl.modelName
+                +
+                p ${'$'}{ctrl.modelName}Model
+                    :public 
+                    :ref ${'$'}{ctrl.modelName}ModelType
+            +
+            ${'$'}hook properties
+            +
+            => initialize
+                param initValues
+                    :ref AppInitializerType
+                log 'Entering ${'$'}{ctrl.name}Controller.initialize'
+                ${'$'}if ctrl.modelName
+                    set this.${'$'}{ctrl.modelName}Model 
+                        _ Get${'$'}{ctrl.modelName}Model
+                ${'$'}hook
+            
+            ${'$'}hook handlers

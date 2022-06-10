@@ -1,0 +1,137 @@
+module
+    kind react
+    import React from "react"
+    import 
+        @ BrowserRouter
+            as Router
+        @ Route
+        @ Link
+        from "react-router-dom"
+    import
+        @ Items 
+        from '../components/dataui/items'        
+    
+    function AppRouter
+        return 
+            < Router 
+                div 
+                    < Header 
+                    < Route 
+                        @ exact
+                        @ path "/"
+                        @ component {Home}
+                    < Route 
+                        @ path "/about"
+                        @ component {About}
+                    < Route 
+                        @ path "/topics"
+                        @ component {Topics}
+                    < Route 
+                        @ path "/items"
+                        @ component {RoutedComponent(Items)}
+    function Home
+        return 
+            . mainRoute
+                h2 
+                    + Home
+    function About
+        param props
+        return 
+            . mainRoute
+                h2 
+                    + About
+                pre
+                    + {JSON.stringify(props, null, 4)}
+            
+    function Topic
+        { 
+            @ history
+            @ match
+            @ location
+
+        return 
+            . mainRoute
+                h3 
+                    + Requested Param: \b
+                    + {match.params.id}
+                h6 history
+                pre
+                    + {JSON.stringify(history, null, 4)}
+                h6 match
+                pre
+                    + {JSON.stringify(match, null, 4)}
+                h6 location
+                pre
+                    + {JSON.stringify(location, null, 4)}
+
+    function Topics
+        { 
+            @ match
+        return 
+            . mainRoute
+                h2 
+                    + Topics
+                ul 
+                    li 
+                        < Link 
+                            @ to
+                                `lit 
+                                    + 
+                                    @ match.url
+                                    + /components
+                            + Components
+                    li 
+                        < Link 
+                            @ to
+                                `lit 
+                                    + 
+                                    @ match.url
+                                    + /props-v-state
+                            + Props v. State
+                < Route 
+                    @ path
+                        `lit 
+                            + 
+                            @ match.path
+                            + /:id
+                    @ component {Topic}
+                < Route 
+                    @ exact
+                    @ path {match.path}
+                    @ render
+                        => 
+                            h3 
+                                + Please select a topic.
+
+    function RoutedComponent
+        param Comp
+        return
+            =>
+                return
+                    . mainRoute
+                        < Comp
+    
+    function Header
+        return 
+            div
+                @ id header
+                ul 
+                    li 
+                        < Link 
+                            @ to "/"
+                            + Home
+                    li 
+                        < Link 
+                            @ to "/about"
+                            + About
+                    li 
+                        < Link 
+                            @ to "/topics"
+                            + Topics
+                    li 
+                        < Link 
+                            @ to "/items"
+                            + Items
+                . clear
+
+    export-default AppRouter

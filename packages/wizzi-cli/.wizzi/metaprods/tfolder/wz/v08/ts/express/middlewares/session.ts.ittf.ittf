@@ -1,0 +1,73 @@
+$group
+
+    ${'$'}if wzCtx.Build.useSession
+
+        import 
+            @ Application
+            @ CookieOptions
+            from 'express'
+        import 
+            @ MiddlewareType
+            from '../features/app/types'
+        import session
+            from 'express-session'
+        ${'$'}if wzCtx.Build.useMongoDb
+            import mongoSessionStore from 'connect-mongo'
+            import mongoose from 'mongoose'
+        import 
+            @ config
+            from '../features/config'
+        export 
+            const SessionMiddleware
+                :ref MiddlewareType
+                =
+                    => 
+                        param app
+                            :ref Application
+                        ${'$'}if wzCtx.Build.useMongoDb
+                            const MongoStore = mongoSessionStore(session)
+                        const cookieOptions
+                            :ref CookieOptions
+                            =
+                                { 
+                                    @ secure
+                                        iif app.get('env') === 'production'
+                                            then true
+                                            else false
+                                        # serve secure cookies, requires https
+                                    @ httpOnly true
+                                    @ maxAge 14 * 24 * 60 * 60 * 1000
+                                        # expires in 14 days
+                        const sessionOptions
+                            :ref session.SessionOptions
+                            =
+                                { 
+                                    @ name '${'$'}{wzCtx.name}.sid'
+                                    @ secret config.sessionSecret
+                                    @ store
+                                        ${'$'}if wzCtx.Build.useMongoDb
+                                            new MongoStore
+                                                { 
+                                                    @ mongooseConnection mongoose.connection
+                                                    @ ttl 14 * 24 * 60 * 60
+                                                    # save session 14 days
+                                        ${'$'}else 
+                                            new session.MemoryStore()
+                                    @ cookie cookieOptions
+                                    @ resave false
+                                    @ saveUninitialized false
+                            #
+                                # 
+                                # if (!dev) {
+                                # server.set('trust proxy', 1); // trust first proxy
+                                # }
+                                # 
+                        _ app.use(session(sessionOptions))
+                            #
+                                # 
+                                # if (!dev) {
+                                # server.set('trust proxy', 1); // trust first proxy
+                                # }
+                                # 
+
+

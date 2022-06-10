@@ -1,0 +1,5 @@
+
+    const cmd = require("C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/dist/examples/sigma/dist/node_modules/gatsby/dist/commands/develop-process.js");
+    const args = {"_":["develop"],"verbose":false,"no-color":false,"no-colors":false,"noColors":false,"noColor":false,"json":false,"H":"localhost","host":"localhost","p":"8000","port":56473,"c":"","cert-file":"","certFile":"","k":"","key-file":"","keyFile":"","ca-file":"","caFile":"","graphql-tracing":false,"graphqlTracing":false,"$0":"gatsby","directory":"C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-cli\\dist\\examples\\sigma\\dist","browserslist":[">0.25%","not dead"],"sitePackageJson":{"name":"sigma","version":"0.0.1","private":false,"main":"","scripts":{"develop":"gatsby develop","start":"gatsby develop","build":"gatsby build","serve":"gatsby serve","clean":"gatsby clean"},"dependencies":{"gatsby":"^2.32.3","react":"^16.13.1","react-dom":"^16.13.1"},"devDependencies":{}},"report":{"errorMap":{}},"useYarn":false,"proxyPort":8000,"ssl":null,"debugInfo":null};
+    cmd(args);
+  

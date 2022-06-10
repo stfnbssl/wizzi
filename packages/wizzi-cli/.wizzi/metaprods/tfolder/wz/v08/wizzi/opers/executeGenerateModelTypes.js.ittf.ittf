@@ -1,0 +1,21 @@
+$group
+
+    $ 
+        var openPar = '(';
+
+    function executeGenerateModelTypes
+        param wfschemaIttfDocumentUri
+        param outputPackagePath
+        param wfschemaName
+        param mTreeBuildUpContext
+        param callback
+
+        _ createWizziFactory
+            {
+            f_cb${openPar} wf )
+                _ wf.generateModelTypes
+                    @ wfschemaIttfDocumentUri
+                    @ outputPackagePath
+                    @ wfschemaName
+                    @ mTreeBuildUpContext
+                    @ callback

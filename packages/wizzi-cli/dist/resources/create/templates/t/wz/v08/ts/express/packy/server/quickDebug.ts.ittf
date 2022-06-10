@@ -1,0 +1,138 @@
+module
+    import 
+        @ createFsJsonAndFactory
+        from './features/wizzi/factory'
+    import 
+        @ generateArtifact
+        @ executeJob
+        from './features/wizzi/productions'
+    import 
+        @ packiTypes
+        from './features/packi'
+    import 
+        @ githubApiCalls
+        from './features/github'
+    const github_access_token = '410a1368f1ba83cae84efac295b7ac0b4afe4b92'
+    async-function testCloneGithubRepo
+        const result
+            await 
+                _ githubApiCalls.cloneBranch
+                    { 
+                        @ name 'packi-demo-strawberry'
+                        @ owner 'stfnbssl'
+                        @ token github_access_token
+                    @ 'master'
+        _ console.log('testCloneGithubRepo.files', result.files)
+        _ console.log('testCloneGithubRepo.commitHistory', result.commitHistory)
+    async-function testUpdateGithubRepo
+        param files
+            :ref packiTypes.PackiFiles
+        const result
+            await 
+                _ githubApiCalls.updateBranch
+                    @ files
+                    { 
+                        @ name 'packi-demo-strawberry'
+                        @ owner 'stfnbssl'
+                        @ token github_access_token
+                    @ 'master'
+    async-function testTemplateRepositories
+        const result
+            await 
+                _ githubApiCalls.getPackiTemplateRepositories()
+        _ console.log('testTemplateRepositories', result)
+    async-function testFactory
+        const wf
+            await 
+                _ createFsJsonAndFactory
+                    { 
+                        { 'x/d/a.js.ittf'
+                            @ type 'CODE'
+                            @ contents 'Hey'
+                        { 'x/d/b.html.ittf'
+                            @ type 'CODE'
+                            @ contents 'Hey'
+        _ console.log(wf)
+    async-function testArtifactGenerator
+        const wf
+            await 
+                _ generateArtifact
+                    @ 'x/a.js.ittf'
+                    { 
+                        { 'x/a.js.ittf'
+                            @ type 'CODE'
+                            @ contents 'module\n\tkind jsfile\n\tb()'
+                        { 'x/t/b.js.ittf'
+                            @ type 'CODE'
+                            @ contents 'log "Hello"'
+        _ console.log(wf)
+    async-function testWizziJob
+        const wf
+            await 
+                _ executeJob
+                    @ 'x/gen.wfjob.ittf'
+                    { 
+                        { 'x/src/a.js.ittf'
+                            @ type 'CODE'
+                            @ contents 'module\n\tkind jsfile\n\tb()'
+                        { 'x/src/t/b.js.ittf'
+                            @ type 'CODE'
+                            @ contents 'log "Hello"'
+                        { 'x/gen.wfjob.ittf'
+                            @ type 'CODE'
+                            @ contents
+                                _ 
+                                    `lit 
+                                        + wfjob&lf;
+                                        + &lf;
+                                        + &nbsp;   $&lf;
+                                        + &nbsp;       var ittf_src_folder        = path.join(__dirname, 'src');&lf;
+                                        + &nbsp;       var dest_folder            = path.join(__dirname, '..', 'src');&lf;
+                                        + &lf;
+                                        + &lf;
+                                        + &nbsp;   line src&lf;
+                                        + &nbsp;       cwd-folder x{ittf_src_folder}&lf;
+                                        + &lf;
+                                        + &nbsp;       artifact javascript modules&lf;
+                                        + &nbsp;           src ./**/*.js.ittf&lf;
+                                        + &nbsp;           schema js&lf;
+                                        + &nbsp;           generator js/module&lf;
+                                        + &nbsp;           extension js&lf;
+                                        + &lf;
+                                        + &nbsp;   production&lf;
+                                        + &nbsp;       dest-folder x{dest_folder}&lf;
+                                        + &nbsp;       line-ref src&lf;
+                                        + &lf;
+                                        + &nbsp;          &nbsp;
+                                    ._ replace
+                                        @ /x{/g
+                                        @ '${'
+        _ console.log
+            _ wf.toJson
+                => 
+                    param err
+                    param result
+                    _ console.log(JSON.stringify(result, null, 2))
+        # testWizziJob();
+        # testCloneGithubRepo();
+        #
+            # 
+            # testUpdateGithubRepo({
+            # 'index.ts': {
+            # type: 'CODE',
+            # contents: 'console.log("Hello world")'
+            # }
+            # })
+            # 
+    _ testTemplateRepositories()
+        # testWizziJob();
+        # testCloneGithubRepo();
+        #
+            # 
+            # testUpdateGithubRepo({
+            # 'index.ts': {
+            # type: 'CODE',
+            # contents: 'console.log("Hello world")'
+            # }
+            # })
+            # 

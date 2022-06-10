@@ -1,0 +1,62 @@
+{
+  "name": "sample",
+  "preserveTags": true,
+  "requires": [],
+  "exportTos": [],
+  "elements": [
+    {
+      "name": "basic",
+      "super": null,
+      "isRoot": true,
+      "tags": [
+        "basic"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "item",
+          "role": "items",
+          "tags": [
+            "item"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": null,
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "item",
+      "super": null,
+      "isRoot": false,
+      "tags": [
+        "item"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string",
+          "tags": [
+            "value"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    }
+  ]
+}

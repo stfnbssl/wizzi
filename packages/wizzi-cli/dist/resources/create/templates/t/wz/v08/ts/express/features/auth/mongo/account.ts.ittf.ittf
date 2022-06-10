@@ -1,0 +1,61 @@
+$group
+
+    import 
+        @ Schema
+        @ Model
+        @ model
+        from "mongoose"
+    import 
+        @ ModelBuilderType
+        from "../../app/types"
+    import 
+        @ IAccountModel
+        from "../types"
+    import 
+        @ TokenSchema
+        from "./token"
+    +
+    const AccountSchema
+        new Schema
+            :param IAccountModel
+            { 
+                { domain
+                    @ type String
+                { uid
+                    @ type String
+                { username
+                    @ type String
+                { displayName
+                    @ type String
+                { avatar_url
+                    @ type String
+                @ tokens []
+    +
+    export 
+        :type AccountModelType
+            :ref Model
+                :param 
+                    :ref IAccountModel
+    +
+    let accountModel
+        :ref AccountModelType
+    +
+    export 
+        function GetAccountModel
+            :return
+                :ref AccountModelType
+            return accountModel
+    +
+    export 
+        const AccountModelBuilder
+            :ref ModelBuilderType
+            =
+                { 
+                    @ buildModel
+                        => 
+                            set accountModel =
+                                _ model
+                                    :param 
+                                        :ref IAccountModel
+                                    @ 'Account'
+                                    @ AccountSchema

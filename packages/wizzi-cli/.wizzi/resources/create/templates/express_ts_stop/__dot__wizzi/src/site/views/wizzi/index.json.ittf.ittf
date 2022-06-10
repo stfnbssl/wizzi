@@ -1,0 +1,7 @@
+﻿{
+    ${'$'}
+        var md = {
+        }
+
+    $$ TODO $if cliCtx.useIttfStatic
+    $include wz/v08/express/site/views/wizzi/index.json

@@ -1,0 +1,68 @@
+module
+    kind jsfile
+
+    $
+        var baseSource = "C:/My/solutions/typescript/snack/website/src";
+        var srcClient = baseSource + "/client";
+        var srcServer = baseSource + "/server";
+        var baseDest = "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/dist/snack/website/.wizzi/src";
+        var destClient = baseDest + "/client";
+        var destServer = baseDest + "/server";
+        var srcSnackSdk = 'C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/dist/snack/packages/snack-sdk/src'
+        var destSnackSdk = 'C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/dist/snack/packages/snack-sdk/.wizzi'
+
+    var fy = require('../../cmds/fy');
+    
+    $if false
+        _ fy
+            {
+                @ s "${srcClient}/components/DevicePreview"
+                @ d "${destClient}/components/DevicePreview"
+        _ fy
+            {
+                @ s "${srcClient}/components/DeviceInstructions"
+                @ d "${destClient}/components/DeviceInstructions"
+        _ fy
+            {
+                @ s "${srcClient}/components/Editor"
+                @ d "${destClient}/components/Editor"
+        _ fy
+            {
+                @ s "${srcClient}/components/FileList"
+                @ d "${destClient}/components/FileList"
+        _ fy
+            {
+                @ s "${srcClient}/components/Shell"
+                @ d "${destClient}/components/Shell"                
+        _ fy
+            {
+                @ s "${srcClient}/components/shared"
+                @ d "${destClient}/components/shared"
+        _ fy
+            {
+                @ s "${srcClient}/components"
+                @ d "${destClient}/components"                
+        _ fy
+            {
+                @ s "${srcServer}"
+                @ d "${destServer}"
+        _ fy
+            {
+                @ s "${srcClient}/auth"
+                @ d "${destClient}/auth"
+        _ fy
+            {
+                @ s "${srcClient}/utils"
+                @ d "${destClient}/utils"                
+        _ fy
+            {
+                @ s "${srcClient}/redux"
+                @ d "${destClient}/redux"
+        _ fy
+            {
+                @ s "${srcClient}/configs"
+                @ d "${destClient}/configs"
+    _ fy
+        {
+            @ s "${srcSnackSdk}"
+            @ d "${destSnackSdk}"

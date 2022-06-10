@@ -1,0 +1,24 @@
+module
+    kind react
+    
+    export 
+        const asyncer
+            => 
+                param dispatch
+                param state
+                => 
+                    param action
+                    iif typeof action === 'function'
+                        then action(dispatch, state)
+                        else dispatch(action)
+    export 
+        const logger
+            => 
+                param action
+                param prevState
+                param currentState
+                _ console.groupCollapsed('Logger')
+                _ console.log('%c Action:', 'color: blue', action)
+                _ console.log('%c Previous State:', 'color: red', prevState)
+                _ console.log('%c Current State:', 'color: green', currentState)
+                _ console.groupEnd

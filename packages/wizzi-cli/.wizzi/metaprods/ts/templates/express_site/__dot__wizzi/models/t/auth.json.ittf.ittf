@@ -1,0 +1,50 @@
+${'$'}group
+
+    usePassport false
+    { passport
+    
+    usePassportAuth0 false
+    { passportAuth0
+        
+    usePacki true
+    { packi
+        endPoint "${'$'}{md.http}://localhost:${'$'}{md.port}/api/${'$'}{md.apiVersion}"
+        storeFolder "data/packi/store"
+        templatesFolder "data/packi/templates"
+        apiId_rem "identifier for the API. This value will be used as the audience parameter on authorization calls."
+        apiId "https://packi/api/${'$'}{md.apiVersion}" ${'$'}${'$'} AUTH0_PACKI_API_ID
+        clientId_rem ""
+        clientId "gPb1dqyNzRHfJgNVawKxPFP65LuNcUI8" ${'$'}${'$'} AUTH0_PACKI_CLIENT_ID
+        clientSecret_rem ""
+        clientSecret "-DVUr9qiz5hivZUmfiJtFDEV-zylvAem8P-X0OH8zwlry06rZNCIDUTF7s9sgWNm" ${'$'}${'$'} AUTH0_PACKI_CLIENT_SECRET
+        backendId_rem ""
+        backendId "awRaG0ilBVlaHQ2xK5JgehLjkBzLNthp" ${'$'}${'$'} AUTH0_PACKI_BACKEND_APP_ID
+        backendSecret_rem ""
+        backendSecret "1iDRuv92BtmZA521Od3BIU923cDL-EsoSNNTAUJkGfrpNmEDr85I_lsWqZAe5UNG" ${'$'}${'$'} AUTH0_PACKI_BACKEND_APP_SECRET
+
+    useAuthentication true
+    { authentication
+        authRequired false
+        userInfo false
+        useAuth0 false
+        { auth0
+            tenant "dev-qwf9-zob.eu"
+            clientId "dJoAkgjkJmbElAgqMxqsBPlfoZ3xdAdV"
+            longRandomString "gdftr75ujgklfòlvposg908495r7o34tklvgklgeòmvojg"
+            baseURL "${'$'}{md.http}://localhost:${'$'}{md.port}"
+        useLocal true
+        { local
+        useGithub true
+        { github
+            clientId "6a42cd4cb7247bb4e823"
+            clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
+            callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/api/${'$'}{md.apiVersion}/authenticate/github/callback"
+
+    useAuthorization false
+    { authorization
+        
+    useCrypto false
+    { crypto
+    
+    useJwt true
+    { jwt

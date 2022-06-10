@@ -1,0 +1,329 @@
+module
+    import 
+        as React
+        from 'react'
+    import 
+        @ SnackState
+        @ SnackFile
+        @ SnackCodeFile
+        @ SnackAssetFile
+        @ SnackFiles
+        @ SnackDependencies
+        @ SnackDependency
+        @ SnackMissingDependencies
+        @ SnackConnectedClient
+        @ SnackConnectedClients
+        @ SDKVersion
+        from 'snack-sdk'
+    import 
+        @ ThemeName
+        from './components/Preferences/withThemeName'
+    export 
+        @ SnackState
+        @ SnackFile
+        @ SnackCodeFile
+        @ SnackAssetFile
+        @ SnackFiles
+        @ SnackDependencies
+        @ SnackDependency
+        @ SnackMissingDependencies
+        @ SnackConnectedClient
+        @ SnackConnectedClients
+        @ SDKVersion
+        @ ThemeName
+    export 
+        :type SnackManifest
+            :{ 
+                :p name
+                    :string 
+                :p description
+                    :string 
+                :p sdkVersion
+                    :optional 
+                    :ref SDKVersion
+    export 
+        :type SavedSnack
+            :{ 
+                :p id
+                    :string 
+                :p created
+                    :string 
+                :p code
+                    :optional 
+                    :union 
+                        :string 
+                        :ref SnackFiles
+                :p manifest
+                    :ref SnackManifest
+                :p dependencies
+                    :optional 
+                    :ref SnackDependencies
+                :p history
+                    :optional 
+                    :ref SaveHistory
+                :p isDraft
+                    :optional 
+                    :boolean 
+    export 
+        :type SnackDefaults
+            :{ 
+                :p name
+                    :string 
+                :p channel
+                    :string 
+    export 
+        :type RouterData
+            :union 
+                :{ 
+                    :p type
+                        :literal 'success'
+                    :p snack
+                        :optional 
+                        :ref SavedSnack
+                    :p defaults
+                        :ref SnackDefaults
+                :{ 
+                    :p type
+                        :literal 'error'
+                    :p error
+                        :{ 
+                            :p message
+                                :string 
+                    :p defaults
+                        :ref SnackDefaults
+    export 
+        :type Viewer
+            :{ 
+                :p username
+                    :string 
+                :p nickname
+                    :string 
+                :p picture
+                    :optional 
+                    :string 
+                :p user_metadata
+                    :optional 
+                    :{ 
+                        :p appetize_code
+                            :string 
+    export 
+        :type Platform
+            :union 
+                :literal 'android'
+                :literal 'ios'
+                :literal 'web'
+                :literal 'mydevice'
+    export 
+        :type Device
+            :{ 
+                :p name
+                    :string 
+                :p id
+                    :string 
+                :p platform
+                    :ref Platform
+                :p status
+                    :union 
+                        :literal 'connected'
+                        :literal 'disconnected'
+                :p timestamp
+                    :number 
+    export 
+        :type DeviceLog
+            :{ 
+                :p device
+                    :ref Device
+                :p method
+                    :union 
+                        :literal 'log'
+                        :literal 'error'
+                        :literal 'warn'
+                :p payload
+                    :[ 
+                        :unknown 
+    export 
+        :type QueryInitParams
+            :{ 
+                :p code
+                    :optional 
+                    :string 
+                :p sourceUrl
+                    :optional 
+                    :string 
+                :p name
+                    :optional 
+                    :string 
+                :p description
+                    :optional 
+                    :string 
+                :p dependencies
+                    :optional 
+                    :string 
+                :p files
+                    :optional 
+                    :string 
+                :p sdkVersion
+                    :optional 
+                    :ref SDKVersion
+                :p iframeId
+                    :optional 
+                    :string 
+                :p waitForData
+                    :optional 
+                    :literal 'boolean'
+                :p saveToAccount
+                    :optional 
+                    :union 
+                        :literal 'true'
+                        :literal 'false'
+    export 
+        :type QueryStateParams
+            :{ 
+                :p preview
+                    :optional 
+                    :union 
+                        :literal 'true'
+                        :literal 'false'
+                :p platform
+                    :optional 
+                    :ref Platform
+                :p theme
+                    :optional 
+                    :ref ThemeName
+                :p supportedPlatforms
+                    :optional 
+                    :string 
+                :p appetizePayerCode
+                    :optional 
+                    :string 
+                :p verbose
+                    :optional 
+                    :union 
+                        :literal 'true'
+                        :literal 'false'
+                :p hideQueryParams
+                    :optional 
+                    :union 
+                        :literal 'true'
+                        :literal 'false'
+    export 
+        :type QueryParams
+            :intersect 
+                :ref QueryInitParams
+                :ref QueryStateParams
+    export 
+        :type SaveStatus
+            :union 
+                :literal 'unsaved'
+                :literal 'edited'
+                :literal 'saving-draft'
+                :literal 'saved-draft'
+                :literal 'publishing'
+                :literal 'published'
+    export 
+        :type SaveHistory
+            :[ 
+                :{ 
+                    :p hashId
+                        :string 
+                    :p savedAt
+                        :string 
+                    :p isDraft
+                        :optional 
+                        :boolean 
+    export 
+        :type SaveOptions
+            :{ 
+                :p isDraft
+                    :optional 
+                    :boolean 
+                :p ignoreUser
+                    :optional 
+                    :boolean 
+                :p excludeFromHistory
+                    :optional 
+                    :boolean 
+    export 
+        :enum AnnotationSeverity
+            @ LOADING
+            @ IGNORE 0
+            @ INFO 1
+            @ WARNING 2
+            @ ERROR 3
+            @ FATAL 4
+    export 
+        :type AnnotationAction
+            :{ 
+                :p title
+                    :string 
+                :p icon
+                    :optional 
+                    :ref React.ComponentType
+                        :param any
+                :p run
+                    :=> 
+                        :void 
+    export 
+        :type AnnotationLocation
+            :{ 
+                :p fileName
+                    :string 
+                :p startLineNumber
+                    :number 
+                :p endLineNumber
+                    :number 
+                :p startColumn
+                    :number 
+                :p endColumn
+                    :number 
+    export 
+        :type Annotation
+            :{ 
+                :p message
+                    :string 
+                :p severity
+                    :ref AnnotationSeverity
+                :p source
+                    :union 
+                        :literal 'Device'
+                        :literal 'Web'
+                        :literal 'JSON'
+                        :literal 'ESLint'
+                        :literal 'Dependencies'
+                :p location
+                    :optional 
+                    :ref AnnotationLocation
+                :p action
+                    :optional 
+                    :ref AnnotationAction
+    export 
+        :type $SetComplement
+            :< A
+            :< A1
+                :ref A
+            :iif 
+                :check 
+                    :ref A
+                :extends 
+                    :ref A1
+                :then 
+                    :never 
+                :else 
+                    :ref A
+    export 
+        :type $Subtract
+            :< T
+                :ref T1
+            :< T1
+                :object 
+            :ref Pick
+                :param 
+                    :ref T
+                :param 
+                    :ref $SetComplement
+                        :param 
+                            :keyof 
+                                :ref T
+                        :param 
+                            :keyof 
+                                :ref T1

@@ -1,0 +1,5 @@
+module
+	kind es6
+
+    $include cli/v08/gatsby.config-base.js
+

@@ -1,0 +1,26 @@
+html 
+    head 
+        meta 
+            charset utf-8
+        @title Blog webpack
+        css https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css
+        css https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css
+        css https://cdn.jsdelivr.net/npm/icheck@1.0.2/skins/all.min.css        
+        css https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css
+        css https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.2/codemirror.min.css
+        css https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.2/theme/dracula.min.css
+        css https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css
+        css ./styles.css.ittf
+    body 
+        js https://code.jquery.com/jquery-3.5.1.min.js
+        $$ js https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.js
+        js //cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.js
+        js https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js
+        js https://cdn.jsdelivr.net/momentjs/latest/moment.min.js
+        js https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js
+        js https://cdn.jsdelivr.net/npm/icheck@1.0.2/icheck.min.js
+        js https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js
+        js https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js
+        js https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.2/codemirror.min.js
+        js https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js
+        js /webpacks/blog/bundle.js

@@ -1,0 +1,10 @@
+module
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useConfig
+        v08/express/features/wizzi/factory${call}

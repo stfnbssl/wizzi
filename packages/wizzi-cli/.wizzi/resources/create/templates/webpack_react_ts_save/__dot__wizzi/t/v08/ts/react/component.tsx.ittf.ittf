@@ -1,0 +1,5 @@
+﻿${'$'}group
+	${'$'}params &md
+
+    $include wz/v08/ts/react/component.tsx
+
