@@ -1,5 +1,0 @@
-$group
-
-    =>
-        param err
-        param result

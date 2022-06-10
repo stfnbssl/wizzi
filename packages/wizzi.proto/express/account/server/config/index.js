@@ -1,3 +1,0 @@
-import create from './env';
-const config = create();
-export {config};
