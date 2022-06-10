@@ -1,0 +1,962 @@
+$group
+    { Banner
+        { promotion
+            title "The Future Web is Here:"
+            subtitle "Join us at WizziConf!&nbsp;"
+            { link
+                label "Register for free now."
+                href "https://wizziconf.com/"
+        [ items
+            {
+                label "Support"
+                href "/support/"
+            {
+                label "Contact"
+                href "/contact/"
+            {
+                label "Github"
+                href "https://github.com/stfnbssl/wizzi"
+            {
+                label "Login"
+                href "/login/"
+    { Nav1
+        [ menuGroups
+            {
+                [ menus
+                    {
+                        title "Docs"
+                        [ panels
+                            {
+                                kind "grid"
+                                title "Documentation"
+                                subtitle "Start building with Wizzi and its ecosystem tools"
+                                [ griditems
+                                    {
+                                        kind "list"
+                                        title 'Get started'
+                                        [ items
+                                            {
+                                                label "Documentation"
+                                                href "${wzCtx.Params.baseUrl}/docs/concepts.html"
+                                            {
+                                                label "Quick Start"
+                                                href "${wzCtx.Params.baseUrl}/docs/quick-start/"
+                                            {
+                                                label "Tutorial"
+                                                href "${wzCtx.Params.baseUrl}/docs/tutorial/"
+                                            {
+                                                label "Cheat Sheet"
+                                                href "${wzCtx.Params.baseUrl}/docs/cheatsheets/cs-ittf.html"
+                                    { 
+                                        kind "list"
+                                        title "Guides"
+                                        [ items
+                                            {
+                                                label "How-To Guides"
+                                                href "${wzCtx.Params.baseUrl}/docs/how-to/"
+                                            {
+                                                label "Reference Guides"
+                                                href "${wzCtx.Params.baseUrl}/docs/reference/"
+                                            {
+                                                label "Conceptual Guides"
+                                                href "${wzCtx.Params.baseUrl}/docs/conceptual/"
+                    {
+                        title "Plugins"
+                        href "/plugins/"
+                    {
+                        title "Features"
+                        [ panels
+                            {
+                                kind "grid"
+                                title "Feature Comparison"
+                                subtitle "See how Wizzi compares to other JAMstack frameworks and traditional content management systems (CMS)"
+
+
+                                $
+                                    var cgs = ['Alpha','Beta'];
+
+                                [ griditems
+                                    $foreach cg in cgs
+                                        {
+                                            title "Group ${cg}"
+                                            kind "list"
+                                            [ items
+                                                $
+                                                    var cis = ['Sigma','Tau'];
+
+                                                $foreach ci in cis
+                                                    { item
+                                                        label "Item ${cg} ${ci}"
+                                                        href "/item${cg}${ci}/"
+
+                            {
+                                kind "subgrid"
+                                title "Plugins"
+                                subtitle "RSS feed? SEO? Shopify integration? There’s a plugin for that!"
+                                $
+                                    var cgs = ['Gamma','Lambda'];
+
+                                [ griditems
+                                    $foreach cg in cgs
+                                        {
+                                            title "Group ${cg}"
+                                            [ items
+                                                $
+                                                    var cis = ['Delta'];
+
+                                                $foreach ci in cis
+                                                    { item
+                                                        label "Item ${cg} ${ci}"
+                                                        href "/item${cg}${ci}/"
+                                        
+                    {
+                        title "Productions"
+                        [ panels
+                            {
+                                kind "grid"
+                                title "Productions"
+                                subtitle "Explore the many ways to use Wizzi:"
+                                [ griditems
+                                    {
+                                        kind "list"
+                                        title "By Industry"
+                                        [ items
+                                            {
+                                                label "Software &amp;SaaS"
+                                                href "/use-cases/software-saas/"
+                                            {
+                                                label "Consumer Finance &amp;Insurance"
+                                                href "/use-cases/finance-insurance/"
+                                            {
+                                                label "E-commerce"
+                                                href "/use-cases/e-commerce/"
+                                            {
+                                                label "Public Interest Organizations"
+                                                href "/use-cases/public-interest-organization/"
+                                            {
+                                                label "Content &amp;Media"
+                                                href "/use-cases/content-media/"
+                                    {
+                                        kind "list"
+                                        title "By Technology"
+                                        [ items
+                                            {
+                                                label "Wordpress"
+                                                href "/use-cases/wordpress/"
+                                                svg "wordpress"
+                                            {
+                                                label "Contentful"
+                                                href "/use-cases/contentful/"
+                                                svg "contentful"
+                                            {
+                                                label "Drupal"
+                                                href "/use-cases/drupal/"
+                                                svg "drupal"
+                                            {
+                                                label "Shopify"
+                                                href "/use-cases/shopify/"
+                                                svg "shopify"
+                            {
+                                kind "list"
+                                title "Webinars"
+                                subtitle "Learn more with webinars on demand"
+                                [ listitems
+                                    {
+                                        title "Latest webinars"
+                                        [ items
+                                            {
+                                                label "This Changes Everything: Incremental Builds in Wizzi"
+                                                href "/incrbuilds-webinar/"
+                                            {
+                                                label "Matter Supply: Just Do It 2.0"
+                                                href "/matter-supply-webinar"
+
+                    {
+                        title "Community"
+                        [ panels
+                            {
+                                kind "grid"
+                                title "Community"
+                                subtitle "We’re so glad you want to help! Here’s how to get started:"
+                                [ griditems
+                                    {
+                                        kind "list"
+                                        title 'Contributing'
+                                        [ items
+                                            {
+                                                label "Why contribute"
+                                                href "/contributing/"
+                                            {
+                                                label "How to contribute"
+                                                href "/contributing/how-to-contribute/"
+                                    {
+                                        kind "list"
+                                        [ items
+                                            {
+                                                label "Code of Conduct"
+                                                href "/contributing/code-of-conduct/"
+                                            {
+                                                label "Style Guide"
+                                                href "/contributing/gatsby-style-guide/"
+                            {
+                                kind "bar"
+                                [ items
+                                    {
+                                        label "Twitch"
+                                        href "https://www.twitch.tv/gatsbyjs"
+                                        { icon
+                                            svg "twitch-svg"
+                                    {
+                                        label "Discord"
+                                        href "https://gatsby.dev/discord"
+                                        { icon
+                                            svg "discors-svg"
+                                    {
+                                        label "Youtube"
+                                        href "https://www.youtube.com/gatsbyjs"
+                                        { icon
+                                            svg "youtube-svg"
+                            {
+                                kind "singleitem"
+                                title "Showcase"
+                                subtitle "Check out what the community is building"
+                                href "/showcase/"
+                            {
+                                kind "singleitem"
+                                title "WizziConf"
+                                subtitle "Join us for WizziConf - March 2-3, 2021!"
+                                href "/wizziconf/"
+                    {
+                        title "Blog"
+                        href "/blog/"
+            {
+                [ menus
+                    {
+                        title "Wizzi Cloud"
+                        [ panels
+                    {
+                        kind "button"
+                        title "Get started"
+                        href "/get-started/"
+
+
+$*
+li 
+    class css-uh3ivc
+    ul 
+        class css-qg23q3
+        li 
+            class css-4is18n
+            . css-szvnas
+                h3 Gatsby Cloud
+                    class css-1enu353
+                button Gatsby Cloud
+                    type button
+                    aria-expanded false
+                    aria-controls Gatsby Cloud-dropdown
+                    class css-3q8779
+                    svg 
+                        stroke currentColor
+                        fill currentColor
+                        stroke-width 0
+                        viewBox 0 0 24 24
+                        height 1em
+                        width 1em
+                        xmlns http://www.w3.org/2000/svg
+                        path 
+                            d M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z
+                . css-1sg6jvm
+                    id Gatsby-Cloud-dropdown
+                    ul 
+                        class css-y86b6k
+                        li 
+                            class css-1v43wp4
+                            a 
+                                class css-1fmrpt2
+                                href /cloud/
+                                svg 
+                                    width 32
+                                    height 32
+                                    viewBox 0 0 32 32
+                                    fill none
+                                    xmlns http://www.w3.org/2000/svg
+                                    class css-1ppz169
+                                    circle 
+                                        cx 10.3097
+                                        cy 11.8282
+                                        r 3.37661
+                                        fill #159CF4
+                                    circle 
+                                        cx 9.60344
+                                        cy 16.812
+                                        r 3.01799
+                                        fill white
+                                    circle 
+                                        cx 17.2403
+                                        cy 14.6116
+                                        r 5.38333
+                                        fill white
+                                    rect 
+                                        x 9.60352
+                                        y 16.8303
+                                        width 8.20622
+                                        height 3.00042
+                                        fill white
+                                    circle 
+                                        cx 11.6583
+                                        cy 14.2931
+                                        r 0.99225
+                                        fill white
+                                    path 
+                                        fill-rule evenodd
+                                        clip-rule evenodd
+                                        d M13.6316 21.0374L9.99109 21.0374C7.63289 21.0374 5.72119 19.1257 5.72119 16.7675C5.72119 14.4093 7.63289 12.4976 9.99109 12.4976C10.3399 12.4976 10.6789 12.5394 11.0034 12.6183C11.8605 10.0685 14.2702 8.23175 17.1089 8.23175C19.7951 8.23175 22.0972 9.87651 23.063 12.2139C22.5394 12.051 21.991 11.9445 21.4248 11.9015C20.5178 10.525 18.9583 9.6165 17.1865 9.6165C14.6053 9.6165 12.6652 11.5679 12.4055 13.2315C12.347 13.6064 12.2024 13.8523 11.9543 14.1151C11.7507 14.2484 11.5943 14.2797 11.4101 14.2484C11.285 14.2271 11.179 14.1826 11.0608 14.1329C10.8293 14.0356 10.5511 13.9187 9.9909 13.9187C8.4205 13.9187 7.14744 15.1917 7.14744 16.7621C7.14744 18.3325 8.4205 19.6056 9.9909 19.6056H13.4346C13.4541 20.0966 13.5213 20.5754 13.6316 21.0374Z
+                                        fill url(#a095db34-56ab-4caf-9e1a-9513af4b0311)
+                                    path 
+                                        d M13.3855 19.3366C13.3855 23.4618 16.7296 26.806 20.8548 26.806C24.9801 26.806 28.3242 23.4618 28.3242 19.3366C28.3242 15.2114 24.9801 11.8672 20.8548 11.8672C16.7296 11.8672 13.3855 15.2114 13.3855 19.3366Z
+                                        fill white
+                                    circle 
+                                        cx 11.2579
+                                        cy 6.14066
+                                        r 0.947821
+                                        fill #159BF3
+                                    circle 
+                                        cx 4.62311
+                                        cy 11.8276
+                                        r 0.947821
+                                        fill #159BF3
+                                    circle 
+                                        cx 6.51911
+                                        cy 7.09022
+                                        r 0.947821
+                                        fill #159BF3
+                                    path 
+                                        d M25.6394 19.426H22.6394V20.2831H24.6965C24.3965 21.5688 23.4536 22.6403 22.2108 23.0688L17.2822 18.1403C17.7965 16.6403 19.2536 15.5688 20.9251 15.5688C22.2108 15.5688 23.3679 16.2117 24.0965 17.1974L24.7394 16.6403C23.8822 15.4831 22.5108 14.7117 20.9251 14.7117C18.6965 14.7117 16.8108 16.2974 16.3394 18.3974L21.9965 24.0546C24.0536 23.5403 25.6394 21.6546 25.6394 19.426Z
+                                        fill white
+                                    path 
+                                        d M16.2109 19.4688C16.2109 20.6688 16.6824 21.826 17.5824 22.726C18.4824 23.626 19.6824 24.0974 20.8395 24.0974L16.2109 19.4688Z
+                                        fill white
+                                    path 
+                                        d M20.9253 13.426C17.6253 13.426 14.9253 16.126 14.9253 19.426C14.9253 22.726 17.6253 25.426 20.9253 25.426C24.2253 25.426 26.9253 22.726 26.9253 19.426C26.9253 16.126 24.2253 13.426 20.9253 13.426ZM17.5824 22.7689C16.6824 21.8689 16.211 20.6689 16.211 19.5117L20.8824 24.1403C19.6824 24.0974 18.4824 23.6689 17.5824 22.7689ZM21.9539 24.0117L16.3396 18.3974C16.811 16.2974 18.6967 14.7117 20.9253 14.7117C22.511 14.7117 23.8824 15.4831 24.7396 16.6403L24.0967 17.1974C23.3682 16.2117 22.211 15.5689 20.9253 15.5689C19.2539 15.5689 17.8396 16.6403 17.2824 18.1403L22.211 23.0689C23.4539 22.6403 24.3967 21.5689 24.6967 20.2831H22.6396V19.426H25.6396C25.6396 21.6546 24.0539 23.5403 21.9539 24.0117Z
+                                        fill #663399
+                                    defs 
+                                        linearGradient 
+                                            id a095db34-56ab-4caf-9e1a-9513af4b0311
+                                            x1 22.9174
+                                            y1 11.6882
+                                            x2 12.8026
+                                            y2 11.6882
+                                            gradientUnits userSpaceOnUse
+                                            stop 
+                                                stop-color #663399
+                                            stop 
+                                                offset 1
+                                                stop-color #159BF3
+                                span Why Gatsby Cloud?
+                                    class css-ovr08e
+                                h2 Why Gatsby Cloud?
+                                    class css-a2l7qn
+                                p 
+                                    class css-9wr7tw
+                        li 
+                            class css-13jvnff
+                            a 
+                                class css-1fmrpt2
+                                href /integrations/
+                                svg 
+                                    width 32
+                                    height 32
+                                    viewBox 0 0 32 32
+                                    fill none
+                                    xmlns http://www.w3.org/2000/svg
+                                    class css-1ppz169
+                                    line 
+                                        x1 17.25
+                                        y1 18
+                                        x2 17.25
+                                        y2 22
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    line 
+                                        x1 20.0556
+                                        y1 10.8839
+                                        x2 23.5911
+                                        y2 7.34838
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    line 
+                                        x1 10.7358
+                                        y1 9.59828
+                                        x2 14.8316
+                                        y2 12.4662
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    line 
+                                        x1 19.7358
+                                        y1 15.5983
+                                        x2 23.8316
+                                        y2 18.4662
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    line 
+                                        x1 7.59076
+                                        y1 23.3484
+                                        x2 14.5908
+                                        y2 16.3484
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 17
+                                        cy 14
+                                        r 4
+                                        fill #D9BAE8
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 25
+                                        cy 19
+                                        r 2
+                                        fill #663399
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 9
+                                        cy 8.5
+                                        r 2
+                                        fill white
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 17.25
+                                        cy 24
+                                        r 2
+                                        fill white
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 6
+                                        cy 25
+                                        r 2
+                                        fill #159BF3
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                    circle 
+                                        cx 24
+                                        cy 7
+                                        r 2
+                                        fill white
+                                        stroke #663399
+                                        stroke-width 1.5
+                                span Integrations
+                                    class css-ovr08e
+                                h2 Integrations
+                                    class css-a2l7qn
+                                p Gatsby Cloud is the best way to use Gatsby's thriving plugin ecosystem:
+                                    class css-9wr7tw
+                            ul 
+                                class css-kqnhvk
+                                li 
+                                    ul 
+                                        class css-1j9zy8k
+                                        li 
+                                            ul 
+                                                class css-j7qwjs
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360053098633-Connecting-to-WordPress
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 25 25
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            path 
+                                                                d M1.99609 12.712C1.99609 16.7867 4.36403 20.3081 7.79772 21.9768L2.88733 8.52246C2.31615 9.80274 1.99609 11.2196 1.99609 12.712Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M19.2376 12.1925C19.2376 10.9202 18.7807 10.0391 18.3887 9.35335C17.8669 8.50538 17.3778 7.78728 17.3778 6.93931C17.3778 5.993 18.0955 5.11212 19.1064 5.11212C19.152 5.11212 19.1953 5.11781 19.2398 5.12035C17.4084 3.44243 14.9683 2.41797 12.2884 2.41797C8.69211 2.41797 5.52814 4.26317 3.6875 7.05801C3.92901 7.06526 4.15662 7.07035 4.34995 7.07035C5.42668 7.07035 7.09338 6.9397 7.09338 6.9397C7.64829 6.90699 7.71371 7.72205 7.15939 7.78767C7.15939 7.78767 6.60173 7.85329 5.9812 7.88581L9.72986 19.0364L11.9826 12.2798L10.3788 7.88542C9.82446 7.8529 9.29932 7.78728 9.29932 7.78728C8.7446 7.75476 8.80963 6.9066 9.36435 6.93931C9.36435 6.93931 11.0644 7.06996 12.0759 7.06996C13.1524 7.06996 14.8193 6.93931 14.8193 6.93931C15.3746 6.9066 15.4398 7.72166 14.8853 7.78728C14.8853 7.78728 14.3265 7.8529 13.7071 7.88542L17.4272 18.9516L18.4539 15.5203C18.899 14.0964 19.2376 13.0737 19.2376 12.1925Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M12.4675 13.6123L9.37891 22.5874C10.3011 22.8585 11.2763 23.0068 12.2869 23.0068C13.4856 23.0068 14.6352 22.7995 15.7053 22.4233C15.6777 22.3792 15.6526 22.3324 15.632 22.2814L12.4675 13.6123Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M21.3226 7.77246C21.3669 8.10037 21.3919 8.45237 21.3919 8.83101C21.3919 9.87564 21.1969 11.05 20.6092 12.5183L17.4648 21.6097C20.5252 19.8251 22.5837 16.5094 22.5837 12.7116C22.5838 10.9218 22.1267 9.23883 21.3226 7.77246Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M0.289062 12.7116C0.289062 6.09494 5.6723 0.711914 12.2888 0.711914C18.905 0.711914 24.2889 6.09494 24.2891 12.7116C24.2891 19.3291 18.905 24.7119 12.2888 24.7119C5.6723 24.7119 0.289062 19.3291 0.289062 12.7116ZM0.839353 12.7116C0.839353 19.0253 5.97579 24.1619 12.2888 24.1619C18.6017 24.1619 23.7377 19.0253 23.7377 12.7116C23.7377 6.39838 18.6017 1.26216 12.2888 1.26216C5.97559 1.26216 0.839353 6.39838 0.839353 12.7116Z
+                                                                fill #b7b5bd
+                                                        + Wordpress
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324514-Connecting-to-Drupal
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 25 25
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            path 
+                                                                d M11.6579 15.5723C9.5669 15.5723 7.87109 17.2681 7.87109 19.3591C7.87109 21.4501 9.5669 23.1459 11.6579 23.1459C13.7489 23.1459 15.4447 21.4501 15.4447 19.3591C15.4447 17.2681 13.7489 15.5723 11.6579 15.5723Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M16.3751 14.8456C17.496 16.0169 18.1858 17.6049 18.1858 19.3582C18.1858 21.5786 17.0792 23.533 15.3906 24.7115C18.5164 23.7486 21.1032 21.3989 22.2601 18.5534C23.8625 14.6157 22.3679 11.6552 19.8673 8.96777C19.9463 9.31268 19.9894 9.67915 19.9894 10.0456C19.9822 12.3306 18.4589 14.2492 16.3751 14.8456Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M12.0898 10.053C12.0898 11.6554 13.3904 12.9488 14.9857 12.9488C16.5809 12.9488 17.8886 11.6482 17.8886 10.053C17.8886 8.45064 16.588 7.15723 14.9928 7.15723C13.3976 7.15723 12.0898 8.45064 12.0898 10.053Z
+                                                                fill #b7b5bd
+                                                            path 
+                                                                d M6.66555 23.5622C5.70986 22.4269 5.13501 20.961 5.13501 19.3586C5.13501 16.0173 7.64279 13.2652 10.8835 12.8844C10.3302 12.0796 9.99968 11.1023 9.99968 10.0532C9.99968 7.29395 12.2344 5.0664 14.9937 5.0664C15.2236 5.0664 15.4464 5.08078 15.662 5.10952C14.0308 3.70114 12.3997 2.2712 11.1135 0.711914C11.7673 7.55263 4.88351 5.0664 2.33261 11.3754C0.629619 15.6005 2.16734 20.8245 6.66555 23.5622Z
+                                                                fill #b7b5bd
+                                                        + Drupal
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324714-Connecting-to-Strapi
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16px
+                                                            height 16px
+                                                            viewBox 0 0 16 16
+                                                            fill none
+                                                            class css-74s18y
+                                                            path 
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M10.6159 10.8743V5.71174C10.6159 5.52787 10.4669 5.37881 10.283 5.37881H5.12643V0.0498657H15.6061C15.79 0.0498657 15.9391 0.198922 15.9391 0.382791V10.8743H10.6159Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                opacity 0.404989
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M5.12643 0.0498657V5.37881H0.204854C0.112919 5.37881 0.0383911 5.30429 0.0383911 5.21235C0.0383911 5.16823 0.0559042 5.12592 0.0870828 5.09471L5.12643 0.0498657Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                opacity 0.404989
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M10.6159 15.8011V10.8743H15.9391L10.9002 15.9187C10.8352 15.9838 10.7298 15.9838 10.6648 15.9188C10.6335 15.8876 10.6159 15.8452 10.6159 15.8011Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                opacity 0.404989
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M5.12643 5.37881H10.4495C10.5414 5.37881 10.6159 5.45334 10.6159 5.54528V10.8743H5.45936C5.27549 10.8743 5.12643 10.7252 5.12643 10.5414V5.37881Z
+                                                                fill #B7B5BD
+                                                        + Strapi
+                                        li 
+                                            ul 
+                                                class css-j7qwjs
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 15 17
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            path 
+                                                                d M5.13956 11.4857V11.4857C4.34629 10.6947 3.90045 9.6205 3.90045 8.50025C3.90045 7.38001 4.34629 6.30582 5.13956 5.51482V5.51482C5.78299 4.87138 5.78299 3.82816 5.13956 3.18473C4.49612 2.54129 3.4529 2.54129 2.80946 3.18473C1.41514 4.60334 0.631118 6.51114 0.625 8.50025C0.64478 10.4866 1.42679 12.3895 2.80946 13.8158C3.22569 14.232 3.83236 14.3946 4.40095 14.2422C4.96953 14.0899 5.41364 13.6457 5.56599 13.0772C5.71834 12.5086 5.55579 11.9019 5.13956 11.4857V11.4857Z
+                                                                stroke #B7B5BD
+                                                            path 
+                                                                d M5.13982 5.51456V5.51456C5.93082 4.72129 7.00501 4.27545 8.12525 4.27545C9.2455 4.27545 10.3197 4.72129 11.1107 5.51456V5.51456C11.7541 6.15799 12.7973 6.15799 13.4408 5.51456C14.0842 4.87112 14.0842 3.8279 13.4408 3.18446C12.0222 1.79014 10.1144 1.00612 8.12525 1C6.13888 1.01978 4.236 1.80179 2.80973 3.18446C2.16629 3.8279 2.16629 4.87112 2.80973 5.51456C3.45316 6.15799 4.49638 6.15799 5.13982 5.51456V5.51456Z
+                                                                stroke #B7B5BD
+                                                            path 
+                                                                d M11.1107 11.4855V11.4855C10.3197 12.2788 9.2455 12.7247 8.12525 12.7247C7.00501 12.7247 5.93082 12.2788 5.13982 11.4855V11.4855C4.49638 10.8421 3.45316 10.8421 2.80973 11.4855C2.16629 12.129 2.16629 13.1722 2.80973 13.8156C4.22834 15.21 6.13614 15.994 8.12525 16.0001C10.1116 15.9803 12.0145 15.1983 13.4408 13.8156C13.857 13.3994 14.0196 12.7927 13.8672 12.2242C13.7149 11.6556 13.2707 11.2115 12.7022 11.0591C12.1336 10.9068 11.5269 11.0693 11.1107 11.4855V11.4855Z
+                                                                stroke #B7B5BD
+                                                        + Contentful
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324454-Connecting-to-DatoCMS
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 16 16
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            path 
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M2.9811 1.18518H8.78502C12.7693 1.18518 16.0007 4.36972 16.0007 8.29629C16.0007 12.2229 12.7693 15.4074 8.78502 15.4074H2.9811C2.19679 15.4074 1.56934 14.789 1.56934 14.0161V2.57648C1.56934 1.80354 2.19679 1.18518 2.9811 1.18518ZM5.23992 8.29629C5.23992 10.2441 6.83992 11.79 8.78502 11.79C10.7301 11.79 12.3301 10.2132 12.3301 8.29629C12.3301 6.34847 10.7615 4.80257 8.78502 4.80257C6.80855 4.80257 5.23992 6.37938 5.23992 8.29629Z
+                                                                fill #D9D7E0
+                                                            path 
+                                                                fill-rule evenodd
+                                                                clip-rule evenodd
+                                                                d M1.41274 1.18518H7.21666C11.201 1.18518 14.4324 4.36972 14.4324 8.29629C14.4324 12.2229 11.201 15.4074 7.21666 15.4074H1.41274C0.628428 15.4074 0.000976562 14.789 0.000976562 14.0161V2.57648C0.000976562 1.80354 0.628428 1.18518 1.41274 1.18518ZM3.67157 8.29629C3.67157 10.2441 5.27156 11.79 7.21666 11.79C9.16176 11.79 10.7618 10.2132 10.7618 8.29629C10.7618 6.34847 9.19313 4.80257 7.21666 4.80257C5.24019 4.80257 3.67157 6.37938 3.67157 8.29629Z
+                                                                fill #B7B5BD
+                                                        + Dato CMS
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324654-Connecting-to-Kontent
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 150 150
+                                                            fill none
+                                                            class css-74s18y
+                                                            @title Kontent
+                                                            path 
+                                                                fill #B7B5BD
+                                                                d M36.34,16.7V73.4a2.15,2.15,0,0,1-1.74,2.12c-7.23,1.37-34.46,5-34.46-18V17c0-22.32,36.2-22.82,36.2-.26
+                                                            path 
+                                                                fill #B7B5BD
+                                                                d M85.88,55.79V112.5a2.14,2.14,0,0,1-1.75,2.11c-7.23,1.38-34.46,5-34.46-18V56.05c0-22.31,36.21-22.81,36.21-.26
+                                                            path 
+                                                                fill #B7B5BD
+                                                                d M135.41,90.1v56.71a2.15,2.15,0,0,1-1.75,2.12c-7.23,1.37-34.46,5-34.46-18V90.36c0-22.31,36.21-22.81,36.21-.26
+                                                        + Kontent
+                                        li 
+                                            ul 
+                                                class css-j7qwjs
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324694-Connecting-to-Sanity-io
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 16 16
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            circle 
+                                                                cx 8.00098
+                                                                cy 8
+                                                                r 8
+                                                                fill #B7B5BD
+                                                            path 
+                                                                opacity 0.75
+                                                                d M10.1254 9.61902C10.875 10.0969 11.2145 10.7716 11.2145 11.7415C10.578 12.5427 9.48895 12.9784 8.20187 12.9784C6.03787 12.9784 4.4962 11.9101 4.1709 10.0688H6.25003C6.51876 10.9122 7.22595 11.3057 8.18772 11.3057C9.33337 11.3198 10.1113 10.7013 10.1254 9.61902Z
+                                                                fill white
+                                                            path 
+                                                                opacity 0.75
+                                                                d M6.06603 6.27368C5.35884 5.852 4.94867 5.09298 4.97696 4.27773C5.58514 3.4906 6.63178 3.0127 7.90472 3.0127C10.1253 3.0127 11.3982 4.17934 11.7235 5.80984H9.71512C9.48882 5.16326 8.93721 4.65725 7.933 4.65725C6.84394 4.6713 6.10846 5.28977 6.06603 6.27368Z
+                                                                fill white
+                                                            path 
+                                                                d M4.97688 4.29175C4.97688 5.62707 5.81137 6.42826 7.48033 6.84994L9.2483 7.25756C10.8324 7.62302 11.7942 8.5226 11.7942 9.98442C11.8083 10.6169 11.5962 11.2354 11.2143 11.7414C11.2143 10.2796 10.4505 9.49246 8.62597 9.01456L6.88629 8.62099C5.48606 8.31176 4.41113 7.56679 4.41113 5.97847C4.41113 5.37406 4.60915 4.76965 4.97688 4.29175Z
+                                                                fill white
+                                                        + Sanity
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052077034-Connecting-to-Cosmic
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 16 16
+                                                            fill none
+                                                            xmlns http://www.w3.org/2000/svg
+                                                            class css-74s18y
+                                                            path 
+                                                                d M6.19972 5.81097C6.577 5.49173 6.92526 5.17249 7.30253 4.88228C7.01232 4.67913 6.75113 4.505 6.48993 4.33087C6.1707 4.59206 5.85146 4.88228 5.53223 5.17249C5.85146 5.28858 6.08363 5.52075 6.19972 5.81097Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M5.26801 7.26196C5.95722 7.26378 6.51734 6.73252 6.51908 6.07537C6.52081 5.41822 5.9635 4.88402 5.27429 4.8822C4.58508 4.88038 4.02496 5.41163 4.02323 6.06879C4.0215 6.72594 4.5788 7.26014 5.26801 7.26196Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M6.40257 12.7471C4.6903 13.6758 3.21021 13.9079 2.54272 13.2695C1.61403 12.3698 2.45565 10.0191 4.48715 7.6393C4.16792 7.55223 3.90672 7.32006 3.76162 7.02985C0.801428 10.3383 -0.53356 13.6758 0.772406 14.9237C1.8462 15.9685 4.42911 15.2719 7.27322 13.4146C6.983 13.2114 6.69279 12.9792 6.40257 12.7471Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M8.43394 4.82421C8.521 4.50497 8.75317 4.24378 9.04339 4.09867C5.61885 1.28359 2.13627 0.0356651 0.830308 1.28359C-0.243486 2.32836 0.453029 4.79518 2.39747 7.5232C2.62964 7.23299 2.86181 6.97179 3.09398 6.68158C2.13627 5.02736 1.87508 3.6053 2.54258 2.93781C3.50028 2.03815 5.93809 2.87977 8.43394 4.82421Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M10.7554 5.63678C10.6393 5.92699 10.3781 6.15917 10.0879 6.27525C10.5232 6.71057 10.9295 7.11688 11.2778 7.5522C11.4809 7.291 11.6841 7.02981 11.8292 6.76862C11.5099 6.39134 11.1327 6.01406 10.7554 5.63678Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M10.0594 6.79767C10.756 6.79767 11.3074 6.27528 11.3074 5.60779C11.3074 4.94029 10.756 4.41791 10.0594 4.41791C9.36293 4.41791 8.81152 4.94029 8.81152 5.60779C8.81152 6.24626 9.36293 6.79767 10.0594 6.79767Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M13.2803 2.9668C14.209 3.86646 13.3674 6.2172 11.3359 8.59696C11.6551 8.68403 11.9163 8.9162 12.0614 9.20641C14.9926 5.89797 16.3276 2.53148 15.0216 1.28355C13.9478 0.267804 11.3649 0.964319 8.5498 2.82169C8.84002 3.02484 9.13023 3.25701 9.42045 3.48919C11.1327 2.5605 12.6128 2.32833 13.2803 2.9668Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M9.82718 10.2222C9.39185 10.6285 8.92751 11.0057 8.49219 11.354C8.7824 11.5572 9.0436 11.7313 9.33381 11.9054C9.74011 11.5862 10.1174 11.2379 10.5237 10.8606C10.2045 10.7446 9.97228 10.5124 9.82718 10.2222Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M10.5409 8.98936C9.85165 8.98746 9.29146 9.51865 9.28965 10.1758C9.28784 10.833 9.84509 11.3672 10.5343 11.3691C11.2235 11.371 11.7837 10.8398 11.7855 10.1827C11.7873 9.52553 11.2301 8.99126 10.5409 8.98936Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M5.73542 9.99001C5.3001 9.55469 4.8938 9.14839 4.54555 8.71307C4.3424 8.97427 4.13925 9.23546 3.99414 9.49665C4.3424 9.87393 4.69065 10.2512 5.06793 10.6285C5.18402 10.3383 5.41619 10.1061 5.73542 9.99001Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M13.4259 8.74213C13.1937 9.03234 12.9616 9.29353 12.7294 9.58375C13.6871 11.238 13.9483 12.631 13.2518 13.2985C12.2941 14.1982 9.85628 13.3565 7.36043 11.4411C7.27336 11.7604 7.04119 12.0216 6.75098 12.1667C10.2045 14.9817 13.6871 16.2587 14.9931 15.0108C16.0669 13.937 15.3704 11.4411 13.4259 8.74213Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M7.01752 10.6442C7.01925 9.98703 6.46193 9.45284 5.77272 9.45103C5.08351 9.44923 4.5234 9.98049 4.52168 10.6376C4.51995 11.2948 5.07727 11.829 5.76648 11.8308C6.45569 11.8326 7.0158 11.3013 7.01752 10.6442Z
+                                                                fill #B7B5BD
+                                                        + Cosmic
+                                                li 
+                                                    class css-1uk1gs8
+                                                    a 
+                                                        target _blank
+                                                        rel noopener noreferrer
+                                                        href https://support.gatsbyjs.com/hc/en-us/articles/360052324434-Connecting-to-Contentstack
+                                                        class css-17mmtw1
+                                                        svg 
+                                                            width 16
+                                                            height 16
+                                                            viewBox 0 0 16 16
+                                                            fill none
+                                                            class css-74s18y
+                                                            path 
+                                                                d M12.3905 6.96382C12.3905 7.12357 12.2929 7.23007 12.1466 7.23007H7.51237C7.36603 7.23007 7.26846 7.12357 7.26846 6.96382V6.37809C7.26846 6.21834 7.36603 6.11185 7.51237 6.11185H12.1466C12.2929 6.11185 12.3905 6.21834 12.3905 6.37809V6.96382Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M14.4392 8.61458C14.4392 8.77433 14.3417 8.88083 14.1953 8.88083H8.4879C8.34155 8.88083 8.24399 8.77433 8.24399 8.61458V8.02885C8.24399 7.8691 8.34155 7.7626 8.4879 7.7626H14.1465C14.2929 7.7626 14.3904 7.8691 14.3904 8.02885L14.4392 8.61458Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M16 10.3185C16 10.4783 15.9024 10.5848 15.7561 10.5848H9.56086C9.41452 10.5848 9.31696 10.4783 9.31696 10.3185V9.73279C9.31696 9.57305 9.41452 9.46655 9.56086 9.46655H15.7561C15.9024 9.46655 16 9.57305 16 9.73279V10.3185Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M16 12.0225C16 12.1822 15.9024 12.2887 15.7561 12.2887H9.56086C9.41452 12.2887 9.31696 12.1822 9.31696 12.0225V11.4367C9.31696 11.277 9.41452 11.1705 9.56086 11.1705H15.7561C15.9024 11.1705 16 11.277 16 11.4367V12.0225Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M14.4392 13.6732C14.4392 13.833 14.3417 13.9395 14.1953 13.9395H8.4879C8.34155 13.9395 8.24399 13.833 8.24399 13.6732V13.0875C8.24399 12.9278 8.34155 12.8213 8.4879 12.8213H14.1465C14.2929 12.8213 14.3904 12.9278 14.3904 13.0875L14.4392 13.6732Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M12.3905 15.377C12.3905 15.5367 12.2929 15.6432 12.1466 15.6432H7.51237C7.36603 15.6432 7.26846 15.5367 7.26846 15.377V14.7912C7.26846 14.6315 7.36603 14.525 7.51237 14.525H12.1466C12.2929 14.525 12.3905 14.6315 12.3905 14.7912V15.377Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M3.60989 1.85198C3.60989 2.01172 3.70746 2.11822 3.8538 2.11822H8.48803C8.63438 2.11822 8.73194 2.01172 8.73194 1.85198V1.26624C8.73194 1.1065 8.63438 1 8.48803 1H3.8538C3.70746 1 3.60989 1.1065 3.60989 1.26624V1.85198Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M1.5614 3.55593C1.5614 3.71567 1.65896 3.82217 1.80531 3.82217H7.46394C7.61028 3.82217 7.70785 3.71567 7.70785 3.55593V2.97019C7.70785 2.81045 7.61028 2.70395 7.46394 2.70395H1.80531C1.65896 2.70395 1.5614 2.81045 1.5614 2.97019V3.55593Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M0 5.25987C0 5.41962 0.0975628 5.52612 0.243907 5.52612H6.43915C6.5855 5.52612 6.68306 5.41962 6.68306 5.25987V4.67414C6.68306 4.51439 6.5855 4.4079 6.43915 4.4079H0.243907C0.0975628 4.4079 0 4.51439 0 4.67414V5.25987Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M0 6.96382C0 7.12357 0.0975628 7.23007 0.243907 7.23007H6.43915C6.5855 7.23007 6.68306 7.12357 6.68306 6.96382V6.37809C6.68306 6.21834 6.5855 6.11185 6.43915 6.11185H0.243907C0.0975628 6.11185 0 6.21834 0 6.37809V6.96382Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M1.5614 8.61458C1.5614 8.77432 1.65896 8.88082 1.80531 8.88082H7.46394C7.61028 8.88082 7.70785 8.77432 7.70785 8.61458V8.02884C7.70785 7.8691 7.61028 7.7626 7.46394 7.7626H1.80531C1.65896 7.7626 1.5614 7.8691 1.5614 8.02884V8.61458Z
+                                                                fill #B7B5BD
+                                                            path 
+                                                                d M3.60989 10.3183C3.60989 10.478 3.70746 10.5845 3.8538 10.5845H8.48803C8.63438 10.5845 8.73194 10.478 8.73194 10.3183V9.73255C8.73194 9.57281 8.63438 9.46631 8.48803 9.46631H3.8538C3.70746 9.46631 3.60989 9.57281 3.60989 9.73255V10.3183Z
+                                                                fill #B7B5BD
+                                                        + Contentstack
+                                li 
+                                    ul 
+                                        class css-1xhj18k
+                                        li 
+                                            class css-w6ak5y
+                                            a Explore all Integrations
+                                                target _blank
+                                                rel noopener noreferrer
+                                                href https://support.gatsbyjs.com/hc/en-us/categories/360004458673-Connecting-to-your-CMS
+                                                class css-17mmtw1
+                        li 
+                            class css-1ooz8m1
+                            a 
+                                class css-1fmrpt2
+                                href /pricing/
+                                svg 
+                                    width 32
+                                    height 32
+                                    viewBox 0 0 32 32
+                                    fill none
+                                    xmlns http://www.w3.org/2000/svg
+                                    class css-1ppz169
+                                    path 
+                                        d M25.375 18.5V21C25.375 21.3315 25.2433 21.6495 25.0089 21.8839C24.7745 22.1183 24.4565 22.25 24.125 22.25H7.875C7.54348 22.25 7.22554 22.1183 6.99112 21.8839C6.7567 21.6495 6.625 21.3315 6.625 21V18.5C7.28804 18.5 7.92393 18.2366 8.39277 17.7678C8.86161 17.2989 9.125 16.663 9.125 16C9.125 15.337 8.86161 14.7011 8.39277 14.2322C7.92393 13.7634 7.28804 13.5 6.625 13.5V11C6.625 10.6685 6.7567 10.3505 6.99112 10.1161C7.22554 9.8817 7.54348 9.75 7.875 9.75H24.125C24.4565 9.75 24.7745 9.8817 25.0089 10.1161C25.2433 10.3505 25.375 10.6685 25.375 11V13.5C24.712 13.5 24.0761 13.7634 23.6072 14.2322C23.1384 14.7011 22.875 15.337 22.875 16C22.875 16.663 23.1384 17.2989 23.6072 17.7678C24.0761 18.2366 24.712 18.5 25.375 18.5Z
+                                        fill #F6EDFA
+                                        stroke #663399
+                                        stroke-width 1.5
+                                        stroke-linecap round
+                                        stroke-linejoin round
+                                    path 
+                                        d M12.875 14.75C13.5654 14.75 14.125 14.1904 14.125 13.5C14.125 12.8096 13.5654 12.25 12.875 12.25C12.1846 12.25 11.625 12.8096 11.625 13.5C11.625 14.1904 12.1846 14.75 12.875 14.75Z
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                        stroke-linecap round
+                                        stroke-linejoin round
+                                    path 
+                                        d M19.75 19.75C20.4404 19.75 21 19.1904 21 18.5C21 17.8096 20.4404 17.25 19.75 17.25C19.0596 17.25 18.5 17.8096 18.5 18.5C18.5 19.1904 19.0596 19.75 19.75 19.75Z
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                        stroke-linecap round
+                                        stroke-linejoin round
+                                    path 
+                                        d M19.125 12.875L12.875 19.125
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                        stroke-linecap round
+                                        stroke-linejoin round
+                                span Pricing
+                                    class css-ovr08e
+                                h2 Pricing
+                                    class css-a2l7qn
+                                p 
+                                    class css-9wr7tw
+                        li 
+                            class css-negznb
+                            a 
+                                target _blank
+                                rel noopener noreferrer
+                                href https://support.gatsbyjs.com/hc
+                                class css-1fmrpt2
+                                svg 
+                                    width 32
+                                    height 32
+                                    viewBox 0 0 32 32
+                                    fill none
+                                    xmlns http://www.w3.org/2000/svg
+                                    class css-1ppz169
+                                    line 
+                                        y1 -0.75
+                                        x2 4.05674
+                                        y2 -0.75
+                                        transform matrix(0.707107 0.707107 0.707107 -0.707107 8.2583 8.30344)
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                    circle 
+                                        r 6.01122
+                                        transform matrix(-1 0 0 1 15.8013 15.4364)
+                                        fill #F6EDFA
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    path 
+                                        d M15.9433 16.1907H17.6877C17.5762 16.6775 17.3125 17.0223 17.0488 17.2251C16.6736 17.5091 16.1665 17.6308 15.7202 17.6308C15.0002 17.6308 14.5235 17.3468 14.2192 17.0527C13.9353 16.7789 13.5499 16.2414 13.5499 15.3388C13.5499 14.5781 13.844 13.929 14.2294 13.5538C14.6452 13.1481 15.2537 12.9554 15.7912 12.9554C16.1056 12.9554 16.4606 13.0264 16.7446 13.1684C16.9575 13.28 17.3024 13.5132 17.5356 13.9696L18.6816 13.351C18.3267 12.7424 17.85 12.3368 17.4139 12.1136C16.8967 11.8398 16.3592 11.7587 15.8521 11.7587C14.5438 11.7587 13.6919 12.2759 13.1848 12.7931C12.7791 13.1988 12.1909 14 12.1909 15.3083C12.1909 16.8296 12.9616 17.6815 13.1949 17.9148C13.9353 18.6551 14.8075 18.8275 15.6492 18.8275C16.491 18.8275 17.3531 18.6348 18.0529 17.9351C18.9859 17.0122 19.0468 15.5923 19.0468 15.1359V15.0548H15.9433V16.1907Z
+                                        fill #663399
+                                    circle 
+                                        r 2.70449
+                                        transform matrix(-1 0 0 1 27.2955 14.7603)
+                                        fill #663399
+                                    line 
+                                        y1 -0.75
+                                        x2 4.05674
+                                        y2 -0.75
+                                        transform matrix(-1 0 0 1 25.9434 15.4364)
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    circle 
+                                        r 1.95449
+                                        transform matrix(0.707107 0.707107 0.707107 -0.707107 6.82473 7.82474)
+                                        stroke #159BF3
+                                        stroke-width 1.5
+                                    circle 
+                                        r 1.95449
+                                        transform matrix(0.707107 -0.707107 -0.707107 -0.707107 7.06201 23.6155)
+                                        fill #F1DEFA
+                                        stroke #663399
+                                        stroke-width 1.5
+                                    line 
+                                        y1 -0.75
+                                        x2 4.05674
+                                        y2 -0.75
+                                        transform matrix(0.707107 -0.707107 -0.707107 -0.707107 7.54004 22.1805)
+                                        stroke #663399
+                                        stroke-width 1.5
+                                span Knowledge Base
+                                    class css-ovr08e
+                                h2 Knowledge Base
+                                    class css-a2l7qn
+                                p 
+                                    class css-9wr7tw
+                        li 
+                            class css-1ar6uo7
+                            a 
+                                class css-1fmrpt2
+                                href /concierge/
+                                svg 
+                                    width 32
+                                    height 32
+                                    viewBox 0 0 32 32
+                                    fill none
+                                    xmlns http://www.w3.org/2000/svg
+                                    class css-1ppz169
+                                    path 
+                                        d M22.3409 16.5909H18.0454V17.8182H20.9909C20.5614 19.6591 19.2114 21.1932 17.4318 21.8068L10.375 14.75C11.1114 12.6023 13.1977 11.0682 15.5909 11.0682C17.4318 11.0682 19.0886 11.9886 20.1318 13.4L21.0523 12.6023C19.825 10.9455 17.8614 9.84091 15.5909 9.84091C12.4 9.84091 9.69999 12.1114 9.02499 15.1182L17.125 23.2182C20.0704 22.4818 22.3409 19.7818 22.3409 16.5909Z
+                                        fill white
+                                    path 
+                                        d M8.84091 16.6523C8.84091 18.3705 9.51591 20.0273 10.8045 21.3159C12.0932 22.6046 13.8114 23.2796 15.4682 23.2796L8.84091 16.6523Z
+                                        fill white
+                                    path 
+                                        d M15.5909 8C10.8659 8 7 11.8659 7 16.5909C7 21.3159 10.8659 25.1818 15.5909 25.1818C20.3159 25.1818 24.1818 21.3159 24.1818 16.5909C24.1818 11.8659 20.3159 8 15.5909 8ZM10.8045 21.3773C9.51591 20.0886 8.84091 18.3705 8.84091 16.7136L15.5295 23.3409C13.8114 23.2795 12.0932 22.6659 10.8045 21.3773ZM17.0636 23.1568L9.025 15.1182C9.7 12.1114 12.4 9.84091 15.5909 9.84091C17.8614 9.84091 19.825 10.9455 21.0523 12.6023L20.1318 13.4C19.0886 11.9886 17.4318 11.0682 15.5909 11.0682C13.1977 11.0682 11.1727 12.6023 10.375 14.75L17.4318 21.8068C19.2114 21.1932 20.5614 19.6591 20.9909 17.8182H18.0455V16.5909H22.3409C22.3409 19.7818 20.0705 22.4818 17.0636 23.1568Z
+                                        fill url(#paint0_linear)
+                                    path 
+                                        d M19.4464 27.8891C21.5245 27.8891 22.4595 28.8286 22.4781 30.9335C22.4792 31.0583 22.5289 31.1777 22.6166 31.2665C22.7043 31.3553 22.8231 31.4064 22.9478 31.4091H22.9581C23.0813 31.4094 23.1999 31.3622 23.2893 31.2773C23.3787 31.1925 23.432 31.0765 23.4381 30.9534C23.5424 28.8631 24.5005 27.8891 26.4544 27.8891H26.4781C26.6054 27.8904 26.728 27.8411 26.819 27.7521C26.9099 27.663 26.9618 27.5415 26.9632 27.4142C26.9645 27.2869 26.9153 27.1642 26.8262 27.0733C26.7372 26.9823 26.6156 26.9304 26.4883 26.9291C24.4025 26.8849 23.4329 25.9217 23.4381 23.898V23.8903C23.4383 23.8273 23.4261 23.7649 23.4022 23.7066C23.3783 23.6483 23.3432 23.5953 23.2988 23.5506C23.2544 23.5059 23.2016 23.4704 23.1435 23.4461C23.0853 23.4218 23.023 23.4092 22.96 23.4091V23.4091C22.8969 23.4088 22.8345 23.421 22.7761 23.4449C22.7178 23.4688 22.6648 23.5039 22.62 23.5483C22.5753 23.5927 22.5397 23.6455 22.5153 23.7036C22.491 23.7617 22.4783 23.8241 22.4781 23.8871V23.8871C22.471 25.9339 21.5033 26.9003 19.431 26.9291C19.3037 26.93 19.182 26.9815 19.0926 27.0721C19.0033 27.1628 18.9536 27.2853 18.9545 27.4126C18.9555 27.5399 19.0069 27.6616 19.0976 27.751C19.1883 27.8403 19.3108 27.89 19.4381 27.8891H19.4464Z
+                                        fill url(#paint1_linear)
+                                    path 
+                                        d M26.2325 20.2464C27.7911 20.2464 28.4924 20.951 28.5063 22.5297C28.5071 22.6233 28.5444 22.7129 28.6102 22.7794C28.6759 22.846 28.7651 22.8844 28.8586 22.8864H28.8663C28.9587 22.8866 29.0477 22.8512 29.1147 22.7876C29.1818 22.7239 29.2217 22.6369 29.2263 22.5446C29.3045 20.9769 30.0231 20.2464 31.4885 20.2464H31.5063C31.6018 20.2474 31.6937 20.2104 31.762 20.1436C31.8302 20.0768 31.8691 19.9857 31.8701 19.8902C31.8712 19.7947 31.8342 19.7027 31.7674 19.6345C31.7006 19.5663 31.6095 19.5274 31.514 19.5264C29.9497 19.4932 29.2225 18.7708 29.2263 17.2531V17.2473C29.2265 17.2001 29.2174 17.1532 29.1994 17.1095C29.1815 17.0658 29.1551 17.026 29.1218 16.9925C29.0885 16.959 29.049 16.9323 29.0054 16.9141C28.9618 16.8959 28.915 16.8865 28.8677 16.8864C28.8205 16.8862 28.7736 16.8953 28.7299 16.9132C28.6861 16.9311 28.6463 16.9575 28.6128 16.9908C28.5792 17.0241 28.5525 17.0637 28.5342 17.1073C28.516 17.1509 28.5065 17.1976 28.5063 17.2449C28.501 18.78 27.7753 19.5048 26.221 19.5264C26.1255 19.5271 26.0342 19.5657 25.9672 19.6337C25.9002 19.7017 25.863 19.7935 25.8637 19.889C25.8644 19.9845 25.903 20.0758 25.971 20.1428C26.039 20.2098 26.1308 20.2471 26.2263 20.2464H26.2325Z
+                                        fill #663399
+                                    path 
+                                        d M4.30741 5.8C5.60621 5.8 6.19061 6.3872 6.20221 7.7028C6.20292 7.78078 6.23397 7.85542 6.28877 7.9109C6.34358 7.96638 6.41784 7.99834 6.49581 8H6.50221C6.57924 8.0002 6.65338 7.97072 6.70925 7.91768C6.76511 7.86465 6.7984 7.79213 6.80221 7.7152C6.86741 6.4088 7.46621 5.8 8.68741 5.8H8.70221C8.78177 5.80085 8.85841 5.77006 8.91527 5.7144C8.97214 5.65873 9.00456 5.58277 9.00541 5.5032C9.00625 5.42364 8.97546 5.34699 8.9198 5.29013C8.86414 5.23327 8.78817 5.20085 8.7086 5.2C7.40501 5.1724 6.79901 4.5704 6.80221 3.3056V3.3008C6.80236 3.26142 6.79476 3.2224 6.77982 3.18597C6.76489 3.14953 6.74291 3.1164 6.71516 3.08846C6.68741 3.06052 6.65443 3.03833 6.61809 3.02315C6.58176 3.00797 6.54278 3.00011 6.50341 3V3C6.46401 2.99984 6.42497 3.00745 6.38851 3.02238C6.35205 3.03731 6.31889 3.05927 6.29092 3.08702C6.26295 3.11477 6.24072 3.14775 6.2255 3.18409C6.21028 3.22043 6.20236 3.25941 6.20221 3.2988V3.2988C6.19781 4.578 5.59301 5.182 4.29781 5.2C4.21824 5.20058 4.14217 5.23275 4.08632 5.28942C4.03047 5.3461 3.99942 5.42264 4.00001 5.5022C4.00059 5.58177 4.03276 5.65784 4.08943 5.71369C4.14611 5.76954 4.22264 5.80058 4.30221 5.8H4.30741Z
+                                        fill #159BF3
+                                        stroke #159BF3
+                                        stroke-width 0.306818
+                                    defs 
+                                        linearGradient 
+                                            id paint0_linear
+                                            x1 15.5909
+                                            y1 8
+                                            x2 15.5909
+                                            y2 21.5
+                                            gradientUnits userSpaceOnUse
+                                            stop 
+                                                stop-color #159BF3
+                                            stop 
+                                                offset 1
+                                                stop-color #663399
+                                        linearGradient 
+                                            id paint1_linear
+                                            x1 22.9589
+                                            y1 23.87
+                                            x2 22.9589
+                                            y2 31.4091
+                                            gradientUnits userSpaceOnUse
+                                            stop 
+                                                offset 0.234375
+                                                stop-color #663399
+                                            stop 
+                                                offset 1
+                                                stop-color #159BF3
+                                span Concierge
+                                    class css-ovr08e
+                                h2 Concierge
+                                    class css-a2l7qn
+                                p Dedicated Gatsby support to turbocharge your site
+                                    class css-9wr7tw
+        li 
+            class m-btn-1-li
+            . css-jebqk6
+                a Get Started
+                    class css-ntw0hb
+                    href /get-started/
+            a Get Started
+                class m-btn-1-li-a
+                href /get-started/
+*$

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\vue\document\gen\main.js.ittf
 */
 'use strict';
@@ -45,11 +45,13 @@ md.gen = function gen(model, ctx, callback) {
         console.log(myname, 'exit err', err);
         return callback(null, ctx);
     })
-};
+}
+;
 function getGenItem(ctx) {
     return function(model, callback) {
+            
+            // log myname, 'known element', model.wzElement
             if (stm[model.wzElement]) {
-                // log myname, 'known element', model.wzElement
                 stm[model.wzElement](model, ctx, function(err, done) {
                     if (err) {
                         return callback(err);
@@ -75,7 +77,7 @@ function genItems(items, ctx, options, callback) {
             goitems.push({
                 wzElement: 'separator', 
                 wzName: options.sep
-            })
+             })
         }
         goitems.push(items[i]);
     }
@@ -94,13 +96,14 @@ stm.vue = function(model, ctx, callback) {
     genItems(model.elements, ctx, {
         indent: false, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         return callback(null);
     })
-};
+}
+;
 stm.htmlInclude = function(model, ctx, callback) {
     if (model.get_html) {
         include_writers.writeIncludeHtml(ctx, model, callback)
@@ -108,7 +111,8 @@ stm.htmlInclude = function(model, ctx, callback) {
     else {
         callback(new Error('::template tag has no html element'))
     }
-};
+}
+;
 stm.jsInclude = function(model, ctx, callback) {
     if (model.get_js) {
         include_writers.writeIncludeJs(ctx, model, callback)
@@ -116,7 +120,8 @@ stm.jsInclude = function(model, ctx, callback) {
     else {
         callback(new Error('::script tag has no module element'))
     }
-};
+}
+;
 stm.tsInclude = function(model, ctx, callback) {
     if (model.get_ts) {
         include_writers.writeIncludeTypescript(ctx, model, callback)
@@ -124,7 +129,8 @@ stm.tsInclude = function(model, ctx, callback) {
     else {
         callback(new Error('::script-ts tag has no module element'))
     }
-};
+}
+;
 stm.cssInclude = function(model, ctx, callback) {
     if (model.get_css) {
         include_writers.writeIncludeCss(ctx, model, callback)
@@ -132,7 +138,8 @@ stm.cssInclude = function(model, ctx, callback) {
     else {
         callback(new Error('::style tag has no css element'))
     }
-};
+}
+;
 function writeComments(ctx, model) {
     if (model.comments.length == 1) {
         ctx.w( '<!-- ' + model.comments[0].wzName + ' -->');

@@ -1,0 +1,4 @@
+a
+    $params name
+    a ${name}
+        href https://github.com/wizzifactory/wizzi/tree/master/packages/${name}/dist

@@ -1,0 +1,26 @@
+$group
+    $params &ctx
+    { Banner
+        { promotion
+            title "The Future Web is Here:"
+            subtitle "Join us at WizziConf!&nbsp;"
+            { link
+                label "Register for free now."
+                href "https://wizziconf.com/"
+        [ items
+            $if ctx.page == 'docs'
+                {
+                    label "Wizzi Cloud"
+                    href "/docs/cloud/"
+            {
+                label "Github"
+                href "https://github.com/stfnbssl/wizzi"
+            {
+                label "Support"
+                href "${wzCtx.Params.baseUrl}//support/"
+            {
+                label "Contact"
+                href "${wzCtx.Params.baseUrl}//contact/"
+            {
+                label "Login"
+                href "${wzCtx.Params.baseUrl}/login/"

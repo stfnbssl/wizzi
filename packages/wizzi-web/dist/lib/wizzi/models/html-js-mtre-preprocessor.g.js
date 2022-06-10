@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\wizzi\models\html-js-mtre-preprocessor.g.js.ittf
 */
 'use strict';
@@ -41,7 +41,7 @@ module.exports = function(node) {
         actions: [
             
         ]
-    };
+     };
     var i, i_items=node.children, i_len=node.children.length, item;
     for (i=0; i<i_len; i++) {
         item = node.children[i];
@@ -63,7 +63,7 @@ module.exports = function(node) {
                     children: [
                         
                     ]
-                }
+                 }
             ];
             var j, j_items=children, j_len=children.length, c;
             for (j=0; j<j_len; j++) {
@@ -73,7 +73,8 @@ module.exports = function(node) {
         }
     }
     return node;
-};
+}
+;
 function traverse(node, state) {
     var saveHtmlOn = state.htmlOn;
     var saveSvgOn = state.svgOn;
@@ -111,11 +112,13 @@ function preprocessNode(node, state) {
         addAttr(state, node, 'async')
         addAttr(state, node, 'generator')
     }
+    
+    // log 'js-mtree-processor svgOn', node.n, node.v
     if (state.svgOn) {
-        // log 'js-mtree-processor svgOn', node.n, node.v
     }
+    
+    // do nothing
     if (node.n === 'p' && state.parent.n === 'class') {
-        // do nothing
     }
     else if (state.svgOn && svg_supported_attrs.indexOf(node.n) > -1) {
         var name = svg_supported_attrs_map[node.n] || node.n;
@@ -140,10 +143,11 @@ function preprocessNode(node, state) {
             state.svgOn = true;
         }
     }
+    
+    // log 'js-mtree-processor svgOn'
     else if (node.n === 'svg') {
         state.htmlOn = true;
         state.svgOn = true;
-        // log 'js-mtree-processor svgOn'
     }
     return false;
 }
@@ -153,5 +157,5 @@ function addAttr(state, node, attr) {
         to: node, 
         n: attr, 
         v: ''
-    })
+     })
 }

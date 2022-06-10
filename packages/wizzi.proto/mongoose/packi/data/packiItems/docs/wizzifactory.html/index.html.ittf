@@ -1,0 +1,11 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            title: 'mTrees'
+        };
+    
+    html/_layouts/docs-layout(&art)
+    
+        $include ./introduction

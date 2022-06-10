@@ -1,0 +1,29 @@
+html
+    $include html/options-init
+	$
+        // _.log('cs', cs);
+        opt.mainCss = '/~-/docs/cheatsheets/index.css?context=mpage;home.model';
+        opt.mainJs = null;
+		opt.logo_w = 70;
+		opt.logo_h = 30;
+		opt.sidebar_1 = true;
+		opt.sb_1_min_w = 80;
+		opt.title = 'Schema <b>' + cs.schema.toUpperCase() + '</b> cheat sheet';
+        opt.schema = cs.schema;
+        opt.SCHEMA = cs.schema.toUpperCase();
+		opt.usePrism = false;
+        opt.useHighlight = true;
+		if (opt.usePrism) {
+            if (cs.schema === 'js') {
+                opt.language = 'language-javascript';
+            } else {
+                opt.language = 'language-' + cs.schema;
+            }
+        } else {
+            opt.language = cs.schema;
+        }
+
+    html/_layouts/page-layout(&opt)
+
+        $include html/home/header/index
+        $include html/cheatsheets/content/index

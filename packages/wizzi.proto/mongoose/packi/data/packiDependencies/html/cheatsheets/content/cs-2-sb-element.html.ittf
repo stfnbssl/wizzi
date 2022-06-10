@@ -1,0 +1,11 @@
+$group
+    $params &el
+    
+    li
+        class cs-sb-element
+        a ${el.name}
+            class cs-sb-element-label
+            href #${el.name}
+        ul
+            class cs-sb-items
+            $hook

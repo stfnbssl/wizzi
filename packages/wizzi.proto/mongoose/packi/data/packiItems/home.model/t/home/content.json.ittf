@@ -1,0 +1,110 @@
+$group
+    { Main
+        [ contents
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "splash"
+                        scream1 "One Machinery"
+                        subscream1 "Many productions"
+                        scream2 "Create productions of components, websites and apps"
+                        subscream2 "harness the power of a pluggable, model driven, generation system"
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "grid"
+                        [ items
+                            {
+                                title "Create factories"
+                                subtitle "Wizzi Open Source"
+                                text "Free, open source framework for creating fast, powerful artifacts productions."
+                                { button
+                                    label "Start the tutorial"
+                                    href "${wzCtx.Params.baseUrl}/docs"
+                            {
+                                title "Deploy"
+                                subtitle "Wizzi Cloud"
+                                text "The best place to build and host your Wizzi productions."
+                                { button
+                                    label "Sign up for free"
+                                    href "/dashboard/signup"
+                            {
+                                title "Outstand"
+                                subtitle "Wizzi Janitory"
+                                text "Get professional support and services to step up your Wizzi productions."
+                                { button
+                                    label "How we help"
+                                    href "/janitory"
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "getstarted"
+                        title "Curious yet?"
+                        subtitle "It only takes a few minutes to get up and running!"
+                        { button
+                            label "Get started"
+                            href "/janitory"
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "eco"
+                        title "Explore the Wizzi Ecosystem"
+                        subtitle "More than just an artifact generator, Wizzi has all the tools for building the modern web: Plugins for seamlessly integrating productions, Schemas for effortless configuration, and Jobs for automating common production chores."
+                        [ items
+                            {
+                                title "Plugins"
+                                [ paragraphs
+                                    "Plugins are packages that compose a Wizzi factory. They can expose Schemas, transform Models, and generate Artifacts. Anything you can imagine — from programming languages to data managment, to solutions as CMSs and e-commerce — can have a Wizzi plugin for seamless integration of productions."
+                                { button
+                                    label "Browse Plugins"
+                                    href "/plugins"
+                            {
+                                title "Schemas"
+                                [ paragraphs
+                                    "Schemas ... ."
+                                { button
+                                    label "Browse Schemas"
+                                    href "/plugins?=wizzi-schema"
+                            {
+                                title "Jobs"
+                                small "Experimental"
+                                [ paragraphs
+                                    "Wizzi Jobs automate common production tasks, orchestrating models build up and transformations, cascading productions, testing and deployment."
+                                { button
+                                    label "Browse Recipes"
+                                    href "${wzCtx.Params.baseUrl}/docs/recipes"                                
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "cloud"
+                        { head
+                            text " Wizzi Cloud is a custom-architected Cloud infrastructure for collaborating 
+                                \b on Wizzi schemas and productions built with the Wizzi open source framework."
+                        { start
+                            label "Start building component productions on Wizzi Cloud"
+                            href "/dashboard/signup"
+                        [ items
+                            {
+                                title "Collaborative schema design"
+                                text "...."
+                            {
+                                title "The Cloud is the new IDE"
+                                text "Create artifact generators and production jobs for your components in a Cloud hosted Wizzi IDE"
+                            {
+                                title "Continuos integration"
+                                text "...."
+                            {
+                                title "Real-time Previews"
+                                text "...."
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "comunity"
+
+

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\css2\document\gen\main.js.ittf
 */
 'use strict';
@@ -40,7 +40,7 @@ md.gen = function(model, ctx, callback) {
             try {
                 var postCssResult = postcss().use(colorFunction({
                     preserveCustomProps: true
-                })).process(ctx.getContent()).css
+                 })).process(ctx.getContent()).css
                 ;
             } 
             catch (ex) {
@@ -55,16 +55,17 @@ md.gen = function(model, ctx, callback) {
                         text: [
                             postCssResult
                         ]
-                    }
+                     }
                 ]
-            })
+             })
             callback(null, ctx);
         })
     } 
     catch (ex) {
         return callback(error('Exception', 'gen', 'An exception encountered during generation', model, ex));
     } 
-};
+}
+;
 md.genItems = function(items, ctx, options, callback) {
     var opt = options || {},
         from = opt.from || 0,
@@ -77,6 +78,7 @@ md.genItems = function(items, ctx, options, callback) {
         goitems.push(items[i]);
     }
     async.mapSeries(goitems, md.mapItem(ctx), (err, notUsed) => {
+    
         if (err) {
             return callback(err);
         }
@@ -84,13 +86,16 @@ md.genItems = function(items, ctx, options, callback) {
             ctx.deindent();
         }
         process.nextTick(callback)
-    })
-};
+    }
+    )
+}
+;
 md.mapItem = function(ctx) {
     return function(model, callback) {
             return md.genItem(model, ctx, callback);
         };
-};
+}
+;
 md.genItem = function(model, ctx, callback) {
     var method = md.stm[model.wzElement];
     if (method) {
@@ -99,7 +104,8 @@ md.genItem = function(model, ctx, callback) {
     else {
         return callback(error('ArtifactGenerationError', 'genItem', myname + '. Unknown tag/element: ' + model.wzTag + '/' + model.wzElement, model, null));
     }
-};
+}
+;
 //
 function error(errorName, method, message, model, innerError) {
     return new errors.WizziPluginError(message, model, {
@@ -107,7 +113,7 @@ function error(errorName, method, message, model, innerError) {
             method: 'wizzi-web/lib/artifacts/css/document/gen/main.' + method, 
             sourcePath: __filename, 
             inner: innerError
-        });
+         });
 }
 md.stm.css = function(model, ctx, callback) {
     // css is container only
@@ -122,20 +128,24 @@ md.stm.css = function(model, ctx, callback) {
         console.log('css,after defaults', ctx.getContent());
         md.genItems(model.rules, ctx, {
             indent: false
-        }, callback)
+         }, callback)
     })
-};
+}
+;
 md.stm.defaults = function(model, ctx, callback) {
     var items = [];
     if (model.useNormalize) {
         items.push('normalize.css');
     }
     async.mapSeries(items, (item, callback) => {
+    
         console.log('defaults,appendFile', item);
         ctx.appendFile(path.join(__dirname, 'defaults', item))
         return callback(null);
-    }, callback)
-};
+    }
+    , callback)
+}
+;
 function emitResources(requestedResources, ctx) {
     if (requestedResources.length > 0 && ctx.values.cssResources) {
         var resourceRepo = ctx.values.cssResources;

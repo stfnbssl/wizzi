@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\root\index.js.ittf
 */
 'use strict';
@@ -41,7 +41,7 @@ var FactoryPlugin = (function () {
         return __filename;
     }
     FactoryPlugin.prototype.getVersion = function() {
-        return '0.7.9';
+        return '0.7.10';
     }
     FactoryPlugin.prototype.getProvides = function() {
         return this.provides;
@@ -146,7 +146,7 @@ function error(code, message) {
             source: 'wizzi-web/FactoryPlugin', 
             code: code, 
             message: message
-        };
+         };
 }
 
 module.exports = {
@@ -173,7 +173,7 @@ module.exports = {
             'vtt/document', 
             'vue/document'
         ]
-    }, 
+     }, 
     createFactoryPlugin: function(wizziPackage, options, callback) {
         var plugin = new FactoryPlugin(wizziPackage, this.provides);
         plugin.initialize(options, function(err, notUsed) {
@@ -183,5 +183,5 @@ module.exports = {
             return callback(null, plugin);
         })
     }
-};
+ };
 

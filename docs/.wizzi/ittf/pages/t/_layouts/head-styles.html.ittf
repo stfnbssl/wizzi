@@ -19,14 +19,12 @@ $group
 		    css https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css
 
     $if opt.useHighlight
+        css https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css
         $*
         link 
             rel stylesheet
-            href https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css
-        *$
-        link 
-            rel stylesheet
             href /docs/scripts/highlightjs-master/dracula.css
+        *$
 
 	$if opt.useCodemirror
         css /docs/scripts/codemirror/lib/codemirror.css

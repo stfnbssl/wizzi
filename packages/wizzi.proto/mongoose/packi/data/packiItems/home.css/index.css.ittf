@@ -1,0 +1,7 @@
+﻿css
+
+    $include css/_layouts/page-layout
+    
+    $include css/home/header/index
+    $include css/home/content/index
+    $include css/home/footer/index

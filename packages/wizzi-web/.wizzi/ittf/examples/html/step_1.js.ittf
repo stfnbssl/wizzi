@@ -20,7 +20,8 @@ module
                 $$ @ 'basic'
                 $$ @ 'ittfprint'
                 $$ @ 'newfeat'
-                @ 'keyframes'
+                $$ @ 'keyframes'
+                @ 'prettify'
 
    		_ async.mapSeries
 			@ example_ittfs

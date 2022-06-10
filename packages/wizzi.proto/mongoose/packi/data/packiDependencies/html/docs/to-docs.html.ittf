@@ -1,0 +1,31 @@
+a
+    $params name
+    $if name === 'mTree' || name === 'mTrees' || name.toLowerCase() === 'tree structures'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/mtrees.html?context=mpage;home.model
+    $elif name === 'ITTF document'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/ittfdocuments.html?context=mpage;home.model
+    $elif name === 'ITTF documents'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/ittfdocuments.html?context=mpage;home.model
+    $elif name === 'Wizzi model'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/wizzimodels.html?context=mpage;home.model
+    $elif name === 'Wizzi models'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/wizzimodels.html?context=mpage;home.model
+    $elif name === 'Wizzi schema'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/wizzischemas.html?context=mpage;home.model
+    $elif name === 'Wizzi schemas'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/wizzischemas.html?context=mpage;home.model
+    $elif name === 'wizzi.WizziFactory'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/wizzifactory.html?context=mpage;home.model
+    $elif name.toLowerCase() === 'artifact generations'
+        a ${name}
+            href ${wzCtx.Params.baseUrl}/~-/docs/artifacts.html?context=mpage;home.model
+    $else
+        h1 ERROR to-docs unknown ${name}

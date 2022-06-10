@@ -1,0 +1,112 @@
+{
+    $
+        // var baseUrl = 'http://127.0.0.1:5500/docs';
+        var baseUrl = "https://stfnbssl.github.io/wizzi";
+
+	name "stfnbssl.github.io/wizzi"
+	version "0.7.1"
+	description "Wizzi github page"
+	author "Stefano Bassoli"
+	license "MIT"
+
+    { Params
+        title "Wizzi"
+        baseUrl "${baseUrl}"
+
+    { Section
+        [ items
+            {
+                title "Home"
+                url "/"
+            {
+                title "Docs"
+                url "/docs/concepts.html"
+            {
+                title "Resources"
+                url "/resources/index.html"
+            {
+                title "Packy"
+                url "/packy/index.html"
+            {
+                title "News"
+                url "/news/index.html"
+
+    { Doc
+        [ items
+            {
+                title "Concepts"
+                url "/docs/concepts.html"
+            {
+                title "Ittf documents"
+                url "/docs/ittfdocuments.html"
+            {
+                title "JsWizzi"
+                url "/docs/jswizzi.html"
+            {
+                title "mTrees"
+                url "/docs/mtrees.html"
+            {
+                title "Wizzi schemas"
+                url "/docs/wizzischemas.html"
+            {
+                title "Wizzi models"
+                url "/docs/wizzimodels.html"
+            {
+                title "Artifacts"
+                url "/docs/artifacts.html"
+            {
+                title "Wizzi factory class"
+                url "/docs/wizzifactoryclass.html"
+            {
+                title "Wizzi jobs"
+                url "/docs/wizzijobs.html"
+            {
+                title "Wizzi plugins"
+                url "/docs/wizziplugins.html"
+
+    { Starter
+        [ items
+            {
+                title "wizzi-starter-wizzi-plugin"
+                url "https://github.com/wizzifactory/wizzi-examples/tree/master/packages/wizzi-starter-wizzi-plugin"
+            {
+                title "wizzi-starter-webpack-react"
+                url "https://github.com/wizzifactory/wizzi-examples/tree/master/packages/wizzi-starter-webpack-react"
+            {
+                title "wizzi-starter-mern"
+                url "https://github.com/wizzifactory/wizzi-examples/tree/master/packages/wizzi-starter-mern"
+            {
+                title "wizzi-starter-nextjs"
+                url "https://github.com/wizzifactory/wizzi-examples/tree/master/packages/wizzi-starter-nextjs"
+            {
+                title "wizzi-starter-gatsby"
+                url "https://github.com/wizzifactory/wizzi-examples/tree/master/packages/wizzi-starter-gatsby"
+
+    { Plugin
+        [ items
+            {
+                title "wizzi-js"
+                url "https://github.com/wizzifactory/wizzi/tree/master/packages/wizzi-js/dist"
+            {
+                title "wizzi-web"
+                url "https://github.com/wizzifactory/wizzi/tree/master/packages/wizzi-web/dist"
+            {
+                title "wizzi-lab"
+                url "https://github.com/wizzifactory/wizzi/tree/master/packages/wizzi-lab/dist"
+
+    { Colors
+        bg_0 "#333"
+        bg_f_0 "#000"
+		c_0  "#fff"
+        bg_dark "#333"
+        bg_dark_medium "#444"
+        c_dark "#ddd"
+        c_dark_medium "#bbb"
+        h3_c_dark "#fc0"
+
+    { Fonts
+        useMaterialIcons true
+        { materialIcons
+            baseUrl "${baseUrl}/fonts"
+            fontWeight "400"
+            size "24px"

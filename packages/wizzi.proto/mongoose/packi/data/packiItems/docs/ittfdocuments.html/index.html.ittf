@@ -1,0 +1,15 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            title: 'Ittf documents'
+        };
+    
+    html/_layouts/docs-layout(&art)
+
+        $include ./introduction
+        $include ./ittf-notation
+        $include ./xml-comparision
+        $include ./ittf-composition
+        $include ./ittf-templates

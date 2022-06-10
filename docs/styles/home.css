@@ -1,8 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\wizzifactory\wizzi\packages\wizzi-web\dist\lib\artifacts\css\document\gen\main.js
-    package: wizzi-web@0.7.9
-    primary source IttfDocument: C:\My\wizzi\wizzifactory\wizzi\docs\.wizzi\ittf\pages\styles\home.css.ittf
-    utc time: Wed, 08 Jun 2022 13:40:59 GMT
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\css\document\gen\main.js
+    package: wizzi-web@0.7.10
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\styles\home.css.ittf
+    utc time: Thu, 09 Jun 2022 20:26:23 GMT
 */
 html {
     margin: 0;
@@ -325,7 +325,7 @@ p {
 }
 #showcase .bg-logo {
     position: absolute;
-    background: #444 url('http://127.0.0.1:5501/wizzi/docs/images/logo.svg');
+    background: #444 url('http://127.0.0.1:5500/docs/images/logo.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -336,7 +336,7 @@ p {
 }
 #showcase .bg-image {
     position: absolute;
-    background: #444 url(http://127.0.0.1:5501/wizzi/docs/images/showcase.png);
+    background: #444 url(http://127.0.0.1:5500/docs/images/showcase.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -1,0 +1,21 @@
+$group
+    $params &item
+    li 
+        $if _.isString(item.svg)
+            class css-1hrdhpc
+            a 
+                target _blank
+                rel noopener noreferrer
+                href ${item.href}
+                class css-tu9on4
+                img
+                    src /static/images/svg/${item.svg}
+                + ${item.label}
+        $else
+            class css-1sncdea
+            a ${item.label}
+                class css-tu9on4
+                href ${item.href}
+
+
+

@@ -9,7 +9,7 @@
     common/v07/plugins/models/mtree-preprocessor(&md)
         
         $append imports
-            var HtmlJsPreprocessor = require('./html-js-mtre-preprocessor.g')
+            var HtmlJsPreprocessor = require('./html-js-mtree-preprocessor.g')
 
         function preprocessNode
             param node
@@ -78,7 +78,8 @@
             elif inferJsonArrayInclude(node)
                 set node.n = '::data-array'
                 return true
-            elif node.n === 'ittf-panel'
+            elif ['ittf-panel', 'js-panel', 'bash-panel'].indexOf(node.n) >-1
+                log '%$%$%$%$%$'
                 set node.wzMTreeData
                     {
                         @ mTree state.mTree

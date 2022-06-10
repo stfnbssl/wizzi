@@ -1,0 +1,44 @@
+﻿element text base
+	tag
+	ast
+	category
+	
+	item
+		title License example
+		ittf
+			text
+                ${'$'}params copy|2021
+				
+                MIT License
+
+                Copyright (c) ${'$'}{copy}
+
+                Permission is hereby granted, free of charge, to any person obtaining a copy
+                ....
+
+	item
+		title Special tags
+		ittf
+            text
+                Text content is by line.
+                    Indentation is respected
+                You can insert a blank line with the br tag
+                br
+                If you want write a br string at start of line you must escape it
+                \br
+                The following is a span tag
+                span hello span
+                The following is an escaped span tag
+                \span hello span
+                The following is a bspan tag
+                bspan hello bspan
+                The following is an escaped bspan tag
+                \bspan hello span
+                The following is an indented span tag
+                    span hello span
+                The following is an indented escaped span tag
+                    \span hello span
+                The following is an indented bspan tag
+                    bspan hello bspan
+                The following is an indented escaped bspan tag
+                    \bspan hello span

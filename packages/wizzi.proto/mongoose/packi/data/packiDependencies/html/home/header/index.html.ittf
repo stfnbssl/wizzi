@@ -1,0 +1,52 @@
+$group
+    $
+        var promo = mpage.Banner.promotion;
+    
+    a-0-main-header()
+        b-0-banner-aside()
+            b-1-promo( &promo )
+            b-2-nav-ul()
+                $foreach item in mpage.Banner.items
+                    b-3-item-li( &item )
+        m-1-header()
+            m-2-nav()
+                m-3-nav-bar()
+                    $foreach menuGroup in mpage.Nav1.menuGroups
+                        m-4-nav-bar-group(&menuGroup)
+                            $foreach menu in menuGroup.menus
+                                m-5-nav-menu-item(&menu)
+                                    $foreach panel in menu.panels
+                                        m-6-li-a-ul(&panel)
+                                            $if panel.kind == 'grid'
+                                                li
+                                                    m-7-ul-grid()
+                                                        $foreach gritem in panel.griditems
+                                                            m-8-li-h3-ul( ${gritem.title}
+                                                                $foreach item in gritem.items
+                                                                    m-9-li-a( ${item.label}, ${item.href}
+                                            $elif panel.kind == 'subgrid'
+                                                li
+                                                    m-7-ul-grid()
+                                                        $foreach gritem in panel.griditems
+                                                            m-8-li-h3-ul( ${gritem.title}
+                                                                $foreach item in gritem.items
+                                                                    m-9-li-a( ${item.label}, ${item.href}
+
+                                            $elif panel.kind == 'bar'
+                                                m-7-ul-bar()
+                                                    $foreach item in panel.items
+                                                        m-9-li-a-bar( ${item.label}, ${item.href}
+
+                                            $elif panel.kind == 'list'
+                                                $$ m-7-ul-list( ${panel.title}, ${panel.subtitle}
+                                                $foreach liitem in panel.listitems
+                                                    li 
+                                                        h3 ${liitem.title}
+                                                            class css-ocmoim
+                                                        ul 
+                                                            class css-j7qwjs
+                                                            $foreach item in liitem.items
+                                                                m-9-li-a( ${item.label}, ${item.href}
+                                            $elif panel.kind == 'singleitem'
+                                                $$ Nothing to do
+            m-2-search()                                            

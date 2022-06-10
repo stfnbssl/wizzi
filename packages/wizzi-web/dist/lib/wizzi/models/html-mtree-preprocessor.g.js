@@ -1,22 +1,23 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\wizzi\models\html-mtree-preprocessor.g.js.ittf
 */
 'use strict';
-var HtmlJsPreprocessor = require('./html-js-mtre-preprocessor.g');
+var HtmlJsPreprocessor = require('./html-js-mtree-preprocessor.g');
 module.exports = function(mTree, context) {
     var state = {
         mTree: mTree, 
         parent: null
-    };
+     };
     var i, i_items=mTree.nodes[0].children, i_len=mTree.nodes[0].children.length, item;
     for (i=0; i<i_len; i++) {
         item = mTree.nodes[0].children[i];
         traverse(item, state);
     }
     return mTree;
-};
+}
+;
 function traverse(node, state) {
     if (preprocessNode(node, state)) {
         return ;
@@ -37,7 +38,7 @@ function preprocessNode(node, state) {
             wrapChilds(node, {
                 n: 'css', 
                 v: ''
-            })
+             })
             if (scoped) {
                 node.children.push(scoped)
             }
@@ -55,9 +56,9 @@ function preprocessNode(node, state) {
                     {
                         n: 'kind', 
                         v: 'react'
-                    }
+                     }
                 ]
-            })
+             })
             if (type) {
                 node.children.push(type)
             }
@@ -74,7 +75,7 @@ function preprocessNode(node, state) {
                 children: [
                     
                 ]
-            })
+             })
         }
         return true;
     }
@@ -87,7 +88,7 @@ function preprocessNode(node, state) {
                 children: [
                     
                 ]
-            })
+             })
         }
         return true;
     }
@@ -99,10 +100,11 @@ function preprocessNode(node, state) {
         node.n = '::data-array';
         return true;
     }
-    else if (node.n === 'ittf-panel') {
+    else if (['ittf-panel', 'js-panel', 'bash-panel'].indexOf(node.n) >-1) {
+        console.log('%$%$%$%$%$');
         node.wzMTreeData = {
             mTree: state.mTree
-        };
+         };
         var i, i_items=node.children, i_len=node.children.length, item;
         for (i=0; i<i_len; i++) {
             item = node.children[i];
@@ -202,7 +204,8 @@ function descendentNameIsOneOf(node, names) {
                 return true;
             }
         }
-        found = descendentNameIsOneOf(child, names);
+        found = descendentNameIsOneOf(child, names)
+        ;
         if (found) {
             return true;
         }

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\examples\graphql\index.js.ittf
 */
 'use strict';
@@ -34,7 +34,7 @@ function executeExample() {
         var graphqlOutput = path.join(__dirname, 'ittf', name + '.g.graphql');
         loadModel(ittfSource, {
             __productionManager: mocks.getProductionManager()
-        }, function(err, wizziModel) {
+         }, function(err, wizziModel) {
             if (err) {
                 console.log('-------------------------------------------------------------------');
                 console.log('--- Test error ----------------------------------------------------');
@@ -70,14 +70,18 @@ function executeExample() {
 }
 function getFiles(srcpath, schema) {
     return fs.readdirSync(srcpath).filter((file) => {
+        
             return fs.lstatSync(path.join(srcpath, file)).isFile() && verify.endsWith(file, (schema === 'ittf' ? '.ittf' : '.' + schema + '.ittf'));
-        })
+        }
+        )
     ;
 }
 function getFilesData(srcpath, schema) {
     var files = fs.readdirSync(srcpath).filter((file) => {
+    
         return fs.lstatSync(path.join(srcpath, file)).isFile() && verify.endsWith(file, '.' + schema + '.ittf');
-    })
+    }
+    )
     ;
     var ret = [];
     var i, i_items=files, i_len=files.length, file;
@@ -87,49 +91,52 @@ function getFilesData(srcpath, schema) {
             path: file, 
             name: file.substring(0, file.length - ('.' + schema + '.ittf').length), 
             fullPath: path.join(srcpath, file)
-        })
+         })
     }
     return ret;
 }
 function createWizziFactory(globalContext, callback) {
+    
+    // The wizzi package will be a previous version from wizzi-mono/node_modules
     if (wizzi == null) {
-        // The wizzi package will be a previous version from wizzi-mono/node_modules
         wizzi = require('wizzi');
     }
     console.log('"wizzi" package version', wizzi.version);
     wizzi.fsnoaclFactory({
         plugins: {
             
-        }, 
+         }, 
         globalContext: globalContext || {}
-    }, callback)
+     }, callback)
 }
 function getWizziObject(callback) {
     if (typeof(callback) === 'undefined') {
         return {
                 loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
                     useCache: false
-                }), 
+                 }), 
                 file: wizziUtils.file, 
                 verify: wizziUtils.verify, 
                 errors: errors
-            };
+             };
     }
     else {
         createWizziFactory({}, (err, wf) => {
+        
             if (err) {
                 return callback(err);
             }
             return callback(null, {
                     loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
                         useCache: false
-                    }), 
+                     }), 
                     file: wizziUtils.file, 
                     verify: wizziUtils.verify, 
                     errors: errors, 
                     wizziFactory: wf
-                });
-        })
+                 });
+        }
+        )
     }
 }
 function getLoadModelContext(mtreeBuilUpContext) {
@@ -160,7 +167,7 @@ function executeWizziJob(wfjobDocumentUri, options) {
         config: {
             wfBaseFolder: 'c:/my/wizzi/v5', 
             plugins: jobPlugins
-        }, 
+         }, 
         job: {
             name: 'example ' + wfjobDocumentUri, 
             ittfDocumentUri: wfjobDocumentUri, 
@@ -168,10 +175,10 @@ function executeWizziJob(wfjobDocumentUri, options) {
                 indentSpaces: 4, 
                 basedir: __dirname, 
                 verbose: 2
-            }), 
+             }), 
             globalContext: options.globalContext
-        }
-    }, function(err) {
+         }
+     }, function(err) {
         if (err) {
             wizzi.printWizziJobError($name, err);
         }

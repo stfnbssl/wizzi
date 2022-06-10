@@ -1,0 +1,27 @@
+$group
+    $params &ctx
+    
+    $include _vars/common
+
+    common/banner( &ctx )
+    
+    { Nav1
+        
+        { section
+            title "cheatsheets"
+            ariaLabel "Link to Cheatsheets home"
+            href "${wzCtx.Params.baseUrl}/cheatsheets/cs-ittf.html"
+        
+        [ menuGroups
+            {
+                [ menus
+                    $foreach schema in g_schemas
+                        {
+                            title "${_.capitalize(schema)}"
+                            href "${wzCtx.Params.baseUrl}/cheatsheets/cs-${schema}.html"
+            {
+                [ menus
+                    {
+                        kind "button"
+                        title "Get started"
+                        href "/get-started/"

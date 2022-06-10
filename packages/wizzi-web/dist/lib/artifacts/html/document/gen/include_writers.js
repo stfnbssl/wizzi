@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\html\document\gen\include_writers.js.ittf
 */
 'use strict';
@@ -16,13 +16,14 @@ md.writeIncludeCssLegacy = function(ctx, model, callback) {
             return callback(err);
         }
         // log myname, 'cssModel.rules', cssModel.rules
+        
+        // log myname, 1
         if (cssModel.rules.length == 0 && verify.isEmpty(cssModel.wzName) == false) {
-            // log myname, 1
             ctx.w('<link href="' + cssModel.wzName + '" rel="stylesheet" />');
             callback();
         }
+        // log myname, 2
         else {
-            // log myname, 2
             md.generateCssArtifact(ctx, cssModel, function(err, artifactText) {
                 if (err) {
                     return callback(err);
@@ -36,20 +37,22 @@ md.writeIncludeCssLegacy = function(ctx, model, callback) {
             })
         }
     })
-};
+}
+;
 md.generateCssArtifact = function(ctx, cssModel, callback) {
     // log myname, 3
     // log myname, 'cssModel', cssModel, 'cssModel.rules', cssModel.rules
     ctx.wizziFactory.generateArtifact(cssModel, 'generated from html model', 'css/document', {
         forHtmlStyle: true
-    }, function(err, artifactText) {
+     }, function(err, artifactText) {
         if (err) {
             return callback(err);
         }
         // log myname, 'css artifactText', artifactText
         return callback(null, artifactText);
     })
-};
+}
+;
 md.writeIncludeCss = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeJs'
     element.get_css(function(err, cssModel) {
@@ -60,7 +63,7 @@ md.writeIncludeCss = function(ctx, element, callback) {
         ctx.wizziFactory.generateArtifact(cssModel, 'generated from html model', 'css/document', {
             forHtmlStyle: true, 
             noGeneratorComments: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -71,7 +74,8 @@ md.writeIncludeCss = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;
 md.writeIncludeJs = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeJs'
     element.get_js(function(err, jsModel) {
@@ -83,7 +87,7 @@ md.writeIncludeJs = function(ctx, element, callback) {
             forHtmlScript: true, 
             noUseStrict: true, 
             noGeneratorComments: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -94,7 +98,8 @@ md.writeIncludeJs = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;
 md.writeIncludeSvg = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeSvg'
     element.get_svg(function(err, svgModel) {
@@ -104,7 +109,7 @@ md.writeIncludeSvg = function(ctx, element, callback) {
         // log myname, 'svgModel', svgModel
         ctx.wizziFactory.generateArtifact(svgModel, 'generated from html model', 'svg/document', {
             forHtmlSvgElement: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -115,7 +120,8 @@ md.writeIncludeSvg = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;
 md.writeIncludeJson = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeSvg'
     element.get_json(function(err, jsonModel) {
@@ -125,7 +131,7 @@ md.writeIncludeJson = function(ctx, element, callback) {
         // log myname, 'jsonModel', jsonModel
         ctx.wizziFactory.generateArtifact(jsonModel, 'generated from html model', 'json/document', {
             forHtmlJson: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -136,4 +142,5 @@ md.writeIncludeJson = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;

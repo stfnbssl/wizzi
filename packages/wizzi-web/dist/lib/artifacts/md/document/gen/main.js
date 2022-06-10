@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\md\document\gen\main.js.ittf
 */
 'use strict';
@@ -17,7 +17,7 @@ module.exports = {
         // log 'model', util.inspect(model, { depth: 1 })
         new Gen(model, ctx, callback);
     }
-};
+ };
 var Gen = (function () {
     function Gen(model, ctx, callback) {
         _classCallCheck(this, Gen);
@@ -33,10 +33,12 @@ var Gen = (function () {
         }
     }
     Gen.prototype.genItem = function(model, ctx) {
+        
+        // known element
         if (this[model.wzElement]) {
-            // known element
+            
+            // ok, processed
             if (this[model.wzElement](model, ctx)) {
-                // ok, processed
                 return ;
             }
         }
@@ -388,7 +390,7 @@ function getAttributes(model) {
         if (typeof model[name] !== 'undefined') {
             ret.push({
                 wzName: name + ' ' + model[name]
-            })
+             })
         }
     }
     return ret;

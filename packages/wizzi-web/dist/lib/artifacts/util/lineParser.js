@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\util\lineParser.js.ittf
 */
 'use strict';
@@ -53,5 +53,6 @@ md.parseNameValueRaw = function(text, node) {
             hasValue: function() {
                 return value.length > 0;
             }
-        };
-};
+         };
+}
+;

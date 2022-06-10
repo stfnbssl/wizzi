@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\svg\document\gen\main.js.ittf
 */
 'use strict';
@@ -50,7 +50,8 @@ md.gen = function gen(model, ctx, callback) {
         // log 'exit', myname, 'err', err
         return callback(null, ctx);
     })
-};
+}
+;
 md.genItems = function(items, ctx, options, callback) {
     var opt = options || {},
         from = opt.from || 0,
@@ -71,17 +72,20 @@ md.genItems = function(items, ctx, options, callback) {
         }
         return callback();
     })
-};
+}
+;
 md.getGenItem = function(ctx) {
     return function(model, callback) {
+            
+            // log '***** known element', model.wzElement
             if (md.stm[model.wzElement]) {
-                // log '***** known element', model.wzElement
                 md.stm[model.wzElement](model, ctx, function(err, done) {
                     if (err) {
                         return callback(err);
                     }
+                    
+                    // ok, processed
                     if (done) {
-                        // ok, processed
                         return callback();
                     }
                     else {
@@ -93,7 +97,8 @@ md.getGenItem = function(ctx) {
                 return md.stm.standardElement(model, ctx, callback);
             }
         };
-};
+}
+;
 md.stm.standardElement = function(model, ctx, callback) {
     // log '***** standard element', model.wzElement
     writeBeginTag(ctx, model.wzTag)
@@ -105,7 +110,7 @@ md.stm.standardElement = function(model, ctx, callback) {
         }
         md.genItems(model.items, ctx, {
             indent: true
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -119,7 +124,8 @@ md.stm.standardElement = function(model, ctx, callback) {
         writeEndTag(ctx, model.wzTag)
         return callback();
     }
-};
+}
+;
 md.stm.svg = function(model, ctx, callback) {
     if (ctx.values.forCssImage || ctx.values.forHtmlSvgElement) {
     }
@@ -132,14 +138,15 @@ md.stm.svg = function(model, ctx, callback) {
     writeCloseBegin(ctx)
     md.genItems(model.items, ctx, {
         indent: true
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         writeEndTag(ctx, 'svg')
         callback(null, true);
     })
-};
+}
+;
 /**
     md.stm.linearGradient = function(model, ctx, callback) {
         writeBeginTag(ctx, 'linearGradient')
@@ -147,7 +154,8 @@ md.stm.svg = function(model, ctx, callback) {
         writeCloseBegin(ctx)
          TODO
         writeEndTag(ctx, 'linearGradient', callback(null, true))
-    }*/
+    }
+*/
 function writeAttributes(model, ctx) {
     var v;
     var i, i_items=model.getAttributes(), i_len=model.getAttributes().length, a;

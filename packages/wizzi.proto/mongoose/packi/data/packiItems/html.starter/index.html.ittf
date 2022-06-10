@@ -1,0 +1,25 @@
+html
+    $
+        var md = {
+            title: 'Html packi starter'
+        }
+    html/layouts/std-layout(&md)
+        frag()
+        ul
+            li
+                a home
+                    href /~-/home.html?context=mpage;home.model
+            
+        h1 Docs
+        ul
+            $foreach item in wzCtx.Doc.items
+                li
+                    a ${item.title}
+                        href /~-/docs/${item.name}.html?context=mpage;home.model
+        
+        h1 Cheatsheets
+        ul
+            $foreach schema in wzCtx.wizziSchemas
+                li
+                    a ${schema.name}
+                        href /~-/docs/cheatsheets/index.html?context=mpage;home.model|cs;docs/cheatsheets/models/${schema.name}.model;ittf/cheatsheet

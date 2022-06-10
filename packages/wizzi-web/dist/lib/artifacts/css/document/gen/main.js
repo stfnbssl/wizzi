@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\css\document\gen\main.js.ittf
 */
 'use strict';
@@ -26,7 +26,7 @@ md.gen = function(model, ctx, callback) {
         try {
             var postCssResult = postcss().use(colorFunction({
                 preserveCustomProps: true
-            })).process(ctx.getContent()).css
+             })).process(ctx.getContent()).css
             ;
         } 
         catch (ex) {
@@ -41,24 +41,26 @@ md.gen = function(model, ctx, callback) {
                     text: [
                         postCssResult
                     ]
-                }
+                 }
             ]
-        })
+         })
         return callback(null, ctx);
     })
-};
+}
+;
 md.getGenItem = function(ctx) {
     return function(model, callback) {
             var stm = md.stm[model.wzElement];
             if (stm) {
                 stm(model, ctx, callback)
             }
+            // this is an abnormal end
             else {
-                // this is an abnormal end
                 throw ctx.error(myname + '. Unknown tag/element: ' + model.wzTag + '/' + model.wzElement, model);
             }
         };
-};
+}
+;
 md.genItems = function(items, ctx, options, callback) {
     var opt = options || {},
         from = opt.from || 0,
@@ -79,7 +81,8 @@ md.genItems = function(items, ctx, options, callback) {
         }
         process.nextTick(callback)
     })
-};
+}
+;
 md.stm.css = function(model, ctx, callback) {
     // css is container only
     if (model.charset) {
@@ -88,25 +91,27 @@ md.stm.css = function(model, ctx, callback) {
     emitResources(model.resources, ctx);
     md.genItems(model.statements, ctx, {
         indent: false
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         md.genItems(model.rules, ctx, {
             indent: false
-        }, callback)
+         }, callback)
     })
-};
+}
+;
 md.stm.statement = function(model, ctx, callback) {
     ctx.w(model.wzName);
     return callback(null);
-};
+}
+;
 function main_init(model, ctx) {
     // log 'css.document.gen.main, ctx.values', ctx.values, !!ctx.values.noGeneratorComments
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-web@0.7.9');
+        ctx.w('    package: wizzi-web@0.7.10');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         if ((!!ctx.values.isPackageDeploy) == false) {
             ctx.w('    utc time: ' + new Date().toUTCString());

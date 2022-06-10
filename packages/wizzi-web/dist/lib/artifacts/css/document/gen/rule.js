@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\css\document\gen\rule.js.ittf
 */
 'use strict';
@@ -18,7 +18,8 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.classRule = function(model, ctx, callback) {
         if (model.hasContent()) {
             return writeRule(cnt, model, ctx, callback);;
@@ -26,7 +27,8 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.idRule = function(model, ctx, callback) {
         if (model.hasContent()) {
             return writeRule(cnt, model, ctx, callback);;
@@ -34,7 +36,8 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.gtRule = function(model, ctx, callback) {
         if (model.hasContent()) {
             return writeRule(cnt, model, ctx, callback);;
@@ -42,7 +45,8 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.pseudoElementRule = function(model, ctx, callback) {
         if (model.hasContent()) {
             return writeRule(cnt, model, ctx, callback);;
@@ -50,7 +54,8 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.ampersand = function(model, ctx, callback) {
         if (model.hasContent()) {
             return writeRule(cnt, model, ctx, callback);;
@@ -58,10 +63,12 @@ md.load = function(cnt) {
         else {
             return callback(null);
         }
-    };
+    }
+    ;
     cnt.stm.placeholder = function(model, ctx, callback) {
         writeRule(cnt, model, ctx, callback);
-    };
+    }
+    ;
     cnt.stm.media = function(model, ctx, callback) {
         if (model.wzName.indexOf(')') > -1) {
             ctx.w('@media ' + model.wzName + ' {');
@@ -87,7 +94,7 @@ md.load = function(cnt) {
                 }
                 cnt.genItems(model.rules, ctx, {
                     indent: false
-                }, function(err, notUsed) {
+                 }, function(err, notUsed) {
                     if (err) {
                         return callback(err);
                     }
@@ -100,7 +107,7 @@ md.load = function(cnt) {
         else {
             cnt.genItems(model.rules, ctx, {
                 indent: false
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -109,7 +116,8 @@ md.load = function(cnt) {
                 return callback(null);
             })
         }
-    };
+    }
+    ;
     cnt.stm.fontface = function(model, ctx, callback) {
         ctx.w('@font-face {');
         ctx.indent();
@@ -145,7 +153,7 @@ md.load = function(cnt) {
         }
         cnt.genItems(model.rules, ctx, {
             indent: false
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -153,14 +161,15 @@ md.load = function(cnt) {
             ctx.w('}');
             return callback(null);
         })
-    };
+    }
+    ;
     cnt.stm.keyframes = function(model, ctx, callback) {
         if (model.wzName != '--styled--') {
             ctx.w('@' + (model.vendor || '') + 'keyframes ' + model.wzName + ' {');
         }
         cnt.genItems(model.rules, ctx, {
             indent: model.wzName != '--styled--'
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -169,7 +178,8 @@ md.load = function(cnt) {
             }
             return callback(null);
         })
-    };
+    }
+    ;
     cnt.stm.keyframe = function(model, ctx, callback) {
         ctx.w(model.wzName + ' {');
         ctx.indent();
@@ -181,7 +191,8 @@ md.load = function(cnt) {
             ctx.w('}');
             return callback(null);
         })
-    };
+    }
+    ;
     cnt.stm.keyframeFrom = function(model, ctx, callback) {
         ctx.w("from " + model.wzName + ' {');
         ctx.indent();
@@ -193,7 +204,8 @@ md.load = function(cnt) {
             ctx.w('}');
             return callback(null);
         })
-    };
+    }
+    ;
     cnt.stm.keyframeTo = function(model, ctx, callback) {
         ctx.w("to " + model.wzName + ' {');
         ctx.indent();
@@ -205,11 +217,13 @@ md.load = function(cnt) {
             ctx.w('}');
             return callback(null);
         })
-    };
+    }
+    ;
     cnt.stm.ximport = function(model, ctx, callback) {
         ctx.w('@import ' + model.wzName + ';');
         return callback(null);
-    };
+    }
+    ;
     cnt.stm.comment = function(model, ctx, callback) {
         if (model.rules && model.rules.length > 0) {
             if (ctx.__comment_level === 0) {
@@ -222,7 +236,7 @@ md.load = function(cnt) {
             ctx.__comment_level++;
             cnt.genItems(model.rules, ctx, {
                 indent: false
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -243,8 +257,10 @@ md.load = function(cnt) {
             }
             return callback(null);
         }
-    };
-};
+    }
+    ;
+}
+;
 function writeRule(cnt, model, ctx, callback) {
     // log 'writeRule, model.ruleParts', model.ruleParts
     if (!!ctx.__isStyledComponent == false) {
@@ -254,8 +270,9 @@ function writeRule(cnt, model, ctx, callback) {
     var isStyledComponent = model.wzElement == "elementRule" && model.wzName == "--styled--";
     var isInsideStyledComponent = ctx.__isStyledComponent;
     // log 'isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName', isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName
+    
+    // log 1
     if (isInsideStyledComponent && model.wzElement === 'ampersand') {
-        // log 1
         var text = ['+', '~'].indexOf(model.wzName[0]) > -1 ? ' ' + model.wzName : model.wzName;
         ctx.w('&' + text + ' {');
         ctx.indent();
@@ -265,12 +282,13 @@ function writeRule(cnt, model, ctx, callback) {
         ctx.w(pref + model.wzName + ' {');
         ctx.indent();
     }
+    
+    // log 2
     else if (isStyledComponent) {
-        // log 2
         ctx.__isStyledComponent = true;
     }
+    // log 3
     else {
-        // log 3
         ctx.w(ruleText + ' {');
         ctx.indent();
     }
@@ -278,13 +296,14 @@ function writeRule(cnt, model, ctx, callback) {
         if (err) {
             return callback(err);
         }
+        
+        // log 11
         if (isInsideStyledComponent) {
-            // log 11
             ctx.deindent();
             ctx.w('}');
         }
+        // log 12
         else {
-            // log 12
             if (!!isStyledComponent == false) {
                 ctx.deindent();
                 ctx.w('}');
@@ -292,12 +311,13 @@ function writeRule(cnt, model, ctx, callback) {
         }
         cnt.genItems(model.rules, ctx, {
             indent: false
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
+            
+            // log 13
             if (isStyledComponent) {
-                // log 13
                 ctx.__isStyledComponent = false;
             }
             return callback(null);
@@ -320,7 +340,7 @@ function getWriteProperty(ctx) {
                             CRLF: '', 
                             forCssImage: true, 
                             noGeneratorComments: true
-                        }, function(err, artifactText) {
+                         }, function(err, artifactText) {
                             if (err) {
                                 return callback(err);
                             }
@@ -343,7 +363,7 @@ function getWriteProperty(ctx) {
                     ctx.wizziFactory.generateArtifact(jsModel, 'generated from css model', 'js/module', {
                         noGeneratorComments: true, 
                         noUseStrict: true
-                    }, function(err, artifactText) {
+                     }, function(err, artifactText) {
                         if (err) {
                             return callback(err);
                         }

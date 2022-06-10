@@ -1,0 +1,19 @@
+$group
+
+    . css-xtak9y
+        max-width 90rem
+        position relative
+        padding-left 2rem
+        padding-right 2rem
+        margin-left auto
+        margin-right auto
+        width 100%
+        display flex
+        flex-direction column
+        position relative
+        margin-top 6rem
+
+    media (min-width: 550px)
+        . css-xtak9y
+            width 90%
+

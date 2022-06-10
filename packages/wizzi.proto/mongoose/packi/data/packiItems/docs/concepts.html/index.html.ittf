@@ -1,0 +1,22 @@
+html
+    $global
+        var dollar = '$';
+    
+    $
+        var art = {
+            title: 'Concepts'
+        };
+
+    html/_layouts/docs-layout(&art)
+
+        $include wizzifactory
+        $include vision
+        $include maincomponents
+        $include ittfdocument
+        $include wfschema
+        $include wizzimodel
+        $include modeltransformer
+        $include artifactgenerator
+        $include wizzijob
+        $include wizziplugin
+        $include wizzifier

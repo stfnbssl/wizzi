@@ -1,0 +1,1 @@
+robocopy C:\My\wizzi\stfnbssl\wizzi\packages\wizzi.proto C:\My\wizzi\stfnbssl\wizzi\node_modules /NFL /NDL /NJH /np /MIR /XD .git, node_modules

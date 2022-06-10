@@ -1,0 +1,11 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            title: 'JsWizzi'
+        };
+    
+    html/_layouts/docs-layout(&art)
+    
+        $include ./introduction

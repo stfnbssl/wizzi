@@ -1,0 +1,35 @@
+$group
+    
+    . cs-item
+        display flex
+        flex-direction column
+
+    . cs-item-code
+        display flex
+        flex-direction row
+        background-color #434343
+        padding 10px
+        border-radius 10px 10px 0 0 
+
+    . cs-item-code-label
+        color #fefefe
+
+    . cs-item-code-expected
+        width 100%
+        overflow-x auto
+        border-radius 10px
+        
+
+    . cs-item-code-ittf
+        width 50%
+        overflow-x auto
+        margin-right 5px
+        padding 15px
+        border-radius 10px
+
+    . cs-item-code-generated
+        width 50%
+        overflow-x auto
+        margin-right 5px
+        padding 15px
+        border-radius 10px

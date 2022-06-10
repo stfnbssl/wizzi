@@ -1,0 +1,24 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Vision'
+        };
+
+    html/docs/section(&sect)
+
+		p Nowadays computing has advanced tremendously thank to many new open and interoperable tools and programming languages. 
+		
+		p Computing handles data structures and is itself described by data. 
+			\b A program source is a human friendly representation of an Abstract Syntax Tree (AST), a data structure that 
+			\b represents its computations. 
+			\b Programming is a combination of data produced by programmers and tools.
+
+		p The Wizzi Factory is a new tool for describing and composing data structures.
+			\b It is aimed at those tasks, in the development process, where programming can be driven by data.
+
+		p In the Wizzi Factory human friendly representations of data drive model transformations and code generations.
+			\b The Wizzi Factory uses a minimal and universal text format and a template processor for composing tree data structures. 
+			
+		p After composition, domain specific schematas can be applied to data nodes, creating dynamic models that become context objects
+			\b for code generations or cascading new data compositions.
+

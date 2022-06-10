@@ -1,0 +1,28 @@
+﻿css
+
+	$include css/options-init
+
+	$
+		opt.sidebar_1 = true;
+		opt.sb_1_min_w = 60;
+		opt.logo_w = 70;
+		opt.logo_h = 30;	
+
+    $include css/options-analize
+    $include css/cheatsheets/content/options
+
+    $include css/_layouts/page-layout
+    $include css/prettyprint
+    
+    $include css/home/header/index
+    $include css/home/content/index
+    $include css/home/footer/index
+
+    $include css/cheatsheets/content/index
+
+
+    < a.anchor
+        display block
+        position relative
+        top -150px
+        visibility hidden

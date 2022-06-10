@@ -1,0 +1,16 @@
+﻿html
+    $global
+        var dollar = '$';
+    
+    $
+        var art = {
+            title: 'Wizzi models'
+        };
+    
+    html/_layouts/docs-layout(&art)
+
+        $include ./introduction
+        $include ./generation
+        $include ./modelmodule
+        $include ./factorymodule
+

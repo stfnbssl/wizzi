@@ -1,0 +1,56 @@
+<!--
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.10
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\examples\html\ittf\prettify.html.ittf
+    utc time: Thu, 09 Jun 2022 20:25:18 GMT
+-->
+<!doctype html>
+<html>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" rel="stylesheet" />
+    <style type="x">
+        .ittf-panel-title {
+            color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class='ittf-panel'>
+    <div class='ittf-panel-title'>Ittf pretty</div>
+    <pre class='prettyprint'><code>
+    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$foreach</span><span class="pp-pln"> item in coll</span></div></div>
+    </code></pre></div>
+    <div class='ittf-panel'>
+    <div class='ittf-panel-title'>The '$' command</div>
+    <pre class='prettyprint'><code>
+    <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">...</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$</span><span class="pp-pln"> jswizzi-statement</span></div></div>
+    </code></pre></div>
+    <div class='js-panel'>
+    <div class='js-panel-title'>Js pretty</div>
+    <pre><code class="hljs">var x = 0;
+var y = call(x)</code></pre>
+    </div>
+    <div class='bash-panel'>
+    <div class='bash-panel-title'>Bash pretty</div>
+    <pre><code class="hljs">git clone ...
+cd ...
+npm install</code></pre>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+        
+            console.log('DOMContentLoaded');
+            document.querySelectorAll('pre code').forEach((el) => {
+            
+                console.log('querySelectorAll', el);
+                hljs.highlightElement(el);
+            }
+            )
+        }
+        )
+    </script>
+</body>
+
+</html>

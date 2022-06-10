@@ -1,0 +1,8 @@
+$group
+    . css-1xhj18k
+        display flex
+        flex-direction row
+        . css-w6ak5y
+            margin 0
+        . css-w6ak5y.css-w6ak5y
+            margin-right 1.25rem

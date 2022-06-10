@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\wizzi\models\vue-mtree-preprocessor.g.js.ittf
 */
 'use strict';
@@ -12,22 +12,24 @@ module.exports = function(mTree, context) {
         level1(item);
     }
     return mTree;
-};
+}
+;
 function level1(model) {
     if (model.n === 'template') {
         traverse(model, {
             isTemplate: true
-        })
+         })
         model.n = '::template';
         wrapChilds(model, {
             n: 'html', 
             v: ''
-        })
+         })
     }
     else if (model.n === 'script') {
         var lang = extractRemove(model, 'lang');
         if (!lang) {
-            lang = extractRemove(model, 'language');
+            lang = extractRemove(model, 'language')
+            ;
         }
         model.n = lang === 'ts' ? '::script-ts' : '::script';
         var newN = {
@@ -36,12 +38,12 @@ function level1(model) {
             children: [
                 
             ]
-        };
+         };
         if (lang !== 'ts') {
             newN.children.push({
                 n: 'kind', 
                 v: 'react'
-            })
+             })
         }
         wrapChilds(model, newN)
     }
@@ -51,7 +53,7 @@ function level1(model) {
         wrapChilds(model, {
             n: 'css', 
             v: ''
-        })
+         })
         if (scoped) {
             model.children.push(scoped)
         }

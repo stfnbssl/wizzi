@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\tests\css\model_css.js.ittf
 */
 'use strict';
@@ -23,7 +23,8 @@ var css_artifact = require('../../lib/artifacts/css/document/gen/main');
 describe("model css", function() {
     var loadModel;
     before(function() {
-        loadModel = css_factory.createLoadModel(getWizziObject());
+        loadModel = css_factory.createLoadModel(getWizziObject())
+        ;
     });
     it("should load a basic css ittf document", function(done) {
         var info = getTestModelInfo('css', 'basic');
@@ -73,10 +74,10 @@ function getWizziObject() {
     return {
             loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
                 useCache: false
-            }), 
+             }), 
             file: file, 
             verify: verify
-        };
+         };
 }
 
 function getLoadModelContext(mTreeBuildUpContext) {
@@ -94,5 +95,5 @@ function getTestModelInfo(schemaName, modelName) {
             writeResult: function(content) {
                 file.write(path.join(__dirname, 'ittf', modelName + '.' + schemaName + '.result'), content)
             }
-        };
+         };
 }

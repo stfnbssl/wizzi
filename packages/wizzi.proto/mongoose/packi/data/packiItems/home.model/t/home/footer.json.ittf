@@ -1,0 +1,132 @@
+$group
+    { Footer
+        [ contents
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "comunity"
+                        { comunity
+                            line1 "Wizzi is powered by the amazing work"
+                            line2 "of a single man."
+                        { ns
+                            { edit
+                                id "emailField"
+                                name "email"
+                                label "Subscribe to our newsletter"
+                                placeholder "you@example.xyz"
+                            { button
+                                label "Subscribe"
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "nav"
+                        [ groups
+                            {
+                                title "Open Source"
+                                [ items
+                                    {
+                                        label "Documentation"
+                                        href "${wzCtx.Params.baseUrl}/docs/"
+                                    {
+                                        label "Quick Start"
+                                        href "${wzCtx.Params.baseUrl}/docs/quick-start/"
+                                    {
+                                        label "Tutorial"
+                                        href "${wzCtx.Params.baseUrl}/docs/tutorial/"
+                                    {
+                                        label "How-To Guides"
+                                        href "${wzCtx.Params.baseUrl}/docs/how-to/"
+                                    {
+                                        label "Reference Guides"
+                                        href "${wzCtx.Params.baseUrl}/docs/reference/"
+                                    {
+                                        label "Conceptual Guides"
+                                        href "${wzCtx.Params.baseUrl}/docs/conceptual/"
+                                    {
+                                        label "Wizzi CLI"
+                                        href "${wzCtx.Params.baseUrl}/docs/reference/wizzi-cli/"
+                                    {
+                                        label "Github"
+                                        href "https://github.com/stfnbssl/wizzi"
+                                        svg "github"
+                            {
+                                title "Wizzi Cloud"
+                                [ items
+                                    {
+                                        label "Why Wizzi Cloud?"
+                                        href "/cloud/"
+                                    {
+                                        label "Support"
+                                        href "/support/"
+                                    {
+                                        label "Integrations"
+                                        href "/integrations/"
+                                    {
+                                        label "Guides"
+                                        href "/guides/"
+                                    {
+                                        label "Pricing"
+                                        href "/pricing/"
+                                    {
+                                        label "Log in"
+                                        href "//dashboard"
+                                        svg "come-in"
+                            {
+                                title "Features"
+                                [ items
+                                    {
+                                        label "Comparison"
+                                        href "/features/"
+                                    {
+                                        label "Plugins"
+                                        href "/plugins/"
+                                    {
+                                        label "Schemas"
+                                        href "${wzCtx.Params.baseUrl}/docs/schemas/"
+                                    {
+                                        label "Jobs"
+                                        href "${wzCtx.Params.baseUrl}/docs/jobs/"
+                                    {
+                                        label "Starters"
+                                        href "/starters/"
+                            {
+                                title "Community"
+                                [ items
+                                    {
+                                        label "Contributing"
+                                        href "/contributing/"
+                                    {
+                                        label "Code of Conduct"
+                                        href "/contributing/code-of-conduct/"
+                                    {
+                                        label "Style Guide"
+                                        href "/contributing/wizzi-style-guide/"
+                                    {
+                                        label "Translations"
+                                        href "/contributing/translation/"
+                            {
+                                title "Events"
+                                [ items
+                                    {
+                                        label "Webinars"
+                                        href "/resources/webinars/"
+                                    {
+                                        label "Wizzi Days"
+                                        href "/resources/wizzi-days/"
+                            {
+                                title "Company"
+                                [ items
+                                    {
+                                        label "About us"
+                                        href "/about/"
+                                    {
+                                        label "Contact Us"
+                                        href "/contact-us/"
+                                    {
+                                        label "Careers"
+                                        href "/careers/"
+                                    {
+                                        label "Partners"
+                                        href "/partners/"

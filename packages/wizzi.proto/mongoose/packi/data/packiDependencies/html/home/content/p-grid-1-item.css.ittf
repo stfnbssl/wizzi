@@ -1,0 +1,105 @@
+$group
+
+    . css-7zq4fr
+        text-align center
+        margin-top 3rem
+
+    media (min-width: 750px)
+        . css-7zq4fr
+            width 33.3333333%
+            margin-top unset
+            padding 0 1rem
+
+    media (min-width: 1000px)
+        . css-7zq4fr
+            margin-bottom 6rem
+
+    . css-mqq84m
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 700
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-weight 800
+        -webkit-letter-spacing -0.015em
+        -moz-letter-spacing -0.015em
+        -ms-letter-spacing -0.015em
+        letter-spacing -0.015em
+        font-size 2.25rem
+
+    media (min-width: 750px)
+        . css-mqq84m
+            font-size 2rem
+
+    media (min-width: 1000px)
+        . css-mqq84m
+            font-size 2.25rem
+
+    . css-td8qak
+        margin 0
+        line-height 1.25
+        color #232129
+        font-weight 700
+        font-family Futura PT,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        font-weight 700
+        font-size 1.75rem
+        color ${mpage.Colors.primary}
+
+    . css-17khnmj
+        height 1rem
+        display block
+        width unset
+
+    media (min-width: 360px)
+        . css-17khnmj
+            height 1rem
+            display block
+            width unset
+
+    media (min-width: 550px)
+        . css-17khnmj
+            height 1rem
+            display block
+            width unset
+
+    media (min-width: 750px)
+        . css-17khnmj
+            height 1rem
+            display block
+            width unset
+
+    media (min-width: 1000px)
+        . css-17khnmj
+            height 1rem
+            display block
+            width unset
+
+    . css-14d0z92
+        font-size 1rem         
+
+    . css-14z3878
+        align-items center
+        border var(--theme-ui-colors-grey-60,#635e69)
+        border-radius 4px
+        box-sizing border-box
+        cursor pointer
+        display inline-flex
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        justify-content center
+        transition background 250ms,border 250ms,color 250ms
+        line-height 1
+        text-decoration none
+        background ${mpage.Colors.primary}
+        border 1px solid ${mpage.Colors.primary}
+        color ${mpage.Colors.themeBack}
+        font-weight 600
+        font-size 1.125rem
+        min-height 3rem
+        min-width 3rem
+        padding 0.5rem 1.25rem
+        border-radius 8px
+
+
+
+
+

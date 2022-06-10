@@ -1,6 +1,6 @@
 {
     $
-        var baseUrl = 'http://127.0.0.1:5501/wizzi/docs';
+        var baseUrl = 'http://127.0.0.1:5500/docs';
         // var baseUrl = "https://stfnbssl.github.io/wizzi";
 
 	name "stfnbssl.github.io/wizzi"

@@ -1,0 +1,6 @@
+$group
+
+	. cs-content
+        padding 20px 60px 0px 60px $$ t r b l
+		width 100%
+		$$ overflow scroll

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\root\errors.js.ittf
 */
 'use strict';
@@ -21,7 +21,7 @@ class WizziPluginError extends Error {
         this.data = {
             model, 
             ...other||{}
-        };
+         };
         Error.captureStackTrace(this, this.constructor);
         if (model) {
             this.errorLines = [
@@ -63,7 +63,7 @@ class InternalWizziPluginError extends WizziPluginError {
         super(error.message);
         this.data = {
             error
-        };
+         };
     }
 }
 md.InternalWizziPluginError = InternalWizziPluginError;

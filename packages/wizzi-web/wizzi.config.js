@@ -10,17 +10,9 @@ module.exports = {
     ], 
     pluginsBaseFolder: path.join(__dirname, '..'),
     schemas: [
-        'css',
-        'graphql',
         'html',
-        'md',
-        'scss',
-        'site',
-        'svg',
-        'vtt',
-        'vue',
     ],
-    schemasStop: [
+    schemas_all: [  /* to be copied into 'schemas' collection */
         'css',
         'graphql',
         'html',

@@ -1,0 +1,67 @@
+$group
+    { Main
+        [ contents
+            {
+                kind "row"
+                [ panels
+                    {
+                        kind "scream"
+                        h1 "Get Started"
+                        { h2
+                            span "The Wizzi Way"
+                            text "of Building"
+                        [ teases
+                            {
+                                h3 "Open Source"
+                                { p
+                                    label "Get started with Wizzi, the"
+                                    strong "free, open source"
+                                    text "framework for building components and apps productions."
+                                [ teasePanels
+                                    {
+                                        kind "github-honors"
+                                        [ items
+                                            {
+                                                kind "icon-label"
+                                                svg "github-stars"
+                                                label "1 GitHub stars"
+                                            { 
+                                                kind "icon-label"
+                                                svg "contributors"
+                                                label "1 contributors"
+                                    {
+                                        kind "code-hint"
+                                        value "npm install -g gatsby-cli"
+                                    {
+                                        kind "hint-link"
+                                        p "You need Node v10+ — see the detailed"
+                                        label "installation docs"
+                                        href "${wzCtx.Params.baseUrl}/docs/quick-start/"
+                                    {
+                                        kind "scream-button"
+                                        label "Take the tutorial"
+                                        href "${wzCtx.Params.baseUrl}/docs/"
+                                        { hint
+                                            svg "mit"
+                                            label "MIT license"
+                            {
+                                h3 "Wizzi Cloud"
+                                { p
+                                    label "Wizzi Cloud is the best place"
+                                    strong "to build and collaborate"
+                                    text "on your Wizzi productions."                                    
+                                [ teasePanels
+                                    {
+                                        kind "scream-features"
+                                        [ items
+                                            {
+                                                svg "incremental-builds"
+                                                { label
+                                                    em "Incremental Builds"
+                                                    text "1000x faster builds"
+                                    {
+                                        kind "scream-button"
+                                        label "Sign up free"
+                                        href "/dashboard/signup/"
+                                        { hint
+                                            label "No credit card required"

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\vue\document\gen\include_writers.js.ittf
 */
 'use strict';
@@ -31,20 +31,22 @@ md.writeIncludeCss = function(ctx, model, callback) {
             callback();
         })
     })
-};
+}
+;
 md.generateCssArtifact = function(ctx, cssModel, callback) {
     // log myname, 3
     // log myname, 'cssModel', cssModel, 'cssModel.rules', cssModel.rules
     ctx.wizziFactory.generateArtifact(cssModel, 'generated from html model', 'css/document', {
         forVueStyle: true
-    }, function(err, artifactText) {
+     }, function(err, artifactText) {
         if (err) {
             return callback(err);
         }
         // log myname, 'css artifactText', artifactText
         return callback(null, artifactText);
     })
-};
+}
+;
 md.writeIncludeJs = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeJs'
     element.get_js(function(err, jsModel) {
@@ -56,7 +58,7 @@ md.writeIncludeJs = function(ctx, element, callback) {
             forVueScript: true, 
             noUseStrict: true, 
             noGeneratorComments: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -69,7 +71,8 @@ md.writeIncludeJs = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;
 md.writeIncludeTypescript = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeTypescript'
     element.get_ts(function(err, tsModel) {
@@ -81,7 +84,7 @@ md.writeIncludeTypescript = function(ctx, element, callback) {
             forVueScript: true, 
             noUseStrict: true, 
             noGeneratorComments: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -94,7 +97,8 @@ md.writeIncludeTypescript = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;
 md.writeIncludeHtml = function(ctx, element, callback) {
     // log myname, 'enter writeIncludeHtml'
     element.get_html(function(err, htmlModel) {
@@ -104,7 +108,7 @@ md.writeIncludeHtml = function(ctx, element, callback) {
         // log myname, 'htmlModel', htmlModel
         ctx.wizziFactory.generateArtifact(htmlModel, 'generated from html model', 'html/document', {
             forVueTemplate: true
-        }, function(err, artifactText) {
+         }, function(err, artifactText) {
             if (err) {
                 return callback(err);
             }
@@ -117,4 +121,5 @@ md.writeIncludeHtml = function(ctx, element, callback) {
             return callback();
         })
     })
-};
+}
+;

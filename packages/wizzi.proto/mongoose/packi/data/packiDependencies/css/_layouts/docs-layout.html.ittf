@@ -1,0 +1,31 @@
+$group
+    $params &art
+
+    $
+        var opt = {
+            mainCss: '/docs/styles/docs.css',
+            mainJs: null,
+        }
+        var page = {
+            sectionTitle: 'Docs'
+        };
+
+    _layouts/page-layout(&opt)
+
+        $$ _includes/header(&page)
+        $$ $append body-content
+        $include home/header/index
+        . doc-container
+            . w-4-5
+                $hook
+            . w-1-5
+                . aside-right
+                    div
+                        style padding-top: 40px;
+                    ul
+                        $foreach item in wzCtx.Doc.items
+                            li
+                                $if item.title === art.title
+                                    class current
+                                a ${item.title}
+                                    href ${wzCtx.Params.baseUrl}${item.url}

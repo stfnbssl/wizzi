@@ -1,0 +1,17 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            title: 'Plugins'
+        };
+    
+    html/_layouts/docs-layout(&art)
+    
+        $include ./introduction
+        $include ./architect
+        $include ./api
+        $include ./core
+        $include ./default
+        $include ./npm
+        $include ./local

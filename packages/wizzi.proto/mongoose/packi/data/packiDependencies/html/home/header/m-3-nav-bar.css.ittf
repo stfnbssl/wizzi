@@ -1,0 +1,47 @@
+$group
+    . m-3-nav-bar
+        $$ BAX-M 
+        background ${mpage.Colors.themeBack}
+        bottom 0
+        display flex
+        flex-grow 1
+        $$ BAX-M left 100%
+        padding-top 7rem
+        padding-bottom 3rem
+        position fixed
+        top 0
+        transform translateX(0)
+        transition transform 500ms cubic-bezier(0.4,0,0.2,1)
+        width 100%
+        overflow-y auto
+        $$ BAX-ADD
+        $$ border 1px solid #cbcbcb
+    media (min-width: 1000px)
+        . m-3-nav-bar
+            background none
+            display flex
+            justify-content flex-start
+            position relative
+            bottom auto
+            top 0.25rem
+            left auto
+            padding 0
+            transform none
+            transition none
+            overflow-y visible
+    . css-pucg4a
+        display flex
+        flex-direction column
+        width 100%
+        position relative
+        transition opacity 500ms cubic-bezier(0.4,0,1,1)
+        $$ BAX-M opacity 0
+    media (min-width: 1000px)
+        . css-pucg4a
+            flex-wrap wrap
+            flex-direction row
+            justify-content flex-end
+            align-items center
+            opacity 1
+        . css-pucg4a > li:last-of-type
+            margin-left auto

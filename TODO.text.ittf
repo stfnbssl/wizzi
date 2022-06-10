@@ -9,3 +9,9 @@ text
     git add .
     git commit -m "dev 18 07 21"
     git push origin master
+
+    9/6/1922
+    Install on your pc for development of wizzi packages
+        git clone https://github.com/stfnbssl/wizzi.git
+        cd wizzi
+        npm install

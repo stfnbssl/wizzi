@@ -5,6 +5,7 @@ $group
         var opt = {
             mainCss: pkg.Params.baseUrl + '/styles/docs.css',
             mainJs: null,
+            useHighlight: true
         }
         var page = {
             sectionTitle: 'Docs'

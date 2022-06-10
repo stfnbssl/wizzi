@@ -1,0 +1,60 @@
+$group
+	$params &opt
+
+    - root layout for wizzi /pages
+
+    head 
+		@title ${opt.title}
+        meta 
+            charset utf-8
+        meta 
+            name viewport
+			content width=device-width, initial-scale=1
+
+		$hook head-styles-0
+		
+		$include ./head-styles
+
+        link 
+            rel preconnect
+            href https://fonts.gstatic.com
+        link
+            rel stylesheet 
+            href https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap
+
+        link
+            href http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext
+            rel stylesheet
+            type text/css
+
+        @style
+		
+		$hook head-styles
+
+    body
+        div 
+            id ___wizzi
+            div 
+                style outline:none
+                tabindex -1
+                id wizzi-focus-wrapper
+                . main-container
+                    $$ $hook body-content
+                    $hook
+	
+		$hook body-scripts-0
+		
+		$include ./body-scripts
+		
+		$hook body-scripts
+
+        $if opt.useHighlight
+            script
+                _ document.addEventListener
+                    @ 'DOMContentLoaded'
+                    => 
+                        param event
+                        _ document.querySelectorAll('pre code').forEach
+                            => 
+                                param block
+                                _ hljs.highlightBlock(block)

@@ -1,0 +1,34 @@
+﻿$group
+    $
+        var sect = {
+            title: 'Wizzi models generation'
+        };
+
+    html/docs/section(&sect)
+
+		p Wizzi models are generated calling the 'generateModelTypes' method of an 
+			\b instance of the wizzi.WizziFactory class, instantiated with the `
+            html/docs/to-plugin( wizzi-core )
+            span `, \b
+            html/docs/to-plugin( wizzi-js )
+            span `, \b
+            html/docs/to-plugin( wizzi-web )
+            span ` plugins.
+
+		ittf-panel
+            schema api
+            title The wizzi.WizziFactory.generateModelTypes method.
+            ittf
+                ...
+                    m generateModelTypes
+                        string wfschemaIttfDocumentUri
+                            # The full path to the primary ITTF document of the `wfschema` declaration.
+                        string outputPackagePath
+                            # The full path of the package folder where the generated artifacts will be written 
+                        string wfschemaName
+                            # The schema name, for composing the names of the generated artifacts
+                        { mTreeBuildUpContext
+                            # An object that will be the evaluation context object
+                            # during the mTree processing of the `wfschema` ITTF document
+                        callback
+                            # Returns error or null

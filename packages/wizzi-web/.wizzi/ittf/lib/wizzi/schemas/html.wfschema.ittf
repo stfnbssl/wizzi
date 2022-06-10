@@ -157,4 +157,10 @@
 	e ittfPanel : element
         tag ittf-panel
 
+	e jsPanel : element
+        tag js-panel
+
+	e bashPanel : element
+        tag bash-panel
+
     $include html/includes

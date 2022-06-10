@@ -1,0 +1,10 @@
+$group
+
+    $include css/reset
+
+    < body
+        font-family raleway
+
+    . main-container
+        background ${mpage.Colors.themeBack}
+        position relative

@@ -53,7 +53,10 @@ $group
                     @ 'DOMContentLoaded'
                     => 
                         param event
-                        _ document.querySelectorAll('pre code').forEach
-                            => 
-                                param block
-                                _ hljs.highlightBlock(block)
+                        _ document.querySelectorAll
+                            @ 'pre .hljs'
+                            $$ @ 'pre code'
+                            ._ forEach
+                                =>
+                                    param block
+                                    _ hljs.highlightElement(block)                                                            

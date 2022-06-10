@@ -1,8 +1,8 @@
 <!--
-    artifact generator: C:\My\wizzi\wizzifactory\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
-    package: wizzi-web@0.7.9
-    primary source IttfDocument: C:\My\wizzi\wizzifactory\wizzi\docs\.wizzi\ittf\pages\samplecode\templateengine.html.ittf
-    utc time: Wed, 08 Jun 2022 13:40:56 GMT
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
+    package: wizzi-web@0.7.10
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\samplecode\templateengine.html.ittf
+    utc time: Thu, 09 Jun 2022 20:26:22 GMT
 -->
 <!doctype html>
 <html>
@@ -11,7 +11,8 @@
     <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="http://127.0.0.1:5501/wizzi/docs/styles/docs.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://127.0.0.1:5500/docs/styles/docs.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
     <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
@@ -38,13 +39,13 @@
                         </div>
                         <nav id="top-nav">
                             <ul>
-                                <li><a href="http://127.0.0.1:5501/wizzi/docs/docs/overview.html">Documentation</a>
+                                <li><a href="http://127.0.0.1:5500/docs/docs/overview.html">Documentation</a>
                                 </li>
-                                <li><a href="http://127.0.0.1:5501/wizzi/docs/howto/overview.html">How to</a>
+                                <li><a href="http://127.0.0.1:5500/docs/howto/overview.html">How to</a>
                                 </li>
-                                <li class="current"><a href="http://127.0.0.1:5501/wizzi/docs/samplecode/overview.html">Sample code</a>
+                                <li class="current"><a href="http://127.0.0.1:5500/docs/samplecode/overview.html">Sample code</a>
                                 </li>
-                                <li><a href="http://127.0.0.1:5501/wizzi/docs/geeky/overview.html">Geeky</a>
+                                <li><a href="http://127.0.0.1:5500/docs/geeky/overview.html">Geeky</a>
                                 </li>
                                 <li><a href="https://github.com/stfnbssl/wizzi">Github</a>
                                 </li>
@@ -101,6 +102,17 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', event => 
+        
+            document.querySelectorAll('pre .hljs').forEach(block => 
+            
+                hljs.highlightElement(block)
+            )
+        
+        )
+    </script>
 </body>
 
 </html>

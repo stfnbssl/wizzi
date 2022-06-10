@@ -1,0 +1,14 @@
+$group
+    $params item
+css
+    . css-15ob7vi
+        display none
+        position absolute
+        height 625px
+        min-width 700px
+        width 50%
+        left 50%
+        top 50%
+        -webkit-transform translateY(-50%)
+        -ms-transform translateY(-50%)
+        transform translateY(-50%)

@@ -1,0 +1,12 @@
+{
+    $
+        var ctx = {
+            page: 'getstarted'
+        }
+    
+    name "getstarted"
+    common/styles( &ctx )
+    $include home/header
+    $include getstarted/content
+    $include home/footer
+    

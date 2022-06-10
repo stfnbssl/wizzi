@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\graphql\document\gen\main.js.ittf
 */
 'use strict';
@@ -42,7 +42,8 @@ md.gen = function gen(model, ctx, callback) {
         }
         return callback(null, ctx);
     })
-};
+}
+;
 md.graphql = function(model, ctx, callback) {
     async.mapSeries(model.typeDefs, md.typeDef(ctx), function(err, notUsed) {
         if (err) {
@@ -55,17 +56,20 @@ md.graphql = function(model, ctx, callback) {
             return callback(null);
         })
     })
-};
+}
+;
 md.typeDef = function(ctx) {
     return function(model, callback) {
             var method = md[model.wzElement];
             method(model, ctx, callback)
         };
-};
+}
+;
 md.scalarTypeDef = function(model, ctx, callback) {
     ctx.w( 'scalar ' + model.wzName );
     return callback(null);
-};
+}
+;
 md.objectTypeDef = function(model, ctx, callback) {
     var impl = [];
     var i, i_items=model.ximplements, i_len=model.ximplements.length, item;
@@ -84,12 +88,14 @@ md.objectTypeDef = function(model, ctx, callback) {
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 md.fieldDef = function(ctx) {
     return function(model, callback) {
             if (model.wzElement === 'method') {
                 return md.method(model, ctx, callback);
             }
+            // log 'fieldDef', model.wzElement, model.wzName
             else {
                 var isList = model.wzElement === 'arrayType';
                 var type = model.type;
@@ -98,7 +104,6 @@ md.fieldDef = function(ctx) {
                     type = '[' + model.itemType.wzName + requiredChar + ']';
                 }
                 var args = [];
-                // log 'fieldDef', model.wzElement, model.wzName
                 var i, i_items=model.argumentDefs, i_len=model.argumentDefs.length, item;
                 for (i=0; i<i_len; i++) {
                     item = model.argumentDefs[i];
@@ -111,7 +116,8 @@ md.fieldDef = function(ctx) {
                 return callback(null);
             }
         };
-};
+}
+;
 md.method = function(model, ctx, callback) {
     var args = [];
     var i, i_items=model.fieldDefs, i_len=model.fieldDefs.length, item;
@@ -132,7 +138,8 @@ md.method = function(model, ctx, callback) {
         ctx.w(': ' + model.type);
         return callback(null);
     }
-};
+}
+;
 md.interfaceTypeDef = function(model, ctx, callback) {
     ctx.w( 'interface ' + model.wzName + ' {' );
     ctx.indent();
@@ -144,7 +151,8 @@ md.interfaceTypeDef = function(model, ctx, callback) {
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 md.unionTypeDef = function(model, ctx, callback) {
     ctx.write( 'union ' + model.wzName + ' = ');
     var i, i_items=model.unionMemberTypes, i_len=model.unionMemberTypes.length, item;
@@ -157,7 +165,8 @@ md.unionTypeDef = function(model, ctx, callback) {
     }
     ctx.w();
     return callback(null);
-};
+}
+;
 md.enumTypeDef = function(model, ctx, callback) {
     ctx.w( 'enum ' + model.wzName + ' {' );
     ctx.indent();
@@ -169,7 +178,8 @@ md.enumTypeDef = function(model, ctx, callback) {
     ctx.deindent();
     ctx.w( '}' );
     return callback(null);
-};
+}
+;
 md.inputObjectTypeDef = function(model, ctx, callback) {
     ctx.write( 'input ' + model.wzName + ' ');
     if (model.objectValueDef) {
@@ -178,7 +188,8 @@ md.inputObjectTypeDef = function(model, ctx, callback) {
     else {
         return callback(null);
     }
-};
+}
+;
 md.objectValueDef = function(model, ctx, callback) {
     ctx.w('{');
     ctx.indent();
@@ -190,14 +201,16 @@ md.objectValueDef = function(model, ctx, callback) {
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 md.valueDef = function(ctx) {
     return function(model, callback) {
             // log 'valueDef', model.wzElement, model.wzName
             ctx.w( model.wzName + ': ' + model.type);
             return callback(null);
         };
-};
+}
+;
 md.directiveDef = function(model, ctx, callback) {
     var args = [];
     // log 'fieldDef', model.wzElement, model.wzName
@@ -216,14 +229,16 @@ md.directiveDef = function(model, ctx, callback) {
     var locString = loc.length > 0 ? ' on ' + loc.join(' | ') : '';
     ctx.w( 'directive ' + model.wzName + argsString + locString );
     return callback(null);
-};
+}
+;
 md.operation = function(ctx) {
     return function(model, callback) {
             console.log('calling operation', model.wzElement);
             var method = md[model.wzElement];
             method(model, ctx, callback)
         };
-};
+}
+;
 md.query = function(model, ctx, callback) {
     var vars = [];
     var i, i_items=model.variables, i_len=model.variables.length, item;
@@ -249,7 +264,8 @@ md.query = function(model, ctx, callback) {
         ctx.w( '}' );
         return callback(null);
     }
-};
+}
+;
 md.selectionSet = function(model, ctx, callback) {
     console.log('selectionSet', model.selections.length);
     if (model.wzName.length > 0) {
@@ -267,14 +283,16 @@ md.selectionSet = function(model, ctx, callback) {
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 md.selection = function(ctx) {
     return function(model, callback) {
             console.log('calling selection', model.wzElement);
             var method = md[model.wzElement];
             method(model, ctx, callback)
         };
-};
+}
+;
 md.field = function(model, ctx, callback) {
     if (model.alias && model.alias.length > 0) {
         ctx.write( model.alias + ': ' );
@@ -283,7 +301,8 @@ md.field = function(model, ctx, callback) {
     writeArguments(model.xarguments, ctx)
     ctx.w();
     return callback(null);
-};
+}
+;
 md.fragmentSpread = function(model, ctx, callback) {
     var directiveString = getDirectives(model.directives);
     ctx.w( '...' + model.wzName + directiveString );
@@ -293,7 +312,8 @@ md.fragmentSpread = function(model, ctx, callback) {
         }
         return callback(null);
     })
-};
+}
+;
 md.inlineFragment = function(model, ctx, callback) {
     var directiveString = getDirectives(model.directives);
     ctx.w( '... on ' + model.wzName + directiveString + ' {');
@@ -311,7 +331,8 @@ md.inlineFragment = function(model, ctx, callback) {
     else {
         return callback(null);
     }
-};
+}
+;
 md.fragment = function(model, ctx, callback) {
     var typeCondition = model.typeCondition && model.typeCondition.length > 0 ? ' on ' + model.typeCondition : '';
     ctx.write( 'fragment ' + model.wzName + typeCondition + ' ' );
@@ -327,11 +348,13 @@ md.fragment = function(model, ctx, callback) {
         ctx.w();
         return callback(null);
     }
-};
+}
+;
 md.xargument = function(ctx) {
     return function(model, callback) {
         };
-};
+}
+;
 function getDirectives(directives, ctx) {
     var ret = [];
     var i, i_items=directives, i_len=directives.length, d;
@@ -352,7 +375,8 @@ md.valueCtx = function(ctx) {
     return function(model, callback) {
             md.value(model, ctx, callback)
         };
-};
+}
+;
 md.value = function(model, ctx, callback) {
     var method = md[model.wzElement];
     if (method) {
@@ -361,7 +385,8 @@ md.value = function(model, ctx, callback) {
     else {
         return callback(null);
     }
-};
+}
+;
 md.arrayValue = function(model, ctx, callback) {
     var saveState = ctx.genState;
     ctx.genState = 'arrayValue';
@@ -374,7 +399,8 @@ md.arrayValue = function(model, ctx, callback) {
         ctx.genState = saveState;
         return callback(null);
     })
-};
+}
+;
 md.objectValue = function(model, ctx, callback) {
     var saveState = ctx.genState;
     ctx.genState = 'objectValue';
@@ -387,7 +413,8 @@ md.objectValue = function(model, ctx, callback) {
     })
     ctx.genState = saveState;
     return callback(null);
-};
+}
+;
 function writeArguments(args, ctx) {
     // sync method
     // no need to use include 'schema' in an argument fragment
@@ -523,7 +550,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-web@0.7.9.lib.artifacts.graphql.document.gen.main.' + method,
+        method: 'wizzi-web@0.7.10.lib.artifacts.graphql.document.gen.main.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

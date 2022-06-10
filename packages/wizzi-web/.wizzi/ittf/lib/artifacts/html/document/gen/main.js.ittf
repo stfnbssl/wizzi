@@ -296,7 +296,6 @@
 
 		r_cb(true)
 
-
 	async/md-stm( ittfPanel )
         _ ctx.w("<div class='ittf-panel'>")
         if model.wzMTreeData.title
@@ -307,6 +306,28 @@
             a_cb( result )
                 _ ctx.w("<div>" + result.ittfPretty + '</div>')
                 _ ctx.w("</code></pre></div>")
+                r_cb(true)
+
+	async/md-stm( jsPanel )
+        _ ctx.w("<div class='js-panel'>")
+        if model.wzMTreeData.title
+            _ ctx.w("<div class='js-panel-title'>" + model.wzMTreeData.title + "</div>")
+        _ prettifyJs
+            @ model.wzMTreeData
+            a_cb( result )
+                _ ctx.w('<pre><code class="hljs">' + result.jsPretty + '</code></pre>')
+                _ ctx.w('</div>')
+                r_cb(true)
+
+	async/md-stm( bashPanel )
+        _ ctx.w("<div class='bash-panel'>")
+        if model.wzMTreeData.title
+            _ ctx.w("<div class='bash-panel-title'>" + model.wzMTreeData.title + "</div>")
+        _ prettifyBash
+            @ model.wzMTreeData
+            a_cb( result )
+                _ ctx.w('<pre><code class="hljs">' + result.bashPretty + '</code></pre>')
+                _ ctx.w('</div>')
                 r_cb(true)
 
     async/md-stm( comment )
@@ -357,6 +378,8 @@
 			_ ctx.w('-->')
 
 	$include prettifyIttf
+    $include prettifyJs
+    $include prettifyBash
 
     function preprocess
 		param model

@@ -1,0 +1,37 @@
+$group
+    . css-c7ectl
+        display flex
+        flex-direction column
+    media (min-width: 1000px)
+        . css-c7ectl
+            flex-direction row
+    . css-1wgu51w
+        margin 0
+        position relative
+        padding 1rem 0
+    . css-1wgu51w:not(:last-of-type):after
+        background var(--theme-ui-colors-grey-20,#f0f0f2)
+        bottom 0
+        content ""
+        left 1.5rem
+        height 1px
+        position absolute
+        right 1.5rem
+    media (min-width: 1000px)
+        . css-1wgu51w
+            padding 0
+        . css-1wgu51w:not(:last-of-type):after
+            content none
+    . css-7jmlzq
+        justify-content space-between
+        $$ BAX-M display none
+    . css-7jmlzq ul
+        margin 0
+        list-style none
+    . css-7jmlzq li
+        margin 0
+    media (min-width: 1000px)
+        . css-7jmlzq
+            display flex
+            flex-shrink 0
+            margin-left auto

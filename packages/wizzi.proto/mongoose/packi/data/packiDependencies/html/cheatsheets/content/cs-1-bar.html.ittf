@@ -1,0 +1,8 @@
+$group
+    $params &opt
+
+    . cs-1-bar
+        . cs-1-bar-title
+            + Schema ${opt.SCHEMA}&nbsp;
+            span cheat sheet
+                class cs-1-bar-title-dark

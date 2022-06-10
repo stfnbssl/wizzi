@@ -1,0 +1,15 @@
+$group
+    $params &panel
+    . css-1oo42pv
+        header
+            class css-1wu77zb
+            . css-c88mhq
+                h2 ${panel.scream1}
+                    id page-header-title
+                    class css-13exkxi
+                    span ${panel.subscream1}
+                . css-1skvk8x
+                    id page-subtitle
+                    p ${panel.scream2}
+                        strong AND
+                        + ${panel.subscream2}

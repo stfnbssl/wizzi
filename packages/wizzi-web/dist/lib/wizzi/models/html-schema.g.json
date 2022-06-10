@@ -1127,6 +1127,18 @@
           ]
         },
         {
+          "name": "jsPanel",
+          "tags": [
+            "js-panel"
+          ]
+        },
+        {
+          "name": "bashPanel",
+          "tags": [
+            "bash-panel"
+          ]
+        },
+        {
           "name": "jsInclude",
           "tags": [
             "::script"
@@ -51127,6 +51139,722 @@
       "isRoot": false,
       "tags": [
         "ittf-panel"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "accesskey",
+          "type": "string",
+          "tags": [
+            "accesskey"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "contenteditable",
+          "type": "string",
+          "tags": [
+            "contenteditable"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "contextmenu",
+          "type": "string",
+          "tags": [
+            "contextmenu"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "dir",
+          "type": "string",
+          "tags": [
+            "dir"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "draggable",
+          "type": "string",
+          "tags": [
+            "draggable"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "dropzone",
+          "type": "string",
+          "tags": [
+            "dropzone"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "hidden",
+          "type": "string",
+          "tags": [
+            "hidden"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "idx",
+          "type": "string",
+          "tags": [
+            "idx"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemid",
+          "type": "string",
+          "tags": [
+            "itemid"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemprop",
+          "type": "string",
+          "tags": [
+            "itemprop"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemref",
+          "type": "string",
+          "tags": [
+            "itemref"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemscope",
+          "type": "string",
+          "tags": [
+            "itemscope"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemtype",
+          "type": "string",
+          "tags": [
+            "itemtype"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "lang",
+          "type": "string",
+          "tags": [
+            "lang"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "spellcheck",
+          "type": "string",
+          "tags": [
+            "spellcheck"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "style",
+          "type": "string",
+          "tags": [
+            "style"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "tabindex",
+          "type": "string",
+          "tags": [
+            "tabindex"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "translate",
+          "type": "string",
+          "tags": [
+            "translate"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "aria__",
+          "type": "string",
+          "tags": [
+            "aria-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "data__",
+          "type": "string",
+          "tags": [
+            "data-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "ng__",
+          "type": "string",
+          "tags": [
+            "ng-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "ui__",
+          "type": "string",
+          "tags": [
+            "ui-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "v__",
+          "type": "string",
+          "tags": [
+            "v-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "on_",
+          "type": "string",
+          "tags": [
+            "on*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "__",
+          "type": "string",
+          "tags": [
+            "@*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "tags": [
+            "role"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "element",
+          "comments": []
+        },
+        {
+          "name": "element",
+          "role": "elements",
+          "tags": [
+            "<"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "element",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "jsPanel",
+      "super": "element",
+      "isRoot": false,
+      "tags": [
+        "js-panel"
+      ],
+      "flags": "",
+      "attributes": [
+        {
+          "name": "accesskey",
+          "type": "string",
+          "tags": [
+            "accesskey"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "tags": [
+            "class"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "contenteditable",
+          "type": "string",
+          "tags": [
+            "contenteditable"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "contextmenu",
+          "type": "string",
+          "tags": [
+            "contextmenu"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "dir",
+          "type": "string",
+          "tags": [
+            "dir"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "draggable",
+          "type": "string",
+          "tags": [
+            "draggable"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "dropzone",
+          "type": "string",
+          "tags": [
+            "dropzone"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "hidden",
+          "type": "string",
+          "tags": [
+            "hidden"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "tags": [
+            "id"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "idx",
+          "type": "string",
+          "tags": [
+            "idx"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemid",
+          "type": "string",
+          "tags": [
+            "itemid"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemprop",
+          "type": "string",
+          "tags": [
+            "itemprop"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemref",
+          "type": "string",
+          "tags": [
+            "itemref"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemscope",
+          "type": "string",
+          "tags": [
+            "itemscope"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "itemtype",
+          "type": "string",
+          "tags": [
+            "itemtype"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "lang",
+          "type": "string",
+          "tags": [
+            "lang"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "spellcheck",
+          "type": "string",
+          "tags": [
+            "spellcheck"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "style",
+          "type": "string",
+          "tags": [
+            "style"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "tabindex",
+          "type": "string",
+          "tags": [
+            "tabindex"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "tags": [
+            "title"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "translate",
+          "type": "string",
+          "tags": [
+            "translate"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "aria__",
+          "type": "string",
+          "tags": [
+            "aria-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "data__",
+          "type": "string",
+          "tags": [
+            "data-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "ng__",
+          "type": "string",
+          "tags": [
+            "ng-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "ui__",
+          "type": "string",
+          "tags": [
+            "ui-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "v__",
+          "type": "string",
+          "tags": [
+            "v-*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "on_",
+          "type": "string",
+          "tags": [
+            "on*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "__",
+          "type": "string",
+          "tags": [
+            "@*"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "tags": [
+            "role"
+          ],
+          "flags": "",
+          "inheritedFrom": "element",
+          "restricts": [],
+          "comments": []
+        }
+      ],
+      "relations": [
+        {
+          "name": "attribute",
+          "role": "attributes",
+          "tags": [
+            "@"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "element",
+          "comments": []
+        },
+        {
+          "name": "element",
+          "role": "elements",
+          "tags": [
+            "<"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "element",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
+    },
+    {
+      "name": "bashPanel",
+      "super": "element",
+      "isRoot": false,
+      "tags": [
+        "bash-panel"
       ],
       "flags": "",
       "attributes": [

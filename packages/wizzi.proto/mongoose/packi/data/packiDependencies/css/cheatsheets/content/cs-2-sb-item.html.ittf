@@ -1,0 +1,9 @@
+$group
+    $params &item
+
+    li
+        class cs-sb-item
+        a ${item.title}
+            class cs-sb-item-label
+            href #${item.title}
+

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	</head>
+	<body>
+		<h2>Monarch Tokenizer Sample</h2>
+		<div id="container" style="width: 800px; height: 600px; border: 1px solid grey; background: #313131; color: #fefefe"></div>
+
+		<script src="../../../node_modules/monaco-editor/min/vs/loader.js"></script>
+		<script>
+            const theme = 'light';
+            // const theme = 'dark';
+			require.config({ paths: { vs: '../../../node_modules/monaco-editor/min/vs' } });
+
+			require(['vs/editor/editor.main'], function () {
+				monaco.languages.register({
+					id: 'myCustomLanguage'
+				});
+				monaco.languages.setMonarchTokensProvider('myCustomLanguage', {
+                    defaultToken: 'invalid',
+                    value: /\w+/,
+					tokenizer: {
+						root: [
+                            { include: '@whitespace' },
+                            { include: '@include' },
+                            { include: '@ittfCommand' },
+                            { include: '@mix' },
+                            { include: '@nodeName' },
+                            /*
+                            [ 
+                                /\$[a-z]+/,
+                                { cases: 
+                                    { 
+                                        '@eos': 'ittf-command',
+                                        '@default': {token: 'ittf-command', next: 'nodeName'}
+                                    }
+                                }                            
+                            ],
+                            [ 
+                                /([^($\s]+)/, 
+                                { cases: 
+                                    { 
+                                        '@eos': 'node-name',
+                                        '@default': {token: 'node-name', next: 'nodeName'}
+                                    }
+                                }                            
+                            ]
+                            */                            
+                            // [ /([^($\s]+)/, {token: 'node-name', next: 'nodeName'} ]
+                            // [ /^\s*([^\s]+)$/, {token: 'node-root'} ],    
+                            // [ /^\s*([^\s]+)(\s*)/, {token: 'node-root', next: 'value'} ],    
+                            // [ /\s*([^($\s]+)\s[^($\s]+/, ['node-root']],
+                            // [ /^\s*([^($\s]+)(?:!\()(@value)/, ['node-root', 'value']],
+                            /*
+                            [ 
+                                /^\s*([^($\s]+)(?:!\()\s+(\w+)/, 
+                                ['node-leaf', { token: 'value', next: '@value'}] 
+                            ],
+                            */
+                            // [ /^(\s*)(@value)[ \t]+(@value)\s*/, ['node-root', 'value'] ],
+                            // [ /[ \t](\w+)/, 'value' ],
+                            // [/\[error.*/, 'custom-error'],
+							// [/\[notice.*/, 'custom-notice'],
+							// [/\[info.*/, 'custom-info'],
+							// [/\[[a-zA-Z 0-9:]+\]/, 'custom-date']
+						],
+                        whitespace: [
+                            [ /[ \t]+/, 'white'],
+                            [ /\$\$.*$/, 'comment'],
+                            [ /(\$\*)/, { token: 'comment', next: 'comment'} ],
+                        ],
+                        include: [
+                            [ /(\$include)/, { token: 'mix', next: 'includeValue'} ]
+                        ],
+                        mix: [
+                        [ 
+                                /([^($\s]+)(?:\()/, 
+                                { cases: 
+                                    { 
+                                        '@eos': 'mix',
+                                        '@default': {token: 'mix', next: 'mixValue'}
+                                    }
+                                }                            
+                            ]
+                        ],
+                        ittfCommand: [
+                            [ /\$[a-z]+$/, 'ittf-command'],
+                            [ /\$[a-z]+/, { token: 'ittf-command', next: 'scriptLine'} ],
+                            [ /\$[ ]/, { token: 'interpolation', next: 'scriptLine'} ],
+                            [ /(\$global|\$)$/, { token: 'interpolation', next: 'scriptMultiLine'} ],
+                        ],                        
+                        nodeName: [
+                            [ 
+                                /([^($\s]+)/, 
+                                { cases: 
+                                    { 
+                                        '@eos': 'node-name',
+                                        '@default': {token: 'node-name', next: 'nodeValue'}
+                                    }
+                                }                            
+                            ]
+                        ],
+                        nodeValue: [
+                            [ /[^\$]+$/, { token: 'node-value', next: '@popall' }],
+			                [ /[^\$]+/, { token: 'node-value' }],                            
+                            [ 
+                                /(\${)([^}]*)(})/,
+                                {
+                                    cases: {
+                                        '@eos': [
+                                            'interpolation.delimiter',
+                                            'interpolation',
+                                            {
+                                                token: 'interpolation.delimiter',
+                                                next: '@popall'
+                                            }
+                                        ],
+                                        '@default': [
+                                            'interpolation.delimiter',
+                                            'interpolation',
+                                            'interpolation.delimiter'
+                                        ]
+                                    }
+                                }                                
+			                ],
+                            // [ /.*$/, { token: 'node-value', next: '@pop' } ] 
+                            [ /\$$/, { token: 'node-value', next: '@popall' }],
+			                [ /\$/, 'node-value']                            
+                        ],
+                        mixValue: [
+                            [ /\)/, { token: 'mix', next: '@popall' }],    
+                            [ /[^\$|\)]+$/, { token: 'mix-value', next: '@popall' }],
+			                [ /[^\$|\)]+/, { token: 'mix-value' }],                            
+                            [ 
+                                /(\${)([^}]*)(})/,
+                                {
+                                    cases: {
+                                        '@eos': [
+                                            'interpolation.delimiter',
+                                            'interpolation',
+                                            {
+                                                token: 'interpolation.delimiter',
+                                                next: '@popall'
+                                            }
+                                        ],
+                                        '@default': [
+                                            'interpolation.delimiter',
+                                            'interpolation',
+                                            'interpolation.delimiter'
+                                        ]
+                                    }
+                                }                                
+			                ],
+                            // [ /.*$/, { token: 'node-value', next: '@pop' } ] 
+                            [ /\$$/, { token: 'mix-value', next: '@popall' }],
+			                [ /\$/, 'mix-value']                            
+                        ],
+                        includeValue: [
+                            [ /.*$/, 'mix-value', '@pop' ]
+                        ],
+                        scriptLine: [
+                            [ /.*$/, 'interpolation', '@pop' ]
+                        ],
+                        scriptMultiLine: [
+                            [/[^\/\/\.]+/, 'interpolation'],
+                            [/\/\/\.$/, 'interpolation', '@pop' ]
+                        ],
+                        comment: [
+                            [/[^\$\*]+/, 'comment'],
+                            [/\*\$/, 'comment', '@pop'],
+                            [/[\$\*]/, 'comment']
+                        ],                        
+					}
+				});
+
+				// Define a new theme that constains only rules that match this language
+                if (theme == 'dark') {
+                    monaco.editor.defineTheme('myCoolTheme', {
+                        base: 'vs-dark',
+                        inherit: false,
+                        rules: [
+                            { token: 'node-name', foreground: '57e34d' },	
+                            { token: 'node-value', foreground: '40d1f5' },	
+                            { token: 'ittf-command', foreground: 'ffa500' },	
+                            { token: 'mix', foreground: 'ff0000' },	
+                            { token: 'mix-value', foreground: 'ffffff' },	
+                            { token: 'comment', foreground: 'ababab' },	
+                            { token: 'invalid', foreground: 'ffffff' },	
+                            { token: 'interpolation.delimiter', foreground: 'ff0000' },	
+                            { token: 'interpolation', foreground: 'ffff00' },	
+                        ]
+                    });
+                } else {
+                    monaco.editor.defineTheme('myCoolTheme', {
+                        base: 'vs',
+                        inherit: false,
+                        rules: [
+                            { token: 'node-name', foreground: '0000ff' },	
+                            { token: 'node-value', foreground: '000000' },	
+                            { token: 'ittf-command', foreground: 'ffa500' },	
+                            { token: 'mix', foreground: 'ff0000' },	
+                            { token: 'mix-value', foreground: '4f548f' },	
+                            { token: 'comment', foreground: 'ababab' },	
+                            { token: 'invalid', foreground: 'ff00ff' },	
+                            { token: 'interpolation.delimiter', foreground: 'ff0000' },	
+                            { token: 'interpolation', foreground: '54db4b' },	
+                        ]
+                    });
+                }
+
+				var editor = monaco.editor.create(document.getElementById('container'), {
+					theme: 'myCoolTheme',
+					value: getCode(),
+					language: 'myCustomLanguage'
+				});
+			});
+
+			function getCode() {
+				return [
+                    'html',
+                    '    $ var j = 0',
+                    '    body',
+                    '        $',
+                    '            var x = {',
+                    '                name: "bepi"',
+                    '            }',
+                    '            //.',
+                    '        div Hello',
+                    '        $*',
+                    '        div Bye',
+                    '        *$',
+                    '        div Tchus ${alpha} centaury',
+                    '        div',
+                    '        $include ./beta',
+                    '        div',
+                    '        $hook',
+                    '        $$ div Ciao',
+                    '        div Adieu',
+                    '        ./simple( name, value )',
+                    '        div Adieu',
+                    '        $foreach item in files',
+                    /*
+                    '[Sun Mar 7 16:02:00 2004] [notice] Apache/1.3.29 (Unix) configured -- resuming normal operations',
+					'[Sun Mar 7 16:02:00 2004] [info] Server built: Feb 27 2004 13:56:37',
+					'[Sun Mar 7 16:02:00 2004] [notice] Accept mutex: sysvsem (Default: sysvsem)',
+					'[Sun Mar 7 16:05:49 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 16:45:56 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 17:13:50 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 17:21:44 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 17:23:53 2004] statistics: Use of uninitialized value in concatenation (.) or string at /home/httpd/twiki/lib/TWiki.pm line 528.',
+					"[Sun Mar 7 17:23:53 2004] statistics: Can't create file /home/httpd/twiki/data/Main/WebStatistics.txt - Permission denied",
+					'[Sun Mar 7 17:27:37 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 17:31:39 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 17:58:00 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:00:09 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:10:09 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:19:01 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:42:29 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:52:30 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 18:58:52 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 19:03:58 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 19:08:55 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:04:35 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:11:33 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:12:55 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:25:31 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:44:48 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 20:58:27 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 21:16:17 2004] [error] [client xx.xx.xx.xx] File does not exist: /home/httpd/twiki/view/Main/WebHome',
+					'[Sun Mar 7 21:20:14 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 21:31:12 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 21:39:55 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Sun Mar 7 21:44:10 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 01:35:13 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 01:47:06 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 01:59:13 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 02:12:24 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 02:54:54 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 03:46:27 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 03:48:18 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 03:52:17 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 03:55:09 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 04:22:55 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 04:24:47 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 04:40:32 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 04:55:40 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 04:59:13 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 05:22:57 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 05:24:29 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'[Mon Mar 8 05:31:47 2004] [info] [client xx.xx.xx.xx] (104)Connection reset by peer: client stopped connection before send body completed',
+					'<11>httpd[31628]: [error] [client xx.xx.xx.xx] File does not exist: /usr/local/installed/apache/htdocs/squirrelmail/_vti_inf.html in 29-Mar 15:18:20.50 from xx.xx.xx.xx',
+					'<11>httpd[25859]: [error] [client xx.xx.xx.xx] File does not exist: /usr/local/installed/apache/htdocs/squirrelmail/_vti_bin/shtml.exe/_vti_rpc in 29-Mar 15:18:20.54 from xx.xx.xx.xx'
+                    */
+				].join('\n');
+			}
+		</script>
+	</body>
+</html>

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\scss\document\gen\main.js.ittf
 */
 'use strict';
@@ -44,11 +44,13 @@ md.gen = function gen(model, ctx, callback) {
         console.log(myname, 'exit err', err);
         return callback(null, ctx);
     })
-};
+}
+;
 function getGenItem(ctx) {
     return function(model, callback) {
+            
+            // log myname, 'known element', model.wzElement
             if (stm[model.wzElement]) {
-                // log myname, 'known element', model.wzElement
                 stm[model.wzElement](model, ctx, function(err, done) {
                     if (err) {
                         return callback(err);
@@ -74,7 +76,7 @@ function genItems(items, ctx, options, callback) {
             goitems.push({
                 wzElement: 'separator', 
                 wzName: options.sep
-            })
+             })
         }
         goitems.push(items[i]);
     }
@@ -92,65 +94,70 @@ stm.scss = function(model, ctx, callback) {
     genItems(model.rules, ctx, {
         indent: false, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         return callback(null);
     })
-};
+}
+;
 stm.typeRule = function(model, ctx, callback) {
     writeOpenRule( ctx, '', model );
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 stm.idRule = function(model, ctx, callback) {
     writeOpenRule( ctx, '#', model );
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 stm.classRule = function(model, ctx, callback) {
     writeOpenRule( ctx, '.', model );
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 stm.parentRule = function(model, ctx, callback) {
     ctx.w( model.getValue() + ' {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 stm.combinator = function(model, ctx, callback) {
     if (model.pseudoClasses.length < 1) {
         callback(ctx.error(myname + " error: combinator must have psedoClasses", model))
@@ -168,14 +175,15 @@ stm.combinator = function(model, ctx, callback) {
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w( '}' );
         return callback(null);
     })
-};
+}
+;
 stm.propertyRule = function(model, ctx, callback) {
     var p = lineParser.parseNameValueRaw(model.wzName, model);
     if (p.hasValue()) {
@@ -185,15 +193,18 @@ stm.propertyRule = function(model, ctx, callback) {
         ctx.write( p.name() );
     }
     return callback(null);
-};
+}
+;
 stm.importRule = function(model, ctx, callback) {
     ctx.w( '@import ' + model.wzName + ';');
     return callback(null);
-};
+}
+;
 stm.extendRule = function(model, ctx, callback) {
     ctx.w( '@extend ' + model.wzName + ';');
     return callback(null);
-};
+}
+;
 stm.includeRule = function(model, ctx, callback) {
     ctx.write( '@include ' + model.wzName);
     if (model.rules.length > 0) {
@@ -202,7 +213,7 @@ stm.includeRule = function(model, ctx, callback) {
             indent: false, 
             from: 0, 
             sep: 'comma'
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
@@ -211,7 +222,7 @@ stm.includeRule = function(model, ctx, callback) {
                 genItems(model.block.rules, ctx, {
                     indent: true, 
                     from: 0
-                }, function(err, notUsed) {
+                 }, function(err, notUsed) {
                     if (err) {
                         return callback(err);
                     }
@@ -231,7 +242,7 @@ stm.includeRule = function(model, ctx, callback) {
             genItems(model.block.rules, ctx, {
                 indent: true, 
                 from: 0
-            }, function(err, notUsed) {
+             }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
                 }
@@ -244,99 +255,109 @@ stm.includeRule = function(model, ctx, callback) {
             return callback(null);
         }
     }
-};
+}
+;
 stm.mixinRule = function(model, ctx, callback) {
     ctx.w( '@mixin ' + model.wzName + '(' + model.paramNames.join(', ') + ') {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 stm.forRule = function(model, ctx, callback) {
     ctx.w( '@for ' + model.wzName + ' {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 stm.eachRule = function(model, ctx, callback) {
     ctx.w( '@each ' + model.wzName + ' {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 stm.whileRule = function(model, ctx, callback) {
     ctx.w( '@while ' + model.wzName + ' {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 stm.functionRule = function(model, ctx, callback) {
     ctx.w( '@function ' + model.wzName + '(' + model.paramNames.join(', ') + ') {');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.w('}');
         return callback(null);
     })
-};
+}
+;
 stm.returnRule = function(model, ctx, callback) {
     ctx.w( '@return ' + model.wzName + ';');
     return callback(null);
-};
+}
+;
 stm.callRule = function(model, ctx, callback) {
     ctx.write( model.wzName + '(');
     genItems(model.rules, ctx, {
         indent: true, 
         from: 0, 
         sep: 'comma'
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
         ctx.write(')');
         return callback(null);
     })
-};
+}
+;
 stm.setRule = function(model, ctx, callback) {
     var p = lineParser.parseNameValueRaw(model.wzName, model);
     ctx.w( '$' + p.name() + ': ' + p.value() + ';' );
     return callback(null);
-};
+}
+;
 stm.separator = function(model, ctx, callback) {
     ctx.write( getSeparator(model.wzName) );
     return callback(null);
-};
+}
+;
 function writeOpenRule(ctx, prefix, model) {
     ctx.write( prefix );
     ctx.write( model.wzName || '');

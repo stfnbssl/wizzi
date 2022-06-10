@@ -1,0 +1,50 @@
+$group
+    $params &item
+    . css-1nbv0ht
+        id eco${item.title}
+        h3 
+            class css-1o3fnh5
+            img 
+                src //images.ctfassets.net/vkdbses00qqt/h7RP1nspwFDZsZEGdGY4n/07bff085583e644a70c1c81a85d21c88/plugins-icon.svg
+                alt 
+                @ loading lazy
+                class css-x6y73b
+            button 
+                aria-expanded true
+                class css-11zrbhq
+                span ${item.title}
+                $if _.isString(item.small)
+                    span 
+                        small ${item.small}
+                span 
+                    class css-1valvb7
+                    svg 
+                        stroke currentColor
+                        fill currentColor
+                        stroke-width 0
+                        viewBox 0 0 24 24
+                        height 1em
+                        width 1em
+                        xmlns http://www.w3.org/2000/svg
+                        path 
+                            d M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z
+        . css-1ds30p3
+            role region
+            id eco${item.title}-dropdown
+            div 
+                $foreach para in item.paragraphs
+                    p ${para}
+                
+            a ${item.button.label}
+                class css-1cqxiz5
+                href ${item.button.href}
+                svg 
+                    stroke currentColor
+                    fill currentColor
+                    stroke-width 0
+                    viewBox 0 0 24 24
+                    height 1em
+                    width 1em
+                    xmlns http://www.w3.org/2000/svg
+                    path 
+                        d M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z

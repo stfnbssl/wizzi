@@ -1,0 +1,7 @@
+$group
+    $params text
+    span \b \b
+    code
+        class highlight-code
+        + ${text}
+    span \b \b

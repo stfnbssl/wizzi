@@ -1,0 +1,7 @@
+$group
+    . css-1h3ns7l
+        order 1
+    media (min-width: 750px)
+        . css-1h3ns7l
+            order 2
+

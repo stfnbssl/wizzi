@@ -1,0 +1,17 @@
+$group
+    
+    cs-0-frame()
+        cs-1-bar(&opt)
+        cs-1-content(&opt)
+            $foreach el in cs.elements
+                $foreach item in el.items
+                    cs-3-item-title(&item)
+                    cs-3-item-code(&item, &opt)
+        div &nbsp;
+            style margin-bottom: 50px;
+
+    cs-2-sb-left()
+        $foreach el in cs.elements
+            cs-2-sb-element(&el)
+                $foreach item in el.items
+                    cs-2-sb-item(&item)

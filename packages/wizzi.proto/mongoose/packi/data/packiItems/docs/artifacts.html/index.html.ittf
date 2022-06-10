@@ -1,0 +1,19 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            title: 'Artifacts'
+        };
+    
+    html/_layouts/docs-layout(&art)
+    
+        $include ./introduction
+        $include ./implementation
+        $include ./gencontext
+        $include ./sample
+        $include ./core
+        $include ./jsonexport
+        $include ./xmlexport
+        $include ./ittfdocument
+

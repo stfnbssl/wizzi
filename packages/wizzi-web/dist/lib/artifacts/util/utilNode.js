@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
+    package: wizzi-js@0.7.8
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\util\utilNode.js.ittf
 */
 'use strict';
@@ -17,7 +17,7 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: text, 
                 lines: null
-            };
+             };
     }
     var text = verify.replaceAll(text, work.textSep, '\n');
     var ss = text.split('\n');
@@ -25,7 +25,7 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: ss[0], 
                 lines: null
-            };
+             };
     }
     else {
         var lines = verify.replaceAll(ss[1], work.lineSep, '\n').split('\n')
@@ -33,6 +33,7 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: ss[0], 
                 lines: lines
-            };
+             };
     }
-};
+}
+;

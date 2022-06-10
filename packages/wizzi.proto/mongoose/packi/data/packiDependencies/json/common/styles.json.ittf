@@ -1,0 +1,18 @@
+$group
+
+    { Colors
+        $$ scheme ECEAE4 81B6CF 4D739E 7C8074 222B31
+        background "#ffffff"
+        xbackground "#ECEAE4"
+        scheme1Fade90 "whiteFade-90,rgba(255,255,255,0.9)"
+        xscheme1Fade90 "scheme-1-90,rgba(235,233,228,0.9)"
+        themeBack "#ffffff"
+        primary "#4D739E"
+        primaryDark "#122944"
+        primary30 "#4D739E"
+        xgray70 "grey-70,#48434f"
+        gray70 "grey-70,#222B31"
+        xgrad1 "#f219aa"
+        grad1 "#81B6CF"
+        xgrad2 "#7026B9"
+        grad2 "#222B31"

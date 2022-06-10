@@ -1,0 +1,11 @@
+html
+    $
+        var opt = {
+            mainCss: '/~-/home.css?context=mpage;home.model',
+            mainJs: '/~-/home.js?context=mpage;home.model',
+        }
+
+    html/_layouts/page-layout(&opt)
+        $include html/home/header/index
+        $include html/home/content/index
+        $include html/home/footer/index

@@ -1,0 +1,147 @@
+$group
+    media (min-width: 1000px)
+        . css-1szfju1
+            padding 0 0.75rem
+    media (min-width: 1000px)
+        . css-1szfju1
+            padding-top 0.75rem
+    media (min-width: 1000px)
+        . css-1szfju1
+            padding-bottom 0.75rem
+            border-radius 0 0 8px 8px
+    . css-jcgwc3
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+        display inline-flex
+        text-decoration none
+        cursor pointer
+        font-size 1rem
+    . css-jcgwc3:hover
+        + .css-jcgwc3:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-jcgwc3:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem
+    . css-jcgwc3:hover
+        + .css-jcgwc3:focus
+        -webkit-text-decoration none
+        text-decoration none
+    media (min-width: 1000px)
+        . css-jcgwc3
+            display flex
+            position relative
+            flex-direction column
+            font-size 0.875rem
+            align-items flex-start
+            padding 0.75rem
+            padding-left 3.5rem
+            transition background 500ms cubic-bezier(0.4,0,0.2,1)
+            transform none
+        . css-jcgwc3:hover
+            + .css-jcgwc3:focus
+            background var(--theme-ui-colors-purple-10,#f6edfa)
+            border-radius 4px
+        . css-jcgwc3:after
+            content none
+    . css-5w7k2g
+        align-items center
+        color ${mpage.Colors.primary}
+        display inline-flex
+        text-decoration underline
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        display inline-block
+        padding 2px 4px
+        transform translateX(-4px)
+        font-size 0.875rem
+        text-decoration none
+        display inline-flex
+        cursor pointer
+        font-size 1rem
+    . css-5w7k2g:focus
+        + .css-5w7k2g:hover
+        color ${mpage.Colors.primary}
+        text-decoration underline
+    . css-5w7k2g:hover
+        + .css-5w7k2g:focus
+        color ${mpage.Colors.primary}
+        transition all 250ms cubic-bezier(0.4,0,0.2,1)
+        text-decoration none
+    . css-5w7k2g:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem
+    . css-5w7k2g:hover
+        + .css-5w7k2g:focus
+        text-decoration none
+    media (min-width: 1000px)
+        . css-5w7k2g
+            display flex
+            position relative
+            flex-direction column
+            font-size 0.875rem
+            align-items flex-start
+            padding 0.75rem
+            padding-left 3.5rem
+            transition background 500ms cubic-bezier(0.4,0,0.2,1)
+            transform none
+        . css-5w7k2g:hover
+            + .css-5w7k2g:focus
+            background var(--theme-ui-colors-purple-10,#f6edfa)
+            border-radius 4px
+        . css-5w7k2g:after
+            content none
+    . css-1ppz169
+        margin-right 0.5rem
+        height 1.5rem
+        width 1.5rem
+    media (min-width: 1000px)
+        . css-1ppz169
+            height 2rem
+            left 0.75rem
+            position absolute
+            top .3rem
+            width 2rem
+    . css-ovr08e
+        display block
+    media (min-width: 1000px)
+        . css-ovr08e
+            display none
+    . css-a2l7qn
+        font-family -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji
+        color var(--theme-ui-colors-blackFade-80,rgba(35,33,41,0.8))
+        font-size 1rem
+        margin 0
+        margin-bottom 0.125rem
+        font-weight 600
+        display none
+    . css-a2l7qn:after
+        content "›"
+        color var(--theme-ui-colors-blackFade-40,rgba(35,33,41,0.4))
+        margin-left 0.25rem
+    media (min-width: 1000px)
+        . css-a2l7qn
+            display block
+    . css-9wr7tw
+        color var(--theme-ui-colors-blackFade-70,rgba(35,33,41,0.7))
+        font-size 0.875rem
+        margin 0
+        display none
+    media (min-width: 1000px)
+        . css-9wr7tw
+            display block
+    . css-kqnhvk
+        padding-top 0.75rem
+        padding-left 3.5rem
+        padding-bottom 1rem
+        display none
+        @ gap 1rem
+    media (min-width: 1000px)
+        . css-kqnhvk
+            display grid
