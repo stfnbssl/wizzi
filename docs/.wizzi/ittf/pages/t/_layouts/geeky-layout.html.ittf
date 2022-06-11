@@ -3,7 +3,7 @@ $group
 
     $
         var opt = {
-            mainCss: pkg.Params.baseUrl + '/styles/docs.css',
+            mainCss: wzCtx.Params.baseUrl + '/styles/docs.css',
             mainJs: null,
             useHighlight: true
         }
@@ -26,20 +26,25 @@ $group
                     a 
                         aria-label Link to home
                         class logo-a
-                        href ${pkg.Params.baseUrl}
+                        href ${wzCtx.Params.baseUrl}
                         logo/index( 74,0,0,#eee )
                 nav 
                     id top-nav
                     ul
-                        $foreach item in pkg.Section.items
+                        $foreach item in wzCtx.Section.items
                             li
                                 $if item.title === art.section
-                                    class current
-                                a ${item.title}
-                                    href ${pkg.Params.baseUrl}${item.url}
+                                    . current
+                                        + ${item.title}
+                                $else
+                                    a ${item.title}
+                                        href ${wzCtx.Params.baseUrl}${item.url}
                         li 
-                            a Github
+                            a
                                 href https://github.com/stfnbssl/wizzi
+                                img
+                                    src ${wzCtx.Params.baseUrl}/images/GitHub-Mark-Light-32px.png
+
             div
                 id middle-container
                 div 
@@ -52,10 +57,15 @@ $group
                             div
                                 style padding-top: 40px;
                             ul
-                                $foreach item in pkg.Docs.items
+                                $foreach item in wzCtx.Geeky.items
                                     li
                                         $if item.title === art.title
                                             class current
-                                        a ${item.title}
-                                            $$ href ${pkg.Params.baseUrl}${item.url}
-                                            href ${item.url}
+                                            . current
+                                                + ${item.title}
+                                        $else
+                                            a ${item.title}
+                                                href ${item.url}
+
+
+

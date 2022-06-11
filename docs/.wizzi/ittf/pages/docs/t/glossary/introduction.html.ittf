@@ -18,6 +18,14 @@
                     + The $include command is an ITTF Template Command for including
                         \b an ITTF Fragment in the node position of the command.
 
+            glo-item( *__copy folders )
+                span
+                    + When mass generating artifacts using a 
+                    high-code( glob )
+                    + pattern, folders having a name ending with 
+                    high-code( __copy )
+                    + are not generated but simply copied as is.
+
             glo-item( Artifact Generator )
                 span
                     + An Artifact Generator is a javascript module exported by a Wizzi Plugin
@@ -185,13 +193,29 @@
                         \b It must be declared in a Wizzi Schema and must be written
                         \b in the 'lib\wizzi\models' folder of a Wizzi Plugin.
 
-            glo-item( t Folder )
+            glo-item( t folder )
                 span Folders named 't' have special rules for the path resolution
                     \b of mixed and included ITTF Documents. In the folder structure
                     \b of a Wizzi Package, ITTF Documents contained in a 't' folder,
                     \b can be referenced with the same rules that apply to NodeJs packages
                     \b in 'node_modules' folders. They are searched up on the folder tree, until the  
                     \b relative path of the mix or include call is matched or the path resolution fails.
+
+            glo-item( Virtual Store System )
+                span 
+                    + The store system store of Wizzi is virtualized. 
+                        \b When instantiating a
+                    high-code( WizziFactory )
+                    + instance you can select the Store Kind. Disk file system is the default.
+                        \b Virtual Store Systems are implemented by the
+                    to-wizzi-package( wizzi-repo )
+                    + core package. Available store kinds are:
+                    high-code( filesystem )
+                    + ,
+                    high-code( mongodb )
+                    + and 
+                    high-code( json )
+                    + .
 
             glo-item( Wizzi Action )
                 span 
@@ -275,7 +299,7 @@
 
             glo-item( Wizzi Model Instance )
                 span 
-                    A Wizzi Model Instance is an istance of a Wizzi Model DOM created by a
+                    + A Wizzi Model Instance is an istance of a Wizzi Model DOM created by a
                         \b Wizzi Model Loading. It is the main context object used
                         \b by Wizzi Actions.
 

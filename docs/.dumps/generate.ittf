@@ -1,8 +1,8 @@
 wfjob stfnbssl.github.io/wizzi
-    model pkg
-        export-name pkg
+    model wzCtx
+        export-name wzCtx
         schema json
-        src C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\models/pkg.json.ittf
+        src C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\models/wzctx.json.ittf
     model cheatsheets
         schema json
         src C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\models/pages/cheatsheets.json.ittf

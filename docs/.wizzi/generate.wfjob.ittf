@@ -30,10 +30,10 @@
             }
         }
 
-    model pkg
-        export-name pkg
+    model wzCtx
+        export-name wzCtx
         schema json
-        src ${ittf_models_folder}/pkg.json.ittf
+        src ${ittf_models_folder}/wzctx.json.ittf
 
     model home
         export-name mpage

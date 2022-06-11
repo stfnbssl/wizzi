@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
     package: wizzi-web@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\docs\glossary.html.ittf
-    utc time: Fri, 10 Jun 2022 19:51:10 GMT
+    utc time: Sat, 11 Jun 2022 09:42:25 GMT
 -->
 <!doctype html>
 <html>
@@ -39,7 +39,8 @@
                         </div>
                         <nav id="top-nav">
                             <ul>
-                                <li class="current"><a href="https://stfnbssl.github.io/wizzi/docs/overview.html">Documentation</a>
+                                <li><div class="current">
+                                    Documentation</div>
                                 </li>
                                 <li><a href="https://stfnbssl.github.io/wizzi/howto/overview.html">How to</a>
                                 </li>
@@ -47,7 +48,8 @@
                                 </li>
                                 <li><a href="https://stfnbssl.github.io/wizzi/geeky/overview.html">Geeky</a>
                                 </li>
-                                <li><a href="https://github.com/stfnbssl/wizzi">Github</a>
+                                <li><a href="https://github.com/stfnbssl/wizzi"><img src="https://stfnbssl.github.io/wizzi/images/GitHub-Mark-Light-32px.png" />
+                                </a>
                                 </li>
                             </ul>
                         </nav>
@@ -79,6 +81,24 @@
                                                     <td>
                                                         <span>
                                                             The $include command is an ITTF Template Command for including an ITTF Fragment in the node position of the command.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="title">
+                                                            *__copy folders</div>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            When mass generating artifacts using a<span> </span>
+                                                            <code class="highlight-code">
+glob</code>
+                                                            <span> </span>
+                                                            pattern, folders having a name ending with<span> </span>
+                                                            <code class="highlight-code">
+__copy</code>
+                                                            <span> </span>
+                                                            are not generated but simply copied as is.</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -343,10 +363,37 @@ ts/module</code>
                                                 <tr>
                                                     <td>
                                                         <div class="title">
-                                                            t Folder</div>
+                                                            t folder</div>
                                                     </td>
                                                     <td>
                                                         <span>Folders named 't' have special rules for the path resolution of mixed and included ITTF Documents. In the folder structure of a Wizzi Package, ITTF Documents contained in a 't' folder, can be referenced with the same rules that apply to NodeJs packages in 'node_modules' folders. They are searched up on the folder tree, until the relative path of the mix or include call is matched or the path resolution fails.</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="title">
+                                                            Virtual Store System</div>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            The store system store of Wizzi is virtualized. When instantiating a<span> </span>
+                                                            <code class="highlight-code">
+WizziFactory</code>
+                                                            <span> </span>
+                                                            instance you can select the Store Kind. Disk file system is the default. Virtual Store Systems are implemented by the<a href="https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-repo/dist"> wizzi-repo </a>
+                                                            core package. Available store kinds are:<span> </span>
+                                                            <code class="highlight-code">
+filesystem</code>
+                                                            <span> </span>
+                                                            ,<span> </span>
+                                                            <code class="highlight-code">
+mongodb</code>
+                                                            <span> </span>
+                                                            and<span> </span>
+                                                            <code class="highlight-code">
+json</code>
+                                                            <span> </span>
+                                                            .</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -477,8 +524,7 @@ wizzi</code>
                                                     </td>
                                                     <td>
                                                         <span>
-                                                            <A>Wizzi Model Instance is an istance of a Wizzi Model DOM created by a Wizzi Model Loading. It is the main context object used by Wizzi Actions.</A>
-                                                        </span>
+                                                            A Wizzi Model Instance is an istance of a Wizzi Model DOM created by a Wizzi Model Loading. It is the main context object used by Wizzi Actions.</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -634,7 +680,7 @@ wizzifier</code>
                                         </li>
                                         <li><a href="./ittfdocuments.html">Ittf Documents</a>
                                         </li>
-                                        <li><a href="./templateengine.html">Template engine</a>
+                                        <li><a href="./templateengine.html">Template Engine</a>
                                         </li>
                                         <li><a href="./jswizzi.html">JsWizzi</a>
                                         </li>
@@ -642,13 +688,13 @@ wizzifier</code>
                                         </li>
                                         <li><a href="./wizzischemas.html">Wizzi Schemas</a>
                                         </li>
-                                        <li><a href="./wizzimodeldom.html">Wizzi Model DOM</a>
+                                        <li><a href="./wizzimodeldoms.html">Wizzi Model DOMs</a>
                                         </li>
-                                        <li><a href="./wizzimodelinstances.html">Wizzi Model instances</a>
+                                        <li><a href="./wizzimodelinstances.html">Wizzi Model Instances</a>
                                         </li>
-                                        <li><a href="./modeltransformers.html">Model transformers</a>
+                                        <li><a href="./modeltransformers.html">Model Transformers</a>
                                         </li>
-                                        <li><a href="./artifactgenerators.html">Artifact generators</a>
+                                        <li><a href="./artifactgenerators.html">Artifact Generators</a>
                                         </li>
                                         <li><a href="./wizzijobs.html">Wizzi Jobs</a>
                                         </li>
@@ -658,7 +704,10 @@ wizzifier</code>
                                         </li>
                                         <li><a href="./wizzicli.html">Wizzi CLI</a>
                                         </li>
-                                        <li><a href="./glossary.html">Glossary</a>
+                                        <li><a href="./virtualstoresystem.html">Virtual Store System</a>
+                                        </li>
+                                        <li class="current"><div class="current">
+                                            Glossary</div>
                                         </li>
                                     </ul>
                                 </div>

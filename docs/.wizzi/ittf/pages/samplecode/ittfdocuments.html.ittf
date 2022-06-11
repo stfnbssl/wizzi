@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Sample code',
-            title: 'Ittf documents'
+            title: 'Ittf Documents'
         };
     
     _layouts/samplecode-layout(&art)

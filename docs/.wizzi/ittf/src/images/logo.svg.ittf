@@ -15,12 +15,12 @@
 		y 0
 		width 660
 		height 280
-		fill ${pkg.Colors.bg_dark}
+		fill ${wzCtx.Colors.bg_dark}
 		stroke none
 	
 	polyline
 		stroke white
-		fill ${pkg.Colors.c_dark}
+		fill ${wzCtx.Colors.c_dark}
 		stroke-width 2
 		points 10 ${opt.ybottom}
 			\b 45 ${opt.y0} 60 ${opt.y0} 75 ${opt.y1a + 40} 

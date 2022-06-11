@@ -2,7 +2,7 @@ html
     $
         var page = {
             sectionTitle: 'Home',
-            mainCss : pkg.Params.baseUrl + '/styles/home.css'
+            mainCss : wzCtx.Params.baseUrl + '/styles/home.css'
         };
 
 	_layouts/default(&page)
@@ -63,31 +63,31 @@ html
 					p Wizzi source document.
 					p Represents code and data as a textual indented tree data structure.
 					p Composable, templeatable, scriptable.
-					link( more, ${pkg.Params.baseUrl}/docs/Ittfdocuments.html)
+					link( more, ${wzCtx.Params.baseUrl}/docs/Ittfdocuments.html)
 				_includes/card( Wizzi schema
 					p Formal description of a type of Ittf document, similar to XML Schema.
 					p Drives the generation of a Wizzi Model Dom that load and validate the Ittf document of its type.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizzischemas.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizzischemas.html)
 				_includes/card( Wizzi model
 					p Instance of a Wizzi Model Dom.
 					p When loaded with a Ittf document can be used as a context object in generations.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizzimodels.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizzimodels.html)
 				_includes/card( Model transformer
 					p Transforms a Wizzi Model.
-                    link( more, ${pkg.Params.baseUrl}/docs/modeltransformers.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/modeltransformers.html)
 				_includes/card( Artifact generator
 					p Generates a software artifact merging data from Wizzi models.
-                    link( more, ${pkg.Params.baseUrl}/docs/artifacts.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/artifacts.html)
 				_includes/card( Wizzi factory
 					p The main API component of Wizzi.
 					p Loads plugins, processes sources, execute generations, run jobs.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizzifactoryclass.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizzifactoryclass.html)
 				_includes/card( Wizzi job
 					p Sequence of generation tasks run by the Wizzi factory.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizzijobs.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizzijobs.html)
 				_includes/card( Wizzi plugin
 					p Implementation of domain specific schemas, transformers and generators.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizziplugins.html)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizziplugins.html)
 
 			_includes/section-grid-content( section-a4, A pluggable architecture
 				p Wizzi is made of an ecosystem of domain specific plugins.
@@ -101,7 +101,7 @@ html
 					p The `
                         to-plugin( wizzi-core )
                         span ` plugin contains schemas and artifacts used by the kernel modules.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizziplugins.html#coreplugins)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizziplugins.html#coreplugins)
 				
 				_includes/card( Default plugins
 					p Default plugins, available in the Npm registry, can be used as starters:
@@ -113,16 +113,16 @@ html
                         to-plugin( wizzi-lab )
                         span ` plugin.
 					p The `wizzi-js` plugin is used to generate Wizzi itself.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizziplugins.html#defaultplugins)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizziplugins.html#defaultplugins)
 				
 				_includes/card( Npm plugins
 					p Plugin authors can contribute their plugins publishing them to the Npm registry.
 					p Public Wizzi plugins should be prefixed with 'wizzi-plugin-'.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizziplugins.html#npmplugins)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizziplugins.html#npmplugins)
 				
 				_includes/card( Local plugins
 					p User generated plugins can be declared by path to the Wizzi factory and may remain locals to user projects.
-                    link( more, ${pkg.Params.baseUrl}/docs/wizziplugins.html#localplugins)
+                    link( more, ${wzCtx.Params.baseUrl}/docs/wizziplugins.html#localplugins)
 
 			_includes/section-grid-content( section-a2, Developing in a connected world
 				p Wizzi is designed to operate in the browser and to use cloud Git repositories as data sources and destinations.

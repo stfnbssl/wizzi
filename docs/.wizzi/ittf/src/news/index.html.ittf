@@ -3,7 +3,7 @@ html
     $
         var page = {
             sectionTitle: 'News',
-            mainCss : pkg.Params.baseUrl + '/styles/article.css'
+            mainCss : wzCtx.Params.baseUrl + '/styles/article.css'
         };
 
 	_layouts/default(&page)

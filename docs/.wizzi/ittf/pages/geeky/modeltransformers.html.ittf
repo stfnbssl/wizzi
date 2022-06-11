@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Geeky',
-            title: 'Model transformers'
+            title: 'Model Transformers'
         };
     
     _layouts/geeky-layout(&art)

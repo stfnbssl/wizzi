@@ -7,22 +7,22 @@ $group
                 $if page.sectionTitle !== 'Home'
                     h1
                         a
-                            href ${pkg.Params.baseUrl}
+                            href ${wzCtx.Params.baseUrl}
                             class logo
                             img
-                                src ${pkg.Params.baseUrl}/images/logo.svg
+                                src ${wzCtx.Params.baseUrl}/images/logo.svg
                                 width 140
                                 height 65
                                 alt Wizzi Logo
             nav
                 class main-nav hide-on-mobiles
                 ul
-                    $foreach item in pkg.Section.items
+                    $foreach item in wzCtx.Section.items
                         li
                             $if item.title === page.sectionTitle
                                 class current
                             a ${item.title}
-                                href ${pkg.Params.baseUrl}${item.url}
+                                href ${wzCtx.Params.baseUrl}${item.url}
             
             . search hide-on-mobiles
                 < form

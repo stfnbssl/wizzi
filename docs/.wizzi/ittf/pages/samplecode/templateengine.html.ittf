@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Sample code',
-            title: 'Template engine'
+            title: 'Template Engine'
         };
     
     _layouts/samplecode-layout(&art)

@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Geeky',
+            title: 'Wizzi CLI'
+        };
+    
+    _layouts/geeky-layout(&art)
+    
+        $include ./wizzicli/introduction

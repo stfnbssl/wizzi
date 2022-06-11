@@ -5,9 +5,6 @@
         };
 
     section(&sect)
-        table-doc()
-                tr( The JsWizzi context object, wizzi-mtree, lib/jswizzi/jsWizziContext.js.ittf, lib/jswizzi/jsWizziContext.js )
-                tr( The JsWizzi script coder, wizzi-mtree, lib/jswizzi/jsWizziScriptCoder.js.ittf, lib/jswizzi/jsWizziScriptCoder.js )
-                tr( The JsWizzi runner, wizzi-mtree, lib/jswizzi/jsWizziRunner.js.ittf, lib/jswizzi/jsWizziRunner.js )
 
-		
+        table-doc()
+            tr( Todo, Todo, Todo )

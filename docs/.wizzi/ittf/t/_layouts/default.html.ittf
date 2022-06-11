@@ -15,7 +15,7 @@ $group
             type text/css   
 		link
 			rel stylesheet
-			href ${page.mainCss ? page.mainCss : pkg.Params.baseUrl + '/styles/main.css'}
+			href ${page.mainCss ? page.mainCss : wzCtx.Params.baseUrl + '/styles/main.css'}
 	body
         _includes/header(&page)
         $hook

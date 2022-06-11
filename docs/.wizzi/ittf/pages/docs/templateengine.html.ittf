@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Documentation',
-            title: 'Template engine'
+            title: 'Template Engine'
         };
     
     _layouts/docs-layout(&art)

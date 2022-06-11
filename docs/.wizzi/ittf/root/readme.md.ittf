@@ -1,2 +1,2 @@
-﻿common/kernel( wizzifactory.github.io, ${pkg.title}. )
+﻿common/kernel( wizzifactory.github.io, ${wzCtx.title}. )
 

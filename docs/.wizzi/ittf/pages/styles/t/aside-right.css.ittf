@@ -24,7 +24,7 @@ $group
                 font-size 16px
                 position relative
             & .current
-                < a:before
+                < div:before
                     content ""
                     border-color transparent transparent transparent #444
                     border-style solid
@@ -35,5 +35,5 @@ $group
                     top 0
                     left -30px
 
-            & .current a
+            & .current div
                 color #f90

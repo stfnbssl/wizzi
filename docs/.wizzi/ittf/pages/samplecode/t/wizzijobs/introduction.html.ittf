@@ -7,6 +7,6 @@
     section(&sect)
 
         table-doc()
-            tr( The wfjob Wizzi Schema definition, wizzi-core, lib/wizzi/schemas/wfjob.wfschema.ittf )
+            tr( Todo, Todo, Todo )
 
 

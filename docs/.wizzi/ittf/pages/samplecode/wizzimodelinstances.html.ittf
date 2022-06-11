@@ -5,7 +5,7 @@
     $
         var art = {
             section: 'Sample code',
-            title: 'Wizzi Models'
+            title: 'Wizzi Model Instances'
         };
     
     _layouts/samplecode-layout(&art)

@@ -5,8 +5,8 @@
         };
 
     section(&sect)
-
         table-doc()
-            tr( The ITTF Document finder, wizzi-repo, lib/repo/ittfDocumentFinder.js.ittf, lib/repo/ittfDocumentFinder.js )
+            tr( Todo, Todo, Todo )
+
 
 		

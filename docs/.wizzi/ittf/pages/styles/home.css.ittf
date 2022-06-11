@@ -21,8 +21,8 @@
 
 	. btn
 		display inline-block
-		background-color ${pkg.Colors.bg_dark_medium}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.c_dark}
 		margin .5em 0
 		padding 1em 2em
 		text-decoration none
@@ -30,7 +30,7 @@
 
 	. btn:hover
 		background-color #eaeaea
-		color ${pkg.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.bg_dark_medium}
 
 	# main
         width 80%
@@ -39,13 +39,13 @@
     # showcase
 		min-height 350px
         width 60%
-		color ${pkg.Colors.c_dark}
+		color ${wzCtx.Colors.c_dark}
 		text-align center
         margin 0 auto
 	
     # showcase .bg-logo
 		position absolute
-		background ${pkg.Colors.bg_dark_medium} url('${pkg.Params.baseUrl}/images/logo.svg')
+		background ${wzCtx.Colors.bg_dark_medium} url('${wzCtx.Params.baseUrl}/images/logo.svg')
 		background-position center
 		background-repeat no-repeat
 		background-size cover
@@ -56,7 +56,7 @@
 
 	# showcase .bg-image
 		position absolute
-		background ${pkg.Colors.bg_dark_medium} url(${pkg.Params.baseUrl}/images/showcase.png)
+		background ${wzCtx.Colors.bg_dark_medium} url(${wzCtx.Params.baseUrl}/images/showcase.png)
 		background-position center
 		background-repeat no-repeat
 		background-size cover
@@ -81,8 +81,8 @@
         font-size 24px
 
 	# section-a
-		background-color ${pkg.Colors.bg_dark_medium}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.c_dark}
         margin 0 auto
         width 70%
         border-radius 5px
@@ -90,24 +90,24 @@
 
 
 	# section-a2
-		background-color ${pkg.Colors.bg_dark_medium}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.c_dark}
         margin 0 auto
         width 70%
         border-radius 5px
         box-shadow inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5)
 
 	# section-a3
-		background-color ${pkg.Colors.bg_dark_medium}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.c_dark}
         margin 0 auto
         width 70%
         border-radius 5px
         box-shadow inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5)
 
 	# section-a4
-		background-color ${pkg.Colors.bg_dark_medium}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark_medium}
+		color ${wzCtx.Colors.c_dark}
         margin 0 auto
         width 70%
         border-radius 5px
@@ -122,13 +122,13 @@
 			padding 0
 
 			< li
-				background-color ${pkg.Colors.bg_dark_medium}
+				background-color ${wzCtx.Colors.bg_dark_medium}
 				margin-bottom 1em
-				color ${pkg.Colors.c_dark}
+				color ${wzCtx.Colors.c_dark}
                 border-radius 5px
                 box-shadow inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5)
                 < h3
-                    color ${pkg.Colors.h3_c_dark}
+                    color ${wzCtx.Colors.h3_c_dark}
 
 	# section-b2
 		padding 2em 1em 1em
@@ -139,13 +139,13 @@
 			padding 0
 
 			< li
-				background-color ${pkg.Colors.bg_dark_medium}
+				background-color ${wzCtx.Colors.bg_dark_medium}
 				margin-bottom 1em
-				color ${pkg.Colors.c_dark}
+				color ${wzCtx.Colors.c_dark}
                 border-radius 5px
                 box-shadow inset 0 1px 10px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.1), 0 -1px 0 rgba(0,0,0,.5)
                 < h3
-                    color ${pkg.Colors.h3_c_dark}
+                    color ${wzCtx.Colors.h3_c_dark}
 
 	# section-b3
 		padding 2em 1em 1em
@@ -157,13 +157,13 @@
 			padding 0
 
 			< li
-				background-color ${pkg.Colors.bg_dark_medium}
+				background-color ${wzCtx.Colors.bg_dark_medium}
 				margin-bottom 1em
-				color ${pkg.Colors.c_dark}
+				color ${wzCtx.Colors.c_dark}
                 border-radius 10px
                 box-shadow 0 3px 5px rgba(0,0,0,0.1)
                 < h3
-                    color ${pkg.Colors.h3_c_dark}
+                    color ${wzCtx.Colors.h3_c_dark}
 	
     # section-b4
 		padding 2em 1em 1em
@@ -174,27 +174,27 @@
 			padding 0
 
 			< li
-				background-color ${pkg.Colors.bg_dark_medium}
+				background-color ${wzCtx.Colors.bg_dark_medium}
 				margin-bottom 1em
-				color ${pkg.Colors.c_dark}
+				color ${wzCtx.Colors.c_dark}
                 border-radius 10px
                 box-shadow 0 3px 5px rgba(0,0,0,0.1)
                 < h3
-                    color ${pkg.Colors.h3_c_dark}
+                    color ${wzCtx.Colors.h3_c_dark}
 
 	. card-content
 		padding 1em
 
     . content-title
-        color ${pkg.Colors.h3_c_dark}
+        color ${wzCtx.Colors.h3_c_dark}
 
 	# section-c
-		background-color ${pkg.Colors.c_dark}
-		color ${pkg.Colors.bg_dark_medium}
+		background-color ${wzCtx.Colors.c_dark}
+		color ${wzCtx.Colors.bg_dark_medium}
 		padding 2em
 
 	# section-d .box
-		color ${pkg.Colors.c_dark}
+		color ${wzCtx.Colors.c_dark}
 		padding 2em
 
 	# section-d .box:first-child
@@ -202,8 +202,8 @@
 
 	# main-footer
 		padding 2em
-		background-color ${pkg.Colors.bg_f_0}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_f_0}
+		color ${wzCtx.Colors.c_dark}
 		text-align center
 
 	# main-footer a

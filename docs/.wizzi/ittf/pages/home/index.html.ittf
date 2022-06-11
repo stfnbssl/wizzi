@@ -8,7 +8,7 @@ html
         link 
             href https://fonts.googleapis.com/css?family=Roboto
             rel stylesheet
-        css ./index.css
+        css ${wzCtx.Params.baseUrl + '/styles/docs.css'}
     body
         div
             id main-container
@@ -20,18 +20,21 @@ html
                     a 
                         aria-label Link to home
                         class logo-a
-                        href ${pkg.Params.baseUrl}
+                        href ${wzCtx.Params.baseUrl}
                         logo/index( 74,0,0,#eee )
                 nav 
                     id top-nav
                     ul
-                        $foreach item in pkg.Section.items
+                        $foreach item in wzCtx.Section.items
                             li
                                 a ${item.title}
-                                    href ${pkg.Params.baseUrl}${item.url}
+                                    href ${wzCtx.Params.baseUrl}${item.url}
                         li 
-                            a Github
+                            a 
                                 href https://github.com/stfnbssl/wizzi
+                                img
+                                    src ${wzCtx.Params.baseUrl}/images/GitHub-Mark-Light-32px.png
+
             div 
                 id middle-container
                 nav 
@@ -64,7 +67,7 @@ html
                                 \b (the .ittf files in the .wizzi folders). 
                         p
                             + Wizzi is pluggable. The core plugins implement the most common target languages (HTML, Css, Javascript,
-                                \b Typescript) and data structures (JSON, XML, YAML) but you can easily write new plugins for
+                                \b Typescript) and data structures (JSON, XML, YAML), but you can write new plugins for
                                 \b your languages and data structures.
                         p
                             + See the \b
@@ -137,9 +140,3 @@ html
                                 href #
             div
                 id footer
-                section
-                    id features
-                    div Features
-                section
-                    id contact
-                    div Contact

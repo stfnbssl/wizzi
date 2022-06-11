@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\css\document\gen\main.js
     package: wizzi-web@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\styles\docs.css.ittf
-    utc time: Fri, 10 Jun 2022 19:51:13 GMT
+    utc time: Sat, 11 Jun 2022 09:42:28 GMT
 */
 html {
     -ms-text-size-adjust: 100%;
@@ -626,8 +626,8 @@ a {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 24px;
     word-spacing: 1px;
     color: #eee;
     background-color: #313131;
@@ -684,12 +684,14 @@ a {
     display: inline-block;
     padding-right: 30px;
     font-size: 28px;
+    color: #ddd;
 }
 #top-nav ul li a {
     color: #eee;
 }
 #top-nav ul li .current {
-    color: #ff0000;
+    font-weight: 700;
+    color: palegoldenrod;
 }
 #middle-container {
     display: -ms-flexbox;
@@ -703,12 +705,9 @@ a {
 #content {
     margin: 0 auto;
     padding: 30px 70px;
-    line-height: 22px;
     word-spacing: 2px;
-    font-size: 18px;
 }
 #left-nav {
-    border-right: 1px solid #a0a0a0;
     padding: 10px 10px;
 }
 #left-nav li {
@@ -719,7 +718,6 @@ a {
     color: #eee;
 }
 #right-nav {
-    border-left: 1px solid #a0a0a0;
     padding: 10px 10px;
 }
 #right-nav li {
@@ -730,7 +728,6 @@ a {
     color: #eee;
 }
 #footer {
-    border-top: 1px solid #a0a0a0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 20px;
@@ -762,7 +759,7 @@ a {
 }
 .aside-right li.current {
 }
-.aside-right li.current a:before {
+.aside-right li.current div:before {
     content: "";
     border-color: transparent transparent transparent #444;
     border-style: solid;
@@ -773,7 +770,7 @@ a {
     top: 0;
     left: -30px;
 }
-.aside-right li.current a {
+.aside-right li.current div {
     color: #f90;
 }
 article {

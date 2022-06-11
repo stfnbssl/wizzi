@@ -4,7 +4,7 @@ html
     $
         var art = {
             section: 'Sample code',
-            title: 'Wizzi Glossary'
+            title: 'Glossary'
         };
     
     _layouts/samplecode-layout(&art)

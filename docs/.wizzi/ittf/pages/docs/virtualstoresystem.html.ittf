@@ -1,0 +1,12 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Documentation',
+            title: 'Virtual Store System'
+        };
+    
+    _layouts/docs-layout(&art)
+    
+        $include ./virtualstoresystem/introduction

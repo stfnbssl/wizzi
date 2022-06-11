@@ -21,8 +21,8 @@
         margin 0 auto
         display flex
         flex-direction column
-        font-size 14px
-        line-height 20px
+        font-size 16px
+        line-height 24px
         word-spacing 1px
         color #eee
         background-color #313131
@@ -58,10 +58,12 @@
                 display inline-block
                 padding-right 30px
                 font-size 28px
+                color #ddd
                 < a
                     color #eee
                 . current
-                    color #ff0000
+                    font-weight 700
+                    color palegoldenrod
 
     # middle-container
         display flex
@@ -73,12 +75,12 @@
         $$ display flex
         $$ flex-direction column
         padding 30px 70px
-        line-height 22px
+        $$ line-height 24px
         word-spacing 2px
-        font-size 18px
+        $$ font-size 18px
         
     # left-nav
-        border-right 1px solid #a0a0a0
+        $$ border-right 1px solid #a0a0a0
         padding 10px 10px
         < li
             margin-top 20px
@@ -87,7 +89,7 @@
                 color #eee
     
     # right-nav
-        border-left 1px solid #a0a0a0
+        $$ border-left 1px solid #a0a0a0
         padding 10px 10px
         < li
             padding-right 30px
@@ -96,7 +98,7 @@
                 color #eee
 
     # footer
-        border-top 1px solid #a0a0a0
+        $$ border-top 1px solid #a0a0a0
         display grid
         grid-template-columns 1fr 1fr
         padding 20px
@@ -104,7 +106,7 @@
     $include aside-right
     
     < article
-        background-color ${pkg.Colors.bg_dark_medium}
+        background-color ${wzCtx.Colors.bg_dark_medium}
         border-radius 10px
         padding 20px
         margin 0 5px 3px 5px
@@ -236,7 +238,7 @@
     
     $include highlight
 
-    $ var opt = pkg.Fonts
+    $ var opt = wzCtx.Fonts
     css/fonts(&opt)
 
     $include tables

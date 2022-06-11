@@ -1,0 +1,6 @@
+{
+    name '@wizzi/legacy-v5'
+    version '0.7.1'
+	title 'Wizzi factory legacy artifacts (v5 pre-release).'
+    license 'MIT'
+    [ schemas

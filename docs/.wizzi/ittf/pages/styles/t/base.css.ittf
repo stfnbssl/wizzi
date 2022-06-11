@@ -13,8 +13,8 @@ $group
 
     < body
         font 300 21px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif
-		background-color ${pkg.Colors.bg_dark}
-		color ${pkg.Colors.c_dark}
+		background-color ${wzCtx.Colors.bg_dark}
+		color ${wzCtx.Colors.c_dark}
     
     < ul
         margin-left 0.45rem

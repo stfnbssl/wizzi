@@ -6,7 +6,7 @@ css
     $include news
 
     < article
-        background-color ${pkg.Colors.bg_dark_medium}
+        background-color ${wzCtx.Colors.bg_dark_medium}
         border-radius 10px
         padding 20px
         margin 0 5px 3px 5px
@@ -127,5 +127,5 @@ css
 
     $include highlight
 
-    $ var opt = pkg.Fonts
+    $ var opt = wzCtx.Fonts
     css/fonts(&opt)

@@ -1,0 +1,14 @@
+﻿html
+    $global
+        var dollar = '$';
+    $
+        var art = {
+            section: 'Documentation',
+            title: 'Wizzi Model DOMs'
+        };
+    
+    _layouts/docs-layout(&art)
+    
+        $include ./wizzimodeldoms/introduction
+        $include ./wizzimodeldoms/generation
+        $include ./wizzimodeldoms/modelmodule

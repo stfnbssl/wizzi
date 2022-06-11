@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\css\document\gen\main.js
     package: wizzi-web@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\styles\article.css.ittf
-    utc time: Fri, 10 Jun 2022 19:51:13 GMT
+    utc time: Sat, 11 Jun 2022 09:42:28 GMT
 */
 html {
     margin: 0;
@@ -309,7 +309,7 @@ nav li,  .meta li {
 }
 .aside-right li.current {
 }
-.aside-right li.current a:before {
+.aside-right li.current div:before {
     content: "";
     border-color: transparent transparent transparent #444;
     border-style: solid;
@@ -320,7 +320,7 @@ nav li,  .meta li {
     top: 0;
     left: -30px;
 }
-.aside-right li.current a {
+.aside-right li.current div {
     color: #f90;
 }
 article h2:first-child {

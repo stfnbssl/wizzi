@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Sample code',
-            title: 'Wizzi jobs'
+            title: 'Wizzi Jobs'
         };
     
     _layouts/samplecode-layout(&art)

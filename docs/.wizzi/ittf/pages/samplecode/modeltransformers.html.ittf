@@ -4,7 +4,7 @@
     $
         var art = {
             section: 'Sample code',
-            title: 'Model transformers'
+            title: 'Model Transformers'
         };
     
     _layouts/samplecode-layout(&art)

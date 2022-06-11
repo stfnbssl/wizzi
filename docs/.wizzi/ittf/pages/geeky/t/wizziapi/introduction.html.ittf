@@ -8,7 +8,6 @@
 
         table-doc()
             tr( The WizziFactory class, wizzi, lib/services, lib/services/wizziFactory.js )
-            tr( The PluginsManager class, lib/services/pluginsManager.js.ittf, lib/services/pluginsManager.js )
             tr( The ProductionContext class, wizzi, lib/production/context.js.ittf, lib/production/context.js )
             tr( The ProductionManager class, wizzi, lib/production/manager.js.ittf, lib/production/manager.js )
             
