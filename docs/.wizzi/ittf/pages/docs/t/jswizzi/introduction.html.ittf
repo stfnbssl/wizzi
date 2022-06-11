@@ -7,27 +7,29 @@
     section(&sect)
 		
         p JsWizzi is a subset of the ECMA-262 javascript standard used by 
-			+ the wizzi factory for processing ITTF Documents and build mTrees.
-			+ JsWizzi uses the quite efficent <a href="http://esprima.org/">esprima</a> parser
-			+ and is run by a custom javascript engine (JsWizziRunner).
+			\b the wizzi factory for processing ITTF Documents and build mTrees.
+			\b JsWizzi uses the quite efficent <a href="https://babeljs.io//">babel</a> parser
+            \b and is run by a custom javascript engine (
+            high-code( JsWizziRunner )
+            + ).
 
-		p Ittf documents may contain Js-Wizzi statements in
+		p Ittf Documents may contain JsWizzi statements in
 			ul
-				li The value part of nodes (ittf node values are interpolated)
+				li The value part of nodes (ITTF Node Values are interpolated)
                     ittf-panel
 					    ittf
 						    caption ${'$'}{ name.capitalize() }
-				li Conditional expression of $if, $elif, $while command nodes
+				li Conditional expression of $if, $elif, $while template commands
                     ittf-panel
 					    ittf
     						${'$'}if name.substring(1,2) === 'is'
 
-				li Collection name of $foreach command node
+				li Collection name of $foreach template command 
                     ittf-panel
 					    ittf
     						${'$'}foreach item in model.getCollection('alfa')
 
-                li Body of $ and $global command nodes
+                li Body of $ and $global template commands
                     ittf-panel
 					    ittf
         					${'$'} var beta = 100
@@ -42,9 +44,6 @@
                         li counting ${'$'}{i}
                         ${'$'} i++;
 
-		p The esprima syntax tree format is expected to be compatible 
-			+ with the Mozilla SpiderMonkey Parser API. 
-		
 		ul Node types implemented by JsWizzi:
 			li VariableDeclaration
 			li Statements
@@ -77,5 +76,5 @@
 			
 			li FunctionDeclaration
 				div Simple function declaration. No prototypes. No function
-					+ objects; functions cannot be built by code and used like objects.    
+					+ objects; functions cannot be built by code and used like objects.
 

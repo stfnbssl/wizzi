@@ -8,14 +8,16 @@
 
 		ul
 			li ITTF Documents
-            li Template engine
+            li Template Engine
             li JsWizzi
             li mTrees
 			li Wizzi Schemas
             li Wizzi Model DOMs
-			li Wizzi Model instances
-			li Model transformers
-			li Artifact generators
+			li Wizzi Model Instances
+			li Model Transformers
+			li Artifact Generators
 			li Wizzi Jobs
             li Wizzi Plugins
             li Wizzi API
+            li Wizzi CLI
+            li Virtual Store System

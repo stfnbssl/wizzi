@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\css\document\gen\main.js
     package: wizzi-web@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\styles\docs.css.ittf
-    utc time: Sat, 11 Jun 2022 09:42:28 GMT
+    utc time: Sat, 11 Jun 2022 12:39:52 GMT
 */
 html {
     -ms-text-size-adjust: 100%;
@@ -704,7 +704,8 @@ a {
 }
 #content {
     margin: 0 auto;
-    padding: 30px 70px;
+    width: 80%;
+    padding: 30px 30px;
     word-spacing: 2px;
 }
 #left-nav {
@@ -718,13 +719,15 @@ a {
     color: #eee;
 }
 #right-nav {
-    padding: 10px 10px;
+    padding: 10px 20px;
 }
-#right-nav li {
-    padding-right: 30px;
-    font-size: 18px;
+#right-nav ul {
+    margin-left: 0;
 }
-#right-nav li a {
+#right-nav ul li {
+    font-size: 14px;
+}
+#right-nav ul li a {
     color: #eee;
 }
 #footer {
@@ -754,7 +757,6 @@ a {
     list-style-type: none;
 }
 .aside-right li a {
-    font-size: 16px;
     position: relative;
 }
 .aside-right li.current {
@@ -1110,7 +1112,7 @@ pre.prettyprint ol {
 }
 @font-face {
     font-family: 'Material Icons';
-    src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://stfnbssl.github.io/wizzi/fonts/MaterialIcons-Regular.woff2) format('woff2'), url(https://stfnbssl.github.io/wizzi/fonts/MaterialIcons-Regular.woff) format('woff'), url(https://stfnbssl.github.io/wizzi/fonts/MaterialIcons-Regular.ttf) format('truetype');
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(http://127.0.0.1:5500/fonts/MaterialIcons-Regular.woff2) format('woff2'), url(http://127.0.0.1:5500/fonts/MaterialIcons-Regular.woff) format('woff'), url(http://127.0.0.1:5500/fonts/MaterialIcons-Regular.ttf) format('truetype');
     font-style: normal;
     font-weight: 400;
     /** For IE6-8 */

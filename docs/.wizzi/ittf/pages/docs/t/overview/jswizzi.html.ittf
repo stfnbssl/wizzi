@@ -25,7 +25,9 @@
             \b subset of the ECMA-262 javascript standard, sandboxed, and tailored
             \b for ITTF processing. 
             \b It is built on the <a href="https://babeljs.io//">babel</a> parser
-            \b and is run by a custom javascript engine (JsWizziRunner).
+            \b and is run by a custom javascript engine (
+            high-code( JsWizziRunner )
+            + ).
 
 
 

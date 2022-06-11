@@ -203,7 +203,7 @@
 
             glo-item( Virtual Store System )
                 span 
-                    + The store system store of Wizzi is virtualized. 
+                    + The store system of Wizzi is virtualized. 
                         \b When instantiating a
                     high-code( WizziFactory )
                     + instance you can select the Store Kind. Disk file system is the default.

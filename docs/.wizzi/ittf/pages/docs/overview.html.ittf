@@ -24,5 +24,8 @@ html
         $include overview/modeltransformer
         $include overview/artifactgenerator
         $include overview/wizzijob
-        $include overview/wizziapi
         $include overview/wizziplugin
+        $include overview/wizziapi
+        $include overview/wizzicli
+        $include overview/virtualstoresystem
+        
