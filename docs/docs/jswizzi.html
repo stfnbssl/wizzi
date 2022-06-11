@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\dist\lib\artifacts\html\document\gen\main.js
     package: wizzi-web@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\docs\.wizzi\ittf\pages\docs\jswizzi.html.ittf
-    utc time: Sat, 11 Jun 2022 12:39:49 GMT
+    utc time: Sat, 11 Jun 2022 13:16:26 GMT
 -->
 <!doctype html>
 <html>
@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://127.0.0.1:5500/styles/docs.css" />
+    <link rel="stylesheet" href="https://stfnbssl.github.io/wizzi/styles/docs.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;700&display=swap" />
     <link href="http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
                 <div id="main-container">
                     <div id="header">
                         <div id="logo">
-                            <a aria-label="Link to home" class="logo-a" href="http://127.0.0.1:5500"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
+                            <a aria-label="Link to home" class="logo-a" href="https://stfnbssl.github.io/wizzi"><svg xmlns='http://www.w3.org/2000/svg' width='78.48484848484848' height='29.151515151515152'>
                                     <rect fill='none' stroke='none' x='0' y='0' width='700' height='280'></rect>
                                     <polyline fill='#eee' stroke='#eee' points='1.121212121212121 28.03030303030303 5.045454545454546 1.121212121212121 6.7272727272727275 1.121212121212121 8.409090909090908 14.575757575757576 13.454545454545455 23.545454545454547 13.454545454545455 14.575757575757576 19.62121212121212 23.545454545454547 19.62121212121212 12.333333333333334 25.78787878787879 23.545454545454547 25.78787878787879 28.03030303030303' style='stroke-width:2;'></polyline>
                                     <polyline fill='#eee' stroke='#eee' points='30.272727272727273 28.03030303030303 31.393939393939394 10.09090909090909 34.75757575757576 10.09090909090909 35.87878787878788 28.03030303030303' style='stroke-width:2;'></polyline>
@@ -42,13 +42,13 @@
                                 <li><div class="current">
                                     Documentation</div>
                                 </li>
-                                <li><a href="http://127.0.0.1:5500/howto/overview.html">How to</a>
+                                <li><a href="https://stfnbssl.github.io/wizzi/howto/overview.html">How to</a>
                                 </li>
-                                <li><a href="http://127.0.0.1:5500/samplecode/overview.html">Sample code</a>
+                                <li><a href="https://stfnbssl.github.io/wizzi/samplecode/overview.html">Sample code</a>
                                 </li>
-                                <li><a href="http://127.0.0.1:5500/geeky/overview.html">Geeky</a>
+                                <li><a href="https://stfnbssl.github.io/wizzi/geeky/overview.html">Geeky</a>
                                 </li>
-                                <li><a href="https://github.com/stfnbssl/wizzi"><img src="http://127.0.0.1:5500/images/GitHub-Mark-Light-32px.png" />
+                                <li><a href="https://github.com/stfnbssl/wizzi"><img src="https://stfnbssl.github.io/wizzi/images/GitHub-Mark-Light-32px.png" />
                                 </a>
                                 </li>
                             </ul>
@@ -60,26 +60,30 @@
                                 <div id class="doc-title">
                                     JsWizzi</div>
                                 <div class="doc-summary">
-                                    <p>JsWizzi is a subset of the ECMA-262 javascript standard used by
-                                        the wizzi factory for processing ITTF Documents and build mTrees.JsWizzi uses the quite efficent <a href="http://esprima.org/">esprima</a> parserand is run by a custom javascript engine (JsWizziRunner).</p>
-                                    <p>Ittf documents may contain Js-Wizzi statements in
+                                    <p>JsWizzi is a subset of the ECMA-262 javascript standard used by the wizzi factory for processing ITTF Documents and build mTrees. JsWizzi uses the quite efficent <a href="https://babeljs.io//">babel</a> parser and is run by a custom javascript engine (
+                                        <span> </span>
+                                        <code class="highlight-code">
+JsWizziRunner</code>
+                                        <span> </span>
+                                        ).</p>
+                                    <p>Ittf Documents may contain JsWizzi statements in
                                         <ul>
-                                            <li>The value part of nodes (ittf node values are interpolated)<div class='ittf-panel'>
+                                            <li>The value part of nodes (ITTF Node Values are interpolated)<div class='ittf-panel'>
                                             <pre class='prettyprint'><code>
                                             <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">caption</span><span class="pp-kwd"> ${</span><span class="pp-expr"> name.capitalize() </span><span class="pp-kwd">}</span></div></div>
                                             </code></pre></div>
                                             </li>
-                                            <li>Conditional expression of $if, $elif, $while command nodes<div class='ittf-panel'>
+                                            <li>Conditional expression of $if, $elif, $while template commands<div class='ittf-panel'>
                                             <pre class='prettyprint'><code>
                                             <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$if</span><span class="pp-expr"> name.substring(1,2) === 'is'</span></div></div>
                                             </code></pre></div>
                                             </li>
-                                            <li>Collection name of $foreach command node<div class='ittf-panel'>
+                                            <li>Collection name of $foreach template command<div class='ittf-panel'>
                                             <pre class='prettyprint'><code>
                                             <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$foreach</span><span class="pp-pln"> item in model.getCollection('alfa')</span></div></div>
                                             </code></pre></div>
                                             </li>
-                                            <li>Body of $ and $global command nodes<div class='ittf-panel'>
+                                            <li>Body of $ and $global template commands<div class='ittf-panel'>
                                             <pre class='prettyprint'><code>
                                             <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">$</span><span class="pp-pln"> var beta = 100</span></div></div>
                                             </code></pre></div>
@@ -91,8 +95,6 @@
                                     <pre class='prettyprint'><code>
                                     <div><div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">ul</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">  </span><span class="pp-kwd">$</span><span class="pp-pln"> var i = 0;</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">  </span><span class="pp-kwd">$while</span><span class="pp-pln"> i &lt; 10</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">    </span><span class="pp-tag">li</span><span class="pp-pln"> counting </span><span class="pp-kwd">${</span><span class="pp-expr">i</span><span class="pp-kwd">}</span></div><div class="L5"><span class="pp-ln">   5 </span><span class="pp-pln">    </span><span class="pp-kwd">$</span><span class="pp-pln"> i++;</span></div></div>
                                     </code></pre></div>
-                                    <p>The esprima syntax tree format is expected to be compatible
-                                        with the Mozilla SpiderMonkey Parser API.</p>
                                     <ul>Node types implemented by JsWizzi:
                                         <li>VariableDeclaration</li>
                                         <li>Statements<ul>
