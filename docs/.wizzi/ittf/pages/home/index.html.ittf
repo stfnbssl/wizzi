@@ -75,7 +75,7 @@ html
                                 href ./docs/overview.html
                             + to know the elements of a production and the \b
                             a How To guide
-                                href ./howto/index.html
+                                href ./howtos/index.html
                             + for a starter. 
 
                 nav

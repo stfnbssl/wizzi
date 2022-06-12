@@ -5,9 +5,10 @@ $group
         var opt = {
             mainCss: wzCtx.Params.baseUrl + '/styles/docs.css',
             mainJs: null,
+            useHighlight: true,
         }
         var page = {
-            sectionTitle: 'Docs'
+            sectionTitle: 'How to'
         };
 
     _layouts/page-layout(&opt)
@@ -56,7 +57,7 @@ $group
                             div
                                 style padding-top: 40px;
                             ul
-                                $foreach item in wzCtx.HowTo.items
+                                $foreach item in wzCtx.HowTos.items
                                     li
                                         $if item.title === art.title
                                             class current

@@ -5,13 +5,14 @@ html
     $
         var art = {
             section: 'How to',
-            title: 'Overview'
+            title: 'Get started'
         };
 
-    _layouts/howto-layout(&art)
+    _layouts/howtos-layout(&art)
 
-        $include overview/overview
-        $include overview/install
+        $include getstarted/overview
+        $include getstarted/background
+        $include getstarted/install
         $*
         $include overview/wizziproject
         $include overview/wizzijob

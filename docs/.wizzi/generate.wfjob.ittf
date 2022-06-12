@@ -12,7 +12,7 @@
 		var dest_folder              = path.join(__dirname, '..');
         var pages = [
             'docs',
-            'howto',
+            'howtos',
             'samplecode',
             'geeky',
         ];

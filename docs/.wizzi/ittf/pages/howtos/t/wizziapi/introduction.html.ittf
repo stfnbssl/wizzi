@@ -1,8 +1,8 @@
 ﻿$group
     $
         var sect = {
-            title: 'How to install Wizzi'
+            title: 'Wizzi API'
         };
 
     section(&sect)
-
+        p TODO

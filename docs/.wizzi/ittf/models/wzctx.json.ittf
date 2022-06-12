@@ -1,8 +1,8 @@
 {
     $
-        // var baseUrl = 'http://127.0.0.1:5500';
+        var baseUrl = 'http://127.0.0.1:5500';
         // var baseUrl = 'http://127.0.0.1:5500/docs';
-        var baseUrl = "https://stfnbssl.github.io/wizzi";
+        // var baseUrl = "https://stfnbssl.github.io/wizzi";
 
 	name "stfnbssl.github.io/wizzi"
 	version "0.7.1"
@@ -21,7 +21,7 @@
                 url "/docs/overview.html"
             {
                 title "How to"
-                url "/howto/overview.html"
+                url "/howtos/getstarted.html"
             {
                 title "Sample code"
                 url "/samplecode/overview.html"
@@ -80,15 +80,14 @@
                 title "Glossary"
                 url "./glossary.html"
 
-
-    { HowTo
+    { HowTos
         [ items
             {
-                title "Overview"
-                url "./overview.html"
+                title "Get started"
+                url "./getstarted.html"
             {
-                title "Install Wizzi"
-                url "./install.html"
+                title "Wizzi API"
+                url "./wizziapi.html"
 
     { SampleCode
         [ items
