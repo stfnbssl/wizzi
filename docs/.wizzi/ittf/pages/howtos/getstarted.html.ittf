@@ -13,12 +13,4 @@ html
         $include getstarted/overview
         $include getstarted/background
         $include getstarted/install
-        $*
-        $include overview/wizziproject
-        $include overview/wizzijob
-        $include overview/wizzischema
-        $include overview/wizziplugin
-        $include overview/wizzistaticsite
-        $include overview/wizziwebapp
-        $include overview/wizziapi
-        *$
+        $include getstarted/starter

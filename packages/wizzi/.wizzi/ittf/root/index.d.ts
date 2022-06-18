@@ -219,21 +219,15 @@ type FactoryOptions = {
     test?: FactoryTestOptions;
 }
 
-type NoAclFactoryOptions = {
-    plugins?: PluginsOptions;
-    globalContext?: object;
-    fsJson?: FsJson;
-}
-
 /**
  * Creates a wizzi factory.
  */
-export function createFactory(user: string, role: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function createAclFactory(user: string, role: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
 export function createFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
-export function fsFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function mongoFactory(storeUri: string, storeBaseFolder: string, options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function jsonFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function browserFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
+export function fsFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function mongoFactory(storeUri: string, storeBaseFolder: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function jsonFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function browserFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
 
 /**
  * WIZZI FACTORY PRODUCTION MANAGER
@@ -409,6 +403,14 @@ type TransformationContext = {
 /**
 * Job production options.
 */
+/**
+ * @type ProductionOptions
+ * @description Wizzi Job production options
+ * @property indentSpaces      Optional. Default: 4. The number of spaces of one indentation in a generated artifact
+ * @property basedir           Optional. Not implemented yet
+ * @property verbose           Optional. Not implemented yet
+
+*/
 type ProductionOptions = {
     indentSpaces?: number;
     basedir?: string;
@@ -416,7 +418,11 @@ type ProductionOptions = {
 }
 
 /**
-* Wizzi job options
+ * @type JobRequest
+ * @description Wizzi Job request options
+ * @property name              The name of the Wizzi Job, for trace purposes
+ * @property path              The path to the ITTF Document of the Wizzi Job definition
+ * @property globalContext     Optional. A global context object for all the productions of the Wizzi Job
 */
 type JobRequest = {
     name: string;
@@ -425,6 +431,13 @@ type JobRequest = {
     productionOptions: ProductionOptions;
 }
 
+/**
+ * @type JsonFactoryOptions
+ * @description JSON Wizzi Factory creation request object (request to en existing istance of a WizziFactory)
+ * @property jsonFsData        A JsonFsData object
+ * @property globalContext     A global context object for all the productions of the created factory
+ *                             TODO Verify this assertion
+*/
 type JsonFactoryOptions = {
     jsonFsData: JsonFsData;
     globalContext?: object;
@@ -456,7 +469,7 @@ declare interface WizziFactory {
     * @param schemaName           
     * @param ittfDocumentUri      The path to the primary ittf source document.
     * @param loadContext          A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
-    * @param callback             Receives the builded [[WizziModel]].
+    * @param callback             Receives the builded [[WizziModelInstance]].
     */
     loadModel(
         schemaName: string, ittfDocumentUri: string, loadContext: ModelLoadContext, callback: cb<WizziModel>
@@ -464,30 +477,99 @@ declare interface WizziFactory {
     loadModelFromConfig(
         modelConfig: ModelLoadConfig, globalContext: object, callback: cb<WizziModel>
     ): void;
+    /**
+     * @param model                  A wizzi model or POJO, the input object for the transformation
+     * @param transformerName        The name for retrieving the model transformer module
+     * @param context                A wizzi model or POJO, further context data for the model transformation
+     * @param callback               Receives the [[TransformedObject]].
+    */
     transformModel(
         model: object, transformerName: string, context: object, callback: cb<object>
+        
     ): void;
+    /**
+     * @param artifactModel          A wizzi model or POJO, the main context of the generation
+     *                               May be null for artifacts of type 'code write'
+     * @param ittfDocumentUri        The path to the source artifactModel, for trace and documentation purposes
+     * @param artifactName           The name for retrieving the artifact generation module
+     * @param callback               Receives the text of the [[GeneratedArtifact]].
+    */
     generateArtifact(
         artifactModel: object, ittfDocumentUri: string, artifactName: string, callback?: cb<string>
     ): void;
+    /**
+     * @param artifactModel          A wizzi model or POJO, the main context of the generation
+     *                               May be null for artifacts of type 'code write'
+     * @param ittfDocumentUri        The path to the source artifactModel, for trace and documentation purposes
+     * @param artifactName           The name for retrieving the artifact generator module
+     * @param artifactRequestContext A wizzi model or POJO, context data for the artifact generation
+     * @param callback               Receives the text of the [[GeneratedArtifact]].
+    */
     generateArtifact(
         artifactModel: object, ittfDocumentUri: string, artifactName: string, artifactRequestContext: object, callback: cb<string>
     ): void;
+    /**
+     * @param ittfDocumentUri        The path to the source artifact ITTF Document
+     * @param generationContext      A GenerationContext object 
+     * @param artifactName           The name for retrieving the artifact generator module
+     * @param callback               Receives the text of the [[GeneratedArtifact]].
+    */
     loadModelAndGenerateArtifact(
-        ittfDocumentUri: string, context: GenerationContext, artifactName: string, callback?: cb<string>
+        ittfDocumentUri: string, generationContext: GenerationContext, artifactName: string, callback?: cb<string>
     ): void;
+    /**
+     * @param ittfDocumentUri        The path to the source ITTF Document
+     * @param transformationContext  A TransformationContext object 
+     * @param transformName          The name for retrieving the model transformer module
+     * @param callback               Receives the Wizzi Model Instance or POJO of the [[TransformedModel]].
+    */
     loadAndTransformModel(
         ittfDocumentUri: string, context: TransformationContext, transformName: string, callback?: cb<object>
     )
-    generateModelTypes(
+    /**
+     * @param wfschemaIttfDocumentUri     The path to the source Wizzi Schema definition
+     * @param outputPackagePath           The path to the folder where to write the generated modules
+     * @param wfschemaName                The name of the Wizzi Schema
+     * @param mTreeBuildUpContext         Context object for the Wizzi Model Load of the source Wizzi Schema definition
+     * @param callback                    Receives the paths of the generated modules.
+    */
+    generateModelDoms(
         wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
     ): void;
+    /**
+     * @param jobRequest     The JobRequest object
+     * @param callback       Receives error | null
+    */
     executeJob(
         jobRequest: JobRequest, callback: cb<any>
     ): void;
+    /**
+     * @method createSingleTextSourceFactory
+     * @description This method allows Wizzi Model Loadings and Artifact Generations from text strings
+     * @param ittfContent          The ITTF text content of a single ITTF Source Unit
+     * @param schema               Name of the Wizzi Schema of the ITTF content.
+     * @param options              A JsonFactoryOptions object
+     * @param callback             Receives error | a WizziFactory instance
+    */
+    createSingleTextSourceFactory(
+        ittfContent: string, schema:string, options: JsonFactoryOptions, callback: cb<WizziFactory>
+    ): void;
+    /**
+     * @method createJsonFactory
+     * @description This method allows Wizzi Model Loadings and Artifact Generations from text strings
+     * @param options              A JsonFactoryOptions object
+     * @param callback             Receives error | a WizziFactory instance
+    */
     createJsonFactory(
         options: JsonFactoryOptions, callback: cb<WizziFactory>
     ): void;
+    /**
+     * @method createProductionManager
+     * @description TODO Why this should be public?
+     * @param options          A ProductionOptions object
+     * @param globalContext    A global context object (POJO)
+     * @returns A ProductionManager instance
+    */
     createProductionManager(options?: ProductionOptions, globalContext?: object): ProductionManager;
 }
 

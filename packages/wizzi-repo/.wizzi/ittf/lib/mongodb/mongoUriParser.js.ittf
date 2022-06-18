@@ -11,10 +11,10 @@
 		# Document uris must be in the form
 		#   db://userName/projectName/documentPath
 		# The internal db path will be
-		#   `config.mongoDbBaseFolder`/userName/projectName/documentPath
+		#   `config.mongoBaseFolder`/userName/projectName/documentPath
 		# params
 		#   string uri
-		#   string mongodbBaseFolder
+		#   string mongoBaseFolder
 		# returns
 		#   {
 		#     string originalUri
@@ -30,7 +30,7 @@
 	set module.exports
 		function parse
 			string uri
-			string mongodbBaseFolder
+			string mongoBaseFolder
 
 			set uri = uri.toLowerCase()
 			
@@ -89,11 +89,11 @@
 			_ parts.shift();
 			set ret.path = parts.join('/')
 
-			if mongodbBaseFolder && mongodbBaseFolder.length > 0
+			if mongoBaseFolder && mongoBaseFolder.length > 0
 				set ret.internalPath
 					_ verify.unixifyPath
 						_ path.join
-							@ mongodbBaseFolder
+							@ mongoBaseFolder
 							@ ret.userId 
 							@ ret.projectId
 							@ ret.path 

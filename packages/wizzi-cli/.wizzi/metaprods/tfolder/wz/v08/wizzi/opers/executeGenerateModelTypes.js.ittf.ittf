@@ -3,7 +3,7 @@ $group
     $ 
         var openPar = '(';
 
-    function executeGenerateModelTypes
+    function executegenerateModelDoms
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
@@ -13,7 +13,7 @@ $group
         _ createWizziFactory
             {
             f_cb${openPar} wf )
-                _ wf.generateModelTypes
+                _ wf.generateModelDoms
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName

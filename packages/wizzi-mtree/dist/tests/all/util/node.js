@@ -26,7 +26,7 @@ function getFSDocumentStore(callback) {
     })
 }
 
-var ittfTree = require('wizzi-utils').IttfMTreeEx;
+var ittfGraph = require('wizzi-utils').IttfDocumentGraph;
 var node = require('../../../lib/util/node');
 
 function evaluate(uri, callback) {
@@ -230,12 +230,12 @@ describe("util.node", function() {
         for (i=0; i<i_len; i++) {
             item = nodeUpdates[i];
             if (item.action === 'remove') {
-                ittfTree.createFrom(item.original, function(err, original) {
+                ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
                         return callback(err);
                     }
                     // log 'original', original.toString()
-                    ittfTree.createFrom(item.expected, function(err, expected) {
+                    ittfGraph.createFrom(item.expected, function(err, expected) {
                         if (err) {
                             return callback(err);
                         }
@@ -249,16 +249,16 @@ describe("util.node", function() {
                 })
             }
             if (item.action === 'replace') {
-                ittfTree.createFrom(item.original, function(err, original) {
+                ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
                         return callback(err);
                     }
                     // log 'original', original.toString()
-                    ittfTree.createFrom(item.replacer, function(err, replacer) {
+                    ittfGraph.createFrom(item.replacer, function(err, replacer) {
                         if (err) {
                             return callback(err);
                         }
-                        ittfTree.createFrom(item.expected, function(err, expected) {
+                        ittfGraph.createFrom(item.expected, function(err, expected) {
                             if (err) {
                                 return callback(err);
                             }
@@ -280,7 +280,7 @@ describe("util.node", function() {
         for (i=0; i<i_len; i++) {
             item = nodeFinds[i];
             if (item.action === 'findCommand') {
-                ittfTree.createFrom(item.original, function(err, original) {
+                ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
                         return callback(err);
                     }

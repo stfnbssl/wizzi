@@ -120,18 +120,18 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 * `folderPath` `uri` 
 * `options` `Object` 
 * returns the root IttfFsNode of the 'folderPath' with its descendant folders as children. 
-## ittfMTreeEx - enhanced mTree with import, export, analize capabilities
-#### var ittfMTreeEx = require('wizzi-utils').ittfMTreeEx
-#### ittfMTreeEx.loadFrom(path_string)
+## ittfDocumentGraph - enhanced mTree with import, export, analize capabilities
+#### var ittfDocumentGraph = require('wizzi-utils').ittfDocumentGraph
+#### ittfDocumentGraph.loadFrom(path_string)
 * `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation) 
-* returns an ittfMTreeEx instance 
-#### ittfMTreeEx.loadFrom(mTree)
+* returns an ittfDocumentGraph instance 
+#### ittfDocumentGraph.loadFrom(mTree)
 * `mTree` `Object` An existent final or partial mTree. 
-* returns an ittfMTreeEx instance 
+* returns an ittfDocumentGraph instance 
 ## ittfHtmlPrettifier - ittf html formatter for documentation
 #### var ittfHtmlPrettifier = require('wizzi-utils').ittfHtmlPrettifier
 ## ittfHtmlPrettifier(rootNode[, options])
-* `rootNode` `Object` ittfMTreeEx instance 
+* `rootNode` `Object` ittfDocumentGraph instance 
 * `options` `Object` 
 ## jsHtmlPrettifier - javascript html formatter for documentation
 #### var jsHtmlPrettifier = require('wizzi-utils').jsHtmlPrettifier

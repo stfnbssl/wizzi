@@ -1,0 +1,31 @@
+﻿wfpackage wizzi.kernel
+	
+	fs-base-uri C:\My\wizzi\stfnbssl\wizzi\packages
+
+	generated-package wizzi
+	    kind kernel
+        version 0.3.2
+        title The Wizzi main package
+		source-folder wizzi/.wizzi
+		build-cwd wizzi/dist
+
+	generated-package wizzi-mtree
+	    kind kernel
+	    version 0.3.2
+	    title The ITTF Documents Loader component. Implements the mTree buildup
+		source-folder wizzi-mtree/.wizzi
+		build-cwd wizzi-mtree/dist
+
+	generated-package wizzi-repo
+	    kind kernel
+        version 0.5.2
+        title The Ittf Documents repository manager for Wizzi
+		source-folder wizzi-repo/.wizzi
+		build-cwd wizzi-repo/dist
+
+	generated-package wizzi-utils
+	    kind kernel
+	    version 0.5.3
+	    title The utility library for Wizzi
+		source-folder wizzi-utils/.wizzi
+		build-cwd wizzi-utils/dist

@@ -12,7 +12,7 @@ module.exports = {
     schemas: [
         'html',
     ],
-    schemas_all: [  /* to be copied into 'schemas' collection */
+    schemas_all_stop: [  /* to be copied into 'schemas' collection */
         'css',
         'graphql',
         'html',

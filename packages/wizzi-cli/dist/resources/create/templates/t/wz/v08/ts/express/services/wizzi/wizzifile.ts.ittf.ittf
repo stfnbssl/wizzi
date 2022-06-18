@@ -133,7 +133,7 @@ $group
                 :ref Function
             log 'wizzifile.onStart.enter'
             set runnerServerInstance = runnerServer
-            _ runnerServer.registerFsNoAclFactory
+            _ runnerServer.registerfsFactory
                 @ FACTORY_SITE
                 { 
                     { plugins

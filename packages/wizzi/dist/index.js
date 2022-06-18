@@ -29,25 +29,45 @@ md.Filesystem = Filesystem;
 md.JsonComponents = require('wizzi-repo').JsonComponents;
 
 //
-md.createFactory = function createFactory(userid, role, options, callback) {
+md.createFactory = function createFactory(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
             error('InvalidArgument', 'createFactory', 'The callback parameter must be a function. Received: ' + callback)
         );
     };
+    if (verify.isObject(options) === false) {
+        return callback(error(
+            'InvalidArgument', 'createFactory', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+        ));
+    }
+    
+    // check_cb( callback, createFactory )
+    // check_cb_object( options, createFactory )
+    
+    wizziFactory.createFactory(options, callback)
+}
+;
+
+//
+md.createAclFactory = function createAclFactory(userid, role, options, callback) {
+    if (typeof(callback) !== 'function') {
+        throw new Error(
+            error('InvalidArgument', 'createAclFactory', 'The callback parameter must be a function. Received: ' + callback)
+        );
+    };
     if (verify.isNotEmpty(userid) === false) {
         return callback(error(
-            'InvalidArgument', 'createFactory', { parameter: 'userid', message: 'The userid parameter must be a string. Received: ' + userid }
+            'InvalidArgument', 'createAclFactory', { parameter: 'userid', message: 'The userid parameter must be a string. Received: ' + userid }
         ));
     }
     if (verify.isNotEmpty(role) === false) {
         return callback(error(
-            'InvalidArgument', 'createFactory', { parameter: 'role', message: 'The role parameter must be a string. Received: ' + role }
+            'InvalidArgument', 'createAclFactory', { parameter: 'role', message: 'The role parameter must be a string. Received: ' + role }
         ));
     }
     if (verify.isObject(options) === false) {
         return callback(error(
-            'InvalidArgument', 'createFactory', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+            'InvalidArgument', 'createAclFactory', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
         ));
     }
     
@@ -58,7 +78,7 @@ md.createFactory = function createFactory(userid, role, options, callback) {
 }
 ;
 
-md.fsnoaclFactory = function(options, callback) {
+md.fsFactory = function(options, callback) {
     
     if (typeof(callback) === 'undefined') {
         callback = options;
@@ -78,9 +98,9 @@ md.fsnoaclFactory = function(options, callback) {
     md.createFactory('stefi', 'admin', options, callback)
 }
 ;
-md.fsFactory = md.fsnoaclFactory;
+md.fsFactory = md.fsFactory;
 
-md.dbnoaclFactory = function(storeUri, storeBaseFolder, options, callback) {
+md.dbFactory = function(storeUri, storeBaseFolder, options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
             error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
@@ -102,19 +122,19 @@ md.dbnoaclFactory = function(storeUri, storeBaseFolder, options, callback) {
         ));
     }
     
-    // log 'wizzi.index.dbnoaclFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
+    // log 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
     
     options.repo = {
         storeKind: 'mongodb', 
         storeUri: storeUri, 
         storeBaseFolder: storeBaseFolder
      };
-    md.createFactory('stefi', 'admin', options, callback)
+    md.createFactory(options, callback)
 }
 ;
-md.mongoFactory = md.dbnoaclFactory;
+md.mongoFactory = md.dbFactory;
 
-md.jsonnoaclFactory = function(options, callback) {
+md.jsonFactory = function(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
             error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
@@ -131,18 +151,18 @@ md.jsonnoaclFactory = function(options, callback) {
         ));
     }
     
-    // log 'wizzi.index.jsonnoaclFactory.fsJson', options.fsJson
+    // log 'wizzi.index.jsonFactory.fsJson', options.fsJson
     
     options.repo = {
         storeKind: 'json', 
         storeFsJson: options.fsJson
      };
-    md.createFactory('stefi', 'admin', options, callback)
+    md.createFactory(options, callback)
 }
 ;
-md.jsonFactory = md.jsonnoaclFactory;
+md.jsonFactory = md.jsonFactory;
 
-md.browsernoaclFactory = function(options, callback) {
+md.browserFactory = function(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
             error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
@@ -154,15 +174,15 @@ md.browsernoaclFactory = function(options, callback) {
         ));
     }
     
-    // log 'wizzi.index.jsonnoaclFactory.jsonFsData', options.jsonFsData
+    // log 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
     
     options.repo = {
         storeKind: 'browser'
      };
-    md.createFactory('stefi', 'admin', options, callback)
+    md.createFactory(options, callback)
 }
 ;
-md.browserFactory = md.browsernoaclFactory;
+md.browserFactory = md.browserFactory;
 
 //
 md.startRunnerServer = function(options, callback) {
@@ -511,7 +531,7 @@ md.generateWizziModelTypes = function(request, callback) {
         // Now we can generate the wizzi model types
         // They will be written in the folder passed as second parameter.
         console.log(chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name));
-        wizziFactory.generateModelTypes(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildUpContext, function(err, result) {
+        wizziFactory.generateModelDoms(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildUpContext, function(err, result) {
             if (err) {
                 return callback(err);
             }
@@ -576,7 +596,7 @@ md.createFactoryLight = function(options, callback) {
         options = {};
     }
     var pluginItems = DEFAULT_PLUGINS().concat(options.plugins || []);
-    md.fsnoaclFactory({
+    md.fsFactory({
         plugins: {
             items: pluginItems
          }, 
@@ -590,7 +610,7 @@ md.createJsonFactoryLight = function(options, callback) {
         options = {};
     }
     var pluginItems = options.noPlugins ? [] : DEFAULT_PLUGINS().concat(options.plugins || []);
-    md.jsonnoaclFactory({
+    md.jsonFactory({
         plugins: {
             items: pluginItems
          }, 
@@ -1337,7 +1357,7 @@ md.generateWizziSchema = function(ittfDocumentPath, context, options, callback) 
         if (err) {
             return callback(err);
         }
-        wf.generateModelTypes(ittfDocumentPath, options.outputPackagePath, name, context, callback)
+        wf.generateModelDoms(ittfDocumentPath, options.outputPackagePath, name, context, callback)
     })
 }
 ;

@@ -3,10 +3,10 @@
         var dollar = '$';
     $
         var art = {
-            section: 'Documentation',   
+            section: 'How to',   
             title: 'Wizzi API'
         };
     
-    _layouts/docs-layout(&art)
+    _layouts/howtos-layout(&art)
     
         $include ./wizziapi/introduction

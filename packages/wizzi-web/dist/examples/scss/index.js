@@ -34,7 +34,7 @@ function executeExample() {
             wizzi = require('wizzi');
         }
         console.log('examples/scss start loadModel', ittfSource);
-        wizzi.fsnoaclFactory({
+        wizzi.fsFactory({
             plugins: {
                 items: [
                     'wizzi-web'
@@ -104,7 +104,7 @@ function createWizziFactory(globalContext, callback) {
         wizzi = require('wizzi');
     }
     console.log('"wizzi" package version', wizzi.version);
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         plugins: {
             
          }, 

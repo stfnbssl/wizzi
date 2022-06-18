@@ -33,7 +33,7 @@
 		
 		log 'examples/scss start loadModel', ittfSource
 
-		_ wizzi.fsnoaclFactory
+		_ wizzi.fsFactory
 			{
 				@ plugins
 					{

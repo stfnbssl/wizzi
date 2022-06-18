@@ -3,7 +3,7 @@
 
 	var StringWriter = require('../stringWriter')
 	var file = require('../../fs/file')
-    var verify = require('../../verify')
+    var verify = require('../../helpers/verify')
     var block = require('./block')
     var interpolate = require('../interpolate')
     var errors = require('../errors')

@@ -1,5 +1,7 @@
 ﻿module 
     kind jsfile
+
+    # This is copied, but from WHO?
     
 	var MACHINE_ID = parseInt(Math.random() * 0xffffff, 10)
     

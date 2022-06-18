@@ -1,61 +1,146 @@
-﻿base_test( ittFsNode )
-	
-	$append imports
-		var ittfMTreeEx = require('../../lib/ittfTree/ittfMTreeEx')
-		var ittfFsNode = require('../../lib/scanners/ittfFsNode')
-		+
-		var root
-	+ 
-	it should add a document
+﻿common/test/base_test( ittFsNode )
 
-		set root = new ittfFsNode('root', null, true)
-		# log 'root', root
-		var added
-			_ root.addDocument('root/readme.md.ittf')
-		# log 'root', root
-		tobe_object(added)
-		tobe_array(root.folders, 0)
-		tobe_array(root.documents, 1)
-		tobe_string(root.documents[0].schema, md)
-		tobe_false(root.documents[0].isFragment)
-		tobe_string(root.documents[0].path, root/readme.md.ittf)
-		tobe_string(root.documents[0].dirname, root)
-		tobe_string(root.documents[0].basename, readme.md.ittf)
+    $append imports
+        var ittfGraph = require('../../lib/ittfGraph/index')
+        var ittfScanner = require('../../lib/ittfScanner/index')
+        +
+        var folderPath
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+        function __createRoot
+            param callback
+            _ vfile
+                f_cb_test( file )
+                    var root
+                        new ittfScanner.IttfFsNode
+                            @ folderPath
+                            @ null
+                            {
+                                @ isDirectory true
+                                @ file file
+                    # log 'root', root
+                    _ callback
+                        @ null
+                        @ root
+        function unixifyPath
+            param path_string
+            var win32 = process.platform === 'win32'
+            if win32
+                return path_string.replace(/\\/g, '/')
+            else
+                return path_string
 
-	it should add a document fragment
-		var added
-			_ root.addDocument('root/t/title.md.ittf')
-		# log 'root', root
-		tobe_object(added)
-		tobe_array(root.folders, 1)
-		tobe_array(root.documents, 1)
-		tobe_true(root.folders[0].isTFolder)
-		tobe_string(root.folders[0].basename, t)
-		tobe_array(root.folders[0].documents, 1)
-		tobe_string(root.folders[0].documents[0].basename, title.md.ittf)
-		tobe_string(root.folders[0].documents[0].dirname, root/t)
-		tobe_string(root.folders[0].documents[0].schema, md)
-		tobe_true(root.folders[0].documents[0].isFragment)
+    + 
+    it-async should add a document
+        _ __createRoot
+            f_cb_test( root )
+                var documentPath
+                    _ path.join
+                        @ folderPath
+                        @ 'readme.tests.ittf'
+                var added
+                    _ root.addDocument(documentPath)
+                # log '-------------- should add a document, added', added
+                tobe_object(added)
+                tobe_array(root.folders, 0)
+                tobe_array(root.documents, 1)
+                tobe_string(root.documents[0].schema, tests)
+                tobe_false(root.documents[0].isFragment)
+                tobe_string_value(root.documents[0].path, unixifyPath(documentPath))
+                tobe_string_value(root.documents[0].dirname, unixifyPath(folderPath))
+                tobe_string(root.documents[0].basename, readme.tests.ittf)
+                _ done
 
-	it should check infos
-		_ root.setInfo()
-		# log 'root', root
-		tobe_object_num(root.info.schemas, 1)
-		tobe_string(root.info.schemas['md'].name, md)
-		tobe_array(root.info.lib.documents, 1)
+    it-async should add a document fragment
+        _ __createRoot
+            f_cb_test( root )
+                var document1Path
+                    _ path.join
+                        @ folderPath
+                        @ 'readme.tests.ittf'
+                var added1
+                    _ root.addDocument(document1Path)
+                var document2Path
+                    _ path.join
+                        @ folderPath
+                        @ 't'
+                        @ 'title.tests.ittf'
+                var added2
+                    _ root.addDocument(document2Path)
+                # log 'root', root
+                tobe_object(added1)
+                tobe_object(added2)
+                tobe_array(root.folders, 1)
+                tobe_array(root.documents, 1)
+                tobe_true(root.folders[0].isTFolder)
+                tobe_string(root.folders[0].basename, t)
+                tobe_array(root.folders[0].documents, 1)
+                tobe_string(root.folders[0].documents[0].basename, title.tests.ittf)
+                tobe_string_value(root.folders[0].documents[0].dirname, unixifyPath(folderPath)+'/t')
+                tobe_string(root.folders[0].documents[0].schema, tests)
+                tobe_true(root.folders[0].documents[0].isFragment)
+                _ done
 
-	it-async should write an ittf
-		var ittf = new ittfMTreeEx('wzpackage')
-		_ root.toIttf2(ittf)
-		_ ittf.writeFile
-			_ path.join
-				@ __dirname
-				@ 'outputs'
-				@ 'test.wzpackage.ittf'
-			f_cb_test( result )
-				_ done()
+    it-async should check infos
+        _ __createRoot
+            f_cb_test( root )
+                var document1Path
+                    _ path.join
+                        @ folderPath
+                        @ 'readme.tests.ittf'
+                var added1
+                    _ root.addDocument(document1Path)
+                # log 'root', root
+                var document2Path
+                    _ path.join
+                        @ folderPath
+                        @ 't'
+                        @ 'title.tests.ittf'
+                var added2
+                    _ root.addDocument(document2Path)
+                # log 'root.info 1', root.info
+                _ root.setInfo
+                    f_cb_test( root )
+                        # log 'root', root
+                        # log 'root.info 2', root.info
+                        tobe_object_num(root.info.schemas, 1)
+                        tobe_string(root.info.schemas['tests'].name, tests)
+                        tobe_array(root.info.test.documents, 1)
+                        _ done
 
-
-
-
-
+    it-async should write an ittf
+        _ __createRoot
+            f_cb_test( root )
+                var document1Path
+                    _ path.join
+                        @ folderPath
+                        @ 'readme.tests.ittf'
+                var added1
+                    _ root.addDocument(document1Path)
+                # log 'root', root
+                var document2Path
+                    _ path.join
+                        @ folderPath
+                        @ 't'
+                        @ 'title.tests.ittf'
+                var added2
+                    _ root.addDocument(document2Path)
+                # log 'root', root
+                _ ittfGraph.createIttfDocumentGraphFrom
+                    @ null
+                    {
+                        @ name 'wzpackage'
+                        @ createEmpty true
+                    f_cb_test( ittfDocumentGraph )
+                        _ root.analize
+                            f_cb_test( result )
+                                _ root.toIttf(ittfDocumentGraph)
+                                _ ittfDocumentGraph.writeFile
+                                    _ path.join
+                                        @ __dirname
+                                        @ 'outputs'
+                                        @ 'test.wzpackage.ittf'
+                                    f_cb_test( result )
+                                        _ done()
+    

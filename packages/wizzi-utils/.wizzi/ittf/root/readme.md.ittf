@@ -101,23 +101,23 @@
 		li `options` `Object`
 		li returns the root IttfFsNode of the 'folderPath' with its descendant folders as children.
 
-	h2 ittfMTreeEx - enhanced mTree with import, export, analize capabilities
-	h4 var ittfMTreeEx = require('wizzi-utils').ittfMTreeEx
-	h4 ittfMTreeEx.loadFrom(path_string)
+	h2 ittfDocumentGraph - enhanced mTree with import, export, analize capabilities
+	h4 var ittfDocumentGraph = require('wizzi-utils').ittfDocumentGraph
+	h4 ittfDocumentGraph.loadFrom(path_string)
 	ul
 		li `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation)
-		li returns an ittfMTreeEx instance
-	h4 ittfMTreeEx.loadFrom(mTree)
+		li returns an ittfDocumentGraph instance
+	h4 ittfDocumentGraph.loadFrom(mTree)
 	ul
 		li `mTree` `Object` An existent final or partial mTree.
-		li returns an ittfMTreeEx instance
+		li returns an ittfDocumentGraph instance
 
 	h2 ittfHtmlPrettifier - ittf html formatter for documentation
 	h4 var ittfHtmlPrettifier = require('wizzi-utils').ittfHtmlPrettifier
 
 	h2 ittfHtmlPrettifier(rootNode[, options])
 	ul
-		li `rootNode` `Object` ittfMTreeEx instance
+		li `rootNode` `Object` ittfDocumentGraph instance
 		li `options` `Object`
 
 	h2 jsHtmlPrettifier - javascript html formatter for documentation

@@ -12,76 +12,192 @@ var del = require('del');
 var expect = require('expect.js');
 
 var _ = require('lodash');
-var file = require('../../lib/fs/file');
-var verify = require('../../lib/verify');
+var mtree = require('wizzi-mtree');
+var file = require('wizzi-utils').file;
+var vfile = require('wizzi-utils').vfile;
+var verify = require('wizzi-utils').verify;
+var mocks = require('wizzi-utils').mocks;
 
-var ittfMTreeEx = require('../../lib/ittfTree/ittfMTreeEx');
-var ittfFsNode = require('../../lib/scanners/ittfFsNode');
+var ittfGraph = require('../../lib/ittfGraph/index');
+var ittfScanner = require('../../lib/ittfScanner/index');
 
-var root;
+var folderPath = path.join(__dirname, 'ittf');
+function __createRoot(callback) {
+    vfile(function(err, file) {
+        if (err) {
+            console.log('err', err);
+            throw new Error(err.message);
+        }
+        var root = new ittfScanner.IttfFsNode(folderPath, null, {
+            isDirectory: true, 
+            file: file
+         });
+        // log 'root', root
+        callback(null, root)
+    })
+}
+function unixifyPath(path_string) {
+    var win32 = process.platform === 'win32';
+    if (win32) {
+        return path_string.replace(/\\/g, '/');
+    }
+    else {
+        return path_string;
+    }
+}
 
 describe("ittFsNode", function() {
     
-    it("should add a document", function() {
-        root = new ittfFsNode('root', null, true);
-        // log 'root', root
-        var added = root.addDocument('root/readme.md.ittf');
-        // log 'root', root
-        expect(added).to.be.an('object');
-        expect(root.folders).to.be.an('array');
-        expect(root.folders.length).to.be(0);
-        expect(root.documents).to.be.an('array');
-        expect(root.documents.length).to.be(1);
-        expect(root.documents[0].schema).to.be.a('string');
-        expect(root.documents[0].schema).to.be('md');
-        expect(root.documents[0].isFragment).to.be(false);
-        expect(root.documents[0].path).to.be.a('string');
-        expect(root.documents[0].path).to.be('root/readme.md.ittf');
-        expect(root.documents[0].dirname).to.be.a('string');
-        expect(root.documents[0].dirname).to.be('root');
-        expect(root.documents[0].basename).to.be.a('string');
-        expect(root.documents[0].basename).to.be('readme.md.ittf');
-    });
-    it("should add a document fragment", function() {
-        var added = root.addDocument('root/t/title.md.ittf');
-        // log 'root', root
-        expect(added).to.be.an('object');
-        expect(root.folders).to.be.an('array');
-        expect(root.folders.length).to.be(1);
-        expect(root.documents).to.be.an('array');
-        expect(root.documents.length).to.be(1);
-        expect(root.folders[0].isTFolder).to.be(true);
-        expect(root.folders[0].basename).to.be.a('string');
-        expect(root.folders[0].basename).to.be('t');
-        expect(root.folders[0].documents).to.be.an('array');
-        expect(root.folders[0].documents.length).to.be(1);
-        expect(root.folders[0].documents[0].basename).to.be.a('string');
-        expect(root.folders[0].documents[0].basename).to.be('title.md.ittf');
-        expect(root.folders[0].documents[0].dirname).to.be.a('string');
-        expect(root.folders[0].documents[0].dirname).to.be('root/t');
-        expect(root.folders[0].documents[0].schema).to.be.a('string');
-        expect(root.folders[0].documents[0].schema).to.be('md');
-        expect(root.folders[0].documents[0].isFragment).to.be(true);
-    });
-    it("should check infos", function() {
-        root.setInfo();
-        // log 'root', root
-        expect(root.info.schemas).to.be.an('object');
-        expect(Object.keys(root.info.schemas).length).to.be(1);
-        expect(root.info.schemas['md'].name).to.be.a('string');
-        expect(root.info.schemas['md'].name).to.be('md');
-        expect(root.info.lib.documents).to.be.an('array');
-        expect(root.info.lib.documents.length).to.be(1);
-    });
-    it("should write an ittf", function(done) {
-        var ittf = new ittfMTreeEx('wzpackage');
-        root.toIttf2(ittf);
-        ittf.writeFile(path.join(__dirname, 'outputs', 'test.wzpackage.ittf'), function(err, result) {
+    it("should add a document", function(done) {
+        __createRoot(function(err, root) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
             }
+            var documentPath = path.join(folderPath, 'readme.tests.ittf');
+            var added = root.addDocument(documentPath);
+            // log '-------------- should add a document, added', added
+            expect(added).to.be.an('object');
+            expect(root.folders).to.be.an('array');
+            expect(root.folders.length).to.be(0);
+            expect(root.documents).to.be.an('array');
+            expect(root.documents.length).to.be(1);
+            expect(root.documents[0].schema).to.be.a('string');
+            expect(root.documents[0].schema).to.be('tests');
+            expect(root.documents[0].isFragment).to.be(false);
+            expect(root.documents[0].path).to.be.a('string');
+            expect(root.documents[0].path).to.be(unixifyPath(documentPath));
+            expect(root.documents[0].dirname).to.be.a('string');
+            expect(root.documents[0].dirname).to.be(unixifyPath(folderPath));
+            expect(root.documents[0].basename).to.be.a('string');
+            expect(root.documents[0].basename).to.be('readme.tests.ittf');
             done();
         })
     });
+    it("should add a document fragment", function(done) {
+        __createRoot(function(err, root) {
+            if (err) {
+                console.log('err', err);
+                throw new Error(err.message);
+            }
+            var document1Path = path.join(folderPath, 'readme.tests.ittf');
+            var added1 = root.addDocument(document1Path);
+            var document2Path = path.join(folderPath, 't', 'title.tests.ittf');
+            var added2 = root.addDocument(document2Path);
+            // log 'root', root
+            expect(added1).to.be.an('object');
+            expect(added2).to.be.an('object');
+            expect(root.folders).to.be.an('array');
+            expect(root.folders.length).to.be(1);
+            expect(root.documents).to.be.an('array');
+            expect(root.documents.length).to.be(1);
+            expect(root.folders[0].isTFolder).to.be(true);
+            expect(root.folders[0].basename).to.be.a('string');
+            expect(root.folders[0].basename).to.be('t');
+            expect(root.folders[0].documents).to.be.an('array');
+            expect(root.folders[0].documents.length).to.be(1);
+            expect(root.folders[0].documents[0].basename).to.be.a('string');
+            expect(root.folders[0].documents[0].basename).to.be('title.tests.ittf');
+            expect(root.folders[0].documents[0].dirname).to.be.a('string');
+            expect(root.folders[0].documents[0].dirname).to.be(unixifyPath(folderPath)+'/t');
+            expect(root.folders[0].documents[0].schema).to.be.a('string');
+            expect(root.folders[0].documents[0].schema).to.be('tests');
+            expect(root.folders[0].documents[0].isFragment).to.be(true);
+            done();
+        })
+    });
+    it("should check infos", function(done) {
+        __createRoot(function(err, root) {
+            if (err) {
+                console.log('err', err);
+                throw new Error(err.message);
+            }
+            var document1Path = path.join(folderPath, 'readme.tests.ittf');
+            var added1 = root.addDocument(document1Path);
+            // log 'root', root
+            var document2Path = path.join(folderPath, 't', 'title.tests.ittf');
+            var added2 = root.addDocument(document2Path);
+            // log 'root.info 1', root.info
+            root.setInfo(function(err, root) {
+                if (err) {
+                    console.log('err', err);
+                    throw new Error(err.message);
+                }
+                // log 'root', root
+                // log 'root.info 2', root.info
+                expect(root.info.schemas).to.be.an('object');
+                expect(Object.keys(root.info.schemas).length).to.be(1);
+                expect(root.info.schemas['tests'].name).to.be.a('string');
+                expect(root.info.schemas['tests'].name).to.be('tests');
+                expect(root.info.test.documents).to.be.an('array');
+                expect(root.info.test.documents.length).to.be(1);
+                done();
+            })
+        })
+    });
+    it("should write an ittf", function(done) {
+        __createRoot(function(err, root) {
+            if (err) {
+                console.log('err', err);
+                throw new Error(err.message);
+            }
+            var document1Path = path.join(folderPath, 'readme.tests.ittf');
+            var added1 = root.addDocument(document1Path);
+            // log 'root', root
+            var document2Path = path.join(folderPath, 't', 'title.tests.ittf');
+            var added2 = root.addDocument(document2Path);
+            // log 'root', root
+            ittfGraph.createIttfDocumentGraphFrom(null, {
+                name: 'wzpackage', 
+                createEmpty: true
+             }, function(err, ittfDocumentGraph) {
+                if (err) {
+                    console.log('err', err);
+                    throw new Error(err.message);
+                }
+                root.analize(function(err, result) {
+                    if (err) {
+                        console.log('err', err);
+                        throw new Error(err.message);
+                    }
+                    root.toIttf(ittfDocumentGraph);
+                    ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'test.wzpackage.ittf'), function(err, result) {
+                        if (err) {
+                            console.log('err', err);
+                            throw new Error(err.message);
+                        }
+                        done();
+                    })
+                })
+            })
+        })
+    });
 });
+
+function getWizziObject() {
+    return {
+            loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
+                useCache: false
+             }), 
+            file: file, 
+            verify: verify
+         };
+}
+
+function getLoadModelContext(mTreeBuildUpContext) {
+    return mocks.getLoadModelContext(mTreeBuildUpContext);
+}
+
+function getTestModelInfo(schemaName, modelName) {
+    
+    var expectedPath = path.join(__dirname, 'ittf', modelName + '.' + schemaName + '.expected');
+    var expectedContent = file.read(expectedPath);
+    return {
+            ittfPath: path.join(__dirname, 'ittf', modelName + '.' + schemaName + '.ittf'), 
+            expectedPath: expectedPath, 
+            expectedContent: expectedContent, 
+            writeResult: function(content) {
+                file.write(path.join(__dirname, 'ittf', modelName + '.' + schemaName + '.result'), content)
+            }
+         };
+}

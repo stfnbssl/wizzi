@@ -35,7 +35,7 @@ var wizzischema = function(step_callback) {
     // Create a filesystem factory without access control,
     // configured with the default wizzi plugins and
     // a local plugin.
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         plugins: {
             items: [
                 'wizzi-core', 
@@ -58,7 +58,7 @@ var wizzischema = function(step_callback) {
         // The wizzi model artifact "sample_0_1" is created after that the wizzi factory
         // has been configured with the local plugin. That is ok. The model factory
         // will be retrieved before use. There is no check for existence at plugin initialization time.
-        wf.generateModelTypes(path.join(__dirname, 'step_1', 'sample_0_1.wfschema.ittf'), path.join(__dirname, 'local'), 'sample_0_1', mTreeBuildupContext, function(err, result) {
+        wf.generateModelDoms(path.join(__dirname, 'step_1', 'sample_0_1.wfschema.ittf'), path.join(__dirname, 'local'), 'sample_0_1', mTreeBuildupContext, function(err, result) {
             if (err) {
                 var fullErr = JSON.stringify(err, null, 2);
                 console.log('Error fullErr', fullErr);

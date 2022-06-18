@@ -22,12 +22,11 @@ var mocks = wizziUtils.mocks;
 var vfile = require('../../lib/fs/vfile');
 var uriParser = require('../../lib/fs/uriParser');
 var fsUtils = require('../../lib/fs/utils');
-var IttfMTreeEx = require('../../lib/ittfTree/ittfMTreeEx');
-var IttfFsNode = require('../../lib/scanners/ittfFsNode');
-var folderBrowse = require('../../lib/scanners/folderBrowse');
-var folderScanner = require('../../lib/scanners/folderScanner');
-var ittfDocumentScanner = require('../../lib/scanners/ittfDocumentScanner');
-var textDocumentScanner = require('../../lib/scanners/textDocumentScanner');
+var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph');
+var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
+var ittfScanner = require('../../lib/ittfScanner/index');
+var fs = require('../../lib/fs/index');
+var ittfGraph = require('../../lib/ittfGraph/index');
 var fsUtils_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
     var fname = path.join(__dirname, 'test.html.ittf');

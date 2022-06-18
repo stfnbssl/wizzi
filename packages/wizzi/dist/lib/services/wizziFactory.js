@@ -1102,30 +1102,30 @@ var WizziFactory = (function () {
         return schema;
     }
     //
-    WizziFactory.prototype.generateModelTypes = function(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
+    WizziFactory.prototype.generateModelDoms = function(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
-                error('InvalidArgument', 'generateModelTypes', 'The callback parameter must be a function. Received: ' + callback)
+                error('InvalidArgument', 'generateModelDoms', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
         if (verify.isNotEmpty(wfschemaIttfDocumentUri) === false) {
             return callback(error(
-                'InvalidArgument', 'generateModelTypes', { parameter: 'wfschemaIttfDocumentUri', message: 'The wfschemaIttfDocumentUri parameter must be a string. Received: ' + wfschemaIttfDocumentUri }
+                'InvalidArgument', 'generateModelDoms', { parameter: 'wfschemaIttfDocumentUri', message: 'The wfschemaIttfDocumentUri parameter must be a string. Received: ' + wfschemaIttfDocumentUri }
             ));
         }
         if (verify.isNotEmpty(outputPackagePath) === false) {
             return callback(error(
-                'InvalidArgument', 'generateModelTypes', { parameter: 'outputPackagePath', message: 'The outputPackagePath parameter must be a string. Received: ' + outputPackagePath }
+                'InvalidArgument', 'generateModelDoms', { parameter: 'outputPackagePath', message: 'The outputPackagePath parameter must be a string. Received: ' + outputPackagePath }
             ));
         }
         if (verify.isNotEmpty(wfschemaName) === false) {
             return callback(error(
-                'InvalidArgument', 'generateModelTypes', { parameter: 'wfschemaName', message: 'The wfschemaName parameter must be a string. Received: ' + wfschemaName }
+                'InvalidArgument', 'generateModelDoms', { parameter: 'wfschemaName', message: 'The wfschemaName parameter must be a string. Received: ' + wfschemaName }
             ));
         }
         if (verify.isObject(mTreeBuildUpContext) === false) {
             return callback(error(
-                'InvalidArgument', 'generateModelTypes', { parameter: 'mTreeBuildUpContext', message: 'The mTreeBuildUpContext parameter must be an object. Received: ' + mTreeBuildUpContext }
+                'InvalidArgument', 'generateModelDoms', { parameter: 'mTreeBuildUpContext', message: 'The mTreeBuildUpContext parameter must be an object. Received: ' + mTreeBuildUpContext }
             ));
         }
         
@@ -1140,7 +1140,7 @@ var WizziFactory = (function () {
             htmldocs: path.join(wizziModelFolder, wfschemaName + '-schema.g.html')
          };
         
-        this.generateModelTypesArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, function(err, generatedArtifacts) {
+        this.generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, function(err, generatedArtifacts) {
             if (err) {
                 return callback(err);
             }
@@ -1163,7 +1163,7 @@ var WizziFactory = (function () {
         })
     }
     //
-    WizziFactory.prototype.generateModelTypesArtifacts = function(wfschemaIttfDocumentUri, mTreeBuildUpContext, callback) {
+    WizziFactory.prototype.generateModelDomsArtifacts = function(wfschemaIttfDocumentUri, mTreeBuildUpContext, callback) {
         
         var loadContext = {
             mTreeBuildUpContext: mTreeBuildUpContext

@@ -8,7 +8,7 @@ $group
 		#   - a WizziModelType test module
 		#   - a WizziModelType json documentation
 		#   - a WizziModelType html documentation
-	m generateModelTypes
+	m generateModelDoms
 		string wfschemaIttfDocumentUri
 		string outputPackagePath
 		string wfschemaName
@@ -26,7 +26,7 @@ $group
 				@ jsondocs path.join(wizziModelFolder, wfschemaName + '-schema.g.json')
 				@ htmldocs path.join(wizziModelFolder, wfschemaName + '-schema.g.html')
 		+
-		_ this.generateModelTypesArtifacts
+		_ this.generateModelDomsArtifacts
 			@ wfschemaIttfDocumentUri
 			@ mTreeBuildUpContext
 			f_cb( generatedArtifacts )
@@ -66,7 +66,7 @@ $group
 	#
 		# generate the wizzi model type artifacts
 		# from an IttfDocument of schema "wfschema"
-	m generateModelTypesArtifacts
+	m generateModelDomsArtifacts
 		param wfschemaIttfDocumentUri
 		param mTreeBuildUpContext
 		param callback

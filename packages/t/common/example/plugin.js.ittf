@@ -69,7 +69,7 @@
                 set wizzi = require('wizzi')
         log '"wizzi" package version', wizzi.version
         
-        _ wizzi.fsnoaclFactory
+        _ wizzi.fsFactory
             {
                 { plugins
                     $hook plugins

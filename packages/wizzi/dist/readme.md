@@ -33,7 +33,7 @@ callback
 ```
 ### Methods
 ```javascript
-wizziFactoryInstance.generateModelTypes(
+wizziFactoryInstance.generateModelDoms(
 );
 wizziFactoryInstance.generateMTree(
 );

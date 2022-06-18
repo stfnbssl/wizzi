@@ -69,7 +69,7 @@
 				set options = {}
 			
 			var pluginItems = DEFAULT_PLUGINS().concat(options.plugins || [])
-			_ md.fsnoaclFactory
+			_ md.fsFactory
 				{
 					{ plugins
 						@ items pluginItems
@@ -86,7 +86,7 @@
 				set options = {}
 			
 			var pluginItems = options.noPlugins ? [] : DEFAULT_PLUGINS().concat(options.plugins || [])
-			_ md.jsonnoaclFactory
+			_ md.jsonFactory
 				{
 					{ plugins
 						@ items pluginItems
@@ -253,7 +253,7 @@
 			@ callback
 
 	lightFunction( generateWizziSchema, schema )
-		_ wf.generateModelTypes
+		_ wf.generateModelDoms
 			@ ittfDocumentPath
 			@ options.outputPackagePath
 			@ name

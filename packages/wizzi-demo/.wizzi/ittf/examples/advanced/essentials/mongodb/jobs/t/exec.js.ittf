@@ -8,9 +8,9 @@
 			@ storeKind 'mongodb'
 			@ config
 				{
-					@ wfBaseFolder testMongodbBaseFolder
+					@ wfBaseFolder testMongoBaseFolder
 					@ storeUri testMongodbUri
-					@ storeBaseFolder testMongodbBaseFolder
+					@ storeBaseFolder testMongoBaseFolder
 					@ plugins
 						[
 							@ 'wizzi-core'

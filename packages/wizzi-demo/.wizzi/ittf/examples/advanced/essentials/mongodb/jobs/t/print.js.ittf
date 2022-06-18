@@ -7,7 +7,7 @@
 		f_cb_throw( docman )
 			_ docman.getFiles
 				_ path.join
-					@ demoUploadMongodbBaseFolder
+					@ demoUploadMongoBaseFolder
 					@ '${section}'
 					@ 'level_${level}'
 					@ 'step_${step}'

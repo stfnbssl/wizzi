@@ -34,7 +34,7 @@ $group
                     @ node
             set itemResult[item.n] = mTree.toIttf(item.children[0])
             set itemResult[item.n + 'Wrapped'] = mTree.toIttf(ittfNode)
-        _ prettify
+        _ pretty.prettifyIttfHtmlFromString
             @ itemResult.ittf
             f_cb( pretty )
                 set itemResult.ittfPretty = pretty

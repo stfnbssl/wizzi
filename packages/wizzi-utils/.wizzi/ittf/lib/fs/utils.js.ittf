@@ -2,7 +2,7 @@ module wizzi-utils.fs.utils
 	kind jsfile
 
     var path = require('path')
-    var verify = require('../verify')
+    var verify = require('../helpers/verify')
 
 	var md
         set module.exports

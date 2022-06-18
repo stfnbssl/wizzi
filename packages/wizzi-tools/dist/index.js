@@ -209,7 +209,7 @@ md.importFolder = function(baseImportPath, baseExportPath, callback) {
     } 
 };
 md.toIttfTreeEx = function(ittfContent) {
-    return wizziUtils.IttfMTreeEx.createFrom(ittfContent, {
+    return wizziUtils.IttfDocumentGraph.createFrom(ittfContent, {
             fromString: true, 
             clean: true
         });

@@ -33,7 +33,7 @@
 	function execute
 		param jsonFsData
 		# Create a json factory without access control
-		_ wizzi.jsonnoaclFactory
+		_ wizzi.jsonFactory
 			{
 				@ plugins
 					{

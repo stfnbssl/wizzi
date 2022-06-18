@@ -64,7 +64,7 @@
 					_ this.storeImpl.init
 						{
 							@ mongoUri storeInfo.storeUri
-							@ mongodbBaseFolder storeInfo.storeBaseFolder
+							@ mongoBaseFolder storeInfo.storeBaseFolder
 						f_cb( notUsed )
 							set that.storeKind = that.storeImpl.storeKind
 							return

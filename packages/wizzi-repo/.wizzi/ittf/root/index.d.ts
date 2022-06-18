@@ -15,21 +15,34 @@ type cb<T> = (err: any, result: T) => void;
  * FsJsonImpl: wraps FsJsonDocumentManager and implements the VFile interface
  */
 
-interface Collection {
-}
-
+/**
+ * @interface FsJsonItemData
+ * @description An item object (directory or file) of a JSON file system
+ * @property _id               Object ID of the item
+ * @property basename          The base name of the item filepath
+ * @property parentId          Object ID of the parent item
+ * @property dirname           Folder name of the item filepath
+ * @property path              Item filepath
+ * @property kind              Item kind: one-of 0 (directory), 1 (file)
+*/
 interface FsJsonItemData {
-    _id: object;
+    _id: ObjectID;
     basename: string;
-    parentId: object;
+    parentId: ObjectID;
     dirname: string;
     path: string;
-    // one-of 0 (directory), 1 (file)
     kind: number;
 }
 
+/**
+ * @interface FsJsonDocumentData
+ * @description The text content of an item object (file) of a JSON file system
+ * @property _id               Object ID of the item
+ * @property content           Text content of the item
+ * @property lastModified      Date of last modification of the content
+*/
 interface FsJsonDocumentData {
-    _id: object;
+    _id: ObjectID;
     content: string;
     lastModified: Date;
 }
@@ -61,11 +74,14 @@ interface FsJsonWriteResult {
 }
 
 /**
- * Json filesystem database
+ * @interface FsJson
+ * @description A JSON file system database
+ * @property items              Array of path infos (directories and files) of a JSON file system
+ * @property documents          Array of content data (files) of a JSON file system 
  */
 interface FsJson {
-    items: Collection;
-    documents: Collection;
+    items: FsJsonItemData[];
+    documents: FsJsonDocumentData[];
     getItem(key: object, callback: cb<FsJsonItemData>): void;
     getItemById(id: ObjectID, callback: cb<FsJsonItemData>): void;
     getItemByPath(path: string, callback: cb<FsJsonItemData>): void;
@@ -107,17 +123,26 @@ interface FsJsonDocumentManager {
     uploadFolder(sourcePath: string, destPath: string, callback: cb<UploadedFileDef[]>): void; 
 }
 
-interface FsJsonItem {
-}
-
+/**
+ * @interface JsonDocumentDto
+ * @description Data of a single text file to load or retrieved from a JSON file system
+ * @property path            The file path
+ * @property content         The text content
+ */
 interface JsonDocumentDto {
     path: string;
     content: string;
 }
 
+/**
+ * @interface JsonFsData
+ * @description Contains two arrays of item objects (path info and content) of a JSON file system
+ * @property items              Array of path infos (directories and files) of a JSON file system
+ * @property documents          Array of content data (files) of a JSON file system 
+ */
 interface JsonFsData {
-    items: Collection;
-    documents: Collection;
+    items: FsJsonItemData[];
+    documents: FsJsonDocumentData[];
 }
 
 export namespace JsonComponents {
@@ -129,15 +154,32 @@ export namespace JsonComponents {
 
 export function jsonfile(options: { jsonFsData?: JsonFsData, fsJson?: FsJson }, callback: cb<VFile>): void;
 
+/**
+ * The interface implemented by Wizzi Store Systems
+ * @param storeKind            One of 'filesystem', 'mongodb', 'json'
+ * @param storeUri             When storeKind == 'mongodb', the mongodb uri
+ * @param storeBaseFolder      When storeKind == 'mongodb', the mongodb filesystem base folder (alternative to storeUri)
+ * @param storeJsonFsData      When storeKind == 'json', a JsonFsData object to initialise the JSON file system
+ */
 interface CreateStoreFactoryOptions {
     storeKind: string;
-    storeUri: string;
-    storeBaseFolder: string;
+    storeUri?: string;
+    storeBaseFolder?: string;
     storeJsonFsData?: JsonFsData;
 }
 
+interface StoreInitOptions {
+    storeUri?: string;
+    storeBaseFolder?: string;
+    jsonFsData? : JsonFsData,
+    fsJson?: FsJson
+}
+
+/**
+ * The interface implemented by Wizzi Store Systems
+ */
 interface Store {
-    init(options: any, callback: cb<VFile>): void;
+    init(options: StoreInitOptions, callback: cb<VFile>): void;
     documentExists(filePath: string, callback: cb<boolean>): void;
     getModelContent(filePath: string, callback: cb<string>): void;
 }

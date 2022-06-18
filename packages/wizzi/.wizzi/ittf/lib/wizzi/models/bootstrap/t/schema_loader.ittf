@@ -1,7 +1,7 @@
 ﻿$group
 
 	#
-		# The method called by 'wizzi.wizziFactory.generateModelTypes'
+		# The method called by 'wizzi.wizziFactory.generateModelDoms'
 		#
 		# params
 		#   { wfschemaWizziModel

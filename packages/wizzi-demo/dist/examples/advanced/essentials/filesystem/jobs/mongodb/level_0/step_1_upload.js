@@ -22,7 +22,7 @@ var wizzi_job_mongodb_level_0_step_1_upload = function(step_callback) {
     var repo = require('wizzi-repo');
     // Test mongoDb config
     // mongodbUri 'mongodb://localhost:27017/test'
-    // mongodbBaseFolder `c:/wizzifactory/users`
+    // mongoBaseFolder `c:/wizzifactory/users`
     // example
     // folder `wizzijob`
     // of project `demo`
@@ -32,14 +32,14 @@ var wizzi_job_mongodb_level_0_step_1_upload = function(step_callback) {
     // and maps to internal mongodb filesystem path
     // `c:/wizzifactory/users/stefi/demo/wizzijob`
     var testMongodbUri = 'mongodb://localhost:27017/test';
-    var testMongodbBaseFolder = 'c:/wizzifactory/users';
-    var demoUploadMongodbBaseFolder = path.join(testMongodbBaseFolder, 'stefi', 'demo');
+    var testMongoBaseFolder = 'c:/wizzifactory/users';
+    var demoUploadMongoBaseFolder = path.join(testMongoBaseFolder, 'stefi', 'demo');
     repo.mongoDbDocumentManager(testMongodbUri, function(err, docman) {
         if (err) {
             throw new Error(JSON.stringify(err, null, 2));
         }
         heading2('uploadFolder');
-        docman.uploadFolder(path.join(__dirname, 'step_1'), path.join(demoUploadMongodbBaseFolder, 'wizzijob', 'level_0', 'step_1'), function(err, result) {
+        docman.uploadFolder(path.join(__dirname, 'step_1'), path.join(demoUploadMongoBaseFolder, 'wizzijob', 'level_0', 'step_1'), function(err, result) {
             if (err) {
                 throw new Error(JSON.stringify(err, null, 2));
             }

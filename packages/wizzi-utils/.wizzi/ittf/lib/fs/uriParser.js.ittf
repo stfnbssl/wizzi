@@ -3,7 +3,7 @@
 
 	import path
 	import url
-	# var verify = require('../verify')
+	# var verify = require('../helpers/verify')
 
 	#
 		# params

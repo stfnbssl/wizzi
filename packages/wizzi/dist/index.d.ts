@@ -219,21 +219,15 @@ type FactoryOptions = {
     test?: FactoryTestOptions;
 }
 
-type NoAclFactoryOptions = {
-    plugins?: PluginsOptions;
-    globalContext?: object;
-    fsJson?: FsJson;
-}
-
 /**
  * Creates a wizzi factory.
  */
-export function createFactory(user: string, role: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function createAclFactory(user: string, role: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
 export function createFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
-export function fsFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function mongoFactory(storeUri: string, storeBaseFolder: string, options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function jsonFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
-export function browserFactory(options: NoAclFactoryOptions, callback: cb<WizziFactory>): void;
+export function fsFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function mongoFactory(storeUri: string, storeBaseFolder: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function jsonFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function browserFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
 
 /**
  * WIZZI FACTORY PRODUCTION MANAGER
@@ -479,7 +473,7 @@ declare interface WizziFactory {
     loadAndTransformModel(
         ittfDocumentUri: string, context: TransformationContext, transformName: string, callback?: cb<object>
     )
-    generateModelTypes(
+    generateModelDoms(
         wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
     ): void;
     executeJob(

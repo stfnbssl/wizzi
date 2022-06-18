@@ -114,7 +114,7 @@ var StorePool = (function () {
         else if (this.storeKind === 'mongodb') {
             repo.dbfile({
                 mongoUri: repoOptions.storeUri, 
-                mongodbBaseFolder: repoOptions.storeBaseFolder
+                mongoBaseFolder: repoOptions.storeBaseFolder
              }, function(err, file) {
                 if (err) {
                     return callback(err);

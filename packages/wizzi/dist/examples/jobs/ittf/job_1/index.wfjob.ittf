@@ -1,7 +1,7 @@
 wfjob job_1
 
 	# Generates a javascript module
-	# from a single ittf document of schema `js`
+	# from a single ITTF Document of schema `js`
 
 	$
 		console.log('Destination folder name: ' + options.destFolder);

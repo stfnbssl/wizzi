@@ -17,17 +17,17 @@
 		# params
 		#   { options
 		#     string mongoUri
-		#     string mongodbBaseFolder
+		#     string mongoBaseFolder
 	set md.dbfile
 		function dbfile
 			{ options
 				string mongoUri
-				string mongodbBaseFolder
+				string mongoBaseFolder
 			callback
 			var fsimpl
 				new MongoFsImpl
 					@ options.mongoUri
-					@ options.mongodbBaseFolder
+					@ options.mongoBaseFolder
 			_ fsimpl.open
 				f_cb( notUsed )
 					_ vfile

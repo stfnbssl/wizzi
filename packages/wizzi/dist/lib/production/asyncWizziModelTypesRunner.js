@@ -17,7 +17,7 @@ var AsyncWizziModelTypesRunner = {
         var productionManager = modelInfo.productionManager();
         var wizziFactory = productionManager.wizziFactory;
         // log "AsyncWizziModelTypesRunner.run: I should run " + wmtRequest.wfschemaIttfDocumentUri
-        wizziFactory.generateModelTypes(wmtRequest.wfschemaIttfDocumentUri, wmtRequest.outputPackageFolder, wmtRequest.schemaName, {}, function(err, result) {
+        wizziFactory.generateModelDoms(wmtRequest.wfschemaIttfDocumentUri, wmtRequest.outputPackageFolder, wmtRequest.schemaName, {}, function(err, result) {
             if (err) {
                 return callback(err);
             }

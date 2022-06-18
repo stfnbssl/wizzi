@@ -1,6 +1,6 @@
 # wizzi-web
 
-A wizzi default plugin for html css svg markdown
+A Wizzi Core Plugin for html css svg markdown
 
 ## Work still in progress
 

@@ -60,7 +60,7 @@
 				_ repo.dbfile
 					{
 						@ mongoUri repoOptions.storeUri
-						@ mongodbBaseFolder repoOptions.storeBaseFolder
+						@ mongoBaseFolder repoOptions.storeBaseFolder
 					f_cb( file )
 						set that.fileService = file
 						r_cb( null )

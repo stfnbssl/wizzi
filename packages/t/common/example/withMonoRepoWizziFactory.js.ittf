@@ -21,7 +21,7 @@ module
                 set wizzi = require('wizzi')
         log '"wizzi" package version', wizzi.version
         
-        _ wizzi.fsnoaclFactory
+        _ wizzi.fsFactory
             {
                 { plugins
                     $hook plugins
@@ -95,7 +95,7 @@ module
                         @ jobContext {}
                     @ callback
 
-    function executeGenerateModelTypes
+    function executegenerateModelDoms
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
@@ -105,7 +105,7 @@ module
         _ createWizziFactory
             {
             f_cb( wf )
-                _ wf.generateModelTypes
+                _ wf.generateModelDoms
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName

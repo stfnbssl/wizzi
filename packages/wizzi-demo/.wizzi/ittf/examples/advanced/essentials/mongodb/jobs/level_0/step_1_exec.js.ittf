@@ -1,7 +1,7 @@
 ﻿demo_module( wizzi_job_mongodb_level_0_step_1_exec )
 
 	var testMongodbUri = 'mongodb://localhost:27017/test'
-	var testMongodbBaseFolder = 'c:/wizzifactory/users'
+	var testMongoBaseFolder = 'c:/wizzifactory/users'
 	
 	_ wizzi.executeWizziJob
 		{
@@ -10,9 +10,9 @@
 			@ storeKind 'mongodb'
 			@ config
 				{
-					@ wfBaseFolder testMongodbBaseFolder
+					@ wfBaseFolder testMongoBaseFolder
 					@ storeUri testMongodbUri
-					@ storeBaseFolder testMongodbBaseFolder
+					@ storeBaseFolder testMongoBaseFolder
 					@ plugins
 						[
 							@ 'wizzi-core'

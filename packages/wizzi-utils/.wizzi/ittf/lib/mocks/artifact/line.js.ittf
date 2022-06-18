@@ -2,7 +2,7 @@
     kind jsfile
     
 	var file = require('../../fs/file')
-    var verify = require('../../verify')
+    var verify = require('../../helpers/verify')
     
 	class Line
         ctor

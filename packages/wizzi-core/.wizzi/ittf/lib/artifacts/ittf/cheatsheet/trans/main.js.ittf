@@ -13,7 +13,7 @@
 
         $append imports
             var stringify = require('json-stringify-safe')
-            var prettify = require('wizzi-utils').prettifyFromString
+            var pretty = require('wizzi-utils').pretty
 
         $append main
             _ executeTrans
@@ -131,7 +131,7 @@
                     # log 'counter', ++counter
                     _ process.nextTick
                         function
-                            _ prettify
+                            _ pretty.prettifyIttfHtmlFromString
                                 @ item.ittfWrapped
                                 f_cb( pretty )
                                     set item.ittfPretty = pretty

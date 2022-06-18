@@ -47,7 +47,7 @@
 	p The generation of the javascript modules for loading and implement a wizzi model is a
 		\b fundamental part of a wizzi plugin development.
 	p A wizzi model of type 'wfschema' describes a wizzi model and its constraints.
-		\b The method 'generateModelTypes' of the wizzi.wizziFactory uses a 'wfschema' model
+		\b The method 'generateModelDoms' of the wizzi.wizziFactory uses a 'wfschema' model
 		\b to generate the javascript artifacts that implement a wizzi model.
 	
 	h3 Wizzi job execution

@@ -77,7 +77,7 @@ $group
 					# Now we can generate the wizzi model types
 					# They will be written in the folder passed as second parameter.
 					log chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name)
-					_ wizziFactory.generateModelTypes
+					_ wizziFactory.generateModelDoms
 						@ request.wfschema.ittfDocumentUri
 						@ request.wfschema.outputPackageFolder
 						@ request.wfschema.name

@@ -1,0 +1,441 @@
+{
+  "parent": null,
+  "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf",
+  "path": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf",
+  "isRoot": true,
+  "relPath": "",
+  "isDirectory": true,
+  "file": {
+    "fsimpl": {
+      "kind": "filesystem"
+    },
+    "storeKind": "filesystem"
+  },
+  "isFragment": false,
+  "isExternal": false,
+  "parts": [
+    "C:",
+    "My",
+    "wizzi",
+    "stfnbssl",
+    "wizzi",
+    "packages",
+    "wizzi-utils",
+    "dist",
+    "examples",
+    "ittfScanner",
+    "ittf"
+  ],
+  "segments": [
+    "C:",
+    "My",
+    "wizzi",
+    "stfnbssl",
+    "wizzi",
+    "packages",
+    "wizzi-utils",
+    "dist",
+    "examples",
+    "ittfScanner"
+  ],
+  "basename": "ittf",
+  "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner",
+  "isTFolder": false,
+  "isInsideTFolder": false,
+  "folders": [
+    {
+      "parent": "[Circular ~]",
+      "path": "first",
+      "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+      "relPath": "first",
+      "isDirectory": true,
+      "file": {
+        "fsimpl": {
+          "kind": "filesystem"
+        },
+        "storeKind": "filesystem"
+      },
+      "isFragment": false,
+      "isExternal": false,
+      "parts": [
+        "C:",
+        "My",
+        "wizzi",
+        "stfnbssl",
+        "wizzi",
+        "packages",
+        "wizzi-utils",
+        "dist",
+        "examples",
+        "ittfScanner",
+        "ittf",
+        "first"
+      ],
+      "segments": [
+        "C:",
+        "My",
+        "wizzi",
+        "stfnbssl",
+        "wizzi",
+        "packages",
+        "wizzi-utils",
+        "dist",
+        "examples",
+        "ittfScanner",
+        "ittf"
+      ],
+      "basename": "first",
+      "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf",
+      "isTFolder": false,
+      "isInsideTFolder": false,
+      "folders": [
+        {
+          "parent": "[Circular ~.folders.0]",
+          "path": "t",
+          "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t",
+          "relPath": "first/t",
+          "isDirectory": true,
+          "file": {
+            "fsimpl": {
+              "kind": "filesystem"
+            },
+            "storeKind": "filesystem"
+          },
+          "isFragment": false,
+          "isExternal": false,
+          "parts": [
+            "C:",
+            "My",
+            "wizzi",
+            "stfnbssl",
+            "wizzi",
+            "packages",
+            "wizzi-utils",
+            "dist",
+            "examples",
+            "ittfScanner",
+            "ittf",
+            "first",
+            "t"
+          ],
+          "segments": [
+            "C:",
+            "My",
+            "wizzi",
+            "stfnbssl",
+            "wizzi",
+            "packages",
+            "wizzi-utils",
+            "dist",
+            "examples",
+            "ittfScanner",
+            "ittf",
+            "first"
+          ],
+          "basename": "t",
+          "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+          "isTFolder": true,
+          "isInsideTFolder": false,
+          "folders": [],
+          "documents": [
+            {
+              "parent": "[Circular ~.folders.0.folders.0]",
+              "path": "frag-1.sample.ittf",
+              "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t/frag-1.sample.ittf",
+              "relPath": "first/t/frag-1.sample.ittf",
+              "isDirectory": false,
+              "file": {
+                "fsimpl": {
+                  "kind": "filesystem"
+                },
+                "storeKind": "filesystem"
+              },
+              "isFragment": true,
+              "isExternal": false,
+              "parts": [
+                "C:",
+                "My",
+                "wizzi",
+                "stfnbssl",
+                "wizzi",
+                "packages",
+                "wizzi-utils",
+                "dist",
+                "examples",
+                "ittfScanner",
+                "ittf",
+                "first",
+                "t",
+                "frag-1.sample.ittf"
+              ],
+              "segments": [
+                "C:",
+                "My",
+                "wizzi",
+                "stfnbssl",
+                "wizzi",
+                "packages",
+                "wizzi-utils",
+                "dist",
+                "examples",
+                "ittfScanner",
+                "ittf",
+                "first",
+                "t"
+              ],
+              "basename": "frag-1.sample.ittf",
+              "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t",
+              "schema": "sample",
+              "folders": [],
+              "documents": [],
+              "info": {
+                "schemas": {},
+                "lib": {
+                  "documents": []
+                },
+                "test": {
+                  "documents": []
+                },
+                "example": {
+                  "documents": []
+                },
+                "util": {
+                  "documents": []
+                }
+              },
+              "analized": true,
+              "id": "d_1",
+              "ittfDocumentGraph": {
+                "__type": "IttfDocumentGraph",
+                "name": "$group",
+                "value": "",
+                "parent": null,
+                "children": [
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "alfa",
+                    "value": "frag-1",
+                    "parent": "[Circular ~.folders.0.folders.0.documents.0.ittfDocumentGraph]",
+                    "children": [],
+                    "row": 2,
+                    "col": 5,
+                    "id": 2,
+                    "commentState": 0
+                  }
+                ],
+                "fragments": {},
+                "ittfReferences": {},
+                "errorFragments": [],
+                "file": {
+                  "fsimpl": {
+                    "kind": "filesystem"
+                  },
+                  "storeKind": "filesystem"
+                },
+                "model": {
+                  "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t/frag-1.sample.ittf",
+                  "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t",
+                  "basename": "frag-1.sample.ittf",
+                  "isIttf": true,
+                  "schema": "sample",
+                  "seedName": "frag-1",
+                  "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\dist\\examples\\ittfScanner\\ittf\\first\\t\\frag-1.json.ittf"
+                },
+                "content": "$group\r\n\talfa frag-1",
+                "row": 1,
+                "col": 1,
+                "id": 1
+              },
+              "fragments": {}
+            }
+          ],
+          "info": {
+            "schemas": {},
+            "lib": {
+              "documents": []
+            },
+            "test": {
+              "documents": []
+            },
+            "example": {
+              "documents": []
+            },
+            "util": {
+              "documents": []
+            }
+          },
+          "analized": true,
+          "id": "f_2"
+        }
+      ],
+      "documents": [
+        {
+          "parent": "[Circular ~.folders.0]",
+          "path": "root.sample.ittf",
+          "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/root.sample.ittf",
+          "relPath": "first/root.sample.ittf",
+          "isDirectory": false,
+          "file": {
+            "fsimpl": {
+              "kind": "filesystem"
+            },
+            "storeKind": "filesystem"
+          },
+          "isFragment": false,
+          "isExternal": false,
+          "parts": [
+            "C:",
+            "My",
+            "wizzi",
+            "stfnbssl",
+            "wizzi",
+            "packages",
+            "wizzi-utils",
+            "dist",
+            "examples",
+            "ittfScanner",
+            "ittf",
+            "first",
+            "root.sample.ittf"
+          ],
+          "segments": [
+            "C:",
+            "My",
+            "wizzi",
+            "stfnbssl",
+            "wizzi",
+            "packages",
+            "wizzi-utils",
+            "dist",
+            "examples",
+            "ittfScanner",
+            "ittf",
+            "first"
+          ],
+          "basename": "root.sample.ittf",
+          "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+          "schema": "sample",
+          "folders": [],
+          "documents": [],
+          "info": {
+            "schemas": {},
+            "lib": {
+              "documents": []
+            },
+            "test": {
+              "documents": []
+            },
+            "example": {
+              "documents": []
+            },
+            "util": {
+              "documents": []
+            }
+          },
+          "analized": true,
+          "id": "d_2",
+          "ittfDocumentGraph": {
+            "__type": "IttfDocumentGraph",
+            "name": "tests",
+            "value": "root",
+            "parent": null,
+            "children": [
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "frag-1(",
+                "value": ")",
+                "parent": "[Circular ~.folders.0.documents.0.ittfDocumentGraph]",
+                "children": [],
+                "row": 2,
+                "col": 5,
+                "id": 2,
+                "commentState": 0,
+                "fragmentName": "frag-1"
+              }
+            ],
+            "fragments": {
+              "frag-1": {
+                "oper": "mix",
+                "baseUri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+                "name": "frag-1",
+                "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t/frag-1.sample.ittf",
+                "id": "d_1"
+              }
+            },
+            "ittfReferences": {},
+            "errorFragments": [],
+            "file": {
+              "fsimpl": {
+                "kind": "filesystem"
+              },
+              "storeKind": "filesystem"
+            },
+            "model": {
+              "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/root.sample.ittf",
+              "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+              "basename": "root.sample.ittf",
+              "isIttf": true,
+              "schema": "sample",
+              "seedName": "root",
+              "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\dist\\examples\\ittfScanner\\ittf\\first\\root.json.ittf"
+            },
+            "content": "tests root\r\n\tfrag-1()",
+            "row": 1,
+            "col": 1,
+            "id": 1
+          },
+          "fragments": {
+            "frag-1": {
+              "oper": "mix",
+              "baseUri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first",
+              "name": "frag-1",
+              "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf/first/t/frag-1.sample.ittf",
+              "id": "d_1"
+            }
+          }
+        }
+      ],
+      "info": {
+        "schemas": {},
+        "lib": {
+          "documents": []
+        },
+        "test": {
+          "documents": []
+        },
+        "example": {
+          "documents": []
+        },
+        "util": {
+          "documents": []
+        }
+      },
+      "analized": true,
+      "id": "f_1"
+    }
+  ],
+  "documents": [],
+  "info": {
+    "schemas": {},
+    "lib": {
+      "documents": []
+    },
+    "test": {
+      "documents": []
+    },
+    "example": {
+      "documents": []
+    },
+    "util": {
+      "documents": []
+    }
+  },
+  "ittfBasePath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/dist/examples/ittfScanner/ittf",
+  "jsCodeBasePath": "c:/blabla",
+  "externalFragments": [],
+  "externalIttfFsNodes": [],
+  "analized": true,
+  "id": "root-parent-folder",
+  "f_idcount": 2,
+  "d_idcount": 2
+}

@@ -13,7 +13,8 @@ var expect = require('expect.js');
 
 var _ = require('lodash');
 var file = require('../../lib/fs/file');
-var verify = require('../../lib/verify');
+var vfile = require('../../lib/fs/vfile');
+var verify = require('../../lib/helpers/verify');
 
 var mocks = require('../../lib/mocks');
 

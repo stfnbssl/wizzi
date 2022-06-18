@@ -1,7 +1,7 @@
 ﻿module 
     kind jsfile
 
-	var verify = require('../verify')
+	var verify = require('../helpers/verify')
 	var file = require('../fs/file')
 	var loader = require('./loader')
 	var errors = require('./errors')
@@ -100,6 +100,4 @@
                             else 
                                 set exception.message = '\nError evaluating ittf in uri: ' + uri + '\n' + exception.message + '\n'
                             _ fail.warn(exception)
-                            throw exception   
-
-
+                            throw exception  

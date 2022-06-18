@@ -38,7 +38,7 @@ var plugin_examples = function(step_callback) {
     // Create a filesystem factory without access control.
     // For mTrees we require the dump of the mTree
     // buildup jsWizzi script. Just to take a look.
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         globalContext: globalContext, 
         test: {
             dumps: {
@@ -70,7 +70,7 @@ var plugin_examples = function(step_callback) {
                 wizziFactoryConfig.globalContext = globalContext;
             }
             // Create a filesystem factory without access control
-            wizzi.fsnoaclFactory(wizziFactoryConfig, function(err, wf) {
+            wizzi.fsFactory(wizziFactoryConfig, function(err, wf) {
                 if (err) {
                     var fullErr = JSON.stringify(err, null, 2);
                     console.log('Error fullErr', fullErr);

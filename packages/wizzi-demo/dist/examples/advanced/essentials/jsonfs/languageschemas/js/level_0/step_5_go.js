@@ -27,7 +27,7 @@ var language_schema_js = function(step_callback) {
     
     function execute(jsonFsData) {
         // Create a json factory without access control
-        wizzi.jsonnoaclFactory({
+        wizzi.jsonFactory({
             plugins: {
                 items: [
                     'wizzi-core', 

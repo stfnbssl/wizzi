@@ -4,264 +4,355 @@ type Readonly<P, T> = {
     readonly [P in keyof T]: T[P];
 }
 
-export interface FileDef {
-    fullPath: string;
-    relPath: string;
-    content?: string;
+/**
+ * The fs Feature
+ */
+ export namespace fs {
+    export interface FileDef {
+        fullPath: string;
+        relPath: string;
+        content?: string;
+    }
+    
+    export interface FolderDef {
+        fullPath: string;
+        relPath: string;
+        documents?: FileDef[];
+    }
+    
+    export interface GetFilesOptions {
+        deep: boolean;
+        extension?: string;
+        documentContent?: boolean;
+    }
+    
+    export interface GetFoldersOptions {
+        deep: boolean;
+        tFoldersOnly?: string;
+        documentNames?: boolean;
+    }
+    
+    export interface GlobOptions {
+        removeRoot?: string;
+    }
+    
+    export interface VFile {
+        mkdir(folderPath: string, callback: cb<any>): void;
+        read(filePath: string, callback: cb<string>): void;
+        write(filePath: string, content: string, callback: cb<any>): void;
+        exists(filePath: string, callback: cb<boolean>): void;
+        unlink(filePath: string, callback: cb<any>): void;
+        deleteFolder(folderPath: string, callback: cb<any>): void;
+        copyFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        copyFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
+        moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        moveFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
+        rename(oldPath: string, newPath: string, callback: cb<any>): void;
+        isFile(filePath: string, callback: cb<boolean>): void;
+        isDirectory(folderPath: string, callback: cb<boolean>): void;
+        getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
+        getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
+        glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
+    }
+    
+    export interface VFileFS {
+        // Sync
+        mkdir(folderPath: string): any;
+        read(filePath: string): string;
+        write(filePath: string, content: string): any;
+        exists(filePath: string): boolean;
+        unlink(filePath: string): any;
+        // NOT IMPLEMENTED deleteFolder(folderPath: string): any;
+        copyFile(fromFile: string, toFile: string): any;
+        // NOT IMPLEMENTED copyFolder(fromFolder: string, toFolder: string): any;
+        // NOT IMPLEMENTED moveFile(fromFile: string, toFile: string): any;
+        // NOT IMPLEMENTED moveFolder(fromFolder: string, toFolder: string): any;
+        isFile(filePath: string): boolean;
+        isDirectory(folderPath: string): boolean;
+        getFiles(folderPath: string, options: GetFilesOptions): FileDef[];
+        getFolders(folderPath: string, options: GetFoldersOptions): FolderDef[];
+        glob(globExpr: string, options: GlobOptions): FileDef[];
+        // Async
+        mkdir(folderPath: string, callback: cb<any>): void;
+        read(filePath: string, callback: cb<string>): void;
+        write(filePath: string, content: string, callback: cb<any>): void;
+        exists(filePath: string, callback: cb<boolean>): void;
+        unlink(filePath: string, callback: cb<any>): void;
+        deleteFolder(folderPath: string, callback: cb<any>): void;
+        copyFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        copyFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
+        moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
+        isFile(filePath: string, callback: cb<boolean>): void;
+        isDirectory(folderPath: string, callback: cb<boolean>): void;
+        getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
+        getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
+        glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
+    }
+    
+    interface ParsedUri {
+        storeKind: string;
+        userId: string;
+        projectId: string;
+        path: string;
+        basename: string;
+        extension: string;
+        isIttfDocument: boolean;
+    }
+    
+    export function uriParser(uri: string): ParsedUri;
+    
+    export function vfile(): VFileFS;
+    
+    interface FsImpl {
+        stat(path: string, callback: cb<object>): any;
+    }
+    
+    export function vfile(fsImpl: FsImpl): VFileFS;
+    
+    interface VFileOptions {
+        storeName?: string;
+    }
+    
+    export function vfile(options: VFileOptions, callback: cb<VFile>): void;
+ }
+
+/**
+ * The ITTF Graph Feature
+ * This feature try to represent the fragments graph of ITTF Documents,
+ * extracting raw representations of ITTF Nodes,
+ * before the evaluation of Template commands and JsWizzi expressions.
+ * This feature is used by the ITTF Scan Feature
+ */
+export namespace ittfGraph {
+    /**
+     * Single bread crumb of a filepath
+     */
+    interface BreadCrumb {
+        uri: string;
+        name: string;
+        isLast: boolean;
+    }
+    /**
+     * Raw content and ITTF Pretty content of an ITTF Source Unit.
+     */
+    interface IttfDocumentContent {
+        content: string;
+        pretty: string;
+    }
+    /**
+     * Represents an ITTF Fragment, for the ITTF Scan Feature
+     * TODO manage fragments mixed or included by this fragment
+     */
+    export interface IttfMTreeFragment {
+        id: string;
+        oper: string;
+        name: string;
+        uri: string;
+        baseUri: string;
+        relUri: string;
+        hash: string;
+        ittfContent: string;
+        ittfPretty: string;
+    }
+    /**
+     * Represents the structure of the ITTF Source Units of an ITTF Document,
+     * once mixed and included fragments are fully resolved in depth, for the ITTF Scan Feature.
+     */
+    export interface IttfMTreeState {
+        id: string;
+        primaryPath: string;
+        primaryUri: string;
+        breadCrumbs: BreadCrumb[];
+        primaryHash: string;
+        primaryIttf: IttfDocumentContent;
+        mTree: ittfGraph.IttfDocumentGraph;
+        fragments: IttfMTreeFragment[];
+        ittfReferences: IttfMTreeReference[];
+        errorFragments: IttfMTreeFragmentError[];
+    }
+    /**
+     * TODO Represents a reference to ???
+     */
+    export interface IttfMTreeReference {
+        id: string;
+        oper: string;
+        name: string;
+        uri: string;
+        baseUri: string;
+        relUri: string;
+        documentState: IttfMTreeState,
+    }
+    export interface IttfMTreeFragmentError extends IttfMTreeFragment {
+        message: string;
+    }
+    /**
+     * Represents an ITTF Node, for the ITTF Scan Feature
+     */
+    export interface IttfMTreeExNode {
+        name: string;
+        value: string;
+        children: IttfMTreeExNode[];
+    }
+    /**
+     * Represents a not yet processed mTree of an ITTF Document, for the ITTF Scan Feature.
+     * Contains the fragments structure and the raw content of ITTF Nodes.
+     * But Template Commands and JsWizzi expressions are not evaluated.
+     */
+    export interface IttfDocumentGraph extends IttfMTreeExNode {
+        fragments: IttfMTreeFragment[];
+        ittfReferences: IttfMTreeReference[];
+        errorFragments: IttfMTreeFragmentError[];
+    }
+    export interface CreateDocumentGraphOptions {
+        fromString: boolean,
+        clean: boolean
+    }
+    export function createIttfDocumentGraphFrom(
+        mTreeOrFilepathOrContent: string | object, 
+        options: CreateDocumentGraphOptions, 
+        callback: cb<IttfDocumentGraph>
+        ): void;
 }
 
-export interface FolderDef {
-    fullPath: string;
-    relPath: string;
-    documents?: FileDef[];
+/**
+ * The ITTF Scanner Feature
+ */
+export namespace ittfScanner {
+    interface FolderScanOptions {
+        /**
+        * the name of the 'wzpackage' ITTF Document that
+        * will be generated from this folder
+        */
+        name: string;
+        /**
+        * the base path to the 'main' generated artifact
+        */
+        gitPath?: string;
+        /**
+        * the Virtual Store System used for scanning the folder
+        * default: filesystem
+        */
+        file?: fs.VFileFS;
+    }
+    interface IttfDocumentScannerOptions {
+        rootFolder: string;
+        baseIdCounter?: number;
+        /**
+        * the Virtual Store System used for scanning the folder
+        * default: filesystem
+        */
+        file?: fs.VFileFS;
+    }
+    interface TextDocumentScannerOptions {
+        /*
+        * the Virtual Store System used for scanning the folder
+        * default: filesystem
+        */
+        file?: fs.VFileFS;
+    }
+    /**
+     * Folder or document item of a folder scanned by ittfScanner.browseFolder
+     */
+    interface FsItem {
+        isFolder?: boolean;
+        /**
+         * dirname + '/' + basename
+         */
+        uri: string;
+        /**
+         * without extension
+         */
+        name: string;         
+        /**
+         * name + '.' + mime
+         */
+        basename?: string;    
+        dirname: string;
+        isIttfDocument?: boolean;
+        /**
+         * when true then isIttfDocument == true
+         */
+        isFragment?: boolean; 
+        /**
+         * Wizzi Schema of document == 'wfschema'
+         */
+        isSchema?: boolean;   
+        /**
+         * Wizzi Schema of document == 'wfjob'
+         */
+        isJob?: boolean; 
+        /**
+         * Wizzi Schema, when isIttfDocument == true
+         */
+        schema?: string;      
+        /**
+         * extension without dot '.'
+         */
+        mime?: string;        
+        hash?: string;
+        content?: string;
+    }
+    /**
+     * Result of a folder scanned by ittfScanner.browseFolder
+     */
+    interface FolderBrowseResult {
+        folderPath: string;
+        folderUri: string;
+        breadCrumbs: ittfGraph.BreadCrumb[];
+        fsitems: FsItem[];
+    }
+    interface FolderBrowseOptions {
+        rootFolder?: string;
+        /*
+        * the Virtual Store System used for scanning the folder
+        * default: filesystem
+        */
+        file?: fs.VFileFS;
+    }
+    export function scanFolder(
+        folderPath: string, 
+        options: FolderScanOptions, 
+        callback: cb<ittfGraph.IttfDocumentGraph>
+        ): void;
+    export function scanIttfDocument(
+        folderPath: string, 
+        options: IttfDocumentScannerOptions, 
+        callback: cb<ittfGraph.IttfDocumentGraph>
+        ): void;
+    export function scanTextDocument(
+        documentPath: string, 
+        options: TextDocumentScannerOptions, 
+        callback: cb<ittfGraph.IttfDocumentGraph>
+        ): void;
+    export function browseFolder(
+        folderPath: string, 
+        options: FolderBrowseOptions, 
+        callback: cb<FolderBrowseResult>
+        ): void;
 }
 
-export interface GetFilesOptions {
-    deep: boolean;
-    extension?: string;
-    documentContent?: boolean;
+/**
+ * The Pretty Feature
+ */
+export namespace pretty {
+    export function prettifyIttfHtml(rootNode: ittfGraph.IttfDocumentGraph, callback:cb<string>): void;
+    export function prettifyIttfHtmlFromString(ittfContent: string, options: {}, callback:cb<string>): void;
 }
 
-export interface GetFoldersOptions {
-    deep: boolean;
-    tFoldersOnly?: string;
-    documentNames?: boolean;
-}
-
-export interface GlobOptions {
-    removeRoot?: string;
-}
-
-export interface VFile {
-    mkdir(folderPath: string, callback: cb<any>): void;
-    read(filePath: string, callback: cb<string>): void;
-    write(filePath: string, content: string, callback: cb<any>): void;
-    exists(filePath: string, callback: cb<boolean>): void;
-    unlink(filePath: string, callback: cb<any>): void;
-    deleteFolder(folderPath: string, callback: cb<any>): void;
-    copyFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    copyFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
-    moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    moveFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
-    rename(oldPath: string, newPath: string, callback: cb<any>): void;
-    isFile(filePath: string, callback: cb<boolean>): void;
-    isDirectory(folderPath: string, callback: cb<boolean>): void;
-    getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
-    getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
-    glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
-}
-
-export interface VFileFS {
-    // Sync
-    mkdir(folderPath: string): any;
-    read(filePath: string): string;
-    write(filePath: string, content: string): any;
-    exists(filePath: string): boolean;
-    unlink(filePath: string): any;
-    // NOT IMPLEMENTED deleteFolder(folderPath: string): any;
-    copyFile(fromFile: string, toFile: string): any;
-    // NOT IMPLEMENTED copyFolder(fromFolder: string, toFolder: string): any;
-    // NOT IMPLEMENTED moveFile(fromFile: string, toFile: string): any;
-    // NOT IMPLEMENTED moveFolder(fromFolder: string, toFolder: string): any;
-    isFile(filePath: string): boolean;
-    isDirectory(folderPath: string): boolean;
-    getFiles(folderPath: string, options: GetFilesOptions): FileDef[];
-    getFolders(folderPath: string, options: GetFoldersOptions): FolderDef[];
-    glob(globExpr: string, options: GlobOptions): FileDef[];
-    // Async
-    mkdir(folderPath: string, callback: cb<any>): void;
-    read(filePath: string, callback: cb<string>): void;
-    write(filePath: string, content: string, callback: cb<any>): void;
-    exists(filePath: string, callback: cb<boolean>): void;
-    unlink(filePath: string, callback: cb<any>): void;
-    deleteFolder(folderPath: string, callback: cb<any>): void;
-    copyFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    copyFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
-    moveFile(fromFile: string, toFile: string, callback: cb<any>): void;
-    isFile(filePath: string, callback: cb<boolean>): void;
-    isDirectory(folderPath: string, callback: cb<boolean>): void;
-    getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
-    getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
-    glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
-}
-
-interface FsImpl {
-    stat(path: string, callback: cb<object>): any;
-}
-
-interface VFileOptions {
-    storeName?: string;
-}
-
-interface ParsedUri {
-    storeKind: string;
-    userId: string;
-    projectId: string;
-    path: string;
-    basename: string;
-    extension: string;
-    isIttfDocument: boolean;
-}
-
-export function uriParser(uri: string): ParsedUri;
-export function vfile(): VFileFS;
-export function vfile(fsImpl: FsImpl): VFileFS;
-export function vfile(options: VFileOptions, callback: cb<VFile>): void;
-
-export interface IttfMTreeFragment {
-    id: string;
-    oper: string;
-    name: string;
-    uri: string;
-    baseUri: string;
-    relUri: string;
-    hash: string;
-    ittfContent: string;
-    ittfPretty: string;
-}
-
-export interface IttfMTreeFragmentError extends IttfMTreeFragment {
-    message: string;
-}
-
-export interface IttfMTreeState {
-    id: string;
-    primaryPath: string;
-    primaryUri: string;
-    breadCrumbs: BreadCrumb[];
-    primaryHash: string;
-    primaryIttf: IttfDocumentContent;
-    mTree: IttfMTreeEx;
-    fragments: IttfMTreeFragment[];
-    ittfReferences: IttfMTreeReference[];
-    errorFragments: IttfMTreeFragmentError[];
-}
-
-export interface IttfMTreeReference {
-    id: string;
-    oper: string;
-    name: string;
-    uri: string;
-    baseUri: string;
-    relUri: string;
-    documentState: IttfMTreeState,
-}
-
-export interface IttfMTreeExNode {
-    name: string;
-    value: string;
-    children: IttfMTreeExNode[];
-}
-
-export interface IttfMTreeEx extends IttfMTreeExNode {
-    fragments: IttfMTreeFragment[];
-    ittfReferences: IttfMTreeReference[];
-    errorFragments: IttfMTreeFragmentError[];
-}
-
-interface FolderScanOptions {
-    /* 
-    * the name of the 'wzpackage' wizzi model that
-    * will be generated from this folder
-    ***/
-    name: string;
-    /*
-    * the base path to the 'main' generated artifact
-    ***/
-    gitPath?: string;
-    /*
-    * the virtual filesystem used for scanning the folder
-    * default: filesystem
-    ***/
-    file?: VFileFS;
-}
-
-export namespace folderScanner {
-    export function scan(folderPath: string, options: FolderScanOptions, callback: cb<IttfMTreeEx>): void;
-}
-
-interface TextDocumentScannerOptions {
-    /*
-    * the virtual filesystem used for scanning the folder
-    * default: filesystem
-    ***/
-    file?: VFileFS;
-}
-
-export namespace textDocumentScanner {
-    export function scan(folderPath: string, options: TextDocumentScannerOptions, callback: cb<IttfMTreeEx>): void;
-}
-
-interface IttfDocumentContent {
-    content: string;
-    pretty: string;
-}
-
-
-interface IttfDocumentScannerOptions {
-    rootFolder: string;
-    baseIdCounter?: number;
-    /*
-    * the virtual filesystem used for scanning the folder
-    * default: filesystem
-    ***/
-    file?: VFileFS;
-}
-
-export namespace ittfDocumentScanner {
-    export function scan(folderPath: string, options: IttfDocumentScannerOptions, callback: cb<IttfMTreeState>): void;
-}
-
-interface BreadCrumb {
-    uri: string;
-    name: string;
-    isLast: boolean;
-}
-
-interface FsItem {
-    isFolder?: boolean;
-    uri: string;          // dirname + '/' + basename
-    name: string;         // without extension
-    basename?: string;    // name + '.' + mime
-    dirname: string;
-    isIttfDocument?: boolean;
-    isFragment?: boolean; // when true always isIttfDocument is true
-    isSchema?: boolean;   // schema === 'wfschema'
-    isJob?: boolean;      // schema === 'wfjob'
-    schema?: string;      // wizzi schema when isIttfDocument is true
-    mime?: string;        // extension without dot '.'
-    hash?: string;
-    content?: string;
-}
-
-interface FolderBrowseResult {
-    folderPath: string;
-    folderUri: string;
-    breadCrumbs: BreadCrumb[];
-    fsitems: FsItem[];
-}
-
-interface FolderBrowseOptions {
-    rootFolder?: string;
-    /*
-    * the virtual filesystem used for scanning the folder
-    * default: filesystem
-    ***/
-    file?: VFileFS;
-}
-
-export namespace folderBrowse {
-    export function scan(folderPath: string, options: FolderBrowseOptions, callback: cb<FolderBrowseResult>): void;
-}
-
+/**
+ * Return value of the verify.parseNameValue() function
+ */
 interface ParseNameValueReturn {
     name(): string;
     value(): string;
     hasValue(): boolean;
 }
 
+/**
+ * Helper functions
+ */
 export namespace verify {
     export function startsWith(text: string, prefix: string): string;
     export function endsWith(text: string, suffix: string): string;

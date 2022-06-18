@@ -7,7 +7,7 @@
 var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var url = require('url');
-// var verify = require('../verify')
+// var verify = require('../helpers/verify')
 //
 module.exports = function parse(uri, callback) {
     if (verify.isNotEmpty(uri) === false) {

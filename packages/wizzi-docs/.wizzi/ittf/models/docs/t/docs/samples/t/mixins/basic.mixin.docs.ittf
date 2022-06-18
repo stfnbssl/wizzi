@@ -1,0 +1,26 @@
+﻿$group
+
+	sample Basic 
+		summary
+	
+		ittf mydb.rdbms.ittf
+			kind primary
+			- table 
+				- primaryKey( id )
+				- column( id, string, Id )
+				- column( id, guid, Id )
+
+		ittf t/column.rdbms.ittf
+			kind mixin
+			- column ${'$'}{name}
+				- $params name, type, label
+				- type ${'$'}{name}
+				- label ${'$'}{label}
+
+		ittf t/primaryKey.rdbms.ittf
+			kind mixin
+			- index ${'$'}{name}_PK
+				- is-primary
+				- column ${'$'}{name}
+
+		$include wfschema.rdbms.sample

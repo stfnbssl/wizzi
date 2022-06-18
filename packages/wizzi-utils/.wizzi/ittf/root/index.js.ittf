@@ -1,117 +1,73 @@
 ﻿module 
     kind jsfile
 
-	# isWebpackTarget ${isWebpackTarget}
+    # TODO lots of clean up
+    # eliminate ittfDocumentGraph, asIsLoader, ittfWriter already in ittfGraph
+    # eliminate file, vfile already in fs
+
     $if isWebpackTarget
 		#
 			# This source targets the browser
 			# (isWebpackTarget == true)
+    $else
+        # isWebpackTarget ${isWebpackTarget}
     
-	var ittfMTreeEx = require('./lib/ittfTree/ittfMTreeEx')
-	var asIsLoader = require('./lib/ittfTree/asIsLoader')
-	var ittfWriter = require('./lib/ittfTree/ittfWriter')
-	var folderScanner = require('./lib/scanners/folderScanner')
-	var folderBrowse = require('./lib/scanners/folderBrowse')
-	var ittfDocumentScanner = require('./lib/scanners/ittfDocumentScanner')
-	var textDocumentScanner = require('./lib/scanners/textDocumentScanner')
-	var ittfHtmlPrettifier = require('./lib/prettifiers/ittfHtmlPrettifier')
+    # features
+    var ittfGraph = require('./lib/ittfGraph/index')
+    var ittfScanner = require('./lib/ittfScanner/index')
+    var pretty = require('./lib/pretty/index')
+    var fs = require('./lib/fs/index')
+    var helpers = require('./lib/helpers/index')
+    var lorem = require('./lib/lorem/index')
+    var crypto = require('./lib/crypto/index')
+    $if isWebpackTarget == false
+        var mocks = require('./lib/mocks/index')
+
+    # 
 	var md
         set module.exports
             { 
-	set md.fail = require('./lib/fail')
-	set md.option = require('./lib/option')
-	set md.config = require('./lib/config')
-	set md.verify = require('./lib/verify')
-	set md.node = require('./lib/node')
-	set md.nodeErrors = require('./lib/errors')
-	set md.exampleErrors = require('./lib/exampleErrors')
-	set md.lineparser = require('./lib/lineparser')
-	$if isWebpackTarget == false
-		set md.mocks = require('./lib/mocks')
-		set md.requireFromString = require('./lib/requireFromString')
-	set md.Coder = require('./lib/coder')
-	set md.lorem = require('./lib/lorem')
-	set md.encdec = require('./lib/crypto/encdec')
-	set md.errors = require('./lib/errors')
 
-	# fs
+    # features
+    set md.ittfGraph = ittfGraph
+    set md.ittfScanner = ittfScanner
+    set md.pretty = pretty
+    set md.fs = fs  
+    set md.crypto = crypto  
+    set md.lorem = lorem  
+    set md.helpers = helpers  
+    $if isWebpackTarget == false
+        set md.mocks = mocks  
+
+	# legacy
+	set md.ittfFinder = ittfGraph.ittfFinder
+    set md.ittfWriter = ittfGraph.ittfWriter
+    set md.asIsLoader = ittfGraph.asIsLoader
+    set md.IttfDocumentGraph = ittfGraph.IttfDocumentGraph
+    set md.fail = helpers.fail
+	set md.option = helpers.option
+	set md.config = helpers.config
+	set md.verify = helpers.verify
+	set md.node = helpers.node
+	set md.lineparser = helpers.lineparser
 	$if isWebpackTarget == false
-		set md.file = require('./lib/fs/file')
-	set md.vfile = require('./lib/fs/vfile')
-	set md.uriParser = require('./lib/fs/uriParser')
-    var fsUtils = require('./lib/fs/utils')
-    set md.fileInfoByPath = fsUtils.fileInfoByPath
+		set md.requireFromString = helpers.requireFromString
+	set md.Coder = helpers.coder
+	set md.encdec = crypto
+	$if isWebpackTarget == false
+		set md.file = fs.file
+	    set md.vfile = fs.vfile
+	set md.uriParser = fs.uriParser
+    set md.fileInfoByPath = fs.fileInfoByPath
+
+	# errors
+    set md.errors = require('./lib/errors')
+	set md.exampleErrors = require('./lib/exampleErrors')
+    # errors - legacy
+    set md.nodeErrors = require('./lib/errors')
+
 	$if isWebpackTarget
 		# expose nodejs path to the browser
 		set md.path = require('path')
 		# expose the filesystem for browsers
 		set md.BrowserFS = require('browserfs')
-
-	# class IttfMTreeEx
-	set md.IttfMTreeEx = ittfMTreeEx
-	set md.ittfWriter = ittfWriter
-	
-	# function asIsLoader
-	#   string ittfDocumentUri
-	#   { options
-	#     { file?
-	#       api-ref wizzi.utils.file
-	#   callback?
-	set md.asIsLoader = asIsLoader
-	
-	# { folderScanner
-	#   m scan
-	#     string folderPath
-	#     { options
-	#       string name
-	#       string gitPath 
-	#   callback
-	set md.folderScanner = folderScanner
-	
-	# { folderBrowse
-	#   m scan
-	#     string folderPath
-	#     { options
-	#       string baseFolder
-	#   callback
-	set md.folderBrowse = folderBrowse
-
-	# { ittfDocumentScanner
-	#   m scan
-	#     string documentPath
-	#     { options
-	#       string rootFolder
-	#   callback
-	set md.ittfDocumentScanner = ittfDocumentScanner
-
-	# { textDocumentScanner
-	#   m scan
-	#     string documentPath
-	#     { options
-	#       string baseFolder
-	#   callback
-	set md.textDocumentScanner = textDocumentScanner
-
-	# function
-	#   { rootNode
-	#     api-ref wizzi-utils.IttfMTreeEx
-	#   { options
-	#   callback
-	set md.ittfHtmlPrettifier = ittfHtmlPrettifier
-
-	#
-	set md.prettifyFromString
-		function
-			param ittfContent
-			param callback
-			_ ittfMTreeEx.createFrom
-				@ ittfContent
-				{
-					@ fromString true
-				f_cb(mTree)
-					_ ittfHtmlPrettifier
-						@ mTree
-						{
-						f_cb( pretty )
-							r_cb( pretty.prettyLines.join('\n') )
-

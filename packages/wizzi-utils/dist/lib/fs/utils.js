@@ -5,7 +5,7 @@
 */
 'use strict';
 var path = require('path');
-var verify = require('../verify');
+var verify = require('../helpers/verify');
 var md = module.exports = {};
 md.fileInfoByPath = function(filePath, baseFolder) {
     if (typeof baseFolder === 'undefined') {

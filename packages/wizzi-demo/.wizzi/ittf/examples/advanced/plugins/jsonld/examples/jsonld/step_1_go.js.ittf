@@ -20,7 +20,7 @@
 		# DEMO: how to load an jsonld ittf document into an mTree.
 	+
 	# Create a filesystem factory without access control
-	_ wizzi.fsnoaclFactory
+	_ wizzi.fsFactory
 		f_cb_throw( wf )
 			# Now we can load the mTree
 			_ wf.loadMTree
@@ -40,7 +40,7 @@
 	function jsonld_model
 		# Create a filesystem factory without access control
 		# requiring the local plugin.
-		_ wizzi.fsnoaclFactory
+		_ wizzi.fsFactory
 			@ wizziFactoryConfig
 			f_cb_throw( wf )
 				# Now we can load the model
@@ -71,7 +71,7 @@
 						# _ jsonld_document_artifact
 
 	function jsonld_document_artifact
-		_ wizzi.fsnoaclFactory
+		_ wizzi.fsFactory
 			@ wizziFactoryConfig
 			f_cb_throw( wf )
 				_ wf.loadModelAndGenerateArtifact

@@ -10,7 +10,7 @@
 	var utilNode = require('../../../util/utilNode')
 	var lineParser = require('../../../util/lineParser')
 	var lorem = require('wizzi-utils').lorem
-    var prettify = require('wizzi-utils').prettifyFromString
+    var pretty = require('wizzi-utils').pretty
 	var myname = 'wizzi-web.htm1.document.main'
 
 	var md = module.exports = {}

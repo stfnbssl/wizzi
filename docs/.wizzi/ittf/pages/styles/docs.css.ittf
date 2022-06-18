@@ -156,7 +156,22 @@
     . ittf-panel-title
         font-size 0.8rem
         font-weight 700
-        $$ margin-bottom 1px
+
+    . js-panel
+        margin-bottom 20px
+    
+    . js-panel-title
+        font-size 0.8rem
+        font-weight 700
+        padding-left 10px
+
+    . bash-panel
+        margin-bottom 20px
+    
+    . bash-panel-title
+        font-size 0.8rem
+        font-weight 700
+        padding-left 10px
 
     media (min-width: 768px)
         . ittf-panel-title

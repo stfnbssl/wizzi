@@ -9,15 +9,15 @@ var path = require('path');
 var url = require('url');
 var verify = require('wizzi-utils').verify;
 //
-module.exports = function parse(uri, mongodbBaseFolder) {
+module.exports = function parse(uri, mongoBaseFolder) {
     if (verify.isNotEmpty(uri) === false) {
         return error(
             'InvalidArgument', 'parse', { parameter: 'uri', message: 'The uri parameter must be a string. Received: ' + uri }
         );
     }
-    if (verify.isNotEmpty(mongodbBaseFolder) === false) {
+    if (verify.isNotEmpty(mongoBaseFolder) === false) {
         return error(
-            'InvalidArgument', 'parse', { parameter: 'mongodbBaseFolder', message: 'The mongodbBaseFolder parameter must be a string. Received: ' + mongodbBaseFolder }
+            'InvalidArgument', 'parse', { parameter: 'mongoBaseFolder', message: 'The mongoBaseFolder parameter must be a string. Received: ' + mongoBaseFolder }
         );
     }
     uri = uri.toLowerCase();
@@ -63,8 +63,8 @@ module.exports = function parse(uri, mongodbBaseFolder) {
     ret.projectId = parts[0];
     parts.shift();
     ret.path = parts.join('/');
-    if (mongodbBaseFolder && mongodbBaseFolder.length > 0) {
-        ret.internalPath = verify.unixifyPath(path.join(mongodbBaseFolder, ret.userId, ret.projectId, ret.path))
+    if (mongoBaseFolder && mongoBaseFolder.length > 0) {
+        ret.internalPath = verify.unixifyPath(path.join(mongoBaseFolder, ret.userId, ret.projectId, ret.path))
         ;
     }
     // log 'parseuri.ret', ret

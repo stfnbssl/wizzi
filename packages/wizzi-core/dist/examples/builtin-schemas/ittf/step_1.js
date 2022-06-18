@@ -30,7 +30,7 @@ function createWizziFactory(globalContext, callback) {
         wizzi = require('wizzi');
     }
     console.log('"wizzi" package version', wizzi.version);
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         plugins: {
             items: [
                 'wizzi-js', 
@@ -114,12 +114,12 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
         }, callback)
     })
 }
-function executeGenerateModelTypes(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
+function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
             return callback(err);
         }
-        wf.generateModelTypes(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
+        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
     })
 }
 function getFiles(srcpath, schema) {

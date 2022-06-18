@@ -55,29 +55,29 @@ var RunnerServer = (function () {
         this.globalContext = _.merge(this.globalContext, context)
         ;
     }
-    RunnerServer.prototype.registerFsNoAclFactory = function(name, options) {
+    RunnerServer.prototype.registerfsFactory = function(name, options) {
         if (verify.isNotEmpty(name) === false) {
             return error(
-                'InvalidArgument', 'registerFsNoAclFactory', { parameter: 'name', message: 'The name parameter must be a string. Received: ' + name }
+                'InvalidArgument', 'registerfsFactory', { parameter: 'name', message: 'The name parameter must be a string. Received: ' + name }
             );
         }
         if (verify.isObject(options) === false) {
             return error(
-                'InvalidArgument', 'registerFsNoAclFactory', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+                'InvalidArgument', 'registerfsFactory', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
             );
         }
         if (verify.isObject(options.plugins) === false) {
             return error(
-                'InvalidArgument', 'registerFsNoAclFactory', { parameter: 'options.plugins', message: 'The options.plugins parameter must be an object. Received: ' + options.plugins }
+                'InvalidArgument', 'registerfsFactory', { parameter: 'options.plugins', message: 'The options.plugins parameter must be an object. Received: ' + options.plugins }
             );
         }
         if (verify.isArray(options.plugins.items) === false) {
             return error(
-                'InvalidArgument', 'registerFsNoAclFactory', { parameter: 'options.plugins.items', message: 'The options.plugins.items parameter must be an array. Received: ' + options.plugins.items }
+                'InvalidArgument', 'registerfsFactory', { parameter: 'options.plugins.items', message: 'The options.plugins.items parameter must be an array. Received: ' + options.plugins.items }
             );
         }
         if (this.prepared) {
-            throw new Error('wizzi/runnerServer/registerFsNoAclFactory error: Cannot register a factory. The RunnerServer has been already prepared.');
+            throw new Error('wizzi/runnerServer/registerfsFactory error: Cannot register a factory. The RunnerServer has been already prepared.');
         }
         options.user = 'stefi';
         options.role = 'admin';

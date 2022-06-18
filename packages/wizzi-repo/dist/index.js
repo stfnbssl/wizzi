@@ -71,12 +71,12 @@ md.dbfile = function dbfile(options, callback) {
             'InvalidArgument', 'dbfile', { parameter: 'options.mongoUri', message: 'The options.mongoUri parameter must be a string. Received: ' + options.mongoUri }
         ));
     }
-    if (verify.isNotEmpty(options.mongodbBaseFolder) === false) {
+    if (verify.isNotEmpty(options.mongoBaseFolder) === false) {
         return callback(error(
-            'InvalidArgument', 'dbfile', { parameter: 'options.mongodbBaseFolder', message: 'The options.mongodbBaseFolder parameter must be a string. Received: ' + options.mongodbBaseFolder }
+            'InvalidArgument', 'dbfile', { parameter: 'options.mongoBaseFolder', message: 'The options.mongoBaseFolder parameter must be a string. Received: ' + options.mongoBaseFolder }
         ));
     }
-    var fsimpl = new MongoFsImpl(options.mongoUri, options.mongodbBaseFolder);
+    var fsimpl = new MongoFsImpl(options.mongoUri, options.mongoBaseFolder);
     fsimpl.open(function(err, notUsed) {
         if (err) {
             return callback(err);

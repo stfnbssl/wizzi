@@ -39,7 +39,7 @@
 		set wizziFactoryConfig.globalContext = globalContext
 	
 	# Create a filesystem factory without access control
-	_ wizzi.fsnoaclFactory
+	_ wizzi.fsFactory
 		@ wizziFactoryConfig
 		f_cb_throw( wf )
 			# Now we can load the model

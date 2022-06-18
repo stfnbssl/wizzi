@@ -4,95 +4,50 @@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\root\index.js.ittf
 */
 'use strict';
+// TODO lots of clean up
+// eliminate ittfDocumentGraph, asIsLoader, ittfWriter already in ittfGraph
+// eliminate file, vfile already in fs
 // isWebpackTarget false
-var ittfMTreeEx = require('./lib/ittfTree/ittfMTreeEx');
-var asIsLoader = require('./lib/ittfTree/asIsLoader');
-var ittfWriter = require('./lib/ittfTree/ittfWriter');
-var folderScanner = require('./lib/scanners/folderScanner');
-var folderBrowse = require('./lib/scanners/folderBrowse');
-var ittfDocumentScanner = require('./lib/scanners/ittfDocumentScanner');
-var textDocumentScanner = require('./lib/scanners/textDocumentScanner');
-var ittfHtmlPrettifier = require('./lib/prettifiers/ittfHtmlPrettifier');
-var md = module.exports = {};
-md.fail = require('./lib/fail');
-md.option = require('./lib/option');
-md.config = require('./lib/config');
-md.verify = require('./lib/verify');
-md.node = require('./lib/node');
-md.nodeErrors = require('./lib/errors');
-md.exampleErrors = require('./lib/exampleErrors');
-md.lineparser = require('./lib/lineparser');
-md.mocks = require('./lib/mocks');
-md.requireFromString = require('./lib/requireFromString');
-md.Coder = require('./lib/coder');
-md.lorem = require('./lib/lorem');
-md.encdec = require('./lib/crypto/encdec');
-md.errors = require('./lib/errors');
-// fs
-md.file = require('./lib/fs/file');
-md.vfile = require('./lib/fs/vfile');
-md.uriParser = require('./lib/fs/uriParser');
-var fsUtils = require('./lib/fs/utils');
-md.fileInfoByPath = fsUtils.fileInfoByPath;
-// class IttfMTreeEx
-md.IttfMTreeEx = ittfMTreeEx;
-md.ittfWriter = ittfWriter;
-// function asIsLoader
-// string ittfDocumentUri
-// { options
-// { file?
-// api-ref wizzi.utils.file
-// callback?
-md.asIsLoader = asIsLoader;
-// { folderScanner
-// m scan
-// string folderPath
-// { options
-// string name
-// string gitPath
-// callback
-md.folderScanner = folderScanner;
-// { folderBrowse
-// m scan
-// string folderPath
-// { options
-// string baseFolder
-// callback
-md.folderBrowse = folderBrowse;
-// { ittfDocumentScanner
-// m scan
-// string documentPath
-// { options
-// string rootFolder
-// callback
-md.ittfDocumentScanner = ittfDocumentScanner;
-// { textDocumentScanner
-// m scan
-// string documentPath
-// { options
-// string baseFolder
-// callback
-md.textDocumentScanner = textDocumentScanner;
-// function
-// { rootNode
-// api-ref wizzi-utils.IttfMTreeEx
-// { options
-// callback
-md.ittfHtmlPrettifier = ittfHtmlPrettifier;
+// features
+var ittfGraph = require('./lib/ittfGraph/index');
+var ittfScanner = require('./lib/ittfScanner/index');
+var pretty = require('./lib/pretty/index');
+var fs = require('./lib/fs/index');
+var helpers = require('./lib/helpers/index');
+var lorem = require('./lib/lorem/index');
+var crypto = require('./lib/crypto/index');
+var mocks = require('./lib/mocks/index');
 //
-md.prettifyFromString = function(ittfContent, callback) {
-    ittfMTreeEx.createFrom(ittfContent, {
-        fromString: true
-     }, function(err, mTree) {
-        if (err) {
-            return callback(err);
-        }
-        ittfHtmlPrettifier(mTree, {}, function(err, pretty) {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, pretty.prettyLines.join('\n'));
-        })
-    })
-}
-;
+var md = module.exports = {};
+// features
+md.ittfGraph = ittfGraph;
+md.ittfScanner = ittfScanner;
+md.pretty = pretty;
+md.fs = fs;
+md.crypto = crypto;
+md.lorem = lorem;
+md.helpers = helpers;
+md.mocks = mocks;
+// legacy
+md.ittfFinder = ittfGraph.ittfFinder;
+md.ittfWriter = ittfGraph.ittfWriter;
+md.asIsLoader = ittfGraph.asIsLoader;
+md.IttfDocumentGraph = ittfGraph.IttfDocumentGraph;
+md.fail = helpers.fail;
+md.option = helpers.option;
+md.config = helpers.config;
+md.verify = helpers.verify;
+md.node = helpers.node;
+md.lineparser = helpers.lineparser;
+md.requireFromString = helpers.requireFromString;
+md.Coder = helpers.coder;
+md.encdec = crypto;
+md.file = fs.file;
+md.vfile = fs.vfile;
+md.uriParser = fs.uriParser;
+md.fileInfoByPath = fs.fileInfoByPath;
+// errors
+md.errors = require('./lib/errors');
+md.exampleErrors = require('./lib/exampleErrors');
+// errors - legacy
+md.nodeErrors = require('./lib/errors');

@@ -63,7 +63,7 @@ var IttfDocumentStore = (function () {
             var that = this;
             this.storeImpl.init({
                 mongoUri: storeInfo.storeUri, 
-                mongodbBaseFolder: storeInfo.storeBaseFolder
+                mongoBaseFolder: storeInfo.storeBaseFolder
              }, function(err, notUsed) {
                 if (err) {
                     return callback(err);

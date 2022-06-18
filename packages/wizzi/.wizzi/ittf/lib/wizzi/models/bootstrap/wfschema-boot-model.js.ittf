@@ -28,7 +28,7 @@
 
 	#
 		# The main class imported and instantiated by the model types generator
-		# (wizzi.wizziFactory.generateModelTypes).
+		# (wizzi.wizziFactory.generateModelDoms).
 		#
 		# This is an in-memory trasformer of a loaded 'SCHEMA_NAME.wfschema.ittf' source document.
 		#

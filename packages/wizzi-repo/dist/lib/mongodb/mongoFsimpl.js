@@ -17,15 +17,15 @@ var MongoClient = require('mongodb').MongoClient
     Document = require('./fs/document'),
     mongoUriParser = require('./mongoUriParser');
 var MongoFsImpl = (function () {
-    function MongoFsImpl(mongoUri, mongodbBaseFolder) {
+    function MongoFsImpl(mongoUri, mongoBaseFolder) {
         _classCallCheck(this, MongoFsImpl);
-        if (verify.isNotEmpty(mongodbBaseFolder) === false) {
+        if (verify.isNotEmpty(mongoBaseFolder) === false) {
             throw new Error(error(
-                'InvalidArgument', 'ctor', { parameter: 'mongodbBaseFolder', message: 'The mongodbBaseFolder parameter must be a string. Received: ' + mongodbBaseFolder }
+                'InvalidArgument', 'ctor', { parameter: 'mongoBaseFolder', message: 'The mongoBaseFolder parameter must be a string. Received: ' + mongoBaseFolder }
             ));
         }
         this.mongoUri = mongoUri || 'mongodb://localhost:27017/test';
-        this.mongodbBaseFolder = mongodbBaseFolder;
+        this.mongoBaseFolder = mongoBaseFolder;
         this.mongoDb = null;
         this.connecting = false;
         this.classType = 'wizzi-repo.mongodb.MongoFsImpl';
@@ -86,7 +86,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -115,7 +115,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -148,7 +148,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -181,7 +181,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -214,7 +214,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -254,7 +254,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -283,7 +283,7 @@ var MongoFsImpl = (function () {
                     message: 'The documentUri parameter must be a string. Received: ' + documentUri
                  }));
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             console.log('__is_error ', parsedUri);
             return callback(parsedUri);
@@ -307,7 +307,7 @@ var MongoFsImpl = (function () {
                 'InvalidArgument', 'createWriteStream', { parameter: 'documentUri', message: 'The documentUri parameter must be a string. Received: ' + documentUri }
             );
         }
-        var parsedUri = mongoUriParser(documentUri, this.mongodbBaseFolder);
+        var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
             return parsedUri;
         }

@@ -11,7 +11,7 @@
 					@ __dirname
 					@ 'step_${step}'
 				_ path.join
-					@ demoUploadMongodbBaseFolder
+					@ demoUploadMongoBaseFolder
 					@ '${section}'
 					@ 'level_${level}'
 					@ 'step_${step}'

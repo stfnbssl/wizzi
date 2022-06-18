@@ -102,7 +102,7 @@ function createWizziFactory(globalContext, callback) {
         wizzi = require('wizzi');
     }
     console.log('"wizzi" package version', wizzi.version);
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         plugins: {
             
          }, 

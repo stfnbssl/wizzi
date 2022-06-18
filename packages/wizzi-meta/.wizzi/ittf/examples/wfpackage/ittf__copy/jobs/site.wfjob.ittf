@@ -1,0 +1,27 @@
+﻿wfjob documentation
+	
+	$
+        var styles_folder = path.join(__dirname, '..', 'site', 'styles');
+        var js_folder     = path.join(__dirname, '..', 'site', 'js');
+		var dest_folder   = path.join(__dirname, '..', '..', 'outputs', 'site');
+
+	line js
+		cwd-folder ${js_folder}
+
+        wfjob/any_js()
+
+	line styles
+		cwd-folder ${styles_folder}
+		
+		wfjob/any_css()
+		wfjob/any_md()
+		wfjob/any_svg()
+		wfjob/any_plain_css()
+		wfjob/any_plain_svg()
+		wfjob/any_plain_jpg()
+
+	production
+		dest-folder ${dest_folder}
+        line-ref js
+        line-ref styles
+        

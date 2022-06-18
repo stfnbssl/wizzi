@@ -1,7 +1,7 @@
 ﻿base_test( util.node )
 
 	$append imports
-		var ittfTree = require('wizzi-utils').IttfMTreeEx
+		var ittfGraph = require('wizzi-utils').IttfDocumentGraph
 		var node = require('../../../lib/util/node')
 
 	$include nodeUpdates
@@ -10,11 +10,11 @@
 	it should modify nodes
 		foreach item in nodeUpdates
 			if item.action === 'remove'
-				_ ittfTree.createFrom
+				_ ittfGraph.createFrom
                     @ item.original
                     f_cb( original )
                         # log 'original', original.toString()
-                        _ ittfTree.createFrom
+                        _ ittfGraph.createFrom
                             @ item.expected
                             f_cb( expected )
                                 var toremove = original.find(item.name)
@@ -26,14 +26,14 @@
                                 tobe_true( original.equals(expected) )
 
 			if item.action === 'replace'
-				_ ittfTree.createFrom
+				_ ittfGraph.createFrom
                     @ item.original
                     f_cb( original )
                         # log 'original', original.toString()
-                        _ ittfTree.createFrom
+                        _ ittfGraph.createFrom
                             @ item.replacer
                             f_cb( replacer )
-                                _ ittfTree.createFrom
+                                _ ittfGraph.createFrom
                                     @ item.expected
                                     f_cb( expected )
                                         var toreplace = original.find(item.name)
@@ -49,7 +49,7 @@
 	it should find commands
 		foreach item in nodeFinds
 			if item.action === 'findCommand'
-				_ ittfTree.createFrom
+				_ ittfGraph.createFrom
                     @ item.original
                     f_cb( original )
                         # log 'original', original.toString()

@@ -26,7 +26,7 @@
                 tr( The genContext class, wizzi, lib/artifact/genContext.js.ittf, lib/artifact/genContext.js )
                 tr( The Artifact Generation function, wizzi, lib/artifact/asyncArtifactGenerator.js.ittf, lib/artifact/asyncArtifactGenerator.js )
                 tr( The wfjob Wizzi Schema definition, wizzi-core, lib/wizzi/schemas/wfjob.wfschema.ittf )
-                tr( The ITTF html prettifier, wizzi-utils, lib/prettifiers/ittfHtmlPrettifier.js.ittf, lib/prettifiers/ittfHtmlPrettifier.js )
+                tr( The ITTF html prettifier, wizzi-utils, lib/pretty/ittfHtmlPrettifier.js.ittf, lib/pretty/ittfHtmlPrettifier.js )
                 tr( The file helper module, wizzi-utils, lib/fs/file.js.ittf, lib/fs/file.js )
                 tr( The vfile helper module, wizzi-utils, lib/fs/vfile.js.ittf, lib/fs/vfile.js )
                 

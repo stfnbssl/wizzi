@@ -11,7 +11,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 var StringWriter = require('../stringWriter');
 var file = require('../../fs/file');
-var verify = require('../../verify');
+var verify = require('../../helpers/verify');
 var block = require('./block');
 var interpolate = require('../interpolate');
 var errors = require('../errors');

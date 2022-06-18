@@ -1,0 +1,38 @@
+module 
+    kind jsfile
+
+    var ittfFinder = require('./ittfFinder')
+    var ittfWriter = require('./ittfWriter')
+    var asIsLoader = require('./asIsLoader/index')
+    var IttfDocumentGraph = require('./ittfDocumentGraph')
+
+	var md
+        set module.exports
+            { 
+
+	set md.ittfFinder = ittfFinder
+    set md.ittfWriter = ittfWriter
+    set md.asIsLoader = asIsLoader
+    set md.IttfDocumentGraph = IttfDocumentGraph
+
+	set md.createAsIsLoaderFromString
+        function 
+			param text
+            param options
+			param callback
+            _ asIsLoader.createFromString
+                @ text
+                @ options
+                @ callback
+
+	set md.createIttfDocumentGraphFrom
+        function 
+			param mTreeOrFilepathOrContent
+			param options
+			param callback
+            _ IttfDocumentGraph.createFrom
+                @ mTreeOrFilepathOrContent
+                @ options
+                @ callback                
+
+                

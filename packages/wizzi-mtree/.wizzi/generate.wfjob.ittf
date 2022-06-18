@@ -1,4 +1,4 @@
-﻿wfjob v5-wizzi-mtree
+﻿wfjob wizzi-mtree
 	
 	$
 		var ittf_meta_folder      = path.join(__dirname, 'ittf', 'meta');

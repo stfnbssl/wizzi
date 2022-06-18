@@ -19,15 +19,15 @@ var globalContext = {};
 var wizzi_job_mongodb_level_0_step_1_exec = function(step_callback) {
     heading1('Advanced-example starting');
     var testMongodbUri = 'mongodb://localhost:27017/test';
-    var testMongodbBaseFolder = 'c:/wizzifactory/users';
+    var testMongoBaseFolder = 'c:/wizzifactory/users';
     wizzi.executeWizziJob({
         user: 'stefi', 
         role: 'admin', 
         storeKind: 'mongodb', 
         config: {
-            wfBaseFolder: testMongodbBaseFolder, 
+            wfBaseFolder: testMongoBaseFolder, 
             storeUri: testMongodbUri, 
-            storeBaseFolder: testMongodbBaseFolder, 
+            storeBaseFolder: testMongoBaseFolder, 
             plugins: [
                 'wizzi-core', 
                 'wizzi-js', 

@@ -1,0 +1,33 @@
+﻿module 
+    kind jsfile
+
+	var ittfHtmlPrettifier = require('./ittfHtmlPrettifier')
+
+	var md
+        set module.exports
+            { 
+
+	set md.prettifyIttfHtml
+        function 
+			param rootNode
+			param options
+			param callback
+            _ ittfHtmlPrettifier
+                @ rootNode
+                @ options
+                @ callback
+
+	set md.prettifyIttfHtmlFromString
+		function
+			param ittfContent
+			param callback
+			_ ittfDocumentGraph.createFrom
+				@ ittfContent
+				{
+					@ fromString true
+				f_cb(mTree)
+					_ ittfHtmlPrettifier
+						@ mTree
+						{
+						f_cb( pretty )
+							r_cb( pretty.prettyLines.join('\n') )	

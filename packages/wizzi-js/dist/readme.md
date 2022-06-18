@@ -1,6 +1,6 @@
 # wizzi-js
 
-A wizzi default plugin for javascript and typescript code-generation..
+A Wizzi Core Plugin for javascript and typescript code-generation..
 
 ## Work still in progress
 

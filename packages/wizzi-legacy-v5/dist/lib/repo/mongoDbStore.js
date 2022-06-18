@@ -37,13 +37,13 @@ var MongoDbStore = (function () {
                 'InvalidArgument', 'init', { parameter: 'options.mongoUri', message: 'The options.mongoUri parameter must be a string. Received: ' + options.mongoUri }
             ));
         }
-        if (verify.isNotEmpty(options.mongodbBaseFolder) === false) {
+        if (verify.isNotEmpty(options.mongoBaseFolder) === false) {
             return callback(error(
-                'InvalidArgument', 'init', { parameter: 'options.mongodbBaseFolder', message: 'The options.mongodbBaseFolder parameter must be a string. Received: ' + options.mongodbBaseFolder }
+                'InvalidArgument', 'init', { parameter: 'options.mongoBaseFolder', message: 'The options.mongoBaseFolder parameter must be a string. Received: ' + options.mongoBaseFolder }
             ));
         }
         var that = this;
-        this.fsimpl = new MongoFsImpl(options.mongoUri, options.mongodbBaseFolder);
+        this.fsimpl = new MongoFsImpl(options.mongoUri, options.mongoBaseFolder);
         this.fsimpl.open(function(err, notUsed) {
             if (err) {
                 return callback(err)

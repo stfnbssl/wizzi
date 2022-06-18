@@ -1,4 +1,4 @@
-﻿wfjob wizzi-html
+﻿wfjob wizzi-web
 	
 	$
 		var ittf_meta_folder    = path.join(__dirname, 'ittf', 'meta');

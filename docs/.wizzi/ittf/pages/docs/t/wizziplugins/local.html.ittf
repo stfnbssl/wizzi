@@ -20,7 +20,7 @@
             title Sample Wizzi factory instantiation with local plugins
             ittf
                 ...
-                    _ wizzi.fsnoaclFactory
+                    _ wizzi.fsFactory
                         { plugins
                             [ items
                                 @ './packages/wizzi-core/dist/index.js'

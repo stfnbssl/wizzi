@@ -38,7 +38,7 @@
 		checked_call( parsedUri )
 			_ mongoUriParser
 				@ documentUri
-				@ this.mongodbBaseFolder
+				@ this.mongoBaseFolder
 
 		var that = this
 		_ this.db

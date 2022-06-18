@@ -25,8 +25,6 @@
 	+
 	#
 		# params
-		#   string userid
-		#   string role
 		#   { options
 		#     { repo
 		#       string storeKind
@@ -43,6 +41,36 @@
 		#         string dumpsBaseFolder
 	set md.createFactory
 		function createFactory
+			{ options
+			callback
+			+
+			# check_cb( callback, createFactory )
+			# check_cb_object( options, createFactory )
+			+
+			_ wizziFactory.createFactory
+				@ options
+				@ callback
+	+
+	#
+		# params
+		#   string userid
+		#   string role
+		#   { options
+		#     { repo
+		#       string storeKind
+		#         oneOf filesystem, mongodb, localstorage
+		#     { plugins
+		#       [ items
+		#         string pluginName
+		#       string 
+		#     { globalContext
+		#     { dumps
+		#       string dumpsBaseFolder
+		# 	    { mTreeBuildUpScript
+		#         boolean dump
+		#         string dumpsBaseFolder
+	set md.createAclFactory
+		function createAclFactory
 			string userid
 			string role
 			{ options
@@ -57,7 +85,7 @@
 				@ options
 				@ callback
 	+
-	set md.fsnoaclFactory
+	set md.fsFactory
 		function
 			param options
 			param callback
@@ -77,16 +105,16 @@
 				@ 'admin'
 				@ options
 				@ callback
-	set md.fsFactory = md.fsnoaclFactory
+	set md.fsFactory = md.fsFactory
 	+
-	set md.dbnoaclFactory
+	set md.dbFactory
 		function
 			string storeUri
 			string storeBaseFolder
 			{ options
 			callback
 			+
-			# log 'wizzi.index.dbnoaclFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
+			# log 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
 			+
 			set options.repo
 				{
@@ -94,47 +122,41 @@
 					@ storeUri storeUri
 					@ storeBaseFolder storeBaseFolder
 			_ md.createFactory
-				@ 'stefi'
-				@ 'admin'
 				@ options
 				@ callback
-	set md.mongoFactory = md.dbnoaclFactory
+	set md.mongoFactory = md.dbFactory
 	+
-	set md.jsonnoaclFactory
+	set md.jsonFactory
 		function
 			{ options
 				{ fsJson
 			callback
 			+
-			# log 'wizzi.index.jsonnoaclFactory.fsJson', options.fsJson
+			# log 'wizzi.index.jsonFactory.fsJson', options.fsJson
 			+
 			set options.repo
 				{
 					@ storeKind 'json'
 					@ storeFsJson options.fsJson
 			_ md.createFactory
-				@ 'stefi'
-				@ 'admin'
 				@ options
 				@ callback
-	set md.jsonFactory = md.jsonnoaclFactory
+	set md.jsonFactory = md.jsonFactory
 	+
-	set md.browsernoaclFactory
+	set md.browserFactory
 		function
 			{ options
 			callback
 			+
-			# log 'wizzi.index.jsonnoaclFactory.jsonFsData', options.jsonFsData
+			# log 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
 			+
 			set options.repo
 				{
 					@ storeKind 'browser'
 			_ md.createFactory
-				@ 'stefi'
-				@ 'admin'
 				@ options
 				@ callback
-	set md.browserFactory = md.browsernoaclFactory
+	set md.browserFactory = md.browserFactory
 	+
 	$include index/start_runnerServer
 	$include index/wizzi_job

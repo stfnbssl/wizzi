@@ -67,6 +67,12 @@
             ittf
                 git wizzi -version
 
+        bash-panel
+            title See the Wizzi CLI help
+            ittf
+                git wizzi --help
+
+
         . doc-title-2
             id nodejs
             style position:relative
@@ -87,23 +93,3 @@
                 git clone https://github.com/stfnbssl/vscode-ittf.git
                 rem copy the vscode-ittf folder into the VsCode Extensions folder
                 rem in windows %USERPROFILE%\.vscode\extensions
-
-        bash-panel
-            title See the Wizzi CLI help
-            ittf
-                git wizzi --help
-
-        bash-panel
-            title Create the Wizzi Starter Package
-            ittf
-                git wizzi create-starter
-
-
-        js-panel
-            title js panel
-            ittf
-                var x = 0;
-                var y = add(x + 1);
-
-
-

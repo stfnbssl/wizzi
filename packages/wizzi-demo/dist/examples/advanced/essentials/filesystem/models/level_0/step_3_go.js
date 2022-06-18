@@ -43,7 +43,7 @@ var wizzimodel = function(step_callback) {
         ]
     };
     // Create a filesystem factory without access control
-    wizzi.fsnoaclFactory({
+    wizzi.fsFactory({
         plugins: {
             items: [
                 'wizzi-core', 

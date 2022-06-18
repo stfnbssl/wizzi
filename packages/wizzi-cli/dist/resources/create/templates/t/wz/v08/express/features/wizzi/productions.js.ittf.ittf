@@ -5,8 +5,7 @@ $group
     import wizziUtils from 'wizzi-utils'
     var
         {
-            @ ittfDocumentScanner
-            @ folderBrowse
+            @ ittfScanner
             @ IttfMTreeState
             @ FolderBrowseResult
         = wizziUtils
@@ -90,7 +89,7 @@ $group
                     => 
                         param resolve
                         param reject
-                        _ ittfDocumentScanner.scan
+                        _ ittfScanner.scanIttfDocument
                             @ filePath
                             { 
                                 @ rootFolder
@@ -110,7 +109,7 @@ $group
                     => 
                         param resolve
                         param reject
-                        _ folderBrowse.scan
+                        _ ittfScanner.browseFolder
                             @ filePath
                             { 
                                 @ rootFolder

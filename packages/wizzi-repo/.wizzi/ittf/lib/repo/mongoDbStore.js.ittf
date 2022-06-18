@@ -21,13 +21,13 @@
 			m init
 				{ options
 					string mongoUri
-					string mongodbBaseFolder
+					string mongoBaseFolder
 				callback
 				var that = this
 				set this.fsimpl
 					new MongoFsImpl
 						@ options.mongoUri
-						@ options.mongodbBaseFolder
+						@ options.mongoBaseFolder
 				_ this.fsimpl.open
 					f_cb( notUsed )
 						_ vfile

@@ -65,7 +65,7 @@ var wizzimodel = function(step_callback) {
         wizziFactoryConfig.globalContext = globalContext;
     }
     // Create a filesystem factory without access control
-    wizzi.fsnoaclFactory(wizziFactoryConfig, function(err, wf) {
+    wizzi.fsFactory(wizziFactoryConfig, function(err, wf) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);

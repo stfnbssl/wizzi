@@ -34,7 +34,7 @@ var plugin_examples = function(step_callback) {
     */
     
     // Create a filesystem factory without access control
-    wizzi.fsnoaclFactory(function(err, wf) {
+    wizzi.fsFactory(function(err, wf) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
@@ -58,7 +58,7 @@ var plugin_examples = function(step_callback) {
     function jsonld_model() {
         // Create a filesystem factory without access control
         // requiring the local plugin.
-        wizzi.fsnoaclFactory(wizziFactoryConfig, function(err, wf) {
+        wizzi.fsFactory(wizziFactoryConfig, function(err, wf) {
             if (err) {
                 var fullErr = JSON.stringify(err, null, 2);
                 console.log('Error fullErr', fullErr);
@@ -84,7 +84,7 @@ var plugin_examples = function(step_callback) {
         });
     }
     function jsonld_document_artifact() {
-        wizzi.fsnoaclFactory(wizziFactoryConfig, function(err, wf) {
+        wizzi.fsFactory(wizziFactoryConfig, function(err, wf) {
             if (err) {
                 var fullErr = JSON.stringify(err, null, 2);
                 console.log('Error fullErr', fullErr);

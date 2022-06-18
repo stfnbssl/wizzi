@@ -5,7 +5,7 @@
 */
 'use strict';
 var util = require('util');
-var fail = require('./fail');
+var fail = require('./helpers/fail');
 
 var md = module.exports = {};
 

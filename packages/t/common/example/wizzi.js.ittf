@@ -49,7 +49,7 @@ $group
         param globalContext
         param callback
 
-        _ wizziIndex.fsnoaclFactory
+        _ wizziIndex.fsFactory
             {
                 { plugins
                     $hook plugins

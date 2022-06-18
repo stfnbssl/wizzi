@@ -16,9 +16,9 @@
 
 		ctor
 			param mongoUri
-			string mongodbBaseFolder
+			string mongoBaseFolder
 			set this.mongoUri = mongoUri || 'mongodb://localhost:27017/test'
-			set this.mongodbBaseFolder = mongodbBaseFolder
+			set this.mongoBaseFolder = mongoBaseFolder
 			set this.mongoDb = null
 			set this.connecting = false
             set this.classType = 'wizzi-repo.mongodb.MongoFsImpl'
@@ -116,7 +116,7 @@
 			checked_call_return( parsedUri )
 				_ mongoUriParser
 					@ documentUri
-					@ this.mongodbBaseFolder
+					@ this.mongoBaseFolder
 			return
 				_ this.mongoDb.createWriteStream
 					@ parsedUri.internalPath

@@ -9,7 +9,7 @@ var util = require('util');
 
 var expect = require('expect.js');
 var ittfTemp = require('../../lib/util/ittfTemp');
-var ittfFsNode = require('../../lib/scanners/ittfFsNode');
+var ittfFsNode = require('../../lib/ittfScanner/ittfFsNode');
 var root;
 
 describe("the ittfFsNode class", function() {

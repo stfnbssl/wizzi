@@ -4,7 +4,7 @@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\mocks\index.js.ittf
 */
 'use strict';
-var verify = require('../verify');
+var verify = require('../helpers/verify');
 var file = require('../fs/file');
 var loader = require('./loader');
 var errors = require('./errors');

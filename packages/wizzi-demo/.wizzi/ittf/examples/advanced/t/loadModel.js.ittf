@@ -36,7 +36,7 @@
 
 	
 	# Create a filesystem factory without access control
-	_ wizzi.fsnoaclFactory
+	_ wizzi.fsFactory
 		{
 			@ plugins
 				{

@@ -25,7 +25,7 @@ var wizziIndex = require('../../index');
 pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
 function createWizziFactory(globalContext, callback) {
-    wizziIndex.fsnoaclFactory({
+    wizziIndex.fsFactory({
         plugins: {
             items: [
                 './wizzi-js/dist/index', 

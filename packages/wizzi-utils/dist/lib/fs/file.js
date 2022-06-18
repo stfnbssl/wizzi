@@ -9,7 +9,7 @@ var path = require('path');
 var _ = require('lodash');
 var iconv = require('iconv-lite');
 var glob = require('glob');
-var verify = require('../verify');
+var verify = require('../helpers/verify');
 var errors = require('../errors');
 var md = module.exports = {};
 var pathSeparatorRe = /[\/\\]/g;

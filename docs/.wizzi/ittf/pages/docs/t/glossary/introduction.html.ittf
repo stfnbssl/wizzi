@@ -103,6 +103,11 @@
                 span
                     + An ITTF Root Node is the root node of an ITTF Source Unit
 
+            glo-item( ITTF Scan Feature )
+                span
+                    + The ITTF Scan Feature is a Wizzi Feature for 
+                        \b keeping tracks and easily retrieve the dependencies of mixed and included ITTF Fragments.
+
             glo-item( ITTF Source Unit )
                 span
                     + An ITTF Source Unit is an ITTF Node branch with a name,
@@ -367,6 +372,12 @@
                         \b Typed elements become javascript classes and in a Wizzi Schema
                         \b you can write methods of the element classes of a Wizzi Model DOM,
                         \b for retrieving and manipulating the loaded data.
+
+            glo-item( Wizzi Store System )
+                span 
+                    + A Wizzi Store System implements a Virtual File System
+                        \b for retrieving ITTF Documents. Currently there are three 
+                        \b Wizzi Store System: filesystem, mongodb and json.
 
             glo-item( wizzifier )
                 span

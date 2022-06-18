@@ -45,7 +45,7 @@
 	# Create a filesystem factory without access control.
 	# For mTrees we require the dump of the mTree
 	# buildup jsWizzi script. Just to take a look. 
-	_ wizzi.fsnoaclFactory
+	_ wizzi.fsFactory
 		{
 			@ globalContext globalContext
 			@ test
