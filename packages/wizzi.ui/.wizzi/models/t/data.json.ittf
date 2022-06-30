@@ -1,0 +1,39 @@
+$group
+    useData true
+    { data
+    
+    useBlog true
+    { blog
+        name "blog"
+        Name "Blog"
+        [ dataModels
+            {
+                name "post"
+                Name "Post"
+                Title "Blog post"
+                Titles "Blog posts"
+                collectionName "posts"
+                [ fields
+                    {
+                        name "_id"
+                        type "oid"
+                        isListItem true
+                        ctrlId "fd_1_post_id"
+                        test "id"
+                    {
+                        name "author"
+                        type "string"
+                        isListItem true
+                        ctrlId "fd_1_post_author"
+                        test "Stefi"
+                    {
+                        name "title"
+                        type "string"
+                        isListItem true
+                        ctrlId "fd_1_post_title"
+                        test "My postulates"
+                    {
+                        name "content"
+                        type "string"
+                        ctrlId "fd_1_post_content"
+                        test "Bla bla"

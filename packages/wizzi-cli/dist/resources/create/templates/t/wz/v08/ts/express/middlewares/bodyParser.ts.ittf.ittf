@@ -10,6 +10,8 @@ $group
         @ MiddlewareType
         from '../features/app/types'
     +
+    # Node.js request body parsing middleware which parses the incoming request body before your handlers, 
+    # and make it available under req.body property. It simplifies the incoming request.
     export 
         const BodyParserMiddleware
             :ref MiddlewareType
@@ -26,3 +28,4 @@ $group
                             { 
                                 @ limit '50mb'
                                 @ extended true
+                    log 'BodyParserMiddleware installed'

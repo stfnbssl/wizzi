@@ -21,8 +21,8 @@ $group
         _ inquirer.prompt(questions).then
             => 
                 param answers
-                _ console.log('\nWizzi plugin type:')
-                _ console.log(JSON.stringify(answers, null, '  '))
+                log '\nWizzi plugin type:'
+                log JSON.stringify(answers, null, '  ')
                 set answers.author = {}
                 set answers.license = {}
                 set answers.license.name = "MIT"

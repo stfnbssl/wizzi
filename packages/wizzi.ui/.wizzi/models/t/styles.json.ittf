@@ -1,0 +1,14 @@
+$group
+    { styles
+        usePalx false
+    useStyledComponents true
+    { styledComponents
+    useStyledSystem true
+    { styledSystem
+    useAphrodite false
+    { aphrodite
+        disableImportant true
+    useTailwindcss false
+    { tailwindcss
+    useExpoStyles false
+    { expoStyles

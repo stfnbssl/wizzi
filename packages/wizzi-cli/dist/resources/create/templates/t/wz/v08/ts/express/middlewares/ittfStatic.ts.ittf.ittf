@@ -219,7 +219,7 @@ $group
                                     _ wizziProds.generateArtifactFs(filePath, modelContext).then
                                         => 
                                             param generated
-                                            # log 'generated.artifactContent', generated.artifactContent
+                                            # loog 'generated.artifactContent', generated.artifactContent
                                             _ res.writeHead
                                                 @ 200
                                                 { 

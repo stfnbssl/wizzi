@@ -48,7 +48,7 @@ $group
                     ._ then
                         => 
                             param responseData
-                            log 'apicalls.getApiToken.audience', audience, 'responseData', responseData
+                            # loog 'apicalls.getApiToken.audience', audience, 'responseData', responseData
                             return responseData
     
     export 
@@ -72,7 +72,7 @@ $group
                                     ._ then
                                         => 
                                             param responseData
-                                            log 'apicalls.getUsers responseData', responseData
+                                            # loog 'apicalls.getUsers responseData', responseData
                                             return responseData
     export 
         async-function getUser
@@ -97,7 +97,7 @@ $group
                                     ._ then
                                         => 
                                             param responseData
-                                            log 'apicalls.getUser.userId', userId, 'responseData', responseData
+                                            # loog 'apicalls.getUser.userId', userId, 'responseData', responseData
                                             return responseData
     
     function getOptions

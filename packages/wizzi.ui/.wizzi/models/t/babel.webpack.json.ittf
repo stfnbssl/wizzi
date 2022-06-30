@@ -1,0 +1,58 @@
+$group
+    useBabel true
+    { babel
+        useParser true
+        useRuntime false
+        useDinamicImport true
+        addModuleExport false
+        useVendor true
+        { vendor
+            compactPath "./src/vendor"
+        useResolutions true
+        [ resolutions
+            {
+                name "**/babel-core"
+                value "7.0.0-bridge.0"
+    useHotReplacement true
+    { hotReplacement
+    useWebpack true
+    { webpack
+        useCss true
+        { css
+        useStyleLoader false
+        { styles
+        useMiniCssExtract true
+        { miniCssExtract
+        useSass false
+        { sass
+        useHtml true
+        { html
+            template "./src/index.html"
+            filename "index.html"
+        useMinimizer true
+        useWorker true
+        useStatsWriter false
+        useIgnore true
+        useCodeSplitting true
+        useEnv false
+        { env
+            [ items
+                {
+                    name "NODE_ENV"
+                    value "env('NODE_ENV')"
+                {
+                    name "SERVER_URL"
+                    value "env('SERVER_URL')"
+                {
+                    name "API_SERVER_URL"
+                    value "env('API_SERVER_URL')"
+                {
+                    name "DEPLOY_ENVIRONMENT"
+                    value "env('DEPLOY_ENVIRONMENT')"
+                {
+                    name "BUILD_TIMESTAMP"
+                    value "Date.now()"
+        useDevServer true
+        { devServer
+            contentBase "path.join(__dirname, 'src')"
+    useResolutions true

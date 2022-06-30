@@ -9,9 +9,9 @@ $group
         from './types'
     ${'$'}if wzCtx.Build.useMongoDb
         import 
-            @ UserModelBuilder
-            @ GetUserModel
-            from './mongo/user'
+            @ AuthUserModelBuilder
+            @ GetAuthUserModel
+            from './mongo/authuser'
         import 
             @ TokenModelBuilder
             @ GetTokenModel
@@ -33,7 +33,7 @@ $group
         +
         const authModelGetters
             { 
-                @ GetUserModel
+                @ GetAuthUserModel
                 @ GetTokenModel
                 @ GetAccountModel
         +
@@ -42,7 +42,7 @@ $group
                 :ref ModelBuilderType
             =
                 [ 
-                    @ UserModelBuilder
+                    @ AuthUserModelBuilder
                     @ TokenModelBuilder
                     @ AccountModelBuilder
 

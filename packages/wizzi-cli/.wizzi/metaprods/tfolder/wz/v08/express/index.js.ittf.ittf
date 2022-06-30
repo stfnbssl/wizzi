@@ -15,7 +15,7 @@ $group
         try 
             _ start
         catch ex
-            log ex
+            log "Express App failed to start. Exception", ex
 
     ${'$'}if wzCtx.Build.useNetlify
         set module.exports = app

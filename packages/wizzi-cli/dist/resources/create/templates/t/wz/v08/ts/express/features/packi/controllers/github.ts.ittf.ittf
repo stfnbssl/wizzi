@@ -123,7 +123,7 @@ $group
                     _ authManager.getAccessTokenFromAccount(request.params.uid, 'github.com').then
                         => 
                             param accessToken
-                            _ console.log('packi.github.commitRepository.owner.name.token', owner, name, accessToken)
+                            # loog 'packi.github.commitRepository.owner.name.token', owner, name, accessToken
                             _ githubApiCalls.updateBranch
                                 @ files
                                 { 

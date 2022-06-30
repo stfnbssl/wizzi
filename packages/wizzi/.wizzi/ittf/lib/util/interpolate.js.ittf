@@ -55,7 +55,7 @@
                     else 
                         set val = data
                         for ; i<len; i++
-                            if keyParts[i] in val
+                            if val && keyParts[i] in val
                                 set val = val[keyParts[i]]
                             else 
                                 return placeholder

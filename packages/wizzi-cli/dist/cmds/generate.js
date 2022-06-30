@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\generate.js.ittf
-    utc time: Tue, 20 Jul 2021 11:08:44 GMT
+    utc time: Wed, 29 Jun 2022 03:20:16 GMT
 */
 'use strict';
 const path = require('path');
@@ -14,7 +14,7 @@ const wizzi = require('wizzi');
 const config = require('../utils/config');
 function generateSchemas(schemasToGen, wfJobFolder, destPath, packageName, plugins) {
     async.mapSeries(schemasToGen, function(schemaName, callback) {
-        console.log('wizzi-cli.generate.Generating schema ' + schemaName);
+        // loog 'wizzi-cli.generate.Generating schema ' + schemaName
         var options = {};
         if (plugins) {
             options = {
@@ -35,7 +35,7 @@ function generateSchemas(schemasToGen, wfJobFolder, destPath, packageName, plugi
                         depth: null
                      })));
             }
-            console.log('wizzi-cli.generate.Generate schema result', result);
+            // loog 'wizzi-cli.generate.Generate schema result', result
             callback(null, result);
         })
     }, function(err, result) {
@@ -52,7 +52,7 @@ module.exports = (name) => {
         return ;
     }
     const configInstance = require(configPath);
-    console.log('wizzi-cli.generate.configInstance', configInstance);
+    // loog 'wizzi-cli.generate.configInstance', configInstance
     const x_pluginsBaseFolder = configInstance.pluginsBaseFolder || __dirname;
     if (!configInstance.pluginsBaseFolder) {
         console.log(chalk.red('wizzi-cli.generate - pluginsBaseFolder not set'))

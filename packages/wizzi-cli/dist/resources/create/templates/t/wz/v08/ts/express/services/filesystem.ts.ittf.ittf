@@ -67,7 +67,7 @@ $group
                     @ packiTemplatesFolder
                 = config
             var packiTemplatesPath = path.join(__dirname, '..', '..', '..', packiTemplatesFolder)
-            _ console.log('filesystem.start.Packi templates path: ', packiTemplatesPath)
+            # loog 'filesystem.start.Packi templates path: ', packiTemplatesPath
             return 
                 new Promise
                     => 
@@ -80,7 +80,7 @@ $group
                                 param fsJson
                                 if err
                                     _ rejects(err)
-                                _ console.log('filesystem.start.created FsJson')
+                                # loog 'filesystem.start.created FsJson'
                                 _ jsonfile
                                     { 
                                         @ fsJson
@@ -88,7 +88,7 @@ $group
                                         param err
                                         param result
                                         set vfile = result
-                                        _ console.log('filesystem.start.created json vfile')
+                                        # loog 'filesystem.start.created json vfile'
                                         set docman = JsonComponents.createDocumentManager(fsJson)
                                         _ docman.uploadFolder
                                             @ packiTemplatesPath
@@ -103,7 +103,7 @@ $group
                                                 _ list.then
                                                     => 
                                                         param value
-                                                        _ console.log('filesystem.start.At start got packi templates', value)
+                                                        # loog 'filesystem.start.At start got packi templates', value
                                                         _ resolve(FsDbDriver)
                                                     ._ catch
                                                         => 
@@ -222,23 +222,23 @@ $group
                                 @ packiTemplatesFolder
                             = saveConfig
                         var templateFolder = path.join(__dirname, '..', '..', '..', packiTemplatesFolder, id)
-                        _ console.log('filesystem.savePackiTemplate.id,path: ', id, templateFolder)
+                        # loog 'filesystem.savePackiTemplate.id,path: ', id, templateFolder
                         try 
                             let result
                                 await 
                                     _ deleteFolder(templateFolder)
-                            _ console.log('filesystem.savePackiTemplate.deleteFolder.result: ', result)
+                            # loog 'filesystem.savePackiTemplate.deleteFolder.result: ', result
                             await 
                                 _ asyncForEach
                                     _ Object.keys(files)
                                     async=> 
                                         param file
                                             :string 
-                                        _ console.log('filesystem.savePackiTemplate.writeFile.begin: ', path.join(templateFolder, file))
+                                        # loog 'filesystem.savePackiTemplate.writeFile.begin: ', path.join(templateFolder, file)
                                         let result
                                             await 
                                                 _ writeFile(path.join(templateFolder, file), files[file].contents)
-                                        _ console.log('filesystem.savePackiTemplate.writeFile.result: ', result)
+                                        # loog 'filesystem.savePackiTemplate.writeFile.result: ', result
                             return 
                                 _ Promise.resolve
                                     { 

@@ -35,6 +35,18 @@ function ittfFsNode_step_1(callback) {
         name: 'first', 
         gitPath: 'c:/blabla'
      };
+    ittfFsNode_step_1_exec(folderPath, options, callback)
+}
+function ittfFsNode_step_1_outside(callback) {
+    console.log('wizzi-utils.examples.ittfFsNode_step_1_outside START');
+    var folderPath = path.join(__dirname, 'ittf', 'outside', 'first');
+    var options = {
+        name: 'first', 
+        gitPath: 'c:/blabla'
+     };
+    ittfFsNode_step_1_exec(folderPath, options, callback)
+}
+function ittfFsNode_step_1_exec(folderPath, options, callback) {
     var removeRoot = path.dirname(folderPath);
     console.log('folderPath, removeRoot', folderPath, removeRoot);
     // var baseFolder = path.basename(folderPath)
@@ -184,7 +196,8 @@ function folderBrowse_step_1() {
 var ittfScanner_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
     // _ step_1
-    ittfFsNode_step_1(function(err, result1) {
+    // _ ittfFsNode_step_1
+    ittfFsNode_step_1_outside(function(err, result1) {
         if (err) {
             console.log('err', err);
             throw new Error(err.message);

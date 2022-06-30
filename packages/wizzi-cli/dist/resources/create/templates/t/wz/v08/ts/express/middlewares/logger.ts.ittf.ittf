@@ -1,11 +1,15 @@
 $group
 
+    ${'$'}
+        var useMorgan = wzCtx.Build.useExpress && wzCtx.Build.useLogger && wzCtx.Build.logger.useMorgan
     import 
         @ Application
         @ Request
         @ Response
         @ RequestHandler
         from 'express'
+    ${'$'}if useMorgan
+        import morgan from 'morgan'
     import 
         @ MiddlewareType
         from '../features/app/types'
@@ -16,18 +20,25 @@ $group
                 => 
                     param app
                         :ref Application
-                    _ app.use
-                        => 
-                            param request
-                                :ref Request
-                            param response
-                                :ref Response
-                            param next
-                            _ console.log
-                                `lit 
-                                    + 
-                                    @ request.method
-                                    + &nbsp;
-                                    @ request.path
-                                    + 
-                            _ next()
+                    ${'$'}if useMorgan
+                        _ app.use
+                            _ morgan
+                                @ 'combined'
+                        log 'LoggerMiddleware installed. Using Morgan'
+                    ${'$'}else
+                        _ app.use
+                            => 
+                                param request
+                                    :ref Request
+                                param response
+                                    :ref Response
+                                param next
+                                _ console.log
+                                    `lit 
+                                        + 
+                                        @ request.method
+                                        + &nbsp;
+                                        @ request.path
+                                        + 
+                                _ next()
+                        log 'LoggerMiddleware installed'

@@ -7,13 +7,13 @@ $group
     
     export-default 
         function getSecured
-            log 'middleware.getSecured called'
+            # loog 'middleware.getSecured called'
             return 
                 function secured
                     param req
                     param res
                     param next
-                    log 'middleware.secured called', req.user
+                    # loog 'middleware.secured called', req.user
                     if req.user
                         return 
                             _ next

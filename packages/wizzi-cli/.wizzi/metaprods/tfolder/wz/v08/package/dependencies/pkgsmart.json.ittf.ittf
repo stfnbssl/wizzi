@@ -39,7 +39,6 @@
 		husky "^0.14.3"				${'$'}${'$'} Git hooks for Node.js, manage your hooks from your package.json. https://githooks.com/
 		jsdom "^11.10.0"			${'$'}${'$'} jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with Node.js
 		prettier "latest"
-		recompose "^0.26.0"			${'$'}${'$'} Recompose is a React utility belt for function components and higher-order components. See the GitHub project page for more information.
 		rimraf "^2.6.2"
 		xmlhttprequest "^1.8.0"     ${'$'}${'$'} node-XMLHttpRequest is a wrapper for the built-in http client to emulate the browser XMLHttpRequest object.
 		ws "^3.2.0"					${'$'}${'$'} ws is a simple to use, blazing fast, and thoroughly tested WebSocket client and server implementation.

@@ -9,40 +9,65 @@ module
 	let cmd = args._[0]
     log 'args', args, 'cmd', cmd
 
-    if cmd == 'ui'
+    if cmd == 'ts-ui'
         _ create
             {
                 @ template 'ts/react'
-                @ pkgName 'wizzi.ui'
-    elif cmd == 'account'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.ui'
+    elif cmd == 'ts-account'
         _ create
             {
                 @ template 'ts/account_site'
-                @ pkgName 'wizzi.account'
-    elif cmd == 'site'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.account'
+    elif cmd == 'ts-site'
         _ create
             {
                 @ template 'ts/express_site'
-                @ pkgName 'wizzi.site'
-    elif cmd == 'backend'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.site'
+    elif cmd == 'ts-backend'
         _ create
             {
                 @ template 'ts/express_backend'
-                @ pkgName 'wizzi.backend'
-    elif cmd == 'editor'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.backend'
+    elif cmd == 'ts-editor'
         _ create
             {
                 @ template 'ts/webpack_editor'
-                @ pkgName 'wizzi.editor'
-    elif cmd == 'pageforms'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.editor'
+    elif cmd == 'ts-pageforms'
         _ create
             {
                 @ template 'ts/webpack_pageforms'
-                @ pkgName 'wizzi.pageforms'
+                @ pkgName '../../wizzi.webapp/packages/wizzi.pageforms'
+    elif cmd == 'js-express'
+        _ create
+            {
+                @ template 'js/express'
+                @ pkgName 'demo.js.express'
+    elif cmd == 'js-gatsby'
+        _ create
+            {
+                @ template 'js/gatsby'
+                @ pkgName 'demo.js.gatsby'
+    elif cmd == 'js-pure-nodejs'
+        _ create
+            {
+                @ template 'js/pure_nodejs'
+                @ pkgName 'demo.js.pure_nodejs'
     elif cmd == 'js-react'
         _ create
             {
                 @ template 'js/webpack_react'
-                @ pkgName 'demo.js.react'
-    else
+                @ pkgName 'demo.js.webpack_react'
+    elif cmd == 'js-react_mui'
         _ create
+            {
+                @ template 'js/webpack_react_mui'
+                @ pkgName 'demo.js.webpack_react_mui'
+    elif cmd == 'js-webpack'
+        _ create
+            {
+                @ template 'js/webpack'
+                @ pkgName 'demo.js.webpack'
+    else
+        _ create        

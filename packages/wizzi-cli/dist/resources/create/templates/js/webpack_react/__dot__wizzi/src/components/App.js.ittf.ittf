@@ -30,8 +30,7 @@ module
             prop classes
             ${'$'}if wzCtx.Build.react.useRedux
                 prop userState
-            ${'$'}if wzCtx.Build.react.useRedux
-                log 'components/App.userState', userState, userState.themeName
+                # loog 'components/App.userState', userState, userState.themeName
             return
                 . { classes.root }
                     ${'$'}if wzCtx.Build.react.useRedux

@@ -103,14 +103,14 @@ module
                 const filePath = path.join(basePath, pathname)
                     # ??? urlPathName.substr(routePath.length);
                 const extname = path.extname(filePath)
-                _ console.log('ittf.pathname, pathname, filePath', urlPathName, pathname, filePath, path.extname(filePath))
+                # loog 'ittf.pathname, pathname, filePath', urlPathName, pathname, filePath, path.extname(filePath)
                 if fs.existsSync(filePath) === false
-                    _ console.log('filePath do not exists', filePath)
+                    # loog 'filePath do not exists', filePath
                     return next()
                 if fs.statSync(filePath).isDirectory()
                     return sendFolderScan(filePath, basePath, req.query.meta, res)
                 let contentType = contentTypeFor(filePath)
-                _ console.log('contentType', contentType)
+                # loog 'contentType', contentType
                 if contentType
                     if req.query.meta && req.query.meta === 'html'
                         try 
@@ -158,7 +158,7 @@ module
                                 _ wizziProds.generateArtifactFs(filePath, modelContext).then
                                     => 
                                         param generated
-                                        _ console.log('generated.artifactContent', generated.artifactContent)
+                                        # loog 'generated.artifactContent', generated.artifactContent
                                         _ res.writeHead
                                             @ 200
                                             { 
@@ -264,7 +264,7 @@ module
                                 @ fullPath undefined
                                 @ relPath undefined
                     const type_path = req.query['_' + element]
-                    _ console.log('contextLoader exportName, type_path', element, type_path)
+                    # loog 'contextLoader exportName, type_path', element, type_path
                     if !type_path
                         return 
                             (
@@ -278,15 +278,15 @@ module
                         set request.relPath = './index.' + tp[0] + '.ittf'
                     else
                         set request.relPath = tp[1]
-                    _ console.log('contextLoader exportName, type_path, relPath', element, type_path, request.relPath)
+                    # loog 'contextLoader exportName, type_path, relPath', element, type_path, request.relPath
                     if request.type === 'cheatsheet'
                         set request.name = request.relPath
                         _ requests.push(request)
                     else
                         set request.fullPath = path.join(path.dirname(resourceFilePath), request.relPath)
                         _ requests.push(request)
-                    _ console.log('contextLoader request', request)
-            _ console.log('contextLoader.requests', requests)
+                    # loog 'contextLoader request', request
+            # loog 'contextLoader.requests', requests
             const resultContext
                 :{ 
                     :index 

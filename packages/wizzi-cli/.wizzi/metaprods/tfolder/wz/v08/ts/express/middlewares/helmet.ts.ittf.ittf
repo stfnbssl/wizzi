@@ -18,3 +18,4 @@ $group
                             :ref Application
                         _ app.use
                             _ helmet
+                        log 'HelmetMiddleware installed'

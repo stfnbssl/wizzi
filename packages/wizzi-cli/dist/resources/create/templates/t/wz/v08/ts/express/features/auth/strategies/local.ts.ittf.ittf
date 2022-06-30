@@ -5,20 +5,20 @@ $group
         from 'passport-local'
     ${'$'}if wzCtx.Build.useMongoDb
         import 
-            @ GetUserModel
-            @ UserModelType
-            from '../mongo/user'
+            @ GetAuthUserModel
+            @ AuthUserModelType
+            from '../mongo/authuser'
     import 
         @ config
         from '../../config'
     ${'$'}if wzCtx.Build.useMongoDb
-        let userModel
-            :ref UserModelType
+        let authUserModel
+            :ref AuthUserModelType
     export 
         function createStrategy
             ${'$'}if wzCtx.Build.useMongoDb
-                set userModel = GetUserModel()
-            _ console.log('features.auth.strategies.local.createStrategy')
+                set authUserModel = GetAuthUserModel()
+            # loog 'features.auth.strategies.local.createStrategy'
             return 
                 new Strategy
                     { 
@@ -33,14 +33,14 @@ $group
                             :any 
                         log 'features.auth.strategies.local.verify.email,password', email, password
                         ${'$'}if wzCtx.Build.useMongoDb
-                            _ userModel.findOne
+                            _ authUserModel.findOne
                                 { 
                                     @ email
                                 ._ then
                                     => 
-                                        param user
+                                        param authuser
                                             :any
-                                        if !user || !user.validatePassword(password)
+                                        if !authuser || !authuser.validatePassword(password)
                                             log 'features.auth.strategies.local.verify.false'
                                             return 
                                                 _ done
@@ -49,8 +49,8 @@ $group
                                                     { 
                                                         { errors
                                                             @ 'email or password' 'is invalid'
-                                        _ console.log('features.auth.strategies.local.verify.true.user', user)
-                                        return done(null, user)
+                                        log 'features.auth.strategies.local.verify.true.authuser', authuser
+                                        return done(null, authuser)
                                 ._ catch
                                     @ done
                         ${'$'}else 

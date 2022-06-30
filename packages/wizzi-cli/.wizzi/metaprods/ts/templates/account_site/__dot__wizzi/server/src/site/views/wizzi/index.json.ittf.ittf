@@ -4,4 +4,4 @@
         }
 
     $$ TODO $if cliCtx.useIttfStatic
-    $include wz/v08/express/site/views/wizzi/index.json
+    $include wz/v08/express/site/views/demoWizzi/index.json

@@ -4,4 +4,4 @@ html
         }
 
     $$ TODO $if cliCtx.useIttfStatic
-    $include wz/v08/express/site/views/account/profile/index.html
+    $include wz/v08/express/site/views/DemoAccount/profile/index.html

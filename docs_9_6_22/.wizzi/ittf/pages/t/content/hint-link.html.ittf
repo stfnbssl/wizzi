@@ -1,9 +1,0 @@
-$group
-    $params &hint
-
-    p ${hint.p}
-        class hint-link
-        a ${hint.label}
-            href ${hint.href}
-            class hint-link-a
-        + .

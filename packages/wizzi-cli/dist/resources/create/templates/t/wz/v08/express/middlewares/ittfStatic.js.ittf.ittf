@@ -71,7 +71,7 @@ $group
                 # ??? urlPathName.substr(routePath.length);
                 const filePath = path.join(basePath, pathname)
                 const extname = path.extname(filePath)
-                # log 'IttfStaticMiddleware. ittf.pathname, pathname, filePath', urlPathName, pathname, filePath, path.extname(filePath)
+                # loog 'IttfStaticMiddleware. ittf.pathname, pathname, filePath', urlPathName, pathname, filePath, path.extname(filePath)
                 if fs.existsSync(filePath) === false
                     log 'IttfStaticMiddleware. filePath do not exists', filePath
                     return 
@@ -81,7 +81,7 @@ $group
                         _ fs.statSync(filePath).isDirectory
                     return sendFolderScan(filePath, basePath, req.query.meta, res)
                 let contentType = contentTypeFor(filePath)
-                # log 'IttfStaticMiddleware. contentType', contentType
+                # loog 'IttfStaticMiddleware. contentType', contentType
                 if contentType
                     if req.query.meta && req.query.meta === 'html'
                         try 
@@ -97,7 +97,7 @@ $group
                                             @ path filePath
                                             @ req
                                             @ ds documentState
-                            # log 'generated.meta.document', generated.artifactContent
+                            # loog 'generated.meta.document', generated.artifactContent
                             _ res.writeHead
                                 @ 200
                                 { 
@@ -126,7 +126,7 @@ $group
                                 _ wizziProds.generateArtifactFs(filePath, modelContext).then
                                     => 
                                         param generated
-                                        # log 'IttfStaticMiddleware. generated.artifactContent', generated.artifactContent
+                                        # loog 'IttfStaticMiddleware. generated.artifactContent', generated.artifactContent
                                         _ res.writeHead
                                             @ 200
                                             { 
@@ -192,7 +192,7 @@ $group
                             @ fullPath undefined
                             @ relPath undefined
                     const type_path = req.query['_' + element]
-                    # log 'IttfStaticMiddleware.contextLoader exportName, type_path', element, type_path
+                    # loog 'IttfStaticMiddleware.contextLoader exportName, type_path', element, type_path
                     if !type_path
                         return 
                             (
@@ -206,15 +206,15 @@ $group
                         set request.relPath = './index.' + tp[0] + '.ittf'
                     else
                         set request.relPath = tp[1]
-                    # log 'IttfStaticMiddleware.contextLoader exportName, type_path, relPath', element, type_path, request.relPath
+                    # loog 'IttfStaticMiddleware.contextLoader exportName, type_path, relPath', element, type_path, request.relPath
                     if request.type === 'cheatsheet'
                         set request.name = request.relPath
                         _ requests.push(request)
                     else
                         set request.fullPath = path.join(path.dirname(resourceFilePath), request.relPath)
                         _ requests.push(request)
-                    # log 'IttfStaticMiddleware.contextLoader request', request
-            # log 'IttfStaticMiddleware.contextLoader.requests', requests
+                    # loog 'IttfStaticMiddleware.contextLoader request', request
+            # loog 'IttfStaticMiddleware.contextLoader.requests', requests
             const resultContext
                 { 
             const repeatCount = requests.length
@@ -263,7 +263,7 @@ $group
                                 @ wizzischema 'html'
                                 @ path folderPath
                                 @ fs folderState
-                # log 'IttfStaticMiddleware.generated.meta.document', generated.artifactContent
+                # loog 'IttfStaticMiddleware.generated.meta.document', generated.artifactContent
                 _ res.writeHead
                     @ 200
                     { 

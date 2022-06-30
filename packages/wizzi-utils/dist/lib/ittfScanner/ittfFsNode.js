@@ -565,7 +565,7 @@ var IttfFsNode = (function () {
         }
     }
     IttfFsNode.prototype.toIttf = function(ittfDocumentGraph) {
-        // log 'toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph)', ittfDocumentGraph.__type, this.analized, this.basename, verify.isObject(this.ittfDocumentGraph)
+        console.log('toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph): ', ittfDocumentGraph.__type, this.analized, this.basename, verify.isObject(this.ittfDocumentGraph));
         var r = this.root();
         if (r === this) {
             this.toIttfRoot(ittfDocumentGraph);
@@ -606,6 +606,7 @@ var IttfFsNode = (function () {
                 var i, i_items=Object.keys(usedFragments), i_len=Object.keys(usedFragments).length, item;
                 for (i=0; i<i_len; i++) {
                     item = Object.keys(usedFragments)[i];
+                    console.log('usedFragments[k]', item, usedFragments[item]);
                     var ittfFragmentsNode = ittfSource.add('fragment', item);
                     ittfFragmentsNode.add('d-id', usedFragments[item].id)
                     ittfFragmentsNode.add('rel-uri', unixifyPath(path.relative(ittfBasePath, usedFragments[item].uri)))

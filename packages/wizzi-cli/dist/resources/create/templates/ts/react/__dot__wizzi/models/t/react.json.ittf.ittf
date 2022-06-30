@@ -45,7 +45,7 @@ ${'$'}group
         useHelmetAsync true
         useSimpleCodeEditor true
         useTextareaAutosize true
-        useVirtualized true
+        useVirtualized false
         useSelect true
         useRange true
         useDate true

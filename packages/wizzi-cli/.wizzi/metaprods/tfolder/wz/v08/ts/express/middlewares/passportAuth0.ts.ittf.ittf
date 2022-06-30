@@ -66,3 +66,4 @@ $group
                             _ passport.initialize
                         _ app.use
                             _ passport.session
+                        log 'PassportAuth0Middleware installed'

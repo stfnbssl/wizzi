@@ -46,7 +46,7 @@ module
                     => 
                         param err
                             :any 
-                        _ console.log('sendPromiseResult.err', err)
+                        # loog 'sendPromiseResult.err', err
                         _ sendFailure(res, err, 500)
     export 
         function sendPromiseLikeResult

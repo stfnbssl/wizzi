@@ -1,6 +1,0 @@
-$group
-    $params &opt
-
-    . cs-content
-        $hook
-

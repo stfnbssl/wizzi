@@ -79,7 +79,7 @@ module
                                 ._ then
                                     => 
                                         param responseData
-                                        _ console.log(responseData)
+                                        # loog responseData
                                         return responseData
     export 
         async-function getUser

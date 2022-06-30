@@ -25,6 +25,6 @@ $group
         _ inquirer.prompt(questions).then
             => 
                 param answers
-                _ console.log('\nNew package type:')
-                _ console.log(JSON.stringify(answers, null, '  '))
+                log '\nNew package type:'
+                log JSON.stringify(answers, null, '  ')
                 r_cb(answers)

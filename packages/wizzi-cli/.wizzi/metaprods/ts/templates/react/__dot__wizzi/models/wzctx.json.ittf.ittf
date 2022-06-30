@@ -16,7 +16,7 @@
         baseUrl "${'$'}{md.http}://localhost:${'$'}{md.port}"
         useLogin false
         { login
-        $include components.json
+        ${'$'}include components.json
 
     { Build
 
@@ -43,23 +43,23 @@
         useMonacoEditor false
         { monacoEditor
         ---
-        $include auth.json
+        ${'$'}include auth.json
         ---
-        $include babel.webpack.json
+        ${'$'}include babel.webpack.json
         ---
-        $include code.json
+        ${'$'}include code.json
         ---
-        $include db.json
+        ${'$'}include db.json
         ---
-        $include react.json
+        ${'$'}include react.json
         ---
-        $include styles.json
+        ${'$'}include styles.json
         ---
-        $include test.json
+        ${'$'}include test.json
         ---
-        $include utils.json
+        ${'$'}include utils.json
         ---
-        $include data.json
+        ${'$'}include data.json
    
     { Styles
         vpadRatio 0.25

@@ -49,7 +49,8 @@ $group
                 ${'$'}if wzCtx.Build.usePacki
                     @ ...packiControllers
                 ${'$'}if wzCtx.Build.useWizzi
-                    @ ...wizziControllers
+                    ${'$'}if wzCtx.Build.wizzi.useControllers
+                        @ ...wizziControllers
 
         +
     log 'Starting app. Config:', config

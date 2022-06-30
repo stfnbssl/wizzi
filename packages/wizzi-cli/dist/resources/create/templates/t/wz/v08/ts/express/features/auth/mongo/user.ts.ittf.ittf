@@ -36,7 +36,7 @@ $group
                 :string 
             set this.salt = crypto.randomBytes(16).toString('hex')
             set this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-            _ console.log('features.auth.mongo.user.setPassword.salt,hash', this.salt, this.hash)
+            # loog 'features.auth.mongo.user.setPassword.salt,hash', this.salt, this.hash
     set UserSchema.methods.validatePassword =
         function 
             param password
@@ -44,7 +44,7 @@ $group
             :return
                 :boolean 
             const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex')
-            _ console.log('features.auth.mongo.user.validatePassword.hash,this.hash', hash, this.hash)
+            # loog 'features.auth.mongo.user.validatePassword.hash,this.hash', hash, this.hash
             return this.hash === hash
     set UserSchema.methods.generateJWT =
         function 

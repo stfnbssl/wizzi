@@ -16,6 +16,38 @@
 				@ name 'first'
 				@ gitPath 'c:/blabla'
 
+        _ ittfFsNode_step_1_exec
+            @ folderPath
+            @ options
+            @ callback
+
+	function ittfFsNode_step_1_outside
+        param callback
+		
+		log 'wizzi-utils.examples.ittfFsNode_step_1_outside START'
+		
+		var folderPath
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+                @ 'outside'
+				@ 'first'
+
+		var options
+			{
+				@ name 'first'
+				@ gitPath 'c:/blabla'
+
+        _ ittfFsNode_step_1_exec
+            @ folderPath
+            @ options
+            @ callback
+
+	function ittfFsNode_step_1_exec
+        param folderPath
+        param options
+        param callback
+		
 		var removeRoot = path.dirname(folderPath)
 		log 'folderPath, removeRoot', folderPath, removeRoot
 		

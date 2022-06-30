@@ -46,22 +46,21 @@ $group
         @storybook/react "^6.2.8"
 
     ${'$'}if wzCtx.Build.useTypescript
-        ${'$'}if wzCtx.Build.useExpress
-            ${'$'}if wzCtx.Build.useCompression
-                @types/compression "^1.7.0"
+        ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useCompression
+            @types/compression "^1.7.0"
+        ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useFlash
+            @types/connect-flash "^0.0.37"
         ${'$'}if wzCtx.Build.useMongoDb
             @types/connect-mongo "3.1.3"
-        ${'$'}if wzCtx.Build.useExpress
-            ${'$'}if wzCtx.Build.useCors
-                @types/cors "^2.8.10"
-            @types/express "^4.16.1"
+        ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useCors
+            @types/cors "^2.8.10"
+        @types/express "^4.16.1"
         ${'$'}if wzCtx.Build.utils.useEscapeHtml
             @types/escape-html "^1.0.1"
         ${'$'}if wzCtx.Build.utils.useGitUrlParse
             @types/git-url-parse "^9.0.0"
-        ${'$'}if wzCtx.Build.useExpress
-            ${'$'}if wzCtx.Build.express.useHelmet
-                @types/helmet "^4.0.0"
+        ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.express.useHelmet
+            @types/helmet "^4.0.0"
         ${'$'}if wzCtx.Build.useJest
             @types/jest "^26.0.15"
         ${'$'}if wzCtx.Build.utils.useJsCookie
@@ -77,6 +76,9 @@ $group
                 @types/express-jwt "^6.0.1"
             ${'$'}if wzCtx.Build.useSession
                 @types/express-session "^1.15.12"
+        ${'$'}if wzCtx.Build.useExpress
+            ${'$'}if wzCtx.Build.express.useErrors
+                @types/http-errors "^1.8.2"
         ${'$'}if wzCtx.Build.utils.useLodash
             @types/lodash "^4.14.120"
         ${'$'}if wzCtx.Build.useMarked
@@ -86,6 +88,9 @@ $group
                 @types/marked "^2.0.2"
         ${'$'}if wzCtx.Build.useMongoDb
             @types/mongoose "^5.10.4"
+        ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useLogger
+            ${'$'}if wzCtx.Build.logger.useMorgan
+                @types/morgan "^1.9.3"
         @types/node "^12.0.0"
         ${'$'}if wzCtx.Build.useGithub
             @types/node-fetch "^2.1.6"
@@ -168,7 +173,7 @@ $group
             ${'$'}if wzCtx.Build.webpack.useCodeSplitting
                 babel-plugin-webpack-chunkname "^1.2.0"
     ${'$'}if wzCtx.Build.usePrismjs
-		babel-plugin-prismjs "^2.0.1"
+        babel-plugin-prismjs "^2.0.1"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useCopy
             copy-webpack-plugin "^4.5.1"
@@ -249,7 +254,7 @@ $group
         ${'$'}if wzCtx.Build.webpack.useUglifyJS
             uglifyjs-webpack-plugin "^1.2.5"
     ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
-        $$ ts-node "^9.1.1"
+        ts-node "^10.8.1"
         ts-node-dev "^1.1.6"
     ${'$'}if wzCtx.Build.useVue
         vue "^2.5.22"
@@ -275,13 +280,13 @@ $group
     ${'$'}if wzCtx.Build.useWebpackApp
         webpack-dev-middleware "4.1.0"
     ${'$'}if wzCtx.Build.useWebpack
-            ${'$'}if wzCtx.Build.webpack.useDevServer
-                webpack-dev-server "^3.11.2"
-            ${'$'}if wzCtx.Build.webpack.useMerge
-                webpack-merge "^4.1.3"
-            ${'$'}if wzCtx.Build.webpack.useStatsWriter
-                webpack-stats-plugin "^1.0.3"
-            ${'$'}if wzCtx.Build.webpack.useVisualizer
-                webpack-visualizer-plugin "^0.1.11"
-            ${'$'}if wzCtx.Build.webpack.useWorker
-                worker-plugin "^5.0.0"
+        ${'$'}if wzCtx.Build.webpack.useDevServer
+            webpack-dev-server "^3.11.2"
+        ${'$'}if wzCtx.Build.webpack.useMerge
+            webpack-merge "^4.1.3"
+        ${'$'}if wzCtx.Build.webpack.useStatsWriter
+            webpack-stats-plugin "^1.0.3"
+        ${'$'}if wzCtx.Build.webpack.useVisualizer
+            webpack-visualizer-plugin "^0.1.11"
+        ${'$'}if wzCtx.Build.webpack.useWorker
+            worker-plugin "^5.0.0"            

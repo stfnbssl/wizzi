@@ -21,7 +21,7 @@
 			let source = args.source || args.s
 			let dest = args.dest || args.d
 
-			log 'fy.source.dest', source, dest
+			# loog 'fy.source.dest', source, dest
 
 			var sourcePath, destPath, sourceIsFolder
             if source && source.length > 0
@@ -56,14 +56,14 @@
                             @ destPath
                             @ path.basename(sourcePath) + '.ittf'
                 if sourceIsFolder
-                    log 'ok. source && dest are folders'
+                    # loog 'ok. source && dest are folders'
                     _ wizziTools.importFolder
                         @ sourcePath
                         @ destPath
                         a_cb_throw( result )
-                            log 'Wizzify folder result', result
+                            # loog 'Wizzify folder result', result
                 else
-					log 'ok. source && dest are files'
+					# loog 'ok. source && dest are files'
                     var extension = path.extname(sourcePath)
                     var schema
                     set extension = extension.substr(1)
@@ -83,7 +83,7 @@
                         @ file.read(sourcePath)
                         a_cb_throw( result )
                             _ file.write(destPath, result)
-                            log 'Wizzify file', result
+                            # loog 'Wizzify file', result
 			else
 				log 'Invalid options for `fy` command.'
 				_ help({_:['help', 'fy']})

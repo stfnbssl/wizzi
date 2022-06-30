@@ -3,7 +3,7 @@ $group
         var call = '(&md)';
     
     import express from 'express'
-    
+
     import 
         @ AppInitializerType
         from './features/app'
@@ -77,12 +77,6 @@ $group
                     _ controller.initialize(initValues)
                     _ this.app.use(controller.path, controller.router)
 
-            +
-            _ initValues.middlewaresPost.forEach
-                => 
-                    param middleware
-                    _ middleware(this.app)
-
             ${'$'}if wzCtx.Build.useSocketIO
                 +
                 # Connecting sockets to the server and adding them to the request
@@ -107,6 +101,12 @@ $group
                         param req
                         param res
                         _ res.send('👍')
+
+            +
+            _ initValues.middlewaresPost.forEach
+                => 
+                    param middleware
+                    _ middleware(this.app)
 
         m listen
             :public 

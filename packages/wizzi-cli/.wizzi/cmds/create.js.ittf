@@ -66,7 +66,7 @@
                             @ copyInclude ['*']
                             @ copyExclude []
                         f_cb_test(genFolderResult)
-                            log 'genFolderResult', genFolderResult
+                            # loog 'genFolderResult', genFolderResult
                             return
 
             _ newpkg
@@ -74,7 +74,7 @@
                     param err
                     param answers
                     
-                    log 'create.answers', answers
+                    # loog 'create.answers', answers
                     
                     _ wizzi.model
                         _ path.join
@@ -89,7 +89,7 @@
                         =>
                             param err
                             param jsonctx
-                            log 'create.jsonctx', jsonctx
+                            # loog 'create.jsonctx', jsonctx
 
                             $* VIA
                             var pkg
@@ -123,6 +123,6 @@
                                     @ copyInclude ['*']
                                     @ copyExclude []
                                 f_cb_test(genFolderResult)
-                                    log 'genFolderResult', genFolderResult
+                                    # loog 'genFolderResult', genFolderResult
 
     $include create/newpkg                                    

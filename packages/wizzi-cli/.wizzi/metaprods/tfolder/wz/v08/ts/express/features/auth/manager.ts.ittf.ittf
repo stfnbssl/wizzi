@@ -4,8 +4,8 @@ $group
     import jwt from 'express-jwt'
     ${'$'}if wzCtx.Build.useMongoDb
         import 
-            @ GetUserModel
-            from './mongo/user'
+            @ GetAuthUserModel
+            from './mongo/authuser'
         import 
             @ GetAccountModel
             @ AccountModelType
@@ -32,19 +32,19 @@ $group
     function initPassport
         # https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize
         ${'$'}if wzCtx.Build.useMongoDb
-            const userModel = GetUserModel()
+            const authUserModel = GetAuthUserModel()
         _ passport.use(createLocalStrategy())
         _ passport.use(createGithubStrategy())
         _ passport.serializeUser
             function 
-                param user
+                param authuser
                     :any
                 param done
                     :any
                 log '============================================================'
-                log 'features.auth.manager.serializeUser', 'user', user
-                $$ _ done(null, user.id)
-                _ done(null, user)
+                log 'features.auth.manager.serializeUser', 'authuser', authuser
+                $$ _ done(null, authuser.id)
+                _ done(null, authuser)
         _ passport.deserializeUser
             function 
                 param id
@@ -56,16 +56,16 @@ $group
                 ${'$'}if wzCtx.Build.useMongoDb
                     return
                         _ done(null, id)
-                    _ userModel.findById
+                    _ authUserModel.findById
                         @ id
                         function 
                             param err
                                 :any
-                            param user
+                            param authuser
                                 :any
                             log 'features.auth.manager.deserializeUser', 'err', err,
-                                \b 'user', user
-                            _ done(err, user || false)
+                                \b 'authuser', authuser
+                            _ done(err, authuser || false)
                 ${'$'}else 
                     _ done(null, { id: id })
         set initialized = true

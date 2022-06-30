@@ -49,28 +49,28 @@ $group
             function 
                 param user
                 param done
-                log 'features.auth.manager.serializeUser.user', user
+                # loog 'features.auth.manager.serializeUser.user', user
                 _ done(null, user.id)
         
         _ passport.deserializeUser
             function 
                 param id
                 param done
-                log 'features.auth.manager.deserializeUser.id', id
+                # loog 'features.auth.manager.deserializeUser.id', id
                 ${'$'}if wzCtx.Build.useMongoDb
                     _ userModel.findById
                         @ id
                         function 
                             param err
                             param user
-                            log 'features.auth.manager.deserializeUser.err, user', err, user
+                            # loog 'features.auth.manager.deserializeUser.err, user', err, user
                             _ done(err, user || false)
                 ${'$'}else
                     _ done
                         @ null
                         {
                             @ id id
-        log 'features.auth.manager.initPassport', 'done'
+        # loog 'features.auth.manager.initPassport', 'done'
         set initialized = true
 
     function getTokenFromHeaders

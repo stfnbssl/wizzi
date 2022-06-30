@@ -178,7 +178,7 @@
             useHelmetAsync true
             useSimpleCodeEditor true
             useTextareaAutosize true
-            useVirtualized true
+            useVirtualized false
             
         useHoistNonReactStatic true
         
@@ -203,7 +203,7 @@
         useGraphql true
         
         useMongoDb false
-        mongoDb
+        { mongoDb
             user "yanez"
             password "x5csosPN5YAsrl4Z"
             dbPath "@cluster0.idlk7.mongodb.net"

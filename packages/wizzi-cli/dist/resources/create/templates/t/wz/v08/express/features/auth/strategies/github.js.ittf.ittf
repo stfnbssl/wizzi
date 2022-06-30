@@ -25,7 +25,7 @@ $group
             ${'$'}if wzCtx.Build.useMongoDb
                 set accountModel =
                     _ GetAccountModel
-            log 'features.auth.strategies.github.createStrategy'
+            # loog 'features.auth.strategies.github.createStrategy'
             return 
                 new Strategy
                     { 
@@ -40,11 +40,11 @@ $group
                         param profile
                         param done
                         ${'$'}if wzCtx.Build.useSocketIO
-                            log 'features.auth.strategies.github.req.session.socketId,socketUserId', req.session.socketId, req.session.socketUserId
-                        log 'features.auth.strategies.github.req.sessionID,session', req.sessionID, req.session
-                        log 'features.auth.strategies.github.req.user', req.user
-                        log 'features.auth.strategies.github.accessToken.refreshToken', accessToken, refreshToken
-                        log 'features.auth.strategies.github.profile', profile
+                            # loog 'features.auth.strategies.github.req.session.socketId,socketUserId', req.session.socketId, req.session.socketUserId
+                        # loog 'features.auth.strategies.github.req.sessionID,session', req.sessionID, req.session
+                        # loog 'features.auth.strategies.github.req.user', req.user
+                        # loog 'features.auth.strategies.github.accessToken.refreshToken', accessToken, refreshToken
+                        # loog 'features.auth.strategies.github.profile', profile
                         ${'$'}if wzCtx.Build.useMongoDb
                             var account = new accountModel()
                         ${'$'}else

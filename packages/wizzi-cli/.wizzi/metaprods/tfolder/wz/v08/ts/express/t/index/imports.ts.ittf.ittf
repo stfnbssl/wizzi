@@ -68,9 +68,10 @@ $group
             from './features/packi/index'
 
     ${'$'}if wzCtx.Build.useWizzi
-        import 
-            @ wizziControllers
-            from './features/wizzi/index'
+        ${'$'}if wzCtx.Build.wizzi.useControllers
+            import 
+                @ wizziControllers
+                from './features/wizzi/index'
 
     import 
         @ appMiddlewaresPre

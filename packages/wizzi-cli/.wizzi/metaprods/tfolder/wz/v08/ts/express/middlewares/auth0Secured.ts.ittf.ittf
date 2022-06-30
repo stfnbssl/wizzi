@@ -4,17 +4,17 @@ $group
         @ Request
         @ Response
         from 'express'
-        #
-            # *
-            # * This is an example middleware that checks if the user is logged in.
-            # *
-            # * If the user is not logged in, it stores the requested url in `returnTo` attribute
-            # * and then redirects to `/account/login`.
-            # *
-            # 
+    #
+        # 
+        # This is an example middleware that checks if the user is logged in.
+        # 
+        # If the user is not logged in, it stores the requested url in `returnTo` attribute
+        # and then redirects to `/account/login`.
+        # 
+        # 
     export-default 
         function getSecured
-            log 'getSecured called'
+            log 'Middleware auth0Secured.getSecured called'
             return 
                 function secured
                     param req
@@ -35,11 +35,3 @@ $group
                             . returnTo
                         @expr req.originalUrl
                     _ res.redirect('/account/login')
-        #
-            # *
-            # * This is an example middleware that checks if the user is logged in.
-            # *
-            # * If the user is not logged in, it stores the requested url in `returnTo` attribute
-            # * and then redirects to `/account/login`.
-            # *
-            # 

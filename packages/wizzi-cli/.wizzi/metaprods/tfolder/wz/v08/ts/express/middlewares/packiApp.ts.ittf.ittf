@@ -25,6 +25,7 @@ $group
                         :ref Application
                     if process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test'
                         _ app.use('/dist', expressStatic(path.resolve(__dirname, '..', '..', '..', 'packi', 'dist')))
+                        log 'PackiAppMiddleware installed. Using  express.static.'
                     else
                         const webpack = require('webpack')
                         const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -35,3 +36,4 @@ $group
                                 @ compiler
                                 { 
                                     @ publicPath '/dist'
+                        log 'PackiAppMiddleware installed. Using webpack-dev-middleware.'

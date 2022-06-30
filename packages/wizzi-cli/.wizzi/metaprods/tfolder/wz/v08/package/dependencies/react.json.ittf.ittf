@@ -46,7 +46,7 @@
             react-transition-group "^2.4.0"
         ${'$'}if wzCtx.Build.react.useVirtualized
             react-virtualized "^9.22.3"
-        ${'$'}if wzCtx.Build.react.useRecompose
+        ${'$'}if wzCtx.Build.react.useRecompose_stopped_25_06_2022
             recompose "^0.30.0"
 
     ${'$'}if wzCtx.Build.useGatsby

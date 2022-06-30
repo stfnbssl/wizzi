@@ -6,8 +6,7 @@ $group
     ${'$'}if wzCtx.Build.usePacki
         import wizziTools from 'wizzi-tools'
     import 
-        @ ittfDocumentScanner
-        @ folderBrowse
+        @ ittfScanner
         @ IttfMTreeState
         @ FolderBrowseResult
         from 'wizzi-utils'
@@ -122,7 +121,7 @@ $group
                     => 
                         param resolve
                         param reject
-                        _ ittfDocumentScanner.scan
+                        _ ittfScanner.scanIttfDocument
                             @ filePath
                             { 
                                 @ rootFolder
@@ -149,7 +148,7 @@ $group
                     => 
                         param resolve
                         param reject
-                        _ folderBrowse.scan
+                        _ ittfScanner.browseFolder
                             @ filePath
                             { 
                                 @ rootFolder
@@ -183,13 +182,13 @@ $group
                             const pf = parseFilePath(filePath)
                             if pf.isIttfDocument && pf.schema !== 'json'
                                 var twinJsonBaseName = pf.seedname + '.json.ittf'
-                                _ console.log('features.wizzi.productions.inferAndLoadContextJson.twinJsonBaseName', twinJsonBaseName)
+                                # loog 'features.wizzi.productions.inferAndLoadContextJson.twinJsonBaseName', twinJsonBaseName
                                 const twinDocumentUri
                                     _ Object.keys(files).find
                                         => 
                                             param k
                                             _ k.endsWith('/' + twinJsonBaseName)
-                                _ console.log('features.wizzi.productions.inferAndLoadContextJson.twinDocumentUri', twinDocumentUri, Object.keys(files))
+                                # loog 'features.wizzi.productions.inferAndLoadContextJson.twinDocumentUri', twinDocumentUri, Object.keys(files)
                                 if twinDocumentUri
                                     _ loadModelJson
                                         @ wf

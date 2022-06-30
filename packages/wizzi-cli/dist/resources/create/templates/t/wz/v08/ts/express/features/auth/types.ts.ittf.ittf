@@ -16,7 +16,7 @@ $group
                 :any 
     +
     export 
-        :type IUser
+        :type IAuthUser
             :{ 
                 :p userName
                     :string 
@@ -45,8 +45,8 @@ $group
     +
     ${'$'}if wzCtx.Build.useMongoDb
         export 
-            :interface IUserModel
-                :extends IUser
+            :interface IAuthUserModel
+                :extends IAuthUser
                 :extends Document
     +
     export 

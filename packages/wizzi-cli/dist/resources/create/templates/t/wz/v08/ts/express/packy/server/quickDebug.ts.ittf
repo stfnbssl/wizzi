@@ -22,8 +22,8 @@ module
                         @ owner 'stfnbssl'
                         @ token github_access_token
                     @ 'master'
-        _ console.log('testCloneGithubRepo.files', result.files)
-        _ console.log('testCloneGithubRepo.commitHistory', result.commitHistory)
+        # loog 'testCloneGithubRepo.files', result.files
+        # loog 'testCloneGithubRepo.commitHistory', result.commitHistory
     async-function testUpdateGithubRepo
         param files
             :ref packiTypes.PackiFiles
@@ -40,7 +40,7 @@ module
         const result
             await 
                 _ githubApiCalls.getPackiTemplateRepositories()
-        _ console.log('testTemplateRepositories', result)
+        # loog 'testTemplateRepositories', result
     async-function testFactory
         const wf
             await 
@@ -52,7 +52,7 @@ module
                         { 'x/d/b.html.ittf'
                             @ type 'CODE'
                             @ contents 'Hey'
-        _ console.log(wf)
+        # loog wf
     async-function testArtifactGenerator
         const wf
             await 
@@ -65,7 +65,7 @@ module
                         { 'x/t/b.js.ittf'
                             @ type 'CODE'
                             @ contents 'log "Hello"'
-        _ console.log(wf)
+        # loog wf
     async-function testWizziJob
         const wf
             await 

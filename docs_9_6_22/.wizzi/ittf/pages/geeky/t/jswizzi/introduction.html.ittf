@@ -1,8 +1,0 @@
-﻿$group
-    $
-        var sect = {
-            title: 'JsWizzi'
-        };
-
-    section(&sect)
-		

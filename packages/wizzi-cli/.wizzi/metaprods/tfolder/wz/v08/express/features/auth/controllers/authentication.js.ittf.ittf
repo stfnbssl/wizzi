@@ -30,7 +30,7 @@ $group
 
             => initialize
                 param initValues
-                log 'Entering AuthenticationController.initialize'
+                # loog 'Entering AuthenticationController.initialize'
                 ${'$'}if wzCtx.Build.useSocketIO
                     _ this.router.use
                         function 
@@ -38,8 +38,8 @@ $group
                             param res
                             param next
                             if req.query.socketId
-                                log 'features.auth.controllers.auth.middleware.req.originalUrl,query', req.originalUrl, req.query
-                                log 'features.auth.controllers.auth.middleware.req.sessionID, session', req.sessionID, req.session
+                                # loog 'features.auth.controllers.auth.middleware.req.originalUrl,query', req.originalUrl, req.query
+                                # loog 'features.auth.controllers.auth.middleware.req.sessionID, session', req.sessionID, req.session
                                 set req.session.socketId = req.query.socketId
                                 set req.session.socketUserId = req.query.socketUserId
                             _ next
@@ -66,9 +66,9 @@ $group
                 param res
                 # Successful authentication
                 ${'$'}if wzCtx.Build.useSocketIO
-                    log 'features.auth.controllers.auth.githubCallback.req.originalUrl,session.socketId,socketUserId', req.originalUrl, req.session.socketId, req.session.socketUserId
-                log 'features.auth.controllers.auth.githubCallback.req.sessionID,session', req.sessionID, req.session
-                log 'features.auth.controllers.auth.githubCallback.req.user', req.user
+                    # loog 'features.auth.controllers.auth.githubCallback.req.originalUrl,session.socketId,socketUserId', req.originalUrl, req.session.socketId, req.session.socketUserId
+                # loog 'features.auth.controllers.auth.githubCallback.req.sessionID,session', req.sessionID, req.session
+                # loog 'features.auth.controllers.auth.githubCallback.req.user', req.user
                 ${'$'}if wzCtx.Build.useSocketIO
                     const io = req.app.get('io')
                 const user
@@ -79,7 +79,7 @@ $group
                         @ displayName req.user.displayName
                         @ picture req.user.avatar_url
                 ${'$'}if wzCtx.Build.useSocketIO
-                    log 'features.auth.controllers.auth.githubCallback.sending user via socket', 'github', req.session.socketId, req.user
+                    # loog 'features.auth.controllers.auth.githubCallback.sending user via socket', 'github', req.session.socketId, req.user
                     _ io.in(req.session.socketId).emit('github', user)
                 set req.session.token = req.user.tokens[0]
                 const account
@@ -94,7 +94,7 @@ $group
                                 @ kind req.user.tokens[0].kind
                                 @ token req.user.tokens[0].token
                                 @ attributes req.user.tokens[0].attributes
-                log 'features.auth.controllers.auth.githubCallback.account', account
+                # loog 'features.auth.controllers.auth.githubCallback.account', account
                 
                 ${'$'}if wzCtx.Build.useMongoDb
                     const AccountModel
@@ -108,7 +108,7 @@ $group
                                 @ account
                                 { 
                                     @ upsert true
-                    log 'features.auth.controllers.auth.githubCallback.account.save.result', result
+                    # loog 'features.auth.controllers.auth.githubCallback.account.save.result', result
                 _ res.end
             
             ${'$'}if wzCtx.Build.useMongoDb
@@ -116,7 +116,7 @@ $group
                     param req
                     param res
                     const uid = req.params.uid
-                    log 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
+                    # loog 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
                     const user
                         await 
                             _ getLoggedUserFromAccount(uid, 'github.com').then

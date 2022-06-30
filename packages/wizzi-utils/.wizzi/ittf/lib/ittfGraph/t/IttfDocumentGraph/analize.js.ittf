@@ -134,7 +134,7 @@
 			@ ctx
 			f_cb( fragmentPath )
 			
-				# log 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
+				log 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
 
                 if fragmentPath.__is_error
 				
@@ -161,7 +161,7 @@
                         					
 						if !fragmentDocument
 						
-							# log 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
+							log 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
 							set fragment.__is_error = true
 							set fragment.message = 'NotFound in ittfFsNode documents.'
 							_ r.errorFragments.push(fragment)
@@ -170,7 +170,7 @@
 
 						else
 						
-							# log 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
+							log 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
                             set fragment.id = fragmentDocument.id
 							if that.isReferenceToIttf()
 								if ctx.ittfReferences

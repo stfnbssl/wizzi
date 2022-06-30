@@ -95,4 +95,4 @@ $group
                     param result
                         :ref T
                     _ sendSuccess(res, result)
-                    # log 'sendPromiseLikeResult.ok', result
+                    # loog 'sendPromiseLikeResult.ok', result

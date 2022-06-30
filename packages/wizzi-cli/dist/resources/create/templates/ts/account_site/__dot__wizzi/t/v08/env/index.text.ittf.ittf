@@ -37,7 +37,13 @@ ${'$'}group
             GITHUB_CLIENT_SECRET=${'$'}{wzCtx.Build.authentication.github.clientSecret}
             GITHUB_CALLBACK_URL=${'$'}{wzCtx.Build.authentication.github.callbackURL}
 
+        ${'$'}if wzCtx.Build.authentication.useGoogle
+            GOOGLE_CLIENT_ID=${'$'}{wzCtx.Build.authentication.google.clientId}
+            GOOGLE_CLIENT_SECRET=${'$'}{wzCtx.Build.authentication.google.clientSecret}
+            GOOGLE_CALLBACK_URL=${'$'}{wzCtx.Build.authentication.google.callbackURL}
+
     ${'$'}if wzCtx.Build.useMongoDb
+        MONGO_HOST=${'$'}{wzCtx.Build.mongoDb.host}
         MONGO_USER=${'$'}{wzCtx.Build.mongoDb.user}
         MONGO_PASSWORD=${'$'}{wzCtx.Build.mongoDb.password}
         MONGO_PATH=${'$'}{wzCtx.Build.mongoDb.dbPath}/${'$'}{wzCtx.Build.mongoDb.dbName}

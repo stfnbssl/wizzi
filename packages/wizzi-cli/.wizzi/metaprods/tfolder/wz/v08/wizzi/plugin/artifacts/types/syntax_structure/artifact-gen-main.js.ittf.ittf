@@ -5,9 +5,9 @@ $group
             @ indent false
     +
     async-md${openPar} sample )
-        log "ctx.keys", Object.keys(ctx)
-        log "ctx.values property", ctx.values
-        log 'tag sample, nodes', model.nodes.length
+        # loog "ctx.keys", Object.keys(ctx)
+        # loog "ctx.values property", ctx.values
+        # loog 'tag sample, nodes', model.nodes.length
 
         set ctx.values.docxStack = []
         set ctx.values.docxCounter = 0
@@ -36,7 +36,7 @@ $group
 
     +
     async-md${openPar} section )
-        log 'tag section, value', model.wzName
+        # loog 'tag section, value', model.wzName
         
         var docxParent = ctx.values.docxStack[ctx.values.docxStack.length-1]
         var docxNode = "docx_sect_" + (++ctx.values.docxCounter)

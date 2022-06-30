@@ -1,5 +1,0 @@
-$group
-    . cs-sb-left
-        ul
-            class cs-sb-left-ul
-            $hook

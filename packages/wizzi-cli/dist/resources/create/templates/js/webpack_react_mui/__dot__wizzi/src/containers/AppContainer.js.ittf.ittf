@@ -1,0 +1,69 @@
+module
+	kind react
+    $
+        var call = '(&md)';
+
+	${'$'}
+		var md = {};
+		md.name = "AppContainer";
+		md.withRouter = false;
+        md.withStyles = false;
+        md.withContext = false;
+	
+	v08/react/container${call}
+
+        ${'$'}append imports
+            ${'$'}if wzCtx.Build.react.useRouter
+                import AppRouter from './AppRouter'
+            import App from '../components/app'
+            ${'$'}if wzCtx.Build.react.useRedux
+                import
+                    @ changeUserState
+                    from '../store/actions'
+            ${'$'}if wzCtx.Build.react.useStateHooks
+                import Provider from '../state/store'
+            
+            const AppWrapper
+                ${'$'}if wzCtx.Build.react.useStateHooks
+                    + Provider
+                ${'$'}else
+                    function
+                        return
+                            div
+        
+        => handleChangeUserState
+            param name
+            param value
+            ${'$'}if wzCtx.Build.react.useRedux
+                _ this.props.dispatchChangeUserState
+                    {
+                        @ ...this.props.userState
+                        @ [name] value
+
+
+        render
+            return
+                < AppWrapper
+                    div
+                        id main
+                        < AppRouter
+                        < App
+                            ${'$'}if wzCtx.Build.react.useRedux
+                                @ userState {this.props.userState}
+                                @ onChangeUserState {this.handleChangeUserState}
+
+        ${'$'}append dispatch-to-props
+            ${'$'}if wzCtx.Build.react.useRedux
+                @ dispatchChangeUserState
+                    =>
+                        param userState
+                        log 'dispatchChangeTheme', userState
+                        _ dispatch
+                            _ changeUserState
+                                @ userState
+
+        ${'$'}append state-to-props
+            ${'$'}if wzCtx.Build.react.useRedux
+                @ userState state.app.userState
+
+        ${'$'}append merge-props

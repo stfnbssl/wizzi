@@ -1,9 +1,0 @@
-{
-
-    $
-        var ctx = {
-            page: 'samplecode'
-        }
-
-    name "samplecode"
-    

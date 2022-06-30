@@ -561,7 +561,7 @@ var IttfDocumentGraph = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
+            console.log(11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath);
             
             // log 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
             
@@ -578,9 +578,8 @@ var IttfDocumentGraph = (function () {
                 // log 13, 'wizzi-utils.ittfDocumentGraph.analizeFragment search fragment in IttfFsNode', fragmentPath
                 if (ctx && ctx.ittfBasePath && ctx.ittfFsNode) {
                     var fragmentDocument = ctx.ittfFsNode.searchDocument(fragmentPath);
-                    
-                    // log 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
                     if (!fragmentDocument) {
+                        console.log(14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath));
                         fragment.__is_error = true;
                         fragment.message = 'NotFound in ittfFsNode documents.';
                         r.errorFragments.push(fragment);
@@ -588,8 +587,8 @@ var IttfDocumentGraph = (function () {
                             ctx.externalFragments[that.fragmentName] = fragment;
                         }
                     }
-                    // log 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
                     else {
+                        console.log(15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id);
                         fragment.id = fragmentDocument.id;
                         if (that.isReferenceToIttf()) {
                             if (ctx.ittfReferences) {

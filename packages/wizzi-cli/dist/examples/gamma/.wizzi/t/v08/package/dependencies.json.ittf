@@ -59,7 +59,7 @@ $group
                         react-select "^3.0.3"
             $if wzCtx.Build.react.transition
                 react-transition-group "^2.4.0"
-            recompose "^0.30.0"
+            $$ 25/06/2022 recompose "^0.30.0"
     
     $group
         $if wzCtx.Build.useReact

@@ -5,9 +5,9 @@ $group
         from 'passport-github2'
     ${'$'}if wzCtx.Build.useMongoDb
         import 
-            @ GetUserModel
-            @ UserModelType
-            from '../mongo/user'
+            @ GetAuthUserModel
+            @ AuthUserModelType
+            from '../mongo/authuser'
         import 
             @ GetAccountModel
             @ AccountModelType
@@ -21,12 +21,12 @@ $group
     ${'$'}if wzCtx.Build.useMongoDb
         let accountModel
             :ref AccountModelType
-            # let userModel: UserModelType;
+            # let authUserModel: AuthUserModelType;
     export 
         function createStrategy
             ${'$'}if wzCtx.Build.useMongoDb
                 set accountModel = GetAccountModel()
-                    # userModel = GetUserModel();
+                    # authUserModel = GetAuthUserModel();
             log '============================================================'
             log 'features.auth.strategies.github.createStrategy',
                 \b 'config.githubClientId', config.githubClientId,

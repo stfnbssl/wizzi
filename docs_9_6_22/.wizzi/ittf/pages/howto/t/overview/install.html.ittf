@@ -1,8 +1,0 @@
-﻿$group
-    $
-        var sect = {
-            title: 'How to install Wizzi'
-        };
-
-    section(&sect)
-

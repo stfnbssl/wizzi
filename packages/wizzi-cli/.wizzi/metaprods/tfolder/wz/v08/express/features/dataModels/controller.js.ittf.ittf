@@ -16,7 +16,7 @@ $group
 
             m initialize
                 param initValues
-                log 'Entering ${'$'}{schema.Name}Controller.initialize'
+                # loog 'Entering ${'$'}{schema.Name}Controller.initialize'
                 set this.${'$'}{schema.name}Model = Get${'$'}{schema.Name}Model()
                 _ this.router.get(`/`, this.get${'$'}{schema.CollectionName}.bind(this))
                 _ this.router.post(`/`, this.create${'$'}{schema.Name}.bind(this))
@@ -38,7 +38,7 @@ $group
                                     @ res
                                     @ err
                         else
-                            log 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
+                            # loog 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
                             _ sendSuccess
                                 @ res
                                 {
@@ -47,14 +47,14 @@ $group
             m create${'$'}{schema.Name}
                 param req
                 param res
-                log 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, req.body', req.body
+                # loog 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, req.body', req.body
                 const data = req.body.data
                 let ${'$'}{schema.name} = new this.${'$'}{schema.name}Model(data)
                 _ ${'$'}{schema.name}.save
                     ._ then
                         => 
                             param ${'$'}{schema.name}
-                            log '${'$'}{schema.Name}Controller.create.save, ${'$'}{schema.Name}
+                            # loog '${'$'}{schema.Name}Controller.create.save, ${'$'}{schema.Name}
                             _ sendSuccess
                                 @ res
                                 { 
@@ -125,7 +125,7 @@ $group
                                 ._ then
                                     => 
                                         param ${'$'}{schema.name}
-                                        log '${'$'}{schema.Name}Controller.update.save, ${'$'}{schema.Name}
+                                        # loog '${'$'}{schema.Name}Controller.update.save, ${'$'}{schema.Name}
                                         _ sendSuccess
                                             @ res
                                             {

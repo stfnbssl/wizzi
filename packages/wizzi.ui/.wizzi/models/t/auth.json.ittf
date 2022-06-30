@@ -1,0 +1,26 @@
+$group
+    usePassport false
+    { passport
+    useAuthentication false
+    { authentication
+        authRequired false
+        userInfo false
+        useAuth0 false
+        { auth0
+            tenant "dev-qwf9-zob.eu"
+            clientId "dJoAkgjkJmbElAgqMxqsBPlfoZ3xdAdV"
+            longRandomString "gdftr75ujgklfòlvposg908495r7o34tklvgklgeòmvojg"
+            baseURL "${md.http}://localhost:${md.port}"
+        useLocal false
+        { local
+        useGithub false
+        { github
+            clientId "6a42cd4cb7247bb4e823"
+            clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
+            callbackURL "${md.http}://localhost:${md.port}/api/${md.apiVersion}/authenticate/github/callback"
+    useAuthorization false
+    { authorization
+    useCrypto false
+    { crypto
+    useJwt false
+    { jwt

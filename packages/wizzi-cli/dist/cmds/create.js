@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\create.js.ittf
-    utc time: Tue, 20 Jul 2021 11:08:44 GMT
+    utc time: Wed, 29 Jun 2022 03:20:16 GMT
 */
 'use strict';
 const path = require('path');
@@ -42,18 +42,18 @@ module.exports = (options) => {
                     console.log('err', err);
                     throw new Error(err.message);
                 }
-                console.log('genFolderResult', genFolderResult);
+                // loog 'genFolderResult', genFolderResult
                 return ;
             });
     }
-    newpkg((err, answers) => {
+    newpkg((err, answers) => 
     
-        console.log('create.answers', answers);
+        // loog 'create.answers', answers
         wizzi.model(path.join(__dirname, '..', 'resources', 'create', 'contexts', answers.pkg_type + ".json.ittf"), {
             answers: answers
-         }, (err, jsonctx) => {
+         }, (err, jsonctx) => 
         
-            console.log('create.jsonctx', jsonctx);
+            // loog 'create.jsonctx', jsonctx
             wizzi.genFolder(path.join(__dirname, '..', 'resources', 'create', 'templates', answers.__template), {
                 cliCtx: jsonctx
              }, {
@@ -66,11 +66,9 @@ module.exports = (options) => {
                     console.log('err', err);
                     throw new Error(err.message);
                 }
-                console.log('genFolderResult', genFolderResult);
+                // loog 'genFolderResult', genFolderResult
             })
-        }
         )
-    }
     )
 }
 ;

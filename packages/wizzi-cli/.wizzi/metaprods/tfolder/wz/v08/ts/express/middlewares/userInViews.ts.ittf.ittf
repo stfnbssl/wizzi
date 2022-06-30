@@ -9,12 +9,12 @@ $group
     import 
         @ MiddlewareType
         from '../features/app/types'
-        #
-            # *
-            # * The purpose of this middleware is to have the `user`
-            # * object available for all views.
-            # *
-            # 
+    #
+        # 
+        # The purpose of this middleware is to have the `user`
+        # object available for all views.
+        # 
+        # 
     export 
         const UserInViewMiddleware
             :ref MiddlewareType
@@ -30,11 +30,10 @@ $group
                                 param res
                                     :ref Response
                                 param next
-                                set res.locals.user = req.user
+                                ${'$'}if wzCtx.Build.useMongoDb
+                                    log 'UserInViewMiddleware.req.session.user', (req.session as any).user
+                                    set res.locals.user = (req.session as any).user
+                                ${'$'}else
+                                    log 'UserInViewMiddleware.req.user', req.user
+                                    set res.locals.user = req.user
                                 _ next()
-        #
-            # *
-            # * The purpose of this middleware is to have the `user`
-            # * object available for all views.
-            # *
-            # 

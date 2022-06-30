@@ -20,7 +20,7 @@
             function 
                 param schemaName
                 param callback
-                log 'wizzi-cli.generate.Generating schema ' + schemaName
+                # loog 'wizzi-cli.generate.Generating schema ' + schemaName
                 var options = {}
                 if plugins
                     set options
@@ -46,7 +46,7 @@
                                             @ err
                                             { 
                                                 @ depth null
-                        log 'wizzi-cli.generate.Generate schema result', result
+                        # loog 'wizzi-cli.generate.Generate schema result', result
 						_ callback(null, result)
             function 
                 param err
@@ -64,7 +64,7 @@
 				return
 
 			const configInstance = require(configPath)
-			log 'wizzi-cli.generate.configInstance', configInstance
+			# loog 'wizzi-cli.generate.configInstance', configInstance
             const x_pluginsBaseFolder = configInstance.pluginsBaseFolder || __dirname
             if !configInstance.pluginsBaseFolder
                 _ console.log

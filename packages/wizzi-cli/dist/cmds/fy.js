@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\fy.js.ittf
-    utc time: Tue, 20 Jul 2021 11:08:44 GMT
+    utc time: Wed, 29 Jun 2022 03:20:16 GMT
 */
 'use strict';
 const path = require('path');
@@ -17,7 +17,7 @@ module.exports = (args) => {
     let currentDir = process.cwd();
     let source = args.source || args.s;
     let dest = args.dest || args.d;
-    console.log('fy.source.dest', source, dest);
+    // loog 'fy.source.dest', source, dest
     var sourcePath, destPath, sourceIsFolder;
     if (source && source.length > 0) {
         if (verify.isAbsolutePath(source)) {
@@ -57,20 +57,21 @@ module.exports = (args) => {
             destPath = path.join(destPath, path.basename(sourcePath) + '.ittf')
             ;
         }
+        
+        // loog 'ok. source && dest are folders'
         if (sourceIsFolder) {
-            console.log('ok. source && dest are folders');
             wizziTools.importFolder(sourcePath, destPath, (err, result) => {
             
                 if (err) {
                     console.log('err', err);
                     throw new Error(err.message);
                 }
-                console.log('Wizzify folder result', result);
+                // loog 'Wizzify folder result', result
             }
             )
         }
+        // loog 'ok. source && dest are files'
         else {
-            console.log('ok. source && dest are files');
             var extension = path.extname(sourcePath);
             var schema;
             extension = extension.substr(1);
@@ -96,7 +97,7 @@ module.exports = (args) => {
                     throw new Error(err.message);
                 }
                 file.write(destPath, result);
-                console.log('Wizzify file', result);
+                // loog 'Wizzify file', result
             }
             )
         }

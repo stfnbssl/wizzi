@@ -8,8 +8,9 @@ ${'$'}group
     { mongoDb
         user "yanez"
         password "x5csosPN5YAsrl4Z"
-        dbPath "@cluster0.idlk7.mongodb.net"
+        host "mongodb+srv"
         dbName "wizzi"
+        dbPath "@cluster0.idlk7.mongodb.net"
     
     useFilesystem false
     { filesystem

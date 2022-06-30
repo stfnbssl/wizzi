@@ -55,7 +55,7 @@
 	m toIttf
 		param ittfDocumentGraph
 
-        # log 'toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph)', 
+        log 'toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph): ', 
             \b ittfDocumentGraph.__type, this.analized, this.basename, verify.isObject(this.ittfDocumentGraph)
 
 		var r = this.root()
@@ -121,7 +121,8 @@
 				var ittfBasePath = r.ittfBasePath
 				foreach item in Object.keys(usedFragments)
 					
-					var ittfFragmentsNode
+					log 'usedFragments[k]', item, usedFragments[item]
+                    var ittfFragmentsNode
 						_ ittfSource.add
 							@ 'fragment'
 							@ item

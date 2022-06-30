@@ -1,4 +1,4 @@
 ${'$'}group
     ${'$'}params &md
 
-    $include wz/v08/express/site/views/t/layout.html
+    $include wz/v08/express/site/views/t/demo_layout.html

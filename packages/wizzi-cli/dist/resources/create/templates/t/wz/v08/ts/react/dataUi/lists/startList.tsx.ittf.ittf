@@ -141,14 +141,14 @@ $group
                 @ onDoneAddItem
                     function
                         param values
-                        log 'onDoneAddItem', values
+                        # loog 'onDoneAddItem', values
                         _ listObj.add
                             @ values
                 
                 @ onDoneUpdateItem
                     function
                         param newValues
-                        log 'onDoneUpdateItem', newValues, newValues[keyId]
+                        # loog 'onDoneUpdateItem', newValues, newValues[keyId]
                         var item = listObj.get(keyId, newValues[keyId])[0]
                         _ item.values
                             @ newValues
@@ -156,7 +156,7 @@ $group
                 @ onDoneDeleteItem
                     function
                         param itemId
-                        log 'onDoneDeleteItem', itemId
+                        # loog 'onDoneDeleteItem', itemId
 
                         _ listObj.remove(keyId, itemId)
 

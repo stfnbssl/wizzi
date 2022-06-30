@@ -1,9 +1,0 @@
-$group
-
-    . cs-sb-item
-        padding-left 1rem
-        margin-top 1px
-        border-left 1px solid ${c_0}
-
-    . cs-sb-item-label
-        text-decoration none 

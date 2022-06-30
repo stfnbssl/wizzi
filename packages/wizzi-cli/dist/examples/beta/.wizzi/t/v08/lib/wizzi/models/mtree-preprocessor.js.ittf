@@ -59,7 +59,7 @@ $group
     function wrapChilds
         param node
         param newN
-        # log 'wrapChild', node.children
+        # loog 'wrapChild', node.children
         _ copyNodeAttrsDeep
             @ node
             @ newN

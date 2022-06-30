@@ -17,8 +17,8 @@ module
             => 
                 param username
                 param password
-                _ console.log('username:', username)
-                _ console.log('environment:', password || 'no password given')
+                log 'username:', username
+                log 'environment:', password || 'no password given'
     _ program.parse
     
     # Try the following:

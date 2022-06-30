@@ -136,7 +136,7 @@ module
                     @ mainReducer
                     @ initialState
 
-            log 'store.Provider.state', state
+            # loog 'store.Provider.state', state
 
 	        const dispatch
                 _ useCallback

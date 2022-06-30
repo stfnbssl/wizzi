@@ -20,7 +20,8 @@
            
 
         # _ step_1
-        _ ittfFsNode_step_1
+        # _ ittfFsNode_step_1
+        _ ittfFsNode_step_1_outside
             f_cb_test( result1 )
                 # log 'ittfFsNode_step_1.result', result1
                 #

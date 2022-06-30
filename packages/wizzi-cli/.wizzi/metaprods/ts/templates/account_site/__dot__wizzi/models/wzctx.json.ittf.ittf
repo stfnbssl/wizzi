@@ -17,7 +17,7 @@
         [ Components
 
     ---
-    { Style
+    { Styles
         vpadRatio 0.25
         bodyFontSize "12px"
         bodyLineHeight 1.3165
@@ -66,24 +66,24 @@
         { monacoEditor
 
         ---
-        $include auth.json
+        ${'$'}include auth.json
         ---
-        $include babel.webpack.json
+        ${'$'}include babel.webpack.json
         ---
-        $include code.json
+        ${'$'}include code.json
         ---
-        $include db.json
+        ${'$'}include db.json
         ---
-        $include express.json
+        ${'$'}include express.json
         ---
-        $include react.json
+        ${'$'}include react.json
         ---
-        $include styles.json
+        ${'$'}include styles.json
         ---
-        $include test.json
+        ${'$'}include test.json
         ---
-        $include utils.json
+        ${'$'}include utils.json
         ---
-        $include wizzi.json
+        ${'$'}include wizzi.json
         ---
-        $include data.json
+        ${'$'}include data.json

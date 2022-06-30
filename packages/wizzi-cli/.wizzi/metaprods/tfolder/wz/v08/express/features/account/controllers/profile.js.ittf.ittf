@@ -14,7 +14,7 @@ $group
 
             m initialize
                 param initValues
-                log 'Entering ProfileController.initialize'
+                # loog 'Entering ProfileController.initialize'
                 _ this.router.get
                     @ `/`
                     ${'$'}if wzCtx.Build.useAuthentication

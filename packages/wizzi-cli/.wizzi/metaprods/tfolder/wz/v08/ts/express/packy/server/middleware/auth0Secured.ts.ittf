@@ -13,7 +13,7 @@ module
             # 
     export-default 
         function getSecured
-            _ console.log('getSecured called')
+            # loog 'getSecured called'
             return 
                 function secured
                     param req
@@ -22,7 +22,7 @@ module
                         :ref Response
                     param next
                         :ref Function
-                    _ console.log('secured called', req.user)
+                    # loog 'secured called', req.user
                     if req.user
                         return next()
                     set =
