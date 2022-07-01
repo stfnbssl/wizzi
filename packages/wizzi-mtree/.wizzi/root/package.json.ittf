@@ -1,0 +1,14 @@
+common/kernel_package( wizzi-mtree, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license}  )
+
+	escodegen "^1.8.1"
+	esprima "^3.1.3"
+	glob "^7.1.2"
+	i "^0.3.5"
+	promise "^7.1.1"
+	
+	$append devDependencies
+        object-inspect "^1.6.0"
+        wizzi-repo "file:../../wizzi-repo/dist"
+
+    $append scripts
+        examples:loader "node examples/loader"

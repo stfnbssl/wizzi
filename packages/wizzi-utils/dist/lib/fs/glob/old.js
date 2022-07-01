@@ -1,9 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\lib\fs\glob\old.js.ittf
+    artifact generator: C:\My\wizzi\v3\v3-next\node_modules\v4-wizzi-js\lib\artifacts\js\module\gen\main.js
+    primary source IttfDocument: c:\my\wizzi\v3\v3-next\sources\v4-wizzi-repo\ittf\lib\mongodb\glob\old.js.ittf
+    utc time: Wed, 30 Aug 2017 16:14:48 GMT
 */
-'use strict';
 'use strict';
 var pathModule = require('path');
 var isWindows = process.platform === 'win32';
@@ -45,7 +44,6 @@ function rethrow() {
 }
 function maybeCallback(cb) {
     return typeof (cb) === 'function' ? cb : rethrow();
-    ;
 }
 var normalize = pathModule.normalize;
 if (isWindows) {
@@ -133,8 +131,7 @@ exports.realpathSync = function realpathSync(p, cache) {
         cache[original] = p;
     }
     return p;
-}
-;
+};
 exports.realpath = function realpath(p, cache, cb) {
     if (typeof (cb) !== 'function') {
         cb = maybeCallback(cache);
@@ -142,7 +139,9 @@ exports.realpath = function realpath(p, cache, cb) {
     }
     p = pathModule.resolve(p);
     if (cache && Object.prototype.hasOwnProperty.call(cache, p)) {
-        return process.nextTick(cb.bind(null, null, cache[p]));
+        return process.nextTick(cb.bind(null, null, cache[p])
+            )
+        ;
     }
     var original = p,
         seenLinks = {},
@@ -165,7 +164,7 @@ exports.realpath = function realpath(p, cache, cb) {
                 }
                 knownHard[base] = true;
                 LOOP();
-            })
+            });
         }
         else {
             process.nextTick(LOOP);
@@ -188,7 +187,8 @@ exports.realpath = function realpath(p, cache, cb) {
             return process.nextTick(LOOP);
         }
         if (cache && Object.prototype.hasOwnProperty.call(cache, base)) {
-            return gotResolvedLink(cache[base]);
+            return gotResolvedLink(cache[base])
+            ;
         }
         return fs.lstat(base, gotStat);
     }
@@ -206,7 +206,8 @@ exports.realpath = function realpath(p, cache, cb) {
         if (! (isWindows)) {
             var id = (((stat.dev.toString(32) + ':')) + stat.ino.toString(32));
             if (seenLinks.hasOwnProperty(id)) {
-                return gotTarget(null, seenLinks[id], base);
+                return gotTarget(null, seenLinks[id], base)
+                ;
             }
         }
         fs.stat(base, function(err) {
@@ -218,8 +219,8 @@ exports.realpath = function realpath(p, cache, cb) {
                     seenLinks[id] = target;
                 }
                 gotTarget(err, target);
-            })
-        })
+            });
+        });
     }
     function gotTarget(err, target, base) {
         if (err) {
@@ -235,5 +236,4 @@ exports.realpath = function realpath(p, cache, cb) {
         p = pathModule.resolve(resolvedLink, p.slice(pos));
         start();
     }
-}
-;
+};

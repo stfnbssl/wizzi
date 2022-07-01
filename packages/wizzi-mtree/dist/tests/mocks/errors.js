@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\mocks\errors.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\mocks\errors.js.ittf
 */
 'use strict';
 var md = module.exports = {};
@@ -17,7 +17,8 @@ function RepoIOError(message, uri, innerEx) {
 }
 RepoIOError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 RepoIOError.prototype = Object.create(Error.prototype);
 RepoIOError.prototype.constructor = RepoIOError;
 md.RepoIOError = RepoIOError;
@@ -35,7 +36,8 @@ function InvalidRequestError(message, code) {
 }
 InvalidRequestError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 InvalidRequestError.prototype = Object.create(Error.prototype);
 InvalidRequestError.prototype.constructor = InvalidRequestError;
 md.InvalidRequestError = InvalidRequestError;

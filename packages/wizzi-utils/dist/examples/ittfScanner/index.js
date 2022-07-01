@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.8
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\ittf\examples\ittfScanner\index.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\ittfScanner\index.js.ittf
 */
 'use strict';
 //
@@ -228,7 +228,7 @@ var ittfScanner_Step_1 = function(step_callback) {
                 console.log('err', err);
                 throw new Error(err.message);
             }
-            ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'first.wfpackage.ittf'), function(err, result) {
+            ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'first.wzCtx.ittf'), function(err, result) {
                 if (err) {
                     console.log('err', err);
                     throw new Error(err.message);
@@ -248,7 +248,7 @@ var ittfScanner_Step_1 = function(step_callback) {
                 console.log('err', err);
                 throw new Error(err.message);
             }
-            ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'second.wfpackage.ittf'), function(err, result) {
+            ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'second.wzCtx.ittf'), function(err, result) {
                 if (err) {
                     console.log('err', err);
                     throw new Error(err.message);

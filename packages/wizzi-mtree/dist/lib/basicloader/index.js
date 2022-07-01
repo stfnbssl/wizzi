@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\basicloader\index.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\basicloader\index.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -31,7 +31,7 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, notUsed, callback) {
     var mTree = new MTree(primaryIttfDocumentUri);
     mTree.load(sourceText, {
         sourceKey: 's1'
-    })
+     })
     var nodes = mTree.nodes;
     mTree.nodes = [];
     var i, i_items=nodes, i_len=nodes.length, item;
@@ -41,7 +41,8 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, notUsed, callback) {
         mTree.nodes.push(final_node)
     }
     return callback(null, mTree);
-};
+}
+;
 function _to_final_mtree(parent, node) {
     var final_node = {
         parent: parent, 
@@ -52,7 +53,7 @@ function _to_final_mtree(parent, node) {
         c: node.col, 
         s: node.brickKey, 
         u: node.sourceKey
-    };
+     };
     var i, i_items=node.children, i_len=node.children.length, item;
     for (i=0; i<i_len; i++) {
         item = node.children[i];

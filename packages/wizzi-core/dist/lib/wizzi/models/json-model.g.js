@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\wizzi\models\json-model.g.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\json-model.g.js.ittf
 */
 'use strict';
 //
@@ -34,15 +34,17 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
         }
     }
     return callback(null, json);
-};
+}
+;
 function toJsonObject(mTreeNodeChilds) {
     var ret = {}, value;
     if (mTreeNodeChilds) {
         var i, i_items=mTreeNodeChilds, i_len=mTreeNodeChilds.length, node;
         for (i=0; i<i_len; i++) {
             node = mTreeNodeChilds[i];
+            
+            // skip comment
             if (node.n === '#') {
-                // skip comment
             }
             else if (node.n === '{' || node.n === '[') {
                 if (!node.v || node.v.length == 0) {
@@ -51,12 +53,14 @@ function toJsonObject(mTreeNodeChilds) {
                 else {
                     if (node.n === '{') {
                         value = toJsonObject(node.children);
+                        ;
                         if (value && value.__is_error) {
                             return value;
                         }
                     }
                     else {
                         value = toJsonArray(node.children);
+                        ;
                         if (value && value.__is_error) {
                             return value;
                         }
@@ -106,8 +110,9 @@ function toJsonArray(mTreeNodeChilds) {
         var i, i_items=mTreeNodeChilds, i_len=mTreeNodeChilds.length, node;
         for (i=0; i<i_len; i++) {
             node = mTreeNodeChilds[i];
+            
+            // skip comment
             if (node.n === '#') {
-                // skip comment
             }
             else if (node.n === '{') {
                 var value = toJsonObject(node.children);
@@ -178,7 +183,7 @@ function error(message, node) {
             node: node.n + ' ' + node.v + ' pos: ' + node.r + ', ' + node.c, 
             message: message, 
             errorLines: nodeInfo(node, message)
-        };
+         };
 }
 function nodeInfo(node, message) {
     return errors.getErrorLinesFromMTreeNode(node, message);

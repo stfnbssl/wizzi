@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\index.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -29,9 +29,10 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
     }
     // log 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
+        
+        // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
         if (err) {
             err.primaryIttfDocumentUri = primaryIttfDocumentUri;
-            // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
             return callback(err);
         }
         var primaryMTreeBrick = createdProvider.getPrimaryMTreeBrick();
@@ -65,8 +66,9 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
                         }
                         // evaluate
                         evaluator(appendedMTreePiece, loadContext, function(err, finalMTree) {
+                            
+                            // log 'wizzi-mTree.loader.index.err', err
                             if (err) {
-                                // log 'wizzi-mTree.loader.index.err', err
                                 err.ittfDocumentUri = primaryIttfDocumentUri;
                                 return callback(err);
                             }
@@ -80,7 +82,8 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
             })
         })
     })
-};
+}
+;
 //
 md.loadMTreeFrontMatter = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, callback) {
     if (typeof(callback) !== 'function') {
@@ -125,7 +128,8 @@ md.loadMTreeFrontMatter = function loadMTreeRaw(primaryIttfDocumentUri, loadCont
         // resolve $-- (front matter) commands
         frontMatter(primaryMTreeBrick, callback)
     })
-};
+}
+;
 //
 md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, callback) {
     if (typeof(callback) !== 'function') {
@@ -178,7 +182,8 @@ md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, cal
         var primaryMTreeBrick = createdProvider.getPrimaryMTreeBrick();
         return callback(null, primaryMTreeBrick);
     })
-};
+}
+;
 //
 md.loadMTreeDebugInfo = function loadMTree(primaryIttfDocumentUri, loadContext, callback) {
     var originalloadContext = loadContext;
@@ -189,9 +194,10 @@ md.loadMTreeDebugInfo = function loadMTree(primaryIttfDocumentUri, loadContext, 
         return callback(loadContext);
     }
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
+        
+        // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
         if (err) {
             err.primaryIttfDocumentUri = primaryIttfDocumentUri;
-            // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
             return callback(err);
         }
         var primaryMTreeBrick = createdProvider.getPrimaryMTreeBrick();
@@ -230,7 +236,8 @@ md.loadMTreeDebugInfo = function loadMTree(primaryIttfDocumentUri, loadContext, 
             })
         })
     })
-};
+}
+;
 //
 function normalizeRequestContext(loadContext) {
     // log 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext

@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\scssparser\gonzales\cleanGonzales.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\scssparser\gonzales\cleanGonzales.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -30,4 +31,5 @@ md.cleanAst = function(ast) {
         }
     }
     return ast;
-};
+}
+;

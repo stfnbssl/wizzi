@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\tests\mocks\errors.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\errors.js.ittf
 */
 'use strict';
 
@@ -35,7 +35,8 @@ function NodeError(message, node) {
 }
 NodeError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 NodeError.prototype = Object.create(Error.prototype);
 NodeError.prototype.constructor = NodeError;
 md.NodeError = NodeError;
@@ -47,7 +48,8 @@ function WizziModelLoadError(message, srcPath, ex) {
 }
 WizziModelLoadError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 WizziModelLoadError.prototype = Object.create(Error.prototype);
 WizziModelLoadError.prototype.constructor = WizziModelLoadError;
 md.WizziModelLoadError = WizziModelLoadError;
@@ -59,7 +61,8 @@ function ArtifactGenerationError(message, generation, srcPath, ex) {
 }
 ArtifactGenerationError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 ArtifactGenerationError.prototype = Object.create(Error.prototype);
 ArtifactGenerationError.prototype.constructor = ArtifactGenerationError;
 md.ArtifactGenerationError = ArtifactGenerationError;
@@ -71,9 +74,11 @@ md.getSrcPathInfo = function(srcPath) {
     if (srcPath && (typeof (srcPath) === 'object')) {
         var msg = md.getSrcPathInfoFromNode(srcPath);
         return msg ? msg : srcPath.toString();
+        ;
     }
     return 'unavailable';
-};
+}
+;
 md.getSrcPathInfoFromNode = function(node) {
     var msg = [];
     if (node) {
@@ -90,4 +95,6 @@ md.getSrcPathInfoFromNode = function(node) {
         }
     }
     return msg.length == 0 ? null : msg.join('');
-};
+    ;
+}
+;

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\mTreeBuildUpScripter.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScripter.js.ittf
 */
 'use strict';
 //
@@ -63,12 +63,15 @@ function codify(node, nparent, jsScriptCoder, ctx) {
         jsScriptCoder.w(value + ' = ' + items[2] + '[' + name + '];' + ' //' + node.id, node)
         closeBlock = '}';
     }
+    
+    // items = [item, in, coll]
+    
+    // TODO if items.length != 3 -> malformed
+    
+    // TODO if items[1] !== 'in' -> malformed
     else if (tag == '$foreach') {
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
         var items = node.value.split(' ');
-        // items = [item, in, coll]
-        // TODO if items.length != 3 -> malformed
-        // TODO if items[1] !== 'in' -> malformed
         jsScriptCoder.w('var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + ' //' + node.id, node)
         jsScriptCoder.w('var ' + items[0] + '_count = ' + items[2] + '.length;' + ' //' + node.id, node)
         jsScriptCoder.for('var i' + nnode + '=0; i' + nnode + '<' + items[0] + '_count' + nnode + '; i' + nnode + '++', node)
@@ -130,8 +133,9 @@ function codify(node, nparent, jsScriptCoder, ctx) {
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
         return ;
     }
+    
+    // no interpolation
     else if (tag == '$raw') {
-        // no interpolation
         setJsWizziContext(ctx, null, jsScriptCoder);
         var i, i_items=node.children, i_len=node.children.length, item;
         for (i=0; i<i_len; i++) {
@@ -161,8 +165,8 @@ function codify(node, nparent, jsScriptCoder, ctx) {
             ctx.brickKey = -1;
         }
     }
+    // children of node have already been written
     else {
-        // children of node have already been written
     }
 }
 function setJsWizziContext(ctx, brickKey, jsScriptCoder, brickKeyInGlobal) {
@@ -184,21 +188,23 @@ function codifyValue(brickKey, value, type, line, hasMacro, ctx) {
     if (typeof(value) === 'undefined' || value == null) {
         return '""';
     }
+    
+    // 23/5/18 return escape(hasMacro ? remacro(value) : value)
     if (type === 'string') {
         if (value.indexOf('${') > -1) {
             var sHasMacro = hasMacro ? 'true' : 'false';
+            
+            // return '"' + newValue + '"'
             if (ctx.isCompile) {
                 var newValue = interpolate(value, {}, {
                     isCompile: true
-                });
-                // return '"' + newValue + '"'
+                 });
                 return newValue;
             }
             else {
                 return '$.ip("' + brickKey + '", ' + escape(value) + ', "' + type + '", ' + line + ', ' + sHasMacro + ')';
             }
         }
-        // 23/5/18 return escape(hasMacro ? remacro(value) : value)
         return escape(remacro(value));
     }
     return value;
@@ -211,9 +217,10 @@ function codeBlock(node, jsScriptCoder, ctx) {
     }
     else {
         if (node.name && (node.name.trim().length > 0)) {
+            
+            // log '=========', node.model.calcParamValues(node.model.$args)
             if (ctx.isCompile && node.__firstOfMixedNodes) {
                 jsScriptCoder.w('// firstOfMixed ' + node.model.$args + '/' + node.model.$params, node)
-                // log '=========', node.model.calcParamValues(node.model.$args)
                 isCompilePassedParameters(jsScriptCoder, node.model.calcParamValues(node.model.$args))
             }
             jsScriptCoder.w(node.name + ' ' + (node.value || '') + ' //' + node.id, node)

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\debugInfoBuilder.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\debugInfoBuilder.js.ittf
 */
 'use strict';
 var JsWizziContext = require('../jswizzi/jsWizziContext');
@@ -20,7 +20,7 @@ module.exports = function(composedMTree, loadContext, callback) {
         counter: 0, 
         startTime: dateUtil.now_GMYHMS(), 
         isCompile: loadContext.options.isCompile
-    };
+     };
     var isCompile = loadContext.options.isCompile;
     var scriptCoder = new JsWizziScriptCoder();
     scriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
@@ -47,5 +47,6 @@ module.exports = function(composedMTree, loadContext, callback) {
     }
     callback(null, {
         mTreeBuildUpScript: scriptCoder.toCode()
-    })
-};
+     })
+}
+;

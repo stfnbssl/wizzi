@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\starter\essentials\models\level_0\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\starter\essentials\models\level_0\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -42,7 +43,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -51,12 +52,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -102,13 +104,8 @@ function formatNum(num, len) {
     return new Array(1 + len-x.length).join(' ') + x;
 }
 module.exports = function exec(step_callback) {
-    heading1('example-essentials starting');
-    /**
-         DEMO: how to load an IttfDocument into an `html` wizzi model,
-         passing a context object to the mTree loader.
-        
-         API   wizzi.model(sourcePathOrModelInfo, context?, options?)
-    */
+    heading1('example-essentials starting')
+    //
     
     wizzi.model(path.join(__dirname, 'step_1', 'basic.html.ittf'), {
         wf: {
@@ -116,21 +113,22 @@ module.exports = function exec(step_callback) {
                 {
                     name: 'wizzi-utils', 
                     title: 'Wizzi factory utility library'
-                }, 
+                 }, 
                 {
                     name: 'wizzi-mTree', 
                     title: 'mTree loader'
-                }
+                 }
             ]
-        }
-    }, function(err, wizziModel) {
+         }
+     }, function(err, wizziModel) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
             throw new Error(JSON.stringify(err, null, 2));
         }
         // And print the wizzi model object
-        printValue('wizziModel', stringify(wizziModel, null, 4), 'dashes');
+        printValue('wizziModel', stringify(wizziModel, null, 4), 'dashes')
         return step_callback(null);
-    });
-};
+    })
+}
+;

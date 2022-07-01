@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\examples\legacy\step_1.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\examples\legacy\step_1.js.ittf
 */
 'use strict';
 //
@@ -25,8 +25,9 @@ var async = require('async');
 var wizzi = null;
 var legacy = require('../../legacy');
 function createWizziFactory(globalContext, callback) {
+    
+    // The wizzi package will be a previous version from wizzi/node_modules
     if (wizzi == null) {
-        // The wizzi package will be a previous version from wizzi/node_modules
         wizzi = require('wizzi');
     }
     console.log('"wizzi" package version', wizzi.version);
@@ -38,9 +39,9 @@ function createWizziFactory(globalContext, callback) {
                 './index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname, '..', '..')
-        }, 
+         }, 
         globalContext: globalContext || {}
-    }, callback)
+     }, callback)
 }
 function loadMTree(ittfDocumentUri, context, callback) {
     createWizziFactory({}, function(err, wf) {
@@ -59,7 +60,7 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
         wf.loadModel(fi.schema, ittfDocumentUri, {
             mTreeBuildUpContext: context, 
             globalContext: {}
-        }, callback)
+         }, callback)
     })
 }
 function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, callback) {
@@ -71,7 +72,7 @@ function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, ca
         wf.loadModelAndGenerateArtifact(ittfDocumentUri, {
             modelRequestContext: context, 
             artifactRequestContext: {}
-        }, artifactName, function(err, artifact) {
+         }, artifactName, function(err, artifact) {
             if (err) {
                 return callback(err);
             }
@@ -88,7 +89,7 @@ function loadAndTransformModel(ittfDocumentUri, context, transformerName, callba
         wf.loadModel(fi.schema, ittfDocumentUri, {
             mTreeBuildUpContext: context, 
             globalContext: {}
-        }, function(err, wizziModel) {
+         }, function(err, wizziModel) {
             if (err) {
                 return callback(err);
             }
@@ -108,10 +109,10 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
                 indentSpaces: 4, 
                 basedir: __dirname, 
                 verbose: 2
-            }), 
+             }), 
             modelContext: context || {}, 
-            jobContext: {}
-        }, callback)
+            jobContext: context || {}
+         }, callback)
     })
 }
 function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
@@ -124,8 +125,10 @@ function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wf
 }
 function getFiles(srcpath, schema) {
     return fs.readdirSync(srcpath).filter((file) => {
+        
             return fs.lstatSync(path.join(srcpath, file)).isFile() && verify.endsWith(file, (schema === 'ittf' ? '.ittf' : '.' + schema + '.ittf'));
-        })
+        }
+        )
     ;
 }
 var legacy_step_1 = function(step_callback) {
@@ -183,12 +186,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -285,9 +289,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

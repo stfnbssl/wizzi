@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\tests\mocks\util\errors.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\util\errors.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -16,7 +16,8 @@ function FileError(message, ex) {
 }
 FileError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 FileError.prototype = Object.create(Error.prototype);
 FileError.prototype.constructor = FileError;
 md.FileError = FileError;
@@ -50,7 +51,8 @@ function NodeError(message, node) {
 }
 NodeError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 NodeError.prototype = Object.create(Error.prototype);
 NodeError.prototype.constructor = NodeError;
 md.NodeError = NodeError;

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\errors.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\errors.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -39,7 +39,8 @@ function NodeError(message, node) {
 }
 NodeError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 NodeError.prototype = Object.create(Error.prototype);
 NodeError.prototype.constructor = NodeError;
 md.NodeError = NodeError;
@@ -55,7 +56,8 @@ function IttfNotFoundError(resourceType, name, sourceUri) {
 }
 IttfNotFoundError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 IttfNotFoundError.prototype = Object.create(Error.prototype);
 IttfNotFoundError.prototype.constructor = IttfNotFoundError;
 md.IttfNotFoundError = IttfNotFoundError;
@@ -71,8 +73,9 @@ function IttfLoadError(message, srcPath, node, ex) {
     if (srcPath) {
         this.message += '\nLoading ittf document ' + md.getSrcPathInfo(srcPath);
     }
+    
+    // TODO set this.nodeInfo = new NodeError('', node)
     if (node) {
-        // TODO set this.nodeInfo = new NodeError('', node)
         this.message += ('\n' + new NodeError('', node).message);
     }
     // TODO set this.inner = ex ???
@@ -80,7 +83,8 @@ function IttfLoadError(message, srcPath, node, ex) {
 }
 IttfLoadError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 IttfLoadError.prototype = Object.create(Error.prototype);
 IttfLoadError.prototype.constructor = IttfLoadError;
 md.IttfLoadError = IttfLoadError;
@@ -96,7 +100,8 @@ function RepoIOError(message, uri, innerEx) {
 }
 RepoIOError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 RepoIOError.prototype = Object.create(Error.prototype);
 RepoIOError.prototype.constructor = RepoIOError;
 md.RepoIOError = RepoIOError;
@@ -109,14 +114,14 @@ class WizziError extends Error {
         this.__is_error = true;
         this.data = {
             ...other||{}
-        };
+         };
         if (node) {
             this.data.node = {
                 name: node.name, 
                 row: node.row, 
                 col: node.col, 
                 sourceKey: node.sourceKey
-            };
+             };
             if (node.wzSourceLineInfo) {
                 var info = node.wzSourceLineInfo;
                 this.node.filePath = node.wzRoot().wzSourceFilepath(info.sourceKey);
@@ -126,13 +131,14 @@ class WizziError extends Error {
         if (mTreeBrick) {
             this.data.mTreeBrick = {
                 uri: mTreeBrick.uri
-            };
+             };
             this.errorLines = mTreeBrick.loadHistory.getIttfDocumentErrorLines(node.sourceKey, {
                 row: node.row, 
                 col: node.col, 
                 pos: node.col + node.name.length + 1, 
                 description: message
-            }, true);
+             }, true)
+            ;
         }
     }
     toString() {
@@ -173,7 +179,7 @@ class InternalError extends WizziError {
         super(error.message);
         this.data = {
             error
-        };
+         };
     }
 }
 md.InternalError = InternalError;
@@ -184,9 +190,11 @@ md.getSrcPathInfo = function(srcPath) {
     if (srcPath && (typeof (srcPath) === 'object')) {
         var msg = md.getSrcPathInfoFromNode(srcPath);
         return msg ? msg : srcPath.toString();
+        ;
     }
     return 'unavailable';
-};
+}
+;
 md.getSrcPathInfoFromNode = function(node) {
     var msg = [];
     if (node) {
@@ -210,4 +218,6 @@ md.getSrcPathInfoFromNode = function(node) {
         }
     }
     return msg.length == 0 ? null : msg.join('');
-};
+    ;
+}
+;

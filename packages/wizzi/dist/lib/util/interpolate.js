@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.8
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\ittf\lib\util\interpolate.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\util\interpolate.js.ittf
 */
 'use strict';
 //
@@ -34,7 +34,7 @@ function interpolate(template, data, opts) {
             else {
                 val = data;
                 for (; i<len; i++) {
-                    if (keyParts[i] in val) {
+                    if (val && keyParts[i] in val) {
                         val = val[keyParts[i]];
                     }
                     else {

@@ -2,7 +2,7 @@
 The task runner of the wizzi factory.
 ### Reference
 
-<p><a href="https://wizzifactory.github.io/concepts.html#concept-8">Concept</a>&nbsp; | &nbsp;<a href="https://wizzifactory.github.io/docs/jobs.html">Docs</a>&nbsp; | &nbsp;<a href="https://github.com/wizzifactory/wizzi/tree/master/packages/ittf-sources/v5/apps/wizzi-demo/src/ittf/examples/advanced/essentials/filesystem/jobs">Demo ittf source</a></p>
+<p><a href="https://wizzifactory.github.io/concepts.html#concept-8">Concept</a>  |  <a href="https://wizzifactory.github.io/docs/jobs.html">Docs</a>  |  <a href="https://github.com/wizzifactory/wizzi/tree/master/packages/ittf-sources/v5/apps/wizzi-demo/src/ittf/examples/advanced/essentials/filesystem/jobs">Demo ittf source</a></p>
 
 ### Demo samples level-0
 

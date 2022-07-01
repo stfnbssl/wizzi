@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\plugins\regexp\examples\regexp\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\plugins\regexp\examples\regexp\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,23 +18,18 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var plugin_examples = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         DEMO: How to use the `regexp` wizzi model type to
-         test regular expressions
-    */
+    heading1('Advanced-example starting')
+    //
     
-    /**
-         Commons
-    */
+    //
     var wizziFactoryConfig = {
         plugins: {
             items: [
                 './regexp/local/index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..')
-        }
-    };
+         }
+     };
     
     // Create a filesystem factory without access control.
     // For mTrees we require the dump of the mTree
@@ -45,17 +41,17 @@ var plugin_examples = function(step_callback) {
                 dumpsBaseFolder: path.join(__dirname, 'step_1', 'dumps'), 
                 mTreeBuildupJsWizziScript: {
                     dump: true
-                }
-            }
-        }
-    }, function(err, wf) {
+                 }
+             }
+         }
+     }, function(err, wf) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
             throw new Error(JSON.stringify(err, null, 2));
         }
         function load(callback) {
-            wf.loadMTree(path.join(__dirname, 'step_1', 'first.regexp.ittf'), {}, callback);
+            wf.loadMTree(path.join(__dirname, 'step_1', 'first.regexp.ittf'), {}, callback)
         }
         // Now we can load the document
         load(function(err, mTreeModel) {
@@ -65,7 +61,7 @@ var plugin_examples = function(step_callback) {
                 throw new Error(JSON.stringify(err, null, 2));
             }
             heading2( 'first.regexp.ittf - loaded mTree' );
-            printValue('mTreeModel.dump(true)', mTreeModel.dump(true));
+            printValue('mTreeModel.dump(true)', mTreeModel.dump(true))
             if (typeof wizziFactoryConfig.globalContext === 'undefined') {
                 wizziFactoryConfig.globalContext = globalContext;
             }
@@ -86,9 +82,9 @@ var plugin_examples = function(step_callback) {
                     // And save the model in json format
                     // to the ./outputs folder
                     var dest = path.join(__dirname, 'step_1', 'outputs', 'first.regexp.ittf.json');
-                    wf.fileService.write(dest, wizziModel.toJson());
+                    wf.fileService.write(dest, wizziModel.toJson())
                     console.log('   ', 'The json representation of first.regexp.ittf.json was saved to ' + dest);
-                    printValue('wizziModel.toJson()', wizziModel.toJson());
+                    printValue('wizziModel.toJson()', wizziModel.toJson())
                     console.log('wizziModel.executables', Object.keys(wizziModel.executables));
                     console.log('wizziModel.elements', Object.keys(wizziModel.elements));
                     var results = wizziModel.execTests();
@@ -111,12 +107,12 @@ var plugin_examples = function(step_callback) {
                         }
                     }
                     if (step_callback) {
-                        step_callback(null);
+                        step_callback(null)
                     }
-                });
-            });
-        });
-    });
+                })
+            })
+        })
+    })
 };
 plugin_examples.__name = 'Level regexp - plugin_examples';
 function heading1(text) {
@@ -146,7 +142,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -155,12 +151,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\wfschema\json_docs\trans\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\wfschema\json_docs\trans\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -18,10 +18,11 @@ md.trans = function(model, ctx, callback) {
     ctx.result = {
         name: model.wzName, 
         preserveTags: model.preserveTags
-    };
+     };
     md.wfschema(model, ctx);
     callback(null, ctx.result);
-};
+}
+;
 md.wfschema = function(model, ctx, parent) {
     ctx.result.requires = [];
     ctx.result.exportTos = [];
@@ -36,10 +37,12 @@ md.wfschema = function(model, ctx, parent) {
         element = model.elements[i];
         md.element(element, ctx, ctx.result);
     }
-};
+}
+;
 md.exportTo = function(model, ctx, parent) {
     parent.exportTos.push(model.wzName);
-};
+}
+;
 md.element = function(model, ctx, parent) {
     var flags = '';
     flags += model.isAbstract ? 'is-abstract ' : '';
@@ -56,7 +59,7 @@ md.element = function(model, ctx, parent) {
         restricts: [], 
         methods: [], 
         comments: []
-    };
+     };
     var flatAttributes = model.getFlatAttributes();
     var i, i_items=flatAttributes, i_len=flatAttributes.length, attr;
     for (i=0; i<i_len; i++) {
@@ -75,7 +78,7 @@ md.element = function(model, ctx, parent) {
         node.derived.push({
             name: d.wzId, 
             tags: d.tagName.split('|')
-        })
+         })
     }
     var i, i_items=model.methods, i_len=model.methods.length, m;
     for (i=0; i<i_len; i++) {
@@ -88,7 +91,7 @@ md.element = function(model, ctx, parent) {
             params: [], 
             statements: [], 
             comments: []
-        };
+         };
         var j, j_items=m.params, j_len=m.params.length, param;
         for (j=0; j<j_len; j++) {
             param = m.params[j];
@@ -121,12 +124,13 @@ md.element = function(model, ctx, parent) {
         node.comments.push(comment.wzName);
     }
     parent.elements.push(node);
-};
+}
+;
 function getRestrictFill(model) {
     var restrictCloned = {
         facets: [], 
         comments: []
-    };
+     };
     var i, i_items=model.facets, i_len=model.facets.length, facet;
     for (i=0; i<i_len; i++) {
         facet = model.facets[i];
@@ -134,7 +138,7 @@ function getRestrictFill(model) {
             type: facet.wzElement, 
             value: facet.wzName, 
             comments: []
-        };
+         };
         var j, j_items=facet.comments, j_len=facet.comments.length, comment;
         for (j=0; j<j_len; j++) {
             comment = facet.comments[j];
@@ -170,7 +174,7 @@ function normalizeJSTNode(jstnode) {
         name: jstnode.n, 
         value: jstnode.v, 
         statements: []
-    };
+     };
     if (jsModelType.__tagElementMapping[jstnode.n]) {
         node.name = jsModelType.__tagElementMapping[jstnode.n];
     }

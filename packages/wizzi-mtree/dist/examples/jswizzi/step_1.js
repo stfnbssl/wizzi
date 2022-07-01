@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\examples\jswizzi\step_1.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\jswizzi\step_1.js.ittf
 */
 'use strict';
 //
@@ -29,7 +29,7 @@ var MTreeBrickProvider = require('../../lib/loader/mTreeBrickProvider');
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFactory) {
+     }, function(err, storeFactory) {
         if (err) {
             return callback(err);
         }
@@ -58,7 +58,7 @@ var jsWizzi_Step_1 = function(step_callback) {
             mTreeBuildUpContext: {}, 
             __productionManager: productionManager, 
             __ittfDocumentStore: fsStore
-        }, function(err, mTree) {
+         }, function(err, mTree) {
             if (err) {
                 console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log('err', err);
@@ -107,12 +107,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -209,9 +210,9 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
+    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // log 'nodes[0]', nodes[0]
     else {
-        // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-        // log 'nodes[0]', nodes[0]
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
             console.log(' ', 'nodes.uri', mTreeModel.uri);

@@ -1,0 +1,12 @@
+﻿wfpackage ${wzCtx.value}
+
+	$function buildup_node
+		$param item
+		${item.name} ${item.value}
+			$foreach c in item.children
+				$_ buildup_node
+					$@ c
+
+	$foreach c in wzCtx.children
+		$_ buildup_node
+			$@ c

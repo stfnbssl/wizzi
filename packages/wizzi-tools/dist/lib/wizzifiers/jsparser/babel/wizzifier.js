@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\jsparser\babel\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsparser\babel\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -51,16 +52,18 @@ var format = function(parent, ast, options) {
         if (options.starter) {
             options.starter = false;
         }
+        
+        // ok
         else if (options.returnText) {
-            // ok
         }
         else {
             showstack(options);
             throw new Error('parent is null.' + util.inspect(ast, 4));
         }
     }
+    
+    // log 'ast.type', ast.type
     if (options.verbose) {
-        // log 'ast.type', ast.type
     }
     if (ast.type == 'OptionalMemberExpression') {
         ast.type = 'MemberExpression';
@@ -98,7 +101,7 @@ var wzDocs = {
     AstgNodes: [
         
     ]
-};
+ };
 // process AST node File
 var File_astNode = {
     name: "File", 
@@ -107,7 +110,7 @@ var File_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(File_astNode)
 format.File = function(parent, node, options) {
     var f_astNode = File_astNode;
@@ -117,7 +120,7 @@ format.File = function(parent, node, options) {
     f_astNode.props.push({
         name: "program", 
         descr: "process AST-node-property program and append ittfNode to `ret`"
-    })
+     })
     if (node.program) {
         if (!node.program.type) {
             throw 'Node program has no type: ' + JSON.stringify(node, null, 2);
@@ -133,7 +136,8 @@ format.File = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node Program
 var Program_astNode = {
     name: "Program", 
@@ -142,7 +146,7 @@ var Program_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Program_astNode)
 format.Program = function(parent, node, options) {
     var f_astNode = Program_astNode;
@@ -154,7 +158,7 @@ format.Program = function(parent, node, options) {
         name: "directives", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection directives and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.directives) {
         if (typeof node.directives.length === 'undefined') {
             throw new Error('Property node.directives must be an array');
@@ -165,7 +169,7 @@ format.Program = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -177,7 +181,7 @@ format.Program = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -188,7 +192,7 @@ format.Program = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -200,7 +204,8 @@ format.Program = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node Identifier
 var Identifier_astNode = {
     name: "Identifier", 
@@ -209,7 +214,7 @@ var Identifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Identifier_astNode)
 format.Identifier = function(parent, node, options) {
     var f_astNode = Identifier_astNode;
@@ -224,15 +229,16 @@ format.Identifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/name.node.name, value: ', node.name, '
     if (typeof node.name !== 'undefined') {
         ret.name = node.name.toString();
     }
     // log 't/name ittf.ret', ret
     // An identifier. Note that an identifier may be an expression or a destructuring pattern.
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -244,7 +250,7 @@ format.Identifier = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -258,27 +264,30 @@ format.Identifier = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
+    
+    // set ret.CICCIO = "MAGIC"
     if (ret.children.length > 0) {
         __isText = false;
         ret.isText = false;
         ret.textified = null;
-        // set ret.CICCIO = "MAGIC"
     }
     // log 'Identifier', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node PrivateName
 var PrivateName_astNode = {
     name: "PrivateName", 
@@ -286,7 +295,7 @@ var PrivateName_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(PrivateName_astNode)
 format.PrivateName = function(parent, node, options) {
     var f_astNode = PrivateName_astNode;
@@ -301,7 +310,7 @@ format.PrivateName = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property Identifier and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -310,7 +319,12 @@ format.PrivateName = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property Identifier and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempIdentifier .children.length > 0
+            * 'node.Identifier must result zero node, returned: ' + tempIdentifier.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.Identifier) {
         if (!node.Identifier.type) {
             throw 'Node Identifier has no type: ' + JSON.stringify(node, null, 2);
@@ -319,13 +333,8 @@ format.PrivateName = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempIdentifier, node.Identifier, options)
-        /**
-            if (tempIdentifier .children.length > 0) {
-                throw 'node.Identifier must result zero node, returned: ' + tempIdentifier.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempIdentifier.children.length > 0) {
             appto.name = tempIdentifier.children[0].name;
@@ -339,14 +348,16 @@ format.PrivateName = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node RegExpLiteral
 var RegExpLiteral_astNode = {
     name: "RegExpLiteral", 
@@ -355,7 +366,7 @@ var RegExpLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(RegExpLiteral_astNode)
 format.RegExpLiteral = function(parent, node, options) {
     var f_astNode = RegExpLiteral_astNode;
@@ -370,14 +381,16 @@ format.RegExpLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = '/' + node.pattern + '/';
+    
+    // log '*************** RegExpLiteral.ret.name', ret.name
     if (node.flags && node.flags.length > 0) {
         ret.name += node.flags;
-        // log '*************** RegExpLiteral.ret.name', ret.name
     }
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -389,14 +402,16 @@ format.RegExpLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NullLiteral
 var NullLiteral_astNode = {
     name: "NullLiteral", 
@@ -405,7 +420,7 @@ var NullLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NullLiteral_astNode)
 format.NullLiteral = function(parent, node, options) {
     var f_astNode = NullLiteral_astNode;
@@ -420,10 +435,11 @@ format.NullLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = 'null';
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -435,14 +451,16 @@ format.NullLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node StringLiteral
 var StringLiteral_astNode = {
     name: "StringLiteral", 
@@ -451,7 +469,7 @@ var StringLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(StringLiteral_astNode)
 format.StringLiteral = function(parent, node, options) {
     var f_astNode = StringLiteral_astNode;
@@ -466,10 +484,11 @@ format.StringLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = node.extra.raw;
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -481,14 +500,16 @@ format.StringLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BooleanLiteral
 var BooleanLiteral_astNode = {
     name: "BooleanLiteral", 
@@ -497,7 +518,7 @@ var BooleanLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BooleanLiteral_astNode)
 format.BooleanLiteral = function(parent, node, options) {
     var f_astNode = BooleanLiteral_astNode;
@@ -512,14 +533,15 @@ format.BooleanLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/name.node.value, value: ', node.value, '
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
     }
     // log 't/name ittf.ret', ret
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -531,14 +553,16 @@ format.BooleanLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NumericLiteral
 var NumericLiteral_astNode = {
     name: "NumericLiteral", 
@@ -547,7 +571,7 @@ var NumericLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NumericLiteral_astNode)
 format.NumericLiteral = function(parent, node, options) {
     var f_astNode = NumericLiteral_astNode;
@@ -562,14 +586,15 @@ format.NumericLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/name.node.value, value: ', node.value, '
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
     }
     // log 't/name ittf.ret', ret
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret.tag = '(';
         }
@@ -581,14 +606,16 @@ format.NumericLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Function
 var Function_astNode = {
     name: "Function", 
@@ -596,7 +623,7 @@ var Function_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Function_astNode)
 format.Function = function(parent, node, options) {
     var f_astNode = Function_astNode;
@@ -611,7 +638,7 @@ format.Function = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A function [declaration](#functiondeclaration) or [expression](#functionexpression).
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -621,7 +648,12 @@ format.Function = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -630,13 +662,8 @@ format.Function = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -649,7 +676,7 @@ format.Function = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -662,7 +689,7 @@ format.Function = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -674,14 +701,14 @@ format.Function = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -693,7 +720,7 @@ format.Function = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -718,14 +745,16 @@ format.Function = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExpressionStatement
 var ExpressionStatement_astNode = {
     name: "ExpressionStatement", 
@@ -733,7 +762,7 @@ var ExpressionStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExpressionStatement_astNode)
 format.ExpressionStatement = function(parent, node, options) {
     var f_astNode = ExpressionStatement_astNode;
@@ -748,13 +777,13 @@ format.ExpressionStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // An expression statement, i.e., a statement consisting of a single expression.
     // process AST-node-property expression and append ittfNode to `ret`
     f_astNode.props.push({
         name: "expression", 
         descr: "process AST-node-property expression and append ittfNode to `ret`"
-    })
+     })
     if (node.expression) {
         if (!node.expression.type) {
             throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -776,14 +805,16 @@ format.ExpressionStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BlockStatement
 var BlockStatement_astNode = {
     name: "BlockStatement", 
@@ -792,7 +823,7 @@ var BlockStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BlockStatement_astNode)
 format.BlockStatement = function(parent, node, options) {
     var f_astNode = BlockStatement_astNode;
@@ -803,7 +834,7 @@ format.BlockStatement = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -814,7 +845,7 @@ format.BlockStatement = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -826,7 +857,7 @@ format.BlockStatement = function(parent, node, options) {
         name: "directives", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection directives and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.directives) {
         if (typeof node.directives.length === 'undefined') {
             throw new Error('Property node.directives must be an array');
@@ -837,7 +868,7 @@ format.BlockStatement = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -850,7 +881,8 @@ format.BlockStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node EmptyStatement
 var EmptyStatement_astNode = {
     name: "EmptyStatement", 
@@ -858,7 +890,7 @@ var EmptyStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(EmptyStatement_astNode)
 format.EmptyStatement = function(parent, node, options) {
     var f_astNode = EmptyStatement_astNode;
@@ -873,20 +905,22 @@ format.EmptyStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // An empty statement, i.e., a solitary semicolon.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node DebuggerStatement
 var DebuggerStatement_astNode = {
     name: "DebuggerStatement", 
@@ -894,7 +928,7 @@ var DebuggerStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(DebuggerStatement_astNode)
 format.DebuggerStatement = function(parent, node, options) {
     var f_astNode = DebuggerStatement_astNode;
@@ -909,20 +943,22 @@ format.DebuggerStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `debugger` statement.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node WithStatement
 var WithStatement_astNode = {
     name: "WithStatement", 
@@ -930,7 +966,7 @@ var WithStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(WithStatement_astNode)
 format.WithStatement = function(parent, node, options) {
     var f_astNode = WithStatement_astNode;
@@ -945,12 +981,12 @@ format.WithStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property object and append ittfNode to `ret`
     f_astNode.props.push({
         name: "object", 
         descr: "process AST-node-property object and append ittfNode to `ret`"
-    })
+     })
     if (node.object) {
         if (!node.object.type) {
             throw 'Node object has no type: ' + JSON.stringify(node, null, 2);
@@ -964,7 +1000,7 @@ format.WithStatement = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -979,14 +1015,16 @@ format.WithStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ReturnStatement
 var ReturnStatement_astNode = {
     name: "ReturnStatement", 
@@ -994,7 +1032,7 @@ var ReturnStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ReturnStatement_astNode)
 format.ReturnStatement = function(parent, node, options) {
     var f_astNode = ReturnStatement_astNode;
@@ -1009,12 +1047,12 @@ format.ReturnStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -1038,14 +1076,16 @@ format.ReturnStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node LabeledStatement
 var LabeledStatement_astNode = {
     name: "LabeledStatement", 
@@ -1053,7 +1093,7 @@ var LabeledStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(LabeledStatement_astNode)
 format.LabeledStatement = function(parent, node, options) {
     var f_astNode = LabeledStatement_astNode;
@@ -1068,7 +1108,7 @@ format.LabeledStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property label and set it in a var
     var p_label = null;
     if (typeof(node.label) !== 'undefined' && node.label != null) {
@@ -1079,17 +1119,17 @@ format.LabeledStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.label == null) {
             p_label.text = "null";
         }
+        // log 'f_p_temp label before format'
+        // log 'f_p_temp label after format', p_label.children.length, p_label
         else {
             if (!node.label.type) {
                 throw 'Node label has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp label before format'
             format(p_label, node.label, options)
-            // log 'f_p_temp label after format', p_label.children.length, p_label
             var label_comments = extractCommentsIf(p_label, 1);
             if (p_label.children.length == 1) {
                 p_label.tag = p_label.children[0].tag;
@@ -1123,7 +1163,7 @@ format.LabeledStatement = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -1137,14 +1177,16 @@ format.LabeledStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BreakStatement
 var BreakStatement_astNode = {
     name: "BreakStatement", 
@@ -1152,7 +1194,7 @@ var BreakStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BreakStatement_astNode)
 format.BreakStatement = function(parent, node, options) {
     var f_astNode = BreakStatement_astNode;
@@ -1167,7 +1209,7 @@ format.BreakStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property label and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -1176,7 +1218,12 @@ format.BreakStatement = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property label and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * templabel .children.length > 0
+            * 'node.label must result zero node, returned: ' + templabel.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.label) {
         if (!node.label.type) {
             throw 'Node label has no type: ' + JSON.stringify(node, null, 2);
@@ -1185,13 +1232,8 @@ format.BreakStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(templabel, node.label, options)
-        /**
-            if (templabel .children.length > 0) {
-                throw 'node.label must result zero node, returned: ' + templabel.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (templabel.children.length > 0) {
             appto.name = templabel.children[0].name;
@@ -1204,14 +1246,16 @@ format.BreakStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ContinueStatement
 var ContinueStatement_astNode = {
     name: "ContinueStatement", 
@@ -1219,7 +1263,7 @@ var ContinueStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ContinueStatement_astNode)
 format.ContinueStatement = function(parent, node, options) {
     var f_astNode = ContinueStatement_astNode;
@@ -1234,7 +1278,7 @@ format.ContinueStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property label and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -1243,7 +1287,12 @@ format.ContinueStatement = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property label and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * templabel .children.length > 0
+            * 'node.label must result zero node, returned: ' + templabel.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.label) {
         if (!node.label.type) {
             throw 'Node label has no type: ' + JSON.stringify(node, null, 2);
@@ -1252,13 +1301,8 @@ format.ContinueStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(templabel, node.label, options)
-        /**
-            if (templabel .children.length > 0) {
-                throw 'node.label must result zero node, returned: ' + templabel.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (templabel.children.length > 0) {
             appto.name = templabel.children[0].name;
@@ -1271,14 +1315,16 @@ format.ContinueStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node IfStatement
 var IfStatement_astNode = {
     name: "IfStatement", 
@@ -1287,7 +1333,7 @@ var IfStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(IfStatement_astNode)
 format.IfStatement = function(parent, node, options) {
     var f_astNode = IfStatement_astNode;
@@ -1302,12 +1348,12 @@ format.IfStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     f_astNode.props.push({
         name: "test", 
         tag: "test", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_test = {
         textified: null, 
         isText: false, 
@@ -1315,7 +1361,13 @@ format.IfStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property test/test not managed by f_p_tag')
+    */
     if (node.test) {
         if (!node.test.type) {
             throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -1323,10 +1375,13 @@ format.IfStatement = function(parent, node, options) {
         format(p_test, node.test, options)
         p_test.tag = 'test';
         ret.children.push(p_test)
+        
+        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        
+        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        
+        // log '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
-            // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
-            // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
-            // log '*** f_p_tag test children[0].name', p_test.children[0].name
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
             }
@@ -1336,16 +1391,13 @@ format.IfStatement = function(parent, node, options) {
                 p_test.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property test/test not managed by f_p_tag');
-            }
-        */
     }
     setNameFromChildByTag(ret, 'test', true);
+    
+    // process AST-node-property consequent and set it in a var
+    
+    // log 'IfStatement', p_consequent
     if (node.consequent) {
-        // process AST-node-property consequent and set it in a var
         var p_consequent = null;
         if (typeof(node.consequent) !== 'undefined' && node.consequent != null) {
             p_consequent = {
@@ -1355,17 +1407,17 @@ format.IfStatement = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.consequent == null) {
                 p_consequent.text = "null";
             }
+            // log 'f_p_temp consequent before format'
+            // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
             else {
                 if (!node.consequent.type) {
                     throw 'Node consequent has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp consequent before format'
                 format(p_consequent, node.consequent, options)
-                // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
                 var consequent_comments = extractCommentsIf(p_consequent, 1);
                 if (p_consequent.children.length == 1) {
                     p_consequent.tag = p_consequent.children[0].tag;
@@ -1394,7 +1446,6 @@ format.IfStatement = function(parent, node, options) {
         else {
             throw new Error('AST-node-property consequent undefined: ' + JSON.stringify(node, null, 2));
         }
-        // log 'IfStatement', p_consequent
         if (p_consequent.tag && p_consequent.tag.length > 0) {
             ret.children.push(p_consequent);
         }
@@ -1406,8 +1457,11 @@ format.IfStatement = function(parent, node, options) {
             }
         }
     }
+    
+    // process AST-node-property alternate and set it in a var
+    
+    // log 'IfStatement', p_consequent
     if (node.alternate) {
-        // process AST-node-property alternate and set it in a var
         var p_alternate = null;
         if (typeof(node.alternate) !== 'undefined' && node.alternate != null) {
             p_alternate = {
@@ -1417,17 +1471,17 @@ format.IfStatement = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.alternate == null) {
                 p_alternate.text = "null";
             }
+            // log 'f_p_temp alternate before format'
+            // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
             else {
                 if (!node.alternate.type) {
                     throw 'Node alternate has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp alternate before format'
                 format(p_alternate, node.alternate, options)
-                // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
                 var alternate_comments = extractCommentsIf(p_alternate, 1);
                 if (p_alternate.children.length == 1) {
                     p_alternate.tag = p_alternate.children[0].tag;
@@ -1461,8 +1515,7 @@ format.IfStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
-        // log 'IfStatement', p_consequent
+         };
         if (p_alternate.tag && p_alternate.tag.length > 0) {
             p_else.children.push(p_alternate);
         }
@@ -1482,8 +1535,9 @@ format.IfStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             var i, i_items=ret, i_len=ret.length, item;
             for (i=0; i<i_len; i++) {
                 item = ret[i];
@@ -1491,7 +1545,8 @@ format.IfStatement = function(parent, node, options) {
             }
         }
     }
-};
+}
+;
 // process AST node SwitchStatement
 var SwitchStatement_astNode = {
     name: "SwitchStatement", 
@@ -1499,7 +1554,7 @@ var SwitchStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(SwitchStatement_astNode)
 format.SwitchStatement = function(parent, node, options) {
     var f_astNode = SwitchStatement_astNode;
@@ -1514,7 +1569,7 @@ format.SwitchStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `switch` statement.
     // process AST-node-property discriminant and set it in a var
     var p_discriminant = null;
@@ -1526,17 +1581,17 @@ format.SwitchStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.discriminant == null) {
             p_discriminant.text = "null";
         }
+        // log 'f_p_temp discriminant before format'
+        // log 'f_p_temp discriminant after format', p_discriminant.children.length, p_discriminant
         else {
             if (!node.discriminant.type) {
                 throw 'Node discriminant has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp discriminant before format'
             format(p_discriminant, node.discriminant, options)
-            // log 'f_p_temp discriminant after format', p_discriminant.children.length, p_discriminant
             var discriminant_comments = extractCommentsIf(p_discriminant, 1);
             if (p_discriminant.children.length == 1) {
                 p_discriminant.tag = p_discriminant.children[0].tag;
@@ -1577,7 +1632,7 @@ format.SwitchStatement = function(parent, node, options) {
         name: "cases", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection cases and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.cases) {
         if (typeof node.cases.length === 'undefined') {
             throw new Error('Property node.cases must be an array');
@@ -1588,7 +1643,7 @@ format.SwitchStatement = function(parent, node, options) {
             item.__parent = {
                 name: 'cases', 
                 len: node.cases.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1599,14 +1654,16 @@ format.SwitchStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node SwitchCase
 var SwitchCase_astNode = {
     name: "SwitchCase", 
@@ -1614,7 +1671,7 @@ var SwitchCase_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(SwitchCase_astNode)
 format.SwitchCase = function(parent, node, options) {
     var f_astNode = SwitchCase_astNode;
@@ -1629,7 +1686,7 @@ format.SwitchCase = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property test and set it in a var
     var p_test = null;
     if (typeof(node.test) !== 'undefined' && node.test != null) {
@@ -1640,17 +1697,17 @@ format.SwitchCase = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.test == null) {
             p_test.text = "null";
         }
+        // log 'f_p_temp test before format'
+        // log 'f_p_temp test after format', p_test.children.length, p_test
         else {
             if (!node.test.type) {
                 throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp test before format'
             format(p_test, node.test, options)
-            // log 'f_p_temp test after format', p_test.children.length, p_test
             var test_comments = extractCommentsIf(p_test, 1);
             if (p_test.children.length == 1) {
                 p_test.tag = p_test.children[0].tag;
@@ -1681,7 +1738,7 @@ format.SwitchCase = function(parent, node, options) {
         name: "consequent", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection consequent and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.consequent) {
         if (typeof node.consequent.length === 'undefined') {
             throw new Error('Property node.consequent must be an array');
@@ -1692,7 +1749,7 @@ format.SwitchCase = function(parent, node, options) {
             item.__parent = {
                 name: 'consequent', 
                 len: node.consequent.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1717,14 +1774,16 @@ format.SwitchCase = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ThrowStatement
 var ThrowStatement_astNode = {
     name: "ThrowStatement", 
@@ -1732,7 +1791,7 @@ var ThrowStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ThrowStatement_astNode)
 format.ThrowStatement = function(parent, node, options) {
     var f_astNode = ThrowStatement_astNode;
@@ -1747,7 +1806,7 @@ format.ThrowStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and set it in a var
     var p_argument = null;
     if (typeof(node.argument) !== 'undefined' && node.argument != null) {
@@ -1758,17 +1817,17 @@ format.ThrowStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.argument == null) {
             p_argument.text = "null";
         }
+        // log 'f_p_temp argument before format'
+        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp argument before format'
             format(p_argument, node.argument, options)
-            // log 'f_p_temp argument after format', p_argument.children.length, p_argument
             var argument_comments = extractCommentsIf(p_argument, 1);
             if (p_argument.children.length == 1) {
                 p_argument.tag = p_argument.children[0].tag;
@@ -1808,14 +1867,16 @@ format.ThrowStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TryStatement
 var TryStatement_astNode = {
     name: "TryStatement", 
@@ -1824,7 +1885,7 @@ var TryStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TryStatement_astNode)
 format.TryStatement = function(parent, node, options) {
     var f_astNode = TryStatement_astNode;
@@ -1839,13 +1900,13 @@ format.TryStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'wizzifiers.js.TryStatement', JSON.stringify(node, null, 2)
     // process AST-node-property block and append ittfNode to `ret`
     f_astNode.props.push({
         name: "block", 
         descr: "process AST-node-property block and append ittfNode to `ret`"
-    })
+     })
     if (node.block) {
         if (!node.block.type) {
             throw 'Node block has no type: ' + JSON.stringify(node, null, 2);
@@ -1865,17 +1926,17 @@ format.TryStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.handler == null) {
             p_handler.text = "null";
         }
+        // log 'f_p_temp handler before format'
+        // log 'f_p_temp handler after format', p_handler.children.length, p_handler
         else {
             if (!node.handler.type) {
                 throw 'Node handler has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp handler before format'
             format(p_handler, node.handler, options)
-            // log 'f_p_temp handler after format', p_handler.children.length, p_handler
             var handler_comments = extractCommentsIf(p_handler, 1);
             if (p_handler.children.length == 1) {
                 p_handler.tag = p_handler.children[0].tag;
@@ -1911,17 +1972,17 @@ format.TryStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.finalizer == null) {
             p_finalizer.text = "null";
         }
+        // log 'f_p_temp finalizer before format'
+        // log 'f_p_temp finalizer after format', p_finalizer.children.length, p_finalizer
         else {
             if (!node.finalizer.type) {
                 throw 'Node finalizer has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp finalizer before format'
             format(p_finalizer, node.finalizer, options)
-            // log 'f_p_temp finalizer after format', p_finalizer.children.length, p_finalizer
             var finalizer_comments = extractCommentsIf(p_finalizer, 1);
             if (p_finalizer.children.length == 1) {
                 p_finalizer.tag = p_finalizer.children[0].tag;
@@ -1953,15 +2014,16 @@ format.TryStatement = function(parent, node, options) {
     if (p_handler) {
         tempRet.push(p_handler);
     }
+    
+    // log 'TryStatement', 'p_finalizer', p_finalizer
     if (p_finalizer) {
-        // log 'TryStatement', 'p_finalizer', p_finalizer
         tempRet.push({
             tag: 'finally', 
             name: '', 
             children: [
                 p_finalizer
             ]
-        })
+         })
     }
     ret = tempRet;
     // A `try` statement. If `handler` is `null` then `finalizer` must be a `BlockStatement`.
@@ -1969,8 +2031,9 @@ format.TryStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             var i, i_items=ret, i_len=ret.length, item;
             for (i=0; i<i_len; i++) {
                 item = ret[i];
@@ -1978,7 +2041,8 @@ format.TryStatement = function(parent, node, options) {
             }
         }
     }
-};
+}
+;
 // process AST node CatchClause
 var CatchClause_astNode = {
     name: "CatchClause", 
@@ -1986,7 +2050,7 @@ var CatchClause_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(CatchClause_astNode)
 format.CatchClause = function(parent, node, options) {
     var f_astNode = CatchClause_astNode;
@@ -2001,7 +2065,7 @@ format.CatchClause = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `catch` clause following a `try` block.
     // Process AST-node-property param and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -2011,7 +2075,12 @@ format.CatchClause = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property param and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempparam .children.length > 0
+            * 'node.param must result zero node, returned: ' + tempparam.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.param) {
         if (!node.param.type) {
             throw 'Node param has no type: ' + JSON.stringify(node, null, 2);
@@ -2020,13 +2089,8 @@ format.CatchClause = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempparam, node.param, options)
-        /**
-            if (tempparam .children.length > 0) {
-                throw 'node.param must result zero node, returned: ' + tempparam.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempparam.children.length > 0) {
             appto.name = tempparam.children[0].name;
@@ -2039,7 +2103,7 @@ format.CatchClause = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2054,14 +2118,16 @@ format.CatchClause = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node WhileStatement
 var WhileStatement_astNode = {
     name: "WhileStatement", 
@@ -2069,7 +2135,7 @@ var WhileStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(WhileStatement_astNode)
 format.WhileStatement = function(parent, node, options) {
     var f_astNode = WhileStatement_astNode;
@@ -2084,12 +2150,12 @@ format.WhileStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     f_astNode.props.push({
         name: "test", 
         tag: "test", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_test = {
         textified: null, 
         isText: false, 
@@ -2097,7 +2163,13 @@ format.WhileStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property test/test not managed by f_p_tag')
+    */
     if (node.test) {
         if (!node.test.type) {
             throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -2105,10 +2177,13 @@ format.WhileStatement = function(parent, node, options) {
         format(p_test, node.test, options)
         p_test.tag = 'test';
         ret.children.push(p_test)
+        
+        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        
+        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        
+        // log '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
-            // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
-            // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
-            // log '*** f_p_tag test children[0].name', p_test.children[0].name
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
             }
@@ -2118,12 +2193,6 @@ format.WhileStatement = function(parent, node, options) {
                 p_test.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property test/test not managed by f_p_tag');
-            }
-        */
     }
     // log 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
@@ -2140,7 +2209,7 @@ format.WhileStatement = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2154,14 +2223,16 @@ format.WhileStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node DoWhileStatement
 var DoWhileStatement_astNode = {
     name: "DoWhileStatement", 
@@ -2169,7 +2240,7 @@ var DoWhileStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(DoWhileStatement_astNode)
 format.DoWhileStatement = function(parent, node, options) {
     var f_astNode = DoWhileStatement_astNode;
@@ -2184,12 +2255,12 @@ format.DoWhileStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     f_astNode.props.push({
         name: "test", 
         tag: "test", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_test = {
         textified: null, 
         isText: false, 
@@ -2197,7 +2268,13 @@ format.DoWhileStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property test/test not managed by f_p_tag')
+    */
     if (node.test) {
         if (!node.test.type) {
             throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -2205,10 +2282,13 @@ format.DoWhileStatement = function(parent, node, options) {
         format(p_test, node.test, options)
         p_test.tag = 'test';
         ret.children.push(p_test)
+        
+        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        
+        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        
+        // log '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
-            // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
-            // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
-            // log '*** f_p_tag test children[0].name', p_test.children[0].name
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
             }
@@ -2218,12 +2298,6 @@ format.DoWhileStatement = function(parent, node, options) {
                 p_test.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property test/test not managed by f_p_tag');
-            }
-        */
     }
     // log 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
@@ -2240,7 +2314,7 @@ format.DoWhileStatement = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2254,14 +2328,16 @@ format.DoWhileStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ForStatement
 var ForStatement_astNode = {
     name: "ForStatement", 
@@ -2269,7 +2345,7 @@ var ForStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ForStatement_astNode)
 format.ForStatement = function(parent, node, options) {
     var f_astNode = ForStatement_astNode;
@@ -2284,12 +2360,12 @@ format.ForStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     f_astNode.props.push({
         name: "init", 
         tag: "init", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_init = {
         textified: null, 
         isText: false, 
@@ -2297,7 +2373,13 @@ format.ForStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property init/init not managed by f_p_tag')
+    */
     if (node.init) {
         if (!node.init.type) {
             throw 'Node init has no type: ' + JSON.stringify(node, null, 2);
@@ -2305,10 +2387,13 @@ format.ForStatement = function(parent, node, options) {
         format(p_init, node.init, options)
         p_init.tag = 'init';
         ret.children.push(p_init)
+        
+        // log '*** f_p_tag init children[0].textified', p_init.children[0].textified
+        
+        // log '*** f_p_tag init children[0].isText', p_init.children[0].isText
+        
+        // log '*** f_p_tag init children[0].name', p_init.children[0].name
         if (p_init.children.length == 1) {
-            // log '*** f_p_tag init children[0].textified', p_init.children[0].textified
-            // log '*** f_p_tag init children[0].isText', p_init.children[0].isText
-            // log '*** f_p_tag init children[0].name', p_init.children[0].name
             if (p_init.children[0].textified) {
                 p_init.textified = p_init.children[0].textified;
             }
@@ -2318,18 +2403,12 @@ format.ForStatement = function(parent, node, options) {
                 p_init.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property init/init not managed by f_p_tag');
-            }
-        */
     }
     f_astNode.props.push({
         name: "test", 
         tag: "test", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_test = {
         textified: null, 
         isText: false, 
@@ -2337,7 +2416,13 @@ format.ForStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property test/test not managed by f_p_tag')
+    */
     if (node.test) {
         if (!node.test.type) {
             throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -2345,10 +2430,13 @@ format.ForStatement = function(parent, node, options) {
         format(p_test, node.test, options)
         p_test.tag = 'test';
         ret.children.push(p_test)
+        
+        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        
+        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        
+        // log '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
-            // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
-            // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
-            // log '*** f_p_tag test children[0].name', p_test.children[0].name
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
             }
@@ -2358,18 +2446,12 @@ format.ForStatement = function(parent, node, options) {
                 p_test.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property test/test not managed by f_p_tag');
-            }
-        */
     }
     f_astNode.props.push({
         name: "update", 
         tag: "update", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_update = {
         textified: null, 
         isText: false, 
@@ -2377,7 +2459,13 @@ format.ForStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property update/update not managed by f_p_tag')
+    */
     if (node.update) {
         if (!node.update.type) {
             throw 'Node update has no type: ' + JSON.stringify(node, null, 2);
@@ -2385,10 +2473,13 @@ format.ForStatement = function(parent, node, options) {
         format(p_update, node.update, options)
         p_update.tag = 'update';
         ret.children.push(p_update)
+        
+        // log '*** f_p_tag update children[0].textified', p_update.children[0].textified
+        
+        // log '*** f_p_tag update children[0].isText', p_update.children[0].isText
+        
+        // log '*** f_p_tag update children[0].name', p_update.children[0].name
         if (p_update.children.length == 1) {
-            // log '*** f_p_tag update children[0].textified', p_update.children[0].textified
-            // log '*** f_p_tag update children[0].isText', p_update.children[0].isText
-            // log '*** f_p_tag update children[0].name', p_update.children[0].name
             if (p_update.children[0].textified) {
                 p_update.textified = p_update.children[0].textified;
             }
@@ -2398,12 +2489,6 @@ format.ForStatement = function(parent, node, options) {
                 p_update.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property update/update not managed by f_p_tag');
-            }
-        */
     }
     // log 'p_init.textified', p_init.textified
     var c1 = p_init.isText ? p_init.name : (p_init.textified ? p_init.textified : '');
@@ -2417,7 +2502,7 @@ format.ForStatement = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2431,14 +2516,16 @@ format.ForStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ForInStatement
 var ForInStatement_astNode = {
     name: "ForInStatement", 
@@ -2446,7 +2533,7 @@ var ForInStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ForInStatement_astNode)
 format.ForInStatement = function(parent, node, options) {
     var f_astNode = ForInStatement_astNode;
@@ -2461,7 +2548,7 @@ format.ForInStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property left and set it in a var
     var p_left = null;
     if (typeof(node.left) !== 'undefined' && node.left != null) {
@@ -2472,17 +2559,17 @@ format.ForInStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -2521,17 +2608,17 @@ format.ForInStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -2571,7 +2658,7 @@ format.ForInStatement = function(parent, node, options) {
                 children: [
                     p_right
                 ]
-            })
+             })
         }
     }
     else {
@@ -2580,7 +2667,7 @@ format.ForInStatement = function(parent, node, options) {
             children: [
                 p_left
             ]
-        })
+         })
         if (isTextualNode(p_right)) {
             ret.children.push({
                 tag: 'in', 
@@ -2588,7 +2675,7 @@ format.ForInStatement = function(parent, node, options) {
                 children: [
                     
                 ]
-            })
+             })
         }
         else {
             ret.children.push({
@@ -2596,7 +2683,7 @@ format.ForInStatement = function(parent, node, options) {
                 children: [
                     p_right
                 ]
-            })
+             })
         }
     }
     // log 'node.await', node.await
@@ -2606,13 +2693,13 @@ format.ForInStatement = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2626,14 +2713,16 @@ format.ForInStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ForOfStatement
 var ForOfStatement_astNode = {
     name: "ForOfStatement", 
@@ -2641,7 +2730,7 @@ var ForOfStatement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ForOfStatement_astNode)
 format.ForOfStatement = function(parent, node, options) {
     var f_astNode = ForOfStatement_astNode;
@@ -2656,7 +2745,7 @@ format.ForOfStatement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property left and set it in a var
     var p_left = null;
     if (typeof(node.left) !== 'undefined' && node.left != null) {
@@ -2667,17 +2756,17 @@ format.ForOfStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -2716,17 +2805,17 @@ format.ForOfStatement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -2769,7 +2858,7 @@ format.ForOfStatement = function(parent, node, options) {
                 children: [
                     p_right
                 ]
-            })
+             })
         }
     }
     else {
@@ -2778,7 +2867,7 @@ format.ForOfStatement = function(parent, node, options) {
             children: [
                 p_left
             ]
-        })
+         })
         if (isTextualNode(p_right)) {
             ret.children.push({
                 tag: 'of', 
@@ -2786,7 +2875,7 @@ format.ForOfStatement = function(parent, node, options) {
                 children: [
                     
                 ]
-            })
+             })
         }
         else {
             ret.children.push({
@@ -2794,7 +2883,7 @@ format.ForOfStatement = function(parent, node, options) {
                 children: [
                     p_right
                 ]
-            })
+             })
         }
     }
     // log 'node.await', node.await
@@ -2804,13 +2893,13 @@ format.ForOfStatement = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -2824,14 +2913,16 @@ format.ForOfStatement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node FunctionDeclaration
 var FunctionDeclaration_astNode = {
     name: "FunctionDeclaration", 
@@ -2839,7 +2930,7 @@ var FunctionDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(FunctionDeclaration_astNode)
 format.FunctionDeclaration = function(parent, node, options) {
     var f_astNode = FunctionDeclaration_astNode;
@@ -2854,7 +2945,7 @@ format.FunctionDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A function [declaration](#functiondeclaration) or [expression](#functionexpression).
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -2864,7 +2955,12 @@ format.FunctionDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -2873,13 +2969,8 @@ format.FunctionDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -2892,7 +2983,7 @@ format.FunctionDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -2912,14 +3003,14 @@ format.FunctionDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.params, i_len=node.params.length, item;
         for (i=0; i<i_len; i++) {
             item = node.params[i];
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(p_params, item, options)
         }
     }
@@ -2934,17 +3025,17 @@ format.FunctionDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -2970,21 +3061,22 @@ format.FunctionDeclaration = function(parent, node, options) {
             }
         }
     }
+    
+    // log 'p_returnType', JSON.stringify(p_returnType)
     if (p_returnType) {
-        // log 'p_returnType', JSON.stringify(p_returnType)
         p_returnType = {
             tag: ':return', 
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property predicate and append ittfNode to `ret`
     f_astNode.props.push({
         name: "predicate", 
         descr: "process AST-node-property predicate and append ittfNode to `ret`"
-    })
+     })
     if (node.predicate) {
         if (!node.predicate.type) {
             throw 'Node predicate has no type: ' + JSON.stringify(node, null, 2);
@@ -2995,7 +3087,7 @@ format.FunctionDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -3015,14 +3107,16 @@ format.FunctionDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node VariableDeclaration
 var VariableDeclaration_astNode = {
     name: "VariableDeclaration", 
@@ -3031,7 +3125,7 @@ var VariableDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(VariableDeclaration_astNode)
 format.VariableDeclaration = function(parent, node, options) {
     var f_astNode = VariableDeclaration_astNode;
@@ -3046,14 +3140,14 @@ format.VariableDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // enum "var" | "let" | "const"
     // process AST-node-property-collection declarations and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "declarations", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection declarations and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.declarations) {
         if (typeof node.declarations.length === 'undefined') {
             throw new Error('Property node.declarations must be an array');
@@ -3064,7 +3158,7 @@ format.VariableDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'declarations', 
                 len: node.declarations.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -3087,27 +3181,36 @@ format.VariableDeclaration = function(parent, node, options) {
     if (got_text_1) {
         ret.textified = node.kind + ' ' + ret.textified;
     }
+    
+    // log 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
     else if (ret.children.length == 1) {
-        // log 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
+        
+        // no init value
         if (ret.children[0].children.length == 0) {
             ret.name = ret.children[0].name;
             ret.children = [];
-            // no init value
         }
+        
+        // log 'ret.name', ret.name
+        
+        // log 'ret.children[0]', ret.children[0]
+        
+        // set ret.textified = node.kind + ' ' + ret.name
         else if (ret.children[0].children.length == 1) {
             ret.name = ret.children[0].name;
             ret.children[0] = ret.children[0].children[0];
-            // log 'ret.name', ret.name
-            // log 'ret.children[0]', ret.children[0]
-            // set ret.textified = node.kind + ' ' + ret.name
         }
+        
+        // log 'ret.name', ret.name
+        
+        // log 'ret.children[0].name', ret.children[0].name
+        
+        // log 'child1.tag.name', child1.tag, child1.name
+        
+        // log 'child2.tag.name', child2.tag, child2.name
         else if (ret.children[0].children.length == 2) {
             var child1 = ret.children[0].children[0];
             var child2 = ret.children[0].children[1];
-            // log 'ret.name', ret.name
-            // log 'ret.children[0].name', ret.children[0].name
-            // log 'child1.tag.name', child1.tag, child1.name
-            // log 'child2.tag.name', child2.tag, child2.name
             if (child2.tag === '=' || isTypeReference(child1.tag)) {
                 ret.name = ret.children[0].name;
                 ret.children = [];
@@ -3167,20 +3270,22 @@ format.VariableDeclaration = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node VariableDeclarator
 var VariableDeclarator_astNode = {
     name: "VariableDeclarator", 
@@ -3188,7 +3293,7 @@ var VariableDeclarator_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(VariableDeclarator_astNode)
 format.VariableDeclarator = function(parent, node, options) {
     var f_astNode = VariableDeclarator_astNode;
@@ -3203,7 +3308,7 @@ format.VariableDeclarator = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property id and set it in a var
     var p_id = null;
     if (typeof(node.id) !== 'undefined' && node.id != null) {
@@ -3214,17 +3319,17 @@ format.VariableDeclarator = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.id == null) {
             p_id.text = "null";
         }
+        // log 'f_p_temp id before format'
+        // log 'f_p_temp id after format', p_id.children.length, p_id
         else {
             if (!node.id.type) {
                 throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp id before format'
             format(p_id, node.id, options)
-            // log 'f_p_temp id after format', p_id.children.length, p_id
             var id_comments = extractCommentsIf(p_id, 1);
             if (p_id.children.length == 1) {
                 p_id.tag = p_id.children[0].tag;
@@ -3271,7 +3376,7 @@ format.VariableDeclarator = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -3288,17 +3393,17 @@ format.VariableDeclarator = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.init == null) {
             p_init.text = "null";
         }
+        // log 'f_p_temp init before format'
+        // log 'f_p_temp init after format', p_init.children.length, p_init
         else {
             if (!node.init.type) {
                 throw 'Node init has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp init before format'
             format(p_init, node.init, options)
-            // log 'f_p_temp init after format', p_init.children.length, p_init
             var init_comments = extractCommentsIf(p_init, 1);
             if (p_init.children.length == 1) {
                 p_init.tag = p_init.children[0].tag;
@@ -3325,8 +3430,9 @@ format.VariableDeclarator = function(parent, node, options) {
         }
     }
     // log 'VariableDeclarator.p_init', p_init
+    
+    // log 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
     if (p_init) {
-        // log 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
         if (isTextualNode(p_id)) {
             if (isTextualNode(p_init)) {
                 ret.name += ' = ' + getNodeText(p_init);
@@ -3345,7 +3451,7 @@ format.VariableDeclarator = function(parent, node, options) {
                     children: [
                         
                     ]
-                })
+                 })
             }
             else {
                 ret.children.push({
@@ -3353,7 +3459,7 @@ format.VariableDeclarator = function(parent, node, options) {
                     children: [
                         p_init
                     ]
-                })
+                 })
             }
         }
     }
@@ -3364,14 +3470,16 @@ format.VariableDeclarator = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Decorator
 var Decorator_astNode = {
     name: "Decorator", 
@@ -3379,7 +3487,7 @@ var Decorator_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Decorator_astNode)
 format.Decorator = function(parent, node, options) {
     var f_astNode = Decorator_astNode;
@@ -3394,7 +3502,7 @@ format.Decorator = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -3405,17 +3513,17 @@ format.Decorator = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -3454,14 +3562,16 @@ format.Decorator = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Directive
 var Directive_astNode = {
     name: "Directive", 
@@ -3469,7 +3579,7 @@ var Directive_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Directive_astNode)
 format.Directive = function(parent, node, options) {
     var f_astNode = Directive_astNode;
@@ -3484,12 +3594,12 @@ format.Directive = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (node.value && node.value.value === 'use strict') {
         ret = null;
     }
+    // process AST-node-property value and set it in a var
     else {
-        // process AST-node-property value and set it in a var
         var p_value = null;
         if (typeof(node.value) !== 'undefined' && node.value != null) {
             p_value = {
@@ -3499,17 +3609,17 @@ format.Directive = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.value == null) {
                 p_value.text = "null";
             }
+            // log 'f_p_temp value before format'
+            // log 'f_p_temp value after format', p_value.children.length, p_value
             else {
                 if (!node.value.type) {
                     throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp value before format'
                 format(p_value, node.value, options)
-                // log 'f_p_temp value after format', p_value.children.length, p_value
                 var value_comments = extractCommentsIf(p_value, 1);
                 if (p_value.children.length == 1) {
                     p_value.tag = p_value.children[0].tag;
@@ -3546,14 +3656,16 @@ format.Directive = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node DirectiveLiteral
 var DirectiveLiteral_astNode = {
     name: "DirectiveLiteral", 
@@ -3561,7 +3673,7 @@ var DirectiveLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(DirectiveLiteral_astNode)
 format.DirectiveLiteral = function(parent, node, options) {
     var f_astNode = DirectiveLiteral_astNode;
@@ -3576,19 +3688,21 @@ format.DirectiveLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Expression
 var Expression_astNode = {
     name: "Expression", 
@@ -3596,7 +3710,7 @@ var Expression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Expression_astNode)
 format.Expression = function(parent, node, options) {
     var f_astNode = Expression_astNode;
@@ -3611,20 +3725,22 @@ format.Expression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Any expression node. Since the left-hand side of an assignment may be any expression in general, an expression can also be a pattern.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Super
 var Super_astNode = {
     name: "Super", 
@@ -3633,7 +3749,7 @@ var Super_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Super_astNode)
 format.Super = function(parent, node, options) {
     var f_astNode = Super_astNode;
@@ -3648,21 +3764,23 @@ format.Super = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `super` pseudo-expression.
     ret.name = 'super';
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Import
 var Import_astNode = {
     name: "Import", 
@@ -3670,7 +3788,7 @@ var Import_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Import_astNode)
 format.Import = function(parent, node, options) {
     var f_astNode = Import_astNode;
@@ -3685,20 +3803,22 @@ format.Import = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `import` pseudo-expression.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ThisExpression
 var ThisExpression_astNode = {
     name: "ThisExpression", 
@@ -3707,7 +3827,7 @@ var ThisExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ThisExpression_astNode)
 format.ThisExpression = function(parent, node, options) {
     var f_astNode = ThisExpression_astNode;
@@ -3722,21 +3842,23 @@ format.ThisExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A `this` expression.
     ret.name = 'this';
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ArrowFunctionExpression
 var ArrowFunctionExpression_astNode = {
     name: "ArrowFunctionExpression", 
@@ -3744,7 +3866,7 @@ var ArrowFunctionExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ArrowFunctionExpression_astNode)
 format.ArrowFunctionExpression = function(parent, node, options) {
     var f_astNode = ArrowFunctionExpression_astNode;
@@ -3759,7 +3881,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (verify.isArray(node.body) == false) {
         node.body = [node.body];
     }
@@ -3769,7 +3891,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -3781,14 +3903,14 @@ format.ArrowFunctionExpression = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -3805,17 +3927,17 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -3847,7 +3969,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property-collection body and append ittfNode(s) to `ret`
@@ -3855,7 +3977,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -3866,7 +3988,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -3880,7 +4002,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // log '*** ArrowFunctionExpression.ret.params', getChildByTag(ret, 'params')
     // log '*** ArrowFunctionExpression.ret', ret
@@ -3895,14 +4017,16 @@ format.ArrowFunctionExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node YieldExpression
 var YieldExpression_astNode = {
     name: "YieldExpression", 
@@ -3910,7 +4034,7 @@ var YieldExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(YieldExpression_astNode)
 format.YieldExpression = function(parent, node, options) {
     var f_astNode = YieldExpression_astNode;
@@ -3925,7 +4049,7 @@ format.YieldExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and set it in a var
     var p_argument = null;
     if (typeof(node.argument) !== 'undefined' && node.argument != null) {
@@ -3936,17 +4060,17 @@ format.YieldExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.argument == null) {
             p_argument.text = "null";
         }
+        // log 'f_p_temp argument before format'
+        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp argument before format'
             format(p_argument, node.argument, options)
-            // log 'f_p_temp argument after format', p_argument.children.length, p_argument
             var argument_comments = extractCommentsIf(p_argument, 1);
             if (p_argument.children.length == 1) {
                 p_argument.tag = p_argument.children[0].tag;
@@ -3989,21 +4113,23 @@ format.YieldExpression = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // A `yield` expression.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node AwaitExpression
 var AwaitExpression_astNode = {
     name: "AwaitExpression", 
@@ -4011,7 +4137,7 @@ var AwaitExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(AwaitExpression_astNode)
 format.AwaitExpression = function(parent, node, options) {
     var f_astNode = AwaitExpression_astNode;
@@ -4026,12 +4152,12 @@ format.AwaitExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -4043,14 +4169,16 @@ format.AwaitExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ArrayExpression
 var ArrayExpression_astNode = {
     name: "ArrayExpression", 
@@ -4058,7 +4186,7 @@ var ArrayExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ArrayExpression_astNode)
 format.ArrayExpression = function(parent, node, options) {
     var f_astNode = ArrayExpression_astNode;
@@ -4073,13 +4201,13 @@ format.ArrayExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection elements and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "elements", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection elements and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.elements) {
         if (typeof node.elements.length === 'undefined') {
             throw new Error('Property node.elements must be an array');
@@ -4090,7 +4218,7 @@ format.ArrayExpression = function(parent, node, options) {
             item.__parent = {
                 name: 'elements', 
                 len: node.elements.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -4099,9 +4227,10 @@ format.ArrayExpression = function(parent, node, options) {
     }
     // An array expression.
     if (options.mustBeText) {
+        
+        // log '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
         if (setTextList(ret, ', ')) {
             ret.textified = '[' + ret.textified + ']';
-            // log '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
         }
         else {
             throw new Error("ArrayExpression. Cannot textify node as requested: " + JSON.stringify(node, null, 2));
@@ -4109,9 +4238,10 @@ format.ArrayExpression = function(parent, node, options) {
     }
     else if (options.couldBeText) {
         var tlist = getTextList(ret, ', ');
+        
+        // TODO??? set ret.children = []
         if (tlist && tlist.length < 15) {
             ret.textified = '[' + ret.textified + ']';
-            // TODO??? set ret.children = []
         }
         else {
             ret.textified = null;
@@ -4148,14 +4278,16 @@ format.ArrayExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectExpression
 var ObjectExpression_astNode = {
     name: "ObjectExpression", 
@@ -4163,7 +4295,7 @@ var ObjectExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectExpression_astNode)
 format.ObjectExpression = function(parent, node, options) {
     var f_astNode = ObjectExpression_astNode;
@@ -4178,7 +4310,7 @@ format.ObjectExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (options.stateAST[options.stateAST.length-1] === 'JSXExpressionContainer') {
         parent.children.pop();
         ret = parent;
@@ -4189,7 +4321,7 @@ format.ObjectExpression = function(parent, node, options) {
         name: "properties", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection properties and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.properties) {
         if (typeof node.properties.length === 'undefined') {
             throw new Error('Property node.properties must be an array');
@@ -4200,7 +4332,7 @@ format.ObjectExpression = function(parent, node, options) {
             item.__parent = {
                 name: 'properties', 
                 len: node.properties.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -4222,8 +4354,9 @@ format.ObjectExpression = function(parent, node, options) {
         var i, i_items=ret.children, i_len=ret.children.length, item;
         for (i=0; i<i_len; i++) {
             item = ret.children[i];
+            
+            // log 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
             if (item.tag === '...') {
-                // log 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
                 if (item.children.length == 0) {
                     item.name = item.textified;
                     item.tag = '@';
@@ -4242,29 +4375,31 @@ format.ObjectExpression = function(parent, node, options) {
                         item.children = item.children[0].children;
                         console.log('ObjectExpression length 1', item.tag, item.name, item.textified);
                     }
+                    // go on
                     else {
-                        // go on
                     }
                 }
             }
+            
+            // log 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
             if (item.tag === '@' && item.name === 'template' && item.children.length == 1 && item.children[0].tag === '`lit') {
-                // log 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
                 options.wizziIncludes.push({
                     kind: 'html', 
                     node: item, 
                     literal: getLiteral(item.children[0])
-                })
+                 })
                 item.children = [];
             }
         }
         if (!ret.textified && ret.children.length == 0) {
+            
+            // set ret.name = ret.textified = '({})' // 10/1/19
             if (node.extra && node.extra.parenthesized == true) {
-                // set ret.name = ret.textified = '({})' // 10/1/19
                 ret.textified = '({})';
             }
+            // set ret.name = ret.textified = '{}' // 10/1/19
+            // set ret.textified = '{}' // 25/3/21
             else {
-                // set ret.name = ret.textified = '{}' // 10/1/19
-                // set ret.textified = '{}' // 25/3/21
             }
         }
         else {
@@ -4274,7 +4409,7 @@ format.ObjectExpression = function(parent, node, options) {
                     children: [
                         ret
                     ]
-                };
+                 };
                 ret = temp;
             }
         }
@@ -4283,14 +4418,16 @@ format.ObjectExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectProperty
 var ObjectProperty_astNode = {
     name: "ObjectProperty", 
@@ -4298,7 +4435,7 @@ var ObjectProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectProperty_astNode)
 format.ObjectProperty = function(parent, node, options) {
     var f_astNode = ObjectProperty_astNode;
@@ -4313,7 +4450,7 @@ format.ObjectProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'ObjectProperty enter options.mustBeText', options.mustBeText
     const save = options.mustBeText;
     options.mustBeText = true;
@@ -4327,17 +4464,17 @@ format.ObjectProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.key == null) {
             p_key.text = "null";
         }
+        // log 'f_p_temp key before format'
+        // log 'f_p_temp key after format', p_key.children.length, p_key
         else {
             if (!node.key.type) {
                 throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp key before format'
             format(p_key, node.key, options)
-            // log 'f_p_temp key after format', p_key.children.length, p_key
             var key_comments = extractCommentsIf(p_key, 1);
             if (p_key.children.length == 1) {
                 p_key.tag = p_key.children[0].tag;
@@ -4380,7 +4517,7 @@ format.ObjectProperty = function(parent, node, options) {
             children: [
                 p_key
             ]
-        };
+         };
         ret.children.push(p_computed)
         ret = p_computed;
     }
@@ -4389,7 +4526,7 @@ format.ObjectProperty = function(parent, node, options) {
         name: "decorators", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.decorators) {
         if (typeof node.decorators.length === 'undefined') {
             throw new Error('Property node.decorators must be an array');
@@ -4400,13 +4537,20 @@ format.ObjectProperty = function(parent, node, options) {
             item.__parent = {
                 name: 'decorators', 
                 len: node.decorators.length
-            };
+             };
             format(ret, item, options)
         }
     }
     // log 'ObjectProperty.ret.name', ret.name, 'node.value.type', node.value.type
+    
+    // process AST-node-property value.left and set it in a var
+    
+    // process AST-node-property value.right and set it in a var
+    
+    // log 'p_value_left', p_value_left
+    
+    // log 'p_value_right', p_value_right
     if (node.value.type === 'AssignmentPattern') {
-        // process AST-node-property value.left and set it in a var
         var p_value_left = null;
         if (typeof(node.value.left) !== 'undefined' && node.value.left != null) {
             p_value_left = {
@@ -4416,17 +4560,17 @@ format.ObjectProperty = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.value.left == null) {
                 p_value_left.text = "null";
             }
+            // log 'f_p_temp value_left before format'
+            // log 'f_p_temp value_left after format', p_value_left.children.length, p_value_left
             else {
                 if (!node.value.left.type) {
                     throw 'Node value_left has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp value_left before format'
                 format(p_value_left, node.value.left, options)
-                // log 'f_p_temp value_left after format', p_value_left.children.length, p_value_left
                 var value_left_comments = extractCommentsIf(p_value_left, 1);
                 if (p_value_left.children.length == 1) {
                     p_value_left.tag = p_value_left.children[0].tag;
@@ -4455,7 +4599,6 @@ format.ObjectProperty = function(parent, node, options) {
         else {
             throw new Error('AST-node-property value_left undefined: ' + JSON.stringify(node, null, 2));
         }
-        // process AST-node-property value.right and set it in a var
         var p_value_right = null;
         if (typeof(node.value.right) !== 'undefined' && node.value.right != null) {
             p_value_right = {
@@ -4465,17 +4608,17 @@ format.ObjectProperty = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.value.right == null) {
                 p_value_right.text = "null";
             }
+            // log 'f_p_temp value_right before format'
+            // log 'f_p_temp value_right after format', p_value_right.children.length, p_value_right
             else {
                 if (!node.value.right.type) {
                     throw 'Node value_right has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp value_right before format'
                 format(p_value_right, node.value.right, options)
-                // log 'f_p_temp value_right after format', p_value_right.children.length, p_value_right
                 var value_right_comments = extractCommentsIf(p_value_right, 1);
                 if (p_value_right.children.length == 1) {
                     p_value_right.tag = p_value_right.children[0].tag;
@@ -4504,8 +4647,6 @@ format.ObjectProperty = function(parent, node, options) {
         else {
             throw new Error('AST-node-property value_right undefined: ' + JSON.stringify(node, null, 2));
         }
-        // log 'p_value_left', p_value_left
-        // log 'p_value_right', p_value_right
         if (node.value.left.type === 'ObjectPattern') {
             ret.children.push(p_value_left)
             if (isTextualNode(p_value_right)) {
@@ -4515,17 +4656,18 @@ format.ObjectProperty = function(parent, node, options) {
                     children: [
                         
                     ]
-                })
+                 })
             }
+            
+            // FIXME why this?
             else if (p_value_right.tag === 'none' && verify.isNotEmpty(p_value_right.name)) {
-                // FIXME why this?
                 ret.children.push({
                     tag: '=', 
                     name: p_value_right.name, 
                     children: [
                         
                     ]
-                })
+                 })
             }
             else {
                 ret.children.push({
@@ -4533,7 +4675,7 @@ format.ObjectProperty = function(parent, node, options) {
                     children: [
                         p_value_right
                     ]
-                })
+                 })
             }
         }
         else {
@@ -4548,18 +4690,19 @@ format.ObjectProperty = function(parent, node, options) {
                         children: [
                             
                         ]
-                    })
+                     })
                 }
             }
+            
+            // FIXME why this?
             else if (p_value_right.tag === 'none' && verify.isNotEmpty(p_value_right.name)) {
-                // FIXME why this?
                 ret.children.push({
                     tag: '=', 
                     name: p_value_right.name, 
                     children: [
                         
                     ]
-                })
+                 })
             }
             else {
                 ret.children.push({
@@ -4567,12 +4710,13 @@ format.ObjectProperty = function(parent, node, options) {
                     children: [
                         p_value_right
                     ]
-                })
+                 })
             }
         }
     }
+    // process AST-node-property value and set it in a var
+    // log 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
     else {
-        // process AST-node-property value and set it in a var
         var p_value = null;
         if (typeof(node.value) !== 'undefined' && node.value != null) {
             p_value = {
@@ -4582,17 +4726,17 @@ format.ObjectProperty = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (node.value == null) {
                 p_value.text = "null";
             }
+            // log 'f_p_temp value before format'
+            // log 'f_p_temp value after format', p_value.children.length, p_value
             else {
                 if (!node.value.type) {
                     throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
                 }
-                // log 'f_p_temp value before format'
                 format(p_value, node.value, options)
-                // log 'f_p_temp value after format', p_value.children.length, p_value
                 var value_comments = extractCommentsIf(p_value, 1);
                 if (p_value.children.length == 1) {
                     p_value.tag = p_value.children[0].tag;
@@ -4621,7 +4765,6 @@ format.ObjectProperty = function(parent, node, options) {
         else {
             throw new Error('AST-node-property value undefined: ' + JSON.stringify(node, null, 2));
         }
-        // log 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
         if (isTextualNode(p_value)) {
             if (isTextualNode(p_key)) {
                 if (options.mustBeText) {
@@ -4645,7 +4788,7 @@ format.ObjectProperty = function(parent, node, options) {
                     children: [
                         
                     ]
-                })
+                 })
             }
         }
         else if (p_value.tag === 'none' && verify.isNotEmpty(p_value.name)) {
@@ -4661,7 +4804,7 @@ format.ObjectProperty = function(parent, node, options) {
                     children: [
                         
                     ]
-                })
+                 })
             }
         }
         else {
@@ -4683,14 +4826,16 @@ format.ObjectProperty = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectMethod
 var ObjectMethod_astNode = {
     name: "ObjectMethod", 
@@ -4699,7 +4844,7 @@ var ObjectMethod_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectMethod_astNode)
 format.ObjectMethod = function(parent, node, options) {
     var f_astNode = ObjectMethod_astNode;
@@ -4714,7 +4859,7 @@ format.ObjectMethod = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'ObjectMethod enter options.mustBeText', options.mustBeText
     // s( kind
     // enum "get" | "set" | "method"
@@ -4730,17 +4875,17 @@ format.ObjectMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.key == null) {
             p_key.text = "null";
         }
+        // log 'f_p_temp key before format'
+        // log 'f_p_temp key after format', p_key.children.length, p_key
         else {
             if (!node.key.type) {
                 throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp key before format'
             format(p_key, node.key, options)
-            // log 'f_p_temp key after format', p_key.children.length, p_key
             var key_comments = extractCommentsIf(p_key, 1);
             if (p_key.children.length == 1) {
                 p_key.tag = p_key.children[0].tag;
@@ -4778,7 +4923,7 @@ format.ObjectMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property-collection params and
     // embed its array of nodes in a new tag
@@ -4786,7 +4931,7 @@ format.ObjectMethod = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -4798,14 +4943,14 @@ format.ObjectMethod = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -4822,17 +4967,17 @@ format.ObjectMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -4864,14 +5009,14 @@ format.ObjectMethod = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -4893,14 +5038,16 @@ format.ObjectMethod = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node FunctionExpression
 var FunctionExpression_astNode = {
     name: "FunctionExpression", 
@@ -4908,7 +5055,7 @@ var FunctionExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(FunctionExpression_astNode)
 format.FunctionExpression = function(parent, node, options) {
     var f_astNode = FunctionExpression_astNode;
@@ -4923,7 +5070,7 @@ format.FunctionExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -4932,7 +5079,12 @@ format.FunctionExpression = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -4941,13 +5093,8 @@ format.FunctionExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -4960,7 +5107,7 @@ format.FunctionExpression = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -4973,7 +5120,7 @@ format.FunctionExpression = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -4985,14 +5132,14 @@ format.FunctionExpression = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -5009,17 +5156,17 @@ format.FunctionExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -5051,14 +5198,14 @@ format.FunctionExpression = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -5078,14 +5225,16 @@ format.FunctionExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node UnaryExpression
 var UnaryExpression_astNode = {
     name: "UnaryExpression", 
@@ -5094,7 +5243,7 @@ var UnaryExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(UnaryExpression_astNode)
 format.UnaryExpression = function(parent, node, options) {
     var f_astNode = UnaryExpression_astNode;
@@ -5109,7 +5258,7 @@ format.UnaryExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A unary operator expression.
     // s( operator, UnaryOperator enum "-" | "+" | "!" | "~" | "typeof" | "void" | "delete" | "throw"
     // b( prefix
@@ -5126,17 +5275,17 @@ format.UnaryExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.argument == null) {
             p_argument.text = "null";
         }
+        // log 'f_p_temp argument before format'
+        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp argument before format'
             format(p_argument, node.argument, options)
-            // log 'f_p_temp argument after format', p_argument.children.length, p_argument
             var argument_comments = extractCommentsIf(p_argument, 1);
             if (p_argument.children.length == 1) {
                 p_argument.tag = p_argument.children[0].tag;
@@ -5174,9 +5323,11 @@ format.UnaryExpression = function(parent, node, options) {
         ret.children.push(p_argument)
     }
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
+        
+        // is the return value of an ArrowExpression
+        
+        // TODO ...
         if (node.extra && node.extra.parenthesized == true) {
-            // is the return value of an ArrowExpression
-            // TODO ...
             if (isTextualNode(p_argument)) {
                 ret.tag = '(';
                 ret.name = node.operator + getNodeText(p_argument);
@@ -5188,12 +5339,12 @@ format.UnaryExpression = function(parent, node, options) {
                     children: [
                         ret
                     ]
-                };
+                 };
                 ret = temp;
             }
         }
+        // TODO ...
         else {
-            // TODO ...
             if (isTextualNode(p_argument)) {
                 ret.tag = '+';
                 ret.name = node.operator + getNodeText(p_argument);
@@ -5204,7 +5355,7 @@ format.UnaryExpression = function(parent, node, options) {
                     children: [
                         ret
                     ]
-                };
+                 };
                 ret = temp;
             }
         }
@@ -5213,14 +5364,16 @@ format.UnaryExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node UpdateExpression
 var UpdateExpression_astNode = {
     name: "UpdateExpression", 
@@ -5229,7 +5382,7 @@ var UpdateExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(UpdateExpression_astNode)
 format.UpdateExpression = function(parent, node, options) {
     var f_astNode = UpdateExpression_astNode;
@@ -5244,14 +5397,14 @@ format.UpdateExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // An update (increment or decrement) operator expression.
     // s( operator, UpdateOperator enum "++" | "--"
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -5286,8 +5439,9 @@ format.UpdateExpression = function(parent, node, options) {
     if (node.prefix) {
         ret.tag = node.operator + 'op';
     }
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (got_text_1) {
             if (node.extra && node.extra.parenthesized == true) {
                 ret.tag = '(';
@@ -5296,9 +5450,9 @@ format.UpdateExpression = function(parent, node, options) {
                 ret.tag = '+';
             }
         }
+        // TODO
+        // is the return value of an ArrowExpression
         else {
-            // TODO
-            // is the return value of an ArrowExpression
             if (got_text_1) {
                 ret.tag = '(';
             }
@@ -5311,14 +5465,16 @@ format.UpdateExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BinaryExpression
 var BinaryExpression_astNode = {
     name: "BinaryExpression", 
@@ -5327,7 +5483,7 @@ var BinaryExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BinaryExpression_astNode)
 format.BinaryExpression = function(parent, node, options) {
     var f_astNode = BinaryExpression_astNode;
@@ -5342,7 +5498,7 @@ format.BinaryExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A binary operator token.
     // s( operator, BinaryOperator
     // enum "==" | "!=" | "===" | "!==" "<" | "<=" | ">" | ">=" | "<<" | ">>" | ">>>" | "+" | "-" | "*" | "/" | "%" | "|" | "^" | "&" | "in" | "instanceof" | "|>"
@@ -5359,17 +5515,17 @@ format.BinaryExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -5409,17 +5565,17 @@ format.BinaryExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -5474,13 +5630,14 @@ format.BinaryExpression = function(parent, node, options) {
             }
         }
         ret.children.push(p_right)
+        
+        // is the return value of an ArrowExpression
         if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-            // is the return value of an ArrowExpression
             if (node.extra && node.extra.parenthesized == true) {
                 ret.tag = '(' + ret.tag;
             }
+            // 18/3/21 set ret.tag = '+'
             else {
-                // 18/3/21 set ret.tag = '+'
             }
         }
     }
@@ -5488,14 +5645,16 @@ format.BinaryExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node AssignmentExpression
 var AssignmentExpression_astNode = {
     name: "AssignmentExpression", 
@@ -5503,7 +5662,7 @@ var AssignmentExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(AssignmentExpression_astNode)
 format.AssignmentExpression = function(parent, node, options) {
     var f_astNode = AssignmentExpression_astNode;
@@ -5518,7 +5677,7 @@ format.AssignmentExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'AssignmentExpression enter options.mustBeText', options.mustBeText
     // An assignment operator expression.
     // s( operator, AssignmentOperator
@@ -5535,17 +5694,17 @@ format.AssignmentExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -5585,17 +5744,17 @@ format.AssignmentExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -5653,14 +5812,16 @@ format.AssignmentExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node LogicalExpression
 var LogicalExpression_astNode = {
     name: "LogicalExpression", 
@@ -5669,7 +5830,7 @@ var LogicalExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(LogicalExpression_astNode)
 format.LogicalExpression = function(parent, node, options) {
     var f_astNode = LogicalExpression_astNode;
@@ -5684,7 +5845,7 @@ format.LogicalExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A logical operator expression.
     // s( operator, LogicalOperator enum "||" | "&&" | "??"
     // process AST-node-property left and set it in a var
@@ -5697,17 +5858,17 @@ format.LogicalExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -5746,17 +5907,17 @@ format.LogicalExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -5794,9 +5955,10 @@ format.LogicalExpression = function(parent, node, options) {
         ret.name = parenthesize(getNodeText(p_left) + ' ' + node.operator + ' ' + getNodeText(p_right), parenthesized);
         ret.textified = ret.name;
     }
+    // log 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
+    // log 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
     else {
         ret.tag = node.operator;
-        // log 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
         if (isTextualNode(p_left) || ['@id', 'literal','set'].indexOf(p_left.tag) > -1) {
             p_left.tag = '+';
             if (isTextualNode(p_left)) {
@@ -5805,7 +5967,6 @@ format.LogicalExpression = function(parent, node, options) {
             }
         }
         ret.children.push(p_left)
-        // log 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
         if (isTextualNode(p_right) || ['@id', 'literal','set'].indexOf(p_right.tag) > -1) {
             p_right.tag = '+';
             if (isTextualNode(p_right)) {
@@ -5818,11 +5979,12 @@ format.LogicalExpression = function(parent, node, options) {
             ret = {
                 tag: '(', 
                 children: [ret]
-            };
+             };
         }
     }
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             if (ret.tag === 'set') {
                 ret.tag = '(';
@@ -5835,8 +5997,8 @@ format.LogicalExpression = function(parent, node, options) {
             if (ret.tag === 'set') {
                 ret.tag = '+';
             }
+            // TODO Do nothing is OK?
             else {
-                // TODO Do nothing is OK?
             }
         }
     }
@@ -5844,14 +6006,16 @@ format.LogicalExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node SpreadElement
 var SpreadElement_astNode = {
     name: "SpreadElement", 
@@ -5859,7 +6023,7 @@ var SpreadElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(SpreadElement_astNode)
 format.SpreadElement = function(parent, node, options) {
     var f_astNode = SpreadElement_astNode;
@@ -5874,7 +6038,7 @@ format.SpreadElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and set it in a var
     var p_argument = null;
     if (typeof(node.argument) !== 'undefined' && node.argument != null) {
@@ -5885,17 +6049,17 @@ format.SpreadElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.argument == null) {
             p_argument.text = "null";
         }
+        // log 'f_p_temp argument before format'
+        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp argument before format'
             format(p_argument, node.argument, options)
-            // log 'f_p_temp argument after format', p_argument.children.length, p_argument
             var argument_comments = extractCommentsIf(p_argument, 1);
             if (p_argument.children.length == 1) {
                 p_argument.tag = p_argument.children[0].tag;
@@ -5929,23 +6093,25 @@ format.SpreadElement = function(parent, node, options) {
         ret.name = getNodeText(p_argument);
         ret.textified = '...' + ret.name;
     }
+    // set ret.textified = p_argument.source
+    // throw new Error('SpreadElement must be textual:' + JSON.stringify(p_argument, null, 2))
     else {
         ret.children.push(p_argument)
-        // set ret.textified = p_argument.source
-        // throw new Error('SpreadElement must be textual:' + JSON.stringify(p_argument, null, 2))
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node MemberExpression
 var MemberExpression_astNode = {
     name: "MemberExpression", 
@@ -5953,7 +6119,7 @@ var MemberExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(MemberExpression_astNode)
 format.MemberExpression = function(parent, node, options) {
     var f_astNode = MemberExpression_astNode;
@@ -5968,7 +6134,7 @@ format.MemberExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property object and set it in a var
     var p_object = null;
     if (typeof(node.object) !== 'undefined' && node.object != null) {
@@ -5979,17 +6145,17 @@ format.MemberExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.object == null) {
             p_object.text = "null";
         }
+        // log 'f_p_temp object before format'
+        // log 'f_p_temp object after format', p_object.children.length, p_object
         else {
             if (!node.object.type) {
                 throw 'Node object has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp object before format'
             format(p_object, node.object, options)
-            // log 'f_p_temp object after format', p_object.children.length, p_object
             var object_comments = extractCommentsIf(p_object, 1);
             if (p_object.children.length == 1) {
                 p_object.tag = p_object.children[0].tag;
@@ -6028,17 +6194,17 @@ format.MemberExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.property == null) {
             p_property.text = "null";
         }
+        // log 'f_p_temp property before format'
+        // log 'f_p_temp property after format', p_property.children.length, p_property
         else {
             if (!node.property.type) {
                 throw 'Node property has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp property before format'
             format(p_property, node.property, options)
-            // log 'f_p_temp property after format', p_property.children.length, p_property
             var property_comments = extractCommentsIf(p_property, 1);
             if (p_property.children.length == 1) {
                 p_property.tag = p_property.children[0].tag;
@@ -6077,12 +6243,13 @@ format.MemberExpression = function(parent, node, options) {
     var qmark = node.optional ? '?' : '';
     if (isTextualNode(p_object)) {
         var obj = getNodeText(p_object);
+        
+        // log 'MemberExpression.textified', ret.textified
         if (isTextualNode(p_property)) {
             var prop = getNodeText(p_property);
             ret.name = node.computed ? obj + qmark + '[' + prop + ']' : obj + qmark + '.' + prop;
             ret.textified = ret.name;
             ret.children = [];
-            // log 'MemberExpression.textified', ret.textified
         }
         else {
             ret.name = obj + qmark;
@@ -6091,11 +6258,12 @@ format.MemberExpression = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             link.children.push(p_property)
             ret.children.push(link)
         }
     }
+    // log 'MemberExpression.tag.name', ret.tag, ret.name
     else {
         console.log(1011);
         if (node.computed) {
@@ -6104,55 +6272,59 @@ format.MemberExpression = function(parent, node, options) {
         else {
             p_property.tag = '.';
         }
+        
+        // log 2
+        
+        // 26/3/21 this is the most improbable, waiting for big damage
         if (p_object.tag === '(') {
-            // log 2
-            // 26/3/21 this is the most improbable, waiting for big damage
             p_object.name = p_object.name + qmark;
             ret.children.push(p_object)
             ret.children.push(p_property)
         }
+        // log 3, p_object.tag, p_object.name
         else {
-            // log 3, p_object.tag, p_object.name
             ret.tag = p_object.tag;
             ret.name = p_object.name + qmark;
             ret.source = p_object.source;
             ret.children = p_object.children;
             ret.children.push(p_property)
         }
-        // log 'MemberExpression.tag.name', ret.tag, ret.name
         var i, i_items=ret.children, i_len=ret.children.length, item;
         for (i=0; i<i_len; i++) {
             item = ret.children[i];
             // log 'MemberExpression.child', i, ret.children[i].tag, ret.children[i].name
         }
     }
+    
+    // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
-        // is the return value of an ArrowExpression
         if (node.extra && node.extra.parenthesized == true) {
             ret = {
                 tag: '(', 
                 children: [ret]
-            };
+             };
         }
         else {
             ret = {
                 tag: '+', 
                 children: [ret]
-            };
+             };
         }
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BindExpression
 var BindExpression_astNode = {
     name: "BindExpression", 
@@ -6160,7 +6332,7 @@ var BindExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BindExpression_astNode)
 format.BindExpression = function(parent, node, options) {
     var f_astNode = BindExpression_astNode;
@@ -6175,12 +6347,12 @@ format.BindExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property object and append ittfNode to `ret`
     f_astNode.props.push({
         name: "object", 
         descr: "process AST-node-property object and append ittfNode to `ret`"
-    })
+     })
     if (node.object) {
         if (!node.object.type) {
             throw 'Node object has no type: ' + JSON.stringify(node, null, 2);
@@ -6191,7 +6363,7 @@ format.BindExpression = function(parent, node, options) {
     f_astNode.props.push({
         name: "callee", 
         descr: "process AST-node-property callee and append ittfNode to `ret`"
-    })
+     })
     if (node.callee) {
         if (!node.callee.type) {
             throw 'Node callee has no type: ' + JSON.stringify(node, null, 2);
@@ -6206,14 +6378,16 @@ format.BindExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ConditionalExpression
 var ConditionalExpression_astNode = {
     name: "ConditionalExpression", 
@@ -6221,7 +6395,7 @@ var ConditionalExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ConditionalExpression_astNode)
 format.ConditionalExpression = function(parent, node, options) {
     var f_astNode = ConditionalExpression_astNode;
@@ -6236,13 +6410,13 @@ format.ConditionalExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A conditional expression, i.e., a ternary `?`/`:` expression.
     f_astNode.props.push({
         name: "test", 
         tag: "test", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_test = {
         textified: null, 
         isText: false, 
@@ -6250,7 +6424,13 @@ format.ConditionalExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property test/test not managed by f_p_tag')
+    */
     if (node.test) {
         if (!node.test.type) {
             throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -6258,10 +6438,13 @@ format.ConditionalExpression = function(parent, node, options) {
         format(p_test, node.test, options)
         p_test.tag = 'test';
         ret.children.push(p_test)
+        
+        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        
+        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        
+        // log '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
-            // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
-            // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
-            // log '*** f_p_tag test children[0].name', p_test.children[0].name
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
             }
@@ -6271,12 +6454,6 @@ format.ConditionalExpression = function(parent, node, options) {
                 p_test.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property test/test not managed by f_p_tag');
-            }
-        */
     }
     // process AST-node-property consequent and set it in a var
     var p_consequent = null;
@@ -6288,17 +6465,17 @@ format.ConditionalExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.consequent == null) {
             p_consequent.text = "null";
         }
+        // log 'f_p_temp consequent before format'
+        // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
         else {
             if (!node.consequent.type) {
                 throw 'Node consequent has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp consequent before format'
             format(p_consequent, node.consequent, options)
-            // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
             var consequent_comments = extractCommentsIf(p_consequent, 1);
             if (p_consequent.children.length == 1) {
                 p_consequent.tag = p_consequent.children[0].tag;
@@ -6337,17 +6514,17 @@ format.ConditionalExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.alternate == null) {
             p_alternate.text = "null";
         }
+        // log 'f_p_temp alternate before format'
+        // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
         else {
             if (!node.alternate.type) {
                 throw 'Node alternate has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp alternate before format'
             format(p_alternate, node.alternate, options)
-            // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
             var alternate_comments = extractCommentsIf(p_alternate, 1);
             if (p_alternate.children.length == 1) {
                 p_alternate.tag = p_alternate.children[0].tag;
@@ -6389,21 +6566,23 @@ format.ConditionalExpression = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     // log 'ConditionalExpression 4', ret.tag
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node CallExpression
 var CallExpression_astNode = {
     name: "CallExpression", 
@@ -6411,7 +6590,7 @@ var CallExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(CallExpression_astNode)
 format.CallExpression = function(parent, node, options) {
     var f_astNode = CallExpression_astNode;
@@ -6426,13 +6605,13 @@ format.CallExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A function or method call expression.
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -6449,17 +6628,17 @@ format.CallExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.callee == null) {
             p_callee.text = "null";
         }
+        // log 'f_p_temp callee before format'
+        // log 'f_p_temp callee after format', p_callee.children.length, p_callee
         else {
             if (!node.callee.type) {
                 throw 'Node callee has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp callee before format'
             format(p_callee, node.callee, options)
-            // log 'f_p_temp callee after format', p_callee.children.length, p_callee
             var callee_comments = extractCommentsIf(p_callee, 1);
             if (p_callee.children.length == 1) {
                 p_callee.tag = p_callee.children[0].tag;
@@ -6499,23 +6678,27 @@ format.CallExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.arguments, i_len=node.arguments.length, item;
         for (i=0; i<i_len; i++) {
             item = node.arguments[i];
             item.__parent = {
                 name: 'arguments', 
                 len: node.arguments.length
-            };
+             };
             format(p_arguments, item, options)
         }
     }
     var lastCallee = ret;
     // log 'CallExpression.p_callee', p_callee
     var qmark = node.optional ? '?.' : '';
+    
+    // log 'CallExpression', 'isTextualNode(p_callee)', isTextualNode(p_callee), 'getNodeText(p_callee)', getNodeText(p_callee), 'node.typeParameters', node.typeParameters, 'p_arguments', p_arguments
+    
+    // first of all try to set ret.textified
+    
+    // log 'CallExpression', 'ret.name,textified', ret.name, ret.textified
     if (isTextualNode(p_callee)) {
-        // log 'CallExpression', 'isTextualNode(p_callee)', isTextualNode(p_callee), 'getNodeText(p_callee)', getNodeText(p_callee), 'node.typeParameters', node.typeParameters, 'p_arguments', p_arguments
-        // first of all try to set ret.textified
         ret.name = getNodeText(p_callee) + qmark;
         if (node.typeParameters) {
             var i, i_items=p_arguments.children, i_len=p_arguments.children.length, item;
@@ -6527,8 +6710,8 @@ format.CallExpression = function(parent, node, options) {
                 lastCallee.children.push(item)
             }
         }
+        // log 'CallExpression p_arguments', p_arguments
         else {
-            // log 'CallExpression p_arguments', p_arguments
             if (p_arguments && p_arguments.children.length > 0) {
                 var tlist = getTextList(p_arguments, ', ');
                 if (tlist) {
@@ -6556,11 +6739,10 @@ format.CallExpression = function(parent, node, options) {
                 ret.textified = '(' + ret.textified + ')';
             }
         }
-        // log 'CallExpression', 'ret.name,textified', ret.name, ret.textified
     }
+    // TODO implement node.optional
+    // log 'CallExpression', 'p_callee.tag', p_callee.tag, 'p_callee.name', p_callee.name, 'ret.tag', ret.tag
     else {
-        // TODO implement node.optional
-        // log 'CallExpression', 'p_callee.tag', p_callee.tag, 'p_callee.name', p_callee.name, 'ret.tag', ret.tag
         var i, i_items=p_callee.children, i_len=p_callee.children.length, item;
         for (i=0; i<i_len; i++) {
             item = p_callee.children[i];
@@ -6576,11 +6758,14 @@ format.CallExpression = function(parent, node, options) {
         if (['[', '{', 'new'].indexOf(p_callee.tag) > -1) {
             ret.tag = p_callee.tag;
         }
+        
+        // log 'node.callee.type', node.callee.type, ret.tag
         if (['`lit','iif'].indexOf(p_callee.tag) < 0) {
             ret.name = p_callee.name;
             ret.children = p_callee.children;
+            
+            // log 'p_callee.children.length > 0'
             if (p_callee.children.length > 0) {
-                // log 'p_callee.children.length > 0'
                 lastCallee = p_callee.children[p_callee.children.length-1];
                 if (p_arguments && p_arguments.children.length > 0) {
                     if (lastCallee.tag === '.') {
@@ -6600,7 +6785,7 @@ format.CallExpression = function(parent, node, options) {
                             children: [
                                 
                             ]
-                        };
+                         };
                         var i, i_items=p_arguments.children, i_len=p_arguments.children.length, item;
                         for (i=0; i<i_len; i++) {
                             item = p_arguments.children[i];
@@ -6618,8 +6803,9 @@ format.CallExpression = function(parent, node, options) {
                     }
                 }
             }
+            // log 'p_callee.children.length == 0'
+            // log 'CallExpression', p_callee, ret
             else {
-                // log 'p_callee.children.length == 0'
                 ret.tag = "_";
                 ret.name = p_callee.tag;
                 if (p_arguments && p_arguments.children.length > 0) {
@@ -6632,12 +6818,10 @@ format.CallExpression = function(parent, node, options) {
                         ret.children.push(item)
                     }
                 }
-                // log 'CallExpression', p_callee, ret
             }
-            // log 'node.callee.type', node.callee.type, ret.tag
         }
+        // log '1203'
         else {
-            // log '1203'
             var temp = [p_callee];
             lastCallee = p_callee.children[p_callee.children.length-1];
             if (lastCallee.tag === '.') {
@@ -6655,8 +6839,9 @@ format.CallExpression = function(parent, node, options) {
                 lastCallee.children.push(item)
             }
         }
+        
+        // log 'node.callee.type 2', node.callee.type, ret.tag
         if (node.callee.type === 'FunctionExpression' && ret.tag === '_') {
-            // log 'node.callee.type 2', node.callee.type, ret.tag
             ret.tag = 'iife' // 9/1/19;
         }
     }
@@ -6666,7 +6851,7 @@ format.CallExpression = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
         ret = temp;
     }
     // log 'CallExpression.exit.ret', ret
@@ -6674,14 +6859,16 @@ format.CallExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NewExpression
 var NewExpression_astNode = {
     name: "NewExpression", 
@@ -6690,7 +6877,7 @@ var NewExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NewExpression_astNode)
 format.NewExpression = function(parent, node, options) {
     var f_astNode = NewExpression_astNode;
@@ -6706,14 +6893,14 @@ format.NewExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection arguments and
     // embed its array of nodes in a new tag
     f_astNode.props.push({
         name: "arguments", 
         tag: "arguments", 
         descr: "# process AST-node-property-collection arguments and embed its array of nodes in a new tag"
-    })
+     })
     if (node.arguments) {
         if (typeof node.arguments.length === 'undefined') {
             throw new Error('Property node.arguments must be an array');
@@ -6725,14 +6912,14 @@ format.NewExpression = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.arguments, i_len=node.arguments.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.arguments[i];
                 item.__parent = {
                     name: 'arguments', 
                     len: node.arguments.length
-                };
+                 };
                 format(temparguments, item, options)
             }
             ret.children.push(temparguments)
@@ -6748,17 +6935,17 @@ format.NewExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeParameters == null) {
             p_typeParameters.text = "null";
         }
+        // log 'f_p_temp typeParameters before format'
+        // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
         else {
             if (!node.typeParameters.type) {
                 throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeParameters before format'
             format(p_typeParameters, node.typeParameters, options)
-            // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
             var typeParameters_comments = extractCommentsIf(p_typeParameters, 1);
             if (typeParameters_comments.length > 0) {
                 p_typeParameters.children = p_typeParameters.children.concat(typeParameters_comments);
@@ -6775,17 +6962,17 @@ format.NewExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.callee == null) {
             p_callee.text = "null";
         }
+        // log 'f_p_temp callee before format'
+        // log 'f_p_temp callee after format', p_callee.children.length, p_callee
         else {
             if (!node.callee.type) {
                 throw 'Node callee has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp callee before format'
             format(p_callee, node.callee, options)
-            // log 'f_p_temp callee after format', p_callee.children.length, p_callee
             var callee_comments = extractCommentsIf(p_callee, 1);
             if (p_callee.children.length == 1) {
                 p_callee.tag = p_callee.children[0].tag;
@@ -6826,8 +7013,9 @@ format.NewExpression = function(parent, node, options) {
     console.log('NewExpression.p_typeParameters', p_typeParameters);
     console.log('NewExpression.argumentsNode', argumentsNode);
     var tlist;
+    
+    // log 101
     if (node.arguments && node.arguments.length > 0) {
-        // log 101
         if (!p_typeParameters) {
             tlist = getTextList(argumentsNode, ', ');
         }
@@ -6855,8 +7043,8 @@ format.NewExpression = function(parent, node, options) {
             }
         }
     }
+    // log 102
     else {
-        // log 102
         if (p_typeParameters) {
             var i, i_items=p_typeParameters.children, i_len=p_typeParameters.children.length, item;
             for (i=0; i<i_len; i++) {
@@ -6873,15 +7061,17 @@ format.NewExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
     options.couldBeText = false;
-};
+}
+;
 // process AST node SequenceExpression
 var SequenceExpression_astNode = {
     name: "SequenceExpression", 
@@ -6889,7 +7079,7 @@ var SequenceExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(SequenceExpression_astNode)
 format.SequenceExpression = function(parent, node, options) {
     var f_astNode = SequenceExpression_astNode;
@@ -6904,13 +7094,13 @@ format.SequenceExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection expressions and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "expressions", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection expressions and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.expressions) {
         if (typeof node.expressions.length === 'undefined') {
             throw new Error('Property node.expressions must be an array');
@@ -6921,7 +7111,7 @@ format.SequenceExpression = function(parent, node, options) {
             item.__parent = {
                 name: 'expressions', 
                 len: node.expressions.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -6940,14 +7130,16 @@ format.SequenceExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node DoExpression
 var DoExpression_astNode = {
     name: "DoExpression", 
@@ -6955,7 +7147,7 @@ var DoExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(DoExpression_astNode)
 format.DoExpression = function(parent, node, options) {
     var f_astNode = DoExpression_astNode;
@@ -6970,12 +7162,12 @@ format.DoExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -6989,14 +7181,16 @@ format.DoExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TemplateLiteral
 var TemplateLiteral_astNode = {
     name: "TemplateLiteral", 
@@ -7004,7 +7198,7 @@ var TemplateLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TemplateLiteral_astNode)
 format.TemplateLiteral = function(parent, node, options) {
     var f_astNode = TemplateLiteral_astNode;
@@ -7019,7 +7213,7 @@ format.TemplateLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection quasis and
     // embed its array of nodes in a temp var
     if (node.quasis) {
@@ -7031,14 +7225,14 @@ format.TemplateLiteral = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.quasis, i_len=node.quasis.length, item;
         for (i=0; i<i_len; i++) {
             item = node.quasis[i];
             item.__parent = {
                 name: 'quasis', 
                 len: node.quasis.length
-            };
+             };
             format(p_quasis, item, options)
         }
     }
@@ -7053,14 +7247,14 @@ format.TemplateLiteral = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.expressions, i_len=node.expressions.length, item;
         for (i=0; i<i_len; i++) {
             item = node.expressions[i];
             item.__parent = {
                 name: 'expressions', 
                 len: node.expressions.length
-            };
+             };
             format(p_expressions, item, options)
         }
     }
@@ -7089,14 +7283,16 @@ format.TemplateLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TaggedTemplateExpression
 var TaggedTemplateExpression_astNode = {
     name: "TaggedTemplateExpression", 
@@ -7104,7 +7300,7 @@ var TaggedTemplateExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TaggedTemplateExpression_astNode)
 format.TaggedTemplateExpression = function(parent, node, options) {
     var f_astNode = TaggedTemplateExpression_astNode;
@@ -7119,7 +7315,7 @@ format.TaggedTemplateExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property tag and set it in a var
     var p_tag = null;
     if (typeof(node.tag) !== 'undefined' && node.tag != null) {
@@ -7130,17 +7326,17 @@ format.TaggedTemplateExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.tag == null) {
             p_tag.text = "null";
         }
+        // log 'f_p_temp tag before format'
+        // log 'f_p_temp tag after format', p_tag.children.length, p_tag
         else {
             if (!node.tag.type) {
                 throw 'Node tag has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp tag before format'
             format(p_tag, node.tag, options)
-            // log 'f_p_temp tag after format', p_tag.children.length, p_tag
             var tag_comments = extractCommentsIf(p_tag, 1);
             if (p_tag.children.length == 1) {
                 p_tag.tag = p_tag.children[0].tag;
@@ -7185,17 +7381,17 @@ format.TaggedTemplateExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.quasi == null) {
             p_quasi.text = "null";
         }
+        // log 'f_p_temp quasi before format'
+        // log 'f_p_temp quasi after format', p_quasi.children.length, p_quasi
         else {
             if (!node.quasi.type) {
                 throw 'Node quasi has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp quasi before format'
             format(p_quasi, node.quasi, options)
-            // log 'f_p_temp quasi after format', p_quasi.children.length, p_quasi
             var quasi_comments = extractCommentsIf(p_quasi, 1);
             if (p_quasi.children.length == 1) {
                 p_quasi.tag = p_quasi.children[0].tag;
@@ -7233,14 +7429,16 @@ format.TaggedTemplateExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TemplateElement
 var TemplateElement_astNode = {
     name: "TemplateElement", 
@@ -7248,7 +7446,7 @@ var TemplateElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TemplateElement_astNode)
 format.TemplateElement = function(parent, node, options) {
     var f_astNode = TemplateElement_astNode;
@@ -7263,7 +7461,7 @@ format.TemplateElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // b( tail
     var lines = node.value.raw.split('\n');
     var i, i_items=lines, i_len=lines.length, line;
@@ -7281,7 +7479,7 @@ format.TemplateElement = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // f_p( value
     // f_p_p( value, cooked, optional
@@ -7290,14 +7488,16 @@ format.TemplateElement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectPattern
 var ObjectPattern_astNode = {
     name: "ObjectPattern", 
@@ -7305,7 +7505,7 @@ var ObjectPattern_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectPattern_astNode)
 format.ObjectPattern = function(parent, node, options) {
     var f_astNode = ObjectPattern_astNode;
@@ -7320,14 +7520,14 @@ format.ObjectPattern = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'ObjectPattern enter options.mustBeText', options.mustBeText
     // process AST-node-property-collection properties and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "properties", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection properties and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.properties) {
         if (typeof node.properties.length === 'undefined') {
             throw new Error('Property node.properties must be an array');
@@ -7338,7 +7538,7 @@ format.ObjectPattern = function(parent, node, options) {
             item.__parent = {
                 name: 'properties', 
                 len: node.properties.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -7357,12 +7557,12 @@ format.ObjectPattern = function(parent, node, options) {
             throw new Error("ObjectPattern. Cannot textify node as requested: " + JSON.stringify(node, null, 2));
         }
     }
+    // process AST-node-property typeAnnotation and append ittfNode to `ret`
     else {
-        // process AST-node-property typeAnnotation and append ittfNode to `ret`
         f_astNode.props.push({
             name: "typeAnnotation", 
             descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-        })
+         })
         if (node.typeAnnotation) {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -7384,7 +7584,7 @@ format.ObjectPattern = function(parent, node, options) {
                     children: [
                         ret
                     ]
-                };
+                 };
                 ret = temp;
             }
         }
@@ -7393,14 +7593,16 @@ format.ObjectPattern = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ArrayPattern
 var ArrayPattern_astNode = {
     name: "ArrayPattern", 
@@ -7408,7 +7610,7 @@ var ArrayPattern_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ArrayPattern_astNode)
 format.ArrayPattern = function(parent, node, options) {
     var f_astNode = ArrayPattern_astNode;
@@ -7423,13 +7625,13 @@ format.ArrayPattern = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection elements and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "elements", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection elements and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.elements) {
         if (typeof node.elements.length === 'undefined') {
             throw new Error('Property node.elements must be an array');
@@ -7440,13 +7642,14 @@ format.ArrayPattern = function(parent, node, options) {
             item.__parent = {
                 name: 'elements', 
                 len: node.elements.length
-            };
+             };
             format(ret, item, options)
         }
     }
+    
+    // log '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
     if (setTextList(ret, ', ')) {
         ret.textified = '[' + ret.textified + ']';
-        // log '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
     }
     else {
         throw new Error('ArrayPattern must be textual: ' + JSON.stringify(node, null, 2));
@@ -7455,14 +7658,16 @@ format.ArrayPattern = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node RestElement
 var RestElement_astNode = {
     name: "RestElement", 
@@ -7470,7 +7675,7 @@ var RestElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(RestElement_astNode)
 format.RestElement = function(parent, node, options) {
     var f_astNode = RestElement_astNode;
@@ -7485,12 +7690,12 @@ format.RestElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -7515,7 +7720,7 @@ format.RestElement = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -7528,14 +7733,16 @@ format.RestElement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node AssignmentPattern
 var AssignmentPattern_astNode = {
     name: "AssignmentPattern", 
@@ -7544,7 +7751,7 @@ var AssignmentPattern_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(AssignmentPattern_astNode)
 format.AssignmentPattern = function(parent, node, options) {
     var f_astNode = AssignmentPattern_astNode;
@@ -7559,7 +7766,7 @@ format.AssignmentPattern = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property left and set it in a var
     var p_left = null;
     if (typeof(node.left) !== 'undefined' && node.left != null) {
@@ -7570,17 +7777,17 @@ format.AssignmentPattern = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -7619,17 +7826,17 @@ format.AssignmentPattern = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -7669,7 +7876,7 @@ format.AssignmentPattern = function(parent, node, options) {
             ret.children.push({
                 tag: node.operator || '=', 
                 children: [p_right]
-            })
+             })
         }
     }
     else {
@@ -7681,14 +7888,16 @@ format.AssignmentPattern = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Class
 var Class_astNode = {
     name: "Class", 
@@ -7696,7 +7905,7 @@ var Class_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Class_astNode)
 format.Class = function(parent, node, options) {
     var f_astNode = Class_astNode;
@@ -7711,7 +7920,7 @@ format.Class = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -7720,7 +7929,12 @@ format.Class = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -7729,13 +7943,8 @@ format.Class = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -7754,17 +7963,17 @@ format.Class = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
+        // log 'f_p_temp superClass before format'
+        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp superClass before format'
             format(p_superClass, node.superClass, options)
-            // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
             var superClass_comments = extractCommentsIf(p_superClass, 1);
             if (p_superClass.children.length == 1) {
                 p_superClass.tag = p_superClass.children[0].tag;
@@ -7795,7 +8004,7 @@ format.Class = function(parent, node, options) {
             ret.children.push({
                 tag: 'super', 
                 name: getNodeText(p_superClass)
-            })
+             })
         }
         else {
             throw new Error('Class. superClass must be textual: ' + JSON.stringify(node, null, 2));
@@ -7806,7 +8015,7 @@ format.Class = function(parent, node, options) {
         name: "decorators", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.decorators) {
         if (typeof node.decorators.length === 'undefined') {
             throw new Error('Property node.decorators must be an array');
@@ -7817,7 +8026,7 @@ format.Class = function(parent, node, options) {
             item.__parent = {
                 name: 'decorators', 
                 len: node.decorators.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -7825,7 +8034,7 @@ format.Class = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -7839,14 +8048,16 @@ format.Class = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassBody
 var ClassBody_astNode = {
     name: "ClassBody", 
@@ -7855,7 +8066,7 @@ var ClassBody_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassBody_astNode)
 format.ClassBody = function(parent, node, options) {
     var f_astNode = ClassBody_astNode;
@@ -7866,7 +8077,7 @@ format.ClassBody = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -7877,7 +8088,7 @@ format.ClassBody = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -7889,7 +8100,8 @@ format.ClassBody = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node ClassMethod
 var ClassMethod_astNode = {
     name: "ClassMethod", 
@@ -7898,7 +8110,7 @@ var ClassMethod_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassMethod_astNode)
 format.ClassMethod = function(parent, node, options) {
     var f_astNode = ClassMethod_astNode;
@@ -7913,12 +8125,12 @@ format.ClassMethod = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     f_astNode.props.push({
         name: "key", 
         tag: "key", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_key = {
         textified: null, 
         isText: false, 
@@ -7926,7 +8138,13 @@ format.ClassMethod = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property key/key not managed by f_p_tag')
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -7934,10 +8152,13 @@ format.ClassMethod = function(parent, node, options) {
         format(p_key, node.key, options)
         p_key.tag = 'key';
         ret.children.push(p_key)
+        
+        // log '*** f_p_tag key children[0].textified', p_key.children[0].textified
+        
+        // log '*** f_p_tag key children[0].isText', p_key.children[0].isText
+        
+        // log '*** f_p_tag key children[0].name', p_key.children[0].name
         if (p_key.children.length == 1) {
-            // log '*** f_p_tag key children[0].textified', p_key.children[0].textified
-            // log '*** f_p_tag key children[0].isText', p_key.children[0].isText
-            // log '*** f_p_tag key children[0].name', p_key.children[0].name
             if (p_key.children[0].textified) {
                 p_key.textified = p_key.children[0].textified;
             }
@@ -7947,12 +8168,6 @@ format.ClassMethod = function(parent, node, options) {
                 p_key.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property key/key not managed by f_p_tag');
-            }
-        */
     }
     // s( kind
     // enum "constructor" | "method" | "get" | "set"
@@ -7964,7 +8179,7 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // log 'node.async', node.async
     if (!!node.async == true) {
@@ -7973,7 +8188,7 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // log 'node.generator', node.generator
     if (!!node.generator == true) {
@@ -7982,7 +8197,7 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (node.accessibility) {
         ret.children.push({
@@ -7991,14 +8206,14 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property-collection decorators and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "decorators", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.decorators) {
         if (typeof node.decorators.length === 'undefined') {
             throw new Error('Property node.decorators must be an array');
@@ -8009,7 +8224,7 @@ format.ClassMethod = function(parent, node, options) {
             item.__parent = {
                 name: 'decorators', 
                 len: node.decorators.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -8019,7 +8234,7 @@ format.ClassMethod = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -8031,14 +8246,14 @@ format.ClassMethod = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -8055,17 +8270,17 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -8097,14 +8312,14 @@ format.ClassMethod = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -8129,14 +8344,16 @@ format.ClassMethod = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassPrivateMethod
 var ClassPrivateMethod_astNode = {
     name: "ClassPrivateMethod", 
@@ -8145,7 +8362,7 @@ var ClassPrivateMethod_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassPrivateMethod_astNode)
 format.ClassPrivateMethod = function(parent, node, options) {
     var f_astNode = ClassPrivateMethod_astNode;
@@ -8160,12 +8377,12 @@ format.ClassPrivateMethod = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property key and append ittfNode to `ret`
     f_astNode.props.push({
         name: "key", 
         descr: "process AST-node-property key and append ittfNode to `ret`"
-    })
+     })
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -8183,14 +8400,14 @@ format.ClassPrivateMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property-collection decorators and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "decorators", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.decorators) {
         if (typeof node.decorators.length === 'undefined') {
             throw new Error('Property node.decorators must be an array');
@@ -8201,7 +8418,7 @@ format.ClassPrivateMethod = function(parent, node, options) {
             item.__parent = {
                 name: 'decorators', 
                 len: node.decorators.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -8211,7 +8428,7 @@ format.ClassPrivateMethod = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -8223,14 +8440,14 @@ format.ClassPrivateMethod = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -8248,17 +8465,17 @@ format.ClassPrivateMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -8290,14 +8507,14 @@ format.ClassPrivateMethod = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     // process AST-node-property body and append ittfNode to `ret`
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -8311,14 +8528,16 @@ format.ClassPrivateMethod = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassProperty
 var ClassProperty_astNode = {
     name: "ClassProperty", 
@@ -8326,7 +8545,7 @@ var ClassProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassProperty_astNode)
 format.ClassProperty = function(parent, node, options) {
     var f_astNode = ClassProperty_astNode;
@@ -8341,7 +8560,7 @@ format.ClassProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property key and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -8350,7 +8569,12 @@ format.ClassProperty = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property key and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempkey .children.length > 0
+            * 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -8359,13 +8583,8 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempkey, node.key, options)
-        /**
-            if (tempkey .children.length > 0) {
-                throw 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempkey.children.length > 0) {
             appto.name = tempkey.children[0].name;
@@ -8384,17 +8603,17 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.value == null) {
             p_value.text = "null";
         }
+        // log 'f_p_temp value before format'
+        // log 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp value before format'
             format(p_value, node.value, options)
-            // log 'f_p_temp value after format', p_value.children.length, p_value
             var value_comments = extractCommentsIf(p_value, 1);
             if (p_value.children.length == 1) {
                 p_value.tag = p_value.children[0].tag;
@@ -8430,17 +8649,17 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -8476,7 +8695,7 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (node.readonly) {
         ret.children.push({
@@ -8485,7 +8704,7 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (node.accessibility) {
         ret.children.push({
@@ -8494,7 +8713,7 @@ format.ClassProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (p_typeAnnotation) {
         ret.children.push(p_typeAnnotation)
@@ -8508,21 +8727,23 @@ format.ClassProperty = function(parent, node, options) {
         }
         ret.children.push(p_value)
     }
+    // do nothing
     else {
-        // do nothing
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassPrivateProperty
 var ClassPrivateProperty_astNode = {
     name: "ClassPrivateProperty", 
@@ -8530,7 +8751,7 @@ var ClassPrivateProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassPrivateProperty_astNode)
 format.ClassPrivateProperty = function(parent, node, options) {
     var f_astNode = ClassPrivateProperty_astNode;
@@ -8545,12 +8766,12 @@ format.ClassPrivateProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property key and append ittfNode to `ret`
     f_astNode.props.push({
         name: "key", 
         descr: "process AST-node-property key and append ittfNode to `ret`"
-    })
+     })
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -8564,7 +8785,7 @@ format.ClassPrivateProperty = function(parent, node, options) {
     f_astNode.props.push({
         name: "value", 
         descr: "process AST-node-property value and append ittfNode to `ret`"
-    })
+     })
     if (node.value) {
         if (!node.value.type) {
             throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -8578,20 +8799,22 @@ format.ClassPrivateProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassDeclaration
 var ClassDeclaration_astNode = {
     name: "ClassDeclaration", 
@@ -8599,7 +8822,7 @@ var ClassDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassDeclaration_astNode)
 format.ClassDeclaration = function(parent, node, options) {
     var f_astNode = ClassDeclaration_astNode;
@@ -8614,7 +8837,7 @@ format.ClassDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -8623,7 +8846,12 @@ format.ClassDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -8632,13 +8860,8 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -8654,13 +8877,13 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -8677,17 +8900,17 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
+        // log 'f_p_temp superClass before format'
+        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp superClass before format'
             format(p_superClass, node.superClass, options)
-            // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
             var superClass_comments = extractCommentsIf(p_superClass, 1);
             if (p_superClass.children.length == 1) {
                 p_superClass.tag = p_superClass.children[0].tag;
@@ -8723,17 +8946,17 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.superTypeParameters == null) {
             p_superTypeParameters.text = "null";
         }
+        // log 'f_p_temp superTypeParameters before format'
+        // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
         else {
             if (!node.superTypeParameters.type) {
                 throw 'Node superTypeParameters has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp superTypeParameters before format'
             format(p_superTypeParameters, node.superTypeParameters, options)
-            // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
             var superTypeParameters_comments = extractCommentsIf(p_superTypeParameters, 1);
             if (p_superTypeParameters.children.length == 1) {
                 p_superTypeParameters.tag = p_superTypeParameters.children[0].tag;
@@ -8768,11 +8991,12 @@ format.ClassDeclaration = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             ret.children.push(p_super)
         }
+        
+        // OK
         else if (p_superClass.text === 'null') {
-            // OK
         }
         else {
             throw new Error('Class. superClass must be textual: ' + JSON.stringify(node, null, 2));
@@ -8790,7 +9014,7 @@ format.ClassDeclaration = function(parent, node, options) {
                         children: [
                             item
                         ]
-                    })
+                     })
                 }
                 else {
                     p_super.children.push(item)
@@ -8813,14 +9037,14 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.implements, i_len=node.implements.length, item;
         for (i=0; i<i_len; i++) {
             item = node.implements[i];
             item.__parent = {
                 name: 'implements', 
                 len: node.implements.length
-            };
+             };
             format(p_implements, item, options)
         }
     }
@@ -8837,7 +9061,7 @@ format.ClassDeclaration = function(parent, node, options) {
         name: "decorators", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.decorators) {
         if (typeof node.decorators.length === 'undefined') {
             throw new Error('Property node.decorators must be an array');
@@ -8848,7 +9072,7 @@ format.ClassDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'decorators', 
                 len: node.decorators.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -8856,7 +9080,7 @@ format.ClassDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -8873,20 +9097,22 @@ format.ClassDeclaration = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassExpression
 var ClassExpression_astNode = {
     name: "ClassExpression", 
@@ -8894,7 +9120,7 @@ var ClassExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassExpression_astNode)
 format.ClassExpression = function(parent, node, options) {
     var f_astNode = ClassExpression_astNode;
@@ -8909,7 +9135,7 @@ format.ClassExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -8918,7 +9144,12 @@ format.ClassExpression = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -8927,13 +9158,8 @@ format.ClassExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -8952,17 +9178,17 @@ format.ClassExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
+        // log 'f_p_temp superClass before format'
+        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp superClass before format'
             format(p_superClass, node.superClass, options)
-            // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
             var superClass_comments = extractCommentsIf(p_superClass, 1);
             if (p_superClass.children.length == 1) {
                 p_superClass.tag = p_superClass.children[0].tag;
@@ -8998,17 +9224,17 @@ format.ClassExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.superTypeParameters == null) {
             p_superTypeParameters.text = "null";
         }
+        // log 'f_p_temp superTypeParameters before format'
+        // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
         else {
             if (!node.superTypeParameters.type) {
                 throw 'Node superTypeParameters has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp superTypeParameters before format'
             format(p_superTypeParameters, node.superTypeParameters, options)
-            // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
             var superTypeParameters_comments = extractCommentsIf(p_superTypeParameters, 1);
             if (p_superTypeParameters.children.length == 1) {
                 p_superTypeParameters.tag = p_superTypeParameters.children[0].tag;
@@ -9035,14 +9261,15 @@ format.ClassExpression = function(parent, node, options) {
         }
     }
     if (p_superClass) {
+        
+        // log 'p_superTypeParameters', p_superTypeParameters
         if (isTextualNode(p_superClass)) {
-            // log 'p_superTypeParameters', p_superTypeParameters
             var superchildren = p_superTypeParameters ? p_superTypeParameters.children : [];
             ret.children.push({
                 tag: 'super', 
                 name: getNodeText(p_superClass), 
                 children: superchildren
-            })
+             })
         }
         else {
             throw new Error('Class. superClass must be textual: ' + JSON.stringify(node, null, 2));
@@ -9052,7 +9279,7 @@ format.ClassExpression = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -9066,14 +9293,16 @@ format.ClassExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node MetaProperty
 var MetaProperty_astNode = {
     name: "MetaProperty", 
@@ -9081,7 +9310,7 @@ var MetaProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(MetaProperty_astNode)
 format.MetaProperty = function(parent, node, options) {
     var f_astNode = MetaProperty_astNode;
@@ -9096,12 +9325,12 @@ format.MetaProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property meta and append ittfNode to `ret`
     f_astNode.props.push({
         name: "meta", 
         descr: "process AST-node-property meta and append ittfNode to `ret`"
-    })
+     })
     if (node.meta) {
         if (!node.meta.type) {
             throw 'Node meta has no type: ' + JSON.stringify(node, null, 2);
@@ -9115,7 +9344,7 @@ format.MetaProperty = function(parent, node, options) {
     f_astNode.props.push({
         name: "property", 
         descr: "process AST-node-property property and append ittfNode to `ret`"
-    })
+     })
     if (node.property) {
         if (!node.property.type) {
             throw 'Node property has no type: ' + JSON.stringify(node, null, 2);
@@ -9141,14 +9370,16 @@ format.MetaProperty = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ModuleDeclaration
 var ModuleDeclaration_astNode = {
     name: "ModuleDeclaration", 
@@ -9156,7 +9387,7 @@ var ModuleDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ModuleDeclaration_astNode)
 format.ModuleDeclaration = function(parent, node, options) {
     var f_astNode = ModuleDeclaration_astNode;
@@ -9171,20 +9402,22 @@ format.ModuleDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // A module `import` or `export` declaration.
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ImportDeclaration
 var ImportDeclaration_astNode = {
     name: "ImportDeclaration", 
@@ -9192,7 +9425,7 @@ var ImportDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ImportDeclaration_astNode)
 format.ImportDeclaration = function(parent, node, options) {
     var f_astNode = ImportDeclaration_astNode;
@@ -9207,13 +9440,13 @@ format.ImportDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection specifiers and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "specifiers", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection specifiers and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.specifiers) {
         if (typeof node.specifiers.length === 'undefined') {
             throw new Error('Property node.specifiers must be an array');
@@ -9224,7 +9457,7 @@ format.ImportDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'specifiers', 
                 len: node.specifiers.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -9235,7 +9468,7 @@ format.ImportDeclaration = function(parent, node, options) {
         name: "source", 
         tag: "from", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_source = {
         textified: null, 
         isText: false, 
@@ -9243,7 +9476,13 @@ format.ImportDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property source/from not managed by f_p_tag')
+    */
     if (node.source) {
         if (!node.source.type) {
             throw 'Node source has no type: ' + JSON.stringify(node, null, 2);
@@ -9251,10 +9490,13 @@ format.ImportDeclaration = function(parent, node, options) {
         format(p_source, node.source, options)
         p_source.tag = 'from';
         ret.children.push(p_source)
+        
+        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        
+        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        
+        // log '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
-            // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
-            // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
-            // log '*** f_p_tag source children[0].name', p_source.children[0].name
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
             }
@@ -9264,12 +9506,6 @@ format.ImportDeclaration = function(parent, node, options) {
                 p_source.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property source/from not managed by f_p_tag');
-            }
-        */
     }
     // An import declaration, e.g., `import foo from "mod"`.
     //
@@ -9292,14 +9528,16 @@ format.ImportDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ImportSpecifier
 var ImportSpecifier_astNode = {
     name: "ImportSpecifier", 
@@ -9307,7 +9545,7 @@ var ImportSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ImportSpecifier_astNode)
 format.ImportSpecifier = function(parent, node, options) {
     var f_astNode = ImportSpecifier_astNode;
@@ -9322,12 +9560,12 @@ format.ImportSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property local and append ittfNode to `ret`
     f_astNode.props.push({
         name: "local", 
         descr: "process AST-node-property local and append ittfNode to `ret`"
-    })
+     })
     if (node.local) {
         if (!node.local.type) {
             throw 'Node local has no type: ' + JSON.stringify(node, null, 2);
@@ -9345,7 +9583,12 @@ format.ImportSpecifier = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property imported and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempimported .children.length > 0
+            * 'node.imported must result zero node, returned: ' + tempimported.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.imported) {
         if (!node.imported.type) {
             throw 'Node imported has no type: ' + JSON.stringify(node, null, 2);
@@ -9354,13 +9597,8 @@ format.ImportSpecifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempimported, node.imported, options)
-        /**
-            if (tempimported .children.length > 0) {
-                throw 'node.imported must result zero node, returned: ' + tempimported.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempimported.children.length > 0) {
             appto.name = tempimported.children[0].name;
@@ -9389,14 +9627,16 @@ format.ImportSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ImportDefaultSpecifier
 var ImportDefaultSpecifier_astNode = {
     name: "ImportDefaultSpecifier", 
@@ -9404,7 +9644,7 @@ var ImportDefaultSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ImportDefaultSpecifier_astNode)
 format.ImportDefaultSpecifier = function(parent, node, options) {
     var f_astNode = ImportDefaultSpecifier_astNode;
@@ -9419,7 +9659,7 @@ format.ImportDefaultSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property local and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -9428,7 +9668,12 @@ format.ImportDefaultSpecifier = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property local and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * templocal .children.length > 0
+            * 'node.local must result zero node, returned: ' + templocal.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.local) {
         if (!node.local.type) {
             throw 'Node local has no type: ' + JSON.stringify(node, null, 2);
@@ -9437,13 +9682,8 @@ format.ImportDefaultSpecifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(templocal, node.local, options)
-        /**
-            if (templocal .children.length > 0) {
-                throw 'node.local must result zero node, returned: ' + templocal.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (templocal.children.length > 0) {
             appto.name = templocal.children[0].name;
@@ -9457,14 +9697,16 @@ format.ImportDefaultSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ImportNamespaceSpecifier
 var ImportNamespaceSpecifier_astNode = {
     name: "ImportNamespaceSpecifier", 
@@ -9472,7 +9714,7 @@ var ImportNamespaceSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ImportNamespaceSpecifier_astNode)
 format.ImportNamespaceSpecifier = function(parent, node, options) {
     var f_astNode = ImportNamespaceSpecifier_astNode;
@@ -9487,12 +9729,12 @@ format.ImportNamespaceSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property local and append ittfNode to `ret`
     f_astNode.props.push({
         name: "local", 
         descr: "process AST-node-property local and append ittfNode to `ret`"
-    })
+     })
     if (node.local) {
         if (!node.local.type) {
             throw 'Node local has no type: ' + JSON.stringify(node, null, 2);
@@ -9518,14 +9760,16 @@ format.ImportNamespaceSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportNamedDeclaration
 var ExportNamedDeclaration_astNode = {
     name: "ExportNamedDeclaration", 
@@ -9533,7 +9777,7 @@ var ExportNamedDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportNamedDeclaration_astNode)
 format.ExportNamedDeclaration = function(parent, node, options) {
     var f_astNode = ExportNamedDeclaration_astNode;
@@ -9548,12 +9792,12 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property declaration and append ittfNode to `ret`
     f_astNode.props.push({
         name: "declaration", 
         descr: "process AST-node-property declaration and append ittfNode to `ret`"
-    })
+     })
     if (node.declaration) {
         if (!node.declaration.type) {
             throw 'Node declaration has no type: ' + JSON.stringify(node, null, 2);
@@ -9565,7 +9809,7 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         name: "specifiers", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection specifiers and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.specifiers) {
         if (typeof node.specifiers.length === 'undefined') {
             throw new Error('Property node.specifiers must be an array');
@@ -9576,7 +9820,7 @@ format.ExportNamedDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'specifiers', 
                 len: node.specifiers.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -9587,7 +9831,7 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         name: "source", 
         tag: "from", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_source = {
         textified: null, 
         isText: false, 
@@ -9595,7 +9839,13 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property source/from not managed by f_p_tag')
+    */
     if (node.source) {
         if (!node.source.type) {
             throw 'Node source has no type: ' + JSON.stringify(node, null, 2);
@@ -9603,10 +9853,13 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         format(p_source, node.source, options)
         p_source.tag = 'from';
         ret.children.push(p_source)
+        
+        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        
+        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        
+        // log '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
-            // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
-            // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
-            // log '*** f_p_tag source children[0].name', p_source.children[0].name
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
             }
@@ -9616,12 +9869,6 @@ format.ExportNamedDeclaration = function(parent, node, options) {
                 p_source.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property source/from not managed by f_p_tag');
-            }
-        */
     }
     var xdefault = getChildByTag(ret, 'default');
     if (xdefault) {
@@ -9630,21 +9877,24 @@ format.ExportNamedDeclaration = function(parent, node, options) {
     }
     // An export named declaration, e.g., `export {foo, bar}`, `export {foo} from "mod"`, `export var foo = 1` or `export * as foo from "bar"`.
     // _Note, Having `declaration` populated with non-empty `specifiers` or non-null `source` results in an invalid state._
+    
+    // VIA 18/03/21 set ret.tag = ':export-type'
     if (node.exportKind === 'type') {
-        // VIA 18/03/21 set ret.tag = ':export-type'
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportSpecifier
 var ExportSpecifier_astNode = {
     name: "ExportSpecifier", 
@@ -9652,7 +9902,7 @@ var ExportSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportSpecifier_astNode)
 format.ExportSpecifier = function(parent, node, options) {
     var f_astNode = ExportSpecifier_astNode;
@@ -9667,12 +9917,12 @@ format.ExportSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property exported and append ittfNode to `ret`
     f_astNode.props.push({
         name: "exported", 
         descr: "process AST-node-property exported and append ittfNode to `ret`"
-    })
+     })
     if (node.exported) {
         if (!node.exported.type) {
             throw 'Node exported has no type: ' + JSON.stringify(node, null, 2);
@@ -9690,7 +9940,12 @@ format.ExportSpecifier = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property local and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * templocal .children.length > 0
+            * 'node.local must result zero node, returned: ' + templocal.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.local) {
         if (!node.local.type) {
             throw 'Node local has no type: ' + JSON.stringify(node, null, 2);
@@ -9699,13 +9954,8 @@ format.ExportSpecifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(templocal, node.local, options)
-        /**
-            if (templocal .children.length > 0) {
-                throw 'node.local must result zero node, returned: ' + templocal.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (templocal.children.length > 0) {
             appto.name = templocal.children[0].name;
@@ -9729,14 +9979,16 @@ format.ExportSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportDefaultSpecifier
 var ExportDefaultSpecifier_astNode = {
     name: "ExportDefaultSpecifier", 
@@ -9744,7 +9996,7 @@ var ExportDefaultSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportDefaultSpecifier_astNode)
 format.ExportDefaultSpecifier = function(parent, node, options) {
     var f_astNode = ExportDefaultSpecifier_astNode;
@@ -9759,7 +10011,7 @@ format.ExportDefaultSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property exported and set it in a var
     var p_exported = null;
     if (typeof(node.exported) !== 'undefined' && node.exported != null) {
@@ -9770,17 +10022,17 @@ format.ExportDefaultSpecifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.exported == null) {
             p_exported.text = "null";
         }
+        // log 'f_p_temp exported before format'
+        // log 'f_p_temp exported after format', p_exported.children.length, p_exported
         else {
             if (!node.exported.type) {
                 throw 'Node exported has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp exported before format'
             format(p_exported, node.exported, options)
-            // log 'f_p_temp exported after format', p_exported.children.length, p_exported
             var exported_comments = extractCommentsIf(p_exported, 1);
             if (p_exported.children.length == 1) {
                 p_exported.tag = p_exported.children[0].tag;
@@ -9819,14 +10071,16 @@ format.ExportDefaultSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportDefaultDeclaration
 var ExportDefaultDeclaration_astNode = {
     name: "ExportDefaultDeclaration", 
@@ -9834,7 +10088,7 @@ var ExportDefaultDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportDefaultDeclaration_astNode)
 format.ExportDefaultDeclaration = function(parent, node, options) {
     var f_astNode = ExportDefaultDeclaration_astNode;
@@ -9849,7 +10103,7 @@ format.ExportDefaultDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // An export default declaration, e.g., `export default function () {}` or `export default 1`.
     // process AST-node-property declaration and set it in a var
     var p_declaration = null;
@@ -9861,17 +10115,17 @@ format.ExportDefaultDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.declaration == null) {
             p_declaration.text = "null";
         }
+        // log 'f_p_temp declaration before format'
+        // log 'f_p_temp declaration after format', p_declaration.children.length, p_declaration
         else {
             if (!node.declaration.type) {
                 throw 'Node declaration has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp declaration before format'
             format(p_declaration, node.declaration, options)
-            // log 'f_p_temp declaration after format', p_declaration.children.length, p_declaration
             var declaration_comments = extractCommentsIf(p_declaration, 1);
             if (p_declaration.children.length == 1) {
                 p_declaration.tag = p_declaration.children[0].tag;
@@ -9910,14 +10164,16 @@ format.ExportDefaultDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportNamespaceSpecifier
 var ExportNamespaceSpecifier_astNode = {
     name: "ExportNamespaceSpecifier", 
@@ -9925,7 +10181,7 @@ var ExportNamespaceSpecifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportNamespaceSpecifier_astNode)
 format.ExportNamespaceSpecifier = function(parent, node, options) {
     var f_astNode = ExportNamespaceSpecifier_astNode;
@@ -9940,7 +10196,7 @@ format.ExportNamespaceSpecifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property exported and set it in a var
     var p_exported = null;
     if (typeof(node.exported) !== 'undefined' && node.exported != null) {
@@ -9951,17 +10207,17 @@ format.ExportNamespaceSpecifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.exported == null) {
             p_exported.text = "null";
         }
+        // log 'f_p_temp exported before format'
+        // log 'f_p_temp exported after format', p_exported.children.length, p_exported
         else {
             if (!node.exported.type) {
                 throw 'Node exported has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp exported before format'
             format(p_exported, node.exported, options)
-            // log 'f_p_temp exported after format', p_exported.children.length, p_exported
             var exported_comments = extractCommentsIf(p_exported, 1);
             if (p_exported.children.length == 1) {
                 p_exported.tag = p_exported.children[0].tag;
@@ -10000,14 +10256,16 @@ format.ExportNamespaceSpecifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExportAllDeclaration
 var ExportAllDeclaration_astNode = {
     name: "ExportAllDeclaration", 
@@ -10015,7 +10273,7 @@ var ExportAllDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExportAllDeclaration_astNode)
 format.ExportAllDeclaration = function(parent, node, options) {
     var f_astNode = ExportAllDeclaration_astNode;
@@ -10030,13 +10288,13 @@ format.ExportAllDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = '*';
     f_astNode.props.push({
         name: "source", 
         tag: "from", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_source = {
         textified: null, 
         isText: false, 
@@ -10044,7 +10302,13 @@ format.ExportAllDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property source/from not managed by f_p_tag')
+    */
     if (node.source) {
         if (!node.source.type) {
             throw 'Node source has no type: ' + JSON.stringify(node, null, 2);
@@ -10052,10 +10316,13 @@ format.ExportAllDeclaration = function(parent, node, options) {
         format(p_source, node.source, options)
         p_source.tag = 'from';
         ret.children.push(p_source)
+        
+        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        
+        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        
+        // log '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
-            // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
-            // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
-            // log '*** f_p_tag source children[0].name', p_source.children[0].name
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
             }
@@ -10065,25 +10332,21 @@ format.ExportAllDeclaration = function(parent, node, options) {
                 p_source.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property source/from not managed by f_p_tag');
-            }
-        */
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node CommentBlock
 var CommentBlock_astNode = {
     name: "CommentBlock", 
@@ -10091,7 +10354,7 @@ var CommentBlock_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(CommentBlock_astNode)
 format.CommentBlock = function(parent, node, options) {
     var f_astNode = CommentBlock_astNode;
@@ -10106,7 +10369,7 @@ format.CommentBlock = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     var values = verify.replaceAll(node.value, '\r\n', '\n').split('\n');
     // log 'options.replaceds', options.replaceds
     var i, i_items=values, i_len=values.length, value;
@@ -10119,20 +10382,22 @@ format.CommentBlock = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node CommentLine
 var CommentLine_astNode = {
     name: "CommentLine", 
@@ -10140,7 +10405,7 @@ var CommentLine_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(CommentLine_astNode)
 format.CommentLine = function(parent, node, options) {
     var f_astNode = CommentLine_astNode;
@@ -10155,7 +10420,7 @@ format.CommentLine = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 'options.replaceds', options.replaceds
     // var v = codeReplacer.restore(node.value, options.replaceds)
     ret.name = node.value;
@@ -10163,14 +10428,16 @@ format.CommentLine = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXAttribute
 var JSXAttribute_astNode = {
     name: "JSXAttribute", 
@@ -10178,7 +10445,7 @@ var JSXAttribute_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXAttribute_astNode)
 format.JSXAttribute = function(parent, node, options) {
     var f_astNode = JSXAttribute_astNode;
@@ -10193,7 +10460,7 @@ format.JSXAttribute = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     options.stateAST.push('JSXAttribute')
     // process AST-node-property name and set it in a var
     var p_name = null;
@@ -10205,17 +10472,17 @@ format.JSXAttribute = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.name == null) {
             p_name.text = "null";
         }
+        // log 'f_p_temp name before format'
+        // log 'f_p_temp name after format', p_name.children.length, p_name
         else {
             if (!node.name.type) {
                 throw 'Node name has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp name before format'
             format(p_name, node.name, options)
-            // log 'f_p_temp name after format', p_name.children.length, p_name
             var name_comments = extractCommentsIf(p_name, 1);
             if (p_name.children.length == 1) {
                 p_name.tag = p_name.children[0].tag;
@@ -10254,17 +10521,17 @@ format.JSXAttribute = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.value == null) {
             p_value.text = "null";
         }
+        // log 'f_p_temp value before format'
+        // log 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp value before format'
             format(p_value, node.value, options)
-            // log 'f_p_temp value after format', p_value.children.length, p_value
             var value_comments = extractCommentsIf(p_value, 1);
             if (p_value.children.length == 1) {
                 p_value.tag = p_value.children[0].tag;
@@ -10310,14 +10577,16 @@ format.JSXAttribute = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXClosingElement
 var JSXClosingElement_astNode = {
     name: "JSXClosingElement", 
@@ -10325,7 +10594,7 @@ var JSXClosingElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXClosingElement_astNode)
 format.JSXClosingElement = function(parent, node, options) {
     var f_astNode = JSXClosingElement_astNode;
@@ -10340,20 +10609,22 @@ format.JSXClosingElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // name JSXIdentifier | JSXMemberExpression
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXElement
 var JSXElement_astNode = {
     name: "JSXElement", 
@@ -10361,7 +10632,7 @@ var JSXElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXElement_astNode)
 format.JSXElement = function(parent, node, options) {
     var f_astNode = JSXElement_astNode;
@@ -10376,7 +10647,7 @@ format.JSXElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property openingElement and set it in a var
     var p_openingElement = null;
     if (typeof(node.openingElement) !== 'undefined' && node.openingElement != null) {
@@ -10387,17 +10658,17 @@ format.JSXElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.openingElement == null) {
             p_openingElement.text = "null";
         }
+        // log 'f_p_temp openingElement before format'
+        // log 'f_p_temp openingElement after format', p_openingElement.children.length, p_openingElement
         else {
             if (!node.openingElement.type) {
                 throw 'Node openingElement has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp openingElement before format'
             format(p_openingElement, node.openingElement, options)
-            // log 'f_p_temp openingElement after format', p_openingElement.children.length, p_openingElement
             var openingElement_comments = extractCommentsIf(p_openingElement, 1);
             if (p_openingElement.children.length == 1) {
                 p_openingElement.tag = p_openingElement.children[0].tag;
@@ -10438,14 +10709,14 @@ format.JSXElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.children, i_len=node.children.length, item;
         for (i=0; i<i_len; i++) {
             item = node.children[i];
             item.__parent = {
                 name: 'children', 
                 len: node.children.length
-            };
+             };
             format(p_children, item, options)
         }
     }
@@ -10472,19 +10743,21 @@ format.JSXElement = function(parent, node, options) {
         item = p_children.children[i];
         // log 'JSXElement.children.item', item
         if (!(item.tag === '+' && item.name.trim().length == 0)) {
+            
+            // log 'isStyle', isStyle, item.children
             if (isStyle) {
-                // log 'isStyle', isStyle, item.children
                 var j, j_items=item.children, j_len=item.children.length, c;
                 for (j=0; j<j_len; j++) {
                     c = item.children[j];
+                    
+                    // log 'JSXElement.children.item.lit', c, getLiteral(c)
                     if (c.tag === '`lit') {
                         ret.tag = "style-jsx";
                         options.wizziIncludes.push({
                             kind: 'css', 
                             node: ret, 
                             literal: getLiteral(c)
-                        })
-                        // log 'JSXElement.children.item.lit', c, getLiteral(c)
+                         })
                     }
                 }
                 if (ret.tag !== "style-jsx") {
@@ -10512,7 +10785,7 @@ format.JSXElement = function(parent, node, options) {
                     children: [
                         
                     ]
-                })
+                 })
             }
             else {
                 ret.children.push(item)
@@ -10527,14 +10800,16 @@ format.JSXElement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXEmptyExpression
 var JSXEmptyExpression_astNode = {
     name: "JSXEmptyExpression", 
@@ -10543,7 +10818,7 @@ var JSXEmptyExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXEmptyExpression_astNode)
 format.JSXEmptyExpression = function(parent, node, options) {
     var f_astNode = JSXEmptyExpression_astNode;
@@ -10554,7 +10829,7 @@ format.JSXEmptyExpression = function(parent, node, options) {
         name: "innerComments", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection innerComments and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.innerComments) {
         if (typeof node.innerComments.length === 'undefined') {
             throw new Error('Property node.innerComments must be an array');
@@ -10565,7 +10840,7 @@ format.JSXEmptyExpression = function(parent, node, options) {
             item.__parent = {
                 name: 'innerComments', 
                 len: node.innerComments.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -10577,7 +10852,8 @@ format.JSXEmptyExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node JSXExpressionContainer
 var JSXExpressionContainer_astNode = {
     name: "JSXExpressionContainer", 
@@ -10585,7 +10861,7 @@ var JSXExpressionContainer_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXExpressionContainer_astNode)
 format.JSXExpressionContainer = function(parent, node, options) {
     var f_astNode = JSXExpressionContainer_astNode;
@@ -10600,7 +10876,7 @@ format.JSXExpressionContainer = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     /**
         options.stateAST.push('JSXExpressionContainer')*/
     // process AST-node-property expression and set it in a var
@@ -10613,17 +10889,17 @@ format.JSXExpressionContainer = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -10658,10 +10934,10 @@ format.JSXExpressionContainer = function(parent, node, options) {
         ret.name = '{' + getNodeText(p_expression) + '}';
         ret.textified = ret.name;
     }
+    // log 'JSXExpressionContainer.options.stateAST', options.stateAST
+    // log 'JSXExpressionContainer.options.p_expression', p_expression
+    // log 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
     else {
-        // log 'JSXExpressionContainer.options.stateAST', options.stateAST
-        // log 'JSXExpressionContainer.options.p_expression', p_expression
-        // log 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
         p_expression.textified = null;
         if (options.stateAST[options.stateAST.length-1] === 'JSXAttribute') {
             var __skip = true;
@@ -10678,14 +10954,16 @@ format.JSXExpressionContainer = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXSpreadChild
 var JSXSpreadChild_astNode = {
     name: "JSXSpreadChild", 
@@ -10693,7 +10971,7 @@ var JSXSpreadChild_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXSpreadChild_astNode)
 format.JSXSpreadChild = function(parent, node, options) {
     var f_astNode = JSXSpreadChild_astNode;
@@ -10708,7 +10986,7 @@ format.JSXSpreadChild = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -10719,17 +10997,17 @@ format.JSXSpreadChild = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -10765,14 +11043,16 @@ format.JSXSpreadChild = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXIdentifier
 var JSXIdentifier_astNode = {
     name: "JSXIdentifier", 
@@ -10781,7 +11061,7 @@ var JSXIdentifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXIdentifier_astNode)
 format.JSXIdentifier = function(parent, node, options) {
     var f_astNode = JSXIdentifier_astNode;
@@ -10796,7 +11076,7 @@ format.JSXIdentifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/name.node.name, value: ', node.name, '
     if (typeof node.name !== 'undefined') {
         ret.name = node.name.toString();
@@ -10806,14 +11086,16 @@ format.JSXIdentifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXMemberExpression
 var JSXMemberExpression_astNode = {
     name: "JSXMemberExpression", 
@@ -10821,7 +11103,7 @@ var JSXMemberExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXMemberExpression_astNode)
 format.JSXMemberExpression = function(parent, node, options) {
     var f_astNode = JSXMemberExpression_astNode;
@@ -10836,12 +11118,12 @@ format.JSXMemberExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property object and append ittfNode to `ret`
     f_astNode.props.push({
         name: "object", 
         descr: "process AST-node-property object and append ittfNode to `ret`"
-    })
+     })
     if (node.object) {
         if (!node.object.type) {
             throw 'Node object has no type: ' + JSON.stringify(node, null, 2);
@@ -10855,7 +11137,7 @@ format.JSXMemberExpression = function(parent, node, options) {
     f_astNode.props.push({
         name: "property", 
         descr: "process AST-node-property property and append ittfNode to `ret`"
-    })
+     })
     if (node.property) {
         if (!node.property.type) {
             throw 'Node property has no type: ' + JSON.stringify(node, null, 2);
@@ -10881,14 +11163,16 @@ format.JSXMemberExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXNamespacedName
 var JSXNamespacedName_astNode = {
     name: "JSXNamespacedName", 
@@ -10896,7 +11180,7 @@ var JSXNamespacedName_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXNamespacedName_astNode)
 format.JSXNamespacedName = function(parent, node, options) {
     var f_astNode = JSXNamespacedName_astNode;
@@ -10911,21 +11195,23 @@ format.JSXNamespacedName = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // namespace JSXIdentifier
     // name JSXIdentifier
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXOpeningElement
 var JSXOpeningElement_astNode = {
     name: "JSXOpeningElement", 
@@ -10933,7 +11219,7 @@ var JSXOpeningElement_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXOpeningElement_astNode)
 format.JSXOpeningElement = function(parent, node, options) {
     var f_astNode = JSXOpeningElement_astNode;
@@ -10948,7 +11234,7 @@ format.JSXOpeningElement = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (typeof(node.name) !== 'undefined' && node.name != null) {
@@ -10959,17 +11245,17 @@ format.JSXOpeningElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.name == null) {
             p_name.text = "null";
         }
+        // log 'f_p_temp name before format'
+        // log 'f_p_temp name after format', p_name.children.length, p_name
         else {
             if (!node.name.type) {
                 throw 'Node name has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp name before format'
             format(p_name, node.name, options)
-            // log 'f_p_temp name after format', p_name.children.length, p_name
             var name_comments = extractCommentsIf(p_name, 1);
             if (p_name.children.length == 1) {
                 p_name.tag = p_name.children[0].tag;
@@ -11029,17 +11315,17 @@ format.JSXOpeningElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeParameters == null) {
             p_typeParameters.text = "null";
         }
+        // log 'f_p_temp typeParameters before format'
+        // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
         else {
             if (!node.typeParameters.type) {
                 throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeParameters before format'
             format(p_typeParameters, node.typeParameters, options)
-            // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
             var typeParameters_comments = extractCommentsIf(p_typeParameters, 1);
             if (p_typeParameters.children.length == 1) {
                 p_typeParameters.tag = p_typeParameters.children[0].tag;
@@ -11084,14 +11370,14 @@ format.JSXOpeningElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.parameters, i_len=node.parameters.length, item;
         for (i=0; i<i_len; i++) {
             item = node.parameters[i];
             item.__parent = {
                 name: 'parameters', 
                 len: node.parameters.length
-            };
+             };
             format(p_parameters, item, options)
         }
     }
@@ -11113,14 +11399,14 @@ format.JSXOpeningElement = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.attributes, i_len=node.attributes.length, item;
         for (i=0; i<i_len; i++) {
             item = node.attributes[i];
             item.__parent = {
                 name: 'attributes', 
                 len: node.attributes.length
-            };
+             };
             format(p_attributes, item, options)
         }
     }
@@ -11135,14 +11421,16 @@ format.JSXOpeningElement = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXSpreadAttribute
 var JSXSpreadAttribute_astNode = {
     name: "JSXSpreadAttribute", 
@@ -11150,7 +11438,7 @@ var JSXSpreadAttribute_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXSpreadAttribute_astNode)
 format.JSXSpreadAttribute = function(parent, node, options) {
     var f_astNode = JSXSpreadAttribute_astNode;
@@ -11165,12 +11453,12 @@ format.JSXSpreadAttribute = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -11195,14 +11483,16 @@ format.JSXSpreadAttribute = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXText
 var JSXText_astNode = {
     name: "JSXText", 
@@ -11210,7 +11500,7 @@ var JSXText_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXText_astNode)
 format.JSXText = function(parent, node, options) {
     var f_astNode = JSXText_astNode;
@@ -11225,7 +11515,7 @@ format.JSXText = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // if node.value.trim().length == 0 || node.value === '\n' // 11/1/19
     var nametrimmed = node.value.trim();
     if (nametrimmed == 0) {
@@ -11238,14 +11528,16 @@ format.JSXText = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXFragment
 var JSXFragment_astNode = {
     name: "JSXFragment", 
@@ -11253,7 +11545,7 @@ var JSXFragment_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXFragment_astNode)
 format.JSXFragment = function(parent, node, options) {
     var f_astNode = JSXFragment_astNode;
@@ -11268,7 +11560,7 @@ format.JSXFragment = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // openingFragment JSXOpeningFragment
     // closingFragment JSXClosingFragment
     // children JSXText | JSXExpressionContainer | JSXSpreadChild | JSXElement | JSXFragment
@@ -11278,7 +11570,7 @@ format.JSXFragment = function(parent, node, options) {
         name: "children", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection children and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.children) {
         if (typeof node.children.length === 'undefined') {
             throw new Error('Property node.children must be an array');
@@ -11289,7 +11581,7 @@ format.JSXFragment = function(parent, node, options) {
             item.__parent = {
                 name: 'children', 
                 len: node.children.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -11300,14 +11592,16 @@ format.JSXFragment = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXOpeningFragment
 var JSXOpeningFragment_astNode = {
     name: "JSXOpeningFragment", 
@@ -11315,7 +11609,7 @@ var JSXOpeningFragment_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXOpeningFragment_astNode)
 format.JSXOpeningFragment = function(parent, node, options) {
     var f_astNode = JSXOpeningFragment_astNode;
@@ -11330,20 +11624,22 @@ format.JSXOpeningFragment = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // aliases: ["JSX", "Immutable"],
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node JSXClosingFragment
 var JSXClosingFragment_astNode = {
     name: "JSXClosingFragment", 
@@ -11351,7 +11647,7 @@ var JSXClosingFragment_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(JSXClosingFragment_astNode)
 format.JSXClosingFragment = function(parent, node, options) {
     var f_astNode = JSXClosingFragment_astNode;
@@ -11366,20 +11662,22 @@ format.JSXClosingFragment = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // aliases: ["JSX", "Immutable"]
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TypeAlias
 var TypeAlias_astNode = {
     name: "TypeAlias", 
@@ -11387,7 +11685,7 @@ var TypeAlias_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeAlias_astNode)
 format.TypeAlias = function(parent, node, options) {
     var f_astNode = TypeAlias_astNode;
@@ -11402,7 +11700,7 @@ format.TypeAlias = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Statement
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -11412,7 +11710,12 @@ format.TypeAlias = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -11421,13 +11724,8 @@ format.TypeAlias = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -11440,7 +11738,7 @@ format.TypeAlias = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -11451,7 +11749,7 @@ format.TypeAlias = function(parent, node, options) {
     f_astNode.props.push({
         name: "right", 
         descr: "process AST-node-property right and append ittfNode to `ret`"
-    })
+     })
     if (node.right) {
         if (!node.right.type) {
             throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -11462,14 +11760,16 @@ format.TypeAlias = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node OpaqueType
 var OpaqueType_astNode = {
     name: "OpaqueType", 
@@ -11477,7 +11777,7 @@ var OpaqueType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(OpaqueType_astNode)
 format.OpaqueType = function(parent, node, options) {
     var f_astNode = OpaqueType_astNode;
@@ -11492,7 +11792,7 @@ format.OpaqueType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -11501,7 +11801,12 @@ format.OpaqueType = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -11510,13 +11815,8 @@ format.OpaqueType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -11529,7 +11829,7 @@ format.OpaqueType = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -11540,7 +11840,7 @@ format.OpaqueType = function(parent, node, options) {
     f_astNode.props.push({
         name: "right", 
         descr: "process AST-node-property right and append ittfNode to `ret`"
-    })
+     })
     if (node.right) {
         if (!node.right.type) {
             throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -11551,14 +11851,16 @@ format.OpaqueType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TypeParameterDeclaration
 var TypeParameterDeclaration_astNode = {
     name: "TypeParameterDeclaration", 
@@ -11567,7 +11869,7 @@ var TypeParameterDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeParameterDeclaration_astNode)
 format.TypeParameterDeclaration = function(parent, node, options) {
     var f_astNode = TypeParameterDeclaration_astNode;
@@ -11579,7 +11881,7 @@ format.TypeParameterDeclaration = function(parent, node, options) {
         name: "params", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection params and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -11590,7 +11892,7 @@ format.TypeParameterDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -11602,7 +11904,8 @@ format.TypeParameterDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TypeParameter
 var TypeParameter_astNode = {
     name: "TypeParameter", 
@@ -11610,7 +11913,7 @@ var TypeParameter_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeParameter_astNode)
 format.TypeParameter = function(parent, node, options) {
     var f_astNode = TypeParameter_astNode;
@@ -11625,7 +11928,7 @@ format.TypeParameter = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (node.name) {
         ret.name = node.name;
     }
@@ -11633,7 +11936,7 @@ format.TypeParameter = function(parent, node, options) {
         name: "bound", 
         tag: "", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_bound = {
         textified: null, 
         isText: false, 
@@ -11641,7 +11944,13 @@ format.TypeParameter = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property bound/ not managed by f_p_tag')
+    */
     if (node.bound) {
         if (!node.bound.type) {
             throw 'Node bound has no type: ' + JSON.stringify(node, null, 2);
@@ -11649,10 +11958,13 @@ format.TypeParameter = function(parent, node, options) {
         format(p_bound, node.bound, options)
         p_bound.tag = 'bound';
         ret.children.push(p_bound)
+        
+        // log '*** f_p_tag bound children[0].textified', p_bound.children[0].textified
+        
+        // log '*** f_p_tag bound children[0].isText', p_bound.children[0].isText
+        
+        // log '*** f_p_tag bound children[0].name', p_bound.children[0].name
         if (p_bound.children.length == 1) {
-            // log '*** f_p_tag bound children[0].textified', p_bound.children[0].textified
-            // log '*** f_p_tag bound children[0].isText', p_bound.children[0].isText
-            // log '*** f_p_tag bound children[0].name', p_bound.children[0].name
             if (p_bound.children[0].textified) {
                 p_bound.textified = p_bound.children[0].textified;
             }
@@ -11662,18 +11974,12 @@ format.TypeParameter = function(parent, node, options) {
                 p_bound.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property bound/ not managed by f_p_tag');
-            }
-        */
     }
     f_astNode.props.push({
         name: "default", 
         tag: "", 
         descr: "fragment f_p_tag"
-    })
+     })
     var p_default = {
         textified: null, 
         isText: false, 
@@ -11681,7 +11987,13 @@ format.TypeParameter = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property default/ not managed by f_p_tag')
+    */
     if (node.default) {
         if (!node.default.type) {
             throw 'Node default has no type: ' + JSON.stringify(node, null, 2);
@@ -11689,10 +12001,13 @@ format.TypeParameter = function(parent, node, options) {
         format(p_default, node.default, options)
         p_default.tag = 'default';
         ret.children.push(p_default)
+        
+        // log '*** f_p_tag default children[0].textified', p_default.children[0].textified
+        
+        // log '*** f_p_tag default children[0].isText', p_default.children[0].isText
+        
+        // log '*** f_p_tag default children[0].name', p_default.children[0].name
         if (p_default.children.length == 1) {
-            // log '*** f_p_tag default children[0].textified', p_default.children[0].textified
-            // log '*** f_p_tag default children[0].isText', p_default.children[0].isText
-            // log '*** f_p_tag default children[0].name', p_default.children[0].name
             if (p_default.children[0].textified) {
                 p_default.textified = p_default.children[0].textified;
             }
@@ -11702,18 +12017,12 @@ format.TypeParameter = function(parent, node, options) {
                 p_default.children = [];
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property default/ not managed by f_p_tag');
-            }
-        */
     }
     // process AST-node-property variance and append ittfNode to `ret`
     f_astNode.props.push({
         name: "variance", 
         descr: "process AST-node-property variance and append ittfNode to `ret`"
-    })
+     })
     if (node.variance) {
         if (!node.variance.type) {
             throw 'Node variance has no type: ' + JSON.stringify(node, null, 2);
@@ -11730,17 +12039,17 @@ format.TypeParameter = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.variance == null) {
             p_variance.text = "null";
         }
+        // log 'f_p_temp variance before format'
+        // log 'f_p_temp variance after format', p_variance.children.length, p_variance
         else {
             if (!node.variance.type) {
                 throw 'Node variance has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp variance before format'
             format(p_variance, node.variance, options)
-            // log 'f_p_temp variance after format', p_variance.children.length, p_variance
             var variance_comments = extractCommentsIf(p_variance, 1);
             if (p_variance.children.length == 1) {
                 p_variance.tag = p_variance.children[0].tag;
@@ -11771,14 +12080,16 @@ format.TypeParameter = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node Variance
 var Variance_astNode = {
     name: "Variance", 
@@ -11786,7 +12097,7 @@ var Variance_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(Variance_astNode)
 format.Variance = function(parent, node, options) {
     var f_astNode = Variance_astNode;
@@ -11801,20 +12112,22 @@ format.Variance = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = node.kind;
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TypeParameterInstantiation
 var TypeParameterInstantiation_astNode = {
     name: "TypeParameterInstantiation", 
@@ -11823,7 +12136,7 @@ var TypeParameterInstantiation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeParameterInstantiation_astNode)
 format.TypeParameterInstantiation = function(parent, node, options) {
     var f_astNode = TypeParameterInstantiation_astNode;
@@ -11834,7 +12147,7 @@ format.TypeParameterInstantiation = function(parent, node, options) {
         name: "params", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection params and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -11845,7 +12158,7 @@ format.TypeParameterInstantiation = function(parent, node, options) {
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -11857,7 +12170,8 @@ format.TypeParameterInstantiation = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node VoidTypeAnnotation
 var VoidTypeAnnotation_astNode = {
     name: "VoidTypeAnnotation", 
@@ -11865,7 +12179,7 @@ var VoidTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(VoidTypeAnnotation_astNode)
 format.VoidTypeAnnotation = function(parent, node, options) {
     var f_astNode = VoidTypeAnnotation_astNode;
@@ -11880,20 +12194,22 @@ format.VoidTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node UndefinedTypeAnnotation
 var UndefinedTypeAnnotation_astNode = {
     name: "UndefinedTypeAnnotation", 
@@ -11901,7 +12217,7 @@ var UndefinedTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(UndefinedTypeAnnotation_astNode)
 format.UndefinedTypeAnnotation = function(parent, node, options) {
     var f_astNode = UndefinedTypeAnnotation_astNode;
@@ -11916,20 +12232,22 @@ format.UndefinedTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NullLiteralTypeAnnotation
 var NullLiteralTypeAnnotation_astNode = {
     name: "NullLiteralTypeAnnotation", 
@@ -11937,7 +12255,7 @@ var NullLiteralTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NullLiteralTypeAnnotation_astNode)
 format.NullLiteralTypeAnnotation = function(parent, node, options) {
     var f_astNode = NullLiteralTypeAnnotation_astNode;
@@ -11952,19 +12270,21 @@ format.NullLiteralTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node GenericTypeAnnotation
 var GenericTypeAnnotation_astNode = {
     name: "GenericTypeAnnotation", 
@@ -11972,7 +12292,7 @@ var GenericTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(GenericTypeAnnotation_astNode)
 format.GenericTypeAnnotation = function(parent, node, options) {
     var f_astNode = GenericTypeAnnotation_astNode;
@@ -11987,7 +12307,7 @@ format.GenericTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -11996,7 +12316,12 @@ format.GenericTypeAnnotation = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -12005,13 +12330,8 @@ format.GenericTypeAnnotation = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -12024,7 +12344,7 @@ format.GenericTypeAnnotation = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -12035,14 +12355,16 @@ format.GenericTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node StringTypeAnnotation
 var StringTypeAnnotation_astNode = {
     name: "StringTypeAnnotation", 
@@ -12050,7 +12372,7 @@ var StringTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(StringTypeAnnotation_astNode)
 format.StringTypeAnnotation = function(parent, node, options) {
     var f_astNode = StringTypeAnnotation_astNode;
@@ -12065,19 +12387,21 @@ format.StringTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSSymbolKeyword
 var TSSymbolKeyword_astNode = {
     name: "TSSymbolKeyword", 
@@ -12085,7 +12409,7 @@ var TSSymbolKeyword_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSSymbolKeyword_astNode)
 format.TSSymbolKeyword = function(parent, node, options) {
     var f_astNode = TSSymbolKeyword_astNode;
@@ -12100,19 +12424,21 @@ format.TSSymbolKeyword = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node AnyTypeAnnotation
 var AnyTypeAnnotation_astNode = {
     name: "AnyTypeAnnotation", 
@@ -12120,7 +12446,7 @@ var AnyTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(AnyTypeAnnotation_astNode)
 format.AnyTypeAnnotation = function(parent, node, options) {
     var f_astNode = AnyTypeAnnotation_astNode;
@@ -12135,20 +12461,22 @@ format.AnyTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ArrayTypeAnnotation
 var ArrayTypeAnnotation_astNode = {
     name: "ArrayTypeAnnotation", 
@@ -12156,7 +12484,7 @@ var ArrayTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ArrayTypeAnnotation_astNode)
 format.ArrayTypeAnnotation = function(parent, node, options) {
     var f_astNode = ArrayTypeAnnotation_astNode;
@@ -12171,13 +12499,13 @@ format.ArrayTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property elementType and append ittfNode to `ret`
     f_astNode.props.push({
         name: "elementType", 
         descr: "process AST-node-property elementType and append ittfNode to `ret`"
-    })
+     })
     if (node.elementType) {
         if (!node.elementType.type) {
             throw 'Node elementType has no type: ' + JSON.stringify(node, null, 2);
@@ -12191,14 +12519,16 @@ format.ArrayTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BooleanLiteralTypeAnnotation
 var BooleanLiteralTypeAnnotation_astNode = {
     name: "BooleanLiteralTypeAnnotation", 
@@ -12206,7 +12536,7 @@ var BooleanLiteralTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BooleanLiteralTypeAnnotation_astNode)
 format.BooleanLiteralTypeAnnotation = function(parent, node, options) {
     var f_astNode = BooleanLiteralTypeAnnotation_astNode;
@@ -12221,21 +12551,23 @@ format.BooleanLiteralTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     ret.name = node.extra.raw;
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node BooleanTypeAnnotation
 var BooleanTypeAnnotation_astNode = {
     name: "BooleanTypeAnnotation", 
@@ -12243,7 +12575,7 @@ var BooleanTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(BooleanTypeAnnotation_astNode)
 format.BooleanTypeAnnotation = function(parent, node, options) {
     var f_astNode = BooleanTypeAnnotation_astNode;
@@ -12258,20 +12590,22 @@ format.BooleanTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ClassImplements
 var ClassImplements_astNode = {
     name: "ClassImplements", 
@@ -12279,7 +12613,7 @@ var ClassImplements_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ClassImplements_astNode)
 format.ClassImplements = function(parent, node, options) {
     var f_astNode = ClassImplements_astNode;
@@ -12294,7 +12628,7 @@ format.ClassImplements = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -12304,7 +12638,12 @@ format.ClassImplements = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -12313,13 +12652,8 @@ format.ClassImplements = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -12332,7 +12666,7 @@ format.ClassImplements = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -12343,14 +12677,16 @@ format.ClassImplements = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node FunctionTypeAnnotation
 var FunctionTypeAnnotation_astNode = {
     name: "FunctionTypeAnnotation", 
@@ -12358,7 +12694,7 @@ var FunctionTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(FunctionTypeAnnotation_astNode)
 format.FunctionTypeAnnotation = function(parent, node, options) {
     var f_astNode = FunctionTypeAnnotation_astNode;
@@ -12373,13 +12709,13 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -12391,7 +12727,7 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
         name: "params", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection params and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -12402,7 +12738,7 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -12410,7 +12746,7 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
     f_astNode.props.push({
         name: "rest", 
         descr: "process AST-node-property rest and append ittfNode to `ret`"
-    })
+     })
     if (node.rest) {
         if (!node.rest.type) {
             throw 'Node rest has no type: ' + JSON.stringify(node, null, 2);
@@ -12427,17 +12763,17 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -12468,7 +12804,7 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
             ret.children.push({
                 tag: ':return', 
                 name: p_returnType.children[0].tag
-            })
+             })
         }
         else {
             ret.children.push({
@@ -12477,21 +12813,23 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
                 children: [
                     p_returnType
                 ]
-            })
+             })
         }
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node FunctionTypeParam
 var FunctionTypeParam_astNode = {
     name: "FunctionTypeParam", 
@@ -12499,7 +12837,7 @@ var FunctionTypeParam_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(FunctionTypeParam_astNode)
 format.FunctionTypeParam = function(parent, node, options) {
     var f_astNode = FunctionTypeParam_astNode;
@@ -12514,7 +12852,7 @@ format.FunctionTypeParam = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property name and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -12524,7 +12862,12 @@ format.FunctionTypeParam = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property name and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempname .children.length > 0
+            * 'node.name must result zero node, returned: ' + tempname.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.name) {
         if (!node.name.type) {
             throw 'Node name has no type: ' + JSON.stringify(node, null, 2);
@@ -12533,13 +12876,8 @@ format.FunctionTypeParam = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempname, node.name, options)
-        /**
-            if (tempname .children.length > 0) {
-                throw 'node.name must result zero node, returned: ' + tempname.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempname.children.length > 0) {
             appto.name = tempname.children[0].name;
@@ -12561,17 +12899,17 @@ format.FunctionTypeParam = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -12613,8 +12951,9 @@ format.FunctionTypeParam = function(parent, node, options) {
         ret.tag = ret.children[0].tag;
         ret.children = ret.children[0].children;
     }
+    
+    // union and intersect
     if (ret.children.length == 1 && ( ret.children[0].tag === ':|' || ret.children[0].tag === ':&' )) {
-        // union and intersect
         var temp_children = ret.children[0];
         ret.children = [];
         var i, i_items=temp_children.children, i_len=temp_children.children.length, ui;
@@ -12631,14 +12970,16 @@ format.FunctionTypeParam = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node InterfaceExtends
 var InterfaceExtends_astNode = {
     name: "InterfaceExtends", 
@@ -12646,7 +12987,7 @@ var InterfaceExtends_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(InterfaceExtends_astNode)
 format.InterfaceExtends = function(parent, node, options) {
     var f_astNode = InterfaceExtends_astNode;
@@ -12661,7 +13002,7 @@ format.InterfaceExtends = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -12671,7 +13012,12 @@ format.InterfaceExtends = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -12680,13 +13026,8 @@ format.InterfaceExtends = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -12699,7 +13040,7 @@ format.InterfaceExtends = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -12710,14 +13051,16 @@ format.InterfaceExtends = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node InterfaceDeclaration
 var InterfaceDeclaration_astNode = {
     name: "InterfaceDeclaration", 
@@ -12725,7 +13068,7 @@ var InterfaceDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(InterfaceDeclaration_astNode)
 format.InterfaceDeclaration = function(parent, node, options) {
     var f_astNode = InterfaceDeclaration_astNode;
@@ -12740,7 +13083,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Statement
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -12750,7 +13093,12 @@ format.InterfaceDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -12759,13 +13107,8 @@ format.InterfaceDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -12779,7 +13122,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
         name: "extends", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection extends and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.extends) {
         if (typeof node.extends.length === 'undefined') {
             throw new Error('Property node.extends must be an array');
@@ -12790,7 +13133,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'extends', 
                 len: node.extends.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -12798,7 +13141,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -12809,7 +13152,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -12820,14 +13163,16 @@ format.InterfaceDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node IntersectionTypeAnnotation
 var IntersectionTypeAnnotation_astNode = {
     name: "IntersectionTypeAnnotation", 
@@ -12835,7 +13180,7 @@ var IntersectionTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(IntersectionTypeAnnotation_astNode)
 format.IntersectionTypeAnnotation = function(parent, node, options) {
     var f_astNode = IntersectionTypeAnnotation_astNode;
@@ -12850,14 +13195,14 @@ format.IntersectionTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property-collection types and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "types", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -12868,7 +13213,7 @@ format.IntersectionTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -12879,14 +13224,16 @@ format.IntersectionTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node MixedTypeAnnotation
 var MixedTypeAnnotation_astNode = {
     name: "MixedTypeAnnotation", 
@@ -12894,7 +13241,7 @@ var MixedTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(MixedTypeAnnotation_astNode)
 format.MixedTypeAnnotation = function(parent, node, options) {
     var f_astNode = MixedTypeAnnotation_astNode;
@@ -12909,20 +13256,22 @@ format.MixedTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NullableTypeAnnotation
 var NullableTypeAnnotation_astNode = {
     name: "NullableTypeAnnotation", 
@@ -12931,7 +13280,7 @@ var NullableTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NullableTypeAnnotation_astNode)
 format.NullableTypeAnnotation = function(parent, node, options) {
     var f_astNode = NullableTypeAnnotation_astNode;
@@ -12948,17 +13297,17 @@ format.NullableTypeAnnotation = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -13002,7 +13351,8 @@ format.NullableTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node NumberLiteralTypeAnnotation
 var NumberLiteralTypeAnnotation_astNode = {
     name: "NumberLiteralTypeAnnotation", 
@@ -13010,7 +13360,7 @@ var NumberLiteralTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NumberLiteralTypeAnnotation_astNode)
 format.NumberLiteralTypeAnnotation = function(parent, node, options) {
     var f_astNode = NumberLiteralTypeAnnotation_astNode;
@@ -13025,21 +13375,23 @@ format.NumberLiteralTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     ret.name = node.extra.raw;
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node NumberTypeAnnotation
 var NumberTypeAnnotation_astNode = {
     name: "NumberTypeAnnotation", 
@@ -13047,7 +13399,7 @@ var NumberTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(NumberTypeAnnotation_astNode)
 format.NumberTypeAnnotation = function(parent, node, options) {
     var f_astNode = NumberTypeAnnotation_astNode;
@@ -13062,20 +13414,22 @@ format.NumberTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node StringLiteralTypeAnnotation
 var StringLiteralTypeAnnotation_astNode = {
     name: "StringLiteralTypeAnnotation", 
@@ -13083,7 +13437,7 @@ var StringLiteralTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(StringLiteralTypeAnnotation_astNode)
 format.StringLiteralTypeAnnotation = function(parent, node, options) {
     var f_astNode = StringLiteralTypeAnnotation_astNode;
@@ -13098,21 +13452,23 @@ format.StringLiteralTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     ret.name = node.extra.raw;
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node StringTypeAnnotation
 var StringTypeAnnotation_astNode = {
     name: "StringTypeAnnotation", 
@@ -13120,7 +13476,7 @@ var StringTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(StringTypeAnnotation_astNode)
 format.StringTypeAnnotation = function(parent, node, options) {
     var f_astNode = StringTypeAnnotation_astNode;
@@ -13135,20 +13491,22 @@ format.StringTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TupleTypeAnnotation
 var TupleTypeAnnotation_astNode = {
     name: "TupleTypeAnnotation", 
@@ -13156,7 +13514,7 @@ var TupleTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TupleTypeAnnotation_astNode)
 format.TupleTypeAnnotation = function(parent, node, options) {
     var f_astNode = TupleTypeAnnotation_astNode;
@@ -13171,14 +13529,14 @@ format.TupleTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property-collection types and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "types", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -13189,7 +13547,7 @@ format.TupleTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -13200,14 +13558,16 @@ format.TupleTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TypeofTypeAnnotation
 var TypeofTypeAnnotation_astNode = {
     name: "TypeofTypeAnnotation", 
@@ -13215,7 +13575,7 @@ var TypeofTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeofTypeAnnotation_astNode)
 format.TypeofTypeAnnotation = function(parent, node, options) {
     var f_astNode = TypeofTypeAnnotation_astNode;
@@ -13230,13 +13590,13 @@ format.TypeofTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // process AST-node-property argument and append ittfNode to `ret`
     f_astNode.props.push({
         name: "argument", 
         descr: "process AST-node-property argument and append ittfNode to `ret`"
-    })
+     })
     if (node.argument) {
         if (!node.argument.type) {
             throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -13247,14 +13607,16 @@ format.TypeofTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TypeAnnotation
 var TypeAnnotation_astNode = {
     name: "TypeAnnotation", 
@@ -13263,7 +13625,7 @@ var TypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeAnnotation_astNode)
 format.TypeAnnotation = function(parent, node, options) {
     var f_astNode = TypeAnnotation_astNode;
@@ -13280,17 +13642,17 @@ format.TypeAnnotation = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -13333,7 +13695,7 @@ format.TypeAnnotation = function(parent, node, options) {
         name: "types", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -13344,7 +13706,7 @@ format.TypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -13352,7 +13714,7 @@ format.TypeAnnotation = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -13364,7 +13726,8 @@ format.TypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TypeCastExpression
 var TypeCastExpression_astNode = {
     name: "TypeCastExpression", 
@@ -13372,7 +13735,7 @@ var TypeCastExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TypeCastExpression_astNode)
 format.TypeCastExpression = function(parent, node, options) {
     var f_astNode = TypeCastExpression_astNode;
@@ -13387,7 +13750,7 @@ format.TypeCastExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Expression
     // process AST-node-property typeAnnotation and set it in a var
     var p_typeAnnotation = null;
@@ -13399,17 +13762,17 @@ format.TypeCastExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -13455,7 +13818,12 @@ format.TypeCastExpression = function(parent, node, options) {
         onParent: false, 
         iftext: true, 
         descr: "Process AST-node-property expression and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempexpression .children.length > 0
+            * 'node.expression must result zero node, returned: ' + tempexpression.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.expression) {
         if (!node.expression.type) {
             throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -13464,13 +13832,8 @@ format.TypeCastExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempexpression, node.expression, options)
-        /**
-            if (tempexpression .children.length > 0) {
-                throw 'node.expression must result zero node, returned: ' + tempexpression.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempexpression.children.length > 0) {
             if (isTextualNode(tempexpression.children[0])) {
@@ -13493,14 +13856,16 @@ format.TypeCastExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectTypeAnnotation
 var ObjectTypeAnnotation_astNode = {
     name: "ObjectTypeAnnotation", 
@@ -13508,7 +13873,7 @@ var ObjectTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectTypeAnnotation_astNode)
 format.ObjectTypeAnnotation = function(parent, node, options) {
     var f_astNode = ObjectTypeAnnotation_astNode;
@@ -13523,14 +13888,14 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property-collection callProperties and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "callProperties", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection callProperties and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.callProperties) {
         if (typeof node.callProperties.length === 'undefined') {
             throw new Error('Property node.callProperties must be an array');
@@ -13541,7 +13906,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'callProperties', 
                 len: node.callProperties.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -13550,7 +13915,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
         name: "indexers", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection indexers and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.indexers) {
         if (typeof node.indexers.length === 'undefined') {
             throw new Error('Property node.indexers must be an array');
@@ -13561,7 +13926,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'indexers', 
                 len: node.indexers.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -13570,7 +13935,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
         name: "properties", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection properties and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.properties) {
         if (typeof node.properties.length === 'undefined') {
             throw new Error('Property node.properties must be an array');
@@ -13581,7 +13946,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'properties', 
                 len: node.properties.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -13592,14 +13957,16 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectTypeCallProperty
 var ObjectTypeCallProperty_astNode = {
     name: "ObjectTypeCallProperty", 
@@ -13607,7 +13974,7 @@ var ObjectTypeCallProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectTypeCallProperty_astNode)
 format.ObjectTypeCallProperty = function(parent, node, options) {
     var f_astNode = ObjectTypeCallProperty_astNode;
@@ -13622,7 +13989,7 @@ format.ObjectTypeCallProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // log 'node.static', node.static
     if (!!node.static == true) {
@@ -13631,13 +13998,13 @@ format.ObjectTypeCallProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property value and append ittfNode to `ret`
     f_astNode.props.push({
         name: "value", 
         descr: "process AST-node-property value and append ittfNode to `ret`"
-    })
+     })
     if (node.value) {
         if (!node.value.type) {
             throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -13651,14 +14018,16 @@ format.ObjectTypeCallProperty = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectTypeIndexer
 var ObjectTypeIndexer_astNode = {
     name: "ObjectTypeIndexer", 
@@ -13666,7 +14035,7 @@ var ObjectTypeIndexer_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectTypeIndexer_astNode)
 format.ObjectTypeIndexer = function(parent, node, options) {
     var f_astNode = ObjectTypeIndexer_astNode;
@@ -13681,7 +14050,7 @@ format.ObjectTypeIndexer = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -13691,7 +14060,12 @@ format.ObjectTypeIndexer = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -13700,13 +14074,8 @@ format.ObjectTypeIndexer = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -13719,7 +14088,7 @@ format.ObjectTypeIndexer = function(parent, node, options) {
     f_astNode.props.push({
         name: "key", 
         descr: "process AST-node-property key and append ittfNode to `ret`"
-    })
+     })
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -13730,7 +14099,7 @@ format.ObjectTypeIndexer = function(parent, node, options) {
     f_astNode.props.push({
         name: "value", 
         descr: "process AST-node-property value and append ittfNode to `ret`"
-    })
+     })
     if (node.value) {
         if (!node.value.type) {
             throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -13741,14 +14110,16 @@ format.ObjectTypeIndexer = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ObjectTypeProperty
 var ObjectTypeProperty_astNode = {
     name: "ObjectTypeProperty", 
@@ -13756,7 +14127,7 @@ var ObjectTypeProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ObjectTypeProperty_astNode)
 format.ObjectTypeProperty = function(parent, node, options) {
     var f_astNode = ObjectTypeProperty_astNode;
@@ -13771,7 +14142,7 @@ format.ObjectTypeProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property key and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -13781,7 +14152,12 @@ format.ObjectTypeProperty = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property key and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempkey .children.length > 0
+            * 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -13790,13 +14166,8 @@ format.ObjectTypeProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempkey, node.key, options)
-        /**
-            if (tempkey .children.length > 0) {
-                throw 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempkey.children.length > 0) {
             appto.name = tempkey.children[0].name;
@@ -13815,17 +14186,17 @@ format.ObjectTypeProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.value == null) {
             p_value.text = "null";
         }
+        // log 'f_p_temp value before format'
+        // log 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp value before format'
             format(p_value, node.value, options)
-            // log 'f_p_temp value after format', p_value.children.length, p_value
             var value_comments = extractCommentsIf(p_value, 1);
             if (p_value.children.length == 1) {
                 p_value.tag = p_value.children[0].tag;
@@ -13868,14 +14239,16 @@ format.ObjectTypeProperty = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node QualifiedTypeIdentifier
 var QualifiedTypeIdentifier_astNode = {
     name: "QualifiedTypeIdentifier", 
@@ -13883,7 +14256,7 @@ var QualifiedTypeIdentifier_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(QualifiedTypeIdentifier_astNode)
 format.QualifiedTypeIdentifier = function(parent, node, options) {
     var f_astNode = QualifiedTypeIdentifier_astNode;
@@ -13898,7 +14271,7 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
@@ -13908,7 +14281,12 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -13917,13 +14295,8 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -13942,17 +14315,17 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.qualification == null) {
             p_qualification.text = "null";
         }
+        // log 'f_p_temp qualification before format'
+        // log 'f_p_temp qualification after format', p_qualification.children.length, p_qualification
         else {
             if (!node.qualification.type) {
                 throw 'Node qualification has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp qualification before format'
             format(p_qualification, node.qualification, options)
-            // log 'f_p_temp qualification after format', p_qualification.children.length, p_qualification
             var qualification_comments = extractCommentsIf(p_qualification, 1);
             if (p_qualification.children.length == 1) {
                 p_qualification.tag = p_qualification.children[0].tag;
@@ -13985,14 +14358,16 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node UnionTypeAnnotation
 var UnionTypeAnnotation_astNode = {
     name: "UnionTypeAnnotation", 
@@ -14000,7 +14375,7 @@ var UnionTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(UnionTypeAnnotation_astNode)
 format.UnionTypeAnnotation = function(parent, node, options) {
     var f_astNode = UnionTypeAnnotation_astNode;
@@ -14015,14 +14390,14 @@ format.UnionTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // extends Node, Type
     // process AST-node-property-collection types and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "types", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -14033,7 +14408,7 @@ format.UnionTypeAnnotation = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -14044,14 +14419,16 @@ format.UnionTypeAnnotation = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node ExistsTypeAnnotation
 var ExistsTypeAnnotation_astNode = {
     name: "ExistsTypeAnnotation", 
@@ -14059,7 +14436,7 @@ var ExistsTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(ExistsTypeAnnotation_astNode)
 format.ExistsTypeAnnotation = function(parent, node, options) {
     var f_astNode = ExistsTypeAnnotation_astNode;
@@ -14074,19 +14451,21 @@ format.ExistsTypeAnnotation = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node InferredPredicate
 var InferredPredicate_astNode = {
     name: "InferredPredicate", 
@@ -14094,7 +14473,7 @@ var InferredPredicate_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(InferredPredicate_astNode)
 format.InferredPredicate = function(parent, node, options) {
     var f_astNode = InferredPredicate_astNode;
@@ -14109,19 +14488,21 @@ format.InferredPredicate = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // Type annotations
 // https://iov-one.github.io/iov-core-docs/latest/iov-core/interfaces/node.html
 format.TSInterfaceDeclaration = format.InterfaceDeclaration;
@@ -14141,7 +14522,7 @@ var TSObjectKeyword_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSObjectKeyword_astNode)
 format.TSObjectKeyword = function(parent, node, options) {
     var f_astNode = TSObjectKeyword_astNode;
@@ -14156,19 +14537,21 @@ format.TSObjectKeyword = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSInterfaceDeclaration
 var TSInterfaceDeclaration_astNode = {
     name: "TSInterfaceDeclaration", 
@@ -14176,7 +14559,7 @@ var TSInterfaceDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSInterfaceDeclaration_astNode)
 format.TSInterfaceDeclaration = function(parent, node, options) {
     var f_astNode = TSInterfaceDeclaration_astNode;
@@ -14191,7 +14574,7 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -14200,7 +14583,12 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -14209,13 +14597,8 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -14228,7 +14611,7 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -14246,14 +14629,14 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.extends, i_len=node.extends.length, item;
         for (i=0; i<i_len; i++) {
             item = node.extends[i];
             item.__parent = {
                 name: 'extends', 
                 len: node.extends.length
-            };
+             };
             format(p_extends, item, options)
         }
     }
@@ -14271,7 +14654,7 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -14285,20 +14668,22 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSInterfaceBody
 var TSInterfaceBody_astNode = {
     name: "TSInterfaceBody", 
@@ -14307,7 +14692,7 @@ var TSInterfaceBody_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSInterfaceBody_astNode)
 format.TSInterfaceBody = function(parent, node, options) {
     var f_astNode = TSInterfaceBody_astNode;
@@ -14318,7 +14703,7 @@ format.TSInterfaceBody = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -14329,7 +14714,7 @@ format.TSInterfaceBody = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -14341,7 +14726,8 @@ format.TSInterfaceBody = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TSConstructorType
 var TSConstructorType_astNode = {
     name: "TSConstructorType", 
@@ -14349,7 +14735,7 @@ var TSConstructorType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSConstructorType_astNode)
 format.TSConstructorType = function(parent, node, options) {
     var f_astNode = TSConstructorType_astNode;
@@ -14364,12 +14750,12 @@ format.TSConstructorType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -14380,7 +14766,7 @@ format.TSConstructorType = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -14393,7 +14779,7 @@ format.TSConstructorType = function(parent, node, options) {
         name: "parameters", 
         tag: "params", 
         descr: "# process AST-node-property-collection parameters and embed its array of nodes in a new tag"
-    })
+     })
     if (node.parameters) {
         if (typeof node.parameters.length === 'undefined') {
             throw new Error('Property node.parameters must be an array');
@@ -14405,14 +14791,14 @@ format.TSConstructorType = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.parameters, i_len=node.parameters.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.parameters[i];
                 item.__parent = {
                     name: 'parameters', 
                     len: node.parameters.length
-                };
+                 };
                 format(tempparameters, item, options)
             }
             ret.children.push(tempparameters)
@@ -14423,14 +14809,16 @@ format.TSConstructorType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSConstructSignatureDeclaration
 var TSConstructSignatureDeclaration_astNode = {
     name: "TSConstructSignatureDeclaration", 
@@ -14438,7 +14826,7 @@ var TSConstructSignatureDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSConstructSignatureDeclaration_astNode)
 format.TSConstructSignatureDeclaration = function(parent, node, options) {
     var f_astNode = TSConstructSignatureDeclaration_astNode;
@@ -14453,12 +14841,12 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -14469,7 +14857,7 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -14482,7 +14870,7 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
         name: "parameters", 
         tag: "params", 
         descr: "# process AST-node-property-collection parameters and embed its array of nodes in a new tag"
-    })
+     })
     if (node.parameters) {
         if (typeof node.parameters.length === 'undefined') {
             throw new Error('Property node.parameters must be an array');
@@ -14494,14 +14882,14 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.parameters, i_len=node.parameters.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.parameters[i];
                 item.__parent = {
                     name: 'parameters', 
                     len: node.parameters.length
-                };
+                 };
                 format(tempparameters, item, options)
             }
             ret.children.push(tempparameters)
@@ -14512,14 +14900,16 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSCallSignatureDeclaration
 var TSCallSignatureDeclaration_astNode = {
     name: "TSCallSignatureDeclaration", 
@@ -14527,7 +14917,7 @@ var TSCallSignatureDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSCallSignatureDeclaration_astNode)
 format.TSCallSignatureDeclaration = function(parent, node, options) {
     var f_astNode = TSCallSignatureDeclaration_astNode;
@@ -14542,12 +14932,12 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -14558,7 +14948,7 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -14571,7 +14961,7 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
         name: "parameters", 
         tag: "params", 
         descr: "# process AST-node-property-collection parameters and embed its array of nodes in a new tag"
-    })
+     })
     if (node.parameters) {
         if (typeof node.parameters.length === 'undefined') {
             throw new Error('Property node.parameters must be an array');
@@ -14583,14 +14973,14 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.parameters, i_len=node.parameters.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.parameters[i];
                 item.__parent = {
                     name: 'parameters', 
                     len: node.parameters.length
-                };
+                 };
                 format(tempparameters, item, options)
             }
             ret.children.push(tempparameters)
@@ -14601,14 +14991,16 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSPropertySignature
 var TSPropertySignature_astNode = {
     name: "TSPropertySignature", 
@@ -14616,7 +15008,7 @@ var TSPropertySignature_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSPropertySignature_astNode)
 format.TSPropertySignature = function(parent, node, options) {
     var f_astNode = TSPropertySignature_astNode;
@@ -14631,7 +15023,7 @@ format.TSPropertySignature = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property key and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -14640,7 +15032,12 @@ format.TSPropertySignature = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property key and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempkey .children.length > 0
+            * 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -14649,13 +15046,8 @@ format.TSPropertySignature = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempkey, node.key, options)
-        /**
-            if (tempkey .children.length > 0) {
-                throw 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempkey.children.length > 0) {
             appto.name = tempkey.children[0].name;
@@ -14674,7 +15066,7 @@ format.TSPropertySignature = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property typeAnnotation and set it in a var
     var p_typeAnnotation = null;
@@ -14686,17 +15078,17 @@ format.TSPropertySignature = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -14738,14 +15130,16 @@ format.TSPropertySignature = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSIndexSignature
 var TSIndexSignature_astNode = {
     name: "TSIndexSignature", 
@@ -14753,7 +15147,7 @@ var TSIndexSignature_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSIndexSignature_astNode)
 format.TSIndexSignature = function(parent, node, options) {
     var f_astNode = TSIndexSignature_astNode;
@@ -14768,12 +15162,12 @@ format.TSIndexSignature = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeAnnotation and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -14787,7 +15181,7 @@ format.TSIndexSignature = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property-collection parameters and
     // embed its array of nodes in a new tag
@@ -14795,7 +15189,7 @@ format.TSIndexSignature = function(parent, node, options) {
         name: "parameters", 
         tag: "params", 
         descr: "# process AST-node-property-collection parameters and embed its array of nodes in a new tag"
-    })
+     })
     if (node.parameters) {
         if (typeof node.parameters.length === 'undefined') {
             throw new Error('Property node.parameters must be an array');
@@ -14807,14 +15201,14 @@ format.TSIndexSignature = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.parameters, i_len=node.parameters.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.parameters[i];
                 item.__parent = {
                     name: 'parameters', 
                     len: node.parameters.length
-                };
+                 };
                 format(tempparameters, item, options)
             }
             ret.children.push(tempparameters)
@@ -14825,14 +15219,16 @@ format.TSIndexSignature = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSIndexedAccessType
 var TSIndexedAccessType_astNode = {
     name: "TSIndexedAccessType", 
@@ -14840,7 +15236,7 @@ var TSIndexedAccessType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSIndexedAccessType_astNode)
 format.TSIndexedAccessType = function(parent, node, options) {
     var f_astNode = TSIndexedAccessType_astNode;
@@ -14855,12 +15251,12 @@ format.TSIndexedAccessType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property objectType and append ittfNode to `ret`
     f_astNode.props.push({
         name: "objectType", 
         descr: "process AST-node-property objectType and append ittfNode to `ret`"
-    })
+     })
     if (node.objectType) {
         if (!node.objectType.type) {
             throw 'Node objectType has no type: ' + JSON.stringify(node, null, 2);
@@ -14874,7 +15270,7 @@ format.TSIndexedAccessType = function(parent, node, options) {
     f_astNode.props.push({
         name: "indexType", 
         descr: "process AST-node-property indexType and append ittfNode to `ret`"
-    })
+     })
     if (node.indexType) {
         if (!node.indexType.type) {
             throw 'Node indexType has no type: ' + JSON.stringify(node, null, 2);
@@ -14888,14 +15284,16 @@ format.TSIndexedAccessType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSModuleDeclaration
 var TSModuleDeclaration_astNode = {
     name: "TSModuleDeclaration", 
@@ -14903,7 +15301,7 @@ var TSModuleDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSModuleDeclaration_astNode)
 format.TSModuleDeclaration = function(parent, node, options) {
     var f_astNode = TSModuleDeclaration_astNode;
@@ -14918,7 +15316,7 @@ format.TSModuleDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -14927,7 +15325,12 @@ format.TSModuleDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -14936,13 +15339,8 @@ format.TSModuleDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -14955,7 +15353,7 @@ format.TSModuleDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "body", 
         descr: "process AST-node-property body and append ittfNode to `ret`"
-    })
+     })
     if (node.body) {
         if (!node.body.type) {
             throw 'Node body has no type: ' + JSON.stringify(node, null, 2);
@@ -14969,20 +15367,22 @@ format.TSModuleDeclaration = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSModuleBlock
 var TSModuleBlock_astNode = {
     name: "TSModuleBlock", 
@@ -14991,7 +15391,7 @@ var TSModuleBlock_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSModuleBlock_astNode)
 format.TSModuleBlock = function(parent, node, options) {
     var f_astNode = TSModuleBlock_astNode;
@@ -15002,7 +15402,7 @@ format.TSModuleBlock = function(parent, node, options) {
         name: "body", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection body and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.body) {
         if (typeof node.body.length === 'undefined') {
             throw new Error('Property node.body must be an array');
@@ -15013,7 +15413,7 @@ format.TSModuleBlock = function(parent, node, options) {
             item.__parent = {
                 name: 'body', 
                 len: node.body.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -15025,7 +15425,8 @@ format.TSModuleBlock = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TSDeclareFunction
 var TSDeclareFunction_astNode = {
     name: "TSDeclareFunction", 
@@ -15033,7 +15434,7 @@ var TSDeclareFunction_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSDeclareFunction_astNode)
 format.TSDeclareFunction = function(parent, node, options) {
     var f_astNode = TSDeclareFunction_astNode;
@@ -15048,7 +15449,7 @@ format.TSDeclareFunction = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -15057,7 +15458,12 @@ format.TSDeclareFunction = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -15066,13 +15472,8 @@ format.TSDeclareFunction = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -15085,7 +15486,7 @@ format.TSDeclareFunction = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15098,7 +15499,7 @@ format.TSDeclareFunction = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -15110,14 +15511,14 @@ format.TSDeclareFunction = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -15134,17 +15535,17 @@ format.TSDeclareFunction = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -15176,7 +15577,7 @@ format.TSDeclareFunction = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     if (node.async) {
@@ -15192,20 +15593,22 @@ format.TSDeclareFunction = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSFunctionType
 var TSFunctionType_astNode = {
     name: "TSFunctionType", 
@@ -15213,7 +15616,7 @@ var TSFunctionType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSFunctionType_astNode)
 format.TSFunctionType = function(parent, node, options) {
     var f_astNode = TSFunctionType_astNode;
@@ -15228,12 +15631,12 @@ format.TSFunctionType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15244,7 +15647,7 @@ format.TSFunctionType = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -15265,14 +15668,14 @@ format.TSFunctionType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.parameters, i_len=node.parameters.length, item;
         for (i=0; i<i_len; i++) {
             item = node.parameters[i];
             item.__parent = {
                 name: 'parameters', 
                 len: node.parameters.length
-            };
+             };
             format(p_parameters, item, options)
         }
     }
@@ -15287,17 +15690,17 @@ format.TSFunctionType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -15329,7 +15732,7 @@ format.TSFunctionType = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     console.log('TSFunctionType', 'ret', ret);
@@ -15337,14 +15740,16 @@ format.TSFunctionType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSMethodSignature
 var TSMethodSignature_astNode = {
     name: "TSMethodSignature", 
@@ -15352,7 +15757,7 @@ var TSMethodSignature_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSMethodSignature_astNode)
 format.TSMethodSignature = function(parent, node, options) {
     var f_astNode = TSMethodSignature_astNode;
@@ -15367,7 +15772,7 @@ format.TSMethodSignature = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property key and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -15376,7 +15781,12 @@ format.TSMethodSignature = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property key and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempkey .children.length > 0
+            * 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -15385,13 +15795,8 @@ format.TSMethodSignature = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempkey, node.key, options)
-        /**
-            if (tempkey .children.length > 0) {
-                throw 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempkey.children.length > 0) {
             appto.name = tempkey.children[0].name;
@@ -15404,7 +15809,7 @@ format.TSMethodSignature = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15415,7 +15820,7 @@ format.TSMethodSignature = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -15431,7 +15836,7 @@ format.TSMethodSignature = function(parent, node, options) {
         name: "parameters", 
         tag: "params", 
         descr: "# process AST-node-property-collection parameters and embed its array of nodes in a new tag"
-    })
+     })
     if (node.parameters) {
         if (typeof node.parameters.length === 'undefined') {
             throw new Error('Property node.parameters must be an array');
@@ -15443,14 +15848,14 @@ format.TSMethodSignature = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.parameters, i_len=node.parameters.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.parameters[i];
                 item.__parent = {
                     name: 'parameters', 
                     len: node.parameters.length
-                };
+                 };
                 format(tempparameters, item, options)
             }
             ret.children.push(tempparameters)
@@ -15461,14 +15866,16 @@ format.TSMethodSignature = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeAnnotation
 var TSTypeAnnotation_astNode = {
     name: "TSTypeAnnotation", 
@@ -15477,7 +15884,7 @@ var TSTypeAnnotation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeAnnotation_astNode)
 format.TSTypeAnnotation = function(parent, node, options) {
     var f_astNode = TSTypeAnnotation_astNode;
@@ -15487,7 +15894,7 @@ format.TSTypeAnnotation = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -15501,7 +15908,7 @@ format.TSTypeAnnotation = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15513,7 +15920,8 @@ format.TSTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TSTypeParameterInstantiation
 var TSTypeParameterInstantiation_astNode = {
     name: "TSTypeParameterInstantiation", 
@@ -15522,7 +15930,7 @@ var TSTypeParameterInstantiation_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeParameterInstantiation_astNode)
 format.TSTypeParameterInstantiation = function(parent, node, options) {
     var f_astNode = TSTypeParameterInstantiation_astNode;
@@ -15539,14 +15947,14 @@ format.TSTypeParameterInstantiation = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.params, i_len=node.params.length, item;
         for (i=0; i<i_len; i++) {
             item = node.params[i];
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(p_params, item, options)
         }
     }
@@ -15574,7 +15982,7 @@ format.TSTypeParameterInstantiation = function(parent, node, options) {
                 children: [
                     p
                 ]
-            };
+             };
         }
         // log 'TSTypeParameterInstantiation.p after', p
         ret.children.push(p)
@@ -15584,7 +15992,8 @@ format.TSTypeParameterInstantiation = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TSTypeParameterDeclaration
 var TSTypeParameterDeclaration_astNode = {
     name: "TSTypeParameterDeclaration", 
@@ -15593,7 +16002,7 @@ var TSTypeParameterDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeParameterDeclaration_astNode)
 format.TSTypeParameterDeclaration = function(parent, node, options) {
     var f_astNode = TSTypeParameterDeclaration_astNode;
@@ -15604,7 +16013,7 @@ format.TSTypeParameterDeclaration = function(parent, node, options) {
         name: "params", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection params and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -15615,7 +16024,7 @@ format.TSTypeParameterDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'params', 
                 len: node.params.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -15627,7 +16036,8 @@ format.TSTypeParameterDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
     }
-};
+}
+;
 // process AST node TSTypeParameter
 var TSTypeParameter_astNode = {
     name: "TSTypeParameter", 
@@ -15635,7 +16045,7 @@ var TSTypeParameter_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeParameter_astNode)
 format.TSTypeParameter = function(parent, node, options) {
     var f_astNode = TSTypeParameter_astNode;
@@ -15650,13 +16060,13 @@ format.TSTypeParameter = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     ret.name = node.name;
     // process AST-node-property constraint and append ittfNode to `ret`
     f_astNode.props.push({
         name: "constraint", 
         descr: "process AST-node-property constraint and append ittfNode to `ret`"
-    })
+     })
     if (node.constraint) {
         if (!node.constraint.type) {
             throw 'Node constraint has no type: ' + JSON.stringify(node, null, 2);
@@ -15667,14 +16077,16 @@ format.TSTypeParameter = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSParameterProperty
 var TSParameterProperty_astNode = {
     name: "TSParameterProperty", 
@@ -15682,7 +16094,7 @@ var TSParameterProperty_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSParameterProperty_astNode)
 format.TSParameterProperty = function(parent, node, options) {
     var f_astNode = TSParameterProperty_astNode;
@@ -15697,7 +16109,7 @@ format.TSParameterProperty = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (node.readonly) {
         ret.children.push({
             tag: ':readonly', 
@@ -15705,7 +16117,7 @@ format.TSParameterProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (node.accessibility) {
         ret.children.push({
@@ -15714,7 +16126,7 @@ format.TSParameterProperty = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property parameter and set it in a var
     var p_parameter = null;
@@ -15726,17 +16138,17 @@ format.TSParameterProperty = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.parameter == null) {
             p_parameter.text = "null";
         }
+        // log 'f_p_temp parameter before format'
+        // log 'f_p_temp parameter after format', p_parameter.children.length, p_parameter
         else {
             if (!node.parameter.type) {
                 throw 'Node parameter has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp parameter before format'
             format(p_parameter, node.parameter, options)
-            // log 'f_p_temp parameter after format', p_parameter.children.length, p_parameter
             var parameter_comments = extractCommentsIf(p_parameter, 1);
             if (p_parameter.children.length == 1) {
                 p_parameter.tag = p_parameter.children[0].tag;
@@ -15777,14 +16189,16 @@ format.TSParameterProperty = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeReference
 var TSTypeReference_astNode = {
     name: "TSTypeReference", 
@@ -15792,7 +16206,7 @@ var TSTypeReference_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeReference_astNode)
 format.TSTypeReference = function(parent, node, options) {
     var f_astNode = TSTypeReference_astNode;
@@ -15807,7 +16221,7 @@ format.TSTypeReference = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeName and set it in a var
     var p_typeName = null;
     if (typeof(node.typeName) !== 'undefined' && node.typeName != null) {
@@ -15818,17 +16232,17 @@ format.TSTypeReference = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeName == null) {
             p_typeName.text = "null";
         }
+        // log 'f_p_temp typeName before format'
+        // log 'f_p_temp typeName after format', p_typeName.children.length, p_typeName
         else {
             if (!node.typeName.type) {
                 throw 'Node typeName has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeName before format'
             format(p_typeName, node.typeName, options)
-            // log 'f_p_temp typeName after format', p_typeName.children.length, p_typeName
             var typeName_comments = extractCommentsIf(p_typeName, 1);
             if (p_typeName.children.length == 1) {
                 p_typeName.tag = p_typeName.children[0].tag;
@@ -15872,7 +16286,7 @@ format.TSTypeReference = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15883,14 +16297,16 @@ format.TSTypeReference = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSExpressionWithTypeArguments
 var TSExpressionWithTypeArguments_astNode = {
     name: "TSExpressionWithTypeArguments", 
@@ -15898,7 +16314,7 @@ var TSExpressionWithTypeArguments_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSExpressionWithTypeArguments_astNode)
 format.TSExpressionWithTypeArguments = function(parent, node, options) {
     var f_astNode = TSExpressionWithTypeArguments_astNode;
@@ -15913,12 +16329,12 @@ format.TSExpressionWithTypeArguments = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameters and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -15935,17 +16351,17 @@ format.TSExpressionWithTypeArguments = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -15983,14 +16399,16 @@ format.TSExpressionWithTypeArguments = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSAsExpression
 var TSAsExpression_astNode = {
     name: "TSAsExpression", 
@@ -15998,7 +16416,7 @@ var TSAsExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSAsExpression_astNode)
 format.TSAsExpression = function(parent, node, options) {
     var f_astNode = TSAsExpression_astNode;
@@ -16013,7 +16431,7 @@ format.TSAsExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -16024,17 +16442,17 @@ format.TSAsExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -16073,17 +16491,17 @@ format.TSAsExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
+        // log 'f_p_temp typeAnnotation before format'
+        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp typeAnnotation before format'
             format(p_typeAnnotation, node.typeAnnotation, options)
-            // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
             var typeAnnotation_comments = extractCommentsIf(p_typeAnnotation, 1);
             if (p_typeAnnotation.children.length == 1) {
                 p_typeAnnotation.tag = p_typeAnnotation.children[0].tag;
@@ -16128,7 +16546,7 @@ format.TSAsExpression = function(parent, node, options) {
         ret = {
             tag: '@expr', 
             children: [p_expression, ret]
-        };
+         };
     }
     if (['@id', 'literal'].indexOf(ret.tag) > -1) {
         ret.tag = '+';
@@ -16141,20 +16559,22 @@ format.TSAsExpression = function(parent, node, options) {
             children: [
                 ret
             ]
-        };
+         };
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTupleType
 var TSTupleType_astNode = {
     name: "TSTupleType", 
@@ -16162,7 +16582,7 @@ var TSTupleType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTupleType_astNode)
 format.TSTupleType = function(parent, node, options) {
     var f_astNode = TSTupleType_astNode;
@@ -16177,13 +16597,13 @@ format.TSTupleType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection elementTypes and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "elementTypes", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection elementTypes and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.elementTypes) {
         if (typeof node.elementTypes.length === 'undefined') {
             throw new Error('Property node.elementTypes must be an array');
@@ -16194,7 +16614,7 @@ format.TSTupleType = function(parent, node, options) {
             item.__parent = {
                 name: 'elementTypes', 
                 len: node.elementTypes.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -16205,14 +16625,16 @@ format.TSTupleType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSUnionType
 var TSUnionType_astNode = {
     name: "TSUnionType", 
@@ -16220,7 +16642,7 @@ var TSUnionType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSUnionType_astNode)
 format.TSUnionType = function(parent, node, options) {
     var f_astNode = TSUnionType_astNode;
@@ -16235,13 +16657,13 @@ format.TSUnionType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection types and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "types", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -16252,7 +16674,7 @@ format.TSUnionType = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -16260,14 +16682,16 @@ format.TSUnionType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSIntersectionType
 var TSIntersectionType_astNode = {
     name: "TSIntersectionType", 
@@ -16275,7 +16699,7 @@ var TSIntersectionType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSIntersectionType_astNode)
 format.TSIntersectionType = function(parent, node, options) {
     var f_astNode = TSIntersectionType_astNode;
@@ -16290,13 +16714,13 @@ format.TSIntersectionType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection types and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "types", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection types and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.types) {
         if (typeof node.types.length === 'undefined') {
             throw new Error('Property node.types must be an array');
@@ -16307,7 +16731,7 @@ format.TSIntersectionType = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -16315,14 +16739,16 @@ format.TSIntersectionType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSEnumDeclaration
 var TSEnumDeclaration_astNode = {
     name: "TSEnumDeclaration", 
@@ -16330,7 +16756,7 @@ var TSEnumDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSEnumDeclaration_astNode)
 format.TSEnumDeclaration = function(parent, node, options) {
     var f_astNode = TSEnumDeclaration_astNode;
@@ -16345,7 +16771,7 @@ format.TSEnumDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -16354,7 +16780,12 @@ format.TSEnumDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -16363,13 +16794,8 @@ format.TSEnumDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -16383,7 +16809,7 @@ format.TSEnumDeclaration = function(parent, node, options) {
         name: "members", 
         throwIfUndefined: true, 
         descr: "process AST-node-property-collection members and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.members) {
         if (typeof node.members.length === 'undefined') {
             throw new Error('Property node.members must be an array');
@@ -16394,7 +16820,7 @@ format.TSEnumDeclaration = function(parent, node, options) {
             item.__parent = {
                 name: 'members', 
                 len: node.members.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -16405,14 +16831,16 @@ format.TSEnumDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSEnumMember
 var TSEnumMember_astNode = {
     name: "TSEnumMember", 
@@ -16420,7 +16848,7 @@ var TSEnumMember_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSEnumMember_astNode)
 format.TSEnumMember = function(parent, node, options) {
     var f_astNode = TSEnumMember_astNode;
@@ -16435,7 +16863,7 @@ format.TSEnumMember = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -16444,7 +16872,12 @@ format.TSEnumMember = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -16453,13 +16886,8 @@ format.TSEnumMember = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -16478,17 +16906,17 @@ format.TSEnumMember = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.initializer == null) {
             p_initializer.text = "null";
         }
+        // log 'f_p_temp initializer before format'
+        // log 'f_p_temp initializer after format', p_initializer.children.length, p_initializer
         else {
             if (!node.initializer.type) {
                 throw 'Node initializer has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp initializer before format'
             format(p_initializer, node.initializer, options)
-            // log 'f_p_temp initializer after format', p_initializer.children.length, p_initializer
             var initializer_comments = extractCommentsIf(p_initializer, 1);
             if (p_initializer.children.length == 1) {
                 p_initializer.tag = p_initializer.children[0].tag;
@@ -16524,14 +16952,16 @@ format.TSEnumMember = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSNeverKeyword
 var TSNeverKeyword_astNode = {
     name: "TSNeverKeyword", 
@@ -16539,7 +16969,7 @@ var TSNeverKeyword_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSNeverKeyword_astNode)
 format.TSNeverKeyword = function(parent, node, options) {
     var f_astNode = TSNeverKeyword_astNode;
@@ -16554,19 +16984,21 @@ format.TSNeverKeyword = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypePredicate
 var TSTypePredicate_astNode = {
     name: "TSTypePredicate", 
@@ -16574,7 +17006,7 @@ var TSTypePredicate_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypePredicate_astNode)
 format.TSTypePredicate = function(parent, node, options) {
     var f_astNode = TSTypePredicate_astNode;
@@ -16589,7 +17021,7 @@ format.TSTypePredicate = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property parameterName and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -16598,7 +17030,12 @@ format.TSTypePredicate = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property parameterName and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempparameterName .children.length > 0
+            * 'node.parameterName must result zero node, returned: ' + tempparameterName.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.parameterName) {
         if (!node.parameterName.type) {
             throw 'Node parameterName has no type: ' + JSON.stringify(node, null, 2);
@@ -16607,13 +17044,8 @@ format.TSTypePredicate = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempparameterName, node.parameterName, options)
-        /**
-            if (tempparameterName .children.length > 0) {
-                throw 'node.parameterName must result zero node, returned: ' + tempparameterName.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempparameterName.children.length > 0) {
             appto.name = tempparameterName.children[0].name;
@@ -16626,7 +17058,7 @@ format.TSTypePredicate = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -16640,14 +17072,16 @@ format.TSTypePredicate = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeLiteral
 var TSTypeLiteral_astNode = {
     name: "TSTypeLiteral", 
@@ -16655,7 +17089,7 @@ var TSTypeLiteral_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeLiteral_astNode)
 format.TSTypeLiteral = function(parent, node, options) {
     var f_astNode = TSTypeLiteral_astNode;
@@ -16670,13 +17104,13 @@ format.TSTypeLiteral = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection members and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "members", 
         throwIfUndefined: false, 
         descr: "process AST-node-property-collection members and append ittfNode(s) to `ret`"
-    })
+     })
     if (node.members) {
         if (typeof node.members.length === 'undefined') {
             throw new Error('Property node.members must be an array');
@@ -16687,7 +17121,7 @@ format.TSTypeLiteral = function(parent, node, options) {
             item.__parent = {
                 name: 'members', 
                 len: node.members.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -16695,14 +17129,16 @@ format.TSTypeLiteral = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeOperator
 var TSTypeOperator_astNode = {
     name: "TSTypeOperator", 
@@ -16710,7 +17146,7 @@ var TSTypeOperator_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeOperator_astNode)
 format.TSTypeOperator = function(parent, node, options) {
     var f_astNode = TSTypeOperator_astNode;
@@ -16725,12 +17161,12 @@ format.TSTypeOperator = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeAnnotation and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -16747,14 +17183,16 @@ format.TSTypeOperator = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSNonNullExpression
 var TSNonNullExpression_astNode = {
     name: "TSNonNullExpression", 
@@ -16762,7 +17200,7 @@ var TSNonNullExpression_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSNonNullExpression_astNode)
 format.TSNonNullExpression = function(parent, node, options) {
     var f_astNode = TSNonNullExpression_astNode;
@@ -16777,7 +17215,7 @@ format.TSNonNullExpression = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -16788,17 +17226,17 @@ format.TSNonNullExpression = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -16834,14 +17272,16 @@ format.TSNonNullExpression = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeAliasDeclaration
 var TSTypeAliasDeclaration_astNode = {
     name: "TSTypeAliasDeclaration", 
@@ -16849,7 +17289,7 @@ var TSTypeAliasDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeAliasDeclaration_astNode)
 format.TSTypeAliasDeclaration = function(parent, node, options) {
     var f_astNode = TSTypeAliasDeclaration_astNode;
@@ -16864,7 +17304,7 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -16873,7 +17313,12 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -16882,13 +17327,8 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -16901,7 +17341,7 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -16912,7 +17352,7 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -16923,14 +17363,16 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSLiteralType
 var TSLiteralType_astNode = {
     name: "TSLiteralType", 
@@ -16938,7 +17380,7 @@ var TSLiteralType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSLiteralType_astNode)
 format.TSLiteralType = function(parent, node, options) {
     var f_astNode = TSLiteralType_astNode;
@@ -16953,7 +17395,7 @@ format.TSLiteralType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property literal and set it in a var
     var p_literal = null;
     if (typeof(node.literal) !== 'undefined' && node.literal != null) {
@@ -16964,17 +17406,17 @@ format.TSLiteralType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.literal == null) {
             p_literal.text = "null";
         }
+        // log 'f_p_temp literal before format'
+        // log 'f_p_temp literal after format', p_literal.children.length, p_literal
         else {
             if (!node.literal.type) {
                 throw 'Node literal has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp literal before format'
             format(p_literal, node.literal, options)
-            // log 'f_p_temp literal after format', p_literal.children.length, p_literal
             var literal_comments = extractCommentsIf(p_literal, 1);
             if (p_literal.children.length == 1) {
                 p_literal.tag = p_literal.children[0].tag;
@@ -17008,14 +17450,16 @@ format.TSLiteralType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSConditionalType
 var TSConditionalType_astNode = {
     name: "TSConditionalType", 
@@ -17023,7 +17467,7 @@ var TSConditionalType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSConditionalType_astNode)
 format.TSConditionalType = function(parent, node, options) {
     var f_astNode = TSConditionalType_astNode;
@@ -17038,7 +17482,7 @@ format.TSConditionalType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property checkType and set it in a var
     var p_checkType = null;
     if (typeof(node.checkType) !== 'undefined' && node.checkType != null) {
@@ -17049,17 +17493,17 @@ format.TSConditionalType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.checkType == null) {
             p_checkType.text = "null";
         }
+        // log 'f_p_temp checkType before format'
+        // log 'f_p_temp checkType after format', p_checkType.children.length, p_checkType
         else {
             if (!node.checkType.type) {
                 throw 'Node checkType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp checkType before format'
             format(p_checkType, node.checkType, options)
-            // log 'f_p_temp checkType after format', p_checkType.children.length, p_checkType
             var checkType_comments = extractCommentsIf(p_checkType, 1);
             if (p_checkType.children.length == 1) {
                 p_checkType.tag = p_checkType.children[0].tag;
@@ -17098,17 +17542,17 @@ format.TSConditionalType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.extendsType == null) {
             p_extendsType.text = "null";
         }
+        // log 'f_p_temp extendsType before format'
+        // log 'f_p_temp extendsType after format', p_extendsType.children.length, p_extendsType
         else {
             if (!node.extendsType.type) {
                 throw 'Node extendsType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp extendsType before format'
             format(p_extendsType, node.extendsType, options)
-            // log 'f_p_temp extendsType after format', p_extendsType.children.length, p_extendsType
             var extendsType_comments = extractCommentsIf(p_extendsType, 1);
             if (p_extendsType.children.length == 1) {
                 p_extendsType.tag = p_extendsType.children[0].tag;
@@ -17144,17 +17588,17 @@ format.TSConditionalType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.trueType == null) {
             p_trueType.text = "null";
         }
+        // log 'f_p_temp trueType before format'
+        // log 'f_p_temp trueType after format', p_trueType.children.length, p_trueType
         else {
             if (!node.trueType.type) {
                 throw 'Node trueType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp trueType before format'
             format(p_trueType, node.trueType, options)
-            // log 'f_p_temp trueType after format', p_trueType.children.length, p_trueType
             var trueType_comments = extractCommentsIf(p_trueType, 1);
             if (p_trueType.children.length == 1) {
                 p_trueType.tag = p_trueType.children[0].tag;
@@ -17193,17 +17637,17 @@ format.TSConditionalType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.falseType == null) {
             p_falseType.text = "null";
         }
+        // log 'f_p_temp falseType before format'
+        // log 'f_p_temp falseType after format', p_falseType.children.length, p_falseType
         else {
             if (!node.falseType.type) {
                 throw 'Node falseType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp falseType before format'
             format(p_falseType, node.falseType, options)
-            // log 'f_p_temp falseType after format', p_falseType.children.length, p_falseType
             var falseType_comments = extractCommentsIf(p_falseType, 1);
             if (p_falseType.children.length == 1) {
                 p_falseType.tag = p_falseType.children[0].tag;
@@ -17238,40 +17682,42 @@ format.TSConditionalType = function(parent, node, options) {
         children: [
             p_checkType
         ]
-    })
+     })
     ret.children.push({
         tag: ':extends', 
         name: '', 
         children: [
             p_extendsType
         ]
-    })
+     })
     ret.children.push({
         tag: ':then', 
         name: '', 
         children: [
             p_trueType
         ]
-    })
+     })
     ret.children.push({
         tag: ':else', 
         name: '', 
         children: [
             p_falseType
         ]
-    })
+     })
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSMappedType
 var TSMappedType_astNode = {
     name: "TSMappedType", 
@@ -17279,7 +17725,7 @@ var TSMappedType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSMappedType_astNode)
 format.TSMappedType = function(parent, node, options) {
     var f_astNode = TSMappedType_astNode;
@@ -17294,7 +17740,7 @@ format.TSMappedType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (node.optional) {
         ret.children.push({
             tag: ':optional', 
@@ -17302,13 +17748,13 @@ format.TSMappedType = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property typeParameter and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameter", 
         descr: "process AST-node-property typeParameter and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameter) {
         if (!node.typeParameter.type) {
             throw 'Node typeParameter has no type: ' + JSON.stringify(node, null, 2);
@@ -17319,7 +17765,7 @@ format.TSMappedType = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -17330,14 +17776,16 @@ format.TSMappedType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSTypeQuery
 var TSTypeQuery_astNode = {
     name: "TSTypeQuery", 
@@ -17345,7 +17793,7 @@ var TSTypeQuery_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSTypeQuery_astNode)
 format.TSTypeQuery = function(parent, node, options) {
     var f_astNode = TSTypeQuery_astNode;
@@ -17360,7 +17808,7 @@ format.TSTypeQuery = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property exprName and set it in a var
     var p_exprName = null;
     if (typeof(node.exprName) !== 'undefined' && node.exprName != null) {
@@ -17371,17 +17819,17 @@ format.TSTypeQuery = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.exprName == null) {
             p_exprName.text = "null";
         }
+        // log 'f_p_temp exprName before format'
+        // log 'f_p_temp exprName after format', p_exprName.children.length, p_exprName
         else {
             if (!node.exprName.type) {
                 throw 'Node exprName has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp exprName before format'
             format(p_exprName, node.exprName, options)
-            // log 'f_p_temp exprName after format', p_exprName.children.length, p_exprName
             var exprName_comments = extractCommentsIf(p_exprName, 1);
             if (p_exprName.children.length == 1) {
                 p_exprName.tag = p_exprName.children[0].tag;
@@ -17420,14 +17868,16 @@ format.TSTypeQuery = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSInferType
 var TSInferType_astNode = {
     name: "TSInferType", 
@@ -17435,7 +17885,7 @@ var TSInferType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSInferType_astNode)
 format.TSInferType = function(parent, node, options) {
     var f_astNode = TSInferType_astNode;
@@ -17450,12 +17900,12 @@ format.TSInferType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeParameter and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeParameter", 
         descr: "process AST-node-property typeParameter and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameter) {
         if (!node.typeParameter.type) {
             throw 'Node typeParameter has no type: ' + JSON.stringify(node, null, 2);
@@ -17466,14 +17916,16 @@ format.TSInferType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSParenthesizedType
 var TSParenthesizedType_astNode = {
     name: "TSParenthesizedType", 
@@ -17481,7 +17933,7 @@ var TSParenthesizedType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSParenthesizedType_astNode)
 format.TSParenthesizedType = function(parent, node, options) {
     var f_astNode = TSParenthesizedType_astNode;
@@ -17496,12 +17948,12 @@ format.TSParenthesizedType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeAnnotation and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeAnnotation", 
         descr: "process AST-node-property typeAnnotation and append ittfNode to `ret`"
-    })
+     })
     if (node.typeAnnotation) {
         if (!node.typeAnnotation.type) {
             throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -17512,14 +17964,16 @@ format.TSParenthesizedType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSDeclareMethod
 var TSDeclareMethod_astNode = {
     name: "TSDeclareMethod", 
@@ -17527,7 +17981,7 @@ var TSDeclareMethod_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSDeclareMethod_astNode)
 format.TSDeclareMethod = function(parent, node, options) {
     var f_astNode = TSDeclareMethod_astNode;
@@ -17542,7 +17996,7 @@ format.TSDeclareMethod = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property key and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -17551,7 +18005,12 @@ format.TSDeclareMethod = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property key and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempkey .children.length > 0
+            * 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.key) {
         if (!node.key.type) {
             throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -17560,13 +18019,8 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempkey, node.key, options)
-        /**
-            if (tempkey .children.length > 0) {
-                throw 'node.key must result zero node, returned: ' + tempkey.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempkey.children.length > 0) {
             appto.name = tempkey.children[0].name;
@@ -17584,7 +18038,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // log 'node.static', node.static
     if (!!node.static == true) {
@@ -17593,7 +18047,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // TODO
     // b( computed
@@ -17601,7 +18055,7 @@ format.TSDeclareMethod = function(parent, node, options) {
     f_astNode.props.push({
         name: "typeParameters", 
         descr: "process AST-node-property typeParameters and append ittfNode to `ret`"
-    })
+     })
     if (node.typeParameters) {
         if (!node.typeParameters.type) {
             throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -17614,7 +18068,7 @@ format.TSDeclareMethod = function(parent, node, options) {
         name: "params", 
         tag: "params", 
         descr: "# process AST-node-property-collection params and embed its array of nodes in a new tag"
-    })
+     })
     if (node.params) {
         if (typeof node.params.length === 'undefined') {
             throw new Error('Property node.params must be an array');
@@ -17626,14 +18080,14 @@ format.TSDeclareMethod = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.params, i_len=node.params.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.params[i];
                 item.__parent = {
                     name: 'params', 
                     len: node.params.length
-                };
+                 };
                 format(tempparams, item, options)
             }
             ret.children.push(tempparams)
@@ -17650,17 +18104,17 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
+        // log 'f_p_temp returnType before format'
+        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp returnType before format'
             format(p_returnType, node.returnType, options)
-            // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
             var returnType_comments = extractCommentsIf(p_returnType, 1);
             if (p_returnType.children.length == 1) {
                 p_returnType.tag = p_returnType.children[0].tag;
@@ -17692,7 +18146,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 p_returnType
             ]
-        };
+         };
         ret.children.push(p_returnType);
     }
     if (node.async) {
@@ -17702,7 +18156,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (node.generator) {
         ret.children.push({
@@ -17711,20 +18165,22 @@ format.TSDeclareMethod = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSQualifiedName
 var TSQualifiedName_astNode = {
     name: "TSQualifiedName", 
@@ -17732,7 +18188,7 @@ var TSQualifiedName_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSQualifiedName_astNode)
 format.TSQualifiedName = function(parent, node, options) {
     var f_astNode = TSQualifiedName_astNode;
@@ -17747,7 +18203,7 @@ format.TSQualifiedName = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property left and set it in a var
     var p_left = null;
     if (typeof(node.left) !== 'undefined' && node.left != null) {
@@ -17758,17 +18214,17 @@ format.TSQualifiedName = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.left == null) {
             p_left.text = "null";
         }
+        // log 'f_p_temp left before format'
+        // log 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp left before format'
             format(p_left, node.left, options)
-            // log 'f_p_temp left after format', p_left.children.length, p_left
             var left_comments = extractCommentsIf(p_left, 1);
             if (p_left.children.length == 1) {
                 p_left.tag = p_left.children[0].tag;
@@ -17804,17 +18260,17 @@ format.TSQualifiedName = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.right == null) {
             p_right.text = "null";
         }
+        // log 'f_p_temp right before format'
+        // log 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp right before format'
             format(p_right, node.right, options)
-            // log 'f_p_temp right after format', p_right.children.length, p_right
             var right_comments = extractCommentsIf(p_right, 1);
             if (p_right.children.length == 1) {
                 p_right.tag = p_right.children[0].tag;
@@ -17859,14 +18315,16 @@ format.TSQualifiedName = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSExportAssignment
 var TSExportAssignment_astNode = {
     name: "TSExportAssignment", 
@@ -17874,7 +18332,7 @@ var TSExportAssignment_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSExportAssignment_astNode)
 format.TSExportAssignment = function(parent, node, options) {
     var f_astNode = TSExportAssignment_astNode;
@@ -17889,7 +18347,7 @@ format.TSExportAssignment = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -17900,17 +18358,17 @@ format.TSExportAssignment = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -17946,14 +18404,16 @@ format.TSExportAssignment = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSImportType
 var TSImportType_astNode = {
     name: "TSImportType", 
@@ -17961,7 +18421,7 @@ var TSImportType_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSImportType_astNode)
 format.TSImportType = function(parent, node, options) {
     var f_astNode = TSImportType_astNode;
@@ -17976,7 +18436,7 @@ format.TSImportType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property argument and set it in a var
     var p_argument = null;
     if (typeof(node.argument) !== 'undefined' && node.argument != null) {
@@ -17987,17 +18447,17 @@ format.TSImportType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.argument == null) {
             p_argument.text = "null";
         }
+        // log 'f_p_temp argument before format'
+        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp argument before format'
             format(p_argument, node.argument, options)
-            // log 'f_p_temp argument after format', p_argument.children.length, p_argument
             var argument_comments = extractCommentsIf(p_argument, 1);
             if (p_argument.children.length == 1) {
                 p_argument.tag = p_argument.children[0].tag;
@@ -18036,17 +18496,17 @@ format.TSImportType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.qualifier == null) {
             p_qualifier.text = "null";
         }
+        // log 'f_p_temp qualifier before format'
+        // log 'f_p_temp qualifier after format', p_qualifier.children.length, p_qualifier
         else {
             if (!node.qualifier.type) {
                 throw 'Node qualifier has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp qualifier before format'
             format(p_qualifier, node.qualifier, options)
-            // log 'f_p_temp qualifier after format', p_qualifier.children.length, p_qualifier
             var qualifier_comments = extractCommentsIf(p_qualifier, 1);
             if (p_qualifier.children.length == 1) {
                 p_qualifier.tag = p_qualifier.children[0].tag;
@@ -18090,14 +18550,16 @@ format.TSImportType = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSImportEqualsDeclaration
 var TSImportEqualsDeclaration_astNode = {
     name: "TSImportEqualsDeclaration", 
@@ -18105,7 +18567,7 @@ var TSImportEqualsDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSImportEqualsDeclaration_astNode)
 format.TSImportEqualsDeclaration = function(parent, node, options) {
     var f_astNode = TSImportEqualsDeclaration_astNode;
@@ -18120,7 +18582,7 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -18129,7 +18591,12 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -18138,13 +18605,8 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -18160,13 +18622,13 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        })
+         })
     }
     // process AST-node-property moduleReference and append ittfNode to `ret`
     f_astNode.props.push({
         name: "moduleReference", 
         descr: "process AST-node-property moduleReference and append ittfNode to `ret`"
-    })
+     })
     if (node.moduleReference) {
         if (!node.moduleReference.type) {
             throw 'Node moduleReference has no type: ' + JSON.stringify(node, null, 2);
@@ -18177,14 +18639,16 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSNamespaceExportDeclaration
 var TSNamespaceExportDeclaration_astNode = {
     name: "TSNamespaceExportDeclaration", 
@@ -18192,7 +18656,7 @@ var TSNamespaceExportDeclaration_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSNamespaceExportDeclaration_astNode)
 format.TSNamespaceExportDeclaration = function(parent, node, options) {
     var f_astNode = TSNamespaceExportDeclaration_astNode;
@@ -18207,7 +18671,7 @@ format.TSNamespaceExportDeclaration = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // Process AST-node-property id and
     // set the resulting node.name on : ret || parent (cmd: onparent)
     // used mainly for Identifier(s)
@@ -18216,7 +18680,12 @@ format.TSNamespaceExportDeclaration = function(parent, node, options) {
         onParent: false, 
         iftext: false, 
         descr: "Process AST-node-property id and set the resulting node.name on : ret || parent (cmd: onparent) used mainly for Identifier(s)"
-    })
+     })
+    
+    /**
+        * tempid .children.length > 0
+            * 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end)
+    */
     if (node.id) {
         if (!node.id.type) {
             throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -18225,13 +18694,8 @@ format.TSNamespaceExportDeclaration = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         format(tempid, node.id, options)
-        /**
-            if (tempid .children.length > 0) {
-                throw 'node.id must result zero node, returned: ' + tempid.children.length + ' source: ' + options.input.substring(node.start, node.end);
-            }
-        */
         var appto = false ? parent : ret;
         if (tempid.children.length > 0) {
             appto.name = tempid.children[0].name;
@@ -18244,14 +18708,16 @@ format.TSNamespaceExportDeclaration = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSExternalModuleReference
 var TSExternalModuleReference_astNode = {
     name: "TSExternalModuleReference", 
@@ -18259,7 +18725,7 @@ var TSExternalModuleReference_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSExternalModuleReference_astNode)
 format.TSExternalModuleReference = function(parent, node, options) {
     var f_astNode = TSExternalModuleReference_astNode;
@@ -18274,7 +18740,7 @@ format.TSExternalModuleReference = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property expression and set it in a var
     var p_expression = null;
     if (typeof(node.expression) !== 'undefined' && node.expression != null) {
@@ -18285,17 +18751,17 @@ format.TSExternalModuleReference = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (node.expression == null) {
             p_expression.text = "null";
         }
+        // log 'f_p_temp expression before format'
+        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
             }
-            // log 'f_p_temp expression before format'
             format(p_expression, node.expression, options)
-            // log 'f_p_temp expression after format', p_expression.children.length, p_expression
             var expression_comments = extractCommentsIf(p_expression, 1);
             if (p_expression.children.length == 1) {
                 p_expression.tag = p_expression.children[0].tag;
@@ -18331,14 +18797,16 @@ format.TSExternalModuleReference = function(parent, node, options) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 // process AST node TSUnknownKeyword
 var TSUnknownKeyword_astNode = {
     name: "TSUnknownKeyword", 
@@ -18346,7 +18814,7 @@ var TSUnknownKeyword_astNode = {
     props: [
         
     ]
-};
+ };
 wzDocs.AstgNodes.push(TSUnknownKeyword_astNode)
 format.TSUnknownKeyword = function(parent, node, options) {
     var f_astNode = TSUnknownKeyword_astNode;
@@ -18361,19 +18829,21 @@ format.TSUnknownKeyword = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
+        
+        // log '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
-            // log '### add ', ret.tag , 'to', parent.tag
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
             parent.children.push(ret);
         }
     }
-};
+}
+;
 var md = module.exports = {};
 function splitComments(ret) {
     var a = [];
@@ -18431,11 +18901,12 @@ function processComments(comments, node, ittfNode, options, leading) {
             item = comments[i];
             // log 'processComments', node.type, item
             if (item.type === 'CommentLine') {
+                
+                // log 'processComments. calling, codeReplacer.restoreInside', item.value
                 if (false) {
                     if (options.commentManager.checkWritten(item) == true) {
                         options.commentManager.removeWritten(item);
                     }
-                    // log 'processComments. calling, codeReplacer.restoreInside', item.value
                     var value = codeReplacer.restoreInside('""' + item.value, options.replaceds);
                     hb = {
                         tag: '#', 
@@ -18443,7 +18914,7 @@ function processComments(comments, node, ittfNode, options, leading) {
                         children: [
                             
                         ]
-                    };
+                     };
                     ittfNode.children.push(hb)
                 }
                 else {
@@ -18453,14 +18924,15 @@ function processComments(comments, node, ittfNode, options, leading) {
                         children: [
                             
                         ]
-                    };
+                     };
                     ittfNode.children.push(hb)
                 }
                 options.commentManager.addWritten(item, ittfNode.children, hb);
             }
             else if (item.type === 'CommentBlock') {
+                
+                // log 'codeReplacer.isKey', true
                 if (false) {
-                    // log 'codeReplacer.isKey', true
                     if (options.commentManager.checkWritten(item) == true) {
                         options.commentManager.removeWritten(item);
                     }
@@ -18470,18 +18942,18 @@ function processComments(comments, node, ittfNode, options, leading) {
                         children: [
                             
                         ]
-                    };
+                     };
                     ittfNode.children.push(hb)
                 }
+                // log 'codeReplacer.isKey', false
                 else {
-                    // log 'codeReplacer.isKey', false
                     var ss = item.value.split(/\r\n|\r|\n/);
                     hb = {
                         tag: '#', 
                         children: [
                             
                         ]
-                    };
+                     };
                     var j, j_items=ss, j_len=ss.length, s;
                     for (j=0; j<j_len; j++) {
                         s = ss[j];
@@ -18491,7 +18963,7 @@ function processComments(comments, node, ittfNode, options, leading) {
                             children: [
                                 
                             ]
-                        })
+                         })
                     }
                     ittfNode.children.push(hb);
                 }
@@ -18524,7 +18996,7 @@ function processParams2(ret, p_params) {
                         item.children.push({
                             tag: '=', 
                             children: [assignItem]
-                        })
+                         })
                     }
                     ret.children.push(item);
                 }
@@ -18558,6 +19030,11 @@ function processParams(ittfNode) {
                 p = item.children[j];
                 var plen = childrenLengthNoProps(p);
                 // log 'processParams. p.tag', p.tag, 'plen', plen, JSON.stringify(p, null, 2)
+                
+                /**
+                    * 
+                        * new Error('processParams.error. Param must be a textual or an ObjectPattern. Node:' + JSON.stringify(ittfNode))
+                */
                 if (p.tag !== '{' && p.tag !== '[') {
                     if (isTextualNode(p)) {
                         p.tag = 'param';
@@ -18569,14 +19046,10 @@ function processParams(ittfNode) {
                     else {
                         p.tag = 'param';
                     }
-                    /**
-                        else {
-                            throw new Error('processParams.error. Param must be a textual or an ObjectPattern. Node:' + JSON.stringify(ittfNode));
-                        }
-                    */
                 }
+                
+                // union and intersect
                 if (plen == 1 && ( p.children[0].tag === ':|' || p.children[0].tag === ':&' )) {
-                    // union and intersect
                     var temp_children = p.children[0];
                     p.children = [];
                     var k, k_items=temp_children.children, k_len=temp_children.children.length, ui;
@@ -18586,11 +19059,14 @@ function processParams(ittfNode) {
                         p.children.push(ui)
                     }
                 }
+                
+                // log 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
                 if (plen == 2) {
-                    // log 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
+                    
+                    // log 111
+                    
+                    // has simple default value (is AssignmentPattern)
                     if (['@id', '@expr', 'literal'].indexOf(p.children[1].tag) > -1) {
-                        // log 111
-                        // has simple default value (is AssignmentPattern)
                         p.name = p.children[0].name;
                         if (p.children[0].children.length > 0) {
                             p.children[0].tag = p.children[0].children[0].tag;
@@ -18599,10 +19075,11 @@ function processParams(ittfNode) {
                         }
                         p.children[1].tag = '=';
                     }
+                    // log 112
                     else {
-                        // log 112
+                        
+                        // has complex default value (is AssignmentPattern)
                         if (p.AST === 'AssignmentPattern') {
-                            // has complex default value (is AssignmentPattern)
                             if (['@id', '@expr', 'literal'].indexOf(p.children[0].tag) > -1) {
                                 p.name = p.children[0].name;
                                 p.children = [p.children[0].children[0], p.children[1]];
@@ -18613,7 +19090,7 @@ function processParams(ittfNode) {
                                 children: [
                                     p.children[1]
                                 ]
-                            };
+                             };
                         }
                     }
                 }
@@ -18651,14 +19128,14 @@ function setOrInlineIfTextualNode(ret, ittfNode, ittfTag) {
             children: [
                 
             ]
-        })
+         })
     }
     else if (isTextualCommentedNode(ittfNode)) {
         ret.children.push({
             tag: ittfTag, 
             name: getNodeText(ittfNode), 
             children: ittfNode.children
-        })
+         })
     }
     else {
         ret.children.push({
@@ -18666,7 +19143,7 @@ function setOrInlineIfTextualNode(ret, ittfNode, ittfTag) {
             children: [
                 ittfNode
             ]
-        })
+         })
     }
 }
 function isTextualChildByTag(ittfNode, tag) {
@@ -18712,7 +19189,8 @@ function replaceChildrenOfChildWhenText(ittfNode, childPos, textTag) {
     if (childPos < 0) {
         return ;
     }
-    ittfNode.children = replaceItemInColl(ittfNode.children, childPos, textifyChildren(ittfNode.children[childPos], textTag));
+    ittfNode.children = replaceItemInColl(ittfNode.children, childPos, textifyChildren(ittfNode.children[childPos], textTag))
+    ;
 }
 function replaceItemInColl(coll, pos, replacers) {
     var ret = [];
@@ -18737,8 +19215,9 @@ function textifyChildren(ittfNode, tag) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
+        
+        // log '@@@@@@@ item.tag.isText', item.tag, item.isText
         if (item.isText || item.textified) {
-            // log '@@@@@@@ item.tag.isText', item.tag, item.isText
             ret.push({
                 tag: tag, 
                 name: item.isText ? item.name : item.textified, 
@@ -18746,7 +19225,7 @@ function textifyChildren(ittfNode, tag) {
                 children: [
                     
                 ]
-            })
+             })
         }
         else {
             ret.push(item);
@@ -18787,8 +19266,8 @@ function getTextList(ittfNode, sep) {
         else if (item.textified && item.children.length == 0) {
             sb.push(item.textified);
         }
+        // log 'getTextList failed ***************', item
         else {
-            // log 'getTextList failed ***************', item
             return null;
         }
     }
@@ -18799,8 +19278,9 @@ function setNameFromChildByTag(ittfNode, tag, forceText) {
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
         if (item.tag === tag) {
+            
+            // log '...................setNameFromChildByTag', item
             if (forceText) {
-                // log '...................setNameFromChildByTag', item
             }
             if (item.isText) {
                 ittfNode.name = item.name;
@@ -18914,8 +19394,9 @@ md.parse = function(input, babelOptions) {
     return parser.parse(input, {
             sourceType: 'module', 
             plugins: plugins
-        });
-};
+         });
+}
+;
 md.getCodeAST = function(input, options, callback) {
     options = options || {};
     options.input = input;
@@ -18934,7 +19415,8 @@ md.getCodeAST = function(input, options, callback) {
     } 
     cleanBabel.cleanAst(syntax);
     callback(null, syntax)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     // log 'options', options
     options = options || {};
@@ -18971,7 +19453,7 @@ md.getWizziTree = function(input, options, callback) {
         children: [
             
         ]
-    };
+     };
     if (babelOptions.ts_or_flow !== 'typescript') {
         root.children.push({
             tag: 'kind', 
@@ -18979,7 +19461,7 @@ md.getWizziTree = function(input, options, callback) {
             children: [
                 
             ]
-        })
+         })
     }
     try {
         format(root, syntax, options);
@@ -19016,7 +19498,8 @@ md.getWizziTree = function(input, options, callback) {
         }
         return callback(null, root);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     // log '++++++++++ jswizzify.options', options
     md.getWizziTree(input, options, function(err, root) {
@@ -19027,5 +19510,6 @@ md.getWizziIttf = function(input, options, callback) {
         // log "md.getWizziIttf\n" + ittf
         callback(null, ittf);
     })
-};
+}
+;
 file.write(path.join(__dirname, "..", "..", "..", "..", "..", "..", "autodocs", "js-ts.wizzify.json"), JSON.stringify(wzDocs, null, '\t'))

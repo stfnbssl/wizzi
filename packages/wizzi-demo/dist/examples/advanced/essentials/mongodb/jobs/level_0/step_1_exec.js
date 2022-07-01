@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\mongodb\jobs\level_0\step_1_exec.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\mongodb\jobs\level_0\step_1_exec.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,7 +18,7 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzi_job_mongodb_level_0_step_1_exec = function(step_callback) {
-    heading1('Advanced-example starting');
+    heading1('Advanced-example starting')
     var testMongodbUri = 'mongodb://localhost:27017/test';
     var testMongoBaseFolder = 'c:/wizzifactory/users';
     wizzi.executeWizziJob({
@@ -34,7 +35,7 @@ var wizzi_job_mongodb_level_0_step_1_exec = function(step_callback) {
                 'wizzi-html', 
                 'wizzi-docs'
             ]
-        }, 
+         }, 
         job: {
             name: 'mongodb.level_0.step_1', 
             ittfDocumentUri: path.join('db://stefi/demo/wizzijob', 'level_0', 'step_1', 'step_1.wfjob.ittf'), 
@@ -42,15 +43,15 @@ var wizzi_job_mongodb_level_0_step_1_exec = function(step_callback) {
                 indentSpaces: 4, 
                 basedir: __dirname, 
                 verbose: 2
-            }), 
+             }), 
             globalContext: {}
-        }
-    }, function(err) {
+         }
+     }, function(err) {
         if (err) {
             console.log("Error executing wizzi instance job", err);
         }
         console.log('Wizzi instance job mongodb.level_0.step_1 SUCCESSFULLY executed');
-    });
+    })
 };
 wizzi_job_mongodb_level_0_step_1_exec.__name = 'Level 0 - wizzi_job_mongodb_level_0_step_1_exec';
 function heading1(text) {
@@ -80,7 +81,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -89,12 +90,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

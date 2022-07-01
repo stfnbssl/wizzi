@@ -1,7 +1,7 @@
 /*
-    artifact generator: C:\my\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: c:\my\wizzi\v5\apps\wizzi-docs\src\ittf\root\index.js.ittf
-    utc time: Thu, 17 Jan 2019 12:26:37 GMT
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-docs\.wizzi\root\index.js.ittf
 */
 'use strict';
 var async = require('async');
@@ -28,13 +28,14 @@ function exec(callback) {
         }
         console.log('docs generation results\n', stringify(results, null, 2));
         if (callback) {
-            callback(null, 'docs generation executed');
+            callback(null, 'docs generation executed')
         }
-    });
+    })
 }
 module.exports = function(callback) {
     exec(callback);
-};
+}
+;
 if (require && require.main === module) {
     exec();
 }

@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\importers\fileImporter.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\importers\fileImporter.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -8,9 +9,10 @@ var wizziUtils = require('wizzi-utils');
 var verify = wizziUtils.verify;
 var packageRoot = require('../../index');
 function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
+    
+    // vfile() defaults to local filesystem
     if (typeof callback === 'undefined') {
         callback = vfile;
-        // vfile() defaults to local filesystem
         vfile = wizziUtils.vfile();
     }
     const dirname = path.dirname(filePath);
@@ -41,8 +43,9 @@ function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
     else {
         schema = extension;
     }
+    
+    // log '0', folderNorm, basename
     if (!packageRoot.canBeWizzified(schema)) {
-        // log '0', folderNorm, basename
         if (folderNorm.length > 0) {
             vfile.write(path.join(baseExportPathNorm, folderNorm, basename), source, callback)
         }
@@ -56,19 +59,22 @@ function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
             options = {
                 embedTag: 'vue', 
                 isForVue: true
-            };
+             };
         }
         console.log(' --- wizzify from ' + filePath);
         console.log('             schema ' + schema);
         packageRoot.wizzify(schema, source, options, function(err, result) {
             var outpath;
+            
+            // log '1', folderNorm, name + '.' + extension + '.ittf'
             if (folderNorm.length > 0) {
-                // log '1', folderNorm, name + '.' + extension + '.ittf'
-                outpath = path.join(baseExportPathNorm, folderNorm, name + '.' + extension + '.ittf');
+                outpath = path.join(baseExportPathNorm, folderNorm, name + '.' + extension + '.ittf')
+                ;
             }
+            // log '2', folderNorm, name + '.' + extension + '.ittf'
             else {
-                // log '2', folderNorm, name + '.' + extension + '.ittf'
-                outpath = path.join(baseExportPathNorm, name + '.' + extension + '.ittf');
+                outpath = path.join(baseExportPathNorm, name + '.' + extension + '.ittf')
+                ;
             }
             console.log('             to ' + outpath);
             if (err) {

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\basicloader\nodifier.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\basicloader\nodifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -43,18 +43,21 @@ module.exports = function(lines, mTree) {
                 current.model.$params = line.value;
                 continue;
             }
+            
+            // value continuation on new line
             else if (nameFirstChar == '\\' && nameLength == 1) {
-                // value continuation on new line
                 current.value += line.value;
                 continue;
             }
+            
+            // value continuation on new line with space
             else if (nameFirstChar == '\\' && line.name === '\\b') {
-                // value continuation on new line with space
                 current.value += (' ' + line.value);
                 continue;
             }
+            
+            // value continuation on new line with line break
             else if (nameFirstChar == '\\' && line.name === '\\n') {
-                // value continuation on new line with line break
                 current.value += ('\n' + line.value);
                 continue;
             }
@@ -80,12 +83,13 @@ module.exports = function(lines, mTree) {
         current.children = [];
     }
     return nodes;
-};
+}
+;
 function error(message, line, mTree) {
     message = message + '\nNode ' + line.name + ' ' + (line.value || '') + ' row: ' + line.row + ' col: ' + line.col + '.\n Filepath: ' + mTree.uri;
     return {
             __is_error: true, 
             message: message, 
             source: 'wizzi-mtree/lib/loader/nodifier'
-        };
+         };
 }

@@ -1,0 +1,30 @@
+common/tools_package( wizzi-tools, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license}  )
+
+	@babel/cli "latest"
+    @babel/core "latest"
+	@babel/parser "latest"
+	@babel/preset-typescript "latest"
+	@babel/preset-env "latest"
+	@babel/plugin-proposal-class-properties "latest"
+	@babel/plugin-proposal-object-rest-spread "latest"
+
+    css "^3.0.0"
+    scss-parser "^1.0.4"
+    escodegen "^2.0.0"
+    esprima "^4.0.1"
+    fs-extra "^9.1.0"
+    gonzales-pe "^4.3.0"
+    graphql "^15.4.0"
+    xml2js "^0.4.23"
+
+	$append devDependencies
+		cacheify "latest"
+
+	$append peerDependencies
+		@babel/core "^7.0.0"
+
+    $append scripts
+        examples:css "node examples/css"
+        examples:html "node examples/html"
+        examples:js "node examples/js"
+        examples:scss "node examples/scss"

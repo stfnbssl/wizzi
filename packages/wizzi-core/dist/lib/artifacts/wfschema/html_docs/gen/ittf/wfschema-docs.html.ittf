@@ -1,6 +1,6 @@
 html
 	head
-		@title Wizzi Schema ${schema.name}
+		@title Wizzi schema ${schema.name}
 		$include _style
 	
 	body

@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\plugins\regexp\examples\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\plugins\regexp\examples\index.js.ittf
 */
 'use strict';
 var async = require('async');
@@ -16,13 +17,14 @@ function exec(callback) {
         }
         console.log('Plugins examples results\n', results);
         if (callback) {
-            callback(null, 'Plugins examples executed');
+            callback(null, 'Plugins examples executed')
         }
-    });
+    })
 }
 module.exports = function(callback) {
     exec(callback);
-};
+}
+;
 if (require.main === module) {
     exec();
 }

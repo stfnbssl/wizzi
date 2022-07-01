@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\jswizzi\jsWizziEvalHelper.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -123,11 +123,11 @@ class JsWizziEvalHelper {
                     brickKey: brickKey, 
                     uri: mTreeBrickData.ittfDocumentUri, 
                     mixerUri: mixerUri
-                });
+                 });
         } 
         var retObject = types.objectify(ret, type, {
             row: line
-        });
+         });
         if (retObject && retObject.__is_error) {
             var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey);
             var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey);
@@ -138,7 +138,7 @@ class JsWizziEvalHelper {
                     brickKey: brickKey, 
                     uri: mTreeBrickData.ittfDocumentUri, 
                     mixerUri: mixerUri
-                });
+                 });
         }
         else {
             return retObject;
@@ -166,17 +166,18 @@ class JsWizziEvalHelper {
         // map of the wizzi-mtree.loader.loadHistory
         var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey);
         var mTreeBrick_EvalContext;
+        
+        // An eval context object has already been created for this mTreeBrickData
         if (mTreeBrickData.evalContext != null) {
-            // An eval context object has already been created for this mTreeBrickData
             mTreeBrick_EvalContext = mTreeBrickData.evalContext;
             var notUsed = this._updateEvalContext(mTreeBrickData, mTreeBrick_EvalContext);
             if (notUsed && notUsed.__is_error) {
                 return notUsed;
             }
         }
+        // log 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
         else {
             mTreeBrick_EvalContext = new ContextData(1, brickKey);
-            // log 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
             mTreeBrick_EvalContext.setValue('__dirname', path.dirname(mTreeBrickData.ittfDocumentUri))
             mTreeBrick_EvalContext.setValue('__filename', mTreeBrickData.ittfDocumentUri)
             var notUsed = this._updateEvalContext(mTreeBrickData, mTreeBrick_EvalContext);
@@ -197,8 +198,14 @@ class JsWizziEvalHelper {
         }
         var args = mTreeBrickData.mTreeBrick.$args;
         var interpolateArgsContext;
+        
+        /**
+            * Mixin call arguments may contain IttfMacros,
+            * in that case they must be interpolated.
+            * mTreeBrickData.mTreeBrick.$mixerBrickKey is the brickKey of the
+            * mixer mTreeBrick. We need its eval context for interpolation.
+        */
         if (args && args.indexOf('${') > -1) {
-            // Mixin call arguments may contain IttfMacros,
             var mixer_mTreeBrick_EvalContext = this.getMTreeBrickEvalContext(mTreeBrickData.mTreeBrick.$mixerBrickKey);
             if (mixer_mTreeBrick_EvalContext && mixer_mTreeBrick_EvalContext.__is_error) {
                 return mixer_mTreeBrick_EvalContext;
@@ -207,7 +214,8 @@ class JsWizziEvalHelper {
                 // Then we create a temporary JsWizziContext and load it with the
                 // context values of both the global context and the mixer mTreeBrick
                 // eval context.
-                interpolateArgsContext = this.getInterpolateContext(mTreeBrickData);
+                interpolateArgsContext = this.getInterpolateContext(mTreeBrickData)
+                ;
                 // TODO the values of the mixer can be modified by the mixed during interpolation
                 // if so, what does it means? Needs investigation.
                 // then we interpolate the arguments passed to the mixed mTree brick
@@ -232,10 +240,13 @@ class JsWizziEvalHelper {
         var i, i_items=calculatedParamValues, i_len=calculatedParamValues.length, item;
         for (i=0; i<i_len; i++) {
             item = calculatedParamValues[i];
+            
+            // The argument is passed by reference, so the parameter
+            
+            // value must be retrieved from the eval context of the mixer mTreeBrick
+            
+            // and then added to the mixed one.
             if (item.isByRef) {
-                // The argument is passed by reference, so the parameter
-                // value must be retrieved from the eval context of the mixer mTreeBrick
-                // and then added to the mixed one.
                 var mixer_mTreeBrick_EvalContext = this.getMTreeBrickEvalContext(mTreeBrickData.mTreeBrick.$mixerBrickKey);
                 if (mixer_mTreeBrick_EvalContext && mixer_mTreeBrick_EvalContext.__is_error) {
                     return mixer_mTreeBrick_EvalContext;
@@ -247,14 +258,15 @@ class JsWizziEvalHelper {
             }
             else if (item.isIttfMacro) {
                 if (!interpolateArgsContext) {
-                    interpolateArgsContext = this.getInterpolateContext(mTreeBrickData);
+                    interpolateArgsContext = this.getInterpolateContext(mTreeBrickData)
+                    ;
                 }
                 var ip_value = interpolate(item.value, interpolateArgsContext);
                 mTreeBrick_EvalContext.setValue(item.name, ip_value)
             }
+            // The argument is passed by value, so the calculated
+            // parameter can be added to the eval context of the mixed mTreeBrick
             else {
-                // The argument is passed by value, so the calculated
-                // parameter can be added to the eval context of the mixed mTreeBrick
                 mTreeBrick_EvalContext.setValue(item.name, item.value)
             }
         }
@@ -283,7 +295,7 @@ function local_error(name, method, message, node, inner, other) {
             method: method, 
             inner: inner, 
             ...other||{}
-        });
+         });
 }
 module.exports = JsWizziEvalHelper;
 /**
@@ -304,7 +316,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.jswizzi.jsWizziEvalHelper.' + method,
+        method: 'wizzi-mtree@0.7.12.jswizzi.jsWizziEvalHelper.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

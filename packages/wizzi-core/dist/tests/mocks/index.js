@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\tests\mocks\index.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\index.js.ittf
 */
 'use strict';
 
@@ -21,16 +21,18 @@ md.getFactoryWizziObject = function() {
             file: file, 
             verify: md.verify, 
             errors: errors
-        };
-};
+         };
+}
+;
 md.getProductionManager = function() {
     return {
             wizziFactory: {}, 
             productionContext: createProductionContext(), 
             globalContext: function() {
             }
-        };
-};
+         };
+}
+;
 function createProductionContext() {
     return {
             aclstat: {}, 
@@ -43,7 +45,7 @@ function createProductionContext() {
                 this.ittfEvaluationScripts[uri] = {
                     uri: uri, 
                     ittfEvalScript: ittfEvalScript
-                };
+                 };
             }, 
             addMixedMTree: function() {
             }, 
@@ -68,5 +70,5 @@ function createProductionContext() {
                 fail.warn(exception);
                 throw exception;
             }
-        };
+         };
 }

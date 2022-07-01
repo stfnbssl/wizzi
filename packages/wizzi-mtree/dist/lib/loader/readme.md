@@ -12,20 +12,20 @@
 <tr>
 <td>$append [hook-name]</td>
 <td>
-Is an ittf node command that declares a node branch that`must be appended to a related '$hook [hook-name]' node command in`
+Is an ittf command that declares a node branch that`must be appended to a related '$hook [hook-name]' command in`
 `a mixed mTree brick.`
 </tr>
 <tr>
 <td>$hook [hook-name]</td>
 <td>
-Is an ittf node command that declares an insertion point in`the tree structure of a mixed mTree brick. Node branches,`
-`children of a 'mix' node command, declared with the`
-`'$append [hook-name]' node command can be appended to the '$hook' node.`
+Is an ittf command that declares an insertion point in`the tree structure of a mixed mTree brick. Node branches,`
+`children of a 'mix' command, declared with the`
+`'$append [hook-name]' command can be appended to the '$hook' node.`
 </tr>
 <tr>
 <td>$include [path]</td>
 <td>
-Is an ittf node command that invokes the inclusion of another mTree brick.`An include node command cannot have children nodes, and it is simply`
+Is an ittf command that invokes the inclusion of another mTree brick.`An include command cannot have children nodes, and it is simply`
 `replaced by the included brick.`
 </tr>
 <tr>
@@ -62,10 +62,10 @@ The evaluation step of an mTree loading uses three types of value contexts.* One
 The javascript engine of an mTree buildup. It is run for expressions interpolation,`template commands evaluation and mTree final buildup.`
 </tr>
 <tr>
-<td>mix node command</td>
+<td>mix command</td>
 <td>
-Is an ittf node command that invokes the mixup of another mTree brick.`Every node with the node-name ending with an open paren is a mix node command.`
-`A mix node command may have children nodes, that may declare`
+Is an ittf command that invokes the mixup of another mTree brick.`Every node with the node-name ending with an open paren is a mix command.`
+`A mix command may have children nodes, that may declare`
 `branches to be appended to hooks in the mixed mTree brick.`
 `See the $append and $hook command nodes.`
 </tr>
@@ -85,7 +85,7 @@ A nodified ittf document.`mTree bricks are the items that compose an mTree.`
 <tr>
 <td>- included mTree brick</td>
 <td>
-An mTree brick included in an including mTree brick`using the node command <bold>$include [path]</bold>.`
+An mTree brick included in an including mTree brick`using the command <bold>$include [path]</bold>.`
 
 <p>Both the tree structure and the value context are included.`Context values declared in the included nodes are created in`
 `the scope of the includer.`
@@ -95,7 +95,7 @@ An mTree brick included in an including mTree brick`using the node command <bold
 <tr>
 <td>- mixed mTree brick</td>
 <td>
-An mTree brick mixed in a mixing mTree brick`using the node command <bold>[path]([params])</bold>.`
+An mTree brick mixed in a mixing mTree brick`using the command <bold>[path]([params])</bold>.`
 
 <p>The tree structure is mixed but the value context remain distinct.`Context values declared in the mixed nodes are created in`
 `the scope of the mixed mTree brick and do not interfere with the mixer.`
@@ -127,21 +127,21 @@ The lines parsed in the previous step are transformed in a tree`structure, an mT
 <tr>
 <td>- mix-composition</td>
 <td>
-The mTree brick, produced by the previous step, is traversed and`all the 'mix node commands' encountered are recursively resolved.`
+The mTree brick, produced by the previous step, is traversed and`all the 'mix commands' encountered are recursively resolved.`
 `The result is an mTree piece composed by one or many bricks.`
 </tr>
 <tr>
 <td>- include-composition</td>
 <td>
-The mTree piece, produced by the previous step, is traversed and`all the '$include [path]' node commands encountered are recursively resolved.`
+The mTree piece, produced by the previous step, is traversed and`all the '$include [path]' commands encountered are recursively resolved.`
 `The recursion manages the mix-composition of included bricks too.`
 </tr>
 <tr>
 <td>- append resolution</td>
 <td>
-The mTree piece resulting from composition is traversed again and`child branches (of mix node commands), declared with the '$append [hook-name]'`
-`node command, are moved, replacing the related '$hook [hook-name]'`
-`node command of the mixed mTree brick.`
+The mTree piece resulting from composition is traversed again and`child branches (of mix commands), declared with the '$append [hook-name]'`
+`command, are moved, replacing the related '$hook [hook-name]'`
+`command of the mixed mTree brick.`
 </tr>
 <tr>
 <td>- evaluation</td>

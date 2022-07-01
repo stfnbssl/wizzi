@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\cssparser\css\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\cssparser\css\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -26,7 +27,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -37,7 +38,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -60,7 +62,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -74,11 +77,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 var format = function(ast, options) {
     var formatter = format[ast.type];
     if (verbose) {
@@ -94,17 +99,18 @@ format['stylesheet'] = function(ast) {
     var ret = {
         tag: 'css', 
         children: []
-    };
+     };
     ast.stylesheet.rules.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['comment'] = function(ast) {
     var ret = {
         tag: '#', 
         children: []
-    };
+     };
     var lines = file.splitLines(ast.comment);
     if (lines.length == 1) {
         ret.name = lines[0];
@@ -117,16 +123,17 @@ format['comment'] = function(ast) {
                 tag: '#', 
                 name: l, 
                 children: []
-            })
+             })
         }
     }
     return ret;
-};
+}
+;
 format['rule'] = function(ast) {
     var ret = {
         tag: '<', 
         children: []
-    };
+     };
     var ls = ast.selectors.length;
     for (var i = 0; i < ls; i++) {
         if (i == 0) {
@@ -145,64 +152,69 @@ format['rule'] = function(ast) {
                 tag: '+', 
                 name: ast.selectors[i], 
                 children: []
-            })
+             })
         }
     }
     ast.declarations.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['declaration'] = function(ast) {
     var ret = {
         tag: ast.property, 
         name: ast.value, 
         children: []
-    };
+     };
     return ret;
-};
+}
+;
 format['media'] = function(ast) {
     var ret = {
         tag: 'media', 
         name: ast.media, 
         children: []
-    };
+     };
     ast.rules.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['font-face'] = function(ast) {
     var ret = {
         tag: 'font-face', 
         children: []
-    };
+     };
     ast.declarations.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['keyframes'] = function(ast) {
     var ret = {
         tag: 'keyframes', 
         name: ast.name, 
         children: []
-    };
+     };
     ret.children.push({
         tag: 'vendor', 
         name: ast.vendor, 
         children: []
-    })
+     })
     ast.keyframes.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['keyframe'] = function(ast) {
     var ret = {
         tag: 'keyframe', 
         children: []
-    };
+     };
     var ls = ast.values.length;
     for (var i = 0; i < ls; i++) {
         if (i == 0) {
@@ -213,43 +225,47 @@ format['keyframe'] = function(ast) {
                 tag: 'value', 
                 name: ast.values[i], 
                 children: []
-            })
+             })
         }
     }
     ast.declarations.map(function(node) {
         ret.children.push(format(node))
     })
     return ret;
-};
+}
+;
 format['import'] = function(ast) {
     /**
         console.log('import', util.inspect(ast, {
             depth: null
-        }))*/
+         }))*/
     var ret = {
         tag: 'import', 
         name: ast.import, 
         children: []
-    };
+     };
     return ret;
-};
+}
+;
 format['charset'] = function(ast) {
     /**
         console.log('charset', util.inspect(ast, {
             depth: null
-        }))*/
+         }))*/
     var ret = {
         tag: 'charset', 
         name: ast.charset, 
         children: []
-    };
+     };
     return ret;
-};
+}
+;
 format['supports'] = function(ast) {
     console.log('supports', util.inspect(ast, {
         depth: null
-    }))
-};
+     }))
+}
+;
 function wizzify(css, options, callback) {
     parseInternal(css, {}, function(err, syntax) {
         if (err) {

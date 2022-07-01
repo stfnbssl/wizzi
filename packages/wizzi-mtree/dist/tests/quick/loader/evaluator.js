@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\quick\loader\evaluator.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\quick\loader\evaluator.js.ittf
 */
 'use strict';
 
@@ -18,7 +18,7 @@ var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFacory) {
+     }, function(err, storeFacory) {
         if (err) {
             return callback(err);
         }
@@ -40,7 +40,7 @@ function evaluate(uri, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
@@ -64,7 +64,7 @@ describe("evaluator", function() {
         store = new mocks.IttfDocumentStore();
         store.init({
             storeKind: 'filesystem'
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             done();
         })
     });

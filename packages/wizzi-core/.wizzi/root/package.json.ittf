@@ -1,0 +1,6 @@
+common/plugin_package( wizzi-core, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license} )
+
+	js-yaml "^3.13.1"
+    wizzi-legacy-v5 "latest"
+
+	$append devDependencies

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\wizzi\models\ittf-model.g.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\ittf-model.g.js.ittf
 */
 'use strict';
 //
@@ -21,13 +21,14 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     ittf.wzElement = 'ittf';
     ittf.mTree = mTree;
     return callback(null, ittf);
-};
+}
+;
 function toIttfNode(node) {
     var ret = {
         name: node.n, 
         value: node.v, 
         children: []
-    };
+     };
     if (node.children) {
         var i, i_items=node.children, i_len=node.children.length, child;
         for (i=0; i<i_len; i++) {
@@ -42,5 +43,5 @@ function error(message) {
             __is_error: true, 
             source: 'wizzi-core/lib/wizzi/models/ittf-model.g', 
             message: message
-        };
+         };
 }

@@ -1,68 +1,37 @@
 ﻿wfjob wizzi-mtree
-	
-	$
-		var ittf_meta_folder      = path.join(__dirname, 'ittf', 'meta');
-		var ittf_lib_folder       = path.join(__dirname, 'ittf', 'lib');
-		var ittf_root_folder      = path.join(__dirname, 'ittf', 'root');
-		var ittf_examples_folder  = path.join(__dirname, 'ittf', 'examples');
-		var ittf_tests_folder     = path.join(__dirname, 'ittf', 'tests');
-		if (isWebpackTarget) {
-			// var dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'packages', 'wizzi-mtree', 'dist');
-            var dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-mtree');
-		} else {
-			var dest_folder           = path.join(__dirname, '..', 'dist');
-		}
 
-	model meta
-		schema json
-		src ${ittf_meta_folder}/index.json.ittf
+    $
+        var dest_folder;
+        if (isWebpackTarget) {
+            dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-mtree')
+        } else {
+            dest_folder           = path.join(__dirname, '..', 'dist');
+        }
+        var jobCtx = {
+            ittf_models_folder: path.join(__dirname, 'models'),
+            ittf_root_folder: path.join(__dirname, 'root'),
+            ittf_lib_folder: path.join(__dirname, 'lib'),
+            ittf_tests_folder: path.join(__dirname, 'tests'),
+            ittf_examples_folder: path.join(__dirname, 'examples'),
+            dest_folder: dest_folder,
+            job_model: 'wzCtx'
+        }
 
-	line ittf-lib
-		cwd-folder ${ittf_lib_folder}
-		dest-folder ${dest_folder}/lib
+    model ${jobCtx.job_model}
+        schema json
+        src ${jobCtx.ittf_models_folder}/wzctx.json.ittf
 
-		wfjob/any_js(true)
-			ignore ${ittf_lib_folder}/**/*__copy/**/*.js.ittf
-
-		artifact any_ittf_inside___copy
-			src ${ittf_lib_folder}/**/*__copy/**/*.ittf
-			extension ittf
-
-		wfjob/any_md()
-
-	$include wfjob/root	
-
-	line ittf-examples
-		cwd-folder ${ittf_examples_folder}
-		dest-folder ${dest_folder}/examples
-
-		wfjob/any_js()
-			ignore ${ittf_examples_folder}/**/*__copy/**/*.js.ittf
-
-		artifact any_ittf_inside___copy
-			src ${ittf_examples_folder}/**/*__copy/**/*.ittf
-			extension ittf
-
-		wfjob/any_md()
-        wfjob/any_plain(json)
-
-	line ittf-tests
-		cwd-folder ${ittf_tests_folder}
-		dest-folder ${dest_folder}/tests
-
-		wfjob/any_js()
-			ignore ${ittf_tests_folder}/**/*__copy/**/*.js.ittf
-
-		artifact any_ittf_inside___copy
-			src ${ittf_tests_folder}/**/*__copy/**/*.ittf
-			extension ittf
-
-		$include wfjob/any_tests_ittf
+    wfjob/pkg_lib( &jobCtx )
+    wfjob/pkg_root( &jobCtx )
+    wfjob/pkg_examples( &jobCtx )
+    wfjob/pkg_tests( &jobCtx )
+    wfjob/pkg_models( &jobCtx )
 
 	production
-		dest-folder ${dest_folder}
+		dest-folder ${jobCtx.dest_folder}
 		line-ref ittf-lib
 		line-ref ittf-root
         $if isWebpackTarget == false
 		    line-ref ittf-examples
 		    line-ref ittf-tests
+        line-ref ittf-models

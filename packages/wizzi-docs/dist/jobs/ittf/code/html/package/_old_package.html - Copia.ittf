@@ -2,7 +2,7 @@ html
 
 	$
 		var currentPage = 'Code';
-		var currentSubPage = wfpackage.wzName;
+		var currentSubPage = wzCtx.wzName;
 		var type = {};
 
 	wizzi-site-layout-compile()

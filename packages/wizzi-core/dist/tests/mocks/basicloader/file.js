@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\tests\mocks\basicloader\file.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\basicloader\file.js.ittf
 */
 'use strict';
 var fs = require('fs');
@@ -19,7 +19,8 @@ md.unixifyPath = function(path_string) {
     else {
         return path_string;
     }
-};
+}
+;
 // sync read
 md.read = function(path_string, options) {
     if (!(options)) {
@@ -33,7 +34,8 @@ md.read = function(path_string, options) {
         }
     }
     return contents;
-};
+}
+;
 // sync readJSON
 md.readJSON = function(path_string, options) {
     var src = md.read(path_string, options);
@@ -45,7 +47,8 @@ md.readJSON = function(path_string, options) {
     catch (ex) {
         throw new errors.FileError('Unable to parse "' + path_string + '" file (' + ex.message + ').', ex);
     } 
-};
+}
+;
 // async read
 md.readFile = function(path_string, callback) {
     fs.readFile(path_string, function(err, data) {
@@ -54,7 +57,8 @@ md.readFile = function(path_string, callback) {
         }
         callback(null, data);
     })
-};
+}
+;
 md.write = function(path_string, contents, options) {
     if (!options) {
         options = {};
@@ -71,14 +75,17 @@ md.write = function(path_string, contents, options) {
         ex.message = 'Writing file ' + path_string + '.\n' + ex.message;
         throw ex;
     } 
-};
+}
+;
 md.writeJSON = function(path_string, contentObject) {
     md.write(path_string, JSON.stringify(contentObject, null, 2))
-};
+}
+;
 md.mkpath = function(path_string) {
     var dir = path.dirname(path_string);
     md.mkdir(dir);
-};
+}
+;
 md.mkdir = function(dirpath, mode) {
     if (mode == null) {
         mode = parseInt('0777', 8) & ~ (process.umask());
@@ -96,7 +103,8 @@ md.mkdir = function(dirpath, mode) {
         }
         return parts;
     }, '')
-};
+}
+;
 md.exists = function(path_string) {
     try {
         var stat = fs.lstatSync(String(path_string));
@@ -105,7 +113,8 @@ md.exists = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;
 md.isDirectory = function(path_string) {
     try {
         return fs.lstatSync(String(path_string)).isDirectory()
@@ -114,7 +123,8 @@ md.isDirectory = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;
 md.isFile = function(path_string) {
     try {
         return fs.lstatSync(String(path_string)).isFile()
@@ -123,4 +133,5 @@ md.isFile = function(path_string) {
     catch (ex) {
     } 
     return false;
-};
+}
+;

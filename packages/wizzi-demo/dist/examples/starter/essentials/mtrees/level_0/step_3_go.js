@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\starter\essentials\mtrees\level_0\step_3_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\starter\essentials\mtrees\level_0\step_3_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -42,7 +43,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -51,12 +52,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -102,17 +104,8 @@ function formatNum(num, len) {
     return new Array(1 + len-x.length).join(' ') + x;
 }
 module.exports = function exec(step_callback) {
-    heading1('example-essentials starting');
-    /**
-         DEMO: How to load into an mTree a ittf document
-         which root is a mixin call to its container.
-        
-         We use an `html` ittf document to show an example of
-         composition, calling mixins.
-        
-         The `html` artifact here is not generated.
-         We build the mTree only, just to take a look to node transformations.
-    */
+    heading1('example-essentials starting')
+    //
     
     console.log('    The primary ittf document `contained_1.html.ittf` mixes its container `layout.html.ittf` ');
     console.log('    and the `lia.html.ittf` mixin');
@@ -121,7 +114,7 @@ module.exports = function exec(step_callback) {
     function load(callback) {
         wizzi.mtree(path.join(__dirname, 'step_3', 'contained_1.html.ittf'), {}, {
             raw: true
-        }, callback);
+         }, callback)
     }
     // Now we can load the document
     load(function(err, mTreeModel) {
@@ -131,11 +124,11 @@ module.exports = function exec(step_callback) {
             throw new Error(JSON.stringify(err, null, 2));
         }
         heading2( 'contained_1.html.ittf - raw ittf document' );
-        printValue('mTreeModel.dump(true)', mTreeModel.dump(true));
+        printValue('mTreeModel.dump(true)', mTreeModel.dump(true))
         function load(callback) {
             wizzi.mtree(path.join(__dirname, 'step_3', 't/layout.html.ittf'), {}, {
                 raw: true
-            }, callback);
+             }, callback)
         }
         // Now we can load the document
         load(function(err, mTreeModel) {
@@ -145,11 +138,11 @@ module.exports = function exec(step_callback) {
                 throw new Error(JSON.stringify(err, null, 2));
             }
             heading2( 't/layout.html.ittf - raw ittf document' );
-            printValue('mTreeModel.dump(true)', mTreeModel.dump(true));
+            printValue('mTreeModel.dump(true)', mTreeModel.dump(true))
             function load(callback) {
                 wizzi.mtree(path.join(__dirname, 'step_3', 't/lia.html.ittf'), {}, {
                     raw: true
-                }, callback);
+                 }, callback)
             }
             // Now we can load the document
             load(function(err, mTreeModel) {
@@ -159,9 +152,9 @@ module.exports = function exec(step_callback) {
                     throw new Error(JSON.stringify(err, null, 2));
                 }
                 heading2( 't/lia.html.ittf - raw ittf document' );
-                printValue('mTreeModel.dump(true)', mTreeModel.dump(true));
+                printValue('mTreeModel.dump(true)', mTreeModel.dump(true))
                 function load(callback) {
-                    wizzi.mtree(path.join(__dirname, 'step_3', 'contained_1.html.ittf'), {}, callback);
+                    wizzi.mtree(path.join(__dirname, 'step_3', 'contained_1.html.ittf'), {}, callback)
                 }
                 // Now we can load the document
                 load(function(err, mTreeModel) {
@@ -171,10 +164,11 @@ module.exports = function exec(step_callback) {
                         throw new Error(JSON.stringify(err, null, 2));
                     }
                     heading2( 'contained_1.html.ittf - loaded mTree' );
-                    printValue('mTreeModel.dump(true)', mTreeModel.dump(true));
+                    printValue('mTreeModel.dump(true)', mTreeModel.dump(true))
                     step_callback(null);
-                });
-            });
-        });
-    });
-};
+                })
+            })
+        })
+    })
+}
+;

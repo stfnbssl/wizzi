@@ -1,6 +1,6 @@
 {
     "name": "wizzi-tools",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "description": "Tools library for the wizzi factory..",
     "author": {
         "name": "Stefano Bassoli",
@@ -50,7 +50,7 @@
         "graphql": "^15.4.0",
         "xml2js": "^0.4.23",
         "wizzi": "0.7.22",
-        "wizzi-utils": "0.7.13",
+        "wizzi-utils": "0.7.15",
         "wizzi-js": "0.7.8"
     },
     "peerDependencies": {

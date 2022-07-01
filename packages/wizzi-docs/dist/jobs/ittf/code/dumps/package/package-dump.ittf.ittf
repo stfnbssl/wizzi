@@ -1,4 +1,4 @@
-wfpackage ${wfpackage.value}
+wfpackage ${wzCtx.value}
 
 	$function buildup_node
 		$param item
@@ -7,6 +7,6 @@ wfpackage ${wfpackage.value}
 				$_ buildup_node
 					$@ c
 
-	$foreach c in wfpackage.children
+	$foreach c in wzCtx.children
 		$_ buildup_node
 			$@ c

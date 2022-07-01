@@ -17,7 +17,7 @@
             th Builtin
 			th Model transformers
 			th Artifacts
-		$foreach schema in wfpackage.schemas
+		$foreach schema in wzCtx.schemas
 			tr
 				td 
                     $if plugin == null || schema.builtin

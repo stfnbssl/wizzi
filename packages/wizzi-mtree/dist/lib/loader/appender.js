@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\appender.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\appender.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -26,7 +26,7 @@ module.exports = function(mixedMTreePiece, callback) {
     var fragments = [];
     var ctx = {
         id: 1
-    };
+     };
     var i, i_items=mixedMTreePiece.nodes, i_len=mixedMTreePiece.nodes.length, node;
     for (i=0; i<i_len; i++) {
         node = mixedMTreePiece.nodes[i];
@@ -74,7 +74,8 @@ module.exports = function(mixedMTreePiece, callback) {
         utilnode.remove(item);
     }
     callback(null, mixedMTreePiece);
-};
+}
+;
 function searchAppend(item, root, appends, groups, overrides, fragments, errors, mixedMTreePiece) {
     if (item.name === '$group') {
         groups.push(item);
@@ -86,7 +87,8 @@ function searchAppend(item, root, appends, groups, overrides, fragments, errors,
         }
         var appto = utilnode.findHookExt(item, item.value.trim(), 1);
         if (appto == null) {
-            appto = utilnode.findHookExt(item, item.value.trim(), 0);
+            appto = utilnode.findHookExt(item, item.value.trim(), 0)
+            ;
             if (appto == null) {
                 console.log('mixedMTreePiece.dump\n', mixedMTreePiece.toText());
                 errors.push(local_error('InvalidIttfError', 'searchAppend', 'Cannot find hook ' + (item.value || '') + ', root is ' + root.name + ' ' + (root.value || '') + ', in ' + item.model.uri + ', brickKey ' + item.model.brickKey + ', remember that $hook/$append does not work between sibling nodes.' + 'After mixup the $hook node must be a parent node or a descendant of a parent node of $append' + ', but not a sibling node.', item))
@@ -101,7 +103,7 @@ function searchAppend(item, root, appends, groups, overrides, fragments, errors,
             appobj = {
                 appto: appto, 
                 items: item.children
-            };
+             };
             appends[item.id] = appobj;
         }
     }
@@ -125,14 +127,14 @@ function searchAppend(item, root, appends, groups, overrides, fragments, errors,
                 virt: virt, 
                 over: item, 
                 items: item.children
-            };
+             };
             overrides[item.value] = overobj;
         }
     }
     else if (item.name === '$fragment') {
         var fragobj = {
             frag: item
-        };
+         };
         fragments[item.value] = fragobj;
     }
     var i, i_items=item.children, i_len=item.children.length, child;
@@ -165,7 +167,7 @@ function local_error(name, method, message, node, inner, other) {
             method: method, 
             inner: inner, 
             ...other||{}
-        });
+         });
 }
 /**
   params
@@ -185,7 +187,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.loader.appender.' + method,
+        method: 'wizzi-mtree@0.7.12.loader.appender.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

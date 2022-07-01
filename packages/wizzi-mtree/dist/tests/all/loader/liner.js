@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\all\loader\liner.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\liner.js.ittf
 */
 'use strict';
 
@@ -18,7 +18,7 @@ var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFacory) {
+     }, function(err, storeFacory) {
         if (err) {
             return callback(err);
         }
@@ -34,7 +34,7 @@ function evaluate(uri, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
@@ -57,7 +57,7 @@ describe("liner", function() {
     it("should have : an indent, row and col number, name and value", function() {
         var lines = liner(file.read(path.join(__dirname, 'repo', 'data', 'liner_1.tests.ittf')), {
             sourceKey: 'f1'
-        });
+         });
         // log 'liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(7);
@@ -122,7 +122,7 @@ describe("liner", function() {
             '    node6 value6'
         ].join('\n'), {
             sourceKey: 'f1'
-        });
+         });
         // log 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);
@@ -156,7 +156,7 @@ describe("liner", function() {
             '    node6 v$$alue6'
         ].join('\n'), {
             sourceKey: 'f1'
-        });
+         });
         // log 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);
@@ -186,7 +186,7 @@ describe("liner", function() {
             '    \$\{name}'
         ].join('\n'), {
             sourceKey: 'f1'
-        });
+         });
         // log 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(3);
@@ -206,7 +206,7 @@ describe("liner", function() {
         // log 'source', source
         var lines = liner(source, {
             sourceKey: 'f1'
-        });
+         });
         // log 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(3);
@@ -234,7 +234,7 @@ describe("liner", function() {
         // log 'should escape javascript string macro delimiters with escapes.source', source
         var lines = liner(source, {
             sourceKey: 'f1'
-        });
+         });
         // log 'should escape javascript string macro delimiters with escapes.lines', lines, 'template_expected', template_expected
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);

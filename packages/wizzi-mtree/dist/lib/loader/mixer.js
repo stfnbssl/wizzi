@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\mixer.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -68,39 +68,44 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 mixerNode.tagSuffix = null;
             }
         }
+        
+        // mixerNode.name is the name of the mixin to include (IttfFragment)
+        
+        // mixerNode.value is a comma separated list of arguments of the mixin call
+        
+        // mixerNode.model.uri is the mixer IttfDocument uri; its folder is the base path
+        
+        // for resolving the uri of the mixin
+        
+        /**
+            * load the parsed mTreeBrickModel of the mixin (we name it 'the mixed')
+        */
         if (isMixinCall) {
-            // mixerNode.name is the name of the mixin to include (IttfFragment)
-            // mixerNode.value is a comma separated list of arguments of the mixin call
-            // mixerNode.model.uri is the mixer IttfDocument uri; its folder is the base path
-            // for resolving the uri of the mixin
             var args = mixerNode.value.trim();
             if (args.substr(-1, 1) === ')') {
                 mixerNode.value = args.substring(0, args.length - 1);
             }
             var mixeruri = mixerNode.model.uri;
             var mixerbasedir = path.dirname(mixeruri);
-            /**
-                load the parsed mTreeBrickModel of the mixin (we name it 'the mixed')
-            */
             mTreeBrickProvider.get({
                 from: 'store', 
                 basedir: mixerbasedir, 
                 relpath: mixerNode.name, 
                 includerBrickKey: mixerNode.model.brickKey, 
                 includerMTreeBrick: mTreePiece
-            }, function(err, mixedNodifiedMTree) {
+             }, function(err, mixedNodifiedMTree) {
                 if (err) {
                     return callback(local_error('IttfMixError', 'mixer', 'Fragment to mix not found', mixerNode, err, {
                             mixerUri: mixeruri, 
                             mixerRelPath: mixerNode.name
-                        }));
+                         }));
                 }
                 mTreeBrickProvider.enterFragmentCall(mixeruri, mixedNodifiedMTree.uri)
                 if (mTreeBrickProvider.checkForRecursion()) {
                     return callback(local_error('IttfMixError', 'mixer', 'Recursive mixin or include: ' + mixerNode.name, mixerNode, null, {
                             mixerUri: mixeruri, 
                             mixerRelPath: mixerNode.name
-                        }));
+                         }));
                 }
                 // before mixing the mixedNodifiedMTree
                 // resolve its eventual includes
@@ -119,8 +124,9 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 })
             })
         }
+        
+        // mixerNode is a TEXT CONTAINER (CDATA)
         else if (mixerNode.name === '$.') {
-            // mixerNode is a TEXT CONTAINER (CDATA)
             if (mixerNode.children.length > 0) {
                 mixerNode.value = utilnode.nodeToTextLine(mixerNode);
                 mixerNode.children = [];
@@ -129,10 +135,10 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                     mixerNode
                 ]);
         }
+        // mixerNode IS NOT a mixin call
+        // but its children could contain mixin calls
+        // so analyze and mix its children before returning it
         else {
-            // mixerNode IS NOT a mixin call
-            // but its children could contain mixin calls
-            // so analyze and mix its children before returning it
             mixNodeCollection(mixerNode.children, mixerNode, function(err, mixedNodes) {
                 if (err) {
                     return callback(err);
@@ -151,11 +157,13 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
             mixedNodesAccumulation = [];
         //
         function repeater(index) {
+            
+            // we are done, return the result
             if (index === len) {
-                // we are done, return the result
                 var firstSemanticNode = getFirstSemanticNode(mixedNodesAccumulation);
+                
+                // log 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
                 if (firstSemanticNode != null) {
-                    // log 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
                     firstSemanticNode.__firstOfMixedNodes = true;
                 }
                 return callback(null, mixedNodesAccumulation);
@@ -175,11 +183,15 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 if (err) {
                     return callback(err);
                 }
+                
+                // A default hook was found,
+                
+                // the mixer node children must replace the $hook node;
+                
+                // utilnode.replace will set the parent of the nodes of
+                
+                // mixedNodes to the parent of hook.
                 if (hooks.length > 0) {
-                    // A default hook was found,
-                    // the mixer node children must replace the $hook node;
-                    // utilnode.replace will set the parent of the nodes of
-                    // mixedNodes to the parent of hook.
                     if (hooks.length > 1) {
                         var i, i_items=hooks, i_len=hooks.length, hook;
                         for (i=0; i<i_len; i++) {
@@ -197,11 +209,11 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                         utilnode.replace(hooks[0], mixedNodes);
                     }
                 }
+                // A default hook was not found,
+                // the mixer node children must be
+                // appended to the last child of the mixedRootNode;
+                // the mixedRootNode becomes the parent of the mixer node children.
                 else {
-                    // A default hook was not found,
-                    // the mixer node children must be
-                    // appended to the last child of the mixedRootNode;
-                    // the mixedRootNode becomes the parent of the mixer node children.
                     var i, i_items=mixedNodes, i_len=mixedNodes.length, item;
                     for (i=0; i<i_len; i++) {
                         item = mixedNodes[i];
@@ -232,7 +244,8 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
             collection.push(item);
         }
     }
-};
+}
+;
 function getFirstSemanticNode(nodes) {
     var i, i_items=nodes, i_len=nodes.length, node;
     for (i=0; i<i_len; i++) {
@@ -255,7 +268,7 @@ function local_error(name, method, message, node, inner, other) {
             method: method, 
             inner: inner, 
             ...other||{}
-        });
+         });
 }
 /**
   params
@@ -275,7 +288,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.loader.mixer.' + method,
+        method: 'wizzi-mtree@0.7.12.loader.mixer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

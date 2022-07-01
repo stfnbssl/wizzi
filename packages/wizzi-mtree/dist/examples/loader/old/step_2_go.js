@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\examples\loader\old\step_2_go.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\step_2_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -26,7 +26,7 @@ var loader_appender = function(step_callback) {
         node;
     store.init({
         storeKind: 'filesystem'
-    }, function(err, notUsed) {
+     }, function(err, notUsed) {
         if (err) {
             console.log('err', err);
             if (err.toString()) {
@@ -44,7 +44,7 @@ var loader_appender = function(step_callback) {
             mTreeBuildUpContext: {}, 
             productionContext: mocks.ProductionContext, 
             __ittfDocumentStore: store
-        };
+         };
         exec( 'appender_1' );
         function exec(name) {
             var source = path.join(__dirname, 'step_2', name + '.sample.ittf');
@@ -138,12 +138,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }

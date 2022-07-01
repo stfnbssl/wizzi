@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\starter\essentials\languageschemas\ts\level_0\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\starter\essentials\languageschemas\ts\level_0\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -42,7 +43,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -51,12 +52,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -102,17 +104,15 @@ function formatNum(num, len) {
     return new Array(1 + len-x.length).join(' ') + x;
 }
 module.exports = function exec(step_callback) {
-    heading1('example-essentials starting');
-    /**
-         DEMO: basic javascript module coded in 'ts' wizzi language schema
-    */
+    heading1('example-essentials starting')
+    //
     
-    heading1('starting step 1 basic.ts.ittf');
+    heading1('starting step 1 basic.ts.ittf')
     wizzi.gen(path.join(__dirname, 'step_1', 'basic.ts.ittf'), {}, {
         globalContext: {}, 
         artifactContext: {}, 
         artifactName: 'ts/module'
-    }, function(err, artifactText) {
+     }, function(err, artifactText) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
@@ -121,9 +121,10 @@ module.exports = function exec(step_callback) {
         // Save the artifact
         // to the ./outputs folder
         var dest = path.join(__dirname, 'step_1', 'outputs', verify.stripExtension('basic.ts.ittf'));
-        wizzi.file.write(dest, artifactText);
+        wizzi.file.write(dest, artifactText)
         console.log(verify.stripExtension('basic.ts.ittf') + ' saved to ' + dest);
-        printValue('artifactText', artifactText);
+        printValue('artifactText', artifactText)
         return step_callback();
-    });
-};
+    })
+}
+;

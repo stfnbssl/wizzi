@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\examples\loader\old\scriptBuilder.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\scriptBuilder.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -21,9 +21,11 @@ var scriptBuilder = function(step_callback) {
     //
     var loadMTree = packageIndex.createLoadMTree(repo.getCreateFilesystemStore(), {
         raw: true
-    });
+     });
     exec('scriptBuilder_1', () => {
-    })
+    
+    }
+    )
     function exec(name, callback) {
         console.log('exec', name);
         var ctx = {
@@ -31,14 +33,14 @@ var scriptBuilder = function(step_callback) {
             counter: 0, 
             startTime: Date.now(), 
             isCompile: false
-        };
+         };
         var scriptCoder = new JsWizziScriptCoder();
         loadMTree(path.join(__dirname, 'ittf', name + '.html.ittf'), {
             __productionManager: mocks.getProductionManager(), 
             mTreeBuildUpContext: {
                 
-            }
-        }, function(err, mTree) {
+             }
+         }, function(err, mTree) {
             if (err) {
                 console.log('err', err);
                 if (err.toString()) {
@@ -100,12 +102,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }

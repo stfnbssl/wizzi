@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\starter\essentials\models\level_0\step_3_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\starter\essentials\models\level_0\step_3_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -42,7 +43,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -51,12 +52,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }
@@ -102,15 +104,8 @@ function formatNum(num, len) {
     return new Array(1 + len-x.length).join(' ') + x;
 }
 module.exports = function exec(step_callback) {
-    heading1('example-essentials starting');
-    /**
-         DEMO: how to load an IttfDocument into an `html` wizzi model,
-         passing a modelInfo object to the sourcePathOrModelInfo parameter.
-        
-         The model has a context model described in the modelInfo object.
-        
-         API   wizzi.model(sourcePathOrModelInfo, context?, options?)
-    */
+    heading1('example-essentials starting')
+    //
     
     var modelsComplexPath = path.join(__dirname, 'step_0', 'complex');
     
@@ -122,9 +117,9 @@ module.exports = function exec(step_callback) {
                 src: path.join(modelsComplexPath, 'formsData.json.ittf'), 
                 schema: 'json', 
                 exportName: 'data'
-            }
+             }
         ]
-    }, function(err, wizziModel) {
+     }, function(err, wizziModel) {
         if (err) {
             throw new Error(JSON.stringify(err, null, 2));
         }
@@ -134,7 +129,8 @@ module.exports = function exec(step_callback) {
                 throw new Error(JSON.stringify(err, null, 2));
             }
             console.log('artifactText complex forms\n', artifactText);
-        });
+        })
         return step_callback(null, 'models example executed');
-    });
-};
+    })
+}
+;

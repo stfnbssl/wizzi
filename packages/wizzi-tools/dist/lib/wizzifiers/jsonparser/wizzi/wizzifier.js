@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\jsonparser\wizzi\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsonparser\wizzi\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -20,7 +21,7 @@ function parseInternal(jsonString, options, callback) {
     options = (options || {});
     var wizziTree = {
         children: []
-    };
+     };
     json_parser.parse(jsonString, {
         onObject: function(open) {
             // log  'onObject', open
@@ -29,15 +30,15 @@ function parseInternal(jsonString, options, callback) {
                     tag: '{', 
                     name: '', 
                     children: []
-                };
+                 };
                 n.parent = wizziTree;
                 wizziTree.children.push(n);
                 wizziTree = n;
             }
+            // log  "onObject wizziTree.tag", wizziTree.tag
+            // log  "onObject wizziTree.tag", wizziTree.tag
             else {
-                // log  "onObject wizziTree.tag", wizziTree.tag
                 wizziTree = wizziTree.parent;
-                // log  "onObject wizziTree.tag", wizziTree.tag
             }
         }, 
         onArray: function(open) {
@@ -47,16 +48,16 @@ function parseInternal(jsonString, options, callback) {
                     tag: '[', 
                     name: '', 
                     children: []
-                };
+                 };
                 n.parent = wizziTree;
                 wizziTree.children.push(n);
                 wizziTree = n;
             }
+            // FIXME
+            // log  "onArray wizziTree.tag", wizziTree.tag
+            // log  "onArray wizziTree.tag", wizziTree.tag
             else {
-                // FIXME
-                // log  "onArray wizziTree.tag", wizziTree.tag
                 wizziTree = wizziTree.parent;
-                // log  "onArray wizziTree.tag", wizziTree.tag
             }
         }, 
         onPropName: function(name) {
@@ -65,7 +66,7 @@ function parseInternal(jsonString, options, callback) {
                 tag: name, 
                 name: '', 
                 children: []
-            };
+             };
             n.parent = wizziTree;
             wizziTree.children.push(n);
             // log  wizziTree.tag
@@ -78,7 +79,7 @@ function parseInternal(jsonString, options, callback) {
                 tag: name, 
                 name: value, 
                 children: []
-            };
+             };
             n.parent = wizziTree;
             wizziTree.children.push(n);
         }, 
@@ -88,7 +89,7 @@ function parseInternal(jsonString, options, callback) {
                 tag: '{', 
                 name: name, 
                 children: []
-            };
+             };
             n.parent = wizziTree;
             wizziTree.children.push(n);
             wizziTree = n;
@@ -99,7 +100,7 @@ function parseInternal(jsonString, options, callback) {
                 tag: '[', 
                 name: name, 
                 children: []
-            };
+             };
             n.parent = wizziTree;
             wizziTree.children.push(n);
             wizziTree = n;
@@ -114,7 +115,7 @@ function parseInternal(jsonString, options, callback) {
                 tag: value, 
                 name: '', 
                 children: []
-            };
+             };
             wizziTree.children.push(n);
         }, 
         onHandlebar: function(hb) {
@@ -123,10 +124,10 @@ function parseInternal(jsonString, options, callback) {
                 tag: '{{', 
                 name: hb, 
                 children: []
-            };
+             };
             wizziTree.children.push(n);
         }
-    }, function(err, result) {
+     }, function(err, result) {
         if (err) {
             return callback(err);
         }
@@ -146,7 +147,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -157,7 +158,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -180,7 +182,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -194,11 +197,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 function wizzify(json, options, callback) {
     parseInternal(json, options, callback)
 }

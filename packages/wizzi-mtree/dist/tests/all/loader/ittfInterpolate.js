@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\all\loader\ittfInterpolate.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\ittfInterpolate.js.ittf
 */
 'use strict';
 
@@ -18,7 +18,7 @@ var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFacory) {
+     }, function(err, storeFacory) {
         if (err) {
             return callback(err);
         }
@@ -35,7 +35,7 @@ function evaluate(uri, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
@@ -121,7 +121,7 @@ describe("ittfInterpolate", function() {
     it("access a member property of an object", function() {
         var obj = {
             a: 'stefi'
-        };
+         };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.a }.', ctx);
         // log 'result', result
@@ -131,7 +131,7 @@ describe("ittfInterpolate", function() {
     it("access a not existent member property of an object", function() {
         var obj = {
             a: 'stefi'
-        };
+         };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.b }.', ctx);
         // log 'result', result
@@ -141,7 +141,7 @@ describe("ittfInterpolate", function() {
     it("access a not existent member property of an object after accesing an existent one", function() {
         var obj = {
             a: 'stefi'
-        };
+         };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.a }.', ctx);
         // log 'result', result

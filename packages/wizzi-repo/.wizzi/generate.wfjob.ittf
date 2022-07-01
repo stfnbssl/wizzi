@@ -1,34 +1,37 @@
 ﻿wfjob wizzi-repo
 	
-	$
-        var folders = {
-            ittf_lib: path.join(__dirname, 'ittf', 'lib')
+    $
+        var dest_folder;
+        if (isWebpackTarget) {
+            dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-mtree')
+        } else {
+            dest_folder           = path.join(__dirname, '..', 'dist');
         }
-		var ittf_meta_folder     = path.join(__dirname, 'ittf', 'meta');
-		var ittf_root_folder     = path.join(__dirname, 'ittf', 'root');
-		var ittf_examples_folder = path.join(__dirname, 'ittf', 'examples');
-		var ittf_tests_folder    = path.join(__dirname, 'ittf', 'tests');
-		if (isWebpackTarget) {
-			// var dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'packages', 'wizzi-repo', 'dist');
-            var dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-repo');
-		} else {
-			var dest_folder           = path.join(__dirname, '..', 'dist');
-		}
-        folders.dest = dest_folder;
+        var jobCtx = {
+            ittf_models_folder: path.join(__dirname, 'models'),
+            ittf_root_folder: path.join(__dirname, 'root'),
+            ittf_lib_folder: path.join(__dirname, 'lib'),
+            ittf_tests_folder: path.join(__dirname, 'tests'),
+            ittf_examples_folder: path.join(__dirname, 'examples'),
+            dest_folder: dest_folder,
+            job_model: 'wzCtx'
+        }
 
-	model meta
-		schema json
-		src ${ittf_meta_folder}/index.json.ittf
+    model ${jobCtx.job_model}
+        schema json
+        src ${jobCtx.ittf_models_folder}/wzctx.json.ittf
 
-    wfjob/lib( &folders )
-	$include wfjob/examples
-	$include wfjob/root
-	$include wfjob/tests
+    wfjob/pkg_lib( &jobCtx )
+    wfjob/pkg_root( &jobCtx )
+    wfjob/pkg_examples( &jobCtx )
+    wfjob/pkg_tests( &jobCtx )
+    wfjob/pkg_models( &jobCtx )
 
 	production
-		dest-folder ${dest_folder}
+		dest-folder ${jobCtx.dest_folder}
 		line-ref ittf-lib
 		line-ref ittf-root
         $if isWebpackTarget == false
-            line-ref ittf-examples
-            line-ref ittf-tests
+		    line-ref ittf-examples
+		    line-ref ittf-tests
+        line-ref ittf-models

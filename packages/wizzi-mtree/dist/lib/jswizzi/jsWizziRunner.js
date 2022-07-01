@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\jswizzi\jsWizziRunner.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -17,7 +17,7 @@ var parsedCache = {};
 var MAX_ITERATIONS = 5000;
 var defaultOptions = {
     verbose: true
-};
+ };
 function dummy(hello) {
     if (verify.isNotEmpty(hello) === false) {
         return error(
@@ -31,7 +31,7 @@ function log(label, node, force) {
         console.log(escodegen.generate(node));
         console.log(label, util.inspect(node, {
             depth: 2
-        }))
+         }))
     }
 }
 function logGet(name, value) {
@@ -79,20 +79,23 @@ runner.Program = function(node, ctx) {
     for (var i = 0; i < node.body.length; i++) {
         var statement = node.body[i];
         var state = runner(statement, ctx);
+        
+        // log '__is_error Program', state
         if (state && state.__is_error) {
-            // log '__is_error Program', state
             return state;
         }
         if (state.return) {
             return state.value;
         }
     }
-};
+}
+;
 runner.Identifier = function(node, ctx) {
     log('Identifier.node', node);
     var parentNode = null;
+    
+    // log 'Identifier returning node.name = undefined'
     if (node.name == 'undefined') {
-        // log 'Identifier returning node.name = undefined'
         return undefined;
     }
     if (ctx.isDeclared(node.name)) {
@@ -101,24 +104,27 @@ runner.Identifier = function(node, ctx) {
         }
         return ctx.getValue(node.name);
     }
+    // log 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
     else {
-        // log 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
         return local_error(ctx, 'ReferenceError|Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>', {
                 node: node, 
                 errorLines: errors.esprimaNodeErrorLines('unknown identifier', node, ctx.source, true)
-            }, node, 'Identifier');
+             }, node, 'Identifier');
     }
-};
+}
+;
 runner.Identifier_Set = function(node, ctx, data) {
     log('Identifier_Set.node', node);
     var parentNode = null;
     ctx.put(node.name, data)
-};
+}
+;
 runner.Literal = function(node, ctx) {
     log('Literal.node', node);
     var parentNode = null;
     return node.value;
-};
+}
+;
 runner.VariableDeclaration = function(node, ctx) {
     log('VariableDeclaration.node', node);
     var parentNode = null;
@@ -126,67 +132,78 @@ runner.VariableDeclaration = function(node, ctx) {
     for (i=0; i<i_len; i++) {
         declaration = node.declarations[i];
         var state = runner(declaration, ctx);
+        
+        // log '__is_error VariableDeclaration', state
         if (state && state.__is_error) {
-            // log '__is_error VariableDeclaration', state
             return state;
         }
     }
     return {};
-};
+}
+;
 runner.VariableDeclarator = function(node, ctx) {
     log('VariableDeclarator.node', node);
     var parentNode = null;
     if (!node.init) {
         ctx.declare(node.id.name)
     }
+    // if node.id.name === '_____result'
+    // log 'jsWizziRunner.VariableDeclarator', node.id.name, value
     else {
         var value = runner(node.init, ctx);
+        
+        // log '__is_error VariableDeclaration', value
         if (value && value.__is_error) {
-            // log '__is_error VariableDeclaration', value
             return value;
         }
-        // if node.id.name === '_____result'
-        // log 'jsWizziRunner.VariableDeclarator', node.id.name, value
         ctx.declare(node.id.name, value)
     }
-};
+}
+;
 runner.EmptyStatement = function(node, ctx) {
     log('EmptyStatement.node', node);
     var parentNode = null;
     return {};
-};
+}
+;
 runner.ExpressionStatement = function(node, ctx) {
     log('ExpressionStatement.node', node);
     var parentNode = null;
     // 1/8/2017 _ ctx.beginExpr()
     var state = runner(node.expression, ctx);
+    
+    // _ ctx.abortExpr()
     if (state && state.__is_error) {
-        // _ ctx.abortExpr()
         return state;
     }
     // _ ctx.endExpr()
     return {};
-};
+}
+;
 runner.IfStatement = function(node, ctx) {
     log('IfStatement.node', node);
     var parentNode = null;
     var ret = {},
         savedCurrentBrickKey;
     var test = runner(node.test, ctx);
+    
+    // log '__is_error IfStatement', test
     if (test && test.__is_error) {
-        // log '__is_error IfStatement', test
         return test;
     }
     if (test) {
         savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
         ret = runner(node.consequent, ctx);
+        ;
+        
+        // log '__is_error IfStatement node.consequent', ret
         if (ret && ret.__is_error) {
-            // log '__is_error IfStatement node.consequent', ret
             return ret;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
     }
@@ -194,19 +211,23 @@ runner.IfStatement = function(node, ctx) {
         if (node.alternate) {
             savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
             ret = runner(node.alternate, ctx);
+            ;
+            
+            // log '__is_error IfStatement node.alternate', ret
             if (ret && ret.__is_error) {
-                // log '__is_error IfStatement node.alternate', ret
                 return ret;
             }
             var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+            
+            // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
             if (notUsed && notUsed.__is_error) {
-                // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
                 return notUsed;
             }
         }
     }
     return ret;
-};
+}
+;
 runner.BlockStatement = function(node, ctx) {
     log('BlockStatement.node', node);
     var parentNode = null;
@@ -214,8 +235,10 @@ runner.BlockStatement = function(node, ctx) {
     for (var i = 0; i < node.body.length; i++) {
         var statement = node.body[i];
         state = runner(statement, ctx);
+        ;
+        
+        // log '__is_error BlockStatement', state
         if (state && state.__is_error) {
-            // log '__is_error BlockStatement', state
             return state;
         }
         if (state.result || state.break || state.continue) {
@@ -223,7 +246,8 @@ runner.BlockStatement = function(node, ctx) {
         }
     }
     return {};
-};
+}
+;
 runner.WhileStatement = function(node, ctx) {
     log('WhileStatement.node', node);
     var parentNode = null;
@@ -231,8 +255,9 @@ runner.WhileStatement = function(node, ctx) {
         savedCurrentBrickKey,
         iterCheck = 0;
     var test = runner(node.test, ctx);
+    
+    // log '__is_error WhileStatement node.test', test
     if (test && test.__is_error) {
-        // log '__is_error WhileStatement node.test', test
         return test;
     }
     while (test) {
@@ -242,8 +267,10 @@ runner.WhileStatement = function(node, ctx) {
         iterCheck++;
         savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
         state = runner(node.body, ctx);
+        ;
+        
+        // log '__is_error WhileStatement node.body', state
         if (state && state.__is_error) {
-            // log '__is_error WhileStatement node.body', state
             return state;
         }
         if (state.result) {
@@ -253,18 +280,22 @@ runner.WhileStatement = function(node, ctx) {
             break;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
         test = runner(node.test, ctx);
+        ;
+        
+        // log '__is_error WhileStatement node.test', test
         if (test && test.__is_error) {
-            // log '__is_error WhileStatement node.test', test
             return test;
         }
     }
     return {};
-};
+}
+;
 runner.DoWhileStatement = function(node, ctx) {
     log('DoWhileStatement.node', node);
     var parentNode = null;
@@ -274,18 +305,23 @@ runner.DoWhileStatement = function(node, ctx) {
         iterCheck = 0;
     savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
     state = runner(node.body, ctx);
+    ;
+    
+    // log '__is_error DoWhileStatement node.body', state
     if (state && state.__is_error) {
-        // log '__is_error DoWhileStatement node.body', state
         return state;
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+    
+    // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
-        // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
         return notUsed;
     }
     test = runner(node.test, ctx);
+    ;
+    
+    // log '__is_error DoWhileStatement node.test', test
     if (test && test.__is_error) {
-        // log '__is_error DoWhileStatement node.test', test
         return test;
     }
     while (test) {
@@ -294,8 +330,10 @@ runner.DoWhileStatement = function(node, ctx) {
             return state;
         }
         state = runner(node.body, ctx);
+        ;
+        
+        // log '__is_error DoWhileStatement node.body', state
         if (state && state.__is_error) {
-            // log '__is_error DoWhileStatement node.body', state
             return state;
         }
         if (state.result) {
@@ -305,38 +343,44 @@ runner.DoWhileStatement = function(node, ctx) {
             break;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
         test = runner(node.test, ctx);
+        ;
+        
+        // log '__is_error DoWhileStatement node.test', test
         if (test && test.__is_error) {
-            // log '__is_error DoWhileStatement node.test', test
             return test;
         }
     }
     return {};
-};
+}
+;
 runner.ReturnStatement = function(node, ctx) {
     log('ReturnStatement.node', node);
     var parentNode = null;
     if (node.argument) {
         var value = runner(node.argument, ctx);
+        
+        // log '__is_error ReturnStatement', value
         if (value && value.__is_error) {
-            // log '__is_error ReturnStatement', value
             return value;
         }
         return {
                 result: true, 
                 value: value
-            };
+             };
     }
     else {
         return {
                 result: true
-            };
+             };
     }
-};
+}
+;
 runner.ForStatement = function(node, ctx) {
     log('ForStatement.node', node);
     var parentNode = null;
@@ -346,18 +390,22 @@ runner.ForStatement = function(node, ctx) {
         iterCheck = 0;
     savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
     var notUsed = runner(node.init, ctx);
+    
+    // log '__is_error ForStatement node.init', notUsed
     if (notUsed && notUsed.__is_error) {
-        // log '__is_error ForStatement node.init', notUsed
         return notUsed;
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+    
+    // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
-        // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
         return notUsed;
     }
     test = runner(node.test, ctx);
+    ;
+    
+    // log '__is_error ForStatement node.test', test
     if (test && test.__is_error) {
-        // log '__is_error ForStatement node.test', test
         return test;
     }
     while (test) {
@@ -366,8 +414,10 @@ runner.ForStatement = function(node, ctx) {
         }
         iterCheck++;
         state = runner(node.body, ctx);
+        ;
+        
+        // log '__is_error ForStatement node.body', state
         if (state && state.__is_error) {
-            // log '__is_error ForStatement node.body', state
             return state;
         }
         if (state.result) {
@@ -377,28 +427,34 @@ runner.ForStatement = function(node, ctx) {
             break;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
         var notUsed = runner(node.update, ctx);
+        
+        // log '__is_error ForStatement node.update', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error ForStatement node.update', notUsed
             return notUsed;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
         test = runner(node.test, ctx);
+        ;
+        
+        // log '__is_error ForStatement node.test', test
         if (test && test.__is_error) {
-            // log '__is_error ForStatement node.test', test
             return test;
         }
     }
     return {};
-};
+}
+;
 runner.ForInStatement = function(node, ctx) {
     log('ForInStatement.node', node);
     var parentNode = null;
@@ -407,16 +463,18 @@ runner.ForInStatement = function(node, ctx) {
         savedCurrentBrickKey;
     savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
     var obj = runner(node.right, ctx);
+    
+    // log '__is_error ForInStatement node.right', obj
     if (obj && obj.__is_error) {
-        // log '__is_error ForInStatement node.right', obj
         return obj;
     }
     if (_.isObject(obj) == false) {
         return local_error(ctx, 'The value must be an object. It is "' + getTypeDescription(obj) + '".', node.right, node, 'ForInStatement');
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+    
+    // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
-        // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
         return notUsed;
     }
     var left = node.left.name;
@@ -424,8 +482,10 @@ runner.ForInStatement = function(node, ctx) {
     for (k in obj) {
         ctx.put(left, k);
         state = runner(node.body, ctx);
+        ;
+        
+        // log '__is_error ForInStatement node.body', state
         if (state && state.__is_error) {
-            // log '__is_error ForInStatement node.body', state
             return state;
         }
         if (state.result) {
@@ -435,36 +495,42 @@ runner.ForInStatement = function(node, ctx) {
             break;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
+        
+        // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
-            // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
             return notUsed;
         }
     }
     ctx.undeclare(left);
     return {};
-};
+}
+;
 runner.BreakStatement = function(node, ctx) {
     log('BreakStatement.node', node);
     var parentNode = null;
     return {
             break: true
-        };
-};
+         };
+}
+;
 runner.ContinueStatement = function(node, ctx) {
     log('ContinueStatement.node', node);
     var parentNode = null;
     return {
             continue: true
-        };
-};
+         };
+}
+;
 runner.UnaryExpression = function(node, ctx) {
     log('UnaryExpression.node', node);
     var parentNode = null;
     var exp;
     if (node.operator === 'typeof') {
-        exp = runner(node.argument, ctx);
+        exp = runner(node.argument, ctx)
+        ;
+        
+        // log 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
         if (exp && exp.__is_error) {
-            // log 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
             if (exp.data && exp.data.errorName === 'ReferenceError') {
                 exp = undefined;
             }
@@ -474,9 +540,11 @@ runner.UnaryExpression = function(node, ctx) {
         }
     }
     else {
-        exp = runner(node.argument, ctx);
+        exp = runner(node.argument, ctx)
+        ;
+        
+        // log '__is_error UnaryExpression', exp
         if (exp && exp.__is_error) {
-            // log '__is_error UnaryExpression', exp
             return exp;
         }
     }
@@ -508,18 +576,21 @@ runner.UnaryExpression = function(node, ctx) {
             return local_error(ctx, 'Unmanaged unary operator ' + node.operator + ' (prefix: false)', node.operator, node, 'UnaryExpression');
         }
     }
-};
+}
+;
 runner.BinaryExpression = function(node, ctx) {
     log('BinaryExpression.node', node);
     var parentNode = null;
     var l = runner(node.left, ctx);
+    
+    // log '__is_error BinaryExpression l', l
     if (l && l.__is_error) {
-        // log '__is_error BinaryExpression l', l
         return l;
     }
     var r = runner(node.right, ctx);
+    
+    // log '__is_error BinaryExpressior', r
     if (r && r.__is_error) {
-        // log '__is_error BinaryExpressior', r
         return r;
     }
     log('BinaryExpression.l,r', [
@@ -592,15 +663,17 @@ runner.BinaryExpression = function(node, ctx) {
     else {
         return local_error(ctx, 'Unmanaged binary operator ' + node.operator, node.operator, node, 'BinaryExpression');
     }
-};
+}
+;
 runner.UpdateExpression = function(node, ctx) {
     log('UpdateExpression.node', node);
     var parentNode = null;
     var v,
         exp;
     var exp = runner(node.argument, ctx);
+    
+    // log '__is_error UpdateExpression', exp
     if (exp && exp.__is_error) {
-        // log '__is_error UpdateExpression', exp
         return exp;
     }
     if (node.operator === '++') {
@@ -614,13 +687,15 @@ runner.UpdateExpression = function(node, ctx) {
     }
     ctx.put(node.argument.name, v)
     return node.prefix ? v : exp;
-};
+}
+;
 runner.LogicalExpression = function(node, ctx) {
     log('LogicalExpression.node', node);
     var parentNode = null;
     var l = runner(node.left, ctx);
+    
+    // log '__is_error LogicalExpression l', l
     if (l && l.__is_error) {
-        // log '__is_error LogicalExpression l', l
         return l;
     }
     // if node.operator === '&&' && (l === false || l === null || typeof(l) === 'undefined')
@@ -631,8 +706,9 @@ runner.LogicalExpression = function(node, ctx) {
         return true;
     }
     var r = runner(node.right, ctx);
+    
+    // log '__is_error LogicalExpression r', r
     if (r && r.__is_error) {
-        // log '__is_error LogicalExpression r', r
         return r;
     }
     log('LogicalExpression.l,r', [
@@ -648,63 +724,75 @@ runner.LogicalExpression = function(node, ctx) {
     else {
         return local_error(ctx, 'Unmanaged logical expression ' + node.operator, node.operator, node, 'LogicalExpression');
     }
-};
+}
+;
 runner.ConditionalExpression = function(node, ctx) {
     log('ConditionalExpression.node', node);
     var parentNode = null;
     var test = runner(node.test, ctx);
+    
+    // log '__is_error ConditionalExpression', test
     if (test && test.__is_error) {
-        // log '__is_error ConditionalExpression', test
         return test;
     }
     if (test) {
         var value = runner(node.consequent, ctx);
+        
+        // log '__is_error ConditionalExpression node.consequent', value
         if (value && value.__is_error) {
-            // log '__is_error ConditionalExpression node.consequent', value
             return value;
         }
         return value;
     }
     else {
         var value = runner(node.alternate, ctx);
+        
+        // log '__is_error ConditionalExpression node.alternate', value
         if (value && value.__is_error) {
-            // log '__is_error ConditionalExpression node.alternate', value
             return value;
         }
         return value;
     }
-};
+}
+;
 runner.CallExpression = function(node, ctx) {
     log('CallExpression.node', node);
     var parentNode = null;
     var value,
         args = [],
         property;
+    
+    // log 'CallExpression.node.callee.object.name', node.callee.object.name
+    
+    // log 'CallExpression.node.callee.property.name', node.callee.property.name
     if (node.callee.type === 'MemberExpression') {
-        // log 'CallExpression.node.callee.object.name', node.callee.object.name
-        // log 'CallExpression.node.callee.property.name', node.callee.property.name
         var i, i_items=node.arguments, i_len=node.arguments.length, item;
         for (i=0; i<i_len; i++) {
             item = node.arguments[i];
             value = runner(item, ctx);
+            ;
+            
+            // log '__is_error CallExpression argument', value
             if (value && value.__is_error) {
-                // log '__is_error CallExpression argument', value
                 return value;
             }
             args.push(value);
         }
         var obj = runner(node.callee.object, ctx);
+        
+        // log '__is_error CallExpression node.callee.object', obj
         if (obj && obj.__is_error) {
-            // log '__is_error CallExpression node.callee.object', obj
             return obj;
         }
         if (obj == null || typeof(obj) == 'undefined') {
             return local_error(ctx, 'The value of callee must be an object. It is "' + getTypeDescription(obj) + '" : ' + obj + '.', node.callee.object, node, 'CallExpression');
         }
         if (node.callee.computed) {
-            property = runner(node.callee.property, ctx);
+            property = runner(node.callee.property, ctx)
+            ;
+            
+            // log '__is_error CallExpression node.callee.property', property
             if (property && property.__is_error) {
-                // log '__is_error CallExpression node.callee.property', property
                 return property;
             }
         }
@@ -717,15 +805,16 @@ runner.CallExpression = function(node, ctx) {
         if (verify.isFunction(obj[property])) {
             try {
                 var value = obj[property].apply(obj, args);
+                
+                // log 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
                 if (value && value.__is_error) {
-                    // log 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
                     var currentModelInfo = ctx.get_currentMTreeBrickInfo();
                     return local_error(ctx, value.message, property, node, 'CallExpression', value, {
                             callingProperty: property, 
                             onStatement: escodegen.generate(node), 
                             uri: currentModelInfo.currentModel_uri, 
                             mixerUri: currentModelInfo.currentModel_mixerUri
-                        });
+                         });
                 }
                 return value;
             } 
@@ -737,9 +826,14 @@ runner.CallExpression = function(node, ctx) {
             return local_error(ctx, 'property: "' + property + '" is not a function', node.callee.property, node, 'CallExpression');
         }
     }
+    
+    // log 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
+    
+    // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
+    
+    // _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' start')
     if (node.callee.type === 'Identifier') {
         var f = ctx.getFunction(node.callee.name);
-        // log 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
         if (f == null) {
             f = ctx.getValue(node.callee.name);
             if (f != null && verify.isFunction(f)) {
@@ -747,8 +841,10 @@ runner.CallExpression = function(node, ctx) {
                 for (i=0; i<i_len; i++) {
                     item = node.arguments[i];
                     value = value = runner(item, ctx);
+                    ;
+                    
+                    // log '__is_error CallExpression argument', value
                     if (value && value.__is_error) {
-                        // log '__is_error CallExpression argument', value
                         return value;
                     }
                     args.push(value);
@@ -764,18 +860,19 @@ runner.CallExpression = function(node, ctx) {
                 return local_error(ctx, ('Function undeclared ' + node.callee.name), node.callee, node, 'CallExpression', new Error());
             }
         }
-        // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
-        // _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' start')
         ctx.beginLoadingCallArguments();
         for (var i=0; i<f.params.length; i++) {
             var item = node.arguments[i];
+            
+            // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
             if (item) {
                 value = value = runner(item, ctx);
+                ;
+                
+                // log '__is_error CallExpression argument', value
                 if (value && value.__is_error) {
-                    // log '__is_error CallExpression argument', value
                     return value;
                 }
-                // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
                 args.push(value);
             }
             else {
@@ -793,8 +890,9 @@ runner.CallExpression = function(node, ctx) {
         } 
         return result;
     }
+    
+    // log 'FunctionExpression', node.callee, true
     if (node.callee.type === 'FunctionExpression') {
-        // log 'FunctionExpression', node.callee, true
         var f = node.callee;
         if (f.params.length !== node.arguments.length) {
             return local_error(ctx, 'A jsWizziFunction call must have the same number of arguments of the callee. Found: ' + f.params.length + ' and ' + node.arguments.length, null, node, 'CallExpression');
@@ -804,8 +902,10 @@ runner.CallExpression = function(node, ctx) {
         for (i=0; i<i_len; i++) {
             item = node.arguments[i];
             value = runner(item, ctx);
+            ;
+            
+            // log '__is_error CallExpression argument', value
             if (value && value.__is_error) {
-                // log '__is_error CallExpression argument', value
                 return value;
             }
             args.push(value);
@@ -815,14 +915,16 @@ runner.CallExpression = function(node, ctx) {
         return runnerCall(f, ctx, args);
     }
     return local_error(ctx, 'Not implemented. CallExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'CallExpression');
-};
+}
+;
 runner.MemberExpression = function(node, ctx) {
     log('MemberExpression.node', node);
     var parentNode = null;
     // log 'MemberExpression.node', node
     var obj = runner(node.object, ctx);
+    
+    // log '__is_error MemberExpression', obj
     if (obj && obj.__is_error) {
-        // log '__is_error MemberExpression', obj
         return obj;
     }
     if (obj == null || typeof(obj) == 'undefined') {
@@ -833,8 +935,9 @@ runner.MemberExpression = function(node, ctx) {
     }
     if (node.computed) {
         var property = runner(node.property, ctx);
+        
+        // log '__is_error MemberExpression node.property', property
         if (property && property.__is_error) {
-            // log '__is_error MemberExpression node.property', property
             return property;
         }
         return obj[property];
@@ -843,13 +946,15 @@ runner.MemberExpression = function(node, ctx) {
         var property = node.property.name;
         return obj[property];
     }
-};
+}
+;
 runner.MemberExpression_Set = function(node, ctx, data) {
     log('MemberExpression_Set.node', node);
     var parentNode = null;
     var obj = runner(node.object, ctx);
+    
+    // log '__is_error MemberExpression_Set', obj
     if (obj && obj.__is_error) {
-        // log '__is_error MemberExpression_Set', obj
         return obj;
     }
     if (obj == null || typeof(obj) == 'undefined') {
@@ -857,8 +962,9 @@ runner.MemberExpression_Set = function(node, ctx, data) {
     }
     if (node.computed) {
         var property = runner(node.property, ctx);
+        
+        // log '__is_error MemberExpression_Set node.property', property
         if (property && property.__is_error) {
-            // log '__is_error MemberExpression_Set node.property', property
             return property;
         }
         obj[property] = data;
@@ -867,18 +973,21 @@ runner.MemberExpression_Set = function(node, ctx, data) {
         var property = node.property.name;
         obj[property] = data;
     }
-};
+}
+;
 runner.AssignmentExpression = function(node, ctx) {
     log('AssignmentExpression.node', node);
     var parentNode = null;
     var l = runner(node.left, ctx);
+    
+    // log '__is_error AssignmentExpression l', l
     if (l && l.__is_error) {
-        // log '__is_error AssignmentExpression l', l
         return l;
     }
     var r = runner(node.right, ctx);
+    
+    // log '__is_error AssignmentExpression r', r
     if (r && r.__is_error) {
-        // log '__is_error AssignmentExpression r', r
         return r;
     }
     var v;
@@ -923,12 +1032,14 @@ runner.AssignmentExpression = function(node, ctx) {
     }
     // log 'jsWizziRunner.AssignmentExpression.node.left', node.left
     var notUsed = runnerSet(node.left, ctx, v);
+    
+    // log '__is_error AssignmentExpression node.left', notUsed
     if (notUsed && notUsed.__is_error) {
-        // log '__is_error AssignmentExpression node.left', notUsed
         return notUsed;
     }
     return v;
-};
+}
+;
 runner.ArrayExpression = function(node, ctx) {
     log('ArrayExpression.node', node);
     var parentNode = null;
@@ -938,14 +1049,17 @@ runner.ArrayExpression = function(node, ctx) {
     for (i=0; i<i_len; i++) {
         element = node.elements[i];
         value = runner(element, ctx);
+        ;
+        
+        // log '__is_error ArrayExpression', value
         if (value && value.__is_error) {
-            // log '__is_error ArrayExpression', value
             return value;
         }
         ret.push(value);
     }
     return ret;
-};
+}
+;
 runner.ObjectExpression = function(node, ctx) {
     log('ObjectExpression.node', node);
     var parentNode = null;
@@ -958,32 +1072,39 @@ runner.ObjectExpression = function(node, ctx) {
     for (i=0; i<i_len; i++) {
         property = node.properties[i];
         prop = runner(property, ctx);
+        ;
+        
+        // log '__is_error ObjectExpression', prop
         if (prop && prop.__is_error) {
-            // log '__is_error ObjectExpression', prop
             return prop;
         }
         ret[prop.key] = prop.value;
     }
     return ret;
-};
+}
+;
 runner.Property = function(node, ctx) {
     log('Property.node', node);
     var parentNode = null;
     var key = node.key.name;
     var value = runner(node.value, ctx);
+    
+    // log '__is_error Property', value
     if (value && value.__is_error) {
-        // log '__is_error Property', value
         return value;
     }
     return {
             key: key, 
             value: value
-        };
-};
+         };
+}
+;
 runner.NewExpression = function(node, ctx) {
     log('NewExpression.node', node);
     var parentNode = null;
     // log 'NewExpression.node', node
+    
+    // log 'NewExpression.args', args
     if (node.callee.type === 'Identifier') {
         var l = node.arguments.length;
         var args = [];
@@ -991,13 +1112,13 @@ runner.NewExpression = function(node, ctx) {
         for (i=0; i<i_len; i++) {
             item = node.arguments[i];
             var value = runner(item, ctx);
+            
+            // log '__is_error NewExpression argument', value
             if (value && value.__is_error) {
-                // log '__is_error NewExpression argument', value
                 return value;
             }
             args.push(value);
         }
-        // log 'NewExpression.args', args
         if (node.callee.name === 'String' && l === 0) {
             return new String();
         }
@@ -1069,7 +1190,8 @@ runner.NewExpression = function(node, ctx) {
         }
     }
     return local_error(ctx, 'Not implemented. NewExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'NewExpression');
-};
+}
+;
 runner.FunctionCall = function(node, ctx) {
     log('FunctionCall.node', node);
     var parentNode = null;
@@ -1078,9 +1200,11 @@ runner.FunctionCall = function(node, ctx) {
     // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, node.name', node.name
     // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, ctx.values', ctx.values
     if (node.name.base) {
-        objbase = runner(node.name.base, ctx);
+        objbase = runner(node.name.base, ctx)
+        ;
+        
+        // log '__is_error FunctionCall node.name.base', objbase
         if (objbase && objbase.__is_error) {
-            // log '__is_error FunctionCall node.name.base', objbase
             return objbase;
         }
     }
@@ -1097,8 +1221,10 @@ runner.FunctionCall = function(node, ctx) {
             item = node.arguments[i];
             // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.item', item
             value = runner(item, ctx);
+            ;
+            
+            // log '__is_error FunctionCall item', value
             if (value && value.__is_error) {
-                // log '__is_error FunctionCall item', value
                 return value;
             }
             // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.value', value
@@ -1119,13 +1245,15 @@ runner.FunctionCall = function(node, ctx) {
             return local_error(ctx, (ex ? ex.message : 'Error calling function'), node.callee.property, node, 'CallExpression', ex);
         } 
     }
-};
+}
+;
 runner.FunctionDeclaration = function(node, ctx) {
     log('FunctionDeclaration.node', node);
     var parentNode = null;
     ctx.declareFunction(node.id.name, node)
     return {};
-};
+}
+;
 runner.FunctionDeclaration_Call = function(node, ctx, data) {
     log('FunctionDeclaration_Call.node', node);
     var parentNode = null;
@@ -1135,21 +1263,24 @@ runner.FunctionDeclaration_Call = function(node, ctx, data) {
     var ctx = ctx.push();
     for (var i = 0; i < node.params.length; i++) {
         // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.param', node.params[i].name
+        
+        // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.value', data[i]
         if (data.length > i) {
-            // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.value', data[i]
             ctx.declareCallParam(node.params[i].name, data[i])
         }
     }
     // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, ctx.callContext.values', ctx.callContext.values
     var state = runner(node.body, ctx);
+    
+    // log '__is_error FunctionCall node.body', state
     if (state && state.__is_error) {
-        // log '__is_error FunctionCall node.body', state
         return state;
     }
     ctx.set_MTreeBrickEvalContext(save_brick_key, 0);
     ctx.pop();
     return state.value;
-};
+}
+;
 function local_error(ctx, message, node, parentnode, method, ex, other) {
     // log 'jsWizziRunner.local_error.message', message
     // log 'jsWizziRunner.local_error.node.name', node && node.name
@@ -1175,10 +1306,12 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
         }
         else {
             if (parentnode) {
-                errorLines = errors.esprimaNodeErrorLines(message, parentnode, ctx.source, true);
+                errorLines = errors.esprimaNodeErrorLines(message, parentnode, ctx.source, true)
+                ;
             }
             else {
-                errorLines = errors.esprimaNodeErrorLines(message, node, ctx.source, true);
+                errorLines = errors.esprimaNodeErrorLines(message, node, ctx.source, true)
+                ;
             }
         }
     }
@@ -1204,15 +1337,15 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
             uri: currentModelInfo.currentModel_uri, 
             mixerUri: currentModelInfo.currentModel_mixerUri, 
             ...other||{}
-        });
+         });
 }
 function local_error_new(name, method, message, node, inner, other) {
     return new mainErrors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
             errorName: name, 
-            method: 'wizzi-mtree@0.7.11.jsWizzi.jsWizziRunner.' + method, 
+            method: 'wizzi-mtree@0.7.12.jsWizzi.jsWizziRunner.' + method, 
             ...other||{}, 
             inner: inner
-        });
+         });
 }
 function getTypeDescription(obj) {
     if (obj == null) {
@@ -1242,7 +1375,8 @@ module.exports = {
                 attachComment: true, 
                 loc: true, 
                 sourceType: 'module'
-            });
+             })
+            ;
         } 
         catch (ex) {
             if (callback) {
@@ -1270,7 +1404,7 @@ module.exports = {
             var err = error('InvalidArgument', 'run', {
                 parameter: 'source', 
                 message: 'The source parameter must be a string. Received: ' + source
-            });
+             });
             if (callback) {
                 return callback(err);
             }
@@ -1282,7 +1416,7 @@ module.exports = {
             var err = error('InvalidArgument', 'run', {
                 parameter: 'ctx', 
                 message: 'The ctx parameter must be an object. Received: ' + ctx
-            });
+             });
             if (callback) {
                 return callback(err);
             }
@@ -1307,7 +1441,7 @@ module.exports = {
             return execute_run_cb(parsed, ctx, options);
         }
     }
-};
+ };
 function execute_run_cb(parsed, ctx, options, callback) {
     if (options.dumpfile) {
         options.dumpfile(JSON.stringify(parsed, null, 2))
@@ -1325,12 +1459,14 @@ function execute_run_cb(parsed, ctx, options, callback) {
         }
     } 
     ctx.popSource();
+    
+    // log 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
     if (result && result.__is_error) {
-        // log 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
     }
     if (callback) {
+        
+        // NO 6/6/19, is a marker.  set delete (result.__is_error)
         if (result && result.__is_error) {
-            // NO 6/6/19, is a marker.  set delete (result.__is_error)
             callback(result);
         }
         else {
@@ -1359,7 +1495,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.7.12.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

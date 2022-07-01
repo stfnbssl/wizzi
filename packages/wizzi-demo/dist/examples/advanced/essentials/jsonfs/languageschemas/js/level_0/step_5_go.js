@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\jsonfs\languageschemas\js\level_0\step_5_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\jsonfs\languageschemas\js\level_0\step_5_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -19,10 +20,8 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var language_schema_js = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         DEMO: javascript module coded in 'js' wizzi language schema
-    */
+    heading1('Advanced-example starting')
+    //
     
     
     function execute(jsonFsData) {
@@ -34,10 +33,10 @@ var language_schema_js = function(step_callback) {
                     'wizzi-js', 
                     'wizzi-web'
                 ]
-            }, 
+             }, 
             jsonFsData: jsonFsData, 
             globalContext: globalContext
-        }, function(err, wf) {
+         }, function(err, wf) {
             if (err) {
                 var fullErr = JSON.stringify(err, null, 2);
                 console.log('Error fullErr', fullErr);
@@ -46,7 +45,7 @@ var language_schema_js = function(step_callback) {
             wf.loadModelAndGenerateArtifact(path.join(__dirname, 'step_5', 'module_1.js.ittf'), {
                 modelRequestContext: {}, 
                 artifactRequestContext: {}
-            }, 'js/module', function(err, artifactText) {
+             }, 'js/module', function(err, artifactText) {
                 if (err) {
                     var fullErr = JSON.stringify(err, null, 2);
                     console.log('Error fullErr', fullErr);
@@ -55,11 +54,11 @@ var language_schema_js = function(step_callback) {
                 // Save the artifact
                 // to the ./outputs folder
                 var dest = path.join(__dirname, 'step_5', 'outputs', verify.stripExtension('module_1.js.ittf'));
-                wizzi.file.write(dest, artifactText);
+                wizzi.file.write(dest, artifactText)
                 console.log(verify.stripExtension('module_1.js.ittf') + ' saved to ' + dest);
-                printValue('artifactText', artifactText);
-            });
-        });
+                printValue('artifactText', artifactText)
+            })
+        })
     }
     
     function getJsonFsData() {
@@ -69,18 +68,18 @@ var language_schema_js = function(step_callback) {
                         _id: id1, 
                         parentId: null, 
                         path: "c:/my/wizzi/v5/apps/wizzi-demo/dist/languageschemas/js/level_0/step_5/module_1.js.ittf"
-                    }
+                     }
                 ], 
                 documents: [
                     {
                         _id: id1, 
                         content: "module\n    kind react\n    react MyComponent"
-                    }
+                     }
                 ]
-            };
+             };
     }
     
-    execute(getJsonFsData());
+    execute(getJsonFsData())
 };
 language_schema_js.__name = 'Level 0 - language_schema_js';
 function heading1(text) {
@@ -110,7 +109,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -119,12 +118,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

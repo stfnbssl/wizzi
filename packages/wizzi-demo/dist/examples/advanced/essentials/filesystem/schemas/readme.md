@@ -1,7 +1,7 @@
 ## Wizzi schemas
 ### Reference
 
-<p><a href="https://wizzifactory.github.io/concepts.html#concept-5">Concept</a>&nbsp; | &nbsp;<a href="https://wizzifactory.github.io/docs/models.html#concept-5">Docs</a>&nbsp; | &nbsp;<a href="https://github.com/wizzifactory/wizzi/tree/master/packages/ittf-sources/v5/apps/wizzi-demo/src/ittf/examples/advanced/essentials/filesystem/schemas">Demo ittf source</a></p>
+<p><a href="https://wizzifactory.github.io/concepts.html#concept-5">Concept</a>  |  <a href="https://wizzifactory.github.io/docs/models.html#concept-5">Docs</a>  |  <a href="https://github.com/wizzifactory/wizzi/tree/master/packages/ittf-sources/v5/apps/wizzi-demo/src/ittf/examples/advanced/essentials/filesystem/schemas">Demo ittf source</a></p>
 
 ### Demo samples level-1
 

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\examples\loader\old\step_1_go.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -22,7 +22,7 @@ var loader_liner = function(step_callback) {
         var source = file.read(path.join(__dirname, 'step_1', name + '.sample.ittf'));
         var lines = liner(source, {
             sourceKey: 'f1'
-        });
+         });
         printValue(name + ' source', source)
         printArray(name + ' lines', lines)
     }
@@ -64,12 +64,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }

@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\mongodb\jobs\level_0\step_1_print.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\mongodb\jobs\level_0\step_1_print.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,7 +18,7 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzi_job_mongodb_level_0_step_1_print = function(step_callback) {
-    heading1('Advanced-example starting');
+    heading1('Advanced-example starting')
     var repo = require('wizzi-repo');
     // Test mongoDb config
     // mongodbUri 'mongodb://localhost:27017/test'
@@ -43,7 +44,7 @@ var wizzi_job_mongodb_level_0_step_1_print = function(step_callback) {
         docman.getFiles(path.join(demoUploadMongoBaseFolder, 'wizzijob', 'level_0', 'step_1', 'outputs'), {
             deep: true, 
             documentContent: true
-        }, function(err, files) {
+         }, function(err, files) {
             if (err) {
                 var fullErr = JSON.stringify(err, null, 2);
                 console.log('Error fullErr', fullErr);
@@ -52,10 +53,10 @@ var wizzi_job_mongodb_level_0_step_1_print = function(step_callback) {
             printArray('files', files, [
                 'fullPath', 
                 'content'
-            ]);
+            ])
             docman.close();
-        });
-    });
+        })
+    })
 };
 wizzi_job_mongodb_level_0_step_1_print.__name = 'Level 0 - wizzi_job_mongodb_level_0_step_1_print';
 function heading1(text) {
@@ -85,7 +86,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -94,12 +95,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\basicloader\liner.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\basicloader\liner.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -10,6 +10,7 @@ var util = require('util');
 //
 //
 module.exports = function(textContent, ittfDocumentData) {
+    // TODO ensure textContent is red as utf-8 and avoid this
     var sourceKey = ittfDocumentData.sourceKey,
         lines = [],
         leadingWhiteSpaces = 0,
@@ -20,7 +21,6 @@ module.exports = function(textContent, ittfDocumentData) {
         commentState = 0,
         macroState = 0,
         quote = null,
-        // TODO ensure textContent is red as utf-8 and avoid this
         chunk = textContent.toString('utf-8'),
         ch,
         chUni,
@@ -39,12 +39,13 @@ module.exports = function(textContent, ittfDocumentData) {
         }
         else {
             if (commentState == 2) {
+                
+                // could be start of end of comment
                 if (ch == '*') {
-                    // could be start of end of comment
                     commentState = 3;
                 }
+                // skip comment char
                 else {
-                    // skip comment char
                     if (ch == '\n') {
                         linepos++;
                         colpos = 0;
@@ -52,53 +53,62 @@ module.exports = function(textContent, ittfDocumentData) {
                 }
             }
             else if (commentState == 21) {
+                
+                // end of line comment
+                
+                // delegate end of comment to processMacro
                 if (ch == '\n') {
-                    // end of line comment
-                    // delegate end of comment to processMacro
                     processMacro(ch);
                 }
             }
             else if (commentState == 3) {
+                
+                // ok, really is end of comment
                 if (ch == '$') {
-                    // ok, really is end of comment
                     commentState = 0;
                 }
+                // no, comments continue
+                // check if it is eol
                 else {
-                    // no, comments continue
                     commentState = 2;
-                    // check if it is eol
                     if (ch == '\n') {
                         linepos++;
                         colpos = 0;
                     }
                 }
             }
+            
+            // ok, really is start of comment
             else if (commentState == 1 && ch == '*') {
-                // ok, really is start of comment
                 commentState = 2;
             }
+            
+            // ok, is a line comment
             else if (commentState == 1 && ch == '$') {
-                // ok, is a line comment
                 commentState = 21;
             }
+            
+            // no, it was not a comment, reset
             else if (commentState == 1 && ch != '*') {
-                // no, it was not a comment, reset
                 commentState = 0;
                 processMacro('$');
                 processMacro(ch);
             }
+            
+            // start of literal
             else if (commentState == 0 && ch == '"') {
-                // start of literal
                 quote = ch;
                 processMacro(ch);
             }
+            
+            // start of literal
             else if (commentState == 0 && ch == "'") {
-                // start of literal
                 quote = ch;
                 processMacro(ch);
             }
+            
+            // could be start of comment
             else if (commentState == 0 && ch == '$') {
-                // could be start of comment
                 commentState = 1;
             }
             else {
@@ -116,33 +126,39 @@ module.exports = function(textContent, ittfDocumentData) {
     }
     return lines;
     function processMacro(ch) {
+        
+        // remove escape state
+        
+        // log 'macroState', macroState, ch
         if (macroState == 2) {
-            // remove escape state
             macroState = 1;
-            // log 'macroState', macroState, ch
         }
         else {
             if (chUni == 96) {
+                
+                // log 'macroState', macroState, ch
                 if (macroState > 0) {
                     macroState = 0;
-                    // log 'macroState', macroState, ch
                 }
+                // log 'macroState', macroState, ch
                 else {
                     macroState = 1;
-                    // log 'macroState', macroState, ch
                 }
             }
             else {
                 if (macroState == 1) {
+                    
+                    // log 'macroState', macroState, ch
                     if (ch == '$') {
                         ch = '#';
                         lineHasMacro = true;
-                        // log 'macroState', macroState, ch
                     }
+                    
+                    // could be an escape of a macro inside a macro
+                    
+                    // log 'macroState', macroState, ch
                     else if (ch == '\\') {
-                        // could be an escape of a macro inside a macro
                         macroState = 2;
-                        // log 'macroState', macroState, ch
                     }
                 }
             }
@@ -160,8 +176,8 @@ module.exports = function(textContent, ittfDocumentData) {
                 line = null;
                 lineHasMacro = false;
             }
+            // Allow blank line. Do nothing
             else {
-                // Allow blank line. Do nothing
             }
             leadingWhiteSpaces = 0;
             colpos = 0;
@@ -205,7 +221,7 @@ module.exports = function(textContent, ittfDocumentData) {
                     row: linepos, 
                     col: colpos, 
                     sourceKey: sourceKey
-                };
+                 };
             }
         }
         else {
@@ -224,8 +240,9 @@ module.exports = function(textContent, ittfDocumentData) {
                     row: linepos, 
                     col: colpos, 
                     sourceKey: sourceKey
-                };
+                 };
             }
         }
     }
-};
+}
+;

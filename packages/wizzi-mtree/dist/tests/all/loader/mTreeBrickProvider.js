@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\all\loader\mTreeBrickProvider.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mTreeBrickProvider.js.ittf
 */
 'use strict';
 
@@ -18,7 +18,7 @@ var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFacory) {
+     }, function(err, storeFacory) {
         if (err) {
             return callback(err);
         }
@@ -35,7 +35,7 @@ function evaluate(uri, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
@@ -62,7 +62,7 @@ describe("mTreeBrickProvider", function() {
         store = new mocks.IttfDocumentStore();
         store.init({
             storeKind: 'filesystem'
-        }, function(err, notUsed) {
+         }, function(err, notUsed) {
             done();
         })
     });
@@ -71,7 +71,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, content) {
+         }, function(err, content) {
             expect(err.name).to.be('InvalidRequestError');
             expect(err.code).to.be('UriError');
             done();
@@ -82,7 +82,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, content) {
+         }, function(err, content) {
             expect(err.name).to.be('InvalidRequestError');
             expect(err.code).to.be('UriError');
             done();
@@ -93,7 +93,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, content) {
+         }, function(err, content) {
             expect(err.name).to.be('InvalidRequestError');
             done();
         })
@@ -103,7 +103,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, content) {
+         }, function(err, content) {
             expect(err.name).to.be('RepoIOError');
             done();
         })
@@ -113,7 +113,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, provider) {
+         }, function(err, provider) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -141,7 +141,7 @@ describe("mTreeBrickProvider", function() {
             productionContext: mocks.ProductionContext, 
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
-        }, function(err, provider) {
+         }, function(err, provider) {
             if (err) {
                 console.log('err', err);
                 throw new Error(err.message);
@@ -152,7 +152,7 @@ describe("mTreeBrickProvider", function() {
                 from: 'store', 
                 basedir: path.join(__dirname, 'repo', 'data'), 
                 relpath: 'frag1.tests.ittf'
-            }, function(err, mTreeBrick) {
+             }, function(err, mTreeBrick) {
                 if (err) {
                     console.log('err', err);
                     throw new Error(err.message);

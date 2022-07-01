@@ -5,52 +5,118 @@ type Readonly<P, T> = {
 }
 
 /**
- * Parsed line of an ittf document.
+ * Parsed line of an ITTF Document
  */
 declare interface MTreeBrickLine {
     indent: number;
-    name: string; // node name
-    value: string; // node value, always trimmed
+    /**
+     * node name
+     */
+    name: string; 
+    /**
+     * node value, always trimmed
+     */
+    value: string; 
     row: number;
     col: number;
     sourceKey: string;
-    tagSuffix?: string; // undefined || '(',
-    hasMacro: boolean; // the line contains a ` (ascii 96) character, replaced by a Æ (ascii 146) character
+    /**
+     * undefined || '('
+     */
+    tagSuffix?: string; 
+    /**
+     * the line contains a ` (ascii 96) character, replaced by a Æ (ascii 146) character
+     */
+    hasMacro: boolean; 
 }
 
 /**
- * Nodified parsed line of an ittf document.
+ * Nodified parsed line of an ITTF Document
  */
 declare interface MTreeBrickNode extends MTreeBrickLine {
-    parent: MTreeBrickNode;     // parent MTreeBrickNode
-    model: MTreeBrick;          // the mTreeBrick to which the node belongs
-    children: MTreeBrickNode[]; // the children MTreeBrickNodes
-    id: number;                 // an id unique inside the loaded MTree
+    /**
+     * parent MTreeBrickNode
+     */
+    parent: MTreeBrickNode;     
+    /**
+     * the mTreeBrick to which the node belongs
+     */
+    model: MTreeBrick;          
+    /**
+     * the children MTreeBrickNodes
+     */
+    children: MTreeBrickNode[]; 
+    /**
+     * an id unique inside the loaded mTree
+     */
+    id: number;                 
 }
 
 /**
- * The parsed tree of an ittf document.
+ * The parsed tree of an ITTF Document
  */
 declare interface MTreeBrick {
-    uri: string;                         // The location of the source IttfDocument.
-    schema: string;                      // The source IttfDocument schema.
-    loadHistory: WizziModelLoadHistory;  // The loadHistory object
-    frontMatter?: Readonly<string, any>; // The front matter object
-    lines: MTreeBrickLine[];             // parsed lines of source text
-    nodes: MTreeBrickNode[];             // nodified lines of source text
-    sourceKey: string;                   // key of the source info of the IttfDocument (see interface IttfDocumentData)
-    brickKey: string;                    // key of the cloned mTreeBrick
-    // these are set by the mixer, on the cloned object
-    mixed: boolean;                      // true if has been mixed
-    $mixerBrickKey: string;              // the brickKey of the mTreeBrick of the calling node (mixer)
-    $args: string;                       // the node-value of the mixer node
-    $argArray: string[]                  // the $arg array of the mixer node
-    // these are set by the nodifier on the original mtree, then cloned
-    $params: string;                     // the node-value of the $params node, if declared
+    /**
+     * The location of the source ITTF Document
+     */
+    uri: string;
+    /**
+     * The source Wizzi Schema of the source ITTF Document
+     */
+    schema: string;                      
+    /**
+     * The loadHistory object
+     */
+    loadHistory: WizziModelLoadHistory;  
+    /**
+     * The front matter object
+     */
+    frontMatter?: Readonly<string, any>; 
+    /**
+     * parsed lines of source text
+     */
+    lines: MTreeBrickLine[];             
+    /**
+     * nodified lines of source text
+     */
+    nodes: MTreeBrickNode[];             
+    /**
+     * key of the source info of the ITTF Document (see interface IttfDocumentData)
+     */
+    sourceKey: string;                   
+    /**
+     * key of the cloned mTreeBrick
+     */
+    brickKey: string;                    
+    /**
+     * true if has been mixed
+     * set by the mixer, on the cloned object
+     */
+    mixed: boolean;                      
+    /**
+     * the brickKey of the mTreeBrick of the calling node (mixer)
+     * set by the mixer, on the cloned object
+     */
+    $mixerBrickKey: string;              
+    /**
+     * the node-value of the mixer node
+     * set by the mixer, on the cloned object
+     */
+    $args: string;                       
+    /**
+     * the $arg array of the mixer node
+     * set by the nodifier on the original MTreeBrickNode, then cloned
+     */
+    $argArray: string[]                  
+    /**
+     * the node-value of the $params node, if declared
+     * set by the nodifier on the original MTreeBrickNode, then cloned
+     */
+     $params: string;                     
 }
 
 /**
- * An history object containing the text source of an ittf document.
+ * An history object containing the text source of an ITTF Document.
  */
 declare interface IttfDocumentData {
     ittfDocumentUri: string;
@@ -70,7 +136,7 @@ declare interface MTreeBrickData {
 }
 
 /**
- * The container of all the parsed ittf documents that compose an MTree.
+ * The container of all the parsed ITTF documents that compose an mTree
  */
 declare interface WizziModelLoadHistory {
     ittfDocumentDatas: Readonly<string, IttfDocumentData>;
@@ -83,32 +149,46 @@ declare interface WizziModelLoadHistory {
  * The node of the builded final tree. See the [[MTree]] interface.
  */
 declare interface MTreeNode {
-    // The value of the source ittf node name
+    /**
+     * The value of the source ittf node name
+     */
     n: string;
-    // The value of the source ittf node value
+    /**
+     * The value of the source ittf node value
+     */
     v: string;
-    // The source ittf node row position
+    /**
+     * The source ittf node row position
+     */
     r: number;
-    // The source ittf node name column position
+    /**
+     * The source ittf node name column position
+     */
     c: number;
-    /* The key of the ittfDocumentData of the ittf source document
-        to which this node belongs. The ittfDocumentData object
-        can be retrieved, with this key, from the wizzi-mtree.mTree.loadHistory object, 
-        available as a property of the wizzi-mtree.mTree.*/
+    /**
+     * The key of the ittfDocumentData of the source ITTF Document
+     * to which this node belongs. The ittfDocumentData object
+     * can be retrieved, with this key, from the wizzi-mtree.mTree.loadHistory object, 
+     * available as a property of the wizzi-mtree.mTree.
+     */
     s: string;
-    /* The key of the mTreeBrick to which this node belongs.
-        The mTreeBrick object can be retrieved, with this key, from the 
-        wizzi-mtree.mTree.loadHistory object, available as a property 
-        of the wizzi-mtree.mTree.*/
+    /**
+     * The key of the mTreeBrick to which this node belongs.
+     * The mTreeBrick object can be retrieved, with this key, from the 
+     * wizzi-mtree.mTree.loadHistory object, available as a property 
+     * of the wizzi-mtree.mTree.
+     */
     u: string;
-    // Children nodes
+    /**
+     * Children nodes
+     */
     children: MTreeNode[];
 }
 
 /**
- * The builded final tree, after composition and template processing.
+ * The builded final mTree, after composition and template processing.
  */
-declare interface MTree {
+declare interface mTree {
     uri: string;
     $schema: string;
     loadHistory: WizziModelLoadHistory;
@@ -130,10 +210,22 @@ interface Store {}
 type createStore = (callback: cb<Store>) => void;
 
 export type CreateLoadMTreeOptions = {
-    useCache?: boolean; // default false
-    frontMatter?: boolean; // default false
-    raw?: boolean; // default false
-    debugInfo?: boolean; // default false
+    /**
+     * default false
+     */
+    useCache?: boolean; 
+    /**
+     * default false
+     */
+    frontMatter?: boolean; 
+    /**
+     *  default false
+     */
+    raw?: boolean; 
+    /**
+     * default false
+     */
+    debugInfo?: boolean; 
 };
 
 export type LoadMTreeContext = {
@@ -151,6 +243,3 @@ export type LoadMTreeContext = {
 export type loadMTreeFn = (ittfDocumentUri: string, loadContext: LoadMTreeContext, callback: cb<MTree>) => void;
 
 export function createLoadMTree(createStore: createStore, options?: CreateLoadMTreeOptions) : loadMTreeFn;
-
-
-

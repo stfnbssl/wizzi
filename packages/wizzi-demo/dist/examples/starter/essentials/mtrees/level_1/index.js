@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\starter\essentials\mtrees\level_1\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\starter\essentials\mtrees\level_1\index.js.ittf
 */
 'use strict';
 var async = require('async');
@@ -15,7 +16,7 @@ function execute() {
             throw new Error(JSON.stringify(err, null, 2));
         }
         console.log('Level 1 samples done.');
-    });
+    })
 }
 module.exports = execute;
 if (typeof require != 'undefined' && require.main==module) {

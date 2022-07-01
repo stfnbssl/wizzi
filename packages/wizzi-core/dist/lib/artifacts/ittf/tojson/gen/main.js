@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\ittf\tojson\gen\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\ittf\tojson\gen\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -15,11 +15,12 @@ md.gen = function(model, ctx, callback) {
         children: [
             
         ]
-    };
+     };
     toJson(model, json)
     ctx.w(stringify(json, null, 2))
     callback(null, ctx);
-};
+}
+;
 function toJson(node, json) {
     var n = node.n || node.name;
     var v = node.v || node.value || '';
@@ -42,7 +43,7 @@ function toJson(node, json) {
                 children: [
                     
                 ]
-            };
+             };
             toJson(child, jsonChild)
             json.children.push(jsonChild)
         }
@@ -53,5 +54,5 @@ function error(message) {
             __is_error: true, 
             source: 'wizzi-core/lib/artifacts/ittf/tojson', 
             message: message
-        };
+         };
 }

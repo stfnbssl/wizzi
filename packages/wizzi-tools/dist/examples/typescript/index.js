@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\examples\typescript\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\examples\typescript\index.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -28,10 +29,10 @@ function go(name) {
         babel: {
             sourceType: 'module', 
             ts_or_flow: 'typescript'
-        }, 
+         }, 
         syntaxOutFile: out_babel, 
         verbose: false
-    }, function(err, result) {
+     }, function(err, result) {
         if (err) {
             console.log('err', err);
             file.write(out_ittf, JSON.stringify(err, null, 4))

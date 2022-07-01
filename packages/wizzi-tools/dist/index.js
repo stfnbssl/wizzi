@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\root\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\root\index.js.ittf
 */
 'use strict';
 var wizziUtils = require('wizzi-utils');
@@ -33,13 +34,14 @@ md.wizzify_js = function(codeSnippet, options, callback) {
             kind: 'react', 
             babel: {
                 sourceType: 'module'
-            }, 
+             }, 
             syntaxOutFile: null
-        };
+         };
     }
     // log 'wizzi-tools.wizzify_js.options', options
     jswizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_ts = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
@@ -48,107 +50,118 @@ md.wizzify_ts = function(codeSnippet, options, callback) {
             babel: {
                 sourceType: 'module', 
                 ts_or_flow: 'typescript'
-            }, 
+             }, 
             syntaxOutFile: null
-        };
+         };
     }
     // log 'wizzi-tools.wizzify_ts.options', options
     jswizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_xml = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     xmlwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_xsd = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     xsdwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_svg = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     svgwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_css = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     csswizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_scss = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     scsswizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_html = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     options.embedTag = 'html';
     htmlwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_mtree_html = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     options.embedTag = 'html';
     htmlwizzifier.getWizziTree(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_json = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     jsonwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_graphql = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     graphqlwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify_vue = function(codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
         options = {
             syntaxOutFile: null
-        };
+         };
     }
     options.isForVue = true;
     options.embedTag = 'vue';
     htmlwizzifier.getWizziIttf(codeSnippet, options, callback)
-};
+}
+;
 md.wizzify = function(schemaName, codeSnippet, options, callback) {
     if (typeof callback === 'undefined') {
         callback = options;
@@ -158,7 +171,7 @@ md.wizzify = function(schemaName, codeSnippet, options, callback) {
         options.babel = {
             sourceType: 'module', 
             ts_or_flow: 'typescript'
-        };
+         };
     }
     try {
         var wizzifier = md['wizzify_' + schemaName.toLowerCase()];
@@ -172,13 +185,15 @@ md.wizzify = function(schemaName, codeSnippet, options, callback) {
         console.log(ex);
         return callback(ex);
     } 
-};
+}
+;
 md.canBeWizzified = function(schemaName) {
     if (wizziUtils.verify.isEmpty(schemaName)) {
         return false;
     }
     return wizziUtils.verify.isFunction(md['wizzify_' + schemaName.toLowerCase()]);
-};
+}
+;
 md.getCodeAST = function(schemaName, codeSnippet, callback) {
     try {
         var wizzifier = md[schemaName.toLowerCase() + 'wizzifier'];
@@ -191,15 +206,16 @@ md.getCodeAST = function(schemaName, codeSnippet, callback) {
                 babel: {
                     sourceType: 'module', 
                     ts_or_flow: 'typescript'
-                }
-            };
+                 }
+             };
         }
         wizzifier.getCodeAST(codeSnippet, options, callback)
     } 
     catch (ex) {
         return callback(ex);
     } 
-};
+}
+;
 md.importFolder = function(baseImportPath, baseExportPath, callback) {
     try {
         importFolder(baseImportPath, baseExportPath, callback)
@@ -207,13 +223,15 @@ md.importFolder = function(baseImportPath, baseExportPath, callback) {
     catch (ex) {
         return callback(ex);
     } 
-};
+}
+;
 md.toIttfTreeEx = function(ittfContent) {
     return wizziUtils.IttfDocumentGraph.createFrom(ittfContent, {
             fromString: true, 
             clean: true
-        });
-};
+         });
+}
+;
 // Must be last because requires this module
 var importFolder = require('./lib/importers').importFolder;
 var importFile = require('./lib/importers').importFile;

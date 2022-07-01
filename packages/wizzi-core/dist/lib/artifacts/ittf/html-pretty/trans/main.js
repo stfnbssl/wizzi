@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\ittf\html-pretty\trans\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\ittf\html-pretty\trans\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -15,19 +15,21 @@ var myname = 'ittf.document.main';
 
 md.trans = function(model, ctx, callback) {
     var transformedModel = {};
+    
+    // log 'wizzi-core', 'transformer', 'model', model
     if (model.wzElement !== 'ittf') {
-        // log 'wizzi-core', 'transformer', 'model', model
         callback(error('Invalid model schema. Expected "ittf". Received: ' + model.wzElement))
     }
     ctx.__ittfNode = {
         line: 0, 
         indent: 0
-    };
+     };
     ctx.hb = new HtmlBuilder();
     toHtmlPretty(model, ctx)
     transformedModel = ctx.hb.toLines();
     callback(null, transformedModel);
-};
+}
+;
 var STYLE_DOCS_ITTF_TREE_PANEL = 'docs-ittf-tree-panel';
 var STYLE_DOCS_ITTF_TREE_LINE = 'docs-ittf-tree-line';
 var STYLE_DOCS_ITTF_NODE_LINENUMS = 'docs-ittf-node-linenums';
@@ -117,5 +119,5 @@ function error(message) {
             __is_error: true, 
             source: 'wizzi-core/lib/artifacts/ittf/document', 
             message: message
-        };
+         };
 }

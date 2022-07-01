@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\util\jsCodeReplacer.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\util\jsCodeReplacer.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -24,7 +25,7 @@ md.clean = function(code) {
             return {
                     replaceds: replaceds, 
                     codeCleaned: codeCleaned.join('')
-                };
+                 };
         }
         ch = code[i];
         if (ch == '{' && state == 0) {
@@ -59,7 +60,7 @@ md.clean = function(code) {
                 token: token, 
                 key: key, 
                 code: codeSpan.join('')
-            })
+             })
             codeCleaned.push(token);
             codeSpan.length = 0;
             state = 0;
@@ -88,7 +89,8 @@ md.clean = function(code) {
         // log '-', state, internalGraph, codeSpan.join('')
         i++;
     }
-};
+}
+;
 md.restore = function(code, replaceds) {
     console.log('md.restore', 'code', code);
     if (!code) {
@@ -100,7 +102,8 @@ md.restore = function(code, replaceds) {
         code = verify.replaceAll(code, item.key, item.code);
     }
     return code;
-};
+}
+;
 md.restoreInside = function(code, replaceds) {
     if (!code) {
         return ;
@@ -110,8 +113,11 @@ md.restoreInside = function(code, replaceds) {
     if (match == null) {
         return ;
     }
-    return // _ verify.replaceAll(code, '/*' + match.key + '*/', '{{' + match.code + '}}')
-        verify.replaceAll(code, match.token, '{{' + match.code + '}}')};
+    
+    // _ verify.replaceAll(code, '/*' + match.key + '*/', '{{' + match.code + '}}')
+    return verify.replaceAll(code, match.token, '{{' + match.code + '}}');
+}
+;
 md.isInside = function(code, replaceds) {
     console.log('md.isInside', 'code', code);
     var match = md.getKey(code, replaceds);
@@ -121,10 +127,12 @@ md.isInside = function(code, replaceds) {
     if (code.trim().length > match.key.length) {
         return true;
     }
-};
+}
+;
 md.isKey = function(code, replaceds) {
     return md.getKey(code, replaceds) != null;
-};
+}
+;
 md.getKey = function(code, replaceds) {
     var i, i_items=replaceds, i_len=replaceds.length, item;
     for (i=0; i<i_len; i++) {
@@ -135,4 +143,5 @@ md.getKey = function(code, replaceds) {
         }
     }
     return null;
-};
+}
+;

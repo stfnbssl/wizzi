@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\examples\loader.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -63,21 +63,21 @@ var loader = function(step_callback) {
                             children: [
                                 
                             ]
-                        }, 
+                         }, 
                         {
                             id: 12, 
                             title: 'node 1.3', 
                             children: [
                                 
                             ]
-                        }
+                         }
                     ]
-                }
-            }, 
+                 }
+             }, 
             options: {
                 isCompile: true
-            }
-        }, function(err, mTree) {
+             }
+         }, function(err, mTree) {
             if (err) {
                 console.log('err', err);
                 if (err.toString()) {
@@ -97,7 +97,7 @@ var loader = function(step_callback) {
                 row: 7, 
                 col: 19, 
                 description: 'dummy error for test'
-            }, true);
+             }, true);
             console.log("EXAMPLE.loader.mTree.loadHistory.getIttfDocumentErrorLines", el);
             file.write(path.join(__dirname, 'outputs', 'load_compile.html.ittf'), mTree.toIttf())
             console.log("EXAMPLE.loader.written outputs/ittf/load_compile.html.ittf");
@@ -108,13 +108,13 @@ var loader = function(step_callback) {
         console.log('EXAMPLE.loader.sample_load.start', ittfDocumentBasename);
         var loadMTree = packageIndex.createLoadMTree(repo.getCreateFilesystemStore(), {
             frontMatter: true
-        });
+         });
         loadMTree(path.join(__dirname, 'ittf', ittfDocumentBasename), {
             __productionManager: mocks.getProductionManager(), 
             mTreeBuildUpContext: {
                 
-            }
-        }, function(err, mTree) {
+             }
+         }, function(err, mTree) {
             if (err) {
                 console.log('err', err);
                 if (err.toString()) {
@@ -172,12 +172,13 @@ function printValue(k, v, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        v = stringify(v, null, 4);
+        v = stringify(v, null, 4)
+        ;
     }
     if (verify.isNotEmpty(v)) {
         var lines = verify.splitLines(v, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', k, ':', lines[0].text);
         }

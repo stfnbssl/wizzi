@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\nodifier.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\nodifier.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -65,18 +65,21 @@ module.exports = function(lines, mTreeBrick) {
                 }
                 continue;
             }
+            
+            // value continuation on new line
             else if (nameFirstChar == '\\' && nameLength == 1) {
-                // value continuation on new line
                 current.value += line.value;
                 continue;
             }
+            
+            // value continuation on new line with space
             else if (nameFirstChar == '\\' && line.name === '\\b') {
-                // value continuation on new line with space
                 current.value += (' ' + line.value);
                 continue;
             }
+            
+            // value continuation on new line with line break
             else if (nameFirstChar == '\\' && line.name === '\\n') {
-                // value continuation on new line with line break
                 current.value += ('\n' + line.value);
                 continue;
             }
@@ -102,12 +105,13 @@ module.exports = function(lines, mTreeBrick) {
         current.children = [];
     }
     return nodes;
-};
+}
+;
 function local_error(name, method, message, line, mTreeBrick) {
     return new errors.WizziError(message, line, mTreeBrick, {
             errorName: name, 
             method: method
-        });
+         });
 }
 /**
   params
@@ -127,7 +131,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.loader.nodifier.' + method,
+        method: 'wizzi-mtree@0.7.12.loader.nodifier.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

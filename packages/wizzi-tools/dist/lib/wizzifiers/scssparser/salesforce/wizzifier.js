@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\scssparser\salesforce\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\scssparser\salesforce\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -20,7 +21,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -31,7 +32,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -54,7 +56,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -68,11 +71,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 var format = function(ast, options) {
     return ast;
     var formatter = format[ast.type];

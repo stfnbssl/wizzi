@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\wizzi\models\text-model.g.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\text-model.g.js.ittf
 */
 'use strict';
 //
@@ -35,8 +35,9 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     return callback(null, {
             wzElement: 'text', 
             content: sb.join('\n')
-        });
-};
+         });
+}
+;
 function toText(indent, sb, nodes) {
     var i, i_items=nodes, i_len=nodes.length, node;
     for (i=0; i<i_len; i++) {
@@ -45,8 +46,9 @@ function toText(indent, sb, nodes) {
         var n = node.n;
         var v = node.v;
         var nextIndent = '    ';
+        
+        // skip
         if (n === 'text') {
-            // skip
             nextIndent = '';
         }
         else if (n === 'br' && (!v || v.length == 0)) {
@@ -86,5 +88,5 @@ function error(message) {
             __is_error: true, 
             source: 'wizzi-core/lib/wizzi/models/text-model.g', 
             message: message
-        };
+         };
 }

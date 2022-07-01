@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\xml\document\gen\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\xml\document\gen\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -21,7 +21,8 @@ md.gen = function(model, ctx, callback) {
         md.genItem(el, ctx);
     }
     callback(null, ctx);
-};
+}
+;
 md.genItem = function(model, ctx) {
     if (model.tag) {
         ctx.write('<' + model.tag);
@@ -56,11 +57,12 @@ md.genItem = function(model, ctx) {
     else {
         ctx.write(model.text);
     }
-};
+}
+;
 function error(message) {
     return {
             __is_error: true, 
             source: 'wizzi-core/lib/artifacts/xml/document', 
             message: message
-        };
+         };
 }

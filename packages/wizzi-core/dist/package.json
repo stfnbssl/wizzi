@@ -1,8 +1,8 @@
 {
     "name": "wizzi-core",
     "sideEffects": false,
-    "version": "0.7.3",
-    "description": "A Wizzi plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API..",
+    "version": "0.7.4",
+    "description": "A Wizzi Plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API..",
     "author": {
         "name": "Stefano Bassoli",
         "email": "stfn.bssl@gmail.com"
@@ -33,7 +33,7 @@
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
         "wizzi-mtree": "0.7.11",
-        "wizzi-utils": "0.7.13",
+        "wizzi-utils": "0.7.15",
         "js-yaml": "^3.13.1",
         "wizzi-legacy-v5": "latest"
     },

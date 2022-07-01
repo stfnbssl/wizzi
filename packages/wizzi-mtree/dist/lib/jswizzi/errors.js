@@ -1,14 +1,14 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\jswizzi\errors.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
 */
 'use strict';
 var util = require('util');
 var wizziUtils = require('wizzi-utils');
 var f_verify = require('./functions/verify');
 
-var pkgVersioned = ' (@wizzi/mtree.0.7.11)';
+var pkgVersioned = ' (@wizzi/mtree.0.7.12)';
 
 var md = module.exports = {};
 
@@ -23,7 +23,8 @@ function JsWizziRunnerError(message, node) {
 }
 JsWizziRunnerError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 JsWizziRunnerError.prototype = Object.create(Error.prototype);
 JsWizziRunnerError.prototype.constructor = JsWizziRunnerError;
 md.JsWizziRunnerError = JsWizziRunnerError;
@@ -38,7 +39,8 @@ function InvalidVariableNameError(message) {
 }
 InvalidVariableNameError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 InvalidVariableNameError.prototype = Object.create(Error.prototype);
 InvalidVariableNameError.prototype.constructor = InvalidVariableNameError;
 md.InvalidVariableNameError = InvalidVariableNameError;
@@ -49,8 +51,9 @@ function JsWizziSynthaxError(message, node) {
     this.node = node;
     this.__is_error = true;
     // log 'JsWizziSynthax.message', message
+    
+    // In this case node = WizziJS source
     if (f_verify.isObject(message) && message.lineNumber) {
-        // In this case node = WizziJS source
         this.message = "Synthax error. " + message.description +' at line ' + message.lineNumber +' column ' + message.column +'\n' +getEsprimaErrorLines(message, node) +'\n';
         this.errorLines = getEsprimaErrorLines(message, node, true);
     }
@@ -62,7 +65,8 @@ function JsWizziSynthaxError(message, node) {
 }
 JsWizziSynthaxError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 JsWizziSynthaxError.prototype = Object.create(Error.prototype);
 JsWizziSynthaxError.prototype.constructor = JsWizziSynthaxError;
 md.JsWizziSynthaxError = JsWizziSynthaxError;
@@ -79,26 +83,30 @@ function JsWizziTypeError(message, node) {
 }
 JsWizziTypeError.prototype.toString = function() {
     return this.message;
-};
+}
+;
 JsWizziTypeError.prototype = Object.create(Error.prototype);
 JsWizziTypeError.prototype.constructor = JsWizziTypeError;
 md.JsWizziTypeError = JsWizziTypeError;
 
 md.esprimaNodeErrorLines = function(description, node, source, json) {
+    
+    // log 'jswizzi.errors.esprimaNodeErrorLines.source', source
+    
+    // log 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
     if (node && node.loc) {
-        // log 'jswizzi.errors.esprimaNodeErrorLines.source', source
-        // log 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
         return wizziUtils.errors.getErrorLines({
                 row: node.loc.start.line, 
                 col: node.loc.start.column, 
                 description: description
-            }, source, json);
+             }, source, json);
     }
+    // log 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
     else {
-        // log 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
         return ['No data available'];
     }
-};
+}
+;
 function getEsprimaErrorLines(esprimaException, source, json) {
     var statements = source.split('\n');
     var start = Math.max(0, (esprimaException.lineNumber - 4));

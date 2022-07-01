@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\tests\models\json\model_json.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\models\json\model_json.js.ittf
 */
 'use strict';
 
@@ -23,7 +23,8 @@ var json_artifact = require('../../../lib/artifacts/json/document/gen/main');
 describe("model json", function() {
     var loadModel;
     before(function() {
-        loadModel = json_factory.createLoadModel(getWizziObject());
+        loadModel = json_factory.createLoadModel(getWizziObject())
+        ;
     });
     it("should load a basic json ittf document", function(done) {
         loadModel(path.join(__dirname, 'ittf', 'basic.json.ittf'), getLoadModelContext({}), function(err, wizziModel) {
@@ -71,10 +72,10 @@ function getWizziObject() {
     return {
             loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
                 useCache: false
-            }), 
+             }), 
             file: file, 
             verify: verify
-        };
+         };
 }
 
 function getLoadModelContext(mTreeBuildUpContext) {
@@ -92,5 +93,5 @@ function getTestModelInfo(schemaName, modelName) {
             writeResult: function(content) {
                 file.write(path.join(__dirname, 'ittf', modelName + '.' + schemaName + '.result'), content)
             }
-        };
+         };
 }

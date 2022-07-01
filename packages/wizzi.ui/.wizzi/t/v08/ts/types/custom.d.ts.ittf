@@ -1,7 +1,0 @@
-$group
-    $params &md
-    :declare
-        :module '*.svg'
-            export
-                const content
-                    :string

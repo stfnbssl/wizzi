@@ -23,12 +23,12 @@ $group
 							h4 Fragments
 								class frag-h4
 							ul
-								$foreach f in d.ittf.fragmentRefs
+								$foreach frag in d.ittf.fragmentRefs
 									li
 										class frag-to-link-li
-										a ${f.wzName}
-											href #${f.relUri}
-											data-frag-id ${f.documentId}
+										a ${frag.wzName}
+											href #${frag.relUri}
+											data-frag-id ${frag.documentId}
 											class frag-to-link-a
 						$$*$
 						pre

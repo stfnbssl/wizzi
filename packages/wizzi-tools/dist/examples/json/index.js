@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\examples\json\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\examples\json\index.js.ittf
 */
 'use strict';
 
@@ -24,7 +25,7 @@ function wizzify(name, callback) {
     console.log('source', source);
     jsonwizzifier.getWizziIttf(file.read(source), {
         dumpfile: path.join(__dirname, 'data', 'output', name + '.json.dump')
-    }, function(err, ittf) {
+     }, function(err, ittf) {
         console.log('ittf\n', ittf);
         if (err) {
             console.log('error wizzifying: ' + source);

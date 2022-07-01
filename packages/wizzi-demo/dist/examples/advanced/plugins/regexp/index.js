@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\plugins\regexp\index.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\plugins\regexp\index.js.ittf
 */
 'use strict';
 var build = require('./source/generate');
@@ -16,7 +17,7 @@ function exec(request, callback) {
         var msg = 'Invalid request: ' + request + ', should be `build` or `examples`';
         console.log(msg);
         if (callback) {
-            callback(msg);
+            callback(msg)
         }
     }
 }
@@ -26,8 +27,9 @@ module.exports = function(request, callback) {
         request = 'build';
     }
     exec(request, callback);
-};
+}
+;
 if (require.main === module) {
     var request = process.argv.length > 2 ? process.argv[2] : 'build';
-    exec(request);
+    exec(request)
 }

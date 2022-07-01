@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\frontMatter.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\frontMatter.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -43,7 +43,8 @@ module.exports = function(primaryMTreeBrick, callback) {
                     row: errItem.row, 
                     col: errItem.col + errItem.name.length + 1, 
                     description: 'jsonify error in front matter'
-                }, true);
+                 }, true)
+                ;
                 console.log('wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines);
                 return callback(prop);
             }
@@ -52,7 +53,8 @@ module.exports = function(primaryMTreeBrick, callback) {
         utilnode.remove(item)
     }
     callback(null, primaryMTreeBrick);
-};
+}
+;
 function searchCommands(item, frontmatters) {
     if (item.name === '$---') {
         frontmatters.push(item);

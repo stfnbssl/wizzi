@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\mocks\misc.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\mocks\misc.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -22,8 +22,8 @@ module.exports = {
                 // log 'addMTreeBuildUpScript'
                 file.write(path.join(path.dirname(uri), '_debug_dumps', path.basename(uri)), jsScriptCoder.toCode())
             }
-        }
-    }, 
+         }
+     }, 
     ProductionContext: {
         IttfDocumentStoreType: IttfDocumentStore, 
         dump: true, 
@@ -36,10 +36,11 @@ module.exports = {
             this.mTreeBuildUpScripts[uri] = {
                 uri: uri, 
                 script: script
-            };
+             };
             // log script, uri
+            
+            // log 'dump'
             if (this.dump) {
-                // log 'dump'
                 file.write(path.join(path.dirname(uri), '_debug', path.basename(uri) + '.js.dump'), script)
             }
         }, 
@@ -56,5 +57,5 @@ module.exports = {
             // In case of --force proceed inside the try/catch flow
             throw exception;
         }
-    }
-};
+     }
+ };

@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\graphqlparser\graphql\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\graphqlparser\graphql\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -15,7 +16,8 @@ var cleanAST = require('./cleanAST');
 function parseInternal(graphql, options, callback) {
     var syntax;
     try {
-        syntax = graphql_parser.parse(graphql);
+        syntax = graphql_parser.parse(graphql)
+        ;
         cleanAST(syntax);
     } 
     catch (ex) {
@@ -28,7 +30,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -39,7 +41,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -62,7 +65,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -76,11 +80,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 var format = function(parent, ast, options) {
     if (!ast) {
         throw new Error('missing ast. parent is: ' + util.inspect(parent, { depth: 2 }));
@@ -89,8 +95,9 @@ var format = function(parent, ast, options) {
         if (options.starter) {
             options.starter = false;
         }
+        
+        // ok
         else if (options.returnText) {
-            // ok
         }
         else {
             showstack(options);
@@ -128,7 +135,7 @@ function wizzify(graphql, options, callback) {
             children: [
                 
             ]
-        };
+         };
         format(root, syntax, options);
         return callback(null, root);
     })
@@ -145,7 +152,7 @@ function processLeadingComments(node, ittfNode) {
                     children: [
                         
                     ]
-                })
+                 })
             }
         }
     }
@@ -161,15 +168,15 @@ function processParams(ittfNode) {
             for (j=0; j<j_len; j++) {
                 p = item.children[j];
                 // log 'processParams. p.tag', p.tag
+                
+                /**
+                    * 
+                        * new Error('processParams.error. Param must be a textual or an ObjectPattern. Node:' + JSON.stringify(ittfNode))
+                */
                 if (p.tag !== '{') {
                     if (isTextualNode(p)) {
                         p.tag = 'param';
                     }
-                    /**
-                        else {
-                            throw new Error('processParams.error. Param must be a textual or an ObjectPattern. Node:' + JSON.stringify(ittfNode));
-                        }
-                    */
                 }
                 temp.push(p);
             }
@@ -253,7 +260,8 @@ function replaceChildrenOfChildWhenText(ittfNode, childPos, textTag) {
     if (childPos < 0) {
         return ;
     }
-    ittfNode.children = replaceItemInColl(ittfNode.children, childPos, textifyChildren(ittfNode.children[childPos], textTag));
+    ittfNode.children = replaceItemInColl(ittfNode.children, childPos, textifyChildren(ittfNode.children[childPos], textTag))
+    ;
 }
 function replaceItemInColl(coll, pos, replacers) {
     var ret = [];
@@ -287,7 +295,7 @@ function textifyChildren(ittfNode, tag) {
                 children: [
                     
                 ]
-            })
+             })
         }
         else {
             ret.push(item);
@@ -327,8 +335,8 @@ function getTextList(ittfNode, sep) {
         else if (item.textified) {
             sb.push(item.textified);
         }
+        // log 'getTextList failed ***************', item
         else {
-            // log 'getTextList failed ***************', item
             return null;
         }
     }
@@ -408,7 +416,7 @@ format.Name = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -422,7 +430,8 @@ format.Name = function(parent, node, options) {
     */
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node NonNullType
 format.NonNullType = function(parent, node, options) {
     console.log('node : NonNullType ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -447,7 +456,7 @@ format.NonNullType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property type and set it in a var
     var p_type = null;
     if (node.type) {
@@ -457,7 +466,7 @@ format.NonNullType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.type.kind) {
             throw 'Node type has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -484,7 +493,8 @@ format.NonNullType = function(parent, node, options) {
     ret.name = p_type.name;
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node NamedType
 format.NamedType = function(parent, node, options) {
     console.log('node : NamedType ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -509,7 +519,7 @@ format.NamedType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -519,7 +529,7 @@ format.NamedType = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -552,7 +562,8 @@ format.NamedType = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node Document
 format.Document = function(parent, node, options) {
     console.log('node : Document ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -580,14 +591,15 @@ format.Document = function(parent, node, options) {
             item.__parent = {
                 name: 'definitions', 
                 len: node.definitions.length
-            };
+             };
             format(ret, item, options)
         }
     }
     else {
         throw new Error('AST-node-property-collection definitions undefined: ' + JSON.stringify(node, null, 2));
     }
-};
+}
+;
 // process AST node SchemaDefinition
 format.SchemaDefinition = function(parent, node, options) {
     console.log('node : SchemaDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -612,7 +624,7 @@ format.SchemaDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection operationTypes and append ittfNode(s) to `ret`
     if (node.operationTypes) {
         if (typeof node.operationTypes.length === 'undefined') {
@@ -624,7 +636,7 @@ format.SchemaDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'operationTypes', 
                 len: node.operationTypes.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -642,7 +654,7 @@ format.SchemaDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -651,7 +663,8 @@ format.SchemaDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node OperationTypeDefinition
 format.OperationTypeDefinition = function(parent, node, options) {
     console.log('node : OperationTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -676,7 +689,7 @@ format.OperationTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/tag.node.operation, value: ', node.operation, '
     if (typeof node.operation !== 'undefined') {
         ret.tag = node.operation.toString();
@@ -691,7 +704,7 @@ format.OperationTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.type.kind) {
             throw 'Node type has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -722,7 +735,8 @@ format.OperationTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ObjectTypeDefinition
 format.ObjectTypeDefinition = function(parent, node, options) {
     console.log('node : ObjectTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -747,7 +761,7 @@ format.ObjectTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -757,7 +771,7 @@ format.ObjectTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -797,14 +811,14 @@ format.ObjectTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.interfaces, i_len=node.interfaces.length, item;
         for (i=0; i<i_len; i++) {
             item = node.interfaces[i];
             item.__parent = {
                 name: 'interfaces', 
                 len: node.interfaces.length
-            };
+             };
             format(p_interfaces, item, options)
         }
     }
@@ -827,7 +841,7 @@ format.ObjectTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'fields', 
                 len: node.fields.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -845,7 +859,7 @@ format.ObjectTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -854,7 +868,8 @@ format.ObjectTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node FieldDefinition
 format.FieldDefinition = function(parent, node, options) {
     console.log('node : FieldDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -879,7 +894,7 @@ format.FieldDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -889,7 +904,7 @@ format.FieldDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -921,7 +936,7 @@ format.FieldDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.type.kind) {
             throw 'Node type has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -954,7 +969,7 @@ format.FieldDefinition = function(parent, node, options) {
                 children: [
                     
                 ]
-            })
+             })
         }
         else {
             ret.tag = p_type.name;
@@ -976,7 +991,7 @@ format.FieldDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'arguments', 
                 len: node.arguments.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -994,7 +1009,7 @@ format.FieldDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1003,7 +1018,8 @@ format.FieldDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ObjectTypeExtension
 format.ObjectTypeExtension = function(parent, node, options) {
     console.log('node : ObjectTypeExtension ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1028,7 +1044,7 @@ format.ObjectTypeExtension = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1038,7 +1054,7 @@ format.ObjectTypeExtension = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1078,14 +1094,14 @@ format.ObjectTypeExtension = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         var i, i_items=node.interfaces, i_len=node.interfaces.length, item;
         for (i=0; i<i_len; i++) {
             item = node.interfaces[i];
             item.__parent = {
                 name: 'interfaces', 
                 len: node.interfaces.length
-            };
+             };
             format(p_interfaces, item, options)
         }
     }
@@ -1108,7 +1124,7 @@ format.ObjectTypeExtension = function(parent, node, options) {
             item.__parent = {
                 name: 'fields', 
                 len: node.fields.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1126,7 +1142,7 @@ format.ObjectTypeExtension = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1135,7 +1151,8 @@ format.ObjectTypeExtension = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node InterfaceTypeDefinition
 format.InterfaceTypeDefinition = function(parent, node, options) {
     console.log('node : InterfaceTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1160,7 +1177,7 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1170,7 +1187,7 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1210,7 +1227,7 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'fields', 
                 len: node.fields.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1228,7 +1245,7 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1237,7 +1254,8 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node InterfaceTypeExtension
 format.InterfaceTypeExtension = function(parent, node, options) {
     console.log('node : InterfaceTypeExtension ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1262,7 +1280,7 @@ format.InterfaceTypeExtension = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1272,7 +1290,7 @@ format.InterfaceTypeExtension = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1312,7 +1330,7 @@ format.InterfaceTypeExtension = function(parent, node, options) {
             item.__parent = {
                 name: 'fields', 
                 len: node.fields.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1330,7 +1348,7 @@ format.InterfaceTypeExtension = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1339,7 +1357,8 @@ format.InterfaceTypeExtension = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node UnionTypeDefinition
 format.UnionTypeDefinition = function(parent, node, options) {
     console.log('node : UnionTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1364,7 +1383,7 @@ format.UnionTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1374,7 +1393,7 @@ format.UnionTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1414,7 +1433,7 @@ format.UnionTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'types', 
                 len: node.types.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1439,7 +1458,7 @@ format.UnionTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1448,7 +1467,8 @@ format.UnionTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ListType
 format.ListType = function(parent, node, options) {
     console.log('node : ListType ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1473,7 +1493,7 @@ format.ListType = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property type and append ittfNode to `ret`
     if (node.type) {
         if (!node.type.kind) {
@@ -1486,7 +1506,8 @@ format.ListType = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ScalarTypeDefinition
 format.ScalarTypeDefinition = function(parent, node, options) {
     console.log('node : ScalarTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1511,7 +1532,7 @@ format.ScalarTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -1540,7 +1561,7 @@ format.ScalarTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1549,7 +1570,8 @@ format.ScalarTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node EnumTypeDefinition
 format.EnumTypeDefinition = function(parent, node, options) {
     console.log('node : EnumTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1574,7 +1596,7 @@ format.EnumTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -1596,7 +1618,7 @@ format.EnumTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'values', 
                 len: node.values.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1614,7 +1636,7 @@ format.EnumTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1623,7 +1645,8 @@ format.EnumTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node EnumValueDefinition
 format.EnumValueDefinition = function(parent, node, options) {
     console.log('node : EnumValueDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1648,7 +1671,7 @@ format.EnumValueDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -1670,7 +1693,7 @@ format.EnumValueDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1679,7 +1702,8 @@ format.EnumValueDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node OperationDefinition
 format.OperationDefinition = function(parent, node, options) {
     console.log('node : OperationDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1704,7 +1728,7 @@ format.OperationDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // log 't/tag.node.operation, value: ', node.operation, '
     if (typeof node.operation !== 'undefined') {
         ret.tag = node.operation.toString();
@@ -1721,7 +1745,7 @@ format.OperationDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'variableDefinitions', 
                 len: node.variableDefinitions.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1749,7 +1773,7 @@ format.OperationDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1758,7 +1782,8 @@ format.OperationDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node SelectionSet
 format.SelectionSet = function(parent, node, options) {
     console.log('node : SelectionSet ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1783,7 +1808,7 @@ format.SelectionSet = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection selections and append ittfNode(s) to `ret`
     if (node.selections) {
         if (typeof node.selections.length === 'undefined') {
@@ -1795,7 +1820,7 @@ format.SelectionSet = function(parent, node, options) {
             item.__parent = {
                 name: 'selections', 
                 len: node.selections.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1804,7 +1829,8 @@ format.SelectionSet = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node InputValueDefinition
 format.InputValueDefinition = function(parent, node, options) {
     console.log('node : InputValueDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1829,7 +1855,7 @@ format.InputValueDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1839,7 +1865,7 @@ format.InputValueDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1871,7 +1897,7 @@ format.InputValueDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.type.kind) {
             throw 'Node type has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1903,7 +1929,7 @@ format.InputValueDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.defaultValue.kind) {
             throw 'Node defaultValue has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -1947,7 +1973,7 @@ format.InputValueDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -1956,7 +1982,8 @@ format.InputValueDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node InputObjectTypeDefinition
 format.InputObjectTypeDefinition = function(parent, node, options) {
     console.log('node : InputObjectTypeDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -1981,7 +2008,7 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -1991,7 +2018,7 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -2032,14 +2059,14 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             var i, i_items=node.fields, i_len=node.fields.length, item;
             for (i=0; i<i_len; i++) {
                 item = node.fields[i];
                 item.__parent = {
                     name: 'fields', 
                     len: node.fields.length
-                };
+                 };
                 format(tempfields, item, options)
             }
             ret.children.push(tempfields)
@@ -2056,7 +2083,7 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2065,7 +2092,8 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node Field
 format.Field = function(parent, node, options) {
     console.log('node : Field ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2090,7 +2118,7 @@ format.Field = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -2107,7 +2135,7 @@ format.Field = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.alias.kind) {
             throw 'Node alias has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -2142,7 +2170,7 @@ format.Field = function(parent, node, options) {
             item.__parent = {
                 name: 'arguments', 
                 len: node.arguments.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2167,7 +2195,7 @@ format.Field = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2176,7 +2204,8 @@ format.Field = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node Argument
 format.Argument = function(parent, node, options) {
     console.log('node : Argument ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2201,7 +2230,7 @@ format.Argument = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -2211,7 +2240,7 @@ format.Argument = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -2249,7 +2278,8 @@ format.Argument = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node IntValue
 format.IntValue = function(parent, node, options) {
     console.log('node : IntValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2274,7 +2304,7 @@ format.IntValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -2283,7 +2313,8 @@ format.IntValue = function(parent, node, options) {
     console.log('t/name ittf.ret', ret);
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node FloatValue
 format.FloatValue = function(parent, node, options) {
     console.log('node : FloatValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2308,7 +2339,7 @@ format.FloatValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -2317,7 +2348,8 @@ format.FloatValue = function(parent, node, options) {
     console.log('t/name ittf.ret', ret);
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node BooleanValue
 format.BooleanValue = function(parent, node, options) {
     console.log('node : BooleanValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2342,7 +2374,7 @@ format.BooleanValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -2351,7 +2383,8 @@ format.BooleanValue = function(parent, node, options) {
     console.log('t/name ittf.ret', ret);
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node NullValue
 format.NullValue = function(parent, node, options) {
     console.log('node : NullValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2376,7 +2409,7 @@ format.NullValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -2385,7 +2418,8 @@ format.NullValue = function(parent, node, options) {
     console.log('t/name ittf.ret', ret);
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node StringValue
 format.StringValue = function(parent, node, options) {
     console.log('node : StringValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2410,7 +2444,7 @@ format.StringValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     console.log('t/name.node.value, value: ', node.value);
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
@@ -2427,12 +2461,13 @@ format.StringValue = function(parent, node, options) {
                 children: [
                     
                 ]
-            })
+             })
         }
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ListValue
 format.ListValue = function(parent, node, options) {
     console.log('node : ListValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2457,7 +2492,7 @@ format.ListValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection values and append ittfNode(s) to `ret`
     if (node.values) {
         if (typeof node.values.length === 'undefined') {
@@ -2469,7 +2504,7 @@ format.ListValue = function(parent, node, options) {
             item.__parent = {
                 name: 'values', 
                 len: node.values.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2478,7 +2513,8 @@ format.ListValue = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ObjectValue
 format.ObjectValue = function(parent, node, options) {
     console.log('node : ObjectValue ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2503,7 +2539,7 @@ format.ObjectValue = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property-collection fields and append ittfNode(s) to `ret`
     if (node.fields) {
         if (typeof node.fields.length === 'undefined') {
@@ -2515,7 +2551,7 @@ format.ObjectValue = function(parent, node, options) {
             item.__parent = {
                 name: 'fields', 
                 len: node.fields.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2524,7 +2560,8 @@ format.ObjectValue = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node ObjectField
 format.ObjectField = function(parent, node, options) {
     console.log('node : ObjectField ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2549,7 +2586,7 @@ format.ObjectField = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -2572,7 +2609,8 @@ format.ObjectField = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node FragmentDefinition
 format.FragmentDefinition = function(parent, node, options) {
     console.log('node : FragmentDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2597,7 +2635,7 @@ format.FragmentDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -2614,7 +2652,13 @@ format.FragmentDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
+    
+    /**
+        * TODO VIA
+        * 
+            * new Error('AST-property typeCondition/on not managed by f_p_tag')
+    */
     if (node.typeCondition) {
         if (!node.typeCondition.kind) {
             throw 'Node typeCondition has no kind: ' + JSON.stringify(node, null, 2);
@@ -2640,12 +2684,6 @@ format.FragmentDefinition = function(parent, node, options) {
                 }
             }
         }
-        /**
-            TODO VIA
-            else {
-                throw new Error('AST-property typeCondition/on not managed by f_p_tag');
-            }
-        */
     }
     /**
          process AST-node-property typeCondition and set it in a var
@@ -2657,7 +2695,7 @@ format.FragmentDefinition = function(parent, node, options) {
                 children: [
                     
                 ]
-            };
+             };
             if (!node.typeCondition.kind) {
                 throw 'Node typeCondition has no kind: ' + JSON.stringify(node, null, 2);
             }
@@ -2703,7 +2741,7 @@ format.FragmentDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2712,7 +2750,8 @@ format.FragmentDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node FragmentSpread
 format.FragmentSpread = function(parent, node, options) {
     console.log('node : FragmentSpread ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2737,7 +2776,7 @@ format.FragmentSpread = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -2759,7 +2798,7 @@ format.FragmentSpread = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2768,7 +2807,8 @@ format.FragmentSpread = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node InlineFragment
 format.InlineFragment = function(parent, node, options) {
     console.log('node : InlineFragment ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2793,7 +2833,7 @@ format.InlineFragment = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property typeCondition and set it in a var
     var p_typeCondition = null;
     if (node.typeCondition) {
@@ -2803,7 +2843,7 @@ format.InlineFragment = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.typeCondition.kind) {
             throw 'Node typeCondition has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -2850,7 +2890,7 @@ format.InlineFragment = function(parent, node, options) {
             item.__parent = {
                 name: 'directives', 
                 len: node.directives.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -2859,7 +2899,8 @@ format.InlineFragment = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node VariableDefinition
 format.VariableDefinition = function(parent, node, options) {
     console.log('node : VariableDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2884,7 +2925,7 @@ format.VariableDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property variable and append ittfNode to `ret`
     if (node.variable) {
         if (!node.variable.kind) {
@@ -2907,7 +2948,8 @@ format.VariableDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node Variable
 format.Variable = function(parent, node, options) {
     console.log('node : Variable ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2932,7 +2974,7 @@ format.Variable = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and set it in a var
     var p_name = null;
     if (node.name) {
@@ -2942,7 +2984,7 @@ format.Variable = function(parent, node, options) {
             children: [
                 
             ]
-        };
+         };
         if (!node.name.kind) {
             throw 'Node name has no kind: ' + JSON.stringify(node, null, 2);
         }
@@ -2974,7 +3016,8 @@ format.Variable = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node DirectiveDefinition
 format.DirectiveDefinition = function(parent, node, options) {
     console.log('node : DirectiveDefinition ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -2999,7 +3042,7 @@ format.DirectiveDefinition = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -3021,7 +3064,7 @@ format.DirectiveDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'arguments', 
                 len: node.arguments.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -3039,7 +3082,7 @@ format.DirectiveDefinition = function(parent, node, options) {
             item.__parent = {
                 name: 'locations', 
                 len: node.locations.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -3048,7 +3091,8 @@ format.DirectiveDefinition = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;
 // process AST node Directive
 format.Directive = function(parent, node, options) {
     console.log('node : Directive ----------------------------------------- parent ittf tag : ', parent.tag);
@@ -3073,7 +3117,7 @@ format.Directive = function(parent, node, options) {
         children: [
             
         ]
-    };
+     };
     // process AST-node-property name and append ittfNode to `ret`
     if (node.name) {
         if (!node.name.kind) {
@@ -3095,7 +3139,7 @@ format.Directive = function(parent, node, options) {
             item.__parent = {
                 name: 'arguments', 
                 len: node.arguments.length
-            };
+             };
             format(ret, item, options)
         }
     }
@@ -3104,4 +3148,5 @@ format.Directive = function(parent, node, options) {
     }
     // log '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
-};
+}
+;

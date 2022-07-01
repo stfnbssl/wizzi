@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\json\toml\gen\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\json\toml\gen\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -32,8 +32,8 @@ md.gen = function(model, ctx, callback) {
             else if (verify.isArray(item)) {
                 ctx.w(key + ' = [' + writeArray(item, ctx) + ']')
             }
+            // log 'key', key, 'value', verify.isString(item) ? '"' + item + '"' : item
             else {
-                // log 'key', key, 'value', verify.isString(item) ? '"' + item + '"' : item
                 ctx.w(key + ' = ' + (verify.isString(item) ? ('"' + item + '"') : item))
             }
         }
@@ -47,7 +47,8 @@ md.gen = function(model, ctx, callback) {
     else {
         return callback(null, ctx);
     }
-};
+}
+;
 function writeArray(arr, ctx) {
     var first = true;
     var i, i_items=arr, i_len=arr.length, item;
@@ -93,5 +94,5 @@ function error(code, method, message, innerError) {
             name: ( verify.isNumber(code) ? 'Err-' + code : code ), 
             method: 'wizzi-core/lib/artifacts/json/toml/main.' + method, 
             sourcePath: __filename
-        }, message || 'Error message unavailable');
+         }, message || 'Error message unavailable');
 }

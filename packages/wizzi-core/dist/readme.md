@@ -1,6 +1,6 @@
 # wizzi-core
 
-A Wizzi plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API..
+A Wizzi Plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API..
 
 ## Work still in progress
 
@@ -8,7 +8,7 @@ Availability of features will be announced
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
 
 ## Features
-### Implemented Wizzi models
+### Implemented Wizzi Models
 
 <table>
 <tr>
@@ -35,7 +35,7 @@ no<td>
 </tr>
 <tr>
 <td>
-<a href https://github.com/wizzifactory/wizzi/blob/master/packages/wizzi-core/.wizzi/ittf/lib/wizzi/schemas/wfschema.wfschema.ittf>wfschema</a><td>Wizzi schema definition</td>
+<a href https://github.com/wizzifactory/wizzi/blob/master/packages/wizzi-core/.wizzi/ittf/lib/wizzi/schemas/wfschema.wfschema.ittf>wfschema</a><td>Wizzi Schema definition</td>
 <td>
 no<td>
 
@@ -178,7 +178,7 @@ yes<td>
 
 
 
-<p>Wizzi plugins are documented <a href="https://wizzifactory.github.io/docs/wizziplugins.html">here</a>.</p>
+<p>Wizzi Plugins are documented <a href="https://wizzifactory.github.io/docs/wizziplugins.html">here</a>.</p>
 
 
 

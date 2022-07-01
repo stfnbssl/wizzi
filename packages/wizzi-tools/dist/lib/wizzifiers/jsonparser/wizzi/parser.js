@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\jsonparser\wizzi\parser.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsonparser\wizzi\parser.js.ittf
 */
 'use strict';
 var md = module.exports = {};
@@ -50,7 +51,7 @@ md.parse = function(input, handlers, callback) {
         name: [], 
         value: [], 
         hb: []
-    };
+     };
     for (var k in handlers) {
         state[k] = handlers[k];
     }
@@ -135,13 +136,14 @@ md.parse = function(input, handlers, callback) {
                     state.cur = COMMENT_SINGLE_IS;
                     return true;
                 }
+                
+                // log 'COMMENT_MULTI_END_COULD done', state.before_comment
                 else if (state.cur === COMMENT_MULTI_END_COULD) {
-                    // log 'COMMENT_MULTI_END_COULD done', state.before_comment
                     state.cur = state.before_comment;
                     return true;
                 }
+                // log 'COMMENT_COULD prev', state.cur
                 else {
-                    // log 'COMMENT_COULD prev', state.cur
                     state.before_comment = state.cur;
                     state.cur = COMMENT_COULD;
                     return true;
@@ -158,8 +160,9 @@ md.parse = function(input, handlers, callback) {
                     state.cur = COMMENT_MULTI_IS;
                     return true;
                 }
+                
+                // log 'COMMENT_MULTI_END_COULD'
                 else if (state.cur === COMMENT_MULTI_IS) {
-                    // log 'COMMENT_MULTI_END_COULD'
                     state.cur = COMMENT_MULTI_END_COULD;
                     return true;
                 }
@@ -187,8 +190,9 @@ md.parse = function(input, handlers, callback) {
                     }
                     return true;
                 }
+                
+                // log 'COMMENT_SINGLE_IS', ch === '\n'
                 else if (state.cur === COMMENT_SINGLE_IS) {
-                    // log 'COMMENT_SINGLE_IS', ch === '\n'
                     if (ch === '\n') {
                         state.cur = state.before_comment;
                         state.line++;
@@ -221,8 +225,9 @@ md.parse = function(input, handlers, callback) {
                     if (chb === '{') {
                         gop++;
                     }
+                    
+                    // ok
                     else if (isWhiteSpace(chb)) {
-                        // ok
                     }
                     else {
                         return false;
@@ -241,8 +246,9 @@ md.parse = function(input, handlers, callback) {
                     }
                 }
                 else if (gop == 3) {
+                    
+                    // ok
                     if (isWhiteSpace(chb)) {
-                        // ok
                     }
                     else if (chb === '}') {
                         onHandlebar();
@@ -261,8 +267,9 @@ md.parse = function(input, handlers, callback) {
             }
         }
         if (ch === '{') {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
             else if (state.cur === START) {
                 onObject(true);
@@ -277,12 +284,14 @@ md.parse = function(input, handlers, callback) {
                 }
             }
             else if (state.cur === WAIT_PROP_VALUE) {
+                
+                // _ onPropName
+                
+                // _ onObject(true)
                 if (tryHB() == false) {
-                    // _ onPropName
                     onObjectProp();
                     state.cur = WAIT_PROP_COMMA;
                     state.stack.push(state.cur);
-                    // _ onObject(true)
                     state.cur = WAIT_PROP_NAME;
                 }
             }
@@ -314,10 +323,12 @@ md.parse = function(input, handlers, callback) {
                 return error(ch);
             }
         }
+        
+        // no setString
         else if (ch === '}') {
-            // no setString
+            
+            // ok
             if (tryCommentOrString(false)) {
-                // ok
             }
             else if (state.cur === PROP_VALUE_STRING || state.cur === ARRAY_VALUE_STRING) {
                 state.value.push(ch);
@@ -325,36 +336,37 @@ md.parse = function(input, handlers, callback) {
             else if (state.cur === PROP_NAME) {
                 state.name.push(ch);
             }
+            
+            /**
+                * FIXME
+                * state.cur === WAIT_PROP_COMMA
+                    * onClosePropName
+            */
             else if (state.cur === PROP_VALUE) {
                 onProp();
                 onObject(false);
                 state.cur = state.stack.pop(ch);
-                /**
-                    FIXME
-                    if (state.cur === WAIT_PROP_COMMA) {
-                        onClosePropName();
-                    }
-                */
             }
+            
+            // accept comma after last prop
             else if (state.cur === WAIT_OBJECT_CLOSE) {
-                // accept comma after last prop
                 onObject(false);
                 state.cur = state.stack.pop(ch);
             }
+            /**
+                FIXME
+                // state.cur === WAIT_PROP_COMMA
+                    // onClosePropName
+            */
             else {
                 onObject(false);
                 state.cur = state.stack.pop(ch);
-                /**
-                    FIXME
-                    if (state.cur === WAIT_PROP_COMMA) {
-                        onClosePropName();
-                    }
-                */
             }
         }
         else if (ch === '[') {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
             else if (state.cur === START) {
                 onArray(true);
@@ -365,39 +377,50 @@ md.parse = function(input, handlers, callback) {
                 onArray(true);
                 state.stack.push(WAIT_ARRAY_COMMA);
             }
+            
+            // _ onPropName
+            
+            // _ onArray(true)
             else if (state.cur === WAIT_PROP_VALUE) {
-                // _ onPropName
                 onArrayProp();
                 state.stack.push(WAIT_PROP_COMMA);
-                // _ onArray(true)
                 state.cur = WAIT_ARRAY_VALUE;
             }
             else {
                 return error(ch);
             }
         }
+        
+        /**
+            * FIXME
+            * state.cur === WAIT_PROP_COMMA
+                * onClosePropName
+        */
         else if (ch === ']') {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
+            
+            /**
+                * FIXME
+                * state.cur === WAIT_PROP_COMMA
+                    * onClosePropName
+            */
             else if (state.cur === ARRAY_VALUE) {
                 onArrayValue();
                 onArray(false);
                 state.cur = state.stack.pop(ch);
-                /**
-                    FIXME
-                    if (state.cur === WAIT_PROP_COMMA) {
-                        onClosePropName();
-                    }
-                */
             }
+            
+            // empty array
             else if (state.cur === WAIT_ARRAY_VALUE) {
-                // empty array
                 onArray(false);
                 state.cur = state.stack.pop(ch);
             }
+            
+            // accept comma after last value
             else if (state.cur === WAIT_ARRAY_CLOSE) {
-                // accept comma after last value
                 onArray(false);
                 state.cur = state.stack.pop(ch);
             }
@@ -408,16 +431,11 @@ md.parse = function(input, handlers, callback) {
             else {
                 return error(ch);
             }
-            /**
-                FIXME
-                if (state.cur === WAIT_PROP_COMMA) {
-                    onClosePropName();
-                }
-            */
         }
         else if (ch === ':') {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
             else if (state.cur === WAIT_COLON) {
                 state.cur = WAIT_PROP_VALUE;
@@ -426,10 +444,12 @@ md.parse = function(input, handlers, callback) {
                 return error(ch);
             }
         }
+        
+        // no setString
         else if (ch === '"') {
-            // no setString
+            
+            // ok
             if (tryCommentOrString(false)) {
-                // ok
             }
             else if (state.cur === WAIT_PROP_NAME) {
                 state.cur = PROP_NAME;
@@ -460,8 +480,9 @@ md.parse = function(input, handlers, callback) {
             }
         }
         else if (ch === ',') {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
             else if (state.cur === PROP_VALUE) {
                 onProp();
@@ -477,12 +498,14 @@ md.parse = function(input, handlers, callback) {
             else if (state.cur === WAIT_ARRAY_COMMA) {
                 state.cur = WAIT_ARRAY_VALUE;
             }
+            
+            // allow comma after last value
             else if (state.cur === 	WAIT_ARRAY_VALUE) {
-                // allow comma after last value
                 state.cur = WAIT_ARRAY_CLOSE;
             }
+            
+            // allow comma after last prop
             else if (state.cur === 	WAIT_PROP_NAME) {
-                // allow comma after last prop
                 state.cur = WAIT_OBJECT_CLOSE;
             }
             else {
@@ -490,15 +513,17 @@ md.parse = function(input, handlers, callback) {
             }
         }
         else {
+            
+            // ok
             if (tryCommentOrString(true)) {
-                // ok
             }
             else if (ch === '\n') {
                 state.line++;
                 state.col = 0;
             }
+            
+            // skip
             else if (ch === ' ' || ch === '\t' || ch === '\r') {
-                // skip
             }
             else if (state.cur === PROP_VALUE || state.cur === ARRAY_VALUE) {
                 state.value.push(ch);
@@ -517,4 +542,5 @@ md.parse = function(input, handlers, callback) {
         }
     }
     return callback(null, state);
-};
+}
+;

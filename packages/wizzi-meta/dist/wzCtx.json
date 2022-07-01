@@ -1,0 +1,19 @@
+{
+    "name": "@wizzi/meta",
+    "version": "0.7.0",
+    "title": "A Wizzi Core Plugin for Wizzi code meta analisys.",
+    "license": "MIT",
+    "schemas": [
+        {
+            "name": "wfpackage",
+            "title": "Wizzi Package model",
+            "commentTag": "#",
+            "transformers": [],
+            "artifacts": [
+                {
+                    "name": "wfpackage/fs-scanner"
+                }
+            ]
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\mocks\mTreeLoader.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\mocks\mTreeLoader.js.ittf
 */
 'use strict';
 var url = require('url');
@@ -16,7 +16,7 @@ module.exports = function(store, content_filepath, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(content_filepath, loadContext, function(err, provider) {
         if (err) {
             console.log('err', err);
@@ -43,4 +43,5 @@ module.exports = function(store, content_filepath, callback) {
             })
         })
     })
-};
+}
+;

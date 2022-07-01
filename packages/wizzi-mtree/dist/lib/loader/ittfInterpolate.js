@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\ittfInterpolate.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -31,8 +31,9 @@ function interpolate(template, jsWizziContext, options) {
     }
     for (var i=0; i<l; i++) {
         ch = template[i];
+        
+        // log 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
         if (ch == '\\') {
-            // log 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
         }
         if (state == state_text && ch == '\\' && i+3 < l && template[i+1] == '$' && template[i+2] == '\\' && template[i+3] == '{') {
             result.push('${');
@@ -46,9 +47,9 @@ function interpolate(template, jsWizziContext, options) {
             else if (state == state_key) {
                 key.push(ch);
             }
+            // state == state_tag
+            // case double
             else {
-                // state == state_tag
-                // case double
                 result.push('$$');
                 state = state_text;
             }
@@ -60,14 +61,15 @@ function interpolate(template, jsWizziContext, options) {
                 }
                 result.push(ch);
             }
+            
+            // case '{' inside $ { }
             else if (state == state_key) {
-                // case '{' inside $ { }
                 inside_tags++;
                 key.push(ch);
             }
+            // state == state_tag
+            // case ${
             else {
-                // state == state_tag
-                // case ${
                 state = state_key;
                 key = [];
                 inside_tags = 0;
@@ -81,15 +83,17 @@ function interpolate(template, jsWizziContext, options) {
                 result.push(ch);
             }
             else if (state == state_key) {
+                
+                // case '{}' inside $ { }
                 if (inside_tags > 0) {
-                    // case '{}' inside $ { }
                     inside_tags--;
                     key.push(ch);
                 }
                 else {
                     keyOrCode = key.join('');
+                    
+                    // case empty ${} - is ok do not replace
                     if (keyOrCode.replace(/\s/g,'').length == 0) {
-                        // case empty ${} - is ok do not replace
                         result.push('${}');
                     }
                     else {
@@ -107,9 +111,9 @@ function interpolate(template, jsWizziContext, options) {
                     state = state_text;
                 }
             }
+            // state == state_tag
+            // case strange sequence '$}' but ok
             else {
-                // state == state_tag
-                // case strange sequence '$}' but ok
                 result.push('$}');
                 state = state_text;
             }
@@ -124,9 +128,9 @@ function interpolate(template, jsWizziContext, options) {
             else if (state == state_key) {
                 key.push(ch);
             }
+            // state == state_tag
+            // case sequence '\$\*' is text
             else {
-                // state == state_tag
-                // case sequence '\$\*' is text
                 result.push('$');
                 if (isCompile && ch === "'") {
                     result.push('\\');
@@ -137,8 +141,9 @@ function interpolate(template, jsWizziContext, options) {
         }
     }
     // check for unclosed macros
+    
+    // 16/11/17 _ result.push('${' + verify.replaceAll(key.join(''), "'", "\\'"))
     if (state == state_key) {
-        // 16/11/17 _ result.push('${' + verify.replaceAll(key.join(''), "'", "\\'"))
         result.push('${' + key.join(''));
     }
     else if (state == state_tag) {
@@ -155,11 +160,15 @@ function evalKeyOrCode(keyOrCode, jsWizziContext) {
     var stm = keyOrCode.indexOf('return ') > -1 ? 'var _____result = function dummy() { ' + keyOrCode + ' }();' : 'var _____result = ' + keyOrCode + ';';
     // log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
     var notUsed = jsWizziRunner.run(stm, jsWizziContext);
+    
+    // TODO verify.logError does not exist any more 25/02/21
+    
+    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.12.loader.ittfInterpolate.evalKeyOrCode' )
+    
+    // _ verify.logError( 'checked_call_return.error.forTest',  'stm',  stm )
+    
+    // _ verify.logError( 'checked_call_return.error.notUsed', notUsed )
     if (notUsed && notUsed.__is_error) {
-        // TODO verify.logError does not exist any more 25/02/21
-        // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.11.loader.ittfInterpolate.evalKeyOrCode' )
-        // _ verify.logError( 'checked_call_return.error.forTest',  'stm',  stm )
-        // _ verify.logError( 'checked_call_return.error.notUsed', notUsed )
         return notUsed;
     }
     var result = jsWizziContext.getValue('_____result');

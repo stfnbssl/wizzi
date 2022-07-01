@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\util\lineparser.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\util\lineparser.js.ittf
 */
 'use strict';
 var errors = require('../errors');
@@ -13,7 +14,7 @@ md.parse = function(text, node) {
                 join: function() {
                     return '';
                 }
-            };
+             };
     }
     var ch,
         l = text.length,
@@ -22,7 +23,7 @@ md.parse = function(text, node) {
             quote: null, 
             text: '', 
             raw: ''
-        };
+         };
     for (var i = 0; i < l; i++) {
         ch = text[i];
         if (token.quote != null) {
@@ -32,7 +33,7 @@ md.parse = function(text, node) {
                     quote: null, 
                     text: '', 
                     raw: ''
-                };
+                 };
             }
             else {
                 token.text += ch;
@@ -53,12 +54,12 @@ md.parse = function(text, node) {
                 quote: null, 
                 text: ch, 
                 raw: ch
-            })
+             })
             token = {
                 quote: null, 
                 text: '', 
                 raw: ''
-            };
+             };
         }
         else if (ch == ' ' || ch == '\t') {
             if (token.text.length > 0) {
@@ -68,7 +69,7 @@ md.parse = function(text, node) {
                     quote: null, 
                     text: '', 
                     raw: ''
-                };
+                 };
             }
         }
         else {
@@ -82,7 +83,7 @@ md.parse = function(text, node) {
             quote: null, 
             text: '', 
             raw: ''
-        };
+         };
     }
     return {
             tokens: tokens, 
@@ -130,7 +131,7 @@ md.parse = function(text, node) {
                 var ret = {
                     name: '', 
                     value: ''
-                };
+                 };
                 if (this.tokens.length >= 2) {
                     tk = this.tokens[0];
                     ret.name = tk.text;
@@ -143,8 +144,9 @@ md.parse = function(text, node) {
                 }
                 return ret;
             }
-        };
-};
+         };
+}
+;
 md.parseInterpolation = function(text, node, handlebar, ng) {
     if (! (verify.isString(text))) {
         return {
@@ -152,7 +154,7 @@ md.parseInterpolation = function(text, node, handlebar, ng) {
                 join: function() {
                     return '';
                 }
-            };
+             };
     }
     var openMacro = ng ? '[' : '{';
     var closeMacro = ng ? ']' : '}';
@@ -163,7 +165,7 @@ md.parseInterpolation = function(text, node, handlebar, ng) {
         token = {
             kind: 0, 
             text: ''
-        };
+         };
     for (var i = 0; i < l; i++) {
         ch = text[i];
         if (ch == openMacro) {
@@ -177,7 +179,7 @@ md.parseInterpolation = function(text, node, handlebar, ng) {
                 token = {
                     kind: 1, 
                     text: ''
-                };
+                 };
                 state = 2;
             }
             else if (state === 2) {
@@ -206,7 +208,7 @@ md.parseInterpolation = function(text, node, handlebar, ng) {
                 token = {
                     kind: 0, 
                     text: ''
-                };
+                 };
                 state = 0;
             }
         }
@@ -258,8 +260,9 @@ md.parseInterpolation = function(text, node, handlebar, ng) {
                 }
                 return t.join('');
             }
-        };
-};
+         };
+}
+;
 //
 md.parseNameValueRaw = function(text, node) {
     var name = '',
@@ -305,8 +308,9 @@ md.parseNameValueRaw = function(text, node) {
             hasValue: function() {
                 return value.length > 0;
             }
-        };
-};
+         };
+}
+;
 //
 md.parseCategoryNameValue = function(text, node) {
     var nv1 = md.parseNameValueRaw(text, node);
@@ -326,8 +330,9 @@ md.parseCategoryNameValue = function(text, node) {
             hasValue: function() {
                 return value.length > 0;
             }
-        };
-};
+         };
+}
+;
 function escapename(value) {
     if (verify.isNotEmpty(value)) {
         return verify.replaceAll(verify.replaceAll(value, "\\", "\\\\"), '"', '\\"');

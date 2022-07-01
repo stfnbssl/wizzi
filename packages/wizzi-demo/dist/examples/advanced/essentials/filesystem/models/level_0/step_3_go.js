@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\filesystem\models\level_0\step_3_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\filesystem\models\level_0\step_3_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,16 +18,12 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzimodel = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         Wizzi model
-         How to load a wizzi model passing an mTree build up context object
-         to the loader and passing values to the factory globalContext.
-    */
+    heading1('Advanced-example starting')
+    //
     
     globalContext = {
         copy: 'The wizzi team'
-    };
+     };
     
     mTreeBuildupContext = {
         packages: [
@@ -34,14 +31,14 @@ var wizzimodel = function(step_callback) {
                 name: 'wizzi-utils', 
                 description: '', 
                 uri: ''
-            }, 
+             }, 
             {
                 name: 'wizzi-mtree', 
                 description: '', 
                 uri: ''
-            }
+             }
         ]
-    };
+     };
     // Create a filesystem factory without access control
     wizzi.fsFactory({
         plugins: {
@@ -50,9 +47,9 @@ var wizzimodel = function(step_callback) {
                 'wizzi-js', 
                 'wizzi-web'
             ]
-        }, 
+         }, 
         globalContext: globalContext
-    }, function(err, wf) {
+     }, function(err, wf) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
@@ -65,12 +62,12 @@ var wizzimodel = function(step_callback) {
                 console.log('Error fullErr', fullErr);
                 throw new Error(JSON.stringify(err, null, 2));
             }
-            printValue('wizziModel', wizziModel, 'dashes');
+            printValue('wizziModel', wizziModel, 'dashes')
             if (step_callback) {
                 return step_callback(null);
             }
-        });
-    });
+        })
+    })
 };
 wizzimodel.__name = 'Level 0 - wizzimodel';
 function heading1(text) {
@@ -100,7 +97,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -109,12 +106,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

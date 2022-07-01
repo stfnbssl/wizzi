@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\filesystem\schemas\level_0\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\filesystem\schemas\level_0\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,20 +18,15 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzischema = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         Wizzi schema
-         How to generate the artifacts for a new wizzi schema
-         A simple schema with a `root` and a single `element`
-         that could represent a product record information.
-    */
+    heading1('Advanced-example starting')
+    //
     
     globalContext = {
         globalContextDummy: 'If you see me the global context works fine.'
-    };
+     };
     mTreeBuildupContext = {
         modelLoadContextDummy: 'If you see me the model load context works fine.'
-    };
+     };
     
     // Create a filesystem factory without access control,
     // configured with the default wizzi plugins and
@@ -44,9 +40,9 @@ var wizzischema = function(step_callback) {
                 './local/index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname)
-        }, 
+         }, 
         globalContext: globalContext
-    }, function(err, wf) {
+     }, function(err, wf) {
         if (err) {
             var fullErr = JSON.stringify(err, null, 2);
             console.log('Error fullErr', fullErr);
@@ -64,7 +60,7 @@ var wizzischema = function(step_callback) {
                 console.log('Error fullErr', fullErr);
                 throw new Error(JSON.stringify(err, null, 2));
             }
-            printValue('Result', 'Wizzi model of schema sample_0_1 generated. \n' + JSON.stringify(result, null, 2), 'dashes');
+            printValue('Result', 'Wizzi model of schema sample_0_1 generated. \n' + JSON.stringify(result, null, 2), 'dashes')
             wf.loadModel(path.join(__dirname, 'step_1', 'first.sample_0_1.ittf'), mTreeBuildupContext, function(err, wizziModel) {
                 if (err) {
                     var fullErr = JSON.stringify(err, null, 2);
@@ -72,19 +68,19 @@ var wizzischema = function(step_callback) {
                     throw new Error(JSON.stringify(err, null, 2));
                 }
                 // And print the loaded model
-                printValue('Result', 'Ittf document first.sample_0_1.ittf loaded.', 'dashes');
+                printValue('Result', 'Ittf document first.sample_0_1.ittf loaded.', 'dashes')
                 if (wizziModel.toJson) {
-                    printValue('wizziModel.toJson()', stringify(wizziModel.toJson(), null, 4), 'dashes');
+                    printValue('wizziModel.toJson()', stringify(wizziModel.toJson(), null, 4), 'dashes')
                 }
                 else {
-                    printValue('wizziModel', stringify(wizziModel, null, 4), 'dashes');
+                    printValue('wizziModel', stringify(wizziModel, null, 4), 'dashes')
                 }
                 if (step_callback) {
-                    step_callback(null);
+                    step_callback(null)
                 }
-            });
-        });
-    });
+            })
+        })
+    })
 };
 wizzischema.__name = 'Level 0 - wizzischema';
 function heading1(text) {
@@ -114,7 +110,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -123,12 +119,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

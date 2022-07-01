@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\wizzi\models\text-factory.g.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\text-factory.g.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -47,8 +47,9 @@ md.createLoadModel = function(wizziObject) {
         // log 'wizzi-core.wizzi.models.text-factory.g, loaded from mTree'
         textmodel(mTree, ittfDocumentUri, wizziModelRequest, callback);
     }
+    
+    // Load a WizziModel of type 'text' from an mTree
     if (options.loadFromMTree) {
-        // Load a WizziModel of type 'text' from an mTree
         return function(mTree, wizziModelRequest, callback) {
                 if (verify.isFunction(callback) !== true) {
                     callback = wizziModelRequest;
@@ -62,11 +63,30 @@ md.createLoadModel = function(wizziObject) {
                 }
                 loadModelFromMTree(mTree, 'Unavailable (loaded from mTree)', wizziModelRequest || {}, {
                     wizziFactory: wizziFactory
-                }, callback)
+                 }, callback)
             };
     }
+    /**
+        // Load a WizziModel of type text from an IttfDocument uri
+        // params
+            // string ittfDocumentUri
+            // { requestContext
+                // { __productionManager
+                    // { productionContext
+                        // { aclstat
+                // { __ittfDocumentStore
+                // { mTreeBuildUpContext
+                    // optional
+                // { __request
+                    // This is a legacy that should disappear.
+                    // See the wizzi.production.productionContext class.
+                    // boolean dumpAll
+                    // boolean dumpIttfModel
+                    // boolean dumpModel
+                    // boolean dumpModelAfterInitializeAsync
+            // callback
+    */
     else {
-        //
         return function loadModel(ittfDocumentUri, requestContext, callback) {
                 if (typeof callback !== 'function') {
                     throw new TypeError('callback must be a function');
@@ -80,7 +100,8 @@ md.createLoadModel = function(wizziObject) {
                 if (verify.isObject(requestContext.__productionManager) !== true) {
                     return callback(error(999, 'loadModel', 'requestContext.__productionManager parameter must be an object', new Error('inner track')));
                 }
-                requestContext.mTreeBuildUpContext = Object.assign({}, requestContext.__productionManager.globalContext(), requestContext.mTreeBuildUpContext);
+                requestContext.mTreeBuildUpContext = Object.assign({}, requestContext.__productionManager.globalContext(), requestContext.mTreeBuildUpContext)
+                ;
                 // STOP set context.sourcePreprocessor = preprocessText
                 var wizziModelRequest = requestContext.__request || {};
                 var start = Date.now();
@@ -101,7 +122,8 @@ md.createLoadModel = function(wizziObject) {
                 })
             };
     }
-};
+}
+;
 function isCommandNode(line) {
     var state = 0;
     var i, i_items=line, i_len=line.length, ch;
@@ -141,21 +163,23 @@ function preprocessText(text) {
     var sb = [ 'text' ];
     for (var i = 0; i<len; i++) {
         ch = text[i];
+        
+        // log 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
         if (ch === '\n' || ch === '\r') {
-            // log 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
             if (isCommandNode(line)) {
                 sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
             }
+            // + Ä
             else {
                 sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
-                // + Ä
             }
             line = [];
             indent = 0;
             seenNotWs = false;
             if (i < len-1) {
+                
+                // log 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
                 if ((ch === '\n' && text[i+1] === '\r') || (ch === '\r' && text[i+1] === '\n')) {
-                    // log 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
                     i++;
                 }
             }
@@ -178,9 +202,10 @@ function preprocessText(text) {
     if (isCommandNode(line)) {
         sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
     }
+    
+    // + Ä
     else if (line.length > 0) {
         sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
-        // + Ä
     }
     console.log('wizzi-core.wizzi.models.text-factory.g.preprocessText result', sb.join('\n'));
     return sb.join('\n');

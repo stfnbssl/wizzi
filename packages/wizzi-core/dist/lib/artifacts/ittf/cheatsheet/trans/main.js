@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\ittf\cheatsheet\trans\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\ittf\cheatsheet\trans\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -9,7 +9,7 @@ var async = require('async');
 var verify = require('wizzi-utils').verify;
 var lineparser = verify.lineParser;
 var stringify = require('json-stringify-safe');
-var prettify = require('wizzi-utils').prettifyFromString;
+var pretty = require('wizzi-utils').pretty;
 
 var md = module.exports = {};
 var myname = 'wizzi-core.ittf.Cheatsheet.trans.main';
@@ -26,7 +26,8 @@ md.trans = function(model, ctx, callback) {
     catch (ex) {
         return callback(ex);
     } 
-};
+}
+;
 function executeTrans(model, ctx, callback) {
     // log 'Starting transform ittf/cheatsheet'
     var workObj = {
@@ -36,7 +37,7 @@ function executeTrans(model, ctx, callback) {
         _all_items: [
             
         ]
-    };
+     };
     loadCheats(model, workObj)
     generateArtifacts(ctx, workObj, function(err, result) {
         if (err) {
@@ -64,7 +65,7 @@ function loadCheats(model, workObj) {
                 items: [
                     
                 ]
-            };
+             };
             var j, j_items=itemTop.children, j_len=itemTop.children.length, itemEl;
             for (j=0; j<j_len; j++) {
                 itemEl = itemTop.children[j];
@@ -72,21 +73,24 @@ function loadCheats(model, workObj) {
                     var itemResult = {
                         schema: workObj.schema, 
                         render: 'artifact'
-                    };
+                     };
                     var k, k_items=itemEl.children, k_len=itemEl.children.length, item;
                     for (k=0; k<k_len; k++) {
                         item = itemEl.children[k];
+                        
+                        // log 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
                         if (item.name === 'ittf') {
-                            // log 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
                             if (item.children.length == 1) {
+                                
+                                // is already ok, has the correct root
+                                
+                                // ??? set itemResult[item.name] = toIttf(item.children[0])
                                 if ((workObj.schema === 'json' && (item.children[0].name === '{' || item.children[0].name === '[')) || item.children[0].name === ittfRootFromSchema(workObj.schema) || ittfRootFromSchema(workObj.schema) === 'any') {
-                                    // is already ok, has the correct root
-                                    // ??? set itemResult[item.name] = toIttf(item.children[0])
                                     itemResult[item.name] = toIttf(item.children[0]);
                                     itemResult[item.name + 'Wrapped'] = itemResult[item.name];
                                 }
+                                // wrap it
                                 else {
-                                    // wrap it
                                     var ittfNode = wrapperForSchema(workObj.schema);
                                     var l, l_items=item.children, l_len=item.children.length, node;
                                     for (l=0; l<l_len; l++) {
@@ -97,8 +101,8 @@ function loadCheats(model, workObj) {
                                     itemResult[item.name + 'Wrapped'] = toIttf(ittfNode);
                                 }
                             }
+                            // wrap them
                             else {
-                                // wrap them
                                 var ittfNode = wrapperForSchema(workObj.schema);
                                 var l, l_items=item.children, l_len=item.children.length, node;
                                 for (l=0; l<l_len; l++) {
@@ -109,9 +113,9 @@ function loadCheats(model, workObj) {
                                 itemResult[item.name + 'Wrapped'] = toIttf(ittfNode);
                             }
                         }
+                        // log item.name, item.value
                         else {
                             itemResult[item.name] = item.value;
-                            // log item.name, item.value
                         }
                     }
                     elementResult.items.push(itemResult)
@@ -133,7 +137,7 @@ function generateArtifacts(ctx, workObj, callback_main) {
     async.mapSeries(workObj._all_items, function(item, callback) {
         // log 'counter', ++counter
         process.nextTick(function() {
-            prettify(item.ittfWrapped, function(err, pretty) {
+            pretty.prettifyIttfHtmlFromString(item.ittfWrapped, function(err, pretty) {
                 if (err) {
                     return callback(err);
                 }
@@ -141,8 +145,9 @@ function generateArtifacts(ctx, workObj, callback_main) {
                 // log 'pretty', pretty
                 // log 'ittf.cheatsheet.ctx', ctx
                 // log 'counter.prettified', counter
+                
+                // log 'ctx.wizziFactory.loadMTreeDebugInfoFromText', ctx.wizziFactory.loadMTreeDebugInfoFromText
                 if (item.render === 'script') {
-                    // log 'ctx.wizziFactory.loadMTreeDebugInfoFromText', ctx.wizziFactory.loadMTreeDebugInfoFromText
                     ctx.wizziFactory.loadMTreeDebugInfoFromText(item.ittfWrapped, {}, function(err, script) {
                         // log 'counter', --counter
                         if (err) {
@@ -154,14 +159,14 @@ function generateArtifacts(ctx, workObj, callback_main) {
                         callback(null)
                     })
                 }
+                // log 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
                 else {
-                    // log 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
                     ctx.wizziFactory.loadModelAndGenerateArtifactFromText(item.ittfWrapped, {
                         artifactRequestContext: {
                             noUseStrict: true, 
                             noGeneratorComments: true
-                        }
-                    }, artifactNameFromSchema(item.schema), function(err, artifactText) {
+                         }
+                     }, artifactNameFromSchema(item.schema), function(err, artifactText) {
                         // log 'err, artifactText', err, artifactText
                         // log 'counter', --counter
                         if (err) {
@@ -186,7 +191,7 @@ function generateArtifacts(ctx, workObj, callback_main) {
         callback_main(null, {
             schema: workObj.schema, 
             elements: workObj.elements
-        })
+         })
     })
 }
 function toIttf(node) {
@@ -245,9 +250,9 @@ function wrapperForSchema(schema) {
                         children: [
                             
                         ]
-                    }
+                     }
                 ]
-            };
+             };
     }
     else if (schema === 'ts') {
         return {
@@ -255,7 +260,7 @@ function wrapperForSchema(schema) {
                 children: [
                     
                 ]
-            };
+             };
     }
     else {
         return {
@@ -263,7 +268,7 @@ function wrapperForSchema(schema) {
                 children: [
                     
                 ]
-            };
+             };
     }
 }
 var schemaArtifactMap = {
@@ -283,7 +288,7 @@ var schemaArtifactMap = {
     ittf: 'ittf/document', 
     xml: 'xml/document', 
     text: 'text/document'
-};
+ };
 function artifactNameFromSchema(schema) {
     // log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
     return schemaArtifactMap[schema];
@@ -304,7 +309,7 @@ var schemaIttfRootMap = {
     ittf: 'any', 
     text: 'text', 
     xml: 'xml'
-};
+ };
 function ittfRootFromSchema(schema) {
     // log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
     return schemaIttfRootMap[schema];
@@ -316,5 +321,5 @@ function error(errorName, method, message, model, innerError) {
             method: 'wizzi-core/lib/artifacts/ittf/cheatsheet/trans/main.' + method, 
             sourcePath: __filename, 
             inner: innerError
-        });
+         });
 }

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\artifacts\json\document\gen\main.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\json\document\gen\main.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -12,8 +12,9 @@ var md = module.exports = {};
 var myname = 'json.document.main';
 
 md.gen = function(model, ctx, callback) {
+    
+    // deprecated old ittf schema
     if (model.n && model.r && model.c && model.sourceKey) {
-        // deprecated old ittf schema
         md.genItem(model, ctx);
     }
     else {
@@ -21,7 +22,8 @@ md.gen = function(model, ctx, callback) {
         ctx.w(stringify(model, null, 4))
     }
     callback(null, ctx);
-};
+}
+;
 md.genItem = function(model, ctx) {
     var n = model.n.trim();
     if (n === '#') {
@@ -75,7 +77,8 @@ md.genItem = function(model, ctx) {
         }
     }
     return true;
-};
+}
+;
 md.genItems = function(items, ctx, options) {
     ctx.indent();
     var first = true;
@@ -94,11 +97,12 @@ md.genItems = function(items, ctx, options) {
     }
     ctx.w('');
     ctx.deindent();
-};
+}
+;
 function error(message) {
     return {
             __is_error: true, 
             source: 'wizzi-core/lib/artifacts/json/document', 
             message: message
-        };
+         };
 }

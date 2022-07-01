@@ -1,9 +1,11 @@
 /*
-    artifact generator: C:\my\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: c:\my\wizzi\v5\apps\wizzi-docs\src\ittf\jobs\site.js.ittf
-    utc time: Thu, 17 Jan 2019 12:26:38 GMT
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-docs\.wizzi\jobs\site.js.ittf
 */
 'use strict';
+
+
 var path = require('path');
 var wizzi = require('wizzi');
 // begin params
@@ -22,7 +24,7 @@ function exec(callback) {
                 'wizzi-js', 
                 'wizzi-web'
             ]
-        }, 
+         }, 
         job: {
             name: $name, 
             ittfDocumentUri: path.join(__dirname, 'ittf', 'site', 'site.wfjob.ittf'), 
@@ -34,12 +36,12 @@ function exec(callback) {
                     dumpsBaseFolder: path.join(__dirname, '_debug_dumps'), 
                     mTreeBuildupJsWizziCode: {
                         dump: true
-                    }
-                }
-            }), 
+                     }
+                 }
+             }), 
             globalContext: {}
-        }
-    }, function(err, result) {
+         }
+     }, function(err, result) {
         if (callback) {
             if (err) {
                 callback(err);
@@ -53,11 +55,12 @@ function exec(callback) {
                 console.log("Error executing wizzi instance job", err);
             }
         }
-    });
+    })
 }
 module.exports = function(callback) {
     exec(callback);
-};
+}
+;
 if (require && require.main === module) {
     exec();
 }

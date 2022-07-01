@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\tests\all\util\node.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\util\node.js.ittf
 */
 'use strict';
 
@@ -18,7 +18,7 @@ var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'
-    }, function(err, storeFacory) {
+     }, function(err, storeFacory) {
         if (err) {
             return callback(err);
         }
@@ -34,7 +34,7 @@ function evaluate(uri, callback) {
         mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
-    };
+     };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
@@ -71,17 +71,17 @@ describe("util.node", function() {
                                 children: [
                                     {
                                         name: 'n111'
-                                    }
+                                     }
                                 ]
-                            }, 
+                             }, 
                             {
                                 name: 'n12', 
                                 value: 'v12'
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }, 
+             }, 
             expected: {
                 name: 'root', 
                 children: [
@@ -92,12 +92,12 @@ describe("util.node", function() {
                             {
                                 name: 'n12', 
                                 value: 'v12'
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }
-        }, 
+             }
+         }, 
         {
             action: 'replace', 
             name: 'n11', 
@@ -114,40 +114,40 @@ describe("util.node", function() {
                                 children: [
                                     {
                                         name: 'n111'
-                                    }
+                                     }
                                 ]
-                            }, 
+                             }, 
                             {
                                 name: 'n12', 
                                 value: 'n12', 
                                 children: [
                                     {
                                         name: 'n121'
-                                    }
+                                     }
                                 ]
-                            }
+                             }
                         ]
-                    }, 
+                     }, 
                     {
                         name: 'n2', 
                         value: 'v2', 
                         children: [
                             {
                                 name: 'n21'
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }, 
+             }, 
             replacer: {
                 name: 'n101', 
                 children: [
                     {
                         name: 'n1011', 
                         value: 'v1011'
-                    }
+                     }
                 ]
-            }, 
+             }, 
             expected: {
                 name: 'root', 
                 children: [
@@ -161,32 +161,32 @@ describe("util.node", function() {
                                     {
                                         name: 'n1011', 
                                         value: 'v1011'
-                                    }
+                                     }
                                 ]
-                            }, 
+                             }, 
                             {
                                 name: 'n12', 
                                 value: 'n12', 
                                 children: [
                                     {
                                         name: 'n121'
-                                    }
+                                     }
                                 ]
-                            }
+                             }
                         ]
-                    }, 
+                     }, 
                     {
                         name: 'n2', 
                         value: 'v2', 
                         children: [
                             {
                                 name: 'n21'
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }
-        }
+             }
+         }
     ];
     var nodeFinds = [
         {
@@ -211,19 +211,19 @@ describe("util.node", function() {
                                     {
                                         name: 'n111', 
                                         id: 4
-                                    }
+                                     }
                                 ]
-                            }, 
+                             }, 
                             {
                                 name: '$hook', 
                                 value: 'default', 
                                 id: 5
-                            }
+                             }
                         ]
-                    }
+                     }
                 ]
-            }
-        }
+             }
+         }
     ];
     it("should modify nodes", function() {
         var i, i_items=nodeUpdates, i_len=nodeUpdates.length, item;
@@ -275,7 +275,7 @@ describe("util.node", function() {
             }
         }
     });
-    it("should find node commands", function() {
+    it("should find commands", function() {
         var i, i_items=nodeFinds, i_len=nodeFinds.length, item;
         for (i=0; i<i_len; i++) {
             item = nodeFinds[i];

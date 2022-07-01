@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\filesystem\artifacts\localPlugin\flow\source\generate.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\filesystem\artifacts\localPlugin\flow\source\generate.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -25,7 +26,7 @@ function exec(gen_callback) {
                 'wizzi-js', 
                 'wizzi-web'
             ]
-        }, 
+         }, 
         job: {
             name: $name, 
             ittfDocumentUri: path.join(__dirname, 'ittf', 'generate.wfjob.ittf'), 
@@ -33,12 +34,12 @@ function exec(gen_callback) {
                 indentSpaces: 4, 
                 basedir: __dirname, 
                 verbose: 2
-            }), 
+             }), 
             globalContext: {
                 
-            }
-        }
-    }, function(err, result) {
+             }
+         }
+     }, function(err, result) {
         if (err) {
             if (gen_callback) {
                 return gen_callback(wizzi.printWizziJobError($name, err));
@@ -52,18 +53,18 @@ function exec(gen_callback) {
             wizzi.generateWizziModelTypes({
                 configOptions: {
                     
-                }, 
+                 }, 
                 wfschema: {
                     name: schemaName, 
                     ittfDocumentUri: path.join(__dirname, 'ittf', 'lib', 'wizzi', 'schemas', schemaName + '.wfschema.ittf'), 
                     outputPackageFolder: $destFolder
-                }
-            }, function(err, result) {
+                 }
+             }, function(err, result) {
                 if (err) {
                     return wizzi.printWizziJobError($name, err);
                 }
                 callback(result);
-            });
+            })
         }, function(err, result) {
             if (err) {
                 if (gen_callback) {
@@ -78,12 +79,13 @@ function exec(gen_callback) {
                     return gen_callback(null, result);
                 }
             }
-        });
-    });
+        })
+    })
 }
 module.exports = function(callback) {
     exec(callback);
-};
+}
+;
 if (require.main === module) {
     exec();
 }

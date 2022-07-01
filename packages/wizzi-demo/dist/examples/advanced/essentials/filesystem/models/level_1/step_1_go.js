@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\filesystem\models\level_1\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\filesystem\models\level_1\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,15 +18,8 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzimodel = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         Wizzi model
-         How to load an IttfDocument into an `html` wizzi model,
-         passing a context object to the mTree loader and
-         passing a value to the globalContext using the options parameter.
-        
-         API wizzi.model(sourcePathOrSourceConfig, context?, options?)
-    */
+    heading1('Advanced-example starting')
+    //
     
     var wizziFactoryConfig = {
         plugins: {
@@ -36,8 +30,8 @@ var wizzimodel = function(step_callback) {
                 './jsonld/local/index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname, '..', '..', 'plugins')
-        }
-    };
+         }
+     };
     
     var wizziModelConfig = {
         src: 'basic.html.ittf', 
@@ -54,12 +48,12 @@ var wizzimodel = function(step_callback) {
                         cwd: path.join(__dirname, 'step_3', 'models'), 
                         schema: 'json', 
                         exportName: 'data'
-                    }
+                     }
                 ]
-            }
+             }
         ], 
         schema: 'html'
-    };
+     };
     
     if (typeof wizziFactoryConfig.globalContext === 'undefined') {
         wizziFactoryConfig.globalContext = globalContext;
@@ -78,7 +72,7 @@ var wizzimodel = function(step_callback) {
                 console.log('Error fullErr', fullErr);
                 throw new Error(JSON.stringify(err, null, 2));
             }
-            printValue('wizziModel', wizziModel, 'dashes');
+            printValue('wizziModel', wizziModel, 'dashes')
             wf.generateArtifact(wizziModel, path.join(__dirname, 'step_3', 'basic.html.ittf'), 'html/document', {}, function(err, artifactText) {
                 if (err) {
                     var fullErr = JSON.stringify(err, null, 2);
@@ -86,11 +80,11 @@ var wizzimodel = function(step_callback) {
                     throw new Error(JSON.stringify(err, null, 2));
                 }
                 // And print the wizzi model object
-                printValue('artifactText', artifactText, 'dashes');
+                printValue('artifactText', artifactText, 'dashes')
                 return step_callback(null);
-            });
-        });
-    });
+            })
+        })
+    })
 };
 wizzimodel.__name = 'Level 0 - wizzimodel';
 function heading1(text) {
@@ -120,7 +114,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -129,12 +123,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

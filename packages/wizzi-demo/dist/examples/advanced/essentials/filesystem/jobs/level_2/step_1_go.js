@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\essentials\filesystem\jobs\level_2\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\essentials\filesystem\jobs\level_2\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,12 +18,8 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var wizzi_job = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         Wizzi job
-         How to generate modules
-         of the language schema schema `js`
-    */
+    heading1('Advanced-example starting')
+    //
     
     wizzi.executeWizziJob({
         user: 'stefi', 
@@ -37,7 +34,7 @@ var wizzi_job = function(step_callback) {
                 'wizzi-web', 
                 './localPlugin/index'
             ]
-        }, 
+         }, 
         job: {
             name: 'level_2_js_schema', 
             ittfDocumentUri: path.join(__dirname, 'step_1', 'js_schema.wfjob.ittf'), 
@@ -45,20 +42,20 @@ var wizzi_job = function(step_callback) {
                 indentSpaces: 4, 
                 basedir: __dirname, 
                 verbose: 2
-            }), 
+             }), 
             globalContext: {
                 wfjobGlobalContextCheck: 'If you can see mee the wfjob global context works fine.'
-            }
-        }
-    }, function(err, result) {
+             }
+         }
+     }, function(err, result) {
         if (err) {
             throw new Error(JSON.stringify(err, null, 2));
         }
-        printValue('Result', 'Wizzi job level_2_js_schema SUCCESSFULLY executed\n' + JSON.stringify(result, null, 2), 'dashes');
+        printValue('Result', 'Wizzi job level_2_js_schema SUCCESSFULLY executed\n' + JSON.stringify(result, null, 2), 'dashes')
         if (step_callback) {
-            step_callback(null);
+            step_callback(null)
         }
-    });
+    })
 };
 wizzi_job.__name = 'Level 2 - wizzi_job';
 function heading1(text) {
@@ -88,7 +85,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -97,12 +94,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

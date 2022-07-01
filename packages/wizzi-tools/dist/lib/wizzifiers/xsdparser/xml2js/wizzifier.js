@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\xsdparser\xml2js\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\xsdparser\xml2js\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -25,7 +26,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -36,7 +37,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -59,7 +61,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -73,11 +76,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 function wizzify(xml, options, callback) {
     parseInternal(xml, options, function(err, result) {
         if (err) {
@@ -91,7 +96,7 @@ function wizzify(xml, options, callback) {
             name: '', 
             attribs: [], 
             children: []
-        };
+         };
         for (var prop in result) {
             if (result.hasOwnProperty(prop)) {
                 if (prop.indexOf('schema') < 0) {
@@ -119,7 +124,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     tag: '#', 
                     name: ss[j], 
                     children: []
-                };
+                 };
                 parent.children.push(tag);
             }
         }
@@ -127,6 +132,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
             parent.name = xmlNode;
         }
     }
+    // log 'parent.tag, ac.n', parent.tag, ac.n
     else {
         var parentTag = parent.tag;
         var ac = getAttribsAndChilds(ctx, xmlNode);
@@ -139,11 +145,10 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     tag: parentTag, 
                     name: s, 
                     children: []
-                };
+                 };
                 parent.children.push(tag);
             }
         }
-        // log 'parent.tag, ac.n', parent.tag, ac.n
         if (ac.n && !parent.name) {
             parent.name = ac.n;
         }
@@ -160,7 +165,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     tag: 'xmlns', 
                     name: nsn.local + ' ' + attribs[aName], 
                     children: []
-                })
+                 })
                 continue;
             }
             rName = resolveAttrName(aName);
@@ -203,27 +208,27 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     tag: rName, 
                     name: attribs[aName], 
                     children: []
-                })
+                 })
             }
             else if (rName === 'use') {
                 parent.children.push({
                     tag: 'is-' + attribs[aName], 
                     children: []
-                })
+                 })
             }
             else if (rName === 'source' && parentTag === '#') {
                 parent.children.push({
                     tag: '# source', 
                     name: attribs[aName], 
                     children: []
-                })
+                 })
             }
             else if (rName === 'abstract') {
                 if (attribs[aName] === 'true') {
                     parent.children.push({
                         tag: 'is-' + rName, 
                         children: []
-                    })
+                     })
                 }
             }
             else {
@@ -231,7 +236,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     tag: '@', 
                     name: rName + ' ' + attribs[rName], 
                     children: []
-                })
+                 })
             }
         }
         var i, i_items=ac.c, i_len=ac.c.length, childnode;
@@ -255,8 +260,9 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                         }
                     }
                 }
+                
+                // log 'parent.tag', parent.tag, childXmlNodeName, childnode.value
                 else if ((childXmlNodeName === 'restrict' || childXmlNodeName === 'extend') && (parent.tag === 'c-content' || parent.tag === 's-content') && childnode.value.length == 1) {
-                    // log 'parent.tag', parent.tag, childXmlNodeName, childnode.value
                     var ac2 = getAttribsAndChilds(ctx, childnode.value[0]);
                     parent.tag = parent.tag + '-' + childXmlNodeName;
                     parent.name = ac2.a.base;
@@ -270,7 +276,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                             tag: childXmlNodeName, 
                             name: '', 
                             children: []
-                        };
+                         };
                         parent.children.push(tag);
                         appendXmlNodeToIttfNode(ctx, childnodeItem, tag)
                     }
@@ -291,7 +297,7 @@ function appendParsedChildsToIttfNode(ctx, parsedChilds, parent) {
                 tag: childXmlNodeName, 
                 name: '', 
                 children: []
-            };
+             };
             parent.children.push(tag);
             appendXmlNodeToIttfNode(ctx, childnodeItem, tag)
         }
@@ -303,9 +309,10 @@ function getAttribsAndChilds(ctx, node) {
     var children = [];
     for (var prop in node) {
         if (node.hasOwnProperty(prop)) {
+            
+            // _ log('getAttribsAndChilds.$', attribsObj, true)
             if (prop === '$') {
                 var attribsObj = node[prop];
-                // _ log('getAttribsAndChilds.$', attribsObj, true)
                 for (var k in attribsObj) {
                     if (k === 'name') {
                         name = attribsObj[k];
@@ -324,13 +331,13 @@ function getAttribsAndChilds(ctx, node) {
                         children.push({
                             name: nsn.local, 
                             value: value
-                        })
+                         })
                     }
                     else {
                         children.push({
                             name: prop, 
                             value: value
-                        })
+                         })
                     }
                 }
             }
@@ -340,7 +347,7 @@ function getAttribsAndChilds(ctx, node) {
             n: name, 
             a: attribs, 
             c: children
-        };
+         };
 }
 function resolveElementName(name) {
     if (name === 'enumeration') {
@@ -512,12 +519,12 @@ function nsName(name) {
         return {
                 prefix: ss[0], 
                 local: ss[1]
-            };
+             };
     }
     else {
         return {
                 local: name
-            };
+             };
     }
 }
 function occurs(value) {
@@ -528,7 +535,7 @@ function getNamespaces(rootXmlNode) {
         targetNs: null, 
         defaultNs: null, 
         namespaces: []
-    };
+     };
     var ac = getAttribsAndChilds({}, rootXmlNode);
     for (var k in ac.a) {
         if (k === 'targetNamespace') {
@@ -543,7 +550,7 @@ function getNamespaces(rootXmlNode) {
                 ret.namespaces.push({
                     prefix: nsn.local, 
                     ns: ac.a[k]
-                })
+                 })
             }
         }
     }

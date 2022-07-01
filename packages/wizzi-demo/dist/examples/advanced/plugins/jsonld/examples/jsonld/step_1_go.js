@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\v5\apps\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\v5\apps\wizzi-demo\src\ittf\examples\advanced\plugins\jsonld\examples\jsonld\step_1_go.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-demo\.wizzi\examples\advanced\plugins\jsonld\examples\jsonld\step_1_go.js.ittf
 */
 'use strict';
 var path = require('path');
@@ -17,21 +18,17 @@ var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
 var plugin_examples = function(step_callback) {
-    heading1('Advanced-example starting');
-    /**
-         Commons
-    */
+    heading1('Advanced-example starting')
+    //
     var wizziFactoryConfig = {
         plugins: {
             items: [
                 './jsonld/local/index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..')
-        }
-    };
-    /**
-         DEMO: how to load an jsonld ittf document into an mTree.
-    */
+         }
+     };
+    //
     
     // Create a filesystem factory without access control
     wizzi.fsFactory(function(err, wf) {
@@ -53,8 +50,8 @@ var plugin_examples = function(step_callback) {
             console.log('mTreeModel.toIttf()', mTreeModel.toIttf());
             console.log('mTreeModel.toText()', mTreeModel.toText());
             jsonld_model();
-        });
-    });
+        })
+    })
     function jsonld_model() {
         // Create a filesystem factory without access control
         // requiring the local plugin.
@@ -75,13 +72,13 @@ var plugin_examples = function(step_callback) {
                 console.log('wizziModel', wizziModel);
                 console.log('wizziModel.toJson()', wizziModel.toJson());
                 var dest = path.join(__dirname, 'outputs', 'w3c.jsonld.json');
-                wf.fileService.write(dest, stringify(wizziModel.toJson(), null, 4));
+                wf.fileService.write(dest, stringify(wizziModel.toJson(), null, 4))
                 if (step_callback) {
-                    step_callback(null);
+                    step_callback(null)
                 }
                 // _ jsonld_document_artifact
-            });
-        });
+            })
+        })
     }
     function jsonld_document_artifact() {
         wizzi.fsFactory(wizziFactoryConfig, function(err, wf) {
@@ -93,19 +90,19 @@ var plugin_examples = function(step_callback) {
             wf.loadModelAndGenerateArtifact(path.join(__dirname, 'step_1', 'w3c.jsonld.ittf'), {
                 modelContext: {}, 
                 artifactContext: {}
-            }, 'jsonld/document', function(err, artifactText) {
+             }, 'jsonld/document', function(err, artifactText) {
                 if (err) {
                     var fullErr = JSON.stringify(err, null, 2);
                     console.log('Error fullErr', fullErr);
                     throw new Error(JSON.stringify(err, null, 2));
                 }
                 console.log('artifactText', artifactText);
-                wizzi.file.write(path.join(__dirname, 'output', 'w3c.jsonld'), artifactText);
+                wizzi.file.write(path.join(__dirname, 'output', 'w3c.jsonld'), artifactText)
                 if (step_callback) {
-                    step_callback(null);
+                    step_callback(null)
                 }
-            });
-        });
+            })
+        })
     }
 };
 plugin_examples.__name = 'Level jsonld - plugin_examples';
@@ -136,7 +133,7 @@ function printArray(name, arr, fields, format) {
         var j, j_items=keys, j_len=keys.length, k;
         for (j=0; j<j_len; j++) {
             k = keys[j];
-            printValue(k, item[k]);
+            printValue(k, item[k])
         }
     }
 }
@@ -145,12 +142,13 @@ function printValue(key, value, format, p1) {
         console.log('   ', '-'.repeat(100));
     }
     if (format === 'json') {
-        value = stringify(value, null, 4);
+        value = stringify(value, null, 4)
+        ;
     }
     if (verify.isNotEmpty(value)) {
         var lines = verify.splitLines(value, {
             numbered: true
-        });
+         });
         if (lines.length === 1) {
             console.log('   ', key, ':', lines[0].text);
         }

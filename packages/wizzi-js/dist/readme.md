@@ -8,7 +8,7 @@ Availability of features will be announced
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
 
 ## Features
-### Implemented Wizzi models
+### Implemented Wizzi Models
 
 <table>
 <tr>
@@ -58,7 +58,7 @@ no<td>
 
 
 
-<p>Wizzi plugins are documented <a href="https://wizzifactory.github.io/docs/wizziplugins.html">here</a>.</p>
+<p>Wizzi Plugins are documented <a href="https://wizzifactory.github.io/docs/wizziplugins.html">here</a>.</p>
 
 
 

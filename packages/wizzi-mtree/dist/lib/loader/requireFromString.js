@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\requireFromString.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\requireFromString.js.ittf
 */
 'use strict';
 // License
@@ -30,4 +30,5 @@ module.exports = function requireFromString(code, filename, opts) {
     var exports = m.exports;
     parent.children && parent.children.splice(parent.children.indexOf(m), 1);
     return exports;
-};
+}
+;

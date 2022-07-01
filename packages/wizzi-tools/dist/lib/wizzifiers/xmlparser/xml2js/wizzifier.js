@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\xmlparser\xml2js\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\xmlparser\xml2js\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -25,7 +26,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -36,7 +37,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -59,7 +61,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -73,11 +76,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 function appendChilds(name, nodeArray, parent) {
     // log 'appendChilds.name', name
     var i, i_items=nodeArray, i_len=nodeArray.length, node;
@@ -91,7 +96,7 @@ function appendChilds(name, nodeArray, parent) {
             var tag = {
                 tag: name, 
                 children: []
-            };
+             };
             parent.children.push(tag);
             var aObj = ac.a;
             for (var aName in aObj) {
@@ -99,7 +104,7 @@ function appendChilds(name, nodeArray, parent) {
                     tag: '@', 
                     name: (((aName + ' ')) + aObj[aName]), 
                     children: []
-                })
+                 })
             }
             var j, j_items=ac.c, j_len=ac.c.length, childnode;
             for (j=0; j<j_len; j++) {
@@ -119,9 +124,10 @@ function getAttribsAndChilds(node) {
     var children = [];
     for (var prop in node) {
         if (node.hasOwnProperty(prop)) {
+            
+            // log('getAttribsAndChilds.$', attribsObj, true)
             if (prop === '$') {
                 var attribsObj = node[prop];
-                // log('getAttribsAndChilds.$', attribsObj, true)
                 for (var k in attribsObj) {
                     attribs[k] = attribsObj[k];
                 }
@@ -132,19 +138,19 @@ function getAttribsAndChilds(node) {
                 children.push({
                     name: prop, 
                     value: node[prop]
-                })
+                 })
             }
         }
     }
     return {
             a: attribs, 
             c: children
-        };
+         };
 }
 function wizzify(xml, options, callback) {
     var wizziTree = {
         children: []
-    };
+     };
     parseInternal(xml, options, function(err, result) {
         if (err) {
             return callback(err);
@@ -163,14 +169,14 @@ function wizzify(xml, options, callback) {
                     tag: prop, 
                     attribs: [], 
                     children: []
-                };
+                 };
                 var aObj = ac.a;
                 for (var aName in aObj) {
                     wizziTree.children.push({
                         tag: '@', 
                         name: (((aName + ' ')) + aObj[aName]), 
                         children: []
-                    })
+                     })
                 }
                 for (var j = 0; j < ac.c.length; j++) {
                     var childnode = ac.c[j];

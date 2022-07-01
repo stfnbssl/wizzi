@@ -1,7 +1,7 @@
 ﻿md
 	$params name, title 
 
-	h1 ${name} - ver 0.6 - plugin package
+	h1 ${name} - plugin package
 	br
 	p ${title}
 	br
@@ -16,7 +16,7 @@
 			th Descriptionn
 			th Model transformers
 			th Artifacts
-		$foreach schema in wfpackage.schemas
+		$foreach schema in wzCtxschemas
 			tr
 				td ${schema.name}
 				td ${schema.title}

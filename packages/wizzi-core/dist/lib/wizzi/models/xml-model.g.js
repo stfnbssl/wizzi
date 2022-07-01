@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\ittf\lib\wizzi\models\xml-model.g.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\xml-model.g.js.ittf
 */
 'use strict';
 //
@@ -23,14 +23,15 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     }
     xml.wzElement = 'xml';
     return callback(null, xml);
-};
+}
+;
 function toXmlElement(tag, nodes) {
     // log '===== ++++++ xml.toXmlElement, nodes.length', nodes.length
     var ret = {
         tag: tag, 
         attributes: [], 
         elements: []
-    };
+     };
     var i, i_items=nodes, i_len=nodes.length, node;
     for (i=0; i<i_len; i++) {
         node = nodes[i];
@@ -47,13 +48,13 @@ function toXmlElement(tag, nodes) {
                 ret.attributes.push({
                     name: nv.name(), 
                     value: nv.value()
-                })
+                 })
             }
         }
         else if (node.n === '+') {
             ret.elements.push({
                 text: node.v
-            })
+             })
             if (node.children && node.children.length > 0) {
                 var newelement = toXmlElement(node.n, node.children);
                 if (newelement && newelement.__is_error) {
@@ -75,7 +76,7 @@ function toXmlElement(tag, nodes) {
                     text: node.v, 
                     attributes: [], 
                     elements: []
-                })
+                 })
                 if (node.children && node.children.length > 0) {
                     var newelement = toXmlElement(node.n, node.children);
                     if (newelement && newelement.__is_error) {
@@ -102,5 +103,5 @@ function error(message) {
             __is_error: true, 
             source: 'wizzi-core/lib/wizzi/models/xml-model.g', 
             message: message
-        };
+         };
 }

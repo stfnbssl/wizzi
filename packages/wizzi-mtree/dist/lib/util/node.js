@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\util\node.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\util\node.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -12,10 +12,13 @@ var md = module.exports = {};
 //
 //
 md.findIttfCommand = function(item, cmdname, cmdtype, startItem, multi) {
+    
+    // searching the hook for an append command
+    
+    // when descending from a parent we encounter startItem
+    
+    // or a sibling we skip it and its descendants
     if (startItem && item.id === startItem.id) {
-        // searching the hook for an append command
-        // when descending from a parent we encounter startItem
-        // or a sibling we skip it and its descendants
         return null;
     }
     // log 'util.node.findIttfCommand', cmdtype, item.name, cmdname, item.value
@@ -49,36 +52,46 @@ md.findIttfCommand = function(item, cmdname, cmdtype, startItem, multi) {
         }
     }
     return null;
-};
+}
+;
 md.findIttfCommandMulti = function(item, cmdname, cmdtype) {
     var commands = [];
     md.findIttfCommand(item, cmdname, cmdtype, null, commands)
     return commands;
-};
+}
+;
 //
 md.findHookExtDeep = function(item, hookname, searchType, startAppendNode, mixedNode) {
+    
+    // log 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
+    
+    // this must be the first call for a new mixed node
     if (typeof mixedNode === 'undefined') {
-        // log 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
-        // this must be the first call for a new mixed node
         assert.ok(typeof(item.model.$mixerBrickKey) !== 'undefined', 'wizzi-mtree.util.node.findHookExtDeep Error. In a first call the paramater item must be the root node of a mixed document. Found: ' + item.model.$mixerBrickKey);
         mixedNode = item;
     }
+    
+    //  || (startAppendNode && item.parent && item.parent.id === startAppendNode.parent.id)
+    
+    // searching the hook for an append command
+    
+    // when descending from a parent we encounter startAppendNode
+    
+    // or a sibling we skip it and its descendants
     if (startAppendNode && item.id === startAppendNode.id) {
-        //  || (startAppendNode && item.parent && item.parent.id === startAppendNode.parent.id)
-        // searching the hook for an append command
-        // when descending from a parent we encounter startAppendNode
-        // or a sibling we skip it and its descendants
         return null;
     }
     if (searchType == 1) {
         if (item.model.brickKey == mixedNode.model.brickKey) {
             if (item.name === ('$hook')) {
+                
+                // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                 if (item.value && item.value.trim() === hookname) {
-                    // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                     return item;
                 }
+                
+                // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                 if (!item.value && hookname === 'default') {
-                    // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                     return item;
                 }
             }
@@ -104,13 +117,14 @@ md.findHookExtDeep = function(item, hookname, searchType, startAppendNode, mixed
         }
     }
     return null;
-};
+}
+;
 //
 md.findHookExt = function(item, hookname, searchType, startAppendNode) {
     // log 'md.findHookExt.enter:', item.name, item.value, 'id', item.id, 'brickKey', item.model.brickKey
-    // the startitem (the $append node command) is saved
+    // the startitem (the $append command) is saved
     // and will be checked when the search descends, to avoid
-    // searching descendants of the $append node command itself.
+    // searching descendants of the $append command itself.
     if (typeof startAppendNode === 'undefined') {
         startAppendNode = item;
     }
@@ -119,15 +133,16 @@ md.findHookExt = function(item, hookname, searchType, startAppendNode) {
     if (!prn) {
         return null;
     }
+    // log 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
     else {
-        // log 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
         var hook = md.findHookExtDeep(prn, hookname, searchType, startAppendNode);
         if (hook) {
             return hook;
         }
         return md.findHookExt(prn, hookname, searchType, startAppendNode);
     }
-};
+}
+;
 //
 md.findVirtual = function(item, virtname) {
     var prn = item.parent;
@@ -139,7 +154,8 @@ md.findVirtual = function(item, virtname) {
         return virt;
     }
     return md.findVirtual(prn, virtname);
-};
+}
+;
 //
 md.findParentMixinRoot = function(item) {
     var prn = item.parent;
@@ -149,10 +165,12 @@ md.findParentMixinRoot = function(item) {
         // log 'util.node.findParentMixinRoot', prn ? prn.model.$mixerBrickKey : prn
     }
     return prn;
-};
+}
+;
 md.replace = function(item, replacers) {
+    
+    // log 'util/node/replace/item', item
     if (!item.parent) {
-        // log 'util/node/replace/item', item
         var i, i_items=replacers, i_len=replacers.length, repl;
         for (i=0; i<i_len; i++) {
             repl = replacers[i];
@@ -176,7 +194,8 @@ md.replace = function(item, replacers) {
             item.parent.children.push(child);
         }
     }
-};
+}
+;
 md.remove = function(item) {
     var nodes = item.parent.children;
     item.parent.children = [];
@@ -187,7 +206,8 @@ md.remove = function(item) {
             item.parent.children.push(child);
         }
     }
-};
+}
+;
 //
 md.nodeToTextLine = function(node) {
     var acc = [];
@@ -199,7 +219,8 @@ md.nodeToTextLine = function(node) {
         }
     }
     return acc.join(work.lineSep);
-};
+}
+;
 function textline(node, acc, indent) {
     var open = node.tagSuffix == '(' ? '(' : ' ';
     acc.push(indent + node.name + open + (node.value || ''))
@@ -214,7 +235,7 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: text, 
                 lines: null
-            };
+             };
     }
     var text = verify.replaceAll(text, work.textSep, '\n');
     var ss = text.split('\n');
@@ -222,7 +243,7 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: ss[0], 
                 lines: null
-            };
+             };
     }
     else {
         var lines = verify.replaceAll(ss[1], work.lineSep, '\n').split('\n')
@@ -230,9 +251,10 @@ md.inlinedTextToTextLines = function(text) {
         return {
                 text: ss[0], 
                 lines: lines
-            };
+             };
     }
-};
+}
+;
 md.isParentOfName = function(parsernode, nameOrArray) {
     var test = parsernode.parent;
     while (test) {
@@ -255,7 +277,8 @@ md.isParentOfName = function(parsernode, nameOrArray) {
         test = test.parent;
     }
     return false;
-};
+}
+;
 md.jsonifyProperty = function(node) {
     if (verify.isObject(node) === false) {
         return error(
@@ -293,6 +316,7 @@ md.jsonifyProperty = function(node) {
         var value;
         try {
             value = JSON.parse(node.value);
+            ;
         } 
         catch (ex) {
             ex.__is_error = true;
@@ -306,7 +330,8 @@ md.jsonifyProperty = function(node) {
         ret.value = value;
     }
     return ret;
-};
+}
+;
 md.jsonifyValue = function(node) {
     if (verify.isObject(node) === false) {
         return error(
@@ -341,7 +366,8 @@ md.jsonifyValue = function(node) {
     else {
         var value;
         try {
-            value = JSON.parse(node.name + (node.value && node.value.length > 0 ? ' ' + node.value : ''));
+            value = JSON.parse(node.name + (node.value && node.value.length > 0 ? ' ' + node.value : ''))
+            ;
         } 
         catch (ex) {
             ex.__is_error = true;
@@ -355,7 +381,8 @@ md.jsonifyValue = function(node) {
         ret = value;
     }
     return ret;
-};
+}
+;
 function spaces(num) {
     return Array(num + 1).join(" ")
     ;
@@ -378,7 +405,8 @@ md.dump = function(nodes) {
         node = nodes[i];
         _dumpNodeDeep(node, 1);
     }
-};
+}
+;
 var work = {};
 work.lineSep = "__LS__";
 work.textSep = "__TS__";

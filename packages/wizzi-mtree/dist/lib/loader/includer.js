@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\includer.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\includer.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -50,12 +50,12 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
             include: true, 
             includerBrickKey: item.model.brickKey, 
             includerMTreeBrick: primaryMTreeBrick
-        }, function(err, includedWipNodifiedMTree) {
+         }, function(err, includedWipNodifiedMTree) {
             if (err) {
                 return callback(local_error('IttfIncludeError', 'includer', 'Fragment to include not found', item, err, {
                         includerUri: mixeruri, 
                         includedRelPath: v
-                    }));
+                     }));
             }
             mTreeBrickProvider.enterFragmentCall(mixeruri, includedWipNodifiedMTree.uri)
             if (mTreeBrickProvider.checkForRecursion()) {
@@ -97,7 +97,8 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
         }
         callback(null, primaryMTreeBrick);
     })
-};
+}
+;
 function searchCommands(item, includes, jsons, fragments) {
     if (item.name === '$include') {
         includes.push(item);
@@ -137,7 +138,7 @@ function local_error(name, method, message, node, inner, other) {
             method: method, 
             inner: inner, 
             ...other||{}
-        });
+         });
 }
 /**
   params
@@ -157,7 +158,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.11.loader.includer.' + method,
+        method: 'wizzi-mtree@0.7.12.loader.includer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

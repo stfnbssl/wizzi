@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\importers\folderImporter.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\importers\folderImporter.js.ittf
 */
 'use strict';
 var async = require('async');
@@ -18,9 +19,10 @@ function importFolder(baseImportPath, baseExportPath, options, vfile, callback) 
         options = {};
         vfile = wizziUtils.vfile();
     }
+    
+    // vfile() defaults to local filesystem
     else if (typeof callback === 'undefined') {
         callback = vfile;
-        // vfile() defaults to local filesystem
         vfile = wizziUtils.vfile();
     }
     const files = vfile.getFiles(baseImportPath);

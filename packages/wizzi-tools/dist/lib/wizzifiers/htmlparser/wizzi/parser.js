@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\htmlparser\wizzi\parser.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\parser.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -9,7 +10,7 @@ function log(label, data) {
     if (verbose) {
         console.log(label, util.inspect(data, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -57,10 +58,11 @@ var stateText = {
     n41: "START_SWIG_1", 
     n42: "SWIG", 
     n43: "END_SWIG_1"
-};
+ };
 md.Parser = function(handlers) {
     this.handlers = handlers;
-};
+}
+;
 md.Parser.prototype.write = function(input) {
     var state = {
         input: input, 
@@ -73,7 +75,7 @@ md.Parser.prototype.write = function(input) {
         currenttagname: null, 
         tagcount: 0, 
         chprev: null
-    };
+     };
     priv.resetStateOpenTag(state);
     for (var k in this.handlers) {
         state[k] = this.handlers[k];
@@ -89,8 +91,9 @@ md.Parser.prototype.write = function(input) {
         ch = input[i];
         state.pos++;
         // log 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
+        
+        // log '+COULD_BE_ENDOFTEXT, ch', ch
         if (state.cur === COULD_BE_ENDOFTEXT) {
-            // log '+COULD_BE_ENDOFTEXT, ch', ch
             if (ch === '/') {
                 priv.ontext(state);
                 priv.resetStateOpenTag(state);
@@ -121,9 +124,11 @@ md.Parser.prototype.write = function(input) {
         priv.loop(ch, state);
         state.chprev = ch;
     }
-};
+}
+;
 md.Parser.prototype.end = function() {
-};
+}
+;
 priv.resetStateOpenTag = function(state) {
     state.quote = null;
     state.tagname = null;
@@ -131,21 +136,25 @@ priv.resetStateOpenTag = function(state) {
     state.attrvalue = null;
     state.text = null;
     state.attribs = {};
-};
+}
+;
 priv.loop = function(ch, state) {
     state.col++;
     // log 'priv.loop', ch, stateText['n'+state.cur], state.pos, state.quote
+    
+    // log '===================================rn', ch === '\r', ch === '\n'
     if (ch === '\r' || ch === '\n') {
-        // log '===================================rn', ch === '\r', ch === '\n'
+        
+        // log '===================================n prev r'
         if (ch === '\n' && state.chprev === '\r') {
-            // log '===================================n prev r'
             return ;
         }
         state.line++;
         state.col = 0;
     }
+    
+    // log ch, "is specialCases"
     if (priv.specialCases(ch, state)) {
-        // log ch, "is specialCases"
         return ;
     }
     if (ch === '<') {
@@ -183,9 +192,10 @@ priv.loop = function(ch, state) {
     else if (ch === '%') {
         priv.doPercent(state);
     }
+    
+    // _ priv.doLF(state)
     else if (ch === '\r' || ch === '\n') {
         priv.doWhite(ch, state);
-        // _ priv.doLF(state)
     }
     else if (isWhite(ch)) {
         priv.doWhite(ch, state);
@@ -196,16 +206,19 @@ priv.loop = function(ch, state) {
     else {
         priv.append(ch, state);
     }
-};
+}
+;
 priv.specialCases = function(ch, state) {
     // log 'specialCases.state.currenttagname', state.currenttagname
     if (state.currenttagname === 'script' || state.currenttagname === 'style') {
+        
+        // log 'isEndTag', state.currenttagname
+        
+        // (NO done in priv.onclosetag) _ state.stack.pop
         if (isEndTag(state.currenttagname, ch, state)) {
-            // log 'isEndTag', state.currenttagname
             priv.ontext(state);
             priv.resetStateOpenTag(state);
             state.cur = TEXT;
-            // (NO done in priv.onclosetag) _ state.stack.pop
             priv.onclosetag(state);
             return true;
         }
@@ -214,8 +227,9 @@ priv.specialCases = function(ch, state) {
             return true;
         }
     }
+    
+    // log 'TEXT', ch, state.quote, state.text.length
     if (state.cur === TEXT && state.text) {
-        // log 'TEXT', ch, state.quote, state.text.length
     }
     if (state.cur === COMMENT && ch !== '-') {
         state.comment = (state.comment || '') + ch;
@@ -258,19 +272,22 @@ priv.specialCases = function(ch, state) {
         state.cur = COMMENT;
     }
     return false;
-};
+}
+;
 priv.doLT = function(state) {
     // log 'doLT', state.cur
     if (state.cur === START) {
         ;
     }
+    
+    // log 'doLT', state.cur
     else if (state.cur === TEXT) {
         state.cur = COULD_BE_ENDOFTEXT;
-        // log 'doLT', state.cur
         return ;
     }
+    
+    // be tolerant
     else if (state.cur === WAIT_ATTR_EQU) {
-        // be tolerant
         state.attribs[state.attrname] = null;
         priv.onopentag(state);
     }
@@ -278,7 +295,8 @@ priv.doLT = function(state) {
         priv.error("doLT invalid state.cur " + stateText['n'+state.cur], state);
     }
     state.cur = WAIT_TAG_NAME;
-};
+}
+;
 priv.doGT = function(state) {
     if (state.cur === TAG_NAME) {
         priv.onopentag(state);
@@ -312,7 +330,8 @@ priv.doGT = function(state) {
         priv.error("doGT invalid state.cur " + stateText['n'+state.cur], state);
     }
     state.cur = TEXT;
-};
+}
+;
 priv.doSlash = function(state) {
     // log 'doSlash', state.tag, state.cur
     if (state.cur === ATTR_VALUE && state.quote == null) {
@@ -332,7 +351,8 @@ priv.doSlash = function(state) {
     else {
         priv.append('/', state);
     }
-};
+}
+;
 priv.doExclamation = function(state) {
     if (state.cur === WAIT_TAG_NAME) {
         state.cur = START_COMMENT_1;
@@ -340,7 +360,8 @@ priv.doExclamation = function(state) {
     else {
         priv.append('!', state);
     }
-};
+}
+;
 priv.doMinus = function(state) {
     if (state.cur === COMMENT) {
         state.cur = END_COMMENT_1;
@@ -360,7 +381,8 @@ priv.doMinus = function(state) {
     else {
         priv.append('-', state);
     }
-};
+}
+;
 priv.doSemicolon = function(state) {
     if (state.cur === TAG_NAME || state.cur === ENDTAG_NAME) {
         state.tagname = (state.tagname || '') + ':';
@@ -368,7 +390,8 @@ priv.doSemicolon = function(state) {
     else {
         priv.append(':', state);
     }
-};
+}
+;
 priv.doOpenGraph = function(state) {
     if (state.cur === START || state.cur === TEXT || state.cur === WAIT_ATTR_NAME) {
         state.prev = state.cur;
@@ -378,7 +401,8 @@ priv.doOpenGraph = function(state) {
     else {
         priv.append('{', state);
     }
-};
+}
+;
 priv.doCloseGraph = function(state) {
     if (state.cur === END_SWIG_1) {
         priv.onswig(state);
@@ -388,7 +412,8 @@ priv.doCloseGraph = function(state) {
     else {
         priv.append('}', state);
     }
-};
+}
+;
 priv.doPercent = function(state) {
     if (state.cur === START_SWIG_1) {
         priv.ontext(state);
@@ -400,7 +425,8 @@ priv.doPercent = function(state) {
     else {
         priv.append('%', state);
     }
-};
+}
+;
 priv.doEq = function(state) {
     if ((state.cur === ATTR_NAME) || (state.cur === WAIT_ATTR_EQU)) {
         state.cur = WAIT_ATTR_VALUE;
@@ -408,7 +434,8 @@ priv.doEq = function(state) {
     else {
         priv.append('=', state);
     }
-};
+}
+;
 priv.doWhite = function(ch, state) {
     // log 'doWhite', ch, state.cur
     if (state.cur === START) {
@@ -434,7 +461,8 @@ priv.doWhite = function(ch, state) {
     else {
         priv.append(ch, state);
     }
-};
+}
+;
 priv.doLF = function(state) {
     // log 'doLf'
     if (state.cur === START) {
@@ -443,7 +471,8 @@ priv.doLF = function(state) {
     else {
         priv.append('\n', state);
     }
-};
+}
+;
 priv.doQuote = function(ch, state) {
     // log 'doQuote', ch, state.cur
     if (state.cur === WAIT_ATTR_VALUE) {
@@ -459,7 +488,8 @@ priv.doQuote = function(ch, state) {
     else {
         priv.append(ch, state);
     }
-};
+}
+;
 priv.append = function(ch, state) {
     if (state.cur === WAIT_TAG_NAME) {
         state.tagname = ch;
@@ -504,12 +534,14 @@ priv.append = function(ch, state) {
     else {
         priv.error("append invalid ch: " + ch + " state.cur: " + stateText['n'+state.cur], state);
     }
-};
+}
+;
 priv.onopentag = function(state) {
     state.tagcount++;
     state.stack.push(state.tagname)
+    
+    // log 'onopentag', state.tagname, 'line', state.line
     if (state.tagname == 'script' || state.tagname == 'style') {
-        // log 'onopentag', state.tagname, 'line', state.line
     }
     state.currenttagname = state.tagname;
     if (state.onopentag) {
@@ -521,33 +553,39 @@ priv.onopentag = function(state) {
             state.onclosetag(state.tagname)
         }
     }
-};
+}
+;
 priv.onclosetag = function(state) {
+    
+    // log 'onclosetag', state.tagname, 'line', state.line
     if (state.tagname == 'script' || state.tagname == 'style') {
-        // log 'onclosetag', state.tagname, 'line', state.line
     }
     if (state.onclosetag) {
+        
+        // done already
         if (state.tagname in voidElements) {
-            // done already
         }
+        // log 'state.stack after onclosetag', state.stack
         else {
             state.stack.pop();
-            // log 'state.stack after onclosetag', state.stack
             state.onclosetag(state.tagname)
             state.currenttagname = null;
         }
     }
-};
+}
+;
 priv.oncomment = function(state) {
     if (state.oncomment) {
         state.oncomment(state.comment)
     }
-};
+}
+;
 priv.ondoctype = function(state) {
     if (state.ondoctype) {
         state.ondoctype(state.doctype)
     }
-};
+}
+;
 priv.ontext = function(state) {
     if (typeof (state.text) == 'undefined' || state.text == null) {
         return ;
@@ -559,18 +597,21 @@ priv.ontext = function(state) {
         state.ontext(state.text)
     }
     state.text = '';
-};
+}
+;
 priv.onswig = function(state) {
     if (state.onswig) {
         state.onswig(state.swig)
     }
     state.swig = '';
-};
+}
+;
 priv.error = function(message, state) {
     delete state.input
     // log 'current state', state
     throw new Error(message + ' at line ' + state.line + ' col ' + state.col + ' text ' + state.text);
-};
+}
+;
 function isText(text) {
     var ch,
         l = text.length;
@@ -669,4 +710,4 @@ var voidElements = {
     stop: true, 
     polyline: true, 
     polygone: true
-};
+ };

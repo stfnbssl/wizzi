@@ -1,5 +1,0 @@
-$group
-    [ Components
-        {
-            name "Button"
-            [ props

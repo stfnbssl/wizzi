@@ -1,7 +1,7 @@
 ## 'vue' language schema
 ### Reference
 
-<p><a href="https://wizzifactory.github.io/concepts.html#concept-5">Concept</a>&nbsp; | &nbsp;<a href="#">Docs</a>&nbsp; | &nbsp;<a href="https://github.com/wizzifactory/v3-next/tree/master/sources/v3-demo/ittf/languageschemas/vue">demo ittf source</a></p>
+<p><a href="https://wizzifactory.github.io/concepts.html#concept-5">Concept</a>  |  <a href="#">Docs</a>  |  <a href="https://github.com/wizzifactory/v3-next/tree/master/sources/v3-demo/ittf/languageschemas/vue">demo ittf source</a></p>
 
 ### Samples
 #### basic.vue

@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.8
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\ittf\lib\artifacts\html\document\gen\main.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\html\document\gen\main.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -12,7 +12,7 @@ var verify = require('wizzi-utils').verify;
 var utilNode = require('../../../util/utilNode');
 var lineParser = require('../../../util/lineParser');
 var lorem = require('wizzi-utils').lorem;
-var prettify = require('wizzi-utils').prettifyFromString;
+var pretty = require('wizzi-utils').pretty;
 var myname = 'wizzi-web.htm1.document.main';
 var md = module.exports = {};
 md.stm = {};
@@ -675,7 +675,7 @@ function prettifyIttf(mTreeData, callback) {
         itemResult[item.n] = mTree.toIttf(item.children[0]);
         itemResult[item.n + 'Wrapped'] = mTree.toIttf(ittfNode);
     }
-    prettify(itemResult.ittf, function(err, pretty) {
+    pretty.prettifyIttfHtmlFromString(itemResult.ittf, function(err, pretty) {
         if (err) {
             return callback(err);
         }

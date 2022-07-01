@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\htmlparser\wizzi\cloner.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\cloner.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -8,7 +9,7 @@ var verify = require('wizzi-utils').verify;
 function log(label, obj) {
     console.log(label, util.inspect(obj, {
         depth: 1
-    }))
+     }))
 }
 function transform(node, options) {
     // log 'cloner.transform', node.tag, node.name
@@ -18,7 +19,7 @@ function transform(node, options) {
         attribs: node.attribs, 
         lines: node.lines, 
         children: []
-    };
+     };
     if (ret.tag === 'title') {
         ret.tag = '@title';
     }
@@ -53,4 +54,5 @@ function transform(node, options) {
 }
 module.exports = function(ast, options) {
     return transform(ast, options);
-};
+}
+;

@@ -1,9 +1,10 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.8
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\ittf\lib\utils\objectId.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\utils\objectId.js.ittf
 */
 'use strict';
+// This is copied, but from WHO?
 var MACHINE_ID = parseInt(Math.random() * 0xffffff, 10);
 var checkForHexRegExp = new RegExp('^[0-9a-fA-F]{24}$');
 try {

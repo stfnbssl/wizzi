@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.7
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\ittf\lib\loader\evaluator.js.ittf
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
 */
 'use strict';
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
@@ -23,7 +23,7 @@ module.exports = function(composedMTree, loadContext, callback) {
         counter: 0, 
         startTime: dateUtil.now_GMYHMS(), 
         isCompile: isCompile
-    };
+     };
     // log 'isCompile', isCompile
     scriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
     if (isCompile) {
@@ -48,8 +48,9 @@ module.exports = function(composedMTree, loadContext, callback) {
         scriptCoder.w('}')
     }
     productionContext.addMTreeBuildUpScript(composedMTree.uri, scriptCoder)
+    
+    // log 'scriptCoder.toCode()', scriptCoder.toCode()
     if (isCompile) {
-        // log 'scriptCoder.toCode()', scriptCoder.toCode()
         if (requireFromString === null) {
             requireFromString = require('./requireFromString');
         }
@@ -59,8 +60,9 @@ module.exports = function(composedMTree, loadContext, callback) {
     }
     else {
         jsWizziRunner.run(scriptCoder.toCode(), jsWizziContext, {}, function(err, result) {
+            
+            // set err.scriptCode = scriptCoder.toCode()
             if (err) {
-                // set err.scriptCode = scriptCoder.toCode()
                 return callback(err);
             }
             jsWizziContext.set_NodeContext();
@@ -71,7 +73,8 @@ module.exports = function(composedMTree, loadContext, callback) {
             finalize(composedMTree, $0, ctx, callback)
         })
     }
-};
+}
+;
 function finalize(composedMTree, $0, ctx, callback) {
     composedMTree.nodes = [];
     var i, i_items=$0.children, i_len=$0.children.length, item;
@@ -82,7 +85,7 @@ function finalize(composedMTree, $0, ctx, callback) {
     }
     composedMTree.data = {
         createdAt: ctx.startTime
-    };
+     };
     callback(null, composedMTree);
 }
 function local_error(name, method, message, node, inner, other) {
@@ -91,5 +94,5 @@ function local_error(name, method, message, node, inner, other) {
             method: method, 
             inner: inner, 
             ...other||{}
-        });
+         });
 }

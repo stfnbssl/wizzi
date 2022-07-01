@@ -1,6 +1,7 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\dist\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\ittf\lib\wizzifiers\htmlparser\wizzi\wizzifier.js.ittf
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\wizzifier.js.ittf
 */
 'use strict';
 var util = require('util');
@@ -23,7 +24,7 @@ function parseInternal(html, options, callback) {
     options.wizziIncludes = options.wizziIncludes || [];
     var wizziTree = {
         children: []
-    };
+     };
     var parser = new html_parser.Parser({
         onopentag: function(tagname, attribs) {
             var ittfTag = tagname;
@@ -47,7 +48,7 @@ function parseInternal(html, options, callback) {
                 name: '', 
                 attribs: attribs, 
                 children: []
-            };
+             };
             n.parent = wizziTree;
             wizziTree.children.push(n);
             wizziTree = n;
@@ -55,35 +56,38 @@ function parseInternal(html, options, callback) {
         ontext: function(text) {
             // log "================= Text", text, wizziTree.tag
             var lines = file.splitLines(text);
+            
+            // log '++++++++++ wizziTree.swig'
             if (wizziTree.swig) {
-                // log '++++++++++ wizziTree.swig'
                 lines.forEach(function(l) {
                     var n = {
                         tag: '+', 
                         name: l, 
                         attribs: {}, 
                         children: []
-                    };
+                     };
                     wizziTree.children.push(n);
                 })
             }
+            
+            // log 'literal', literal, wizziTree.attribs['lang']
             else if ('script' === wizziTree.tag) {
                 var literal = lines.join('\n');
-                // log 'literal', literal, wizziTree.attribs['lang']
                 options.wizziIncludes.push({
                     kind: wizziTree.attribs['lang'] || wizziTree.attribs['language'] || 'js', 
                     node: wizziTree, 
                     literal: literal
-                })
+                 })
             }
+            
+            // log 'literal', literal
             else if ('style' === wizziTree.tag) {
                 var literal = lines.join('\n');
-                // log 'literal', literal
                 options.wizziIncludes.push({
                     kind: 'css', 
                     node: wizziTree, 
                     literal: literal
-                })
+                 })
             }
             else if (lines.length == 1) {
                 if (wizziTree.children.length > 0) {
@@ -93,7 +97,7 @@ function parseInternal(html, options, callback) {
                             name: lines[0], 
                             attribs: {}, 
                             children: []
-                        };
+                         };
                         wizziTree.children.push(n);
                     }
                 }
@@ -109,7 +113,7 @@ function parseInternal(html, options, callback) {
                             name: l, 
                             attribs: {}, 
                             children: []
-                        };
+                         };
                         wizziTree.children.push(n);
                     }
                 })
@@ -138,7 +142,7 @@ function parseInternal(html, options, callback) {
                     children: [], 
                     lines: [], 
                     swig: true
-                };
+                 };
                 n.parent = wizziTree;
                 wizziTree.children.push(n);
                 wizziTree = n;
@@ -159,7 +163,7 @@ function parseInternal(html, options, callback) {
                     children: [], 
                     lines: [], 
                     swig: true
-                };
+                 };
                 wizziTree.children.push(n);
             }
             else if (['else', 'elif', 'elseif'].indexOf(tag) >= 0) {
@@ -176,7 +180,7 @@ function parseInternal(html, options, callback) {
                     children: [], 
                     lines: [], 
                     swig: true
-                };
+                 };
                 n.parent = wizziTree;
                 wizziTree.children.push(n);
                 wizziTree = n;
@@ -185,20 +189,24 @@ function parseInternal(html, options, callback) {
                 throw new Error('Html.Wizzifier. Wizzi parse onswig unknown tag: ' + tag);
             }
         }
-    });
+     });
     var addedWrapper = false;
     try {
         if (html && html.length > 0) {
+            
+            // log 'html document has root tag html'
             if (html.substr(0,'<html>'.length) == '<html>' || html.substr(0,'<!doctype>'.length) == '<!doctype>') {
-                // log 'html document has root tag html'
             }
+            // log html.substr(0,'<html>'.length), html.substr(0,'<!doctype>'.length)
             else {
-                // log html.substr(0,'<html>'.length), html.substr(0,'<!doctype>'.length)
                 var i1 = html.indexOf('<');
                 var i2 = html.indexOf('>');
+                
+                // log 'wizzi-tools.htmlparser.addedWrapper.temp', temp
+                
+                // log 'wizzi-tools.htmlparser.addedWrapper.html', html
                 if (i1 > -1 && i2 > -1) {
                     var temp = html.substr(i1+1, i2-i1-1);
-                    // log 'wizzi-tools.htmlparser.addedWrapper.temp', temp
                     if (temp.toLowerCase().indexOf('!doctype') > -1) {
                         html = '<html>' + html.substr(i2+1) + '</html>';
                     }
@@ -206,7 +214,6 @@ function parseInternal(html, options, callback) {
                         html = '<html>' + html + '</html>';
                     }
                     addedWrapper = true;
-                    // log 'wizzi-tools.htmlparser.addedWrapper.html', html
                 }
             }
             parser.write(html);
@@ -225,8 +232,9 @@ function parseInternal(html, options, callback) {
     // log 'wizziTree', wizziTree
     // log 'wizzi-tools.htmlparser.wizzify.options.embedTag,wizziTree.children.length', options.embedTag, wizziTree.children.length
     var synthax;
+    
+    // log 'wizzi-tools.htmlparser.wizzify.options.embedTag, wizziTree.children[0]', options.embedTag, wizziTree.children[0]
     if (wizziTree.children.length > 1 && typeof (options.embedTag) === 'string') {
-        // log 'wizzi-tools.htmlparser.wizzify.options.embedTag, wizziTree.children[0]', options.embedTag, wizziTree.children[0]
         if (options.embedTag === wizziTree.children[0].tag) {
             synthax = wizziTree.children[0];
         }
@@ -236,7 +244,7 @@ function parseInternal(html, options, callback) {
                 name: '', 
                 attribs: {}, 
                 children: []
-            };
+             };
             wizziTree.children.forEach(function(item) {
                 synthax.children.push(item);
             })
@@ -252,7 +260,7 @@ function parseInternal(html, options, callback) {
                 name: '__dummy_root__', 
                 attribs: {}, 
                 children: []
-            };
+             };
             wizziTree.children.forEach(function(item) {
                 synthax.children.push(item);
             })
@@ -268,7 +276,7 @@ function log(label, obj, force) {
     if (verbose || force) {
         console.log(label, util.inspect(obj, {
             depth: null
-        }))
+         }))
     }
 }
 var md = module.exports = {};
@@ -279,7 +287,8 @@ md.getCodeAST = function(input, options, callback) {
     }
     options = options || {};
     parseInternal(input, options, callback)
-};
+}
+;
 md.getWizziTree = function(input, options, callback) {
     options = (options || {});
     if (typeof (options.verbose) !== 'undefined') {
@@ -302,7 +311,8 @@ md.getWizziTree = function(input, options, callback) {
         // log 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
-};
+}
+;
 md.getWizziIttf = function(input, options, callback) {
     md.getWizziTree(input, options, function(err, result) {
         if (err) {
@@ -316,11 +326,13 @@ md.getWizziIttf = function(input, options, callback) {
             callback(null, ittfwriter.stringify(result, options))
         })
     })
-};
+}
+;
 // ovveridable
 md.getWizzifierIncludes = function(options, callback) {
     return callback(null);
-};
+}
+;
 md.getWizzifierIncludes = function(options, callback) {
     options.wizziIncludes = options.wizziIncludes || [];
     // log 'options.wizziIncludes', options.wizziIncludes
@@ -338,7 +350,7 @@ md.getWizzifierIncludes = function(options, callback) {
                         children: [
                             
                         ]
-                    })
+                     })
                 }
                 else {
                     if (options.isForVue) {
@@ -355,19 +367,22 @@ md.getWizzifierIncludes = function(options, callback) {
                 return callback(null);
             })
         }
+        
+        // log 'jswizzifier', jswizzifier
         else if (item.kind === 'ts') {
+            
+            // log 'jswizzifier import 1'
+            
+            // log 'jswizzifier import 2'
             if (!jswizzifier) {
-                // log 'jswizzifier import 1'
                 jswizzifier = require('../../jsparser/babel/wizzifier');
-                // log 'jswizzifier import 2'
             }
-            // log 'jswizzifier', jswizzifier
             jswizzifier.getWizziTree(item.literal, {
                 babel: {
                     sourceType: 'module', 
                     ts_or_flow: 'typescript'
-                }
-            }, function(err, ittf) {
+                 }
+             }, function(err, ittf) {
                 // log 'getWizzifierIncludes.item.ittf', ittf
                 if (err) {
                     item.node.children.push({
@@ -376,7 +391,7 @@ md.getWizzifierIncludes = function(options, callback) {
                         children: [
                             
                         ]
-                    })
+                     })
                 }
                 else {
                     if (options.isForVue) {
@@ -396,13 +411,15 @@ md.getWizzifierIncludes = function(options, callback) {
                 return callback(null);
             })
         }
+        // log 'jswizzifier', jswizzifier
         else {
+            
+            // log 'jswizzifier import 1'
+            
+            // log 'jswizzifier import 2'
             if (!jswizzifier) {
-                // log 'jswizzifier import 1'
                 jswizzifier = require('../../jsparser/babel/wizzifier');
-                // log 'jswizzifier import 2'
             }
-            // log 'jswizzifier', jswizzifier
             jswizzifier.getWizziTree(item.literal, {}, function(err, ittf) {
                 // log 'getWizzifierIncludes.item.ittf', ittf
                 if (err) {
@@ -412,7 +429,7 @@ md.getWizzifierIncludes = function(options, callback) {
                         children: [
                             
                         ]
-                    })
+                     })
                 }
                 else {
                     if (options.isForVue) {
@@ -433,7 +450,8 @@ md.getWizzifierIncludes = function(options, callback) {
             })
         }
     }, callback)
-};
+}
+;
 function wizzify(html, options, callback) {
     // log 'wizzi-tools.htmlparser.wizzify.html', html
     parseInternal(html, options, callback)
