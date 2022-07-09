@@ -4,6 +4,7 @@ $group
     export
         :type
         @ MiddlewareType
+        @ ApiType
         @ ControllerType
         @ ModelBuilderType
         @ AppInitializerType

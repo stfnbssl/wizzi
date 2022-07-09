@@ -105,13 +105,9 @@
 						# no ACL required
 						set options = user
 						set callback = role
-						set user = 'stefi'
-						set role = 'admin'
 					# log 'wizzi.wizziFactory.createFactory.globalContext', options.globalContext
 					var wf
 						new WizziFactory
-							@ user
-							@ role
 					_ wf.initialize
 						@ options
 						@ callback

@@ -12,7 +12,7 @@
     
 	var util = require('util')
     var path = require('path')
-	var file = require('../../fs/file')
+	var file = require('../../fSystem/file')
     var liner = require('./liner')
     var nodifier = require('./nodifier')
 	var MTree = require('./mTree').MTree

@@ -10,11 +10,7 @@
 	class RunnerServer
         ctor
             string cwd
-			param user
-			param role
 			set this.cwd = cwd
-			set this.user = user
-			set this.role = role
 			set this.wizziFactoryDatas = []
 			set this.apis = {}
 			set this.models = {}
@@ -51,13 +47,8 @@
 			@ init
 				function
 					param cwd
-					param user
-					param role
 					if this.instance != null
 						throw new Error('wizzi/services/runnerServer/init error: The runner server has already been instantiated.')
 					set this.instance 
 						new RunnerServer
-							@ cwd
-							@ user 
-							@ role 
-						
+							@ cwd						

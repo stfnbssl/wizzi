@@ -7,7 +7,7 @@
 var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var encdec = require('../crypto/index');
-var vfile = require('../fs/vfile');
+var vfile = require('../fSystem/vfile');
 var verify = require('../helpers/verify');
 // TODO use Wizzi Virtual Store System (defaults to filesystems)
 var md = module.exports = {};

@@ -24,11 +24,12 @@ module
             {
                 @ template 'ts/express_site'
                 @ pkgName '../../wizzi.webapp/packages/wizzi.site'
-    elif cmd == 'ts-backend'
+    elif cmd == 'ts-webapp'
+        log 'create ts-webapp'
         _ create
             {
-                @ template 'ts/express_backend'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.backend'
+                @ template 'ts/express_webapp'
+                @ pkgName '../../wizzi.apps/packages/wizzi.webapp'
     elif cmd == 'ts-editor'
         _ create
             {

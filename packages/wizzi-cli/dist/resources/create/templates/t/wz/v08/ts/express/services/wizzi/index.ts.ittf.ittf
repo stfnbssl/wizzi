@@ -30,8 +30,6 @@ $group
                             _ wizzi.startRunnerServer
                                 { 
                                     @ cwd __dirname
-                                    @ userid 'stefi'
-                                    @ role 'admin'
                                     @ wizzifile
                                 function 
                                     param err

@@ -6,13 +6,13 @@
 'use strict';
 // TODO lots of clean up
 // eliminate ittfDocumentGraph, asIsLoader, ittfWriter already in ittfGraph
-// eliminate file, vfile already in fs
+// eliminate file, vfile already in fSystem
 // isWebpackTarget false
 // features
 var ittfGraph = require('./lib/ittfGraph/index');
 var ittfScanner = require('./lib/ittfScanner/index');
 var pretty = require('./lib/pretty/index');
-var fs = require('./lib/fs/index');
+var fSystem = require('./lib/fSystem/index');
 var helpers = require('./lib/helpers/index');
 var lorem = require('./lib/lorem/index');
 var crypto = require('./lib/crypto/index');
@@ -23,7 +23,7 @@ var md = module.exports = {};
 md.ittfGraph = ittfGraph;
 md.ittfScanner = ittfScanner;
 md.pretty = pretty;
-md.fs = fs;
+md.fSystem = fSystem;
 md.crypto = crypto;
 md.lorem = lorem;
 md.helpers = helpers;
@@ -42,10 +42,10 @@ md.lineparser = helpers.lineparser;
 md.requireFromString = helpers.requireFromString;
 md.Coder = helpers.coder;
 md.encdec = crypto;
-md.file = fs.file;
-md.vfile = fs.vfile;
-md.uriParser = fs.uriParser;
-md.fileInfoByPath = fs.fileInfoByPath;
+md.file = fSystem.file;
+md.vfile = fSystem.vfile;
+md.uriParser = fSystem.uriParser;
+md.fileInfoByPath = fSystem.fileInfoByPath;
 // errors
 md.errors = require('./lib/errors');
 md.exampleErrors = require('./lib/exampleErrors');

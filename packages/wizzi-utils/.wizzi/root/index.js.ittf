@@ -3,7 +3,7 @@
 
     # TODO lots of clean up
     # eliminate ittfDocumentGraph, asIsLoader, ittfWriter already in ittfGraph
-    # eliminate file, vfile already in fs
+    # eliminate file, vfile already in fSystem
 
     $if isWebpackTarget
 		#
@@ -16,7 +16,7 @@
     var ittfGraph = require('./lib/ittfGraph/index')
     var ittfScanner = require('./lib/ittfScanner/index')
     var pretty = require('./lib/pretty/index')
-    var fs = require('./lib/fs/index')
+    var fSystem = require('./lib/fSystem/index')
     var helpers = require('./lib/helpers/index')
     var lorem = require('./lib/lorem/index')
     var crypto = require('./lib/crypto/index')
@@ -32,7 +32,7 @@
     set md.ittfGraph = ittfGraph
     set md.ittfScanner = ittfScanner
     set md.pretty = pretty
-    set md.fs = fs  
+    set md.fSystem = fSystem  
     set md.crypto = crypto  
     set md.lorem = lorem  
     set md.helpers = helpers  
@@ -55,10 +55,10 @@
 	set md.Coder = helpers.coder
 	set md.encdec = crypto
 	$if isWebpackTarget == false
-		set md.file = fs.file
-	    set md.vfile = fs.vfile
-	set md.uriParser = fs.uriParser
-    set md.fileInfoByPath = fs.fileInfoByPath
+		set md.file = fSystem.file
+	    set md.vfile = fSystem.vfile
+	set md.uriParser = fSystem.uriParser
+    set md.fileInfoByPath = fSystem.fileInfoByPath
 
 	# errors
     set md.errors = require('./lib/errors')

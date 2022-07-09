@@ -185,6 +185,16 @@ type RepositoryOptions = {
     storeKind: string;
     storeUri?: string;
     storeBaseFolder?: string;
+    storeFsJson?: FsJson;
+}
+
+/**
+ * JSON repository config options. 
+ * A Wizzi Factory instance may have one single repository.
+ */
+ type JSONRepositoryOptions = {
+    storeKind: string;
+    storeFsJson?: FsJson;
 }
 
 /**
@@ -220,13 +230,23 @@ type FactoryOptions = {
 }
 
 /**
+ * The JSON wizzi factory configuration object
+ */
+ type JSONFactoryOptions = {
+    fsJson: FsJson;
+    plugins: PluginsOptions;
+    globalContext?: object;
+    test?: FactoryTestOptions;
+}
+
+/**
  * Creates a wizzi factory.
  */
 export function createAclFactory(user: string, role: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
 export function createFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
 export function fsFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
 export function mongoFactory(storeUri: string, storeBaseFolder: string, options: FactoryOptions, callback: cb<WizziFactory>): void;
-export function jsonFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+export function jsonFactory(options: JSONFactoryOptions, callback: cb<WizziFactory>): void;
 export function browserFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
 
 /**

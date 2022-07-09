@@ -5,9 +5,9 @@ type Readonly<P, T> = {
 }
 
 /**
- * The fs Feature
+ * The fSystem Feature
  */
- export namespace fs {
+ export namespace fSystem {
     export interface FileDef {
         fullPath: string;
         relPath: string;
@@ -72,7 +72,7 @@ type Readonly<P, T> = {
         isDirectory(folderPath: string): boolean;
         getFiles(folderPath: string, options: GetFilesOptions): FileDef[];
         getFolders(folderPath: string, options: GetFoldersOptions): FolderDef[];
-        glob(globExpr: string, options: GlobOptions): FileDef[];
+        glob(globExpr: string, options?: GlobOptions): FileDef[];
         // Async
         mkdir(folderPath: string, callback: cb<any>): void;
         read(filePath: string, callback: cb<string>): void;
@@ -234,7 +234,7 @@ export namespace ittfScanner {
         * the Virtual Store System used for scanning the folder
         * default: filesystem
         */
-        file?: fs.VFileFS;
+        file?: fSystem.VFileFS;
     }
     interface IttfDocumentScannerOptions {
         rootFolder: string;
@@ -243,14 +243,14 @@ export namespace ittfScanner {
         * the Virtual Store System used for scanning the folder
         * default: filesystem
         */
-        file?: fs.VFileFS;
+        file?: fSystem.VFileFS;
     }
     interface TextDocumentScannerOptions {
         /*
         * the Virtual Store System used for scanning the folder
         * default: filesystem
         */
-        file?: fs.VFileFS;
+        file?: fSystem.VFileFS;
     }
     /**
      * Folder or document item of a folder scanned by ittfScanner.browseFolder
@@ -309,7 +309,7 @@ export namespace ittfScanner {
         * the Virtual Store System used for scanning the folder
         * default: filesystem
         */
-        file?: fs.VFileFS;
+        file?: fSystem.VFileFS;
     }
     export function scanFolder(
         folderPath: string, 
@@ -340,6 +340,30 @@ export namespace pretty {
     export function prettifyIttfHtml(rootNode: ittfGraph.IttfDocumentGraph, callback:cb<string>): void;
     export function prettifyIttfHtmlFromString(ittfContent: string, options: {}, callback:cb<string>): void;
 }
+
+/**
+ * The Crypto Feature
+ */
+ export namespace crypto {
+    export function encrypt(text: string): string;
+    export function decrypt(text: string): string;
+    export function encryptSimple(text: string): string;
+    export function decryptSimple(text: string): string;
+}
+
+/**
+ * Options for lorem text generation
+ */
+ interface LoremOptions {
+    count: number;
+    sentenceLowerBound?: number;
+    sentenceUpperBound?: number;
+    paragraphLowerBound?: number;
+    paragraphUpperBound?: number;
+    htmlTag?: string;
+    suffix?: string;
+}
+export function lorem(options: LoremOptions): string;
 
 /**
  * Return value of the verify.parseNameValue() function

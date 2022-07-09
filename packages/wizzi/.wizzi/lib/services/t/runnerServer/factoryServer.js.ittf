@@ -7,8 +7,6 @@
 				[ items
 		if this.prepared
 			throw new Error('wizzi/runnerServer/registerfsFactory error: Cannot register a factory. The RunnerServer has been already prepared.')
-		set options.user = 'stefi'
-		set options.role = 'admin'
 		set options.repo
 			{
 				@ storeKind 'filesystem'

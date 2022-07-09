@@ -8,7 +8,7 @@ var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var async = require('async');
 var verify = require('../helpers/verify');
-var vfile = require('../fs/vfile');
+var vfile = require('../fSystem/vfile');
 var encdec = require('../crypto/index');
 var md = module.exports = {};
 // Scans a folder searching for *.ittf files

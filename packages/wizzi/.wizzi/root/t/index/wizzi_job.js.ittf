@@ -3,10 +3,6 @@ $group
 	#
 		# params
 		#	{ request
-		#		string user
-		#         default stefi
-		#		string role
-		#         default admin
 		#		string storeKind
 		#         default filesystem
 		#		{ config
@@ -60,8 +56,6 @@ $group
 			# check_cb_object( request.config, executeWizziJob )
 			# check_cb_object( request.job, executeWizziJob )
 			+
-			var user = request.user || 'stefi'
-			var role = request.role || 'admin'
 			var storeKind = request.storeKind || 'filesystem'
 			var jobName = request.job.name
 			+
@@ -69,7 +63,6 @@ $group
 			log '======== v0.7.6.wizzi.executeWizziJob ===== Start job: ' + jobName + ' ============='
 			log '- Executor module path ', __filename
 			log '- Job source path ', request.job.ittfDocumentUri
-			log '- user', user + '/' + role
 			log '- storeKind', storeKind
 			if request.config.wfBaseFolder
 				log '- wfBaseFolder', request.config.wfBaseFolder
@@ -97,8 +90,6 @@ $group
 			log '- pluginsBaseFolder', requestConfig.pluginsBaseFolder || process.cwd()
 			+
 			_ wizziFactory.createFactory
-				@ user
-				@ role
 				{
 					@ repo
 						{

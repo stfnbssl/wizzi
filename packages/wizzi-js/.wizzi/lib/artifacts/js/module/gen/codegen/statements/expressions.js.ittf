@@ -357,6 +357,18 @@
 	stm( op_ge
         _ emitOperators(cnt, '>=', model, ctx, callback)
 
+	stm( bit_not
+        _ emitOperators(cnt, '~', model, ctx, callback)
+
+	stm( bit_left_shift
+        _ emitOperators(cnt, '<<', model, ctx, callback)
+
+	stm( bit_right_shift
+        _ emitOperators(cnt, '>>', model, ctx, callback)
+
+	stm( zero_fill_right_shift
+        _ emitOperators(cnt, '>>>', model, ctx, callback)
+
 	function emitOperators
 		param cnt
 		param op

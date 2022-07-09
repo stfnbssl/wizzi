@@ -1,10 +1,10 @@
 $group
     $
         var versions = {};
-        versions['wizzi'] = '0.7.22';
-        versions['wizzi@next'] = '0.7.23';
-        versions['wizzi-utils'] = '0.7.15';
-        versions['wizzi-utils@next'] = '0.7.16';
+        versions['wizzi'] = '0.7.24';
+        versions['wizzi@next'] = '0.7.25';
+        versions['wizzi-utils'] = '0.7.16';
+        versions['wizzi-utils@next'] = '0.7.17';
         versions['wizzi-mtree'] = '0.7.11';
         versions['wizzi-mtree@next'] = '0.7.12';
         versions['wizzi-repo'] = '0.7.5';

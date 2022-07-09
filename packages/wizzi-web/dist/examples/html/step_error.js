@@ -137,7 +137,7 @@ var html_step_1 = function(step_callback) {
     heading1('EXAMPLE')
     heading2('basic html generations')
     const example_ittfs = [
-        'exception'
+        'errors_TODO/script_tag'
     ];
     async.mapSeries(example_ittfs, function(ittf, callback) {
         console.log('======================================================================================');

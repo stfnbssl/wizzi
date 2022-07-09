@@ -29,6 +29,14 @@ $group
             [ 
                 @ ...appMiddlewaresPost
         +
+    let apis
+        :[ 
+            :ref ApiType
+        =
+            [ 
+                ${'$'}if wzCtx.Build.useWizziIttf
+                    @ ...ittfApi
+        +
     let controllers
         :[ 
             :ref ControllerType
@@ -70,6 +78,8 @@ $group
             { 
                 @ config
                 @ middlewaresPre
+                { globalApi
+                @ apis
                 @ controllers
                 @ middlewaresPost
                 ${'$'}if wzCtx.Build.useFilesystem

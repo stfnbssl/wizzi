@@ -659,6 +659,46 @@ md.load = function(cnt) {
         emitOperators(cnt, '>=', model, ctx, callback);
     }
     ;
+    cnt.stm.bit_not = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.bit_not');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.bit_not. Got: ' + callback);
+        }
+        emitOperators(cnt, '~', model, ctx, callback);
+    }
+    ;
+    cnt.stm.bit_left_shift = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.bit_left_shift');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.bit_left_shift. Got: ' + callback);
+        }
+        emitOperators(cnt, '<<', model, ctx, callback);
+    }
+    ;
+    cnt.stm.bit_right_shift = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.bit_right_shift');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.bit_right_shift. Got: ' + callback);
+        }
+        emitOperators(cnt, '>>', model, ctx, callback);
+    }
+    ;
+    cnt.stm.zero_fill_right_shift = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.zero_fill_right_shift');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.zero_fill_right_shift. Got: ' + callback);
+        }
+        emitOperators(cnt, '>>>', model, ctx, callback);
+    }
+    ;
     function emitOperators(cnt, op, model, ctx, callback) {
         // log 'emitOperators', op
         model = writeComments(model, ctx);

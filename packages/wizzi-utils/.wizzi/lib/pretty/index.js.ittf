@@ -1,7 +1,8 @@
 ﻿module 
     kind jsfile
 
-	var ittfHtmlPrettifier = require('./ittfHtmlPrettifier')
+	var IttfDocumentGraph = require('../ittfGraph/ittfDocumentGraph')
+    var ittfHtmlPrettifier = require('./ittfHtmlPrettifier')
 
 	var md
         set module.exports
@@ -21,7 +22,7 @@
 		function
 			param ittfContent
 			param callback
-			_ ittfDocumentGraph.createFrom
+			_ IttfDocumentGraph.createFrom
 				@ ittfContent
 				{
 					@ fromString true

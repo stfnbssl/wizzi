@@ -13,4 +13,4 @@ html
                         href /account/login
                     + to continue.
         h1 Test
-        p ${mpage.test.path}
+        p ${wzCtx.test.path}

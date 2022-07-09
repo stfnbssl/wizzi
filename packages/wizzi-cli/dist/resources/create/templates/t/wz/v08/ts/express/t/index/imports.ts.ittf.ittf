@@ -3,6 +3,7 @@ $group
     ${'$'} var baseDir = wzCtx.Build.useNetlify ? '..' : '.'
 
     import 
+        @ ApiType
         @ ControllerType
         @ AppInitializerType
         @ MiddlewareType
@@ -72,6 +73,11 @@ $group
             import 
                 @ wizziControllers
                 from './features/wizzi/index'
+
+    ${'$'}if wzCtx.Build.useWizziIttf
+        import 
+            @ ittfApi
+            from './features/ittf/index'
 
     import 
         @ appMiddlewaresPre

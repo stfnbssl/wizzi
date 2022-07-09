@@ -5,8 +5,6 @@
 	
 	_ wizzi.executeWizziJob
 		{
-			@ user 'stefi'
-			@ role 'admin'
 			@ storeKind 'mongodb'
 			@ config
 				{

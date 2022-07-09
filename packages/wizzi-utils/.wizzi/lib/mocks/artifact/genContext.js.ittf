@@ -2,7 +2,7 @@
     kind jsfile
 
 	var StringWriter = require('../stringWriter')
-	var file = require('../../fs/file')
+	var file = require('../../fSystem/file')
     var verify = require('../../helpers/verify')
     var block = require('./block')
     var interpolate = require('../interpolate')

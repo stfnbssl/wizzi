@@ -133,12 +133,3 @@
                         // ... save or use the artifactText
                     });
 
-artifactModel: object, ittfDocumentUri: string, artifactName: string, artifactRequestContext: object, callback: cb<string>
-
-        js-panel
-            title Execute a Generate Wizzi Model DOM action
-            ittf
-
-        js-panel
-            title Execute a Wizzi Job
-            ittf

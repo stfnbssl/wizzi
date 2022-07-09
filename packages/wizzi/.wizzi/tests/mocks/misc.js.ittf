@@ -13,8 +13,6 @@
 			param options
 			param callback
 			_ wizziFactory.createFactory
-				@ 'stefi'
-				@ 'admin'
 				{
 					@ repo
 						{
@@ -38,7 +36,6 @@
 		function
 			param basedir
 			param modelPaths
-			var aclStat = new acl.AclStat('stefi', 'admin')
 			var pman
 				new ProductionManager
 					{
@@ -51,7 +48,6 @@
 					return
 						_ md.getLoadModel
 							@ modelPaths
-			_ pman.aclStat(aclStat);
 			_ pman.globalContext
 				{
 			return pman

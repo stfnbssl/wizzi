@@ -4,6 +4,7 @@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\pretty\index.js.ittf
 */
 'use strict';
+var IttfDocumentGraph = require('../ittfGraph/ittfDocumentGraph');
 var ittfHtmlPrettifier = require('./ittfHtmlPrettifier');
 var md = module.exports = {};
 md.prettifyIttfHtml = function(rootNode, options, callback) {
@@ -11,7 +12,7 @@ md.prettifyIttfHtml = function(rootNode, options, callback) {
 }
 ;
 md.prettifyIttfHtmlFromString = function(ittfContent, callback) {
-    ittfDocumentGraph.createFrom(ittfContent, {
+    IttfDocumentGraph.createFrom(ittfContent, {
         fromString: true
      }, function(err, mTree) {
         if (err) {

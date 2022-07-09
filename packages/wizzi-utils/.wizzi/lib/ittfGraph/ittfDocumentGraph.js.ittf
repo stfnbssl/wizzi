@@ -3,7 +3,7 @@
 
 	var path = require('path')
 	var async = require('async')
-	var vfile = require('../fs/vfile')
+	var vfile = require('../fSystem/vfile')
 	var verify = require('../helpers/verify')
 	var asIsLoader = require('./asIsLoader')
 	var IttfFinder = require('./ittfFinder')

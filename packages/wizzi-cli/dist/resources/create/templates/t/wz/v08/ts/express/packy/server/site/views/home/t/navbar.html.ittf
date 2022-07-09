@@ -6,7 +6,7 @@ nav
         href /
         class top-link
     
-    $foreach panel in mpage.navTop.panels
+    $foreach panel in wzCtx.navTop.panels
         $if panel.kind === 'flex'
             $foreach item in panel.items
                 $if item.label !== 'Home'

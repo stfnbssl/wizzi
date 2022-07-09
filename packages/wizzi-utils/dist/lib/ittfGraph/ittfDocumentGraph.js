@@ -11,7 +11,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 var path = require('path');
 var async = require('async');
-var vfile = require('../fs/vfile');
+var vfile = require('../fSystem/vfile');
 var verify = require('../helpers/verify');
 var asIsLoader = require('./asIsLoader');
 var IttfFinder = require('./ittfFinder');

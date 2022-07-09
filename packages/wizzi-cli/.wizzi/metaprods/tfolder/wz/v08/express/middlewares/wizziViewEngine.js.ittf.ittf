@@ -26,7 +26,7 @@ $group
                         # define the template engine
                         const twinJsonContext
                             await 
-                                _ wizziProds.inferAndLoadContextFs(filePath, 'mpage')
+                                _ wizziProds.inferAndLoadContextFs(filePath, 'wzCtx')
                         const context
                             { 
                                 @ ...options

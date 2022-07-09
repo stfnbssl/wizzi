@@ -64,6 +64,8 @@ $group
                 ${'$'}if wzCtx.Build.useWizzi
                     :p isWizziDev
                         :boolean 
+                    :p wizziBasePath
+                        :string 
                     :p ittfPath
                         :string 
                     :p dataPath

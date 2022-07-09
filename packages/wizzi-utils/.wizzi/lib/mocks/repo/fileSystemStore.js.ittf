@@ -1,7 +1,7 @@
 ﻿module
     kind jsfile
 
-	var file = require('../../fs/file')
+	var file = require('../../fSystem/file')
 	var errors = require('./errors')
 	var uriparser = require('./uriparser')
 

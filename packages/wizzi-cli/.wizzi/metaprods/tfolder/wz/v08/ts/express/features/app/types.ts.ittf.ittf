@@ -23,6 +23,17 @@ $group
                         :void 
     
     export 
+        :type ApiType
+            :{ 
+                :p name
+                    :string 
+                :p initialize
+                    :=> 
+                        :void 
+                        param initValues
+                            :ref AppInitializerType
+
+    export 
         :type ControllerType
             :{ 
                 :p path
@@ -47,6 +58,11 @@ $group
             :{ 
                 :p config
                     :ref ConfigType
+                :p globalApi
+                    :any 
+                :p apis
+                    :[ 
+                        :ref ApiType
                 :p controllers
                     :[ 
                         :ref ControllerType

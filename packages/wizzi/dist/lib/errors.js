@@ -7,7 +7,7 @@
 var util = require('util');
 var fail = require('wizzi-utils').fail;
 var utilsErrors = require('wizzi-utils').errors;
-var pkgVersioned = ' (@wizzi.0.7.23)';
+var pkgVersioned = ' (@wizzi.0.7.24)';
 
 var md = module.exports = {};
 

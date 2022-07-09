@@ -172,8 +172,6 @@ $group
             set wizzi = require('wizzi')
         _ wizzi.executeWizziJob
             {
-                @ user 'stefi'
-                @ role 'admin'
                 @ storeKind 'filesystem'
                 { config
                     @ wfBaseFolder 'c:/my/wizzi/v5'

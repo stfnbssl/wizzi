@@ -5,7 +5,7 @@
 */
 'use strict';
 var verify = require('../helpers/verify');
-var file = require('../fs/file');
+var file = require('../fSystem/file');
 var loader = require('./loader');
 var errors = require('./errors');
 var genContext = require('./artifact/genContext');

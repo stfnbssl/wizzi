@@ -122,6 +122,7 @@
     e clip-path : property
 	e color : property
 	e columns : property
+    e column-break-inside : property
 	e column-count : property
 	e column-fill : property
 	e column-gap : property
@@ -233,6 +234,7 @@
 	e hanging-punctuation : property
 	e height : property
 	e hyphens : property
+    e image-rendering : property
 	e isolation : property
 	e justify-content : property
 	e justify-items : property
@@ -264,6 +266,8 @@
 	e nav-down : property
 	e nav-left : property
 	e nav-right : property
+    e object-fit : property
+    e object-position : property
 	e opacity : property
 	e order : property
 	e orphans : property

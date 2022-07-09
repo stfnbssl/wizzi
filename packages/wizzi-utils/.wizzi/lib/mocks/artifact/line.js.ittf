@@ -1,7 +1,7 @@
 ﻿module
     kind jsfile
     
-	var file = require('../../fs/file')
+	var file = require('../../fSystem/file')
     var verify = require('../../helpers/verify')
     
 	class Line

@@ -17,7 +17,7 @@ module
 
         const example_ittfs
             [
-                @ 'exception'
+                @ 'errors_TODO/script_tag'
 
    		_ async.mapSeries
 			@ example_ittfs

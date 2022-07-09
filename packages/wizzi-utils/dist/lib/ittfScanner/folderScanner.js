@@ -7,7 +7,7 @@
 var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var verify = require('../helpers/verify');
-var vfile = require('../fs/vfile');
+var vfile = require('../fSystem/vfile');
 var ittfGraph = require('../ittfGraph/index');
 var IttfFsNode = require('./ittfFsNode');
 var md = module.exports = {};

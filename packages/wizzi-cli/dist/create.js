@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\root\create.js.ittf
-    utc time: Wed, 29 Jun 2022 03:20:17 GMT
+    utc time: Tue, 05 Jul 2022 06:52:47 GMT
 */
 'use strict';
 const minimist = require('minimist');
@@ -28,10 +28,11 @@ else if (cmd == 'ts-site') {
         pkgName: '../../wizzi.webapp/packages/wizzi.site'
      })
 }
-else if (cmd == 'ts-backend') {
+else if (cmd == 'ts-webapp') {
+    console.log('create ts-webapp');
     create({
-        template: 'ts/express_backend', 
-        pkgName: '../../wizzi.webapp/packages/wizzi.backend'
+        template: 'ts/express_webapp', 
+        pkgName: '../../wizzi.apps/packages/wizzi.webapp'
      })
 }
 else if (cmd == 'ts-editor') {

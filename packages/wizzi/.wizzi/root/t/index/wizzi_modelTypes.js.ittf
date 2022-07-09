@@ -3,10 +3,6 @@ $group
 	#
 		# PARAMS
 		# { request
-		# 	string user
-		# 		default stefi
-		# 	string role
-		# 		default admin
 		# 	string storeKind
 		# 		default filesystem
 		# 	{ configOptions
@@ -29,15 +25,12 @@ $group
 			# TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelTypes )
 			# TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelTypes )
 			+
-			var user = request.user || 'stefi'
-			var role = request.role || 'admin'
 			var storeKind = request.storeKind || 'filesystem'
 			+
 			set request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext)
 			set request.globalContext = Object.assign({}, request.globalContext)
 			+
 			log 'generateWizziModelTypes'
-			log '- user', user +'/' + role
 			log '- storeKind', storeKind
 			log '- configOptions', request.configOptions
 			log '- wfschema.name', request.wfschema.name
@@ -62,8 +55,6 @@ $group
 				log '- globalContext property', k
 			+
 			_ wizziFactory.createFactory
-				@ user
-				@ role
 				{
 					@ repo
 						{

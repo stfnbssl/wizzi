@@ -323,7 +323,7 @@ module
             try 
                 const twinJsonContext
                     await 
-                        _ wizziProds.inferAndLoadContextFs(resourceFilePath, 'mpage')
+                        _ wizziProds.inferAndLoadContextFs(resourceFilePath, 'wzCtx')
                 return (callback(null, twinJsonContext))
             catch ex
                 return callback(ex)

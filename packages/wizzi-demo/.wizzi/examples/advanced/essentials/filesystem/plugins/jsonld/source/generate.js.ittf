@@ -22,8 +22,6 @@
 
 		_ wizzi.executeWizziJob
 			{
-				@ user 'stefi'
-				@ role 'admin'
 				@ storeKind 'filesystem'
 				{ config
 					@ wfBaseFolder __dirname

@@ -299,7 +299,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.23.runnerServer.' + method,
+        method: 'wizzi@0.7.24.runnerServer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');
