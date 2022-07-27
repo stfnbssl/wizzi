@@ -4,7 +4,7 @@
 	set md.${schema}${artifact}
 		function
 			string ittfDocumentUri
-			{ mtreeBrickBuildUpContext
+			{ mtreeBrickBuildupContext
 			callback
 
 			log '${schema}${artifact} created by legacy package in ', __dirname
@@ -22,7 +22,7 @@
 			_ loadModel
 				@ ittfDocumentUri
 				_ createRequestContext
-					@ mtreeBrickBuildUpContext
+					@ mtreeBrickBuildupContext
 				f_cb( artifactModel )
 					var genContext
 						new GenContext

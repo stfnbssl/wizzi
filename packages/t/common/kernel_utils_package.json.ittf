@@ -24,7 +24,7 @@
 			$if license == 'MIT'
 			{
 				type "MIT"
-				url "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
+				url "https://github.com/stfnbssl/wizzi/tree/master/packages/${pkgName}/license.txt"
 	
 	repository
 		{

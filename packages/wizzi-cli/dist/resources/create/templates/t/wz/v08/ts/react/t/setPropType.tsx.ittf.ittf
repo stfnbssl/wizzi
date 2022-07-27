@@ -3,6 +3,9 @@ $group
     :p ${'$'}{prop.name}
         ${'$'}if prop.type == 'date'
             :ref Date
+        ${'$'}elif prop.type == '['
+            :[
+                :any
         ${'$'}elif prop.type == 'node'
             :ref React.ReactNode
         ${'$'}elif prop.type == 'mouse-event'

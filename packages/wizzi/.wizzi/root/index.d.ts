@@ -396,7 +396,7 @@ type ModelFormatOptions = {
 * A wizzi model load context.
 */
 type ModelLoadContext = {
-    mTreeBuildUpContext?: object;
+    mTreeBuildupContext?: object;
     formatOptions?: ModelFormatOptions;
 }
 
@@ -405,7 +405,7 @@ type ModelLoadContext = {
 */
 type GenerationContext = {
     modelRequestContext?: {
-        mTreeBuildUpContext?: {}
+        mTreeBuildupContext?: {}
     };
     artifactRequestContext?: {
     };
@@ -415,7 +415,7 @@ type GenerationContext = {
 * An artifact generation context.
 */
 type TransformationContext = {
-    // This become the mTreeBuildUpContext of the ModelLoadContext
+    // This become the mTreeBuildupContext of the ModelLoadContext
     modelRequestContext?: {};
     transformRequestContext?: {};
 }
@@ -471,19 +471,19 @@ declare interface WizziFactory {
 
     /**
      * @param ittfDocumentUri      The path to the primary ittf source document.
-     * @param mTreeBuildUpContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
+     * @param mTreeBuildupContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
      * @param callback             Receives the builded [[MTree]].
      */
     loadMTree(
-        ittfDocumentUri: string, mTreeBuildUpContext: object, callback: cb<MTree>
+        ittfDocumentUri: string, mTreeBuildupContext: object, callback: cb<MTree>
     ): void;
     /**
      * @param ittfDocumentUri      The path to the primary ittf source document.
-     * @param mTreeBuildUpContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
+     * @param mTreeBuildupContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
      * @param callback             Receives the builded [[MTree]].
      */
-    loadMTreeDebugInfo(
-        ittfDocumentUri: string, mTreeBuildUpContext: object, callback: cb<string>
+    loadMTreeBuildupScript(
+        ittfDocumentUri: string, mTreeBuildupContext: object, callback: cb<string>
     ): void;
     /**
     * @param schemaName           
@@ -550,11 +550,11 @@ declare interface WizziFactory {
      * @param wfschemaIttfDocumentUri     The path to the source Wizzi Schema definition
      * @param outputPackagePath           The path to the folder where to write the generated modules
      * @param wfschemaName                The name of the Wizzi Schema
-     * @param mTreeBuildUpContext         Context object for the Wizzi Model Load of the source Wizzi Schema definition
+     * @param mTreeBuildupContext         Context object for the Wizzi Model Load of the source Wizzi Schema definition
      * @param callback                    Receives the paths of the generated modules.
     */
     generateModelDoms(
-        wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
+        wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildupContext: object, callback: cb<object>
     ): void;
     /**
      * @param jobRequest     The JobRequest object
@@ -672,56 +672,56 @@ interface LightArtifactsFolderOptions extends LightOptions {
 * [[MTree]] build up
 */
 export function mtree(ittfDocumentPath: string, callback: cb<MTree>): void;
-export function mtree(ittfDocumentPath: string, mTreeBuildUpContext: object, callback: cb<MTree>): void;
+export function mtree(ittfDocumentPath: string, mTreeBuildupContext: object, callback: cb<MTree>): void;
 export function mtree(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightMTreeOptions, callback: cb<MTree>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightMTreeOptions, callback: cb<MTree>
 ): void;
 export function mtreeFromText(ittfContent: string, callback: cb<MTree>): void;
-export function mtreeFromText(ittfContent: string, mTreeBuildUpContext: object, callback: cb<MTree>): void;
+export function mtreeFromText(ittfContent: string, mTreeBuildupContext: object, callback: cb<MTree>): void;
 export function mtreeFromText(
-    ittfContent: string, mTreeBuildUpContext: object, options: LightMTreeFromTextOptions, callback: cb<MTree>
+    ittfContent: string, mTreeBuildupContext: object, options: LightMTreeFromTextOptions, callback: cb<MTree>
 ): void;
 
 /**
 * [[WizziModel]] loading
 */
 export function model(ittfDocumentPath: string, callback: cb<WizziModel>): void;
-export function model(ittfDocumentPath: string, mTreeBuildUpContext: object, callback: cb<WizziModel>): void;
+export function model(ittfDocumentPath: string, mTreeBuildupContext: object, callback: cb<WizziModel>): void;
 export function model(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightModelOptions, callback: cb<WizziModel>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightModelOptions, callback: cb<WizziModel>
 ): void;
 export function modelFromText(ittfContent: string, callback: cb<WizziModel>): void;
-export function modelFromText(ittfContent: string, mTreeBuildUpContext: object, callback: cb<WizziModel>): void;
+export function modelFromText(ittfContent: string, mTreeBuildupContext: object, callback: cb<WizziModel>): void;
 export function modelFromText(
-    ittfContent: string, mTreeBuildUpContext: object, options: LightModelFromTextOptions, callback: cb<WizziModel>
+    ittfContent: string, mTreeBuildupContext: object, options: LightModelFromTextOptions, callback: cb<WizziModel>
 ): void;
 
 /**
 * Artifact generation (single document)
 */
 export function artifact(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightArtifactOptions, callback: cb<string>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightArtifactOptions, callback: cb<string>
 ): void;
 
 /**
 * Artifact generation (folder documents)
 */
 export function artifactsFolder(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightArtifactsFolderOptions, callback: cb<string>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightArtifactsFolderOptions, callback: cb<string>
 ): void;
 
 /**
 * Wizzi job execution
 */
 export function job(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightJobOptions, callback: cb<string>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightJobOptions, callback: cb<string>
 ): void;
 
 /**
 * Wizzi schema generation
 */
 export function schema(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightSchemaOptions, callback: cb<string>
+    ittfDocumentPath: string, mTreeBuildupContext: object, options: LightSchemaOptions, callback: cb<string>
 ): void;
 
 /**

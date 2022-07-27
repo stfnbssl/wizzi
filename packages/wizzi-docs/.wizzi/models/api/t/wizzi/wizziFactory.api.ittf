@@ -101,7 +101,7 @@
 			m loadMTree
 				string ittfDocumentUri
 					# The path of the source ittf document.
-				{ mTreeBuildUpContext
+				{ mTreeBuildupContext
 					# An object context which properties are loaded in the 
 					# wizzi-mtree.jsWizziContext used in the evaluation step
 					# on the mTree loading.
@@ -114,10 +114,10 @@
 
 				info
 					internal-call createLoadContext
-						send mTreeBuildUpContext
+						send mTreeBuildupContext
 						receive
 							{ loadContext
-								{ mTreeBuildUpContext
+								{ mTreeBuildupContext
 								{ __productionManager
 									api-ref wizzi.production.productionManager
 					api-call wizzi-mtree.loadMTree
@@ -158,7 +158,7 @@
 				string ittfDocumentUri
 					required
 				{ loadContext
-					{ mTreeBuildUpContext
+					{ mTreeBuildupContext
 						# An object context which properties are loaded in the 
 						# wizzi-mtree.jsWizziContext used in the evaluation step
 						# on the mTree loading.
@@ -166,7 +166,7 @@
 						# or a POJO.
 					{ globalContext
 						# Being the loadModel function called once this usually is not used.
-						# Its properties are added to the `mTreeBuildUpContext` parameter object.
+						# Its properties are added to the `mTreeBuildupContext` parameter object.
 					{ formatOptions
 						boolean ittfSources
 							# if true returns not the model but its ittf source documents.
@@ -178,14 +178,14 @@
 				
 				# Loads a wizzi.modelType described by a wizzi.model.modelInfoConfig object.
 				# The `modelConfig` parameter can describe a deep nidification of
-				# context models that must be loaded and passed as mTreeBuildUpContext
+				# context models that must be loaded and passed as mTreeBuildupContext
 				# properties to the load context of their parents.
 				# TODO links to a demo example.
 				
 				{ modelConfig
 					api-ref wizzi.model.modelInfoConfig
 				{ globalContext
-					# Its properties are added to the `mTreeBuildUpContext` parameter object.
+					# Its properties are added to the `mTreeBuildupContext` parameter object.
 				{ formatOptions
 					boolean ittfSources
 						# if true returns not the model but its ittf source documents.
@@ -250,7 +250,7 @@
 				{ requestContext
 					required
 					{ modelRequestContext
-						{ mTreeBuildUpContext
+						{ mTreeBuildupContext
 							# An object context which properties are loaded in the 
 							# wizzi-mtree.jsWizziContext used in the evaluation step
 							# on the mTree loading.

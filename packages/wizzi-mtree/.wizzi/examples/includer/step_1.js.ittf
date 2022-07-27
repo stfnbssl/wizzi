@@ -21,7 +21,7 @@ module
                 _ MTreeBrickProvider.createFromUri
                     @ ittfUri
                     {
-                        @ mTreeBuildUpContext
+                        @ mTreeBuildupContext
                             {
                         @ productionContext 
                             _ mocks.createProductionContext

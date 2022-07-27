@@ -66,16 +66,16 @@
             \b to the Wizzi Model Loader instead of the path to the source ITTF Document. 
 
         js-panel
-            title Execute a Load mTree Debug Info action
+            title Execute a Load mTree buildup script action
             ittf
-                wizziFactory.loadMTreeDebugInfo (
+                wizziFactory.loadMTreeBuildupScript (
                     path.join (__dirname, 'ittf', 'mysource.myschema.ittf'),
                     myContextObject,
-                    function (err, loadedMTreeDebugInfo) {
+                    function (err, loadedMTreeBuildupScript) {
                         if (err) {
                             throw new Error(err.message);
                         }
-                        // ... use the loadedMTreeDebugInfo object
+                        // ... use the loadedMTreeBuildupScript object
                     });
 
         p You execute this action for debugging purposes. An mTree Debug Info
@@ -88,7 +88,7 @@
                     'myschema', // schema name
                     path.join (__dirname, 'ittf', 'mysource.myschema.ittf'),
                     {
-                        mTreeBuildUpContext: myContextObject,
+                        mTreeBuildupContext: myContextObject,
                         formatOptions: {}
                     },
                     function (err, loadedModel) {

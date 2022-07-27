@@ -3,7 +3,7 @@ $group
     ${'$'}if wzCtx.Build.usePacki
         +
         export 
-            async-function mTreeDebugInfo
+            async-function mTreeBuildupScript
                 param filePath
                     :string 
                 param files
@@ -30,15 +30,15 @@ $group
                             set jsonwf =
                                 await 
                                     _ createFsJsonAndFactory(files)
-                            _ jsonwf.wf.loadMTreeDebugInfo
+                            _ jsonwf.wf.loadMTreeBuildupScript
                                 @ ittfDocumentUri
                                 @ context
                                 =>
                                     param err
                                         :any
-                                    param buildUpScript
+                                    param buildupScript
                                         :string
                                     if err
                                         return reject(err)
                                     _ resolve
-                                        @ buildUpScript
+                                        @ buildupScript

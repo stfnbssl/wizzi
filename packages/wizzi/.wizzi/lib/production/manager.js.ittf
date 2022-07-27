@@ -68,7 +68,7 @@
 			#   string basedir // uri
 			#   { dumps
 			#     string dumpsBaseFolder
-			# 	  { mTreeBuildUpScript
+			# 	  { mTreeBuildupScript
 			#       boolean dump
 			#       string dumpsBaseFolder
 		ctor

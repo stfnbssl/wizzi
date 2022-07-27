@@ -21,7 +21,7 @@
 				{ loadContext
 					{ __productionManager
 						required
-					{ mTreeBuildUpContext
+					{ mTreeBuildupContext
 						# An (optional) object context which properties are loaded in the 
 						# wizzi-mtree.jsWizziContext used in the evaluation step
 						# of the mTree loading.

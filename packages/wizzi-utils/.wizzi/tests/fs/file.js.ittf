@@ -1,7 +1,7 @@
 ﻿base_test( file )
 	
 	$append imports
-		var file = require('../../lib/fs/file')
+		var file = require('../../lib/fSystem/file')
 
 	it should split a text into lines
 

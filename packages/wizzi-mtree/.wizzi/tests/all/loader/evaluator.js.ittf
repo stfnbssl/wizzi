@@ -32,7 +32,7 @@
 
 		var loadContext
             {
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ productionContext mocks.ProductionContext
 				@ __ittfDocumentStore store

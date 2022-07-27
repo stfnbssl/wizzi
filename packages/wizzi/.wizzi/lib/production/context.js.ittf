@@ -54,7 +54,7 @@
                         @ content content
                         @ cacheCount 0
     
-		m addMTreeBuildUpScript
+		m addMTreeBuildupScript
             param uri
             param ittfEvalScript
             set this.ittfEvaluationScripts[uri]

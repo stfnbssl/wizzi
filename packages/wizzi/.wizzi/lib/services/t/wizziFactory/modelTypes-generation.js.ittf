@@ -12,7 +12,7 @@ $group
 		string wfschemaIttfDocumentUri
 		string outputPackagePath
 		string wfschemaName
-		{ mTreeBuildUpContext
+		{ mTreeBuildupContext
 		callback
 		+
 		var wizziSchemaLabFolder = path.join(outputPackagePath, 'lib', 'wizzi', 'schemas', 'lab')
@@ -28,7 +28,7 @@ $group
 		+
 		_ this.generateModelDomsArtifacts
 			@ wfschemaIttfDocumentUri
-			@ mTreeBuildUpContext
+			@ mTreeBuildupContext
 			f_cb( generatedArtifacts )
 				_ file.write
 					@ paths.model
@@ -68,12 +68,12 @@ $group
 		# from an IttfDocument of schema "wfschema"
 	m generateModelDomsArtifacts
 		param wfschemaIttfDocumentUri
-		param mTreeBuildUpContext
+		param mTreeBuildupContext
 		param callback
 		+
 		var loadContext
 			{
-				@ mTreeBuildUpContext mTreeBuildUpContext
+				@ mTreeBuildupContext mTreeBuildupContext
 		+
 		var that = this
 		+

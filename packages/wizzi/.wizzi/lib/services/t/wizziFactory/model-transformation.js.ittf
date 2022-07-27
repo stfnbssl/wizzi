@@ -57,7 +57,7 @@ $group
         _ this.loadModel
             @ ittfDocumentUri
             {
-                @ mTreeBuildUpContext requestContext.modelRequestContext
+                @ mTreeBuildupContext requestContext.modelRequestContext
             f_cb( wizziModel )
                 # log 'wizzi.wizziFactory.loadAndTransformModel', 'model loaded', wizziModel
                 # the loaded wizzi model becomes the wizziModel of the transformation
@@ -89,7 +89,7 @@ $group
         _ this.loadModel
             @ ittfDocumentUri
             {
-                @ mTreeBuildUpContext requestContext.modelRequestContext
+                @ mTreeBuildupContext requestContext.modelRequestContext
             f_cb( wizziModel )
                 # log 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact', 'model loaded', wizziModel
                 # the loaded wizzi model becomes the wizziModel of the transformation

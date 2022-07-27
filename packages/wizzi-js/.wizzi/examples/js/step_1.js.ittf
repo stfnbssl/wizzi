@@ -20,7 +20,7 @@ module
                 $*
                 @ 'call'
                 @ 'class'
-                @ 'debug'
+                
                 @ 'exceptions'
                 @ 'expressions'
                 @ 'function'
@@ -28,6 +28,7 @@ module
                 @ 'html'
                 @ 'if-switch'
                 *$
+                @ 'debug'
                 @ 'quick'
 
    		_ async.mapSeries

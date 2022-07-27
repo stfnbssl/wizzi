@@ -26,11 +26,11 @@
 								function
 									param uri
 									param content
-							@ addMTreeBuildUpScript
+							@ addMTreeBuildupScript
 								function
 									param uri
 									param jsScriptCoder
-									# log 'addMTreeBuildUpScript'
+									# log 'addMTreeBuildupScript'
 									_ file.write
 										_ path.join
 											@ path.dirname(uri)
@@ -49,17 +49,17 @@
 							param uri
 							param content
 					
-					@ mTreeBuildUpScripts
+					@ mTreeBuildupScripts
 						{
 					
-					@ addMTreeBuildUpScript
+					@ addMTreeBuildupScript
 						function
 							param uri
 							param jsScriptCoder
 
 							var uri = uri
 							var script = jsScriptCoder.toCode()
-							set this.mTreeBuildUpScripts[uri]
+							set this.mTreeBuildupScripts[uri]
 								{
 									@ uri uri
 									@ script script
@@ -79,7 +79,7 @@
 							param exception
 							
 							var uri = uri
-							var script = this.mTreeBuildUpScripts[uri]
+							var script = this.mTreeBuildupScripts[uri]
 							if script && script.ittfEvalScript && exception && exception.lineNumber
 								var lines = script.ittfEvalScript.getErrorLines(exception).join('\n')
 								set exception.message = '\nError evaluating ittf in uri: ' + uri + '\n' + lines + '\n'

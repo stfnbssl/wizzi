@@ -16,7 +16,7 @@
                 param callback
 
                 var wfschemaIttfPath = path.join(__dirname, 'ittf', 'wfschema-factory.js.ittf')
-                var mTreeBuildUpContext
+                var mTreeBuildupContext
                     {
                         @ schema model
                         @ request
@@ -27,7 +27,7 @@
 
                 _ legacy.jsModule
                     @ wfschemaIttfPath
-                    @ mTreeBuildUpContext
+                    @ mTreeBuildupContext
                     f_cb( result )
                         _ ctx.w(result)
                         _ callback(null, ctx)

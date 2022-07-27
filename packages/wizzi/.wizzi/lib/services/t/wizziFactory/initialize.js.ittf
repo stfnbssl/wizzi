@@ -81,11 +81,11 @@
 						@ that.createStore
 						{
 							@ raw true
-				checked_call_set( that.__loadMTreeDebugInfo )
+				checked_call_set( that.__loadMTreeBuildupScript )
 					_ mtree.createLoadMTree
 						@ that.createStore
 						{
-							@ debugInfo true
+							@ mTreeBuildupScript true
 				_ that.createStore
 					f_cb( store )
 						set that.store = store

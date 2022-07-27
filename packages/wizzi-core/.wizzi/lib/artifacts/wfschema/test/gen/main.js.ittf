@@ -19,7 +19,7 @@
                 # log myname + 'model', model
 
                 var ittfDocumentPath = path.join(__dirname, 'ittf', 'wizzischema-test.js.ittf')
-                var mTreeBuildUpContext
+                var mTreeBuildupContext
                     {
                         @ schema model
                         @ request
@@ -29,7 +29,7 @@
 
                 _ legacy.jsModule
                     @ ittfDocumentPath
-                    @ mTreeBuildUpContext
+                    @ mTreeBuildupContext
                     function
                         param err
                         param result

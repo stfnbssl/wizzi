@@ -1,8 +1,8 @@
 ﻿base_test( glob )
 	
 	$append imports
-		var glob = require('../../lib/fs/glob')
-		var vfile = require('../../lib/fs/vfile')
+		var glob = require('../../lib/fSystem/glob')
+		var vfile = require('../../lib/fSystem/vfile')
 		var file = vfile()
 
 	it-async should glob a folder

@@ -137,6 +137,7 @@ var js_step_1 = function(step_callback) {
     heading1('EXAMPLE')
     heading2('basic js generations')
     const example_ittfs = [
+        'debug', 
         'quick'
     ];
     async.mapSeries(example_ittfs, function(ittf, callback) {

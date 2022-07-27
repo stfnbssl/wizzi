@@ -32,7 +32,7 @@
 		_ MTreeBrickProvider.createFromUri
 			@ content_filepath
 			{
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ productionContext mocks.ProductionContext
 				@ __ittfDocumentStore store

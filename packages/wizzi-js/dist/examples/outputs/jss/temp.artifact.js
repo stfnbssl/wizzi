@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: C:\My\wizzi\wizzi\packages\wizzi-js\dist\examples\ittf\jss\temp.js.ittf
-    utc time: Fri, 07 Jun 2019 11:08:15 GMT
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\examples\ittf\jss\temp.js.ittf
+    utc time: Thu, 21 Jul 2022 21:19:01 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;

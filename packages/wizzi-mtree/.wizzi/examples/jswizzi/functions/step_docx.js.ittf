@@ -30,7 +30,7 @@ module
                 _ loader.loadMTree
                     @ ittfUri
                     {
-                        { mTreeBuildUpContext
+                        { mTreeBuildupContext
                             @ beba context
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore

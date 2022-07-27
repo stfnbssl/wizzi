@@ -1,9 +1,9 @@
 ﻿base_test( vfile )
 	
 	$append imports
-		var vfile = require('../../lib/fs/vfile')
+		var vfile = require('../../lib/fSystem/vfile')
 		var file = vfile()
-		var glob = require('../../lib/fs/glob')
+		var glob = require('../../lib/fSystem/glob')
 
 	before
 		_ del.sync

@@ -19,7 +19,7 @@
 				string ittfDocumentUri
 					# The location of the source ittf document.
 				{ loadContext
-					{ mTreeBuildUpContext
+					{ mTreeBuildupContext
 						# 
 					{ __productionManager
 						api-ref wizzi.production.productionManager 
@@ -80,7 +80,7 @@
 				string primaryIttfDocumentUri
 					# The location of the source ittf document.
 				{ loadContext
-					{ mTreeBuildUpContext
+					{ mTreeBuildupContext
 						# An object context which properties are loaded in the 
 						# wizzi-mtree.jsWizziContext used in the evaluation step
 						# of the mTree loading.

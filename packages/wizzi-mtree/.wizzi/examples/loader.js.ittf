@@ -28,7 +28,7 @@
 			{
 				@ __productionManager
 					_ mocks.getProductionManager
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 						@ tree
 							{
@@ -88,7 +88,7 @@
 			{
 				@ __productionManager
 					_ mocks.getProductionManager
-				{ mTreeBuildUpContext
+				{ mTreeBuildupContext
             f_cb_throw( mTree )
                 log 'EXAMPLE.loader.sample_load.result\n', mTree.toIttf()
                 log 'EXAMPLE.loader.sample_load.frontmatter\n', JSON.stringify(mTree.frontMatter, null, 2)

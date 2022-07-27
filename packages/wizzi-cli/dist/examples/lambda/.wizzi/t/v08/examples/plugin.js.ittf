@@ -40,14 +40,14 @@ $group
                     @ ittfDocumentUri
                     @ context
                     @ callback
-    function loadMTreeDebugInfo
+    function loadMTreeBuildupScript
         param ittfDocumentUri
         param context
         param callback
         _ createWizziFactory
             {
             f_cb( wf )
-                _ wf.loadMTreeDebugInfo
+                _ wf.loadMTreeBuildupScript
                     @ ittfDocumentUri
                     @ context
                     @ callback
@@ -63,7 +63,7 @@ $group
                     @ fi.schema
                     @ ittfDocumentUri
                     {
-                        @ mTreeBuildUpContext context
+                        @ mTreeBuildupContext context
                         @ globalContext {}
                     @ callback
     function loadWizziModelAndSaveToJson
@@ -194,7 +194,7 @@ $group
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
-        param mTreeBuildUpContext
+        param mTreeBuildupContext
         param callback
         _ createWizziFactory
             {
@@ -203,7 +203,7 @@ $group
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName
-                    @ mTreeBuildUpContext
+                    @ mTreeBuildupContext
                     @ callback
     function getIttfFilesBySchema
         param srcpath

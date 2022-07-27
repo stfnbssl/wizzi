@@ -3,7 +3,7 @@
 
 	import path
 	import del
-	var vfile = require('../../lib/fs/vfile')
+	var vfile = require('../../lib/fSystem/vfile')
 	var file = vfile()
 
 	_ del.sync

@@ -129,7 +129,7 @@
 		# { options
 		#   { globalContext
 	lightFunction( loadMTreeDebug, mtreeDebug )
-		_ wf.loadMTreeDebugInfo
+		_ wf.loadMTreeBuildupScript
 			@ ittfDocumentPath
 			@ context
 			@ callback
@@ -139,7 +139,7 @@
 		#   { globalContext
 	jsonLightFunction( loadMTreeDebugFromText, mtreeDebugFromText )
 		var ittfDocumentPath = tempIttfUri
-		_ wf.loadMTreeDebugInfo
+		_ wf.loadMTreeBuildupScript
 			@ ittfDocumentPath
 			@ context
 			@ callback
@@ -178,7 +178,7 @@
 				@ schema
 				@ ittfDocumentPath
 				{
-					@ mTreeBuildUpContext context
+					@ mTreeBuildupContext context
 					@ globalContext {}
 				@ callback
 
@@ -210,7 +210,7 @@
 			@ schema
 			@ ittfDocumentPath
 			{
-				@ mTreeBuildUpContext context
+				@ mTreeBuildupContext context
 				@ globalContext {}
 			@ callback
 

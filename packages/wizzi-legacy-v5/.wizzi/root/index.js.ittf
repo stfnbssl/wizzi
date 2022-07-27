@@ -78,12 +78,12 @@
 								@ store
 
 	function createRequestContext
-		param mTreeBuildUpContext
+		param mTreeBuildupContext
 		return
 			{
 				@ __productionManager
 					_ createProductionManager
-				@ mTreeBuildUpContext mTreeBuildUpContext
+				@ mTreeBuildupContext mTreeBuildupContext
 
 	function createProductionManager
 		return
@@ -106,7 +106,7 @@
 					function
 				@ addIttfDocument
 					function
-				@ addMTreeBuildUpScript
+				@ addMTreeBuildupScript
 					function
 						param uri
 						param ittfEvalScript

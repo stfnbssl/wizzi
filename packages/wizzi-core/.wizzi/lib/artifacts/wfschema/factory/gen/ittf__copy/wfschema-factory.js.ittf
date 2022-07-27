@@ -79,7 +79,7 @@
 								# { productionContext
 									# { aclstat
 							# { __ittfDocumentStore
-							# { mTreeBuildUpContext
+							# { mTreeBuildupContext
 								# optional
 							# { __request
 								# This is a legacy that should disappear.
@@ -122,11 +122,11 @@
 										@ 'loadModel'
 										@ 'The loadContext.__productionManager parameter must be an object'
 
-						set loadContext.mTreeBuildUpContext
+						set loadContext.mTreeBuildupContext
 							_ Object.assign
 								{
 								_ loadContext.__productionManager.globalContext
-								@ loadContext.mTreeBuildUpContext
+								@ loadContext.mTreeBuildupContext
 
 						var wizziModelRequest = loadContext.__request || {}
 						var start = Date.now()

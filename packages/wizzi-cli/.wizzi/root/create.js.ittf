@@ -9,38 +9,7 @@ module
 	let cmd = args._[0]
     log 'args', args, 'cmd', cmd
 
-    if cmd == 'ts-ui'
-        _ create
-            {
-                @ template 'ts/react'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.ui'
-    elif cmd == 'ts-account'
-        _ create
-            {
-                @ template 'ts/account_site'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.account'
-    elif cmd == 'ts-site'
-        _ create
-            {
-                @ template 'ts/express_site'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.site'
-    elif cmd == 'ts-webapp'
-        log 'create ts-webapp'
-        _ create
-            {
-                @ template 'ts/express_webapp'
-                @ pkgName '../../wizzi.apps/packages/wizzi.webapp'
-    elif cmd == 'ts-editor'
-        _ create
-            {
-                @ template 'ts/webpack_editor'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.editor'
-    elif cmd == 'ts-pageforms'
-        _ create
-            {
-                @ template 'ts/webpack_pageforms'
-                @ pkgName '../../wizzi.webapp/packages/wizzi.pageforms'
-    elif cmd == 'js-express'
+    if cmd == 'js-express'
         _ create
             {
                 @ template 'js/express'

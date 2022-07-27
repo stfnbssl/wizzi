@@ -293,7 +293,11 @@
 							[ 
 						decl content
 					foreach item in result
-						set content = md.read(item)
+						set content
+                            _ md.read
+                                _ path.join
+                                    @ path_string
+                                    @ item
 						_ newResult.push
 							{ 
 								@ file item

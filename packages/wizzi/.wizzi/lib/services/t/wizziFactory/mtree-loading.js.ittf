@@ -5,19 +5,19 @@
 		#
 		# params
 		#  string ittfDocumentUri
-		#  { mTreeBuildUpContext
+		#  { mTreeBuildupContext
 		#  callback
 	
 	m loadMTree
 		string ittfDocumentUri
-		{ mTreeBuildUpContext
+		{ mTreeBuildupContext
 		callback
 		+
 		_ this.__loadMTree
 			@ ittfDocumentUri
 			_ this.createLoadContext
 				{
-					@ mTreeBuildUpContext mTreeBuildUpContext
+					@ mTreeBuildupContext mTreeBuildupContext
 			@ callback
 
 	#
@@ -62,31 +62,31 @@
 		#  string ittfDocumentUri
 		#  callback
 
-	m loadMTreeDebugInfo
+	m loadMTreeBuildupScript
 		string ittfDocumentUri
-		{ mTreeBuildUpContext
+		{ mTreeBuildupContext
 		callback
 		+
-		_ this.__loadMTreeDebugInfo
+		_ this.__loadMTreeBuildupScript
 			@ ittfDocumentUri
 			_ this.createLoadContext
 				{
-					@ mTreeBuildUpContext mTreeBuildUpContext
+					@ mTreeBuildupContext mTreeBuildupContext
 			@ callback
 
-	m loadMTreeDebugInfoFromText
+	m loadMTreeBuildupScriptFromText
 		string ittfContent
-		{ mTreeBuildUpContext
+		{ mTreeBuildupContext
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadMTreeDebugInfoFromText', ittfContent, mTreeBuildUpContext, callback
+		# log 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
 		_ this.createSingleTextSourceFactory
 			@ ittfContent
 			@ 'ittf'
 			{
 			f_cb( result )
-				_ result.wizziFactory.loadMTreeDebugInfo
+				_ result.wizziFactory.loadMTreeBuildupScript
 					@ result.ittfDocumentUri
-					@ mTreeBuildUpContext
+					@ mTreeBuildupContext
 					@ callback
 

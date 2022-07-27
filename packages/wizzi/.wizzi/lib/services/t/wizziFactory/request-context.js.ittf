@@ -8,7 +8,7 @@
 		# But the method must become asynchronous !!!
 		# params
 		#   { loadContext
-		#     { mTreeBuildUpContext
+		#     { mTreeBuildupContext
 	m createLoadContext
 		param loadContext
 		+
@@ -16,19 +16,19 @@
 			# Already a valid request context
 			return loadContext
 		+
-		var mTreeBuildUpContext
+		var mTreeBuildupContext
 			_ Object.assign
 				{
 				@ this.globalContext
-				@ loadContext.mTreeBuildUpContext
+				@ loadContext.mTreeBuildupContext
 		+
-		# log 'wizzi.wizziFactory.createLoadContext.mTreeBuildUpContext', mTreeBuildUpContext
+		# log 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
 		+
 		return
 			{
 				@ __productionManager
 					_ this.createProductionManager
-				@ mTreeBuildUpContext mTreeBuildUpContext
+				@ mTreeBuildupContext mTreeBuildupContext
 	
 	#
 		# params

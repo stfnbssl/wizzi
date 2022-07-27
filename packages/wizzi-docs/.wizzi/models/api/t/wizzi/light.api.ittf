@@ -7,7 +7,7 @@
 				string ittfDocumentPath
 					# the wizzi schema is detected from the path
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					string artifactName
@@ -25,7 +25,7 @@
 			m mtree
 				string ittfDocumentPath
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					boolean raw
@@ -41,7 +41,7 @@
 			m mtreeFromText
 				string ittfContent
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					string schema
@@ -59,7 +59,7 @@
 			m model
 				string ittfDocumentPath
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					[ plugins
@@ -73,7 +73,7 @@
 			m modelFromText
 				string ittfContent
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					string schema
@@ -90,7 +90,7 @@
 			m job
 				string ittfDocumentPath
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					integer indentedSpaces
@@ -104,7 +104,7 @@
 			m genSchema
 				string ittfDocumentPath
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					[ plugins
@@ -115,7 +115,7 @@
 			m genFolder
 				string ittfDocumentPath
 				{ context
-					# the mTreeBuildUpContext
+					# the mTreeBuildupContext
 					# optional
 				{ options
 					[ plugins

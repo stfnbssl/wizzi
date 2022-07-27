@@ -18,7 +18,7 @@
 				set value = ss[0]
 		_ ctx.w
 			@ 'console.log("' + name + '" + " " +
-				\b util.inspect(' + value + ', { depth: null } ))'
+				\b util.inspect(' + value + ', { depth: null } ), __filename)'
 		r_cb()
 
 	stm( debug )
@@ -26,16 +26,22 @@
 		r_cb()
 
 	stm( log )
-		_ ctx.w('console.log(' + model.wzName + ')' + u.semicolon(model.wzName))
+        if model.wzName && model.wzName.length > 0
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename'
+		    _ ctx.w('console.log(' + text + ')' + u.semicolon(model.wzName))
 		# log 151
 		r_cb()
 
 	stm( warn )
-		_ ctx.w('console.warn(' + model.wzName + ')' + u.semicolon(model.wzName))
+        if model.wzName && model.wzName.length > 0
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename'
+		_ ctx.w('console.warn(' + text + ')' + u.semicolon(model.wzName))
 		r_cb()
 
 	stm( error )
-		_ ctx.w('console.error(' + model.wzName + ')' + u.semicolon(model.wzName))
+        if model.wzName && model.wzName.length > 0
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename'
+		_ ctx.w('console.error(' + text + ')' + u.semicolon(model.wzName))
 		r_cb()
 
 	stm( chalk )

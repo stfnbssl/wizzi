@@ -28,7 +28,7 @@ module
                 @ this.loadInfo.schema
                 _ this.loadInfo.srcFullPath
                 {
-                    @ mTreeBuildUpContext {}
+                    @ mTreeBuildupContext {}
                     @ globalContext {}
                 a_cb( wizziModel )
                     _ this.productionContext.addGlobalModel

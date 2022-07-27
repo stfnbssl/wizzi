@@ -46,7 +46,7 @@ module
                     @ 'html'
                     @ htmlFriendsPath
                     {
-                        { mTreeBuildUpContext                    
+                        { mTreeBuildupContext                    
                             @ friends friendsArray
                     f_cb_test(wizziModel)
                         _ printValue
@@ -73,7 +73,7 @@ module
                                     @ 'ittf'
                                     @ htmlFriendsPathIttf
                                     {
-                                        { mTreeBuildUpContext                    
+                                        { mTreeBuildupContext                    
                                             @ friends friendsArray
                                     f_cb_test(wizziModel)
                                         _ wf.transformModel

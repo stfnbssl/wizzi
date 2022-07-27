@@ -18,7 +18,7 @@ type WizziModelOrPOJO = WizziModel | Object;
 interface LoadModelContext {
     __ittfDocumentStore: IttfDocumentStore;
     __productionManager: ProductionManager;
-    mTreeBuildUpContext : WizziModelOrPOJO;
+    mTreeBuildupContext : WizziModelOrPOJO;
 }
 
 function loadModel(ittfDocumentUri: string, loadContext: LoadModelContext, callback: cb<WizziModel>) : void;

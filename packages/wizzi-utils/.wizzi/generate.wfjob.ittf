@@ -7,7 +7,7 @@
             ittf_lib_folder: path.join(__dirname, 'lib'),
             ittf_tests_folder: path.join(__dirname, 'tests'),
             ittf_examples_folder: path.join(__dirname, 'examples'),
-            dest_folder: path.join(__dirname, '..', 'dist'),
+            dest_folder: path.join(__dirname, '..'),
             job_model: 'wzCtx'
         }
     

@@ -16,12 +16,13 @@
     ${'$'}if wzCtx.Build.webpack.useNodePolifills
         new webpack.ProvidePlugin
             {
-                @ process 'process/browser.js'
-                @ Buffer 
-                    [
-                        @ 'buffer'
-                        @ 'Buffer'
-                @ console 'console-browserify'
+                ${'$'}if wzCtx.Build.webpack.nodePolifills.useBuffer
+                    @ Buffer 
+                        [
+                            @ 'buffer'
+                            @ 'Buffer'
+                $$ @ process 'process/browser'
+                $$ @ console 'console-browserify'
     ---
 	${'$'}if wzCtx.Build.useMonacoEditor
 		#

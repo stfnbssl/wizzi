@@ -10,7 +10,7 @@
 		# based on wizzi factory services.
 		# It allows to JsWizzi statements coded in ittf documents to access models
 		# and api functions, registered at start up, as they where passed in the
-		# mTreeBuildUpContext for each mTree loading.
+		# mTreeBuildupContext for each mTree loading.
 		# To use the wizzi.runnerServer an applications must implement the wizzi-app.wizzifile
 		# interface.
 

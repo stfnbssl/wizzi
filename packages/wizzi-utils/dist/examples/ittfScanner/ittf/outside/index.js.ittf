@@ -1,4 +1,0 @@
-module
-	kind jsfile
-
-	log 'hello'

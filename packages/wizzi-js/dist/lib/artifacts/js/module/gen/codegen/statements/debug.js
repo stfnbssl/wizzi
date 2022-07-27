@@ -103,7 +103,7 @@ md.load = function(cnt) {
                 value = ss[0];
             }
         }
-        ctx.w('console.log("' + name + '" + " " + util.inspect(' + value + ', { depth: null } ))')
+        ctx.w('console.log("' + name + '" + " " + util.inspect(' + value + ', { depth: null } ), __filename)')
         return callback(null, null);
     }
     ;
@@ -125,7 +125,10 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.log. Got: ' + callback);
         }
-        ctx.w('console.log(' + model.wzName + ')' + u.semicolon(model.wzName));
+        if (model.wzName && model.wzName.length > 0) {
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename';
+            ctx.w('console.log(' + text + ')' + u.semicolon(model.wzName));
+        }
         // log 151
         return callback(null, null);
     }
@@ -137,7 +140,10 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.warn. Got: ' + callback);
         }
-        ctx.w('console.warn(' + model.wzName + ')' + u.semicolon(model.wzName));
+        if (model.wzName && model.wzName.length > 0) {
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename';
+        }
+        ctx.w('console.warn(' + text + ')' + u.semicolon(model.wzName));
         return callback(null, null);
     }
     ;
@@ -148,7 +154,10 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.error. Got: ' + callback);
         }
-        ctx.w('console.error(' + model.wzName + ')' + u.semicolon(model.wzName));
+        if (model.wzName && model.wzName.length > 0) {
+            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename';
+        }
+        ctx.w('console.error(' + text + ')' + u.semicolon(model.wzName));
         return callback(null, null);
     }
     ;

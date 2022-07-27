@@ -12,7 +12,7 @@
 	var mixer = null
     var appender = require('./appender')
     var evaluator = require('./evaluator')
-	var debugInfoBuilder = require('./debugInfoBuilder')
+	var mTreeBuildupScriptBuilder = require('./mTreeBuildupScriptBuilder')
     
 	var md
         set module.exports =
@@ -152,7 +152,7 @@
 	#
 		# Load mTree debug info.
 		# This is mainly for debug or documentation purposes.
-	set md.loadMTreeDebugInfo
+	set md.loadMTreeBuildupScript
         function loadMTree
             param primaryIttfDocumentUri
             param loadContext
@@ -200,7 +200,7 @@
                                                 @ mixedMTreePiece
                                                 f_cb( appendedMTreePiece
                                                     # build debug info
-                                                    _ debugInfoBuilder
+                                                    _ mTreeBuildupScriptBuilder
                                                         @ appendedMTreePiece
                                                         @ loadContext
                                                         @ callback 
@@ -209,7 +209,7 @@
 		# normalized means:
 		#   { loadContext
 		#     { productionContext
-		#     { mTreeBuildUpContext
+		#     { mTreeBuildupContext
 		#     { options
 		#
 	function normalizeRequestContext
@@ -221,8 +221,8 @@
         
 		set loadContext.productionContext = loadContext.__productionManager.productionContext
 
-		if verify.isObject(loadContext.mTreeBuildUpContext) == false
-			set loadContext.mTreeBuildUpContext = {}
+		if verify.isObject(loadContext.mTreeBuildupContext) == false
+			set loadContext.mTreeBuildupContext = {}
 		
 		# TODO this seems out of place, remove
 		# if verify.isObject(loadContext.artifactContext) == false

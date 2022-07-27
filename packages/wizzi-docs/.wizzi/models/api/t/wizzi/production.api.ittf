@@ -16,7 +16,7 @@
 					# for debug purposes.
 					string dumpsBaseFolder
 						# The base folder where dump files are written.
-					{ mTreeBuildUpScript
+					{ mTreeBuildupScript
 						boolean dump
 							# When true dump the script to the `dumpsBaseFolder`.
 						string dumpsBaseFolder
@@ -29,9 +29,9 @@
 				string uri
 				string content
     
-			m addMTreeBuildUpScript
+			m addMTreeBuildupScript
 				string uri
-				string mTreeBuildUpScript
+				string mTreeBuildupScript
     
 			m addMixedMTree
 				string uri

@@ -3,7 +3,7 @@ $group
     $ 
         var openPar = '(';
 
-    function loadMTreeDebugInfo
+    function loadMTreeBuildupScript
         param ittfDocumentUri
         param context
         param callback
@@ -11,7 +11,7 @@ $group
         _ createWizziFactory
             {
             f_cb${openPar} wf )
-                _ wf.loadMTreeDebugInfo
+                _ wf.loadMTreeBuildupScript
                     @ ittfDocumentUri
                     @ context
                     @ callback

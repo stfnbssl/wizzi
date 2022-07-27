@@ -68,7 +68,7 @@ $group
                                         @ ittfDocumentUri
                                         { 
                                             { modelRequestContext
-                                                @ mTreeBuildUpContext context
+                                                @ mTreeBuildupContext context
                                         @ generator
                                         => 
                                             param err

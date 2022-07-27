@@ -24,7 +24,7 @@
                 _ loader.loadMTreeFrontMatter
                     @ ittfUri
                     {
-                        @ mTreeBuildUpContext
+                        @ mTreeBuildupContext
                             {
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore

@@ -34,7 +34,7 @@ module
                         @ 'ittf'
                         @ 'cheatsheet.html.ittf'
                     {
-                        { mTreeBuildUpContext
+                        { mTreeBuildupContext
                             { cs 
                                 @ elements transformed.elements || []
                                 @ schema transformed.schema || ''

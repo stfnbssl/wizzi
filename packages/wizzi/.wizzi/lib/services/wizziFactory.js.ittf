@@ -42,8 +42,8 @@
 			set this.__loadMTreeFrontMatter = null
 			# loadMTreeRaw is a method of this class, we need an alias
 			set this.__loadMTreeRaw = null
-			# loadMTreeDebugInfo is a method of this class, we need an alias
-			set this.__loadMTreeDebugInfo = null
+			# loadMTreeBuildupScript is a method of this class, we need an alias
+			set this.__loadMTreeBuildupScript = null
 			set this.pluginsManager = null
 			set this.modelLoaders = {}
 			set this.modelTransformers = {}

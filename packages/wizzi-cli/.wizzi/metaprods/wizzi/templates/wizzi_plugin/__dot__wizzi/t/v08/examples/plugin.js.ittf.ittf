@@ -40,7 +40,7 @@
             @ callback
 
     $include wz/v08/wizzi/opers/loadMTree.js
-    $include wz/v08/wizzi/opers/loadMTreeDebugInfo.js
+    $include wz/v08/wizzi/opers/loadMTreeBuildupScript.js
     $include wz/v08/wizzi/opers/loadWizziModel.js
     $include wz/v08/wizzi/opers/loadWizziModelAndSaveToJson.js
     $include wz/v08/wizzi/opers/loadModelAndGenerateArtifact.js

@@ -225,7 +225,7 @@ export type CreateLoadMTreeOptions = {
     /**
      * default false
      */
-    debugInfo?: boolean; 
+    mTreeBuildupScript?: boolean; 
 };
 
 export type LoadMTreeContext = {
@@ -233,7 +233,7 @@ export type LoadMTreeContext = {
         productionContext: {
             aclstat: {}
         },
-        mTreeBuildUpContext?: {},
+        mTreeBuildupContext?: {},
         options?: {
             isCompile: boolean
         }

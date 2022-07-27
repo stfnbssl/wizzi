@@ -27,7 +27,7 @@ $group
 			+
 			var storeKind = request.storeKind || 'filesystem'
 			+
-			set request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext)
+			set request.wfschema.mTreeBuildupContext = Object.assign({}, request.wfschema.mTreeBuildupContext)
 			set request.globalContext = Object.assign({}, request.globalContext)
 			+
 			log 'generateWizziModelTypes'
@@ -49,7 +49,7 @@ $group
             else
                 _ plugins.push('wizzi-core')
 			log '- plugins', plugins
-			for var k in request.wfschema.mTreeBuildUpContext
+			for var k in request.wfschema.mTreeBuildupContext
 				log '- wfschemaContext property', k
 			for var k in request.globalContext
 				log '- globalContext property', k
@@ -72,7 +72,7 @@ $group
 						@ request.wfschema.ittfDocumentUri
 						@ request.wfschema.outputPackageFolder
 						@ request.wfschema.name
-						@ request.wfschema.mTreeBuildUpContext
+						@ request.wfschema.mTreeBuildupContext
 						f_cb( result )
 							log chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + request.wfschema.name)
                             r_cb( request.wfschema.name )

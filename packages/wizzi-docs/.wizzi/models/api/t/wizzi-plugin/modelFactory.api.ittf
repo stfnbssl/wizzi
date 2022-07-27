@@ -19,7 +19,7 @@
 				{ __ittfDocumentStore
 					required
 					api-ref wizzi-repo.ittfDocumentStore
-				{ mTreeBuildUpContext
+				{ mTreeBuildupContext
 					# (Optional) wizzi-plugin.wizziModel or POJO
 				{ __request
 					# This is a legacy that should disappear.

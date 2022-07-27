@@ -7,7 +7,7 @@ $group
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
-        param mTreeBuildUpContext
+        param mTreeBuildupContext
         param callback
 
         _ createWizziFactory
@@ -17,5 +17,5 @@ $group
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName
-                    @ mTreeBuildUpContext
+                    @ mTreeBuildupContext
                     @ callback

@@ -12,7 +12,7 @@
 			@ 'alfa.txt'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_no_err( content )
@@ -25,7 +25,7 @@
 			@ 'http://alpha.txt'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_no_err( content )
@@ -38,7 +38,7 @@
 			@ 'repo://alpha.txt'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_no_err( content )
@@ -53,7 +53,7 @@
 				@ 'alpha.txt'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_no_err( content )
@@ -69,7 +69,7 @@
 				@ 'doc1.tests.ittf'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_test( provider )
@@ -99,7 +99,7 @@
 				@ 'doc1.tests.ittf'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_test( provider )

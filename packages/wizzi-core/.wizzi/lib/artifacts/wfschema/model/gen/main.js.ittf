@@ -20,7 +20,7 @@
                 log 'wizzi-core.wfschema.gen.model started', ittfDocumentPath
                 # log 'wizzi-core.artifacts.wfschema.model.model', model
 
-                var mTreeBuildUpContext
+                var mTreeBuildupContext
                     {
                         @ schema model
                         @ request
@@ -32,7 +32,7 @@
                 
                 _ legacy.jsModule
                     @ ittfDocumentPath
-                    @ mTreeBuildUpContext 
+                    @ mTreeBuildupContext 
                     f_cb_no_err( result )
                         if err
                             log __dirname, myname, 'err', err

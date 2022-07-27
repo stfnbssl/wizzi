@@ -139,8 +139,8 @@
                                     # log 'ittf.cheatsheet.ctx', ctx
                                     # log 'counter.prettified', counter
                                     if item.render === 'script'
-                                        # log 'ctx.wizziFactory.loadMTreeDebugInfoFromText', ctx.wizziFactory.loadMTreeDebugInfoFromText
-                                        _ ctx.wizziFactory.loadMTreeDebugInfoFromText
+                                        # log 'ctx.wizziFactory.loadMTreeBuildupScriptFromText', ctx.wizziFactory.loadMTreeBuildupScriptFromText
+                                        _ ctx.wizziFactory.loadMTreeBuildupScriptFromText
                                             @ item.ittfWrapped
                                             {
                                             f_cb_no_err(script)
@@ -148,7 +148,7 @@
                                                 if err
                                                     set item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2))
                                                 else
-                                                    set item.generated = '\n' + verify.htmlEscape(script.mTreeBuildUpScript)
+                                                    set item.generated = '\n' + verify.htmlEscape(script.mTreeBuildupScript)
                                                 _ callback
                                                     @ null
                                     else

@@ -2,7 +2,7 @@
 	kind jsfile
 
 	import path
-	var uriParser = require('../../lib/fs/uriParser')
+	var uriParser = require('../../lib/fSystem/uriParser')
 
 	_ parse
 		@ '\\tmp\\stefi\\wizzi\\index.js.ittf'

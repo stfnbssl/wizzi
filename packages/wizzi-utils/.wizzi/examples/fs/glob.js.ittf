@@ -13,7 +13,7 @@
     common\example\utils(&opt)
 
         $append imports
-            var fs = require('../../lib/fs/index')
+            var fs = require('../../lib/fSystem/index')
             var glob = fs.glob
             var file = fs.vfile()
 

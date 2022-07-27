@@ -16,7 +16,7 @@
 						- # The full path of the package folder where the generated artifacts will be written 
 					- string wfschemaName
 						- # The schema name, for composing the names of the generated artifacts
-					- { mTreeBuildUpContext
+					- { mTreeBuildupContext
 						- # A context object which properties will inserted in the global
 						- # evaluation context during the mTree loading of the schema
 					- callback

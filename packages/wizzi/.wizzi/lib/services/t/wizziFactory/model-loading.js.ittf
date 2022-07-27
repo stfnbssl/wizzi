@@ -12,7 +12,7 @@ $group
 		#   { globalContext
 		#     optional
 		#     # A global context object can be used to add mTree buildup contex values
-		#     # to those contained in the mTreeBuildUpContext parameter, every time
+		#     # to those contained in the mTreeBuildupContext parameter, every time
 		#     # the returned loadModel function is called.
 		#   string testOnlyMockBaseDir
 		#     # used for test purposes
@@ -84,7 +84,7 @@ $group
 		#   string schemaName
 		#   string ittfDocumentUri
 		#   { loadContext
-		#     { mTreeBuildUpContext
+		#     { mTreeBuildupContext
 		#       optional
 		#     { globalContext
 		#         # Being the loadModel function called once this usually is not used.

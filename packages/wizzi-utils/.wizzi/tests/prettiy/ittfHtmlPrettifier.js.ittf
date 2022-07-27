@@ -1,7 +1,7 @@
 ﻿base_test( asIsLoader )
 
 	$append imports
-		var file = require('../../lib/fs/file')
+		var file = require('../../lib/fSystem/file')
 		var ittfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph')
 		var ittfHtmlPrettifier = require('../../lib/pretty/ittfHtmlPrettifier')
 

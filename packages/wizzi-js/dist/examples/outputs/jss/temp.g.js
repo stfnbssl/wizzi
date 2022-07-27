@@ -2,7 +2,7 @@
     "wzName": "",
     "wzParent": null,
     "wzChildren": [],
-    "wzElement": "module",
+    "wzElement": "xmodule",
     "statements": [
         {
             "wzName": "sayHello",
@@ -117,21 +117,22 @@
         "__type": "LoadHistory",
         "ittfDocumentDatas": {
             "f1": {
-                "ittfDocumentUri": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
+                "ittfDocumentUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
                 "sourceKey": "f1",
                 "content": "module\r\n\tkind jsfile\r\n\r\n\tfunction sayHello\r\n        string name\r\n\t\tlog 'Hello', name\r\n"
             }
         },
         "mTreeBrickDatas": {
             "f1": {
-                "ittfDocumentUri": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
+                "ittfDocumentUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
                 "schema": "js",
                 "sourceKey": "f1",
                 "brickKey": "f1",
                 "mTreeBrick": {
-                    "uri": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
+                    "uri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\examples\\ittf\\jss\\temp.js.ittf",
                     "loadHistory": "[Circular ~.loadHistory]",
                     "frontMatter": {},
+                    "documentFragments": [],
                     "nodes": [
                         {
                             "n": "module",
@@ -191,7 +192,7 @@
                     "$schema": "js",
                     "mixed": false,
                     "data": {
-                        "createdAt": "7/6/2019:13:8:15"
+                        "createdAt": "21/7/2022:23:19:1"
                     }
                 },
                 "evalContext": null
@@ -234,10 +235,10 @@
         },
         "pluginsManager": {
             "packagePathCache": {
-                "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist": {
-                    "wizzi-core/package.json": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-core\\package.json",
-                    "wizzi-web/package.json": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-web\\package.json",
-                    "./index.js": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\index.js"
+                "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist": {
+                    "wizzi-core/package.json": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-core\\package.json",
+                    "wizzi-web/package.json": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-web\\package.json",
+                    "./index.js": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\index.js"
                 }
             },
             "factoryPlugins": [
@@ -248,26 +249,34 @@
                     },
                     "provides": {
                         "schemas": [
-                            "ittf",
-                            "json",
-                            "text",
                             "wfjob",
                             "wfschema",
-                            "xml"
+                            "json",
+                            "xml",
+                            "text",
+                            "ittf",
+                            "yaml"
                         ],
                         "modelTransformers": [
-                            "wfschema/json_docs"
+                            "wfschema/json_docs",
+                            "ittf/cheatsheet",
+                            "ittf/html-pretty"
                         ],
                         "artifactGenerators": [
-                            "json/document",
-                            "json/export",
-                            "ittf/document",
-                            "text/document",
                             "wfschema/factory",
                             "wfschema/model",
                             "wfschema/html_docs",
+                            "wfschema/test",
+                            "json/document",
+                            "json/toyaml",
+                            "json/toml",
+                            "json/export",
                             "xml/document",
-                            "xml/export"
+                            "xml/export",
+                            "text/document",
+                            "ittf/document",
+                            "ittf/tojson",
+                            "yaml/document"
                         ]
                     },
                     "modelFactories": {
@@ -282,7 +291,7 @@
                     },
                     "schemaDefinitions": {},
                     "packageName": "wizzi-core",
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-core"
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-core"
                 },
                 {
                     "file": {
@@ -297,6 +306,7 @@
                             "svg",
                             "md",
                             "graphql",
+                            "site",
                             "vtt",
                             "vue"
                         ],
@@ -324,7 +334,7 @@
                     },
                     "schemaDefinitions": {},
                     "packageName": "wizzi-web",
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-web"
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-web"
                 },
                 {
                     "file": {
@@ -354,19 +364,10 @@
                     },
                     "schemaDefinitions": {},
                     "packageName": "./index",
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\index.js"
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\index.js"
                 }
             ],
             "providedSchemas": [
-                {
-                    "name": "ittf"
-                },
-                {
-                    "name": "json"
-                },
-                {
-                    "name": "text"
-                },
                 {
                     "name": "wfjob"
                 },
@@ -374,7 +375,19 @@
                     "name": "wfschema"
                 },
                 {
+                    "name": "json"
+                },
+                {
                     "name": "xml"
+                },
+                {
+                    "name": "text"
+                },
+                {
+                    "name": "ittf"
+                },
+                {
+                    "name": "yaml"
                 },
                 {
                     "name": "html"
@@ -395,6 +408,9 @@
                     "name": "graphql"
                 },
                 {
+                    "name": "site"
+                },
+                {
                     "name": "vtt"
                 },
                 {
@@ -410,21 +426,15 @@
             "providedModelTransformers": [
                 {
                     "name": "wfschema/json_docs"
+                },
+                {
+                    "name": "ittf/cheatsheet"
+                },
+                {
+                    "name": "ittf/html-pretty"
                 }
             ],
             "providedArtifactGenerators": [
-                {
-                    "name": "json/document"
-                },
-                {
-                    "name": "json/export"
-                },
-                {
-                    "name": "ittf/document"
-                },
-                {
-                    "name": "text/document"
-                },
                 {
                     "name": "wfschema/factory"
                 },
@@ -435,10 +445,37 @@
                     "name": "wfschema/html_docs"
                 },
                 {
+                    "name": "wfschema/test"
+                },
+                {
+                    "name": "json/document"
+                },
+                {
+                    "name": "json/toyaml"
+                },
+                {
+                    "name": "json/toml"
+                },
+                {
+                    "name": "json/export"
+                },
+                {
                     "name": "xml/document"
                 },
                 {
                     "name": "xml/export"
+                },
+                {
+                    "name": "text/document"
+                },
+                {
+                    "name": "ittf/document"
+                },
+                {
+                    "name": "ittf/tojson"
+                },
+                {
+                    "name": "yaml/document"
                 },
                 {
                     "name": "html/document"
@@ -480,36 +517,44 @@
         "pluginsOptions": {
             "items": [
                 {
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-core",
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-core",
                     "provides": {
                         "schemas": [
-                            "ittf",
-                            "json",
-                            "text",
                             "wfjob",
                             "wfschema",
-                            "xml"
+                            "json",
+                            "xml",
+                            "text",
+                            "ittf",
+                            "yaml"
                         ],
                         "modelTransformers": [
-                            "wfschema/json_docs"
+                            "wfschema/json_docs",
+                            "ittf/cheatsheet",
+                            "ittf/html-pretty"
                         ],
                         "artifactGenerators": [
-                            "json/document",
-                            "json/export",
-                            "ittf/document",
-                            "text/document",
                             "wfschema/factory",
                             "wfschema/model",
                             "wfschema/html_docs",
+                            "wfschema/test",
+                            "json/document",
+                            "json/toyaml",
+                            "json/toml",
+                            "json/export",
                             "xml/document",
-                            "xml/export"
+                            "xml/export",
+                            "text/document",
+                            "ittf/document",
+                            "ittf/tojson",
+                            "yaml/document"
                         ]
                     },
                     "consumes": [],
                     "packageName": "wizzi-core"
                 },
                 {
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\node_modules\\wizzi-web",
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\node_modules\\wizzi-web",
                     "provides": {
                         "schemas": [
                             "html",
@@ -518,6 +563,7 @@
                             "svg",
                             "md",
                             "graphql",
+                            "site",
                             "vtt",
                             "vue"
                         ],
@@ -537,7 +583,7 @@
                     "packageName": "wizzi-web"
                 },
                 {
-                    "packagePath": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist\\index.js",
+                    "packagePath": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist\\index.js",
                     "provides": {
                         "schemas": [
                             "js",
@@ -553,7 +599,7 @@
                     "packageName": "./index"
                 }
             ],
-            "pluginsBaseFolder": "C:\\My\\wizzi\\wizzi\\packages\\wizzi-js\\dist"
+            "pluginsBaseFolder": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-js\\dist"
         },
         "store": {
             "storeImpl": {

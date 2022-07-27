@@ -128,4 +128,30 @@
 		li `script` `String` javascript code
 		li `options` `Object`
 
+    hr
+	h2 Ittf scanner Feature
+    h4 var ittfScanner = require('wizzi-utils').ittfScanner
+
+    hr
+	h2 Ittf graph Feature
+    h4 var ittfGraph = require('wizzi-utils').ittfGraph
 	
+    hr
+	h2 Filesystem Feature
+	h4 var fSystem = require('wizzi-utils').fSystem
+
+    hr
+	h2 Prettify Feature
+	h4 var pretty = require('wizzi-utils').pretty
+
+    hr
+	h2 Lorem ipsum Feature
+	h4 var lorem = require('wizzi-utils').lorem
+
+    hr
+	h2 Crypto Feature
+	h4 var crypto = require('wizzi-utils').crypto
+
+    hr
+	h2 Helpers Feature
+	h4 var helpers = require('wizzi-utils').helpers

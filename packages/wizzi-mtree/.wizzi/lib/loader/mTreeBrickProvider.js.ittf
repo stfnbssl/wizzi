@@ -27,7 +27,7 @@
 			set this.loadHistory = null
             set this.frontMatter = null
 			set this.productionContext = null
-			set this.mTreeBuildUpContext = null
+			set this.mTreeBuildupContext = null
 			set this.sourcePreprocessor = null
 
 		# The primary mTreeBrick of an mTree loading
@@ -42,7 +42,7 @@
 			{ loadContext
 				{ __ittfDocumentStore
 				{ productionContext
-				{ mTreeBuildUpContext
+				{ mTreeBuildupContext
 				func sourcePreprocessor
 					optional
 			callback
@@ -86,7 +86,7 @@
 							set that.loadHistory = new LoadHistory()
                             set that.frontMatter = {}
 							set that.productionContext = loadContext.productionContext
-							set that.mTreeBuildUpContext = loadContext.mTreeBuildUpContext
+							set that.mTreeBuildupContext = loadContext.mTreeBuildupContext
 							set that.sourcePreprocessor = loadContext.sourcePreprocessor
 							$$ log 'wizzi-mtree.mTreeBrickProvider.ittfContent', ittfContent
 							# load the primary mTreeBrick from the ittf content
