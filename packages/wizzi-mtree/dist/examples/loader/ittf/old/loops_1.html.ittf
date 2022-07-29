@@ -1,6 +1,0 @@
-html
-
-    body
-        $for var i=0; i<5; i++
-            h1 hello ${ i }
-        

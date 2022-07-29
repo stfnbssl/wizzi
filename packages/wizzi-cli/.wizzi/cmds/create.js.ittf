@@ -32,6 +32,26 @@
 		=>
 			param options
             if options
+                var cliCtx
+                    { 
+                        @ name options.pkgName
+                        @ description options.pkgName
+                        @ version "0.0.1"
+                        { author
+                            @ name "Stefano Bassoli"
+                            @ email "stfn.bssl@gmail.com"
+                        { license
+                            @ name "MIT"
+                            @ copy "copy 2021"
+                        { github
+                var fileCtx = {}
+                if options.template = "wizzi/plugin"
+                    set cliCtx.wizzi_plugin_type = options.wizzi_plugin_type
+                    set cliCtx.Schemas
+                        [
+                            {
+                                @ name options.wizzi_plugin_schema
+                    set fileCtx.schema = options.wizzi_plugin_schema
                 return
                     _ wizzi.genFolder
                         _ path.join
@@ -42,31 +62,17 @@
                             @ 'templates'
                             @ options.template
                         {
-                            { cliCtx 
-                                @ name options.pkgName
-                                @ description options.pkgName
-                                @ version "0.0.1"
-                                $$ @ wizzi_plugin_type "${wizzi_plugin_type}"
-                                { author
-                                { license
-                                    @ name "MIT"
-                                    @ copy "copy 2021"
-                                { github
-                                [ Schemas
-                                    {
-                                        $$ @ name "${wizzi_plugin_schema}"
+                            @ cliCtx cliCtx
+                            @ fileCtx fileCtx
                         {
                             @ destFolder
                                 _ path.join
-                                    @ 'C:/My/wizzi/stfnbssl/wizzi/packages'
-                                    $$ _ process.cwd
-                                    $$ @ '${pkgMonoName}'
-                                    $$ @ 'packages'
+                                    @ 'C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages'
                                     @ options.pkgName
                             @ copyInclude ['*']
                             @ copyExclude []
                         f_cb_test(genFolderResult)
-                            # loog 'genFolderResult', genFolderResult
+                            log 'genFolderResult', genFolderResult
                             return
 
             _ newpkg
@@ -114,7 +120,6 @@
                                     @ answers.__template
                                 {
                                     @ cliCtx jsonctx
-
                                 {
                                     @ destFolder
                                         _ path.join

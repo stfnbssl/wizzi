@@ -118,12 +118,13 @@
 		function
 			param folderPath
 			param fileService
+            param options
             param callback
             log 'wizzi-repo.folderFilesInfoByPath', folderPath
+            set options = options || { deep: true }
             _ fileService.getFilesAsync
                 @ folderPath
-                {
-                    @ deep true
+                @ options
                 f_cb( files )
                     var result = []
                     foreach f in files

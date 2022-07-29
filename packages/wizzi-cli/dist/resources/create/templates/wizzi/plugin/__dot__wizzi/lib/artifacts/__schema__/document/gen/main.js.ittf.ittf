@@ -1,0 +1,38 @@
+module
+    kind es6
+
+    $
+        _.log("cliCtx", cliCtx);
+    
+    ${'$'}
+        var md = {
+            plugin: '${cliCtx.name}',
+            name: 'document',
+            schema: '${cliCtx.Schemas[0].name}',
+            checkSchema: true,
+            isAsync: true,
+        };
+
+    v08/lib/artifacts/gen${ '(&md)' }
+
+        ${'$'}append imports
+            $if cliCtx.wizzi_plugin_type == 'prettify'
+                var pretty = require('wizzi-utils').pretty
+                ${'$'}${'$'} var highlightCode = require('./highlightCode')
+
+        ${'$'}append main
+            _ md.${cliCtx.Schemas[0].name}
+                @ model
+                @ ctx
+                f_cb${ '()' }
+                    if ctx.artifactGenerationErrors.length > 0
+                        r_cb_err${ '(ctx.artifactGenerationErrors)' }
+                    else
+                        # generation OK
+                        r_cb${ '(ctx)' }
+
+        $if cliCtx.wizzi_plugin_type == 'prettify'
+            $include wz/v08/wizzi/plugin/artifacts/types/prettify/artifact-gen-main.js
+
+        $if cliCtx.wizzi_plugin_type == 'syntax_structure'
+            $include wz/v08/wizzi/plugin/artifacts/types/syntax_structure/artifact-gen-main.js

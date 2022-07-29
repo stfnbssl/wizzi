@@ -123,5 +123,4 @@
 	error( File, message, ex )
 		set this.message = message
 		set this.inner = ex
-    
 

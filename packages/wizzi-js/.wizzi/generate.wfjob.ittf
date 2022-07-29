@@ -5,7 +5,7 @@
         if (isWebpackTarget) {
             dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-mtree')
         } else {
-            dest_folder           = path.join(__dirname, '..', 'dist');
+            dest_folder           = path.join(__dirname, '..');
         }
         var jobCtx = {
             ittf_models_folder: path.join(__dirname, 'models'),

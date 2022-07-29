@@ -1,4 +1,0 @@
-$group
-    $params name|${_name}
-
-    h1 ${name}

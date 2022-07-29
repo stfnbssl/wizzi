@@ -1,0 +1,30 @@
+module
+	kind jsfile
+
+	import util
+	+
+	var md = module.exports = {}
+	+
+	error( WizziModelDOMNode, message, node )
+        var msg
+            [ 
+                @ message
+        if node
+			set this.ittfDocumentUri = 'Unavailable'
+            if node.wzSourceLineInfo
+                var info = node.wzSourceLineInfo
+                if node.wzSourceFilepath
+                    set this.ittfDocumentUri = node.wzSourceFilepath(info.sourceKey)
+				set this.row = info.row
+				set this.col = info.col
+				set this.sourceKey = info.sourceKey
+                _ msg.push((' at row: ' + info.row))
+                _ msg.push((', col: ' + info.col))
+                _ msg.push((', source: ' + info.sourceKey))
+                _ msg.push((', in file: ' + this.ittfDocumentUri))
+            elif node.row
+				set this.row = node.row
+				set this.col = node.col
+                _ msg.push((' at row: ' + node.row))
+                _ msg.push((', col: ' + node.col))
+        set this.message = msg.join('')

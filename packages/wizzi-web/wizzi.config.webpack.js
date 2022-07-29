@@ -4,7 +4,7 @@ module.exports = {
     wfjobPath: path.join(__dirname, '.wizzi', 'generate.wfjob.ittf'), 
     destPath: path.join(__dirname, '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-web'),
     plugins: [
-        './wizzi-core/dist/index.js', 
+        './wizzi-core/index.js', 
         'wizzi-js', 
         'wizzi-web'
     ], 

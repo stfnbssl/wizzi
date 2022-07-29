@@ -39,5 +39,12 @@ module
             {
                 @ template 'js/webpack'
                 @ pkgName 'demo.js.webpack'
+    elif cmd == 'wizzi-plugin'
+        _ create
+            {
+                @ template 'wizzi/plugin'
+                @ pkgName 'demo.wizzi.plugin'
+                @ wizzi_plugin_type 'data'      $$ code | document | data
+                @ wizzi_plugin_schema 'db'
     else
-        _ create        
+        _ create

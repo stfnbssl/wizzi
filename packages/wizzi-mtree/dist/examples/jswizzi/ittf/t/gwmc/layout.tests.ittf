@@ -1,8 +1,0 @@
-top
-	$params name
-
-	$global
-		var gname = name;
-
-	footer()
-		

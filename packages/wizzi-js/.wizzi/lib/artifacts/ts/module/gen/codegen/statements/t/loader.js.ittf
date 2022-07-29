@@ -5,6 +5,7 @@
 	var util = require('util')
 	var verify = require('wizzi-utils').verify
 	var node = require('wizzi-utils').node
+    var errors = require('wizzi-utils').errors
 	var u = require('../../../../../js/module/gen/codegen/util/stm')
 	$hook requires
 	+

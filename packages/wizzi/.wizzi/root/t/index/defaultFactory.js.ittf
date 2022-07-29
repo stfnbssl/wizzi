@@ -287,7 +287,19 @@
 		#   { globalContext
 	lightFunction( generateFolderArtifacts, genFolder, artifactsFolder )
 		var ittfFolderPath = ittfDocumentPath
-		_ folderFilesInfoByPath
+        set options = options || {}
+        if options.deep !== false
+            set options.deep = true
+        _ wf.generateFolderArtifacts
+            @ ittfFolderPath
+            {
+                @ modelRequestContext context
+                @ artifactRequestContext options.artifactContext
+            @ options
+            @ callback
+
+		$*
+        _ folderFilesInfoByPath
 			@ ittfFolderPath
 			@ wf.fileService
 			a_cb( items )
@@ -333,6 +345,7 @@
 			        f_cb_test(result)
 				        # log 'result', result
                         r_cb( result )
+        *$
 	
 	function getDefaultArtifact
 		param schema

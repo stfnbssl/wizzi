@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
     wfjobName: "wizzi-core/job", 
     wfjobPath: path.join(__dirname, '.wizzi', 'generate.wfjob.ittf'), 
-    destPath: path.join(__dirname, 'dist'),
+    destPath: __dirname,
     plugins: [
         'wizzi-core', 
         'wizzi-js', 

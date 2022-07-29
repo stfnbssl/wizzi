@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\dist\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\create.js.ittf
-    utc time: Sun, 24 Jul 2022 09:00:20 GMT
+    utc time: Fri, 29 Jul 2022 19:07:49 GMT
 */
 'use strict';
 const path = require('path');
@@ -13,27 +13,37 @@ var inquirer = require('inquirer');
 module.exports = (options) => {
 
     if (options) {
-        return wizzi.genFolder(path.join(__dirname, '..', 'resources', 'create', 'templates', options.template), {
-                cliCtx: {
-                    name: options.pkgName, 
-                    description: options.pkgName, 
-                    version: "0.0.1", 
-                    author: {
-                        
-                     }, 
-                    license: {
-                        name: "MIT", 
-                        copy: "copy 2021"
-                     }, 
-                    github: {
-                        
-                     }, 
-                    Schemas: [
-                        {}
-                    ]
+        var cliCtx = {
+            name: options.pkgName, 
+            description: options.pkgName, 
+            version: "0.0.1", 
+            author: {
+                name: "Stefano Bassoli", 
+                email: "stfn.bssl@gmail.com"
+             }, 
+            license: {
+                name: "MIT", 
+                copy: "copy 2021"
+             }, 
+            github: {
+                
+             }
+         };
+        var fileCtx = {};
+        if (options.template = "wizzi/plugin") {
+            cliCtx.wizzi_plugin_type = options.wizzi_plugin_type;
+            cliCtx.Schemas = [
+                {
+                    name: options.wizzi_plugin_schema
                  }
+            ];
+            fileCtx.schema = options.wizzi_plugin_schema;
+        }
+        return wizzi.genFolder(path.join(__dirname, '..', 'resources', 'create', 'templates', options.template), {
+                cliCtx: cliCtx, 
+                fileCtx: fileCtx
              }, {
-                destFolder: path.join('C:/My/wizzi/stfnbssl/wizzi/packages', options.pkgName), 
+                destFolder: path.join('C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages', options.pkgName), 
                 copyInclude: ['*'], 
                 copyExclude: []
              }, function(err, genFolderResult) {
@@ -42,7 +52,7 @@ module.exports = (options) => {
                     console.log('err', err, __filename);
                     throw new Error(err.message);
                 }
-                // loog 'genFolderResult', genFolderResult
+                console.log('genFolderResult', genFolderResult, __filename);
                 return ;
             });
     }

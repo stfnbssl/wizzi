@@ -1,0 +1,98 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
+*/
+'use strict';
+var jsWizziRunner = require('../jswizzi/jsWizziRunner');
+var JsWizziContext = require('../jswizzi/jsWizziContext');
+var dateUtil = require('../jswizzi/functions/dateutil');
+var JsWizziScriptCoder = require('../jswizzi/JsWizziScriptCoder');
+var mTreeBuildupScripter = require('./mTreeBuildupScripter');
+var requireFromString = null;
+//
+module.exports = function(composedMTree, loadContext, callback) {
+    loadContext.options = loadContext.options || {};
+    var isCompile = loadContext.options.isCompile;
+    var productionContext = loadContext.productionContext;
+    var scriptCoder = new JsWizziScriptCoder();
+    var jsWizziContext = new JsWizziContext(composedMTree, productionContext, scriptCoder);
+    jsWizziContext.setGlobalValues(loadContext.mTreeBuildupContext)
+    var ctx = {
+        brickKey: null, 
+        counter: 0, 
+        startTime: dateUtil.now_GMYHMS(), 
+        isCompile: isCompile
+     };
+    // log 'isCompile', isCompile
+    scriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
+    if (isCompile) {
+        scriptCoder.w('module.exports = function($, $ctx) {')
+        scriptCoder.indent();
+        var i, i_items=Object.keys(jsWizziContext.getIsCompileGlobals()), i_len=Object.keys(jsWizziContext.getIsCompileGlobals()).length, k;
+        for (i=0; i<i_len; i++) {
+            k = Object.keys(jsWizziContext.getIsCompileGlobals())[i];
+            scriptCoder.w('var ' + k + ' = $ctx.' + k + ';')
+        }
+    }
+    scriptCoder.w('$.n(); // set the context state to NodeContext')
+    scriptCoder.w('var $0 = {}; // the root node of the MTree buildup')
+    var i, i_items=composedMTree.nodes, i_len=composedMTree.nodes.length, item;
+    for (i=0; i<i_len; i++) {
+        item = composedMTree.nodes[i];
+        mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx);
+    }
+    if (isCompile) {
+        scriptCoder.w('return $0;')
+        scriptCoder.deindent();
+        scriptCoder.w('}')
+    }
+    productionContext.addMTreeBuildupScript(composedMTree.uri, scriptCoder)
+    
+    // log 'scriptCoder.toCode()', scriptCoder.toCode()
+    if (isCompile) {
+        if (requireFromString === null) {
+            requireFromString = require('./requireFromString');
+        }
+        var md = requireFromString(scriptCoder.toCode());
+        var $0 = md(jsWizziContext.getValue('$'), jsWizziContext.getGlobalValues());
+        finalize(composedMTree, $0, ctx, callback)
+    }
+    else {
+        jsWizziRunner.run(scriptCoder.toCode(), jsWizziContext, {}, function(err, result) {
+            
+            // set err.scriptCode = scriptCoder.toCode()
+            if (err) {
+                return callback(err);
+            }
+            jsWizziContext.set_NodeContext();
+            var $0 = jsWizziContext.getValue('$0');
+            if (typeof($0) === 'undefined' || $0 == null || $0.children === 'undefined') {
+                return callback(local_error('IttfEvaluationError', 'evaluator', 'No node returned after IttfEvaluation', composedMTree.nodes[0], null));
+            }
+            finalize(composedMTree, $0, ctx, callback)
+        })
+    }
+}
+;
+function finalize(composedMTree, $0, ctx, callback) {
+    composedMTree.nodes = [];
+    var i, i_items=$0.children, i_len=$0.children.length, item;
+    for (i=0; i<i_len; i++) {
+        item = $0.children[i];
+        item.parent = null;
+        composedMTree.nodes.push(item);
+    }
+    composedMTree.data = {
+        createdAt: ctx.startTime
+     };
+    callback(null, composedMTree);
+}
+function local_error(name, method, message, node, inner, other) {
+    return new errors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
+            errorName: name, 
+            method: method, 
+            inner: inner, 
+            ...other||{}
+         });
+}

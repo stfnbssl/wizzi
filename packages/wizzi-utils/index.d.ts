@@ -352,6 +352,15 @@ export namespace pretty {
 }
 
 /**
+ * The Errors Feature
+ */
+ export namespace errors {
+    interface WizziModelDOMNodeError {
+        message: string;
+    }
+}
+
+/**
  * Options for lorem text generation
  */
  interface LoremOptions {

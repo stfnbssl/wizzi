@@ -40,6 +40,7 @@
                         _ repoIndex.folderFilesInfoByPath
                             @ 'c:\\folder1'
                             @ vfile
+                            {
                             a_cb( items )
                                 _ printObject
                                     @ 'items'

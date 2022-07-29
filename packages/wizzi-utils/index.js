@@ -16,6 +16,7 @@ var fSystem = require('./lib/fSystem/index');
 var helpers = require('./lib/helpers/index');
 var lorem = require('./lib/lorem/index');
 var crypto = require('./lib/crypto/index');
+var errors = require('./lib/errors/index');
 var mocks = require('./lib/mocks/index');
 //
 var md = module.exports = {};
@@ -27,6 +28,7 @@ md.fSystem = fSystem;
 md.crypto = crypto;
 md.lorem = lorem;
 md.helpers = helpers;
+md.errors = errors;
 md.mocks = mocks;
 // legacy
 md.ittfFinder = ittfGraph.ittfFinder;
@@ -46,8 +48,6 @@ md.file = fSystem.file;
 md.vfile = fSystem.vfile;
 md.uriParser = fSystem.uriParser;
 md.fileInfoByPath = fSystem.fileInfoByPath;
-// errors
-md.errors = require('./lib/errors');
-md.exampleErrors = require('./lib/exampleErrors');
 // errors - legacy
-md.nodeErrors = require('./lib/errors');
+md.nodeErrors = require('./lib/errors/legacyErrors');
+md.exampleErrors = require('./lib/exampleErrors');

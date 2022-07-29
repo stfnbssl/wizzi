@@ -160,7 +160,7 @@
                         @ item_1
                 else
                     log 'Error.model', model
-                    throw new Error('In ts._htmlelement wzElement not managed: ' + item_1.wzElement)
+                    throw new errors.WizziModelDOMNodeError('In ts._htmlelement wzElement not managed: ' + item_1.wzElement, item_1)
 
 				repeater_increment(1)
 

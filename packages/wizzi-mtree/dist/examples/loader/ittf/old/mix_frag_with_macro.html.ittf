@@ -1,7 +1,0 @@
-html
-    $
-        var _name = 'stefi';
-    body
-
-        frag_with_ittf_macro_param()
-
