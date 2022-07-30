@@ -1,4 +1,0 @@
-module
-
-    $include wz/v08/ts/react/basic/App.tsx
-

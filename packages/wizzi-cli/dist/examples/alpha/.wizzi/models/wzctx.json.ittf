@@ -1,9 +1,0 @@
-{
-    name ""
-    version ""
-    description ""
-    type "module"
-    { Build
-    { Styles
-    { Code
-    { App

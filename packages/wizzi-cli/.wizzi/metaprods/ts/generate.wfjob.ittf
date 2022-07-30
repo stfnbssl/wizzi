@@ -4,7 +4,7 @@
         var folders = {
             ittf_contexts: path.join(__dirname, 'contexts'),
             ittf_templates: path.join(__dirname, 'templates'),
-            dest: path.join(__dirname, '..', '..', '..', 'dist', 'resources', 'create'),
+            dest: path.join(__dirname, '..', '..', '..', 'resources', 'create'),
         }
 
 	line ittf-contexts

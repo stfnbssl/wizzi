@@ -4,7 +4,7 @@
         var folders = {
             ittf_cli: path.join(__dirname, 'cli'),
             ittf_wz: path.join(__dirname, 'wz'),
-            dest: path.join(__dirname, '..', '..', '..', 'dist', 'resources', 'create')
+            dest: path.join(__dirname, '..', '..', '..', 'resources', 'create')
         }
 
 	line ittf-cli

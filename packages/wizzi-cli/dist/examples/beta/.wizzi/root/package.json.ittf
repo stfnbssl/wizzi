@@ -1,9 +1,0 @@
-{
-    $
-        var md = {
-        }
-    v08/root/package(&md)
-        $append scripts
-            examples "node examples"
-        $append dependencies
-        $append devDependencies

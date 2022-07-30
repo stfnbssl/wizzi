@@ -1,17 +1,19 @@
 ﻿md
     h1 Metaproductions
 
-    p The core templates are in `wizzi-cli/.wizzi/metaprods/tfolder`. They are plain copied
-        \b in the `t/cli` and `t/wz` folders of `wizzi-cli/dist`.
-    p Metaproductions include core sources from `t/wz` and core context properties from `t/cli`.
+    p The core templates sources are in the `wizzi-cli/.wizzi/metaprods/tfolder` folder. They are plain copied
+        \b in the `t/cli` and `t/wz` folders of the `wizzi-cli/resources/create/templates` folder,
+        \b with the `wizzi tfolder` command of the Wizzi CLI.
+    
+    p Metaproductions are grouped for category in the `wizzi-cli/.wizzi/metaprods/[category-folder]` folders.
+        \b They are copied in the `wizzi-cli/resources/create/contexts` and
+        \b `wizzi-cli/resources/create/templates` folders
+        \b with the `wizzi [category-folder]` command of the Wizzi CLI.
 
-    p Others folders in `wizzi-cli/.wizzi/metaprods/` are copied in the `wizzi-cli/dist/resources/create/contexts` and
-        \b `wizzi-cli/dist/resources/create/templates` folder   
-        \b with the wizzi `folder-name` command of the Wizzi CLI.
+    p Metaproductions `$include` core sources from `t/wz` and core context properties from `t/cli`.
 
-    p These `wizzi-cli/dist/resources/create/contexts` and `wizzi-cli/dist/resources/create/templates` contains one folder
+    p These `wizzi-cli/resources/create/contexts` and `wizzi-cli/resources/create/templates` contains one folder
         \b for each Meta Production. The folder name is the name of the Meta Production.
 
-    p ITTF Documents in `wizzi-cli/dist/resources/create/templates` include templates from 
-        \b the `wizzi-cli/dist/resource/create/t/wz` folder.
-
+    p ITTF Documents in `wizzi-cli/resources/create/templates` `$include` templates from 
+        \b the `wizzi-cli/resource/create/templates/t/wz` folder.

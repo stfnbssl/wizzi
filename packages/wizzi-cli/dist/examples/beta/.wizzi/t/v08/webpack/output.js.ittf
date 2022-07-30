@@ -1,8 +1,0 @@
-$group
-    
-    $if wzCtx.Build.isLibrary
-        @ library '${wzCtx.Build.library.name}'
-        $if wzCtx.Build.library.target
-            @ libraryTarget 'var'
-        $else
-            @ libraryTarget '${wzCtx.Build.library.target}'

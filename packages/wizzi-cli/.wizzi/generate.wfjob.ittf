@@ -8,7 +8,7 @@
             ittf_examples: path.join(__dirname, 'examples'),
             ittf_resources: path.join(__dirname, 'resources'),
             ittf_root: path.join(__dirname, 'root'),
-            dest: path.join(__dirname, '..', 'dist')
+            dest: path.join(__dirname, '..')
         }
 
 	line ittf-bin
