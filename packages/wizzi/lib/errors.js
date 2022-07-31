@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\errors.js.ittf
 */
 'use strict';
@@ -13,7 +13,7 @@ var md = module.exports = {};
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';
-    // log 'message', message
+    // loog 'message', message
     this.message;
     this.message += pkgVersioned;
     // 5/10/17 set this.stack = (new Error()).stack
@@ -34,7 +34,7 @@ md.NotImplementedError = NotImplementedError;
 
 function InvalidRequestError(message, code) {
     this.name = 'InvalidRequestError';
-    // log 'message', message
+    // loog 'message', message
     this.message = message;
     this.message += pkgVersioned;
     this.code = code;
@@ -163,7 +163,7 @@ function ArtifactGenerationError(message, generation, srcPath, ex) {
     this.message = 'Error: ' + message +'\nDuring generation:' + generation +', processing document ' + md.getSrcPathInfo(srcPath);
     this.message += pkgVersioned;
     this.inner = ex;
-    // log 'wizzi.artifact.errors.artifactGenerationError.message', this.message
+    // loog 'wizzi.artifact.errors.artifactGenerationError.message', this.message
     // 5/10/17 set this.stack = (new Error()).stack
 }
 ArtifactGenerationError.prototype.toString = function() {

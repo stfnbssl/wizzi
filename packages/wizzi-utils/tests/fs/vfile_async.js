@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\fs\vfile_async.js.ittf
 */
 'use strict';
@@ -32,12 +32,12 @@ describe("vfile", function() {
     it("should async create the first file in the ittf folder", function(done) {
         file.write(path.join(__dirname, 'ittf', 'gc_one.ittf'), 'first one\nsecond one', function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.write(path.join(__dirname, 'ittf', 'folder_one', 'gc_two.ittf'), 'first one\nsecond one', function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 done();
@@ -47,37 +47,37 @@ describe("vfile", function() {
     it("should async check existence of file", function(done) {
         file.exists(path.join(__dirname, 'ittf', 'gc_one.ittf'), function(err, exists) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             expect(exists).to.be(true);
             file.exists(path.join(__dirname, 'ittf', 'astrumb.ittf'), function(err, exists) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(exists).to.be(false);
                 file.isFile(path.join(__dirname, 'ittf', 'gc_one.ittf'), function(err, isFile) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     expect(isFile).to.be(true);
                     file.isFile(path.join(__dirname, 'ittf', 'astrumb.ittf'), function(err, isFile) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         expect(isFile).to.be(false);
                         file.isFile(path.join(__dirname, 'ittf', 'folder_one'), function(err, isFile) {
                             if (err) {
-                                console.log('err', err);
+                                console.log("[31m%s[0m", err);
                                 throw new Error(err.message);
                             }
                             expect(isFile).to.be(false);
                             file.isDirectory(path.join(__dirname, 'ittf', 'gc_one.ittf'), function(err, isDirectory) {
                                 if (err) {
-                                    console.log('err', err);
+                                    console.log("[31m%s[0m", err);
                                     throw new Error(err.message);
                                 }
                                 expect(isDirectory).to.be(false);
@@ -92,31 +92,31 @@ describe("vfile", function() {
     it("should async check existence of folder", function(done) {
         file.exists(path.join(__dirname, 'ittf', 'folder_one'), function(err, exists) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             expect(exists).to.be(true);
             file.exists(path.join(__dirname, 'ittf', 'folder_astrumb'), function(err, exists) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(exists).to.be(false);
                 file.isDirectory(path.join(__dirname, 'ittf', 'folder_one'), function(err, isDirectory) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     expect(isDirectory).to.be(true);
                     file.isDirectory(path.join(__dirname, 'ittf', 'astrumb.ittf'), function(err, isDirectory) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         expect(isDirectory).to.be(false);
                         file.isFile(path.join(__dirname, 'ittf', 'folder_one'), function(err, isFile) {
                             if (err) {
-                                console.log('err', err);
+                                console.log("[31m%s[0m", err);
                                 throw new Error(err.message);
                             }
                             expect(isFile).to.be(false);
@@ -130,23 +130,23 @@ describe("vfile", function() {
     it("should async create folder", function(done) {
         file.mkdir(path.join(__dirname, 'ittf', 'folder_created_one'), function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.isDirectory(path.join(__dirname, 'ittf', 'folder_created_one'), function(err, isDirectory) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(isDirectory).to.be(true);
                 file.mkdir(path.join(__dirname, 'ittf', 'folder_created_one', 'alfa', 'beta'), function(err, result) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     file.isDirectory(path.join(__dirname, 'ittf', 'folder_created_one', 'alfa', 'beta'), function(err, isDirectory) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         expect(isDirectory).to.be(true);
@@ -159,12 +159,12 @@ describe("vfile", function() {
     it("should async write/read a file", function(done) {
         file.write(path.join(__dirname, 'ittf', 'gc_one.ittf'), 'first one\nsecond one', function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.read(path.join(__dirname, 'ittf', 'gc_one.ittf'), function(err, contents) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(contents).to.be.a('string');
@@ -176,12 +176,12 @@ describe("vfile", function() {
     it("should async write/read a file on a new folder", function(done) {
         file.write(path.join(__dirname, 'ittf', 'alca', 'traz', 'gc_one.ittf'), 'first one\nsecond one', function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.read(path.join(__dirname, 'ittf', 'alca', 'traz', 'gc_one.ittf'), function(err, contents) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(contents).to.be.a('string');
@@ -204,12 +204,12 @@ describe("vfile", function() {
          };
         file.writeJSON(path.join(__dirname, 'ittf', 'abrac.json'), obj, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.readJSON(path.join(__dirname, 'ittf', 'abrac.json'), function(err, obj_read) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 // loose equality works for objects
@@ -227,10 +227,10 @@ describe("vfile", function() {
             documentContent: false
          }, function(err, files) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'should get files in a basefolder - files', files
+            // loog 'should get files in a basefolder - files', files
             expect(files).to.be.an('array');
             expect(files.length).to.be(2);
             done();
@@ -243,7 +243,7 @@ describe("vfile", function() {
             documentContent: true
          }, function(err, files) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             expect(files).to.be.an('array');
@@ -268,10 +268,10 @@ describe("vfile", function() {
             documentNames: false
          }, function(err, folders) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'folders', folders
+            // loog 'folders', folders
             expect(folders).to.be.an('array');
             expect(folders.length).to.be(2);
             done();
@@ -286,10 +286,10 @@ describe("vfile", function() {
             documentNames: false
          }, function(err, folders) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'folders', folders
+            // loog 'folders', folders
             expect(folders).to.be.an('array');
             expect(folders.length).to.be(4);
             expect(folders[0].relPath).to.be.a('string');
@@ -312,12 +312,12 @@ describe("vfile", function() {
             documentNames: true
          }, function(err, folders) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log ''
-            // log ''
-            // log '*** folders', folders
+            // loog ''
+            // loog ''
+            // loog '*** folders', folders
             expect(folders).to.be.an('array');
             expect(folders.length).to.be(4);
             expect(folders[0].documents).to.be.an('array');
@@ -337,7 +337,7 @@ describe("vfile", function() {
         file.write(path.join(__dirname, 'ittf', 'globs2', 'one', 'globbed_2_one.ittf'), 'globbed 2 one')
         file.getGlobbedFilesEx(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), file, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             expect(result).to.be.an('array');
@@ -346,7 +346,7 @@ describe("vfile", function() {
                 removeRoot: path.join(__dirname, 'ittf')
              }, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(result).to.be.an('array');

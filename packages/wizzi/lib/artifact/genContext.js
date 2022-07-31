@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\artifact\genContext.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ var GenContext = (function () {
                 throw new Error('wizzi.artifact.GenContext: genconfig.options argument must be an Object');
             }
         */
-        // log 'wizzi.artifact.genContext.pman.globalContext', genconfig.pman.globalContext()
+        // loog 'wizzi.artifact.genContext.pman.globalContext', genconfig.pman.globalContext()
         var globalContext = Object.assign({}, genconfig.options.data || {}, genconfig.pman.globalContext());
         this.model = genconfig.model;
         this.srcPath = genconfig.srcPath;
@@ -154,7 +154,7 @@ var GenContext = (function () {
     }
     GenContext.prototype.toStream = function(stream) {
         
-        // log 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
+        // loog 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
         if (this.writeFilePath != null) {
             stream.write(file.read(this.writeFilePath))
         }
@@ -179,7 +179,7 @@ var GenContext = (function () {
         return new errors.NodeError(message, node);
     }
     GenContext.prototype.artifactGenerationError = function(message, location, node) {
-        console.log('wizzi.artifact.genContext.artifactGenerationError.message', message);
+        // loog 'wizzi.artifact.genContext.artifactGenerationError.message', message
         var error = new errors.ArtifactGenerationError(message, location, node);
         this.artifactGenerationErrors.push(error);
         return error;

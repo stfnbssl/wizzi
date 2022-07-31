@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\ittfDocumentState.js.ittf
 */
 'use strict';
@@ -29,7 +29,7 @@ var IttfDocumentState = (function () {
         this.scanId = options.scanIdCounter;
         this.id = 'p_' + this.scanId + '_1';
         this.idCounter = 2;
-        // log 'wizzi-utils.IttfDocumentState', this.primaryPath, this.primaryUri
+        // loog 'wizzi-utils.IttfDocumentState', this.primaryPath, this.primaryUri
     }
     IttfDocumentState.prototype.getFragment = function(uri) {
         var i, i_items=this.fragments, i_len=this.fragments.length, item;

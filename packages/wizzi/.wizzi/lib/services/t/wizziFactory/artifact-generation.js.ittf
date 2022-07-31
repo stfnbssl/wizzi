@@ -43,7 +43,7 @@ $group
 		param artifactRequestContext
 		param callback
 		+
-		# log 'generateArtifact.artifactModel', artifactModel
+		# loog 'generateArtifact.artifactModel', artifactModel
 		+
 		if typeof(callback) === 'undefined'
 			set callback = artifactRequestContext
@@ -76,7 +76,7 @@ $group
 							{
 								@ data artifactRequestContext
 					@ pman this.createProductionManager()
-		# log 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
+		# loog 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
         _ generator.gen
             @ artifactModel
             @ genContext
@@ -90,7 +90,7 @@ $group
                         return
                             _ callback(err)
                     #
-                    # log 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                    # loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                     r_cb_wz_err( WizziFactoryError, generateArtifact, err )
                         {
                             @ message 'See inner error'
@@ -125,7 +125,7 @@ $group
 		string artifactName
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
+		# loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
 			\b 'artifactRequestContext', requestContext.artifactRequestContext
 		+
 		var that = this
@@ -135,7 +135,7 @@ $group
             {
                 @ mTreeBuildupContext requestContext.modelRequestContext
             f_cb( artifactModel )
-                # log 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
+                # loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
                 # the loaded wizzi model becomes the artifactModel of the artifact generation
                 _ that.generateArtifact
                     @ artifactModel
@@ -154,7 +154,7 @@ $group
 		string artifactName
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromText', ittfContent, requestContext, artifactName, callback
+		# loog 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromText', ittfContent, requestContext, artifactName, callback
 		+
 		var ss = artifactName.split('/')
 		var schema = ss[0]

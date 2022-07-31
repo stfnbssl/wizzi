@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
 */
 'use strict';
@@ -27,7 +27,7 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
         loadContext.instance = originalloadContext;
         return callback(loadContext);
     }
-    // log 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
+    // loog 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
         
         // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
@@ -39,7 +39,7 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
         if (!primaryMTreeBrick.nodes || primaryMTreeBrick.nodes.length == 0) {
             return callback(null, primaryMTreeBrick);
         }
-        // log 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
+        // loog 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
         // resolve $-- (front matter) commands
         frontMatter(primaryMTreeBrick, function(err, frontMatterResolvedMTreePiece) {
             if (err) {
@@ -67,12 +67,12 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
                         // evaluate
                         evaluator(appendedMTreePiece, loadContext, function(err, finalMTree) {
                             
-                            // log 'wizzi-mTree.loader.index.err', err
+                            // loog 'wizzi-mTree.loader.index.err', err
                             if (err) {
                                 err.ittfDocumentUri = primaryIttfDocumentUri;
                                 return callback(err);
                             }
-                            // log 'wizzi-mTree.loader.index.createdProvider.loadHistory', createdProvider.loadHistory
+                            // loog 'wizzi-mTree.loader.index.createdProvider.loadHistory', createdProvider.loadHistory
                             finalMTree.loadHistory = createdProvider.loadHistory;
                             loadContext.productionContext.addEvaluatedMTree(primaryIttfDocumentUri, finalMTree);
                             callback(null, finalMTree);
@@ -204,7 +204,7 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
         if (!primaryMTreeBrick.nodes || primaryMTreeBrick.nodes.length == 0) {
             return callback(null, primaryMTreeBrick);
         }
-        // log 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
+        // loog 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
         // resolve $-- (front matter) commands
         frontMatter(primaryMTreeBrick, function(err, frontMatterResolvedMTreePiece) {
             if (err) {
@@ -240,7 +240,7 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
 ;
 //
 function normalizeRequestContext(loadContext) {
-    // log 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext
+    // loog 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext
     // for var k in loadContext
     loadContext.productionContext = loadContext.__productionManager.productionContext;
     if (verify.isObject(loadContext.mTreeBuildupContext) == false) {

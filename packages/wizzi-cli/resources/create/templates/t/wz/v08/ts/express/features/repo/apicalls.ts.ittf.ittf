@@ -21,7 +21,7 @@ $group
                     ._ then
                         => 
                             param responseData
-                            log 'getRepositories.responseData', responseData
+                            # loog 'getRepositories.responseData', responseData
                             return responseData
     +
     function getOptions

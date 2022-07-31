@@ -81,7 +81,7 @@
 		_ c.insertOne
 			@ item_root
 			f_cb_no_err( result )
-				# log 'err', err, 'result', result
+				# loog 'err', err, 'result', result
 				tobe_typeof( err, errors.RepoCollectionError )
 				tobe_string( err.message, Duplicated key )
 				_ done

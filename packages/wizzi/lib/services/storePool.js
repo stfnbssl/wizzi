@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\storePool.js.ittf
 */
 'use strict';
@@ -124,7 +124,7 @@ var StorePool = (function () {
             })
         }
         
-        // log 'repoOptions', repoOptions
+        // loog 'repoOptions', repoOptions
         else if (this.storeKind === 'json') {
             repo.jsonfile({
                 fsJson: this.repoOptions.storeFsJson
@@ -137,7 +137,7 @@ var StorePool = (function () {
             })
         }
         
-        // log 'repoOptions', repoOptions
+        // loog 'repoOptions', repoOptions
         else if (this.storeKind === 'browser') {
             repo.browserfile(function(err, file) {
                 if (err) {

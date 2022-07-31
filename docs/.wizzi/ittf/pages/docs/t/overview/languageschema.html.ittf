@@ -37,7 +37,7 @@
                             param name
                             base name
                         m say
-                            log 'Hiiii i am ' + this.name
+                            info 'Hiiii i am ' + this.name
                         m create
                             static
                             param name

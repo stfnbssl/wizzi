@@ -20,7 +20,7 @@
                     @ result
                     {
                     f_cb(html_lines)
-                        # log 'html_lines', html_lines
+                        # loog 'html_lines', html_lines
                         tobe_object( html_lines )
                         tobe_array( html_lines.prettyLines, 1 )
                         _ file.write
@@ -40,7 +40,7 @@
                 @ 'basic.tests.ittf'
             {
             f_cb(html_lines)
-                # log 'html_lines', html_lines
+                # loog 'html_lines', html_lines
                 tobe_object( html_lines )
                 tobe_array( html_lines.prettyLines, 1 )
                 _ file.write

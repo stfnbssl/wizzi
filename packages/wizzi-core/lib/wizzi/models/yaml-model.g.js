@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\yaml-model.g.js.ittf
 */
 'use strict';
@@ -12,7 +12,7 @@ var jsyaml = require('js-yaml');
 var lineparser = require('../../util/lineParser');
 
 module.exports = function(mTree, ittfDocumentUri, request, callback) {
-    // log 'wizzi-core.wizzi.models.yaml-model.g', mTree
+    // loog 'wizzi-core.wizzi.models.yaml-model.g', mTree
     if (!(mTree.nodes && mTree.nodes.length == 1)) {
         return callback(error('Malformed mTree. Must have one root node. Found mTree.nodes: ' + mTree.nodes, {}));
     }
@@ -185,7 +185,7 @@ function unquote(str) {
     return str.substr(1, str.length -2);
 }
 function error(message, node) {
-    console.log('wizzi-core.wizzi.models.yaml-model.g.error', node);
+    // loog 'wizzi-core.wizzi.models.yaml-model.g.error', node
     nodeInfo(node, message)
     return {
             __is_error: true, 

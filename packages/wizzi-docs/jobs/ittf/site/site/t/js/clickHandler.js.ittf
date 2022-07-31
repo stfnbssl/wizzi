@@ -11,12 +11,12 @@ $group
 		return
 			function wrapperClickHandler
 				param event
-				log 'wrapperClickHandler.target', event.target
-				log 'wrapperClickHandler.target.dataset', event.target.dataset
-				log 'wrapperClickHandler.target.dataset.fragId', event.target.dataset.fragId
-				log 'has class frag-to-link-a', wzui.hasClass(event.target, 'frag-to-link-a')
+				# loog 'wrapperClickHandler.target', event.target
+				# loog 'wrapperClickHandler.target.dataset', event.target.dataset
+				# loog 'wrapperClickHandler.target.dataset.fragId', event.target.dataset.fragId
+				# loog 'has class frag-to-link-a', wzui.hasClass(event.target, 'frag-to-link-a')
 				if wzui.hasClass(event.target, 'frag-to-link-a')
-					log 'href', event.target.href
+					# loog 'href', event.target.href
 					_ ctx.modalManager.pushFragment
 						@ event.target.dataset.fragId
 					_ event.preventDefault()

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\mocks\plugin_ex\plugin_ex.js.ittf
 */
 'use strict';
@@ -43,7 +43,7 @@ var FactoryPlugin = (function () {
     }
     //
     FactoryPlugin.prototype.getModelFactory = function(schemaName, mockBaseDir) {
-        console.log('wizzi.tests.plugin.getModelFactory: schemaName, mockBaseDir', schemaName, mockBaseDir);
+        // loog 'wizzi.tests.plugin.getModelFactory: schemaName, mockBaseDir', schemaName, mockBaseDir
         var factory = this.modelFactories[schemaName] || null;
         if (factory == null) {
             var models = require('./wizziModels');
@@ -62,8 +62,8 @@ var FactoryPlugin = (function () {
                             if (models[ittfDocumentUri]) {
                                 callback(null, models[ittfDocumentUri])
                             }
+                            // loog 'wizzi.tests.plugin.createLoadModel', ittfDocumentUri, models
                             else {
-                                console.log('wizzi.tests.plugin.createLoadModel', ittfDocumentUri, models);
                                 callback({
                                     __is_error: true, 
                                     message: 'Wizzi model not found. IttfDocumentUri: ' + ittfDocumentUri
@@ -76,14 +76,16 @@ var FactoryPlugin = (function () {
     //
     FactoryPlugin.prototype.getModelTransformer = function(transformerName) {
         
-        console.log('wizzi.tests.plugin.getModelTransformer transformerName: ' + transformerName);
+        // loog 'wizzi.tests.plugin.getModelTransformer transformerName: ' + transformerName
         var transformer = this.modelTransformers[transformerName] || null;
+        
+        // loog 'wizzi.tests.plugin.getModelTransformer transformers: ' + transformers
+        
+        // loog 'wizzi.tests.plugin.getModelTransformer transformer: ' + transformer
         if (transformer == null) {
             var transformers = require('./transformers');
-            console.log('wizzi.tests.plugin.getModelTransformer transformers: ' + transformers);
             transformer = transformers.getTransformer(transformerName)
             ;
-            console.log('wizzi.tests.plugin.getModelTransformer transformer: ' + transformer);
             this.modelTransformers[transformerName] = transformer;
         }
         return transformer;

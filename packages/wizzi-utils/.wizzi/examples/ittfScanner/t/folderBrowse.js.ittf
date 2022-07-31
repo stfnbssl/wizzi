@@ -2,7 +2,7 @@
 
 	function folderBrowse_step_1
 		
-		log 'wizzi-utils.examples.folderBrowse_step_1 START'
+		info 'wizzi-utils.examples.folderBrowse_step_1 START'
 
 		_ ittfScanner.browseFolder
 			_ path.join
@@ -15,4 +15,4 @@
 						@ __dirname
 						@ 'ittf'
 			f_cb_test( result )
-				log 'result\n', JSON.stringify(result, null, 2)
+				info 'result\n', JSON.stringify(result, null, 2)

@@ -41,7 +41,7 @@
 							try
 								# load the module now
 								set moduleObject = require(modulePath)
-								# log 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
+								# loog 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
 							catch ex
 								return
 									_ callback

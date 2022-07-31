@@ -33,7 +33,7 @@ $group
             ${'$'}if wzCtx.Build.useBlog
                 @ ...blogControllers
         +
-    log 'Starting app. Config:', config
+    warn 'Starting app. Config:', config
     const appInitializer
         { 
             @ config

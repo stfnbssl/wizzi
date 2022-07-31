@@ -9,7 +9,7 @@
 				function
 					param artifactInfo
 					param callback
-                    # log 'Started async artifact collection pre load', artifactInfo.collection
+                    # loog 'Started async artifact collection pre load', artifactInfo.collection
                     _ log.info('Started async artifact collection pre load: ' + artifactInfo.collection)
                     if verify.isEmpty(artifactInfo.collection)
                         r_cb()

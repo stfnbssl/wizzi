@@ -17,8 +17,8 @@
                 param callback
 
                 var ittfDocumentPath = path.join(__dirname, 'ittf', 'wfschema-model.js.ittf')
-                log 'wizzi-core.wfschema.gen.model started', ittfDocumentPath
-                # log 'wizzi-core.artifacts.wfschema.model.model', model
+                # loog 'wizzi-core.wfschema.gen.model started', ittfDocumentPath
+                # loog 'wizzi-core.artifacts.wfschema.model.model', model
 
                 var mTreeBuildupContext
                     {
@@ -35,8 +35,8 @@
                     @ mTreeBuildupContext 
                     f_cb_no_err( result )
                         if err
-                            log __dirname, myname, 'err', err
-                        log 'wizzi-core.wfschema.gen.model ended', ittfDocumentPath
+                            error __dirname, myname, 'err', err
+                        # loog 'wizzi-core.wfschema.gen.model ended', ittfDocumentPath
                         _ ctx.w(result)
                         _ callback(null, ctx)
 

@@ -19,11 +19,11 @@ frag-1()
                     param e
                     
                     let scrollPos = window.scrollY
-                    log 'pre sticki', navPos, scrollPos, scrollPos > navPos
+                    info 'pre sticki', navPos, scrollPos, scrollPos > navPos
                     if scrollPos > navPos
                         _ navbar.classList.add('sticky')
                         _ header.classList.add('navbarOffsetMargin')
-                        log 'sticki', scrollPos
+                        info 'sticki', scrollPos
                     else
                         _ navbar.classList.remove('sticky')
                         _ header.classList.remove('navbarOffsetMargin')

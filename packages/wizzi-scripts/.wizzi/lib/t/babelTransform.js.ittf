@@ -44,7 +44,7 @@
 		var code = options.code
 		var codePath = options.codePath
 
-		log 'wizzi-scripts.babelTransformExec.codePath', codePath
+		# loog 'wizzi-scripts.babelTransformExec.codePath', codePath
 
 		var cfg
 			_ this.getBabelTransformConfig
@@ -69,7 +69,7 @@
 		_ this.babelTransformExec
 			@ options
 			f_cb_no_err(result)
-				# log 'wizzi-scripts.babelTransformExecToEventStream.err.result', err, result
+				# loog 'wizzi-scripts.babelTransformExecToEventStream.err.result', err, result
 				_ res.writeHead
 					@ 200
 					{ 
@@ -82,7 +82,7 @@
 				else
 					# TODO calculate payload from options
 					var payload = result.code
-				# log 'payload', payload
+				# loog 'payload', payload
 				
 				var str
 				var lines = payload.split("\n")

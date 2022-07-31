@@ -8,7 +8,7 @@
 				@ '${folder}/folder1/hello.js.ittf'
 				@ 'Hello wizzi factory'
 				f_cb_test( result )
-					log 'tests.mongodb.fsimpl.writeFile, result:', result
+					# loog 'tests.mongodb.fsimpl.writeFile, result:', result
 					tobe_string( result.code, 'DOCUMENT_WRITTEN' )
 					tobe_string( result.item.content, 'Hello wizzi factory' )
 					_ done
@@ -17,7 +17,7 @@
 			_ fsimpl.readFile
 				@ '${folder}/folder1/hello.js.ittf'
 				f_cb_test( content )
-					log 'tests.mongodb.fsimpl.readFile, content:', content
+					# loog 'tests.mongodb.fsimpl.readFile, content:', content
 					tobe_string( content, 'Hello wizzi factory' )
 					_ done
 
@@ -25,7 +25,7 @@
 			_ fsimpl.stat
 				@ '${folder}/folder1/hello.js.ittf'
 				f_cb_test( stat )
-					log 'tests.mongodb.fsimpl.stat, stat:', stat
+					# loog 'tests.mongodb.fsimpl.stat, stat:', stat
 					tobe_true( stat.isFile() )
 					tobe_false( stat.isDirectory() )
 					_ done
@@ -34,7 +34,7 @@
 			_ fsimpl.stat
 				@ '${folder}'
 				f_cb_test( stat )
-					log 'tests.mongodb.fsimpl.stat, stat:', stat
+					# loog 'tests.mongodb.fsimpl.stat, stat:', stat
 					tobe_false( stat.isFile() )
 					tobe_true( stat.isDirectory() )
 					_ done

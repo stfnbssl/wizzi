@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\mongoFsimpl.js.ittf
 */
 'use strict';
@@ -60,15 +60,15 @@ var MongoFsImpl = (function () {
             that.mounted_db = db;
             var fsmongo = new FsMongo(db);
             that.mongoDb = new Document(fsmongo);
-            // log '***** mongodb connected'
+            // loog '***** mongodb connected'
             return callback(null, that.mongoDb);
         })
     }
     MongoFsImpl.prototype.close = function() {
         
-        // log '***** mongodb start closing'
+        // loog '***** mongodb start closing'
         
-        // log '***** mongodb closed'
+        // loog '***** mongodb closed'
         if (this.mounted_db) {
             this.mounted_db.close();
             this.mounted_db = null;
@@ -76,7 +76,7 @@ var MongoFsImpl = (function () {
         }
     }
     MongoFsImpl.prototype.stat = function(documentUri, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.stat.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.stat.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'stat', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -88,7 +88,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -105,7 +105,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.lstat = function(documentUri, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.lstat.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.lstat.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'lstat', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -117,7 +117,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -134,7 +134,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.readFile = function(documentUri, options, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.readFile.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.readFile.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -150,7 +150,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -167,7 +167,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.writeFile = function(documentUri, content, options, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.writeFile.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.writeFile.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -183,7 +183,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -200,7 +200,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.readdir = function(documentUri, options, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.readdir.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.readdir.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -216,7 +216,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -232,7 +232,7 @@ var MongoFsImpl = (function () {
                 var i, i_items=result, i_len=result.length, item;
                 for (i=0; i<i_len; i++) {
                     item = result[i];
-                    // log 'wizzi-repo.mongodb.mongoFsImpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
+                    // loog 'wizzi-repo.mongodb.mongoFsImpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
                     dir.push(item.basename);
                 }
                 callback(null, dir);
@@ -240,7 +240,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.mkdir = function(documentUri, options, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.mkdir.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.mkdir.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -256,7 +256,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;
@@ -273,7 +273,7 @@ var MongoFsImpl = (function () {
         })
     }
     MongoFsImpl.prototype.unlink = function(documentUri, callback) {
-        // log 'wizzi-repo.mongodb.mongoFsImpl.unlink.documentUri', documentUri
+        // loog 'wizzi-repo.mongodb.mongoFsImpl.unlink.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'unlink', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -285,7 +285,7 @@ var MongoFsImpl = (function () {
         }
         var parsedUri = mongoUriParser(documentUri, this.mongoBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
         var that = this;

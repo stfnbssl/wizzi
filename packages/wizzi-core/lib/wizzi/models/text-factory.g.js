@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\text-factory.g.js.ittf
 */
 'use strict';
@@ -44,7 +44,7 @@ md.createLoadModel = function(wizziObject) {
     var errors = wizziObject.errors;
     var wizziFactory = wizziObject.wizziFactory;
     function loadModelFromMTree(mTree, ittfDocumentUri, wizziModelRequest, options, callback) {
-        // log 'wizzi-core.wizzi.models.text-factory.g, loaded from mTree'
+        // loog 'wizzi-core.wizzi.models.text-factory.g, loaded from mTree'
         textmodel(mTree, ittfDocumentUri, wizziModelRequest, callback);
     }
     
@@ -111,13 +111,13 @@ md.createLoadModel = function(wizziObject) {
                         return callback(err);
                     }
                     // TODO implement a stats object inside the wizziModelRequest object
-                    // log 'Loaded mTree instance for pseudo schema text from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
+                    // loog 'Loaded mTree instance for pseudo schema text from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
                     if ((wizziModelRequest.dumpAll || wizziModelRequest.dumpIttfModel) && file.isFilePath(ittfDocumentUri)) {
                         var ittfDumpPath = path.join(path.dirname(ittfDocumentUri), '_debug', path.basename(ittfDocumentUri) + '.ittf.json');
                         file.write(ittfDumpPath, stringify(mTree, null, 2))
                     }
-                    // log 'wizzi-core.wizzi.models.text-factory.g current __dirname', __dirname
-                    // log 'wizzi-core.wizzi.models.text-factory.g, loaded from ittfDocumentUri: ', ittfDocumentUri, mTree
+                    // loog 'wizzi-core.wizzi.models.text-factory.g current __dirname', __dirname
+                    // loog 'wizzi-core.wizzi.models.text-factory.g, loaded from ittfDocumentUri: ', ittfDocumentUri, mTree
                     textmodel(mTree, ittfDocumentUri, wizziModelRequest, callback);
                 })
             };
@@ -151,7 +151,7 @@ function isCommandNode(line) {
     return false;
 }
 function preprocessText(text) {
-    // log 'wizzi-core.wizzi.models.text-factory.g.preprocessText text: ' + text
+    // loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText text: ' + text
     if (!text || text.length == 0) {
         return text;
     }
@@ -164,7 +164,7 @@ function preprocessText(text) {
     for (var i = 0; i<len; i++) {
         ch = text[i];
         
-        // log 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
+        // loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
         if (ch === '\n' || ch === '\r') {
             if (isCommandNode(line)) {
                 sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
@@ -178,7 +178,7 @@ function preprocessText(text) {
             seenNotWs = false;
             if (i < len-1) {
                 
-                // log 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
+                // loog 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
                 if ((ch === '\n' && text[i+1] === '\r') || (ch === '\r' && text[i+1] === '\n')) {
                     i++;
                 }
@@ -207,7 +207,7 @@ function preprocessText(text) {
     else if (line.length > 0) {
         sb.push('    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : ''))
     }
-    console.log('wizzi-core.wizzi.models.text-factory.g.preprocessText result', sb.join('\n'));
+    // loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText result', sb.join('\n')
     return sb.join('\n');
 }
 /**

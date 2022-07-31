@@ -16,9 +16,9 @@
 			@ 'ts'
 
 	repeater(1, example_files)
-		log '======================================================================================'
+		info '======================================================================================'
 		log index_1 + 1, '/', len_1, '', 'file', item_1
-		log '--------------------------------------------------------------------------------------'
+		info '--------------------------------------------------------------------------------------'
 		_ execute
 			@ item_1.name
 			f_cb()
@@ -49,13 +49,13 @@
 			_ getLoadModelContext
 				{
 			f_cb_test( tsWizziModel )
-				# log 'tsWizziModel', stringify(tsWizziModel, null, 2)
+				# loog 'tsWizziModel', stringify(tsWizziModel, null, 2)
 				var ctx = new mocks.getGenContext()
 				_ ts_artifact.gen
 					@ tsWizziModel
 					@ ctx
 					f_cb_test( ctxout )
-						log 'ctxout', ctxout.getContent()
+						info 'ctxout', ctxout.getContent()
 						_ file.write
 							@ tsOutput
 							@ ctxout.getContent()

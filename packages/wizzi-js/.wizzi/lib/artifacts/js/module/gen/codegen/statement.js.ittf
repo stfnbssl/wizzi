@@ -162,7 +162,7 @@ module wizzi.js.artifacts.module.gen.codegen.statement
 			param ctx
 			param callback
 
-			log 'codeline ', model.wzName
+			# loog 'codeline ', model.wzName
 			if u.isTopStatement(model, ctx)
 				# _ ctx.w(model.wzName)
 				_ ctx.write(model.wzName)

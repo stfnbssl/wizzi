@@ -20,4 +20,4 @@ $group
                             :ref Application
                         _ app.use
                             _ cookieParser
-                        log 'CookieMiddleware installed'
+                        success 'CookieMiddleware installed'

@@ -37,7 +37,7 @@
                 @ dirname 'w:/zero'
                 @ kind 1
             f_cb_test( result )
-                log 'insert.alpha.js.ittf.result', result
+                # loog 'insert.alpha.js.ittf.result', result
                 var insertedId = result.insertedId
                 _ dump
                     @ fsJson
@@ -45,23 +45,23 @@
                 _ fsJson.updateItem
                     @ result.item
                     f_cb_test( result )
-                        log 'update.beta.js.ittf.result', result
+                        # loog 'update.beta.js.ittf.result', result
                         _ dump
                             @ fsJson
                         _ fsJson.writeDocument
                             @ result.item._id
                             @ 'My content'
                             f_cb_test( result )
-                                log 'write.beta.js.ittf.result', result
+                                # loog 'write.beta.js.ittf.result', result
                                 _ dump
                                     @ fsJson
                                 _ fsJson.readDocument
                                     @ result.item._id
                                     f_cb_test( result )
-                                        log 'read.beta.js.ittf.result', result
+                                        # loog 'read.beta.js.ittf.result', result
                                         _ fsJson.deleteItem
                                             @ insertedId
                                             f_cb_test( result )
-                                                log 'delete.beta.js.ittf.result', result
+                                                # loog 'delete.beta.js.ittf.result', result
                                                 _ dump
                                                     @ fsJson

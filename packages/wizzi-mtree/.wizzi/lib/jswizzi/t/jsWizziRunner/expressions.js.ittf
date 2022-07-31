@@ -8,7 +8,7 @@
 					@ node.argument
 					@ ctx
 			if exp && exp.__is_error
-				# log 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
+				# loog 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
                 if exp.data && exp.data.errorName === 'ReferenceError'
 					set exp = undefined
 				else
@@ -199,8 +199,8 @@
         
 		if node.callee.type === 'MemberExpression'
 
-            # log 'CallExpression.node.callee.object.name', node.callee.object.name
-            # log 'CallExpression.node.callee.property.name', node.callee.property.name
+            # loog 'CallExpression.node.callee.object.name', node.callee.object.name
+            # loog 'CallExpression.node.callee.property.name', node.callee.property.name
 			
 			foreach item in node.arguments
 				checked_run_set( value, CallExpression argument
@@ -238,7 +238,7 @@
 				try
 					var value = obj[property].apply(obj, args)
 					if value && value.__is_error
-						# log 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
+						# loog 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
                         $* 1/3/21 NO this hide the source position of the error
                         if value.name === 'WizziError'
                             return value
@@ -294,7 +294,7 @@
             var f
                 _ ctx.getFunction
                     @ node.callee.name
-			# log 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
+			# loog 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
             if f == null
 				set f = ctx.getValue(node.callee.name)
 				if f != null && verify.isFunction(f)
@@ -322,7 +322,7 @@
 							@ node
 							@ 'CallExpression'
 							@ new Error()
-            # log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
+            # loog 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
 
 			$* VIA
             if f.params.length !== node.arguments.length
@@ -343,7 +343,7 @@
                 if item
                     checked_run_set(value, CallExpression argument)
                         set value = runner(item, ctx)
-                    # log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
+                    # loog 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
                     _ args.push(value)
                 else
                     _ args.push(undefined)
@@ -351,7 +351,7 @@
             foreach item in node.arguments
 				checked_run_set(value, CallExpression argument)
 					set value = runner(item, ctx)
-				# log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
+				# loog 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
 				_ args.push(value)
             *$
 			_ ctx.endLoadingCallArguments();
@@ -373,7 +373,7 @@
         
 		if node.callee.type === 'FunctionExpression'
 
-			# log 'FunctionExpression', node.callee, true
+			# loog 'FunctionExpression', node.callee, true
 			
 			var f = node.callee
 
@@ -405,15 +405,15 @@
 				@ 'CallExpression'
 
     runner( MemberExpression
-		# log 'MemberExpression.node', node
+		# loog 'MemberExpression.node', node
         checked_run( obj, MemberExpression
             _ runner
                 @ node.object
                 @ ctx
         if obj == null || typeof(obj) == 'undefined'
-            log 'jsWizziRunner.MemberExpression.obj', obj, typeof obj
-            log 'jsWizziRunner.MemberExpression.node.object', node.object
-            log 'jsWizziRunner.MemberExpression.callContext.values', ctx.callContext && ctx.callContext.values
+            error 'jsWizziRunner.MemberExpression.obj', obj, typeof obj
+            error 'jsWizziRunner.MemberExpression.node.object', node.object
+            error 'jsWizziRunner.MemberExpression.callContext.values', ctx.callContext && ctx.callContext.values
 			return
 				_ local_error
 					@ ctx
@@ -498,7 +498,7 @@
 					@ node
 					@ 'AssignmentExpression'
         
-		# log 'jsWizziRunner.AssignmentExpression.node.left', node.left
+		# loog 'jsWizziRunner.AssignmentExpression.node.left', node.left
 		checked_run( notUsed, AssignmentExpression node.left
 			_ runnerSet
 				@ node.left
@@ -543,7 +543,7 @@
                 @ value value
 
 	runner( NewExpression
-		# log 'NewExpression.node', node
+		# loog 'NewExpression.node', node
 
 		if node.callee.type === 'Identifier'
 			var l = node.arguments.length
@@ -552,7 +552,7 @@
 				checked_run( value, NewExpression argument
 					_ runner(item, ctx)
 				_ args.push(value)
-			# log 'NewExpression.args', args
+			# loog 'NewExpression.args', args
 			if node.callee.name === 'String' && l === 0
 				return new String()
 			elif node.callee.name === 'String' && l === 1

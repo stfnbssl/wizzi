@@ -11,12 +11,13 @@
 	var ${schema}wizzifier = require('../../lib/wizzifiers/${schema}parser/css/wizzifier')
 	var file = require('wizzi-utils').file
 	+
+
 	_ async.map
 		[
 			@ 'styles'
 		@ wizzify
 		f_cb_no_err( result )
-			log 'Terminated. result: ', result
+			info 'Terminated. result: ', result
 
 	function wizzify
 		param name
@@ -39,10 +40,9 @@
 						@ 'output'
 						@ name + '.${schema}.dump'
 			f_cb_no_err( ittf )
-				log 1
 				if err
-					log 'error wizzifying: ' + source
-					log 'err', err
+					error 'error wizzifying: ' + source
+					error 'err', err
 					return callback(null, 'error ' + source)
 				_ file.write
 					_ path.join

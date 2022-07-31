@@ -7,7 +7,7 @@ $group
         param newWizziSchema
         param callback
 
-        log 'copyChangeWizziSchema',
+        # loog 'copyChangeWizziSchema',
             \b 'from', fromFolder,
             \b 'to', toFolder,
 
@@ -18,19 +18,12 @@ $group
                     @ extension 'ittf'
                     @ documentContent true
                     @ deep true
-                $*
-                f_cb( result )
-                    log 'result'
-                    _ callback
-                        @ null
-                        @ result
-                *$
-        # log 'result1', result1
+        # loog 'result1', result1
         foreach item in result1
             var parts = item.file.split('.')
             if parts[parts.length -1] == 'ittf' && parts[parts.length -2] == oldWizziSchema
                 var newItemFile = parts.slice(0, -2).join('.') + '.'+ newWizziSchema + '.ittf'
-                log 'new item.file', newItemFile
+                # loog 'new item.file', newItemFile
                 _ file.write
                     _ path.join
                         @ toFolder

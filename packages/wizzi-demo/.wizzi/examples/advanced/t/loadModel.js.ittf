@@ -68,7 +68,7 @@
 						_ wf.fileService.write
 							@ dest
 							_ wizziModel.toJson()
-						log '   ', 'The json representation of ${ittfDocumentName}.json was saved to ' + dest
+						info '   ', 'The json representation of ${ittfDocumentName}.json was saved to ' + dest
 					$if printJson == true
 						_ printValue
 							@ 'wizziModel.toJson()'

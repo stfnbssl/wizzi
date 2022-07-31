@@ -115,7 +115,7 @@
 			param item
 			param newName
 			param callback
-			log 'treeFileSystem.rename', item, newName
+			# loog 'treeFileSystem.rename', item, newName
 			if item.isFolder
 				_ this.fsAdapter.renameFolder
 					@ item.path
@@ -152,7 +152,7 @@
 			param item
 			param callback
 			
-			log 'TreeFileSystem.pasteTo', item, 'from', this.copyCutItem
+			# loog 'TreeFileSystem.pasteTo', item, 'from', this.copyCutItem
 			
 			var action
 			if this.copyCutOper === 'copy'

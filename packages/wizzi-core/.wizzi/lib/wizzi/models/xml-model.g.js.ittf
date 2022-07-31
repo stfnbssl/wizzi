@@ -40,14 +40,14 @@
 	function toXmlElement
 		param tag
 		param nodes
-		# log '===== ++++++ xml.toXmlElement, nodes.length', nodes.length
+		# loog '===== ++++++ xml.toXmlElement, nodes.length', nodes.length
 		var ret
 			{
 				@ tag tag
 				@ attributes []
 				@ elements []
 		foreach node in nodes
-			# log '===== ++++++ xml.toXmlElement, node.n', node.n, node.v, node.children.length
+			# loog '===== ++++++ xml.toXmlElement, node.n', node.n, node.v, node.children.length
 			if node.n === '@'
 				var nv
 					_ lineparser.parseNameValueRaw

@@ -69,7 +69,7 @@
                             @ deep true
                             @ documentContent true
                         f_cb_test( files )
-                            # log 'files', files
+                            # loog 'files', files
                             _ heading2('getFiles')
                             _ printArray
                                 @ 'files'
@@ -85,7 +85,7 @@
                         {
                             @ deep true
                         f_cb_test( folders )
-                            # log 'folders', folders
+                            # loog 'folders', folders
                             _ heading2('getFolders')
                             _ printArray
                                 @ 'folders'

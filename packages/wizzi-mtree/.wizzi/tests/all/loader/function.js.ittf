@@ -84,7 +84,7 @@
 		_ done()
 
 	it-async complex function nodes [0][0]
-		# log 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
+		# loog 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
 		tobe_array( evaluatedModel.nodes[0].children, 2 )
 		set node = evaluatedModel.nodes[0].children[0]
 		tobe_number( node.r, 2 )
@@ -113,7 +113,7 @@
 			@ store
 			@ content_filepath
 			f_cb_no_err( result )
-				# log '================', err, result
+				# loog '================', err, result
 				set evaluatedModel = result
 				tobe_object( evaluatedModel )
 				tobe_array( evaluatedModel.nodes, 1 )

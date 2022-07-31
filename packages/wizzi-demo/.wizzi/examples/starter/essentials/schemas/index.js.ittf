@@ -20,7 +20,7 @@
 		{
 			@ outputPackagePath schemaFriendsOutputPath
 		f_cb_test(schemaPaths)
-			log 'schemaPaths of generated schema friends\n', schemaPaths
+			info 'schemaPaths of generated schema friends\n', schemaPaths
 			return
 				_ step_callback
 					@ null

@@ -35,7 +35,7 @@
 				(
 					@ model
 					f_cb( notUsed )
-						# log 'exit', myname, 'err', err
+						# loog 'exit', myname, 'err', err
 						r_cb(ctx)
 
 	async/md-gen-items( )
@@ -65,7 +65,7 @@
 					_ callback
 
 	async/md-gen-item( )
-		# log 'wizzi-web.artifacts.html.main', model.wzElement
+		# loog 'wizzi-web.artifacts.html.main', model.wzElement
 
 		if ['_text','_textLF'].indexOf(model.wzElement) >= 0
 			# model.wzName is a TEXTNODE
@@ -75,7 +75,7 @@
 			#     var text = verify.startsWith(model.wzName, "' '") ? '&nbsp;' + model.wzName.substr(3) : model.wzName;
 			var text = model.wzName
 
-            # log 'text', text
+            # loog 'text', text
 				
 			if ctx.__iscode || model.wzElement === '_textLF'
 				_ ctx.w(text)

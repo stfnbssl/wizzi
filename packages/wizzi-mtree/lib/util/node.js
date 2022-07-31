@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\util\node.js.ittf
 */
 'use strict';
@@ -21,7 +21,7 @@ md.findIttfCommand = function(item, cmdname, cmdtype, startItem, multi) {
     if (startItem && item.id === startItem.id) {
         return null;
     }
-    // log 'util.node.findIttfCommand', cmdtype, item.name, cmdname, item.value
+    // loog 'util.node.findIttfCommand', cmdtype, item.name, cmdname, item.value
     if (item.name === ('$' + cmdtype)) {
         if (item.value && item.value.trim() === cmdname) {
             if (multi) {
@@ -63,7 +63,7 @@ md.findIttfCommandMulti = function(item, cmdname, cmdtype) {
 //
 md.findHookExtDeep = function(item, hookname, searchType, startAppendNode, mixedNode) {
     
-    // log 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
+    // loog 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
     
     // this must be the first call for a new mixed node
     if (typeof mixedNode === 'undefined') {
@@ -85,12 +85,12 @@ md.findHookExtDeep = function(item, hookname, searchType, startAppendNode, mixed
         if (item.model.brickKey == mixedNode.model.brickKey) {
             if (item.name === ('$hook')) {
                 
-                // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
+                // loog 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                 if (item.value && item.value.trim() === hookname) {
                     return item;
                 }
                 
-                // log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
+                // loog 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
                 if (!item.value && hookname === 'default') {
                     return item;
                 }
@@ -121,7 +121,7 @@ md.findHookExtDeep = function(item, hookname, searchType, startAppendNode, mixed
 ;
 //
 md.findHookExt = function(item, hookname, searchType, startAppendNode) {
-    // log 'md.findHookExt.enter:', item.name, item.value, 'id', item.id, 'brickKey', item.model.brickKey
+    // loog 'md.findHookExt.enter:', item.name, item.value, 'id', item.id, 'brickKey', item.model.brickKey
     // the startitem (the $append command) is saved
     // and will be checked when the search descends, to avoid
     // searching descendants of the $append command itself.
@@ -133,7 +133,7 @@ md.findHookExt = function(item, hookname, searchType, startAppendNode) {
     if (!prn) {
         return null;
     }
-    // log 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
+    // loog 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
     else {
         var hook = md.findHookExtDeep(prn, hookname, searchType, startAppendNode);
         if (hook) {
@@ -159,22 +159,22 @@ md.findVirtual = function(item, virtname) {
 //
 md.findParentMixinRoot = function(item) {
     var prn = item.parent;
-    // log 'util.node.findParentMixinRoot', prn.model.$mixerBrickKey
+    // loog 'util.node.findParentMixinRoot', prn.model.$mixerBrickKey
     while (prn != null && ( typeof(prn.model) === 'undefined' || typeof(prn.model.$mixerBrickKey) === 'undefined' )) {
         prn = prn.parent;
-        // log 'util.node.findParentMixinRoot', prn ? prn.model.$mixerBrickKey : prn
+        // loog 'util.node.findParentMixinRoot', prn ? prn.model.$mixerBrickKey : prn
     }
     return prn;
 }
 ;
 md.replace = function(item, replacers) {
     
-    // log 'util/node/replace/item', item
+    // loog 'util/node/replace/item', item
     if (!item.parent) {
         var i, i_items=replacers, i_len=replacers.length, repl;
         for (i=0; i<i_len; i++) {
             repl = replacers[i];
-            // log 'util/node/replace/repl', repl
+            // loog 'util/node/replace/repl', repl
         }
     }
     var nodes = item.parent.children;
@@ -388,9 +388,9 @@ function spaces(num) {
     ;
 }
 function _dumpNodeDeep(node, indent) {
-    console.log(spaces(indent) + node.name + ' ' + (node.value || '') + ' ids: ' + node.parsedId + ' ' + node.id);
+    console.log(spaces(indent) + node.name + ' ' + (node.value || '') + ' ids: ' + node.parsedId + ' ' + node.id, __filename);
     if (node.$args || node.$params) {
-        console.log(spaces(indent) + ' $args: ' + node.$args + ' $params: ' + node.$params);
+        console.log(spaces(indent) + ' $args: ' + node.$args + ' $params: ' + node.$params, __filename);
     }
     indent++;
     var i, i_items=node.children, i_len=node.children.length, child;

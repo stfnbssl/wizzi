@@ -25,12 +25,12 @@ module
                 @ 'first'
             f_cb_no_throw${openPar} result )
                 if err
-                    log '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err', err
-                    log '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err.toString()', err.toString()
+                    error '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err', err
+                    error '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err.toString()', err.toString()
                     if err.inner
-                        log '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err.inner.toString()', err.inner.toString()
+                        error '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err.inner.toString()', err.inner.toString()
                 else
-                    log '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.result', result
+                    # loog '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.result', result
 
         function executeGenerateModules
             param modules

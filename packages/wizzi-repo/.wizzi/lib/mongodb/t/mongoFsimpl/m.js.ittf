@@ -9,7 +9,7 @@
 			param ${arg2}
 		param callback
 
-		# log 'wizzi-repo.mongodb.mongoFsImpl.${name}.documentUri', documentUri
+		# loog 'wizzi-repo.mongodb.mongoFsImpl.${name}.documentUri', documentUri
 
 		$if arg1 === 'options' || arg2 === 'options'
 			if typeof(callback) === 'undefined' && verify.isFunction(options) 

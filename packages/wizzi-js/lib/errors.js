@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\errors.js.ittf
 */
 'use strict';
@@ -28,7 +28,7 @@ function NodeError(message, node) {
         }
     }
     this.message = msg.join('');
-    // log 'NodeError', this.message
+    // loog 'NodeError', this.message
     // set this.node = node
     // 5/8/17 set this.stack = (new Error()).stack
 }

@@ -17,7 +17,7 @@ $group
                         @ useUnifiedTopology true
                     ._ then
                         => 
-                            log 'Mongodb. Connected to', mongoPath
+                            success 'Mongodb. Connected to', mongoPath
                             _ modelBuilders.forEach
                                 => 
                                     param builder

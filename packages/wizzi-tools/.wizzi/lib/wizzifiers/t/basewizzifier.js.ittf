@@ -52,7 +52,7 @@
             if typeof (options.verbose) !== 'undefined'
                 set verbose = options.verbose
             var startTime = Date.now()
-			# log 'startTime', startTime
+			# loog 'startTime', startTime
             _ wizzify
                 @ input
                 @ options
@@ -69,7 +69,7 @@
 										@ null
 										@ 2
                     
-                    # log 'Parsed in ' + Date.now() - startTime + ' ms'
+                    # loog 'Parsed in ' + Date.now() - startTime + ' ms'
                     _ callback(null, syntax)
     
 	set md.getWizziIttf

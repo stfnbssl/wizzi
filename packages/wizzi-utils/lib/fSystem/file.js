@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\file.js.ittf
 */
 'use strict';
@@ -68,10 +68,10 @@ md.readFile = function(path_string, options, callback) {
         if (err) {
             return callback(err);
         }
-        // log 'readFile.contents', contents
+        // loog 'readFile.contents', contents
         if (options.encoding !== null) {
             
-            // log 'wizzi-utils.file.read.isString', path_string, content
+            // loog 'wizzi-utils.file.read.isString', path_string, content
             if (verify.isString(contents)) {
             }
             contents = iconv.decode(contents, (options.encoding || md.defaultEncoding));
@@ -244,7 +244,7 @@ var getFilesDefaults = {
     documentContent: false
  };
 md.getFiles = function(path_string, options) {
-    // log 'wizzi-utils.file.getFiles', path_string, options
+    // loog 'wizzi-utils.file.getFiles', path_string, options
     options = _.assign({}, getFilesDefaults, (options || {}));
     var result;
     if (md.isDirectory(path_string)) {
@@ -279,7 +279,7 @@ md.getFiles = function(path_string, options) {
 ;
 md._appendFiles = function(path_string, files, relPath, options) {
     var dir = fs.readdirSync(String(path_string));
-    // log 'wizzi-utils.file.appendFiles', dir
+    // loog 'wizzi-utils.file.appendFiles', dir
     var folders = [];
     var i, i_items=dir, i_len=dir.length, item;
     for (i=0; i<i_len; i++) {
@@ -394,12 +394,13 @@ md.getGlobbedFiles = function(globPatterns, removeRoot, options) {
         if (urlRegex.test(globPatterns)) {
             output.push(globPatterns);
         }
-        // log 'wizzi-utils.globPatterns, options', globPatterns, options
-        // log 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
+        // loog 'wizzi-utils.globPatterns, options', globPatterns, options
+        // loog 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
         else {
             var files = glob.sync(globPatterns, options);
+            
+            // loog 'removeRoot', removeRoot
             if (removeRoot) {
-                console.log('removeRoot', removeRoot);
                 files = files.map(function(file) {
                     if (_.isArray(removeRoot)) {
                         for (var i in removeRoot) {

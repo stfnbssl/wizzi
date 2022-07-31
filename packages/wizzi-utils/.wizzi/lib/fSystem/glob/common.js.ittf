@@ -210,7 +210,7 @@
             set abs = path.resolve(f)
         if process.platform === 'win32'
             set abs = abs.replace(/\\/g, '/')
-		# log '***** wizzi-utils.glob.common.makeAbs.abs', abs
+		# loog '***** wizzi-utils.glob.common.makeAbs.abs', abs
         return abs
     
 	function isIgnored

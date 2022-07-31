@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\context.js.ittf
 */
 'use strict';
@@ -53,7 +53,7 @@ var ProductionContext = (function () {
             uri: uri, 
             ittfEvalScript: ittfEvalScript
          };
-        // log '*=*=*=*= temporary wizzi.production.productionContext. this.dumps : ', this.dumps
+        // loog '*=*=*=*= temporary wizzi.production.productionContext. this.dumps : ', this.dumps
         if (this.dumps && this.dumps.mTreeBuildupJsWizziScript && this.dumps.mTreeBuildupJsWizziScript.dump) {
             var dumpsFolder = this.dumps.mTreeBuildupJsWizziScript.dumpsBaseFolder || this.dumps.dumpsBaseFolder;
             file.write(path.join(dumpsFolder, path.basename(uri) + '.js.dump'), ittfEvalScript.toCode())
@@ -87,8 +87,8 @@ var ProductionContext = (function () {
          };
     }
     ProductionContext.prototype.addArtifactCollection = function(artifactInfo, frontMatters) {
-        // log 'wizzi.ProductionContext.addArtifactCollection.artifactName', artifactInfo.name
-        // log 'wizzi.ProductionContext.addArtifactCollection.frontMatters', frontMatters
+        // loog 'wizzi.ProductionContext.addArtifactCollection.artifactName', artifactInfo.name
+        // loog 'wizzi.ProductionContext.addArtifactCollection.frontMatters', frontMatters
         var coll = this.artifactCollections[frontMatters.collection];
         if (!coll) {
             this.artifactCollections[frontMatters.collection] = [...frontMatters.items];

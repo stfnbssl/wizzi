@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\es6\property.js.ittf
 */
 'use strict';
@@ -39,7 +39,7 @@ md.gen = function(model, ctx, callback) {
 }
 ;
 function property_step_1(model, ctx, callback) {
-    // log 'property_step_1', model
+    // loog 'property_step_1', model
     var ivalue = u.extractTS(model, 'typeInitValue');
     if (ivalue) {
         ctx.write(' = ');

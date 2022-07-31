@@ -11,5 +11,5 @@
 					script
 						module
 							function sayHello
-								log 'Hello'
+								success 'Hello'
 							_ sayHello

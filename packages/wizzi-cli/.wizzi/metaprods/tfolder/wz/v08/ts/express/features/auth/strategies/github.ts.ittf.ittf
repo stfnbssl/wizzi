@@ -27,8 +27,8 @@ $group
             ${'$'}if wzCtx.Build.useMongoDb
                 set accountModel = GetAccountModel()
                     # authUserModel = GetAuthUserModel();
-            log '============================================================'
-            log 'features.auth.strategies.github.createStrategy',
+            # loog '============================================================'
+            # loog 'features.auth.strategies.github.createStrategy',
                 \b 'config.githubClientId', config.githubClientId,
                 \b 'config.clientSecret', config.githubClientSecret,
                 \b 'config.githubCallbackURL', config.githubCallbackURL
@@ -50,8 +50,8 @@ $group
                             :any 
                         param done
                             :any 
-                        log '============================================================'
-                        log 'features.auth.strategies.github.callback', 
+                        # loog '============================================================'
+                        # loog 'features.auth.strategies.github.callback', 
                             \b 'req.session.socketId', req.session.socketId, 
                             \b 'req.session.socketUserId', req.session.socketUserId,
                             \b 'req.sessionID', req.sessionID,

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\includer.js.ittf
 */
 'use strict';
@@ -36,9 +36,9 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
         node = primaryMTreeBrick.nodes[i];
         searchCommands(node, includes, jsons, fragments)
     }
-    // log 'wizzi-mtree.includer.fragments before', primaryMTreeBrick.documentFragments
+    // loog 'wizzi-mtree.includer.fragments before', primaryMTreeBrick.documentFragments
     primaryMTreeBrick.documentFragments = fragments;
-    // log 'wizzi-mtree.includer.fragments after', primaryMTreeBrick.documentFragments
+    // loog 'wizzi-mtree.includer.fragments after', primaryMTreeBrick.documentFragments
     async.mapSeries(includes, function(item, callback) {
         var v = item.value.trim();
         var mixeruri = item.model.uri;

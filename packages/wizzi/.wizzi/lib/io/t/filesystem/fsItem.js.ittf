@@ -49,7 +49,7 @@
 			param userId
 			param action
 			param callback
-			log 'wizzi.FileSystem.deleteFsItem.action', action
+			# loog 'wizzi.FileSystem.deleteFsItem.action', action
 			if action.itemKind == 0
 				_ md.deleteFolder
 					@ action.userId || userId 

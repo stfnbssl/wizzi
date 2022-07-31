@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\html.js.ittf
 */
 'use strict';
@@ -50,7 +50,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -108,7 +108,7 @@ md.load = function(cnt) {
                     return callback(err);
                 }
                 // @ callback
-                // log 'exit fb_html_supported_tags &&&&&&&&&&&&&&&&&&&&&&&&&', model.wzElement
+                // loog 'exit fb_html_supported_tags &&&&&&&&&&&&&&&&&&&&&&&&&', model.wzElement
                 return callback(null, null);
             })
         }
@@ -125,14 +125,14 @@ md.load = function(cnt) {
         var p = lineParser.parseNameValueRaw(model.wzName, model),
             tag = p.name(),
             text = p.value();
-        // log 'enter htmlelement $$$$$$$$$$$$$$$$$$$', tag
-        // log 'statements/html/htmlelement', tag, text
+        // loog 'enter htmlelement $$$$$$$$$$$$$$$$$$$', tag
+        // loog 'statements/html/htmlelement', tag, text
         md._htmlelement(cnt, model, tag, text, ctx, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
             // @ callback
-            // log 'exit htmlelement $$$$$$$$$$$$$$$$$$$', tag
+            // loog 'exit htmlelement $$$$$$$$$$$$$$$$$$$', tag
             return callback(null, null);
         })
     }
@@ -318,7 +318,7 @@ md.load = function(cnt) {
             text = model.wzName;
             tag = model.wzElement;
         }
-        // log 'enter _htmlelement ----------------', tag
+        // loog 'enter _htmlelement ----------------', tag
         var attrs = getAttrs(model, ctx);
         var statements = null,
             value = null;
@@ -396,7 +396,7 @@ md.load = function(cnt) {
                     return callback(err);
                 }
                 // @ callback
-                // log 'exit _htmlelement ----------------', tag
+                // loog 'exit _htmlelement ----------------', tag
                 return callback(null, null);
             })
         }

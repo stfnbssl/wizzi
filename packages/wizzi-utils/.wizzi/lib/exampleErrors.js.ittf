@@ -8,11 +8,11 @@
 	var md = module.exports = {}
 	+
 	error( NotImplemented, message )
-		log 'message', message
+		error 'message', message
 		set this.message = message
 	+
 	error( InvalidRequest, message, code )
-		log 'message', message
+		error 'message', message
 		set this.message = message
 		set this.code = code
 
@@ -34,7 +34,7 @@
                 _ msg.push((' at row: ' + node.row))
                 _ msg.push((', col: ' + node.col))
         set this.message = msg.join('')
-		log 'NodeError', this.message
+		error 'NodeError', this.message
         # set this.node = node
     
 	error( NotFound, resourceType, name, message )
@@ -63,7 +63,7 @@
         set this.message = 'Error: ' + message + 
 			\ '\nDuring generation:' + generation + 
 			\ ', processing document ' + md.getSrcPathInfo(srcPath)
-		log 'wizzi.artifact.errors.artifactGenerationError.message', this.message
+		error 'wizzi.artifact.errors.artifactGenerationError.message', this.message
     
 	error( WizziInvalidRequest, message, srcPath, ex )
         set this.message = message

@@ -21,7 +21,7 @@ $group
         const IttfStaticMiddleware
             => 
                 param app
-                log 'IttfStaticMiddleware. Folder served from ', path.resolve(__dirname, '..', '..', 'ittf')
+                success 'IttfStaticMiddleware. Folder served from ', path.resolve(__dirname, '..', '..', 'ittf')
                 _ app.use('/ittf', ittfMiddleware(path.resolve(__dirname, '..', '..', 'ittf'), '/ittf'))
     
     const extContentTypeMap
@@ -73,7 +73,7 @@ $group
                 const extname = path.extname(filePath)
                 # loog 'IttfStaticMiddleware. ittf.pathname, pathname, filePath', urlPathName, pathname, filePath, path.extname(filePath)
                 if fs.existsSync(filePath) === false
-                    log 'IttfStaticMiddleware. filePath do not exists', filePath
+                    # loog 'IttfStaticMiddleware. filePath do not exists', filePath
                     return 
                         _ next
                 if 

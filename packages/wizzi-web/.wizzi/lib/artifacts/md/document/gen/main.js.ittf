@@ -13,7 +13,7 @@
 					param ctx
 					param callback
 
-					# log 'model', util.inspect(model, { depth: 1 })
+					# loog 'model', util.inspect(model, { depth: 1 })
 					new Gen(model, ctx, callback)
 
 	class Gen
@@ -210,6 +210,7 @@
 				_ this.genItems(model.elements, ctx)
 				if ctx.isCode
 					_ ctx.deindent()
+                _ ctx.w('')
 				return true;
 	
 		md-gen-method( span )

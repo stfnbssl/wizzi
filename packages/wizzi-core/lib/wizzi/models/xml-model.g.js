@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\xml-model.g.js.ittf
 */
 'use strict';
@@ -18,7 +18,7 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     }
     var xml = toXmlElement('xml', root.children);
     if (xml && xml.__is_error) {
-        console.log('__is_error ', xml);
+        console.log("[31m%s[0m", '__is_error ', xml);
         return callback(xml);
     }
     xml.wzElement = 'xml';
@@ -26,7 +26,7 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
 }
 ;
 function toXmlElement(tag, nodes) {
-    // log '===== ++++++ xml.toXmlElement, nodes.length', nodes.length
+    // loog '===== ++++++ xml.toXmlElement, nodes.length', nodes.length
     var ret = {
         tag: tag, 
         attributes: [], 
@@ -35,7 +35,7 @@ function toXmlElement(tag, nodes) {
     var i, i_items=nodes, i_len=nodes.length, node;
     for (i=0; i<i_len; i++) {
         node = nodes[i];
-        // log '===== ++++++ xml.toXmlElement, node.n', node.n, node.v, node.children.length
+        // loog '===== ++++++ xml.toXmlElement, node.n', node.n, node.v, node.children.length
         if (node.n === '@') {
             var nv = lineparser.parseNameValueRaw(node.v);
             if (tag === 'xml' && nv.name() === 'encoding') {

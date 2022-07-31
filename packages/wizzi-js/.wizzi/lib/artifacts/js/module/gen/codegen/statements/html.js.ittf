@@ -27,7 +27,7 @@
 					@ ctx
 					f_cb()
 						# @ callback
-						# log 'exit fb_html_supported_tags &&&&&&&&&&&&&&&&&&&&&&&&&', model.wzElement
+						# loog 'exit fb_html_supported_tags &&&&&&&&&&&&&&&&&&&&&&&&&', model.wzElement
 						r_cb()
 	+
     stm( htmlelement
@@ -39,8 +39,8 @@
                     @ model
             decl tag = p.name()
             decl text = p.value()
-		# log 'enter htmlelement $$$$$$$$$$$$$$$$$$$', tag
-		# log 'statements/html/htmlelement', tag, text
+		# loog 'enter htmlelement $$$$$$$$$$$$$$$$$$$', tag
+		# loog 'statements/html/htmlelement', tag, text
         _ md._htmlelement
 			@ cnt
 			@ model
@@ -49,7 +49,7 @@
 			@ ctx
 			f_cb()
 				# @ callback
-				# log 'exit htmlelement $$$$$$$$$$$$$$$$$$$', tag
+				# loog 'exit htmlelement $$$$$$$$$$$$$$$$$$$', tag
 				r_cb()
     
    
@@ -171,7 +171,7 @@
                 set text = model.wzName
                 set tag = model.wzElement
             
-			#  log 'enter _htmlelement ----------------', tag
+			#  loog 'enter _htmlelement ----------------', tag
 
 			var attrs = getAttrs(model, ctx)
             
@@ -246,7 +246,7 @@
 						@ attrs
 						f_cb()
 							# @ callback
-							# log 'exit _htmlelement ----------------', tag
+							# loog 'exit _htmlelement ----------------', tag
 							r_cb()
             
 	function _htmlelement_end

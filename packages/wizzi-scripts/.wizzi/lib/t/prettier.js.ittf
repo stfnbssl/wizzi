@@ -67,7 +67,7 @@
 		_ this.prettierExec
 			@ options
 			f_cb_no_err(result)
-				# log 'wizzi-scripts.prettierExecToEventStream.err.result', err, result
+				# loog 'wizzi-scripts.prettierExecToEventStream.err.result', err, result
 				_ res.writeHead
 					@ 200
 					{ 
@@ -80,7 +80,7 @@
 				else
 					# TODO calculate payload from options
 					var payload = result
-				# log 'payload', payload
+				# loog 'payload', payload
 				
 				var str
 				var lines = payload.split("\n")

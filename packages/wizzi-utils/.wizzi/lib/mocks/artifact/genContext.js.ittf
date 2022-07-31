@@ -113,7 +113,7 @@
 		m toStream
             param stream
 			if this.writeFilePath != null
-				# log 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
+				# loog 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
 				_ stream.write
 					_ file.read
 						@ this.writeFilePath
@@ -147,7 +147,7 @@
             param message
             param location
             param node
-			log 'wizzi.artifact.genContext.artifactGenerationError.message', message
+			error 'wizzi.artifact.genContext.artifactGenerationError.message', message
 			var error
 				new errors.ArtifactGenerationError(message, location, node)
 			_ this.artifactGenerationErrors.push(error)

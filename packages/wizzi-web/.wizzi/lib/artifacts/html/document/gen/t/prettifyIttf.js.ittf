@@ -38,7 +38,7 @@ $group
             @ itemResult.ittf
             f_cb( pretty )
                 set itemResult.ittfPretty = pretty
-                log 'prettifyIttf', itemResult
+                # loog 'prettifyIttf', itemResult
                 return
                     _ callback
                         @ null
@@ -82,7 +82,7 @@ $group
 
 	function ittfRootFromSchema
 		param schema
-		# log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+		# loog 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
 		return schemaIttfRootMap[schema]
 
 	var schemaPrismLanguageMap

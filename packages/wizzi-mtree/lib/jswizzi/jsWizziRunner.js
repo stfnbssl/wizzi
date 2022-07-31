@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
 */
 'use strict';
@@ -28,7 +28,7 @@ function dummy(hello) {
 }
 function log(label, node, force) {
     if (verbose || force) {
-        console.log(escodegen.generate(node));
+        console.log(escodegen.generate(node), __filename);
         console.log(label, util.inspect(node, {
             depth: 2
          }))
@@ -39,14 +39,14 @@ function logGet(name, value) {
         return ;
     }
     // var fmt =  util.inspect(value, { depth: null})
-    // log 'wizzi-mtree.jsWizziRunner == get == ' + name + ' : ' + fmt + ' -----'
+    // loog 'wizzi-mtree.jsWizziRunner == get == ' + name + ' : ' + fmt + ' -----'
 }
 function logSet(name, value) {
     if (name[0] === '$') {
         return ;
     }
     // var fmt =  util.inspect(value, { depth: null})
-    // log 'wizzi-mtree.jsWizziRunner -- set -- ' + name + ' : ' + fmt + ' ====='
+    // loog 'wizzi-mtree.jsWizziRunner -- set -- ' + name + ' : ' + fmt + ' ====='
 }
 var runner = function(ast, ctx, action, data) {
     var type = action ? ast.type + '_' + action : ast.type;
@@ -66,7 +66,7 @@ var runner = function(ast, ctx, action, data) {
     }
 };
 var runnerSet = function(ast, ctx, data) {
-    // log 'jsWizziRunner.runnerSet', ast, data
+    // loog 'jsWizziRunner.runnerSet', ast, data
     return runner(ast, ctx, 'Set', data);
 };
 var runnerCall = function(ast, ctx, data) {
@@ -80,7 +80,7 @@ runner.Program = function(node, ctx) {
         var statement = node.body[i];
         var state = runner(statement, ctx);
         
-        // log '__is_error Program', state
+        // loog '__is_error Program', state
         if (state && state.__is_error) {
             return state;
         }
@@ -94,7 +94,7 @@ runner.Identifier = function(node, ctx) {
     log('Identifier.node', node);
     var parentNode = null;
     
-    // log 'Identifier returning node.name = undefined'
+    // loog 'Identifier returning node.name = undefined'
     if (node.name == 'undefined') {
         return undefined;
     }
@@ -104,7 +104,7 @@ runner.Identifier = function(node, ctx) {
         }
         return ctx.getValue(node.name);
     }
-    // log 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
+    // loog 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
     else {
         return local_error(ctx, 'ReferenceError|Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>', {
                 node: node, 
@@ -133,7 +133,7 @@ runner.VariableDeclaration = function(node, ctx) {
         declaration = node.declarations[i];
         var state = runner(declaration, ctx);
         
-        // log '__is_error VariableDeclaration', state
+        // loog '__is_error VariableDeclaration', state
         if (state && state.__is_error) {
             return state;
         }
@@ -148,11 +148,11 @@ runner.VariableDeclarator = function(node, ctx) {
         ctx.declare(node.id.name)
     }
     // if node.id.name === '_____result'
-    // log 'jsWizziRunner.VariableDeclarator', node.id.name, value
+    // loog 'jsWizziRunner.VariableDeclarator', node.id.name, value
     else {
         var value = runner(node.init, ctx);
         
-        // log '__is_error VariableDeclaration', value
+        // loog '__is_error VariableDeclaration', value
         if (value && value.__is_error) {
             return value;
         }
@@ -187,7 +187,7 @@ runner.IfStatement = function(node, ctx) {
         savedCurrentBrickKey;
     var test = runner(node.test, ctx);
     
-    // log '__is_error IfStatement', test
+    // loog '__is_error IfStatement', test
     if (test && test.__is_error) {
         return test;
     }
@@ -196,13 +196,13 @@ runner.IfStatement = function(node, ctx) {
         ret = runner(node.consequent, ctx);
         ;
         
-        // log '__is_error IfStatement node.consequent', ret
+        // loog '__is_error IfStatement node.consequent', ret
         if (ret && ret.__is_error) {
             return ret;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
@@ -213,13 +213,13 @@ runner.IfStatement = function(node, ctx) {
             ret = runner(node.alternate, ctx);
             ;
             
-            // log '__is_error IfStatement node.alternate', ret
+            // loog '__is_error IfStatement node.alternate', ret
             if (ret && ret.__is_error) {
                 return ret;
             }
             var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
             
-            // log '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
+            // loog '__is_error IfStatement set_MTreeBrickEvalContext', notUsed
             if (notUsed && notUsed.__is_error) {
                 return notUsed;
             }
@@ -237,7 +237,7 @@ runner.BlockStatement = function(node, ctx) {
         state = runner(statement, ctx);
         ;
         
-        // log '__is_error BlockStatement', state
+        // loog '__is_error BlockStatement', state
         if (state && state.__is_error) {
             return state;
         }
@@ -256,7 +256,7 @@ runner.WhileStatement = function(node, ctx) {
         iterCheck = 0;
     var test = runner(node.test, ctx);
     
-    // log '__is_error WhileStatement node.test', test
+    // loog '__is_error WhileStatement node.test', test
     if (test && test.__is_error) {
         return test;
     }
@@ -269,7 +269,7 @@ runner.WhileStatement = function(node, ctx) {
         state = runner(node.body, ctx);
         ;
         
-        // log '__is_error WhileStatement node.body', state
+        // loog '__is_error WhileStatement node.body', state
         if (state && state.__is_error) {
             return state;
         }
@@ -281,14 +281,14 @@ runner.WhileStatement = function(node, ctx) {
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
         test = runner(node.test, ctx);
         ;
         
-        // log '__is_error WhileStatement node.test', test
+        // loog '__is_error WhileStatement node.test', test
         if (test && test.__is_error) {
             return test;
         }
@@ -307,20 +307,20 @@ runner.DoWhileStatement = function(node, ctx) {
     state = runner(node.body, ctx);
     ;
     
-    // log '__is_error DoWhileStatement node.body', state
+    // loog '__is_error DoWhileStatement node.body', state
     if (state && state.__is_error) {
         return state;
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
     
-    // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
+    // loog '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
         return notUsed;
     }
     test = runner(node.test, ctx);
     ;
     
-    // log '__is_error DoWhileStatement node.test', test
+    // loog '__is_error DoWhileStatement node.test', test
     if (test && test.__is_error) {
         return test;
     }
@@ -332,7 +332,7 @@ runner.DoWhileStatement = function(node, ctx) {
         state = runner(node.body, ctx);
         ;
         
-        // log '__is_error DoWhileStatement node.body', state
+        // loog '__is_error DoWhileStatement node.body', state
         if (state && state.__is_error) {
             return state;
         }
@@ -344,14 +344,14 @@ runner.DoWhileStatement = function(node, ctx) {
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error DoWhileStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
         test = runner(node.test, ctx);
         ;
         
-        // log '__is_error DoWhileStatement node.test', test
+        // loog '__is_error DoWhileStatement node.test', test
         if (test && test.__is_error) {
             return test;
         }
@@ -365,7 +365,7 @@ runner.ReturnStatement = function(node, ctx) {
     if (node.argument) {
         var value = runner(node.argument, ctx);
         
-        // log '__is_error ReturnStatement', value
+        // loog '__is_error ReturnStatement', value
         if (value && value.__is_error) {
             return value;
         }
@@ -391,20 +391,20 @@ runner.ForStatement = function(node, ctx) {
     savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
     var notUsed = runner(node.init, ctx);
     
-    // log '__is_error ForStatement node.init', notUsed
+    // loog '__is_error ForStatement node.init', notUsed
     if (notUsed && notUsed.__is_error) {
         return notUsed;
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
     
-    // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
+    // loog '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
         return notUsed;
     }
     test = runner(node.test, ctx);
     ;
     
-    // log '__is_error ForStatement node.test', test
+    // loog '__is_error ForStatement node.test', test
     if (test && test.__is_error) {
         return test;
     }
@@ -416,7 +416,7 @@ runner.ForStatement = function(node, ctx) {
         state = runner(node.body, ctx);
         ;
         
-        // log '__is_error ForStatement node.body', state
+        // loog '__is_error ForStatement node.body', state
         if (state && state.__is_error) {
             return state;
         }
@@ -428,26 +428,26 @@ runner.ForStatement = function(node, ctx) {
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
         var notUsed = runner(node.update, ctx);
         
-        // log '__is_error ForStatement node.update', notUsed
+        // loog '__is_error ForStatement node.update', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error ForStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
         test = runner(node.test, ctx);
         ;
         
-        // log '__is_error ForStatement node.test', test
+        // loog '__is_error ForStatement node.test', test
         if (test && test.__is_error) {
             return test;
         }
@@ -464,7 +464,7 @@ runner.ForInStatement = function(node, ctx) {
     savedCurrentBrickKey = ctx.get_currentMTreeBrickKey();
     var obj = runner(node.right, ctx);
     
-    // log '__is_error ForInStatement node.right', obj
+    // loog '__is_error ForInStatement node.right', obj
     if (obj && obj.__is_error) {
         return obj;
     }
@@ -473,7 +473,7 @@ runner.ForInStatement = function(node, ctx) {
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
     
-    // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
+    // loog '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
     if (notUsed && notUsed.__is_error) {
         return notUsed;
     }
@@ -484,7 +484,7 @@ runner.ForInStatement = function(node, ctx) {
         state = runner(node.body, ctx);
         ;
         
-        // log '__is_error ForInStatement node.body', state
+        // loog '__is_error ForInStatement node.body', state
         if (state && state.__is_error) {
             return state;
         }
@@ -496,7 +496,7 @@ runner.ForInStatement = function(node, ctx) {
         }
         var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
         
-        // log '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
+        // loog '__is_error ForInStatement set_MTreeBrickEvalContext', notUsed
         if (notUsed && notUsed.__is_error) {
             return notUsed;
         }
@@ -529,7 +529,7 @@ runner.UnaryExpression = function(node, ctx) {
         exp = runner(node.argument, ctx)
         ;
         
-        // log 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
+        // loog 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
         if (exp && exp.__is_error) {
             if (exp.data && exp.data.errorName === 'ReferenceError') {
                 exp = undefined;
@@ -543,7 +543,7 @@ runner.UnaryExpression = function(node, ctx) {
         exp = runner(node.argument, ctx)
         ;
         
-        // log '__is_error UnaryExpression', exp
+        // loog '__is_error UnaryExpression', exp
         if (exp && exp.__is_error) {
             return exp;
         }
@@ -583,13 +583,13 @@ runner.BinaryExpression = function(node, ctx) {
     var parentNode = null;
     var l = runner(node.left, ctx);
     
-    // log '__is_error BinaryExpression l', l
+    // loog '__is_error BinaryExpression l', l
     if (l && l.__is_error) {
         return l;
     }
     var r = runner(node.right, ctx);
     
-    // log '__is_error BinaryExpressior', r
+    // loog '__is_error BinaryExpressior', r
     if (r && r.__is_error) {
         return r;
     }
@@ -672,7 +672,7 @@ runner.UpdateExpression = function(node, ctx) {
         exp;
     var exp = runner(node.argument, ctx);
     
-    // log '__is_error UpdateExpression', exp
+    // loog '__is_error UpdateExpression', exp
     if (exp && exp.__is_error) {
         return exp;
     }
@@ -694,7 +694,7 @@ runner.LogicalExpression = function(node, ctx) {
     var parentNode = null;
     var l = runner(node.left, ctx);
     
-    // log '__is_error LogicalExpression l', l
+    // loog '__is_error LogicalExpression l', l
     if (l && l.__is_error) {
         return l;
     }
@@ -707,7 +707,7 @@ runner.LogicalExpression = function(node, ctx) {
     }
     var r = runner(node.right, ctx);
     
-    // log '__is_error LogicalExpression r', r
+    // loog '__is_error LogicalExpression r', r
     if (r && r.__is_error) {
         return r;
     }
@@ -731,14 +731,14 @@ runner.ConditionalExpression = function(node, ctx) {
     var parentNode = null;
     var test = runner(node.test, ctx);
     
-    // log '__is_error ConditionalExpression', test
+    // loog '__is_error ConditionalExpression', test
     if (test && test.__is_error) {
         return test;
     }
     if (test) {
         var value = runner(node.consequent, ctx);
         
-        // log '__is_error ConditionalExpression node.consequent', value
+        // loog '__is_error ConditionalExpression node.consequent', value
         if (value && value.__is_error) {
             return value;
         }
@@ -747,7 +747,7 @@ runner.ConditionalExpression = function(node, ctx) {
     else {
         var value = runner(node.alternate, ctx);
         
-        // log '__is_error ConditionalExpression node.alternate', value
+        // loog '__is_error ConditionalExpression node.alternate', value
         if (value && value.__is_error) {
             return value;
         }
@@ -762,9 +762,9 @@ runner.CallExpression = function(node, ctx) {
         args = [],
         property;
     
-    // log 'CallExpression.node.callee.object.name', node.callee.object.name
+    // loog 'CallExpression.node.callee.object.name', node.callee.object.name
     
-    // log 'CallExpression.node.callee.property.name', node.callee.property.name
+    // loog 'CallExpression.node.callee.property.name', node.callee.property.name
     if (node.callee.type === 'MemberExpression') {
         var i, i_items=node.arguments, i_len=node.arguments.length, item;
         for (i=0; i<i_len; i++) {
@@ -772,7 +772,7 @@ runner.CallExpression = function(node, ctx) {
             value = runner(item, ctx);
             ;
             
-            // log '__is_error CallExpression argument', value
+            // loog '__is_error CallExpression argument', value
             if (value && value.__is_error) {
                 return value;
             }
@@ -780,7 +780,7 @@ runner.CallExpression = function(node, ctx) {
         }
         var obj = runner(node.callee.object, ctx);
         
-        // log '__is_error CallExpression node.callee.object', obj
+        // loog '__is_error CallExpression node.callee.object', obj
         if (obj && obj.__is_error) {
             return obj;
         }
@@ -791,7 +791,7 @@ runner.CallExpression = function(node, ctx) {
             property = runner(node.callee.property, ctx)
             ;
             
-            // log '__is_error CallExpression node.callee.property', property
+            // loog '__is_error CallExpression node.callee.property', property
             if (property && property.__is_error) {
                 return property;
             }
@@ -806,7 +806,7 @@ runner.CallExpression = function(node, ctx) {
             try {
                 var value = obj[property].apply(obj, args);
                 
-                // log 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
+                // loog 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
                 if (value && value.__is_error) {
                     var currentModelInfo = ctx.get_currentMTreeBrickInfo();
                     return local_error(ctx, value.message, property, node, 'CallExpression', value, {
@@ -827,9 +827,9 @@ runner.CallExpression = function(node, ctx) {
         }
     }
     
-    // log 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
+    // loog 'wizzi-mtree.jsWizziRunner.CallExpression.node.callee.name', node.callee.name, f
     
-    // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
+    // loog 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.jsWizziFunction', f.params
     
     // _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' start')
     if (node.callee.type === 'Identifier') {
@@ -843,7 +843,7 @@ runner.CallExpression = function(node, ctx) {
                     value = value = runner(item, ctx);
                     ;
                     
-                    // log '__is_error CallExpression argument', value
+                    // loog '__is_error CallExpression argument', value
                     if (value && value.__is_error) {
                         return value;
                     }
@@ -864,12 +864,12 @@ runner.CallExpression = function(node, ctx) {
         for (var i=0; i<f.params.length; i++) {
             var item = node.arguments[i];
             
-            // log 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
+            // loog 'wizzi-mtree.jswizzi.runner.expressions.CallExpression.value', value
             if (item) {
                 value = value = runner(item, ctx);
                 ;
                 
-                // log '__is_error CallExpression argument', value
+                // loog '__is_error CallExpression argument', value
                 if (value && value.__is_error) {
                     return value;
                 }
@@ -891,7 +891,7 @@ runner.CallExpression = function(node, ctx) {
         return result;
     }
     
-    // log 'FunctionExpression', node.callee, true
+    // loog 'FunctionExpression', node.callee, true
     if (node.callee.type === 'FunctionExpression') {
         var f = node.callee;
         if (f.params.length !== node.arguments.length) {
@@ -904,7 +904,7 @@ runner.CallExpression = function(node, ctx) {
             value = runner(item, ctx);
             ;
             
-            // log '__is_error CallExpression argument', value
+            // loog '__is_error CallExpression argument', value
             if (value && value.__is_error) {
                 return value;
             }
@@ -920,23 +920,23 @@ runner.CallExpression = function(node, ctx) {
 runner.MemberExpression = function(node, ctx) {
     log('MemberExpression.node', node);
     var parentNode = null;
-    // log 'MemberExpression.node', node
+    // loog 'MemberExpression.node', node
     var obj = runner(node.object, ctx);
     
-    // log '__is_error MemberExpression', obj
+    // loog '__is_error MemberExpression', obj
     if (obj && obj.__is_error) {
         return obj;
     }
     if (obj == null || typeof(obj) == 'undefined') {
-        console.log('jsWizziRunner.MemberExpression.obj', obj, typeof obj);
-        console.log('jsWizziRunner.MemberExpression.node.object', node.object);
-        console.log('jsWizziRunner.MemberExpression.callContext.values', ctx.callContext && ctx.callContext.values);
+        console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.obj', obj, typeof obj);
+        console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.node.object', node.object);
+        console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.callContext.values', ctx.callContext && ctx.callContext.values);
         return local_error(ctx, 'The value must be an object. It is undefined', node.object, node, 'MemberExpression');
     }
     if (node.computed) {
         var property = runner(node.property, ctx);
         
-        // log '__is_error MemberExpression node.property', property
+        // loog '__is_error MemberExpression node.property', property
         if (property && property.__is_error) {
             return property;
         }
@@ -953,7 +953,7 @@ runner.MemberExpression_Set = function(node, ctx, data) {
     var parentNode = null;
     var obj = runner(node.object, ctx);
     
-    // log '__is_error MemberExpression_Set', obj
+    // loog '__is_error MemberExpression_Set', obj
     if (obj && obj.__is_error) {
         return obj;
     }
@@ -963,7 +963,7 @@ runner.MemberExpression_Set = function(node, ctx, data) {
     if (node.computed) {
         var property = runner(node.property, ctx);
         
-        // log '__is_error MemberExpression_Set node.property', property
+        // loog '__is_error MemberExpression_Set node.property', property
         if (property && property.__is_error) {
             return property;
         }
@@ -980,13 +980,13 @@ runner.AssignmentExpression = function(node, ctx) {
     var parentNode = null;
     var l = runner(node.left, ctx);
     
-    // log '__is_error AssignmentExpression l', l
+    // loog '__is_error AssignmentExpression l', l
     if (l && l.__is_error) {
         return l;
     }
     var r = runner(node.right, ctx);
     
-    // log '__is_error AssignmentExpression r', r
+    // loog '__is_error AssignmentExpression r', r
     if (r && r.__is_error) {
         return r;
     }
@@ -1030,10 +1030,10 @@ runner.AssignmentExpression = function(node, ctx) {
     else {
         return local_error(ctx, 'Unmanaged expression operator ' + node.operator, node.operator, node, 'AssignmentExpression');
     }
-    // log 'jsWizziRunner.AssignmentExpression.node.left', node.left
+    // loog 'jsWizziRunner.AssignmentExpression.node.left', node.left
     var notUsed = runnerSet(node.left, ctx, v);
     
-    // log '__is_error AssignmentExpression node.left', notUsed
+    // loog '__is_error AssignmentExpression node.left', notUsed
     if (notUsed && notUsed.__is_error) {
         return notUsed;
     }
@@ -1051,7 +1051,7 @@ runner.ArrayExpression = function(node, ctx) {
         value = runner(element, ctx);
         ;
         
-        // log '__is_error ArrayExpression', value
+        // loog '__is_error ArrayExpression', value
         if (value && value.__is_error) {
             return value;
         }
@@ -1074,7 +1074,7 @@ runner.ObjectExpression = function(node, ctx) {
         prop = runner(property, ctx);
         ;
         
-        // log '__is_error ObjectExpression', prop
+        // loog '__is_error ObjectExpression', prop
         if (prop && prop.__is_error) {
             return prop;
         }
@@ -1089,7 +1089,7 @@ runner.Property = function(node, ctx) {
     var key = node.key.name;
     var value = runner(node.value, ctx);
     
-    // log '__is_error Property', value
+    // loog '__is_error Property', value
     if (value && value.__is_error) {
         return value;
     }
@@ -1102,9 +1102,9 @@ runner.Property = function(node, ctx) {
 runner.NewExpression = function(node, ctx) {
     log('NewExpression.node', node);
     var parentNode = null;
-    // log 'NewExpression.node', node
+    // loog 'NewExpression.node', node
     
-    // log 'NewExpression.args', args
+    // loog 'NewExpression.args', args
     if (node.callee.type === 'Identifier') {
         var l = node.arguments.length;
         var args = [];
@@ -1113,7 +1113,7 @@ runner.NewExpression = function(node, ctx) {
             item = node.arguments[i];
             var value = runner(item, ctx);
             
-            // log '__is_error NewExpression argument', value
+            // loog '__is_error NewExpression argument', value
             if (value && value.__is_error) {
                 return value;
             }
@@ -1197,13 +1197,13 @@ runner.FunctionCall = function(node, ctx) {
     var parentNode = null;
     var objbase,
         value;
-    // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, node.name', node.name
-    // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, ctx.values', ctx.values
+    // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, node.name', node.name
+    // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, ctx.values', ctx.values
     if (node.name.base) {
         objbase = runner(node.name.base, ctx)
         ;
         
-        // log '__is_error FunctionCall node.name.base', objbase
+        // loog '__is_error FunctionCall node.name.base', objbase
         if (objbase && objbase.__is_error) {
             return objbase;
         }
@@ -1219,15 +1219,15 @@ runner.FunctionCall = function(node, ctx) {
         var i, i_items=node.arguments, i_len=node.arguments.length, item;
         for (i=0; i<i_len; i++) {
             item = node.arguments[i];
-            // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.item', item
+            // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.item', item
             value = runner(item, ctx);
             ;
             
-            // log '__is_error FunctionCall item', value
+            // loog '__is_error FunctionCall item', value
             if (value && value.__is_error) {
                 return value;
             }
-            // log 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.value', value
+            // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.value', value
             args.push(value);
         }
     }
@@ -1238,7 +1238,7 @@ runner.FunctionCall = function(node, ctx) {
     if (verify.isFunction(f)) {
         try {
             var v = objbase[node.name.name].apply(objbase, args);
-            // log 'jsWizziRunner.FunctionCall.name.result', node.name.name, v
+            // loog 'jsWizziRunner.FunctionCall.name.result', node.name.name, v
             return v;
         } 
         catch (ex) {
@@ -1257,22 +1257,22 @@ runner.FunctionDeclaration = function(node, ctx) {
 runner.FunctionDeclaration_Call = function(node, ctx, data) {
     log('FunctionDeclaration_Call.node', node);
     var parentNode = null;
-    // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.params', node.params
-    // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.body', node.body
+    // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.params', node.params
+    // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.body', node.body
     var save_brick_key = ctx.get_currentMTreeBrickKey();
     var ctx = ctx.push();
     for (var i = 0; i < node.params.length; i++) {
-        // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.param', node.params[i].name
+        // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.param', node.params[i].name
         
-        // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.value', data[i]
+        // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.value', data[i]
         if (data.length > i) {
             ctx.declareCallParam(node.params[i].name, data[i])
         }
     }
-    // log 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, ctx.callContext.values', ctx.callContext.values
+    // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, ctx.callContext.values', ctx.callContext.values
     var state = runner(node.body, ctx);
     
-    // log '__is_error FunctionCall node.body', state
+    // loog '__is_error FunctionCall node.body', state
     if (state && state.__is_error) {
         return state;
     }
@@ -1282,22 +1282,22 @@ runner.FunctionDeclaration_Call = function(node, ctx, data) {
 }
 ;
 function local_error(ctx, message, node, parentnode, method, ex, other) {
-    // log 'jsWizziRunner.local_error.message', message
-    // log 'jsWizziRunner.local_error.node.name', node && node.name
-    // log 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
-    // log 'jsWizziRunner.local_error.method', method
-    // log 'jsWizziRunner.local_error.ex.message', ex && ex.message
-    // log 'jsWizziRunner.local_error.parentnode.other', other
-    // log 'jsWizziRunner.local_error.ctx.source', ctx.source
-    // log 'jsWizziRunner.local_error.ctx', ctx
-    // log 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
+    // loog 'jsWizziRunner.local_error.message', message
+    // loog 'jsWizziRunner.local_error.node.name', node && node.name
+    // loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
+    // loog 'jsWizziRunner.local_error.method', method
+    // loog 'jsWizziRunner.local_error.ex.message', ex && ex.message
+    // loog 'jsWizziRunner.local_error.parentnode.other', other
+    // loog 'jsWizziRunner.local_error.ctx.source', ctx.source
+    // loog 'jsWizziRunner.local_error.ctx', ctx
+    // loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
     message = message || '';
     var errorCode = 'JsWizziError', ss = message.split('|');
     if (ss.length == 2) {
         errorCode = ss[0];
         message = ss[1];
     }
-    // log 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
+    // loog 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
     var node, errorLines;
     if (node) {
         if (node.errorLines) {
@@ -1398,7 +1398,7 @@ module.exports = {
     }, 
     run: function run(source, ctx, options, callback) {
         // ctx : instance-of wizzi-mtree.jswizzi.jsWizziContext
-        // log 'jsWizziRunner.run.source', source.substr(0, 400)
+        // loog 'jsWizziRunner.run.source', source.substr(0, 400)
         ctx.pushSource(source);
         if (verify.isNotEmpty(source) === false) {
             var err = error('InvalidArgument', 'run', {
@@ -1460,7 +1460,7 @@ function execute_run_cb(parsed, ctx, options, callback) {
     } 
     ctx.popSource();
     
-    // log 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
+    // loog 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
     if (result && result.__is_error) {
     }
     if (callback) {

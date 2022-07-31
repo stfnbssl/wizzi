@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\io\errors.js.ittf
 */
 'use strict';
@@ -11,7 +11,7 @@ var pkgVersioned = ' (wizzi.0.7.25)';
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';
-    console.log('message', message);
+    console.log("[31m%s[0m", 'message', message);
     this.message = message;
     // 5/10/17 set this.stack = (new Error()).stack
 }
@@ -31,7 +31,7 @@ md.NotImplementedError = NotImplementedError;
 
 function InvalidRequestError(message, code) {
     this.name = 'InvalidRequestError';
-    console.log('message', message);
+    console.log("[31m%s[0m", 'message', message);
     this.message = message;
     this.code = code;
     // 5/10/17 set this.stack = (new Error()).stack

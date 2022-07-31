@@ -30,7 +30,7 @@
             ${'$'}virtual requireWizzi
                 # The wizzi package will be the npm version from wizzi/node_modules
                 set wizzi = require('wizzi')
-        log '"wizzi" package version', wizzi.version
+        info '"wizzi" package version', wizzi.version
         
         _ wizzi.fsFactory
             {

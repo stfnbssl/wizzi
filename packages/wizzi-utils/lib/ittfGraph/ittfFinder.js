@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfGraph\ittfFinder.js.ittf
 */
 'use strict';
@@ -67,7 +67,7 @@ var ittfFinder = (function () {
                     if (tresult.found) {
                         return callback(null, tresult.ittfDocumentUri);
                     }
-                    // log 'ittfFinder.resolvePath options', options, schema
+                    // loog 'ittfFinder.resolvePath options', options, schema
                     else {
                         return callback(error('IttfNotFound', 'resolvePath', 'Cannot find ittf document: ' + ittfDocumentUri));
                     }
@@ -78,7 +78,7 @@ var ittfFinder = (function () {
     ittfFinder.prototype.resolvePathInTFolders = function(basePath, relPath, schema, callback) {
         var that = this;
         function recurserTFolder(basePath, relPath, schema) {
-            // log 'recurserTFolder enter', basePath, relPath
+            // loog 'recurserTFolder enter', basePath, relPath
             return new Promise(function(resolve, reject) {
                     var ittfDocumentUri = path.join(basePath, 't', relPath);
                     that.tryExists(ittfDocumentUri, schema, function(err, result) {
@@ -88,25 +88,25 @@ var ittfFinder = (function () {
                         
                         // return callback(null, result)
                         
-                        // log 'recurserTFolder resolve found', result
+                        // loog 'recurserTFolder resolve found', result
                         if (result.found) {
                             return resolve(result);
                         }
                         else {
                             basePath = path.dirname(basePath);
                             
-                            // log 'recurserTFolder try parent', basePath
+                            // loog 'recurserTFolder try parent', basePath
                             if (basePath.length > 3) {
                                 return recurserTFolder(basePath, relPath, schema).then(function(result) {
-                                        // log 'recurserTFolder transmit resolve result', basePath, result
+                                        // loog 'recurserTFolder transmit resolve result', basePath, result
                                         resolve(result);
                                     }).catch(function(err) {
-                                        // log 'recurserTFolder transmit reject err', basePath, err
+                                        // loog 'recurserTFolder transmit reject err', basePath, err
                                         reject(err);
                                     })
                                 ;
                             }
-                            // log 'recurserTFolder resolve not found', basePath
+                            // loog 'recurserTFolder resolve not found', basePath
                             else {
                                 return resolve({
                                         found: false
@@ -119,7 +119,7 @@ var ittfFinder = (function () {
         recurserTFolder(basePath, relPath, schema).then(function(result) {
             return callback(null, result);
         }).catch(function(err) {
-            console.log('Error in wizzi-utils.ittfGraph.ittfFinder.resolvePathInTFolders calling recurserTFolder', err);
+            // loog 'Error in wizzi-utils.ittfGraph.ittfFinder.resolvePathInTFolders calling recurserTFolder', err
             return callback(err);
         })
     }

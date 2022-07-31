@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\glob\common.js.ittf
 */
 'use strict';
@@ -209,7 +209,7 @@ function makeAbs(self, f) {
     if (process.platform === 'win32') {
         abs = abs.replace(/\\/g, '/');
     }
-    // log '***** wizzi-utils.glob.common.makeAbs.abs', abs
+    // loog '***** wizzi-utils.glob.common.makeAbs.abs', abs
     return abs;
 }
 function isIgnored(self, path) {

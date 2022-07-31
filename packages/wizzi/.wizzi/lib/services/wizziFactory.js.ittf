@@ -120,13 +120,13 @@
 					param role
 					param options
 					param callback
-					# log 'wizzi.wizziFactory.createFactory.options', options
+					# loog 'wizzi.wizziFactory.createFactory.options', options
 					if typeof(callback) === 'undefined' &&
 						\b typeof(options) === 'undefined'
 						# no ACL required
 						set options = user
 						set callback = role
-					# log 'wizzi.wizziFactory.createFactory.globalContext', options.globalContext
+					# loog 'wizzi.wizziFactory.createFactory.globalContext', options.globalContext
 					var wf
 						new WizziFactory
 					_ wf.initialize

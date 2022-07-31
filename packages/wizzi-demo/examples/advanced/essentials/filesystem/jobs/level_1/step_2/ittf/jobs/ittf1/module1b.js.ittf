@@ -3,5 +3,5 @@ module
 
 	class Bye
 		m say
-			log 'Bye'
+			success 'Bye'
 

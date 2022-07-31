@@ -14,7 +14,7 @@
 			param callback
 			_ example(callback)
 		f_cb_test(results)
-			log 'languageschemas examples results\n', results
+			info 'languageschemas examples results\n', results
 			return
 				_ step_callback
 					@ null

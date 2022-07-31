@@ -1,0 +1,64 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:35 GMT
+*/
+'use strict';
+
+//
+
+var schemafragmentPersister = require('../persisters/schemafragment');
+
+var md = module.exports = {};
+
+md.getSchemafragments = function(userName, projectName, schemaName, fragmentName, callback) {
+    schemafragmentPersister.getSchemafragments(userName, projectName, schemaName, fragmentName, callback)
+}
+;
+
+md.getSchemafragment = function(userName, projectName, schemaName, fragmentName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    schemafragmentPersister.get(userName, projectName, schemaName, fragmentName, callback)
+}
+;
+
+md.insertSchemafragment = function(userName, projectName, schemaName, fragmentName, callback) {
+    schemafragmentPersister.exists(userName, projectName, schemaName, fragmentName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('schemafragment', utils.buildResourcePath(userName, projectName, schemaName, fragmentName)));
+        }
+        var newItem = {
+            type: 'schemafragment', 
+            userName: null, 
+            projectName: null, 
+            schemaName: null, 
+            fragmentName: null
+         };
+        schemafragmentPersister.putSchemafragment(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateSchemafragment = function(item, callback) {
+    schemafragmentPersister.put(item, callback)
+}
+
+.prototype.deleteSchemafragment = function(item, callback) {
+    schemafragmentPersister.delete(item, callback)
+}
+

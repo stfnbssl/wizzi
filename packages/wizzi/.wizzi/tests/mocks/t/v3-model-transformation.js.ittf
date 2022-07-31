@@ -7,14 +7,14 @@ $group
 	m getModelTransformer
 		param transformerName
 		+
-		log 'wizzi.tests.plugin.getModelTransformer transformerName: ' + transformerName
+		# loog 'wizzi.tests.plugin.getModelTransformer transformerName: ' + transformerName
 		var transformer = this.modelTransformers[transformerName] || null
 		if transformer == null
 			var transformers = require('./transformers')
-			log 'wizzi.tests.plugin.getModelTransformer transformers: ' + transformers
+			# loog 'wizzi.tests.plugin.getModelTransformer transformers: ' + transformers
 			set transformer
 				_ transformers.getTransformer
 					@ transformerName
-			log 'wizzi.tests.plugin.getModelTransformer transformer: ' + transformer
+			# loog 'wizzi.tests.plugin.getModelTransformer transformer: ' + transformer
 			set this.modelTransformers[transformerName] = transformer
 		return transformer

@@ -297,55 +297,6 @@
                 @ artifactRequestContext options.artifactContext
             @ options
             @ callback
-
-		$*
-        _ folderFilesInfoByPath
-			@ ittfFolderPath
-			@ wf.fileService
-			a_cb( items )
-				# log 'generateFolderArtifacts\n', stringify(items, null, 2)
-				_ async.mapSeries
-					@ items
-					function
-						param item
-						param callback
-						if item.isIttfDocument
-                            log 'generating', item.fullPath
-							_ md.gen
-								@ item.fullPath
-								@ context
-								f_cb(artifactText)
-                                    log 'generated', item.destRelPath
-									_ wf.fileService.write
-										_ path.join
-											@ options.destFolder
-											@ item.destRelPath
-										@ artifactText
-										f_cb()
-                                            log 'written', item.destRelPath
-											_ callback
-												@ null
-												_ path.join
-													@ options.destFolder
-													@ item.destRelPath
-						else
-                            log 'copying', item.fullPath
-							_ wf.fileService.copyFile
-								@ item.fullPath
-								_ path.join
-									@ options.destFolder
-									@ item.destRelPath
-								f_cb()
-									_ callback
-										@ null
-										_ path.join
-											@ options.destFolder
-											@ item.destRelPath
-
-			        f_cb_test(result)
-				        # log 'result', result
-                        r_cb( result )
-        *$
 	
 	function getDefaultArtifact
 		param schema

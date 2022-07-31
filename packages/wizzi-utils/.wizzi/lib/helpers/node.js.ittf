@@ -91,9 +91,9 @@
             param item
             param replacers
 			if !item.parent
-				# log 'util/node/replace/item', item
+				# loog 'util/node/replace/item', item
 				foreach repl in replacers
-					# log 'util/node/replace/repl', repl
+					# loog 'util/node/replace/repl', repl
             var nodes = item.parent.children
             set item.parent.children = []
             foreach child in nodes

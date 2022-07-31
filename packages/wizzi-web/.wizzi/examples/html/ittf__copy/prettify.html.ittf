@@ -44,12 +44,12 @@ html
                     @ 'DOMContentLoaded'
                     =>
                         param event
-                        log 'DOMContentLoaded'
+                        info 'DOMContentLoaded'
                         _ document.querySelectorAll
                             $$ @ 'pre .hljs'
                             @ 'pre code'
                             ._ forEach
                                 =>
                                     param el
-                                    log 'querySelectorAll', el
+                                    info 'querySelectorAll', el
                                     _ hljs.highlightElement(el)    

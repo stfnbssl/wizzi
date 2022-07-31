@@ -30,11 +30,11 @@
 					@ schema 'json'
 					@ exportName 'data'
 		f_cb_test(wizziModel)
-			log 'wizziModel.wzElement', wizziModel.wzElement
+			info 'wizziModel.wzElement', wizziModel.wzElement
 			_ wizzi.gen
 				@ wizziModel
 				f_cb_test(artifactText)
-					log 'artifactText complex forms\n', artifactText
+					info 'artifactText complex forms\n', artifactText
 			return
 				_ step_callback
 					@ null

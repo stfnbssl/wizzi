@@ -17,7 +17,7 @@
 			@ 'css'
 		@ wizzify
 		f_cb_no_err( result )
-			log 'Terminated. result: ', result
+			info 'Terminated. result: ', result
 
 	function wizzify
 		param name
@@ -41,8 +41,8 @@
 						@ name + '.${schema}.dump'
 			f_cb_no_err( ittf )
 				if err
-					log 'error wizzifying: ' + source
-					log 'err', err
+					error 'error wizzifying: ' + source
+					error err
 					return callback(null, 'error ' + source)
 				_ file.write
 					_ path.join

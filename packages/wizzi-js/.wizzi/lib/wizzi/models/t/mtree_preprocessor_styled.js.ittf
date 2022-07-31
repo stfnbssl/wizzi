@@ -35,7 +35,7 @@ $group
         set node.v = null 
         set node.children = [nJsModule]
 
-        log 'node', node
+        # loog 'node', node
 
         return true
 

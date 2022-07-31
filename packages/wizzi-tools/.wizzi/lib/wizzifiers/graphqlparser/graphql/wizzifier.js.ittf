@@ -38,7 +38,7 @@
 					_ showstack(options)
 					throw new Error('parent is null.' + util.inspect(ast, 4))
 			if options.verbose
-				log 'ast.kind', ast.kind
+				info 'ast.kind', ast.kind
 			var kind = ast.kind === 'arguments' ? 'xarguments' : ast.kind
 			var formatter = format[kind]
 			if formatter
@@ -86,18 +86,18 @@
 	f( Name, name )
 		name( value )
 		#
-			log 'Name.tag', ret.tag
-			log 'Name.name', ret.name
-			log 'Name.textified', ret.textified
+			# loog 'Name.tag', ret.tag
+			# loog 'Name.name', ret.name
+			# loog 'Name.textified', ret.textified
 
 	f( NonNullType, ! )
 		f_p_temp( type 
-		log 'NonNullType.p_type', p_type
+		# loog 'NonNullType.p_type', p_type
 		set ret.name = p_type.name
 
 	f( NamedType, namedType )
 		f_p_temp( name
-		# log 'NamedType.p_name', ret, p_name
+		# loog 'NamedType.p_name', ret, p_name
 		if isTextualNode(p_name)
 			set ret.name = getTypeName(getNodeText(p_name))
 			set ret.textified = ret.name
@@ -228,7 +228,7 @@
 		f_p_temp( name 
 		f_p_temp( type 
 		f_p_temp( defaultValue, false
-		log 'InputValueDefinition', p_type, p_name
+		# loog 'InputValueDefinition', p_type, p_name
 		if p_type.tag === 'namedType'
 			set ret.tag = p_type.name
 			set ret.name = p_name.name

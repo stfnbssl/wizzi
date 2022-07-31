@@ -52,7 +52,7 @@ ${'$'}group
             [
                 @ './print.js'
             function
-                log 'Accepting the updated printMe module!'
+                # loog 'Accepting the updated printMe module!'
                 _ document.body.removeChild
                     @ rootElement
                 # Re-render the "component" to update the click handler

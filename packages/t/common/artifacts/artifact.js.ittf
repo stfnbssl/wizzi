@@ -29,7 +29,7 @@
 	md-gen-main(
 		$if noschemacheck == false
 			if model.wzElement !== '${rootElement}'
-				log '${plugin}', 'artifact', 'model', model
+				# loog '${plugin}', 'artifact', 'model', model
 				_ callback
 					_ error
 						@ 'InvalidArgument'

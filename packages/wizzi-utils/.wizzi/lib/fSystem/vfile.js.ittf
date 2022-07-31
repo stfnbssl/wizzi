@@ -88,7 +88,7 @@
 				_ default_fs
 					@ options
 					f_cb( fsimpl )
-						# log 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
+						# loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
 						_ callback
 							@ null
 							new VFile
@@ -96,7 +96,7 @@
 			else
 				_ default_fs
 					f_cb( fsimpl )
-						# log 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
+						# loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
 						_ callback
 							@ null
 							new VFile
@@ -224,20 +224,20 @@
 			var parsedUri = uriParser(path_string)
 			if !options
 				set options = {}
-			# log 'wizzi-utils.vfile.write.contents 1', contents
+			# loog 'wizzi-utils.vfile.write.contents 1', contents
 			$$ 24/7/21 if parsedUri.storeKind === 'filesystem'
             if this.storeKind === 'filesystem'
 				$$ 24/7/21 if !Buffer.isBuffer(contents) 
                 if !Buffer.isBuffer(contents) && options.encoding !== null
 					set contents = iconv.encode(contents, (options.encoding || DEFAULT_DECODING))
-			# log 'wizzi-utils.vfile.write.contents 2', contents
+			# loog 'wizzi-utils.vfile.write.contents 2', contents
 			
 			$append async
 				var that = this
 				_ this.mkpath
 					@ path_string
 					f_cb( notUsed )
-						# log 'write async', path_string, that.fsimpl.writeFile, callback
+						# loog 'write async', path_string, that.fsimpl.writeFile, callback
 						return
 							_ that.fsimpl.writeFile
 								@ path_string
@@ -246,7 +246,7 @@
 			$append sync
 				_ this.mkpath(path_string)
 				try
-					# log 'write sync', path_string, that.fsimpl.writeFile, callback
+					# loog 'write sync', path_string, that.fsimpl.writeFile, callback
 					_ this.fsimpl.writeFileSync(path_string, contents)
 				catch ex
 					set ex.message = 'Writing file ' + path_string + '.\n' + ex.message
@@ -291,13 +291,13 @@
 			# legacy
 
 			$append sync
-				# log 'mkpath sync', path_string
+				# loog 'mkpath sync', path_string
 				return
 					_ this.ensureParentDir
 						@ path_string
 			
 			$append async
-				# log 'mkpath async', path_string
+				# loog 'mkpath async', path_string
 				_ this.ensureParentDir
 					@ path_string
 					@ callback
@@ -314,14 +314,14 @@
 
 			$append async
 
-				# log 'ensureParentDir', path_string
+				# loog 'ensureParentDir', path_string
 
 				var that = this
 				var pathParent = path.dirname(path_string)
 				_ this.isDirectory
 					@ pathParent
 					f_cb( result )
-						# log 'ensureParentDir.isDirectory', result, path_string
+						# loog 'ensureParentDir.isDirectory', result, path_string
 						if result == true
 							r_cb()
 						else

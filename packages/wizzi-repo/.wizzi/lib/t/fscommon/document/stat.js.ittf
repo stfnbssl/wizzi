@@ -8,7 +8,7 @@
 		_ this.fsCommon.getItemByPath
 			@ filePath
 			f_cb( fsitem )
-				# log 'wizzi-repo.${source}.document.stat.filePath', filePath, 'fsitem', fsitem
+				# loog 'wizzi-repo.${source}.document.stat.filePath', filePath, 'fsitem', fsitem
 				if fsitem == null
 					r_cb()
 						{

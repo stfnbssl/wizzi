@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\md\document\gen\main.js.ittf
 */
 'use strict';
@@ -14,7 +14,7 @@ var verify = require('wizzi-utils').verify;
 var myname = 'md.document.main';
 module.exports = {
     gen: function(model, ctx, callback) {
-        // log 'model', util.inspect(model, { depth: 1 })
+        // loog 'model', util.inspect(model, { depth: 1 })
         new Gen(model, ctx, callback);
     }
  };
@@ -43,7 +43,7 @@ var Gen = (function () {
             }
         }
         else {
-            console.log(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model);
+            console.log(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model, __filename);
             throw ctx.error(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model);
         }
     }
@@ -235,6 +235,7 @@ var Gen = (function () {
             if (ctx.isCode) {
                 ctx.deindent();
             }
+            ctx.w('');
             return true;
         }
     }

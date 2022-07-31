@@ -42,7 +42,7 @@ $group
         if !keyId || keyId.length < 1
             throw new Error('Id key missing on list ' + list_def.id)
         
-        log 'starting list', list_def.id, $('#' + list_def.id)[0]
+        # loog 'starting list', list_def.id, $('#' + list_def.id)[0]
         
         # Init list
         var listObj = new List(list_def.id, options)

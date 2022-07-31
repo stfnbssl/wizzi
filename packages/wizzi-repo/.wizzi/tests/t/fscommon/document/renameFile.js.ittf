@@ -18,8 +18,8 @@
 				@ file_1
 				@ file_1renamed
 				f_cb_test( r )
-					log 'doc.renameFile', r
+					info 'doc.renameFile', r
 					_ doc.readFile
 						@ file_1renamed
 						f_cb_done( read )
-							log 'doc.renameFile read', read
+							info 'doc.renameFile read', read

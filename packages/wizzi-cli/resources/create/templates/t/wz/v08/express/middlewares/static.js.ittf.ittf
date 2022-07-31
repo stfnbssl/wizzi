@@ -12,7 +12,7 @@ $group
         const StaticFilesMiddleware
             => 
                 param app
-                log 'StaticFilesMiddleware. Folder served from ', path.resolve(__dirname,  '..', '..', 'static')
+                success 'StaticFilesMiddleware. Folder served from ', path.resolve(__dirname,  '..', '..', 'static')
                 _ app.use('/static', express.static(path.resolve(__dirname, '..', '..', 'static')))
                 # simply browse ittfs when IttfStaticMiddleware is not used
                 # app.use('/ittf', express.static(path.resolve(__dirname, '..', '..', 'ittf')));

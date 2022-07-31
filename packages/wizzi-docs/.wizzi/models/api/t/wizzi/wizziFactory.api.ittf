@@ -250,12 +250,11 @@
 				{ requestContext
 					required
 					{ modelRequestContext
-						{ mTreeBuildupContext
-							# An object context which properties are loaded in the 
-							# wizzi-mtree.jsWizziContext used in the evaluation step
-							# on the mTree loading.
-							# Properties, or the object itself, can be a wizzi-plugin.wizziModel
-							# or a POJO.
+                        # An object context which properties are loaded in the 
+                        # wizzi-mtree.jsWizziContext used in the evaluation step
+                        # on the mTree loading.
+                        # Properties, or the object itself, can be a wizzi-plugin.wizziModel
+                        # or a POJO.
 					{ artifactRequestContext
 						# A context object which properties will be set in
 						# the `values` property of the wizzi.artifact.genContext.

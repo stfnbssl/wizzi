@@ -41,7 +41,7 @@
 					r_cb_wz_err( ${fsname}RepoError, renameFile )
 						@ 'Document rename file error. Is a folder path, not a file path: ' + oldPath
 
-				# log 'wizzi-repo.${source}.document.renameFile.fsitem', fsitem
+				# loog 'wizzi-repo.${source}.document.renameFile.fsitem', fsitem
 
 				_ that.exists
 					@ newPath

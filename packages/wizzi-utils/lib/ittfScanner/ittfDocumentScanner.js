@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\ittfDocumentScanner.js.ittf
 */
 'use strict';
@@ -70,9 +70,9 @@ function scanMTreeEx(file, documentPath, options, callback) {
                 if (err) {
                     return callback(err);
                 }
-                // log 'scanMTreeEx.ittfDocumentGraph.fragments',  ittfDocumentGraph.fragments
-                // log 'scanMTreeEx.ittfDocumentGraph.ittfReferences',  ittfDocumentGraph.ittfReferences
-                // log 'scanMTreeEx.ittfDocumentGraph.errorFragments',  ittfDocumentGraph.errorFragments
+                // loog 'scanMTreeEx.ittfDocumentGraph.fragments',  ittfDocumentGraph.fragments
+                // loog 'scanMTreeEx.ittfDocumentGraph.ittfReferences',  ittfDocumentGraph.ittfReferences
+                // loog 'scanMTreeEx.ittfDocumentGraph.errorFragments',  ittfDocumentGraph.errorFragments
                 return callback(null, {
                         ittfDocumentGraph: ittfDocumentGraph, 
                         fragments: ittfDocumentGraph.fragments, 
@@ -118,10 +118,10 @@ function scanExec(file, documentPath, options, callback) {
         ittfDocumentState.setIttfPretty(pretty.prettyLines.join(''));
         ittfDocumentState.setFromScanResult(scanResult)
         var msg = stringify(ittfDocumentState, null, 2);
-        // log 'related', msg
+        // loog 'related', msg
         var guard = 0;
         function loopNext(done) {
-            // log 'loopNext', guard
+            // loog 'loopNext', guard
             if (done) {
                 return callback(null, ittfDocumentState);
             }
@@ -138,7 +138,7 @@ function scanExec(file, documentPath, options, callback) {
         }
         loopNext(false)
         function scanState(callback) {
-            // log 'scanState.ittfDocumentState.hasUnscanned()', ittfDocumentState.hasUnscanned()
+            // loog 'scanState.ittfDocumentState.hasUnscanned()', ittfDocumentState.hasUnscanned()
             if (ittfDocumentState.hasUnscanned() == false) {
                 return callback(null, true);
             }
@@ -155,7 +155,7 @@ function scanExec(file, documentPath, options, callback) {
             })
         }
         function scanStateFragments(callback) {
-            // log 'scanStateFragments.getUnscannedFragments.length', ittfDocumentState.getUnscannedFragments().length
+            // loog 'scanStateFragments.getUnscannedFragments.length', ittfDocumentState.getUnscannedFragments().length
             async.map(ittfDocumentState.getUnscannedFragments(), function(fragment, callback) {
                 fragment.hash = encdec.encrypt(fragment.uri);
                 scanMTreeEx(file, fragment.uri, options, function(err, scanResult) {
@@ -164,7 +164,7 @@ function scanExec(file, documentPath, options, callback) {
                     }
                     var primary = scanResult.ittfDocumentGraph;
                     var msg = stringify(scanResult, null, 2);
-                    // log 'scanResult', fragment.uri, msg
+                    // loog 'scanResult', fragment.uri, msg
                     ittfDocumentState.setFromScanResult(scanResult)
                     fragment.ittfContent = primary.content;
                     var pretty = mTreeHtmlPrettifier(primary);
@@ -174,14 +174,14 @@ function scanExec(file, documentPath, options, callback) {
             }, callback)
         }
         function scanStateIttfReferences(callback) {
-            // log 'scanStateFragments.getUnscannedIttfReferences.length', ittfDocumentState.getUnscannedIttfReferences()
+            // loog 'scanStateFragments.getUnscannedIttfReferences.length', ittfDocumentState.getUnscannedIttfReferences()
             async.map(ittfDocumentState.getUnscannedIttfReferences(), function(reference, callback) {
                 scanExec(file, reference.uri, {
                     rootFolder: options.rootFolder, 
                     baseIdCounter: ++idCounter
                  }, function(err, documentState) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     reference.documentState = documentState;

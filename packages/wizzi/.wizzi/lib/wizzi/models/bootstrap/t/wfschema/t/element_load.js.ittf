@@ -9,7 +9,7 @@
 		_ this.initializeLoad_includes(ctx, choiceSet, typeTagSet)
 		set this.choiceOrdered = choiceSet.createOrdered()
 		set this.typeTags = typeTagSet.typeTags
-		# log 'wizzi.models.bootstrap.this.typeTags', this.wzId, this.typeTags
+		# loog 'wizzi.models.bootstrap.this.typeTags', this.wzId, this.typeTags
 
 	m initializeLoad_attributes
 		param ctx

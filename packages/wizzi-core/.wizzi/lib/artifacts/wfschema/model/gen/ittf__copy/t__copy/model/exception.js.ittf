@@ -22,7 +22,7 @@
 				set this.message = message + instance.wzSourceLineInfo.toString(instance)
 			else 
 				set this.message = message 
-			log 'message', this.message
+			error 'message', this.message
 			set this.stack = (new Error()).stack
 			
         m toString

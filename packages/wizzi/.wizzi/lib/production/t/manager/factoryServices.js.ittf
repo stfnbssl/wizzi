@@ -2,7 +2,7 @@
 
 	m getLoadModel
 		string schemaName
-		# log 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
+		# loog 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
 		return 
 			_ this.wizziFactory.getLoadModel
 				@ schemaName
@@ -36,7 +36,7 @@
 
 		# called by WfjobLoader
 		
-		# log 'wizzi.production.productionManager.loadWfjob.ittfDocumentUri', ittfDocumentUri
+		# loog 'wizzi.production.productionManager.loadWfjob.ittfDocumentUri', ittfDocumentUri
 		if !this.wfjobLoadModel
 			checked_call_set( this.wfjobLoadModel )
 				_ this.getLoadModel
@@ -45,7 +45,7 @@
 		var ctx
 			_ this.wizziFactory.createLoadContext
 				@ context
-		# log 'wizzi.production.productionManager.loadWfjob.ctx', ctx, this.wizziFactory.globalContext
+		# loog 'wizzi.production.productionManager.loadWfjob.ctx', ctx, this.wizziFactory.globalContext
 
 		_ this.wfjobLoadModel
 			@ ittfDocumentUri

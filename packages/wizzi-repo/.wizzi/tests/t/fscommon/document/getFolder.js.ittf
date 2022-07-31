@@ -6,5 +6,5 @@
 			_ doc.getFolder
 				@ 'c:/my/starters'
 				f_cb_done( f )
-					log 'should get a folder', err, f
+					# loog 'should get a folder', err, f
 					tobe_string( f.path, c:/my/starters )

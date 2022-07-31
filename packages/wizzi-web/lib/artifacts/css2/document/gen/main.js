@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\css2\document\gen\main.js.ittf
 */
 'use strict';
@@ -36,7 +36,7 @@ md.gen = function(model, ctx, callback) {
             if (err) {
                 return callback(err);
             }
-            // log 'exit', myname
+            // loog 'exit', myname
             try {
                 var postCssResult = postcss().use(colorFunction({
                     preserveCustomProps: true
@@ -125,7 +125,7 @@ md.stm.css = function(model, ctx, callback) {
         if (err) {
             return callback(err);
         }
-        console.log('css,after defaults', ctx.getContent());
+        // loog 'css,after defaults', ctx.getContent()
         md.genItems(model.rules, ctx, {
             indent: false
          }, callback)
@@ -139,7 +139,7 @@ md.stm.defaults = function(model, ctx, callback) {
     }
     async.mapSeries(items, (item, callback) => {
     
-        console.log('defaults,appendFile', item);
+        // loog 'defaults,appendFile', item
         ctx.appendFile(path.join(__dirname, 'defaults', item))
         return callback(null);
     }

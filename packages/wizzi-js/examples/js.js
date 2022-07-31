@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\js.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
-            mTreeBuildUpContext: context, 
+            mTreeBuildupContext: context, 
             globalContext: {}
          }, callback)
     })
@@ -81,12 +81,12 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
          }, callback)
     })
 }
-function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
+function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
             return callback(err);
         }
-        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
+        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback)
     })
 }
 function getFiles(srcpath, schema) {
@@ -180,11 +180,11 @@ function executeLoadModel(name, folder, schema, context, callback) {
     console.log('wizzi-core.examples.jobs.before-load ittfSource', ittfSource, 'schema', schema);
     loadWizziModel(ittfSource, context || {}, function(err, jsWizziModel) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        // log 'wizzi-core.examples.index.loaded ittfSource', ittfSource, 'schema', schema
-        // log 'jsWizziModel', jsWizziModel
+        // loog 'wizzi-core.examples.index.loaded ittfSource', ittfSource, 'schema', schema
+        // loog 'jsWizziModel', jsWizziModel
         if (jsWizziModel.toJson) {
             file.write(jsOutput, stringify(jsWizziModel.toJson(), null, 4))
         }
@@ -193,7 +193,7 @@ function executeLoadModel(name, folder, schema, context, callback) {
         }
         loadModelAndGenerateArtifact(ittfSource, context || {}, "js/module", function(err, artifactText) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             file.write(artifactOutput, artifactText)

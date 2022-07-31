@@ -10,21 +10,21 @@
 		set destPath = normalize(destPath)
 		
 		if sourcePath === destPath
-			log 'wizzi-repo.t.fscommon.document.copyFolder. sourcePath === destPath'
+			# loog 'wizzi-repo.t.fscommon.document.copyFolder. sourcePath === destPath'
 			r_cb( {} )
 
 		var that = this
 
 		var copies = []
 
-		log 'wizzi-repo.t.fscommon.document.getFiles.before'
+		# loog 'wizzi-repo.t.fscommon.document.getFiles.before'
 		_ this.getFiles
 			@ sourcePath
 			{
 				@ deep true
 			f_cb( files )
 
-				log 'wizzi-repo.t.fscommon.document.copyFolder. files', files.length
+				# loog 'wizzi-repo.t.fscommon.document.copyFolder. files', files.length
 				var
 					decl sourcefile
 					decl destfile

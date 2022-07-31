@@ -46,7 +46,7 @@ module
                 @ copyInclude ['*']
                 @ copyExclude []
             f_cb_test(genFolderResult)
-                log 'genFolderResult', genFolderResult
+                info 'genFolderResult', genFolderResult
 
 
 

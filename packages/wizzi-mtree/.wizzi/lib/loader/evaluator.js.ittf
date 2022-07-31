@@ -53,7 +53,7 @@
                     @ startTime dateUtil.now_GMYHMS()
 					@ isCompile isCompile
             
-			# log 'isCompile', isCompile
+			# loog 'isCompile', isCompile
 			
 			_ scriptCoder.w
 				@ '// ' + ctx.startTime + '  by ' + __filename
@@ -98,7 +98,7 @@
 		               
                 $else
 
-                    # log 'scriptCoder.toCode()', scriptCoder.toCode()
+                    # loog 'scriptCoder.toCode()', scriptCoder.toCode()
                     
                     if requireFromString === null
                         set requireFromString = require('./requireFromString')

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\wfschema\json_docs\trans\main.js.ittf
 */
 'use strict';
@@ -47,11 +47,19 @@ md.element = function(model, ctx, parent) {
     var flags = '';
     flags += model.isAbstract ? 'is-abstract ' : '';
     flags += model.addToChildren ? 'add-to-children ' : '';
+    var tagEscaped = verify.replaceAll(model.tagName, '\\|', '__&%%&__');
+    var tagsEscaped = tagEscaped.split('|');
+    var tags = [];
+    var i, i_items=tagsEscaped, i_len=tagsEscaped.length, tag;
+    for (i=0; i<i_len; i++) {
+        tag = tagsEscaped[i];
+        tags.push(verify.replaceAll(tag, '__&%%&__', '|'))
+    }
     var node = {
         name: model.wzId, 
         super: model.superId, 
         isRoot: model.isRoot, 
-        tags: model.tagName.split('|'), 
+        tags: tags, 
         flags: flags, 
         attributes: [], 
         relations: [], 
@@ -75,9 +83,17 @@ md.element = function(model, ctx, parent) {
     var i, i_items=model.derived, i_len=model.derived.length, d;
     for (i=0; i<i_len; i++) {
         d = model.derived[i];
+        var tagEscaped = verify.replaceAll(d.tagName, '\\|', '__&%%&__');
+        var tagsEscaped = tagEscaped.split('|');
+        var tags = [];
+        var j, j_items=tagsEscaped, j_len=tagsEscaped.length, tag;
+        for (j=0; j<j_len; j++) {
+            tag = tagsEscaped[j];
+            tags.push(verify.replaceAll(tag, '__&%%&__', '|'))
+        }
         node.derived.push({
             name: d.wzId, 
-            tags: d.tagName.split('|')
+            tags: tags
          })
     }
     var i, i_items=model.methods, i_len=model.methods.length, m;

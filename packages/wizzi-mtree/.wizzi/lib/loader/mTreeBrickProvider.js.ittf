@@ -55,7 +55,7 @@
 			_ this.store.parseUri
 				@ primaryIttfDocumentUri
 				f_cb( parsedUri )
-					$$ log 'wizzi-mtree.mTreeBrickProvider.parsedUri', parsedUri
+					# loog 'wizzi-mtree.mTreeBrickProvider.parsedUri', parsedUri
 					
 					set that.storeKind = parsedUri.storeKind
 					set that.uri = parsedUri.uri || parsedUri.originalUri
@@ -71,7 +71,7 @@
 								set err.documentUri = that.uri
 								r_cb_err()
 							# init helper objects
-							$$ log 'ittfContent', ittfContent
+							# loog 'ittfContent', ittfContent
 							if !ittfContent || ittfContent.trim().length == 0
 								# TODO document this
 								return
@@ -88,7 +88,7 @@
 							set that.productionContext = loadContext.productionContext
 							set that.mTreeBuildupContext = loadContext.mTreeBuildupContext
 							set that.sourcePreprocessor = loadContext.sourcePreprocessor
-							$$ log 'wizzi-mtree.mTreeBrickProvider.ittfContent', ittfContent
+							# loog 'wizzi-mtree.mTreeBrickProvider.ittfContent', ittfContent
 							# load the primary mTreeBrick from the ittf content
 							_ that.loadMTreeBrickFromSource
 								@ that.uri
@@ -134,10 +134,10 @@
 			_ this.documentFinder.resolvePath
 				@ options
 				f_cb( uri )
-					$$ log 'wizzi-mtree.mTreeBrickProvider.path resolved', uri
+					# loog 'wizzi-mtree.mTreeBrickProvider.path resolved', uri
 					var mTreeBrickCloned = null
 					# check cache
-					$$ log 'searching in cache', that.bricksCache, uri
+					# loog 'searching in cache', that.bricksCache, uri
 					var cachedMTreeBrick = that.bricksCache[uri]
 					if cachedMTreeBrick
 						# found in cache, clone it
@@ -231,7 +231,7 @@
 			# frome the ittf node tree.
 			checked_call( notUsed )
 				_ newMTreeBrick.load(ittfContent, mTreeBrickData)
-			$$ log 'wizzi-mtree.mTreeBrickProvider.parsed newMTreeBrick', newMTreeBrick
+			# loog 'wizzi-mtree.mTreeBrickProvider.parsed newMTreeBrick', newMTreeBrick
 			
 			# caches the newMTreeBrick
 			set this.bricksCache[uri] = newMTreeBrick
@@ -246,7 +246,7 @@
 			if !(options.include)
 				set mTreeBrickData.mTreeBrick = mTreeBrickCloned
 			+
-			$$ log 'cloned newMTreeBrick', mTreeBrickCloned
+			# loog 'cloned newMTreeBrick', mTreeBrickCloned
 			return callback(null, mTreeBrickCloned)
 
 		m loadMTreeBrickFromDocumentFragment
@@ -260,7 +260,7 @@
             # load it
             foreach item in options.includerMTreeBrick.documentFragments
                 if item.value === options.relpath
-                    $$ log 'wizzi-mtree.mTreeBrickProvider.loadMTreeBrickFromDocumentFragment', item.name, item.value, item.$params
+                    # loog 'wizzi-mtree.mTreeBrickProvider.loadMTreeBrickFromDocumentFragment', item.name, item.value, item.$params
                     set newMTreeBrick.nodes = [item]
                     if !(options.include)
                         set newMTreeBrick.$params = item.$params
@@ -296,7 +296,7 @@
                 set mTreeBrickCloned.brickKey = parentMtreeBrick.brickKey
                 set mTreeBrickCloned.$schema = parentMtreeBrick.$schema
 			
-            $$ log 'cloned newMTreeBrick', mTreeBrickCloned
+            # loog 'cloned newMTreeBrick', mTreeBrickCloned
 			return callback(null, mTreeBrickCloned)
 
 		m enterFragmentCall
@@ -321,7 +321,7 @@
 			string primaryIttfDocumentUri
 			{ loadContext
 			callback
-			$$ log 'wizzi-mtree.mTreeBrickProvider.createFromUri', primaryIttfDocumentUri
+			# loog 'wizzi-mtree.mTreeBrickProvider.createFromUri', primaryIttfDocumentUri
 			var provider = new MTreeBrickProvider()
 			try
 				_ provider.init

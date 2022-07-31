@@ -15,7 +15,14 @@
 	a link to
 		href http:/wizzi-factory.org
 	
-	p ul list
+	p line p 1
+    p line p 2
+    p line p 3
+    hr
+	+ line + 1
+    + line + 2
+    + line + 3
+    p ul list
 	ul
 		li item 1
 		li item 2

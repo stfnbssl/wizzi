@@ -23,7 +23,7 @@
 	function preprocessText
 		param text
 
-		# log 'wizzi-core.wizzi.models.text-factory.g.preprocessText text: ' + text
+		# loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText text: ' + text
 		
 		if !text || text.length == 0
 			return text
@@ -38,7 +38,7 @@
 		for var i = 0; i<len; i++
 			set ch = text[i]
 			if ch === '\n' || ch === '\r'
-				# log 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
+				# loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText line[0]', line[0]
 				if isCommandNode(line)
 					_ sb.push
 						@ '    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : '')
@@ -52,7 +52,7 @@
 				if i < len-1
 					if (ch === '\n' && text[i+1] === '\r')
 						\b || (ch === '\r' && text[i+1] === '\n')
-						# log 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
+						# loog 'wizzi-core.wizzi.models.text-factory.g. preprocessText skip'
 						set i++
 			else
 				if !seenNotWs
@@ -72,7 +72,7 @@
 				@ '    ' + line.join('') + (indent > 0 ? ' || ' + indent.toString() : '')
 			# + Ä
 		
-		log 'wizzi-core.wizzi.models.text-factory.g.preprocessText result', sb.join('\n')
+		# loog 'wizzi-core.wizzi.models.text-factory.g.preprocessText result', sb.join('\n')
 		return sb.join('\n')
 
 		

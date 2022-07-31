@@ -49,7 +49,7 @@
                     [ mainSourceModels
                     callback
                     
-					# log 'wizzi.production.AsyncArtifactGenerator.generate, modelInfos', modelInfos, 'mainSourceModels', mainSourceModels
+					# loog 'wizzi.production.AsyncArtifactGenerator.generate, modelInfos', modelInfos, 'mainSourceModels', mainSourceModels
 					if verify.isObject(generator) == false || verify.isFunction(generator.gen) == false
 						return
 							_ callback

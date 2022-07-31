@@ -15,4 +15,4 @@
 		{
 			@ friends friendsArray
 		f_cb_test(artifactText)
-			log 'artifactText friends\n', artifactText
+			info 'artifactText friends\n', artifactText

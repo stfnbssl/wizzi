@@ -44,7 +44,7 @@
 				var requiredChar = model.itemType.isRequired ? '!' : ''
 				set type = '[' + model.itemType.wzName + requiredChar + ']'
 			var args = []
-			# log 'fieldDef', model.wzElement, model.wzName
+			# loog 'fieldDef', model.wzElement, model.wzName
 			foreach item in model.argumentDefs
 				_ args.push
 					_ getTypedArgumentDeclaration
@@ -126,13 +126,13 @@
 
 	async/md-ctx( valueDef )
 		
-		# log 'valueDef', model.wzElement, model.wzName
+		# loog 'valueDef', model.wzElement, model.wzName
 		_ ctx.w( model.wzName + ': ' + model.type)
 		r_cb()
 
 	async/md( directiveDef )
 		var args = []
-		# log 'fieldDef', model.wzElement, model.wzName
+		# loog 'fieldDef', model.wzElement, model.wzName
 		foreach item in model.argumentDefs
 			_ args.push
 				_ getTypedArgumentDeclaration

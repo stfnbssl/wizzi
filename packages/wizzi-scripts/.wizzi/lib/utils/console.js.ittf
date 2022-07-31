@@ -21,7 +21,7 @@
 	set md.openWindowPowershell
 		function
 			param options
-			log 'wizzi-script.console.openWindowPowershell.options', options
+			# loog 'wizzi-script.console.openWindowPowershell.options', options
 			_ cp.execSync
 				@ 'START "" /D ' + options.cwd + ' PowerShell_ISE.exe ' + options.document
 				[
@@ -30,7 +30,7 @@
 	set md.openWindowPowershell_prev2
 		function
 			param options
-			log 'wizzi-script.console.openWindowPowershell.options', options
+			# loog 'wizzi-script.console.openWindowPowershell.options', options
 			_ cp.execSync
 				@ 'START'
 				[
@@ -43,7 +43,7 @@
 	set md.openWindowPowershell_prev
 		function
 			param options
-			log 'wizzi-script.console.openWindowPowershell.options', options
+			# loog 'wizzi-script.console.openWindowPowershell.options', options
 			_ cp.execSync
 				@ 'PowerShell_ISE.exe'
 				[
@@ -60,7 +60,7 @@
 		function
 			param documentFullPath
 			param options
-			log 'wizzi-scripts.console.openDocument', documentFullPath
+			# loog 'wizzi-scripts.console.openDocument', documentFullPath
 			_ cp.execSync
 				@ path.basename(documentFullPath)
 				{

@@ -30,12 +30,12 @@ $group
 			set request.wfschema.mTreeBuildupContext = Object.assign({}, request.wfschema.mTreeBuildupContext)
 			set request.globalContext = Object.assign({}, request.globalContext)
 			+
-			log 'generateWizziModelTypes'
-			log '- storeKind', storeKind
-			log '- configOptions', request.configOptions
-			log '- wfschema.name', request.wfschema.name
-			log '- wfschema.ittfDocumentUri', request.wfschema.ittfDocumentUri
-			log '- wfschema.outputPackageFolder', request.wfschema.outputPackageFolder
+			info 'wizzi.generateWizziModelTypes'
+			info '- storeKind', storeKind
+			info '- configOptions', request.configOptions
+			info '- wfschema.name', request.wfschema.name
+			info '- wfschema.ittfDocumentUri', request.wfschema.ittfDocumentUri
+			info '- wfschema.outputPackageFolder', request.wfschema.outputPackageFolder
 			+
 			var repoUri = request.configOptions.repoUri
 			var repoBaseFolder = request.configOptions.repoBaseFolder
@@ -48,11 +48,11 @@ $group
 						_ plugins.push(item)
             else
                 _ plugins.push('wizzi-core')
-			log '- plugins', plugins
+			info '- plugins', plugins
 			for var k in request.wfschema.mTreeBuildupContext
-				log '- wfschemaContext property', k
+				info '- wfschemaContext property', k
 			for var k in request.globalContext
-				log '- globalContext property', k
+				info '- globalContext property', k
 			+
 			_ wizziFactory.createFactory
 				{
@@ -67,14 +67,14 @@ $group
 				f_cb( wizziFactory )
 					# Now we can generate the wizzi model types
 					# They will be written in the folder passed as second parameter.
-					log chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name)
+					info chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name)
 					_ wizziFactory.generateModelDoms
 						@ request.wfschema.ittfDocumentUri
 						@ request.wfschema.outputPackageFolder
 						@ request.wfschema.name
 						@ request.wfschema.mTreeBuildupContext
 						f_cb( result )
-							log chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + request.wfschema.name)
+							info chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + request.wfschema.name)
                             r_cb( request.wfschema.name )
 
 	

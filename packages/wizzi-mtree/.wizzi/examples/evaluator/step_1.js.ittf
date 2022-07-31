@@ -49,5 +49,5 @@ module
                                             @ appendedModel
                                             @ loadContext
                                             f_cb_test( evaluatedModel )
-                                                # log 'evaluatedModel', evaluatedModel
+                                                # loog 'evaluatedModel', evaluatedModel
                                                 _ printEvaluatedNodes(evaluatedModel, 'After evaluate')

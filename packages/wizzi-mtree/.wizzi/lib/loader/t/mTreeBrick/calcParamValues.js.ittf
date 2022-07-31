@@ -156,7 +156,7 @@
                 *$
                 _ verify.isIttfMacro(value)
 
-            $$ log 'wizzi-mtree.calcParamValues.isIttfMacro', isIttfMacro, value
+            # loog 'wizzi-mtree.calcParamValues.isIttfMacro', isIttfMacro, value
             
 			_ result.push
                 { 

@@ -10,12 +10,12 @@
 	var md = module.exports = {}
 	+
 	error( NotImplemented, message )
-		# log 'message', message
+		# loog 'message', message
 		set this.message
         set this.message += pkgVersioned
 	+
 	error( InvalidRequest, message, code )
-		# log 'message', message
+		# loog 'message', message
 		set this.message = message
         set this.message += pkgVersioned
 		set this.code = code
@@ -57,7 +57,7 @@
 			\ ', processing document ' + md.getSrcPathInfo(srcPath)
         set this.message += pkgVersioned
         set this.inner = ex
-		# log 'wizzi.artifact.errors.artifactGenerationError.message', this.message
+		# loog 'wizzi.artifact.errors.artifactGenerationError.message', this.message
     
 	error( WizziInvalidRequest, message, srcPath, ex )
         set this.message = message

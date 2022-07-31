@@ -76,9 +76,9 @@
 								@ rootFolder options.rootFolder
 							f_cb()
 
-								# log 'scanMTreeEx.ittfDocumentGraph.fragments',  ittfDocumentGraph.fragments
-								# log 'scanMTreeEx.ittfDocumentGraph.ittfReferences',  ittfDocumentGraph.ittfReferences
-								# log 'scanMTreeEx.ittfDocumentGraph.errorFragments',  ittfDocumentGraph.errorFragments
+								# loog 'scanMTreeEx.ittfDocumentGraph.fragments',  ittfDocumentGraph.fragments
+								# loog 'scanMTreeEx.ittfDocumentGraph.ittfReferences',  ittfDocumentGraph.ittfReferences
+								# loog 'scanMTreeEx.ittfDocumentGraph.errorFragments',  ittfDocumentGraph.errorFragments
 					
 								return
 									_ callback
@@ -125,12 +125,12 @@
 						@ null
 						@ 2
 					
-				# log 'related', msg
+				# loog 'related', msg
 
 				var guard = 0
 				function loopNext
 					param done
-					# log 'loopNext', guard
+					# loog 'loopNext', guard
 					if done
 						r_cb(ittfDocumentState)
 					set guard++
@@ -145,7 +145,7 @@
 					
 				function scanState
 					param callback
-					# log 'scanState.ittfDocumentState.hasUnscanned()', ittfDocumentState.hasUnscanned()
+					# loog 'scanState.ittfDocumentState.hasUnscanned()', ittfDocumentState.hasUnscanned()
 					if ittfDocumentState.hasUnscanned() == false
 						r_cb(true)
 					_ scanStateFragments
@@ -157,7 +157,7 @@
 				function scanStateFragments
 					param callback
 
-					# log 'scanStateFragments.getUnscannedFragments.length', ittfDocumentState.getUnscannedFragments().length
+					# loog 'scanStateFragments.getUnscannedFragments.length', ittfDocumentState.getUnscannedFragments().length
 						
 					_ async.map
 						@ ittfDocumentState.getUnscannedFragments()
@@ -178,7 +178,7 @@
 											@ scanResult
 											@ null
 											@ 2
-									# log 'scanResult', fragment.uri, msg
+									# loog 'scanResult', fragment.uri, msg
 									_ ittfDocumentState.setFromScanResult
 										@ scanResult
 									set fragment.ittfContent = primary.content
@@ -192,7 +192,7 @@
 				function scanStateIttfReferences
 					param callback
 
-					# log 'scanStateFragments.getUnscannedIttfReferences.length', ittfDocumentState.getUnscannedIttfReferences()
+					# loog 'scanStateFragments.getUnscannedIttfReferences.length', ittfDocumentState.getUnscannedIttfReferences()
 						
 					_ async.map
 						@ ittfDocumentState.getUnscannedIttfReferences()

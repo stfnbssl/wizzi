@@ -21,11 +21,11 @@
 						@ projectId
 						@ path_string
 				
-			# log 'wizzi-io.filesystem.exists.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.exists.fsPath', fsPath
 
 			var exists
 				_ file.exists
 					@ fsPath
-			# log 'wizzi-io.filesystem.exists.fsPath', fsPath, 'exists', exists
+			# loog 'wizzi-io.filesystem.exists.fsPath', fsPath, 'exists', exists
 			return 
 				_ callback(null, exists)

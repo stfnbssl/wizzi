@@ -40,14 +40,14 @@
 					f_cb_throw( includedModel )
 
 						set node = includedModel.nodes[0]
-                        # log 'includedModel.nodes[0]', node
+                        # loog 'includedModel.nodes[0]', node
 						tobe_number( node.row, 1 )
 						tobe_number( node.col, 1 )
 						tobe_string( node.name, sigma )
 						tobe_undefined( node.value )
 
 						set node = includedModel.nodes[0].children[0]
-                        # log 'includedModel.nodes[0].children[0]', node
+                        # loog 'includedModel.nodes[0].children[0]', node
 						tobe_number( node.row, 1 )
 						tobe_number( node.col, 1 )
 						tobe_string( node.name, tau )
@@ -77,7 +77,7 @@
 					@ mTree
 					@ provider
 					f_cb_no_err( includedModel )
-                        # log 'should throw an error for fragment to include not found', '\n' + err.toString()
+                        # loog 'should throw an error for fragment to include not found', '\n' + err.toString()
                         tobe_error( err, IttfIncludeError )                    
                         _ done
 

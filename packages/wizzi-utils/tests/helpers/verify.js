@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\helpers\verify.js.ittf
 */
 'use strict';
@@ -46,12 +46,12 @@ describe("verify", function() {
     it("should convert string values to types", function() {
         var expected;
         var result = verify.convert('', 'string');
-        console.log(' "" result', result);
+        // loog ' "" result', result
         expected = '';
         // strict equality
         expect(result).to.be(expected);
         result = verify.convert(null, 'string');
-        console.log(' "" result', result);
+        // loog ' "" result', result
         expected = '';
         // strict equality
         expect(result).to.be(expected);
@@ -85,11 +85,11 @@ describe("verify", function() {
         expect(result).to.be(false);
         result = verify.convert('1990-5-12', 'date');
         expected = new Date(1990, 4, 12);
-        console.log('expected', expected);
+        // loog 'expected', expected
         // loose equality works for objects
         expect(result).to.eql(expected);
         result = verify.convert('1990/5/12', 'date');
-        console.log('date 1990/5/12 result', result);
+        // loog 'date 1990/5/12 result', result
         expect(result.__is_error).to.be(true);
         result = verify.convert('yes', 'boolean');
         expect(result.__is_error).to.be(true);

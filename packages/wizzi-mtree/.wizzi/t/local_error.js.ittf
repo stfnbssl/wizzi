@@ -10,7 +10,7 @@
 		
         $* 6/6/19
         if node
-			# log 'local_error.node', node
+			# loog 'local_error.node', node
 			var nodeError = new errors.NodeError(message, node)
 			set message = nodeError.message
 		return

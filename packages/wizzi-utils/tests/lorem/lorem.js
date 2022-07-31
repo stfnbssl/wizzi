@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\lorem\lorem.js.ittf
 */
 'use strict';
@@ -26,14 +26,14 @@ describe("lorem", function() {
         var text1 = lorem({
             count: 100
          });
-        // log 'lorem.100', text1
+        // loog 'lorem.100', text1
         expect(text1).to.be.a('string');
         var text2 = lorem({
             count: 10, 
             units: 'paragraphs', 
             htmlTag: 'p'
          });
-        // log 'lorem.10.paragraphs.p\n', text
+        // loog 'lorem.10.paragraphs.p\n', text
         expect(text2).to.be.a('string');
     });
 });
@@ -48,8 +48,8 @@ function getWizziObject() {
          };
 }
 
-function getLoadModelContext(mTreeBuildUpContext) {
-    return mocks.getLoadModelContext(mTreeBuildUpContext);
+function getLoadModelContext(mTreeBuildupContext) {
+    return mocks.getLoadModelContext(mTreeBuildupContext);
 }
 
 function getTestModelInfo(schemaName, modelName) {

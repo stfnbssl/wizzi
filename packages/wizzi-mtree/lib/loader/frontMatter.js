@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\frontMatter.js.ittf
 */
 'use strict';
@@ -36,8 +36,11 @@ module.exports = function(primaryMTreeBrick, callback) {
         for (j=0; j<j_len; j++) {
             node = item.children[j];
             var prop = utilnode.jsonifyProperty(node);
+            
+            // loog 'wizzi-mtree.includer.jsonifyProperty.err', prop
+            
+            // loog 'wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines
             if (prop.__is_error) {
-                console.log('wizzi-mtree.includer.jsonifyProperty.err', prop);
                 var errItem = prop.__errItem ? prop.__errItem : node;
                 prop.errorLines = item.model.loadHistory.getIttfDocumentErrorLines(item.sourceKey, {
                     row: errItem.row, 
@@ -45,7 +48,6 @@ module.exports = function(primaryMTreeBrick, callback) {
                     description: 'jsonify error in front matter'
                  }, true)
                 ;
-                console.log('wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines);
                 return callback(prop);
             }
             primaryMTreeBrick.frontMatter[prop.name] = prop.value;

@@ -17,7 +17,7 @@
 				{
 					@ sourceKey 'f1'
 
-		# log 'liner lines', lines
+		# loog 'liner lines', lines
 
 		tobe_array( lines, 7 )
 		tobe_number( lines[0].indent, 0 )
@@ -65,7 +65,7 @@
 				{
 					@ sourceKey 'f1'
 
-		# log 'should skip comments liner lines', lines
+		# loog 'should skip comments liner lines', lines
 		tobe_array( lines, 4 )
 		tobe_number( lines[0].indent, 0 )
 		tobe_number( lines[0].row, 1 )
@@ -93,7 +93,7 @@
 				{
 					@ sourceKey 'f1'
 
-		# log 'should skip comments liner lines', lines
+		# loog 'should skip comments liner lines', lines
 		tobe_array( lines, 4 )
 		tobe_number( lines[0].indent, 0 )
 		tobe_number( lines[0].row, 1 )
@@ -116,7 +116,7 @@
 				{
 					@ sourceKey 'f1'
 
-		# log 'should skip comments liner lines', lines
+		# loog 'should skip comments liner lines', lines
 		tobe_array( lines, 3 )
 		tobe_number( lines[0].indent, 0 )
 		tobe_string( lines[0].name, 'root' )
@@ -130,14 +130,14 @@
 				@ '    node1 value1'
 				@ '    `my ${name}`'
 				._ join('\n')
-		# log 'source', source
+		# loog 'source', source
 		var lines
 			_ liner
 				@ source
 				{
 					@ sourceKey 'f1'
 
-		# log 'should skip comments liner lines', lines
+		# loog 'should skip comments liner lines', lines
 		tobe_array( lines, 3 )
 		tobe_number( lines[0].indent, 0 )
 		tobe_string( lines[0].name, 'root' )
@@ -177,7 +177,7 @@
 				@ '    node3 value2'
 				._ join('\n')
 		
-		# log 'should escape javascript string macro delimiters with escapes.source', source
+		# loog 'should escape javascript string macro delimiters with escapes.source', source
 		
 		var lines
 			_ liner
@@ -185,7 +185,7 @@
 				{
 					@ sourceKey 'f1'
 
-		# log 'should escape javascript string macro delimiters with escapes.lines', lines, 'template_expected', template_expected
+		# loog 'should escape javascript string macro delimiters with escapes.lines', lines, 'template_expected', template_expected
 		tobe_array( lines, 4 )
 		tobe_number( lines[0].indent, 0 )
 		tobe_string( lines[0].name, 'root' )

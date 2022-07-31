@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\function.js.ittf
 */
 'use strict';
@@ -39,12 +39,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -128,7 +128,7 @@ describe("function", function() {
         done();
     });
     it("complex function nodes [0][0]", function(done) {
-        // log 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
+        // loog 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
         expect(evaluatedModel.nodes[0].children).to.be.an('array');
         expect(evaluatedModel.nodes[0].children.length).to.be(2);
         node = evaluatedModel.nodes[0].children[0];
@@ -157,7 +157,7 @@ describe("function", function() {
     it("should load and evaluate an ittf with a recursive function", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_3.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
-            // log '================', err, result
+            // loog '================', err, result
             evaluatedModel = result;
             expect(evaluatedModel).to.be.an('object');
             expect(evaluatedModel.nodes).to.be.an('array');

@@ -31,9 +31,9 @@ $group
                                     :ref Response
                                 param next
                                 ${'$'}if wzCtx.Build.useMongoDb
-                                    log 'UserInViewMiddleware.req.session.user', (req.session as any).user
+                                    # loog 'UserInViewMiddleware.req.session.user', (req.session as any).user
                                     set res.locals.user = (req.session as any).user
                                 ${'$'}else
-                                    log 'UserInViewMiddleware.req.user', req.user
+                                    # loog 'UserInViewMiddleware.req.user', req.user
                                     set res.locals.user = req.user
                                 _ next()

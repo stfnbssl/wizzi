@@ -7,7 +7,7 @@
 			set this.ittfBasePath = unixifyPath(options.ittfBasePath)
 		if verify.isNotEmpty(options.jsCodeBasePath)
 			set this.jsCodeBasePath = unixifyPath(options.jsCodeBasePath)
-		# log 'wizzi-utils.ittfFsNode.setSourcePaths - ittfBasePath, jsCodeBasePath : ', options.ittfBasePath, options.jsCodeBasePath
+		# loog 'wizzi-utils.ittfFsNode.setSourcePaths - ittfBasePath, jsCodeBasePath : ', options.ittfBasePath, options.jsCodeBasePath
 	
 	#
 	# FIXME this is NOT OK
@@ -16,7 +16,7 @@
 	#
 	m getPrettyAnalizedIttfSource
 		var r = this.root()
-		# log 'wizzi-utils.ittfFsNode.getPrettyAnalizedIttfSource', r.ittfBasePath, this.parts.join('/')
+		# loog 'wizzi-utils.ittfFsNode.getPrettyAnalizedIttfSource', r.ittfBasePath, this.parts.join('/')
 		if verify.isNotEmpty(r.ittfBasePath)
 			return
 				_ ittfHtmlPrettifier

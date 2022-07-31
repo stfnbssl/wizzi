@@ -22,7 +22,7 @@
 		f_p_tag( default )
 		f_p( variance, false
 		f_p_temp( variance, false
-		# log 'p_variance', p_variance
+		# loog 'p_variance', p_variance
 
 	f( Variance, :variance
 		set ret.name = node.kind

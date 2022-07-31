@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\artifact\block.js.ittf
 */
 'use strict';
@@ -59,12 +59,12 @@ var Block = (function () {
         this.w();
     }
     Block.prototype.setLastNotEmptyLine = function() {
-        // log 'setLastNotEmptyLine.this.currentline.begin', this.currentline, this.lines.length
+        // loog 'setLastNotEmptyLine.this.currentline.begin', this.currentline, this.lines.length
         if (this.currentline != null && this.currentline.isEmpty() == false) {
             return ;
         }
         while (this.lines.length > 0) {
-            // log 'setLastNotEmptyLine.loop', this.lines[this.lines.length - 1], this.lines[this.lines.length - 1].isEmpty()
+            // loog 'setLastNotEmptyLine.loop', this.lines[this.lines.length - 1], this.lines[this.lines.length - 1].isEmpty()
             if (this.lines[this.lines.length - 1].isEmpty() == false) {
                 this.currentline = this.lines[this.lines.length - 1];
                 this.lines.pop();
@@ -74,7 +74,7 @@ var Block = (function () {
                 this.lines.pop();
             }
         }
-        // log 'setLastNotEmptyLine.this.currentline.end', this.currentline, this.lines.length
+        // loog 'setLastNotEmptyLine.this.currentline.end', this.currentline, this.lines.length
     }
     Block.prototype._lastLineNotBlank = function() {
         if (this.currentline != null && this.currentline.isEmpty() == false) {

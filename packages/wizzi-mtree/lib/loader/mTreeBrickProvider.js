@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBrickProvider.js.ittf
 */
 'use strict';
@@ -89,6 +89,7 @@ var MTreeBrickProvider = (function () {
             if (err) {
                 return callback(err);
             }
+            // loog 'wizzi-mtree.mTreeBrickProvider.parsedUri', parsedUri
             that.storeKind = parsedUri.storeKind;
             that.uri = parsedUri.uri || parsedUri.originalUri;
             that.userId = parsedUri.userId;
@@ -101,6 +102,7 @@ var MTreeBrickProvider = (function () {
                     return callback(err);
                 }
                 // init helper objects
+                // loog 'ittfContent', ittfContent
                 
                 // TODO document this
                 if (!ittfContent || ittfContent.trim().length == 0) {
@@ -113,6 +115,7 @@ var MTreeBrickProvider = (function () {
                 that.productionContext = loadContext.productionContext;
                 that.mTreeBuildupContext = loadContext.mTreeBuildupContext;
                 that.sourcePreprocessor = loadContext.sourcePreprocessor;
+                // loog 'wizzi-mtree.mTreeBrickProvider.ittfContent', ittfContent
                 // load the primary mTreeBrick from the ittf content
                 that.loadMTreeBrickFromSource(that.uri, {}, ittfContent, function(err, primaryMTreeBrickCloned) {
                     if (err) {
@@ -145,8 +148,10 @@ var MTreeBrickProvider = (function () {
             if (err) {
                 return callback(err);
             }
+            // loog 'wizzi-mtree.mTreeBrickProvider.path resolved', uri
             var mTreeBrickCloned = null;
             // check cache
+            // loog 'searching in cache', that.bricksCache, uri
             var cachedMTreeBrick = that.bricksCache[uri];
             
             // found in cache, clone it
@@ -213,9 +218,10 @@ var MTreeBrickProvider = (function () {
         // frome the ittf node tree.
         var notUsed = newMTreeBrick.load(ittfContent, mTreeBrickData);
         if (notUsed && notUsed.__is_error) {
-            console.log('__is_error ', notUsed);
+            console.log("[31m%s[0m", '__is_error ', notUsed);
             return callback(notUsed);
         }
+        // loog 'wizzi-mtree.mTreeBrickProvider.parsed newMTreeBrick', newMTreeBrick
         // caches the newMTreeBrick
         this.bricksCache[uri] = newMTreeBrick;
         // clone it
@@ -229,6 +235,7 @@ var MTreeBrickProvider = (function () {
             mTreeBrickData.mTreeBrick = mTreeBrickCloned;
         }
         
+        // loog 'cloned newMTreeBrick', mTreeBrickCloned
         return callback(null, mTreeBrickCloned);
     }
     MTreeBrickProvider.prototype.loadMTreeBrickFromDocumentFragment = function(uri, options, callback) {
@@ -238,6 +245,8 @@ var MTreeBrickProvider = (function () {
         var i, i_items=options.includerMTreeBrick.documentFragments, i_len=options.includerMTreeBrick.documentFragments.length, item;
         for (i=0; i<i_len; i++) {
             item = options.includerMTreeBrick.documentFragments[i];
+            
+            // loog 'wizzi-mtree.mTreeBrickProvider.loadMTreeBrickFromDocumentFragment', item.name, item.value, item.$params
             if (item.value === options.relpath) {
                 newMTreeBrick.nodes = [item];
                 if (!(options.include)) {
@@ -264,6 +273,7 @@ var MTreeBrickProvider = (function () {
             mTreeBrickCloned.brickKey = parentMtreeBrick.brickKey;
             mTreeBrickCloned.$schema = parentMtreeBrick.$schema;
         }
+        // loog 'cloned newMTreeBrick', mTreeBrickCloned
         return callback(null, mTreeBrickCloned);
     }
     MTreeBrickProvider.prototype.enterFragmentCall = function(mixerUri, mixedUri) {
@@ -295,6 +305,7 @@ MTreeBrickProvider.createFromUri = function(primaryIttfDocumentUri, loadContext,
             'InvalidArgument', '', { parameter: 'loadContext', message: 'The loadContext parameter must be an object. Received: ' + loadContext }
         ));
     }
+    // loog 'wizzi-mtree.mTreeBrickProvider.createFromUri', primaryIttfDocumentUri
     var provider = new MTreeBrickProvider();
     try {
         provider.init(primaryIttfDocumentUri, loadContext, function(err, notUsed) {

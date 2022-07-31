@@ -121,12 +121,8 @@
         {
           "name": "or",
           "tags": [
-            "\\",
-            "\\",
-            "",
-            "op\\",
-            "\\",
-            ""
+            "||",
+            "op||"
           ]
         },
         {
@@ -221,8 +217,7 @@
         {
           "name": "bit_or",
           "tags": [
-            "op\\",
-            ""
+            "op|"
           ]
         },
         {
@@ -972,9 +967,21 @@
           ]
         },
         {
+          "name": "info",
+          "tags": [
+            "info"
+          ]
+        },
+        {
           "name": "inspect",
           "tags": [
             "log?"
+          ]
+        },
+        {
+          "name": "success",
+          "tags": [
+            "success"
           ]
         },
         {
@@ -1824,12 +1831,8 @@
       "super": "statement",
       "isRoot": false,
       "tags": [
-        "\\",
-        "\\",
-        "",
-        "op\\",
-        "\\",
-        ""
+        "||",
+        "op||"
       ],
       "flags": "",
       "attributes": [],
@@ -2218,8 +2221,7 @@
       "super": "statement",
       "isRoot": false,
       "tags": [
-        "op\\",
-        ""
+        "op|"
       ],
       "flags": "",
       "attributes": [],
@@ -3157,7 +3159,7 @@
       "comments": [
         "ittf",
         "foreach item in arr5",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "",
         "js",
         "var i, i_len=arr5.length, item;",
@@ -3196,7 +3198,7 @@
       "comments": [
         "ittf",
         "backeach item in arr5",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "js",
         "var i, i_len=arr5.length, item;",
         "for (i= (i_len-1); i>-1; i--) {",
@@ -3234,7 +3236,7 @@
       "comments": [
         "ittf",
         "each item in arr5 [this]",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "js",
         "arr5.forEach(function(item, i, array) {",
         "console.log('item ', i, item);",
@@ -3489,7 +3491,7 @@
         "# The second for statement is labeled \"loop2\"",
         "if i === 1 && j === 1",
         "continue loop1",
-        "log 'i = ' + i + ', j = ' + j"
+        "info 'i = ' + i + ', j = ' + j"
       ]
     },
     {
@@ -5821,7 +5823,7 @@
             }
           ],
           "comments": [
-            "log 'typeInterface.statements', this.statements"
+            "loog 'typeInterface.statements', this.statements"
           ]
         }
       ],
@@ -6396,7 +6398,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.model.class.modelState', ctx.modelState"
+            "loog 'wizzi-js.model.class.modelState', ctx.modelState"
           ]
         }
       ],
@@ -7091,12 +7093,6 @@
               "statements": []
             },
             {
-              "tag": "log",
-              "name": "log",
-              "value": "'wzInitialize', this.statements.length",
-              "statements": []
-            },
-            {
               "tag": "foreach",
               "name": "foreach",
               "value": "s in this.statements",
@@ -7149,7 +7145,9 @@
               ]
             }
           ],
-          "comments": []
+          "comments": [
+            "loog 'wzInitialize', this.statements.length"
+          ]
         }
       ],
       "comments": []
@@ -7294,7 +7292,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.model.class.modelState', ctx.modelState"
+            "loog 'wizzi-js.model.class.modelState', ctx.modelState"
           ]
         }
       ],
@@ -48982,7 +48980,40 @@
       "methods": [],
       "comments": [
         "ittf:",
-        "log 'xxx', yyy, ...",
+        "info 'xxx', yyy, ...",
+        "js:",
+        "console.log( 'xxx', yyy, ..., __filename );",
+        ""
+      ]
+    },
+    {
+      "name": "info",
+      "super": "statement",
+      "isRoot": false,
+      "tags": [
+        "info"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "statement",
+          "role": "statements",
+          "tags": [
+            "+"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "statement",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": [
+        "ittf:",
+        "info 'xxx', yyy, ...",
         "js:",
         "console.log( 'xxx', yyy, ... );",
         ""
@@ -49024,6 +49055,39 @@
         "log? label xxx",
         "js:",
         "console.log('label', util.inspect(xxx, { depth: null } );",
+        ""
+      ]
+    },
+    {
+      "name": "success",
+      "super": "statement",
+      "isRoot": false,
+      "tags": [
+        "success"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "statement",
+          "role": "statements",
+          "tags": [
+            "+"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "statement",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": [
+        "ittf:",
+        "warn 'xxx', yyy, ...",
+        "js:",
+        "console.log( ...",
         ""
       ]
     },

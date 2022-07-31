@@ -200,12 +200,12 @@
 	stm( arrowfunction
 		var async_str = model.xasync ? 'async ' : ''
         #
-            log '++++ arrowfunction', model.wzName, async_str, model.xasync, model.statements[0]
-            log 'ctx.__is_react_class', ctx.__is_react_class
-            log 'model.wzParent.wzElement', model.wzParent.wzElement
-            log 'u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue')
-            log 'u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model)
-            log 'u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction')
+            # loog '++++ arrowfunction', model.wzName, async_str, model.xasync, model.statements[0]
+            # loog 'ctx.__is_react_class', ctx.__is_react_class
+            # loog 'model.wzParent.wzElement', model.wzParent.wzElement
+            # loog 'u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue')
+            # loog 'u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model)
+            # loog 'u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction')
             log "u.isImplicitReturn(model)", u.isImplicitReturn(model)
         if ctx.__is_react_class && model.wzParent.wzElement == 'reactComponent'
             var implicitReturn = u.isImplicitReturn(model)
@@ -246,11 +246,11 @@
                     @ indent true
 				@ callback
 		elif u.isImplicitReturn(model)
-            # log 'isImplicitReturn', model.wzElement, model.wzName
+            # loog 'isImplicitReturn', model.wzElement, model.wzName
             var isSingleParam = u.isSingleParamForArrowFunction(model)
             var firstChildIsTemplate = u.firstChildIs(model, ['template'])
-            # log 'function.isSingleParam', isSingleParam
-            # log 'function.firstChildIs template', firstChildIsTemplate
+            # loog 'function.isSingleParam', isSingleParam
+            # loog 'function.firstChildIs template', firstChildIsTemplate
             
             _ ctx.write(async_str + (isSingleParam ? '' : '('))
 			_ u.genParams

@@ -37,13 +37,13 @@
 		m leadingIsInline
 			param c
 			param node
-			log 'leadingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
+			# loog 'leadingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
 			return c.loc.end.line ==  node.loc.start.line
 
 		m trailingIsInline
 			param c
 			param node
-			log 'trailingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
+			# loog 'trailingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
 			return c.loc.start.line ==  node.loc.end.line
 	
 	set module.exports = CommentManager

@@ -77,7 +77,7 @@
 								function
 									param item
 									param callback
-									# log 'wizzi-util.folderBrowse.item', item
+									# loog 'wizzi-util.folderBrowse.item', item
 			
 									var fullPath
 										_ path.join

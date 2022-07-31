@@ -29,7 +29,7 @@
 		
 		foreach p in parameters
 			var state = prmAnalizeParam(p)
-			# log 'wizzi-codegen.js2.function.generateParamConstraints.state', state
+			# loog 'wizzi-codegen.js2.function.generateParamConstraints.state', state
 			foreach item in state.candidates
 				foreach c in item.constraints
 					if c.constraintType === 'required'
@@ -146,7 +146,7 @@
 		param type
 		param hasCallback
 		param ctx
-		# log 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type 
+		# loog 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type 
 		if hasCallback
 			_ ctx.w("    return callback(error(")
 			_ ctx.w("        'InvalidArgument', '" + methodName + "', { parameter: '" + name + "', message: 'The " + name + " parameter must be " + type + ". Received: ' + " + name + " }")

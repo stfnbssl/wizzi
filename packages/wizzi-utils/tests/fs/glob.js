@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\fs\glob.js.ittf
 */
 'use strict';
@@ -27,7 +27,7 @@ describe("glob", function() {
         file.write(path.join(__dirname, 'ittf', 'globs2', 'one', 'globbed_2_one.ittf'), 'globbed 2 one')
         glob(path.join(__dirname, 'ittf', 'globs2', '**/*.ittf'), file, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             expect(result).to.be.an('array');

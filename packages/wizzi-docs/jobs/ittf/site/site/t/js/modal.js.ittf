@@ -4,9 +4,9 @@ $group
 		param ctx
 
 		set ctx.fragModal = wzui.element('#frag-modal')
-		log 'ctx.fragModal', ctx.fragModal
+		# loog 'ctx.fragModal', ctx.fragModal
 		set ctx.fragModalClose = wzui.element('#frag-modal .modal-close')
-		log 'ctx.fragModalClose', ctx.fragModalClose
+		# loog 'ctx.fragModalClose', ctx.fragModalClose
 		set ctx.fragModalContent = wzui.element('#frag-modal-content')
 		set ctx.fragModalClose.onclick
             function 
@@ -30,10 +30,10 @@ $group
 			var that = this
 
 			set this.fragModal = wzui.element('#frag-modal')
-			log 'this.fragModal', this.fragModal
+			# loog 'this.fragModal', this.fragModal
 
 			set this.fragModalClose = wzui.element('#frag-modal .modal-close')
-			log 'this.fragModalClose', this.fragModalClose
+			# loog 'this.fragModalClose', this.fragModalClose
 
 			set this.fragModalContent = wzui.element('#frag-modal-content')
 			set this.fragModalClose.onclick
@@ -65,12 +65,12 @@ $group
 				_ wzui.element
 					@ '#' + fragmentId
 			
-			log 'fragContentOriginalParent', fragmentId, fragContentOriginalParent
+			# loog 'fragContentOriginalParent', fragmentId, fragContentOriginalParent
 
 			var fragContent
 				_ wzui.element
 					@ '#' + fragmentId + ' div:first-of-type'
-			log 'fragContent', fragContent
+			# loog 'fragContent', fragContent
 
 					
 			set this.fragModal.style.display = "block"

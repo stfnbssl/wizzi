@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\reviewed\nodifier.js.ittf
 */
 'use strict';
@@ -42,12 +42,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -65,7 +65,7 @@ describe("nodifier", function() {
             sourceKey: 'f1'
          });
         var nodes = nodifier(lines, mTree);
-        // log 'nodifier nodes', nodes
+        // loog 'nodifier nodes', nodes
         expect(nodes).to.be.an('array');
         expect(nodes.length).to.be(1);
         expect(nodes[0].children).to.be.an('array');
@@ -140,7 +140,7 @@ describe("nodifier", function() {
             sourceKey: 'f1'
          });
         var nodes = nodifier(lines, mTree);
-        console.log('nodifier should throw WizziError', '\n' + nodes.toString());
+        // loog 'nodifier should throw WizziError', '\n' + nodes.toString()
         expect(nodes.__is_error).to.be(true);
         expect(nodes.data).to.be.an('object');
         expect(nodes.data.errorName).to.be('InvalidIttfError');

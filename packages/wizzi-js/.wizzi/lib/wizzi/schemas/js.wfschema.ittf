@@ -49,7 +49,7 @@
 			# > decl hasClasses = model.wzModelState.hasClasses
 			# The 'hasClasses' is set in the 'wzInitialize' method
 			# of the 'class' element.
-			# log 'wizzi-js.model.module', this.wzName
+			# loog 'wizzi-js.model.module', this.wzName
 			set this.wzModelState = ctx.modelState = {}
 
 		m hasFeature

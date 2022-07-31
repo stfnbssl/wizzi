@@ -64,7 +64,7 @@
 								{
 									@ parameter 'documentPath'
 									@ message 'Getting content of document: ' + documentPath
-						# log 'getModelContent.received', result
+						# loog 'getModelContent.received', result
 						return callback(null, result)
 
 	set module.exports = MongoDbStore

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\svg\document\gen\main.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ md.gen = function gen(model, ctx, callback) {
         if (err) {
             return callback(err);
         }
-        // log 'exit', myname, 'err', err
+        // loog 'exit', myname, 'err', err
         return callback(null, ctx);
     })
 }
@@ -77,7 +77,7 @@ md.genItems = function(items, ctx, options, callback) {
 md.getGenItem = function(ctx) {
     return function(model, callback) {
             
-            // log '***** known element', model.wzElement
+            // loog '***** known element', model.wzElement
             if (md.stm[model.wzElement]) {
                 md.stm[model.wzElement](model, ctx, function(err, done) {
                     if (err) {
@@ -100,7 +100,7 @@ md.getGenItem = function(ctx) {
 }
 ;
 md.stm.standardElement = function(model, ctx, callback) {
-    // log '***** standard element', model.wzElement
+    // loog '***** standard element', model.wzElement
     writeBeginTag(ctx, model.wzTag)
     writeAttributes(model, ctx);
     if (model.items.length > 0) {

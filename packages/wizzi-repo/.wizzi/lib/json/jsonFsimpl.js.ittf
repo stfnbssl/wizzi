@@ -57,7 +57,7 @@
 							else
 								new FsJson(this.fsJsonData)
 			set that.docManager = new DocumentManager(this.fsJson)
-			# log '***** json connected'
+			# loog '***** json connected'
 			return
 				_ callback
 					@ null
@@ -65,9 +65,9 @@
 
 		m close
 			if this.docManager
-				# log '***** json start closing'
+				# loog '***** json start closing'
 				set this.docManager = null
-				# log '***** json closed'
+				# loog '***** json closed'
 
 		jsonFsimpl/m( stat )
 			_ jsonDb.stat
@@ -101,7 +101,7 @@
 				f_cb( result )
 					var dir = []
 					foreach item in result
-						# log 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
+						# loog 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
 						_ dir.push(item.basename)
 					_ callback(null, dir)
 		

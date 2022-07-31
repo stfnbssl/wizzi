@@ -1,0 +1,64 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:35 GMT
+*/
+'use strict';
+
+//
+
+var sectionfragmentPersister = require('../persisters/sectionfragment');
+
+var md = module.exports = {};
+
+md.getSectionfragments = function(userName, projectName, sectionName, fragmentName, callback) {
+    sectionfragmentPersister.getSectionfragments(userName, projectName, sectionName, fragmentName, callback)
+}
+;
+
+md.getSectionfragment = function(userName, projectName, sectionName, fragmentName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    sectionfragmentPersister.get(userName, projectName, sectionName, fragmentName, callback)
+}
+;
+
+md.insertSectionfragment = function(userName, projectName, sectionName, fragmentName, callback) {
+    sectionfragmentPersister.exists(userName, projectName, sectionName, fragmentName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('sectionfragment', utils.buildResourcePath(userName, projectName, sectionName, fragmentName)));
+        }
+        var newItem = {
+            type: 'sectionfragment', 
+            userName: null, 
+            projectName: null, 
+            sectionName: null, 
+            fragmentName: null
+         };
+        sectionfragmentPersister.putSectionfragment(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateSectionfragment = function(item, callback) {
+    sectionfragmentPersister.put(item, callback)
+}
+
+.prototype.deleteSectionfragment = function(item, callback) {
+    sectionfragmentPersister.delete(item, callback)
+}
+

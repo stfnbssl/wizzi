@@ -7,35 +7,35 @@
 	function match
 		param key
 		param item
-		# log 'wizzi-repo.utils.collection.match', key, item
+		# loog 'wizzi-repo.utils.collection.match', key, item
 		if !key
-			# log 'wizzi-repo.utils.collection.match: true'
+			# loog 'wizzi-repo.utils.collection.match: true'
 			return true
 		elif key.hasOwnProperty('_id')
 			if item._id == null && key._id == null
 				return true
 			if item._id && item._id.equals(key._id)
-				# log 'wizzi-repo.utils.collection.match: true'
+				# loog 'wizzi-repo.utils.collection.match: true'
 				return true
 		elif key.hasOwnProperty('path')
 			if item.path == normalize(key.path)
-				# log 'wizzi-repo.utils.collection.match: true'
+				# loog 'wizzi-repo.utils.collection.match: true'
 				return true
 		elif key.hasOwnProperty('basename') && key.hasOwnProperty('parentId')
 			if item.basename === key.basename
 				if item.parentId == null && key.parentId == null
-					# log 'wizzi-repo.utils.collection.match: true'
+					# loog 'wizzi-repo.utils.collection.match: true'
 					return true
 				if item.parentId && item.parentId.equals(key.parentId)
-					# log 'wizzi-repo.utils.collection.match: true'
+					# loog 'wizzi-repo.utils.collection.match: true'
 					return true
 		elif key.hasOwnProperty('parentId')
 			if item.parentId == null && key.parentId == null
 				return true
 			if item.parentId && item.parentId.equals(key.parentId)
-				# log 'wizzi-repo.utils.collection.match: true'
+				# loog 'wizzi-repo.utils.collection.match: true'
 				return true
-		# log 'wizzi-repo.utils.collection.match: false'
+		# loog 'wizzi-repo.utils.collection.match: false'
 		return false
 
 	class Collection
@@ -52,10 +52,10 @@
 		m restoreIds
 			foreach item in this.items
 				if item._id && item._id.length
-					# log 'restoreIds._id', item._id, item._id.length
+					# loog 'restoreIds._id', item._id, item._id.length
 					set item._id = ObjectID.createFromHexString(item._id)
 				if item.parentId && item.parentId.length
-					# log 'restoreIds.parentId', item.parentId, item.parentId.length
+					# loog 'restoreIds.parentId', item.parentId, item.parentId.length
 					set item.parentId = ObjectID.createFromHexString(item.parentId)
 
 		m count
@@ -64,7 +64,7 @@
 
 		m find
 			param key
-			# log 'wizzi-repo.utils.collection.find', key
+			# loog 'wizzi-repo.utils.collection.find', key
 			var result = []
 			foreach item in this.items
 				if match(key, item)
@@ -78,7 +78,7 @@
 			if typeof(callback) == 'undefined'
 				set callback = options
 				set options = null
-			# log 'insertOne.doc', doc
+			# loog 'insertOne.doc', doc
 			if !doc._id
 				set doc._id = new ObjectID()
 			else
@@ -202,7 +202,7 @@
 
 		m toArray
 			callback
-			# log 'wizzi-repo.utils.collection.toArray'
+			# loog 'wizzi-repo.utils.collection.toArray'
 			_ callback(null, this.items)
 
 	function normalize

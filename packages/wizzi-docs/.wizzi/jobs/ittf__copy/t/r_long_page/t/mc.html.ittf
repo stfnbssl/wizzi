@@ -99,9 +99,9 @@
 					log el.checked
 					if el.checked
 						set seenTrue = true
-				log 'el_toc.checked', el_toc.checked
+				# loog 'el_toc.checked', el_toc.checked
 				set el_toc.checked = seenTrue
-				log 'el_toc.checked', el_toc.checked
+				# loog 'el_toc.checked', el_toc.checked
 
 			function mc_toggle_toc_Close
 				var el_toc = document.querySelector("input[id='mc-toggle-toc']")

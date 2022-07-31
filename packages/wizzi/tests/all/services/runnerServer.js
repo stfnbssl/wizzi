@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\services\runnerServer.js.ittf
 */
 'use strict';
@@ -15,8 +15,8 @@ var _ = require('lodash');
 var file = require('wizzi-utils').file;
 var verify = require('wizzi-utils').verify;
 
-var runnerServer = require('../../lib/services/runnerServer');
-var mocks = require('../mocks/misc');
+var runnerServer = require('../../../lib/services/runnerServer');
+var mocks = require('../../mocks/misc');
 
 describe("runnerServer", function() {
     var _wizziFactory = null;
@@ -40,7 +40,7 @@ describe("runnerServer", function() {
              }
          }, function(err, wf) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             _wizziFactory = wf;
@@ -50,7 +50,7 @@ describe("runnerServer", function() {
     it("should use the runnerServer to load a model", function(done) {
         runnerServer.instance.loadModel('tests', path.join(__dirname, 'ittf', 'mock1.tests.ittf'), {}, function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(wizziModel).to.be.an('object');

@@ -6,7 +6,7 @@
 		# set ctx.tagElementMapping
 		# return array of element tags
 		
-		# log 'element.getTags', this.tagName, ctx.tagElementMapping
+		# loog 'element.getTags', this.tagName, ctx.tagElementMapping
 		var tagElMap = ctx.tagElementMapping
 		if tagElMap == null
 			set ctx.tagElementMapping = tagElMap = {}
@@ -34,24 +34,4 @@
 					set tagElMap[tagString] = elId;
 				_ retval.push(tagString)
 
-        # OLD VIA
-			
-			if schemautil.startsWith(this.tagName, "|") || schemautil.endsWith(this.tagName, "|")
-				var tagString = this.tagName
-				if tagString != elId && typeof tagElMap[tagString] === 'undefined' 
-					set tagElMap[tagString] = elId;
-				_ retval.push(tagString)
-			else
-				var ss = this.tagName.split('|')
-				foreach s in ss
-					set tagString = s
-					if tagString != elId && typeof tagElMap[tagString] === 'undefined' 
-						set tagElMap[tagString] = elId;
-					_ retval.push(tagString)
-					if s.indexOf("-") > 0
-						set tagString = schemautil.replaceAll(s, '-', '')
-						if tagString != elId && typeof tagElMap[tagString] === 'undefined' 
-							set tagElMap[tagString] = elId;
-						_ retval.push(tagString)
-        
 		return retval;

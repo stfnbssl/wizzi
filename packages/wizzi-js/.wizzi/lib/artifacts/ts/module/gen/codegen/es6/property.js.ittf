@@ -44,7 +44,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.property
 		param ctx
 		param callback
 
-        # log 'property_step_1', model
+        # loog 'property_step_1', model
 
 		var ivalue
 			_ u.extractTS

@@ -46,7 +46,7 @@
 			param handlers
 			param callback
 
-			# log 'input', input
+			# loog 'input', input
             
 			var state
                 { 
@@ -123,7 +123,7 @@
 			for var i = 0; i < l; i++
 				set state.col++
                 set ch = input[i]
-				# log 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
+				# loog 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
 
 				function withEscapeCheck
 					param arr
@@ -148,7 +148,7 @@
 
 				function tryCommentOrString
 					param doSetString
-					# log 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
+					# loog 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
 					if ch === '/'
 						if setString()
 							return true
@@ -158,11 +158,11 @@
 							set state.cur = COMMENT_SINGLE_IS
 							return true
 						elif state.cur === COMMENT_MULTI_END_COULD
-							# log 'COMMENT_MULTI_END_COULD done', state.before_comment
+							# loog 'COMMENT_MULTI_END_COULD done', state.before_comment
 							set state.cur = state.before_comment
 							return true
 						else
-							# log 'COMMENT_COULD prev', state.cur
+							# loog 'COMMENT_COULD prev', state.cur
 							set state.before_comment = state.cur
 							set state.cur = COMMENT_COULD
 							return true
@@ -175,7 +175,7 @@
 							set state.cur = COMMENT_MULTI_IS
 							return true
 						elif state.cur === COMMENT_MULTI_IS
-							# log 'COMMENT_MULTI_END_COULD'
+							# loog 'COMMENT_MULTI_END_COULD'
 							set state.cur = COMMENT_MULTI_END_COULD
 							return true
 						else
@@ -195,7 +195,7 @@
 								set state.cur = COMMENT_MULTI_IS
 							return true
 						elif state.cur === COMMENT_SINGLE_IS
-							# log 'COMMENT_SINGLE_IS', ch === '\n'
+							# loog 'COMMENT_SINGLE_IS', ch === '\n'
 							if ch === '\n'
 								set state.cur = state.before_comment
 								set state.line++
@@ -216,7 +216,7 @@
 					var j, chb, gop = 1
 					for j = i+1; j < l; j++
 						set chb = input[j]
-						# log 'tryHB state', state.cur, 'ch', chb, 'gop', gop
+						# loog 'tryHB state', state.cur, 'ch', chb, 'gop', gop
 						if gop == 1
 							if chb === '{'
 								set gop++

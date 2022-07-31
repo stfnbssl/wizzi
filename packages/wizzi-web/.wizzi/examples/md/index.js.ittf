@@ -15,7 +15,7 @@
 			@ 'ittf'
 	foreach item in getFiles(ittfPath,'md')
 		set item = item.substring(0, item.length - '.md.ittf'.length)
-		log 'item', item
+		info 'item', item
 		_ execute(item)
 	+
 	function execute
@@ -35,14 +35,14 @@
 			_ getLoadModelContext
 				{
 			f_cb_test( mdWizziModel )
-				log 'mdWizziModel', mdWizziModel
+				info 'mdWizziModel', mdWizziModel
 				var ctx
 					_ mocks.getGenContext
 				_ mdgenerator.gen
 					@ mdWizziModel
 					@ ctx
 					f_cb_test( ctxout )
-						log 'ctxout', ctxout.getContent()
+						info 'ctxout', ctxout.getContent()
 						_ file.write
 							@ mdOutput
 							@ ctxout.getContent()

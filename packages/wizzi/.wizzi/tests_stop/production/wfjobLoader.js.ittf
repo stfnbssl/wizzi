@@ -36,9 +36,9 @@
 								@ 'ittf'
 						@ src 'mock1.wfjob.ittf'
 			f_cb_test( result )
-				log 'shoul load a wfjob: seenWfjobRequests', result.seenWfjobRequests
-				log 'shoul load a wfjob: pendingWfjobRequests', result.pendingWfjobRequests
-				log 'shoul load a wfjob: artifactInfoConfigs', result.artifactInfoConfigs
+				# loog 'shoul load a wfjob: seenWfjobRequests', result.seenWfjobRequests
+				# loog 'shoul load a wfjob: pendingWfjobRequests', result.pendingWfjobRequests
+				# loog 'shoul load a wfjob: artifactInfoConfigs', result.artifactInfoConfigs
 				tobe_array( result.pendingWfjobRequests, 1)
 				tobe_array( result.seenWfjobRequests, 1)
 				tobe_array( result.artifactInfoConfigs, 1)

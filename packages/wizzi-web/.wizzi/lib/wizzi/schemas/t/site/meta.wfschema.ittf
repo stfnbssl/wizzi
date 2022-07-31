@@ -17,7 +17,7 @@
 				_ cpath.splice(0, 0, prn.wzName.toLowerCase())
 				set prn = prn.wzParent
 			set this.categoryPath = cpath.join('/')
-			# log 'category.wzinitialize.name,categoryPath', this.wzName, this.categoryPath
+			# loog 'category.wzinitialize.name,categoryPath', this.wzName, this.categoryPath
 
 		m getDemos
 			var ret = []
@@ -42,7 +42,7 @@
 
 		m getDemosByPath
 			param path
-			# log 'category.getDemosByPath', path, this.categoryPath
+			# loog 'category.getDemosByPath', path, this.categoryPath
 			if this.categoryPath === path
 				return this.getDemos()
 			else
@@ -90,7 +90,7 @@
 				_ cpath.splice(0, 0, prn.wzName.toLowerCase())
 				set prn = prn.wzParent
 			set this.demoPath = cpath.join('/')
-			# log 'demo.wzinitialize.name,demoPath', this.wzName, this.demoPath
+			# loog 'demo.wzinitialize.name,demoPath', this.wzName, this.demoPath
 
 		m getUri
 			var sb = [ this.demoPath, '/index.html.ittf' ]

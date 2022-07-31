@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\class.js.ittf
 */
 'use strict';
@@ -51,7 +51,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();

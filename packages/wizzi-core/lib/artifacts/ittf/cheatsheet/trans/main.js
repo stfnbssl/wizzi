@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\ittf\cheatsheet\trans\main.js.ittf
 */
 'use strict';
@@ -16,8 +16,9 @@ var myname = 'wizzi-core.ittf.Cheatsheet.trans.main';
 
 md.trans = function(model, ctx, callback) {
     var transformedModel = {};
+    
+    // loog 'wizzi-core', 'transformer', 'model', model
     if (model.wzElement !== 'ittf') {
-        console.log('wizzi-core', 'transformer', 'model', model);
         callback(error('InvalidArgument', 'gen', 'Invalid model schema. Expected "ittf". Received: ' + model.wzElement, model))
     }
     try {
@@ -29,7 +30,7 @@ md.trans = function(model, ctx, callback) {
 }
 ;
 function executeTrans(model, ctx, callback) {
-    // log 'Starting transform ittf/cheatsheet'
+    // loog 'Starting transform ittf/cheatsheet'
     var workObj = {
         elements: [
             
@@ -43,7 +44,7 @@ function executeTrans(model, ctx, callback) {
         if (err) {
             return callback(err);
         }
-        // log 'executeTrans.result', result
+        // loog 'executeTrans.result', result
         callback(null, result)
     })
 }
@@ -58,7 +59,7 @@ function loadCheats(model, workObj) {
     var i, i_items=model.children, i_len=model.children.length, itemTop;
     for (i=0; i<i_len; i++) {
         itemTop = model.children[i];
-        // log 'name, value', itemTop.name, itemTop.value
+        // loog 'name, value', itemTop.name, itemTop.value
         if (itemTop.name === 'element') {
             var elementResult = {
                 name: itemTop.value, 
@@ -78,7 +79,7 @@ function loadCheats(model, workObj) {
                     for (k=0; k<k_len; k++) {
                         item = itemEl.children[k];
                         
-                        // log 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
+                        // loog 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
                         if (item.name === 'ittf') {
                             if (item.children.length == 1) {
                                 
@@ -129,27 +130,27 @@ function loadCheats(model, workObj) {
         }
     }
     var dump = stringify(workObj, null, 2);
-    // log 'loadCheats, _all_items.length', workObj._all_items.length
-    // log 'loadCheats, workObj\n', dump
+    // loog 'loadCheats, _all_items.length', workObj._all_items.length
+    // loog 'loadCheats, workObj\n', dump
 }
 function generateArtifacts(ctx, workObj, callback_main) {
     var counter = 0;
     async.mapSeries(workObj._all_items, function(item, callback) {
-        // log 'counter', ++counter
+        // loog 'counter', ++counter
         process.nextTick(function() {
             pretty.prettifyIttfHtmlFromString(item.ittfWrapped, function(err, pretty) {
                 if (err) {
                     return callback(err);
                 }
                 item.ittfPretty = pretty;
-                // log 'pretty', pretty
-                // log 'ittf.cheatsheet.ctx', ctx
-                // log 'counter.prettified', counter
+                // loog 'pretty', pretty
+                // loog 'ittf.cheatsheet.ctx', ctx
+                // loog 'counter.prettified', counter
                 
-                // log 'ctx.wizziFactory.loadMTreeBuildupScriptFromText', ctx.wizziFactory.loadMTreeBuildupScriptFromText
+                // loog 'ctx.wizziFactory.loadMTreeBuildupScriptFromText', ctx.wizziFactory.loadMTreeBuildupScriptFromText
                 if (item.render === 'script') {
                     ctx.wizziFactory.loadMTreeBuildupScriptFromText(item.ittfWrapped, {}, function(err, script) {
-                        // log 'counter', --counter
+                        // loog 'counter', --counter
                         if (err) {
                             item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2));
                         }
@@ -159,7 +160,7 @@ function generateArtifacts(ctx, workObj, callback_main) {
                         callback(null)
                     })
                 }
-                // log 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
+                // loog 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
                 else {
                     ctx.wizziFactory.loadModelAndGenerateArtifactFromText(item.ittfWrapped, {
                         artifactRequestContext: {
@@ -167,8 +168,8 @@ function generateArtifacts(ctx, workObj, callback_main) {
                             noGeneratorComments: true
                          }
                      }, artifactNameFromSchema(item.schema), function(err, artifactText) {
-                        // log 'err, artifactText', err, artifactText
-                        // log 'counter', --counter
+                        // loog 'err, artifactText', err, artifactText
+                        // loog 'counter', --counter
                         if (err) {
                             item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2));
                         }
@@ -186,8 +187,8 @@ function generateArtifacts(ctx, workObj, callback_main) {
             return callback(err);
         }
         var dump = stringify(workObj, null, 2);
-        // log 'workObj final\n', dump
-        // log 'Ending transform ittf/cheatsheet'
+        // loog 'workObj final\n', dump
+        // loog 'Ending transform ittf/cheatsheet'
         callback_main(null, {
             schema: workObj.schema, 
             elements: workObj.elements
@@ -290,7 +291,7 @@ var schemaArtifactMap = {
     text: 'text/document'
  };
 function artifactNameFromSchema(schema) {
-    // log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
+    // loog 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
     return schemaArtifactMap[schema];
 }
 var schemaIttfRootMap = {
@@ -311,7 +312,7 @@ var schemaIttfRootMap = {
     xml: 'xml'
  };
 function ittfRootFromSchema(schema) {
-    // log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+    // loog 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
     return schemaIttfRootMap[schema];
 }
 //

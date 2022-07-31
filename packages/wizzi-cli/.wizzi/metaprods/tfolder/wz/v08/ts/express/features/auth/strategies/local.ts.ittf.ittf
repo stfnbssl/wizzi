@@ -31,7 +31,7 @@ $group
                             :string 
                         param done
                             :any 
-                        log 'features.auth.strategies.local.verify.email,password', email, password
+                        # loog 'features.auth.strategies.local.verify.email,password', email, password
                         ${'$'}if wzCtx.Build.useMongoDb
                             _ authUserModel.findOne
                                 { 
@@ -41,7 +41,7 @@ $group
                                         param authuser
                                             :any
                                         if !authuser || !authuser.validatePassword(password)
-                                            log 'features.auth.strategies.local.verify.false'
+                                            # loog 'features.auth.strategies.local.verify.false'
                                             return 
                                                 _ done
                                                     @ null
@@ -49,7 +49,7 @@ $group
                                                     { 
                                                         { errors
                                                             @ 'email or password' 'is invalid'
-                                        log 'features.auth.strategies.local.verify.true.authuser', authuser
+                                        # loog 'features.auth.strategies.local.verify.true.authuser', authuser
                                         return done(null, authuser)
                                 ._ catch
                                     @ done

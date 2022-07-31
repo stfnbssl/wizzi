@@ -43,7 +43,7 @@
 						_ appender
 							@ mixedModel
 							f_cb_test( appendedModel )
-                                log 'appendedModel.toIttf()', appendedModel.toIttf()
+                                # loog 'appendedModel.toIttf()', appendedModel.toIttf()
                                 tobe_object( appendedModel )
                                 tobe_array( appendedModel.nodes, 1 )
                                 tobe_object( appendedModel.nodes[0] )
@@ -94,7 +94,7 @@
 						_ appender
 							@ mixedModel
 							f_cb_test( appendedModel )
-                                log 'appendedModel.toIttf()', appendedModel.toIttf()
+                                # loog 'appendedModel.toIttf()', appendedModel.toIttf()
                                 
                                 tobe_object( appendedModel )
                                 tobe_array( appendedModel.nodes, 1 )

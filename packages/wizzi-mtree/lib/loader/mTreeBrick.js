@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBrick.js.ittf
 */
 'use strict';
@@ -84,7 +84,7 @@ var MTreeBrick = (function () {
                 parent: parent, 
                 model: clonedModel
              };
-            // log 'clone node', node.name, node.value, node.$params
+            // loog 'clone node', node.name, node.value, node.$params
             
             // $fragment
             if (node.$params) {
@@ -111,7 +111,7 @@ var MTreeBrick = (function () {
             parent: parent, 
             model: clonedModel
          };
-        // log 'clone node', node.name, node.value, node.$params
+        // loog 'clone node', node.name, node.value, node.$params
         
         // $fragment
         if (node.$params) {
@@ -203,6 +203,7 @@ var MTreeBrick = (function () {
                 return local_error('MixinParamError', 'calcParamValues', 'Error evaluating: $params ' + params + ', missing value for not optional argument ' + i + ' = ' + name, mTreeBrickRoot);
             }
             var isIttfMacro = verify.isIttfMacro(value);
+            // loog 'wizzi-mtree.calcParamValues.isIttfMacro', isIttfMacro, value
             result.push({
                 name: name.substr(0, 1) === '&' ? name.substr(1) : name, 
                 value: value, 

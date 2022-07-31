@@ -18,10 +18,10 @@
 
 	_ eslint
 		f_cb_test(result)
-			log 'eslint.result', result
+			# loog 'eslint.result', result
 			_ eslintToEventStream
 				f_cb_test(result)
-					log 'eslintToEventStream.result', result
+					# loog 'eslintToEventStream.result', result
 	
 	function eslint
 		param callback
@@ -38,9 +38,9 @@
 			@ options1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

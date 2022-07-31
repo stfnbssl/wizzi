@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\debug.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -134,6 +134,32 @@ md.load = function(cnt) {
         return callback(null, null);
     }
     ;
+    cnt.stm.info = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.info');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.info. Got: ' + callback);
+        }
+        if (model.wzName && model.wzName.length > 0) {
+            ctx.w('console.log(' + model.wzName + ');');
+        }
+        return callback(null, null);
+    }
+    ;
+    cnt.stm.success = function(model, ctx, callback) {
+        if (typeof callback === 'undefined') {
+            throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.success');
+        }
+        if (typeof callback !== 'function') {
+            throw new Error('The callback parameter must be a function. In ' + myname + '.success. Got: ' + callback);
+        }
+        if (model.wzName && model.wzName.length > 0) {
+            ctx.w('console.log("\x1b[32m%s\x1b[0m", ' + model.wzName + ');');
+        }
+        return callback(null, null);
+    }
+    ;
     cnt.stm.warn = function(model, ctx, callback) {
         if (typeof callback === 'undefined') {
             throw new Error('Missing callback parameter in cnt.stm: ' + myname + '.warn');
@@ -142,9 +168,8 @@ md.load = function(cnt) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.warn. Got: ' + callback);
         }
         if (model.wzName && model.wzName.length > 0) {
-            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename';
+            ctx.w('console.log("\x1b[33m%s\x1b[0m", ' + model.wzName + ');');
         }
-        ctx.w('console.warn(' + text + ')' + u.semicolon(model.wzName));
         return callback(null, null);
     }
     ;
@@ -156,9 +181,8 @@ md.load = function(cnt) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.error. Got: ' + callback);
         }
         if (model.wzName && model.wzName.length > 0) {
-            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename';
+            ctx.w('console.log("\x1b[31m%s\x1b[0m", ' + model.wzName + ');');
         }
-        ctx.w('console.error(' + text + ')' + u.semicolon(model.wzName));
         return callback(null, null);
     }
     ;

@@ -14,7 +14,7 @@
 
 		m create
 			param meta
-			# log 'wz.ContextMenu.create'
+			# loog 'wz.ContextMenu.create'
 			set this.meta = meta
 
 			var menusContainer = wz.element('#' + this.menusContainerId)
@@ -41,7 +41,7 @@
 				=>
 					param event
 					var command = event.target.dataset['command']
-					# log 'clickListener.target', event.target, command
+					# loog 'clickListener.target', event.target, command
 					if meta.onClick
 						_ meta.onClick
 							{
@@ -52,21 +52,21 @@
 			_ wz.click
 				@ document
 				=>
-					# log 'document.onclick', meta.menu.id
+					# loog 'document.onclick', meta.menu.id
 					_ this.handleClose
 			
 			_ wz.global.on
 				@ 'wz.contextMenu.clear'
 				function
 					param target
-					# log 'wz.contextMenu.clear.target', target, meta.menu.id
+					# loog 'wz.contextMenu.clear.target', target, meta.menu.id
 					if target !== meta.menu.id
 						_ this.handleClose
 				@ this
 
 		m replace
 			param menuMeta
-			# log 'wz.ContextMenu.replace'
+			# loog 'wz.ContextMenu.replace'
 			# _createMenuItemsDiv removes the previous div
 			var itemsDiv
 				_ this._createMenuItemsDiv
@@ -136,7 +136,7 @@
 		m handleClose
 			_ wz.hide
 				@ '#' + this.meta.menu.id
-			# log 'handleClose', this.onClose
+			# loog 'handleClose', this.onClose
 			_ this.onClose
 
 	set wz.ContextMenu = wz_ContextMenu			

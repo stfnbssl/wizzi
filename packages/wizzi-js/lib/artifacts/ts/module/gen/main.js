@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\main.js.ittf
 */
 'use strict';
@@ -21,7 +21,7 @@ md.gen = function(model, ctx, callback) {
         return callback(error('InvalidArgument', 'gen', 'The model parameter must be an object. Received: ' + model));
     }
     if (model.wzElement !== 'xmodule') {
-        console.log('v5-wizzi-ts', 'artifact', 'model', model);
+        console.log("[31m%s[0m", 'v5-wizzi-ts', 'artifact', 'model', model);
         return callback(error('InvalidArgument', 'gen', 'Invalid model schema. Expected root element "xmodule". Received: ' + model.wzElement));
     }
     /**
@@ -37,7 +37,7 @@ md.gen = function(model, ctx, callback) {
                 return next_1();
             }
             var item_1 = model.statements[index_1];
-            // log 'main item_1.wzElement', item_1.wzElement
+            // loog 'main item_1.wzElement', item_1.wzElement
             if (item_1.wzElement === 'wzIife') {
                 wzIife.gen(item_1, ctx, function(err, notUsed) {
                     if (err) {

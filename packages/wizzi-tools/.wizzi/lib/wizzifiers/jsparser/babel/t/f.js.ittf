@@ -63,13 +63,13 @@
 					set options.couldBeText = true
 
 				$*
-                # log 'node : ${name} ----------------------------------------- parent ittf tag : ', parent.tag
+                # loog 'node : ${name} ----------------------------------------- parent ittf tag : ', parent.tag
 				foreach item in Object.keys(node)
 					if ['type', 'start', 'end', 'loc'].indexOf(item) < 0
 						if verify.isNotEmpty(node[item])
-							# log 'property', item, node[item]
+							# loog 'property', item, node[item]
 						else
-							# log 'property', item
+							# loog 'property', item
                 *$
 
 				$if skip
@@ -101,7 +101,7 @@
 			
 					$elif skip == false
 						if typeof __skip === 'undefined' || __skip == false
-							# log '### add ', ret.tag , 'to', parent.tag
+							# loog '### add ', ret.tag , 'to', parent.tag
                             $* 29/3/21 start replacement
                             _ processLeadingComments(node, parent, options)
 							$if retIsArray
@@ -119,7 +119,7 @@
 							$else
                                 $*
                                 if node.type == 'VariableDeclaration'
-                                    log 'node.leadingComments', node.leadingComments
+                                    # loog 'node.leadingComments', node.leadingComments
                                 *$
                                 _ processLeadingComments(node, ret, options)
                                 _ processTrailingComments(node, ret, options)
@@ -132,6 +132,6 @@
 					set options.couldBeText = false
                 $*
                 if node.type == 'VariableDeclaration'
-                    log 'f.VariableDeclaration.ret', ret
+                    # loog 'f.VariableDeclaration.ret', ret
                 *$
 

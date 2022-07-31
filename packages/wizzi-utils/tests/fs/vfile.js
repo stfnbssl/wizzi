@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\fs\vfile.js.ittf
 */
 'use strict';
@@ -108,7 +108,7 @@ describe("vfile", function() {
             extension: null, 
             documentContent: false
          });
-        // log 'should get files in a basefolder - files', files
+        // loog 'should get files in a basefolder - files', files
         expect(files).to.be.an('array');
         expect(files.length).to.be(2);
     });
@@ -138,7 +138,7 @@ describe("vfile", function() {
             documentNames: false, 
             documentContents: false
          });
-        // log 'folders', folders
+        // loog 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(2);
     });
@@ -150,7 +150,7 @@ describe("vfile", function() {
             tFoldersOnly: false, 
             documentNames: false
          });
-        // log 'folders', folders
+        // loog 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
         expect(folders[0].relPath).to.be.a('string');
@@ -171,7 +171,7 @@ describe("vfile", function() {
             documentNames: true, 
             documentContents: false
          });
-        // log 'folders', folders
+        // loog 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
         expect(folders[0].documents).to.be.an('array');
@@ -189,7 +189,7 @@ describe("vfile", function() {
             tFoldersOnly: false, 
             documentNames: true
          });
-        // log 'folders', folders
+        // loog 'folders', folders
         expect(folders).to.be.an('array');
         expect(folders.length).to.be(4);
         expect(folders[0].documents[0].relPath).to.be.a('string');

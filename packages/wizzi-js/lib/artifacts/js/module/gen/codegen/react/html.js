@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\react\html.js.ittf
 */
 'use strict';
@@ -8,7 +8,7 @@ var u = require('../util/stm');
 var md = module.exports = {};
 var myname = 'wizzi.js.artifacts.module.gen.codegen.react.html';
 md.htmlelement = function(cnt, model, tag, text, ctx, attrs, callback) {
-    // log 'enter in react/html *****************', tag
+    // loog 'enter in react/html *****************', tag
     if (u.isGraphEnclosed(tag)) {
         ctx.w(tag);
         return callback(null, null);
@@ -39,7 +39,7 @@ md.htmlelement = function(cnt, model, tag, text, ctx, attrs, callback) {
                 if (err) {
                     return callback(err);
                 }
-                // log 'exit from react/html *****************', tag
+                // loog 'exit from react/html *****************', tag
                 // @ callback
                 return callback(null, null);
             })
@@ -68,7 +68,7 @@ function htmlelement_open(cnt, model, ctx, tag, attrs, callback) {
     }
     repeater_1(0);
     function next_1() {
-        // log 'htmlelement_open.model.statements.length', model.statements.length
+        // loog 'htmlelement_open.model.statements.length', model.statements.length
         
         // end of open tag
         if (model.statements.length > 0) {

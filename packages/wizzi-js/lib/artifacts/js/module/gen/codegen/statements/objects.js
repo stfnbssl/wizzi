@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\objects.js.ittf
 */
 'use strict';
@@ -48,7 +48,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -174,7 +174,7 @@ md.load = function(cnt) {
         if (typeof callback === 'undefined') {
             throw new Error('Missing callback parameter in fn: ' + myname + '.jsPropertyOrValue_with_stm_children');
         }
-        // log 'js.module.statements.object.model.wzName, model.statements.length', model.wzName, model.statements.length
+        // loog 'js.module.statements.object.model.wzName, model.statements.length', model.wzName, model.statements.length
         var colon = ((ctx.isGraphql && !ctx.isNamedCallParam) || model.wzParent.wzElement == 'call') ? ' ' : ': ';
         
         // Attributes have been already processed
@@ -304,7 +304,7 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.jsObject. Got: ' + callback);
         }
-        // log 'model.jsPropertyOrValues', model.jsPropertyOrValues && model.jsPropertyOrValues.length
+        // loog 'model.jsPropertyOrValues', model.jsPropertyOrValues && model.jsPropertyOrValues.length
         if (model.jsPropertyOrValues && model.jsPropertyOrValues.length > 0) {
             if (!model.statements) {
                 model.statements = [];
@@ -327,7 +327,7 @@ md.load = function(cnt) {
                 jsObject_close(model, ctx, callback)
             })
         }
-        // log '++++ start', ctx.__ecma
+        // loog '++++ start', ctx.__ecma
         else {
             
             // is an object property
@@ -356,7 +356,7 @@ md.load = function(cnt) {
                     return callback(err);
                 }
                 
-                // log '++++ end', ctx.__ecma
+                // loog '++++ end', ctx.__ecma
                 if (ctx.__ecma === 'es6') {
                     ctx.__is_react_class = save__is_react_class;
                 }
@@ -416,7 +416,7 @@ md.load = function(cnt) {
         }
         var first = true,
             comma = true;
-        // log 'jsObject_close 1'
+        // loog 'jsObject_close 1'
         var len_1 = model.statements.length;
         function repeater_1(index_1) {
             if (index_1 === len_1) {
@@ -426,16 +426,16 @@ md.load = function(cnt) {
             
             // skip
             
-            // log 'jsObject_close 2'
+            // loog 'jsObject_close 2'
             if (model.isDslCall && item_1.wzElement == 'namedCallParam') {
                 process.nextTick(function() {
                     repeater_1(index_1 + 1);
                 })
             }
-            // log 'js.module.gen.jsObject_close.item_1', item_1.wzElement, u.isMemberAccessOrCall(item_1)
+            // loog 'js.module.gen.jsObject_close.item_1', item_1.wzElement, u.isMemberAccessOrCall(item_1)
             else {
                 
-                // log 'jsObject_close 3'
+                // loog 'jsObject_close 3'
                 if (u.isMemberAccessOrCall(item_1)) {
                     if (!!ctx.__inline == false) {
                         ctx.w('');
@@ -497,7 +497,7 @@ md.load = function(cnt) {
                         if (err) {
                             return callback(err);
                         }
-                        // log 'js.module.gen.jsObject_close.after.genItem'
+                        // loog 'js.module.gen.jsObject_close.after.genItem'
                         comma = ['comment', 'handlebar'].indexOf(item_1.wzElement) < 0;
                         process.nextTick(function() {
                             repeater_1(index_1 + 1);
@@ -509,7 +509,7 @@ md.load = function(cnt) {
         repeater_1(0);
         function next_1() {
             ;
-            // log 'jsObject_close 4'
+            // loog 'jsObject_close 4'
             if (!!ctx.__inline == false) {
                 ctx.w('');
             }
@@ -534,7 +534,7 @@ md.load = function(cnt) {
         u.writeComments(model, ctx);
         u.checkInlineEnter(model, ctx);
         var colon = (ctx.isGraphql && !ctx.isNamedCallParam) ? ' ' : ': ';
-        // log '600 jsArray'
+        // loog '600 jsArray'
         
         // is an array property
         if (model.wzName && model.wzName.length > 0) {
@@ -542,7 +542,7 @@ md.load = function(cnt) {
         }
         else {
             
-            // log '601 jsArray'
+            // loog '601 jsArray'
             if (model.statements.length == 0) {
                 ctx.write('[' + (model.wzName || '') + ']');
                 u.checkInlineExit(model, ctx);
@@ -557,16 +557,16 @@ md.load = function(cnt) {
         }
         ctx.indent();
         var needs_comma = false;
-        // log '602 jsArray'
+        // loog '602 jsArray'
         var len_1 = model.statements.length;
         function repeater_1(index_1) {
             if (index_1 === len_1) {
                 return next_1();
             }
             var item_1 = model.statements[index_1];
-            // log '607 jsArray'
+            // loog '607 jsArray'
             
-            // log '605 jsArray'
+            // loog '605 jsArray'
             if (u.isMemberAccessOrCall(item_1)) {
                 if (!!ctx.__inline == false) {
                     ctx.w('');
@@ -577,7 +577,7 @@ md.load = function(cnt) {
                         if (err) {
                             return callback(err);
                         }
-                        // log '603 jsArray'
+                        // loog '603 jsArray'
                         var len_2 = model.statements.length;
                         function repeater_2(index_2) {
                             if (index_2 === len_2) {
@@ -603,7 +603,7 @@ md.load = function(cnt) {
                         }
                     });
             }
-            // log '606 jsArray'
+            // loog '606 jsArray'
             if (needs_comma) {
                 if (ctx.__inline) {
                     ctx.write(', ');
@@ -617,7 +617,7 @@ md.load = function(cnt) {
                 if (err) {
                     return callback(err);
                 }
-                // log '604 jsArray'
+                // loog '604 jsArray'
                 if (!u.isComment(item_1)) {
                     needs_comma = true;
                 }

@@ -25,7 +25,7 @@
                 @ extension null
                 @ documentContent false
             f_cb_test( files )
-                log 'utils.getFiles.files', files
+                info 'utils.getFiles.files', files
                 _ file.getFiles
                     _ path.join
                         @ __dirname 
@@ -36,7 +36,7 @@
                         @ extension null
                         @ documentContent true
                     f_cb_test( files )
-                        log 'utils.getFilesWithContent.files', files
+                        info 'utils.getFilesWithContent.files', files
                         _ file.getFiles
                             _ path.join
                                 @ __dirname 
@@ -47,4 +47,4 @@
                                 @ extension null
                                 @ documentContent true
                             f_cb_test( files )
-                                log 'utils.getFilesWithContentDeep.files', files
+                                info 'utils.getFilesWithContentDeep.files', files

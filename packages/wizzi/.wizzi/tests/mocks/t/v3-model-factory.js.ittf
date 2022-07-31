@@ -7,7 +7,7 @@ $group
 	m getModelFactory
 		param schemaName
 		param mockBaseDir
-		log 'wizzi.tests.plugin.getModelFactory: schemaName, mockBaseDir', schemaName, mockBaseDir
+		# loog 'wizzi.tests.plugin.getModelFactory: schemaName, mockBaseDir', schemaName, mockBaseDir
 		var factory = this.modelFactories[schemaName] || null
 		if factory == null
 			var models = require('./wizziModels')
@@ -40,7 +40,7 @@ $group
 										@ null
 										@ models[ittfDocumentUri]
 								else
-									log 'wizzi.tests.plugin.createLoadModel', ittfDocumentUri, models
+									# loog 'wizzi.tests.plugin.createLoadModel', ittfDocumentUri, models
 									_ callback
 										{
 											@ __is_error true

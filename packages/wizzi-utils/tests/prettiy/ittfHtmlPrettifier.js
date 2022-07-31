@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\prettiy\ittfHtmlPrettifier.js.ittf
 */
 'use strict';
@@ -24,7 +24,7 @@ describe("asIsLoader", function() {
     it("should load an ittf tree as is and prettify it", function(done) {
         ittfDocumentGraph.createFrom(path.join(__dirname, 'ittf', 'basic.tests.ittf'), {}, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             // log? result
@@ -33,7 +33,7 @@ describe("asIsLoader", function() {
                 if (err) {
                     return callback(err);
                 }
-                // log 'html_lines', html_lines
+                // loog 'html_lines', html_lines
                 expect(html_lines).to.be.an('object');
                 expect(html_lines.prettyLines).to.be.an('array');
                 expect(html_lines.prettyLines.length).to.be(1);
@@ -47,7 +47,7 @@ describe("asIsLoader", function() {
             if (err) {
                 return callback(err);
             }
-            // log 'html_lines', html_lines
+            // loog 'html_lines', html_lines
             expect(html_lines).to.be.an('object');
             expect(html_lines.prettyLines).to.be.an('array');
             expect(html_lines.prettyLines.length).to.be(1);

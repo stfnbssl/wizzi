@@ -3,7 +3,7 @@
 	function ittfFsNode_step_1
         param callback
 		
-		log 'wizzi-utils.examples.ittfFsNode_step_1 START'
+		info 'wizzi-utils.examples.ittfFsNode_step_1 START'
 		
 		var folderPath
 			_ path.join
@@ -24,7 +24,7 @@
 	function ittfFsNode_step_1_outside
         param callback
 		
-		log 'wizzi-utils.examples.ittfFsNode_step_1_outside START'
+		info 'wizzi-utils.examples.ittfFsNode_step_1_outside START'
 		
 		var folderPath
 			_ path.join
@@ -49,7 +49,7 @@
         param callback
 		
 		var removeRoot = path.dirname(folderPath)
-		log 'folderPath, removeRoot', folderPath, removeRoot
+		info 'folderPath, removeRoot', folderPath, removeRoot
 		
 		# var baseFolder = path.basename(folderPath)
         var baseFolder = path.dirname(folderPath)
@@ -70,7 +70,7 @@
 								@ '**/node_modules/**/*.*'
 					f_cb_test( ittfs )
 						
-						# log 'ittfs\n', JSON.stringify(ittfs, null, 2)
+						# loog 'ittfs\n', JSON.stringify(ittfs, null, 2)
 
                         _ ittfGraph.createIttfDocumentGraphFrom
                             @ null
@@ -119,7 +119,7 @@
                                         # 'wzpackage' schema.
                                         _ root.toIttf(ittfDocumentGraph)
                     
-                                        # log 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                                        # loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
                                         _ ittfDocumentGraph.writeFile
                                             _ path.join
                                                 @ __dirname
@@ -136,7 +136,7 @@
 	function ittfFsNode_step_2
         param callback
 		
-		log 'wizzi-utils.examples.ittfFsNode_step_2 START'
+		info 'wizzi-utils.examples.ittfFsNode_step_2 START'
 
 		var folderPath
 			_ path.join
@@ -153,14 +153,14 @@
                         {
                             @ isDirectory true
                             @ file file
-                # log 'root', root
+                # loog 'root', root
                 var d1Path
                     _ path.join
                         @ folderPath
                         @ 'root.sample.ittf'
                 var added
                     _ root.addDocument(d1Path)
-                # log 'root', root
+                # loog 'root', root
                 var d2Path
                     _ path.join
                         @ folderPath
@@ -168,7 +168,7 @@
                         @ 'frag-1.sample.ittf'
                 set added
                     _ root.addDocument(d2Path)
-                # log 'root', root
+                # loog 'root', root
                 _ file.write
                     _ path.join
                         @ __dirname
@@ -180,9 +180,9 @@
                         @ 2
                 _ root.setInfo
                     f_cb_test()
-                        # log 'root', root
-                        log 'root.info.schemas', root.info.schemas
-                        log 'root.info.lib', root.info.lib
+                        # loog 'root', root
+                        info 'root.info.schemas', root.info.schemas
+                        info 'root.info.lib', root.info.lib
                         # tobe_string(root.info.schemas['md'].name, md)
                         # tobe_array(root.info.lib.documents, 1)
                         _ file.write
@@ -204,7 +204,7 @@
         param root
         param callback
         
-        log 'wizzi-utils.examples.ittfFsNode_step_3 START'
+        info 'wizzi-utils.examples.ittfFsNode_step_3 START'
         
         _ ittfGraph.createIttfDocumentGraphFrom
             @ null

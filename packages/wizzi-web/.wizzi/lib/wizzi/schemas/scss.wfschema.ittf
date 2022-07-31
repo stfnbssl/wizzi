@@ -40,7 +40,7 @@
 	e_tag( combinator, >, rule
 		m wzinitialize
 			_ _md.rule.prototype.wzInitialize.call(this, ctx);
-			log 'wzinitialize.combinator', this.wzName
+			# loog 'wzinitialize.combinator', this.wzName
 			var acc = []
 			var pseudoClasses = []
 			var seenProp = false
@@ -56,7 +56,7 @@
 	e_tag( parentRule, &, rule
 		
 		m wzinitialize
-			log 'wzinitialize.parentRule', this.wzName
+			# loog 'wzinitialize.parentRule', this.wzName
 			var acc = []
 			var selectorNames = []
 			var seenProp = false
@@ -92,7 +92,7 @@
 	e_tag( pseudoClass, :, rule
 		
 		m wzinitialize
-			log 'wzinitialize.pseudoClass', this.wzName
+			# loog 'wzinitialize.pseudoClass', this.wzName
 			var paramSelectorNames = []
 			foreach item in this.rules
 				_ paramSelectorNames.push(getSelectorName(item))

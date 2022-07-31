@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\glob\index.js.ittf
 */
 'use strict';
@@ -34,7 +34,7 @@ var childrenIgnored = common.childrenIgnored;
 var isIgnored = common.isIgnored;
 var once = require('./once');
 function glob(pattern, virtFS, options, cb) {
-    // log 'wizzi-utils.glob.index.pattern', pattern
+    // loog 'wizzi-utils.glob.index.pattern', pattern
     if (typeof(options) === 'function') {
         cb = options, options = {};
     }
@@ -64,17 +64,17 @@ var Glob  = (function ( EE) {
             return new Glob(pattern, virtFS, options, cb);
         }
         this.virtFS = virtFS;
-        // log 'wizzi-utils.Glob.ctor.pattern', pattern
+        // loog 'wizzi-utils.Glob.ctor.pattern', pattern
         setopts(this, pattern, options);
-        // log 'wizzi-utils.Glob.ctor.this.minimatch', this.minimatch
-        // log 'wizzi-utils.Glob.ctor.this.minimatch.set', this.minimatch.set
+        // loog 'wizzi-utils.Glob.ctor.this.minimatch', this.minimatch
+        // loog 'wizzi-utils.Glob.ctor.this.minimatch.set', this.minimatch.set
         var n = this.minimatch.set.length;
         this.matches = new Array(n);
         if (typeof(cb) === 'function') {
             cb = once(cb);
             this.on('error', cb);
             this.on('end', function(matches) {
-                // log 'on.end.cb.matches', matches.length
+                // loog 'on.end.cb.matches', matches.length
                 cb(null, matches);
             })
         }
@@ -93,7 +93,7 @@ var Glob  = (function ( EE) {
         sync = false;
         function done() {
             --self._processing;
-            // log '---------- done self._processing, sync', self._processing, sync
+            // loog '---------- done self._processing, sync', self._processing, sync
             if (self._processing <= 0) {
                 if (sync) {
                     process.nextTick(function() {
@@ -121,32 +121,32 @@ var Glob  = (function ( EE) {
         assert(this instanceof Glob);
         assert(typeof (cbDone) === 'function');
         this._processing++;
-        // log '_process.pattern.index.inGlobStar', pattern, index, inGlobStar
+        // loog '_process.pattern.index.inGlobStar', pattern, index, inGlobStar
         var n = 0;
         while (typeof (pattern[n]) === 'string') {
             n++;
         }
-        // log '_process.n', n
+        // loog '_process.n', n
         var prefix;
         switch (n) {
             case pattern.length: {
-                // log '_process.prefix.case._processSimple'
+                // loog '_process.prefix.case._processSimple'
                 this._processSimple(pattern.join('/'), index, cbDone)
                 return ;
             }
             case 0: {
                 prefix = null;
-                // log '_process.prefix.n=0', prefix
+                // loog '_process.prefix.n=0', prefix
                 break;
             }
             default: {
                 prefix = pattern.slice(0, n).join('/');
-                // log '_process.prefix.default', prefix
+                // loog '_process.prefix.default', prefix
                 break;
             }
         }
         var remain = pattern.slice(n);
-        // log 'pattern, remain', pattern, '-- / --', remain
+        // loog 'pattern, remain', pattern, '-- / --', remain
         var read;
         if (prefix === null) {
             read = '.';
@@ -165,7 +165,7 @@ var Glob  = (function ( EE) {
             return cbDone();
         }
         var isGlobStar = remain[0] === minimatch.GLOBSTAR;
-        // log 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
+        // loog 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
         if (isGlobStar) {
             this._processGlobStar(prefix, read, abs, remain, index, inGlobStar, cbDone);
         }
@@ -187,7 +187,7 @@ var Glob  = (function ( EE) {
         var negate = !!this.minimatch.negate;
         var rawGlob = pn._glob;
         var dotOk = this.dot || rawGlob.charAt(0) === '.';
-        // log '***** _processReaddir2 pn, negate, rawGlob, dotOk', pn, negate, rawGlob, dotOk
+        // loog '***** _processReaddir2 pn, negate, rawGlob, dotOk', pn, negate, rawGlob, dotOk
         var matchedEntries = [];
         for (var i = 0; i < entries.length; i++) {
             var e = entries[i];
@@ -253,7 +253,7 @@ var Glob  = (function ( EE) {
         cbDone();
     }
     Glob .prototype._emitMatch = function(index, ePath, e) {
-        // log '***** _emitMatch.index,ePath,e', index, ePath, e
+        // loog '***** _emitMatch.index,ePath,e', index, ePath, e
         if (isIgnored(this, ePath)) {
             return ;
         }
@@ -289,7 +289,7 @@ var Glob  = (function ( EE) {
         var self = this;
         var lstatcb = inflight(lstatkey, lstatcb_);
         
-        // log 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
+        // loog 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
         if (lstatcb) {
             this.virtFS.stat(abs, lstatcb);
         }
@@ -324,7 +324,7 @@ var Glob  = (function ( EE) {
             }
         }
         var self = this;
-        // log 'wizzi-utils.Glob._readdir.abs', abs
+        // loog 'wizzi-utils.Glob._readdir.abs', abs
         this.virtFS.readdir(abs, readdirCb(this, abs, cb))
         function readdirCb(self, abs, cb) {
             return function(er, entries) {
@@ -393,13 +393,13 @@ var Glob  = (function ( EE) {
     }
     Glob .prototype._processGlobStar = function(prefix, read, abs, remain, index, inGlobStar, cbDone) {
         var self = this;
-        // log '_processGlobStar'
+        // loog '_processGlobStar'
         this._readdir(abs, inGlobStar, function(er, entries) {
             self._processGlobStar2(prefix, read, abs, remain, index, inGlobStar, entries, cbDone);
         })
     }
     Glob .prototype._processGlobStar2 = function(prefix, read, abs, remain, index, inGlobStar, entries, cbDone) {
-        // log '_processGlobStar2.entries', entries
+        // loog '_processGlobStar2.entries', entries
         if (!(entries)) {
             return cbDone();
         }
@@ -420,12 +420,12 @@ var Glob  = (function ( EE) {
             this._process(instead, index, true, cbDone);
             var below = gspref.concat(ePath, remain);
             this._process(below, index, true, cbDone);
-            // log '_processGlobStar2 e.instead.below', ePath, instead, below
+            // loog '_processGlobStar2 e.instead.below', ePath, instead, below
         }
         cbDone();
     }
     Glob .prototype._processSimple = function(prefix, index, cbDone) {
-        // log '***** _processSimple', prefix, index
+        // loog '***** _processSimple', prefix, index
         var self = this;
         this._stat(prefix, function(er, exists) {
             self._processSimple2(prefix, index, er, exists, cbDone);
@@ -443,8 +443,8 @@ var Glob  = (function ( EE) {
             if (prefix.charAt(0) === '/') {
                 prefix = path.join(this.root, prefix);
             }
-            // log '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
-            // log '***** wizzi-utils.Glob._processSimple2.prefix', prefix
+            // loog '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
+            // loog '***** wizzi-utils.Glob._processSimple2.prefix', prefix
             else {
                 prefix = path.resolve(this.root, prefix);
                 if (trail) {
@@ -496,7 +496,7 @@ var Glob  = (function ( EE) {
         var self = this;
         var statcb = inflight('stat\0' + abs, lstatcb_);
         
-        // log 'wizzi-utils.Glob._stat.abs', abs
+        // loog 'wizzi-utils.Glob._stat.abs', abs
         if (statcb) {
             this.virtFS.stat(abs, statcb);
         }

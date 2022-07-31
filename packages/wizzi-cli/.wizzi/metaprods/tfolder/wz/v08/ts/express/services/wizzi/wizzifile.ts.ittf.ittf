@@ -46,7 +46,7 @@ $group
                 _ getConfigValues
                     @ appConfig.ittfPath
                     @ appConfig.dataPath
-            log 'wizziConfig', wizziConfig
+            # loog 'wizziConfig', wizziConfig
             set runnerModelsFolder
                 _ path.join
                     @ appConfig.ittfPath
@@ -57,7 +57,7 @@ $group
                     set runnerModelsFolder + '/**/*.ittf'
                     { 
                         @ persistent true
-            log 'wizzifile is watching', runnerModelsFolder + '/**/*.ittf'
+            success 'wizzifile is watching', runnerModelsFolder + '/**/*.ittf'
 
 
     set md.models =
@@ -120,7 +120,7 @@ $group
                     # Set the path of the html page
                     # for simple text editing of non IttfDocuments
                     # 
-            log 'wizzifile.onConfig'
+            info 'wizzifile.onConfig'
             _ callback(null)
     +
     set md.onStart =
@@ -131,7 +131,7 @@ $group
                 :any 
             param callback
                 :ref Function
-            log 'wizzifile.onStart.enter'
+            info 'wizzifile.onStart.enter'
             set runnerServerInstance = runnerServer
             _ runnerServer.registerfsFactory
                 @ FACTORY_SITE
@@ -142,7 +142,7 @@ $group
                             ${'$'}foreach item in wzCtx.Build.wizzi.plugins
                                 @ '${'$'}{item}'
             _ runnerServer.registerApi('default', md.defaultApi)
-            log 'wizzifile.onStart.exit'
+            info 'wizzifile.onStart.exit'
             _ callback(null)
     +
     set md.onPrepare =
@@ -185,7 +185,7 @@ $group
                 :string 
             param query
                 :string 
-            log 'wizzifile.defaultApi.request', name, query
+            info 'wizzifile.defaultApi.request', name, query
             if name === 'demos'
                 const model = md.models['mainsite']
                 return model.getDemosByPath(query)
@@ -204,7 +204,7 @@ $group
             :ref Function
             :optional 
         var mainSiteIttfPath = path.join(runnerModelsFolder, 'main.site.ittf')
-        log 'wizzifile loading', mainSiteIttfPath
+        info 'wizzifile loading', mainSiteIttfPath
         _ runnerServerInstance.loadModel
             @ FACTORY_SITE
             @ MODEL_TICKET_MAINSITE
@@ -222,7 +222,7 @@ $group
                     else
                         throw err
                 set md.models[MODEL_TICKET_MAINSITE] = wizziModel
-                log 'wizzifile loaded', mainSiteIttfPath
+                info 'wizzifile loaded', mainSiteIttfPath
                 if callback
                     _ callback(null)
     

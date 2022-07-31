@@ -18,7 +18,7 @@
 				@ filePathNew
 				@ content
 				f_cb_done( r )
-					log 'should write a file', err, r
+					info 'should write a file', err, r
 					tobe_string( r.code, DOCUMENT_WRITTEN )
 					tobe_string_value( r.item.content, content )
 
@@ -28,7 +28,7 @@
 				@ filePathNew
 				@ content
 				f_cb_done( r )
-					log 'should be not modified', err, r
+					info 'should be not modified', err, r
 					tobe_string( r.code, DOCUMENT_NOT_MODIFIED )
 
 		it-async should write into an existing folder
@@ -36,7 +36,7 @@
 				@ filePathOld
 				@ content
 				f_cb_done( r )
-					log 'should write into an existing folder', err, r
+					info 'should write into an existing folder', err, r
 					tobe_string( r.code, DOCUMENT_WRITTEN )
 					tobe_string_value( r.item.content, content )
 
@@ -44,7 +44,7 @@
 			_ doc.readFile
 				@ filePathOld
 				f_cb_done( r )
-					log 'should read', err, r
+					info 'should read', err, r
 					tobe_string_value( r, content )
 
 		it-async should overwrite an existing file
@@ -52,7 +52,7 @@
 				@ filePathOld
 				@ content + ' ' + content
 				f_cb_done( r )
-					log 'should overwrite an existing file', err, r
+					info 'should overwrite an existing file', err, r
 					tobe_string( r.code, DOCUMENT_WRITTEN )
 					tobe_string_value( r.item.content, content + ' ' + content )
 

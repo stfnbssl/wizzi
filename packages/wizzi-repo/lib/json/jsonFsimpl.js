@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\jsonFsimpl.js.ittf
 */
 'use strict';
@@ -52,20 +52,20 @@ var JsonFsImpl = (function () {
         this.fsJson = options.fsJson ? options.fsJson : options.fsJsonData ? new FsJson(options.fsJsonData) : new FsJson(this.fsJsonData);
         ;
         that.docManager = new DocumentManager(this.fsJson);
-        // log '***** json connected'
+        // loog '***** json connected'
         return callback(null, that.docManager);
     }
     JsonFsImpl.prototype.close = function() {
         
-        // log '***** json start closing'
+        // loog '***** json start closing'
         
-        // log '***** json closed'
+        // loog '***** json closed'
         if (this.docManager) {
             this.docManager = null;
         }
     }
     JsonFsImpl.prototype.stat = function(documentUri, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.stat.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.stat.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'stat', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -77,10 +77,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.stat.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.stat.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -95,7 +95,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.lstat = function(documentUri, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.lstat.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.lstat.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'lstat', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -107,10 +107,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.lstat.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.lstat.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -125,7 +125,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.readFile = function(documentUri, options, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.readFile.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.readFile.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -141,10 +141,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.readFile.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.readFile.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -159,7 +159,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.writeFile = function(documentUri, content, options, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.writeFile.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.writeFile.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -175,10 +175,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.writeFile.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.writeFile.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -193,7 +193,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.readdir = function(documentUri, options, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.readdir.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.readdir.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -209,10 +209,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -226,7 +226,7 @@ var JsonFsImpl = (function () {
                 var i, i_items=result, i_len=result.length, item;
                 for (i=0; i<i_len; i++) {
                     item = result[i];
-                    // log 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
+                    // loog 'wizzi-repo.json.jsonFsimpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
                     dir.push(item.basename);
                 }
                 callback(null, dir);
@@ -234,7 +234,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.mkdir = function(documentUri, options, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.mkdir.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.mkdir.documentUri', documentUri
         if (typeof(callback) === 'undefined' && verify.isFunction(options)) {
             callback = options;
             options = {};
@@ -250,10 +250,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.mkdir.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.mkdir.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -268,7 +268,7 @@ var JsonFsImpl = (function () {
         })
     }
     JsonFsImpl.prototype.unlink = function(documentUri, callback) {
-        // log 'wizzi-repo.json.jsonFsimpl.unlink.documentUri', documentUri
+        // loog 'wizzi-repo.json.jsonFsimpl.unlink.documentUri', documentUri
         if (verify.isFunction(callback) === false) {
             throw new Error(error('InvalidArgument', 'unlink', 'The callback parameter must be a function. Received: ' + callback));
         }
@@ -280,10 +280,10 @@ var JsonFsImpl = (function () {
         }
         var parsedUri = jsonUriParser(documentUri, this.jsondbBaseFolder);
         if (parsedUri && parsedUri.__is_error) {
-            console.log('__is_error ', parsedUri);
+            console.log("[31m%s[0m", '__is_error ', parsedUri);
             return callback(parsedUri);
         }
-        // log 'wizzi-repo.json.jsonFsimpl.unlink.parsedUri', parsedUri
+        // loog 'wizzi-repo.json.jsonFsimpl.unlink.parsedUri', parsedUri
         var that = this;
         this.db(function(err, jsonDb) {
             if (err) {
@@ -312,7 +312,7 @@ var JsonFsImpl = (function () {
     JsonFsImpl.prototype.toJson = function(callback) {
         this.fsJson.toJson(function(err, json) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             return callback(null, json);

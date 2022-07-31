@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\es6\htmlReact.js.ittf
 */
 'use strict';
@@ -9,7 +9,7 @@ var u = require('../../../../../js/module/gen/codegen/util/stm');
 var md = module.exports = {};
 var myname = 'wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact';
 md.htmlelement = function(cnt, model, tag, text, ctx, attrs, comments, callback) {
-    // log 'enter in htmlReact', 'tag', tag, 'model.wzElement', model.wzElement, 'u.parentIsHtmlElement(model)', u.parentIsHtmlElement(model), 'u.isArgumentOfCall(model)', u.isArgumentOfCall(model), 'u.isGraphEnclosed(tag)', u.isGraphEnclosed(tag), 'attrs.length', attrs.length
+    // loog 'enter in htmlReact', 'tag', tag, 'model.wzElement', model.wzElement, 'u.parentIsHtmlElement(model)', u.parentIsHtmlElement(model), 'u.isArgumentOfCall(model)', u.isArgumentOfCall(model), 'u.isGraphEnclosed(tag)', u.isGraphEnclosed(tag), 'attrs.length', attrs.length
     if (u.isGraphEnclosed(tag)) {
         u.writeComments(model, ctx);
         u.checkInlineEnter(model, ctx);
@@ -47,7 +47,7 @@ md.htmlelement = function(cnt, model, tag, text, ctx, attrs, comments, callback)
                 if (err) {
                     return callback(err);
                 }
-                // log 'exit from htmlReact', tag
+                // loog 'exit from htmlReact', tag
                 u.checkInlineExit(model, ctx);
                 return callback(null, null);
             })
@@ -62,7 +62,7 @@ function htmlelement_open(cnt, model, ctx, tag, attrs, comments, callback) {
     if (u.parentIsHtmlElement(model) == true) {
     }
     // begin open tag and write attributes
-    // log 'htmlelement_open.tag', tag
+    // loog 'htmlelement_open.tag', tag
     ctx.write("<" + tag);
     u.genTSTypeParameterInsts(model, ctx, cnt, (err, notUsed) => {
     
@@ -94,7 +94,7 @@ function htmlelement_open(cnt, model, ctx, tag, attrs, comments, callback) {
         }
         repeater_1(0);
         function next_1() {
-            // log 'htmlelement_open.model.statements.length', model.statements.length
+            // loog 'htmlelement_open.model.statements.length', model.statements.length
             cnt.genItems(comments, ctx, {
                 indent: false
              }, function(err, notUsed) {
@@ -121,7 +121,7 @@ function htmlelement_open(cnt, model, ctx, tag, attrs, comments, callback) {
 function htmlelement_attribute(cnt, a, ctx, singleline, callback) {
     const writer = singleline ? 'w' : 'write';
     const aindent = singleline ? '' : ' ';
-    // log 'htmlelement_attribute', a
+    // loog 'htmlelement_attribute', a
     if (a.statements && a.statements.length > 0) {
         u.writeComments(a, ctx, true);
     }

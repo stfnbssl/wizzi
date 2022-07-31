@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statement.js.ittf
 */
 'use strict';
@@ -196,7 +196,7 @@ md.genItem = function(model, ctx, callback) {
             stm(model, ctx, callback);
         }
         else {
-            console.log(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model);
+            console.log(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model, __filename);
             return callback(ctx.error(myname + '. Unknown statement tag/element: ' + model.wzTag + '/' + model.wzElement, model));
         }
     }
@@ -255,7 +255,7 @@ md.genItems = function(statements, ctx, options, callback) {
 }
 ;
 md.stm.codeline = function(model, ctx, callback) {
-    console.log('codeline ', model.wzName);
+    // loog 'codeline ', model.wzName
     
     // _ ctx.w(model.wzName)
     if (u.isTopStatement(model, ctx)) {

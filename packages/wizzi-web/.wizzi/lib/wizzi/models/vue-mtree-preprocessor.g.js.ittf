@@ -6,7 +6,7 @@
 			param mTree
 			param context
 
-			# log 'preprocess.mTree', mTree
+			# loog 'preprocess.mTree', mTree
 
 			foreach item in mTree.nodes[0].children
 				_ level1(item)
@@ -87,7 +87,7 @@
 		param model
 		param newN
 		
-		# log 'wrapChild', model.children
+		# loog 'wrapChild', model.children
 
 		_ copyNodeAttrsDeep
 			@ model
@@ -137,18 +137,18 @@
 		param state
 
 		if state.isTemplate
-			log 'preprocessNode', node.n, node.v
+			# loog 'preprocessNode', node.n, node.v
 			if ['<', '@', '.', '#', '+'].indexOf(node.n) < 0
 				if isVueStdAttribute(node) == false
 					if node.n.substr(0, 2) === 'v-' ||
 						\b ['router-link', 'router-view'].indexOf(node.n) > -1
 						set node.v = node.n + ' ' + node.v
 						set node.n = '<'
-						log 'preprocessNode 2', node.n, node.v
+						# loog 'preprocessNode 2', node.n, node.v
 					elif isHtmlTag(node) == false
 						set node.v = node.n + ' ' + node.v
 						set node.n = '@'
-						log 'preprocessNode 2', node.n, node.v
+						# loog 'preprocessNode 2', node.n, node.v
 
 		return false
 

@@ -15,15 +15,15 @@
         var text = 'alba chiara'
 
         var hash = encdec.encrypt(text)
-        log 'encdec ', text, '=', encdec.decrypt(hash), hash
+        info 'encdec ', text, '=', encdec.decrypt(hash), hash
 
         set hash = encdec.encrypt(text)
-        log 'encdec ', text, '=', encdec.decrypt(hash), hash
+        info 'encdec ', text, '=', encdec.decrypt(hash), hash
 
         set hash = encdec.encryptSimple(text)
-        log 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
+        info 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
 
         set hash = encdec.encryptSimple(text)
-        log 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
+        info 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
 
 

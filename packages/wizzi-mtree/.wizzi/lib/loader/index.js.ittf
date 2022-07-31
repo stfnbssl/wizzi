@@ -46,7 +46,7 @@
 				return
 					_ callback(loadContext)
             
-			# log 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
+			# loog 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
 			_ MTreeBrickProvider.createFromUri
                 @ primaryIttfDocumentUri
                 @ loadContext
@@ -58,7 +58,7 @@
 					var primaryMTreeBrick = createdProvider.getPrimaryMTreeBrick()
                     if !primaryMTreeBrick.nodes || primaryMTreeBrick.nodes.length == 0
                         return callback(null, primaryMTreeBrick)
-					# log 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
+					# loog 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
 					# resolve $-- (front matter) commands
                     _ frontMatter
                         @ primaryMTreeBrick
@@ -88,10 +88,10 @@
                                                             param err
                                                             param finalMTree
                                                             if err
-                                                                # log 'wizzi-mTree.loader.index.err', err
+                                                                # loog 'wizzi-mTree.loader.index.err', err
                                                                 set err.ittfDocumentUri = primaryIttfDocumentUri
                                                                 return callback(err)
-                                                            # log 'wizzi-mTree.loader.index.createdProvider.loadHistory', createdProvider.loadHistory
+                                                            # loog 'wizzi-mTree.loader.index.createdProvider.loadHistory', createdProvider.loadHistory
                                                             set finalMTree.loadHistory = createdProvider.loadHistory
                                                             _ loadContext.productionContext.addEvaluatedMTree(primaryIttfDocumentUri, finalMTree)
                                                             _ callback(null, finalMTree)
@@ -177,7 +177,7 @@
 					var primaryMTreeBrick = createdProvider.getPrimaryMTreeBrick()
                     if !primaryMTreeBrick.nodes || primaryMTreeBrick.nodes.length == 0
                         return callback(null, primaryMTreeBrick)
-					# log 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
+					# loog 'wizzi-mtree.loader.index.primaryMTreeBrick', primaryMTreeBrick.dump()
 					# resolve $-- (front matter) commands
                     _ frontMatter
                         @ primaryMTreeBrick
@@ -214,10 +214,10 @@
 		#
 	function normalizeRequestContext
         param loadContext
-		# log 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext
+		# loog 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext
 
 		# for var k in loadContext
-			# log 'normalizeRequestContext.k', k
+			# loog 'normalizeRequestContext.k', k
         
 		set loadContext.productionContext = loadContext.__productionManager.productionContext
 

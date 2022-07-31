@@ -77,7 +77,7 @@
 									@ 'Parameter folderPath must be an existing folder, ' + folderPath + ' not found'
 
 					var removeRoot = path.dirname(folderPath)
-					# log 'folderPath, removeRoot', folderPath, removeRoot
+					# loog 'folderPath, removeRoot', folderPath, removeRoot
 					var baseFolder = path.basename(folderPath)
 
 					_ file.getGlobbedFilesEx
@@ -94,7 +94,7 @@
 									@ '**/node_modules/**/*.*'
 						f_cb_test( ittfs )
 						
-							# log 'ittfs\n', JSON.stringify(ittfs, null, 2)
+							# loog 'ittfs\n', JSON.stringify(ittfs, null, 2)
 						
 							_ ittfGraph.createIttfDocumentGraphFrom
                                 @ null
@@ -137,7 +137,7 @@
                                             # 'wzpackage' schema.
                                             _ root.toIttf(ittfDocumentGraph)
                     
-                                            # log 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                                            # loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
 
                                             return
                                                 _ callback

@@ -63,18 +63,18 @@
             _ this.w()
 
 		m setLastNotEmptyLine
-            # log 'setLastNotEmptyLine.this.currentline.begin', this.currentline, this.lines.length
+            # loog 'setLastNotEmptyLine.this.currentline.begin', this.currentline, this.lines.length
             if this.currentline != null && this.currentline.isEmpty() == false
                 return
             while this.lines.length > 0
-                # log 'setLastNotEmptyLine.loop', this.lines[this.lines.length - 1], this.lines[this.lines.length - 1].isEmpty()
+                # loog 'setLastNotEmptyLine.loop', this.lines[this.lines.length - 1], this.lines[this.lines.length - 1].isEmpty()
                 if this.lines[this.lines.length - 1].isEmpty() == false
                     set this.currentline = this.lines[this.lines.length - 1]
                     _ this.lines.pop()
                     break
                 else
                     _ this.lines.pop()
-            # log 'setLastNotEmptyLine.this.currentline.end', this.currentline, this.lines.length
+            # loog 'setLastNotEmptyLine.this.currentline.end', this.currentline, this.lines.length
 
         m _lastLineNotBlank
             if this.currentline != null && this.currentline.isEmpty() == false

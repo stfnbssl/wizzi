@@ -32,16 +32,24 @@
 		# log 151
 		r_cb()
 
+	stm( info )
+        if model.wzName && model.wzName.length > 0
+		    _ ctx.w('console.log(' + model.wzName + ');')
+		r_cb()
+
+	stm( success )
+        if model.wzName && model.wzName.length > 0
+            _ ctx.w('console.log("\x1b[32m%s\x1b[0m", ' + model.wzName + ');'); 
+		r_cb()
+
 	stm( warn )
         if model.wzName && model.wzName.length > 0
-            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename'
-		_ ctx.w('console.warn(' + text + ')' + u.semicolon(model.wzName))
+            _ ctx.w('console.log("\x1b[33m%s\x1b[0m", ' + model.wzName + ');'); 
 		r_cb()
 
 	stm( error )
         if model.wzName && model.wzName.length > 0
-            var text = model.wzName.trim().endsWith(',') ? model.wzName + '__filename' : model.wzName + ', __filename'
-		_ ctx.w('console.error(' + text + ')' + u.semicolon(model.wzName))
+            _ ctx.w('console.log("\x1b[31m%s\x1b[0m", ' + model.wzName + ');'); 
 		r_cb()
 
 	stm( chalk )

@@ -1,27 +1,27 @@
 module
 
 	function sayHello
-		log 'Hello'
+		success 'Hello'
 
 	function sayHello
 		param name
-		log 'Hello ' + name
+		success 'Hello ' + name
 
 	function sayHello
 		string name
-		log 'Hello ' + name
+		success 'Hello ' + name
 
 	function sayHello
 		string name
 		callback
-		log 'Hello ' + name
+		success 'Hello ' + name
 		r_cb()
 
 	function sayHello
 		string name
 		any greetings
 		callback
-		log 'Hello ' + name + '. ' + greetings
+		success 'Hello ' + name + '. ' + greetings
 		r_cb()
 
 	function sayHello

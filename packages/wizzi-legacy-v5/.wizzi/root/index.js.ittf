@@ -30,7 +30,7 @@
 	if file.exists(jsModelTypeFile)
 		set md.jsModelType = require('./lib/wizzi/models/js-model.g')
 	else
-		log 'WARNING module ./lib/wizzi/models/js-model.g NOT FOUND. During current version bootstrap is OK'
+		warn 'WARNING module ./lib/wizzi/models/js-model.g NOT FOUND. During current version bootstrap is OK'
 	
 	genArtifact( html, Document )
 	

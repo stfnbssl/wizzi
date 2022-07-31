@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\json\toml\gen\main.js.ittf
 */
 'use strict';
@@ -18,13 +18,13 @@ md.gen = function(model, ctx, callback) {
         return callback(error('InvalidArgument', 'gen', 'The model parameter must be an object. Received: ' + model));
     }
     try {
-        // log 'model', model
+        // loog 'model', model
         delete model.___exportName
         var i, i_items=Object.keys(model), i_len=Object.keys(model).length, key;
         for (i=0; i<i_len; i++) {
             key = Object.keys(model)[i];
             var item = model[key];
-            // log 'key', key
+            // loog 'key', key
             if (verify.isObject(item)) {
                 ctx.w('[' + key + ']')
                 writeObject(item, ctx, true)
@@ -32,7 +32,7 @@ md.gen = function(model, ctx, callback) {
             else if (verify.isArray(item)) {
                 ctx.w(key + ' = [' + writeArray(item, ctx) + ']')
             }
-            // log 'key', key, 'value', verify.isString(item) ? '"' + item + '"' : item
+            // loog 'key', key, 'value', verify.isString(item) ? '"' + item + '"' : item
             else {
                 ctx.w(key + ' = ' + (verify.isString(item) ? ('"' + item + '"') : item))
             }

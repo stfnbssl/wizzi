@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\fs\document.js.ittf
 */
 'use strict';
@@ -59,7 +59,7 @@ var Document = (function () {
                 deep: true, 
                 documentContent: true
              });
-            // log 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
+            // loog 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
             var d, destFilePath, len = documents.length;
             var uploaded = [];
             function repeater(index) {
@@ -108,7 +108,7 @@ var Document = (function () {
         var insertedId = null;
         var parentFsItemId = null;
         var lastInserted = null;
-        // log 'wizzi-repo.fs.mongodb.document.createFolder.parts', parts
+        // loog 'wizzi-repo.fs.mongodb.document.createFolder.parts', parts
         var that = this;
         var item, len = parts.length;
         function repeater(index) {
@@ -124,7 +124,7 @@ var Document = (function () {
             var dirnameS = dirname.join('/');
             dirname.push(item);
             var pathS = dirname.join('/');
-            // log 'wizzi-repo.fs.mongodb.document.createFolder.item,dirnameS,pathS', item , dirnameS, pathS
+            // loog 'wizzi-repo.fs.mongodb.document.createFolder.item,dirnameS,pathS', item , dirnameS, pathS
             that.fsCommon.insertItem({
                 basename: item, 
                 parentId: parentFsItemId, 
@@ -135,7 +135,7 @@ var Document = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-repo.fs.mongodb.document.createFolder.r', r
+                // loog 'wizzi-repo.fs.mongodb.document.createFolder.r', r
                 lastInserted = r;
                 if (r.code === 'FSITEM_EXISTS') {
                     if (r.kind == 1) {
@@ -170,7 +170,7 @@ var Document = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.fs.mongodb.document.getFolder.r', r
+            // loog 'wizzi-repo.fs.mongodb.document.getFolder.r', r
             if (r.kind == 1) {
                 return callback(error('MongoFSRepoError', 'getFolder', 'Document getFolder error: ' + folderPath + ' is a file path'));
             }
@@ -239,16 +239,16 @@ var Document = (function () {
         
         var that = this;
         function get_files_Async(singleFolderPath, callback) {
-            // log 'wizzi-repo.fs.mongodb.document.get_files_Async', singleFolderPath
+            // loog 'wizzi-repo.fs.mongodb.document.get_files_Async', singleFolderPath
             
             that.fsCommon.getItemByPath(singleFolderPath, function(err, r) {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-repo.fs.mongodb.document.get_files_Async.r', r
+                // loog 'wizzi-repo.fs.mongodb.document.get_files_Async.r', r
                 if (r) {
                     that.fsCommon.getItemChildren(r._id, function(err, r2) {
-                        // log 'wizzi-repo.fs.mongodb.document.getItemChildren.err.r2', err, r2
+                        // loog 'wizzi-repo.fs.mongodb.document.getItemChildren.err.r2', err, r2
                         if (err) {
                             return callback(err);
                         }
@@ -265,7 +265,7 @@ var Document = (function () {
         function recurser(folderPaths, files, ids, basenames) {
             return new Promise(function(resolve, reject) {
                     async.map(folderPaths, get_files_Async, function(err, fsitemsArray) {
-                        // log 'wizzi-repo.fs.mongodb.document.getfiles err, fsitemsArray', err, fsitemsArray
+                        // loog 'wizzi-repo.fs.mongodb.document.getfiles err, fsitemsArray', err, fsitemsArray
                         if (err) {
                             return reject(err);
                         }
@@ -305,7 +305,7 @@ var Document = (function () {
         var ids = [];
         var basenames = [];
         recurser([folderPath], files, ids, basenames).then(function() {
-            // log 'wizzi-repo.fs.mongodb.document.getfiles', 'folderPath', folderPath, 'files', files, 'ids', ids, 'documentContent', documentContent
+            // loog 'wizzi-repo.fs.mongodb.document.getfiles', 'folderPath', folderPath, 'files', files, 'ids', ids, 'documentContent', documentContent
             if (!documentContent) {
                 return callback(null, files);
             }
@@ -314,7 +314,7 @@ var Document = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-repo.fs.mongodb.document.getfiles.contents', contents
+                    // loog 'wizzi-repo.fs.mongodb.document.getfiles.contents', contents
                     var ret = [];
                     for (var i=0; i<files.length; i++) {
                         ret.push({
@@ -347,7 +347,7 @@ var Document = (function () {
         var fsCommon = this.fsCommon;
         
         async.map(ids, function(id, callback) {
-            console.log('wizzi-repo.fs.mongodb.document.getContentsByIds', id);
+            // loog 'wizzi-repo.fs.mongodb.document.getContentsByIds', id
             fsCommon.readDocument(id, callback)
         }, callback)
     }
@@ -449,7 +449,7 @@ var Document = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.fs.mongodb.document.copyFile.source', source
+            // loog 'wizzi-repo.fs.mongodb.document.copyFile.source', source
             that.exists(destPath, function(err, result) {
                 if (err) {
                     return callback(err);
@@ -462,7 +462,7 @@ var Document = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        console.log('wizzi-repo.fs.mongodb.document.copyFile.r', r);
+                        // loog 'wizzi-repo.fs.mongodb.document.copyFile.r', r
                         return callback(null, {
                                 code: "DOCUMENT_COPIED"
                              });
@@ -489,20 +489,21 @@ var Document = (function () {
         }
         sourcePath = normalize(sourcePath);
         destPath = normalize(destPath);
+        
+        // loog 'wizzi-repo.t.fscommon.document.copyFolder. sourcePath === destPath'
         if (sourcePath === destPath) {
-            console.log('wizzi-repo.t.fscommon.document.copyFolder. sourcePath === destPath');
             return callback(null, {});
         }
         var that = this;
         var copies = [];
-        console.log('wizzi-repo.t.fscommon.document.getFiles.before');
+        // loog 'wizzi-repo.t.fscommon.document.getFiles.before'
         this.getFiles(sourcePath, {
             deep: true
          }, function(err, files) {
             if (err) {
                 return callback(err);
             }
-            console.log('wizzi-repo.t.fscommon.document.copyFolder. files', files.length);
+            // loog 'wizzi-repo.t.fscommon.document.copyFolder. files', files.length
             var sourcefile,
                 destfile,
                 files_len = files.length;
@@ -552,7 +553,7 @@ var Document = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-repo.fs.mongodb.document.deleteFile.r', r
+                // loog 'wizzi-repo.fs.mongodb.document.deleteFile.r', r
                 return callback(null, r);
             })
         })
@@ -584,7 +585,7 @@ var Document = (function () {
                 if (err) {
                     return callback(err);
                 }
-                console.log('wizzi-repo.fs.mongodb.document.deleteFolder.children', children);
+                // loog 'wizzi-repo.fs.mongodb.document.deleteFolder.children', children
                 if (children.length > 0) {
                     return callback(error('MongoFSRepoError', 'deleteFolder', 'Folder not empty: ' + folderPath));
                 }
@@ -593,7 +594,7 @@ var Document = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        console.log('wizzi-repo.fs.mongodb.document.deleteFolder.r', r);
+                        // loog 'wizzi-repo.fs.mongodb.document.deleteFolder.r', r
                         assert( true, r.deleted );
                         return callback(null, r);
                     })
@@ -646,7 +647,7 @@ var Document = (function () {
             if (fsitem.kind == 0) {
                 return callback(error('MongoFSRepoError', 'renameFile', 'Document rename file error. Is a folder path, not a file path: ' + oldPath));
             }
-            // log 'wizzi-repo.fs.mongodb.document.renameFile.fsitem', fsitem
+            // loog 'wizzi-repo.fs.mongodb.document.renameFile.fsitem', fsitem
             that.exists(newPath, function(err, r) {
                 if (err) {
                     return callback(err);
@@ -715,7 +716,7 @@ var Document = (function () {
             if (fsitem.kind == 1) {
                 return callback(error('MongoFSRepoError', 'renameFolder', 'Document rename folder error. Is a file path, not a folder path: ' + oldPath));
             }
-            console.log('wizzi-repo.fs.mongodb.document.renameFolder.fsitem', fsitem);
+            // loog 'wizzi-repo.fs.mongodb.document.renameFolder.fsitem', fsitem
             that.exists(newPath, function(err, r) {
                 if (err) {
                     return callback(err);
@@ -730,7 +731,7 @@ var Document = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        console.log('wizzi-repo.fs.mongodb.document.renameFolder.changes', changes);
+                        // loog 'wizzi-repo.fs.mongodb.document.renameFolder.changes', changes
                         that.fsCommon.updateItem(fsitem, function(err, r) {
                             if (err) {
                                 return callback(err);
@@ -749,7 +750,7 @@ var Document = (function () {
             var i, i_items=fsitems, i_len=fsitems.length, item;
             for (i=0; i<i_len; i++) {
                 item = fsitems[i];
-                console.log('wizzi-repo.fs.mongodb.document.renameFolder.change_dirnames_Async', item);
+                // loog 'wizzi-repo.fs.mongodb.document.renameFolder.change_dirnames_Async', item
                 item.dirname = newDirname;
                 item.path = normalize(path.join(item.dirname, item.basename));
             }
@@ -773,7 +774,7 @@ var Document = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        // log 'wizzi-repo.fs.mongodb.document.renameFolder.children of ', fsitemParent._id, fsitemParent.path, fsitems.length
+                        // loog 'wizzi-repo.fs.mongodb.document.renameFolder.children of ', fsitemParent._id, fsitemParent.path, fsitems.length
                         if (fsitems.length > 0) {
                             change_dirnames_Async(fsitems, fsitemParent.path, function(err, updfsitems) {
                                 if (err) {
@@ -782,17 +783,17 @@ var Document = (function () {
                                 var i, i_items=updfsitems, i_len=updfsitems.length, upd;
                                 for (i=0; i<i_len; i++) {
                                     upd = updfsitems[i];
-                                    console.log('wizzi-repo.fs.mongodb.document.renameFolder.upd', upd);
+                                    // loog 'wizzi-repo.fs.mongodb.document.renameFolder.upd', upd
                                     changes.push(upd.path);
                                     recurser(upd, changes).then(function() {
-                                        console.log('wizzi-repo.fs.mongodb.document.renameFolder.resolve');
+                                        // loog 'wizzi-repo.fs.mongodb.document.renameFolder.resolve'
                                         resolve();
                                     })
                                 }
                             })
                         }
+                        // loog 'wizzi-repo.fs.mongodb.document.renameFolder.last resolve'
                         else {
-                            console.log('wizzi-repo.fs.mongodb.document.renameFolder.last resolve');
                             resolve();
                         }
                     })
@@ -800,7 +801,7 @@ var Document = (function () {
         }
         var changes = [];
         recurser(fsitemParent, changes).then(function() {
-            console.log('wizzi-repo.fs.mongodb.document.renameFolder._changeParentFolder ended', changes);
+            // loog 'wizzi-repo.fs.mongodb.document.renameFolder._changeParentFolder ended', changes
             return callback(null, changes);
         })
     }
@@ -837,7 +838,7 @@ var Document = (function () {
                 deep: true, 
                 documentContent: true
              });
-            // log 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
+            // loog 'wizzi-repo.fs.mongodb.document.uploadFolder.documents', sourcePath, options, documents
             var d, destFilePath, len = documents.length;
             var uploaded = [];
             function repeater(index) {
@@ -893,7 +894,7 @@ var Document = (function () {
                 if (err) {
                     return callback(err);
                 }
-                console.log('wizzi-repo.MongoFS.document.download.content', content);
+                // loog 'wizzi-repo.MongoFS.document.download.content', content
                 return callback(null, {
                         path: singleFilePath, 
                         content: content
@@ -910,7 +911,7 @@ var Document = (function () {
                 if (err) {
                     return callback(err);
                 }
-                console.log('wizzi-repo.MongoFS.document.download.fileContents', fileContents);
+                // loog 'wizzi-repo.MongoFS.document.download.fileContents', fileContents
                 var zip = new JSZip();
                 var i, i_items=fileContents, i_len=fileContents.length, item;
                 for (i=0; i<i_len; i++) {
@@ -933,7 +934,7 @@ var Document = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.fs.mongodb.document.writeFile._createFile.r', r
+            // loog 'wizzi-repo.fs.mongodb.document.writeFile._createFile.r', r
             if (r.code === 'FSITEM_EXISTS') {
                 that.fsCommon.writeDocument(r.item._id, content, callback)
             }
@@ -943,7 +944,7 @@ var Document = (function () {
         })
     }
     Document.prototype._updateFile = function(id, content, callback) {
-        // log 'wizzi-repo.fs.mongodb.document.writeFile._updateFile', id, content
+        // loog 'wizzi-repo.fs.mongodb.document.writeFile._updateFile', id, content
         this.fsCommon.writeDocument(id, content, callback)
     }
     Document.prototype.writeFile = function(filePath, content, callback) {
@@ -964,20 +965,20 @@ var Document = (function () {
                 ));
             }
         }
-        // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.init', filePath
+        // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.init', filePath
         filePath = normalize(filePath);
-        // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.normalized', filePath
+        // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.normalized', filePath
         var that = this;
         this.fsCommon.getItemByPath(filePath, function(err, fsitem) {
             if (err) {
                 return callback(err);
             }
             
-            // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.1.exists, so update', filePath
+            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.1.exists, so update', filePath
             if (fsitem != null) {
                 return that._updateFile(fsitem._id, content, callback);
             }
-            // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.2.not exists. try get dirname', dirname
+            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.2.not exists. try get dirname', dirname
             else {
                 var dirname = path.dirname(filePath);
                 that.fsCommon.getItemByPath(dirname, function(err, fsitem) {
@@ -985,17 +986,17 @@ var Document = (function () {
                         return callback(err);
                     }
                     
-                    // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
+                    // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                     if (fsitem != null) {
                         return that._createFile(fsitem._id, dirname, path.basename(filePath), content, callback);
                     }
-                    // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
+                    // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                     else {
                         that.createFolder(dirname, function(err, fsitem) {
                             if (err) {
                                 return callback(err);
                             }
-                            // log 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.5.dirname created. so create file', fsitem.item._id, dirname, path.basename(filePath)
+                            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.5.dirname created. so create file', fsitem.item._id, dirname, path.basename(filePath)
                             return that._createFile(fsitem.item._id, dirname, path.basename(filePath), content, callback);
                         })
                     }
@@ -1023,10 +1024,10 @@ var Document = (function () {
                 'InvalidArgument', 'readFile', { parameter: 'filePath', message: 'The filePath parameter must be a string. Received: ' + filePath }
             ));
         }
-        // log 'wizzi-repo.t.fsCommon.readFile.filePath before', filePath
+        // loog 'wizzi-repo.t.fsCommon.readFile.filePath before', filePath
         // set filePath = denormalize(filePath)
         filePath = normalize(filePath);
-        console.log('wizzi-repo.t.fsCommon.readFile.normalized.filePath before', filePath);
+        // loog 'wizzi-repo.t.fsCommon.readFile.normalized.filePath before', filePath
         var that = this;
         this.fsCommon.getItemByPath(filePath, function(err, fsitem) {
             if (err) {
@@ -1037,7 +1038,7 @@ var Document = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'fsJson.readFile not found', JSON.stringify(json, null, 4)
+                    // loog 'fsJson.readFile not found', JSON.stringify(json, null, 4)
                     return callback(error('MongoFSRepoError', 'readFile', 'Document read file error. Not found: ' + filePath));
                 })
             }
@@ -1064,7 +1065,7 @@ var Document = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.fs.mongodb.document.stat.filePath', filePath, 'fsitem', fsitem
+            // loog 'wizzi-repo.fs.mongodb.document.stat.filePath', filePath, 'fsitem', fsitem
             if (fsitem == null) {
                 return callback(null, {
                         isDirectory: function() {

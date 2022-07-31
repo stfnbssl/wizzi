@@ -107,21 +107,21 @@
 									@ depth null
                         *$
 						set node = result_mixedModel.nodes[0]
-                        # log 'node 1', node.row, node.col, node.name, node.value
+                        # loog 'node 1', node.row, node.col, node.name, node.value
 						tobe_number( node.row, 1 )
 						tobe_number( node.col, 1 )
 						tobe_string( node.name, sigma )
 						tobe_undefined( node.value )
 
 						set node = result_mixedModel.nodes[0].children[0]
-                        # log 'node 2', node.row, node.col, node.name, node.value
+                        # loog 'node 2', node.row, node.col, node.name, node.value
 						tobe_number( node.row, 1 )
 						tobe_number( node.col, 1 )
 						tobe_string( node.name, tau )
 						tobe( node.value, '$'+'{id}' )
 
                         set node = node.children[0]
-                        # log 'node 3', node.row, node.col, node.name, node.value
+                        # loog 'node 3', node.row, node.col, node.name, node.value
 						tobe_number( node.row, 3 )
 						tobe_number( node.col, 5 )
 						tobe_string( node.name, boss )

@@ -36,7 +36,7 @@
 				@ ctx
 				f_cb()
 					repeater( 1, model.statements )
-						# log 'wizzi-js.wziife', item_1.wzElement, item_1.wzName
+						# loog 'wizzi-js.wziife', item_1.wzElement, item_1.wzName
 						_ statement.gen
 							@ item_1
 							@ ctx

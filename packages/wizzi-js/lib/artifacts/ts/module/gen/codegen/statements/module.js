@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\module.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -171,23 +171,23 @@ md.load = function(cnt) {
         }
         var xmodel = writeComments(model, ctx);
         ctx.write('function ' + xmodel.wzName);
-        // log 'typeFunctionDeclare enter 1'
+        // loog 'typeFunctionDeclare enter 1'
         u.genTSTypeParameters(xmodel, ctx, cnt, (err, notUsed) => {
         
             if (err) {
                 return callback(err);
             }
-            // log 'typeFunctionDeclare enter 2'
+            // loog 'typeFunctionDeclare enter 2'
             ctx.write('(');
             u.genTSParams(xmodel, ctx, cnt, (err, notUsed) => {
             
                 if (err) {
                     return callback(err);
                 }
-                // log 'typeFunctionDeclare cb 1'
+                // loog 'typeFunctionDeclare cb 1'
                 ctx.write(')');
                 
-                // log 'typeFunctionDeclare typeReturn', xmodel.typeReturn.wzElement
+                // loog 'typeFunctionDeclare typeReturn', xmodel.typeReturn.wzElement
                 if (xmodel.typeReturn) {
                     ctx.write(': ');
                     cnt.stm.typeReturn(xmodel.typeReturn, ctx, (err, notUsed) => {
@@ -196,12 +196,12 @@ md.load = function(cnt) {
                             return callback(err);
                         }
                         ctx.w(';');
-                        // log 'typeFunctionDeclare exit 1'
+                        // loog 'typeFunctionDeclare exit 1'
                         return callback(null, null);
                     }
                     )
                 }
-                // log 'typeFunctionDeclare exit 2'
+                // loog 'typeFunctionDeclare exit 2'
                 else {
                     return callback(null, null);
                 }

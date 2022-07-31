@@ -22,7 +22,7 @@ $group
 						return callback(err)
 					var ittfmodel = mTree.nodes[0]
 					
-					# log 'md.ittf.ittfDocumentUri', ittfDocumentUri, ittfmodel
+					# loog 'md.ittf.ittfDocumentUri', ittfDocumentUri, ittfmodel
 					
 					_ callback(null, ittfmodel)
 

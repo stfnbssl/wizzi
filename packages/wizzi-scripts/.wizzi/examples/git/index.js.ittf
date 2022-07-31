@@ -22,10 +22,10 @@
 
 	_ addCommit
 		f_cb_test(result)
-			log 'addCommit.result', result
+			# loog 'addCommit.result', result
 			_ addCommitToEventStream
 				f_cb_test(result)
-					log 'addCommitToEventStream.result', result
+					# loog 'addCommitToEventStream.result', result
 
 	function addCommit
 		param callback
@@ -40,9 +40,9 @@
 			@ gitOptions2
 			@ res
 			f_cb_test(result)
-				log 'addCommitToEventStream.res.head', res.head
-				log 'addCommitToEventStream.res.stdout', res.stdout
-				log 'addCommitToEventStream.res.stderr', res.stderr
+				# loog 'addCommitToEventStream.res.head', res.head
+				# loog 'addCommitToEventStream.res.stdout', res.stdout
+				# loog 'addCommitToEventStream.res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

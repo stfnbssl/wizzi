@@ -9,7 +9,7 @@
 			
 		foreach k in Object.keys(ast)
 			if verify.isArray(ast[k])
-				# log 'k', k
+				# loog 'k', k
 				var temp = []
 				foreach node in ast[k]
 					if node.type === 'space'
@@ -18,7 +18,7 @@
 						_ temp.push(node)
 				set ast[k] = temp
 			if verify.isObject(ast[k])
-				# log 'k', k
+				# loog 'k', k
 				_ cleanAst(ast[k])
 		return ast
 

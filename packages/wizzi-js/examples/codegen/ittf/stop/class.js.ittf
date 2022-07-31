@@ -6,7 +6,7 @@ block
 			param name
 			base name
 		m say
-			log 'Hiiii'
+			success 'Hiiii'
 		m create
 			static
 			param name

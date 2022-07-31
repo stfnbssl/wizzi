@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\util\verify.js.ittf
 */
 'use strict';
@@ -729,7 +729,7 @@ md.error = function() {
 }
 ;
 md.fatal = function(err, errcode) {
-    console.log('wizzi-utils.errors.fatal', util.inspect(err, { depth: null }));
+    console.log("[31m%s[0m", 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null }));
     throw new Error(err);
     logerror("Fatal error: " + String(err.message || err))
     dumpStack(err)

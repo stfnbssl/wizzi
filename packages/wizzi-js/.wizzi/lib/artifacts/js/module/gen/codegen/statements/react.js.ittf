@@ -24,10 +24,10 @@
 						@ item_1
 						@ ctx
 						f_cb()
-							# log 'react.js 2 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+							# loog 'react.js 2 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
 							repeater_increment(1)
 					$append next
-						# log 'react.js 3 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+						# loog 'react.js 3 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
 						_ reactComponent_close
 							@ model
 							@ ctx
@@ -54,7 +54,7 @@
 
 	fn( reactComponent_member
 
-		# log 'reactComponent, model.wzElement', model.wzElement, model.wzName, model.wzParent.wzName
+		# loog 'reactComponent, model.wzElement', model.wzElement, model.wzName, model.wzParent.wzName
 		if model.wzElement == 'state'
 			_ ctx.write('state = ')
 			set model.wzElement = 'jsObject'
@@ -128,7 +128,7 @@
 					r_cb()
 			
 		elif model.wzElement == 'render'
-			# log 'react.js - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+			# loog 'react.js - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
 			_ writeMethod('render', model, ctx, cnt, callback)
 			
 		elif model.wzElement == 'method'
@@ -190,7 +190,7 @@
 
 	fn( reactComponent_close, childrenInfo
 
-		# log 'reactComponent_close'
+		# loog 'reactComponent_close'
 
 		_ ctx.deindent()
 		_ ctx.w('}')
@@ -228,7 +228,7 @@
 			_ ctx.deindent()
 			_ ctx.w('}')
 
-		# log 'react.js 4 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+		# loog 'react.js 4 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
 		r_cb()
 
 	stm( reactFunction
@@ -300,7 +300,7 @@
         
 		_ ctx.indent()
 		repeater( 1, statements )
-			# log 'writeIndented', item_1.wzElement
+			# loog 'writeIndented', item_1.wzElement
 			if item_1.wzElement == 'prop'
 				# done in writeMethodProps
 				repeater_increment(1)
@@ -324,7 +324,7 @@
 		foreach item in react.statements
 			if item.wzElement == 'prop'
 				_ ret.items.push(item)
-				# log 'item.defaultValue', item.defaultValue
+				# loog 'item.defaultValue', item.defaultValue
 				if item.defaultValue
 					_ ret.itemsWithDefault.push(item)
 			if item.wzElement == 'style'

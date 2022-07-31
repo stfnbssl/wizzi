@@ -336,7 +336,7 @@
 					_ jsScriptCoder.w
 						@ '// firstOfMixed ' + node.model.$args + '/' + node.model.$params
                         @ node
-					# log '=========', node.model.calcParamValues(node.model.$args)
+					# loog '=========', node.model.calcParamValues(node.model.$args)
 					_ isCompilePassedParameters
 						@ jsScriptCoder
 						@ node.model.calcParamValues(node.model.$args)

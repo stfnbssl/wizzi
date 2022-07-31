@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\ittfFsNode.js.ittf
 */
 'use strict';
@@ -40,8 +40,8 @@ var IttfFsNode = (function () {
         this.segments = this.parts.slice(0, this.parts.length -1);
         this.basename = this.parts[this.parts.length -1];
         this.dirname = this.segments.join('/');
-        // log 'ittfScanner.IttfFsNode.ctor.nodePath', nodePath, 'this.basename', this.basename, 'this.path', this.path, 'this.fullPath', this.fullPath
-        // log 'ittfScanner.IttfFsNode.ctor.options', options
+        // loog 'ittfScanner.IttfFsNode.ctor.nodePath', nodePath, 'this.basename', this.basename, 'this.path', this.path, 'this.fullPath', this.fullPath
+        // loog 'ittfScanner.IttfFsNode.ctor.options', options
         if (!options.isDirectory) {
             this.schema = detectSchema(this.basename);
             this.isFragment = isTFragment(this.parts);
@@ -87,7 +87,7 @@ var IttfFsNode = (function () {
             );
         };
         var r = this.root();
-        // log 'called setInfo', this.basename, r === this
+        // loog 'called setInfo', this.basename, r === this
         if (r === this) {
             this.setIds();
             var that = this;
@@ -95,7 +95,7 @@ var IttfFsNode = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'analized', that.basename
+                // loog 'analized', that.basename
                 that.__setInfo(r, callback)
             })
         }
@@ -104,11 +104,11 @@ var IttfFsNode = (function () {
         }
     }
     IttfFsNode.prototype.__setInfo = function(r, callback) {
-        // log 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
+        // loog 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
         if (!this.isDirectory && !this.isFragment) {
             var schema = r.info.schemas[this.schema];
             
-            // log 'created schema', schema, r.info.schemas
+            // loog 'created schema', schema, r.info.schemas
             if (!schema) {
                 schema = {
                     name: this.schema, 
@@ -116,7 +116,7 @@ var IttfFsNode = (function () {
                  };
                 r.info.schemas[this.schema] = schema;
             }
-            // log 'found', schema, r.info.schemas
+            // loog 'found', schema, r.info.schemas
             else {
             }
             schema.documents.push(this);
@@ -141,15 +141,15 @@ var IttfFsNode = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'folders setted info'
+                // loog 'folders setted info'
                 async.map(that.documents, function(item, callback) {
-                    // log 'document setted', item.basename
+                    // loog 'document setted', item.basename
                     item.setInfo(callback)
                 }, function(err, notUsed) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'documents setted info'
+                    // loog 'documents setted info'
                     return callback(null, r);
                 })
             })
@@ -165,23 +165,23 @@ var IttfFsNode = (function () {
         var r = this.root();
         var tobeAddedFullPath = unixifyPath(path.join(this.fullPath, relPath));
         relPath = unixifyPath(relPath);
-        // log 'addDocument relPath', relPath, 'to this.fullPath', this.fullPath
+        // loog 'addDocument relPath', relPath, 'to this.fullPath', this.fullPath
         var parts = tobeAddedFullPath.split('/');
-        // log 'addDocument parts.length', parts.length, 'to this.parts.length', this.parts.length
+        // loog 'addDocument parts.length', parts.length, 'to this.parts.length', this.parts.length
         
-        // log 'addDocument parts.length <= this.parts.length return null'
+        // loog 'addDocument parts.length <= this.parts.length return null'
         if (parts.length <= this.parts.length) {
             return null;
         }
         
-        // log 'addDocument this.match(parts) == false return null'
+        // loog 'addDocument this.match(parts) == false return null'
         if (this.match(parts) == false) {
             return null;
         }
         
-        // log 'addDocument could be a document try match'
+        // loog 'addDocument could be a document try match'
         
-        // log '+++ addDocument added document', parts[parts.length-1], 'to', this.path
+        // loog '+++ addDocument added document', parts[parts.length-1], 'to', this.path
         if (parts.length == this.parts.length + 1) {
             var dnode = new IttfFsNode(parts[parts.length-1], this, {
                 isDirectory: false, 
@@ -190,9 +190,9 @@ var IttfFsNode = (function () {
             this.documents.push(dnode);
             return dnode;
         }
-        // log 'addDocument try subfolder', subfolder, 'subRelPath', subRelPath
-        // log 'addDocument created subfolder', subfolderPath
-        // log '+++ addDocument created subfolder', subfolder, 'in folder', this.path
+        // loog 'addDocument try subfolder', subfolder, 'subRelPath', subRelPath
+        // loog 'addDocument created subfolder', subfolderPath
+        // loog '+++ addDocument created subfolder', subfolder, 'in folder', this.path
         else {
             var relPathParts = relPath.split('/');
             var subfolder = relPathParts[0];
@@ -223,14 +223,14 @@ var IttfFsNode = (function () {
             throw new Error('wizzi-utils.ittfFsNode.addExternalDocument must be called on root node only.');
         }
         var relPath = path.relative(this.ittfBasePath, fullPath);
-        // log 'addExternalDocument.relPath', relPath, 'fullPath', fullPath
+        // loog 'addExternalDocument.relPath', relPath, 'fullPath', fullPath
         var dnode = this.searchDocument(relPath);
         
-        // log 'addExternalDocument.relPath already exists', relPath,
+        // loog 'addExternalDocument.relPath already exists', relPath,
         if (dnode) {
             return dnode;
         }
-        // log 'addExternalDocument.relPath added', relPath
+        // loog 'addExternalDocument.relPath added', relPath
         else {
             dnode = new IttfFsNode(relPath, this, {
                 isDirectory: false, 
@@ -303,7 +303,7 @@ var IttfFsNode = (function () {
         if (verify.isNotEmpty(options.jsCodeBasePath)) {
             this.jsCodeBasePath = unixifyPath(options.jsCodeBasePath);
         }
-        // log 'wizzi-utils.ittfFsNode.setSourcePaths - ittfBasePath, jsCodeBasePath : ', options.ittfBasePath, options.jsCodeBasePath
+        // loog 'wizzi-utils.ittfFsNode.setSourcePaths - ittfBasePath, jsCodeBasePath : ', options.ittfBasePath, options.jsCodeBasePath
     }
     //
     // FIXME this is NOT OK
@@ -312,7 +312,7 @@ var IttfFsNode = (function () {
     //
     IttfFsNode.prototype.getPrettyAnalizedIttfSource = function() {
         var r = this.root();
-        // log 'wizzi-utils.ittfFsNode.getPrettyAnalizedIttfSource', r.ittfBasePath, this.parts.join('/')
+        // loog 'wizzi-utils.ittfFsNode.getPrettyAnalizedIttfSource', r.ittfBasePath, this.parts.join('/')
         if (verify.isNotEmpty(r.ittfBasePath)) {
             return ittfHtmlPrettifier(path.join(r.ittfBasePath, this.parts.join('/')), {
                     ittfFsNode: this, 
@@ -343,7 +343,7 @@ var IttfFsNode = (function () {
                 error('InvalidArgument', 'analize', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        // log 'wizzi-utils.ittfFsNode.analize.relPath', this.isDirectory, this.basename
+        // loog 'wizzi-utils.ittfFsNode.analize.relPath', this.isDirectory, this.basename
         var r = this.root();
         if (r === this) {
             this.setIds();
@@ -384,7 +384,7 @@ var IttfFsNode = (function () {
                 })
             })
         }
-        // log 'ittfFsNode.analize this.parts.join("/")', this.parts.join('/')
+        // loog 'ittfFsNode.analize this.parts.join("/")', this.parts.join('/')
         else {
             var that = this;
             IttfDocumentGraph.createFrom(this.parts.join('/'), {
@@ -393,7 +393,7 @@ var IttfFsNode = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-utils.ittfFsNode.analize.created ittfDocumentGraph'
+                // loog 'wizzi-utils.ittfFsNode.analize.created ittfDocumentGraph'
                 var ctx = {
                     fragments: {}, 
                     externalFragments: {}, 
@@ -405,20 +405,20 @@ var IttfFsNode = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-utils.ittfFsNode.analize.ctx.fragments from ittfDocumentGraph', ctx.fragments
+                    // loog 'wizzi-utils.ittfFsNode.analize.ctx.fragments from ittfDocumentGraph', ctx.fragments
                     that.ittfDocumentGraph = ittfDocumentGraph;
                     that.fragments = ctx.fragments;
                     // TODO review this
                     var max_repeat = 3;
                     function repeat(count) {
-                        // log 'wizzi-utils.ittfFsNode.analize.repeat count', count
+                        // loog 'wizzi-utils.ittfFsNode.analize.repeat count', count
                         if (Object.keys(ctx.externalFragments).length < 1 || count > max_repeat) {
                             return callback(null);
                         }
                         async.map(Object.keys(ctx.externalFragments), function(k, callback) {
-                            // log 'wizzi-utils.ittfFsNode.analize.repeat externalFragment', ctx.externalFragments[k].uri
+                            // loog 'wizzi-utils.ittfFsNode.analize.repeat externalFragment', ctx.externalFragments[k].uri
                             var dnode = r.addExternalDocument(ctx.externalFragments[k].uri);
-                            // log 'external dnode', dnode
+                            // loog 'external dnode', dnode
                             dnode.setIds();
                             dnode.analize(function(err, notUsed) {
                                 if (err) {
@@ -431,7 +431,7 @@ var IttfFsNode = (function () {
                                         return callback(err);
                                     }
                                     that.fragments = ctx.fragments;
-                                    // log 'wizzi-utils.ittfFsNode.analize.externalFragments', ctx.externalFragments
+                                    // loog 'wizzi-utils.ittfFsNode.analize.externalFragments', ctx.externalFragments
                                     return callback(null);
                                 })
                             })
@@ -471,9 +471,9 @@ var IttfFsNode = (function () {
         return r.__searchDocument(searchPath);
     }
     IttfFsNode.prototype.__searchDocument = function(dFullPath) {
-        // log '__searchDocument, this.fullPath, dFullPath', this.fullPath, dFullPath
+        // loog '__searchDocument, this.fullPath, dFullPath', this.fullPath, dFullPath
         
-        // log '__searchDocument, found'
+        // loog '__searchDocument, found'
         if (this.fullPath === dFullPath) {
             return this;
         }
@@ -565,7 +565,7 @@ var IttfFsNode = (function () {
         }
     }
     IttfFsNode.prototype.toIttf = function(ittfDocumentGraph) {
-        console.log('toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph): ', ittfDocumentGraph.__type, this.analized, this.basename, verify.isObject(this.ittfDocumentGraph));
+        // loog 'toIttf, type, this.analized, this.basename, isObject(this.ittfDocumentGraph): ', ittfDocumentGraph.__type, this.analized, this.basename, verify.isObject(this.ittfDocumentGraph)
         var r = this.root();
         if (r === this) {
             this.toIttfRoot(ittfDocumentGraph);
@@ -606,7 +606,7 @@ var IttfFsNode = (function () {
                 var i, i_items=Object.keys(usedFragments), i_len=Object.keys(usedFragments).length, item;
                 for (i=0; i<i_len; i++) {
                     item = Object.keys(usedFragments)[i];
-                    console.log('usedFragments[k]', item, usedFragments[item]);
+                    // loog 'usedFragments[k]', item, usedFragments[item]
                     var ittfFragmentsNode = ittfSource.add('fragment', item);
                     ittfFragmentsNode.add('d-id', usedFragments[item].id)
                     ittfFragmentsNode.add('rel-uri', unixifyPath(path.relative(ittfBasePath, usedFragments[item].uri)))

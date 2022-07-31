@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\wfschema\html_docs\gen\main.js.ittf
 */
 'use strict';
@@ -15,7 +15,7 @@ md.gen = function(model, ctx, callback) {
         schema: model, 
         request: {}
      };
-    // log 'htmlContext', util.inspect(htmlContext, { depth: 2 })
+    // loog 'htmlContext', util.inspect(htmlContext, { depth: 2 })
     legacy.htmlDocument(ittfDocumentPath, mTreeBuildupContext, function(err, result) {
         if (err) {
             return callback(err);

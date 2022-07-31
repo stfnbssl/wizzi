@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -109,7 +109,7 @@ var WizziFactory = (function () {
             this.globalContext = Object.assign({}, this.globalContext, options.globalContext)
             ;
         }
-        // log 'wizzi.wizziFactory.initialize.globalContext', this.globalContext
+        // loog 'wizzi.wizziFactory.initialize.globalContext', this.globalContext
         var repoOptions = options.repo;
         // can be used for creating on the fly a json factory
         // for loading models from text strings
@@ -128,7 +128,7 @@ var WizziFactory = (function () {
             that.__loadMTree = mtree.createLoadMTree(that.createStore)
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTree
+            // loog 'wizzi.checked_call_set.__is_error ', that.__loadMTree
             if (that.__loadMTree && that.__loadMTree.__is_error) {
                 return callback(that.__loadMTree);
             }
@@ -137,7 +137,7 @@ var WizziFactory = (function () {
              })
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeFrontMatter
+            // loog 'wizzi.checked_call_set.__is_error ', that.__loadMTreeFrontMatter
             if (that.__loadMTreeFrontMatter && that.__loadMTreeFrontMatter.__is_error) {
                 return callback(that.__loadMTreeFrontMatter);
             }
@@ -146,7 +146,7 @@ var WizziFactory = (function () {
              })
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeRaw
+            // loog 'wizzi.checked_call_set.__is_error ', that.__loadMTreeRaw
             if (that.__loadMTreeRaw && that.__loadMTreeRaw.__is_error) {
                 return callback(that.__loadMTreeRaw);
             }
@@ -155,7 +155,7 @@ var WizziFactory = (function () {
              })
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', that.__loadMTreeBuildupScript
+            // loog 'wizzi.checked_call_set.__is_error ', that.__loadMTreeBuildupScript
             if (that.__loadMTreeBuildupScript && that.__loadMTreeBuildupScript.__is_error) {
                 return callback(that.__loadMTreeBuildupScript);
             }
@@ -169,7 +169,7 @@ var WizziFactory = (function () {
                         return callback(err);
                     }
                     that.pluginsManager = pluginsManager;
-                    // log 'pluginsManager', pluginsManager
+                    // loog 'pluginsManager', pluginsManager
                     return callback(null, that);
                 })
             })
@@ -189,7 +189,7 @@ var WizziFactory = (function () {
         
         var mTreeBuildupContext = Object.assign({}, this.globalContext, loadContext.mTreeBuildupContext);
         
-        // log 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
+        // loog 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
         
         return {
                 __productionManager: this.createProductionManager(), 
@@ -218,7 +218,7 @@ var WizziFactory = (function () {
             options = Object.assign(options, this.testOptions)
             ;
         }
-        // log '*=*=*=*= temporary wizzi.wizziFactory.createProductionManager. options : ', options
+        // loog '*=*=*=*= temporary wizzi.wizziFactory.createProductionManager. options : ', options
         var ProductionManager = getProductionManager();
         var pman = new ProductionManager(this, options);
         
@@ -322,7 +322,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        // log 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
+        // loog 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
         this.createSingleTextSourceFactory(ittfContent, 'ittf', {}, function(err, result) {
             if (err) {
                 return callback(err);
@@ -345,14 +345,14 @@ var WizziFactory = (function () {
             }
         }
         
-        // log 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
+        // loog 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
         var loadModel = this.modelLoaders[schemaName] || null;
         
-        // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+        // loog 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
         
-        // log 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
+        // loog 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
         
-        // log 'getLoadModel.loadModel', loadModel
+        // loog 'getLoadModel.loadModel', loadModel
         if (loadModel == null) {
             var factory = this.pluginsManager.getModelFactory(schemaName, (testOnlyMockBaseDir || this.testOnlyMockBaseDir));
             if (factory && factory.__is_error) {
@@ -379,9 +379,9 @@ var WizziFactory = (function () {
         }
         var loadModel = this.modelLoaders[schemaName + 'FromMTree'] || null;
         
-        // log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+        // loog 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
         
-        // log 'getLoadModel.loadModel', loadModel
+        // loog 'getLoadModel.loadModel', loadModel
         if (loadModel == null) {
             var factory = this.pluginsManager.getModelFactory(schemaName, null);
             if (factory && factory.__is_error) {
@@ -420,13 +420,13 @@ var WizziFactory = (function () {
             schemaName = detectSchema(ittfDocumentUri);
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', schemaName
+            // loog 'wizzi.checked_call_set.__is_error ', schemaName
             if (schemaName && schemaName.__is_error) {
                 return callback(schemaName);
             }
         }
         var resolved_ittfDocumentUri = verify.resolveToString(ittfDocumentUri);
-        // log 'resolved_ittfDocumentUri', resolved_ittfDocumentUri
+        // loog 'resolved_ittfDocumentUri', resolved_ittfDocumentUri
         if (verify.isNotEmpty(resolved_ittfDocumentUri) === false) {
             return callback(error('InvalidArgument', 'loadModel', {
                     parameter: 'ittfDocumentUri', 
@@ -437,7 +437,7 @@ var WizziFactory = (function () {
             ittfDocumentUri = resolved_ittfDocumentUri;
         }
         
-        // log 'wizzi.wizziFactory.loadModel: schemaName, ittfDocumentUri, testOnlyMockBaseDir', schemaName, ittfDocumentUri, testOnlyMockBaseDir
+        // loog 'wizzi.wizziFactory.loadModel: schemaName, ittfDocumentUri, testOnlyMockBaseDir', schemaName, ittfDocumentUri, testOnlyMockBaseDir
         
         loadContext = loadContext || {};
         
@@ -480,7 +480,7 @@ var WizziFactory = (function () {
             callback = loadContext;
             loadContext = {};
         }
-        // log 'wizzi.wizziFactory.loadModelFromMtree 2', schemaName, mTree, mTree.nodes[0].children, loadContext, callback
+        // loog 'wizzi.wizziFactory.loadModelFromMtree 2', schemaName, mTree, mTree.nodes[0].children, loadContext, callback
         
         if (typeof(callback) !== 'function') {
             throw new Error(error('InvalidArgument', 'loadModelFromMtree', 'The callback parameter must be a function. Received: ' + callback));
@@ -592,7 +592,7 @@ var WizziFactory = (function () {
             callback = loadContext;
             loadContext = {};
         }
-        // log 'wizzi.wizziFactory.loadModelFromText', ittfContent, schema, loadContext, callback
+        // loog 'wizzi.wizziFactory.loadModelFromText', ittfContent, schema, loadContext, callback
         
         if (typeof(callback) !== 'function') {
             throw new Error(error('InvalidArgument', 'loadModelFromText', 'The callback parameter must be a function. Received: ' + callback));
@@ -704,7 +704,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        // log 'wizzi.wizziFactory.loadAndTransformModel.requestContext.modelRequestContext', requestContext.modelRequestContext, 'transformRequestContext', requestContext.transformRequestContext
+        // loog 'wizzi.wizziFactory.loadAndTransformModel.requestContext.modelRequestContext', requestContext.modelRequestContext, 'transformRequestContext', requestContext.transformRequestContext
         
         var that = this;
         // load the wizzi model from an ittfDocument
@@ -714,7 +714,7 @@ var WizziFactory = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi.wizziFactory.loadAndTransformModel', 'model loaded', wizziModel
+            // loog 'wizzi.wizziFactory.loadAndTransformModel', 'model loaded', wizziModel
             // the loaded wizzi model becomes the wizziModel of the transformation
             that.transformModel(wizziModel, transformName, requestContext.transformRequestContext || requestContext.modelRequestContext, callback)
         })
@@ -767,7 +767,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        // log 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 'transformRequestContext', requestContext.transformRequestContext, 'artifactRequestContext', requestContext.artifactRequestContext
+        // loog 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 'transformRequestContext', requestContext.transformRequestContext, 'artifactRequestContext', requestContext.artifactRequestContext
         
         var that = this;
         // load the wizzi model from an ittfDocument
@@ -777,7 +777,7 @@ var WizziFactory = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact', 'model loaded', wizziModel
+            // loog 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact', 'model loaded', wizziModel
             // the loaded wizzi model becomes the wizziModel of the transformation
             that.transformModel(wizziModel, transformName, requestContext.transformRequestContext || requestContext.modelRequestContext, function(err, artifactModel) {
                 if (err) {
@@ -836,7 +836,7 @@ var WizziFactory = (function () {
             );
         }
         
-        // log 'generateArtifact.artifactModel', artifactModel
+        // loog 'generateArtifact.artifactModel', artifactModel
         
         if (typeof(callback) === 'undefined') {
             callback = artifactRequestContext;
@@ -869,7 +869,7 @@ var WizziFactory = (function () {
              }), 
             pman: this.createProductionManager()
          });
-        // log 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
+        // loog 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
         generator.gen(artifactModel, genContext, function(err, result) {
             
             /**
@@ -881,7 +881,7 @@ var WizziFactory = (function () {
             
             // 
             
-            // log 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+            // loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
             if (err) {
                 return callback(error('WizziFactoryError', 'generateArtifact', {
                         message: 'See inner error', 
@@ -933,7 +933,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        // log 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 'artifactRequestContext', requestContext.artifactRequestContext
+        // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 'artifactRequestContext', requestContext.artifactRequestContext
         
         var that = this;
         // load the wizzi model from an ittfDocument
@@ -943,7 +943,7 @@ var WizziFactory = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
+            // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
             // the loaded wizzi model becomes the artifactModel of the artifact generation
             that.generateArtifact(artifactModel, ittfDocumentUri, artifactName, requestContext.artifactRequestContext, callback)
         })
@@ -984,7 +984,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        // log 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromText', ittfContent, requestContext, artifactName, callback
+        // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromText', ittfContent, requestContext, artifactName, callback
         
         var ss = artifactName.split('/');
         var schema = ss[0];
@@ -1079,8 +1079,8 @@ var WizziFactory = (function () {
             }
             , function(err, result) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 // loog 'generateFolderArtifacts.result', result
@@ -1246,7 +1246,7 @@ var WizziFactory = (function () {
             ));
         }
         
-        console.log('wizzi.wizziFactory.executeJob.jobRequest', jobRequest);
+        // loog 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest
         
         
         // jobRequest type 1
@@ -1275,7 +1275,7 @@ var WizziFactory = (function () {
                     console.log('wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext);
                     var pman = that.createProductionManager(jobRequest.productionOptions, jobRequest.globalContext);
                     if (pman && pman.__is_error) {
-                        console.log('__is_error ', pman);
+                        console.log("[31m%s[0m", '__is_error ', pman);
                         return callback(pman);
                     }
                     
@@ -1285,7 +1285,7 @@ var WizziFactory = (function () {
                          }
                      });
                     if (notUsed && notUsed.__is_error) {
-                        console.log('__is_error ', notUsed);
+                        console.log("[31m%s[0m", '__is_error ', notUsed);
                         return callback(notUsed);
                     }
                     
@@ -1438,14 +1438,14 @@ function interpolate_filename(text, ctx) {
 }
 module.exports = {
     createFactory: function(user, role, options, callback) {
-        // log 'wizzi.wizziFactory.createFactory.options', options
+        // loog 'wizzi.wizziFactory.createFactory.options', options
         
         // no ACL required
         if (typeof(callback) === 'undefined' && typeof(options) === 'undefined') {
             options = user;
             callback = role;
         }
-        // log 'wizzi.wizziFactory.createFactory.globalContext', options.globalContext
+        // loog 'wizzi.wizziFactory.createFactory.globalContext', options.globalContext
         var wf = new WizziFactory();
         wf.initialize(options, callback)
     }

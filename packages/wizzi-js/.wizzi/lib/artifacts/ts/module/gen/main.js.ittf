@@ -16,7 +16,7 @@
 			@ ctx
 
 		repeater(1, model.statements)
-			# log 'main item_1.wzElement', item_1.wzElement
+			# loog 'main item_1.wzElement', item_1.wzElement
 			if item_1.wzElement === 'wzIife'
 				_ wzIife.gen
 					@ item_1

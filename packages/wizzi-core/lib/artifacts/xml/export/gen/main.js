@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\xml\export\gen\main.js.ittf
 */
 'use strict';
@@ -11,7 +11,7 @@ var myname = 'xml.export.main';
 
 md.gen = function(model, ctx, callback) {
     if (model.wzElement !== 'xml') {
-        console.log('wizzi-core', 'artifact', 'model', model);
+        console.log("[31m%s[0m", 'wizzi-core', 'artifact', 'model', model);
         callback(error('Invalid model schema. Expected "xml". Received: ' + model.wzElement))
     }
     var xml;

@@ -26,7 +26,7 @@
 					@ deep false
 					@ extension null
 					@ documentContent false
-		# log 'should get files in a basefolder - files', files
+		# loog 'should get files in a basefolder - files', files
 		tobe_array( files, 2 )
 
 	it should get files with content in a basefolder
@@ -78,7 +78,7 @@
 					@ tFoldersOnly false
 					@ documentNames false
 					@ documentContents false
-		# log 'folders', folders
+		# loog 'folders', folders
 
 		tobe_array( folders, 2 )
 
@@ -113,7 +113,7 @@
 					@ deep true
 					@ tFoldersOnly false
 					@ documentNames false
-		# log 'folders', folders
+		# loog 'folders', folders
 		tobe_array( folders, 4 )
 		tobe_string( folders[0].relPath, one )
 		tobe_string( folders[1].relPath, one/deep )
@@ -152,7 +152,7 @@
 					@ tFoldersOnly false
 					@ documentNames true
 					@ documentContents false
-		# log 'folders', folders
+		# loog 'folders', folders
 
 		tobe_array( folders, 4 )
 		tobe_array( folders[0].documents, 1 )
@@ -172,7 +172,7 @@
 					@ deep true
 					@ tFoldersOnly false
 					@ documentNames true
-		# log 'folders', folders
+		# loog 'folders', folders
 
 		tobe_array( folders, 4 )
 		tobe_string( folders[0].documents[0].relPath, globbed_1.ittf )

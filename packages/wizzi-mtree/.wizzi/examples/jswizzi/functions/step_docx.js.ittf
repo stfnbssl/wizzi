@@ -35,7 +35,7 @@ module
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore
                     f_cb_test( mTree )
-                        # log 'mTree', mTree
+                        # loog 'mTree', mTree
                         _ printEvaluatedNodes(mTree, 'After evaluate')
 
 

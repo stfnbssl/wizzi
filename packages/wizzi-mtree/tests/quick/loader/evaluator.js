@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\quick\loader\evaluator.js.ittf
 */
 'use strict';
@@ -45,12 +45,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -72,14 +72,14 @@ describe("evaluator", function() {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_1.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -112,7 +112,7 @@ describe("evaluator", function() {
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_1.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
-            console.log('should throw an error evaluating', '\n' + err.toString());
+            // loog 'should throw an error evaluating', '\n' + err.toString()
             expect(err.__is_error).to.be(true);
             expect(err.data).to.be.an('object');
             expect(err.data.errorName).to.be('IttfEvaluationError');
@@ -122,8 +122,9 @@ describe("evaluator", function() {
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_2.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
+            
+            // loog 'should throw an error evaluating', '\n' + err.toString()
             if (err) {
-                console.log('should throw an error evaluating', '\n' + err.toString());
             }
             expect(err.__is_error).to.be(true);
             expect(err.data).to.be.an('object');
@@ -134,8 +135,9 @@ describe("evaluator", function() {
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_3.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
+            
+            // loog 'should throw an error evaluating', '\n', err, '\n' + err.toString()
             if (err) {
-                console.log('should throw an error evaluating', '\n', err, '\n' + err.toString());
             }
             expect(err.__is_error).to.be(true);
             expect(err.data).to.be.an('object');

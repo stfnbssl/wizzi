@@ -145,12 +145,8 @@
         {
           "name": "or",
           "tags": [
-            "\\",
-            "\\",
-            "",
-            "op\\",
-            "\\",
-            ""
+            "||",
+            "op||"
           ]
         },
         {
@@ -245,8 +241,7 @@
         {
           "name": "bit_or",
           "tags": [
-            "op\\",
-            ""
+            "op|"
           ]
         },
         {
@@ -2544,9 +2539,21 @@
           ]
         },
         {
+          "name": "info",
+          "tags": [
+            "info"
+          ]
+        },
+        {
           "name": "inspect",
           "tags": [
             "log?"
+          ]
+        },
+        {
+          "name": "success",
+          "tags": [
+            "success"
           ]
         },
         {
@@ -2831,7 +2838,7 @@
             "> decl hasClasses = model.wzModelState.hasClasses",
             "The 'hasClasses' is set in the 'wzInitialize' method",
             "of the 'class' element.",
-            "log 'wizzi-js.model.module', this.wzName"
+            "loog 'wizzi-js.model.module', this.wzName"
           ]
         },
         {
@@ -4143,7 +4150,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues"
+            "loog 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues"
           ]
         }
       ],
@@ -4418,7 +4425,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues"
+            "loog 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues"
           ]
         }
       ],
@@ -5733,12 +5740,8 @@
       "super": "statement",
       "isRoot": false,
       "tags": [
-        "\\",
-        "\\",
-        "",
-        "op\\",
-        "\\",
-        ""
+        "||",
+        "op||"
       ],
       "flags": "",
       "attributes": [],
@@ -6127,8 +6130,7 @@
       "super": "statement",
       "isRoot": false,
       "tags": [
-        "op\\",
-        ""
+        "op|"
       ],
       "flags": "",
       "attributes": [],
@@ -7066,7 +7068,7 @@
       "comments": [
         "ittf",
         "foreach item in arr5",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "",
         "js",
         "var i, i_len=arr5.length, item;",
@@ -7105,7 +7107,7 @@
       "comments": [
         "ittf",
         "backeach item in arr5",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "js",
         "var i, i_len=arr5.length, item;",
         "for (i= (i_len-1); i>-1; i--) {",
@@ -7143,7 +7145,7 @@
       "comments": [
         "ittf",
         "each item in arr5 [this]",
-        "log 'item ', i, item",
+        "info 'item ', i, item",
         "js",
         "arr5.forEach(function(item, i, array) {",
         "console.log('item ', i, item);",
@@ -7398,7 +7400,7 @@
         "# The second for statement is labeled \"loop2\"",
         "if i === 1 && j === 1",
         "continue loop1",
-        "log 'i = ' + i + ', j = ' + j"
+        "info 'i = ' + i + ', j = ' + j"
       ]
     },
     {
@@ -9316,7 +9318,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.model.class.modelState', ctx.modelState"
+            "loog 'wizzi-js.model.class.modelState', ctx.modelState"
           ]
         }
       ],
@@ -9336,9 +9338,9 @@
         "set this.options = options",
         "m sayHello",
         "if this.options.canSpeakLikeAHuman",
-        "log 'Hello i am ' + this.name",
+        "success 'Hello i am ' + this.name",
         "else",
-        "log 'Hii i am ' + this.name",
+        "success 'Hii i am ' + this.name",
         ""
       ]
     },
@@ -9587,7 +9589,7 @@
         "class Foo",
         "m sayHello",
         "string name",
-        "log 'Hello ' + name"
+        "success 'Hello ' + name"
       ]
     },
     {
@@ -10085,7 +10087,7 @@
             }
           ],
           "comments": [
-            "log 'wizzi-js.model.class.modelState', ctx.modelState"
+            "loog 'wizzi-js.model.class.modelState', ctx.modelState"
           ]
         }
       ],
@@ -19268,7 +19270,40 @@
       "methods": [],
       "comments": [
         "ittf:",
-        "log 'xxx', yyy, ...",
+        "info 'xxx', yyy, ...",
+        "js:",
+        "console.log( 'xxx', yyy, ..., __filename );",
+        ""
+      ]
+    },
+    {
+      "name": "info",
+      "super": "statement",
+      "isRoot": false,
+      "tags": [
+        "info"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "statement",
+          "role": "statements",
+          "tags": [
+            "+"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "statement",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": [
+        "ittf:",
+        "info 'xxx', yyy, ...",
         "js:",
         "console.log( 'xxx', yyy, ... );",
         ""
@@ -19310,6 +19345,39 @@
         "log? label xxx",
         "js:",
         "console.log('label', util.inspect(xxx, { depth: null } );",
+        ""
+      ]
+    },
+    {
+      "name": "success",
+      "super": "statement",
+      "isRoot": false,
+      "tags": [
+        "success"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "statement",
+          "role": "statements",
+          "tags": [
+            "+"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "statement",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": [
+        "ittf:",
+        "warn 'xxx', yyy, ...",
+        "js:",
+        "console.log( ...",
         ""
       ]
     },

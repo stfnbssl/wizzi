@@ -10,7 +10,7 @@ $group
             m initialize
                 param initValues
                 
-                log 'Entering WizziController.initialize'
+                warn 'Entering WizziController.initialize'
                 
                 _ this.router.get(`/`, this.index)
 

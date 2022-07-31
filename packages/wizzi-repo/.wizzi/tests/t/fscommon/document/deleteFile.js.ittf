@@ -15,7 +15,7 @@
 			_ doc.deleteFile
 				@ filePathDelete
 				f_cb_done( r )
-					log 'should delete a file', err, r
+					# loog 'should delete a file', err, r
 					tobe_string( r.code, FSITEM_DELETED )
 					tobe_number( r.deletedCount, 1 )
 

@@ -28,4 +28,4 @@ $group
                             { 
                                 @ limit '50mb'
                                 @ extended true
-                    log 'BodyParserMiddleware installed'
+                    success 'BodyParserMiddleware installed'

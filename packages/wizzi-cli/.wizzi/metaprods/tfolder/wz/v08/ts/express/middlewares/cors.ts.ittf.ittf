@@ -15,4 +15,4 @@ $group
                     param app
                         :ref Application
                     _ app.use(cors())
-                    log 'CorsMiddleware installed'
+                    success 'CorsMiddleware installed'

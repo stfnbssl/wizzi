@@ -59,15 +59,15 @@
 							[
 								@ path_string
                 else
-					# log 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
+					# loog 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
                     _ glob
 						@ path_string
 						@ this
 						@ options
 						f_cb( files )
-							# log 'wizzi-utils.fs.vfile.glob.after_glob.path_string ', path_string, 'files', files.length
+							# loog 'wizzi-utils.fs.vfile.glob.after_glob.path_string ', path_string, 'files', files.length
 							if removeRoot
-								# log 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
+								# loog 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
 								set files =
 									_ files.map
 										function 
@@ -116,11 +116,11 @@
                     _ output.push(path_string)
                 else
 					set options.sync = true
-					# log 'path_string, options', path_string, options
+					# loog 'path_string, options', path_string, options
                     var files = glob(path_string, this, options)
-                    # log 'wizzi-meta.file.path_string ', path_string, 'files', files.length
+                    # loog 'wizzi-meta.file.path_string ', path_string, 'files', files.length
 					if removeRoot
-						# log 'removeRoot', removeRoot
+						# loog 'removeRoot', removeRoot
                         set files =
                             _ files.map
                                 function 

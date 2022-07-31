@@ -29,14 +29,14 @@ $group
                 _ wizziProds.generateArtifact(entry, files).then
                     => 
                         param generated
-                        log 'generateArtifact.result', generated
+                        # loog 'generateArtifact.result', generated
                         _ sendHtml
                             @ response
                             @ generated.artifactContent
                     ._ catch
                         => 
                             param err
-                            log 'features.packi.controllers.production.generateArtifact.err', err
+                            error 'features.packi.controllers.production.generateArtifact.err', err
                             _ sendFailure(response, err, 501)
             catch err
                 _ sendFailure(response, err, 501)

@@ -25,18 +25,18 @@ append 1
 
 	$if do = 1
         repeater(1, model.statements)
-			log '607 jsArray'
+			# loog '607 jsArray'
             if u.isMemberAccessOrCall(item_1)
                 _ ctx.w('')
                 _ ctx.deindent()
                 _ ctx.write(']')
-				log '605 jsArray'
+				# loog '605 jsArray'
 				return
 					_ cnt.genItem
 						@ item_1
 						@ ctx
 						f_cb()
-							log '603 jsArray'
+							# loog '603 jsArray'
 							repeater(2, model.statements, index_1 + 1)
 								if u.isCallArgument(item_2)
 									_ ctx.write('.')
@@ -47,7 +47,7 @@ append 1
 										repeater_increment(2)
 								$append next
 									r_cb()
-            log '606 jsArray'
+            # loog '606 jsArray'
 			if !first
                 _ ctx.w(', ')
             set first = false
@@ -55,7 +55,7 @@ append 1
 				@ item_1
 				@ ctx
 				f_cb()
-					log '604 jsArray'
+					# loog '604 jsArray'
 					repeater_increment(1)
 			$append next
 				+ ;

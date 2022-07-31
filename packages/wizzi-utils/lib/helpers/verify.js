@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\verify.js.ittf
 */
 'use strict';
@@ -685,7 +685,7 @@ md.replaceAll = function(text, find, replace) {
     if (md.isEmpty(text)) {
         return text;
     }
-    // log 'replaceAll', text, '-', find, '-', md.escapeRegExp(find), '-', replace
+    // loog 'replaceAll', text, '-', find, '-', md.escapeRegExp(find), '-', replace
     return text.replace(new RegExp(md.escapeRegExp(find), 'g'), replace);
 }
 ;
@@ -774,7 +774,7 @@ var wzError = (function (Error) {
             }
         }
         
-        // log 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
+        // loog 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
         if (this.inner) {
             var inner = this.inner;
             while (inner) {
@@ -844,7 +844,7 @@ md.error = function() {
     for (i=0; i<i_len; i++) {
         arg = args[i];
         
-        // log 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
+        // loog 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
         if (md.isError(arg)) {
             inner = arg;
         }
@@ -882,7 +882,7 @@ md.error = function() {
 }
 ;
 md.fatal = function(err, errcode) {
-    console.log('wizzi-utils.errors.fatal', util.inspect(err, { depth: null }));
+    console.log("[31m%s[0m", 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null }));
     throw new Error(err);
     md.logError("Fatal error: " + String(err.message || err))
     dumpStack(err)

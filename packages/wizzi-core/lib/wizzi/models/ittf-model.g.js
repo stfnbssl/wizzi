@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\ittf-model.g.js.ittf
 */
 'use strict';
@@ -15,7 +15,7 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     var root = mTree.nodes[0];
     var ittf = toIttfNode(root);
     if (ittf && ittf.__is_error) {
-        console.log('__is_error ', ittf);
+        console.log("[31m%s[0m", '__is_error ', ittf);
         return callback(ittf);
     }
     ittf.wzElement = 'ittf';

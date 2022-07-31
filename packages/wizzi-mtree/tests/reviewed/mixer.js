@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\reviewed\mixer.js.ittf
 */
 'use strict';
@@ -40,12 +40,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -60,14 +60,14 @@ describe("mixer", function() {
     before(function(done) {
         getFSDocumentStore(function(err, fsStore) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -84,14 +84,14 @@ describe("mixer", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -99,14 +99,14 @@ describe("mixer", function() {
             var mTree = provider.getPrimaryMTreeBrick();
             mixer(mTree, provider, function(err, mixedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'err', err);
                     if (err.toString()) {
-                        console.log('err.toString()', err.toString());
+                        console.log("[31m%s[0m", 'err.toString()', err.toString());
                     }
                     if (err.inner) {
-                        console.log('err.inner', err.inner);
+                        console.log("[31m%s[0m", 'err.inner', err.inner);
                         if (err.inner.toString) {
-                            console.log('err.inner.toString()', err.inner.toString());
+                            console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                         }
                     }
                     throw new Error(err.message);
@@ -140,21 +140,21 @@ describe("mixer", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
             }
             var mTree = provider.getPrimaryMTreeBrick();
             mixer(mTree, provider, function(err, includedModel) {
-                console.log('should throw an error for fragment to mix not found', '\n' + err.toString());
+                // loog 'should throw an error for fragment to mix not found', '\n' + err.toString()
                 expect(err.__is_error).to.be(true);
                 expect(err.data).to.be.an('object');
                 expect(err.data.errorName).to.be('IttfMixError');

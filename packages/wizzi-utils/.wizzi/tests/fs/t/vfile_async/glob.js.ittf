@@ -26,7 +26,7 @@
 				@ extension null
 				@ documentContent false
 			f_cb_test( files )
-				# log 'should get files in a basefolder - files', files
+				# loog 'should get files in a basefolder - files', files
 				tobe_array( files, 2 )
 				_ done
 
@@ -78,7 +78,7 @@
 				@ tFoldersOnly false
 				@ documentNames false
 			f_cb_test( folders )
-				# log 'folders', folders
+				# loog 'folders', folders
 				tobe_array( folders, 2 )
 				_ done
 
@@ -114,7 +114,7 @@
 				@ documentNames false
 			f_cb_test( folders )
 				
-				# log 'folders', folders
+				# loog 'folders', folders
 
 				tobe_array( folders, 4 )
 				tobe_string( folders[0].relPath, one )
@@ -155,9 +155,9 @@
 				@ documentNames true
 			f_cb_test( folders )
 
-				# log ''
-				# log ''
-				# log '*** folders', folders
+				# loog ''
+				# loog ''
+				# loog '*** folders', folders
 
 				tobe_array( folders, 4 )
 				tobe_array( folders[0].documents, 1 )

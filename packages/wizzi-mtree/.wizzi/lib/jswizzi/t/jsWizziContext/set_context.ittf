@@ -12,7 +12,7 @@
 			# we already are in a nodeContext state
             return
 
-		# log '*** => set_NodeContext'
+		# loog '*** => set_NodeContext'
 
 		set this.ittf_state = ittfStates.nodeContext
         set this.currentMTreeBrickKey = null
@@ -43,7 +43,7 @@
 			# we already are in a globalContext state
             return 
 
-		# log '*** => set_GlobalContext'
+		# loog '*** => set_GlobalContext'
 
 		set this.ittf_state = ittfStates.globalContext
         # via 7/8/17 set this.currentMTreeBrickKey = null
@@ -82,7 +82,7 @@
 			 _ this.evalHelper.getMTreeBrickEvalContext(brickKey, line)
 		_ assert(this.brickEvalContext, 'set_MTreeBrickEvalContext brickEvalContext for key ' + brickKey + ' undefined')
 
-		# log '*** => set_MTreeBrickEvalContext', brickKey
+		# loog '*** => set_MTreeBrickEvalContext', brickKey
        
 		return this.brickEvalContext
     

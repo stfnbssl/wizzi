@@ -21,11 +21,11 @@
 						@ projectId
 						@ path_string
 				
-			# log 'wizzi-io.filesystem.readFile.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.readFile.fsPath', fsPath
 
 			_ file.readFile
 				@ fsPath
 				f_cb( content )
-					# log 'wizzi-io.filesystem.readFile.fsPath', fsPath, 'content', content
+					# loog 'wizzi-io.filesystem.readFile.fsPath', fsPath, 'content', content
 					return 
 						_ callback(null, content)

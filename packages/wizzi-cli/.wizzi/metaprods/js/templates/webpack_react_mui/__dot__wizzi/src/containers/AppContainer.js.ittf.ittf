@@ -57,7 +57,7 @@ module
                 @ dispatchChangeUserState
                     =>
                         param userState
-                        log 'dispatchChangeTheme', userState
+                        # loog 'dispatchChangeTheme', userState
                         _ dispatch
                             _ changeUserState
                                 @ userState

@@ -35,7 +35,7 @@
 		function
 			param err
 			if err
-				log "Error executing wizzi job mongodb.level_${level}.step_${step}", err
+				error "Error executing wizzi job mongodb.level_${level}.step_${step}", err
 				return
-			log 'Wizzi job mongodb.level_${level}.step_${step} SUCCESSFULLY executed'
+			info 'Wizzi job mongodb.level_${level}.step_${step} SUCCESSFULLY executed'
 			$hook

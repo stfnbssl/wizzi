@@ -34,7 +34,7 @@
 		param virtFS
         param options
         param cb
-		# log 'wizzi-utils.glob.index.pattern', pattern
+		# loog 'wizzi-utils.glob.index.pattern', pattern
         if typeof(options) === 'function'
             set cb = options, options = {}
         if !options
@@ -64,12 +64,12 @@
         
 			set this.virtFS = virtFS
 			
-			# log 'wizzi-utils.Glob.ctor.pattern', pattern
+			# loog 'wizzi-utils.Glob.ctor.pattern', pattern
 
 			_ setopts(this, pattern, options)
         
-			# log 'wizzi-utils.Glob.ctor.this.minimatch', this.minimatch
-			# log 'wizzi-utils.Glob.ctor.this.minimatch.set', this.minimatch.set
+			# loog 'wizzi-utils.Glob.ctor.this.minimatch', this.minimatch
+			# loog 'wizzi-utils.Glob.ctor.this.minimatch.set', this.minimatch.set
         
 			var n = this.minimatch.set.length
 			set this.matches = new Array(n)
@@ -80,7 +80,7 @@
 					@ 'end'
 					function 
 						param matches
-						# log 'on.end.cb.matches', matches.length
+						# loog 'on.end.cb.matches', matches.length
 						_ cb(null, matches)
 			
 			var self = this
@@ -101,7 +101,7 @@
         
 			function done
 				set --self._processing
-				# log '---------- done self._processing, sync', self._processing, sync
+				# loog '---------- done self._processing, sync', self._processing, sync
 				if self._processing <= 0
 					if sync
 						_ process.nextTick
@@ -138,16 +138,16 @@
             _ assert(typeof (cbDone) === 'function')
             
 			set this._processing++
-            # log '_process.pattern.index.inGlobStar', pattern, index, inGlobStar
+            # loog '_process.pattern.index.inGlobStar', pattern, index, inGlobStar
 			var n = 0
             while typeof (pattern[n]) === 'string'
                 set n++
 			
-			# log '_process.n', n
+			# loog '_process.n', n
             var prefix
             switch n
                 case pattern.length
-					# log '_process.prefix.case._processSimple'
+					# loog '_process.prefix.case._processSimple'
                     _ this._processSimple
                         _ pattern.join('/')
                         @ index
@@ -155,15 +155,15 @@
                     return 
                 case 0
                     set prefix = null
-					# log '_process.prefix.n=0', prefix
+					# loog '_process.prefix.n=0', prefix
                     break 
                 default 
                     set prefix = pattern.slice(0, n).join('/')
-					# log '_process.prefix.default', prefix
+					# loog '_process.prefix.default', prefix
                     break 
 			
             var remain = pattern.slice(n)
-			# log 'pattern, remain', pattern, '-- / --', remain
+			# loog 'pattern, remain', pattern, '-- / --', remain
             var read
             
 			if prefix === null
@@ -182,7 +182,7 @@
             
 			var isGlobStar = remain[0] === minimatch.GLOBSTAR
 
-			# log 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
+			# loog 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
             
 			if isGlobStar
                 _ this._processGlobStar(prefix, read, abs, remain, index, inGlobStar, cbDone)
@@ -227,7 +227,7 @@
             
 			var dotOk = this.dot || rawGlob.charAt(0) === '.'
             
-			# log '***** _processReaddir2 pn, negate, rawGlob, dotOk', pn, negate, rawGlob, dotOk
+			# loog '***** _processReaddir2 pn, negate, rawGlob, dotOk', pn, negate, rawGlob, dotOk
 
 			var matchedEntries
                 [ 
@@ -295,7 +295,7 @@
             param ePath
 			param e
 
-			# log '***** _emitMatch.index,ePath,e', index, ePath, e
+			# loog '***** _emitMatch.index,ePath,e', index, ePath, e
 
 			if isIgnored(this, ePath)
                 return 
@@ -341,7 +341,7 @@
             var lstatcb = inflight(lstatkey, lstatcb_)
             
 			if lstatcb
-				# log 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
+				# loog 'wizzi-utils.Glob._readdirInGlobStar.abs', abs
                 _ this.virtFS.stat(abs, lstatcb)
             
 			function lstatcb_
@@ -377,7 +377,7 @@
             
 			var self = this
             
-			# log 'wizzi-utils.Glob._readdir.abs', abs
+			# loog 'wizzi-utils.Glob._readdir.abs', abs
 			_ this.virtFS.readdir
                 @ abs
                 _ readdirCb(this, abs, cb)
@@ -458,7 +458,7 @@
             param inGlobStar
             param cbDone
             var self = this
-			# log '_processGlobStar'
+			# loog '_processGlobStar'
             _ this._readdir
                 @ abs
                 @ inGlobStar
@@ -477,7 +477,7 @@
             param entries
             param cbDone
 			
-			# log '_processGlobStar2.entries', entries
+			# loog '_processGlobStar2.entries', entries
             
 			if !(entries)
                 return cbDone()
@@ -511,7 +511,7 @@
                         @ ePath
                         @ remain
                 _ this._process(below, index, true, cbDone)
-				# log '_processGlobStar2 e.instead.below', ePath, instead, below
+				# loog '_processGlobStar2 e.instead.below', ePath, instead, below
             
 			_ cbDone()
     
@@ -520,7 +520,7 @@
             param index
             param cbDone
 
-			# log '***** _processSimple', prefix, index
+			# loog '***** _processSimple', prefix, index
 
             var self = this
             _ this._stat
@@ -548,9 +548,9 @@
                 if prefix.charAt(0) === '/'
                     set prefix = path.join(this.root, prefix)
                 else 
-					# log '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
+					# loog '***** wizzi-utils.Glob._processSimple2.this.root,prefix', this.root, prefix
                     set prefix = path.resolve(this.root, prefix)
-					# log '***** wizzi-utils.Glob._processSimple2.prefix', prefix
+					# loog '***** wizzi-utils.Glob._processSimple2.prefix', prefix
                     if trail
                         set prefix += '/'
             
@@ -597,7 +597,7 @@
             var statcb = inflight('stat\0' + abs, lstatcb_)
             
 			if statcb
-				# log 'wizzi-utils.Glob._stat.abs', abs
+				# loog 'wizzi-utils.Glob._stat.abs', abs
                 _ this.virtFS.stat(abs, statcb)
             
 			function lstatcb_

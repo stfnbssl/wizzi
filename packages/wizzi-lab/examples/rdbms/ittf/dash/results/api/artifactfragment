@@ -1,0 +1,65 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:35 GMT
+*/
+'use strict';
+
+//
+
+var artifactfragmentPersister = require('../persisters/artifactfragment');
+
+var md = module.exports = {};
+
+md.getArtifactfragments = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    artifactfragmentPersister.getArtifactfragments(userName, projectName, schemaName, artifactName, fragmentName, callback)
+}
+;
+
+md.getArtifactfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    artifactfragmentPersister.get(userName, projectName, schemaName, artifactName, fragmentName, callback)
+}
+;
+
+md.insertArtifactfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    artifactfragmentPersister.exists(userName, projectName, schemaName, artifactName, fragmentName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('artifactfragment', utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        var newItem = {
+            type: 'artifactfragment', 
+            userName: null, 
+            projectName: null, 
+            schemaName: null, 
+            artifactName: null, 
+            fragmentName: null
+         };
+        artifactfragmentPersister.putArtifactfragment(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateArtifactfragment = function(item, callback) {
+    artifactfragmentPersister.put(item, callback)
+}
+
+.prototype.deleteArtifactfragment = function(item, callback) {
+    artifactfragmentPersister.delete(item, callback)
+}
+

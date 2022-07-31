@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\statements.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -88,7 +88,7 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.statement. Got: ' + callback);
         }
-        // log 'wizzi-js.module.statements.statement', model.wzParent.wzElement, u.isTopStatement(model, ctx), model.wzName, model.__templateChild
+        // loog 'wizzi-js.module.statements.statement', model.wzParent.wzElement, u.isTopStatement(model, ctx), model.wzName, model.__templateChild
         var text = model.wzName;
         if (model.__templateChild || ctx.__inside_html) {
             text = verify.replaceAll(verify.replaceAll(text, '&nbsp;', ' '), '&lf;', '\n')
@@ -249,7 +249,7 @@ md.load = function(cnt) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.exportDefault. Got: ' + callback);
         }
         
-        // log 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
+        // loog 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
         if (ctx.__ecma === 'es5') {
             ctx.artifactGenerationError('export statement invalid in ecma 5', 'js/module', model);
             return callback(null, null);
@@ -280,7 +280,7 @@ md.load = function(cnt) {
         }
         var typekey = model.__isType ? 'type ' : '';
         
-        // log 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
+        // loog 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
         if (ctx.__ecma === 'es5') {
             ctx.artifactGenerationError('export statement invalid in ecma 5', 'js/module', model);
             return callback(null, null);
@@ -295,7 +295,7 @@ md.load = function(cnt) {
         }
         var name = model.wzName || '';
         ctx.write('export ' + typekey + name);
-        // log 'js.module.xexport', 'model.__isType', model.__isType, name, model.from, model.statements.length, model.specifiers.length
+        // loog 'js.module.xexport', 'model.__isType', model.__isType, name, model.from, model.statements.length, model.specifiers.length
         if (model.from) {
             if (model.statements.length == 1) {
                 if (model.statements[0].wzElement == 'typeTypeAlias') {
@@ -429,15 +429,16 @@ md.load = function(cnt) {
             }
             else {
                 ctx.w('//' + (model.wzName ? (' ' + model.wzName) : ''));
+                
+                // loog '§§§ statements.comment', model.wzName
                 if (model.wzName.indexOf('@ts-ignore') > -1) {
-                    console.log('§§§ statements.comment', model.wzName);
                     ctx.__inlineNext = true;
                 }
             }
             ctx.__needs_crlf = false;
             return callback(null, null);
         }
-        // log 'ctx.__inside_comment', ctx.__inside_comment
+        // loog 'ctx.__inside_comment', ctx.__inside_comment
         var enter_inside_comment = ctx.__inside_comment;
         if (!ctx.__inside_comment) {
             ctx.w('/**');
@@ -508,7 +509,7 @@ md.load = function(cnt) {
         u.writeComments(model, ctx);
         u.checkInlineEnter(model, ctx);
         var text;
-        // log 'set,wzParent,wzName', model.wzParent.wzElement, model.wzName, '|'
+        // loog 'set,wzParent,wzName', model.wzParent.wzElement, model.wzName, '|'
         // FIXME this hack require refactoring
         if (model.wzName === 'work.textSep = "__TS__"') {
             text = model.wzName;
@@ -535,7 +536,7 @@ md.load = function(cnt) {
         if (model.statements[0].wzEntity === 'function') {
             ctx.w('');
         }
-        // log 'set,model.statements.length', model.wzName, model.statements.length
+        // loog 'set,model.statements.length', model.wzName, model.statements.length
         if (model.statements.length == 2) {
             if (model.statements[0].wzElement == 'comment') {
                 ctx.w(model.wzName + ' ')

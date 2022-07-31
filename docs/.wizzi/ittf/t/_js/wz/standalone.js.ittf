@@ -8,7 +8,7 @@
 		if !wizziStandalone || !wizziStandalone.default
 			throw new Error('Missing component: wizziStandalone.default')
 
-		log 'standalone', wizziStandalone.default
+		# loog 'standalone', wizziStandalone.default
 		set wz.wf = wizziStandalone.default
 		set wz.tools = wizziStandalone.default.wizziTools
 		set wz.utils = wizziStandalone.default.wizziUtils
@@ -46,7 +46,7 @@
 					@ filePath
 					@ options
 					f_cb( artifactText )
-						# log 'wz.gen', artifactText
+						# loog 'wz.gen', artifactText
 						r_cb( artifactText )
 							
 		set wz.genFromText
@@ -63,7 +63,7 @@
 					@ ittfContent
 					@ options
 					f_cb( artifactText )
-						# log 'wz.gen', artifactText
+						# loog 'wz.gen', artifactText
 						r_cb( artifactText )
 		
 		set wz.canWizzify
@@ -152,12 +152,12 @@
 				if typeof callback === 'undefined'
 					set callback = options
 					set options = {}
-				log 'wz.fsGit', options 
+				# loog 'wz.fsGit', options 
 				_ wz.git.fsGit
 					{
 						@ storeName options.storeName || wz.fs.storeName
 					f_cb( fsGit
-						log 'created fs', fsGit
+						# loog 'created fs', fsGit
 						r_cb( fsGit )
 
 		set wz.fs
@@ -208,12 +208,12 @@
 				if typeof callback === 'undefined'
 					set callback = options
 					set options = {}
-				# log 'wz.fs.getFs', options 
+				# loog 'wz.fs.getFs', options 
 				_ wz.utils.vfile
 					{
 						@ storeName options.storeName || wz.fs.storeName
 					f_cb( fs
-						# log 'created fs', fs
+						# loog 'created fs', fs
 						r_cb( fs )
 
 		set wz.fs.getFolders

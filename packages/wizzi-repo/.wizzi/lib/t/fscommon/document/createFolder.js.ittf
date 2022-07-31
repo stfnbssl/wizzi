@@ -12,7 +12,7 @@
 		var parentFsItemId = null
 		var lastInserted = null
 		
-		# log 'wizzi-repo.${source}.document.createFolder.parts', parts
+		# loog 'wizzi-repo.${source}.document.createFolder.parts', parts
 
 		var that = this
 
@@ -33,7 +33,7 @@
 			_ dirname.push(item)
 			var pathS = dirname.join('/')
 
-			# log 'wizzi-repo.${source}.document.createFolder.item,dirnameS,pathS', item , dirnameS, pathS
+			# loog 'wizzi-repo.${source}.document.createFolder.item,dirnameS,pathS', item , dirnameS, pathS
 
 			_ that.fsCommon.insertItem
 				{
@@ -44,7 +44,7 @@
 					@ kind 0
 				f_cb( r )
 
-					# log 'wizzi-repo.${source}.document.createFolder.r', r
+					# loog 'wizzi-repo.${source}.document.createFolder.r', r
 
 					set lastInserted = r
 

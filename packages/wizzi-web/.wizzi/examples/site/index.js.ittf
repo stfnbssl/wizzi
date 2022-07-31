@@ -14,7 +14,7 @@
 			@ 'ittf'
 	foreach item in getFiles(ittfPath,'site')
 		set item = item.substring(0, item.length - '.site.ittf'.length)
-		# log 'item', item
+		# loog 'item', item
 		_ execute(item)
 	+
 	function execute
@@ -35,10 +35,10 @@
 				@ __productionManager
 					_ mocks.getProductionManager
 			f_cb_test( wizziModel )
-				# log 'site wizziModel', wizziModel
+				# loog 'site wizziModel', wizziModel
 				var demos
 					_ wizziModel.getDemosByPath('javascript/bundlers')
-				# log 'demos(Javascript/Bundlers)', demos
+				# loog 'demos(Javascript/Bundlers)', demos
 				var cats
 					_ wizziModel.getCategoriesByPath('javascript')
-				# log 'categories(Javascript/Bundlers)', cats
+				# loog 'categories(Javascript/Bundlers)', cats

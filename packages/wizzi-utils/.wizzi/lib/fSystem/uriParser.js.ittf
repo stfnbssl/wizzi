@@ -40,7 +40,7 @@
 					@ browser false
 
             var parsedUri = url.parse(uri)
-			# log 'wizzi-utils.uriParser.parsedUri', '\n', JSON.stringify(parsedUri, null, 2)
+			# loog 'wizzi-utils.uriParser.parsedUri', '\n', JSON.stringify(parsedUri, null, 2)
 			set ret._protocol = parsedUri.protocol
 			set ret._hostname = parsedUri.hostname
 			set ret._pathname = parsedUri.pathname
@@ -50,7 +50,7 @@
 				iif parsedUri.pathname && parsedUri.pathname[0] === '/'
 					then parsedUri.pathname.substr(1)
 					else parsedUri.pathname
-			# log 'pathname', parsedUri.pathname, pathname
+			# loog 'pathname', parsedUri.pathname, pathname
 
 			# hostname is part of path
 			set ret.pathname
@@ -60,7 +60,7 @@
 							then parsedUri.hostname + '/' + pathname
 							else parsedUri.hostname
 					else pathname || ''
-			# log 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
+			# loog 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
 
 			if typeof(parsedUri.protocol) !== 'string'
 
@@ -82,7 +82,7 @@
 						@ ret
 						@ parsedUri
 					
-					# log 'wizzi-utils.uriParser.parsed', '\n', JSON.stringify(ret, null, 2)
+					# loog 'wizzi-utils.uriParser.parsed', '\n', JSON.stringify(ret, null, 2)
 
 					return
 						_ returnOrCb
@@ -101,7 +101,7 @@
 					else 
 						set parsedUri.protocol
 
-			# log 'parsed.protocol', protocol
+			# loog 'parsed.protocol', protocol
 			set ret.protocol = protocol
 			set ret.storeKind = 'filesystem'
 			if protocol === 'db'
@@ -113,7 +113,7 @@
 				@ ret
 				@ parsedUri
 			
-			# log 'parsed.result', ret
+			# loog 'parsed.result', ret
 
 			return
 				_ returnOrCb
@@ -129,7 +129,7 @@
 
 		set parsed._parts = parts
 
-		# log 'wizzi-utils.fs.uriParser.parsedUri.parts', parts
+		# loog 'wizzi-utils.fs.uriParser.parsedUri.parts', parts
 
 		if parts.length > 0
 			set name = parts[parts.length-1]

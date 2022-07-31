@@ -6,7 +6,7 @@
 			_ doc.createFolder
 				@ 'c:/my/starters/darvin'
 				f_cb_done( f )
-					log 'should create a folder', err, f
+					info 'should create a folder', err, f
 					tobe_number( f.insertedCount, 1 )
 
 		$*
@@ -14,14 +14,14 @@
 			_ doc.isFolder
 				@ 'c:/my/starters/darvin'
 				f_cb_done( f )
-					log 'should verify that folder exists', err, f
+					info 'should verify that folder exists', err, f
 					tobe_true( f )
 
 		it-async should retrieve a folder
 			_ doc.getFolder
 				@ 'c:/my/starters'
 				f_cb_done( f )
-					log 'should retrieve a folder', f
+					info 'should retrieve a folder', f
 					tobe_number( f.kind, 0 )
 					tobe_string( f.path, c:/my/starters )
 
@@ -29,7 +29,7 @@
 			_ doc.deleteFolder
 				@ 'c:/my/starters/darvin'
 				f_cb_done( f )
-					log 'should delete a folder', err, f
+					info 'should delete a folder', err, f
 					tobe_true( f.deleted )
 					tobe_number( f.n, 1 )
 					tobe_number( f.ok, 1 )
@@ -38,7 +38,7 @@
 			_ doc.isFolder
 				@ 'c:/my/starters/darvin'
 				f_cb_done( f )
-					log 'should verify that folder does not exists', f
+					info 'should verify that folder does not exists', f
 					tobe_false( f )
 		*$
 

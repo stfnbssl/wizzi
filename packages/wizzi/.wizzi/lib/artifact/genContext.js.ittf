@@ -21,7 +21,7 @@
 				if !verify.isObject(genconfig.options)
 					throw 
 						new Error('wizzi.artifact.GenContext: genconfig.options argument must be an Object')
-			# log 'wizzi.artifact.genContext.pman.globalContext', genconfig.pman.globalContext()
+			# loog 'wizzi.artifact.genContext.pman.globalContext', genconfig.pman.globalContext()
 			var globalContext
 				_ Object.assign
 					{
@@ -151,7 +151,7 @@
 		m toStream
             param stream
 			if this.writeFilePath != null
-				# log 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
+				# loog 'wizzi.artifact.genContext.toStream. this.writeFilePath', this.writeFilePath
 				_ stream.write
 					_ file.read
 						@ this.writeFilePath
@@ -185,7 +185,7 @@
             param message
             param location
             param node
-			log 'wizzi.artifact.genContext.artifactGenerationError.message', message
+			# loog 'wizzi.artifact.genContext.artifactGenerationError.message', message
 			var error
 				new errors.ArtifactGenerationError(message, location, node)
 			_ this.artifactGenerationErrors.push(error)

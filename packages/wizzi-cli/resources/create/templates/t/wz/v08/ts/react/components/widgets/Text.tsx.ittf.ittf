@@ -95,7 +95,7 @@ $group
                                 else null
     +
     ${'$'}foreach f in ssfuncs
-        log '${'$'}{f}', ${'$'}{f}
+        # loog '${'$'}{f}', ${'$'}{f}
     +
     const textProps
         styled-css

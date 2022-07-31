@@ -23,7 +23,7 @@
                         @ schema model
                         @ request
                             {
-                # log 'htmlContext', util.inspect(htmlContext, { depth: 2 })
+                # loog 'htmlContext', util.inspect(htmlContext, { depth: 2 })
                 _ legacy.htmlDocument
                     @ ittfDocumentPath
                     @ mTreeBuildupContext

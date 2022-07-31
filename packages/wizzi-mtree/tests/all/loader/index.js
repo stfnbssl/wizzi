@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\index.js.ittf
 */
 'use strict';
@@ -41,12 +41,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -64,7 +64,7 @@ describe("index", function() {
             storeKind: 'filesystem'
          }, function(err, notUsed) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             done();
@@ -92,7 +92,7 @@ describe("index", function() {
             __ittfDocumentStore: store
          }, function(err, mTree) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             result = mTree;
@@ -106,7 +106,7 @@ describe("index", function() {
             __productionManager: mocks.ProductionManager, 
             __ittfDocumentStore: store
          }, function(err, result) {
-            // log 'should get an RepoIOError error.err', err
+            // loog 'should get an RepoIOError error.err', err
             expect(err.name).to.be.a('string');
             expect(err.name).to.be('RepoIOError');
             done();

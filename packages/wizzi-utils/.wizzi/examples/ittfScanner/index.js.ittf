@@ -23,14 +23,14 @@
         # _ ittfFsNode_step_1
         _ ittfFsNode_step_1_outside
             f_cb_test( result1 )
-                # log 'ittfFsNode_step_1.result', result1
+                # loog 'ittfFsNode_step_1.result', result1
                 #
                     _ ittfFsNode_step_2
                         f_cb_test( result2 )
                             _ ittfFsNode_step_3
                                 @ result.root
                                 f_cb_test( result3 )
-                                    log 'ittfFsNode_step_3.result', result3
+                                    info 'ittfFsNode_step_3.result', result3
         # _ folderBrowse_step_1
 
         function step_1
@@ -50,7 +50,7 @@
                             @ 'outputs'
                             @ 'first.wzCtx.ittf'
                         f_cb_test( result )
-                            log 'err, result', err, result
+                            info 'err, result', err, result
                             _ step_2
 
         function step_2
@@ -72,7 +72,7 @@
                             @ 'outputs'
                             @ 'second.wzCtx.ittf'
                         f_cb_test( result )
-                            log 'err, result', err, result
+                            info 'err, result', err, result
                             _ step_4
 
         function step_4
@@ -88,13 +88,13 @@
                             @ wizziStudioFolder
                             @  'dist/server'
                 f_cb_test( result )
-                    log 'step_4 err', err
+                    info 'step_4 err', err
                     var msg
                         _ stringify
                             @ result
                             @ null
                             @ 2
-                    # log 'step_4 result', msg
+                    # loog 'step_4 result', msg
                     _ file.write
                         _ path.join
                             @ __dirname
@@ -117,7 +117,7 @@
                             @  'dist/server'
 
                 f_cb_test( result )
-                    log 'step_4 err', err
+                    info 'step_4 err', err
 
                     var msg
                         _ stringify
@@ -125,4 +125,4 @@
                             @ null
                             @ 2
             
-                    log 'step_5 result', msg
+                    info 'step_5 result', msg

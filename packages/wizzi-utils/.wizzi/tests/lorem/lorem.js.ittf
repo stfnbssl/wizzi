@@ -10,7 +10,7 @@
             _ lorem
                 {
                     @ count 100
-        # log 'lorem.100', text1
+        # loog 'lorem.100', text1
 
         tobe_string_type(text1)
         
@@ -20,6 +20,6 @@
                     @ count 10
                     @ units 'paragraphs'
                     @ htmlTag 'p'
-        # log 'lorem.10.paragraphs.p\n', text
+        # loog 'lorem.10.paragraphs.p\n', text
 
         tobe_string_type(text2, md)

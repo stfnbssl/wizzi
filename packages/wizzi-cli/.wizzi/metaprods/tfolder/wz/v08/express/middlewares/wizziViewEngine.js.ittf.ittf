@@ -32,7 +32,7 @@ $group
                                 @ ...options
                                 @ locals options._locals
                                 @ ...twinJsonContext
-                        log 'WizziViewEngineMiddleware.context', stringify(context, null, 2)
+                        # loog 'WizziViewEngineMiddleware.context', stringify(context, null, 2)
                         _ wizziProds.generateArtifactFs(filePath, context).then
                             => 
                                 param generated
@@ -42,7 +42,7 @@ $group
                                     param err
                                     _ callback(err)
                 const viewsFolder = path.resolve(__dirname, '..', 'site', 'views')
-                log 'WizziViewEngineMiddleware.views folder', viewsFolder
+                success 'WizziViewEngineMiddleware.views folder', viewsFolder
                 # specify the views directory
                 _ app.set('views', viewsFolder)
                 # register the template engine

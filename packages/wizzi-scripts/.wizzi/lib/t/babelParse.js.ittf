@@ -67,14 +67,14 @@
 		var code = options.code
 		var codePath = options.codePath
 
-		# log 'wizzi-scripts.babelParseExec codePath, code', codePath, code
+		# loog 'wizzi-scripts.babelParseExec codePath, code', codePath, code
 
 		var cfg
 			_ this.getBabelParseConfig
 				@ options
 
 		if codePath
-			# log 'babelParseExec.cfg', cfg
+			# loog 'babelParseExec.cfg', cfg
 			var ast
 				_ this.cleanBabelAst
 					@ options
@@ -84,14 +84,14 @@
 						@ cfg
 			r_cb(ast)
 		else
-			# log 'babelParseExec.cfg', cfg
+			# loog 'babelParseExec.cfg', cfg
 			var ast
 				_ this.cleanBabelAst
 					@ options
 					_ babelParser.parse
 						@ code
 						@ cfg
-			# log 'babelParseExec.ast', ast
+			# loog 'babelParseExec.ast', ast
 			r_cb(ast)
 			#
 				_ babelParser.parse
@@ -123,7 +123,7 @@
 					_ res.write('data: ' + JSON.stringify(err, null, 2))
 					_ res.end('data: ***___CLOSE___***\n\n')
 				else
-					# log 'wizzi-scripts.babelParseExecToEventStream'
+					# loog 'wizzi-scripts.babelParseExecToEventStream'
 					var resultString = JSON.stringify(result, null, 2)
 					var str
 					var lines = resultString.split("\n")

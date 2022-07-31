@@ -12,7 +12,7 @@
 
 			var duplicatedItemPath = parentPath(itemPath) + '/' + newName
 				
-			# log 'wizzi-io.filesystem.duplicateFile', userId, projectId, itemPath, duplicatedItemPath
+			# loog 'wizzi-io.filesystem.duplicateFile', userId, projectId, itemPath, duplicatedItemPath
 
 			_ md.exists
 				@ userId
@@ -43,7 +43,7 @@
 
 			var renamedItemPath = parentPath(itemPath) + '/' + newName
 				
-			# log 'wizzi-io.filesystem.renameFile', userId, projectId, itemPath, renamedItemPath
+			# loog 'wizzi-io.filesystem.renameFile', userId, projectId, itemPath, renamedItemPath
 
 			_ md.exists
 				@ userId

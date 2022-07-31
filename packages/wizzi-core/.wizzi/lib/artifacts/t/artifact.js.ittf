@@ -23,7 +23,7 @@
 	md-gen-main(
 		$if noschemacheck == false
 			if model.wzElement !== '${schema}'
-				log 'wizzi-core', 'artifact', 'model', model
+				error 'wizzi-core', 'artifact', 'model', model
 				_ callback
 					_ error
 						@ 'Invalid model schema. Expected "${schema}". Received: ' + model.wzElement

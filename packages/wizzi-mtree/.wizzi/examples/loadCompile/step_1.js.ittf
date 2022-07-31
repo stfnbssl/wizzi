@@ -45,7 +45,7 @@
                             {
                                 @ isCompile false $$ true
                     f_cb_test( mTree )
-                        # log 'mTree', mTree
+                        # loog 'mTree', mTree
                         _ printEvaluatedNodes(mTree, 'After evaluate')
 
 $*
@@ -64,12 +64,12 @@ $*
 	function step_1
 		param file
         param callback
-        log 'EXAMPLE.loader.start'
+        info 'EXAMPLE.loader.start'
 		var loadMTree
 			_ packageIndex.createLoadMTree
 				_ repo.getCreateFilesystemStore
 
-		log 'EXAMPLE.loader.loading ittf/load_compile.html.ittf'
+		info 'EXAMPLE.loader.loading ittf/load_compile.html.ittf'
         _ loadMTree
 			_ path.join
 				@ __dirname
@@ -97,7 +97,7 @@ $*
 					{
 						@ isCompile true
 			f_cb_throw( mTree )
-				log 'EXAMPLE.loader.loaded.succesfully ittf/load_compile.html.ittf'
+				info 'EXAMPLE.loader.loaded.succesfully ittf/load_compile.html.ittf'
                 log "EXAMPLE.loader.mTree.loadHistory", mTree.loadHistory
 				var el
 					_ mTree.loadHistory.getIttfDocumentErrorLines
@@ -122,7 +122,7 @@ $*
         param ittfDocumentBasename
         param callback
         
-        log 'EXAMPLE.loader.sample_load.start', ittfDocumentBasename
+        info 'EXAMPLE.loader.sample_load.start', ittfDocumentBasename
 		
         var loadMTree
 			_ packageIndex.createLoadMTree
@@ -140,8 +140,8 @@ $*
 					_ mocks.getProductionManager
 				{ mTreeBuildupContext
             f_cb_throw( mTree )
-                log 'EXAMPLE.loader.sample_load.result\n', mTree.toIttf()
-                log 'EXAMPLE.loader.sample_load.frontmatter\n', JSON.stringify(mTree.frontMatter, null, 2)
+                info 'EXAMPLE.loader.sample_load.result\n', mTree.toIttf()
+                info 'EXAMPLE.loader.sample_load.frontmatter\n', JSON.stringify(mTree.frontMatter, null, 2)
 				_ file.write
 					_ path.join
 						@ __dirname

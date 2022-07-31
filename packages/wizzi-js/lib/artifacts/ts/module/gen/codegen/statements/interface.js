@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\interface.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -185,7 +185,7 @@ md.load = function(cnt) {
         var model = writeComments(model, ctx);
         u.genAccessorsAndExtra(model, ctx)
         var atype = u.extractTSSimpleType(model);
-        // log 'typeMethod atype', atype
+        // loog 'typeMethod atype', atype
         ctx.write(model.wzName);
         ctx.write('(');
         u.genTSParams(model, ctx, cnt, (err, notUsed) => {
@@ -196,7 +196,7 @@ md.load = function(cnt) {
             ctx.write(')');
             if (atype) {
                 if (!cnt.stm[atype.wzElement]) {
-                    console.log('ts.module.gen.item.wzElement not managed', atype.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', atype.wzElement);
                 }
                 ctx.write(': ');
                 cnt.stm[atype.wzElement](atype, ctx, (err, notUsed) => {

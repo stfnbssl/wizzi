@@ -51,7 +51,7 @@
 			set ch = template[i]
 			
 			if ch == '\\'
-				# log 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
+				# loog 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
 			
 			if state == state_text &&
 				\b ch == '\\' && 
@@ -150,17 +150,17 @@
 	function evalKeyOrCode
 		param keyOrCode
 		param jsWizziContext
-		# log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode
+		# loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode
 		# TODO Is this a week assumption ???
 		var stm
 			iif keyOrCode.indexOf('return ') > -1
 				then 'var _____result = function dummy() { ' + keyOrCode + ' }();'
 				else 'var _____result = ' + keyOrCode + ';'
-		# log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
+		# loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
 		checked_call_return( notUsed, wizzi-mtree@${versions['wizzi-mtree@next']}.loader.ittfInterpolate.evalKeyOrCode, stm )
 			_ jsWizziRunner.run(stm, jsWizziContext)
 		var result = jsWizziContext.getValue('_____result')
-		# log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode, result
+		# loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode, result
 		_ jsWizziContext.setValue('_____result', undefined)
 		return result
 

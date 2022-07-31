@@ -13,7 +13,7 @@
 			f_cb( r_upd )
 				delete r_upd.connection
 				delete r_upd.message
-				# log 'wizzi-repo.mongodb.FsMongo.updateItem', r_upd
+				# loog 'wizzi-repo.mongodb.FsMongo.updateItem', r_upd
 				if r_upd.result.nModified == 1
 					r_cb()
 						{
@@ -34,7 +34,7 @@
 		_ this.getItemById
 			@ id
 			f_cb( r )
-				# log 'wizzi-repo.mongodb.FsMongo.updateItemLastModified, getItemById', id, r
+				# loog 'wizzi-repo.mongodb.FsMongo.updateItemLastModified, getItemById', id, r
 				if r != null
 					set r.lastModified = lastModified
 					_ that.db.collection(FSITEMS).replaceOne
@@ -44,7 +44,7 @@
 						f_cb( r_upd )
 							delete r_upd.connection
 							delete r_upd.message
-							# log 'wizzi-repo.mongodb.FsMongo.updateItemLastModified', r_upd
+							# loog 'wizzi-repo.mongodb.FsMongo.updateItemLastModified', r_upd
 							if r_upd.result.nModified == 1
 								r_cb()
 									{

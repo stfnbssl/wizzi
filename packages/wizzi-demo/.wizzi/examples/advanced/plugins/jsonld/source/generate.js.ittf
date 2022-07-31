@@ -58,7 +58,7 @@
 					function async_item
 						param schemaName
 						param callback
-						log 'Generating schema ' + schemaName
+						info 'Generating schema ' + schemaName
 						_ wizzi.generateWizziModelTypes
 							{
 								{ configOptions

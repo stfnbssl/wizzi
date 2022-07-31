@@ -3,19 +3,19 @@
 
 	function heading1
 		param text
-		log ''
-		log '*'.repeat(120)
-		log '** level ${level} - step ${step} - ${name} - ' + text
-		log '*'.repeat(120)
-		log ''
+		info ''
+		info '*'.repeat(120)
+		info '** level ${level} - step ${step} - ${name} - ' + text
+		info '*'.repeat(120)
+		info ''
 	
 	function heading2
 		param text
-		log ''
-		log '   ', '-'.repeat(100)
-		log '   ','-- ${name} - ' + text
-		log '   ', '-'.repeat(100)
-		log ''
+		info ''
+		info '   ', '-'.repeat(100)
+		info '   ','-- ${name} - ' + text
+		info '   ', '-'.repeat(100)
+		info ''
 
 	function printArray
 		param name
@@ -23,10 +23,10 @@
 		param fields
 		param format
 		if format === 'dashes'
-			log '   ', '-'.repeat(100)
-		log '   ', '* array ' + name + ' : '
+			info '   ', '-'.repeat(100)
+		info '   ', '* array ' + name + ' : '
 		foreach item in arr
-			log '    {', i
+			info '    {', i
 			var keys = fields || Object.keys(item)
 			foreach k in keys
 				_ printValue
@@ -39,7 +39,7 @@
 		param format
 		param p1
 		if format === 'dashes' || format === 'meter'
-			log '   ', '-'.repeat(100)
+			info '   ', '-'.repeat(100)
 		if format === 'json'
 			set value
 				_ stringify
@@ -53,17 +53,17 @@
 					{
 						@ numbered true
 			if lines.length === 1
-				log '   ', key, ':', lines[0].text
+				info '   ', key, ':', lines[0].text
 			else
 				for var i=0; i<lines.length; i++
 					if i === 0
-						log '   ', key, ':', lines[0].numFmt, lines[0].text
+						info '   ', key, ':', lines[0].numFmt, lines[0].text
 					else
-						log '   ', spaces(key.length+1), ' ', lines[i].numFmt, lines[i].text
+						info '   ', spaces(key.length+1), ' ', lines[i].numFmt, lines[i].text
 		elif verify.isObject(value)
-			log '   ', key, ':', inspect(value)
+			info '   ', key, ':', inspect(value)
 		else
-			log '   ', key, ':', value
+			info '   ', key, ':', value
 		if format === 'meter'
 			_ meterLine(p1, '     ' + new Array(1 + key.length).join(' '))
 

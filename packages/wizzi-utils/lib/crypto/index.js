@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\crypto\index.js.ittf
 */
 'use strict';
@@ -9,11 +9,11 @@ var Hashids = require("hashids");
 if (Hashids.__esModule == true) {
     Hashids = Hashids.default;
 }
-// log 'Hashids', Hashids
+// loog 'Hashids', Hashids
 var crypto = require('crypto');
 // Must be 256 bytes (32 characters)
 var ENCRYPTION_KEY = process.env.PROCESS_ENCRYPTION_KEY || "C9jM6ONATgsd1W30g6T8N3elW7sgHF4q";
-console.log('crypto/endec.ENCRYPTION_KEY', ENCRYPTION_KEY);
+// loog 'crypto/endec.ENCRYPTION_KEY', ENCRYPTION_KEY
 // For AES, this is always 16
 var IV_LENGTH = 16;
 // simple

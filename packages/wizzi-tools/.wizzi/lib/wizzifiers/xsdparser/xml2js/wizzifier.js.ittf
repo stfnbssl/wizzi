@@ -59,7 +59,7 @@
         if verify.isString(xmlNode)
 			var ss = xmlNode.split('\n')
 			if ss.length > 1
-				log 'ss', ss
+				# loog 'ss', ss
 				set parent.name = ss[0]
 				for var j=1; j<ss.length; j++
 					var tag
@@ -84,7 +84,7 @@
 							@ children
 								[ 
 					_ parent.children.push(tag)
-			# log 'parent.tag, ac.n', parent.tag, ac.n
+			# loog 'parent.tag, ac.n', parent.tag, ac.n
 			if ac.n && !parent.name
 				set parent.name = ac.n
 			var attribs = ac.a, aName, rName, nsn
@@ -179,7 +179,7 @@
 					elif (childXmlNodeName === 'restrict' || childXmlNodeName === 'extend') &&
 						\b (parent.tag === 'c-content' || parent.tag === 's-content') &&
 						\b childnode.value.length == 1
-						# log 'parent.tag', parent.tag, childXmlNodeName, childnode.value
+						# loog 'parent.tag', parent.tag, childXmlNodeName, childnode.value
 						var ac2 = getAttribsAndChilds(ctx, childnode.value[0])
 						set parent.tag = parent.tag + '-' + childXmlNodeName
 						set parent.name = ac2.a.base
@@ -433,5 +433,5 @@
 				set ret.targetNsPrefix = item.prefix
 			if item.ns === 'http://www.w3.org/2001/XMLSchema'
 				set ret.xmlSchemaNsPrefix = item.prefix
-		log 'getNamespaces', ret
+		# loog 'getNamespaces', ret
 		return ret

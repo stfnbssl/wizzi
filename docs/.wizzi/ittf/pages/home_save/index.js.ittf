@@ -28,7 +28,7 @@
 
     _ wz.contentLoaded
         =>
-            log 'contentLoaded'
+            # loog 'contentLoaded'
             $foreach menuGroup in mpage.Nav1.menuGroups
                 $foreach menu in menuGroup.menus
                     $if menu.panels && menu.panels.length > 0            

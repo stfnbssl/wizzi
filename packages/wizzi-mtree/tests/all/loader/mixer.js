@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mixer.js.ittf
 */
 'use strict';
@@ -40,12 +40,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -108,7 +108,7 @@ describe("mixer", function() {
             mixer(mTree, provider, function(err, mixedModel) {
                 result_mixedModel = mixedModel;
                 node = result_mixedModel.nodes[0];
-                // log 'node 1', node.row, node.col, node.name, node.value
+                // loog 'node 1', node.row, node.col, node.name, node.value
                 expect(node.row).to.be.a('number');
                 expect(node.row).to.be(1);
                 expect(node.col).to.be.a('number');
@@ -117,7 +117,7 @@ describe("mixer", function() {
                 expect(node.name).to.be('sigma');
                 expect(node.value).to.be(undefined);
                 node = result_mixedModel.nodes[0].children[0];
-                // log 'node 2', node.row, node.col, node.name, node.value
+                // loog 'node 2', node.row, node.col, node.name, node.value
                 expect(node.row).to.be.a('number');
                 expect(node.row).to.be(1);
                 expect(node.col).to.be.a('number');
@@ -127,7 +127,7 @@ describe("mixer", function() {
                 // strict equality
                 expect(node.value).to.be('$'+'{id}');
                 node = node.children[0];
-                // log 'node 3', node.row, node.col, node.name, node.value
+                // loog 'node 3', node.row, node.col, node.name, node.value
                 expect(node.row).to.be.a('number');
                 expect(node.row).to.be(3);
                 expect(node.col).to.be.a('number');

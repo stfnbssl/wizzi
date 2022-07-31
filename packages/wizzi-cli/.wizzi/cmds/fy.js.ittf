@@ -30,8 +30,8 @@
                 else
                     set sourcePath = path.join(currentDir, source)
                 if !file.exists(sourcePath)
-                    log 'Invalid options for `fy` command.'
-                    log 'Source path not found', source
+                    error 'Invalid options for `fy` command.'
+                    error 'Source path not found', source
                     _ help({_:['help', 'fy']})
                     return       
                 set sourceIsFolder = file.isDirectory(sourcePath)
@@ -41,13 +41,13 @@
                     else
 					    set destPath = path.join(currentDir, dest)
                 if !file.exists(path.dirname(destPath))
-                    log 'Invalid options for `fy` command.'
-                    log 'Destination path dirname not found', dest
+                    error 'Invalid options for `fy` command.'
+                    error 'Destination path dirname not found', dest
                     _ help({_:['help', 'fy']})
                     return       
                 if file.isFile(destPath) && sourceIsFolder
-                    log 'Invalid options for `fy` command.'
-                    log 'Source path is a folder, destination path cannot be a filename', dest
+                    error 'Invalid options for `fy` command.'
+                    error 'Source path is a folder, destination path cannot be a filename', dest
                     _ help({_:['help', 'fy']})
                     return       
                 if file.isDirectory(destPath) && !sourceIsFolder
@@ -85,5 +85,5 @@
                             _ file.write(destPath, result)
                             # loog 'Wizzify file', result
 			else
-				log 'Invalid options for `fy` command.'
+				error 'Invalid options for `fy` command.'
 				_ help({_:['help', 'fy']})

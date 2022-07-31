@@ -7,7 +7,7 @@
                 @ this.productionManager().globalContext() || {}
                 @ this.productionManager().productionContext.getGlobalModels()
                 @ this.productionManager().productionContext.getArtifactCollections()
-        # log 'getGlobalContextForLoading', context
+        # loog 'getGlobalContextForLoading', context
         return context
 
     m getLoadFrontMatter

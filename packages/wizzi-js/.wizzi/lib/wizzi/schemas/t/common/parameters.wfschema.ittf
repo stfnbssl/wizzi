@@ -93,7 +93,7 @@
 		r param/s
 		r jsPropertyOrValue/s
 		m wzinitialize
-			# log 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues
+			# loog 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues
 			if this.params.length == 0 && this.jsPropertyOrValues.length > 0
 				set this.paramArrayPattern = true
 				var acc = []
@@ -111,7 +111,7 @@
 		r jsPropertyOrValue/s
 
 		m wzinitialize
-			# log 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues
+			# loog 'wizzi-js.parameters.wfschema.objectParam', this.params, this.jsPropertyOrValues
 			if this.params.length == 0 && this.jsPropertyOrValues.length > 0
 				set this.paramObjectPattern = true
 				var acc = []

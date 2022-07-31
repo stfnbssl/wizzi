@@ -1,0 +1,40 @@
+{
+    "name": "wizzi-lab",
+    "version": "0.0.0",
+    "title": "A wizzi factory incubator plugin for new wizzi schemas",
+    "license": "MIT",
+    "schemas": [
+        {
+            "name": "rdbms",
+            "title": "relational db model",
+            "transformers": [],
+            "artifacts": [
+                {
+                    "name": "rdbms/jsonpersister"
+                }
+            ]
+        },
+        {
+            "name": "raml",
+            "title": "rest service model",
+            "transformers": [],
+            "artifacts": [
+                {
+                    "name": "raml/js_client"
+                }
+            ]
+        },
+        {
+            "name": "regexp",
+            "title": "regular expressions model",
+            "transformers": [],
+            "artifacts": []
+        },
+        {
+            "name": "py",
+            "title": "python language",
+            "transformers": [],
+            "artifacts": []
+        }
+    ]
+}

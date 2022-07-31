@@ -44,7 +44,7 @@
 
 	m equals
 		param other
-		# log 'wizzi-utils.ittfDocumentGraph.equals', this.name, this.value, other.name, other.value
+		# loog 'wizzi-utils.ittfDocumentGraph.equals', this.name, this.value, other.name, other.value
 		if this.name !== other.name ||
 			\b this.value !== other.value
 			return false

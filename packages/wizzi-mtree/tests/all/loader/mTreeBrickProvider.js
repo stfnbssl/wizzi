@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mTreeBrickProvider.js.ittf
 */
 'use strict';
@@ -40,12 +40,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -115,10 +115,10 @@ describe("mTreeBrickProvider", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'err, provider', err, provider
+            // loog 'err, provider', err, provider
             expect(provider).to.be.an('object');
             var mTreeBrick = provider.getPrimaryMTreeBrick();
             expect(mTreeBrick).to.be.an('object');
@@ -143,10 +143,10 @@ describe("mTreeBrickProvider", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'err, provider', err, provider
+            // loog 'err, provider', err, provider
             expect(provider).to.be.an('object');
             provider.get({
                 from: 'store', 
@@ -154,10 +154,10 @@ describe("mTreeBrickProvider", function() {
                 relpath: 'frag1.tests.ittf'
              }, function(err, mTreeBrick) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
-                // log 'err, mTreeBrick', err, mTreeBrick
+                // loog 'err, mTreeBrick', err, mTreeBrick
                 expect(mTreeBrick).to.be.an('object');
                 expect(mTreeBrick.$schema).to.be('tests');
                 expect(mTreeBrick.nodes).to.be.an('array');

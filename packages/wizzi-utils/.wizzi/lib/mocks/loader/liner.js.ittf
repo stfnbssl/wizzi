@@ -110,15 +110,15 @@
 				else 
 					throw new Error('wizzi-mtree.loader.liner index of chunk out of range: ' + chunk)
 				if cp > 0xffff
-					log 'wizzi-mtree.loader.liner.cp > 0xffff'
+					# loog 'wizzi-mtree.loader.liner.cp > 0xffff'
 					set i += 1
 
                 set colpos++
 
 				if cp == CP.SLASH
-					# log '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
+					# loog '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
                 
-				$$ log 'liner', ch, cp, commentState, quote
+				# loog 'liner', ch, cp, commentState, quote
 				
 				if quote != null
                     if quote == cp
@@ -194,7 +194,7 @@
                 if typeof (line.value) !== 'undefined'
                     set line.value = line.value.trim()
 				set line.hasMacro = lineHasMacro
-				# log 'last push line', line
+				# loog 'last push line', line
                 _ lines.push(line)
 				set lineHasMacro = false
             
@@ -207,7 +207,7 @@
 					# remove escape state
 					set macroState = MACRO.INSIDE_TEMPLATE
 					_ processChar(cp)
-					# log 'macroState', macroState, String.fromCodePoint(cp) 
+					# loog 'macroState', macroState, String.fromCodePoint(cp) 
 				elif macroState == MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR
 					if cp == CP.OPEN_GRAPH
 						# ok - really it was a start of macro
@@ -220,30 +220,30 @@
 						_ processChar(CP.DOLLAR)
 						_ processChar(cp)
 					set macroState = MACRO.INSIDE_TEMPLATE
-					# log 'macroState', macroState, String.fromCodePoint(cp) 
+					# loog 'macroState', macroState, String.fromCodePoint(cp) 
 				else
 					if cp == CP.BACKTICK
 						if macroState > MACRO.NONE 
 							set macroState = MACRO.NONE
 							_ processChar(cp)
-							# log 'macroState', macroState, String.fromCodePoint(cp) 
+							# loog 'macroState', macroState, String.fromCodePoint(cp) 
 						else
 							set macroState = MACRO.INSIDE_TEMPLATE
 							_ processChar(cp)
-							# log 'macroState', macroState, String.fromCodePoint(cp) 
+							# loog 'macroState', macroState, String.fromCodePoint(cp) 
 					else
 						if macroState == MACRO.INSIDE_TEMPLATE
 							if cp == CP.DOLLAR
 								# could be start of macro
 								set macroState = MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR
-								# log 'macroState', macroState, String.fromCodePoint(cp) 
+								# loog 'macroState', macroState, String.fromCodePoint(cp) 
 							elif cp == CP.SLASH
 								# could be an escape of a template start inside a template
 								set macroState = MACRO.INSIDE_TEMPLATE_SEEN_ESCAPE
 								_ processChar(cp)
-								# log 'macroState', macroState, String.fromCodePoint(cp) 
+								# loog 'macroState', macroState, String.fromCodePoint(cp) 
 							else
-								# log 'process char macroState', macroState, String.fromCodePoint(cp) 
+								# loog 'process char macroState', macroState, String.fromCodePoint(cp) 
 								_ processChar(cp)
 						else
 							_ processChar(cp)
@@ -302,4 +302,4 @@
                                 @ sourceKey sourceKey
                 
 				if line
-					# log 'line.name, value', line.name, line.value
+					# loog 'line.name, value', line.name, line.value

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\examples\vtt\index.js.ittf
 */
 'use strict';
@@ -25,7 +25,7 @@ function executeExample() {
     for (i=0; i<i_len; i++) {
         item = getFiles(ittfPath,'vtt')[i];
         item = item.substring(0, item.length - '.vtt.ittf'.length);
-        console.log('item', item);
+        // loog 'item', item
         execute(item);
     }
     
@@ -36,30 +36,30 @@ function executeExample() {
             __productionManager: mocks.getProductionManager()
          }, function(err, wizziModel) {
             if (err) {
-                console.log('-------------------------------------------------------------------');
-                console.log('--- Test error ----------------------------------------------------');
-                console.log('err', err);
-                console.log('err.toString()', err.toString());
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '--- Test error ----------------------------------------------------');
+                console.log("[31m%s[0m", 'err', err);
+                console.log("[31m%s[0m", 'err.toString()', err.toString());
                 if (err.inner) {
-                    console.log('err.inner.toString()', err.inner.toString());
+                    console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                 }
-                console.log('-------------------------------------------------------------------');
-                console.log('-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
                 throw 'Test error';
             }
             console.log('vtt wizziModel', JSON.stringify(wizziModel.toJson(), null, 2));
             var ctx = mocks.getGenContext();
             vttgenerator.gen(wizziModel, ctx, function(err, ctxout) {
                 if (err) {
-                    console.log('-------------------------------------------------------------------');
-                    console.log('--- Test error ----------------------------------------------------');
-                    console.log('err', err);
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                    console.log("[31m%s[0m", '--- Test error ----------------------------------------------------');
+                    console.log("[31m%s[0m", 'err', err);
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                     if (err.inner) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
-                    console.log('-------------------------------------------------------------------');
-                    console.log('-------------------------------------------------------------------');
+                    console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                    console.log("[31m%s[0m", '-------------------------------------------------------------------');
                     throw 'Test error';
                 }
                 console.log('ctxout', ctxout.getContent());
@@ -145,16 +145,20 @@ function executeWizziJob(wfjobDocumentUri, options) {
     options = options || {};
     options.plugins = options.plugins || [];
     options.globalContext = options.globalContext || {};
-    var jobPlugins = [
-        'wizzi-core', 
-        'wizzi-meta', 
-        'wizzi-js', 
-        'wizzi-web'
-    ];
-    var i, i_items=options.plugins, i_len=options.plugins.length, item;
-    for (i=0; i<i_len; i++) {
-        item = options.plugins[i];
-        jobPlugins.push(item);
+    var pluginsBaseFolder = null;
+    var wfBaseFolder = null;
+    var jobPlugins = [];
+    if (options.plugins) {
+        wfBaseFolder = options.wfBaseFolder;
+        pluginsBaseFolder = options.pluginsBaseFolder;
+        jobPlugins = options.plugins;
+    }
+    else {
+        jobPlugins = [
+            'wizzi-core', 
+            'wizzi-js', 
+            'wizzi-web'
+        ];
     }
     if (wizzi == null) {
         wizzi = require('wizzi');
@@ -164,7 +168,8 @@ function executeWizziJob(wfjobDocumentUri, options) {
         role: 'admin', 
         storeKind: 'filesystem', 
         config: {
-            wfBaseFolder: 'c:/my/wizzi/v5', 
+            wfBaseFolder: wfBaseFolder, 
+            pluginsBaseFolder: pluginsBaseFolder, 
             plugins: jobPlugins
          }, 
         job: {
@@ -179,7 +184,7 @@ function executeWizziJob(wfjobDocumentUri, options) {
          }
      }, function(err) {
         if (err) {
-            wizzi.printWizziJobError($name, err);
+            wizzi.printWizziJobError(wfjobDocumentUri, err);
         }
     })
 }

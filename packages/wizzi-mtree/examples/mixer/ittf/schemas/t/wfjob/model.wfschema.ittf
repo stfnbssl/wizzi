@@ -83,9 +83,9 @@ $group
 							@ attribute item.attribute
 							@ function item.function
 
-				$$ log 'this.modelCollection.wzName', this.modelCollection.wzName
-				$$ log 'this.collName', this.collName
-				$$ log 'this.collItemName', this.collItemName
+				# loog 'this.modelCollection.wzName', this.modelCollection.wzName
+				# loog 'this.collName', this.collName
+				# loog 'this.collItemName', this.collItemName
 	
 	e_tag( modelCollection, model-coll )
 		

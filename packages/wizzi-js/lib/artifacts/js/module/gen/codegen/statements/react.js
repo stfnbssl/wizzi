@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\react.js.ittf
 */
 'use strict';
@@ -48,7 +48,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -112,7 +112,7 @@ md.load = function(cnt) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'react.js 2 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+                    // loog 'react.js 2 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
                     process.nextTick(function() {
                         repeater_1(index_1 + 1);
                     })
@@ -120,7 +120,7 @@ md.load = function(cnt) {
             }
             repeater_1(0);
             function next_1() {
-                // log 'react.js 3 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+                // loog 'react.js 3 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
                 reactComponent_close(model, ctx, childrenInfo, callback)
             }
         })
@@ -153,7 +153,7 @@ md.load = function(cnt) {
         if (typeof callback === 'undefined') {
             throw new Error('Missing callback parameter in fn: ' + myname + '.reactComponent_member');
         }
-        // log 'reactComponent, model.wzElement', model.wzElement, model.wzName, model.wzParent.wzName
+        // loog 'reactComponent, model.wzElement', model.wzElement, model.wzName, model.wzParent.wzName
         if (model.wzElement == 'state') {
             ctx.write('state = ');
             model.wzElement = 'jsObject';
@@ -222,7 +222,7 @@ md.load = function(cnt) {
             })
         }
         
-        // log 'react.js - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+        // loog 'react.js - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
         else if (model.wzElement == 'render') {
             writeMethod('render', model, ctx, cnt, callback);
         }
@@ -288,7 +288,7 @@ md.load = function(cnt) {
         if (typeof callback === 'undefined') {
             throw new Error('Missing callback parameter in fn: ' + myname + '.reactComponent_close');
         }
-        // log 'reactComponent_close'
+        // loog 'reactComponent_close'
         ctx.deindent();
         ctx.w('}');
         if (childrenInfo.items.length > 0) {
@@ -331,7 +331,7 @@ md.load = function(cnt) {
             ctx.deindent();
             ctx.w('}');
         }
-        // log 'react.js 4 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
+        // loog 'react.js 4 - render §§§§§§§§§§§§§§§§§§§§§§§§§§§§§'
         return callback(null, null);
     }
     cnt.stm.reactFunction = function(model, ctx, callback) {
@@ -414,7 +414,7 @@ md.load = function(cnt) {
                 return next_1();
             }
             var item_1 = statements[index_1];
-            // log 'writeIndented', item_1.wzElement
+            // loog 'writeIndented', item_1.wzElement
             
             // done in writeMethodProps
             if (item_1.wzElement == 'prop') {
@@ -449,7 +449,7 @@ md.load = function(cnt) {
         for (i=0; i<i_len; i++) {
             item = react.statements[i];
             
-            // log 'item.defaultValue', item.defaultValue
+            // loog 'item.defaultValue', item.defaultValue
             if (item.wzElement == 'prop') {
                 ret.items.push(item);
                 if (item.defaultValue) {
@@ -545,7 +545,7 @@ md.load = function(cnt) {
         var lc = {};
         lc.oneOfParam = function(model, ctx, cnt) {
             ctx.w(model.wzName + ': PropTypes.oneOf([');
-            // log 'wizzi-codegen.statemts.t.reactPropTypes oneOfParam model: ', model
+            // loog 'wizzi-codegen.statemts.t.reactPropTypes oneOfParam model: ', model
             writeValueList(model, ctx);
             if (model.isRequired) {
                 ctx.w(').isRequired');
@@ -556,7 +556,7 @@ md.load = function(cnt) {
         }
         ;
         lc.oneOfTypeParam = function(model, ctx, cnt) {
-            // log 'wizzi-codegen.statemts.t.reactPropTypes oneOfTypeParam model: ', model
+            // loog 'wizzi-codegen.statemts.t.reactPropTypes oneOfTypeParam model: ', model
             ctx.w(model.wzName + ': PropTypes.oneOfType([');
             writeTypeList(model, ctx);
             if (model.isRequired) {
@@ -613,7 +613,7 @@ md.load = function(cnt) {
         }
         ;
         lc.shapeParam = function(model, ctx, cnt) {
-            // log 'wizzi-codegen.statemts.t.reactPropTypes shapeParam model: ', model
+            // loog 'wizzi-codegen.statemts.t.reactPropTypes shapeParam model: ', model
             ctx.w(model.wzName + ': PropTypes.shape({');
             writePropList(model, ctx);
             if (model.isRequired) {
@@ -629,19 +629,19 @@ md.load = function(cnt) {
         }
         ;
         return function genReactPropType(prop, ctx, cnt) {
-                // log 'wizzi-codegen.reactPropTypes', prop.wzName
+                // loog 'wizzi-codegen.reactPropTypes', prop.wzName
                 
                 // default to string
                 
-                // log 'wizzi-codegen.statemts.t.reactPropTypes < 1, prop.wzName:', prop.wzName, 'string'
+                // loog 'wizzi-codegen.statemts.t.reactPropTypes < 1, prop.wzName:', prop.wzName, 'string'
                 if (!prop.param) {
                     ctx.write(prop.wzName + ': PropTypes.string');
                     if (prop.isRequired) {
                         ctx.write('.isRequired');
                     }
                 }
-                // log 'wizzi-codegen.statemts.t.reactPropTypes prop.wzName: ', prop.wzName, 'prop.param.wzElement', propParam.wzElement
-                // log 'prop', propParam.wzElement, lc[propParam.wzElement]
+                // loog 'wizzi-codegen.statemts.t.reactPropTypes prop.wzName: ', prop.wzName, 'prop.param.wzElement', propParam.wzElement
+                // loog 'prop', propParam.wzElement, lc[propParam.wzElement]
                 else {
                     var propParam = prop.param;
                     if (lc[propParam.wzElement]) {
@@ -797,7 +797,7 @@ md.load = function(cnt) {
         for (i=0; i<i_len; i++) {
             p = parameters[i];
             var state = prmAnalizeParam(p);
-            // log 'wizzi-codegen.js2.function.generateParamConstraints.state', state
+            // loog 'wizzi-codegen.js2.function.generateParamConstraints.state', state
             var j, j_items=state.candidates, j_len=state.candidates.length, item;
             for (j=0; j<j_len; j++) {
                 item = state.candidates[j];
@@ -948,7 +948,7 @@ md.load = function(cnt) {
         return callback(null, null);
     }
     function invalidParam(methodName, name, type, hasCallback, ctx) {
-        // log 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type
+        // loog 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type
         if (hasCallback) {
             ctx.w("    return callback(error(");
             ctx.w("        'InvalidArgument', '" + methodName + "', { parameter: '" + name + "', message: 'The " + name + " parameter must be " + type + ". Received: ' + " + name + " }");
@@ -984,7 +984,7 @@ md.load = function(cnt) {
         return state;
     }
     function prmSelectAnalizer(candidate, state) {
-        // log 'wizzi-codegen.js2.paramAnalizer.prmSelectAnalizer.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmSelectAnalizer.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
         if (candidate.prm.wzElement === 'objectParam') {
             prmAnalizeObject(candidate, state);
         }
@@ -997,7 +997,7 @@ md.load = function(cnt) {
     }
     function prmAnalizeObject(candidate, state) {
         prmAnalizeLeaf(candidate, state);
-        // log 'wizzi-codegen.js2.paramAnalizer.prmAnalizeObject.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmAnalizeObject.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
         var i, i_items=candidate.prm.params, i_len=candidate.prm.params.length, item;
         for (i=0; i<i_len; i++) {
             item = candidate.prm.params[i];
@@ -1020,7 +1020,7 @@ md.load = function(cnt) {
         }
     }
     function prmAnalizeLeaf(candidate, state) {
-        // log 'wizzi-codegen.js2.paramAnalizer.prmAnalizeLeaf.candidate.name', candidate.prm.wzElement, candidate.prm.wzName, candidate.accessPath
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmAnalizeLeaf.candidate.name', candidate.prm.wzElement, candidate.prm.wzName, candidate.accessPath
         if (candidate.prm.isRequired || candidate.prm.isOptional) {
             candidate.constraints.push({
                 constraintType: (candidate.prm.isRequired ? 'required' : 'optional'), 

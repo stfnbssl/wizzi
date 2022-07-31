@@ -93,7 +93,7 @@
 			else
 				_ ctx.hb.writeAttribute('class', name_style)
 		if node.isMixinCall()
-			# log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
+			# loog 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
 			var dId = ctx.fragments[node.fragmentName] ? ctx.fragments[node.fragmentName].id : null
 			if dId
 				_ ctx.hb.writeAttribute('data-frag-id', dId)

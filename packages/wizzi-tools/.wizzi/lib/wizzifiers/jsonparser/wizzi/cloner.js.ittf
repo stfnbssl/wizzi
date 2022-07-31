@@ -7,7 +7,7 @@
 	function transform
         param node
 		param options
-		# log 'cloner.transform', node.tag, node.name
+		# loog 'cloner.transform', node.tag, node.name
 
         var ret
             { 

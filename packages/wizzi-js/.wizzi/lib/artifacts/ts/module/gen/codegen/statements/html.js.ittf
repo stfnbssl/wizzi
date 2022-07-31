@@ -24,7 +24,7 @@
             decl tag = p.name()
             decl text = p.value()
 		
-		# log 'enter statements/html/htmlelement', tag, text
+		# loog 'enter statements/html/htmlelement', tag, text
         _ md._htmlelement
 			@ cnt
 			@ model
@@ -33,7 +33,7 @@
 			@ ctx
 			f_cb()
 				# @ callback
-				# log 'exit statements/html/htmlelement', tag, text
+				# loog 'exit statements/html/htmlelement', tag, text
 				r_cb()
     
 	stm( js
@@ -85,7 +85,7 @@
                 set text = model.wzName
                 set tag = model.wzElement
             
-			# log 'enter _htmlelement ----------------', tag
+			# loog 'enter _htmlelement ----------------', tag
 
 			var attrs = getAttrs(model, ctx)
             var comments = []
@@ -99,7 +99,7 @@
             set model.__hasChildElements = text && text.length > 0
 
 			repeater(1, model.statements)
-                # log 'html.md._htmlelement', item_1.wzElement
+                # loog 'html.md._htmlelement', item_1.wzElement
                 if item_1.isEvent
                     var name = item_1.wzElement
 					if item_1.statements && item_1.statements.length > 0
@@ -159,7 +159,7 @@
                     _ typeParameters.push
                         @ item_1
                 else
-                    log 'Error.model', model
+                    error 'Error.model', model
                     throw new errors.WizziModelDOMNodeError('In ts._htmlelement wzElement not managed: ' + item_1.wzElement, item_1)
 
 				repeater_increment(1)
@@ -177,7 +177,7 @@
                         @ comments
 						f_cb()
 							# @ callback
-							# log 'exit _htmlelement', tag
+							# loog 'exit _htmlelement', tag
 							r_cb()
             
 	function _htmlelement_end

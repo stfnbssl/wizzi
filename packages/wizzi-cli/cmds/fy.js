@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\fy.js.ittf
-    utc time: Sat, 30 Jul 2022 03:36:38 GMT
+    utc time: Sun, 31 Jul 2022 09:15:50 GMT
 */
 'use strict';
 const path = require('path');
@@ -27,8 +27,8 @@ module.exports = (args) => {
             sourcePath = path.join(currentDir, source);
         }
         if (!file.exists(sourcePath)) {
-            console.log('Invalid options for `fy` command.', __filename);
-            console.log('Source path not found', source, __filename);
+            console.log("[31m%s[0m", 'Invalid options for `fy` command.');
+            console.log("[31m%s[0m", 'Source path not found', source);
             help({_:['help', 'fy']});
             return ;
         }
@@ -42,14 +42,14 @@ module.exports = (args) => {
             }
         }
         if (!file.exists(path.dirname(destPath))) {
-            console.log('Invalid options for `fy` command.', __filename);
-            console.log('Destination path dirname not found', dest, __filename);
+            console.log("[31m%s[0m", 'Invalid options for `fy` command.');
+            console.log("[31m%s[0m", 'Destination path dirname not found', dest);
             help({_:['help', 'fy']});
             return ;
         }
         if (file.isFile(destPath) && sourceIsFolder) {
-            console.log('Invalid options for `fy` command.', __filename);
-            console.log('Source path is a folder, destination path cannot be a filename', dest, __filename);
+            console.log("[31m%s[0m", 'Invalid options for `fy` command.');
+            console.log("[31m%s[0m", 'Source path is a folder, destination path cannot be a filename', dest);
             help({_:['help', 'fy']});
             return ;
         }
@@ -63,7 +63,7 @@ module.exports = (args) => {
             wizziTools.importFolder(sourcePath, destPath, (err, result) => {
             
                 if (err) {
-                    console.log('err', err, __filename);
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 // loog 'Wizzify folder result', result
@@ -93,7 +93,7 @@ module.exports = (args) => {
             wizziTools.wizzify(schema, file.read(sourcePath), (err, result) => {
             
                 if (err) {
-                    console.log('err', err, __filename);
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 file.write(destPath, result);
@@ -103,7 +103,7 @@ module.exports = (args) => {
         }
     }
     else {
-        console.log('Invalid options for `fy` command.', __filename);
+        console.log("[31m%s[0m", 'Invalid options for `fy` command.');
         help({_:['help', 'fy']});
     }
 }

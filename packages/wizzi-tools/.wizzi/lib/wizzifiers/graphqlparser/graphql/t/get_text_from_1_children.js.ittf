@@ -1,7 +1,7 @@
 ﻿$group
 	$params expr|c1
 
-	log 'get_text_from_1_children', isChildrenCount(ret, 1)
+	# loog 'get_text_from_1_children', isChildrenCount(ret, 1)
 	
 	var got_text_1 = false
 	

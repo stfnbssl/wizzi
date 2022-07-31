@@ -18,7 +18,7 @@
 					_ u.extractTSSimpleType
 						@ model
 				if ptype
-					# log 'property', ptype.wzElement
+					# loog 'property', ptype.wzElement
 					_ ctx.write(': ')
 					_ cnt.stm[ptype.wzElement](ptype, ctx, () => {})
 				_ ctx.w(';')

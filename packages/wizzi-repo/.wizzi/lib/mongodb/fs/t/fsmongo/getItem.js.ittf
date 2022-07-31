@@ -15,7 +15,7 @@
 			@ key
 			._ toArray
 				f_cb( r )
-					# log 'wizzi-repo.mongodb.FsMongo.getItem.r', key, r
+					# loog 'wizzi-repo.mongodb.FsMongo.getItem.r', key, r
 					if r.length == 1
 						r_cb( r[0] )
 					else
@@ -57,5 +57,5 @@
 					@ parentId parentId
 				._ toArray
 					f_cb( r )
-						# log 'wizzi-repo.mongodb.FsMongo.getItemChildren.r', parentId, r
+						# loog 'wizzi-repo.mongodb.FsMongo.getItemChildren.r', parentId, r
 						r_cb( r )

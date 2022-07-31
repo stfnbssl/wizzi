@@ -28,6 +28,6 @@
 					@ regex
 					function 
 						param placeholder
-						log '==================== codifyInterpolation.placeholder', placeholder
+						# loog '==================== codifyInterpolation.placeholder', placeholder
 						var key = placeholder.slice(lDelLen, -rDelLen)
 						return '" + ' + key + ' + "'

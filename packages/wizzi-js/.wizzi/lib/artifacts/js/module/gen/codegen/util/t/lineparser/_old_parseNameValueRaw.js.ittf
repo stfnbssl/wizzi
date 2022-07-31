@@ -58,14 +58,14 @@
                     @ value
                         function 
 							if quotes.length > 0
-								# log '*=*=*= temporary wizzi-codegen.lineparser. quotes, value: ', quotes, value.join('')
+								# loog '*=*=*= temporary wizzi-codegen.lineparser. quotes, value: ', quotes, value.join('')
 								# log quotes[0].q, quotes[quotes.length -1].q
 							if quotes.length > 2 && quotes[0].q === quotes[quotes.length -1].q && quotes[0].q === '"'
 								var q = quotes[0].q
 								for var i = 1; i < quotes.length -1; i ++
 									if quotes[i].q === q
 										set value[quotes[i].p] = '\\' + q
-								# log '*=*=*= temporary wizzi-codegen.lineparser. value: ', value.join('')
+								# loog '*=*=*= temporary wizzi-codegen.lineparser. value: ', value.join('')
                             return value.join('')
                     @ hasValue
                         function 

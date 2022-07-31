@@ -54,7 +54,7 @@
 				r_wz_err( InvalidArgument, parse )
 					@ 'Invalid uri protocol. Must be `db`. Received: ' + uri
 			
-			# log 'parseuri.parsedUri', parsedUri
+			# loog 'parseuri.parsedUri', parsedUri
 			var
 				decl name
 				decl parts = parsedUri.pathname ? parsedUri.pathname.split('/') : []
@@ -79,8 +79,8 @@
 						@ parameter 'uri'
 						@ message 'A mongodb uri must be in the form `db://userName/projectName/documentPath`. Received: ' + uri
                 
-			# log 'wizzi-repo.mongodb.uriparser.parsedUri.parts', parts
-			# log 'wizzi-repo.mongodb.uriparser.parsedUri', parsedUri
+			# loog 'wizzi-repo.mongodb.uriparser.parsedUri.parts', parts
+			# loog 'wizzi-repo.mongodb.uriparser.parsedUri', parsedUri
 			
 			set ret.storeKind = 'mongodb'
             set ret.userId = parsedUri.host
@@ -98,6 +98,6 @@
 							@ ret.projectId
 							@ ret.path 
 
-			# log 'parseuri.ret', ret
+			# loog 'parseuri.ret', ret
 
 			return  ret

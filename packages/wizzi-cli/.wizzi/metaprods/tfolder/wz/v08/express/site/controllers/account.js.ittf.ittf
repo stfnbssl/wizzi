@@ -11,7 +11,7 @@ $group
             m initialize
                 param initValues
                 
-                log 'Entering AccountController.initialize'
+                warn 'Entering AccountController.initialize'
                 
                 _ this.router.get
                     @ `${this.path}/login`
@@ -48,7 +48,7 @@ $group
                         if err
                             return next(err)
                         const full_user = await authApiCalls.getUser(user.user_id)
-                        log 'full_user', full_user
+                        # loog 'full_user', full_user
                         set request.session.github_accessToken = full_user.identities[0].access_token
                         let returnTo = `${this.path}/user`
                         if request.session

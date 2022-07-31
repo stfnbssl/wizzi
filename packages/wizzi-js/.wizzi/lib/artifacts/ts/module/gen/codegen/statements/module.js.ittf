@@ -47,31 +47,31 @@
 	stm( typeFunctionDeclare
         var xmodel = writeComments(model, ctx)
 		_ ctx.write('function ' + xmodel.wzName)
-		# log 'typeFunctionDeclare enter 1'
+		# loog 'typeFunctionDeclare enter 1'
 		_ u.genTSTypeParameters
 			@ xmodel
 			@ ctx
 			@ cnt
 			a_cb()
-				# log 'typeFunctionDeclare enter 2'
+				# loog 'typeFunctionDeclare enter 2'
 				_ ctx.write('(')
 				_ u.genTSParams
 					@ xmodel
 					@ ctx
 					@ cnt
 					a_cb()
-						# log 'typeFunctionDeclare cb 1'
+						# loog 'typeFunctionDeclare cb 1'
 						_ ctx.write(')')
 						if xmodel.typeReturn
-							# log 'typeFunctionDeclare typeReturn', xmodel.typeReturn.wzElement
+							# loog 'typeFunctionDeclare typeReturn', xmodel.typeReturn.wzElement
 							_ ctx.write(': ')
 							_ cnt.stm.typeReturn
 								@ xmodel.typeReturn
 								@ ctx
 								a_cb()
 									_ ctx.w(';')
-									# log 'typeFunctionDeclare exit 1'
+									# loog 'typeFunctionDeclare exit 1'
 									r_cb()
 						else
-							# log 'typeFunctionDeclare exit 2'
+							# loog 'typeFunctionDeclare exit 2'
 							r_cb()

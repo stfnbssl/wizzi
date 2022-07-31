@@ -1,12 +1,12 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\mocks\misc.js.ittf
 */
 'use strict';
 var path = require('path');
 var file = require('wizzi-utils').file;
-var IttfDocumentStore = require('../../lib/repo/ittfDocumentStore');
+var IttfDocumentStore = require('../../../lib/repo/ittfDocumentStore');
 module.exports = {
     IttfDocumentStore: IttfDocumentStore, 
     ProductionManager: {

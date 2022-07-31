@@ -19,7 +19,7 @@
                             {
                                 @ isDirectory true
                                 @ file file
-                    # log 'root', root
+                    # loog 'root', root
                     _ callback
                         @ null
                         @ root
@@ -41,7 +41,7 @@
                         @ 'readme.tests.ittf'
                 var added
                     _ root.addDocument(documentPath)
-                # log '-------------- should add a document, added', added
+                # loog '-------------- should add a document, added', added
                 tobe_object(added)
                 tobe_array(root.folders, 0)
                 tobe_array(root.documents, 1)
@@ -68,7 +68,7 @@
                         @ 'title.tests.ittf'
                 var added2
                     _ root.addDocument(document2Path)
-                # log 'root', root
+                # loog 'root', root
                 tobe_object(added1)
                 tobe_object(added2)
                 tobe_array(root.folders, 1)
@@ -91,7 +91,7 @@
                         @ 'readme.tests.ittf'
                 var added1
                     _ root.addDocument(document1Path)
-                # log 'root', root
+                # loog 'root', root
                 var document2Path
                     _ path.join
                         @ folderPath
@@ -99,11 +99,11 @@
                         @ 'title.tests.ittf'
                 var added2
                     _ root.addDocument(document2Path)
-                # log 'root.info 1', root.info
+                # loog 'root.info 1', root.info
                 _ root.setInfo
                     f_cb_test( root )
-                        # log 'root', root
-                        # log 'root.info 2', root.info
+                        # loog 'root', root
+                        # loog 'root.info 2', root.info
                         tobe_object_num(root.info.schemas, 1)
                         tobe_string(root.info.schemas['tests'].name, tests)
                         tobe_array(root.info.test.documents, 1)
@@ -118,7 +118,7 @@
                         @ 'readme.tests.ittf'
                 var added1
                     _ root.addDocument(document1Path)
-                # log 'root', root
+                # loog 'root', root
                 var document2Path
                     _ path.join
                         @ folderPath
@@ -126,7 +126,7 @@
                         @ 'title.tests.ittf'
                 var added2
                     _ root.addDocument(document2Path)
-                # log 'root', root
+                # loog 'root', root
                 _ ittfGraph.createIttfDocumentGraphFrom
                     @ null
                     {

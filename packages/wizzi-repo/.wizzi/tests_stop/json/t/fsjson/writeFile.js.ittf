@@ -9,7 +9,7 @@
 				@ hellotxt_item._id
 				@ 'hello world'
 				f_cb_test( r )
-					log 'writeFile.r', err, r
+					# loog 'writeFile.r', err, r
 					# tobe_number( r.n, 1 )
 					tobe_string( r.code, DOCUMENT_WRITTEN )
 					_ done

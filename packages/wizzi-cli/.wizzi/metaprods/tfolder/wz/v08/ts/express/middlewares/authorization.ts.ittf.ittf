@@ -52,7 +52,7 @@ $group
                     param app
                         :ref Application
                     _ app.use(checkJwt)
-                    log 'AuthorizationMiddleware installed'
+                    success 'AuthorizationMiddleware installed'
         
         const jwtAuthz
             => 

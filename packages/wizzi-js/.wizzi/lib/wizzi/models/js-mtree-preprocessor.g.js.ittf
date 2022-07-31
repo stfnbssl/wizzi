@@ -9,7 +9,7 @@
 			param mTree
 			param context
 
-			# log 'wizzi-js.js.preprocess.mTree', mTree
+			# loog 'wizzi-js.js.preprocess.mTree', mTree
 
 			var state
 				{
@@ -58,7 +58,7 @@
 	function preprocessNode
 		param node
 		param state
-		# log 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
+		# loog 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
 		if node.n === 'async-m'
 			set node.n = 'm'
 			_ addAttr
@@ -92,7 +92,7 @@
 				@ node
 				@ 'generator'
 		if state.svgOn
-			# log 'js-mtree-processor svgOn', node.n, node.v
+			# loog 'js-mtree-processor svgOn', node.n, node.v
 		if node.n === 'p' && state.parent && (state.parent.n === 'class' || state.parent.n === 'react')
 			# log "node.n === 'p' && state.parent && (state.parent.n === 'class' || state.parent.n === 'react'"
             # do nothing
@@ -119,7 +119,7 @@
 		elif node.n === 'svg'
 			set state.htmlOn = true
 			set state.svgOn = true
-			# log 'js-mtree-processor svgOn'
+			# loog 'js-mtree-processor svgOn'
         
         $include mtree_preprocessor_styled
 		

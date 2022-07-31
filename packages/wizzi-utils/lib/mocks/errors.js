@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\mocks\errors.js.ittf
 */
 'use strict';
@@ -32,7 +32,7 @@ function NodeError(message, node) {
         }
     }
     this.message = msg.join('');
-    // log 'NodeError', this.message
+    // loog 'NodeError', this.message
     // set this.node = node
 }
 NodeError.prototype.toString = function() {
@@ -59,7 +59,7 @@ md.WizziModelLoadError = WizziModelLoadError;
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';
-    console.log('message', message);
+    console.log("[31m%s[0m", 'message', message);
     this.message = message;
 }
 NotImplementedError.prototype.toString = function() {
@@ -73,7 +73,7 @@ md.NotImplementedError = NotImplementedError;
 
 function InvalidRequestError(message, code) {
     this.name = 'InvalidRequestError';
-    console.log('message', message);
+    console.log("[31m%s[0m", 'message', message);
     this.message = message;
     this.code = code;
 }
@@ -113,7 +113,7 @@ md.IttfNotFoundError = IttfNotFoundError;
 function ArtifactGenerationError(message, generation, srcPath, ex) {
     this.name = 'ArtifactGenerationError';
     this.message = 'Error: ' + message +'\nDuring generation:' + generation +', processing document ' + md.getSrcPathInfo(srcPath);
-    console.log('wizzi.artifact.errors.artifactGenerationError.message', this.message);
+    console.log("[31m%s[0m", 'wizzi.artifact.errors.artifactGenerationError.message', this.message);
 }
 ArtifactGenerationError.prototype.toString = function() {
     return this.message;

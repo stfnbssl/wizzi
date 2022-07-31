@@ -79,7 +79,7 @@
 		var atype
 			_ u.extractTSSimpleType
 				@ model
-		# log 'typeMethod atype', atype
+		# loog 'typeMethod atype', atype
 		_ ctx.write(model.wzName)
 		_ ctx.write('(')
 		_ u.genTSParams
@@ -90,7 +90,7 @@
 				_ ctx.write(')')
 				if atype
 					if !cnt.stm[atype.wzElement]
-						log 'ts.module.gen.item.wzElement not managed', atype.wzElement
+						error 'ts.module.gen.item.wzElement not managed', atype.wzElement
 					_ ctx.write(': ')
 					_ cnt.stm[atype.wzElement]
 						@ atype

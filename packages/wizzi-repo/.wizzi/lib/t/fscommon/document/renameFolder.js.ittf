@@ -41,7 +41,7 @@
 					r_cb_wz_err( ${fsname}RepoError, renameFolder )
 						@ 'Document rename folder error. Is a file path, not a folder path: ' + oldPath
 
-				log 'wizzi-repo.${source}.document.renameFolder.fsitem', fsitem
+				# loog 'wizzi-repo.${source}.document.renameFolder.fsitem', fsitem
 
 				_ that.exists
 					@ newPath
@@ -55,7 +55,7 @@
 							_ that._changeParentFolder
 								@ fsitem
 								f_cb( changes )
-									log 'wizzi-repo.${source}.document.renameFolder.changes', changes
+									# loog 'wizzi-repo.${source}.document.renameFolder.changes', changes
 									_ that.fsCommon.updateItem
 										@ fsitem
 										f_cb( r )
@@ -73,7 +73,7 @@
 			param callback
 			+
 			foreach item in fsitems
-				log 'wizzi-repo.${source}.document.renameFolder.change_dirnames_Async', item
+				# loog 'wizzi-repo.${source}.document.renameFolder.change_dirnames_Async', item
 				set item.dirname = newDirname
 				set item.path = normalize(path.join(item.dirname, item.basename))
 			_ async.mapSeries
@@ -101,24 +101,24 @@
 						_ that.fsCommon.getItemChildren
 							@ fsitemParent._id
 							f_cb( fsitems )
-								# log 'wizzi-repo.${source}.document.renameFolder.children of ', fsitemParent._id, fsitemParent.path, fsitems.length
+								# loog 'wizzi-repo.${source}.document.renameFolder.children of ', fsitemParent._id, fsitemParent.path, fsitems.length
 								if fsitems.length > 0
 									_ change_dirnames_Async
 										@ fsitems
 										@ fsitemParent.path
 										f_cb( updfsitems )
 											foreach upd in updfsitems
-												log 'wizzi-repo.${source}.document.renameFolder.upd', upd
+												# loog 'wizzi-repo.${source}.document.renameFolder.upd', upd
 												_ changes.push(upd.path)
 												_ recurser
 													@ upd
 													@ changes
 													._ then
 														function
-															log 'wizzi-repo.${source}.document.renameFolder.resolve'
+															# loog 'wizzi-repo.${source}.document.renameFolder.resolve'
 															_ resolve()
 								else
-									log 'wizzi-repo.${source}.document.renameFolder.last resolve'
+									# loog 'wizzi-repo.${source}.document.renameFolder.last resolve'
 									_ resolve()
 
 		var changes = []
@@ -127,6 +127,6 @@
 			@ changes
 			._ then
 				function
-					log 'wizzi-repo.${source}.document.renameFolder._changeParentFolder ended', changes
+					# loog 'wizzi-repo.${source}.document.renameFolder._changeParentFolder ended', changes
 					return
 						_ callback(null, changes)

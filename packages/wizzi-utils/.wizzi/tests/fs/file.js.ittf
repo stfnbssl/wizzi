@@ -23,7 +23,7 @@
 					@ 'ittf'
 					@ 'gc_one.ittf'
 
-		# log 'file lines', lines
+		# loog 'file lines', lines
 		tobe_string( lines[0], first one )
 		tobe_string( lines[1], second one )
 

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\reviewed\appender.js.ittf
 */
 'use strict';
@@ -41,12 +41,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -62,14 +62,14 @@ describe("appender", function() {
     before(function(done) {
         getFSDocumentStore(function(err, fsStore) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -88,15 +88,15 @@ describe("appender", function() {
             var mTree = provider.getPrimaryMTreeBrick();
             mixer(mTree, provider, function(err, mixedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 appender(mixedModel, function(err, appendedModel) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
-                    console.log('appendedModel.toIttf()', appendedModel.toIttf());
+                    // loog 'appendedModel.toIttf()', appendedModel.toIttf()
                     expect(appendedModel).to.be.an('object');
                     expect(appendedModel.nodes).to.be.an('array');
                     expect(appendedModel.nodes.length).to.be(1);
@@ -145,15 +145,15 @@ describe("appender", function() {
             var mTree = provider.getPrimaryMTreeBrick();
             mixer(mTree, provider, function(err, mixedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 appender(mixedModel, function(err, appendedModel) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
-                    console.log('appendedModel.toIttf()', appendedModel.toIttf());
+                    // loog 'appendedModel.toIttf()', appendedModel.toIttf()
                     expect(appendedModel).to.be.an('object');
                     expect(appendedModel.nodes).to.be.an('array');
                     expect(appendedModel.nodes.length).to.be(1);

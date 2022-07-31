@@ -24,7 +24,7 @@ $group
                         _ app.use
                             _ morgan
                                 @ 'combined'
-                        log 'LoggerMiddleware installed. Using Morgan'
+                        success 'LoggerMiddleware installed. Using Morgan'
                     ${'$'}else
                         _ app.use
                             => 
@@ -41,4 +41,4 @@ $group
                                         @ request.path
                                         + 
                                 _ next()
-                        log 'LoggerMiddleware installed'
+                        success 'LoggerMiddleware installed'

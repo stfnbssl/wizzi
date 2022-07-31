@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\acl\aclstat.js.ittf
 */
 'use strict';
@@ -25,9 +25,9 @@ var AclStat = (function () {
         if (config == null) {
             config = require('../../index').config;
         }
-        // log 'wizzi.acl.AclStat._init.config', config
-        // log 'wizzi.acl.AclStat._init.aclConfig', this.aclConfig
-        // log 'wizzi.acl.AclStat._init.statisticsConfig', this.statisticsConfig
+        // loog 'wizzi.acl.AclStat._init.config', config
+        // loog 'wizzi.acl.AclStat._init.aclConfig', this.aclConfig
+        // loog 'wizzi.acl.AclStat._init.statisticsConfig', this.statisticsConfig
         this.acl = new Acl(this.aclConfig, config);
         this.statistics = new Statistics(this.statisticsConfig, config);
     }

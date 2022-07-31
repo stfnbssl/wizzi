@@ -1,0 +1,21 @@
+// 31/7/2022:8:5:24  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
+$.n(); // set the context state to NodeContext
+var $0 = {}; // the root node of the MTree buildup
+var $1 = { n: "alfa", v: "", r: 1, c: 1, s: "f1", u: "f1",  }; //10
+$.a($0, $1, 5);
+var $2 = { n: "beta", v: "", r: 2, c: 5, s: "f1", u: "f1",  }; //11
+$.a($1, $2, 7);
+$.s("f1");
+function buildup_sigma($parent,name) {
+    $.n();
+    var $4 = { n: "sigma", v: $.ip("f1", "${name}", "string", 11, false), r: 5, c: 9, s: "f1", u: "f1",  }; //14
+    $.a($parent, $4, 12);
+}
+$.s("f1");
+var y = 'stefi';
+$.n();
+var $6 = { n: "gamma", v: "", r: 7, c: 5, s: "f1", u: "f1",  }; //16
+$.a($1, $6, 18);
+$.s("f1");
+buildup_sigma($6,y);
+$.s("f1");

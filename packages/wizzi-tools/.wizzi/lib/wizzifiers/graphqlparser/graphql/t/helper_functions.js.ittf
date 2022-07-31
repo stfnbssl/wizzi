@@ -19,7 +19,7 @@
 		foreach item in ittfNode.children
 			if pos == i
 				foreach p in item.children
-					# log 'processParams. p.tag', p.tag
+					# loog 'processParams. p.tag', p.tag
 					if p.tag !== '{'
 						if isTextualNode(p)
 							set p.tag = 'param'
@@ -43,7 +43,7 @@
 					return false
 			return true
 		else
-			log 'isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified)
+			# loog 'isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified)
 			return ittfNode && (ittfNode.isText || ittfNode.textified)
 
 
@@ -127,7 +127,7 @@
 		var ret = []
 		foreach item in ittfNode.children
 			if item.isText || item.textified
-				log '@@@@@@@ item.tag.isText', item.tag, item.isText
+				# loog '@@@@@@@ item.tag.isText', item.tag, item.isText
 				_ ret.push
 					{
 						@ tag tag
@@ -136,7 +136,7 @@
 						[ children
 			else
 				_ ret.push(item)
-		# log '@@@@@@@@@@@@@@@ textifyChildren', ret
+		# loog '@@@@@@@@@@@@@@@ textifyChildren', ret
 		return ret
 
 	function setTextList
@@ -144,7 +144,7 @@
 		param sep
 		var sb = []
 		foreach item in ittfNode.children
-			log 'setTextList', item.tag, item.name, item.isText, item.textified
+			# loog 'setTextList', item.tag, item.name, item.isText, item.textified
 			if item.isText
 				_ sb.push(item.name)
 			elif item.textified
@@ -165,7 +165,7 @@
 			elif item.textified
 				_ sb.push(item.textified)
 			else
-				# log 'getTextList failed ***************', item
+				# loog 'getTextList failed ***************', item
 				return null
 		return sb.join(sep)
 
@@ -176,7 +176,7 @@
 		foreach item in ittfNode.children
 			if item.tag === tag
 				if forceText
-					log '...................setNameFromChildByTag', item
+					# loog '...................setNameFromChildByTag', item
 				if item.isText
 					set ittfNode.name = item.name
 					_ ittfNode.children.splice(i, 1)

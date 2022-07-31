@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\util\node.js.ittf
 */
 'use strict';
@@ -39,12 +39,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -234,16 +234,16 @@ describe("util.node", function() {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'original', original.toString()
+                    // loog 'original', original.toString()
                     ittfGraph.createFrom(item.expected, function(err, expected) {
                         if (err) {
                             return callback(err);
                         }
                         var toremove = original.find(item.name);
                         node.remove(toremove)
-                        // log 'toremove', toremove.toString()
-                        // log 'original after', original.toString()
-                        // log 'expected', expected.toString()
+                        // loog 'toremove', toremove.toString()
+                        // loog 'original after', original.toString()
+                        // loog 'expected', expected.toString()
                         expect(original.equals(expected)).to.be(true);
                     })
                 })
@@ -253,7 +253,7 @@ describe("util.node", function() {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'original', original.toString()
+                    // loog 'original', original.toString()
                     ittfGraph.createFrom(item.replacer, function(err, replacer) {
                         if (err) {
                             return callback(err);
@@ -263,11 +263,11 @@ describe("util.node", function() {
                                 return callback(err);
                             }
                             var toreplace = original.find(item.name);
-                            // log 'toreplace', toreplace.toString()
+                            // loog 'toreplace', toreplace.toString()
                             node.replace(toreplace, [replacer])
-                            // log 'replacer', replacer.toString()
-                            // log 'original after', original.toString()
-                            // log 'expected', expected.toString()
+                            // loog 'replacer', replacer.toString()
+                            // loog 'original after', original.toString()
+                            // loog 'expected', expected.toString()
                             expect(original.equals(expected)).to.be(true);
                         })
                     })
@@ -284,9 +284,9 @@ describe("util.node", function() {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'original', original.toString()
+                    // loog 'original', original.toString()
                     var found = node.findIttfCommand(original, item.value, item.name);
-                    // log 'findCommand.name,value,found', item.name, item.value, found && found.id
+                    // loog 'findCommand.name,value,found', item.name, item.value, found && found.id
                     expect(found).to.be.an('object');
                     // loose equality works for objects
                     expect(item.expected).to.eql(found.id);

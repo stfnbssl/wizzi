@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\filesystem\step_1.js.ittf
 */
 'use strict';
@@ -43,38 +43,38 @@ var filesystem_step_1 = function(step_callback) {
     var projectId = 'example';
     wfs.mount(path.join(__dirname, 'mounted_fs'), function(err, notUsed) {
         if (err) {
-            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log('err', err);
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
         wfs.mkdir(userId, projectId, 'folderA', function(err, notUsed) {
             if (err) {
-                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                console.log('err', err);
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
             wfs.mkdir(userId, projectId, 'folderB', function(err, notUsed) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 wfs.mkdir(userId, projectId, 'folderC', function(err, notUsed) {
                     if (err) {
-                        console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                        console.log('err', err);
+                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                        console.log("[31m%s[0m", 'err', err);
                         throw new Error(err.message);
                     }
                     wfs.mkdir(userId, projectId, 'folderD', function(err, notUsed) {
                         if (err) {
-                            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                            console.log('err', err);
+                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                            console.log("[31m%s[0m", 'err', err);
                             throw new Error(err.message);
                         }
                         wfs.mkdir(userId, projectId, 'folderToDelete/folder1', function(err, notUsed) {
                             if (err) {
-                                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                                console.log('err', err);
+                                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                console.log("[31m%s[0m", 'err', err);
                                 throw new Error(err.message);
                             }
                             createExampleFiles();
@@ -87,38 +87,38 @@ var filesystem_step_1 = function(step_callback) {
     function createExampleFiles() {
         wfs.writeFile(userId, projectId, 'folderA/docA1.js.ittf', 'module\n\t kind react', function(err, notUsed) {
             if (err) {
-                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                console.log('err', err);
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
             wfs.writeFile(userId, projectId, 'folderA/docA2.js.ittf', 'module\n\t kind jsfile', function(err, notUsed) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 wfs.writeFile(userId, projectId, 'folderB/docB1.js.ittf', 'module\n\t kind es6', function(err, notUsed) {
                     if (err) {
-                        console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                        console.log('err', err);
+                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                        console.log("[31m%s[0m", 'err', err);
                         throw new Error(err.message);
                     }
                     wfs.writeFile(userId, projectId, 'folderC/docC1.js.ittf', 'module\n\t kind es6', function(err, notUsed) {
                         if (err) {
-                            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                            console.log('err', err);
+                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                            console.log("[31m%s[0m", 'err', err);
                             throw new Error(err.message);
                         }
                         wfs.writeFile(userId, projectId, 'folderC/docC2.js.ittf', 'module\n\t kind es6', function(err, notUsed) {
                             if (err) {
-                                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                                console.log('err', err);
+                                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                console.log("[31m%s[0m", 'err', err);
                                 throw new Error(err.message);
                             }
                             wfs.writeFile(userId, projectId, 'folderToDelete/folder1/docToDel1.js.ittf', 'module\n\t kind es6', function(err, notUsed) {
                                 if (err) {
-                                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                                    console.log('err', err);
+                                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                    console.log("[31m%s[0m", 'err', err);
                                     throw new Error(err.message);
                                 }
                                 executeCopyMove();
@@ -132,26 +132,26 @@ var filesystem_step_1 = function(step_callback) {
     function executeCopyMove() {
         wfs.copyFolder(userId, projectId, 'folderA', projectId, 'folderA_copied', function(err, notUsed) {
             if (err) {
-                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                console.log('err', err);
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
             wfs.moveFolder(userId, projectId, 'folderB', projectId, 'folderB_moved', function(err, notUsed) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 wfs.copyFile(userId, projectId, 'folderC/docC1.js.ittf', projectId, 'folderD/docC1.js.ittf', function(err, notUsed) {
                     if (err) {
-                        console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                        console.log('err', err);
+                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                        console.log("[31m%s[0m", 'err', err);
                         throw new Error(err.message);
                     }
                     wfs.moveFile(userId, projectId, 'folderC/docC2.js.ittf', projectId, 'folderD/docC2.js.ittf', function(err, notUsed) {
                         if (err) {
-                            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                            console.log('err', err);
+                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                            console.log("[31m%s[0m", 'err', err);
                             throw new Error(err.message);
                         }
                         executeBatch();
@@ -210,8 +210,8 @@ var filesystem_step_1 = function(step_callback) {
              }
         ], function(err, notUsed) {
             if (err) {
-                console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                console.log('err', err);
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
         })
@@ -306,14 +306,14 @@ function __printObject(v, level, limit) {
         for (var k in v) {
             prop = v[k];
             if (verify.isObject(prop)) {
-                console.log(indent, k, '{');
+                console.log(indent, k, '{', __filename);
                 __printObject(prop, level+1, limit);
             }
             else if (verify.isFunction(prop)) {
-                console.log(indent, k, 'function');
+                console.log(indent, k, 'function', __filename);
             }
             else if (verify.isArray(prop)) {
-                console.log(indent, k, '[');
+                console.log(indent, k, '[', __filename);
                 var indent2 = new Array(1 + (level+1) * 4).join(' ');
                 var i, i_items=prop, i_len=prop.length, item;
                 for (i=0; i<i_len; i++) {
@@ -322,15 +322,15 @@ function __printObject(v, level, limit) {
                         __printObject(item, level+1, limit);
                     }
                     else if (verify.isFunction(item)) {
-                        console.log(indent2, 'function');
+                        console.log(indent2, 'function', __filename);
                     }
                     else {
-                        console.log(indent2, item);
+                        console.log(indent2, item, __filename);
                     }
                 }
             }
             else {
-                console.log(indent, k, prop);
+                console.log(indent, k, prop, __filename);
             }
         }
     }
@@ -358,8 +358,8 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
-    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-    // log 'nodes[0]', nodes[0]
+    // loog 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // loog 'nodes[0]', nodes[0]
     else {
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
@@ -410,7 +410,7 @@ function meterLine(len, indent) {
             x = formatNum(j, numW);
             sb.push(x.substr(i,1));
         }
-        console.log(indent, sb.join(''));
+        console.log(indent, sb.join(''), __filename);
         sb = [];
     }
 }

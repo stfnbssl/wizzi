@@ -38,21 +38,21 @@ $group
                             :[ 
                                 :ref I${'$'}{schema.Name}
                         if err
-                            log 'get${'$'}{schema.CollectionName}.err', err
+                            error 'get${'$'}{schema.CollectionName}.err', err
                             return
                                 _ sendFailure
                                     @ response
                                     @ err
                                     @ 501
                         else
-                            log 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
+                            # loog 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
                             _ sendSuccess
                                 @ response
                                 {
                                     @ ${'$'}{schema.collectionName} ${'$'}{schema.collectionName}
 
             handler${lp} create${'$'}{schema.Name} )
-                log 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, request.body', request.body
+                # loog 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, request.body', request.body
                 const data = request.body.data
                 let ${'$'}{schema.name} = new this.${'$'}{schema.name}Model(data)
                 _ ${'$'}{schema.name}.save
@@ -69,7 +69,7 @@ $group
                         => 
                             param err
                                 :any
-                            log 'create${'$'}{schema.Name}.err', err
+                            error 'create${'$'}{schema.Name}.err', err
                             _ sendFailure
                                 @ response
                                 {
@@ -88,7 +88,7 @@ $group
                         param ${'$'}{schema.name}
                             :ref I${'$'}{schema.Name}
                         if err
-                            log 'get${'$'}{schema.Name}ById.err', err
+                            error 'get${'$'}{schema.Name}ById.err', err
                             return
                                 _ sendFailure
                                     @ response
@@ -112,7 +112,7 @@ $group
                         param ${'$'}{schema.name}
                             :ref I${'$'}{schema.Name}
                         if err
-                            log 'update${'$'}{schema.Name}.err', err
+                            error 'update${'$'}{schema.Name}.err', err
                             return
                                 _ sendFailure
                                     @ response
@@ -145,7 +145,7 @@ $group
                                 ._ catch
                                     => 
                                         param err
-                                        log 'update${'$'}{schema.Name}.err', err
+                                        error 'update${'$'}{schema.Name}.err', err
                                         _ sendFailure
                                             @ response
                                             {
@@ -165,7 +165,7 @@ $group
                         param ${'$'}{schema.name}
                             :ref I${'$'}{schema.Name}
                         if err
-                            log 'delete${'$'}{schema.Name}.err', err
+                            error 'delete${'$'}{schema.Name}.err', err
                             return
                                 _ sendFailure
                                     @ response

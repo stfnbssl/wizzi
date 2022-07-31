@@ -2,7 +2,7 @@
 
 	function ittfFinder_step_1
 
-		log 'wizzi-utils.examples.ittfGraph.ittfFinder_step_1'
+		info 'wizzi-utils.examples.ittfGraph.ittfFinder_step_1'
 		var ittfFinder
 			new IttfFinder
 				_ vfile()
@@ -15,7 +15,7 @@
 						@ 'ittf'
 						@ 'basic.sample.ittf'
 			f_cb_no_err( result )
-				log 'ittfFinder_step_1.result.1', err, result
+				info 'ittfFinder_step_1.result.1', err, result
 
 				var callerFullPath
 					_ path.join
@@ -28,4 +28,4 @@
 						@ callerFullPath callerFullPath
 						@ fragmentName 'frag_1'
 					f_cb_no_err( result )
-						log 'ittfFinder_step_1.result.2', err, result
+						info 'ittfFinder_step_1.result.2', err, result

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\includer.js.ittf
 */
 'use strict';
@@ -40,12 +40,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -60,14 +60,14 @@ describe("includer", function() {
     before(function(done) {
         getFSDocumentStore(function(err, fsStore) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -84,14 +84,14 @@ describe("includer", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
@@ -99,20 +99,20 @@ describe("includer", function() {
             var mTree = provider.getPrimaryMTreeBrick();
             includer(mTree, provider, function(err, includedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", 'err', err);
                     if (err.toString()) {
-                        console.log('err.toString()', err.toString());
+                        console.log("[31m%s[0m", 'err.toString()', err.toString());
                     }
                     if (err.inner) {
-                        console.log('err.inner', err.inner);
+                        console.log("[31m%s[0m", 'err.inner', err.inner);
                         if (err.inner.toString) {
-                            console.log('err.inner.toString()', err.inner.toString());
+                            console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                         }
                     }
                     throw new Error(err.message);
                 }
                 node = includedModel.nodes[0];
-                // log 'includedModel.nodes[0]', node
+                // loog 'includedModel.nodes[0]', node
                 expect(node.row).to.be.a('number');
                 expect(node.row).to.be(1);
                 expect(node.col).to.be.a('number');
@@ -121,7 +121,7 @@ describe("includer", function() {
                 expect(node.name).to.be('sigma');
                 expect(node.value).to.be(undefined);
                 node = includedModel.nodes[0].children[0];
-                // log 'includedModel.nodes[0].children[0]', node
+                // loog 'includedModel.nodes[0].children[0]', node
                 expect(node.row).to.be.a('number');
                 expect(node.row).to.be(1);
                 expect(node.col).to.be.a('number');
@@ -142,21 +142,21 @@ describe("includer", function() {
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 if (err.toString()) {
-                    console.log('err.toString()', err.toString());
+                    console.log("[31m%s[0m", 'err.toString()', err.toString());
                 }
                 if (err.inner) {
-                    console.log('err.inner', err.inner);
+                    console.log("[31m%s[0m", 'err.inner', err.inner);
                     if (err.inner.toString) {
-                        console.log('err.inner.toString()', err.inner.toString());
+                        console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                     }
                 }
                 throw new Error(err.message);
             }
             var mTree = provider.getPrimaryMTreeBrick();
             includer(mTree, provider, function(err, includedModel) {
-                // log 'should throw an error for fragment to include not found', '\n' + err.toString()
+                // loog 'should throw an error for fragment to include not found', '\n' + err.toString()
                 expect(err.__is_error).to.be(true);
                 expect(err.data).to.be.an('object');
                 expect(err.data.errorName).to.be('IttfIncludeError');

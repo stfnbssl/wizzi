@@ -5,6 +5,6 @@
 
 	it should create an objectId
 		var id = new ObjectId
-		log 'ObjectId.id', id
+		# loog 'ObjectId.id', id
 		tobe_object(id)
 		tobe_number(id.toString().length, 24)

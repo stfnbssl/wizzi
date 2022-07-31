@@ -1,7 +1,7 @@
 ﻿$group
 	$params name, tag|@@null
 
-	# log 'node.${name}', node.${name}
+	# loog 'node.${name}', node.${name}
 
 	if !!node.${name} == true
 		_ ret.children.push

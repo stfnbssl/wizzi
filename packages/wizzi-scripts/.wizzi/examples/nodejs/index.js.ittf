@@ -12,10 +12,10 @@
 
 	_ nodeJs
 		f_cb_test(result)
-			log 'nodeJs.result', result
+			# loog 'nodeJs.result', result
 			_ nodeJsToEventStream
 				f_cb_test(result)
-					log 'nodeJsToEventStream.result', result
+					# loog 'nodeJsToEventStream.result', result
 	
 	function nodeJs
 		param callback
@@ -32,9 +32,9 @@
 			@ nodeOptions1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

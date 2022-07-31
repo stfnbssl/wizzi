@@ -26,7 +26,7 @@
             param ctx
             param callback
             
-            # log 'Starting transform ittf/cheatsheet'
+            # loog 'Starting transform ittf/cheatsheet'
             var workObj
                 {
                     [ elements
@@ -40,7 +40,7 @@
                 @ ctx
                 @ workObj
                 f_cb( result )
-                    # log 'executeTrans.result', result
+                    # loog 'executeTrans.result', result
                     _ callback
                         @ null
                         @ result
@@ -54,7 +54,7 @@
                     set workObj[itemTop.name] = itemTop.value
                         
             foreach itemTop in model.children
-                # log 'name, value', itemTop.name, itemTop.value
+                # loog 'name, value', itemTop.name, itemTop.value
                 if itemTop.name === 'element'
                     var elementResult
                         {
@@ -68,7 +68,7 @@
                                     @ render 'artifact'
                             foreach item in itemEl.children
                                 if item.name === 'ittf'
-                                    # log 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
+                                    # loog 'item.name, toIttf(item.children[0])', item.name, toIttf(item.children[0])
                                     if item.children.length == 1
                                         if (workObj.schema === 'json' && (item.children[0].name === '{' || item.children[0].name === '[')) ||
                                             \b item.children[0].name === ittfRootFromSchema(workObj.schema) ||
@@ -114,8 +114,8 @@
                     @ workObj
                     @ null
                     @ 2
-            # log 'loadCheats, _all_items.length', workObj._all_items.length
-            # log 'loadCheats, workObj\n', dump
+            # loog 'loadCheats, _all_items.length', workObj._all_items.length
+            # loog 'loadCheats, workObj\n', dump
             
         function generateArtifacts
             param ctx
@@ -128,23 +128,23 @@
                 function
                     param item
                     param callback
-                    # log 'counter', ++counter
+                    # loog 'counter', ++counter
                     _ process.nextTick
                         function
                             _ pretty.prettifyIttfHtmlFromString
                                 @ item.ittfWrapped
                                 f_cb( pretty )
                                     set item.ittfPretty = pretty
-                                    # log 'pretty', pretty
-                                    # log 'ittf.cheatsheet.ctx', ctx
-                                    # log 'counter.prettified', counter
+                                    # loog 'pretty', pretty
+                                    # loog 'ittf.cheatsheet.ctx', ctx
+                                    # loog 'counter.prettified', counter
                                     if item.render === 'script'
-                                        # log 'ctx.wizziFactory.loadMTreeBuildupScriptFromText', ctx.wizziFactory.loadMTreeBuildupScriptFromText
+                                        # loog 'ctx.wizziFactory.loadMTreeBuildupScriptFromText', ctx.wizziFactory.loadMTreeBuildupScriptFromText
                                         _ ctx.wizziFactory.loadMTreeBuildupScriptFromText
                                             @ item.ittfWrapped
                                             {
                                             f_cb_no_err(script)
-                                                # log 'counter', --counter
+                                                # loog 'counter', --counter
                                                 if err
                                                     set item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2))
                                                 else
@@ -152,7 +152,7 @@
                                                 _ callback
                                                     @ null
                                     else
-                                        # log 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
+                                        # loog 'ctx.wizziFactory.loadModelAndGenerateArtifactFromText', ctx.wizziFactory.loadModelAndGenerateArtifactFromText, artifactNameFromSchema(item.schema)
                                         _ ctx.wizziFactory.loadModelAndGenerateArtifactFromText
                                             @ item.ittfWrapped
                                             {
@@ -161,8 +161,8 @@
                                                     @ noGeneratorComments true
                                             @ artifactNameFromSchema(item.schema)
                                             f_cb_no_err(artifactText)
-                                                # log 'err, artifactText', err, artifactText
-                                                # log 'counter', --counter
+                                                # loog 'err, artifactText', err, artifactText
+                                                # loog 'counter', --counter
                                                 if err
                                                     set item.generated = '\n' + verify.htmlEscape(stringify(err, null, 2))
                                                 else
@@ -176,8 +176,8 @@
                             @ workObj
                             @ null
                             @ 2
-                    # log 'workObj final\n', dump
-                    # log 'Ending transform ittf/cheatsheet'
+                    # loog 'workObj final\n', dump
+                    # loog 'Ending transform ittf/cheatsheet'
                     _ callback_main
                         @ null
                         {
@@ -270,7 +270,7 @@
 
         function artifactNameFromSchema
             param schema
-            # log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
+            # loog 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
             return schemaArtifactMap[schema]
 
         var schemaIttfRootMap
@@ -293,5 +293,5 @@
 
         function ittfRootFromSchema
             param schema
-            # log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+            # loog 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
             return schemaIttfRootMap[schema]

@@ -399,11 +399,11 @@
                 if urlRegex.test(globPatterns)
                     _ output.push(globPatterns)
                 else 
-					# log 'globPatterns, options', globPatterns, options
+					# loog 'globPatterns, options', globPatterns, options
                     var files = glob.sync(globPatterns, options)
-                    # log 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
+                    # loog 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
 					if removeRoot
-						# log 'removeRoot', removeRoot
+						# loog 'removeRoot', removeRoot
                         set files =
                             _ files.map
                                 function 

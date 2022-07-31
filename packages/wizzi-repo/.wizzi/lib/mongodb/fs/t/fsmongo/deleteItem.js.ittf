@@ -21,7 +21,7 @@
 							f_cb( r )
 								delete r.connection
 								delete r.message
-								# log 'wizzi-repo.mongodb.FsMongo.deleteItem,r', r
+								# loog 'wizzi-repo.mongodb.FsMongo.deleteItem,r', r
 								if r.deletedCount == 1 && r.result.ok == 1
 									r_cb()
 										{
@@ -40,10 +40,10 @@
 			f_cb( r )
 				delete r.connection
 				delete r.message
-				# log 'wizzi-repo.mongodb.FsMongo._deleteDocument.r', r
+				# loog 'wizzi-repo.mongodb.FsMongo._deleteDocument.r', r
 				if r.deletedCount == 1 && r.result.ok == 1
-					# log 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
+					# loog 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
 					r_cb(true)
 				else
-					# log 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
+					# loog 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
 					r_cb(false)

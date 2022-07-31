@@ -14,10 +14,10 @@
 		it should add a document
 
 			set root = new ittfFsNode('root', null, true)
-			log 'root', root
+			# loog 'root', root
 			var added
 				_ root.addDocument('root/readme.md.ittf')
-			log 'root', root
+			# loog 'root', root
 			tobe_true(added)
 			tobe_array(root.folders, 0)
 			tobe_array(root.documents, 1)
@@ -27,7 +27,7 @@
 		it should add a document fragment
 			var added
 				_ root.addDocument('root/t/title.md.ittf')
-			log 'root', root
+			# loog 'root', root
 			tobe_true(added)
 			tobe_array(root.folders, 1)
 			tobe_array(root.documents, 1)
@@ -40,7 +40,7 @@
 
 		it should chhck infos
 			_ root.setInfo()
-			log 'root', root
+			# loog 'root', root
 			tobe_object_num(root.info.schemas, 1)
 			tobe_string(root.info.schemas['md'].name, md)
 			tobe_array(root.info.documents, 1)

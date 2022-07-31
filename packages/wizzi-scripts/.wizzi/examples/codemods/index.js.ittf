@@ -6,4 +6,4 @@ base_example()
         @ 'meta'
         @ 'ittf'
         f_cb( result )
-            log 'codemods.copyChangeWizziSchema', result
+            # loog 'codemods.copyChangeWizziSchema', result

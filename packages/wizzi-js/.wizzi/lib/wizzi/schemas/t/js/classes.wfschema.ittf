@@ -10,7 +10,7 @@
 
 		m wzInitialize
 			set ctx.modelState = ctx.modelState || {}
-			# log 'wizzi-js.model.class.modelState', ctx.modelState
+			# loog 'wizzi-js.model.class.modelState', ctx.modelState
 			set ctx.modelState.hasClasses = true
 			if this.extends && this.extends.length > 0
 				set this.super = this.extends
@@ -34,9 +34,9 @@
 		#       set this.options = options
 		#     m sayHello
 		#       if this.options.canSpeakLikeAHuman
-		#         log 'Hello i am ' + this.name
+		#         success 'Hello i am ' + this.name
 		#       else
-		#         log 'Hii i am ' + this.name
+		#         success 'Hii i am ' + this.name
 		#
 
 	e ctor : function
@@ -72,7 +72,7 @@
 		#   class Foo
 		#     m sayHello
 		#       string name
-		#       log 'Hello ' + name
+		#       success 'Hello ' + name
 
 	e property : function
 		a_flag( static )

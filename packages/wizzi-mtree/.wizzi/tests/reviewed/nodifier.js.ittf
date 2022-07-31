@@ -33,7 +33,7 @@
 
 		var nodes = nodifier(lines, mTree)
 
-		# log 'nodifier nodes', nodes
+		# loog 'nodifier nodes', nodes
 
 		tobe_array( nodes, 1 )
 		tobe_array( nodes[0].children, 3 )
@@ -103,6 +103,6 @@
 
 		var nodes = nodifier(lines, mTree)
 
-        log 'nodifier should throw WizziError', '\n' + nodes.toString()
+        # loog 'nodifier should throw WizziError', '\n' + nodes.toString()
 
         tobe_error( nodes, InvalidIttfError )

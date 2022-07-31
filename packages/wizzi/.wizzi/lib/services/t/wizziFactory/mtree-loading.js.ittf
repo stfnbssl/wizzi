@@ -79,7 +79,7 @@
 		{ mTreeBuildupContext
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
+		# loog 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
 		_ this.createSingleTextSourceFactory
 			@ ittfContent
 			@ 'ittf'

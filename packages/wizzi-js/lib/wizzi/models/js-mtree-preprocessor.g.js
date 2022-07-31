@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\wizzi\models\js-mtree-preprocessor.g.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ for (i=0; i<i_len; i++) {
 }
 svg_supported_attrs = svg_supported_attrs.concat(temp);
 module.exports = function(mTree, context) {
-    // log 'wizzi-js.js.preprocess.mTree', mTree
+    // loog 'wizzi-js.js.preprocess.mTree', mTree
     var state = {
         svgOn: false, 
         htmlOn: false, 
@@ -106,7 +106,7 @@ function traverse(node, state) {
     state.parent = saveParent;
 }
 function preprocessNode(node, state) {
-    // log 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
+    // loog 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
     if (node.n === 'async-m') {
         node.n = 'm';
         addAttr(state, node, 'async')
@@ -126,7 +126,7 @@ function preprocessNode(node, state) {
         addAttr(state, node, 'generator')
     }
     
-    // log 'js-mtree-processor svgOn', node.n, node.v
+    // loog 'js-mtree-processor svgOn', node.n, node.v
     if (state.svgOn) {
     }
     
@@ -164,11 +164,13 @@ function preprocessNode(node, state) {
         }
     }
     
-    // log 'js-mtree-processor svgOn'
+    // loog 'js-mtree-processor svgOn'
     else if (node.n === 'svg') {
         state.htmlOn = true;
         state.svgOn = true;
     }
+    
+    // loog 'node', node
     else if (node.n === 'if' && state.styledOn) {
         var nCssStyled = createNode(node, '<', '--styled--', node.children);
         var nCss = createNode(node, 'css', null, [nCssStyled]);
@@ -178,7 +180,6 @@ function preprocessNode(node, state) {
         node.n = 'js=>';
         node.v = null;
         node.children = [nJsModule];
-        console.log('node', node);
         return true;
     }
     else if (node.n === 'styled' || node.n === 'keyframes' || node.n === 'styled-css' || (node.n === 'css' && state.styledOn)) {

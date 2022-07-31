@@ -73,7 +73,7 @@
 					{
 				@ __ittfDocumentStore store
 			f_cb_test( provider )
-				# log 'err, provider', err, provider
+				# loog 'err, provider', err, provider
 				_ expect(provider).to.be.an('object')
 				var mTreeBrick = provider.getPrimaryMTreeBrick()
 				_ expect(mTreeBrick).to.be.an('object')
@@ -103,7 +103,7 @@
 					{
 				@ __ittfDocumentStore store
 			f_cb_test( provider )
-				# log 'err, provider', err, provider
+				# loog 'err, provider', err, provider
 				_ expect(provider).to.be.an('object')
 				_ provider.get
 					{
@@ -115,7 +115,7 @@
 								@ 'data'
 						@ relpath 'frag1.tests.ittf'
 					f_cb_test( mTreeBrick )
-						# log 'err, mTreeBrick', err, mTreeBrick
+						# loog 'err, mTreeBrick', err, mTreeBrick
 						_ expect(mTreeBrick).to.be.an('object')
 						_ expect(mTreeBrick.$schema).to.be('tests')
 						_ expect(mTreeBrick.nodes).to.be.an('array')

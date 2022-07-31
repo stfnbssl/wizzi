@@ -25,4 +25,4 @@ $group
                         _ app.use
                             _ compression
                                 @ options
-                        log 'CompressionMiddleware installed'
+                        success 'CompressionMiddleware installed'

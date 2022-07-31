@@ -37,7 +37,7 @@
 							optional
 					callback
 
-					# log 'wizzi-mtree.loadMTree.loadContext', loadContext
+					# loog 'wizzi-mtree.loadMTree.loadContext', loadContext
 
 					if !useCache || !ittfDocumentStore
 						_ createStore

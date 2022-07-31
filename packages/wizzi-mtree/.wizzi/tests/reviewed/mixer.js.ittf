@@ -84,7 +84,7 @@
 					@ mTree
 					@ provider
 					f_cb_no_err( includedModel )
-                        log 'should throw an error for fragment to mix not found', '\n' + err.toString()
+                        # loog 'should throw an error for fragment to mix not found', '\n' + err.toString()
                         tobe_error( err, IttfMixError )                    
                         _ done
 

@@ -79,6 +79,8 @@
 			return true;
 		if this.includes.length > 0
 			return true;
+        if schemautil.isNotEmpty(this.acceptAnyTag)
+            return true;
 		return false
 
 	m needsInitialize

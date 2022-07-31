@@ -1,6 +1,6 @@
 ﻿$group
 	$params name
 
-	# log 'node.${name}', node.${name}, 'string'
+	# loog 'node.${name}', node.${name}, 'string'
 	set ret.name = node.${name}
 	

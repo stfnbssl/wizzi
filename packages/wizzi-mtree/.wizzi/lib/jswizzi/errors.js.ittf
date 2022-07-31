@@ -18,7 +18,7 @@
         set this.message += pkgVersioned
 
 	error( JsWizziSynthax, message, node )
-		# log 'JsWizziSynthax.message', message
+		# loog 'JsWizziSynthax.message', message
 		if f_verify.isObject(message) && message.lineNumber
 			# In this case node = WizziJS source
 			set this.message = "Synthax error. " + message.description + 
@@ -46,8 +46,8 @@
 			param source
 			param json
             if node && node.loc
-                # log 'jswizzi.errors.esprimaNodeErrorLines.source', source
-                # log 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
+                # loog 'jswizzi.errors.esprimaNodeErrorLines.source', source
+                # loog 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
                 return
                     _ wizziUtils.errors.getErrorLines
                         {
@@ -57,7 +57,7 @@
                         @ source
                         @ json
             else
-                # log 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
+                # loog 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
                 return ['No data available']
 
 	function getEsprimaErrorLines

@@ -11,9 +11,9 @@
 		# The `html` artifact here is not generated.
 		# We build the mTree only, just to take a look to node transformations.
 	+
-	log '    The primary ittf document `contained_1.html.ittf` mixes its container `layout.html.ittf` '
-	log '    and the `lia.html.ittf` mixin'
-	log '    You can se the raw ittf documents and the builded mTree'
+	info '    The primary ittf document `contained_1.html.ittf` mixes its container `layout.html.ittf` '
+	info '    and the `lia.html.ittf` mixin'
+	info '    You can se the raw ittf documents and the builded mTree'
 	+
 	loadMTree( 3, contained_1.html.ittf, raw;print:dump )
 		loadMTree( 3, t/layout.html.ittf, raw;print:dump )

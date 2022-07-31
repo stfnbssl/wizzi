@@ -3,7 +3,7 @@
 	m getSource
 		callback
 
-		# log 'wizzi.modelinfo.getsource', this.srcFullPath()
+		# loog 'wizzi.modelinfo.getsource', this.srcFullPath()
 		var fileService = this.getFileService()
 		var that = this
         _ this.exists
@@ -25,7 +25,7 @@
 	m getSources
 		callback
 		
-		# log 'wizzi.modelinfo.getsources', this.srcFullPath()
+		# loog 'wizzi.modelinfo.getsources', this.srcFullPath()
 		var fileService = this.getFileService()
 		var that = this
         _ this.exists

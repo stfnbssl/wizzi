@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\io\filesystem.js.ittf
 */
 'use strict';
@@ -39,7 +39,7 @@ md.isMounted = function() {
 md.mount = function(baseFolderPath, callback) {
     fsBaseFolderPath = baseFolderPath;
     isMounted = true;
-    // log 'wizzi-io.filesystem mounted. BaseFolderPath: ' + baseFolderPath
+    // loog 'wizzi-io.filesystem mounted. BaseFolderPath: ' + baseFolderPath
     return callback(null);
 }
 ;
@@ -64,9 +64,9 @@ md.exists = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.exists.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.exists.fsPath', fsPath
     var exists = file.exists(fsPath);
-    // log 'wizzi-io.filesystem.exists.fsPath', fsPath, 'exists', exists
+    // loog 'wizzi-io.filesystem.exists.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
 }
 ;
@@ -78,9 +78,9 @@ md.isFile = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.isFile.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.isFile.fsPath', fsPath
     var exists = file.isFile(fsPath);
-    // log 'wizzi-io.filesystem.isFile.fsPath', fsPath, 'exists', exists
+    // loog 'wizzi-io.filesystem.isFile.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
 }
 ;
@@ -92,9 +92,9 @@ md.isFolder = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.isFolder.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.isFolder.fsPath', fsPath
     var exists = file.isDirectory(fsPath);
-    // log 'wizzi-io.filesystem.isFolder.fsPath', fsPath, 'exists', exists
+    // loog 'wizzi-io.filesystem.isFolder.fsPath', fsPath, 'exists', exists
     return callback(null, exists);
 }
 ;
@@ -106,12 +106,12 @@ md.readFile = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.readFile.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.readFile.fsPath', fsPath
     file.readFile(fsPath, function(err, content) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.readFile.fsPath', fsPath, 'content', content
+        // loog 'wizzi-io.filesystem.readFile.fsPath', fsPath, 'content', content
         return callback(null, content);
     })
 }
@@ -124,12 +124,12 @@ md.writeFile = function(userId, projectId, path_string, content, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.writeFile.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.writeFile.fsPath', fsPath
     file.writeFile(fsPath, content, function(err, result) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.writeFile.fsPath', fsPath, 'result', result
+        // loog 'wizzi-io.filesystem.writeFile.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
 }
@@ -142,9 +142,9 @@ md.mkdir = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.mkdir.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.mkdir.fsPath', fsPath
     file.mkdir(fsPath)
-    // log 'wizzi-io.filesystem.createFolder.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.createFolder.fsPath', fsPath
     return callback(null);
 }
 ;
@@ -163,13 +163,13 @@ md.readDir = function(userId, projectId, dirPath, callback) {
         fsPath = path.join(fsPath, dirPath);
     }
     fsPath = normalize(fsPath);
-    // log 'wizzi-io.filesystem.readDir.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.readDir.fsPath', fsPath
     file.getDir(fsPath, function(err, files) {
         if (err) {
             return callback(err);
         }
         var fsitems = filesToFsitems(files);
-        // log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
+        // loog 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
         return callback(null, fsitems);
     })
 }
@@ -182,13 +182,13 @@ md._readDir = function(dirPath, callback) {
              });
     }
     var fsPath = normalize(dirPath);
-    // log 'wizzi-io.filesystem.readDir.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.readDir.fsPath', fsPath
     file.getDir(fsPath, function(err, files) {
         if (err) {
             return callback(err);
         }
         var fsitems = filesToFsitems(files);
-        // log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
+        // loog 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
         return callback(null, fsitems);
     })
 }
@@ -201,12 +201,12 @@ md.stat = function(userId, projectId, filePath, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, filePath));
-    // log 'wizzi-io.filesystem.stat.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.stat.fsPath', fsPath
     fsdb.getItemByPath(fsPath, function(err, fsitem) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.stat.fsPath', fsPath, 'fsitem', fsitem
+        // loog 'wizzi-io.filesystem.stat.fsPath', fsPath, 'fsitem', fsitem
         if (fsitem == null) {
             return callback({
                     er: {
@@ -228,7 +228,7 @@ md._stat = function(filePath, callback) {
              });
     }
     var fsPath = normalize(filePath);
-    // log 'wizzi-io.filesystem.stat.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.stat.fsPath', fsPath
     if (file.exists(fsPath) == false) {
         return callback({
                 err: {
@@ -249,12 +249,12 @@ md.glob = function(userId, projectId, pattern, callback) {
              });
     }
     var fsPattern = normalize(path.join(fsBaseFolderPath, userId, projectId, pattern));
-    // log 'wizzi-io.filesystem.glob.fsPattern', fsPattern
+    // loog 'wizzi-io.filesystem.glob.fsPattern', fsPattern
     glob(fsPattern, this, {}, function(err, fsitems) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.glob.fsPattern', fsPattern, 'fsitems', fsitems
+        // loog 'wizzi-io.filesystem.glob.fsPattern', fsPattern, 'fsitems', fsitems
         return callback(null, fsitems);
     })
 }
@@ -267,12 +267,12 @@ md.deleteFile = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.deleteFile.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.deleteFile.fsPath', fsPath
     file.deleteFile(fsPath, function(err, result) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.deleteFile.fsPath', fsPath, 'result', result
+        // loog 'wizzi-io.filesystem.deleteFile.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
 }
@@ -286,9 +286,9 @@ md.copyFile = function(userId, source_projectId, source_path_string, dest_projec
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_path_string));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_path_string));
-    // log 'wizzi-io.filesystem.copyFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+    // loog 'wizzi-io.filesystem.copyFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     file.copy(sourceFsPath, destFsPath)
-    // log 'wizzi-io.filesystem.copyFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+    // loog 'wizzi-io.filesystem.copyFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     return callback(null);
 }
 ;
@@ -301,12 +301,12 @@ md.moveFile = function(userId, source_projectId, source_path_string, dest_projec
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_path_string));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_path_string));
-    // log 'wizzi-io.filesystem.moveFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+    // loog 'wizzi-io.filesystem.moveFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     file.moveFile(sourceFsPath, destFsPath, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.moveFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+        // loog 'wizzi-io.filesystem.moveFile.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
 }
@@ -319,12 +319,12 @@ md.deleteFolder = function(userId, projectId, path_string, callback) {
              });
     }
     var fsPath = normalize(path.join(fsBaseFolderPath, userId, projectId, path_string));
-    // log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath
+    // loog 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath
     file.deleteFolder(fsPath, function(err, result) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath, 'result', result
+        // loog 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath, 'result', result
         return callback(null, result);
     })
 }
@@ -338,12 +338,12 @@ md.copyFolder = function(userId, source_projectId, source_itemPath, dest_project
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_itemPath));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_itemPath));
-    // log 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+    // loog 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     file.copyFolder(sourceFsPath, destFsPath, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+        // loog 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
 }
@@ -357,12 +357,12 @@ md.moveFolder = function(userId, source_projectId, source_itemPath, dest_project
     }
     var sourceFsPath = normalize(path.join(fsBaseFolderPath, userId, source_projectId, source_itemPath));
     var destFsPath = normalize(path.join(fsBaseFolderPath, userId, dest_projectId, dest_itemPath));
-    // log 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+    // loog 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
     file.moveFolder(sourceFsPath, destFsPath, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
-        // log 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+        // loog 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
         return callback(null);
     })
 }
@@ -375,7 +375,7 @@ md.duplicateFile = function(userId, projectId, itemPath, newName, callback) {
              });
     }
     var duplicatedItemPath = parentPath(itemPath) + '/' + newName;
-    // log 'wizzi-io.filesystem.duplicateFile', userId, projectId, itemPath, duplicatedItemPath
+    // loog 'wizzi-io.filesystem.duplicateFile', userId, projectId, itemPath, duplicatedItemPath
     md.exists(userId, projectId, duplicatedItemPath, function(err, result) {
         if (err) {
             return callback(err);
@@ -405,7 +405,7 @@ md.renameFile = function(userId, projectId, itemPath, newName, callback) {
              });
     }
     var renamedItemPath = parentPath(itemPath) + '/' + newName;
-    // log 'wizzi-io.filesystem.renameFile', userId, projectId, itemPath, renamedItemPath
+    // loog 'wizzi-io.filesystem.renameFile', userId, projectId, itemPath, renamedItemPath
     md.exists(userId, projectId, renamedItemPath, function(err, result) {
         if (err) {
             return callback(err);
@@ -437,7 +437,7 @@ md.duplicateFolder = function(userId, projectId, itemPath, newName, callback) {
              });
     }
     var duplicatedItemPath = parentPath(itemPath) + '/' + newName;
-    // log 'wizzi-io.filesystem.duplicateFolder', userId, projectId, itemPath, duplicatedItemPath
+    // loog 'wizzi-io.filesystem.duplicateFolder', userId, projectId, itemPath, duplicatedItemPath
     md.exists(userId, projectId, duplicatedItemPath, function(err, result) {
         if (err) {
             return callback(err);
@@ -467,7 +467,7 @@ md.renameFolder = function(userId, projectId, itemPath, newName, callback) {
              });
     }
     var renamedItemPath = parentPath(itemPath) + '/' + newName;
-    // log 'wizzi-io.filesystem.renameFolder', userId, projectId, itemPath, renamedItemPath
+    // loog 'wizzi-io.filesystem.renameFolder', userId, projectId, itemPath, renamedItemPath
     md.exists(userId, projectId, renamedItemPath, function(err, result) {
         if (err) {
             return callback(err);
@@ -510,7 +510,7 @@ md.moveFsItem = function(userId, action, callback) {
 }
 ;
 md.deleteFsItem = function(userId, action, callback) {
-    console.log('wizzi.FileSystem.deleteFsItem.action', action);
+    // loog 'wizzi.FileSystem.deleteFsItem.action', action
     if (action.itemKind == 0) {
         md.deleteFolder(action.userId || userId, action.projectId, action.itemPath, callback)
     }

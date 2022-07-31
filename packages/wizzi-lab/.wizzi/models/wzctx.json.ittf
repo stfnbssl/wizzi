@@ -1,0 +1,38 @@
+{
+    $include versions
+    
+    name 'wizzi-lab'
+    version '${versions['wizzi-lab@next']}'
+    title 'A wizzi factory incubator plugin for new wizzi schemas'
+    license 'MIT'
+    [ schemas
+        {
+            name 'rdbms'
+            title 'relational db model'
+            [ transformers
+            [ artifacts
+                {
+                    name 'rdbms/html_docs'
+					name 'rdbms/jsoncrud'
+					name 'rdbms/jsonmodel'
+					name 'rdbms/jsoncontext'
+					name 'rdbms/jsonpersister'
+        {
+            name 'raml'
+            title 'rest service model'
+            [ transformers
+            [ artifacts
+                {
+                    name 'raml/html_docs'
+					name 'raml/nodejs_server'
+					name 'raml/js_client'
+        {
+            name 'regexp'
+            title 'regular expressions model'
+            [ transformers
+            [ artifacts
+        {
+            name 'py'
+            title 'python language'
+            [ transformers
+            [ artifacts            

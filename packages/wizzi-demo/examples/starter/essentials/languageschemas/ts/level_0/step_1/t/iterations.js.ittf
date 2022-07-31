@@ -9,12 +9,12 @@ $group
 	# 
 		# The foreach iteration
 	foreach item in arr5
-		log 'item ', i, item
+		info 'item ', i, item
 
 	# 
 		# The backeach iteration (foreach backwards)
 	backeach item in arr5
-		log 'item ', i, item
+		info 'item ', i, item
 
 	#
 		# Nested foreach
@@ -22,9 +22,9 @@ $group
 		# The letters used for iterations are, in order: 
 		#   i, j, k, l, m, n
 	foreach item5 in arr5
-		log 'item5', i, item5
+		info 'item5', i, item5
 		foreach item4 in arr4
-			log 'item4', j, item4
+			info 'item4', j, item4
 
 	#
 		# Nested backeach
@@ -32,17 +32,17 @@ $group
 		# The letters used for iterations are in order: 
 		#   i, j, k, l, m, n
 	backeach item5 in arr5
-		log 'item5', i, item5
+		info 'item5', i, item5
 		backeach item4 in arr4
-			log 'item4', j, item4
+			info 'item4', j, item4
 
 	#
 		# Foreach's and backeach's
 		# can be mixed
 	backeach item5 in arr5
-		log 'item5', i, item5
+		info 'item5', i, item5
 		foreach item4 in arr4
-			log 'item4', j, item4
+			info 'item4', j, item4
 
 	#
 		# For loops

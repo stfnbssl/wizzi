@@ -94,7 +94,7 @@
 		m append
 			param sb
 			param indent
-			# log 'sb',sb
+			# loog 'sb',sb
 			_ sb.push
 				@ indentTabs(indent) + this.name + (this.value && this.value.length > 0 ? ' ' + this.value : '')
 			foreach node in this.children

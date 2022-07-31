@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\tests\css\model_css.js.ittf
 */
 'use strict';
@@ -30,14 +30,14 @@ describe("model css", function() {
         var info = getTestModelInfo('css', 'basic');
         loadModel(info.ittfPath, getLoadModelContext({}), function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             // log? wizziModel
             var ctx = new mocks.getGenContext();
             css_artifact.gen(wizziModel, ctx, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 var artifactText = result.getContent();
@@ -51,14 +51,14 @@ describe("model css", function() {
         var info = getTestModelInfo('css', 'mixed');
         loadModel(info.ittfPath, getLoadModelContext({}), function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             // log? wizziModel
             var ctx = new mocks.getGenContext();
             css_artifact.gen(wizziModel, ctx, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 var artifactText = result.getContent();

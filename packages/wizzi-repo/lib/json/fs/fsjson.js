@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\fs\fsjson.js.ittf
 */
 'use strict';
@@ -62,7 +62,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.json.FsJson.getItem.r', key, r
+            // loog 'wizzi-repo.json.FsJson.getItem.r', key, r
             if (r.length == 1) {
                 return callback(null, r[0]);
             }
@@ -135,14 +135,14 @@ var FsJson = (function () {
                 'InvalidArgument', 'getItemChildren', { parameter: 'parentId', message: 'The parentId parameter must be an object. Received: ' + parentId }
             ));
         }
-        // log 'wizzi-repo.json.FsJson.getItemChildren.enter', parentId
+        // loog 'wizzi-repo.json.FsJson.getItemChildren.enter', parentId
         this.items.find({
             parentId: parentId
          }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.json.FsJson.getItemChildren.r', parentId, r
+            // loog 'wizzi-repo.json.FsJson.getItemChildren.r', parentId, r
             return callback(null, r);
         })
     }
@@ -167,7 +167,7 @@ var FsJson = (function () {
                 'InvalidArgument', 'insertItem', { parameter: 'fsItem.kind', message: 'The fsItem.kind parameter must be a number. Received: ' + fsItem.kind }
             ));
         }
-        // log 'wizzi-repo.json.FsJson.insertItem. fsItem:', fsItem
+        // loog 'wizzi-repo.json.FsJson.insertItem. fsItem:', fsItem
         var basename = fsItem.basename;
         var dirname = fsItem.dirname;
         var parentId = fsItem.parentId;
@@ -178,13 +178,13 @@ var FsJson = (function () {
                 return callback(err);
             }
             
-            // log 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
+            // loog 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
             if (item == null) {
                 that.items.insertOne(fsItem, function(err, r) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-repo.json.FsJson.insertItem.insertOne', r
+                    // loog 'wizzi-repo.json.FsJson.insertItem.insertOne', r
                     assert.equal(1, r.insertedCount);
                     assert.equal(1, r.ops.length);
                     return callback(null, {
@@ -195,7 +195,7 @@ var FsJson = (function () {
                          });
                 })
             }
-            // log 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
+            // loog 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
             else {
                 return callback(null, {
                         code: 'FSITEM_EXISTS', 
@@ -228,7 +228,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.json.FsJson.updateItem', r_upd.result
+            // loog 'wizzi-repo.json.FsJson.updateItem', r_upd.result
             if (r_upd.modifiedCount == 1) {
                 return callback(null, {
                         code: 'FSITEM_UPDATED', 
@@ -265,7 +265,7 @@ var FsJson = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-repo.json.FsJson.updateItemLastModified', r_upd.result
+                    // loog 'wizzi-repo.json.FsJson.updateItemLastModified', r_upd.result
                     if (r_upd.modifiedCount == 1) {
                         return callback(null, {
                                 code: 'FSITEM_LASTMODIFIED_UPDATED', 
@@ -312,7 +312,7 @@ var FsJson = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // log '*** wizzi-repo.json.FsJson.deleteItem,r', r
+                    // loog '*** wizzi-repo.json.FsJson.deleteItem,r', r
                     if (r.deletedCount == 1 && r.result.ok == 1) {
                         return callback(null, {
                                 code: 'FSITEM_DELETED', 
@@ -334,13 +334,13 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // log '*** wizzi-repo.json.FsJson._deleteDocument.r', r
+            // loog '*** wizzi-repo.json.FsJson._deleteDocument.r', r
             
-            // log 'wizzi-repo.json.FsJson._deleteDocument', true
+            // loog 'wizzi-repo.json.FsJson._deleteDocument', true
             if (r.deletedCount == 1 && r.result.ok == 1) {
                 return callback(null, true);
             }
-            // log 'wizzi-repo.json.FsJson._deleteDocument', false
+            // loog 'wizzi-repo.json.FsJson._deleteDocument', false
             else {
                 return callback(null, false);
             }
@@ -363,7 +363,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.json.FsJson.read.r', id, r
+            // loog 'wizzi-repo.json.FsJson.read.r', id, r
             if (r.length == 1) {
                 return callback(null, r[0].content);
             }
@@ -395,15 +395,15 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
+            // loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
             
-            // log 'wizzi-repo.json.FsJson.writeDocument not modified', f
+            // loog 'wizzi-repo.json.FsJson.writeDocument not modified', f
             if (f === content) {
                 return callback(null, {
                         code: 'DOCUMENT_NOT_MODIFIED'
                      });
             }
-            // log 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
+            // loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
             var lastModified = new Date();
             that.documents.replaceOne({
                 _id: id
@@ -417,14 +417,14 @@ var FsJson = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-repo.json.FsJson.writeDocument', r
+                // loog 'wizzi-repo.json.FsJson.writeDocument', r
                 var modified = r.modifiedCount + r.upsertedCount;
                 assert.equal(1, modified);
                 that.updateItemLastModified(id, lastModified, function(err, rUpd) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-repo.json.FsJson.writeDocument upd', rUpd
+                    // loog 'wizzi-repo.json.FsJson.writeDocument upd', rUpd
                     return callback(null, {
                             code: 'DOCUMENT_WRITTEN', 
                             item: r.ops[0]

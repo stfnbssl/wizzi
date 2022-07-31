@@ -3,11 +3,11 @@
 	it should convert string values to types
 		var expected
 		var result = verify.convert('', 'string')
-		log ' "" result', result
+		# loog ' "" result', result
 		set expected = ''
 		tobe(result, expected)
 		set result = verify.convert(null, 'string')
-		log ' "" result', result
+		# loog ' "" result', result
 		set expected = ''
 		tobe(result, expected)
 		set result = verify.convert('alfa', 'string')
@@ -31,10 +31,10 @@
 		tobe(result, false)
 		set result = verify.convert('1990-5-12', 'date')
 		set expected = new Date(1990, 4, 12)
-		log 'expected', expected
+		# loog 'expected', expected
 		tobe_eql(result, expected)
 		set result = verify.convert('1990/5/12', 'date')
-		log 'date 1990/5/12 result', result
+		# loog 'date 1990/5/12 result', result
 		tobe_true( result.__is_error )
 		set result = verify.convert('yes', 'boolean')
 		tobe_true( result.__is_error )

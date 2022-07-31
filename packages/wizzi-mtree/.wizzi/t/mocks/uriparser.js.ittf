@@ -26,7 +26,7 @@
                     else 
                         set parsedUri.protocol
             
-			# log 'parseuri.parsedUri', parsedUri
+			# loog 'parseuri.parsedUri', parsedUri
 			var name, parts = parsedUri.pathname ? parsedUri.pathname.split('/') : []
 			if parsedUri.pathname && parsedUri.pathname.length > 0 && parsedUri.pathname[0] == '/'
 				_ parts.shift()
@@ -51,8 +51,8 @@
 					var_cb_error( InvalidRequest )
 						@ 'Invalid uri for an IttfDocument. Too short: ' + uri
 						@ 'UriError'
-                log 'parsedUri.parts', parts
-				log 'parsedUri', parsedUri
+                # loog 'parsedUri.parts', parts
+				# loog 'parsedUri', parsedUri
 				set ret.storeKind = 'repo'
                 set ret.userId = parsedUri.host
 				set ret.projectId = parts[0]

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\es6\class.js.ittf
 */
 'use strict';
@@ -22,7 +22,7 @@ md.gen = function(model, ctx, callback) {
     }
     var zclass = model.wzName,
         zsuper = model.super;
-    // log 'ts.es6.class', model
+    // loog 'ts.es6.class', model
     u.writeComments(model, ctx);
     classDecorators(model, ctx, (err, notUsed) => {
     
@@ -143,7 +143,7 @@ function classSuper(model, ctx, callback) {
         throw new Error('Missing callback parameter in fn: ' + myname + '.classSuper');
     }
     
-    // log 'classSuper', 'model.superType',
+    // loog 'classSuper', 'model.superType',
     if (model.super) {
         ctx.write(' extends ' + model.super);
         if (model.superType && model.superType.typeParameterInsts.length > 0) {
@@ -200,7 +200,7 @@ function classCTor(model, ctx, callback) {
     if (typeof callback === 'undefined') {
         throw new Error('Missing callback parameter in fn: ' + myname + '.classCTor');
     }
-    // log 'classCTor'
+    // loog 'classCTor'
     var zsuper = model.super,
         ctor = model.findCtor();
     if (ctor) {
@@ -234,7 +234,7 @@ function classCTor_end(model, ctx, callback) {
     if (typeof callback === 'undefined') {
         throw new Error('Missing callback parameter in fn: ' + myname + '.classCTor_end');
     }
-    // log 'classCTor_end'
+    // loog 'classCTor_end'
     var zsuper = model.super,
         ctor = model.findCtor(),
         superArgs = ctor == null ? '' : (ctor.getBaseArgs() || '');
@@ -264,14 +264,14 @@ function classMembers(model, ctx, callback) {
     if (typeof callback === 'undefined') {
         throw new Error('Missing callback parameter in fn: ' + myname + '.classMembers');
     }
-    // log 'classMembers'
+    // loog 'classMembers'
     var len_1 = model.statements.length;
     function repeater_1(index_1) {
         if (index_1 === len_1) {
             return next_1();
         }
         var item_1 = model.statements[index_1];
-        // log 'ts.es6.class.classMembers', item_1.wzElement
+        // loog 'ts.es6.class.classMembers', item_1.wzElement
         var generator = null;
         var done = false;
         
@@ -334,7 +334,7 @@ function classMembers(model, ctx, callback) {
     }
     repeater_1(0);
     function next_1() {
-        // log 'ts.es6.class.classMembers end'
+        // loog 'ts.es6.class.classMembers end'
         return callback(null, null);
     }
 }

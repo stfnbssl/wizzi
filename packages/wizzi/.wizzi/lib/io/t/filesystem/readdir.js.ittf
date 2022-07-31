@@ -23,13 +23,13 @@
 				set fsPath = path.join(fsPath, dirPath)
 			set fsPath = normalize(fsPath)
 				
-			# log 'wizzi-io.filesystem.readDir.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.readDir.fsPath', fsPath
 
 			_ file.getDir
 				@ fsPath
 				f_cb( files )
 					var fsitems = filesToFsitems(files)
-					# log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
+					# loog 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
 					return 
 						_ callback(null, fsitems)
 
@@ -48,12 +48,12 @@
 				_ normalize
 					@ dirPath
 				
-			# log 'wizzi-io.filesystem.readDir.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.readDir.fsPath', fsPath
 
 			_ file.getDir
 				@ fsPath
 				f_cb( files )
 					var fsitems = filesToFsitems(files)
-					# log 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
+					# loog 'wizzi-io.filesystem.readDir.fsPath', fsPath, 'fsitems', fsitems
 					return 
 						_ callback(null, fsitems)

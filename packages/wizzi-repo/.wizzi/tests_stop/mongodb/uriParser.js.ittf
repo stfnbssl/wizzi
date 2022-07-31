@@ -8,7 +8,7 @@
 			_ uriParser
 				@ 'db://stefi/wf/utils/hello.js.ittf'
 				@ 'c://wf/users'
-		log 'parsed', parsed
+		# loog 'parsed', parsed
 		tobe_string( parsed.userId, stefi )
 		tobe_string( parsed.projectId, wf )
 		tobe_string( parsed.schema, js )
@@ -20,7 +20,7 @@
 			_ uriParser
 				@ '/stefi/wf/utils/hello.js.ittf'
 				@ 'c://wf/users'
-		log 'parsed', parsed
+		# loog 'parsed', parsed
 		tobe_true( parsed.__is_error )
 		tobe_string( parsed.name,  InvalidArgument )
 

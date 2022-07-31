@@ -70,8 +70,8 @@
 			set this.segments = this.parts.slice(0, this.parts.length -1)
 			set this.basename = this.parts[this.parts.length -1]
 			set this.dirname = this.segments.join('/')
-            # log 'ittfScanner.IttfFsNode.ctor.nodePath', nodePath, 'this.basename', this.basename, 'this.path', this.path, 'this.fullPath', this.fullPath
-            # log 'ittfScanner.IttfFsNode.ctor.options', options
+            # loog 'ittfScanner.IttfFsNode.ctor.nodePath', nodePath, 'this.basename', this.basename, 'this.path', this.path, 'this.fullPath', this.fullPath
+            # loog 'ittfScanner.IttfFsNode.ctor.options', options
 			if !options.isDirectory
                 set this.schema = detectSchema(this.basename)
 				set this.isFragment = isTFragment(this.parts)
@@ -109,13 +109,13 @@
 		m setInfo
             callback
 			var r = this.root()
-            # log 'called setInfo', this.basename, r === this
+            # loog 'called setInfo', this.basename, r === this
 			if r === this
 				_ this.setIds
                 var that = this
 				_ this.analize
                     f_cb()
-                        # log 'analized', that.basename
+                        # loog 'analized', that.basename
                         _ that.__setInfo
                             @ r
                             @ callback
@@ -127,7 +127,7 @@
 		m __setInfo
             param r
             param callback
-            # log 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
+            # loog 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
 			if !this.isDirectory && !this.isFragment
 				var schema = r.info.schemas[this.schema]
 				if !schema
@@ -136,9 +136,9 @@
 							@ name this.schema
 							@ documents []
 					set r.info.schemas[this.schema] = schema
-					# log 'created schema', schema, r.info.schemas
+					# loog 'created schema', schema, r.info.schemas
 				else
-					# log 'found', schema, r.info.schemas
+					# loog 'found', schema, r.info.schemas
 				_ schema.documents.push(this)
 				if this.isTest
 					_ r.info.test.documents.push(this)
@@ -158,17 +158,17 @@
                         _ item.setInfo
                             @ callback
                     f_cb()
-                        # log 'folders setted info'
+                        # loog 'folders setted info'
                         _ async.map
                             @ that.documents
                             function
                                 param item
                                 param callback
-                                # log 'document setted', item.basename
+                                # loog 'document setted', item.basename
                                 _ item.setInfo
                                     @ callback
                             f_cb()
-                                # log 'documents setted info'
+                                # loog 'documents setted info'
                                 return
                                     _ callback
                                         @ null
@@ -188,17 +188,17 @@
 			var r = this.root()
             var tobeAddedFullPath = unixifyPath(path.join(this.fullPath, relPath)) 
             set relPath = unixifyPath(relPath)
-            # log 'addDocument relPath', relPath, 'to this.fullPath', this.fullPath
+            # loog 'addDocument relPath', relPath, 'to this.fullPath', this.fullPath
 			var parts = tobeAddedFullPath.split('/')
-			# log 'addDocument parts.length', parts.length, 'to this.parts.length', this.parts.length
+			# loog 'addDocument parts.length', parts.length, 'to this.parts.length', this.parts.length
 			if parts.length <= this.parts.length
-                # log 'addDocument parts.length <= this.parts.length return null'
+                # loog 'addDocument parts.length <= this.parts.length return null'
 				return null
 			if this.match(parts) == false
-				# log 'addDocument this.match(parts) == false return null'
+				# loog 'addDocument this.match(parts) == false return null'
 				return null
 			if parts.length == this.parts.length + 1
-				# log 'addDocument could be a document try match'
+				# loog 'addDocument could be a document try match'
                 var dnode
                     new IttfFsNode
                         @ parts[parts.length-1]
@@ -207,13 +207,13 @@
                             @ isDirectory false
                             @ file r.file
                 _ this.documents.push(dnode)
-                # log '+++ addDocument added document', parts[parts.length-1], 'to', this.path
+                # loog '+++ addDocument added document', parts[parts.length-1], 'to', this.path
                 return dnode
 			else
                 var relPathParts = relPath.split('/')
                 var subfolder = relPathParts[0]
                 var subRelPath = relPathParts.slice(1).join('/')
-                # log 'addDocument try subfolder', subfolder, 'subRelPath', subRelPath
+                # loog 'addDocument try subfolder', subfolder, 'subRelPath', subRelPath
 				var added
 				foreach f in this.folders
 					$$ if f.path === subfolderPath
@@ -230,8 +230,8 @@
 							@ isDirectory true
 							@ file r.file
 				_ this.folders.push(fnode)
-				# log 'addDocument created subfolder', subfolderPath
-                # log '+++ addDocument created subfolder', subfolder, 'in folder', this.path
+				# loog 'addDocument created subfolder', subfolderPath
+                # loog '+++ addDocument created subfolder', subfolder, 'in folder', this.path
 				set added
 					_ fnode.addDocument(subRelPath, options)
 				return added
@@ -245,12 +245,12 @@
 				_ path.relative
 					@ this.ittfBasePath
 					@ fullPath
-			# log 'addExternalDocument.relPath', relPath, 'fullPath', fullPath
+			# loog 'addExternalDocument.relPath', relPath, 'fullPath', fullPath
 			var dnode
 				_ this.searchDocument
 					@ relPath
 			if dnode
-				# log 'addExternalDocument.relPath already exists', relPath,
+				# loog 'addExternalDocument.relPath already exists', relPath,
 				return dnode
 			else
 				set dnode
@@ -262,7 +262,7 @@
 							@ file r.file
 				set dnode.isExternal = true
 				_ this.documents.push(dnode)
-				# log 'addExternalDocument.relPath added', relPath
+				# loog 'addExternalDocument.relPath added', relPath
 				return dnode
 
 		m match

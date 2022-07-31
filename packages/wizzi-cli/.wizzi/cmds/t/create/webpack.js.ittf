@@ -20,6 +20,6 @@ $group
         _ inquirer.prompt(questions).then
             => 
                 param answers
-                log '\nNew webpack package type:'
-                log JSON.stringify(answers, null, '  ')
+                info '\nNew webpack package type:'
+                info JSON.stringify(answers, null, '  ')
                 r_cb(answers)

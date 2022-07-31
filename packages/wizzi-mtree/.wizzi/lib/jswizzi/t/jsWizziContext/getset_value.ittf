@@ -24,7 +24,7 @@
     m declareCallParam
         param name
         param value
-		# log 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
+		# loog 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
 		_ this.callContext.declare(name, value)
 
     m undeclare
@@ -116,8 +116,8 @@
 				if !ok
 					set ok = this.globalContext.put(name, value)
 			if !ok
-				# log 'wizzi-mtree.jsWizziContext.brickEvalContext.declaresStack', this.brickEvalContext.declaresStack
-				# log 'wizzi-mtree.jsWizziContext.brickEvalContext.valuesStack', this.brickEvalContext.valuesStack
+				# loog 'wizzi-mtree.jsWizziContext.brickEvalContext.declaresStack', this.brickEvalContext.declaresStack
+				# loog 'wizzi-mtree.jsWizziContext.brickEvalContext.valuesStack', this.brickEvalContext.valuesStack
 				throw new Error('jsWizziContext.put error. Not declared: ' + name);
 
 	m getValue
@@ -161,9 +161,9 @@
 				return fn
 			else
 				# return undefined
-				# log 'JsWizziContext.getValue context value not found for', name
-				# log 'JsWizziContext.getValue ittf_state ', this.ittf_state
-				# log 'JsWizziContext.getValue currentMTreeBrickKey ', this.currentMTreeBrickKey
+				# loog 'JsWizziContext.getValue context value not found for', name
+				# loog 'JsWizziContext.getValue ittf_state ', this.ittf_state
+				# loog 'JsWizziContext.getValue currentMTreeBrickKey ', this.currentMTreeBrickKey
 				# _ this.dumpValues
 				throw new Error('jsWizziContext.getValue error. Not declared: ' + name);
 
@@ -225,13 +225,13 @@
 
 	m dumpValues
 		# TODO if this.verbose
-		log 'Dump context value for debug'
-		log 'JsWizziContext ittf_state ', this.ittf_state
-		log 'JsWizziContext currentMTreeBrickKey ', this.currentMTreeBrickKey
+		info 'Dump context value for debug'
+		info 'JsWizziContext ittf_state ', this.ittf_state
+		info 'JsWizziContext currentMTreeBrickKey ', this.currentMTreeBrickKey
 		if this.brickEvalContext
-			log 'Local values'
+			info 'Local values'
 			_ this.brickEvalContext.dumpValues
-		log 'Global values'
+		info 'Global values'
 		_ this.globalContext.dumpValues
 
 	m getDeclaredInfo

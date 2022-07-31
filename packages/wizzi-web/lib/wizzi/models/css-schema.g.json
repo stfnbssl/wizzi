@@ -501,8 +501,8 @@
             }
           ],
           "comments": [
-            "log '*** rule.initialize.start', this.wzElement, this.wzName",
-            "log '*** rule.initialize.end', this.wzElement, this.wzName, 'this.parentRuleParts', this.parentRuleParts.join(',')"
+            "loog '*** rule.initialize.start', this.wzElement, this.wzName",
+            "loog '*** rule.initialize.end', this.wzElement, this.wzName, 'this.parentRuleParts', this.parentRuleParts.join(',')"
           ]
         },
         {
@@ -1106,8 +1106,8 @@
             }
           ],
           "comments": [
-            "log '*** thisRuleParts 1', thisRuleParts.join(',')",
-            "log '*** thisRuleParts 2', thisRuleParts.join(',')"
+            "loog '*** thisRuleParts 1', thisRuleParts.join(',')",
+            "loog '*** thisRuleParts 2', thisRuleParts.join(',')"
           ]
         }
       ],

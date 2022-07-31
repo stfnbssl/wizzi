@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -176,7 +176,7 @@ md.createStoreFactory = function createStoreFactory(options, callback) {
         }
     }
     
-    // log 'wizzi-repo.index.createStoreFactory.options', options
+    // loog 'wizzi-repo.index.createStoreFactory.options', options
     
     var storeKind = options.storeKind || 'filesystem';
     if (checkStoreKind(storeKind) == false) {
@@ -234,7 +234,7 @@ function checkStoreKind(kind) {
 }
 // TODO fileService.getFilesAsync
 md.folderFilesInfoByPath = function(folderPath, fileService, options, callback) {
-    console.log('wizzi-repo.folderFilesInfoByPath', folderPath);
+    // loog 'wizzi-repo.folderFilesInfoByPath', folderPath
     options = options || { deep: true };
     fileService.getFilesAsync(folderPath, options, function(err, files) {
         if (err) {

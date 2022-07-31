@@ -13,10 +13,10 @@
 				set doc = new Document(fsmongo)
 				_ db.collection(FSITEMS).drop
 					f_cb( result )
-						log 'FSITEMS.drop result', result
+						info 'FSITEMS.drop result', result
 						_ db.collection(DOCUMENTS).drop
 							f_cb( result )
-								log 'DOCUMENTS.drop result', result
+								info 'DOCUMENTS.drop result', result
 								return
 									_ callback
 										@ null

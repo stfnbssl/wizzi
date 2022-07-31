@@ -18,7 +18,7 @@
 
 	_ prettier
 		f_cb_test(result)
-			log 'prettier.result', result
+			# loog 'prettier.result', result
 			_ file.write
 				_ path.join
 					@ codecampPath
@@ -29,7 +29,7 @@
 			#
 				_ prettier
 					f_cb_test(result)
-						log 'prettierToEventStream.result', result
+						# loog 'prettierToEventStream.result', result
 	
 	function prettier
 		param callback
@@ -46,9 +46,9 @@
 			@ options1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

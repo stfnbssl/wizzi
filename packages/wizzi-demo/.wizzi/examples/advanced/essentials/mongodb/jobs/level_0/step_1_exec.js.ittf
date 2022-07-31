@@ -38,4 +38,4 @@
 			param err
 			if err
 				log "Error executing wizzi instance job", err
-			log 'Wizzi instance job mongodb.level_0.step_1 SUCCESSFULLY executed'
+			info 'Wizzi instance job mongodb.level_0.step_1 SUCCESSFULLY executed'

@@ -200,11 +200,11 @@ $group
         _ u.checkInlineEnter(model, ctx)
 		var async_str = model.xasync ? 'async ' : ''
         $*
-        log 'arrowfunction, model.wzParent.wzElement', model.wzParent.wzElement
-        log 'arrowfunction, ctx.__is_react_class', ctx.__is_react_class
-        log 'arrowfunction, u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue')
-        log 'arrowfunction, u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model)
-        log 'arrowfunction, u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction')
+        # loog 'arrowfunction, model.wzParent.wzElement', model.wzParent.wzElement
+        # loog 'arrowfunction, ctx.__is_react_class', ctx.__is_react_class
+        # loog 'arrowfunction, u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue')
+        # loog 'arrowfunction, u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model)
+        # loog 'arrowfunction, u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction')
         log "arrowfunction, u.isImplicitReturn(model)", u.isImplicitReturn(model)
         *$
         
@@ -303,11 +303,11 @@ $group
                             @ false
                             @ callback
 		elif u.isImplicitReturn(model)
-            # log 'isImplicitReturn', model.wzElement, model.wzName
+            # loog 'isImplicitReturn', model.wzElement, model.wzName
             var isSingleParam = u.isSingleParamForArrowFunction(model)
             var firstChildIsTemplate = u.firstChildIs(model, ['template'])
-            # log 'function.isSingleParam', isSingleParam
-            # log 'function.firstChildIs template', firstChildIsTemplate
+            # loog 'function.isSingleParam', isSingleParam
+            # loog 'function.firstChildIs template', firstChildIsTemplate
             _ ctx.write(async_str + (isSingleParam ? '' : '('))
 			_ u.genTSParams
 				@ model

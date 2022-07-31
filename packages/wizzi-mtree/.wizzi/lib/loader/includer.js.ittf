@@ -37,9 +37,9 @@
                         @ jsons
                         @ fragments
 
-                # log 'wizzi-mtree.includer.fragments before', primaryMTreeBrick.documentFragments
+                # loog 'wizzi-mtree.includer.fragments before', primaryMTreeBrick.documentFragments
                 set primaryMTreeBrick.documentFragments = fragments
-                # log 'wizzi-mtree.includer.fragments after', primaryMTreeBrick.documentFragments
+                # loog 'wizzi-mtree.includer.fragments after', primaryMTreeBrick.documentFragments
                 
 				_ async.mapSeries
 					@ includes
@@ -60,9 +60,9 @@
 							f_cb_no_err( includedWipNodifiedMTree )
 								if err
                                     $* 6/6/19
-									log 'wizzi-mtree.includer.err', err
-									# log 'wizzi-mtree.includer.item', item
-									# log 'wizzi-mtree.includer.item.model.loadHistory', item.model.loadHistory
+									# loog 'wizzi-mtree.includer.err', err
+									# loog 'wizzi-mtree.includer.item', item
+									# loog 'wizzi-mtree.includer.item.model.loadHistory', item.model.loadHistory
 									set err.errorLines
 										_ item.model.loadHistory.getIttfDocumentErrorLines
 											@ item.sourceKey
@@ -71,7 +71,7 @@
 												@ col item.col
 												@ description 'fragment not found'
 											@ true
-									log 'wizzi-mtree.includer.item.model.loadHistory.lineErrors', err.errorLines
+									# loog 'wizzi-mtree.includer.item.model.loadHistory.lineErrors', err.errorLines
                                     *$
 									return
 										_ callback

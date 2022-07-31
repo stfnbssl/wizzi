@@ -22,7 +22,7 @@
 				_ that.fsCommon.getItemChildren
 					@ fsitem._id
 					f_cb( children )
-						log 'wizzi-repo.${source}.document.deleteFolder.children', children
+						# loog 'wizzi-repo.${source}.document.deleteFolder.children', children
 						if children.length > 0
 							r_cb_wz_err( ${fsname}RepoError, deleteFolder )
 								@ 'Folder not empty: ' + folderPath
@@ -30,6 +30,6 @@
 							_ that.fsCommon.deleteItem
 								@ fsitem._id
 								f_cb( r )
-									log 'wizzi-repo.${source}.document.deleteFolder.r', r
+									# loog 'wizzi-repo.${source}.document.deleteFolder.r', r
 									_ assert( true, r.deleted )
 									r_cb( r )

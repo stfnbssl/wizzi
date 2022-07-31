@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\utils\step_1.js.ittf
 */
 'use strict';
@@ -122,14 +122,14 @@ function __printObject(v, level, limit) {
         for (var k in v) {
             prop = v[k];
             if (verify.isObject(prop)) {
-                console.log(indent, k, '{');
+                console.log(indent, k, '{', __filename);
                 __printObject(prop, level+1, limit);
             }
             else if (verify.isFunction(prop)) {
-                console.log(indent, k, 'function');
+                console.log(indent, k, 'function', __filename);
             }
             else if (verify.isArray(prop)) {
-                console.log(indent, k, '[');
+                console.log(indent, k, '[', __filename);
                 var indent2 = new Array(1 + (level+1) * 4).join(' ');
                 var i, i_items=prop, i_len=prop.length, item;
                 for (i=0; i<i_len; i++) {
@@ -138,15 +138,15 @@ function __printObject(v, level, limit) {
                         __printObject(item, level+1, limit);
                     }
                     else if (verify.isFunction(item)) {
-                        console.log(indent2, 'function');
+                        console.log(indent2, 'function', __filename);
                     }
                     else {
-                        console.log(indent2, item);
+                        console.log(indent2, item, __filename);
                     }
                 }
             }
             else {
-                console.log(indent, k, prop);
+                console.log(indent, k, prop, __filename);
             }
         }
     }
@@ -174,8 +174,8 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
-    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-    // log 'nodes[0]', nodes[0]
+    // loog 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // loog 'nodes[0]', nodes[0]
     else {
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
@@ -226,7 +226,7 @@ function meterLine(len, indent) {
             x = formatNum(j, numW);
             sb.push(x.substr(i,1));
         }
-        console.log(indent, sb.join(''));
+        console.log(indent, sb.join(''), __filename);
         sb = [];
     }
 }

@@ -6,7 +6,7 @@
 			number kind
 		callback
 
-		# log 'wizzi-repo.json.FsJson.insertItem. fsItem:', fsItem
+		# loog 'wizzi-repo.json.FsJson.insertItem. fsItem:', fsItem
 
 		var basename = fsItem.basename
 		var dirname = fsItem.dirname
@@ -20,11 +20,11 @@
 			@ parentId
 			f_cb( item )
 				if item == null
-					# log 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
+					# loog 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
 					_ that.items.insertOne
 						@ fsItem
 						f_cb( r )
-							# log 'wizzi-repo.json.FsJson.insertItem.insertOne', r
+							# loog 'wizzi-repo.json.FsJson.insertItem.insertOne', r
 							_ assert.equal(1, r.insertedCount)
 							_ assert.equal(1, r.ops.length)
 							r_cb()
@@ -34,7 +34,7 @@
 									@ insertedCount r.insertedCount
 									@ item r.ops[0]
 				else
-					# log 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
+					# loog 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
 					r_cb()
 						{
 							@ code 'FSITEM_EXISTS'

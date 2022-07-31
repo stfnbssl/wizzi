@@ -19,7 +19,7 @@
 	var item
 	repeater(1, js_ittf_files)
 		set item = item_1.substring(0, item_1.length - '.js.ittf'.length)
-		log 'wizzi-codegen.examples.item', item
+		# loog 'wizzi-codegen.examples.item', item
 		_ execute
 			@ item
 			f_cb()
@@ -33,7 +33,7 @@
 				@ __dirname
 				@ 'ittf'
 				@ name + '.js.ittf'
-		log 'wizzi-codegen.examples.ittfSource', ittfSource
+		# loog 'wizzi-codegen.examples.ittfSource', ittfSource
 		var jsOutput
 			_ path.join
 				@ __dirname
@@ -43,10 +43,10 @@
 			@ ittfSource
 			{
 			f_cb_test( mTree )
-				# log 'mTree', mTree
+				# loog 'mTree', mTree
 				var js = new jsNode(mTree.n, mTree.v)
 				_ js.loadFromMTree(mTree)
-				# log 'jsNode', js
+				# loog 'jsNode', js
 				var ctx
 					new genContext
 						{

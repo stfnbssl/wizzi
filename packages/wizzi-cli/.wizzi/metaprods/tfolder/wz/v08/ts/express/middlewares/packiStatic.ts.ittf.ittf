@@ -28,7 +28,7 @@ $group
                 => 
                     param app
                         :ref Application
-                    log 'PackiStaticMiddleware. Folder served from ', 
+                    success 'PackiStaticMiddleware. Folder served from ', 
                         \b path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf')
                     _ app.use('/packi', 
                         \b ittfMiddleware(path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf'), '/ittf'))
@@ -56,15 +56,15 @@ $group
                 if !parsedUrl || !parsedUrl.pathname
                     return next()
 
-                log 'packiStatic parsedUrl', parsedUrl
-                log 'packiStatic request.path', request.path
+                # loog 'packiStatic parsedUrl', parsedUrl
+                # loog 'packiStatic request.path', request.path
                 
                 const reqpath = parsedUrl && parsedUrl.path
 
                 if false
                     return response.redirect(307, 'http://localhost:3000/packi' + reqpath);
                 else
-                    log 'packiStatic parsedUrl.path', reqpath
+                    # loog 'packiStatic parsedUrl.path', reqpath
                     _ axios.get
                         @ 'http://localhost:3000/packi' + reqpath
                         ._ then

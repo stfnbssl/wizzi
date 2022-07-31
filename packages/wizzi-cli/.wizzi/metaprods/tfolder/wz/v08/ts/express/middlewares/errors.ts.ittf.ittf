@@ -77,4 +77,4 @@ $group
                                     { 
                                         @ message err.message
                                         @ error err
-                    log 'ErrorsMiddleware installed'
+                    success 'ErrorsMiddleware installed'

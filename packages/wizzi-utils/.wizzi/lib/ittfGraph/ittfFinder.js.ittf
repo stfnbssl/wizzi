@@ -81,7 +81,7 @@
 											@ null
 											@ tresult.ittfDocumentUri
 								else 
-									# log 'ittfFinder.resolvePath options', options, schema
+									# loog 'ittfFinder.resolvePath options', options, schema
 									r_cb_wz_err( IttfNotFound, resolvePath )
 										@ 'Cannot find ittf document: ' + ittfDocumentUri
     
@@ -107,7 +107,7 @@
 				._ catch
 					function
 						param err
-                        log 'Error in wizzi-utils.ittfGraph.ittfFinder.resolvePathInTFolders calling recurserTFolder', err
+                        # loog 'Error in wizzi-utils.ittfGraph.ittfFinder.resolvePathInTFolders calling recurserTFolder', err
 						return
 							_ callback(err)
 

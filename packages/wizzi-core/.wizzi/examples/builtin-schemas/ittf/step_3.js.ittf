@@ -25,7 +25,7 @@ module
             f_cb_test( transformed )
                 _ heading2
                     @ 'Ittf builtin schema - transformation ittf/cheatsheet'
-                log 'Object.keys(transformed)', Object.keys(transformed)
+                info 'Object.keys(transformed)', Object.keys(transformed)
                 # _ printValue('ittf/cheatsheet', Object.keys(transformed))
 
                 _ loadModelAndGenerateArtifact

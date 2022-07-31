@@ -5,6 +5,6 @@
 		param err
 		param ${result}
 		if err
-			log 'err', err
+			error 'err', err
 			throw new Error(err)
 		$hook

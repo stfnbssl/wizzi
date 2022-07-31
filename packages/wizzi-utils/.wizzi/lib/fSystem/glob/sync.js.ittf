@@ -29,7 +29,7 @@
 		param virtFS
         param options
         
-		# log 'typeof (options), arguments.length', typeof (options), arguments.length
+		# loog 'typeof (options), arguments.length', typeof (options), arguments.length
 		if (typeof (options) === 'function') || (arguments.length === 4)
             throw 
                 new TypeError(('callback provided to sync glob\n' + 'See: https://github.com/isaacs/node-glob/issues/167'))
@@ -56,7 +56,7 @@
 			if this.noprocess
 				return this
 			var n = this.minimatch.set.length
-			# log 'pattern,this.minimatch.set', pattern, this.minimatch.set
+			# loog 'pattern,this.minimatch.set', pattern, this.minimatch.set
 			set this.matches = new Array(n)
 			for var i = 0; i < n; i++
 				_ this._process
@@ -111,7 +111,7 @@
 					set prefix = pattern.slice(0, n).join('/')
 					break 
 			var remain = pattern.slice(n)
-			# log 'pattern, remain', pattern, '-- / --', remain
+			# loog 'pattern, remain', pattern, '-- / --', remain
 			var read
 			if prefix === null
 				set read = '.'
@@ -125,7 +125,7 @@
 			if childrenIgnored(this, read)
 				return 
 			var isGlobStar = remain[0] === minimatch.GLOBSTAR
-			# log 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
+			# loog 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
 			if isGlobStar
 				_ this._processGlobStar(prefix, read, abs, remain, index, inGlobStar)
 			else 

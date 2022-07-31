@@ -78,7 +78,7 @@ $group
                     => 
                         param err
                             :any 
-                        log 'sendPromiseResult.err', err
+                        error 'sendPromiseResult.err', err
                         _ sendFailure(res, err, 500)
     
     export 

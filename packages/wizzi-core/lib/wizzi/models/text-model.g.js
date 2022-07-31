@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\text-model.g.js.ittf
 */
 'use strict';
@@ -15,8 +15,8 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     if (root.n !== "text") {
         return callback(error('The root node of a text ittf document must be : "text". Found: ' + root.n + ' ' + root.v + ', mTree: ' + util.inspect(mTree, { depth: null } )));
     }
-    // log 'wizzi-core.wizzi.models.text-model root', root
-    // log 'wizzi-core.wizzi.models.text-model root.children[0].children', root.children[0].children
+    // loog 'wizzi-core.wizzi.models.text-model root', root
+    // loog 'wizzi-core.wizzi.models.text-model root.children[0].children', root.children[0].children
     var sb = [];
     //
     // TODO in text-factory do not insert another root text node
@@ -29,7 +29,7 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     //
     var hr = toText('', sb, root.children);
     if (hr && hr.__is_error) {
-        console.log('__is_error ', hr);
+        console.log("[31m%s[0m", '__is_error ', hr);
         return callback(hr);
     }
     return callback(null, {
@@ -42,7 +42,7 @@ function toText(indent, sb, nodes) {
     var i, i_items=nodes, i_len=nodes.length, node;
     for (i=0; i<i_len; i++) {
         node = nodes[i];
-        // log 'wizzi-core/wizzi/models/text-model/toText', node.n, node.v
+        // loog 'wizzi-core/wizzi/models/text-model/toText', node.n, node.v
         var n = node.n;
         var v = node.v;
         var nextIndent = '    ';

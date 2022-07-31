@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\types.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -136,13 +136,13 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.typeArray. Got: ' + callback);
         }
-        // log 'typeArray model.statements.length', model.statements.length
+        // loog 'typeArray model.statements.length', model.statements.length
         
-        // log 'typeArray item.wzElement', item.wzElement
+        // loog 'typeArray item.wzElement', item.wzElement
         if (model.statements.length == 1) {
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
             
@@ -150,7 +150,7 @@ md.load = function(cnt) {
                     return callback(err);
                 }
                 ctx.write('[]');
-                // log 'typeArray item.wzElement exit', item.wzElement
+                // loog 'typeArray item.wzElement exit', item.wzElement
                 return callback(null, null);
             }
             )
@@ -197,7 +197,7 @@ md.load = function(cnt) {
             // (19/1/21 It seems are separated by ';') _ ctx.write(', ')
             if (index_1 > 0) {
             }
-            // log 'typeObjectLiteral.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeObjectLiteral.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -300,13 +300,13 @@ md.load = function(cnt) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.typeReference. Got: ' + callback);
         }
-        // log 'typeReference.model', model
+        // loog 'typeReference.model', model
         var model = writeComments(model, ctx);
         if (model.statements.length == 1) {
             ctx.write('<' + model.wzName + '>');
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, callback)
         }
@@ -336,7 +336,7 @@ md.load = function(cnt) {
                         ctx.write(', ');
                     }
                     if (!cnt.stm[item_1.wzElement]) {
-                        console.log('ts.module.gen.item.wzElement not managed', item_1.wzElement);
+                        console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item_1.wzElement);
                     }
                     cnt.stm[item_1.wzElement](item_1, ctx, (err, notUsed) => {
                     
@@ -374,11 +374,11 @@ md.load = function(cnt) {
             return callback(null, null);
         }
         
-        // log 'typeParameterInst,item.wzElement', item.wzElement
+        // loog 'typeParameterInst,item.wzElement', item.wzElement
         else if (model.statements.length == 1) {
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, callback)
         }
@@ -398,7 +398,7 @@ md.load = function(cnt) {
         var model = writeComments(model, ctx);
         var item = model.typeCheck.statements[0];
         if (!cnt.stm[item.wzElement]) {
-            console.log('ts.module.gen.typeConditional.wzElement not managed', item.wzElement);
+            console.log("[31m%s[0m", 'ts.module.gen.typeConditional.wzElement not managed', item.wzElement);
         }
         cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
         
@@ -408,7 +408,7 @@ md.load = function(cnt) {
             ctx.write(' extends ');
             var item = model.typeExtends.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.typeExtends.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.typeExtends.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
             
@@ -418,7 +418,7 @@ md.load = function(cnt) {
                 ctx.write(' ? ');
                 var item = model.typeThen.statements[0];
                 if (!cnt.stm[item.wzElement]) {
-                    console.log('ts.module.gen.typeThen.wzElement not managed', item.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.typeThen.wzElement not managed', item.wzElement);
                 }
                 cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
                 
@@ -428,7 +428,7 @@ md.load = function(cnt) {
                     ctx.write(' : ');
                     var item = model.typeElse.statements[0];
                     if (!cnt.stm[item.wzElement]) {
-                        console.log('ts.module.gen.typeElse.wzElement not managed', item.wzElement);
+                        console.log("[31m%s[0m", 'ts.module.gen.typeElse.wzElement not managed', item.wzElement);
                     }
                     cnt.stm[item.wzElement](item, ctx, callback)
                 }
@@ -450,7 +450,7 @@ md.load = function(cnt) {
         ctx.write(' infer ');
         var item = model.statements[0];
         if (!cnt.stm[item.wzElement]) {
-            console.log('ts.module.gen.typeThen.wzElement not managed', item.wzElement);
+            console.log("[31m%s[0m", 'ts.module.gen.typeThen.wzElement not managed', item.wzElement);
         }
         cnt.stm[item.wzElement](item, ctx, callback)
     }
@@ -467,7 +467,7 @@ md.load = function(cnt) {
         if (model.statements.length == 1) {
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
             
@@ -502,7 +502,7 @@ md.load = function(cnt) {
             if (index_1 > 0) {
                 ctx.write(' , ');
             }
-            // log 'typeTuple.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeTuple.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -541,7 +541,7 @@ md.load = function(cnt) {
             if (index_1 > 0) {
                 ctx.w(' , ');
             }
-            // log 'typeEnum.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeEnum.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -574,7 +574,7 @@ md.load = function(cnt) {
             var item = model.statements[0];
             ctx.write(' ');
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, callback)
         }
@@ -627,7 +627,7 @@ md.load = function(cnt) {
             if (index_1 > 0) {
                 ctx.write(' , ');
             }
-            // log 'typeKeyOf.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeKeyOf.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -663,7 +663,7 @@ md.load = function(cnt) {
                 ctx.write(' extends ');
             }
             if (!cnt.stm[atype.wzElement]) {
-                console.log('ts.module.gen.typeParameterDecl.item.wzElement not managed', atype.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.typeParameterDecl.item.wzElement not managed', atype.wzElement);
             }
             cnt.stm[atype.wzElement](atype, ctx, callback)
         }
@@ -690,7 +690,7 @@ md.load = function(cnt) {
             if (index_1 > 0) {
                 ctx.write(' | ');
             }
-            // log 'typeUnion.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeUnion.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -725,7 +725,7 @@ md.load = function(cnt) {
             if (index_1 > 0) {
                 ctx.write(' & ');
             }
-            // log 'typeIntersect.item_1.wzElement', item_1.wzElement, item_1.wzName
+            // loog 'typeIntersect.item_1.wzElement', item_1.wzElement, item_1.wzName
             cnt.genItem(item_1, ctx, (err, notUsed) => {
             
                 if (err) {
@@ -781,7 +781,7 @@ md.load = function(cnt) {
             ctx.write(model.wzName + ' is ');
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             cnt.stm[item.wzElement](item, ctx, callback)
         }
@@ -802,7 +802,7 @@ md.load = function(cnt) {
             var item = model.statements[0];
             var gr = u.indexedTSNeedsGraphs(item);
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             if (gr) {
                 ctx.write('{');
@@ -818,7 +818,7 @@ md.load = function(cnt) {
                 ctx.write('[');
                 var item = model.statements[1];
                 if (!cnt.stm[item.wzElement]) {
-                    console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
                 }
                 cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
                 
@@ -853,12 +853,12 @@ md.load = function(cnt) {
             if (err) {
                 return callback(err);
             }
-            // log '11'
+            // loog '11'
             ctx.write(']');
             if (atype) {
                 ctx.write(': ');
                 if (!cnt.stm[atype.wzElement]) {
-                    console.log('ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
                 }
                 cnt.stm[atype.wzElement](atype, ctx, (err, notUsed) => {
                 
@@ -886,15 +886,15 @@ md.load = function(cnt) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.typeAs. Got: ' + callback);
         }
         var model = writeComments(model, ctx);
-        // log 'typeAs.model.statements 1', model.statements
+        // loog 'typeAs.model.statements 1', model.statements
         var atype = u.extractTSSimpleType(model);
-        // log 'typeAs atype', atype
-        // log 'typeAs.model.statements 2', model.statements
+        // loog 'typeAs atype', atype
+        // loog 'typeAs.model.statements 2', model.statements
         ctx.setLastNotEmptyLine();
         ctx.write(' as ');
         if (atype) {
             if (!cnt.stm[atype.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', atype.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', atype.wzElement);
             }
             cnt.stm[atype.wzElement](atype, ctx, callback)
         }
@@ -925,11 +925,11 @@ md.load = function(cnt) {
         }
         var model = writeComments(model, ctx);
         
-        // log 'ts.module.gen.typeMapped', item.wzElement
+        // loog 'ts.module.gen.typeMapped', item.wzElement
         if (model.statements.length == 2) {
             var item = model.statements[0];
             if (!cnt.stm[item.wzElement]) {
-                console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
             }
             ctx.write('[');
             cnt.stm[item.wzElement](item, ctx, 'mapped', (err, notUsed) => {
@@ -941,7 +941,7 @@ md.load = function(cnt) {
                 ctx.write(' : ');
                 var item = model.statements[1];
                 if (!cnt.stm[item.wzElement]) {
-                    console.log('ts.module.gen.item.wzElement not managed', item.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.item.wzElement not managed', item.wzElement);
                 }
                 cnt.stm[item.wzElement](item, ctx, callback)
             }
@@ -1001,7 +1001,7 @@ md.load = function(cnt) {
         ctx.write(' => ');
         if (atype) {
             if (!cnt.stm[atype.wzElement]) {
-                console.log('ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
+                console.log("[31m%s[0m", 'ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
             }
             cnt.stm[atype.wzElement](atype, ctx, (err, notUsed) => {
             
@@ -1123,7 +1123,7 @@ md.load = function(cnt) {
             if (atype) {
                 ctx.write(': ');
                 if (!cnt.stm[atype.wzElement]) {
-                    console.log('ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
+                    console.log("[31m%s[0m", 'ts.module.gen.typeIndex.item.wzElement not managed', atype.wzElement);
                 }
                 cnt.stm[atype.wzElement](atype, ctx, (err, notUsed) => {
                 

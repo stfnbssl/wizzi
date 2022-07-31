@@ -23,11 +23,11 @@
 
 	_ webpack
 		f_cb_test(result)
-			log 'webpack.result', result
+			# loog 'webpack.result', result
 			#
 				_ webpackToEventStream
 					f_cb_test(result)
-						log 'webpackToEventStream.result', result
+						# loog 'webpackToEventStream.result', result
 	
 	function webpack
 		param callback
@@ -44,9 +44,9 @@
 			@ options1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

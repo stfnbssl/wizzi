@@ -89,7 +89,7 @@
                         @ item.wzElement == 'commentmultiline'
                     set written = true
                     if item.wzName.indexOf('@ts-ignore') > -1 
-                        # log '§§§ stm.writeComments', model.wzName
+                        # loog '§§§ stm.writeComments', model.wzName
                         set ctx.__inlineNext = true
                     else
                         set ctx.__inlineNext = false
@@ -102,7 +102,7 @@
 		param model
         param ctx
         param multi
-        # log '__writeComments-model', model
+        # loog '__writeComments-model', model
         if multi || model.statements.length > 0
             _ ctx.w('/**')
             _ ctx.indent
@@ -151,7 +151,7 @@
                     _ ctx.w('// ' + item.wzName)
                     set written = true
                     if item.wzName.indexOf('@ts-ignore') > -1 
-                        # log '§§§ stm.writeComments', model.wzName
+                        # loog '§§§ stm.writeComments', model.wzName
                         set ctx.__inlineNext = true
                     else
                         set ctx.__inlineNext = false
@@ -221,7 +221,7 @@
             param model
             param elementsArray
             var ss = md.nonCommentStatements(model)
-            # log 'firstChildIs', ss.length > 0 && ss[0].wzElement
+            # loog 'firstChildIs', ss.length > 0 && ss[0].wzElement
             return ss.length > 0 && elementsArray.indexOf(ss[0].wzElement) > -1
 
 	set md.onlyChildIs
@@ -262,12 +262,12 @@
             param model
             if model.params.length != 1 
                 return false
-            # log 'model.params', model.params
-            # log 'model.params[0]', model.params[0]
+            # loog 'model.params', model.params
+            # loog 'model.params[0]', model.params[0]
             if model.params[0].wzName.startsWith('...')
                 return false
             var ss = md.nonCommentStatements(model.params[0])
-            # log 'return', ss.length == 0
+            # loog 'return', ss.length == 0
             return ss.length == 0
 
     set md.hasStatementChildren
@@ -478,9 +478,9 @@
             if typeof(callText) !== 'string'
                 return false
             set callText = callText.trim()
-            # log 'callText.substr(0, 1) ', callText.substr(0, 1) 
+            # loog 'callText.substr(0, 1) ', callText.substr(0, 1) 
             var hasEndParens = ((callText.substr(- (1), 1) === ')') || (callText.substr(- (2), 2) === ');'))
-            # log 'hasArguments.hasEndParens', hasEndParens
+            # loog 'hasArguments.hasEndParens', hasEndParens
             if !hasEndParens
                 return false
             if callText.substr(0, 1) === '/'
@@ -681,7 +681,7 @@
 				=>
 					param item
 					param index
-                    # log 'extractTSSimpleType', item.wzElement
+                    # loog 'extractTSSimpleType', item.wzElement
 					if md.isTSSimpleType(item)
 						set ret = item
 						set retIndex = index
@@ -735,13 +735,13 @@
 			param callback
 			if !!(model.params && model.params.length > 0) == false
 				r_cb()
-			# log 'genParams enter', model.wzElement
+			# loog 'genParams enter', model.wzElement
 			repeater(1, model.params)
 				var p = item_1
-				# log 'genParams p', p
+				# loog 'genParams p', p
 				if index_1 > 0
 					_ ctx.write(', ')
-				# log 'genParams', index_1, (p.statements && p.statements.length) || (p.jsPropertyOrValues && p.jsPropertyOrValues.length)
+				# loog 'genParams', index_1, (p.statements && p.statements.length) || (p.jsPropertyOrValues && p.jsPropertyOrValues.length)
 				if (!p.statements || p.statements.length == 0) && (!p.jsPropertyOrValues || p.jsPropertyOrValues.length == 0)
 					_ ctx.write(p.wzName)
 					repeater_increment(1)
@@ -756,9 +756,9 @@
 				elif p.statements.length > 0 && p.statements.length < 3
 					_ ctx.write(p.wzName)
 					var s0 = p.statements[0]
-					# log 'genParams.s0.wzElement', s0.wzElement
+					# loog 'genParams.s0.wzElement', s0.wzElement
 					# if s0.wzElement === 'typeInitValue' || s0.wzElement === 'typeCTor' || s0.wzElement === 'typeNever'
-					# log 'genParams.s0.statements.length', s0.statements.length
+					# loog 'genParams.s0.statements.length', s0.statements.length
                     _ genParams_close
                         @ s0
                         @ ctx
@@ -766,11 +766,11 @@
                         a_cb()
                             repeater_increment(1)
 				else
-					# log 'jswizzifier.genParams.p', p, 'statements', p.statements
+					# loog 'jswizzifier.genParams.p', p, 'statements', p.statements
 					_ callback
 						_ ctx.error(myname + '.genParams.statements.length should be 0 or 1.found: ' + p.statements.length, model)
 				$append next
-					# log 'genParams.exit'
+					# loog 'genParams.exit'
 					r_cb()
 
 	function genParams_close
@@ -780,21 +780,21 @@
 		param callback
 		if s0.statements.length == 2
 			var item = s0.statements[0]
-			# log 'genParams_close 1 item.wzElement', item.wzElement
+			# loog 'genParams_close 1 item.wzElement', item.wzElement
 			_ cnt.stm[item.wzElement]
 				@ item
 				@ ctx
 				a_cb()
 					_ ctx.write(' = ')
 					var item = s0.statements[1]
-					# log 'genParams_close 2 item.wzElement', item.wzElement
+					# loog 'genParams_close 2 item.wzElement', item.wzElement
 					_ cnt.stm[item.wzElement]
 						@ item
 						@ ctx
 						@ callback
 		else
 			_ ctx.write(' = ')
-			# log 'genParams_close 3 item.wzElement', s0.wzElement
+			# loog 'genParams_close 3 item.wzElement', s0.wzElement
 			_ cnt.stm[s0.wzElement]
 				@ s0
 				@ ctx
@@ -808,10 +808,10 @@
 			param callback
 			if !!(model.params && model.params.length > 0) == false
 				r_cb()
-			# log 'genTSParams enter', model.wzElement
+			# loog 'genTSParams enter', model.wzElement
 			repeater(1, model.params)
 				var p = item_1
-				# log 'genTSParams p', p
+				# loog 'genTSParams p', p
 				if index_1 > 0
 					_ ctx.write(', ')
 				var ptype 
@@ -820,7 +820,7 @@
 				_ md.genAccessorsAndExtra
 					@ p
 					@ ctx
-				# log 'genTSParams', index_1, p.statements.length, ptype && ptype.wzElement
+				# loog 'genTSParams', index_1, p.statements.length, ptype && ptype.wzElement
 				if p.statements.length == 0
 					_ ctx.write(p.wzName)
 					if p.typeOptional
@@ -855,9 +855,9 @@
 					if p.typeOptional
 						_ ctx.write('?')
 					var s0 = p.statements[0]
-					# log 'genTSParams.s0.wzElement', s0.wzElement
+					# loog 'genTSParams.s0.wzElement', s0.wzElement
 					# if s0.wzElement === 'typeInitValue' || s0.wzElement === 'typeCTor' || s0.wzElement === 'typeNever'
-					# log 'genTSParams.s0.statements.length', s0.statements.length
+					# loog 'genTSParams.s0.statements.length', s0.statements.length
 					if ptype
 						_ ctx.write(': ')
 						_ cnt.stm[ptype.wzElement]
@@ -880,11 +880,11 @@
 					# else
 					#	throw new Error('jswizzifier.genTSParams.statements[0].wzElement should be "typeInitValue or typeCTor".found: ' + s0.wzElement)
 				else
-					# log 'jswizzifier.genTSParams.p', p, 'statements', p.statements
+					# loog 'jswizzifier.genTSParams.p', p, 'statements', p.statements
 					_ callback
 						_ ctx.error(myname + '.genTSParams.statements.length should be 0 or 1.found: ' + p.statements.length, model)
 				$append next
-					# log 'genTSParams.exit'
+					# loog 'genTSParams.exit'
 					r_cb()
 
 	function genTSParams_close
@@ -894,21 +894,21 @@
 		param callback
 		if s0.statements.length == 2
 			var item = s0.statements[0]
-			# log 'genTSParams_close 1 item.wzElement', item.wzElement
+			# loog 'genTSParams_close 1 item.wzElement', item.wzElement
 			_ cnt.stm[item.wzElement]
 				@ item
 				@ ctx
 				a_cb()
 					_ ctx.write(' = ')
 					var item = s0.statements[1]
-					# log 'genTSParams_close 2 item.wzElement', item.wzElement
+					# loog 'genTSParams_close 2 item.wzElement', item.wzElement
 					_ cnt.stm[item.wzElement]
 						@ item
 						@ ctx
 						@ callback
 		else
 			_ ctx.write(' = ')
-			# log 'genTSParams_close 3 item.wzElement', s0.wzElement
+			# loog 'genTSParams_close 3 item.wzElement', s0.wzElement
 			_ cnt.stm[s0.wzElement]
 				@ s0
 				@ ctx
@@ -935,7 +935,7 @@
 			param ctx
 			param cnt
 			param callback
-            # log 'model.statements.length', model.statements.length, 'Object.keys(model)', Object.keys(model)
+            # loog 'model.statements.length', model.statements.length, 'Object.keys(model)', Object.keys(model)
 			_ genTSTypeParameters_partial
 				@ model
 				@ ctx
@@ -980,7 +980,7 @@
             param ctx
             param cnt
             param callback
-            # log 'genTSTypeParameterInsts', Object.keys(model), model.typeParameterInsts
+            # loog 'genTSTypeParameterInsts', Object.keys(model), model.typeParameterInsts
             if model.typeParameterInsts && model.typeParameterInsts.length > 0
                 _ ctx.write('<')
                 repeater( 1, model.typeParameterInsts

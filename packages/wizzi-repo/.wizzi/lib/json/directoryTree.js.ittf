@@ -44,12 +44,12 @@
 			set stats = FS.statSync(path)
 		catch e
 			return null
-		# log 'stats', stats
+		# loog 'stats', stats
 		
 		if stats.isFile()
 			const ext = PATH.extname(path).toLowerCase();
 			# Skip if it does not match the extension regex
-			# log 'ext', ext
+			# loog 'ext', ext
 			if ext != '.ittf'
 				return null
 			# File size in bytes

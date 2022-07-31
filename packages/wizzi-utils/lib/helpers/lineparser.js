@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\lineparser.js.ittf
 */
 'use strict';
@@ -18,7 +18,7 @@ md.codifyInterpolation = function(template, lDel, rDel) {
     rDel = rDel.replace(regexEscape, "\\$1");
     var regex = new RegExp(lDel + "[^" + lDel + rDel + "]+" + rDel, "g");
     return template.replace(regex, function(placeholder) {
-            console.log('==================== codifyInterpolation.placeholder', placeholder);
+            // loog '==================== codifyInterpolation.placeholder', placeholder
             var key = placeholder.slice(lDelLen, -rDelLen);
             return '" + ' + key + ' + "';
         });

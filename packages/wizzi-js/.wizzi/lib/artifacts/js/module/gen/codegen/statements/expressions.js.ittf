@@ -184,7 +184,7 @@
         function doThen
             param callback
             if m_then
-                # log 'doThen', Object.keys(ctx), 'forceInLine', ctx.forceInLine, '__inside_expr', ctx.__inside_expr, '__inside_html', ctx.__inside_html
+                # loog 'doThen', Object.keys(ctx), 'forceInLine', ctx.forceInLine, '__inside_expr', ctx.__inside_expr, '__inside_html', ctx.__inside_html
                 _ cnt.genItem
                     @ m_then
                     @ ctx
@@ -219,7 +219,7 @@
                                     @ callback
     
 	fn( iif_end )
-        # log 'iif_end', u.isTopStatement(model, ctx)
+        # loog 'iif_end', u.isTopStatement(model, ctx)
         var paren = ctx.parenRequired || model.statements.length > 2
         if paren
             _ ctx.write(')')
@@ -375,7 +375,7 @@
 		param model
 		param ctx
 		param callback
-        # log 'emitOperators', op
+        # loog 'emitOperators', op
         set model = writeComments(model, ctx)
         if model.wzParent.wzElement == 'template'
             _ ctx.write('${')

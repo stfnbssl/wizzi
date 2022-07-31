@@ -10,7 +10,7 @@ $group
         ._ then
             => 
                 param response
-                log '${'$'}{name}', 'response', response
+                # loog '${'$'}{name}', 'response', response
                 set __response_status = response.status
                 if response.ok
                     set __response_ok = true

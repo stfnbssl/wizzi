@@ -33,7 +33,7 @@
 					throw new Error('parent is null.' + util.inspect(ast, 4))
 
 			if options.verbose
-				# log 'ast.type', ast.type
+				# loog 'ast.type', ast.type
             if ast.type == 'OptionalMemberExpression'
                 set ast.type = 'MemberExpression'
                 set ast.optional = true
@@ -119,7 +119,7 @@
 						@ 'flow'
 						._ concat
 							@ commonPlugins
-			# log 'jswizzifier.container.babelOptions', babelOptions
+			# loog 'jswizzifier.container.babelOptions', babelOptions
 			return
 				_ parser.parse
 					@ input
@@ -161,7 +161,7 @@
 			param input
 			param options
 			param callback
-			# log 'options', options
+			# loog 'options', options
 			
 			set options = options || {};
 			set options.input = input
@@ -171,14 +171,14 @@
 			set options.stateAST = []
 			var startTime = Date.now()
 			var babelOptions = options.babel || {}
-			# log 'Parsed in ' + (Date.now() - startTime) + ' ms'
+			# loog 'Parsed in ' + (Date.now() - startTime) + ' ms'
 			
 			var syntax
 			var cr
 			try
                 $* STOP codeReplacer (is for handlebars?)
 				set cr = codeReplacer.clean(input)
-                # log 'jsparser.container.cr', cr
+                # loog 'jsparser.container.cr', cr
 				set syntax = md.parse(cr.codeCleaned, babelOptions)
                 *$
                 set syntax = md.parse(input, babelOptions)
@@ -202,8 +202,8 @@
 			set options.starter = true
 			$$ set options.replaceds = cr.replaceds
 			set options.commentManager = new CommentManager()
-			# log 'cr.codeCleaned', cr.codeCleaned
-			# log 'cr.replaceds', cr.replaceds
+			# loog 'cr.codeCleaned', cr.codeCleaned
+			# loog 'cr.replaceds', cr.replaceds
 			var root
 				{
 					@ tag 'module'
@@ -222,7 +222,7 @@
 						@ ex
 			
 			# log "wizziTree", JSON.stringify(root, null, 2)
-			# log 'options.wizziIncludes', options.wizziIncludes
+			# loog 'options.wizziIncludes', options.wizziIncludes
 			_ async.map
 				@ options.wizziIncludes
 				function
@@ -235,7 +235,7 @@
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								_ item.node.children.push
 									@ ittf
 								r_cb()
@@ -246,7 +246,7 @@
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								_ item.node.children.push
 									@ ittf
 								r_cb()
@@ -258,7 +258,7 @@
 			param input
 			param options
 			param callback
-			# log '++++++++++ jswizzify.options', options
+			# loog '++++++++++ jswizzify.options', options
 
 			_ md.getWizziTree
 				@ input

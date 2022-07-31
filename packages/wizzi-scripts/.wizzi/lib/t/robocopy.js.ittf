@@ -39,7 +39,7 @@
 			._ done
 				function
 					param stdout
-					log 'wizzi-scripts.manager.robocopyExec.stdout', stdout
+					# loog 'wizzi-scripts.manager.robocopyExec.stdout', stdout
 					if callback
 						return
 							_ callback
@@ -51,7 +51,7 @@
 			._ fail
 				function
 					param error
-					log 'wizzi-scripts.manager.robocopyExec.error', error
+					# loog 'wizzi-scripts.manager.robocopyExec.error', error
 					return
 						_ callback
 							@ null
@@ -79,7 +79,7 @@
 					_ res.write('stderr: ' + result.stderr)
 					_ res.end('data: ***___CLOSE___***\n\n')
 				else
-					log 'wizzi-scripts.robocopyExecToEventStream', result.stdout
+					# loog 'wizzi-scripts.robocopyExecToEventStream', result.stdout
 					var str
 					var lines = result.stdout.split("\n")
 					for var i in lines

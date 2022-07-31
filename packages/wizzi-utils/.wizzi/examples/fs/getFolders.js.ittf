@@ -25,7 +25,7 @@
                 @ tFoldersOnly false
                 @ documentNames false
             f_cb_test( folders )
-                log 'utils.getFolders.folders', folders
+                info 'utils.getFolders.folders', folders
                 _ file.getFolders
                     _ path.join
                         @ __dirname 
@@ -36,7 +36,7 @@
                         @ tFoldersOnly false
                         @ documentNames false
                     f_cb_test( folders )
-                        log 'utils.getFoldersWithContent.folders', folders
+                        info 'utils.getFoldersWithContent.folders', folders
                         _ file.getFolders
                             _ path.join
                                 @ __dirname 
@@ -47,4 +47,4 @@
                                 @ tFoldersOnly false
                                 @ documentNames true
                             f_cb_test( folders )
-                                log 'utils.getFoldersWithDocumentNames.folders', folders
+                                info 'utils.getFoldersWithDocumentNames.folders', folders

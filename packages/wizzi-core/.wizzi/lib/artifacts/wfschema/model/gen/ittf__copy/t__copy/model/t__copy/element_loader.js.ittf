@@ -73,12 +73,15 @@
 			$if verify.isNotEmpty(element.acceptAnyTag)
 		
 				if !ok
+                    return this.wzLoadToChildColl(child, _md.${element.acceptAnyTagId}, this.${element.acceptAnyTagCollectionId})
+                    $* OLD VIA
 					set item = new Any${element.acceptAnyTagId}(child.v, new wzSourceLineInfo(child.r, child.c, child.u))
 					set item.wzParent = this
 					set item.wzTag = name
 					_ this.${element.AcceptAnyTagCollectionId}.push(item)
 					_ item.loadFromNode(child)
 					set ok = true
+                    *$
 		
 			$if verify.isNotEmpty(element.acceptAnyTag) || verify.isNotEmpty(element.super)
                 return ok

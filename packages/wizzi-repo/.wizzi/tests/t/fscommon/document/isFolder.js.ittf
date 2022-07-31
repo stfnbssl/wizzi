@@ -6,5 +6,5 @@
 			_ doc.isFolder
 				@ 'c:/my/starters'
 				f_cb_done( f )
-					log 'should test if a folder exists', err, f
+					# loog 'should test if a folder exists', err, f
 					tobe_true( f )

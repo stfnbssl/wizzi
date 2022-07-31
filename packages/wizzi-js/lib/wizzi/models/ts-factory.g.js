@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-legacy-v5\lib\artifacts\js\module\gen\main.js
-    primary source IttfDocument: c:\my\wizzi\stfnbssl\wizzi\node_modules\wizzi-core\lib\artifacts\wfschema\factory\gen\ittf\wfschema-factory.js.ittf
-    utc time: Fri, 29 Jul 2022 21:04:19 GMT
+    primary source IttfDocument: c:\my\wizzi\stfnbssl\wizzi\packages\wizzi-core\lib\artifacts\wfschema\factory\gen\ittf\wfschema-factory.js.ittf
+    utc time: Sun, 31 Jul 2022 08:46:06 GMT
 */
 'use strict';
 /**
@@ -134,7 +134,7 @@ md.createLoadModel = function(wizziObject) {
                             { productionContext
                              { aclstat
                      { __ittfDocumentStore
-                        { mTreeBuildUpContext
+                        { mTreeBuildupContext
                          optional
                         { __request
                          This is a legacy that should disappear.
@@ -158,7 +158,7 @@ md.createLoadModel = function(wizziObject) {
                 if (verify.isObject(loadContext.__productionManager) !== true) {
                     return callback(error('InvalidArgument', 'loadModel', 'The loadContext.__productionManager parameter must be an object'));
                 }
-                loadContext.mTreeBuildUpContext = Object.assign({}, loadContext.__productionManager.globalContext(), loadContext.mTreeBuildUpContext);
+                loadContext.mTreeBuildupContext = Object.assign({}, loadContext.__productionManager.globalContext(), loadContext.mTreeBuildupContext);
                 var wizziModelRequest = loadContext.__request || {};
                 var start = Date.now();
                 // load the magical tree

@@ -28,7 +28,7 @@
 		else
 			
 			set mTreeBrick_EvalContext = new ContextData(1, brickKey)
-			# log 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
+			# loog 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
         
 			_ mTreeBrick_EvalContext.setValue
 				@ '__dirname'
@@ -56,7 +56,7 @@
 		# If the mTreeBrick do not receives parameters
 		# a refresh of the eval context is not required 
 		
-		# log 'wizzi-mtree.jsWizziEvalHelper.brickKey.sourceKey.$args,$params.name,value', 
+		# loog 'wizzi-mtree.jsWizziEvalHelper.brickKey.sourceKey.$args,$params.name,value', 
             \b mTreeBrickData.brickKey, 
             \b mTreeBrickData.sourceKey, 
             \b mTreeBrickData.mTreeBrick.$args, 
@@ -102,7 +102,7 @@
 				# then we interpolate the arguments passed to the mixed mTree brick
 				set args = interpolate(args, interpolateArgsContext)
 				
-				# log 'JsWizziEvalHelper interpolateArgs', mTreeBrickData.mTreeBrick.$args, args
+				# loog 'JsWizziEvalHelper interpolateArgs', mTreeBrickData.mTreeBrick.$args, args
 					
 			catch ex
 				var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)

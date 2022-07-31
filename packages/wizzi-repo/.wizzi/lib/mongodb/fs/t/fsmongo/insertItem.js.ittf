@@ -6,7 +6,7 @@
 			number kind
 		callback
 
-		# log 'wizzi-repo.mongodb.FsMongo.insertItem.fsItem', fsItem
+		# loog 'wizzi-repo.mongodb.FsMongo.insertItem.fsItem', fsItem
 
 		var basename = fsItem.basename
 		var dirname = fsItem.dirname
@@ -25,7 +25,7 @@
 						f_cb( r )
 							delete r.connection
 							delete r.message
-							# log 'wizzi-repo.mongodb.FsMongo.insertItem.insertOne.r', r
+							# loog 'wizzi-repo.mongodb.FsMongo.insertItem.insertOne.r', r
 							_ assert.equal(1, r.insertedCount)
 							_ assert.equal(1, r.ops.length)
 							r_cb()

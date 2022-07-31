@@ -1,0 +1,10 @@
+common/plugin_package( wizzi-lab, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license}  )
+
+	inflection "latest"
+	parseurl "latest"
+
+	$append scripts
+        $foreach schema in wzCtx.schemas
+            examples:${schema.name} "node examples/${schema.name}"
+    $append devDependencies
+        object-inspect "latest"

@@ -4,7 +4,7 @@
 		param basePath
 		param relPath
 
-		# log 'recurserTFolder enter', basePath, relPath
+		# loog 'recurserTFolder enter', basePath, relPath
 		return
 			new Promise
 				function
@@ -17,13 +17,13 @@
 						f_cb( result )
 							if result.found
 								# return callback(null, result)
-								# log 'recurserTFolder resolve found', result
+								# loog 'recurserTFolder resolve found', result
 								return
 									_ resolve(result)
 							else 
 								set basePath = path.dirname(basePath)
 								if basePath.length > 3
-									# log 'recurserTFolder try parent', basePath
+									# loog 'recurserTFolder try parent', basePath
 									return
 										_ recurserTFolder
 											@ basePath
@@ -31,11 +31,11 @@
 											._ then
 												function
 													param result
-													# log 'recurserTFolder transmit resolve result', basePath, result
+													# loog 'recurserTFolder transmit resolve result', basePath, result
 													_ resolve(result)
 									# return that.resolvePathInTFolders(basePath, relPath, callback)
 								else 
-									# log 'recurserTFolder resolve not found', basePath
+									# loog 'recurserTFolder resolve not found', basePath
 									return
 										_ resolve
 											{ 

@@ -21,9 +21,9 @@
 		m _init
 			if config == null
 				set config = require('../../index').config
-			# log 'wizzi.acl.AclStat._init.config', config
-			# log 'wizzi.acl.AclStat._init.aclConfig', this.aclConfig
-			# log 'wizzi.acl.AclStat._init.statisticsConfig', this.statisticsConfig
+			# loog 'wizzi.acl.AclStat._init.config', config
+			# loog 'wizzi.acl.AclStat._init.aclConfig', this.aclConfig
+			# loog 'wizzi.acl.AclStat._init.statisticsConfig', this.statisticsConfig
 			set this.acl = new Acl(this.aclConfig, config)
 			set this.statistics = new Statistics(this.statisticsConfig, config)
 		

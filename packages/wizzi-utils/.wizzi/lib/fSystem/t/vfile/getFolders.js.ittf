@@ -9,7 +9,7 @@
 
 		$append async
 
-			# log 'wizzi-utils.vfile.getFolders', path_string, options
+			# loog 'wizzi-utils.vfile.getFolders', path_string, options
 			var that = this
 
 			function getItems
@@ -17,7 +17,7 @@
 				_ that.isDirectory
 					@ path_string
 					f_cb( isDirectory )
-						# log 'wizzi-utils.vfile.getFolders.isDirectory', isDirectory
+						# loog 'wizzi-utils.vfile.getFolders.isDirectory', isDirectory
 						if isDirectory
 							var folders
 								[ 
@@ -29,7 +29,7 @@
 								@ relPath
 								@ options
 								f_cb( notUsed )
-									# log 'wizzi-utils.vfile.getFolders.folders', folders
+									# loog 'wizzi-utils.vfile.getFolders.folders', folders
 									return
 										_ callback
 											@ null
@@ -42,7 +42,7 @@
 
 			_ getItems
 				f_cb( items )
-					# log 'wizzi-utils.vfile.getFiles.items', items, options.documentNames
+					# loog 'wizzi-utils.vfile.getFiles.items', items, options.documentNames
 					if options.documentNames
 						_ async.map
 							@ items
@@ -118,7 +118,7 @@
 			_ this.fsimpl.readdir
 				@ path_string
 				f_cb( dir )
-					# log 'wizzi-utils.vfile._appendFolders.dir', dir
+					# loog 'wizzi-utils.vfile._appendFolders.dir', dir
 					_ async.map
 						@ dir
 						function
@@ -128,7 +128,7 @@
 							_ that.isDirectory
 								@ filePath
 								f_cb( isDirectory )
-									# log 'wizzi-utils.vfile._appendFolders.isDirectory', filePath, isDirectory
+									# loog 'wizzi-utils.vfile._appendFolders.isDirectory', filePath, isDirectory
 									if isDirectory
 										_ folders.push
 											{
@@ -142,7 +142,7 @@
 										@ null
 										@ ( isDirectory && options.deep ? item : null )
 						f_cb( items )
-							# log 'wizzi-utils.vfile._appendFolders.async.items, folders', items, folders
+							# loog 'wizzi-utils.vfile._appendFolders.async.items, folders', items, folders
 							var len = items.length
 							function repeat
 								param index

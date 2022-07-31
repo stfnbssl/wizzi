@@ -16,7 +16,7 @@
 				param callback
 				_ example(callback)
 			f_cb_test(results)
-				log 'Advanced.essentials.filesystem.plugins.results\n', results
+				info 'Advanced.essentials.filesystem.plugins.results\n', results
 				if callback
 					_ callback
 						@ null

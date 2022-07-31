@@ -17,12 +17,12 @@
 						@ projectId
 						@ path_string
 				
-			# log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath
 
 			_ file.deleteFolder
 				@ fsPath
 				f_cb( result )
-					# log 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath, 'result', result
+					# loog 'wizzi-io.filesystem.deleteFolder.fsPath', fsPath, 'result', result
 					return 
 						_ callback(null, result)
 
@@ -53,13 +53,13 @@
 						@ dest_projectId
 						@ dest_itemPath
 
-			# log 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+			# loog 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
 
 			_ file.copyFolder
 				@ sourceFsPath
 				@ destFsPath
 				f_cb()
-					# log 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+					# loog 'wizzi-io.filesystem.copyFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
 					return 
 						_ callback(null)
 
@@ -91,12 +91,12 @@
 						@ dest_projectId
 						@ dest_itemPath
 
-			# log 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+			# loog 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
 
 			_ file.moveFolder
 				@ sourceFsPath
 				@ destFsPath
 				f_cb()
-					# log 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
+					# loog 'wizzi-io.filesystem.moveFolder.sourceFsPath', sourceFsPath, 'destFsPath', destFsPath
 					return 
 						_ callback(null)

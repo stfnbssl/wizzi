@@ -1,7 +1,7 @@
 ﻿$group
 
 	async/md-ctx( operation )
-		log 'calling operation', model.wzElement
+		# loog 'calling operation', model.wzElement
 		var method = md[model.wzElement]
 		_ method
 			@ model
@@ -32,7 +32,7 @@
 
 	async/md( selectionSet )
 		
-		log 'selectionSet', model.selections.length
+		# loog 'selectionSet', model.selections.length
 		if model.wzName.length > 0
 			_ ctx.write( model.wzName)
 			_ writeArguments
@@ -51,7 +51,7 @@
 				r_cb()
 
 	async/md-ctx( selection )
-		log 'calling selection', model.wzElement
+		# loog 'calling selection', model.wzElement
 		var method = md[model.wzElement]
 		_ method
 			@ model

@@ -47,7 +47,7 @@
 			if this.filesystem
 				_ this.filesystem.getFolderRoot
 					a_cb_throw( data )
-						# log 'TreeView.folderRoot', data
+						# loog 'TreeView.folderRoot', data
 						set this.rootNode = new TreeNode(data, this)
 						r_cb( this.rootNode.render() )
 			elif rootItem
@@ -60,7 +60,7 @@
 
 		m handleContextMenu
 			param payload
-			# log 'handleContextMenu.payload', payload, payload.data
+			# loog 'handleContextMenu.payload', payload, payload.data
 
 			if this.filesystem
 				if payload.data.isFolder
@@ -91,7 +91,7 @@
 						@ onClick
 							=>
 								param data
-								# log 'handleContextMenu_ittfDocument.onClick', data
+								# loog 'handleContextMenu_ittfDocument.onClick', data
 								if data.command === 'rename'
 									_ data.payload.treeNode.renameStart
 								elif data.command === 'create folder'
@@ -159,7 +159,7 @@
 						@ onClick
 							=>
 								param data
-								# log 'handleContextMenu_ittfDocument.onClick', data
+								# loog 'handleContextMenu_ittfDocument.onClick', data
 								if data.command === 'rename'
 									_ data.payload.treeNode.renameStart
 								elif data.command === 'copy' || data.command === 'cut'
@@ -199,7 +199,7 @@
 			_ this.filesystem.populateFolderItem
 				@ treeNode.item
 				a_cb_throw( populatedItem )
-					# log 'TreeView.populate', populatedItem
+					# loog 'TreeView.populate', populatedItem
 					_ treeNode.replace
 						@ populatedItem
 					if callback
@@ -220,14 +220,14 @@
 					_ this.filesystem.createFolder
 						@ treeNode.item
 						a_cb_throw( newItem
-							log 'createFolder.1', newItem
+							# loog 'createFolder.1', newItem
 							var newNode
 								_ treeNode.addItem
 									@ newItem
 							_ treeNode.expand
 							_ newNode.renameStart
 			if !treeNode.item.loadedAt
-				log 'createFolder.populate'
+				# loog 'createFolder.populate'
 				_ this.populate
 					@ treeNode
 					a_cb_throw()
@@ -276,14 +276,14 @@
 						_ this.filesystem.cloneFolder
 							@ treeNode.item
 							a_cb_throw( newItem
-								log 'cloneFolder.1', newItem
+								# loog 'cloneFolder.1', newItem
 								var newNode
 									_ treeNode.addItem
 										@ newItem
 								_ treeNode.expand
 								_ newNode.renameStart
 			if !treeNode.item.loadedAt
-				log 'cloneFolder.populate'
+				# loog 'cloneFolder.populate'
 				_ this.populate
 					@ treeNode
 					a_cb_throw()
@@ -304,14 +304,14 @@
 						_ this.filesystem.checkoutFolder
 							@ treeNode.item
 							a_cb_throw( newItem
-								log 'checkoutFolder.1', newItem
+								# loog 'checkoutFolder.1', newItem
 								var newNode
 									_ treeNode.addItem
 										@ newItem
 								_ treeNode.expand
 								_ newNode.renameStart
 			if !treeNode.item.loadedAt
-				log 'checkoutFolder.populate'
+				# loog 'checkoutFolder.populate'
 				_ this.populate
 					@ treeNode
 					a_cb_throw()
@@ -363,7 +363,7 @@
 				@ treeNode.item
 				a_cb_throw( from
 
-					log 'treeView.pasteTo', 'from', from, 'to', treeNode.item
+					# loog 'treeView.pasteTo', 'from', from, 'to', treeNode.item
 					
 					if from.action === 'copyFile' || from.action === 'copyFolder'
 						var newItem

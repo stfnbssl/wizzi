@@ -3,7 +3,7 @@
 
 	function exec
 		param callback
-		log 'The starter/apps demo is not implemented yet'
+		info 'The starter/apps demo is not implemented yet'
 		if callback
 			_ callback
 				@ null

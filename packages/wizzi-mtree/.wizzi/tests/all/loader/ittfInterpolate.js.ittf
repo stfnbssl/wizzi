@@ -15,7 +15,7 @@
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('My name is $' + '{name}.', ctx)
-		# log 'result', result
+		# loog 'result', result
 
 		tobe_string( result, My name is stefi. )
 	
@@ -24,7 +24,7 @@
 		_ ctx.setValue('name', 'stefi') 
 		_ ctx.setValue('hobby', '') 
 		var result = ip('My name is $' + '{name} and hobby $' + '{hobby}.', ctx)
-		# log 'result', result
+		# loog 'result', result
 
 		tobe_string( result, My name is stefi and hobby . )
 
@@ -33,7 +33,7 @@
 		_ ctx.setValue('name', 'stefi') 
 		_ ctx.setValue('hobby', 'walking') 
 		var result = ip('My name is \\$' + '\\{name} and hobby $' + '{hobby}.', ctx)
-		# log 'result', result
+		# loog 'result', result
 
 		_ expect(result).to.be.a('string')
 		_ expect(result).to.be('My name is $' + '{name} and hobby walking.')
@@ -42,28 +42,28 @@
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('Hello *{ $a $ {} a$ ok.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello *{ $a $ {} a$ ok. )
 
 	it not closed var delimiter
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('Hello ${a', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello ${a )
 
 	it ending dollar
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('Hello $', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello $ )
 
 	it double dollar
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('Hello $' + '$ ok', ctx)
-		# log 'result', result
+		# loog 'result', result
 		_ expect(result).to.be.a('string')
 		_ expect(result).to.be('Hello $' + '$ ok')
 
@@ -72,7 +72,7 @@
 
 		_ ctx.setValue('name', 'stefi') 
 		var result = ip('Hello $' + '{ _.capitalize(name); }.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello Stefi.
 
 	it access a member property of an object
@@ -82,7 +82,7 @@
 				@ a 'stefi'
 		_ ctx.setValue('obj', obj) 
 		var result = ip('Hello $' + '{ obj.a }.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello stefi.
 
 	it access a not existent member property of an object
@@ -92,7 +92,7 @@
 				@ a 'stefi'
 		_ ctx.setValue('obj', obj) 
 		var result = ip('Hello $' + '{ obj.b }.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello .
 
 	it access a not existent member property of an object after accesing an existent one
@@ -102,8 +102,8 @@
 				@ a 'stefi'
 		_ ctx.setValue('obj', obj) 
 		var result = ip('Hello $' + '{ obj.a }.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello stefi.
 		set result = ip('Hello $' + '{ obj.b }.', ctx)
-		# log 'result', result
+		# loog 'result', result
 		tobe_string( result, Hello .

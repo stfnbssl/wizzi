@@ -21,10 +21,10 @@
 
 	_ robo
 		f_cb_test(result)
-			log 'robo.result', result
+			# loog 'robo.result', result
 			_ roboToEventStream
 				f_cb_test(result)
-					log 'roboToEventStream.result', result
+					# loog 'roboToEventStream.result', result
 	
 	function robo
 		param callback
@@ -41,9 +41,9 @@
 			@ rcOptions1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

@@ -122,7 +122,7 @@
         f_a_temp( parameters
         _ processParams2(ret, p_parameters)
 		ts-return()
-        log 'TSFunctionType', 'ret', ret
+        # loog 'TSFunctionType', 'ret', ret
 
 	f( TSMethodSignature, :m
 		f_p_name(key, Identifier | null
@@ -139,9 +139,9 @@
 
 	f( TSTypeParameterInstantiation, skip
 		f_a_temp( params
-		# log 'TSTypeParameterInstantiation.p_params', p_params
+		# loog 'TSTypeParameterInstantiation.p_params', p_params
 		foreach p in p_params.children
-			# log 'TSTypeParameterInstantiation.p before', p
+			# loog 'TSTypeParameterInstantiation.p before', p
 			if p.children.length == 0 && p.name.length == 0
 				if p.tag === ':{'
 					set p.name = '{}'
@@ -157,7 +157,7 @@
 						@ name ''
 						[ children
 							@ p
-			# log 'TSTypeParameterInstantiation.p after', p
+			# loog 'TSTypeParameterInstantiation.p after', p
 			_ ret.children.push
 				@ p
 
@@ -182,7 +182,7 @@
 					@ name ''
 					[ children
 		f_p_temp( parameter, true
-		# log 'p_parameter', p_parameter
+		# loog 'p_parameter', p_parameter
 		set ret.name = p_parameter.name
 		foreach item in p_parameter.children
 			_ ret.children.push
@@ -217,8 +217,8 @@
 		f_p_temp( expression, true
 		f_p_temp( typeAnnotation, true
 		
-		# log 'p_expression', p_expression
-        # log 'p_typeAnnotation', p_typeAnnotation
+		# loog 'p_expression', p_expression
+        # loog 'p_typeAnnotation', p_typeAnnotation
 
 		if p_expression.isText || p_expression.textified
             set p_expression.name = p_expression.textified
@@ -240,7 +240,7 @@
         if ['@id', 'literal'].indexOf(ret.tag) > -1
             set ret.tag = '+'
 
-        # log 'TSAsExpression.ret', ret
+        # loog 'TSAsExpression.ret', ret
 		
 		if node.extra && node.extra.parenthesized
 			set ret
@@ -266,7 +266,7 @@
 	f( TSEnumMember, @
 		f_p_name( id
 		f_p_temp(initializer, false
-        # log 'TSEnumMember', 'p_initializer', p_initializer
+        # loog 'TSEnumMember', 'p_initializer', p_initializer
 		if p_initializer
 			$$ 12/4/21 if [$*'@expr', 27/3/21*$'@id', 'literal'].indexOf(p_initializer.tag) > -1
             if p_initializer.children.length == 0
@@ -421,7 +421,7 @@
 	f( TSImportType, :import-type
         f_p_temp( argument, true )
         f_p_temp( qualifier, false )
-        # log 'TSImportType', p_qualifier
+        # loog 'TSImportType', p_qualifier
         if isTextualNode(p_argument) && (p_qualifier == null || isTextualNode(p_qualifier))
             set ret.textified = 'import(' + getNodeText(p_argument) + ')'
             if p_qualifier

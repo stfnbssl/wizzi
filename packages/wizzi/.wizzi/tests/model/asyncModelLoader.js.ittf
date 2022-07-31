@@ -39,7 +39,7 @@
 		_ asyncModelLoader.load
 			@ mi
 			f_cb_test( result )
-				log 'result.keys()', Object.keys(result)
+				# loog 'result.keys()', Object.keys(result)
 				tobe_object(result)
 				_ done
 
@@ -63,7 +63,7 @@
 		_ asyncModelLoader.load
 			@ mi
 			f_cb_test( result )
-				log 'result.keys()', Object.keys(result)
+				# loog 'result.keys()', Object.keys(result)
 				tobe_object(result)
 				tobe_string(result.alfa,stefi)
 				_ done

@@ -498,7 +498,7 @@ module
                                                 @ oauth2format 'github'
                                 # loog pushResponse
                             catch ex
-                                log 'push. err', ex
+                                error 'updateBranch.push. err', ex
                         #
                             # 
                             # Object.keys(packiFiles).forEach(filePath=> {

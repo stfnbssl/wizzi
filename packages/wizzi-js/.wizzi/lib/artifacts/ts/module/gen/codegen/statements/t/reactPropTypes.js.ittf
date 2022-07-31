@@ -27,14 +27,14 @@
 			lc-init()
 			lc-stm( oneOfParam )
 				_ ctx.w(model.wzName + ': PropTypes.oneOf([')
-				# log 'wizzi-codegen.statemts.t.reactPropTypes oneOfParam model: ', model
+				# loog 'wizzi-codegen.statemts.t.reactPropTypes oneOfParam model: ', model
 				_ writeValueList(model, ctx)
 				if model.isRequired
 					_ ctx.w(').isRequired')
 				else
 					_ ctx.w('])')
 			lc-stm( oneOfTypeParam )
-				# log 'wizzi-codegen.statemts.t.reactPropTypes oneOfTypeParam model: ', model
+				# loog 'wizzi-codegen.statemts.t.reactPropTypes oneOfTypeParam model: ', model
 				_ ctx.w(model.wzName + ': PropTypes.oneOfType([')
 				_ writeTypeList(model, ctx)
 				if model.isRequired
@@ -64,7 +64,7 @@
 					_ ctx.w(')')
 			
 			lc-stm( shapeParam )
-				# log 'wizzi-codegen.statemts.t.reactPropTypes shapeParam model: ', model
+				# loog 'wizzi-codegen.statemts.t.reactPropTypes shapeParam model: ', model
 				_ ctx.w(model.wzName + ': PropTypes.shape({')
 				_ writePropList(model, ctx)
 				if model.isRequired
@@ -77,16 +77,16 @@
 					param ctx
 					param cnt
 
-					# log 'wizzi-codegen.reactPropTypes', prop.wzName
+					# loog 'wizzi-codegen.reactPropTypes', prop.wzName
 					if !prop.param
 						# default to string
-						# log 'wizzi-codegen.statemts.t.reactPropTypes < 1, prop.wzName:', prop.wzName, 'string'
+						# loog 'wizzi-codegen.statemts.t.reactPropTypes < 1, prop.wzName:', prop.wzName, 'string'
 						_ ctx.write(prop.wzName + ': PropTypes.string')
 						if prop.isRequired
 							_ ctx.write('.isRequired')
 					else
 						var propParam = prop.param
-						# log 'wizzi-codegen.statemts.t.reactPropTypes prop.wzName: ', prop.wzName, 'prop.param.wzElement', propParam.wzElement
+						# loog 'wizzi-codegen.statemts.t.reactPropTypes prop.wzName: ', prop.wzName, 'prop.param.wzElement', propParam.wzElement
 						lc-exec-if( propParam.wzElement )
 						else
 							var name

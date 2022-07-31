@@ -79,7 +79,7 @@ $group
                         param ev
                         param picker
                         _ $(this).val(picker.startDate.format('DD/MM/YYYY'))
-                log 'datepicker', item.id, 'activated'
+                # loog 'datepicker', item.id, 'activated'
             catch err
                 log err
         elif item.type == 'checkbox' || item.type == 'radio'

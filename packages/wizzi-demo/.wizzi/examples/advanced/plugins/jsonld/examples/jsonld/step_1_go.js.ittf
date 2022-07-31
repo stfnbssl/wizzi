@@ -31,10 +31,10 @@
 				{
 				f_cb_throw( mTreeModel )
 					# And print the mTree model object
-					log 'mTreeModel', mTreeModel
-					log 'mTreeModel.dump(true)', mTreeModel.dump(true)
-					log 'mTreeModel.toIttf()', mTreeModel.toIttf()
-					log 'mTreeModel.toText()', mTreeModel.toText()
+					info 'mTreeModel', mTreeModel
+					info 'mTreeModel.dump(true)', mTreeModel.dump(true)
+					info 'mTreeModel.toIttf()', mTreeModel.toIttf()
+					info 'mTreeModel.toText()', mTreeModel.toText()
 					_ jsonld_model
 
 	function jsonld_model
@@ -52,8 +52,8 @@
 					{
 					f_cb_throw( wizziModel )
 						# And print the wizzi model object
-						log 'wizziModel', wizziModel
-						log 'wizziModel.toJson()', wizziModel.toJson()
+						info 'wizziModel', wizziModel
+						info 'wizziModel.toJson()', wizziModel.toJson()
 						var dest
 							_ path.join
 								@ __dirname
@@ -84,7 +84,7 @@
 						@ artifactContext {}
 					@ 'jsonld/document'
 					f_cb_throw( artifactText )
-						log 'artifactText', artifactText
+						info 'artifactText', artifactText
 						_ wizzi.file.write
 							_ path.join
 								@ __dirname

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\preprocess.js.ittf
 */
 'use strict';
@@ -41,11 +41,11 @@ function wzTopLevel(topitem) {
         item = topitem.statements[i];
         checkWzItem(item, wzItems);
     }
-    // log 'wzItems.requires.length', wzItems.requires.length
-    // log 'wzItems.vars.length', wzItems.vars.length
-    // log 'wzItems.consts.length', wzItems.consts.length
-    // log 'wzItems.functions.length', wzItems.functions.length
-    // log 'wzItems.classes.length', wzItems.classes.length
+    // loog 'wzItems.requires.length', wzItems.requires.length
+    // loog 'wzItems.vars.length', wzItems.vars.length
+    // loog 'wzItems.consts.length', wzItems.consts.length
+    // loog 'wzItems.functions.length', wzItems.functions.length
+    // loog 'wzItems.classes.length', wzItems.classes.length
     return wzItems;
 }
 function checkWzItem(item, wzItems) {

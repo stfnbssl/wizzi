@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
 */
 'use strict';
@@ -32,7 +32,7 @@ function interpolate(template, jsWizziContext, options) {
     for (var i=0; i<l; i++) {
         ch = template[i];
         
-        // log 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
+        // loog 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
         if (ch == '\\') {
         }
         if (state == state_text && ch == '\\' && i+3 < l && template[i+1] == '$' && template[i+2] == '\\' && template[i+3] == '{') {
@@ -155,10 +155,10 @@ function interpolate(template, jsWizziContext, options) {
     return result.join('');
 }
 function evalKeyOrCode(keyOrCode, jsWizziContext) {
-    // log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode
+    // loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode
     // TODO Is this a week assumption ???
     var stm = keyOrCode.indexOf('return ') > -1 ? 'var _____result = function dummy() { ' + keyOrCode + ' }();' : 'var _____result = ' + keyOrCode + ';';
-    // log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
+    // loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
     var notUsed = jsWizziRunner.run(stm, jsWizziContext);
     
     // TODO verify.logError does not exist any more 25/02/21
@@ -172,7 +172,7 @@ function evalKeyOrCode(keyOrCode, jsWizziContext) {
         return notUsed;
     }
     var result = jsWizziContext.getValue('_____result');
-    // log 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode, result
+    // loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode, result
     jsWizziContext.setValue('_____result', undefined);
     return result;
 }

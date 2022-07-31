@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\node.js.ittf
 */
 'use strict';
@@ -79,12 +79,12 @@ md.inlinedTextToTextLines = function(text, options) {
 ;
 md.replace = function(item, replacers) {
     
-    // log 'util/node/replace/item', item
+    // loog 'util/node/replace/item', item
     if (!item.parent) {
         var i, i_items=replacers, i_len=replacers.length, repl;
         for (i=0; i<i_len; i++) {
             repl = replacers[i];
-            // log 'util/node/replace/repl', repl
+            // loog 'util/node/replace/repl', repl
         }
     }
     var nodes = item.parent.children;

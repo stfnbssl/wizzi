@@ -7,11 +7,11 @@
     var pkgVersioned = ' (${wzCtx.name}.${wzCtx.version})'
 	+
 	error( NotImplemented, message )
-		log 'message', message
+		error 'message', message
 		set this.message = message
 	+
 	error( InvalidRequest, message, code )
-		log 'message', message
+		error 'message', message
 		set this.message = message
 		set this.code = code
 

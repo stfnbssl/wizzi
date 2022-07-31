@@ -71,7 +71,7 @@
 								_ callback(null)
 			
 			elif storeInfo.storeKind === 'json'
-                # log 'storeInfo', storeInfo
+                # loog 'storeInfo', storeInfo
 				set this.storeImpl = new JsonDbStore()
 				var that = this
 				_ this.storeImpl.init

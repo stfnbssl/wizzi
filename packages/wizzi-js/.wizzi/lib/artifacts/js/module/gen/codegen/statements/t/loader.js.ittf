@@ -48,7 +48,7 @@
 		param model
         param ctx
         param multi
-        # log '__writeComments-model', model
+        # loog '__writeComments-model', model
         if multi || model.statements.length > 0
             _ ctx.w('/**')
             _ ctx.indent

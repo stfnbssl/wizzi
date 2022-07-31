@@ -40,7 +40,7 @@
 		_ AsyncRecurseWfjobLoad
 			@ jobRequest
 			f_cb_test( result )
-				log 'shoul load a wfjob (AsyncRecurseWfjobLoad) : seenWfjobRequests, pendingWfjobRequests, artifactInfoConfigs', result.seenWfjobRequests, result.pendingWfjobRequests, result.artifactInfoConfigs
+				# loog 'shoul load a wfjob (AsyncRecurseWfjobLoad) : seenWfjobRequests, pendingWfjobRequests, artifactInfoConfigs', result.seenWfjobRequests, result.pendingWfjobRequests, result.artifactInfoConfigs
 				tobe_array( result.pendingWfjobRequests, 0)
 				tobe_array( result.seenWfjobRequests, 2)
 				tobe_array( result.artifactInfoConfigs, 2)

@@ -3,5 +3,5 @@ module
 
 	class Hello
 		m say
-			log 'Hello'
+			success 'Hello'
 

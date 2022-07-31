@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\codegen\index.js.ittf
 */
 'use strict';
@@ -313,7 +313,7 @@ function repeater_1(index_1) {
         return next_1();
     }
     var item_1 = examples[index_1];
-    // log 'item_1.test', item_1.test
+    // loog 'item_1.test', item_1.test
     var mTree = item_1.test;
     var js = new jsNode(mTree.n, mTree.v);
     js.loadFromMTree(mTree);

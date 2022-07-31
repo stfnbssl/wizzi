@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\css\document\gen\rule.js.ittf
 */
 'use strict';
@@ -78,7 +78,7 @@ md.load = function(cnt) {
         }
         ctx.indent();
         var selector = model.getSelector();
-        // log '*** selector', selector
+        // loog '*** selector', selector
         if (selector && selector.length > 0) {
             if (!!ctx.__isStyledComponent == false) {
                 ctx.w(model.getSelector() + ' {');
@@ -262,14 +262,14 @@ md.load = function(cnt) {
 }
 ;
 function writeRule(cnt, model, ctx, callback) {
-    // log 'writeRule, model.ruleParts', model.ruleParts
+    // loog 'writeRule, model.ruleParts', model.ruleParts
     if (!!ctx.__isStyledComponent == false) {
         var wzName = model.wzElement === 'ampersand' ? '&' + model.wzName : model.wzName;
     }
     var ruleText = model.getSelector(true);
     var isStyledComponent = model.wzElement == "elementRule" && model.wzName == "--styled--";
     var isInsideStyledComponent = ctx.__isStyledComponent;
-    // log 'isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName', isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName
+    // loog 'isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName', isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName
     
     // log 1
     if (isInsideStyledComponent && model.wzElement === 'ampersand') {
@@ -328,7 +328,7 @@ function getWriteProperty(ctx) {
     return function writeProperty(prop, callback) {
             var name = prop.name;
             var value = prop.value;
-            // log 'getWriteProperty', prop.name, prop.value, prop.wzElement, prop.wzName, prop.get_js, prop.prop && prop.prop.get_js
+            // loog 'getWriteProperty', prop.name, prop.value, prop.wzElement, prop.wzName, prop.get_js, prop.prop && prop.prop.get_js
             if (prop.wzElement && prop.prop && prop.prop.get_svg) {
                 if (prop.wzElement === "background_image") {
                     prop.prop.get_svg(function(err, svgModel) {

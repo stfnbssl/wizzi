@@ -14,7 +14,7 @@ $group
         # 
     export-default 
         function getSecured
-            log 'Middleware auth0Secured.getSecured called'
+            # loog 'Middleware auth0Secured.getSecured called'
             return 
                 function secured
                     param req
@@ -23,7 +23,7 @@ $group
                         :ref Response
                     param next
                         :ref Function
-                    log 'secured called', req.user
+                    # loog 'secured called', req.user
                     if req.user
                         return next()
                     set =

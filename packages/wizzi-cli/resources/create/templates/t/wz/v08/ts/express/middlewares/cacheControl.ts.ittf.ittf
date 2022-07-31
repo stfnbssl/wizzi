@@ -29,5 +29,5 @@ $group
                                 param next
                                 _ res.set('Cache-Control', 'no-store')
                                 _ next
-                        log 'CacheControlMiddleware installed'
+                        success 'CacheControlMiddleware installed'
                     ${'$'}hook

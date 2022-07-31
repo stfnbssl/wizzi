@@ -6,7 +6,7 @@
 			param mTree
 			param context
 
-			# log 'wizzi-web.css.preprocess.mTree', mTree
+			# loog 'wizzi-web.css.preprocess.mTree', mTree
 
 			var state
 				{
@@ -48,7 +48,7 @@
 	function preprocessNode
 		param node
 		param state
-		# log 'css-mtree-processor preprocessNode', node.n, node.v
+		# loog 'css-mtree-processor preprocessNode', node.n, node.v
         if node.n === 'styled'
             if node.children.length == 1 && node.children[0].n == "css"
                 return false

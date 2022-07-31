@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\json-factory.g.js.ittf
 */
 'use strict';
@@ -44,7 +44,7 @@ md.createLoadModel = function(wizziObject) {
     var errors = wizziObject.errors;
     var wizziFactory = wizziObject.wizziFactory;
     function loadModelFromMTree(mTree, ittfDocumentUri, wizziModelRequest, options, callback) {
-        // log 'wizzi-core.wizzi.models.json-factory.g, loaded from mTree'
+        // loog 'wizzi-core.wizzi.models.json-factory.g, loaded from mTree'
         jsonmodel(mTree, ittfDocumentUri, wizziModelRequest, callback);
     }
     
@@ -110,13 +110,13 @@ md.createLoadModel = function(wizziObject) {
                         return callback(err);
                     }
                     // TODO implement a stats object inside the wizziModelRequest object
-                    // log 'Loaded mTree instance for pseudo schema json from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
+                    // loog 'Loaded mTree instance for pseudo schema json from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
                     if ((wizziModelRequest.dumpAll || wizziModelRequest.dumpIttfModel) && file.isFilePath(ittfDocumentUri)) {
                         var ittfDumpPath = path.join(path.dirname(ittfDocumentUri), '_debug', path.basename(ittfDocumentUri) + '.ittf.json');
                         file.write(ittfDumpPath, stringify(mTree, null, 2))
                     }
-                    // log 'wizzi-core.wizzi.models.json-factory.g current __dirname', __dirname
-                    // log 'wizzi-core.wizzi.models.json-factory.g, loaded from ittfDocumentUri: ', ittfDocumentUri, mTree
+                    // loog 'wizzi-core.wizzi.models.json-factory.g current __dirname', __dirname
+                    // loog 'wizzi-core.wizzi.models.json-factory.g, loaded from ittfDocumentUri: ', ittfDocumentUri, mTree
                     jsonmodel(mTree, ittfDocumentUri, wizziModelRequest, callback);
                 })
             };

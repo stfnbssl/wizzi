@@ -72,10 +72,10 @@
 				@ errors mocks.errors
 
 	function getLoadModelContext
-		param mTreeBuildUpContext
+		param mTreeBuildupContext
 		return 
 			_ mocks.getLoadModelContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 
 	set module.exports = executeExample
 

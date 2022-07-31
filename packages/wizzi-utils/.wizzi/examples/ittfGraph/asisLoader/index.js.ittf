@@ -14,7 +14,7 @@
 
         _ fs.vfile
             f_cb_test( file )
-                log 'example.asIsLoader file', file
+                info 'example.asIsLoader file', file
                 _ step_1
                     @ file
             
@@ -32,7 +32,7 @@
                 {
                     @ clean true
                 f_cb_test( tree )
-                    log 'step_1.tree', tree
+                    info 'step_1.tree', tree
                     _ file.write
                         _ path.join
                             @ __dirname
@@ -59,7 +59,7 @@
                 {
                     @ clean_remove true
                 f_cb_test( tree )
-                    log 'step_2.tree', tree
+                    info 'step_2.tree', tree
                     _ file.write
                         _ path.join
                             @ __dirname
@@ -84,7 +84,7 @@
                     @ clean_remove true
                     @ file file
                 f_cb_test( tree )
-                    log 'step_3.tree', tree
+                    info 'step_3.tree', tree
                     _ file.write
                         _ path.join
                             @ __dirname

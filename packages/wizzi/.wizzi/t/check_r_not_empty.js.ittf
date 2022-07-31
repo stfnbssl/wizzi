@@ -1,7 +1,7 @@
 ﻿$group
 	$params varName, method|@@null, type|Parameter
 	var resolved_${varName} = verify.resolveToString(${varName})
-	# log 'resolved_${varName}', resolved_${varName}
+	# loog 'resolved_${varName}', resolved_${varName}
 	if resolved_${varName} == null
 		return
 			_ error

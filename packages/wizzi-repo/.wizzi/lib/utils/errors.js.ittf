@@ -7,5 +7,5 @@
 	+
 
 	error( RepoCollection, message )
-		log 'message', message
+		error 'message', message
 		set this.message = message

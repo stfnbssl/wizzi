@@ -78,7 +78,7 @@
 				_ wf.fileService.write
 					@ dest
 					_ mTreeModel.toIttf()
-				log '   ', 'The ${ittfDocumentName} mTree was saved to ' + dest
+				info '   ', 'The ${ittfDocumentName} mTree was saved to ' + dest
 			$if raw === true
 				_ heading2( '${ittfDocumentName} - raw ittf document' )
 			$else

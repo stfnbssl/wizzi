@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\function.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -485,11 +485,11 @@ md.load = function(cnt) {
             )
         }
         
-        // log 'isImplicitReturn', model.wzElement, model.wzName
+        // loog 'isImplicitReturn', model.wzElement, model.wzName
         
-        // log 'function.isSingleParam', isSingleParam
+        // loog 'function.isSingleParam', isSingleParam
         
-        // log 'function.firstChildIs template', firstChildIsTemplate
+        // loog 'function.firstChildIs template', firstChildIsTemplate
         else if (u.isImplicitReturn(model)) {
             var isSingleParam = u.isSingleParamForArrowFunction(model);
             var firstChildIsTemplate = u.firstChildIs(model, ['template']);

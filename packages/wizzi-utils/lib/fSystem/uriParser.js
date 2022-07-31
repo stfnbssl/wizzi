@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\uriParser.js.ittf
 */
 'use strict';
@@ -21,16 +21,16 @@ module.exports = function parse(uri, callback) {
         browser: false
      };
     var parsedUri = url.parse(uri);
-    // log 'wizzi-utils.uriParser.parsedUri', '\n', JSON.stringify(parsedUri, null, 2)
+    // loog 'wizzi-utils.uriParser.parsedUri', '\n', JSON.stringify(parsedUri, null, 2)
     ret._protocol = parsedUri.protocol;
     ret._hostname = parsedUri.hostname;
     ret._pathname = parsedUri.pathname;
     // uniform protocol:xxx protocol:/xxx protocol://xxx and protocol:\xxx
     var pathname = parsedUri.pathname && parsedUri.pathname[0] === '/' ? parsedUri.pathname.substr(1) : parsedUri.pathname;
-    // log 'pathname', parsedUri.pathname, pathname
+    // loog 'pathname', parsedUri.pathname, pathname
     // hostname is part of path
     ret.pathname = parsedUri.hostname && parsedUri.hostname.length > 0 ? pathname && pathname.length > 0 ? parsedUri.hostname + '/' + pathname : parsedUri.hostname : pathname || '';
-    // log 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
+    // loog 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
     if (typeof(parsedUri.protocol) !== 'string') {
         if (callback) {
             return callback(error('InvalidArgument', 'parse', 'Uri must have a protocol (must be an absolute url). Received: ' + uri));
@@ -41,7 +41,7 @@ module.exports = function parse(uri, callback) {
     }
     var protocol = parsedUri.protocol.substr(-1, 1) === ':' ? parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1)) : parsedUri.protocol;
     ;
-    // log 'parsed.protocol', protocol
+    // loog 'parsed.protocol', protocol
     ret.protocol = protocol;
     ret.storeKind = 'filesystem';
     if (protocol === 'db') {
@@ -51,7 +51,7 @@ module.exports = function parse(uri, callback) {
         ret.storeKind = 'json';
     }
     setParsed(ret, parsedUri)
-    // log 'parsed.result', ret
+    // loog 'parsed.result', ret
     return returnOrCb(ret, callback);
 }
 ;
@@ -59,7 +59,7 @@ function setParsed(parsed, parsedUri) {
     var name,
         parts = parsed.pathname ? parsed.pathname.split('/') : [];
     parsed._parts = parts;
-    // log 'wizzi-utils.fs.uriParser.parsedUri.parts', parts
+    // loog 'wizzi-utils.fs.uriParser.parsedUri.parts', parts
     if (parts.length > 0) {
         name = parts[parts.length-1];
         parsed.basename = name;

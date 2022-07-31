@@ -10,7 +10,7 @@
 
 		m wzInitialize
 			set ctx.modelState = ctx.modelState || {}
-			# log 'wizzi-js.model.class.modelState', ctx.modelState
+			# loog 'wizzi-js.model.class.modelState', ctx.modelState
 			set ctx.modelState.hasClasses = true
 			
 			if this.extends && this.extends.length > 0

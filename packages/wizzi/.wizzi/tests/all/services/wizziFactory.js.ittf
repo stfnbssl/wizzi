@@ -1,8 +1,8 @@
 ﻿base_test( wizziFactory )
 
 	$append imports
-		var wizziFactory = require('../../lib/services/wizziFactory')
-		var mocks = require('../mocks/misc')
+		var wizziFactory = require('../../../lib/services/wizziFactory')
+		var mocks = require('../../mocks/misc')
     +
 	var wizziFactoryInstance = null
 	var testsMock1Model = null
@@ -23,7 +23,7 @@
 					{
 						@ testOnlyMockBaseDir __dirname
 			f_cb_test( wf )
-				log 'wf.__loadMTree', wf.__loadMTree
+				# loog 'wf.__loadMTree', wf.__loadMTree
 				set wizziFactoryInstance = wf
 				_ done
 	+
@@ -38,7 +38,7 @@
 			{
 				@ __productionManager pman
 			f_cb_test( wizziModel )
-				log 'wizziModel', wizziModel
+				# loog 'wizziModel', wizziModel
 				set testsMock1Model = wizziModel
 				tobe_object( wizziModel )
 				tobe_string( wizziModel.wzName, mock1 )
@@ -54,7 +54,7 @@
 		var transformModel
 			_ wizziFactoryInstance.getModelTransformer
 				@ 'tests/trans1'
-		log 'should retrieve a model transformer. transformModel', transformModel
+		# loog 'should retrieve a model transformer. transformModel', transformModel
 		tobe_function( transformModel.trans )
 
 	it-async should transform a model from a pre loaded wizzimodel 
@@ -113,7 +113,7 @@
 		tobe_string( schemaDefinition.name, tests )
 
 	it-async should load an mTree
-		log 'wizziFactoryInstance.__loadMTree', wizziFactoryInstance.__loadMTree
+		# loog 'wizziFactoryInstance.__loadMTree', wizziFactoryInstance.__loadMTree
 		_ wizziFactoryInstance.loadMTree
 			_ path.join
 				@ __dirname
@@ -123,7 +123,7 @@
 			{
 				@ from 'stefi'
 			f_cb( mTree )
-				log 'mTree', mTree
+				# loog 'mTree', mTree
 				tobe_object( mTree )
 				tobe_string( mTree.nodes[0].n, html )
 				tobe_string( mTree.nodes[0].children[0].n, head )

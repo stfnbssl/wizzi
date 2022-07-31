@@ -31,9 +31,9 @@
 
 		if p_${name}.children.length == 1 
 
-			# log '*** f_p_tag ${name} children[0].textified', p_${name}.children[0].textified
-			# log '*** f_p_tag ${name} children[0].isText', p_${name}.children[0].isText
-			# log '*** f_p_tag ${name} children[0].name', p_${name}.children[0].name
+			# loog '*** f_p_tag ${name} children[0].textified', p_${name}.children[0].textified
+			# loog '*** f_p_tag ${name} children[0].isText', p_${name}.children[0].isText
+			# loog '*** f_p_tag ${name} children[0].name', p_${name}.children[0].name
 			
 			if p_${name}.children[0].textified
 				set p_${name}.textified = p_${name}.children[0].textified

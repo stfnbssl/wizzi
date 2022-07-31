@@ -53,7 +53,7 @@
 				set callback = context
 				set context = {}
 
-			# log 'md.${name}.options', options
+			# loog 'md.${name}.options', options
 			var schema
 			if verify.isNotEmpty(options.artifactName)
 				var ss = options.artifactName.split('/')

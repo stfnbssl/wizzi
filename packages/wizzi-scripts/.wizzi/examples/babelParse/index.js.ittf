@@ -19,7 +19,7 @@
 
 	_ babel
 		f_cb_test(result)
-			log 'babel.result', result
+			# loog 'babel.result', result
 			_ file.write
 				_ path.join
 					@ codecampPath
@@ -30,7 +30,7 @@
 			#
 				_ babel
 					f_cb_test(result)
-						log 'babelToEventStream.result', result
+						# loog 'babelToEventStream.result', result
 	
 	function babel
 		param callback
@@ -47,9 +47,9 @@
 			@ options1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

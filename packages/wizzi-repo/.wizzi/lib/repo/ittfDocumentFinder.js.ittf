@@ -67,7 +67,7 @@
 											@ null
 											@ tresult.ittfDocumentUri
 								else 
-									# log 'IttfDocumentFinder.resolvePath options', options, that.schema
+									# loog 'IttfDocumentFinder.resolvePath options', options, that.schema
 									r_cb_wz_err( IttfNotFound, resolvePath )
 										@ 'Cannot find ittf document: ' + ittfDocumentUri
     

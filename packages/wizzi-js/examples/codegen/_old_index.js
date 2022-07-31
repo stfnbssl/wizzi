@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\codegen\_old_index.js.ittf
 */
 'use strict';
@@ -21,7 +21,7 @@ function repeater_1(index_1) {
     }
     var item_1 = js_ittf_files[index_1];
     item = item_1.substring(0, item_1.length - '.js.ittf'.length);
-    console.log('wizzi-codegen.examples.item', item);
+    // loog 'wizzi-codegen.examples.item', item
     execute(item, function(err, notUsed) {
         if (err) {
             return callback(err);
@@ -36,17 +36,17 @@ function next_1() {
 }
 function execute(name, callback) {
     var ittfSource = path.join(__dirname, 'ittf', name + '.js.ittf');
-    console.log('wizzi-codegen.examples.ittfSource', ittfSource);
+    // loog 'wizzi-codegen.examples.ittfSource', ittfSource
     var jsOutput = path.join(__dirname, 'ittf', name + '.g.js');
     basicLoader.loadMTree(ittfSource, {}, function(err, mTree) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        // log 'mTree', mTree
+        // loog 'mTree', mTree
         var js = new jsNode(mTree.n, mTree.v);
         js.loadFromMTree(mTree);
-        // log 'jsNode', js
+        // loog 'jsNode', js
         var ctx = new genContext({
             options: {
                 CRLF: '\n', 
@@ -57,7 +57,7 @@ function execute(name, callback) {
             if (err) {
                 return callback(err);
             }
-            console.log(name, 'ctx\n' + ctx.getContent());
+            console.log(name, 'ctx\n' + ctx.getContent(), __filename);
             file.write(jsOutput, ctx.getContent())
             return callback(null, null);
         })

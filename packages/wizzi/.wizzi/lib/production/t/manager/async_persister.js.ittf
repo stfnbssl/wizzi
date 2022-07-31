@@ -11,7 +11,7 @@
 						{ productionManager
 					callback
 
-					log 'Started async persist to file artifact: ', artifactInfo.name
+					# loog 'Started async persist to file artifact: ', artifactInfo.name
 					var persister = new ArtifactPersister(artifactInfo)
 					_ persister.toFile
 						f_cb( operResult )
@@ -22,5 +22,5 @@
 										\b oper.status + ', ' + 
 										\b oper.item.filepath
 							
-							log 'Ended async persist to file artifact: ', artifactInfo.name
+							# loog 'Ended async persist to file artifact: ', artifactInfo.name
 							_ callback(null, operResult)

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\index.js.ittf
 */
 'use strict';
@@ -35,10 +35,10 @@ function execute(jobName, callback) {
          }
      }, function(err, jobResults) {
         if (err) {
-            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log('err', err);
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        console.log("results of job " + jobName + "\n", stringify(jobResults, null, 2));
+        console.log("results of job " + jobName + "\n", stringify(jobResults, null, 2), __filename);
     })
 }

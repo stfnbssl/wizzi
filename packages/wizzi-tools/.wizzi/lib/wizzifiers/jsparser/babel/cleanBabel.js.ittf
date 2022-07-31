@@ -17,7 +17,7 @@
 						var temp = []
 						foreach node in ast[k]
 							if !node
-								log 'cleanBabel.Null ast node', k, ast
+								warn 'cleanBabel.Null ast node', k, ast
 								# throw new Error(ast)
 							else
 								_ md.cleanAst(node)

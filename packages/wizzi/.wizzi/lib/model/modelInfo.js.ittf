@@ -164,7 +164,7 @@
                 if verify.isObject(value) === false
                     throw 
                         new Error("value parameter must be an object. Instead is: " + value)
-				# log 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
+				# loog 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
                 set this.productionManagerInstance = value
 				foreach modelInfo in this.contexts
 					_ modelInfo.productionManager(value)

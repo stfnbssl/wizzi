@@ -11,7 +11,7 @@
 		string schemaName
 		param textOnlyMockBaseDir
 
-		# log 'wizzi.services.PluginsManager.getModelFactory: schemaName, textOnlyMockBaseDir ' + schemaName, textOnlyMockBaseDir
+		# loog 'wizzi.services.PluginsManager.getModelFactory: schemaName, textOnlyMockBaseDir ' + schemaName, textOnlyMockBaseDir
 		var
 			decl found = null
 			decl foundInPlugin = null
@@ -21,12 +21,12 @@
 		# all factoryPlugins are searched, last matching encountered wins.
 
 		foreach item in this.factoryPlugins
-			# log 'wizzi.pluginsManager.getModelFactory.searching model loader', schemaName, ' in plugin ', item.getName()
+			# loog 'wizzi.pluginsManager.getModelFactory.searching model loader', schemaName, ' in plugin ', item.getName()
 			checked_call_r_set( found )
 				_ item.getModelFactory
 					@ schemaName
 					@ textOnlyMockBaseDir
-			# log 'found', found, found && verify.isFunction(found.createLoadModel)
+			# loog 'found', found, found && verify.isFunction(found.createLoadModel)
 			if found && verify.isFunction(found.createLoadModel)
 				set result = found
 				set foundInPlugin = item.getFilename()

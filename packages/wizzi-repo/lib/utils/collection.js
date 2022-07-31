@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\utils\collection.js.ittf
 */
 'use strict';
@@ -13,9 +13,9 @@ var verify = require('wizzi-utils').verify;
 const errors = require('./errors');
 const ObjectID = require('./objectId');
 function match(key, item) {
-    // log 'wizzi-repo.utils.collection.match', key, item
+    // loog 'wizzi-repo.utils.collection.match', key, item
     
-    // log 'wizzi-repo.utils.collection.match: true'
+    // loog 'wizzi-repo.utils.collection.match: true'
     if (!key) {
         return true;
     }
@@ -24,14 +24,14 @@ function match(key, item) {
             return true;
         }
         
-        // log 'wizzi-repo.utils.collection.match: true'
+        // loog 'wizzi-repo.utils.collection.match: true'
         if (item._id && item._id.equals(key._id)) {
             return true;
         }
     }
     else if (key.hasOwnProperty('path')) {
         
-        // log 'wizzi-repo.utils.collection.match: true'
+        // loog 'wizzi-repo.utils.collection.match: true'
         if (item.path == normalize(key.path)) {
             return true;
         }
@@ -39,12 +39,12 @@ function match(key, item) {
     else if (key.hasOwnProperty('basename') && key.hasOwnProperty('parentId')) {
         if (item.basename === key.basename) {
             
-            // log 'wizzi-repo.utils.collection.match: true'
+            // loog 'wizzi-repo.utils.collection.match: true'
             if (item.parentId == null && key.parentId == null) {
                 return true;
             }
             
-            // log 'wizzi-repo.utils.collection.match: true'
+            // loog 'wizzi-repo.utils.collection.match: true'
             if (item.parentId && item.parentId.equals(key.parentId)) {
                 return true;
             }
@@ -55,12 +55,12 @@ function match(key, item) {
             return true;
         }
         
-        // log 'wizzi-repo.utils.collection.match: true'
+        // loog 'wizzi-repo.utils.collection.match: true'
         if (item.parentId && item.parentId.equals(key.parentId)) {
             return true;
         }
     }
-    // log 'wizzi-repo.utils.collection.match: false'
+    // loog 'wizzi-repo.utils.collection.match: false'
     return false;
 }
 var Collection = (function () {
@@ -81,12 +81,12 @@ var Collection = (function () {
         for (i=0; i<i_len; i++) {
             item = this.items[i];
             
-            // log 'restoreIds._id', item._id, item._id.length
+            // loog 'restoreIds._id', item._id, item._id.length
             if (item._id && item._id.length) {
                 item._id = ObjectID.createFromHexString(item._id);
             }
             
-            // log 'restoreIds.parentId', item.parentId, item.parentId.length
+            // loog 'restoreIds.parentId', item.parentId, item.parentId.length
             if (item.parentId && item.parentId.length) {
                 item.parentId = ObjectID.createFromHexString(item.parentId);
             }
@@ -96,7 +96,7 @@ var Collection = (function () {
         return this.items.length;
     }
     Collection.prototype.find = function(key) {
-        // log 'wizzi-repo.utils.collection.find', key
+        // loog 'wizzi-repo.utils.collection.find', key
         var result = [];
         var i, i_items=this.items, i_len=this.items.length, item;
         for (i=0; i<i_len; i++) {
@@ -112,7 +112,7 @@ var Collection = (function () {
             callback = options;
             options = null;
         }
-        // log 'insertOne.doc', doc
+        // loog 'insertOne.doc', doc
         if (!doc._id) {
             doc._id = new ObjectID();
         }
@@ -248,7 +248,7 @@ var Collection = (function () {
                 error('InvalidArgument', 'toArray', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        // log 'wizzi-repo.utils.collection.toArray'
+        // loog 'wizzi-repo.utils.collection.toArray'
         callback(null, this.items);
     }
     return Collection;

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\html.js.ittf
 */
 'use strict';
@@ -50,7 +50,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -105,13 +105,13 @@ md.load = function(cnt) {
         var p = lineParser.parseNameValueRaw(model.wzName, model),
             tag = p.name(),
             text = p.value();
-        // log 'enter statements/html/htmlelement', tag, text
+        // loog 'enter statements/html/htmlelement', tag, text
         md._htmlelement(cnt, model, tag, text, ctx, function(err, notUsed) {
             if (err) {
                 return callback(err);
             }
             // @ callback
-            // log 'exit statements/html/htmlelement', tag, text
+            // loog 'exit statements/html/htmlelement', tag, text
             return callback(null, null);
         })
     }
@@ -189,7 +189,7 @@ md.load = function(cnt) {
             text = model.wzName;
             tag = model.wzElement;
         }
-        // log 'enter _htmlelement ----------------', tag
+        // loog 'enter _htmlelement ----------------', tag
         var attrs = getAttrs(model, ctx);
         var comments = [];
         var statements = null,
@@ -203,7 +203,7 @@ md.load = function(cnt) {
                 return next_1();
             }
             var item_1 = model.statements[index_1];
-            // log 'html.md._htmlelement', item_1.wzElement
+            // loog 'html.md._htmlelement', item_1.wzElement
             if (item_1.isEvent) {
                 var name = item_1.wzElement;
                 if (item_1.statements && item_1.statements.length > 0) {
@@ -265,7 +265,7 @@ md.load = function(cnt) {
                 typeParameters.push(item_1)
             }
             else {
-                console.log('Error.model', model);
+                console.log("[31m%s[0m", 'Error.model', model);
                 throw new errors.WizziModelDOMNodeError('In ts._htmlelement wzElement not managed: ' + item_1.wzElement, item_1);
             }
             process.nextTick(function() {
@@ -281,7 +281,7 @@ md.load = function(cnt) {
                     return callback(err);
                 }
                 // @ callback
-                // log 'exit _htmlelement', tag
+                // loog 'exit _htmlelement', tag
                 return callback(null, null);
             })
         }

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\create.js.ittf
-    utc time: Sat, 30 Jul 2022 03:36:38 GMT
+    utc time: Sun, 31 Jul 2022 09:15:50 GMT
 */
 'use strict';
 const path = require('path');
@@ -48,11 +48,11 @@ module.exports = (options) => {
                 copyExclude: []
              }, function(err, genFolderResult) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', __filename);
-                    console.log('err', err, __filename);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                console.log('genFolderResult', genFolderResult, __filename);
+                // loog 'genFolderResult', genFolderResult
                 return ;
             });
     }
@@ -72,8 +72,8 @@ module.exports = (options) => {
                 copyExclude: []
              }, function(err, genFolderResult) {
                 if (err) {
-                    console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', __filename);
-                    console.log('err', err, __filename);
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
                 // loog 'genFolderResult', genFolderResult
@@ -149,8 +149,8 @@ function promptPkgType(callback) {
      };
     inquirer.prompt(questions).then((answers) => {
     
-        console.log('\nNew package type:', __filename);
-        console.log(JSON.stringify(answers, null, '  '), __filename);
+        console.log('\nNew package type:');
+        console.log(JSON.stringify(answers, null, '  '));
         return callback(null, answers);
     }
     )
@@ -173,8 +173,8 @@ function promptWizziPlugin(callback) {
      };
     inquirer.prompt(questions).then((answers) => {
     
-        console.log('\nWizzi plugin type:', __filename);
-        console.log(JSON.stringify(answers, null, '  '), __filename);
+        console.log('\nWizzi plugin type:');
+        console.log(JSON.stringify(answers, null, '  '));
         answers.author = {};
         answers.license = {};
         answers.license.name = "MIT";
@@ -201,8 +201,8 @@ function promptWebpack(callback) {
      };
     inquirer.prompt(questions).then((answers) => {
     
-        console.log('\nNew webpack package type:', __filename);
-        console.log(JSON.stringify(answers, null, '  '), __filename);
+        console.log('\nNew webpack package type:');
+        console.log(JSON.stringify(answers, null, '  '));
         return callback(null, answers);
     }
     )
@@ -230,8 +230,8 @@ function promptPkgName(callback) {
     ];
     inquirer.prompt(questions).then((answers) => {
     
-        console.log('\nNew package name:', __filename);
-        console.log(JSON.stringify(answers, null, '  '), __filename);
+        console.log('\nNew package name:');
+        console.log(JSON.stringify(answers, null, '  '));
         if (answers.pkg_enterinfo) {
             delete answers.pkg_enterinfo
             promptPkgInfo(function(err, info_answers) {
@@ -276,8 +276,8 @@ function promptPkgInfo(callback) {
     ];
     inquirer.prompt(questions).then((answers) => {
     
-        console.log('\nNew package info:', __filename);
-        console.log(JSON.stringify(answers, null, '  '), __filename);
+        console.log('\nNew package info:');
+        console.log(JSON.stringify(answers, null, '  '));
         return callback(null, answers);
     }
     )

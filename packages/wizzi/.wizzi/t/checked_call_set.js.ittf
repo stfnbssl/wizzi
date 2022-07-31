@@ -4,5 +4,5 @@
 	set ${varName}
 		$hook
 	if ${varName} && ${varName}.__is_error
-		# log 'wizzi.checked_call_set.__is_error ${message}', ${varName}
+		# loog 'wizzi.checked_call_set.__is_error ${message}', ${varName}
 		return callback(${varName})

@@ -20,10 +20,10 @@
 						@ projectId
 						@ path_string
 				
-			# log 'wizzi-io.filesystem.mkdir.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.mkdir.fsPath', fsPath
 
 			_ file.mkdir
 				@ fsPath
-			# log 'wizzi-io.filesystem.createFolder.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.createFolder.fsPath', fsPath
 			return 
 				_ callback(null)

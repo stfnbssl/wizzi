@@ -66,7 +66,7 @@
 					_ ctx.w('@media (' + model.wzName + ') {');
 				_ ctx.indent()
 				var selector = model.getSelector()
-				# log '*** selector', selector
+				# loog '*** selector', selector
 				if selector && selector.length > 0
                     if !!ctx.__isStyledComponent == false
 					    _ ctx.w(model.getSelector() + ' {')
@@ -218,13 +218,13 @@
 		param ctx
 		param callback
 
-		# log 'writeRule, model.ruleParts', model.ruleParts
+		# loog 'writeRule, model.ruleParts', model.ruleParts
 		if !!ctx.__isStyledComponent == false
             var wzName = model.wzElement === 'ampersand' ? '&' + model.wzName : model.wzName
 		var ruleText = model.getSelector(true)
         var isStyledComponent = model.wzElement == "elementRule" && model.wzName == "--styled--"
         var isInsideStyledComponent = ctx.__isStyledComponent
-        # log 'isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName', isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName
+        # loog 'isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName', isStyledComponent, ctx.__isStyledComponent, isInsideStyledComponent, model.wzName
         if isInsideStyledComponent && model.wzElement === 'ampersand'
             # log 1
             var text = ['+', '~'].indexOf(model.wzName[0]) > -1 ? ' ' + model.wzName : model.wzName
@@ -280,7 +280,7 @@
 				
 				var name = prop.name
 				var value = prop.value
-                # log 'getWriteProperty', prop.name, prop.value, prop.wzElement, prop.wzName, prop.get_js, prop.prop && prop.prop.get_js
+                # loog 'getWriteProperty', prop.name, prop.value, prop.wzElement, prop.wzName, prop.get_js, prop.prop && prop.prop.get_js
 				if prop.wzElement && prop.prop && prop.prop.get_svg
 					if prop.wzElement === "background_image"
 						_ prop.prop.get_svg

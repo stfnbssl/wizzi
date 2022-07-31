@@ -57,7 +57,7 @@
 					optional
 			callback
 			+
-			# log 'wizzi-repo.index.createStoreFactory.options', options
+			# loog 'wizzi-repo.index.createStoreFactory.options', options
 			+
 			var storeKind = options.storeKind || 'filesystem'
 			if checkStoreKind(storeKind) == false
@@ -120,7 +120,7 @@
 			param fileService
             param options
             param callback
-            log 'wizzi-repo.folderFilesInfoByPath', folderPath
+            # loog 'wizzi-repo.folderFilesInfoByPath', folderPath
             set options = options || { deep: true }
             _ fileService.getFilesAsync
                 @ folderPath

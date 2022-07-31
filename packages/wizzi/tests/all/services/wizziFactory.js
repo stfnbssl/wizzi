@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -15,8 +15,8 @@ var _ = require('lodash');
 var file = require('wizzi-utils').file;
 var verify = require('wizzi-utils').verify;
 
-var wizziFactory = require('../../lib/services/wizziFactory');
-var mocks = require('../mocks/misc');
+var wizziFactory = require('../../../lib/services/wizziFactory');
+var mocks = require('../../mocks/misc');
 
 describe("wizziFactory", function() {
     
@@ -39,10 +39,10 @@ describe("wizziFactory", function() {
              }
          }, function(err, wf) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
-            console.log('wf.__loadMTree', wf.__loadMTree);
+            // loog 'wf.__loadMTree', wf.__loadMTree
             wizziFactoryInstance = wf;
             done();
         })
@@ -54,10 +54,10 @@ describe("wizziFactory", function() {
             __productionManager: pman
          }, function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
-            console.log('wizziModel', wizziModel);
+            // loog 'wizziModel', wizziModel
             testsMock1Model = wizziModel;
             expect(wizziModel).to.be.an('object');
             expect(wizziModel.wzName).to.be.a('string');
@@ -72,7 +72,7 @@ describe("wizziFactory", function() {
     });
     it("should retrieve a model transformer", function() {
         var transformModel = wizziFactoryInstance.getModelTransformer('tests/trans1');
-        console.log('should retrieve a model transformer. transformModel', transformModel);
+        // loog 'should retrieve a model transformer. transformModel', transformModel
         expect(transformModel.trans).to.be.a('function');
     });
     it("should transform a model from a pre loaded wizzimodel", function(done) {
@@ -80,7 +80,7 @@ describe("wizziFactory", function() {
             from: 'stefi'
          }, function(err, transformedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(transformedModel).to.be.an('object');
@@ -100,7 +100,7 @@ describe("wizziFactory", function() {
             from: 'stefi'
          }, function(err, artifact) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(artifact).to.be.a('string');
@@ -116,7 +116,7 @@ describe("wizziFactory", function() {
              }
          }, 'tests/gen1', function(err, artifact) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(artifact).to.be.a('string');
@@ -131,14 +131,14 @@ describe("wizziFactory", function() {
         expect(schemaDefinition.name).to.be('tests');
     });
     it("should load an mTree", function(done) {
-        console.log('wizziFactoryInstance.__loadMTree', wizziFactoryInstance.__loadMTree);
+        // loog 'wizziFactoryInstance.__loadMTree', wizziFactoryInstance.__loadMTree
         wizziFactoryInstance.loadMTree(path.join(__dirname, 'ittf', 'html', 'simple.html.ittf'), {
             from: 'stefi'
          }, function(err, mTree) {
             if (err) {
                 return callback(err);
             }
-            console.log('mTree', mTree);
+            // loog 'mTree', mTree
             expect(mTree).to.be.an('object');
             expect(mTree.nodes[0].n).to.be.a('string');
             expect(mTree.nodes[0].n).to.be('html');

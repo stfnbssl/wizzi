@@ -45,7 +45,7 @@ module
 							{
 								@ sourceType 'module'
 						@ syntaxOutFile null
-            # log 'wizzi-tools.wizzify_js.options', options
+            # loog 'wizzi-tools.wizzify_js.options', options
 			_ jswizzifier.getWizziIttf
                 @ codeSnippet
                 @ options
@@ -66,7 +66,7 @@ module
 								@ sourceType 'module'
 								@ ts_or_flow 'typescript'
 						@ syntaxOutFile null
-            # log 'wizzi-tools.wizzify_ts.options', options
+            # loog 'wizzi-tools.wizzify_ts.options', options
 			_ jswizzifier.getWizziIttf
                 @ codeSnippet
                 @ options
@@ -246,7 +246,7 @@ module
 
 			try
 				var wizzifier = md['wizzify_' + schemaName.toLowerCase()]
-				# log 'wizzi-tools.wizzify', schemaName, wizzifier
+				# loog 'wizzi-tools.wizzify', schemaName, wizzifier
 				if !wizzifier
 					return
 						_ callback

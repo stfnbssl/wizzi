@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -53,7 +53,7 @@ var PluginsManager = (function () {
                 ));
             }
         }
-        // log 'wizzi.pluginsManager.initialize.options', options
+        // loog 'wizzi.pluginsManager.initialize.options', options
         var itemsOptions = options.items;
         if (typeof(itemsOptions) === 'undefined' || itemsOptions == null) {
             options.items = [];
@@ -83,12 +83,12 @@ var PluginsManager = (function () {
         
         var itemsOptions = options.items;
         var pluginsBaseFolder = options.pluginsBaseFolder || process.cwd();
-        // log 'pluginsBaseFolder', pluginsBaseFolder
+        // loog 'pluginsBaseFolder', pluginsBaseFolder
         var packagePathCache = this.packagePathCache;
         
         function resolveNext(i) {
             
-            // log 'itemsOptions', itemsOptions
+            // loog 'itemsOptions', itemsOptions
             if (i >= itemsOptions.length) {
                 return callback(null, itemsOptions);
             }
@@ -103,7 +103,7 @@ var PluginsManager = (function () {
                         }
                         Object.keys(moduleObject).forEach(function(key) {
                             
-                            // log 'plugin key', key
+                            // loog 'plugin key', key
                             if (!plugin.hasOwnProperty(key)) {
                                 plugin[key] = moduleObject[key];
                             }
@@ -150,7 +150,7 @@ var PluginsManager = (function () {
                     try {
                         // load the module now
                         moduleObject = require(modulePath);
-                        // log 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
+                        // loog 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
                     } 
                     catch (ex) {
                         return callback(error('ModuleError', 'resolveModule', 'Error loading plugin module ' + modulePath + ', message: ' + ex.message + '\n' + ex.stack));
@@ -256,7 +256,7 @@ var PluginsManager = (function () {
             that.factoryPlugins.push(factoryPlugin);
             var providesAdded = that.addPluginProvides(factoryPlugin);
             if (providesAdded && providesAdded.__is_error) {
-                console.log('__is_error ', providesAdded);
+                console.log("[31m%s[0m", '__is_error ', providesAdded);
                 return callback(providesAdded);
             }
             return callback(null);
@@ -274,7 +274,7 @@ var PluginsManager = (function () {
             );
         }
         for (var k in factoryPlugin) {
-            // log 'wizzi.pluginsManager.validatefactoryPlugin.key', k
+            // loog 'wizzi.pluginsManager.validatefactoryPlugin.key', k
         }
         
         var methodNames = [
@@ -312,7 +312,7 @@ var PluginsManager = (function () {
                 return error('InvalidFactoryPlugin', 'validateFactoryPlugin', 'Missing property: ' + propName + ' in provides object');
             }
         }
-        // log 'validateFactoryPlugin', factoryPlugin.getName(), true
+        // loog 'validateFactoryPlugin', factoryPlugin.getName(), true
         return {
                 __is_error: false
              };
@@ -429,7 +429,7 @@ var PluginsManager = (function () {
                 'InvalidArgument', 'getModelFactory', { parameter: 'schemaName', message: 'The schemaName parameter must be a string. Received: ' + schemaName }
             );
         }
-        // log 'wizzi.services.PluginsManager.getModelFactory: schemaName, textOnlyMockBaseDir ' + schemaName, textOnlyMockBaseDir
+        // loog 'wizzi.services.PluginsManager.getModelFactory: schemaName, textOnlyMockBaseDir ' + schemaName, textOnlyMockBaseDir
         var found = null,
             foundInPlugin = null,
             pluginVersion = null,
@@ -438,13 +438,13 @@ var PluginsManager = (function () {
         var i, i_items=this.factoryPlugins, i_len=this.factoryPlugins.length, item;
         for (i=0; i<i_len; i++) {
             item = this.factoryPlugins[i];
-            // log 'wizzi.pluginsManager.getModelFactory.searching model loader', schemaName, ' in plugin ', item.getName()
+            // loog 'wizzi.pluginsManager.getModelFactory.searching model loader', schemaName, ' in plugin ', item.getName()
             found = item.getModelFactory(schemaName, textOnlyMockBaseDir)
             ;
             if (found && found.__is_error) {
                 return found;
             }
-            // log 'found', found, found && verify.isFunction(found.createLoadModel)
+            // loog 'found', found, found && verify.isFunction(found.createLoadModel)
             if (found && verify.isFunction(found.createLoadModel)) {
                 result = found;
                 foundInPlugin = item.getFilename();
@@ -469,7 +469,7 @@ var PluginsManager = (function () {
                 'InvalidArgument', 'getModelTransformer', { parameter: 'transformerName', message: 'The transformerName parameter must be a string. Received: ' + transformerName }
             );
         }
-        // log 'wizzi.pluginsManager.getModelTransformer.transformerName: ' + transformerName
+        // loog 'wizzi.pluginsManager.getModelTransformer.transformerName: ' + transformerName
         var found = null,
             foundInPlugin = null,
             pluginVersion = null,
@@ -478,13 +478,13 @@ var PluginsManager = (function () {
         var i, i_items=this.factoryPlugins, i_len=this.factoryPlugins.length, item;
         for (i=0; i<i_len; i++) {
             item = this.factoryPlugins[i];
-            // log 'searching transformer ', transformerName, ' in plugin', item.getName()
+            // loog 'searching transformer ', transformerName, ' in plugin', item.getName()
             found = item.getModelTransformer(transformerName);
             ;
             if (found && found.__is_error) {
                 return found;
             }
-            // log 'found', found, found && verify.isFunction(found.trans)
+            // loog 'found', found, found && verify.isFunction(found.trans)
             if (found && verify.isFunction(found.trans)) {
                 result = found;
                 foundInPlugin = item.getFilename();
@@ -510,7 +510,7 @@ var PluginsManager = (function () {
                 'InvalidArgument', 'getArtifactGenerator', { parameter: 'artifactName', message: 'The artifactName parameter must be a string. Received: ' + artifactName }
             );
         }
-        // log 'PluginsManager.getArtifactGenerator.artifactName: ' + artifactName
+        // loog 'PluginsManager.getArtifactGenerator.artifactName: ' + artifactName
         var found = null,
             foundInPlugin = null,
             pluginVersion,
@@ -519,13 +519,13 @@ var PluginsManager = (function () {
         var i, i_items=this.factoryPlugins, i_len=this.factoryPlugins.length, item;
         for (i=0; i<i_len; i++) {
             item = this.factoryPlugins[i];
-            // log 'searching artifact ', artifactName, ' in module', item.getName()
+            // loog 'searching artifact ', artifactName, ' in module', item.getName()
             found = item.getArtifactGenerator(artifactName);
             ;
             if (found && found.__is_error) {
                 return found;
             }
-            // log 'found', found, found && verify.isFunction(found.gen)
+            // loog 'found', found, found && verify.isFunction(found.gen)
             if (found && verify.isFunction(found.gen)) {
                 result = found;
                 foundInPlugin = item.getFilename();
@@ -551,7 +551,7 @@ var PluginsManager = (function () {
                 'InvalidArgument', 'getSchemaDefinition', { parameter: 'schemaName', message: 'The schemaName parameter must be a string. Received: ' + schemaName }
             );
         }
-        // log 'PluginsManager.getSchemaObject.schemaName: ' + schemaName
+        // loog 'PluginsManager.getSchemaObject.schemaName: ' + schemaName
         var found = null,
             foundInPlugin = null,
             result = null;
@@ -559,13 +559,13 @@ var PluginsManager = (function () {
         var i, i_items=this.factoryPlugins, i_len=this.factoryPlugins.length, item;
         for (i=0; i<i_len; i++) {
             item = this.factoryPlugins[i];
-            // log 'searching wizzi schema definition', schemaName, ' in plugin ', item.getName()
+            // loog 'searching wizzi schema definition', schemaName, ' in plugin ', item.getName()
             found = item.getSchemaDefinition(schemaName);
             ;
             if (found && found.__is_error) {
                 return found;
             }
-            // log 'found', found
+            // loog 'found', found
             if (found && verify.isObject(found)) {
                 result = found;
                 foundInPlugin = item.getFilename();
@@ -636,7 +636,7 @@ function resolveModule(pluginsBaseFolder, modulePath, callback) {
             try {
                 // load the module now
                 moduleObject = require(modulePath);
-                // log 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
+                // loog 'wizzi.services.pluginManager.resolveModule: modulePath, moduleObject', modulePath, moduleObject
             } 
             catch (ex) {
                 return callback(error('ModuleError', 'resolveModule', 'Error loading plugin module ' + modulePath + ', message: ' + ex.message + '\n' + ex.stack));

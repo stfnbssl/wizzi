@@ -5,7 +5,7 @@
 		param err
 		param ${result}
 		if err
-            log 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-			log 'err', err
+            error 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+			error 'err', err
 			throw new Error(err.message)
 		$hook

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\root\index.js.ittf
-    utc time: Sat, 30 Jul 2022 03:36:39 GMT
+    utc time: Sun, 31 Jul 2022 09:15:50 GMT
 */
 'use strict';
 const path = require('path');
@@ -15,7 +15,7 @@ function checkConfig(name) {
 module.exports = () => {
 
     const args = minimist(process.argv.slice(2));
-    console.log('args', args, __filename);
+    // loog 'args', args
     let cmd = args._[0] || 'generate';
     if (args.version || args.v) {
         cmd = 'version';
@@ -23,7 +23,7 @@ module.exports = () => {
     if (args.help || args.h || args['?']) {
         cmd = 'help';
     }
-    console.log('cmd', cmd, __filename);
+    // loog 'cmd', cmd
     switch (cmd) {
         case 'generate': {
             require('./cmds/generate')();

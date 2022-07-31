@@ -656,12 +656,6 @@
               "statements": []
             },
             {
-              "tag": "log",
-              "name": "log",
-              "value": "'wzinitialize.combinator', this.wzName",
-              "statements": []
-            },
-            {
               "tag": "var",
               "name": "xvar",
               "value": "acc = []",
@@ -731,7 +725,9 @@
               "statements": []
             }
           ],
-          "comments": []
+          "comments": [
+            "loog 'wzinitialize.combinator', this.wzName"
+          ]
         }
       ],
       "comments": []
@@ -778,12 +774,6 @@
           "isKnownMethod": true,
           "params": [],
           "statements": [
-            {
-              "tag": "log",
-              "name": "log",
-              "value": "'wzinitialize.parentRule', this.wzName",
-              "statements": []
-            },
             {
               "tag": "var",
               "name": "xvar",
@@ -918,7 +908,9 @@
               "statements": []
             }
           ],
-          "comments": []
+          "comments": [
+            "loog 'wzinitialize.parentRule', this.wzName"
+          ]
         },
         {
           "name": "getValue",
@@ -1026,12 +1018,6 @@
           "params": [],
           "statements": [
             {
-              "tag": "log",
-              "name": "log",
-              "value": "'wzinitialize.pseudoClass', this.wzName",
-              "statements": []
-            },
-            {
               "tag": "var",
               "name": "xvar",
               "value": "paramSelectorNames = []",
@@ -1057,7 +1043,9 @@
               "statements": []
             }
           ],
-          "comments": []
+          "comments": [
+            "loog 'wzinitialize.pseudoClass', this.wzName"
+          ]
         },
         {
           "name": "getValue",

@@ -34,7 +34,7 @@
 					_ showstack(options)
 					throw new Error('parent is null.' + util.inspect(ast, 4))
 			if options.verbose
-				log 'ast.type', ast.type
+				info 'ast.type', ast.type
 			var type = ast.type === 'arguments' ? 'xarguments' : ast.type
 			var formatter = format[type]
 			if formatter
@@ -296,7 +296,7 @@
 						_ ret.children.push(item)
 						# throw new Error('xarguments. expected selector node: ' + JSON.stringify(node, null, 2))
 					#
-						log '*****', 'xarguments', 'item.tag', item.tag, item.name, isTextualNode(item.children)
+						# loog '*****', 'xarguments', 'item.tag', item.tag, item.name, isTextualNode(item.children)
 						if item.tag === 'selector' && isTextualNode(item.children)
 							set temp.name = getTextList(item, ' ')
 						else

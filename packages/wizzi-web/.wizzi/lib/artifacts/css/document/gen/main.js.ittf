@@ -22,8 +22,8 @@
 			param ctx
 			param callback
 
-			# log 'model', util.inspect(model, { depth: 3 })
-			# log 'enter', myname
+			# loog 'model', util.inspect(model, { depth: 3 })
+			# loog 'enter', myname
 
             _ main_init
                 @ model
@@ -36,7 +36,7 @@
 				(
 					@ model
 					f_cb()
-						# log 'exit', myname
+						# loog 'exit', myname
                         try
                             var postCssResult
                                 _ postcss
@@ -124,7 +124,7 @@
 		param model
 		param ctx
 
-        # log 'css.document.gen.main, ctx.values', ctx.values, !!ctx.values.noGeneratorComments
+        # loog 'css.document.gen.main, ctx.values', ctx.values, !!ctx.values.noGeneratorComments
 		
 		if (!!ctx.values.noGeneratorComments) == false
 			_ ctx.w('/*')

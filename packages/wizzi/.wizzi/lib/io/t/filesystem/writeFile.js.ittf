@@ -22,12 +22,12 @@
 						@ projectId
 						@ path_string
 				
-			# log 'wizzi-io.filesystem.writeFile.fsPath', fsPath
+			# loog 'wizzi-io.filesystem.writeFile.fsPath', fsPath
 
 			_ file.writeFile
 				@ fsPath
 				@ content
 				f_cb( result )
-					# log 'wizzi-io.filesystem.writeFile.fsPath', fsPath, 'result', result
+					# loog 'wizzi-io.filesystem.writeFile.fsPath', fsPath, 'result', result
 					return 
 						_ callback(null, result)

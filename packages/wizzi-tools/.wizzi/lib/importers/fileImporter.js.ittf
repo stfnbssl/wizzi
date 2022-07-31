@@ -30,7 +30,7 @@
 		var baseExportPathNorm = verify.replaceAll(baseExportPath, '\\', '/')
 		var folderNorm = dirname.substr(baseImportPathNorm.length + 1)
 
-		# log 'importFile', baseImportPath, folderNorm, name, schema, extension
+		# loog 'importFile', baseImportPath, folderNorm, name, schema, extension
 
 		var source
 			_ vfile.read
@@ -53,7 +53,7 @@
             set schema = extension
 
 		if !packageRoot.canBeWizzified(schema)
-			# log '0', folderNorm, basename
+			# loog '0', folderNorm, basename
 			if folderNorm.length > 0
 				_ vfile.write
 					_ path.join
@@ -76,8 +76,8 @@
 					{
 						@ embedTag 'vue'
 						@ isForVue true
-			log ' --- wizzify from ' + filePath
-			log '             schema ' + schema
+			info ' --- wizzify from ' + filePath
+			info '             schema ' + schema
 			_ packageRoot.wizzify
 				@ schema
 				@ source
@@ -85,21 +85,21 @@
 				f_cb_no_err( result )
 					var outpath
 					if folderNorm.length > 0
-						# log '1', folderNorm, name + '.' + extension + '.ittf'
+						# loog '1', folderNorm, name + '.' + extension + '.ittf'
 						set outpath
 							_ path.join
 								@ baseExportPathNorm
 								@ folderNorm
 								@ name + '.' + extension + '.ittf'
 					else
-						# log '2', folderNorm, name + '.' + extension + '.ittf'
+						# loog '2', folderNorm, name + '.' + extension + '.ittf'
 						set outpath
 							_ path.join
 								@ baseExportPathNorm
 								@ name + '.' + extension + '.ittf'
-					log '             to ' + outpath
+					info '             to ' + outpath
 					if err
-						log 'Error', outpath, err
+						error 'Error', outpath, err
 						_ vfile.write
 							@ outpath
 							@ err

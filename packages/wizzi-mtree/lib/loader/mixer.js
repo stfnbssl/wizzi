@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
 */
 'use strict';
@@ -162,7 +162,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
             if (index === len) {
                 var firstSemanticNode = getFirstSemanticNode(mixedNodesAccumulation);
                 
-                // log 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
+                // loog 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
                 if (firstSemanticNode != null) {
                     firstSemanticNode.__firstOfMixedNodes = true;
                 }

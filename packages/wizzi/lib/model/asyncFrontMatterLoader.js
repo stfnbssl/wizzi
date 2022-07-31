@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\model\asyncFrontMatterLoader.js.ittf
 */
 'use strict';
@@ -10,12 +10,12 @@ var async = require('async');
 var verify = require('wizzi-utils').verify;
 
 function loadMany(modelInfos, callback) {
-    // log '+ asyncFrontMatterLoader.loadMany, modelInfos', modelInfos
+    // loog '+ asyncFrontMatterLoader.loadMany, modelInfos', modelInfos
     async.map(modelInfos, _load_item, function(err, frontMatters) {
         if (err) {
             return callback(err);
         }
-        // log 'asyncFrontMatterLoader.loadMany, frontMatters', frontMatters
+        // loog 'asyncFrontMatterLoader.loadMany, frontMatters', frontMatters
         return callback(null, frontMatters);
     })
 }
@@ -24,13 +24,13 @@ function load(modelInfo, callback) {
         if (err) {
             return callback(err);
         }
-        // log 'asyncFrontMatterLoader.load, frontMatter', frontMatter
+        // loog 'asyncFrontMatterLoader.load, frontMatter', frontMatter
         return callback(null, frontMatter);
     })
 }
 //
 function _load_item(masterModelInfo, callback) {
-    // log '+ asyncFrontMatterLoader._load_item, masterModelInfo', masterModelInfo.srcFullPath()
+    // loog '+ asyncFrontMatterLoader._load_item, masterModelInfo', masterModelInfo.srcFullPath()
     var srcFullPath = masterModelInfo.srcFullPath();
     masterModelInfo.getLoadFrontMatter(function(err, frontMatterLoader) {
         if (err) {

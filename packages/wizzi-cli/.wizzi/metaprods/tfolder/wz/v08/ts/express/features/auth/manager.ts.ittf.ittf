@@ -41,8 +41,8 @@ $group
                     :any
                 param done
                     :any
-                log '============================================================'
-                log 'features.auth.manager.serializeUser', 'authuser', authuser
+                info '============================================================'
+                info 'features.auth.manager.serializeUser', 'authuser', authuser
                 $$ _ done(null, authuser.id)
                 _ done(null, authuser)
         _ passport.deserializeUser
@@ -51,8 +51,8 @@ $group
                     :string
                 param done
                     :any
-                log '============================================================'
-                log 'features.auth.manager.deserializeUser', 'id', id
+                info '============================================================'
+                info 'features.auth.manager.deserializeUser', 'id', id
                 ${'$'}if wzCtx.Build.useMongoDb
                     return
                         _ done(null, id)
@@ -63,7 +63,7 @@ $group
                                 :any
                             param authuser
                                 :any
-                            log 'features.auth.manager.deserializeUser', 'err', err,
+                            # loog 'features.auth.manager.deserializeUser', 'err', err,
                                 \b 'authuser', authuser
                             _ done(err, authuser || false)
                 ${'$'}else 
@@ -97,8 +97,8 @@ $group
             param callback
                 :any 
                 :optional 
-            log '============================================================'
-            log 'auth.manager.authenticate', 'strategyName', strategyName,
+            # loog '============================================================'
+            # loog 'auth.manager.authenticate', 'strategyName', strategyName,
                 \b 'options', options
             return passport.authenticate(strategyName, options, callback)
     ${'$'}if wzCtx.Build.useMongoDb

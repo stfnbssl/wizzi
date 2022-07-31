@@ -88,8 +88,8 @@ module
                                 _ printObject
                                     @ 'job.fsJson'
                                     @ fsJson
-                                log 'job.result', Object.keys(result)
-                                log 'job.fsJson', Object.keys(fsJson)
+                                # loog 'job.result', Object.keys(result)
+                                # loog 'job.fsJson', Object.keys(fsJson)
                                 var files = {}
                                 _ fsJson.toFiles
                                     {

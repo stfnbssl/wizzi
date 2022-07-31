@@ -27,12 +27,12 @@
 				foreach item in Object.keys(this.extends)
 					set rule = this.findRuleBySelector(item)
 					if rule
-						# log 'rule.wzName, rule.ruleParts, rule.getSelector()', rule.wzName, rule.ruleParts, rule.getSelector(), 'rule.wzParent.wzName', rule.wzParent.wzName, 'rule.wzElement', rule.wzElement
+						# loog 'rule.wzName, rule.ruleParts, rule.getSelector()', rule.wzName, rule.ruleParts, rule.getSelector(), 'rule.wzParent.wzName', rule.wzParent.wzName, 'rule.wzElement', rule.wzElement
 						foreach ext in this.extends[item]
-							# log 'ext.wzParent.getSelector()',ext.wzParent.getSelector(),ext.wzParent.wzName
+							# loog 'ext.wzParent.getSelector()',ext.wzParent.getSelector(),ext.wzParent.wzName
 							_ rule.addOtherRuleSelector(ext.wzParent.getSelector(), this.wzSourceLineInfo)
 						set rule.ruleParts = rule.getAscendingRuleParts()
-						# log 'rule.ruleParts', rule.ruleParts, rule.getSelector()
+						# loog 'rule.ruleParts', rule.ruleParts, rule.getSelector()
 
 		m findRuleBySelector
 			param name
@@ -71,9 +71,9 @@
 		r rule/s
 
 		m wzInitialize
-			# log '*** rule.initialize.start', this.wzElement, this.wzName
+			# loog '*** rule.initialize.start', this.wzElement, this.wzName
 			set this.parentRuleParts = this.getAscendingRuleParts()
-			# log '*** rule.initialize.end', this.wzElement, this.wzName, 'this.parentRuleParts', this.parentRuleParts.join(',')
+			# loog '*** rule.initialize.end', this.wzElement, this.wzName, 'this.parentRuleParts', this.parentRuleParts.join(',')
 			set this.canHaveContent = ['idRule', 'classRule', 'elementRule', 'gtRule', 'ampersand', 'placeholder'].indexOf(this.wzElement) > -1
 
 		m findRuleBySelector
@@ -132,13 +132,13 @@
 								@ prop prop
                                 @ styledprop prop.styledprop
 					elif verify.isNotEmpty(prop.wzName)
-                        # log 'verify.isNotEmpty(prop.wzName)', prop.wzTag, prop.wzName, prop.styledprop
+                        # loog 'verify.isNotEmpty(prop.wzName)', prop.wzTag, prop.wzName, prop.styledprop
 						_ retval.push({ name: prop.wzTag, value: prop.wzName })
                     else
                         _ retval.push({ name: prop.wzTag, value: null, styledprop: prop.styledprop })
 					for var attr in prop
 						if isPropValue(attr, prop[attr])
-                            # log 'if isPropValue(attr, prop[attr])', prop.wzTag, attr
+                            # loog 'if isPropValue(attr, prop[attr])', prop.wzTag, attr
 							_ retval.push({ name: prop.wzTag + '-' + verify.replaceAll(attr, '_', '-'), value: prop[attr] })
 			return retval
 
@@ -149,7 +149,7 @@
 				set thisRuleParts = this.wzName.trim().split(',')
 				foreach ors in this.otherRuleSelectors
 					_ thisRuleParts.push(ors.wzName)
-			# log '*** thisRuleParts 1', thisRuleParts.join(',')
+			# loog '*** thisRuleParts 1', thisRuleParts.join(',')
 			if thisRuleParts.length > 0 
 				if this.wzElement === 'idRule'
 					set thisRuleParts[0] = '#' + thisRuleParts[0]
@@ -161,10 +161,10 @@
 					set thisRuleParts[0] = '%' + thisRuleParts[0]
 				elif this.wzElement === 'ampersand'
 					set thisRuleParts[0] = '&' + thisRuleParts[0]
-			# log '*** thisRuleParts 2', thisRuleParts.join(',')
+			# loog '*** thisRuleParts 2', thisRuleParts.join(',')
 			if this.wzParent && this.wzParent.getAscendingRuleParts
 				var parentRuleParts = this.wzParent.getAscendingRuleParts()
-				# log '*** parentRuleParts 3', parentRuleParts.join(',')
+				# loog '*** parentRuleParts 3', parentRuleParts.join(',')
 				if parentRuleParts.length > 0
 					var ret = []
 					foreach prp in parentRuleParts

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\pretty\ittfHtmlPrettifier.js.ittf
 */
 'use strict';
@@ -101,7 +101,7 @@ function toHtmlPretty(node, ctx) {
         }
     }
     
-    // log 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
+    // loog 'wizzi-utils.ittfHtmlPrettifier.fragmentName', node.fragmentName, ctx.fragments
     if (node.isMixinCall()) {
         var dId = ctx.fragments[node.fragmentName] ? ctx.fragments[node.fragmentName].id : null;
         if (dId) {

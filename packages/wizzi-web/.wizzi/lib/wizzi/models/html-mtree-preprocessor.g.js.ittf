@@ -79,7 +79,7 @@
                 set node.n = '::data-array'
                 return true
             elif ['ittf-panel', 'js-panel', 'bash-panel'].indexOf(node.n) >-1
-                log '%$%$%$%$%$'
+                # loog '%$%$%$%$%$'
                 set node.wzMTreeData
                     {
                         @ mTree state.mTree
@@ -150,7 +150,7 @@
 			param mTree
 			param context
 
-			# log 'wizzi-web.html.preprocess.mTree', mTree
+			# loog 'wizzi-web.html.preprocess.mTree', mTree
 
 			var state = {}
 			foreach item in mTree.nodes[0].children
@@ -203,7 +203,7 @@
 		param node
 		param newN
 		
-		# log 'wrapChild', node.children
+		# loog 'wrapChild', node.children
 
 		_ copyNodeAttrsDeep
 			@ node

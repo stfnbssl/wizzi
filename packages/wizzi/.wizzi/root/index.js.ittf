@@ -112,7 +112,7 @@
 			{ options
 			callback
 			+
-			# log 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
+			# loog 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
 			+
 			set options.repo
 				{
@@ -130,7 +130,7 @@
 				{ fsJson
 			callback
 			+
-			# log 'wizzi.index.jsonFactory.fsJson', options.fsJson
+			# loog 'wizzi.index.jsonFactory.fsJson', options.fsJson
 			+
 			set options.repo
 				{
@@ -146,7 +146,7 @@
 			{ options
 			callback
 			+
-			# log 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
+			# loog 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
 			+
 			set options.repo
 				{

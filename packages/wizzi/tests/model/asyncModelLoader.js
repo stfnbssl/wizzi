@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\model\asyncModelLoader.js.ittf
 */
 'use strict';
@@ -34,10 +34,10 @@ describe("asyncModelLoader", function() {
         mi.productionManager(mocks.getProductionManager(path.join(__dirname, 'ittf'), modelPaths))
         asyncModelLoader.load(mi, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
-            console.log('result.keys()', Object.keys(result));
+            // loog 'result.keys()', Object.keys(result)
             expect(result).to.be.an('object');
             done();
         })
@@ -51,10 +51,10 @@ describe("asyncModelLoader", function() {
         mi.productionManager(mocks.getProductionManager(path.join(__dirname, 'ittf'), modelPaths))
         asyncModelLoader.load(mi, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
-            console.log('result.keys()', Object.keys(result));
+            // loog 'result.keys()', Object.keys(result)
             expect(result).to.be.an('object');
             expect(result.alfa).to.be.a('string');
             expect(result.alfa).to.be('stefi');

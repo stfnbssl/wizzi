@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\wizzi\models\html-mtree-preprocessor.g.js.ittf
 */
 'use strict';
@@ -100,8 +100,9 @@ function preprocessNode(node, state) {
         node.n = '::data-array';
         return true;
     }
+    
+    // loog '%$%$%$%$%$'
     else if (['ittf-panel', 'js-panel', 'bash-panel'].indexOf(node.n) >-1) {
-        console.log('%$%$%$%$%$');
         node.wzMTreeData = {
             mTree: state.mTree
          };
@@ -227,7 +228,7 @@ function extractRemove(node, n) {
     }
 }
 function wrapChilds(node, newN) {
-    // log 'wrapChild', node.children
+    // loog 'wrapChild', node.children
     copyNodeAttrsDeep(node, newN)
     var children = node.children;
     newN.parent = node.parent;

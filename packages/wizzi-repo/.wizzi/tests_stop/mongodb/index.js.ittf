@@ -21,7 +21,7 @@
 			f_cb_no_err()
 				tobe_object( err )
 				tobe_true( err.__is_error )
-				# log 'should return InvalidStoreKind error 2.err', err
+				# loog 'should return InvalidStoreKind error 2.err', err
 				tobe_string( err.name, InvalidArgument )
 				tobe_string( err.info.parameter, storeKind )
 				_ done()

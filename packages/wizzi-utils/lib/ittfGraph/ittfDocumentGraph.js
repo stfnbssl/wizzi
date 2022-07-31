@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfGraph\ittfDocumentGraph.js.ittf
 */
 'use strict';
@@ -58,7 +58,7 @@ var IttfDocumentGraph = (function () {
         return node;
     }
     IttfDocumentGraph.prototype.append = function(sb, indent) {
-        // log 'sb',sb
+        // loog 'sb',sb
         sb.push(indentTabs(indent) + this.name + (this.value && this.value.length > 0 ? ' ' + this.value : ''))
         var i, i_items=this.children, i_len=this.children.length, node;
         for (i=0; i<i_len; i++) {
@@ -137,13 +137,13 @@ var IttfDocumentGraph = (function () {
             if (err) {
                 return callback(err);
             }
-            // log '__loadMTree, this.file', that.file
+            // loog '__loadMTree, this.file', that.file
             options.file = file;
             if (options.createEmpty) {
                 return callback(null, that);
             }
             
-            // log 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is an object'
+            // loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is an object'
             if (verify.isObject(mTreeOrFilepathOrContent)) {
                 if (verify.isArray(mTreeOrFilepathOrContent.nodes) && mTreeOrFilepathOrContent.nodes.length == 1) {
                     that.loadFromNode(mTreeOrFilepathOrContent.nodes[0], mTreeOrFilepathOrContent.$params);
@@ -161,26 +161,26 @@ var IttfDocumentGraph = (function () {
                 return callback(null, that);
             }
             
-            // log 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is a string'
+            // loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is a string'
             else if (verify.isNotEmpty(mTreeOrFilepathOrContent)) {
                 that.model = {
                     uri: (options.fromString ? 'string://' : mTreeOrFilepathOrContent), 
                     dirname: (options.fromString ? '' : path.dirname(mTreeOrFilepathOrContent))
                  };
                 
-                // log 'ittfDocumentGraph.__loadMTree. Loading from text string'
+                // loog 'ittfDocumentGraph.__loadMTree. Loading from text string'
                 if (options.fromString) {
                     asIsLoader.createFromString(mTreeOrFilepathOrContent, options, function(err, asisMTree) {
                         if (err) {
                             return callback(err);
                         }
                         that.content = asisMTree.content;
-                        // log 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+                        // loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
                         that.loadFromNode(asisMTree.nodes[0], asisMTree.$params)
                         return callback(null, that);
                     })
                 }
-                // log 'ittfDocumentGraph.__loadMTree. Loading from file'
+                // loog 'ittfDocumentGraph.__loadMTree. Loading from file'
                 // load from file using the vfile class
                 else {
                     file.isFile(mTreeOrFilepathOrContent, function(err, isFile) {
@@ -200,7 +200,7 @@ var IttfDocumentGraph = (function () {
                                     return callback(err);
                                 }
                                 that.content = asisMTree.content;
-                                // log 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+                                // loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
                                 that.loadFromNode(asisMTree.nodes[0], asisMTree.$params)
                                 that.model.basename = path.basename(mTreeOrFilepathOrContent);
                                 var ss = that.model.basename.split('.');
@@ -213,7 +213,7 @@ var IttfDocumentGraph = (function () {
                                         ;
                                     }
                                 }
-                                // log 'ittfDocumentGraph.loadFrom.ittf.model', that.model
+                                // loog 'ittfDocumentGraph.loadFrom.ittf.model', that.model
                                 return callback(null, that);
                             })
                         }
@@ -265,7 +265,7 @@ var IttfDocumentGraph = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.ittfDocumentGraph.createFrom. Received ittfDocuGraph', ittfDocuGraph.name, ittfDocuGraph.value
+            // loog 'wizzi-utils.ittfDocumentGraph.createFrom. Received ittfDocuGraph', ittfDocuGraph.name, ittfDocuGraph.value
             if (options.clean) {
                 clean(ittfDocuGraph);
             }
@@ -325,7 +325,7 @@ var IttfDocumentGraph = (function () {
     }
     IttfDocumentGraph.prototype.isReferenceToIttf = function() {
         
-        // log 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
+        // loog 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
         if (verify.isNotEmpty(this.getValueStripComments())) {
             return verify.endsWith(this.getValueStripComments(), '.ittf');
         }
@@ -477,7 +477,7 @@ var IttfDocumentGraph = (function () {
                 }
                 if (that.isCodeDeclare() == false && that.isMultilineDeclare() == false) {
                     async.map(that.children, function(c, mapcallback) {
-                        // log 'return analizeFragment, c.name', c.name
+                        // loog 'return analizeFragment, c.name', c.name
                         if (c.commentState == 0) {
                             return c.analize(ctx, mapcallback);
                         }
@@ -529,7 +529,7 @@ var IttfDocumentGraph = (function () {
         if (this.isReferenceToIttf() && !(ctx && ctx.rootFolder)) {
             return callback();
         }
-        // log '******* analizeFragment', this.name, this.value
+        // loog '******* analizeFragment', this.name, this.value
         var r = this.root();
         if (typeof r.model === 'undefined') {
             return callback(new Error('wizzi-utils.ittfDocumentGraph.analize require a `model` object in the root node. For example when created calling ittfDocumentGraph.createFrom(documentUri)'));
@@ -561,7 +561,7 @@ var IttfDocumentGraph = (function () {
             if (err) {
                 return callback(err);
             }
-            console.log(11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath);
+            console.log(11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath, __filename);
             
             // log 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
             
@@ -579,7 +579,7 @@ var IttfDocumentGraph = (function () {
                 if (ctx && ctx.ittfBasePath && ctx.ittfFsNode) {
                     var fragmentDocument = ctx.ittfFsNode.searchDocument(fragmentPath);
                     if (!fragmentDocument) {
-                        console.log(14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath));
+                        console.log(14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath), __filename);
                         fragment.__is_error = true;
                         fragment.message = 'NotFound in ittfFsNode documents.';
                         r.errorFragments.push(fragment);
@@ -588,7 +588,7 @@ var IttfDocumentGraph = (function () {
                         }
                     }
                     else {
-                        console.log(15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id);
+                        console.log(15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id, __filename);
                         fragment.id = fragmentDocument.id;
                         if (that.isReferenceToIttf()) {
                             if (ctx.ittfReferences) {
@@ -732,7 +732,7 @@ var IttfDocumentGraph = (function () {
         return found;
     }
     IttfDocumentGraph.prototype.equals = function(other) {
-        // log 'wizzi-utils.ittfDocumentGraph.equals', this.name, this.value, other.name, other.value
+        // loog 'wizzi-utils.ittfDocumentGraph.equals', this.name, this.value, other.name, other.value
         if (this.name !== other.name || this.value !== other.value) {
             return false;
         }

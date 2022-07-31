@@ -17,7 +17,7 @@
                 {
                     @ count 100
         
-        log 'lorem.100', text
+        info 'lorem.100', text
 
         set text
             _ lorem
@@ -26,4 +26,4 @@
                     @ units 'paragraphs'
                     @ htmlTag 'p'
 
-        log 'lorem.10.paragraphs.p\n', text
+        info 'lorem.10.paragraphs.p\n', text

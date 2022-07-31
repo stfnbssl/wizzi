@@ -29,8 +29,8 @@ $group
             p cssNode
                 :any 
             m componentDidMount
-                log 'componentDidMount.this.ifr', this.ifr
-                log '_updateContent.this.ifr.contentWindow', this.ifr.contentWindow
+                # loog 'componentDidMount.this.ifr', this.ifr
+                # loog '_updateContent.this.ifr.contentWindow', this.ifr.contentWindow
                 const prevSS = this.props.styleSheets || []
                 _ this._updateStylesheets(prevSS)
                 if this.props.css
@@ -55,9 +55,9 @@ $group
                     param content
                         :string 
                         :optional 
-                    log '_updateContent.this.ifr', this.ifr
-                    log '_updateContent.this.ifr.contentWindow', this.ifr.contentWindow
-                    log '_updateContent.this.ifr.contentDocument', this.ifr.contentDocument
+                    # loog '_updateContent.this.ifr', this.ifr
+                    # loog '_updateContent.this.ifr.contentWindow', this.ifr.contentWindow
+                    # loog '_updateContent.this.ifr.contentDocument', this.ifr.contentDocument
                     _ this.ifr.setAttribute('srcdoc', content)
                         #
                             # 

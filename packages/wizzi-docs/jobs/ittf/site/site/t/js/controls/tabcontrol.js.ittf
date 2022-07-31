@@ -30,9 +30,9 @@ $group
 
 			set element = wzui.element(element)
 			var pageId = element.getAttribute("data-tab-page")
-			log 'pageId', pageId
+			# loog 'pageId', pageId
 			var pageElement = document.getElementById(pageId)
-			log 'pageElement', pageElement
+			# loog 'pageElement', pageElement
 			
 			_ wzui.click
 				@ element

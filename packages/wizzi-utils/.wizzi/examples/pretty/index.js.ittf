@@ -46,7 +46,7 @@
                     @ 'basic.sample.ittf'
                 {
                 f_cb_test( ittfHtmlPretty )
-                    log 'step_2', ittfHtmlPretty
+                    info 'step_2', ittfHtmlPretty
                     _ step_3
 
         function step_3
@@ -56,4 +56,4 @@
                     @ '\t$include item'
                     ._ join('\n')
                 f_cb_test( pretty )
-                    log 'step_3', pretty
+                    info 'step_3', pretty

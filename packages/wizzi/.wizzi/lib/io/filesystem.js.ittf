@@ -27,7 +27,7 @@
 			param callback
 			set fsBaseFolderPath = baseFolderPath
 			set isMounted = true
-			# log 'wizzi-io.filesystem mounted. BaseFolderPath: ' + baseFolderPath
+			# loog 'wizzi-io.filesystem mounted. BaseFolderPath: ' + baseFolderPath
 			return 
 				_ callback(null)
 

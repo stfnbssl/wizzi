@@ -17,7 +17,7 @@ $group
                 from '../site/webpacks/${'$'}{item.name}/webpack.config.js'
 
         ${'$'}foreach item in wzCtx.Build.webpackApp.items
-            log 'WebpackAppMiddleware config_${'$'}{item.name}', config_${'$'}{item.name}
+            info 'WebpackAppMiddleware config_${'$'}{item.name}', config_${'$'}{item.name}
     
     export 
         const WebpackAppMiddleware
@@ -44,4 +44,4 @@ $group
                                     { 
                                         @ writeToDisk !!${'$'}{item.writeToDisk}
                                         @ publicPath config_${'$'}{item.name}.output.publicPath
-                            log 'WebpackAppMiddleware.pack ${'$'}{item.name} on path', config_${'$'}{item.name}.output.publicPath, 'writeToDisk',  !!${'$'}{item.writeToDisk}                                       
+                            success 'WebpackAppMiddleware.pack ${'$'}{item.name} on path', config_${'$'}{item.name}.output.publicPath, 'writeToDisk',  !!${'$'}{item.writeToDisk}                                       

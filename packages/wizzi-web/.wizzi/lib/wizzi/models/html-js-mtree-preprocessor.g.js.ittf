@@ -8,7 +8,7 @@
 		function
 			param node
 
-			# log 'wizzi-web.html-js.preprocess.node', node
+			# loog 'wizzi-web.html-js.preprocess.node', node
 
 			var state
 				{
@@ -54,7 +54,7 @@
 	function preprocessNode
 		param node
 		param state
-		# log 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
+		# loog 'js-mtree-processor preprocessNode', node.n, node.v, state.htmlOn, state.svgOn
 		if node.n === 'async-m'
 			set node.n = 'm'
 			_ addAttr
@@ -88,7 +88,7 @@
 				@ node
 				@ 'generator'
 		if state.svgOn
-			# log 'js-mtree-processor svgOn', node.n, node.v
+			# loog 'js-mtree-processor svgOn', node.n, node.v
 		if node.n === 'p' && state.parent.n === 'class'
 			# do nothing
 		elif state.svgOn && svg_supported_attrs.indexOf(node.n) > -1
@@ -111,7 +111,7 @@
 		elif node.n === 'svg'
 			set state.htmlOn = true
 			set state.svgOn = true
-			# log 'js-mtree-processor svgOn'
+			# loog 'js-mtree-processor svgOn'
 		return false
 
 	function addAttr

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\graphql\document\gen\main.js.ittf
 */
 'use strict';
@@ -95,7 +95,7 @@ md.fieldDef = function(ctx) {
             if (model.wzElement === 'method') {
                 return md.method(model, ctx, callback);
             }
-            // log 'fieldDef', model.wzElement, model.wzName
+            // loog 'fieldDef', model.wzElement, model.wzName
             else {
                 var isList = model.wzElement === 'arrayType';
                 var type = model.type;
@@ -205,7 +205,7 @@ md.objectValueDef = function(model, ctx, callback) {
 ;
 md.valueDef = function(ctx) {
     return function(model, callback) {
-            // log 'valueDef', model.wzElement, model.wzName
+            // loog 'valueDef', model.wzElement, model.wzName
             ctx.w( model.wzName + ': ' + model.type);
             return callback(null);
         };
@@ -213,7 +213,7 @@ md.valueDef = function(ctx) {
 ;
 md.directiveDef = function(model, ctx, callback) {
     var args = [];
-    // log 'fieldDef', model.wzElement, model.wzName
+    // loog 'fieldDef', model.wzElement, model.wzName
     var i, i_items=model.argumentDefs, i_len=model.argumentDefs.length, item;
     for (i=0; i<i_len; i++) {
         item = model.argumentDefs[i];
@@ -233,7 +233,7 @@ md.directiveDef = function(model, ctx, callback) {
 ;
 md.operation = function(ctx) {
     return function(model, callback) {
-            console.log('calling operation', model.wzElement);
+            // loog 'calling operation', model.wzElement
             var method = md[model.wzElement];
             method(model, ctx, callback)
         };
@@ -267,7 +267,7 @@ md.query = function(model, ctx, callback) {
 }
 ;
 md.selectionSet = function(model, ctx, callback) {
-    console.log('selectionSet', model.selections.length);
+    // loog 'selectionSet', model.selections.length
     if (model.wzName.length > 0) {
         ctx.write( model.wzName);
         writeArguments(model.xarguments, ctx)
@@ -287,7 +287,7 @@ md.selectionSet = function(model, ctx, callback) {
 ;
 md.selection = function(ctx) {
     return function(model, callback) {
-            console.log('calling selection', model.wzElement);
+            // loog 'calling selection', model.wzElement
             var method = md[model.wzElement];
             method(model, ctx, callback)
         };
@@ -550,7 +550,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-web@0.7.10.lib.artifacts.graphql.document.gen.main.' + method,
+        method: 'wizzi-web@0.7.11.lib.artifacts.graphql.document.gen.main.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

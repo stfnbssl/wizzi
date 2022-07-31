@@ -30,7 +30,7 @@
     function assertNoComments
         param node
         if node.leadingComments || node.trailingComments
-            log 'Node should have no comments', node
+            error 'Node should have no comments', node
             throw new Error('Node should have no comments')
     
     function processLeadingComments
@@ -64,12 +64,12 @@
 		if verify.isArray(comments) && comments.length > 0
 			var hb
 			foreach item in comments
-				# log 'processComments', node.type, item
+				# loog 'processComments', node.type, item
 				if item.type === 'CommentLine'
 					if false $$ codeReplacer.isKey(item.value, options.replaceds)
 						if options.commentManager.checkWritten(item) == true
 							_ options.commentManager.removeWritten(item)
-						# log 'processComments. calling, codeReplacer.restoreInside', item.value
+						# loog 'processComments. calling, codeReplacer.restoreInside', item.value
                         var value = codeReplacer.restoreInside('""' + item.value, options.replaceds)
 						set hb
 							{
@@ -93,7 +93,7 @@
 					_ options.commentManager.addWritten(item, ittfNode.children, hb)
 				elif item.type === 'CommentBlock'
 					if false $$ codeReplacer.isKey(item.value, options.replaceds)
-						# log 'codeReplacer.isKey', true
+						# loog 'codeReplacer.isKey', true
 						if options.commentManager.checkWritten(item) == true
 							_ options.commentManager.removeWritten(item)
 						$* stop
@@ -113,7 +113,7 @@
 						_ ittfNode.children.push
 							@ hb
 					else
-						# log 'codeReplacer.isKey', false
+						# loog 'codeReplacer.isKey', false
                         $* VIA 30/3/21
 						if options.commentManager.checkWritten(item) == true
 							_ options.commentManager.removeWritten(item)
@@ -137,7 +137,7 @@
         param p_params
 		if p_params != null
 			foreach item in p_params.children
-                log 'TSFunctionType', 'p_params.item', item
+                # loog 'TSFunctionType', 'p_params.item', item
                 if item.tag == '@id'
 				    set item.tag = 'param'
 				    _ ret.children.push(item)
@@ -176,7 +176,7 @@
 			if pos == i
 				foreach p in item.children
 					var plen = childrenLengthNoProps(p)
-					# log 'processParams. p.tag', p.tag, 'plen', plen, JSON.stringify(p, null, 2)
+					# loog 'processParams. p.tag', p.tag, 'plen', plen, JSON.stringify(p, null, 2)
 					if p.tag !== '{' && p.tag !== '['
 						if isTextualNode(p)
 							set p.tag = 'param'
@@ -197,7 +197,7 @@
 							_ p.children.push
 								@ ui
 					if plen == 2
-                        # log 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
+                        # loog 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
 						if ['@id', '@expr', 'literal'].indexOf(p.children[1].tag) > -1
                             # log 111
 							# has simple default value (is AssignmentPattern)
@@ -223,7 +223,7 @@
 					_ temp.push(p)
 			else
 				_ temp.push(item)
-		# log 'wizzifiers.js.processParams.result', JSON.stringify(temp, null, 2)
+		# loog 'wizzifiers.js.processParams.result', JSON.stringify(temp, null, 2)
 		set ittfNode.children = temp
 
 	function getNodeText
@@ -336,7 +336,7 @@
 		var ret = []
 		foreach item in ittfNode.children
 			if item.isText || item.textified
-				# log '@@@@@@@ item.tag.isText', item.tag, item.isText
+				# loog '@@@@@@@ item.tag.isText', item.tag, item.isText
 				_ ret.push
 					{
 						@ tag tag
@@ -345,7 +345,7 @@
 						[ children
 			else
 				_ ret.push(item)
-		# log '@@@@@@@@@@@@@@@ textifyChildren', ret
+		# loog '@@@@@@@@@@@@@@@ textifyChildren', ret
 		return ret
 
 	function setTextList
@@ -353,7 +353,7 @@
 		param sep
 		var sb = []
 		foreach item in ittfNode.children
-			log 'setTextList', item.tag, item.isText, item.name, item.textified
+			# loog 'setTextList', item.tag, item.isText, item.name, item.textified
 			if item.isText
 				_ sb.push(item.name)
 			elif item.textified
@@ -369,13 +369,13 @@
 		param sep
 		var sb = []
 		foreach item in ittfNode.children
-            # log 'getTextList', item
+            # loog 'getTextList', item
 			if item.isText && item.children.length == 0
 				_ sb.push(item.name)
 			elif item.textified && item.children.length == 0
 				_ sb.push(item.textified)
 			else
-				# log 'getTextList failed ***************', item
+				# loog 'getTextList failed ***************', item
 				return null
 		return sb.join(sep)
 
@@ -386,7 +386,7 @@
 		foreach item in ittfNode.children
 			if item.tag === tag
 				if forceText
-					# log '...................setNameFromChildByTag', item
+					# loog '...................setNameFromChildByTag', item
 				if item.isText
 					set ittfNode.name = item.name
 					_ ittfNode.children.splice(i, 1)
@@ -437,7 +437,7 @@
 		param ittfNode
 		var sb = [], temp
 		foreach item in ittfNode.children
-			# log 'getLiteral.item', item
+			# loog 'getLiteral.item', item
 			if item.tag === '+'
 				set temp = verify.replaceAll(verify.replaceAll(item.name, '\\n', '\n'), '\\b', ' ')
 				_ sb.push(temp)

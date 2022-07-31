@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\nodifier.js.ittf
 */
 'use strict';
@@ -52,6 +52,8 @@ module.exports = function(lines, mTreeBrick) {
         }
         else if (line.indent > current.indent) {
             if (nameFirstChar == '$' && line.name === '$params') {
+                
+                // loog 'wizzi-mtree.nodifier.current.name', current.name, current.value, line.value
                 if (current.indent > 0) {
                     if (current.name !== '$fragment') {
                         return local_error('InvalidIttfError', 'default', 'The $params node must be a child of the root node.', line, mTreeBrick);

@@ -19,7 +19,7 @@
 			
 			foreach arg in args
 				if md.isError(arg)
-					# log 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
+					# loog 'wizzi-utils.verify.errors.error. seen inner', arg.message, arg.stack
 					set inner = arg
 				elif typeof (arg) === 'object' && sprintf_args.length == 0
 					for var k in arg
@@ -66,7 +66,7 @@
             param err
             param errcode
             
-			log 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null })
+			error 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null })
 			throw new Error(err)
 			_ md.logError
 				@ "Fatal error: " + String(err.message || err)

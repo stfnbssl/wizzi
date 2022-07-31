@@ -49,7 +49,7 @@ $group
 		string transformName
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadAndTransformModel.requestContext.modelRequestContext', requestContext.modelRequestContext, 
+		# loog 'wizzi.wizziFactory.loadAndTransformModel.requestContext.modelRequestContext', requestContext.modelRequestContext, 
 			\b 'transformRequestContext', requestContext.transformRequestContext
 		+
 		var that = this
@@ -59,7 +59,7 @@ $group
             {
                 @ mTreeBuildupContext requestContext.modelRequestContext
             f_cb( wizziModel )
-                # log 'wizzi.wizziFactory.loadAndTransformModel', 'model loaded', wizziModel
+                # loog 'wizzi.wizziFactory.loadAndTransformModel', 'model loaded', wizziModel
                 # the loaded wizzi model becomes the wizziModel of the transformation
                 _ that.transformModel
                     @ wizziModel
@@ -80,7 +80,7 @@ $group
         string artifactName
 		callback
 		+
-		# log 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
+		# loog 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
 			\b 'transformRequestContext', requestContext.transformRequestContext,
             \b 'artifactRequestContext', requestContext.artifactRequestContext
 		+
@@ -91,7 +91,7 @@ $group
             {
                 @ mTreeBuildupContext requestContext.modelRequestContext
             f_cb( wizziModel )
-                # log 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact', 'model loaded', wizziModel
+                # loog 'wizzi.wizziFactory.loadAndTransformModelAndGenerateArtifact', 'model loaded', wizziModel
                 # the loaded wizzi model becomes the wizziModel of the transformation
                 _ that.transformModel
                     @ wizziModel

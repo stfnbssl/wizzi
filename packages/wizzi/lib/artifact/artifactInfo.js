@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\artifact\artifactInfo.js.ittf
 */
 'use strict';
@@ -106,12 +106,12 @@ var ArtifactInfo = (function () {
                 assert.strictEqual(verify.isObject(collectionItem), true, 'genContext.model must contain an object.')
                 var ipcontext = this.getInterpolatePathNameContext(collectionItem);
                 if (ipcontext && ipcontext.__is_error) {
-                    console.log('__is_error ', ipcontext);
+                    console.log("[31m%s[0m", '__is_error ', ipcontext);
                     return callback(ipcontext);
                 }
                 var destUri = this.getDestinationUri(srcPath);
                 if (destUri && destUri.__is_error) {
-                    console.log('__is_error ', destUri);
+                    console.log("[31m%s[0m", '__is_error ', destUri);
                     return callback(destUri);
                 }
                 var filepath = interpolate(destUri, ipcontext, {
@@ -132,7 +132,7 @@ var ArtifactInfo = (function () {
             else {
                 var destUri = this.getDestinationUri(srcPath);
                 if (destUri && destUri.__is_error) {
-                    console.log('__is_error ', destUri);
+                    console.log("[31m%s[0m", '__is_error ', destUri);
                     return callback(destUri);
                 }
                 var persisteable = {

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\ittfScan\scanner.js.ittf
 */
 'use strict';
@@ -25,7 +25,7 @@ describe("the folderScanner module", function() {
             expect(ittfDocumentGraph).to.be.an('object');
             ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'first.wfpackage.ittf'), function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 console.log('err, result', err, result);

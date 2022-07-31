@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\expressions.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -344,7 +344,7 @@ md.load = function(cnt) {
         }
         function doThen(callback) {
             
-            // log 'doThen', Object.keys(ctx), 'forceInLine', ctx.forceInLine, '__inside_expr', ctx.__inside_expr, '__inside_html', ctx.__inside_html
+            // loog 'doThen', Object.keys(ctx), 'forceInLine', ctx.forceInLine, '__inside_expr', ctx.__inside_expr, '__inside_html', ctx.__inside_html
             if (m_then) {
                 cnt.genItem(m_then, ctx, function(err, notUsed) {
                     if (err) {
@@ -398,7 +398,7 @@ md.load = function(cnt) {
         if (typeof callback === 'undefined') {
             throw new Error('Missing callback parameter in fn: ' + myname + '.iif_end');
         }
-        // log 'iif_end', u.isTopStatement(model, ctx)
+        // loog 'iif_end', u.isTopStatement(model, ctx)
         var paren = ctx.parenRequired || model.statements.length > 2;
         if (paren) {
             ctx.write(')');
@@ -701,7 +701,7 @@ md.load = function(cnt) {
     }
     ;
     function emitOperators(cnt, op, model, ctx, callback) {
-        // log 'emitOperators', op
+        // loog 'emitOperators', op
         model = writeComments(model, ctx);
         if (model.wzParent.wzElement == 'template') {
             ctx.write('${');

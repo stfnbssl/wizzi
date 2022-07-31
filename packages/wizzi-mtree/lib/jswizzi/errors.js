@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
 */
 'use strict';
@@ -50,7 +50,7 @@ function JsWizziSynthaxError(message, node) {
     this.message = message;
     this.node = node;
     this.__is_error = true;
-    // log 'JsWizziSynthax.message', message
+    // loog 'JsWizziSynthax.message', message
     
     // In this case node = WizziJS source
     if (f_verify.isObject(message) && message.lineNumber) {
@@ -91,9 +91,9 @@ md.JsWizziTypeError = JsWizziTypeError;
 
 md.esprimaNodeErrorLines = function(description, node, source, json) {
     
-    // log 'jswizzi.errors.esprimaNodeErrorLines.source', source
+    // loog 'jswizzi.errors.esprimaNodeErrorLines.source', source
     
-    // log 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
+    // loog 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
     if (node && node.loc) {
         return wizziUtils.errors.getErrorLines({
                 row: node.loc.start.line, 
@@ -101,7 +101,7 @@ md.esprimaNodeErrorLines = function(description, node, source, json) {
                 description: description
              }, source, json);
     }
-    // log 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
+    // loog 'jswizzi.errors.esprimaNodeErrorLines', 'node has no loc property', node
     else {
         return ['No data available'];
     }

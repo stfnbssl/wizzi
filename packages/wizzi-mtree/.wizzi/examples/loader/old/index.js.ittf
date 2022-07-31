@@ -25,7 +25,7 @@ example( index, 1 )
 		param name
         param callback
 
-        log 'exec', name
+        info 'exec', name
 
         var ctx
             { 

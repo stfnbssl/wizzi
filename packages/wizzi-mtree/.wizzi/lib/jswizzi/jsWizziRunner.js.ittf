@@ -40,7 +40,7 @@
 		if name[0] === '$'
 			return
 		# var fmt =  util.inspect(value, { depth: null})
-		# log 'wizzi-mtree.jsWizziRunner == get == ' + name + ' : ' + fmt + ' -----'
+		# loog 'wizzi-mtree.jsWizziRunner == get == ' + name + ' : ' + fmt + ' -----'
 
 	function logSet
 		param name
@@ -48,7 +48,7 @@
 		if name[0] === '$'
 			return
 		# var fmt =  util.inspect(value, { depth: null})
-		# log 'wizzi-mtree.jsWizziRunner -- set -- ' + name + ' : ' + fmt + ' ====='
+		# loog 'wizzi-mtree.jsWizziRunner -- set -- ' + name + ' : ' + fmt + ' ====='
 
 	var runner
         function 
@@ -64,7 +64,7 @@
                         set ast.type
             
 			if verbose
-                log 'ast.type: ' + type
+                info 'ast.type: ' + type
             
 			if ast.trailingComments && ast.trailingComments.length == 1
                 _ ctx.setRunningNodeId
@@ -84,7 +84,7 @@
             param ast
             param ctx
             param data
-			# log 'jsWizziRunner.runnerSet', ast, data
+			# loog 'jsWizziRunner.runnerSet', ast, data
             return runner(ast, ctx, 'Set', data)
     
 	var runnerCall
@@ -105,7 +105,7 @@
     
 	runner( Identifier
         if node.name == 'undefined'
-            # log 'Identifier returning node.name = undefined'
+            # loog 'Identifier returning node.name = undefined'
             return undefined
         if ctx.isDeclared(node.name)
 			if logGetSet
@@ -117,7 +117,7 @@
 				_ ctx.getValue
 					@ node.name
         else
-            # log 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
+            # loog 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
 			return
 				_ local_error
 					@ ctx
@@ -158,7 +158,7 @@
                     @ node.init
                     @ ctx
 			# if node.id.name === '_____result'
-			# log 'jsWizziRunner.VariableDeclarator', node.id.name, value
+			# loog 'jsWizziRunner.VariableDeclarator', node.id.name, value
             _ ctx.declare
                 @ node.id.name
                 @ value
@@ -177,22 +177,22 @@
 		param ex
         param other
 
-        # log 'jsWizziRunner.local_error.message', message
-        # log 'jsWizziRunner.local_error.node.name', node && node.name
-        # log 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
-        # log 'jsWizziRunner.local_error.method', method
-        # log 'jsWizziRunner.local_error.ex.message', ex && ex.message
-        # log 'jsWizziRunner.local_error.parentnode.other', other
-        # log 'jsWizziRunner.local_error.ctx.source', ctx.source
+        # loog 'jsWizziRunner.local_error.message', message
+        # loog 'jsWizziRunner.local_error.node.name', node && node.name
+        # loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
+        # loog 'jsWizziRunner.local_error.method', method
+        # loog 'jsWizziRunner.local_error.ex.message', ex && ex.message
+        # loog 'jsWizziRunner.local_error.parentnode.other', other
+        # loog 'jsWizziRunner.local_error.ctx.source', ctx.source
 
         $*
         if ex && ex.name === "JsWizziSynthaxError"
             return ex
-        log 'jsWizziRunner.local_error.ex', ex
+        # loog 'jsWizziRunner.local_error.ex', ex
         *$
 
-        # log 'jsWizziRunner.local_error.ctx', ctx
-        # log 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
+        # loog 'jsWizziRunner.local_error.ctx', ctx
+        # loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
 
 		set message = message || ''
 		var errorCode = 'JsWizziError', ss = message.split('|')
@@ -200,7 +200,7 @@
 			set errorCode = ss[0]
 			set message = ss[1]
 
-		# log 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
+		# loog 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
 
         var node, errorLines
 		if node
@@ -349,7 +349,7 @@
 
 					# ctx : instance-of wizzi-mtree.jswizzi.jsWizziContext
 
-                    # log 'jsWizziRunner.run.source', source.substr(0, 400)
+                    # loog 'jsWizziRunner.run.source', source.substr(0, 400)
 
 					_ ctx.pushSource(source)
 
@@ -426,7 +426,7 @@
 		_ ctx.popSource
 
         if result && result.__is_error
-			# log 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
+			# loog 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
 
 		if callback
             if result && result.__is_error

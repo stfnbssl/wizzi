@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\liner.js.ittf
 */
 'use strict';
@@ -74,15 +74,17 @@ module.exports = function(textContent, ittfDocumentData) {
         else {
             throw new Error('wizzi-mtree.loader.liner index of chunk out of range: ' + chunk);
         }
+        
+        // loog 'wizzi-mtree.loader.liner.cp > 0xffff'
         if (cp > 0xffff) {
-            console.log('wizzi-mtree.loader.liner.cp > 0xffff');
             i += 1;
         }
         colpos++;
         
-        // log '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
+        // loog '+++++ wizzi-mtree.liner', chunk[i+1], chunk[i+2], chunk[i+3]
         if (cp == CP.SLASH) {
         }
+        // loog 'liner', ch, cp, commentState, quote
         if (quote != null) {
             if (quote == cp) {
                 quote = null;
@@ -180,13 +182,13 @@ module.exports = function(textContent, ittfDocumentData) {
         
         // remove escape state
         
-        // log 'macroState', macroState, String.fromCodePoint(cp)
+        // loog 'macroState', macroState, String.fromCodePoint(cp)
         if (macroState == MACRO.INSIDE_TEMPLATE_SEEN_ESCAPE) {
             macroState = MACRO.INSIDE_TEMPLATE;
             processChar(cp);
         }
         
-        // log 'macroState', macroState, String.fromCodePoint(cp)
+        // loog 'macroState', macroState, String.fromCodePoint(cp)
         else if (macroState == MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR) {
             
             // ok - really it was a start of macro
@@ -207,12 +209,12 @@ module.exports = function(textContent, ittfDocumentData) {
         else {
             if (cp == CP.BACKTICK) {
                 
-                // log 'macroState', macroState, String.fromCodePoint(cp)
+                // loog 'macroState', macroState, String.fromCodePoint(cp)
                 if (macroState > MACRO.NONE) {
                     macroState = MACRO.NONE;
                     processChar(cp);
                 }
-                // log 'macroState', macroState, String.fromCodePoint(cp)
+                // loog 'macroState', macroState, String.fromCodePoint(cp)
                 else {
                     macroState = MACRO.INSIDE_TEMPLATE;
                     processChar(cp);
@@ -223,19 +225,19 @@ module.exports = function(textContent, ittfDocumentData) {
                     
                     // could be start of macro
                     
-                    // log 'macroState', macroState, String.fromCodePoint(cp)
+                    // loog 'macroState', macroState, String.fromCodePoint(cp)
                     if (cp == CP.DOLLAR) {
                         macroState = MACRO.INSIDE_TEMPLATE_SEEN_DOLLAR;
                     }
                     
                     // could be an escape of a template start inside a template
                     
-                    // log 'macroState', macroState, String.fromCodePoint(cp)
+                    // loog 'macroState', macroState, String.fromCodePoint(cp)
                     else if (cp == CP.SLASH) {
                         macroState = MACRO.INSIDE_TEMPLATE_SEEN_ESCAPE;
                         processChar(cp);
                     }
-                    // log 'process char macroState', macroState, String.fromCodePoint(cp)
+                    // loog 'process char macroState', macroState, String.fromCodePoint(cp)
                     else {
                         processChar(cp);
                     }
@@ -308,7 +310,7 @@ module.exports = function(textContent, ittfDocumentData) {
             }
         }
         
-        // log 'line.name, value', nameAcc.join(''), valueAcc.join('')
+        // loog 'line.name, value', nameAcc.join(''), valueAcc.join('')
         if (line) {
         }
     }
@@ -346,7 +348,7 @@ module.exports = function(textContent, ittfDocumentData) {
             line.value = valueAcc.slice(v_start, v_end + 1).join('');
         }
         line.hasMacro = lineHasMacro;
-        // log 'last push line', line
+        // loog 'last push line', line
         lines.push(line);
         line = null;
         waitValue = false;

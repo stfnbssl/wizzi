@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\jsmodel\jsnode.js.ittf
 */
 'use strict';
@@ -85,7 +85,7 @@ var keywords = [
 ];
 var __tagElementMapping = { '+': 'statement', '++': 'statementmultiline', '#': 'comment', '##': 'commentmultiline', 'var': 'xvar', 'wz-var': 'wzVar', 'wzvar': 'wzVar', 'const': 'xconst', 'wz-const': 'wzConst', 'wzconst': 'wzConst', 'let': 'xlet', '{': 'jsObject', '[': 'jsArray', '@': 'jsPropertyOrValue', 'jst': 'jsonStatementTree', 'import': 'ximport', 'export': 'xexport', 'delete': 'xdelete', 'if': 'xif', 'else': 'xelse', 'for': 'xfor', 'break': 'xbreak', 'continue': 'xcontinue', 'while': 'xwhile', 'do': 'xdo', 'switch': 'xswitch', 'case': 'xcase', 'default': 'xdefault', 'try': 'xtry', 'catch': 'xcatch', 'finally': 'xfinally', 'throw': 'xthrow', 'function': 'xfunction', '=>': 'arrowfunction', 'function*': 'generatorfunction', 'm': 'method', 'wz-iife': 'wzIife', 'wziife': 'wzIife', 'wz-function': 'wzFunction', 'wzfunction': 'wzFunction', 'yield': 'xyield', 'return': 'xreturn', 'class': 'xclass', 'wz-class': 'wzClass', 'wzclass': 'wzClass', 'new': 'xnew', '_': 'call', '._': 'memberCall', '@_': 'decoratorCall', '(': 'callOnValue', '.': 'memberAccess', '.[': 'memberAccessComputed', 'void': 'xvoid', '||': 'or', '&&': 'and', '===': 'op_eq_strict', '!==': 'op_noteq_strict', '==': 'op_eq', '!=': 'op_noteq', 'minus': 'op_minus', 'plus': 'op_plus', 'times': 'op_times', 'divide': 'op_div', 'power': 'op_power', 'mod': 'op_mod', 'xor': 'op_xor', 'xand': 'op_xand', 'gt': 'op_gt', '>=': 'op_ge', 'lt': 'op_lt', '<=': 'op_le', 'wz-require': 'wzRequire', 'wzrequire': 'wzRequire', 'react': 'reactComponent', 'react-f': 'reactFunction', 'reactf': 'reactFunction', 'set-state': 'setState', 'setstate': 'setState', 'will-mount': 'willMount', 'willmount': 'willMount', 'did-mount': 'didMount', 'didmount': 'didMount', 'will-unmount': 'willUnmount', 'willunmount': 'willUnmount', 'should-update': 'shouldUpdate', 'shouldupdate': 'shouldUpdate', 'did-update': 'didUpdate', 'didupdate': 'didUpdate', 'will-update': 'willUpdate', 'willupdate': 'willUpdate', 'will-receive-props': 'willReceiveProps', 'willreceiveprops': 'willReceiveProps', 'array-of': 'arrayOf', 'arrayof': 'arrayOf', 'instance-of': 'instanceOf', 'instanceof': 'instanceOf', 'object-of': 'objectOf', 'objectof': 'objectOf', 'one-of': 'oneOf', 'oneof': 'oneOf', 'one-of-type': 'oneOfType', 'oneoftype': 'oneOfType', 'event': 'htmlevent', '<': 'htmlelement', '@style': '_style', 'color-profile': 'color_profile', 'colorprofile': 'color_profile', 'font-face': 'font_face', 'fontface': 'font_face', 'font-face-format': 'font_face_format', 'fontfaceformat': 'font_face_format', 'font-face-name': 'font_face_name', 'fontfacename': 'font_face_name', 'font-face-src': 'font_face_src', 'fontfacesrc': 'font_face_src', 'font-face-uri': 'font_face_uri', 'fontfaceuri': 'font_face_uri', 'missing-glyph': 'missing_glyph', 'missingglyph': 'missing_glyph', '!!': 'assert', '!!=': 'assert_equal', 'log?': 'inspect', 'log-info': 'log_info', 'loginfo': 'log_info', 'it-async': 'itAsync', 'itasync': 'itAsync', 'before-async': 'beforeAsync', 'beforeasync': 'beforeAsync', 'before-each': 'beforeEach', 'beforeeach': 'beforeEach', 'after-async': 'afterAsync', 'afterasync': 'afterAsync', 'after-each': 'afterEach', 'aftereach': 'afterEach', 'sa-get': 'saGet', 'saget': 'saGet', 'sa-post': 'saPost', 'sapost': 'saPost', 'sa-put': 'saPut', 'saput': 'saPut', 'sa-end': 'saEnd', 'saend': 'saEnd' };
 function isAttribute(name) {
-    console.log('isAttribute', name);
+    // loog 'isAttribute', name
     return attributes.indexOf(name) > -1 ? true : false;
 }
 var attributes = [
@@ -103,7 +103,7 @@ var JsNode = (function () {
         this.wzParent = null;
     }
     JsNode.prototype.addStatement = function(element, name) {
-        console.log('addStatement', element, name, checkKeyword(element));
+        // loog 'addStatement', element, name, checkKeyword(element)
         if (isAttribute(this.wzElement + '/' + checkKeyword(element))) {
             this[checkKeyword(element)] = name;
             return this;
@@ -122,8 +122,9 @@ var JsNode = (function () {
             var i, i_items=this.statements, i_len=this.statements.length, item;
             for (i=0; i<i_len; i++) {
                 item = this.statements[i];
+                
+                // loog 'param', item.wzName
                 if (item.wzElement == 'param') {
-                    console.log('param', item.wzName);
                     this.params.push(item.wzName);
                 }
                 else {
@@ -146,8 +147,9 @@ var JsNode = (function () {
             var i, i_items=this.statements, i_len=this.statements.length, item;
             for (i=0; i<i_len; i++) {
                 item = this.statements[i];
+                
+                // loog 'base', item.wzName
                 if (item.wzElement == 'base') {
-                    console.log('base', item.wzName);
                     this.bases.push(item);
                 }
                 else {

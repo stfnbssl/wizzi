@@ -56,7 +56,7 @@ $group
                     => 
                         param state = initialState.items
                         param action
-                        log '${'$'}{schema.Name}.items.action', action
+                        # loog '${'$'}{schema.Name}.items.action', action
                         switch action.type
                             case getType(${'$'}{schema.name}Actions.get${'$'}{schema.Name}ListSuccess)
                                 return action.payload.${'$'}{schema.collectionName}
@@ -90,7 +90,7 @@ $group
                     => 
                         param state = initialState.item
                         param action
-                        log '${'$'}{schema.Name}.item.action', action
+                        # loog '${'$'}{schema.Name}.item.action', action
                         switch action.type
                             case getType(${'$'}{schema.name}Actions.get${'$'}{schema.Name}ByIdSuccess)
                                 return action.payload.${'$'}{schema.name}

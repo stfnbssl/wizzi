@@ -18,7 +18,7 @@
 			{
 				@ storeKind 'filesystem'
 			f_cb_no_err( result )
-				log 'err, result', err, result
+				# loog 'err, result', err, result
 				set finder = new IttfDocumentFinder(store, 'js')
 				_ done()
 

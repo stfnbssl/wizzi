@@ -21,7 +21,7 @@
 				param callback
 				_ example(callback)
 			f_cb_test(results)
-				log 'Advanced-essentials examples results\n', results
+				info 'Advanced-essentials examples results\n', results
 				if callback
 					_ callback
 						@ null

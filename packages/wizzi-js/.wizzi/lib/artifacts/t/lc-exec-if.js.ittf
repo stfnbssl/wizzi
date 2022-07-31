@@ -1,7 +1,7 @@
 ﻿$group
 	$params name
 
-	# log 'prop', ${name}, lc[${name}]
+	# loog 'prop', ${name}, lc[${name}]
 	if lc[${name}]
 		_ lc[${name}]
 			@ prop

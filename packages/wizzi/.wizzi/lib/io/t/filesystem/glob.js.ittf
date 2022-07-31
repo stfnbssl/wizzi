@@ -21,13 +21,13 @@
 						@ projectId
 						@ pattern
 				
-			# log 'wizzi-io.filesystem.glob.fsPattern', fsPattern
+			# loog 'wizzi-io.filesystem.glob.fsPattern', fsPattern
 
 			_ glob
 				@ fsPattern
 				@ this
 				{
 				f_cb( fsitems )
-					# log 'wizzi-io.filesystem.glob.fsPattern', fsPattern, 'fsitems', fsitems
+					# loog 'wizzi-io.filesystem.glob.fsPattern', fsPattern, 'fsitems', fsitems
 					return 
 						_ callback(null, fsitems)

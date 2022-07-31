@@ -23,8 +23,8 @@ $group
         _ inquirer.prompt(questions).then
             => 
                 param answers
-                log '\nNew package name:'
-                log JSON.stringify(answers, null, '  ')
+                info '\nNew package name:'
+                info JSON.stringify(answers, null, '  ')
                 if answers.pkg_enterinfo
                     delete answers.pkg_enterinfo
                     _ promptPkgInfo
@@ -121,7 +121,7 @@ $group
         _ inquirer.prompt(questions).then
             => 
                 param answers
-                log '\nNew package info:'
-                log JSON.stringify(answers, null, '  ')
+                info '\nNew package info:'
+                info JSON.stringify(answers, null, '  ')
                 r_cb(answers)
 

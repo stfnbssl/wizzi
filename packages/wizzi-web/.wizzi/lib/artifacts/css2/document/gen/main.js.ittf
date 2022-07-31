@@ -26,7 +26,7 @@
                 @ model
 				@ ctx
                 f_cb()
-                    # log 'exit', myname
+                    # loog 'exit', myname
                     try
                         var postCssResult
                             _ postcss
@@ -67,7 +67,7 @@
             @ model
             @ ctx
             f_cb()
-                log 'css,after defaults', ctx.getContent()
+                # loog 'css,after defaults', ctx.getContent()
                 _ md.genItems
                     @ model.rules
                     @ ctx
@@ -84,7 +84,7 @@
             =>
                 param item
                 param callback
-                log 'defaults,appendFile', item
+                # loog 'defaults,appendFile', item
                 _ ctx.appendFile
                     _ path.join
                         @ __dirname

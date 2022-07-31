@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
-            mTreeBuildUpContext: context, 
+            mTreeBuildupContext: context, 
             globalContext: {}
          }, callback)
     })
@@ -81,12 +81,12 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
          }, callback)
     })
 }
-function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
+function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
             return callback(err);
         }
-        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
+        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback)
     })
 }
 function getFiles(srcpath, schema) {
@@ -167,7 +167,7 @@ executeLoadFolderModels('job_globalModels', 'wfjob', {}, function(err, notUsed) 
 function executeLoadFolderModels(folder, schema, context, callback) {
     var suffix = schema === 'ittf' ? '.ittf' : '.' + schema + '.ittf';
     var ittfPath = path.join(__dirname, 'ittf', folder);
-    console.log('executeLoadFolderModels.ittfPath,schema', ittfPath, schema);
+    // loog 'executeLoadFolderModels.ittfPath,schema', ittfPath, schema
     async.mapSeries(getFiles(ittfPath,schema), function(item, callback) {
         item = item.substring(0, item.length - suffix.length);
         console.log('wizzi-core.examples.jobs.item', item, 'schema', schema);
@@ -185,12 +185,12 @@ function executeLoadModel(name, folder, schema, context, callback) {
     console.log('wizzi-core.examples.jobs.before-load ittfSource', ittfSource, 'schema', schema);
     loadWizziModel(ittfSource, context || {}, function(err, jsWizziModel) {
         if (err) {
-            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log('err', err);
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        // log 'wizzi-core.examples.index.loaded ittfSource', ittfSource, 'schema', schema
-        // log 'jsWizziModel', jsWizziModel
+        // loog 'wizzi-core.examples.index.loaded ittfSource', ittfSource, 'schema', schema
+        // loog 'jsWizziModel', jsWizziModel
         if (jsWizziModel.toJson) {
             file.write(jsOutput, stringify(jsWizziModel.toJson(), null, 4))
         }
@@ -218,8 +218,8 @@ function executeJob(name, folder, schema, context, callback) {
     var ittfSource = path.join(__dirname, 'ittf', folder, schema === 'ittf' ? name + '.ittf' : name + '.' + schema + '.ittf');
     executeWizziJob(ittfSource, context || {}, function(err, jobResult) {
         if (err) {
-            console.log('Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log('err', err);
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
         console.log('jobResult.mTrees', jobResult.productionContext.mTrees);

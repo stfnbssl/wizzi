@@ -176,7 +176,7 @@
 				{ wfjob
 					string ittfDocumentUri
 
-			# log 'wizzi.productionManager.addJobRequest.jobRequest', jobRequest
+			# loog 'wizzi.productionManager.addJobRequest.jobRequest', jobRequest
 			set jobRequest.__pman = this
 			set jobRequest.options
 				_ Object.assign
@@ -215,7 +215,7 @@
 			_ this.initialize
 				f_cb()
 					# run artifact requests
-					# log 'wizzi.productionManager.self.artifactInfos.length', self.artifactInfos.length
+					# loog 'wizzi.productionManager.self.artifactInfos.length', self.artifactInfos.length
 					_ async.mapSeries
 						@ self.artifactInfos
 						@ AsyncRunner.run
@@ -234,7 +234,7 @@
 		m persistToFile
 			callback
 
-			# log 'ProductionManager.persistToFile.this.artifactInfos.length', this.artifactInfos.length
+			# loog 'ProductionManager.persistToFile.this.artifactInfos.length', this.artifactInfos.length
 			
 			var self = this
 			_ async.mapSeries
@@ -243,10 +243,10 @@
 				function
 					param err
 					param result
-					# log 'persistToFile err, result', err, result
+					# loog 'persistToFile err, result', err, result
 					if err
 						return callback(err)
-					# log 'ProductionManager.persistToFile.persisted artifacts', util.inspect(result, { depth: 1 })
+					# loog 'ProductionManager.persistToFile.persisted artifacts', util.inspect(result, { depth: 1 })
 					foreach ai in self.artifactInfos
 						_ ai.terminate()
 					_ callback(null, result)

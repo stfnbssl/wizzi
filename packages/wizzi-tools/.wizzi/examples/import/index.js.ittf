@@ -65,7 +65,7 @@
 				@ 'src'
 				@ folder
 			f_cb_throw()
-				log 'importFolder done'
+				success 'importFolder done'
 
 	function nextjs_file
 		param file
@@ -88,7 +88,7 @@
 				@ 'ittf'
 				@ 'root'
 			f_cb_throw()
-				log 'importFile done'
+				success 'importFile done'
 
 	function snack
 		_ importFolder
@@ -99,21 +99,21 @@
 					@ '/vendor'
 					@ '\\vendor'
 			f_cb_throw()
-				log 'importFolder done'
+				success 'importFolder done'
 
 	function chrome_ext
 		_ importFolder
 			@ "C:/My/wizzi/v5/apps/js-tutorials/chrome/get_started_complete"
 			@ "C:/My/wizzi/v5/apps/js-tutorials/chrome/ext1/wizzi/ittf/root"
 			f_cb_throw()
-				log 'importFolder done'
+				success 'importFolder done'
 
 	function react_typescript
 		_ importFolder
 			@ "C:/My/wizzi/v5/apps/3dParty/react-redux-typescript-guide/playground"
 			@ "C:/My/wizzi/v5/apps/3dParty/react-redux-typescript-guide/ittf"
 			f_cb_throw()
-				log 'importFolder done'
+				success 'importFolder done'
 
 
 	function react_webpack_typescript_babel
@@ -121,6 +121,6 @@
 			@ "C:/My/wizzi/v5/apps/3dParty/react-webpack-typescript-babel/original"
 			@ "C:/My/wizzi/v5/apps/3dParty/react-webpack-typescript-babel/ittf"
 			f_cb_throw()
-				log 'importFolder done'
+				success 'importFolder done'
 
 				

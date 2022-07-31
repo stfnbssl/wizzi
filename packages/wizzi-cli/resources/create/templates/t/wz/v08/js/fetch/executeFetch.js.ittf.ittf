@@ -26,7 +26,7 @@ $group
                     {
                         @ 'Content-Type' 'application/json'
 
-        log 'executeFetch', 'url', url, 'fetchOptions', fetchOptions
+        # loog 'executeFetch', 'url', url, 'fetchOptions', fetchOptions
 
                                                          $$ Default options are marked with *
         set fetchOptions.mode = 'cors'                   $$ no-cors, *cors, same-origin

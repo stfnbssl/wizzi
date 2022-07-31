@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\manager.js.ittf
 */
 'use strict';
@@ -162,7 +162,7 @@ var ProductionManager = (function () {
                 'InvalidArgument', 'addJobRequest', { parameter: 'jobRequest.wfjob.ittfDocumentUri', message: 'The jobRequest.wfjob.ittfDocumentUri parameter must be a string. Received: ' + jobRequest.wfjob.ittfDocumentUri }
             );
         }
-        // log 'wizzi.productionManager.addJobRequest.jobRequest', jobRequest
+        // loog 'wizzi.productionManager.addJobRequest.jobRequest', jobRequest
         jobRequest.__pman = this;
         jobRequest.options = Object.assign({}, this.options, jobRequest.options || {})
         ;
@@ -217,7 +217,7 @@ var ProductionManager = (function () {
                 return callback(err);
             }
             // run artifact requests
-            // log 'wizzi.productionManager.self.artifactInfos.length', self.artifactInfos.length
+            // loog 'wizzi.productionManager.self.artifactInfos.length', self.artifactInfos.length
             async.mapSeries(self.artifactInfos, AsyncRunner.run, function(err, result) {
                 if (err) {
                     return callback(err);
@@ -238,14 +238,14 @@ var ProductionManager = (function () {
                 error('InvalidArgument', 'persistToFile', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        // log 'ProductionManager.persistToFile.this.artifactInfos.length', this.artifactInfos.length
+        // loog 'ProductionManager.persistToFile.this.artifactInfos.length', this.artifactInfos.length
         var self = this;
         async.mapSeries(this.artifactInfos, AsyncPersisterToFile.run, function(err, result) {
-            // log 'persistToFile err, result', err, result
+            // loog 'persistToFile err, result', err, result
             if (err) {
                 return callback(err);
             }
-            // log 'ProductionManager.persistToFile.persisted artifacts', util.inspect(result, { depth: 1 })
+            // loog 'ProductionManager.persistToFile.persisted artifacts', util.inspect(result, { depth: 1 })
             var i, i_items=self.artifactInfos, i_len=self.artifactInfos.length, ai;
             for (i=0; i<i_len; i++) {
                 ai = self.artifactInfos[i];
@@ -263,7 +263,7 @@ var ProductionManager = (function () {
                 'InvalidArgument', 'getLoadModel', { parameter: 'schemaName', message: 'The schemaName parameter must be a string. Received: ' + schemaName }
             );
         }
-        // log 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
+        // loog 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
         return this.wizziFactory.getLoadModel(schemaName, this.globalContextObject);
     }
     ProductionManager.prototype.getSchemaDefinition = function(schemaName) {
@@ -307,18 +307,18 @@ var ProductionManager = (function () {
             ));
         }
         // called by WfjobLoader
-        // log 'wizzi.production.productionManager.loadWfjob.ittfDocumentUri', ittfDocumentUri
+        // loog 'wizzi.production.productionManager.loadWfjob.ittfDocumentUri', ittfDocumentUri
         if (!this.wfjobLoadModel) {
             this.wfjobLoadModel = this.getLoadModel('wfjob')
             ;
             
-            // log 'wizzi.checked_call_set.__is_error ', this.wfjobLoadModel
+            // loog 'wizzi.checked_call_set.__is_error ', this.wfjobLoadModel
             if (this.wfjobLoadModel && this.wfjobLoadModel.__is_error) {
                 return callback(this.wfjobLoadModel);
             }
         }
         var ctx = this.wizziFactory.createLoadContext(context);
-        // log 'wizzi.production.productionManager.loadWfjob.ctx', ctx, this.wizziFactory.globalContext
+        // loog 'wizzi.production.productionManager.loadWfjob.ctx', ctx, this.wizziFactory.globalContext
         this.wfjobLoadModel(ittfDocumentUri, this.wizziFactory.createLoadContext(context), callback)
     }
     ProductionManager.prototype.aclStat = function(value) {
@@ -345,13 +345,13 @@ var ProductionManager = (function () {
         var logState = {
             models: {}
          };
-        // log 'wizzi-factory/productionManager/state models length', this.___state.models.length
+        // loog 'wizzi-factory/productionManager/state models length', this.___state.models.length
         for (var m in this.___state.models) {
             var mo = this.___state.models[m];
             var modelState = {};
             logState[m] = modelState;
             for (var k in mo) {
-                // log 'wizzi-factory/productionManager/state model prop', k
+                // loog 'wizzi-factory/productionManager/state model prop', k
                 
                 // set modelState.ittfDocumentDatas = mo.loadHistory.ittfDocumentDatas
                 if (mo.loadHistory) {
@@ -362,15 +362,15 @@ var ProductionManager = (function () {
                         var idm_o = mo.loadHistory.ittfDocumentDatas[idm];
                         delete idm_o.mTree
                         for (var idm_k in idm_o) {
-                            // log 'wizzi-factory/productionManager/state model loadHistory ittfDocumentData prop', idm_k
+                            // loog 'wizzi-factory/productionManager/state model loadHistory ittfDocumentData prop', idm_k
                         }
                     }
                     for (var z in mo.loadHistory) {
-                        // log 'wizzi-factory/productionManager/state model loadHistory prop', z
+                        // loog 'wizzi-factory/productionManager/state model loadHistory prop', z
                     }
                     if (mo.loadHistory.ittfSources) {
                         for (var z in mo.loadHistory.ittfSources) {
-                            // log 'wizzi-factory/productionManager/state model ittfSources prop', z
+                            // loog 'wizzi-factory/productionManager/state model ittfSources prop', z
                         }
                     }
                 }
@@ -443,7 +443,7 @@ var ProductionManager = (function () {
         }
         else {
             loadModel(ittfDocumentUri, modelContext, function(err, wizziModelInstance) {
-                // log 'ProductionManager.generateArtifact', err
+                // loog 'ProductionManager.generateArtifact', err
                 if (err) {
                     var msg = 'Error loading IttfDocument: ' + ittfDocumentUri + '\n' + util.inspect(err, { depth: null});
                     fail.warn(msg);
@@ -486,10 +486,10 @@ var AsyncInitializeJobRequests = {
             ));
         }
         var pman = jobRequest.__pman;
-        // ok log 'AsyncInitializeJobRequests.pman.globalContext()', pman.globalContext()
+        // loog 'AsyncInitializeJobRequests.pman.globalContext()', pman.globalContext()
         var wfjobIttfDocumentUri = jobRequest.wfjob.ittfDocumentUri;
         pman.productionName += '_' + path.basename(wfjobIttfDocumentUri);
-        // log 'wizzi.production.asyncInitializeJobRequests.productionName', pman.productionName
+        // loog 'wizzi.production.asyncInitializeJobRequests.productionName', pman.productionName
         // The wfjobLoader instance is created here and used
         // in any case of recursive request of `wfjob` executions.
         var wfjobLoader = new WfjobLoader(pman);
@@ -503,11 +503,11 @@ var AsyncInitializeJobRequests = {
             if (err) {
                 return callback(err);
             }
-            // log 'AsyncRecurseWfjobLoad.globalModelInfoConfigs', result.globalModelInfoConfigs.length, 'artifactInfoConfigs', result.artifactInfoConfigs.length
+            // loog 'AsyncRecurseWfjobLoad.globalModelInfoConfigs', result.globalModelInfoConfigs.length, 'artifactInfoConfigs', result.artifactInfoConfigs.length
             var i, i_items=result.globalModelInfoConfigs, i_len=result.globalModelInfoConfigs.length, globalModelInfoConfig;
             for (i=0; i<i_len; i++) {
                 globalModelInfoConfig = result.globalModelInfoConfigs[i];
-                // log 'wizzi.production.asyncInitializeJobRequests.globalModelInfoConfig', util.inspect(globalModelInfoConfig, { depth: 2 })
+                // loog 'wizzi.production.asyncInitializeJobRequests.globalModelInfoConfig', util.inspect(globalModelInfoConfig, { depth: 2 })
                 globalModelInfoConfig.wfjob = wfjobIttfDocumentUri;
                 if (pman.options.trace) {
                     console.log('ProductionManager.initialize.globalModelInfoConfig', globalModelInfoConfig.toString());
@@ -517,7 +517,7 @@ var AsyncInitializeJobRequests = {
             var i, i_items=result.artifactInfoConfigs, i_len=result.artifactInfoConfigs.length, artifactInfoConfig;
             for (i=0; i<i_len; i++) {
                 artifactInfoConfig = result.artifactInfoConfigs[i];
-                // log 'wizzi.production.asyncInitializeJobRequests.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 2 })
+                // loog 'wizzi.production.asyncInitializeJobRequests.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 2 })
                 artifactInfoConfig.wfjob = wfjobIttfDocumentUri;
                 if (pman.options.trace) {
                     console.log('ProductionManager.initialize.artifactInfoConfig', artifactInfoConfig.toString());
@@ -549,7 +549,7 @@ var AsyncGlobalModelPreLoader = {
 // async artifact collection pre loader
 var AsyncArtifactCollectionPreLoader = {
     run: function(artifactInfo, callback) {
-        // log 'Started async artifact collection pre load', artifactInfo.collection
+        // loog 'Started async artifact collection pre load', artifactInfo.collection
         log.info('Started async artifact collection pre load: ' + artifactInfo.collection);
         if (verify.isEmpty(artifactInfo.collection)) {
             return callback(null);
@@ -615,7 +615,7 @@ var AsyncPersisterToFile = {
                 'InvalidArgument', '', { parameter: 'artifactInfo.productionManager', message: 'The artifactInfo.productionManager parameter must be an object. Received: ' + artifactInfo.productionManager }
             ));
         }
-        console.log('Started async persist to file artifact: ', artifactInfo.name);
+        // loog 'Started async persist to file artifact: ', artifactInfo.name
         var persister = new ArtifactPersister(artifactInfo);
         persister.toFile(function(err, operResult) {
             if (err) {
@@ -626,7 +626,7 @@ var AsyncPersisterToFile = {
                 oper = operResult[i];
                 log.info(oper.oper + ', ' + oper.status + ', ' + oper.item.filepath)
             }
-            console.log('Ended async persist to file artifact: ', artifactInfo.name);
+            // loog 'Ended async persist to file artifact: ', artifactInfo.name
             callback(null, operResult);
         })
     }

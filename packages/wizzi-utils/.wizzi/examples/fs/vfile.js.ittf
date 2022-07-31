@@ -21,7 +21,7 @@
 			@ 'alpha.tests.ittf'
 		@ 'tests makepath'
 		f_cb_throw( result )
-			log 'result', result
+			info 'result', result
 
 	_ file.write
 		_ path.join
@@ -46,7 +46,7 @@
 				@ 'ittf'
 				@ 'globs2'
 				@ '**/*.ittf'
-	log 'vfile.result', result
+	info 'vfile.result', result
 
 	var result
 		_ file.getGlobbedFilesEx
@@ -61,6 +61,6 @@
 						@ __dirname
 						@ 'ittf'
 
-	log 'vfile.result', result
+	info 'vfile.result', result
 
 

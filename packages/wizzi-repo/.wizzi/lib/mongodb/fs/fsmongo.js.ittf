@@ -43,10 +43,10 @@
 
 		m close
 			if this.db
-				# log '***** wizzi-repo.mongodb.FsMongo start closing'
+				# loog '***** wizzi-repo.mongodb.FsMongo start closing'
 				_ this.db.close
 				set this.db = null
-				# log '***** wizzi-repo.mongodb.FsMongo closed'
+				# loog '***** wizzi-repo.mongodb.FsMongo closed'
 
 	#
 		# Creates a FsMongo instance

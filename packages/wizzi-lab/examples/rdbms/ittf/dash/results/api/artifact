@@ -1,0 +1,253 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:35 GMT
+*/
+'use strict';
+
+//
+
+var artifactPersister = require('../persisters/artifact');
+
+var md = module.exports = {};
+
+md.getArtifacts = function(userName, projectName, schemaName, artifactName, callback) {
+    artifactPersister.getArtifacts(userName, projectName, schemaName, artifactName, callback)
+}
+;
+
+md.getArtifact = function(userName, projectName, schemaName, artifactName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    artifactPersister.get(userName, projectName, schemaName, artifactName, callback)
+}
+;
+
+md.insertArtifact = function(userName, projectName, schemaName, artifactName, callback) {
+    artifactPersister.exists(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('artifact', utils.buildResourcePath(userName, projectName, schemaName, artifactName)));
+        }
+        var newItem = {
+            type: 'artifact', 
+            userName: null, 
+            projectName: null, 
+            schemaName: null, 
+            artifactName: null, 
+            artifactFragments: [], 
+            artifactContextModels: [], 
+            artifactContextFragments: []
+         };
+        artifactPersister.putArtifact(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateArtifact = function(item, callback) {
+    artifactPersister.put(item, callback)
+}
+
+.prototype.deleteArtifact = function(item, callback) {
+    artifactPersister.delete(item, callback)
+}
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getArtifactArtifactfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.artifactFragments, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'schemaName': schemaName, 
+            'artifactName': artifactName, 
+            'fragmentName': fragmentName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+    })
+}
+;
+
+md.addArtifactArtifactfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+
+md.removeArtifactArtifactfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getArtifactArtifactcontextmodel = function(userName, projectName, schemaName, artifactName, modelSchema, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.artifactContextModels, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'schemaName': schemaName, 
+            'artifactName': artifactName, 
+            'modelSchema': modelSchema
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextmodel'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, modelSchema)));
+        }
+    })
+}
+;
+
+md.addArtifactArtifactcontextmodel = function(userName, projectName, schemaName, artifactName, modelSchema, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextmodel'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, modelSchema)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+
+md.removeArtifactArtifactcontextmodel = function(userName, projectName, schemaName, artifactName, modelSchema, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextmodel'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, modelSchema)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getArtifactArtifactcontextfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.artifactContextFragments, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'schemaName': schemaName, 
+            'artifactName': artifactName, 
+            'fragmentName': fragmentName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+    })
+}
+;
+
+md.addArtifactArtifactcontextfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+
+md.removeArtifactArtifactcontextfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    md.getArtifact(userName, projectName, schemaName, artifactName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('artifact', 'artifactcontextfragment'), utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterArtifact.put(userName, projectName, schemaName, artifactName, result, callback)
+        
+    })
+}
+;
+

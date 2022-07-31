@@ -11,7 +11,7 @@
 		
 	m getArtifactGenerator
 		string artifactName
-		# log 'PluginsManager.getArtifactGenerator.artifactName: ' + artifactName
+		# loog 'PluginsManager.getArtifactGenerator.artifactName: ' + artifactName
 			
 		var
 			decl found = null
@@ -21,10 +21,10 @@
 
 		# all factoryPlugins are searched, last matching encountered wins.
 		foreach item in this.factoryPlugins
-			# log 'searching artifact ', artifactName, ' in module', item.getName()
+			# loog 'searching artifact ', artifactName, ' in module', item.getName()
 			checked_call_r_set( found )
 				_ item.getArtifactGenerator(artifactName)
-			# log 'found', found, found && verify.isFunction(found.gen)
+			# loog 'found', found, found && verify.isFunction(found.gen)
 			if found && verify.isFunction(found.gen)
 				set result = found
 				set foundInPlugin = item.getFilename()

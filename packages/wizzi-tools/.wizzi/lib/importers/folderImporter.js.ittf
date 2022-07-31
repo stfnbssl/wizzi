@@ -12,12 +12,12 @@
 		param vfile
 		param callback
 
-		log '****************************************'
-		log ' wizzi-tools FOLDER IMPORTER'
-		log '----------------------------------------'
-		log ' from ' + baseImportPath
-		log ' to ' + baseExportPath
-		log '========================================'
+		info '****************************************'
+		info ' wizzi-tools FOLDER IMPORTER'
+		info '----------------------------------------'
+		info ' from ' + baseImportPath
+		info ' to ' + baseExportPath
+		info '========================================'
 
 		if typeof vfile === 'undefined'
 			set callback = options

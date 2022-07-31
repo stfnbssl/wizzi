@@ -3,5 +3,5 @@
 
 	class Adieu
 		m say
-			log 'Adieu'
+			success 'Adieu'
 

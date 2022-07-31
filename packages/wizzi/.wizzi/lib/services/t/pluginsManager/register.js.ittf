@@ -32,7 +32,7 @@
 	m validateFactoryPlugin
 		{ factoryPlugin
 		for var k in factoryPlugin
-			# log 'wizzi.pluginsManager.validatefactoryPlugin.key', k
+			# loog 'wizzi.pluginsManager.validatefactoryPlugin.key', k
 		+
 		var methodNames
 			[
@@ -71,7 +71,7 @@
 						@ 'InvalidFactoryPlugin'
 						@ 'validateFactoryPlugin'
 						@ 'Missing property: ' + propName + ' in provides object'
-		# log 'validateFactoryPlugin', factoryPlugin.getName(), true
+		# loog 'validateFactoryPlugin', factoryPlugin.getName(), true
 		return
 			{
 				@ __is_error false

@@ -73,14 +73,14 @@ $group
             _ initValues.apis.forEach
                 => 
                     param api
-                    log 'installing api: ', api.name
+                    warn 'installing api: ', api.name
                     _ api.initialize(initValues)
                     set initValues.globalApi[api.name] = api
             +
             _ initValues.controllers.forEach
                 => 
                     param controller
-                    log 'installing router on path: ', controller.path
+                    warn 'installing router on path: ', controller.path
                     _ controller.initialize(initValues)
                     _ this.app.use(controller.path, controller.router)
 

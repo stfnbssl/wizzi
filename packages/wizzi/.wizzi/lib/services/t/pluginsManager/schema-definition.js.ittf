@@ -11,7 +11,7 @@
 		
 	m getSchemaDefinition
 		string schemaName
-		# log 'PluginsManager.getSchemaObject.schemaName: ' + schemaName
+		# loog 'PluginsManager.getSchemaObject.schemaName: ' + schemaName
 			
 		var
 			decl found = null
@@ -21,10 +21,10 @@
 		# all factoryPlugins are searched, last encountered results override the previous.
 
 		foreach item in this.factoryPlugins
-			# log 'searching wizzi schema definition', schemaName, ' in plugin ', item.getName()
+			# loog 'searching wizzi schema definition', schemaName, ' in plugin ', item.getName()
 			checked_call_r_set( found )
 				_ item.getSchemaDefinition(schemaName)
-			# log 'found', found
+			# loog 'found', found
 			if found && verify.isObject(found)
 				set result = found
 				set foundInPlugin = item.getFilename()

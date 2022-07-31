@@ -8,7 +8,7 @@
 				@ options || {}
 
 		$append async
-			# log 'wizzi-utils.vfile.getFiles', path_string, options
+			# loog 'wizzi-utils.vfile.getFiles', path_string, options
 			var that = this
 			
 			function getItems
@@ -16,7 +16,7 @@
 				_ that.isDirectory
 					@ path_string
 					f_cb( isDirectory )
-						# log 'wizzi-utils.vfile.getFiles.isDirectory', isDirectory
+						# loog 'wizzi-utils.vfile.getFiles.isDirectory', isDirectory
 						if isDirectory
 							var files
 								[ 
@@ -28,7 +28,7 @@
 								@ relPath
 								@ options
 								f_cb( notUsed )
-									# log 'wizzi-utils.vfile.getFiles.after_appendFiles.files', files
+									# loog 'wizzi-utils.vfile.getFiles.after_appendFiles.files', files
 									return
 										_ callback
 											@ null
@@ -37,7 +37,7 @@
 							_ that.isFile
 								@ path_string
 								f_cb( isFile )
-									# log 'wizzi-utils.vfile.getFiles.isFile', isFile
+									# loog 'wizzi-utils.vfile.getFiles.isFile', isFile
 									if isFile
 										return
 											_ callback
@@ -53,7 +53,7 @@
 												[
 			_ getItems
 				f_cb( items )
-					# log 'wizzi-utils.vfile.getFiles.items', items, options.documentContent
+					# loog 'wizzi-utils.vfile.getFiles.items', items, options.documentContent
 					if options.documentContent
 						_ async.map
 							@ items
@@ -127,14 +127,14 @@
 
 		$append async
 
-			# log 'wizzi-utils.vfile._appendFiles.async.files', files, options
+			# loog 'wizzi-utils.vfile._appendFiles.async.files', files, options
 
 			var that = this
 			_ this.fsimpl.readdir
 				@ path_string
 				f_cb( dir )
 					
-					# log 'wizzi-utils.vfile._appendFiles.async.dir', dir
+					# loog 'wizzi-utils.vfile._appendFiles.async.dir', dir
 					var folders = []
 					_ async.map
 						@ dir
@@ -142,11 +142,11 @@
 							param item
 							param callback
 							var filePath = path.join(path_string, item)
-							# log 'wizzi-utils.vfile._appendFiles.filePath', filePath
+							# loog 'wizzi-utils.vfile._appendFiles.filePath', filePath
 							_ that.isDirectory
 								@ filePath
 								f_cb( isDirectory )
-									# log 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
+									# loog 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
 									if isDirectory
 										return
 											_ callback
@@ -168,7 +168,7 @@
 												@ null
 						f_cb( items )
 
-							# log 'wizzi-utils.vfile._appendFiles.async.items', items
+							# loog 'wizzi-utils.vfile._appendFiles.async.items', items
 							
 							var len = items.length
 							
@@ -179,19 +179,19 @@
 										_ callback
 											@ null
 								var item = items[index]
-								# log '*** item', item
+								# loog '*** item', item
 								if item !== null
 									var filePath = path.join(path_string, item)
 									var newRelPath = relPath.slice(0)
 									_ newRelPath.push(item)
-									# log '*** item', item, filePath
+									# loog '*** item', item, filePath
 									_ that._appendFiles
 										@ filePath
 										@ files
 										@ newRelPath
 										@ options
 										f_cb( result )
-											# log 'wizzi-utils.vfile._appendFiles.deep.async.files', files
+											# loog 'wizzi-utils.vfile._appendFiles.deep.async.files', files
 											return
 												_ repeat
 													@ index + 1
@@ -206,7 +206,7 @@
 			var folders = []
             foreach item in dir
 				var filePath = path.join(path_string, item)
-				# log 'wizzi-utils.vfile._appendFiles.filePath', filePath
+				# loog 'wizzi-utils.vfile._appendFiles.filePath', filePath
                 if this.isDirectory(filePath)
 					if options.deep
 						_ folders.push(item)

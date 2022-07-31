@@ -18,7 +18,7 @@
 					_ mTreeModel.toIttf
 					@ null
 					@ 2
-			log 'mTree friends\n', dump
+			info 'mTree friends\n', dump
 
 			var level0 = require('./level_0')
 			_ level0

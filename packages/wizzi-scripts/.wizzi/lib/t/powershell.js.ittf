@@ -11,7 +11,7 @@
 					@ verbose true
 					@ version 3
 		
-		log 'wizzi-script.manager.powershellExec.options', JSON.stringify(options, null, 2)
+		# loog 'wizzi-script.manager.powershellExec.options', JSON.stringify(options, null, 2)
 		
 		if options.params
 			_ ps.addCommand
@@ -25,7 +25,7 @@
 			=> 
 				param output
 				log output
-				log 'wizzi-script.manager.powershellExec.output', output
+				# loog 'wizzi-script.manager.powershellExec.output', output
 				if callback
 					return
 						_ callback
@@ -36,7 +36,7 @@
 			._ catch
 				=> 
 					param err
-					log 'wizzi-script.manager.powershellExec.err', err
+					# loog 'wizzi-script.manager.powershellExec.err', err
 					_ ps.dispose
 					if callback
 						_ callback

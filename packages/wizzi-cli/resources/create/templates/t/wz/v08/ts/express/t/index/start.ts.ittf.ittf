@@ -61,7 +61,7 @@ $group
                         @ ...wizziControllers
 
         +
-    log 'Starting app. Config:', config
+    warn 'Starting app. Config:', config
     
     ${'$'}if wzCtx.Build.useFilesystem
         const fsDb

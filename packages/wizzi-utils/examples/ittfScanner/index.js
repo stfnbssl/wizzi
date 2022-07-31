@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\ittfScanner\index.js.ittf
 */
 'use strict';
@@ -53,7 +53,7 @@ function ittfFsNode_step_1_exec(folderPath, options, callback) {
     var baseFolder = path.dirname(folderPath);
     vfile(function(err, file) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
         file.getGlobbedFilesEx(path.join(folderPath, '**/*.ittf'), {
@@ -62,17 +62,17 @@ function ittfFsNode_step_1_exec(folderPath, options, callback) {
             ignore: path.join(folderPath, '**/node_modules/**/*.*')
          }, function(err, ittfs) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'ittfs\n', JSON.stringify(ittfs, null, 2)
+            // loog 'ittfs\n', JSON.stringify(ittfs, null, 2)
             ittfGraph.createIttfDocumentGraphFrom(null, {
                 name: 'wzpackage', 
                 value: options.name, 
                 createEmpty: true
              }, function(err, ittfDocumentGraph) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 var root = new IttfFsNode(baseFolder, null, {
@@ -97,17 +97,17 @@ function ittfFsNode_step_1_exec(folderPath, options, callback) {
                 // outside (up) of folderPath
                 root.analize(function(err, notUsed) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     file.write(path.join(__dirname, 'outputs', 'ittfFsNode_step_1_after_analize.json'), stringify(root, null, 2))
                     // export folder infos to an mTree conformant to the
                     // 'wzpackage' schema.
                     root.toIttf(ittfDocumentGraph);
-                    // log 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                    // loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
                     ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'ittfFsNode_step_1.wzpackage.ittf'), function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         callback(null, {
@@ -126,28 +126,28 @@ function ittfFsNode_step_2(callback) {
     var folderPath = path.join(__dirname, 'ittf', 'first');
     vfile(function(err, file) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
         var root = new IttfFsNode(folderPath, null, {
             isDirectory: true, 
             file: file
          });
-        // log 'root', root
+        // loog 'root', root
         var d1Path = path.join(folderPath, 'root.sample.ittf');
         var added = root.addDocument(d1Path);
-        // log 'root', root
+        // loog 'root', root
         var d2Path = path.join(folderPath, 't', 'frag-1.sample.ittf');
         added = root.addDocument(d2Path);
         ;
-        // log 'root', root
+        // loog 'root', root
         file.write(path.join(__dirname, 'outputs', 'ittfFsNode_step_2_after_add.json'), stringify(root, null, 2))
         root.setInfo(function(err, notUsed) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'root', root
+            // loog 'root', root
             console.log('root.info.schemas', root.info.schemas);
             console.log('root.info.lib', root.info.lib);
             // tobe_string(root.info.schemas['md'].name, md)
@@ -167,12 +167,12 @@ function ittfFsNode_step_3(root, callback) {
         createEmpty: true
      }, function(err, ittfDocumentGraph) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
         root.analize(function(err, notUsed) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             root.toIttf(ittfDocumentGraph);
@@ -187,7 +187,7 @@ function folderBrowse_step_1() {
         rootFolder: path.join(__dirname, 'ittf')
      }, function(err, result) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
         console.log('result\n', JSON.stringify(result, null, 2));
@@ -199,19 +199,19 @@ var ittfScanner_Step_1 = function(step_callback) {
     // _ ittfFsNode_step_1
     ittfFsNode_step_1_outside(function(err, result1) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        // log 'ittfFsNode_step_1.result', result1
+        // loog 'ittfFsNode_step_1.result', result1
         /**
             ittfFsNode_step_2(function(err, result2) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 ittfFsNode_step_3(result.root, function(err, result3) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     console.log('ittfFsNode_step_3.result', result3);
@@ -225,12 +225,12 @@ var ittfScanner_Step_1 = function(step_callback) {
             gitPath: 'c:/blabla'
          }, function(err, ittfDocumentGraph) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'first.wzCtx.ittf'), function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 console.log('err, result', err, result);
@@ -245,12 +245,12 @@ var ittfScanner_Step_1 = function(step_callback) {
             gitPath: 'c:/blabla'
          }, function(err, ittfDocumentGraph) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             ittfDocumentGraph.writeFile(path.join(__dirname, 'outputs', 'second.wzCtx.ittf'), function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 console.log('err, result', err, result);
@@ -263,12 +263,12 @@ var ittfScanner_Step_1 = function(step_callback) {
             rootFolder: path.join(wizziStudioFolder, 'dist/server')
          }, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             console.log('step_4 err', err);
             var msg = stringify(result, null, 2);
-            // log 'step_4 result', msg
+            // loog 'step_4 result', msg
             file.write(path.join(__dirname, 'outputs', 'ittfDocumentScanner.json'), msg)
             step_5();
         })
@@ -278,7 +278,7 @@ var ittfScanner_Step_1 = function(step_callback) {
             baseFolder: path.join(wizziStudioFolder, 'dist/server')
          }, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             console.log('step_4 err', err);
@@ -376,14 +376,14 @@ function __printObject(v, level, limit) {
         for (var k in v) {
             prop = v[k];
             if (verify.isObject(prop)) {
-                console.log(indent, k, '{');
+                console.log(indent, k, '{', __filename);
                 __printObject(prop, level+1, limit);
             }
             else if (verify.isFunction(prop)) {
-                console.log(indent, k, 'function');
+                console.log(indent, k, 'function', __filename);
             }
             else if (verify.isArray(prop)) {
-                console.log(indent, k, '[');
+                console.log(indent, k, '[', __filename);
                 var indent2 = new Array(1 + (level+1) * 4).join(' ');
                 var i, i_items=prop, i_len=prop.length, item;
                 for (i=0; i<i_len; i++) {
@@ -392,15 +392,15 @@ function __printObject(v, level, limit) {
                         __printObject(item, level+1, limit);
                     }
                     else if (verify.isFunction(item)) {
-                        console.log(indent2, 'function');
+                        console.log(indent2, 'function', __filename);
                     }
                     else {
-                        console.log(indent2, item);
+                        console.log(indent2, item, __filename);
                     }
                 }
             }
             else {
-                console.log(indent, k, prop);
+                console.log(indent, k, prop, __filename);
             }
         }
     }
@@ -428,8 +428,8 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
-    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-    // log 'nodes[0]', nodes[0]
+    // loog 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // loog 'nodes[0]', nodes[0]
     else {
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
@@ -480,7 +480,7 @@ function meterLine(len, indent) {
             x = formatNum(j, numW);
             sb.push(x.substr(i,1));
         }
-        console.log(indent, sb.join(''));
+        console.log(indent, sb.join(''), __filename);
         sb = [];
     }
 }

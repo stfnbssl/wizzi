@@ -22,4 +22,4 @@ $group
                     _ app.use
                         _ flash
                             { 
-                    log 'FlashMiddleware installed'
+                    success 'FlashMiddleware installed'

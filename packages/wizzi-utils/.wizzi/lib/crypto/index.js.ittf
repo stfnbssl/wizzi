@@ -5,11 +5,11 @@
 	var Hashids = require("hashids")
 	if Hashids.__esModule == true 
 		set Hashids = Hashids.default
-	# log 'Hashids', Hashids
+	# loog 'Hashids', Hashids
 	var crypto = require('crypto')
     # Must be 256 bytes (32 characters)
 	var ENCRYPTION_KEY = process.env.PROCESS_ENCRYPTION_KEY || "C9jM6ONATgsd1W30g6T8N3elW7sgHF4q"
-	# log 'crypto/endec.ENCRYPTION_KEY', ENCRYPTION_KEY
+	# loog 'crypto/endec.ENCRYPTION_KEY', ENCRYPTION_KEY
     # For AES, this is always 16
     var IV_LENGTH = 16
 	# simple

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\mongoUriParser.js.ittf
 */
 'use strict';
@@ -33,7 +33,7 @@ module.exports = function parse(uri, mongoBaseFolder) {
     if (protocol !== 'db') {
         return error('InvalidArgument', 'parse', 'Invalid uri protocol. Must be `db`. Received: ' + uri);
     }
-    // log 'parseuri.parsedUri', parsedUri
+    // loog 'parseuri.parsedUri', parsedUri
     var name,
         parts = parsedUri.pathname ? parsedUri.pathname.split('/') : [];
     if (parsedUri.pathname && parsedUri.pathname.length > 0 && parsedUri.pathname[0] == '/') {
@@ -56,8 +56,8 @@ module.exports = function parse(uri, mongoBaseFolder) {
                 message: 'A mongodb uri must be in the form `db://userName/projectName/documentPath`. Received: ' + uri
              });
     }
-    // log 'wizzi-repo.mongodb.uriparser.parsedUri.parts', parts
-    // log 'wizzi-repo.mongodb.uriparser.parsedUri', parsedUri
+    // loog 'wizzi-repo.mongodb.uriparser.parsedUri.parts', parts
+    // loog 'wizzi-repo.mongodb.uriparser.parsedUri', parsedUri
     ret.storeKind = 'mongodb';
     ret.userId = parsedUri.host;
     ret.projectId = parts[0];
@@ -67,7 +67,7 @@ module.exports = function parse(uri, mongoBaseFolder) {
         ret.internalPath = verify.unixifyPath(path.join(mongoBaseFolder, ret.userId, ret.projectId, ret.path))
         ;
     }
-    // log 'parseuri.ret', ret
+    // loog 'parseuri.ret', ret
     return ret;
 }
 ;

@@ -48,7 +48,7 @@
                     set counter++
 					var token = '""/*;;' + counter + ';;*/'
 					var key = ';;' + counter + ';;'
-                    log 'jsCodeReplacer.token', token 
+                    # loog 'jsCodeReplacer.token', token 
 					_ replaceds.push
 						{
 							@ token token
@@ -73,15 +73,15 @@
 					set state = 2
 				else
 					_ codeCleaned.push(ch)
-				# log '-', state, internalGraph, codeCleaned.join(''), '/', codeSpan.join('')
-				# log '-', state, internalGraph, codeSpan.join('')
+				# loog '-', state, internalGraph, codeCleaned.join(''), '/', codeSpan.join('')
+				# loog '-', state, internalGraph, codeSpan.join('')
 				set i++
 
 	set md.restore
 		function
 			param code
 			param replaceds
-            log 'md.restore', 'code', code
+            # loog 'md.restore', 'code', code
 			if !code
 				return
 			foreach item in replaceds
@@ -95,7 +95,7 @@
 			if !code
 				return
 			var match = md.getKey(code, replaceds)
-            log 'md.restoreInside', 'code', code, 'match', match
+            # loog 'md.restoreInside', 'code', code, 'match', match
 			if match == null
 				return
 			return
@@ -106,7 +106,7 @@
 		function
 			param code
 			param replaceds
-            log 'md.isInside', 'code', code
+            # loog 'md.isInside', 'code', code
 			var match = md.getKey(code, replaceds)
 			if match == null
 				return false
@@ -124,7 +124,7 @@
 			param code
 			param replaceds
 			foreach item in replaceds
-				log 'isKey', code, item.key
+				# loog 'isKey', code, item.key
 				if code.indexOf(item.key) > -1
 					return item
 			return null

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\jswizzi\jsWizziRunner.js.ittf
 */
 'use strict';
@@ -39,12 +39,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -452,7 +452,7 @@ describe("jsWizziRunner", function() {
                 expect(runExpression(expr.code)).to.be.a('number');
                 expect(runExpression(expr.code)).to.be(expr.expected_number);
             }
-            // log 'expr.code, expr.expected', expr.code, expr.expected
+            // loog 'expr.code, expr.expected', expr.code, expr.expected
             else {
                 if (verify.isBoolean(expr.expected) && expr.expected) {
                     expect(runExpression(expr.code)).to.be(true);
@@ -481,15 +481,15 @@ describe("jsWizziRunner", function() {
         var jsWizziContext = new JsWizziContext();
         // run the expression embedded in a var declaration 'result'
         var scriptCode = code.indexOf('return ') > -1 ? 'var result = function dummy() { ' + code + ' }();' : 'var result = ' + code + ';';
-        // log 'runExpression.scriptCode', scriptCode
+        // loog 'runExpression.scriptCode', scriptCode
         var hr = jsWizziRunner.run(scriptCode, jsWizziContext, {
             verbose: false
          });
-        // log 'runExpression.hr', hr
+        // loog 'runExpression.hr', hr
         if (hr instanceof Error) {
             throw hr;
         }
-        // log 'runExpression.result', jsWizziContext.getValue('result')
+        // loog 'runExpression.result', jsWizziContext.getValue('result')
         // return the 'result' var from the context
         return jsWizziContext.getValue('result');
     }

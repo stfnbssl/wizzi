@@ -103,7 +103,7 @@
 								return callback(err)
 					
 							# TODO implement a stats object inside the wizziModelRequest object
-							log 'Loaded model instance of schema ${schema} from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
+							# loog 'Loaded model instance of schema ${schema} from Ittf document ' + ittfDocumentUri + ' in ' + (Date.now() - start) + ' ms'
 					
 							if (wizziModelRequest.dumpAll || wizziModelRequest.dumpIttfModel) && file.isFilePath(ittfDocumentUri)
 								var ittfDumpPath = path.join(path.dirname(ittfDocumentUri), '_debug', path.basename(ittfDocumentUri) + '.ittf.json')

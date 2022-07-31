@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\fs\vfile.js.ittf
 */
 'use strict';
@@ -11,7 +11,7 @@ var file = vfile();
 del.sync(path.join(__dirname, 'ittf', '**', '*.*'))
 file.write(path.join(__dirname, 'ittf', 't', 'alpha.tests.ittf'), 'tests makepath', function(err, result) {
     if (err) {
-        console.log('err', err);
+        console.log("[31m%s[0m", err);
         throw new Error(err.message);
     }
     console.log('result', result);

@@ -18,5 +18,5 @@
 							var p
 								_ JSON.parse
 									@ document.querySelector('#profile').text
-							log 'profile.name', p.name
-							log 'profile.job', p.job
+							success 'profile.name', p.name
+							success 'profile.job', p.job

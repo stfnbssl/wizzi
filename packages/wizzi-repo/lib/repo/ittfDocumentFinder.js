@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\ittfDocumentFinder.js.ittf
 */
 'use strict';
@@ -73,7 +73,7 @@ var IttfDocumentFinder = (function () {
                     if (tresult.found) {
                         return callback(null, tresult.ittfDocumentUri);
                     }
-                    // log 'IttfDocumentFinder.resolvePath options', options, that.schema
+                    // loog 'IttfDocumentFinder.resolvePath options', options, that.schema
                     else {
                         return callback(error('IttfNotFound', 'resolvePath', 'Cannot find ittf document: ' + ittfDocumentUri));
                     }
@@ -99,7 +99,7 @@ var IttfDocumentFinder = (function () {
         }
         var that = this;
         function recurserTFolder(basePath, relPath) {
-            // log 'recurserTFolder enter', basePath, relPath
+            // loog 'recurserTFolder enter', basePath, relPath
             return new Promise(function(resolve) {
                     var ittfDocumentUri = path.join(basePath, 't', relPath);
                     that.tryExists(ittfDocumentUri, that.schema, function(err, result) {
@@ -109,24 +109,24 @@ var IttfDocumentFinder = (function () {
                         
                         // return callback(null, result)
                         
-                        // log 'recurserTFolder resolve found', result
+                        // loog 'recurserTFolder resolve found', result
                         if (result.found) {
                             return resolve(result);
                         }
                         else {
                             basePath = path.dirname(basePath);
                             
-                            // log 'recurserTFolder try parent', basePath
+                            // loog 'recurserTFolder try parent', basePath
                             
                             // return that.resolvePathInTFolders(basePath, relPath, callback)
                             if (basePath.length > 3) {
                                 return recurserTFolder(basePath, relPath).then(function(result) {
-                                        // log 'recurserTFolder transmit resolve result', basePath, result
+                                        // loog 'recurserTFolder transmit resolve result', basePath, result
                                         resolve(result);
                                     })
                                 ;
                             }
-                            // log 'recurserTFolder resolve not found', basePath
+                            // loog 'recurserTFolder resolve not found', basePath
                             else {
                                 return resolve({
                                         found: false

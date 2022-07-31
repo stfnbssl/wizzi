@@ -41,6 +41,10 @@
 			set element.xmlTagInternal = eFrom.xmlTagInternal
 			set element.tagType = eFrom.tagType
 			set element.acceptAnyTag = eFrom.acceptAnyTag
+            if schemautil.isNotEmpty(eFrom.acceptAnyTag)
+                var anyTags = eFrom.acceptAnyTag.split('/')
+                set element.acceptAnyTag = anyTags[0]
+                set element.acceptAnyTagCollection = anyTags[1]
 			set element.nameIsRequired = eFrom.nameIsRequired
 			set element.addToChildren = eFrom.addToChildren
 			set element.suppressCollectionEmit = eFrom.suppressCollectionEmit

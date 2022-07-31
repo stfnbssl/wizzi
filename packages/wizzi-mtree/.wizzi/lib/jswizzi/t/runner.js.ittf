@@ -13,7 +13,7 @@
 			$hook
             $*
             catch ex
-                log 'runner.fragment.' + '${name}' + ' Error catch:', ex.message 
+                # loog 'runner.fragment.' + '${name}' + ' Error catch:', ex.message 
                 return
                     _ local_error
                         @ ctx

@@ -54,13 +54,13 @@ html
 						_ document.getElementById
 							@ "author"
 							. innerHTML
-				log 'author', author
+				info 'author', author
 				var friends
 					_ JSON.parse
 						_ document.getElementById
 							@ "friends"
 							. innerHTML
-				log 'friends', friends
+				info 'friends', friends
 				var v = new MyView('root')
 				_ v.render
 
@@ -70,13 +70,13 @@ html
 					_ document.getElementById
 						@ "author"
 						. innerHTML
-			log 'author', author
+			info 'author', author
 			var friends
 				_ JSON.parse
 					_ document.getElementById
 						@ "friends"
 						. innerHTML
-			log 'friends', friends
+			info 'friends', friends
 			var v = new MyView('root')
 			_ v.render
 

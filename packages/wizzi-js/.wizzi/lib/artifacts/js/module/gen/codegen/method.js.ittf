@@ -20,7 +20,7 @@ module wizzi.js.artifacts.module.gen.codegen.method
 				if model.async
 					_ ctx.write('async ')
 			
-			# log '++++ __is_react_class', ctx.__is_react_class, method
+			# loog '++++ __is_react_class', ctx.__is_react_class, method
 			if ctx.__is_react_class
 				_ ctx.w(method + '(' + model.paramNames.join(', ') + ') {');
 			elif model.static

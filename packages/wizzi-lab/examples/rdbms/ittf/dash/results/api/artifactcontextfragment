@@ -1,0 +1,65 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:35 GMT
+*/
+'use strict';
+
+//
+
+var artifactcontextfragmentPersister = require('../persisters/artifactcontextfragment');
+
+var md = module.exports = {};
+
+md.getArtifactcontextfragments = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    artifactcontextfragmentPersister.getArtifactcontextfragments(userName, projectName, schemaName, artifactName, fragmentName, callback)
+}
+;
+
+md.getArtifactcontextfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    artifactcontextfragmentPersister.get(userName, projectName, schemaName, artifactName, fragmentName, callback)
+}
+;
+
+md.insertArtifactcontextfragment = function(userName, projectName, schemaName, artifactName, fragmentName, callback) {
+    artifactcontextfragmentPersister.exists(userName, projectName, schemaName, artifactName, fragmentName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('artifactcontextfragment', utils.buildResourcePath(userName, projectName, schemaName, artifactName, fragmentName)));
+        }
+        var newItem = {
+            type: 'artifactcontextfragment', 
+            userName: null, 
+            projectName: null, 
+            schemaName: null, 
+            artifactName: null, 
+            fragmentName: null
+         };
+        artifactcontextfragmentPersister.putArtifactcontextfragment(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateArtifactcontextfragment = function(item, callback) {
+    artifactcontextfragmentPersister.put(item, callback)
+}
+
+.prototype.deleteArtifactcontextfragment = function(item, callback) {
+    artifactcontextfragmentPersister.delete(item, callback)
+}
+

@@ -34,7 +34,7 @@ $group
                         @ useUnifiedTopology true
                     ._ then
                         => 
-                            log 'Mongodb. Connected to', mongoPath
+                            success 'Mongodb. Connected to', mongoPath
                             _ mongoose.set('useFindAndModify', false)
                             _ modelBuilders.forEach
                                 => 

@@ -53,7 +53,7 @@
 						else 
 							set parsedUri.protocol
             
-				# log 'parseuri.parsedUri', parsedUri
+				# loog 'parseuri.parsedUri', parsedUri
 
 				set ret.protocol = protocol
 			
@@ -90,8 +90,8 @@
 							{
 								@ parameter 'uri'
 								@ message 'A mongodb uri must be in the form `db://userName/projectName/documentPath`. Received: ' + uri
-					# log 'wizzi-repo.fs.uriparser.parsedUri.parts', parts
-					# log 'wizzi-repo.fs.uriparser.parsedUri', parsedUri
+					# loog 'wizzi-repo.fs.uriparser.parsedUri.parts', parts
+					# loog 'wizzi-repo.fs.uriparser.parsedUri', parsedUri
 					set ret.userId = parsedUri.host
 					set ret.projectId = parts[0]
 					_ parts.shift();
@@ -101,7 +101,7 @@
 
 					set ret.path = parts.join('/')
 
-				# log 'parseuri.ret', ret
+				# loog 'parseuri.ret', ret
 
 				return
 					_ callback

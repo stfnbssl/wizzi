@@ -56,7 +56,7 @@
 					param err
 					param wizziModelInstance
 
-					# log 'ProductionManager.generateArtifact', err
+					# loog 'ProductionManager.generateArtifact', err
 					if err
 						var msg = 'Error loading IttfDocument: ' + ittfDocumentUri + '\n' + util.inspect(err, { depth: null})
 						_ fail.warn(msg)

@@ -17,7 +17,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact
             param comments
 			param callback
 
-			# log 'enter in htmlReact', 
+			# loog 'enter in htmlReact', 
                 \b 'tag', tag, 
                 \b 'model.wzElement', model.wzElement, 
                 \b 'u.parentIsHtmlElement(model)', u.parentIsHtmlElement(model), 
@@ -68,7 +68,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact
                             @ tag
                             @ text
                             f_cb()
-                                # log 'exit from htmlReact', tag
+                                # loog 'exit from htmlReact', tag
                                 _ u.checkInlineExit(model, ctx)
                                 r_cb()
 
@@ -87,7 +87,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact
             # _ ctx.indent() // 23/3/21
 
 		# begin open tag and write attributes
-        # log 'htmlelement_open.tag', tag
+        # loog 'htmlelement_open.tag', tag
 		_ ctx.write("<" + tag)
         _ u.genTSTypeParameterInsts
             @ model
@@ -109,7 +109,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact
                                 _ ctx.deindent
                             repeater_increment(1)
                     $append next
-                        # log 'htmlelement_open.model.statements.length', model.statements.length
+                        # loog 'htmlelement_open.model.statements.length', model.statements.length
                         _ cnt.genItems
                             @ comments
                             @ ctx
@@ -138,7 +138,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.htmlReact
         const writer = singleline ? 'w' : 'write'
         const aindent = singleline ? '' : ' '
 
-        # log 'htmlelement_attribute', a
+        # loog 'htmlelement_attribute', a
 		if a.statements && a.statements.length > 0
             _ u.writeComments(a, ctx, true)
 

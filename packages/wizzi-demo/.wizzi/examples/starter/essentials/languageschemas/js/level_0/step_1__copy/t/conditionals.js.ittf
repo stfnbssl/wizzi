@@ -9,21 +9,21 @@
 	# 
 		# The if, else if, else conditional statement
 	if oper === 'sum'
-		log 'sum', a + b
+		info 'sum', a + b
 	elif oper === 'times'
-		log 'times', a * b
+		info 'times', a * b
 	elif oper === 'sub'
-		log 'subtract', a - b
+		info 'subtract', a - b
 	else
-		log 'divide', a / b
+		info 'divide', a / b
 
 	# 
 		# The switch conditional statement
 	switch letter
 		case 'a'
-			log 'alfa'
+			info 'alfa'
 		case 'b'
-			log 'beta'
+			info 'beta'
 		default
-			log 'gamma'
+			info 'gamma'
 

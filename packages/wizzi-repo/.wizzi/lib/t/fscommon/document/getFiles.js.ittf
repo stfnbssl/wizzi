@@ -15,17 +15,17 @@
 		function get_files_Async
 			param singleFolderPath
 			param callback
-			# log 'wizzi-repo.${source}.document.get_files_Async', singleFolderPath
+			# loog 'wizzi-repo.${source}.document.get_files_Async', singleFolderPath
 			+
 			_ that.fsCommon.getItemByPath
 				@ singleFolderPath
 				f_cb( r )
-					# log 'wizzi-repo.${source}.document.get_files_Async.r', r
+					# loog 'wizzi-repo.${source}.document.get_files_Async.r', r
 					if r
 						_ that.fsCommon.getItemChildren
 							@ r._id
 							f_cb_no_err( r2 )
-								# log 'wizzi-repo.${source}.document.getItemChildren.err.r2', err, r2
+								# loog 'wizzi-repo.${source}.document.getItemChildren.err.r2', err, r2
 								if err
 									return
 										_ callback(err)
@@ -49,7 +49,7 @@
 							@ folderPaths
 							@ get_files_Async
 							f_cb_no_err( fsitemsArray )
-								# log 'wizzi-repo.${source}.document.getfiles err, fsitemsArray', err, fsitemsArray
+								# loog 'wizzi-repo.${source}.document.getfiles err, fsitemsArray', err, fsitemsArray
 								if err
 									return
 										_ reject
@@ -87,7 +87,7 @@
 			@ basenames
 			._ then
 				function
-					# log 'wizzi-repo.${source}.document.getfiles', 'folderPath', folderPath, 'files', files, 'ids', ids, 'documentContent', documentContent
+					# loog 'wizzi-repo.${source}.document.getfiles', 'folderPath', folderPath, 'files', files, 'ids', ids, 'documentContent', documentContent
 					if !documentContent
 						return
 							_ callback(null, files)
@@ -95,7 +95,7 @@
 						_ that.getContentsByIds
 							@ ids
 							f_cb( contents )
-								# log 'wizzi-repo.${source}.document.getfiles.contents', contents
+								# loog 'wizzi-repo.${source}.document.getfiles.contents', contents
 								var ret = []
 								for var i=0; i<files.length; i++
 									_ ret.push

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\examples\css\step_1.js.ittf
 */
 'use strict';
@@ -60,7 +60,7 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
-            mTreeBuildUpContext: context, 
+            mTreeBuildupContext: context, 
             globalContext: {}
          }, callback)
     })
@@ -89,7 +89,7 @@ function loadAndTransformModel(ittfDocumentUri, context, transformerName, callba
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
-            mTreeBuildUpContext: context, 
+            mTreeBuildupContext: context, 
             globalContext: {}
          }, function(err, wizziModel) {
             if (err) {
@@ -117,12 +117,12 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
          }, callback)
     })
 }
-function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
+function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
             return callback(err);
         }
-        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
+        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback)
     })
 }
 function getFiles(srcpath, schema) {
@@ -145,15 +145,15 @@ var css_step_1 = function(step_callback) {
         console.log('--------------------------------------------------------------------------------------');
         loadModelAndGenerateArtifact(path.join(__dirname, 'ittf', ittf + '.css.ittf'), {}, "css/document", function(err, artifactText) {
             if (err) {
-                console.log('-------------------------------------------------------------------');
-                console.log('--- Test error ----------------------------------------------------');
-                console.log('err', err);
-                console.log('err.toString()', err.toString());
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '--- Test error ----------------------------------------------------');
+                console.log("[31m%s[0m", 'err', err);
+                console.log("[31m%s[0m", 'err.toString()', err.toString());
                 if (err.inner) {
-                    console.log('err.inner.toString()', err.inner.toString());
+                    console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
                 }
-                console.log('-------------------------------------------------------------------');
-                console.log('-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
+                console.log("[31m%s[0m", '-------------------------------------------------------------------');
                 throw 'Test error';
             }
             printValue(ittf, artifactText);
@@ -161,18 +161,18 @@ var css_step_1 = function(step_callback) {
         })
     }, function(err, result) {
         if (err) {
-            console.log('-------------------------------------------------------------------');
-            console.log('--- Test error ----------------------------------------------------');
-            console.log('err', err);
-            console.log('err.toString()', err.toString());
+            console.log("[31m%s[0m", '-------------------------------------------------------------------');
+            console.log("[31m%s[0m", '--- Test error ----------------------------------------------------');
+            console.log("[31m%s[0m", 'err', err);
+            console.log("[31m%s[0m", 'err.toString()', err.toString());
             if (err.inner) {
-                console.log('err.inner.toString()', err.inner.toString());
+                console.log("[31m%s[0m", 'err.inner.toString()', err.inner.toString());
             }
-            console.log('-------------------------------------------------------------------');
-            console.log('-------------------------------------------------------------------');
+            console.log("[31m%s[0m", '-------------------------------------------------------------------');
+            console.log("[31m%s[0m", '-------------------------------------------------------------------');
             throw 'Test error';
         }
-        console.log(result);
+        console.log(result, __filename);
     })
 };
 css_step_1.__name = 'css_step_1';
@@ -264,14 +264,14 @@ function __printObject(v, level, limit) {
         for (var k in v) {
             prop = v[k];
             if (verify.isObject(prop)) {
-                console.log(indent, k, '{');
+                console.log(indent, k, '{', __filename);
                 __printObject(prop, level+1, limit);
             }
             else if (verify.isFunction(prop)) {
-                console.log(indent, k, 'function');
+                console.log(indent, k, 'function', __filename);
             }
             else if (verify.isArray(prop)) {
-                console.log(indent, k, '[');
+                console.log(indent, k, '[', __filename);
                 var indent2 = new Array(1 + (level+1) * 4).join(' ');
                 var i, i_items=prop, i_len=prop.length, item;
                 for (i=0; i<i_len; i++) {
@@ -280,15 +280,15 @@ function __printObject(v, level, limit) {
                         __printObject(item, level+1, limit);
                     }
                     else if (verify.isFunction(item)) {
-                        console.log(indent2, 'function');
+                        console.log(indent2, 'function', __filename);
                     }
                     else {
-                        console.log(indent2, item);
+                        console.log(indent2, item, __filename);
                     }
                 }
             }
             else {
-                console.log(indent, k, prop);
+                console.log(indent, k, prop, __filename);
             }
         }
     }
@@ -316,8 +316,8 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
-    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-    // log 'nodes[0]', nodes[0]
+    // loog 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // loog 'nodes[0]', nodes[0]
     else {
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
@@ -368,7 +368,7 @@ function meterLine(len, indent) {
             x = formatNum(j, numW);
             sb.push(x.substr(i,1));
         }
-        console.log(indent, sb.join(''));
+        console.log(indent, sb.join(''), __filename);
         sb = [];
     }
 }

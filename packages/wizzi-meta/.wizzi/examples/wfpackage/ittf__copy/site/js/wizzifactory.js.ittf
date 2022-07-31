@@ -10,7 +10,7 @@
 
 	_ wzui.contentLoaded
 		function
-			log '*** content loaded'
+			# loog '*** content loaded'
 			var ctx 
 				{
 					@ tabControls []
@@ -44,7 +44,7 @@
 		elif wzui.hasClass(node, 'wz-ui-tv-documents')
 			var documentControl = new wzuiTvDocumentsControl(node)
 			var active_document_title_id = node.getAttribute('data-active-document-title-id')
-			log 'active_document_title_id', active_document_title_id
+			# loog 'active_document_title_id', active_document_title_id
 			_ documentControl.setActiveDocumentTitleElement(active_document_title_id)
 			_ ctx.documentControls.push(documentControl)
 			set ctx.currentDocumentControl = documentControl

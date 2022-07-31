@@ -43,8 +43,8 @@ $group
                 param next
                     :any 
                 if request.query.socketId
-                    log 'features.auth.controllers.auth.middleware.request.originalUrl,query', request.originalUrl, request.query
-                    log 'features.auth.controllers.auth.middleware.request.sessionID, session', request.sessionID, request.session
+                    # loog 'features.auth.controllers.auth.middleware.request.originalUrl,query', request.originalUrl, request.query
+                    # loog 'features.auth.controllers.auth.middleware.request.sessionID, session', request.sessionID, request.session
                     set request.session.socketId = request.query.socketId
                     set request.session.socketUserId = request.query.socketUserId
                 _ next()
@@ -84,15 +84,15 @@ $group
             handler${lparen} githubConnect )
             
             handler${lparen} githubConnectCallback )
-                log '============================================================'
-                log 'Successful authentication'
+                # loog '============================================================'
+                # loog 'Successful authentication'
                 # Successful authentication
                 ${'$'}if wzCtx.Build.useSocketIO
-                    log 'features.auth.controllers.auth.githubCallback',
+                    # loog 'features.auth.controllers.auth.githubCallback',
                         \b 'request.originalUrl, request.originalUrl,
                         \b 'session.socketId, request.session.socketId,
                         \b 'socketUserId', request.session.socketUserId
-                log 'features.auth.controllers.auth.githubCallback',
+                # loog 'features.auth.controllers.auth.githubCallback',
                     \b 'request.sessionID', request.sessionID,
                     \b 'request.session', request.session,
                     \b 'request.user', request.user
@@ -107,7 +107,7 @@ $group
                         @ displayName ruser.displayName
                         @ picture ruser.avatar_url
                 ${'$'}if wzCtx.Build.useSocketIO
-                    log 'features.auth.controllers.auth.githubCallback.sending user via socket', 'github', 
+                    # loog 'features.auth.controllers.auth.githubCallback.sending user via socket', 'github', 
                         \b 'request.session.socketId', request.session.socketId,
                         \b 'ruser', ruser
                     _ io.in(request.session.socketId).emit('github', user)
@@ -136,13 +136,13 @@ $group
                                 @ account
                                 { 
                                     @ upsert true
-                    log 'features.auth.controllers.auth.githubCallback.account.save', 'result', result
+                    # loog 'features.auth.controllers.auth.githubCallback.account.save', 'result', result
                 _ response.redirect('/account/profile')
 
             +
             handler${lparen} getGithubLoggedIn )
                 const uid = request.params.uid
-                log 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
+                # loog 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
                 ${'$'}if wzCtx.Build.useMongoDb
                     const user
                         await 

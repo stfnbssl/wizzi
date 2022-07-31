@@ -31,7 +31,7 @@
             {
                 @ artifactName 'js/module'
             f_cb(artifactText)
-                log 'genFromText', '\n', artifactText
+                # loog 'genFromText', '\n', artifactText
                 _ wizziIndex.genFromText
                     [
                         @ 'module'
@@ -52,5 +52,6 @@
                     =>
                         param err
                         param result
-                        log 'err', err
-                        log 'result', result
+                        if err
+                            error 'err', err
+                        info 'result', result

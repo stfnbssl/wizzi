@@ -3,9 +3,9 @@
         + npm install -g wizzi-cli
 
     h1 wizzi-cli
-    p The Wizzi command line interface (CLI) is used to perform basic functionality, 
-        \b such as executing a Wizzi production, 
-        \b creating a Wizzi production package based on a starter,
+    p The Wizzi command line interface (CLI) performs basic functionality, 
+        \b such as executing a Wizzi Production, 
+        \b creating a Wizzi Package based on a templated Meta Production,
         \b wizzifying an existent artifact or a folder of artifacts.
 
     p The Wizzi CLI (`wizzi-cli`) is packaged as an executable that can be used globally. 
@@ -30,23 +30,25 @@
 
 
     h3 `generate`
-    p Executes a Wizzi production described in a wizzi.config[.configname].js file.
-    p The config file is searched in the current folder and its parent.
+    p Executes a Wizzi Production described in a wizzi.config[.configname].js file.
+    p The config file is searched in the current folder and its parents.
     code sh
         + wizzi [configname]
     
     h3 `create`
-    p Executes a Wizzi meta production creating a new package for a type of Wizzi production.
+    p Executes a Wizzi Meta Production creating a new Wizzi Package for a type of Wizzi production.
     code sh
         + wizzi create
     p An 'inquirer' dialog asks for the production type and other available options.
-    ul Available starters
+    ul Examples of available Meta Production
         li pure js
         li webpack
+        li webpack + react
         li webpack + react + material-ui
         li gatsby
         li express
         li wizzi plugin
+        li ...
     
     h3 `fy`
     p Executes the 'wizzifying' of a file or folder (for example creates a .js.ittf

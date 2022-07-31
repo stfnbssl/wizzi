@@ -26,7 +26,7 @@ $group
                         ${'$'}if wzCtx.Build.useWizzi && wzCtx.Build.wizzi.useRunner
                             _ wizzifile.setAppConfig
                                 @ config
-                            log 'wizzifile', wizzifile
+                            # loog 'wizzifile', wizzifile
                             _ wizzi.startRunnerServer
                                 { 
                                     @ cwd __dirname

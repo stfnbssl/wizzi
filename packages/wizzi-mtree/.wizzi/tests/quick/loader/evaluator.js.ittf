@@ -62,7 +62,7 @@
 		_ evaluate
 			@ content_filepath
 			f_cb_no_err( evaluatedModel )
-                log 'should throw an error evaluating', '\n' + err.toString()
+                # loog 'should throw an error evaluating', '\n' + err.toString()
                 tobe_error( err, IttfEvaluationError )                    
                 _ done()
 
@@ -79,7 +79,7 @@
 			@ content_filepath
 			f_cb_no_err( evaluatedModel )
                 if err
-                    log 'should throw an error evaluating', '\n' + err.toString()
+                    # loog 'should throw an error evaluating', '\n' + err.toString()
                 tobe_error( err, JsWizziError )                    
                 _ done()
 
@@ -96,6 +96,6 @@
 			@ content_filepath
 			f_cb_no_err( evaluatedModel )
                 if err
-                    log 'should throw an error evaluating', '\n', err, '\n' + err.toString()
+                    # loog 'should throw an error evaluating', '\n', err, '\n' + err.toString()
                 tobe_error( err, JsWizziError )                    
                 _ done()

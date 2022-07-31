@@ -1,7 +1,7 @@
 ﻿base_test( pluginsManager )
 
 	$append imports
-		var pluginsManager = require('../../lib/services/pluginsManager')
+		var pluginsManager = require('../../../lib/services/pluginsManager')
 	
 	+
 	var pluginsManagerInstance = null
@@ -11,7 +11,7 @@
 			{
 				@ items
 					[
-						@ '../mocks/plugin'
+						@ '../../mocks/plugin'
 				@ pluginsBaseFolder __dirname
 			f_cb_test( pm )
 				set pluginsManagerInstance = pm 

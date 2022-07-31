@@ -28,7 +28,7 @@
 
 	m isReferenceToIttf
 		if verify.isNotEmpty(this.getValueStripComments())
-			# log 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
+			# loog 'isReferenceToIttf.this.getValueStripComments()', verify.endsWith(this.getValueStripComments(), '.ittf')
 			return verify.endsWith(this.getValueStripComments(), '.ittf')
 		else
 			return false

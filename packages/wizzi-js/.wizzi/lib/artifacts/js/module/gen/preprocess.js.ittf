@@ -42,11 +42,11 @@ module
 		foreach item in topitem.statements
 			_ checkWzItem(item, wzItems)
 
-		# log 'wzItems.requires.length', wzItems.requires.length
-		# log 'wzItems.vars.length', wzItems.vars.length
-		# log 'wzItems.consts.length', wzItems.consts.length
-		# log 'wzItems.functions.length', wzItems.functions.length
-		# log 'wzItems.classes.length', wzItems.classes.length
+		# loog 'wzItems.requires.length', wzItems.requires.length
+		# loog 'wzItems.vars.length', wzItems.vars.length
+		# loog 'wzItems.consts.length', wzItems.consts.length
+		# loog 'wzItems.functions.length', wzItems.functions.length
+		# loog 'wzItems.classes.length', wzItems.classes.length
 
 		return wzItems
 

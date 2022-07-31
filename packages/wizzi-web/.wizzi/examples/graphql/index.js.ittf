@@ -15,7 +15,7 @@
 			@ 'ittf'
 	foreach item in getFiles(ittfPath,'graphql')
 		set item = item.substring(0, item.length - '.graphql.ittf'.length)
-		log 'item', item
+		info 'item', item
 		_ execute(item)
 	+
 	function execute
@@ -36,14 +36,14 @@
 				@ __productionManager
 					_ mocks.getProductionManager
 			f_cb_test( wizziModel )
-				log 'graphql wizziModel', JSON.stringify(wizziModel.toJson(), null, 2)
+				info 'graphql wizziModel', JSON.stringify(wizziModel.toJson(), null, 2)
 				var ctx
 					_ mocks.getGenContext
 				_ graphqlgenerator.gen
 					@ wizziModel
 					@ ctx
 					f_cb_test( ctxout )
-						log 'ctxout begin ========', '\n' + ctxout.getContent(), '\nctxout end ============'
+						info 'ctxout begin ========', '\n' + ctxout.getContent(), '\nctxout end ============'
 						_ file.write
 							@ graphqlOutput
 							@ ctxout.getContent()

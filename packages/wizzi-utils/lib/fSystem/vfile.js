@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\vfile.js.ittf
 */
 'use strict';
@@ -82,7 +82,7 @@ module.exports = function(options, callback) {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
+            // loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
             callback(null, new VFile(fsimpl))
         })
     }
@@ -91,7 +91,7 @@ module.exports = function(options, callback) {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
+            // loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
             callback(null, new VFile(fsimpl))
         })
     }
@@ -239,13 +239,13 @@ var VFile = (function () {
         if (!options) {
             options = {};
         }
-        // log 'wizzi-utils.vfile.write.contents 1', contents
+        // loog 'wizzi-utils.vfile.write.contents 1', contents
         if (this.storeKind === 'filesystem') {
             if (!Buffer.isBuffer(contents) && options.encoding !== null) {
                 contents = iconv.encode(contents, (options.encoding || DEFAULT_DECODING));
             }
         }
-        // log 'wizzi-utils.vfile.write.contents 2', contents
+        // loog 'wizzi-utils.vfile.write.contents 2', contents
         if (verify.isFunction(callback)) {
             return this.writeAsync(path_string, contents, options, callback);
         }
@@ -259,7 +259,7 @@ var VFile = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'write async', path_string, that.fsimpl.writeFile, callback
+            // loog 'write async', path_string, that.fsimpl.writeFile, callback
             return that.fsimpl.writeFile(path_string, contents, callback);
         })
     }
@@ -273,7 +273,7 @@ var VFile = (function () {
         }
         this.mkpath(path_string);
         try {
-            // log 'write sync', path_string, that.fsimpl.writeFile, callback
+            // loog 'write sync', path_string, that.fsimpl.writeFile, callback
             this.fsimpl.writeFileSync(path_string, contents);
         } 
         catch (ex) {
@@ -302,7 +302,7 @@ var VFile = (function () {
                         }
                         var stream = that.fsimpl.createWriteStream(path_string);
                         if (stream && stream.__is_error) {
-                            console.log('__is_error ', stream);
+                            console.log("[31m%s[0m", '__is_error ', stream);
                             return callback(stream);
                         }
                         callback(null, stream);
@@ -315,7 +315,7 @@ var VFile = (function () {
                         }
                         var stream = that.fsimpl.createWriteStream(path_string);
                         if (stream && stream.__is_error) {
-                            console.log('__is_error ', stream);
+                            console.log("[31m%s[0m", '__is_error ', stream);
                             return callback(stream);
                         }
                         callback(null, stream);
@@ -335,7 +335,7 @@ var VFile = (function () {
         }
     }
     VFile.prototype.mkpathAsync = function(path_string, callback) {
-        // log 'mkpath async', path_string
+        // loog 'mkpath async', path_string
         this.ensureParentDir(path_string, callback)
     }
     VFile.prototype.mkpathSync = function(path_string) {
@@ -343,7 +343,7 @@ var VFile = (function () {
             throw new errors.FileError('The filesystem implementation does not support method \'mkdirSync\'. Unable to execute \'mkpath\' method for path: \'' + path_string + '\'');
         }
         var shouldThrow = true;
-        // log 'mkpath sync', path_string
+        // loog 'mkpath sync', path_string
         return this.ensureParentDir(path_string);
     }
     VFile.prototype.ensureParentDir = function(path_string, callback) {
@@ -356,14 +356,14 @@ var VFile = (function () {
         }
     }
     VFile.prototype.ensureParentDirAsync = function(path_string, callback) {
-        // log 'ensureParentDir', path_string
+        // loog 'ensureParentDir', path_string
         var that = this;
         var pathParent = path.dirname(path_string);
         this.isDirectory(pathParent, function(err, result) {
             if (err) {
                 return callback(err);
             }
-            // log 'ensureParentDir.isDirectory', result, path_string
+            // loog 'ensureParentDir.isDirectory', result, path_string
             if (result == true) {
                 return callback(null);
             }
@@ -1117,14 +1117,14 @@ var VFile = (function () {
         }
     }
     VFile.prototype.getFilesAsync = function(path_string, options, callback) {
-        // log 'wizzi-utils.vfile.getFiles', path_string, options
+        // loog 'wizzi-utils.vfile.getFiles', path_string, options
         var that = this;
         function getItems(callback) {
             that.isDirectory(path_string, function(err, isDirectory) {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-utils.vfile.getFiles.isDirectory', isDirectory
+                // loog 'wizzi-utils.vfile.getFiles.isDirectory', isDirectory
                 if (isDirectory) {
                     var files = [];
                     var relPath = [];
@@ -1132,7 +1132,7 @@ var VFile = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        // log 'wizzi-utils.vfile.getFiles.after_appendFiles.files', files
+                        // loog 'wizzi-utils.vfile.getFiles.after_appendFiles.files', files
                         return callback(null, files);
                     })
                 }
@@ -1141,7 +1141,7 @@ var VFile = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        // log 'wizzi-utils.vfile.getFiles.isFile', isFile
+                        // loog 'wizzi-utils.vfile.getFiles.isFile', isFile
                         if (isFile) {
                             return callback(null, [
                                     {
@@ -1161,7 +1161,7 @@ var VFile = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.vfile.getFiles.items', items, options.documentContent
+            // loog 'wizzi-utils.vfile.getFiles.items', items, options.documentContent
             if (options.documentContent) {
                 async.map(items, function(item, callback) {
                     that.read(item.fullPath, function(err, content) {
@@ -1246,22 +1246,22 @@ var VFile = (function () {
         }
     }
     VFile.prototype._appendFilesAsync = function(path_string, files, relPath, options, callback) {
-        // log 'wizzi-utils.vfile._appendFiles.async.files', files, options
+        // loog 'wizzi-utils.vfile._appendFiles.async.files', files, options
         var that = this;
         this.fsimpl.readdir(path_string, function(err, dir) {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.vfile._appendFiles.async.dir', dir
+            // loog 'wizzi-utils.vfile._appendFiles.async.dir', dir
             var folders = [];
             async.map(dir, function(item, callback) {
                 var filePath = path.join(path_string, item);
-                // log 'wizzi-utils.vfile._appendFiles.filePath', filePath
+                // loog 'wizzi-utils.vfile._appendFiles.filePath', filePath
                 that.isDirectory(filePath, function(err, isDirectory) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
+                    // loog 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
                     if (isDirectory) {
                         return callback(null, (options.deep ? item : null ));
                     }
@@ -1279,16 +1279,16 @@ var VFile = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-utils.vfile._appendFiles.async.items', items
+                // loog 'wizzi-utils.vfile._appendFiles.async.items', items
                 var len = items.length;
                 function repeat(index) {
                     if (index == len) {
                         return callback(null);
                     }
                     var item = items[index];
-                    // log '*** item', item
+                    // loog '*** item', item
                     
-                    // log '*** item', item, filePath
+                    // loog '*** item', item, filePath
                     if (item !== null) {
                         var filePath = path.join(path_string, item);
                         var newRelPath = relPath.slice(0);
@@ -1297,7 +1297,7 @@ var VFile = (function () {
                             if (err) {
                                 return callback(err);
                             }
-                            // log 'wizzi-utils.vfile._appendFiles.deep.async.files', files
+                            // loog 'wizzi-utils.vfile._appendFiles.deep.async.files', files
                             return repeat(index + 1);
                         })
                     }
@@ -1323,7 +1323,7 @@ var VFile = (function () {
         for (i=0; i<i_len; i++) {
             item = dir[i];
             var filePath = path.join(path_string, item);
-            // log 'wizzi-utils.vfile._appendFiles.filePath', filePath
+            // loog 'wizzi-utils.vfile._appendFiles.filePath', filePath
             if (this.isDirectory(filePath)) {
                 if (options.deep) {
                     folders.push(item);
@@ -1363,14 +1363,14 @@ var VFile = (function () {
         }
     }
     VFile.prototype.getFoldersAsync = function(path_string, options, callback) {
-        // log 'wizzi-utils.vfile.getFolders', path_string, options
+        // loog 'wizzi-utils.vfile.getFolders', path_string, options
         var that = this;
         function getItems(callback) {
             that.isDirectory(path_string, function(err, isDirectory) {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-utils.vfile.getFolders.isDirectory', isDirectory
+                // loog 'wizzi-utils.vfile.getFolders.isDirectory', isDirectory
                 if (isDirectory) {
                     var folders = [];
                     var relPath = [];
@@ -1378,7 +1378,7 @@ var VFile = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        // log 'wizzi-utils.vfile.getFolders.folders', folders
+                        // loog 'wizzi-utils.vfile.getFolders.folders', folders
                         return callback(null, folders);
                     })
                 }
@@ -1391,7 +1391,7 @@ var VFile = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.vfile.getFiles.items', items, options.documentNames
+            // loog 'wizzi-utils.vfile.getFiles.items', items, options.documentNames
             if (options.documentNames) {
                 async.map(items, function(item, callback) {
                     if (item !== null) {
@@ -1482,14 +1482,14 @@ var VFile = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-utils.vfile._appendFolders.dir', dir
+            // loog 'wizzi-utils.vfile._appendFolders.dir', dir
             async.map(dir, function(item, callback) {
                 var filePath = path.join(path_string, item);
                 that.isDirectory(filePath, function(err, isDirectory) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-utils.vfile._appendFolders.isDirectory', filePath, isDirectory
+                    // loog 'wizzi-utils.vfile._appendFolders.isDirectory', filePath, isDirectory
                     if (isDirectory) {
                         folders.push({
                             fullPath: filePath, 
@@ -1502,7 +1502,7 @@ var VFile = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'wizzi-utils.vfile._appendFolders.async.items, folders', items, folders
+                // loog 'wizzi-utils.vfile._appendFolders.async.items, folders', items, folders
                 var len = items.length;
                 function repeat(index) {
                     if (index == len) {
@@ -1618,15 +1618,15 @@ var VFile = (function () {
                         path_string
                     ]);
             }
-            // log 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
+            // loog 'wizzi-utils.fs.vfile.glob.path_string, options', path_string, options
             else {
                 glob(path_string, this, options, function(err, files) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-utils.fs.vfile.glob.after_glob.path_string ', path_string, 'files', files.length
+                    // loog 'wizzi-utils.fs.vfile.glob.after_glob.path_string ', path_string, 'files', files.length
                     
-                    // log 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
+                    // loog 'wizzi-utils.fs.vfile.glob.after_glob.removeRoot', removeRoot
                     if (removeRoot) {
                         files = files.map(function(file) {
                             if (_.isArray(removeRoot)) {
@@ -1673,13 +1673,13 @@ var VFile = (function () {
             if (urlRegex.test(path_string)) {
                 output.push(path_string);
             }
-            // log 'path_string, options', path_string, options
-            // log 'wizzi-meta.file.path_string ', path_string, 'files', files.length
+            // loog 'path_string, options', path_string, options
+            // loog 'wizzi-meta.file.path_string ', path_string, 'files', files.length
             else {
                 options.sync = true;
                 var files = glob(path_string, this, options);
                 
-                // log 'removeRoot', removeRoot
+                // loog 'removeRoot', removeRoot
                 if (removeRoot) {
                     files = files.map(function(file) {
                         if (_.isArray(removeRoot)) {

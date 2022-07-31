@@ -2,7 +2,7 @@
 
 	function isAttribute
 		param name
-		log 'isAttribute', name
+		# loog 'isAttribute', name
 		return
 			iif attributes.indexOf(name) > -1
 				then true

@@ -11,11 +11,11 @@
 		m emit
 			param name
 			var args = [].slice.call(arguments, 1)
-			# log 'wz_EventTarget.emit.args', arguments, args
+			# loog 'wz_EventTarget.emit.args', arguments, args
 			if this.__is_Event(name)
 				if this.handlers[name] instanceof Array
 					foreach handle in this.handlers[name]
-						# log 'handle.context', handle.context
+						# loog 'handle.context', handle.context
 						_ handle.callback.apply(handle.context, args)
 			else
 				throw new Error(name + ' event cannot be found on TreeView.')
@@ -24,7 +24,7 @@
 			param name
 			param callback
 			param scope
-			# log 'EventTarget.on.name,scope', name, scope
+			# loog 'EventTarget.on.name,scope', name, scope
 			if this.__is_Event(name)
 				if !this.handlers[name]
 					set this.handlers[name] = []

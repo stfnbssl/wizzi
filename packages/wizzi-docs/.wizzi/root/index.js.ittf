@@ -28,7 +28,7 @@
 				param callback
 				_ job(callback)
 			f_cb_test(results)
-				log 'docs generation results\n', stringify(results, null, 2)
+				# loog 'docs generation results\n', stringify(results, null, 2)
 				if callback
 					_ callback
 						@ null

@@ -49,7 +49,7 @@
 							@ 'The model parameter must be an object. Received: ' + model
 			$if noschemacheck == false
 				if model.wzElement !== '${rootElement}'
-					log '${plugin}', 'artifact', 'model', model
+					error '${plugin}', 'artifact', 'model', model
 					return
 						_ callback
 							_ error

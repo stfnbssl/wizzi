@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -122,7 +122,7 @@ md.dbFactory = function(storeUri, storeBaseFolder, options, callback) {
         ));
     }
     
-    // log 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
+    // loog 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
     
     options.repo = {
         storeKind: 'mongodb', 
@@ -151,7 +151,7 @@ md.jsonFactory = function(options, callback) {
         ));
     }
     
-    // log 'wizzi.index.jsonFactory.fsJson', options.fsJson
+    // loog 'wizzi.index.jsonFactory.fsJson', options.fsJson
     
     options.repo = {
         storeKind: 'json', 
@@ -174,7 +174,7 @@ md.browserFactory = function(options, callback) {
         ));
     }
     
-    // log 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
+    // loog 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
     
     options.repo = {
         storeKind: 'browser'
@@ -237,24 +237,24 @@ md.startRunnerServer = function(options, callback) {
                                     if (err) {
                                         return callback(err);
                                     }
-                                    console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
+                                    console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
                                     return callback(null);
                                 })
                             }
                             else {
-                                console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
+                                console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
                                 return callback(null);
                             }
                         })
                     }
                     else {
-                        console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
+                        console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
                         return callback(null);
                     }
                 })
             }
             else {
-                console.log(chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.'));
+                console.log(chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.'), __filename);
                 return callback(null);
             }
         }
@@ -280,11 +280,11 @@ md.loadWizzifile = function(options, callback) {
         var wizziFilePath = path.join(runnerServerCWD, 'wizzifile.js');
         if (md.file.isFile(wizziFilePath)) {
             md.wizzifile = require(wizziFilePath);
-            console.log(chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath));
+            console.log(chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath), __filename);
             return callback(null, md.wizzifile);
         }
         else {
-            console.log(chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.'));
+            console.log(chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.'), __filename);
             return callback(null);
         }
     }
@@ -394,7 +394,7 @@ function executeWizziJob_step2(jobRequest, callback) {
             
             var pman = wizziFactoryInstance.createProductionManager(jobRequest.productionOptions, jobRequest.globalContext);
             if (pman && pman.__is_error) {
-                console.log('__is_error ', pman);
+                console.log("[31m%s[0m", '__is_error ', pman);
                 return callback(pman);
             }
             
@@ -404,21 +404,21 @@ function executeWizziJob_step2(jobRequest, callback) {
                  }
              });
             if (notUsed && notUsed.__is_error) {
-                console.log('__is_error ', notUsed);
+                console.log("[31m%s[0m", '__is_error ', notUsed);
                 return callback(notUsed);
             }
             
             pman.run(function(err, result) {
                 if (err) {
-                    console.log('executeWizziJob_step2.error', err);
+                    console.log("[31m%s[0m", 'executeWizziJob_step2.error', err);
                     err.wizziJob = jobName;
                     err.wizziJobStep = 'Running job';
                     err.wizziJobIttfSourceUri = jobPath;
                     return callback(err);
                 }
-                console.log('=');
-                log.success('======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '. Run completed');
-                console.log('=');
+                console.log("[32m%s[0m", '=');
+                console.log("[32m%s[0m", '======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '. Run completed');
+                console.log("[32m%s[0m", '=');
                 pman.persistToFile(function(err, result) {
                     if (err) {
                         err.wizziJob = jobName;
@@ -426,9 +426,9 @@ function executeWizziJob_step2(jobRequest, callback) {
                         err.wizziJobIttfSourceUri = jobPath;
                         return callback(err);
                     }
-                    console.log('=');
-                    log.success('======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '.  PersistToFile completed');
-                    console.log('=');
+                    console.log("[32m%s[0m", '=');
+                    console.log("[32m%s[0m", '======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '.  PersistToFile completed');
+                    console.log("[32m%s[0m", '=');
                     pman.terminate();
                     if (callback) {
                         callback(null, result);
@@ -439,17 +439,17 @@ function executeWizziJob_step2(jobRequest, callback) {
 }
 md.printWizziJobError = function(jobName, err) {
     err.WizziIndexStack = (new Error()).stack;
-    console.log("\n");
-    console.log("====================================================================================================\n");
-    console.log("FATAL ERROR : v0.7.6.executing wizzi instance job: " + jobName);
-    console.log("\n");
-    console.log("Error message:\n");
-    console.log(err.message + "\n");
-    console.log("Error details:\n");
-    console.log(err + "\n");
-    console.log("FATAL ERROR - END\n");
-    console.log("====================================================================================================\n");
-    console.log("\n");
+    console.log("[31m%s[0m", "\n");
+    console.log("[31m%s[0m", "====================================================================================================\n");
+    console.log("[31m%s[0m", "FATAL ERROR : v0.7.6.executing wizzi instance job: " + jobName);
+    console.log("[31m%s[0m", "\n");
+    console.log("[31m%s[0m", "Error message:\n");
+    console.log("[31m%s[0m", err.message + "\n");
+    console.log("[31m%s[0m", "Error details:\n");
+    console.log("[31m%s[0m", err + "\n");
+    console.log("[31m%s[0m", "FATAL ERROR - END\n");
+    console.log("[31m%s[0m", "====================================================================================================\n");
+    console.log("[31m%s[0m", "\n");
     process.exit(999);
 }
 ;
@@ -478,7 +478,7 @@ md.generateWizziModelTypes = function(request, callback) {
     request.wfschema.mTreeBuildupContext = Object.assign({}, request.wfschema.mTreeBuildupContext);
     request.globalContext = Object.assign({}, request.globalContext);
     
-    console.log('generateWizziModelTypes');
+    console.log('wizzi.generateWizziModelTypes');
     console.log('- storeKind', storeKind);
     console.log('- configOptions', request.configOptions);
     console.log('- wfschema.name', request.wfschema.name);
@@ -728,7 +728,7 @@ md.loadMTreeFromText = function(ittfContent, context, options, callback) {
         callback = context;
         context = {};
     }
-    // log 'md.loadMTreeFromText.options', options
+    // loog 'md.loadMTreeFromText.options', options
     var schema;
     if (verify.isNotEmpty(options.artifactName)) {
         var ss = options.artifactName.split('/');
@@ -876,7 +876,7 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
         callback = context;
         context = {};
     }
-    // log 'md.loadMTreeDebugFromText.options', options
+    // loog 'md.loadMTreeDebugFromText.options', options
     var schema;
     if (verify.isNotEmpty(options.artifactName)) {
         var ss = options.artifactName.split('/');
@@ -1100,7 +1100,7 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
         callback = context;
         context = {};
     }
-    // log 'md.loadModelFromText.options', options
+    // loog 'md.loadModelFromText.options', options
     var schema;
     if (verify.isNotEmpty(options.artifactName)) {
         var ss = options.artifactName.split('/');
@@ -1257,7 +1257,7 @@ md.generateArtifactFromText = function(ittfContent, context, options, callback) 
         callback = context;
         context = {};
     }
-    // log 'md.generateArtifactFromText.options', options
+    // loog 'md.generateArtifactFromText.options', options
     var schema;
     if (verify.isNotEmpty(options.artifactName)) {
         var ss = options.artifactName.split('/');

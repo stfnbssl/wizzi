@@ -67,7 +67,7 @@
 					# done already
 				else
 					_ ctx.addError('Unknow child of `nodeObject` element : ' + item.wzElement, item)
-			# log 'this.__jsonld', this.__jsonld
+			# loog 'this.__jsonld', this.__jsonld
 			set this.__jsonProps
 				{
 					@ __jsonld this.__jsonld
@@ -179,7 +179,7 @@
 
 		m wzInitialize
 			var nv = verify.parseNameValue(this.wzName)
-			# log 'nv.name(), nv.value()', nv.name(), '/', nv.value()
+			# loog 'nv.name(), nv.value()', nv.name(), '/', nv.value()
 			if this.jsonlditems.length === 0
 				set this.__key = nv.name()
 				if verify.isNotEmpty(this.id)
@@ -298,7 +298,7 @@
 						set this.__jsonld[item.__key] = item.__jsonld
 				else
 					_ ctx.addError('Unknow child of `context` element : ' + item.wzElement, item)
-			# log 'this.__jsonld', this.__jsonld
+			# loog 'this.__jsonld', this.__jsonld
 			set this.__jsonProps
 				{
 					@ __jsonld this.__jsonld
@@ -309,7 +309,7 @@
 		m wzInitialize
 			var isArrayOfNodes = true
 			foreach item in this.jsonlditems
-				# log 'graph.item.wzElement', item.wzElement
+				# loog 'graph.item.wzElement', item.wzElement
 				if item.wzElement !== 'nodeObject'
 					set isArrayOfNodes = false
 			if isArrayOfNodes

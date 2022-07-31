@@ -25,7 +25,7 @@
 	md-trans-main(
 		$if noschemacheck == false
 			if model.wzElement !== '${schema}'
-				log 'wizzi-core', 'transformer', 'model', model
+				# loog 'wizzi-core', 'transformer', 'model', model
 				_ callback
 					_ error
 						@ 'Invalid model schema. Expected "${schema}". Received: ' + model.wzElement

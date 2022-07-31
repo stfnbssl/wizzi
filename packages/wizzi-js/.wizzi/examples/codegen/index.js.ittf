@@ -35,7 +35,7 @@
 	$include react
 
 	repeater(1, examples)
-		# log 'item_1.test', item_1.test
+		# loog 'item_1.test', item_1.test
 		var mTree = item_1.test
 		var js = new jsNode(mTree.n, mTree.v)
 		_ js.loadFromMTree(mTree)
@@ -51,5 +51,5 @@
 				else
 					chalk red 'test' + '\n' + ctx.getContent()
 					chalk red 'expected' + '\n' + item_1.expected
-				log '----------------------------------------------------'
+				info '----------------------------------------------------'
 				repeater_increment(1)

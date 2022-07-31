@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\css\document\gen\main.js.ittf
 */
 'use strict';
@@ -14,15 +14,15 @@ md.stm = {};
 var rule = require('./rule');
 rule.load(md);
 md.gen = function(model, ctx, callback) {
-    // log 'model', util.inspect(model, { depth: 3 })
-    // log 'enter', myname
+    // loog 'model', util.inspect(model, { depth: 3 })
+    // loog 'enter', myname
     main_init(model, ctx)
     ctx.__comment_level = 0;
     md.getGenItem(ctx)(model, function(err, notUsed) {
         if (err) {
             return callback(err);
         }
-        // log 'exit', myname
+        // loog 'exit', myname
         try {
             var postCssResult = postcss().use(colorFunction({
                 preserveCustomProps: true
@@ -107,11 +107,11 @@ md.stm.statement = function(model, ctx, callback) {
 }
 ;
 function main_init(model, ctx) {
-    // log 'css.document.gen.main, ctx.values', ctx.values, !!ctx.values.noGeneratorComments
+    // loog 'css.document.gen.main, ctx.values', ctx.values, !!ctx.values.noGeneratorComments
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-web@0.7.10');
+        ctx.w('    package: wizzi-web@0.7.11');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         if ((!!ctx.values.isPackageDeploy) == false) {
             ctx.w('    utc time: ' + new Date().toUTCString());

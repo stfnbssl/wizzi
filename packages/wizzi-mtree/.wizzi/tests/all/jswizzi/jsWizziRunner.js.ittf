@@ -62,7 +62,7 @@
 			elif typeof(expr.expected_number) !== 'undefined'
 				tobe_number( runExpression(expr.code), expr.expected_number )
 			else
-				# log 'expr.code, expr.expected', expr.code, expr.expected
+				# loog 'expr.code, expr.expected', expr.code, expr.expected
                 if verify.isBoolean(expr.expected) && expr.expected
 				    tobe_true( runExpression(expr.code) )
                 elif verify.isBoolean(expr.expected) && !expr.expected
@@ -87,16 +87,16 @@
             iif code.indexOf('return ') > -1
                 then 'var result = function dummy() { ' + code + ' }();'
                 else 'var result = ' + code + ';'
-        # log 'runExpression.scriptCode', scriptCode
+        # loog 'runExpression.scriptCode', scriptCode
         var hr
 			_ jsWizziRunner.run
                 @ scriptCode
 				@ jsWizziContext
 				{
 					@ verbose false
-		# log 'runExpression.hr', hr
+		# loog 'runExpression.hr', hr
         if hr instanceof Error 
 			throw hr
-        # log 'runExpression.result', jsWizziContext.getValue('result')
+        # loog 'runExpression.result', jsWizziContext.getValue('result')
 		# return the 'result' var from the context
 		return jsWizziContext.getValue('result')

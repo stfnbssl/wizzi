@@ -111,7 +111,7 @@
 	it-async should get an error trying to ges sources (not a directory)
 		_ mi.getSources
 			f_cb_no_err( sources )
-				log 'should get sources.sources', err, sources
+				# loog 'should get sources.sources', err, sources
 				tobe_true( err.__is_error )
 				tobe_string( err.name, InvalidOperation )
 				_ done

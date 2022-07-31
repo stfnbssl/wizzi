@@ -28,5 +28,5 @@
                             @ 'outputs'
                             @ 'first.wfpackage.ittf'
                         f_cb_test( result )
-                            log 'err, result', err, result
+                            info 'err, result', err, result
                             _ done

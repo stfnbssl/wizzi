@@ -149,7 +149,7 @@ module wizzi.ts.artifacts.module.gen.codegen.statement
 			param ctx
 			param callback
 
-			log 'codeline ', model.wzName
+			# loog 'codeline ', model.wzName
 			# 4/2/19 _ ctx.write(model.wzName)
 			_ ctx.w(model.wzName) 
 			_ md.genItems(model.items, ctx, callback)

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\util\stm.js.ittf
 */
 'use strict';
@@ -137,7 +137,7 @@ md.writeComments = function(model, ctx, newline) {
             __writeComments(item, ctx, item.wzElement == 'commentmultiline')
             written = true;
             
-            // log '§§§ stm.writeComments', model.wzName
+            // loog '§§§ stm.writeComments', model.wzName
             if (item.wzName.indexOf('@ts-ignore') > -1) {
                 ctx.__inlineNext = true;
             }
@@ -154,7 +154,7 @@ md.writeComments = function(model, ctx, newline) {
 }
 ;
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -207,7 +207,7 @@ md.writeComments_template = function(model, ctx, newline, newlineindent) {
             ctx.w('// ' + item.wzName);
             written = true;
             
-            // log '§§§ stm.writeComments', model.wzName
+            // loog '§§§ stm.writeComments', model.wzName
             if (item.wzName.indexOf('@ts-ignore') > -1) {
                 ctx.__inlineNext = true;
             }
@@ -283,7 +283,7 @@ md.isArgumentOfCall = function(model) {
 ;
 md.firstChildIs = function(model, elementsArray) {
     var ss = md.nonCommentStatements(model);
-    // log 'firstChildIs', ss.length > 0 && ss[0].wzElement
+    // loog 'firstChildIs', ss.length > 0 && ss[0].wzElement
     return ss.length > 0 && elementsArray.indexOf(ss[0].wzElement) > -1;
 }
 ;
@@ -311,13 +311,13 @@ md.isSingleParamForArrowFunction = function(model) {
     if (model.params.length != 1) {
         return false;
     }
-    // log 'model.params', model.params
-    // log 'model.params[0]', model.params[0]
+    // loog 'model.params', model.params
+    // loog 'model.params[0]', model.params[0]
     if (model.params[0].wzName.startsWith('...')) {
         return false;
     }
     var ss = md.nonCommentStatements(model.params[0]);
-    // log 'return', ss.length == 0
+    // loog 'return', ss.length == 0
     return ss.length == 0;
 }
 ;
@@ -527,9 +527,9 @@ md.hasArguments = function(callText) {
         return false;
     }
     callText = callText.trim();
-    // log 'callText.substr(0, 1) ', callText.substr(0, 1)
+    // loog 'callText.substr(0, 1) ', callText.substr(0, 1)
     var hasEndParens = ((callText.substr(- (1), 1) === ')') || (callText.substr(- (2), 2) === ');'));
-    // log 'hasArguments.hasEndParens', hasEndParens
+    // loog 'hasArguments.hasEndParens', hasEndParens
     if (!hasEndParens) {
         return false;
     }
@@ -696,7 +696,7 @@ md.extractTSSimpleType = function(model) {
     var ret, retIndex;
     model.statements.some((item, index) => {
     
-        // log 'extractTSSimpleType', item.wzElement
+        // loog 'extractTSSimpleType', item.wzElement
         if (md.isTSSimpleType(item)) {
             ret = item;
             retIndex = index;
@@ -754,7 +754,7 @@ md.genParams = function(model, ctx, cnt, callback) {
     if (!!(model.params && model.params.length > 0) == false) {
         return callback(null, null);
     }
-    // log 'genParams enter', model.wzElement
+    // loog 'genParams enter', model.wzElement
     var len_1 = model.params.length;
     function repeater_1(index_1) {
         if (index_1 === len_1) {
@@ -762,11 +762,11 @@ md.genParams = function(model, ctx, cnt, callback) {
         }
         var item_1 = model.params[index_1];
         var p = item_1;
-        // log 'genParams p', p
+        // loog 'genParams p', p
         if (index_1 > 0) {
             ctx.write(', ');
         }
-        // log 'genParams', index_1, (p.statements && p.statements.length) || (p.jsPropertyOrValues && p.jsPropertyOrValues.length)
+        // loog 'genParams', index_1, (p.statements && p.statements.length) || (p.jsPropertyOrValues && p.jsPropertyOrValues.length)
         if ((!p.statements || p.statements.length == 0) && (!p.jsPropertyOrValues || p.jsPropertyOrValues.length == 0)) {
             ctx.write(p.wzName);
             process.nextTick(function() {
@@ -788,11 +788,11 @@ md.genParams = function(model, ctx, cnt, callback) {
             )
         }
         
-        // log 'genParams.s0.wzElement', s0.wzElement
+        // loog 'genParams.s0.wzElement', s0.wzElement
         
         // if s0.wzElement === 'typeInitValue' || s0.wzElement === 'typeCTor' || s0.wzElement === 'typeNever'
         
-        // log 'genParams.s0.statements.length', s0.statements.length
+        // loog 'genParams.s0.statements.length', s0.statements.length
         else if (p.statements.length > 0 && p.statements.length < 3) {
             ctx.write(p.wzName);
             var s0 = p.statements[0];
@@ -807,21 +807,21 @@ md.genParams = function(model, ctx, cnt, callback) {
             }
             )
         }
-        // log 'jswizzifier.genParams.p', p, 'statements', p.statements
+        // loog 'jswizzifier.genParams.p', p, 'statements', p.statements
         else {
             callback(ctx.error(myname + '.genParams.statements.length should be 0 or 1.found: ' + p.statements.length, model))
         }
     }
     repeater_1(0);
     function next_1() {
-        // log 'genParams.exit'
+        // loog 'genParams.exit'
         return callback(null, null);
     }
 }
 ;
 function genParams_close(s0, ctx, cnt, callback) {
     
-    // log 'genParams_close 1 item.wzElement', item.wzElement
+    // loog 'genParams_close 1 item.wzElement', item.wzElement
     if (s0.statements.length == 2) {
         var item = s0.statements[0];
         cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
@@ -831,12 +831,12 @@ function genParams_close(s0, ctx, cnt, callback) {
             }
             ctx.write(' = ');
             var item = s0.statements[1];
-            // log 'genParams_close 2 item.wzElement', item.wzElement
+            // loog 'genParams_close 2 item.wzElement', item.wzElement
             cnt.stm[item.wzElement](item, ctx, callback)
         }
         )
     }
-    // log 'genParams_close 3 item.wzElement', s0.wzElement
+    // loog 'genParams_close 3 item.wzElement', s0.wzElement
     else {
         ctx.write(' = ');
         cnt.stm[s0.wzElement](s0, ctx, callback)
@@ -846,7 +846,7 @@ md.genTSParams = function(model, ctx, cnt, callback) {
     if (!!(model.params && model.params.length > 0) == false) {
         return callback(null, null);
     }
-    // log 'genTSParams enter', model.wzElement
+    // loog 'genTSParams enter', model.wzElement
     var len_1 = model.params.length;
     function repeater_1(index_1) {
         if (index_1 === len_1) {
@@ -854,13 +854,13 @@ md.genTSParams = function(model, ctx, cnt, callback) {
         }
         var item_1 = model.params[index_1];
         var p = item_1;
-        // log 'genTSParams p', p
+        // loog 'genTSParams p', p
         if (index_1 > 0) {
             ctx.write(', ');
         }
         var ptype = md.extractTSSimpleType(p);
         md.genAccessorsAndExtra(p, ctx)
-        // log 'genTSParams', index_1, p.statements.length, ptype && ptype.wzElement
+        // loog 'genTSParams', index_1, p.statements.length, ptype && ptype.wzElement
         if (p.statements.length == 0) {
             ctx.write(p.wzName);
             if (p.typeOptional) {
@@ -915,11 +915,11 @@ md.genTSParams = function(model, ctx, cnt, callback) {
             )
         }
         
-        // log 'genTSParams.s0.wzElement', s0.wzElement
+        // loog 'genTSParams.s0.wzElement', s0.wzElement
         
         // if s0.wzElement === 'typeInitValue' || s0.wzElement === 'typeCTor' || s0.wzElement === 'typeNever'
         
-        // log 'genTSParams.s0.statements.length', s0.statements.length
+        // loog 'genTSParams.s0.statements.length', s0.statements.length
         
         // else
         
@@ -963,21 +963,21 @@ md.genTSParams = function(model, ctx, cnt, callback) {
                 )
             }
         }
-        // log 'jswizzifier.genTSParams.p', p, 'statements', p.statements
+        // loog 'jswizzifier.genTSParams.p', p, 'statements', p.statements
         else {
             callback(ctx.error(myname + '.genTSParams.statements.length should be 0 or 1.found: ' + p.statements.length, model))
         }
     }
     repeater_1(0);
     function next_1() {
-        // log 'genTSParams.exit'
+        // loog 'genTSParams.exit'
         return callback(null, null);
     }
 }
 ;
 function genTSParams_close(s0, ctx, cnt, callback) {
     
-    // log 'genTSParams_close 1 item.wzElement', item.wzElement
+    // loog 'genTSParams_close 1 item.wzElement', item.wzElement
     if (s0.statements.length == 2) {
         var item = s0.statements[0];
         cnt.stm[item.wzElement](item, ctx, (err, notUsed) => {
@@ -987,12 +987,12 @@ function genTSParams_close(s0, ctx, cnt, callback) {
             }
             ctx.write(' = ');
             var item = s0.statements[1];
-            // log 'genTSParams_close 2 item.wzElement', item.wzElement
+            // loog 'genTSParams_close 2 item.wzElement', item.wzElement
             cnt.stm[item.wzElement](item, ctx, callback)
         }
         )
     }
-    // log 'genTSParams_close 3 item.wzElement', s0.wzElement
+    // loog 'genTSParams_close 3 item.wzElement', s0.wzElement
     else {
         ctx.write(' = ');
         cnt.stm[s0.wzElement](s0, ctx, callback)
@@ -1017,7 +1017,7 @@ md.genAccessorsAndExtra = function(model, ctx) {
 }
 ;
 md.genTSTypeParameters = function(model, ctx, cnt, callback) {
-    // log 'model.statements.length', model.statements.length, 'Object.keys(model)', Object.keys(model)
+    // loog 'model.statements.length', model.statements.length, 'Object.keys(model)', Object.keys(model)
     genTSTypeParameters_partial(model, ctx, cnt, (err, notUsed) => {
     
         if (err) {
@@ -1073,7 +1073,7 @@ function genTSTypeParameters_partial(model, ctx, cnt, callback) {
     }
 }
 md.genTSTypeParameterInsts = function(model, ctx, cnt, callback) {
-    // log 'genTSTypeParameterInsts', Object.keys(model), model.typeParameterInsts
+    // loog 'genTSTypeParameterInsts', Object.keys(model), model.typeParameterInsts
     if (model.typeParameterInsts && model.typeParameterInsts.length > 0) {
         ctx.write('<');
         var len_1 = model.typeParameterInsts.length;

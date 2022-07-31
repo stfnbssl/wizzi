@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfGraph\asIsLoader\index.js.ittf
 */
 'use strict';
@@ -48,7 +48,7 @@ function AsisLoader(ittfDocumentUri, options, callback) {
         asisMTree.nodes = nodifier(lines, asisMTree)
         ;
         
-        // log 'asis.loader.asisMTree.nodes.__is_error', asisMTree.nodes.__is_error
+        // loog 'asis.loader.asisMTree.nodes.__is_error', asisMTree.nodes.__is_error
         if (asisMTree.nodes.__is_error) {
             asisMTree.nodes = [
                 {
@@ -56,7 +56,7 @@ function AsisLoader(ittfDocumentUri, options, callback) {
                  }
             ];
         }
-        // log 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
+        // loog 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
         else {
             if (asisMTree.nodes.length != 1) {
                 var message = 'wizzi-utils.asIsLoader.error. The ittf source document must have one node. Found: ' + asisMTree.nodes.length + ' in document: ' + ittfDocumentUri;

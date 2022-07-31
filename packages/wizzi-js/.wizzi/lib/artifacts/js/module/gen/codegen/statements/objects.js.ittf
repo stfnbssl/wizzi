@@ -72,7 +72,7 @@
 		    r_cb()
 
 	fn( jsPropertyOrValue_with_stm_children
-		# log 'js.module.statements.object.model.wzName, model.statements.length', model.wzName, model.statements.length
+		# loog 'js.module.statements.object.model.wzName, model.statements.length', model.wzName, model.statements.length
 		var colon = ((ctx.isGraphql && !ctx.isNamedCallParam) || model.wzParent.wzElement == 'call') ? ' ' : ': '
 		if u.parentIsHtmlElement(model)
 			# Attributes have been already processed
@@ -204,7 +204,7 @@
 			r_cb()
 
 	stm( jsObject
-        # log 'model.jsPropertyOrValues', model.jsPropertyOrValues && model.jsPropertyOrValues.length
+        # loog 'model.jsPropertyOrValues', model.jsPropertyOrValues && model.jsPropertyOrValues.length
         if model.jsPropertyOrValues && model.jsPropertyOrValues.length > 0
             if !model.statements
                 set model.statements = []
@@ -241,7 +241,7 @@
                 else
 				    _ ctx.w('{')
 			_ ctx.indent()
-			# log '++++ start', ctx.__ecma
+			# loog '++++ start', ctx.__ecma
 			if ctx.__ecma === 'es6'
 				set ctx.__is_react_class = true
 			_ jsObject_close
@@ -249,7 +249,7 @@
 				@ ctx
 				f_cb()
 					if ctx.__ecma === 'es6'
-						# log '++++ end', ctx.__ecma
+						# loog '++++ end', ctx.__ecma
 						set ctx.__is_react_class = save__is_react_class
                     _ u.checkInlineExit(model, ctx)
 					r_cb()
@@ -286,16 +286,16 @@
 			decl first = true
 			decl comma = true
 		
-		# log 'jsObject_close 1'
+		# loog 'jsObject_close 1'
 		repeater(1, model.statements)
 			if model.isDslCall && item_1.wzElement == 'namedCallParam'
 				# skip
-				# log 'jsObject_close 2'
+				# loog 'jsObject_close 2'
 				repeater_increment(1)
             else
-				# log 'js.module.gen.jsObject_close.item_1', item_1.wzElement, u.isMemberAccessOrCall(item_1)
+				# loog 'js.module.gen.jsObject_close.item_1', item_1.wzElement, u.isMemberAccessOrCall(item_1)
 				if u.isMemberAccessOrCall(item_1)
-					# log 'jsObject_close 3'
+					# loog 'jsObject_close 3'
                     if !!ctx.__inline == false
 					    _ ctx.w('')
 					_ ctx.deindent()
@@ -336,12 +336,12 @@
                         @ item_1
                         @ ctx
                         f_cb()
-                            # log 'js.module.gen.jsObject_close.after.genItem'
+                            # loog 'js.module.gen.jsObject_close.after.genItem'
                             set comma = ['comment', 'handlebar'].indexOf(item_1.wzElement) < 0
                             repeater_increment(1)
 			$append next
 				+ ;
-				# log 'jsObject_close 4'
+				# loog 'jsObject_close 4'
                 if !!ctx.__inline == false
 				    _ ctx.w('')
 				_ ctx.deindent()
@@ -356,14 +356,14 @@
         _ u.writeComments(model, ctx)
         _ u.checkInlineEnter(model, ctx)
 		var colon = (ctx.isGraphql && !ctx.isNamedCallParam) ? ' ' : ': '
-		# log '600 jsArray'
+		# loog '600 jsArray'
 		if model.wzName && model.wzName.length > 0
 			# is an array property
 			_ ctx.w(model.wzName + colon + '[')
 		else
 			if model.statements.length == 0
 				_ ctx.write('[' + (model.wzName || '') + ']')
-				# log '601 jsArray'
+				# loog '601 jsArray'
                 _ u.checkInlineExit(model, ctx)
 				r_cb() 
             if ctx.__inline
@@ -372,21 +372,21 @@
 			    _ ctx.w('[')
         _ ctx.indent()
         var needs_comma = false
-		# log '602 jsArray'
+		# loog '602 jsArray'
         repeater(1, model.statements)
-			# log '607 jsArray'
+			# loog '607 jsArray'
             if u.isMemberAccessOrCall(item_1)
                 if !!ctx.__inline == false
                     _ ctx.w('')
                 _ ctx.deindent()
                 _ ctx.write(']')
-				# log '605 jsArray'
+				# loog '605 jsArray'
 				return
 					_ cnt.genItem
 						@ item_1
 						@ ctx
 						f_cb()
-							# log '603 jsArray'
+							# loog '603 jsArray'
 							repeater(2, model.statements, index_1 + 1)
 								if u.isCallArgument(item_2)
 									_ ctx.write('.')
@@ -398,7 +398,7 @@
 								$append next
                                     _ u.checkInlineExit(model, ctx)
 									r_cb()
-            # log '606 jsArray'
+            # loog '606 jsArray'
 			if needs_comma
                 if ctx.__inline
                     _ ctx.write(', ')
@@ -409,7 +409,7 @@
 				@ item_1
 				@ ctx
 				f_cb()
-					# log '604 jsArray'
+					# loog '604 jsArray'
                     if !u.isComment(item_1) 
                         set needs_comma = true
 					repeater_increment(1)

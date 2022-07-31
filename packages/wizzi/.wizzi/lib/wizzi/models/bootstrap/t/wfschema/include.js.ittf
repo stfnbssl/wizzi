@@ -18,4 +18,4 @@
 		set this.actualNameId = schemautil.getIdentifier(this.actualName, true)
 		set this.rootEntityNameId = schemautil.getIdentifier(this.rootEntityName, true)
 
-		log 'wizzi.models.bootstrap.wfschema.include', this.actualNameLower, this.actualNameId, this.rootEntityNameId
+		# loog 'wizzi.models.bootstrap.wfschema.include', this.actualNameLower, this.actualNameId, this.rootEntityNameId

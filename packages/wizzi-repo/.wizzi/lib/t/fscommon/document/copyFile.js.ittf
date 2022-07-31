@@ -17,7 +17,7 @@
 		_ this.readFile
 			@ sourcePath
 			f_cb( source )
-				# log 'wizzi-repo.${source}.document.copyFile.source', source
+				# loog 'wizzi-repo.${source}.document.copyFile.source', source
 				_ that.exists
 					@ destPath
 					f_cb( result )
@@ -29,7 +29,7 @@
 								@ destPath
 								@ source
 								f_cb( r )
-									log 'wizzi-repo.${source}.document.copyFile.r', r
+									# loog 'wizzi-repo.${source}.document.copyFile.r', r
 									r_cb()
 										{
 											@ code "DOCUMENT_COPIED"

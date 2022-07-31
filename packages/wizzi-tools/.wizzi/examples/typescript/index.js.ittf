@@ -76,7 +76,7 @@
                 param err
                 param result
 				if err
-					log 'err', err
+					error 'err', err
 					_ file.write
 						@ out_ittf
 						_ JSON.stringify
@@ -86,9 +86,9 @@
 				else
 					var r1 = result.substring(0, 24)
 					var r2 = result.substring(24)
-					log 'r1', r1
+					# loog 'r1', r1
 					set r1 = r1.replace('jsfile', 'react ')
-					log 'r1 after', r1
+					# loog 'r1 after', r1
 
 					_ file.write
 						@ out_ittf

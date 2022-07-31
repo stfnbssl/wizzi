@@ -105,7 +105,7 @@
                 
 				    if nameFirstChar == '$' && line.name === '$params'
                         if current.indent > 0
-                            $$ log 'wizzi-mtree.nodifier.current.name', current.name, current.value, line.value
+                            # loog 'wizzi-mtree.nodifier.current.name', current.name, current.value, line.value
                             if current.name !== '$fragment'
                                 return
                                     _ local_error

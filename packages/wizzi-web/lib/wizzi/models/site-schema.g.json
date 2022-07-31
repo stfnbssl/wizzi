@@ -931,7 +931,7 @@
             }
           ],
           "comments": [
-            "log 'category.wzinitialize.name,categoryPath', this.wzName, this.categoryPath"
+            "loog 'category.wzinitialize.name,categoryPath', this.wzName, this.categoryPath"
           ]
         },
         {
@@ -1132,7 +1132,7 @@
             }
           ],
           "comments": [
-            "log 'category.getDemosByPath', path, this.categoryPath"
+            "loog 'category.getDemosByPath', path, this.categoryPath"
           ]
         },
         {
@@ -1411,7 +1411,7 @@
             }
           ],
           "comments": [
-            "log 'demo.wzinitialize.name,demoPath', this.wzName, this.demoPath"
+            "loog 'demo.wzinitialize.name,demoPath', this.wzName, this.demoPath"
           ]
         },
         {

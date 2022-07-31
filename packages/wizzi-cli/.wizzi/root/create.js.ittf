@@ -7,7 +7,7 @@ module
 	const args = minimist(process.argv.slice(2))
 	
 	let cmd = args._[0]
-    log 'args', args, 'cmd', cmd
+    info 'args', args, 'cmd', cmd
 
     if cmd == 'js-express'
         _ create

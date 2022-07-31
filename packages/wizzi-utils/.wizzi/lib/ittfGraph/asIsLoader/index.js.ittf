@@ -43,13 +43,13 @@
 						@ asisMTree
 
 				if asisMTree.nodes.__is_error
-                    # log 'asis.loader.asisMTree.nodes.__is_error', asisMTree.nodes.__is_error
+                    # loog 'asis.loader.asisMTree.nodes.__is_error', asisMTree.nodes.__is_error
 					set asisMTree.nodes
 						[
 							{
 								@ name 'Cannot load this ittf document: ' + asisMTree.nodes.message
 				else
-					# log 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
+					# loog 'asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, asisMTree.nodes.length != 1
 					if asisMTree.nodes.length != 1
 						var message = 'wizzi-utils.asIsLoader.error. The ittf source document must have one node. Found: ' + asisMTree.nodes.length +
 							\b ' in document: ' + ittfDocumentUri

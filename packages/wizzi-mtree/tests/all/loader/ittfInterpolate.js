@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\ittfInterpolate.js.ittf
 */
 'use strict';
@@ -40,12 +40,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -63,7 +63,7 @@ describe("ittfInterpolate", function() {
     it("interpolate a single var", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('My name is $' + '{name}.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('My name is stefi.');
     });
@@ -71,7 +71,7 @@ describe("ittfInterpolate", function() {
         ctx.setValue('name', 'stefi');
         ctx.setValue('hobby', '');
         var result = ip('My name is $' + '{name} and hobby $' + '{hobby}.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('My name is stefi and hobby .');
     });
@@ -79,42 +79,42 @@ describe("ittfInterpolate", function() {
         ctx.setValue('name', 'stefi');
         ctx.setValue('hobby', 'walking');
         var result = ip('My name is \\$' + '\\{name} and hobby $' + '{hobby}.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('My name is $' + '{name} and hobby walking.');
     });
     it("strange template string", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('Hello *{ $a $ {} a$ ok.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello *{ $a $ {} a$ ok.');
     });
     it("not closed var delimiter", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('Hello ${a', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello ${a');
     });
     it("ending dollar", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('Hello $', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello $');
     });
     it("double dollar", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('Hello $' + '$ ok', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello $' + '$ ok');
     });
     it("interpolated can manage methods on values", function() {
         ctx.setValue('name', 'stefi');
         var result = ip('Hello $' + '{ _.capitalize(name); }.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello Stefi.');
     });
@@ -124,7 +124,7 @@ describe("ittfInterpolate", function() {
          };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.a }.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello stefi.');
     });
@@ -134,7 +134,7 @@ describe("ittfInterpolate", function() {
          };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.b }.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello .');
     });
@@ -144,11 +144,11 @@ describe("ittfInterpolate", function() {
          };
         ctx.setValue('obj', obj);
         var result = ip('Hello $' + '{ obj.a }.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello stefi.');
         result = ip('Hello $' + '{ obj.b }.', ctx);
-        // log 'result', result
+        // loog 'result', result
         expect(result).to.be.a('string');
         expect(result).to.be('Hello .');
     });

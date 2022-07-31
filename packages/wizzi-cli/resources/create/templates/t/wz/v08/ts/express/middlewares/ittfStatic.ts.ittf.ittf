@@ -30,7 +30,7 @@ $group
                 => 
                     param app
                         :ref Application
-                    log 'IttfStaticMiddleware. Folder served from ', 
+                    success 'IttfStaticMiddleware. Folder served from ', 
                         \b path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf')
                     _ app.use('/ittf', 
                         \b ittfMiddleware(path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf'), '/ittf'))
@@ -121,7 +121,7 @@ $group
                 var queryMeta = (req.query.meta as string)
                 var queryTransform = (req.query.transform as string)
 
-                log 'middleware.ittfStatic',
+                # loog 'middleware.ittfStatic',
                     \b 'urlPathName', urlPathName,
                     \b 'pathname', pathname,
                     \b 'filePath', filePath, 
@@ -129,11 +129,11 @@ $group
                     \b 'queryMeta', queryMeta
                 
                 if fs.existsSync(filePath) === false
-                    log 'filePath do not exists', filePath
+                    # loog 'filePath do not exists', filePath
                     return next()
                 
                 if fs.statSync(filePath).isDirectory()
-                    log 'filePath is directory', filePath
+                    # loog 'filePath is directory', filePath
                     return sendFolderScan(filePath, basePath, queryMeta, res)
 
                 if queryTransform && queryTransform.indexOf('/') > 0
@@ -141,7 +141,7 @@ $group
                 
                 let ittfSchema = ittfSchemaOf(filePath)
                 let contentType = contentTypeFor(filePath)
-                log 'contentType', contentType,
+                # loog 'contentType', contentType,
                     \b 'ittfSchema', ittfSchema,
                     \b 'queryMeta', queryMeta
                 
@@ -183,7 +183,7 @@ $group
                             ._ then
                                 => 
                                     param generated
-                                    log 'generated.meta.ittf.json', filePath
+                                    # loog 'generated.meta.ittf.json', filePath
                                     _ res.writeHead
                                         @ 200
                                         { 
@@ -313,7 +313,7 @@ $group
                                 @ fullPath undefined
                                 @ relPath undefined
                     const type_path = (req.query['_' + element] as string)
-                    log 'contextLoader exportName, type_path', element, type_path
+                    # loog 'contextLoader exportName, type_path', element, type_path
                     if !type_path
                         return 
                             (
@@ -327,15 +327,15 @@ $group
                         set request.relPath = './index.' + tp[0] + '.ittf'
                     else
                         set request.relPath = tp[1]
-                    log 'contextLoader exportName, type_path, relPath', element, type_path, request.relPath
+                    # loog 'contextLoader exportName, type_path, relPath', element, type_path, request.relPath
                     if request.type === 'cheatsheet'
                         set request.name = request.relPath
                         _ requests.push(request)
                     else
                         set request.fullPath = path.join(path.dirname(resourceFilePath), request.relPath)
                         _ requests.push(request)
-                    log 'contextLoader request', request
-            log 'contextLoader.requests', requests
+                    # loog 'contextLoader request', request
+            # loog 'contextLoader.requests', requests
             const resultContext
                 :{ 
                     :index 
@@ -390,7 +390,7 @@ $group
             const folderState
                 await 
                     _ wizziProds.scanIttfFolder(folderPath, path.dirname(root))
-            log 'sendFolderScan',
+            # loog 'sendFolderScan',
                 \b 'folderState.keys', Object.keys(folderState)
             if meta === 'json'
                 return sendJSONStringified(res, folderState)
@@ -412,7 +412,7 @@ $group
                     # console.log('generated.meta.document', generated.artifactContent);
                 _ res.end(generated.artifactContent)
         catch ex
-            log 'sendFolderScan.exception', ex
+            error 'sendFolderScan.exception', ex
             _ sendError
                 @ res
                 @ ex

@@ -14,7 +14,7 @@
 				optional
 		callback
 		
-		# log 'wizzi.pluginsManager.initialize.options', options
+		# loog 'wizzi.pluginsManager.initialize.options', options
 		var itemsOptions = options.items
 		if typeof(itemsOptions) === 'undefined' || itemsOptions == null
 			set options.items = []
@@ -49,13 +49,13 @@
 		+
 		var itemsOptions = options.items
 		var pluginsBaseFolder = options.pluginsBaseFolder || process.cwd()
-		# log 'pluginsBaseFolder', pluginsBaseFolder
+		# loog 'pluginsBaseFolder', pluginsBaseFolder
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext
             param i
             if i >= itemsOptions.length
-				# log 'itemsOptions', itemsOptions
+				# loog 'itemsOptions', itemsOptions
                 return callback(null, itemsOptions)
             var plugin = itemsOptions[i]
             if typeof (plugin) === "string"
@@ -76,7 +76,7 @@
 										param key
 										if !plugin.hasOwnProperty(key)
 											set plugin[key] = moduleObject[key]
-											# log 'plugin key', key
+											# loog 'plugin key', key
 							set plugin.packageName = plugin.packagePath
 							set plugin.packagePath = moduleObject.packagePath
 							return resolveNext(++i)

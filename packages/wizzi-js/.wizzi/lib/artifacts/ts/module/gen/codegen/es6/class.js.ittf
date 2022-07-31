@@ -18,7 +18,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
 			decl zclass = model.wzName
 			decl zsuper = model.super
 
-		# log 'ts.es6.class', model
+		# loog 'ts.es6.class', model
         
         _ u.writeComments(model, ctx)
 
@@ -92,7 +92,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
 	fn( classSuper )
 		if model.super
 			_ ctx.write(' extends ' + model.super)
-            # log 'classSuper', 'model.superType', 
+            # loog 'classSuper', 'model.superType', 
 			if model.superType && model.superType.typeParameterInsts.length > 0
 				_ ctx.write('<')
 				repeater( 1, model.superType.typeParameterInsts )
@@ -120,7 +120,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
 
 	fn( classCTor )
 
-		# log 'classCTor'
+		# loog 'classCTor'
 
 		var
 			decl zsuper = model.super
@@ -154,7 +154,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
 
 	fn( classCTor_end)
 		
-		# log 'classCTor_end'
+		# loog 'classCTor_end'
 
 		var
 			decl zsuper = model.super
@@ -182,11 +182,11 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
 
 	fn( classMembers )
 
-		# log 'classMembers'
+		# loog 'classMembers'
 
 		
 		repeater( 1, model.statements )
-			# log 'ts.es6.class.classMembers', item_1.wzElement
+			# loog 'ts.es6.class.classMembers', item_1.wzElement
             var generator = null
             var done = false
 			if item_1.wzElement === 'ctor'
@@ -227,7 +227,7 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
                 else
                     repeater_increment( 1 )
 			$append next
-				# log 'ts.es6.class.classMembers end'
+				# loog 'ts.es6.class.classMembers end'
 				r_cb()
 
 	$include generateParams

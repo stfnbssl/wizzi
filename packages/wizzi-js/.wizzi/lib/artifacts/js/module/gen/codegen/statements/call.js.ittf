@@ -29,7 +29,7 @@
         else 
             set name = hasParens ? name : (name + '()')
             _ ctx.write(name)
-            # log 'call', 'u.isTopStatement(xmodel, ctx)', u.isTopStatement(xmodel, ctx), "u.isDescendentOf(xmodel, 'iif')", u.isDescendentOf(xmodel, 'iif')
+            # loog 'call', 'u.isTopStatement(xmodel, ctx)', u.isTopStatement(xmodel, ctx), "u.isDescendentOf(xmodel, 'iif')", u.isDescendentOf(xmodel, 'iif')
             if u.isTopStatement(xmodel, ctx) && u.isChildOf(xmodel, 'iif') == false
                 _ ctx.w
                     _ u.semicolon(name)
@@ -104,7 +104,7 @@
         param ctx
 		param callback
 
-        # log 'doCallChildStatements_one.model', model
+        # loog 'doCallChildStatements_one.model', model
 
         _ ctx.write(name)
 
@@ -138,9 +138,9 @@
         param ctx
 		param callback
         
-		# log 'doCallChildStatements_two', name, hasParens
+		# loog 'doCallChildStatements_two', name, hasParens
         if hasParens === false
-            # log 'doCallChildStatements_two 1', model.wzElement
+            # loog 'doCallChildStatements_two 1', model.wzElement
 			
 			# VIA 20/2/19 if name.length > 0
             # restored 19/3/21 for call template (`lit), waiting for damage
@@ -162,7 +162,7 @@
 					_ doCallChildStatements_call(item_1, ctx, remainings, callback)
 			if !first
 				_ ctx.write(', ')
-            # log 'doCallChildStatements_two', item_1
+            # loog 'doCallChildStatements_two', item_1
             if item_1.wzElement == 'comment'
                 _ ctx.w()
 			_ cnt.genItem
@@ -174,7 +174,7 @@
 					repeater_increment(1)
 			$append next
 				+ ;
-                # log 'doCallChildStatements_two 2'
+                # loog 'doCallChildStatements_two 2'
 				if hasParens === false
 					_ ctx.write(')')
 				if u.isTopStatement(model, ctx) && 

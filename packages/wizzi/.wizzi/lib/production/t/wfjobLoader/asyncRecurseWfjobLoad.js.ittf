@@ -19,21 +19,21 @@
 		{ wfjobRequest
 			{ wfjobLoader
 		callback
-		log '='
-		log '= ========= wizzi.AsyncRecurseWfjobLoad. Start. wfjobRequest.model : ', wfjobRequest.model
-		log '='
+		info '='
+		info '= ========= wizzi.AsyncRecurseWfjobLoad. Start. wfjobRequest.model : ', wfjobRequest.model
+		info '='
 		var wfjobLoader = wfjobRequest.wfjobLoader
 		_ wfjobLoader.load
 			@ wfjobRequest
 			f_cb( result )
 				
-				log '='
-				log '= ========= wizzi.AsyncRecurseWfjobLoad. Results. ',
+				info '='
+				info '= ========= wizzi.AsyncRecurseWfjobLoad. Results. ',
 					\b 'seenWfjobRequests: ', result.seenWfjobRequests.length,
 					\b ', globalModelInfoConfigs: ', result.globalModelInfoConfigs.length,
                     \b ', artifactInfoConfigs: ', result.artifactInfoConfigs.length,
 					\b ', pendingWfjobRequests: ', result.pendingWfjobRequests 
-				log '='
+				info '='
 				
 				if result.pendingWfjobRequests.length > 0
 					

@@ -33,10 +33,10 @@
 				@ verify verify
 	+
 	function getLoadModelContext
-		param mTreeBuildUpContext
+		param mTreeBuildupContext
 		return 
 			_ mocks.getLoadModelContext
-				@ mTreeBuildUpContext
+				@ mTreeBuildupContext
 	+
 	function getTestModelInfo
 		param schemaName

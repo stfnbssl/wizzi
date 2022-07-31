@@ -3,7 +3,7 @@
 
 	import path
 	var file = require('wizzi-utils').file
-	var IttfDocumentStore = require('../../lib/repo/ittfDocumentStore')
+	var IttfDocumentStore = require('../../../lib/repo/ittfDocumentStore')
 
 	set module.exports
 		{

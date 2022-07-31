@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
 */
 'use strict';
@@ -52,7 +52,7 @@ class JsWizziEvalHelper {
     }
     //
     s(brickKey) {
-        // log 'JsWizziEvalHelper called $.s(' + brickKey +')'
+        // loog 'JsWizziEvalHelper called $.s(' + brickKey +')'
         var notUsed = this.jsWizziContext.set_MTreeBrickEvalContext(brickKey);
         if (notUsed && notUsed.__is_error) {
             return notUsed;
@@ -60,17 +60,17 @@ class JsWizziEvalHelper {
     }
     //
     n() {
-        // log 'JsWizziEvalHelper called $.n()'
+        // loog 'JsWizziEvalHelper called $.n()'
         this.jsWizziContext.set_NodeContext();
     }
     //
     g(brickKey) {
-        // log 'JsWizziEvalHelper called $.g("brickKey")'
+        // loog 'JsWizziEvalHelper called $.g("brickKey")'
         this.jsWizziContext.set_GlobalContext(brickKey);
     }
     //
     a(parent, node, line) {
-        // log 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
+        // loog 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
         assert(parent, "wizzi-mtree.JsWizziEvalHelper error. Parent undefined in add. At line " + line);
         node.parent = parent;
         if (typeof (parent.children) === 'undefined') {
@@ -88,7 +88,7 @@ class JsWizziEvalHelper {
             if (notUsed && notUsed.__is_error) {
                 return notUsed;
             }
-            // log 'wizzi-mtree.JsWizziEvalHelper.2', 2
+            // loog 'wizzi-mtree.JsWizziEvalHelper.2', 2
             var ret = interpolate(templatedValue, this.jsWizziContext, {delimiter: '${}'});
             if (ret && ret.__is_error) {
                 ret.sourceKey = brickKey;
@@ -96,10 +96,10 @@ class JsWizziEvalHelper {
                 ret.templatedValue = templatedValue;
                 return ret;
             }
-            // log 'wizzi-mtree.JsWizziEvalHelper.ip.interpolated result', ret
+            // loog 'wizzi-mtree.JsWizziEvalHelper.ip.interpolated result', ret
             // Stop 7/7/17 if hasMacro
             ret = remacro(ret);
-            // log 'wizzi-mtree.JsWizziEvalHelper.ret', ret
+            // loog 'wizzi-mtree.JsWizziEvalHelper.ret', ret
             if (save === null) {
                 this.jsWizziContext.set_NodeContext(brickKey);
             }
@@ -114,9 +114,9 @@ class JsWizziEvalHelper {
             var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey);
             var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey);
             var mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
-            console.log('wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', save, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext);
-            console.log('wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2}));
-            console.log('wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message);
+            // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', save, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext
+            // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2})
+            // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message
             return local_error('IttfEvaluationError', 'ip', 'Interpolation failed, ' + ex.message, this.jsWizziContext.getNodeFromScriptMap(line), ex, {
                     line: line, 
                     type: type, 
@@ -175,7 +175,7 @@ class JsWizziEvalHelper {
                 return notUsed;
             }
         }
-        // log 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
+        // loog 'JsWizziEvalHelper created mTreeBrick_EvalContext for', brickKey, 'id', mTreeBrickData.mTreeBrick.id, mTreeBrickData.evalContext, mTreeBrickData.ittfDocumentUri
         else {
             mTreeBrick_EvalContext = new ContextData(1, brickKey);
             mTreeBrick_EvalContext.setValue('__dirname', path.dirname(mTreeBrickData.ittfDocumentUri))
@@ -192,7 +192,7 @@ class JsWizziEvalHelper {
     _updateEvalContext(mTreeBrickData, mTreeBrick_EvalContext) {
         // If the mTreeBrick do not receives parameters
         // a refresh of the eval context is not required
-        // log 'wizzi-mtree.jsWizziEvalHelper.brickKey.sourceKey.$args,$params.name,value', mTreeBrickData.brickKey, mTreeBrickData.sourceKey, mTreeBrickData.mTreeBrick.$args, mTreeBrickData.mTreeBrick.$params, mTreeBrickData.mTreeBrick.nodes[0].name, mTreeBrickData.mTreeBrick.nodes[0].value
+        // loog 'wizzi-mtree.jsWizziEvalHelper.brickKey.sourceKey.$args,$params.name,value', mTreeBrickData.brickKey, mTreeBrickData.sourceKey, mTreeBrickData.mTreeBrick.$args, mTreeBrickData.mTreeBrick.$params, mTreeBrickData.mTreeBrick.nodes[0].name, mTreeBrickData.mTreeBrick.nodes[0].value
         if (verify.isEmpty(mTreeBrickData.mTreeBrick.$params)) {
             return ;
         }
@@ -220,7 +220,7 @@ class JsWizziEvalHelper {
                 // if so, what does it means? Needs investigation.
                 // then we interpolate the arguments passed to the mixed mTree brick
                 args = interpolate(args, interpolateArgsContext);
-                // log 'JsWizziEvalHelper interpolateArgs', mTreeBrickData.mTreeBrick.$args, args
+                // loog 'JsWizziEvalHelper interpolateArgs', mTreeBrickData.mTreeBrick.$args, args
             } 
             catch (ex) {
                 var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey);

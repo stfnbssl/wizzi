@@ -34,7 +34,7 @@
 			set ret.isText = false
 			set ret.textified = null
 			# set ret.CICCIO = "MAGIC"
-		# log 'Identifier', ret
+		# loog 'Identifier', ret
 
 	f( PrivateName
 		f_p_name( Identifier
@@ -44,7 +44,7 @@
 		set ret.name = '/' + node.pattern + '/'
 		if node.flags && node.flags.length > 0
 			set ret.name += node.flags
-			# log '*************** RegExpLiteral.ret.name', ret.name
+			# loog '*************** RegExpLiteral.ret.name', ret.name
 		if node.__parent && node.__parent.name === 'body' && node.__parent.len == 1
 			# is the return value of an ArrowExpression
 			if node.extra && node.extra.parenthesized == true
@@ -114,7 +114,7 @@
 		if replaceWithSingleChild(ret, 'set')
 		elif replaceWithSingleChild(ret, '_')
         else
-            log 'ExpressionStatement.failed.ret', ret
+            error 'ExpressionStatement.failed.ret', ret
             throw new Error()
 
 	f( BlockStatement, block;skip
@@ -136,8 +136,8 @@
 	f( ReturnStatement, return
 		f_p( argument, false, Expression | null
 		get_text_from_1_children(  )
-		# log 'ReturnStatement', ret
-        # log 'ReturnStatement.parent', parent.children[parent.children.length-1]
+		# loog 'ReturnStatement', ret
+        # loog 'ReturnStatement.parent', parent.children[parent.children.length-1]
 
     f( LabeledStatement, label
 		f_p_temp( label, true, true, Identifier
@@ -155,7 +155,7 @@
 		_ setNameFromChildByTag(ret, 'test', true)
 		if node.consequent
 			f_p_temp( consequent
-			# log 'IfStatement', p_consequent
+			# loog 'IfStatement', p_consequent
 			if p_consequent.tag && p_consequent.tag.length > 0
 				_ ret.children.push(p_consequent)
 			else
@@ -167,7 +167,7 @@
 				{
 					@ tag 'else'
 					[ children
-			# log 'IfStatement', p_consequent
+			# loog 'IfStatement', p_consequent
 			if p_alternate.tag && p_alternate.tag.length > 0
 				_ p_else.children.push(p_alternate)
 			else
@@ -212,17 +212,17 @@
 				@ p_argument
 
     f( TryStatement, try;ret-is-array
-		# log 'wizzifiers.js.TryStatement', JSON.stringify(node, null, 2)
+		# loog 'wizzifiers.js.TryStatement', JSON.stringify(node, null, 2)
 		f_p( block, true, BlockStatement
 		f_p_temp( handler, false, true, CatchClause, optional
 		f_p_temp( finalizer, false, true, BlockStatement | null
 		var tempRet = [ ret ]
-		# log 'TryStatement.p_handler', p_handler
-		# log 'TryStatement.p_finalizer', p_finalizer
+		# loog 'TryStatement.p_handler', p_handler
+		# loog 'TryStatement.p_finalizer', p_finalizer
 		if p_handler
 			_ tempRet.push(p_handler)
 		if p_finalizer
-            # log 'TryStatement', 'p_finalizer', p_finalizer
+            # loog 'TryStatement', 'p_finalizer', p_finalizer
             _ tempRet.push
                 {
                     @ tag 'finally'
@@ -236,7 +236,7 @@
 		# A `catch` clause following a `try` block.
 		f_p_name( param, Pattern | null
 		f_p( body, true, BlockStatement
-		# log 'CatchClause.ret', ret
+		# loog 'CatchClause.ret', ret
 
     f( WhileStatement, while
 		f_p_tag( test, test, Expression
@@ -252,7 +252,7 @@
 		f_p_tag( init, init, VariableDeclaration | Expression | null
 		f_p_tag( test, test, Expression | null
 		f_p_tag( update, update, Expression | null
-		# log 'p_init.textified', p_init.textified
+		# loog 'p_init.textified', p_init.textified
 		var c1 = p_init.isText ? p_init.name : (p_init.textified ? p_init.textified : '')
 		var c2 = p_test.isText ? p_test.name : (p_test.textified ? p_test.textified : '')
 		var c3 = p_update.isText ? p_update.name : (p_update.textified ? p_update.textified : '')
@@ -300,7 +300,7 @@
 	f( ForOfStatement, for
 		f_p_temp( left, true, true, VariableDeclaration |  Expression
 		f_p_temp( right, true, true, Expression
-        # log 'ForOfStatement', isTextualNode(p_left), isTextualNode(p_right)
+        # loog 'ForOfStatement', isTextualNode(p_left), isTextualNode(p_right)
 		if isTextualNode(p_left)
 			set ret.name = getNodeText(p_left)
             if isTextualNode(p_right)
@@ -344,7 +344,7 @@
         _ processParams2(ret, p_params)
 		f_p_temp( returnType, false, true
 		if p_returnType
-			# log 'p_returnType', JSON.stringify(p_returnType)
+			# loog 'p_returnType', JSON.stringify(p_returnType)
 			set p_returnType
 				{
 					@ tag ':return'
@@ -363,16 +363,16 @@
 		
         f_a( declarations, true, VariableDeclarator
 		
-		# log '=== VariableDeclaration ittf result 1', JSON.stringify(ret, null, 2)
+		# loog '=== VariableDeclaration ittf result 1', JSON.stringify(ret, null, 2)
 		
 		get_text_from_1_children(  )
 		
-		# log '=== VariableDeclaration ittf result 2', ret, 'got_text_1', got_text_1
+		# loog '=== VariableDeclaration ittf result 2', ret, 'got_text_1', got_text_1
 		
 		if got_text_1
 			set ret.textified = node.kind + ' ' + ret.textified
 		elif ret.children.length == 1
-			# log 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
+			# loog 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
 			if ret.children[0].children.length == 0
 				set ret.name = ret.children[0].name
 				set ret.children = []
@@ -380,16 +380,16 @@
 			elif ret.children[0].children.length == 1
 				set ret.name = ret.children[0].name
 				set ret.children[0] = ret.children[0].children[0]
-                # log 'ret.name', ret.name
-                # log 'ret.children[0]', ret.children[0]
+                # loog 'ret.name', ret.name
+                # loog 'ret.children[0]', ret.children[0]
 				# set ret.textified = node.kind + ' ' + ret.name
 			elif ret.children[0].children.length == 2
 				var child1 = ret.children[0].children[0]
 				var child2 = ret.children[0].children[1]
-				# log 'ret.name', ret.name
-				# log 'ret.children[0].name', ret.children[0].name
-				# log 'child1.tag.name', child1.tag, child1.name
-				# log 'child2.tag.name', child2.tag, child2.name
+				# loog 'ret.name', ret.name
+				# loog 'ret.children[0].name', ret.children[0].name
+				# loog 'child1.tag.name', child1.tag, child1.name
+				# loog 'child2.tag.name', child2.tag, child2.name
 				if child2.tag === '=' || isTypeReference(child1.tag)
 					set ret.name = ret.children[0].name
 					set ret.children = []
@@ -414,9 +414,9 @@
 						_ ret.children.push
 							@ child2
 			else
-				log 'Error VariableDeclaration. Case not managed.',
+				error 'Error VariableDeclaration. Case not managed.',
 				foreach item in ret.children
-					log 'VariableDeclaration.child', item
+					error 'VariableDeclaration.child', item
 				throw new Error("VariableDeclaration. Case not managed.")
 		elif ret.children.length > 1
 			var sb = []
@@ -441,7 +441,7 @@
     f( VariableDeclarator, decl
 		f_p_temp(id, true, true)
 		
-		# log 'VariableDeclarator,p_id, isTextualNode(p_id)', p_id, isTextualNode(p_id)
+		# loog 'VariableDeclarator,p_id, isTextualNode(p_id)', p_id, isTextualNode(p_id)
 		if isTextualNode(p_id)
 			set ret.name = getNodeText(p_id)
 		else
@@ -452,16 +452,16 @@
 				_ ret.children.push
 					@ p_id
 		
-		# log 'VariableDeclarator 1', ret
+		# loog 'VariableDeclarator 1', ret
 
 		f_p( typeAnnotation, false, ?TypeAnnotation
 
 		f_p_temp( init, false, true, Expression | null
 		
-		# log 'VariableDeclarator.p_init', p_init
+		# loog 'VariableDeclarator.p_init', p_init
 		
 		if p_init
-			# log 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
+			# loog 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
 			if isTextualNode(p_id)
 				if isTextualNode(p_init)
 					set ret.name += ' = ' + getNodeText(p_init)
@@ -500,7 +500,7 @@
             set ret.isText = true
             *$
 
-		# log 'VariableDeclarator 2 ret', ret
+		# loog 'VariableDeclarator 2 ret', ret
 
     f( Decorator, @decorator
 		f_p_temp( expression, true, true, Expression
@@ -550,8 +550,8 @@
 		f_a( body, true, BlockStatement | Expression
 		b( expression
 		
-		# log '*** ArrowFunctionExpression.ret.params', getChildByTag(ret, 'params')
-		# log '*** ArrowFunctionExpression.ret', ret
+		# loog '*** ArrowFunctionExpression.ret.params', getChildByTag(ret, 'params')
+		# loog '*** ArrowFunctionExpression.ret', ret
 		# A fat arrow function expression, e.g., `let foo = (bar) => { /* body */ }`.
 		
 		if node.async
@@ -562,7 +562,7 @@
     f( YieldExpression, yield
 		$$ 20/3/21 f_p_tag( argument, argument, Expression | null
         f_p_temp( argument, true, true, Expression | null
-        # log 'ObjectProperty.p_value', p_value
+        # loog 'ObjectProperty.p_value', p_value
         if isTextualNode(p_argument)
             set ret.name = getNodeText(p_argument)
         else
@@ -582,7 +582,7 @@
 		if options.mustBeText
 			if setTextList(ret, ', ')
 				set ret.textified = '[' + ret.textified + ']'
-				# log '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
+				# loog '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
 			else
 				throw new Error("ArrayExpression. Cannot textify node as requested: " + JSON.stringify(node, null, 2))
 		elif options.couldBeText
@@ -624,7 +624,7 @@
 		else
 			foreach item in ret.children
 				if item.tag === '...' 
-                    # log 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
+                    # loog 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
 					if item.children.length == 0
 						set item.name = item.textified
 						set item.tag = '@'
@@ -638,12 +638,12 @@
                             set item.textified = item.children[0].textified
                             set item.name = item.children[0].name
                             set item.children = item.children[0].children
-                            log 'ObjectExpression length 1', item.tag, item.name, item.textified
+                            # loog 'ObjectExpression length 1', item.tag, item.name, item.textified
                         else
                             # go on
 				if item.tag === '@' && item.name === 'template' 
 					\b && item.children.length == 1 && item.children[0].tag === '`lit'
-					# log 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
+					# loog 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
 					_ options.wizziIncludes.push
 						{
 							@ kind 'html'
@@ -675,11 +675,11 @@
 	*$
 
     f( ObjectProperty, @
-		# log 'ObjectProperty enter options.mustBeText', options.mustBeText
+		# loog 'ObjectProperty enter options.mustBeText', options.mustBeText
 		const save = options.mustBeText
 		set options.mustBeText = true
 		f_p_temp(key, true)
-		# log 'ObjectProperty.p_key', p_key
+		# loog 'ObjectProperty.p_key', p_key
 		set options.mustBeText = save
 		
 		if isTextualNode(p_key)
@@ -698,12 +698,12 @@
 		
 		f_a( decorators, false, Decorator
 
-		# log 'ObjectProperty.ret.name', ret.name, 'node.value.type', node.value.type
+		# loog 'ObjectProperty.ret.name', ret.name, 'node.value.type', node.value.type
 		if node.value.type === 'AssignmentPattern'
 			f_p_temp( value.left, true, true, Expression
 			f_p_temp( value.right, true, true, Expression
-			# log 'p_value_left', p_value_left
-			# log 'p_value_right', p_value_right
+			# loog 'p_value_left', p_value_left
+			# loog 'p_value_right', p_value_right
 			if node.value.left.type === 'ObjectPattern'
 				_ ret.children.push
 					@ p_value_left
@@ -751,7 +751,7 @@
 								@ p_value_right
 		else
 			f_p_temp( value, true, true, Expression
-			# log 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
+			# loog 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
 			if isTextualNode(p_value)
 				if isTextualNode(p_key)
 					if options.mustBeText
@@ -795,7 +795,7 @@
 			set ret.children = ret.children[0].children
 
     f( ObjectMethod, node.kind;tag-is-var
-		# log 'ObjectMethod enter options.mustBeText', options.mustBeText
+		# loog 'ObjectMethod enter options.mustBeText', options.mustBeText
 		# s( kind
 		# enum "get" | "set" | "method"
 		const save = options.mustBeText
@@ -935,9 +935,9 @@
 			set ret.tag = node.operator
 		
 		f_p_temp( left, true, true, Expression
-		# log 'BinaryExpression.p_left', p_left
+		# loog 'BinaryExpression.p_left', p_left
 		f_p_temp( right, true, true, Expression
-		# log 'BinaryExpression.p_right', p_right
+		# loog 'BinaryExpression.p_right', p_right
 
 		if isTextualNode(p_left) && isTextualNode(p_right)
 			set ret.tag = 'set'
@@ -968,7 +968,7 @@
 					# 18/3/21 set ret.tag = '+'
 
     f( AssignmentExpression, set
-		# log 'AssignmentExpression enter options.mustBeText', options.mustBeText
+		# loog 'AssignmentExpression enter options.mustBeText', options.mustBeText
 		# An assignment operator expression.
 		# s( operator, AssignmentOperator
 		# enum AssignmentOperator {
@@ -987,8 +987,8 @@
 			set ret.name = node.operator
 			_ ret.children.push
 				@ p_left
-		# log 'AssignmentExpression.isTextualNode(p_right)', isTextualNode(p_right)
-        # log 'AssignmentExpression.p_right', p_right
+		# loog 'AssignmentExpression.isTextualNode(p_right)', isTextualNode(p_right)
+        # loog 'AssignmentExpression.p_right', p_right
         if isTextualNode(p_left) && isTextualNode(p_right)
 			set ret.name += getNodeText(p_right)
 		else
@@ -999,7 +999,7 @@
             else
                 _ ret.children.push
                     @ p_right
-        # log 'AssignmentExpression.ret final', ret
+        # loog 'AssignmentExpression.ret final', ret
 
     f( LogicalExpression, 'op' + node.operator;tag-is-var
 		# A logical operator expression.
@@ -1010,16 +1010,16 @@
 
         var parenthesized = node.extra && node.extra.parenthesized
 
-		# log 'LogicalExpression', isTextualNode(p_left), isTextualNode(p_right)
-        # log 'LogicalExpression,p_left', p_left
-        # log 'LogicalExpression,p_right', p_right
+		# loog 'LogicalExpression', isTextualNode(p_left), isTextualNode(p_right)
+        # loog 'LogicalExpression,p_left', p_left
+        # loog 'LogicalExpression,p_right', p_right
         if isTextualNode(p_left) && isTextualNode(p_right)
 			set ret.tag = '@expr' $$ 27/3/21 'set'
 			set ret.name = parenthesize(getNodeText(p_left) + ' ' + node.operator + ' ' + getNodeText(p_right), parenthesized)
 			set ret.textified = ret.name
 		else
 			set ret.tag = node.operator
-            # log 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
+            # loog 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
             if isTextualNode(p_left) || [$*'@expr', 27/3/21*$'@id', 'literal','set'].indexOf(p_left.tag) > -1
 				set p_left.tag = '+'
 				if isTextualNode(p_left)
@@ -1027,7 +1027,7 @@
 					set p_left.children = []
 			_ ret.children.push
 				@ p_left
-            # log 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
+            # loog 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
 			if isTextualNode(p_right) || [$*'@expr', 27/3/21*$'@id', 'literal','set'].indexOf(p_right.tag) > -1
 				set p_right.tag = '+'
 				if isTextualNode(p_right)
@@ -1048,7 +1048,7 @@
 					set p_left.children = []
 			_ ret.children.push
 				@ p_left
-			# log 'LogicalExpression.p_left', p_left
+			# loog 'LogicalExpression.p_left', p_left
 			if isTextualNode(p_right) || ['@id', 'literal'].indexOf(p_right.tag) > -1
 				set p_right.tag = '+'
 				if isTextualNode(p_right)
@@ -1056,7 +1056,7 @@
 					set p_right.children = []
 			_ ret.children.push
 				@ p_right
-			# log 'LogicalExpression.p_right', p_right
+			# loog 'LogicalExpression.p_right', p_right
             *$
 
 		if node.__parent && node.__parent.name === 'body' && node.__parent.len == 1
@@ -1074,7 +1074,7 @@
 
     f( SpreadElement, ...
 		f_p_temp( argument, true, true, Expression
-		# log 'SpreadElement.p_argument', p_argument
+		# loog 'SpreadElement.p_argument', p_argument
 		if isTextualNode(p_argument)
 			set ret.name = getNodeText(p_argument)
 			set ret.textified = '...' + ret.name
@@ -1096,8 +1096,8 @@
 		# If this is the object value (null/undefined) should be returned.
 		
 		# if p_object.name == 'Promise'
-            # log 'MemberExpression.p_object', isTextualNode(p_object), p_object
-            # log 'MemberExpression.p_property', isTextualNode(p_property), p_property
+            # loog 'MemberExpression.p_object', isTextualNode(p_object), p_object
+            # loog 'MemberExpression.p_property', isTextualNode(p_property), p_property
 
         var qmark = node.optional ? '?' : ''
 
@@ -1110,7 +1110,7 @@
                     \b : obj + qmark + '.' + prop
 				set ret.textified = ret.name
 				set ret.children = []
-				# log 'MemberExpression.textified', ret.textified
+				# loog 'MemberExpression.textified', ret.textified
 			else
 				set ret.name = obj + qmark
 				var link
@@ -1144,9 +1144,9 @@
 				_ ret.children.push
 					@ p_property
 
-			# log 'MemberExpression.tag.name', ret.tag, ret.name
+			# loog 'MemberExpression.tag.name', ret.tag, ret.name
 			foreach item in ret.children
-				# log 'MemberExpression.child', i, ret.children[i].tag, ret.children[i].name
+				# loog 'MemberExpression.child', i, ret.children[i].tag, ret.children[i].name
 
 		if node.__parent && node.__parent.name === 'body' && node.__parent.len == 1
 			# is the return value of an ArrowExpression
@@ -1174,9 +1174,9 @@
 		f_p_temp( consequent, true, true, Expression
 		f_p_temp( alternate, true, true, Expression
 		
-		# log 'ConditionalExpression 1', ret.tag
+		# loog 'ConditionalExpression 1', ret.tag
         _ setNameFromChildByTag(ret, 'test', true)
-        # log 'ConditionalExpression 2', ret.tag
+        # loog 'ConditionalExpression 2', ret.tag
 
         _ setOrInlineIfTextualNode
             @ ret
@@ -1218,7 +1218,7 @@
 						@ p_alternate
         *$
 
-        # log 'ConditionalExpression 3', ret.tag
+        # loog 'ConditionalExpression 3', ret.tag
 
 		$* VIA 29/3/21
         if node.__parent && node.__parent.name === 'body' && node.__parent.len == 1
@@ -1241,7 +1241,7 @@
                     [ children
                         @ ret
 
-        # log 'ConditionalExpression 4', ret.tag
+        # loog 'ConditionalExpression 4', ret.tag
 
     f( CallExpression, _
 		# A function or method call expression.
@@ -1251,12 +1251,12 @@
 		f_a_temp( arguments
 
 		var lastCallee = ret
-		# log 'CallExpression.p_callee', p_callee
+		# loog 'CallExpression.p_callee', p_callee
 
         var qmark = node.optional ? '?.' : ''
 		
 		if isTextualNode(p_callee)
-            # log 'CallExpression',
+            # loog 'CallExpression',
                 \b 'isTextualNode(p_callee)', isTextualNode(p_callee), 
                 \b 'getNodeText(p_callee)', getNodeText(p_callee), 
                 \b 'node.typeParameters', node.typeParameters,
@@ -1275,7 +1275,7 @@
 			
 			else
 
-                # log 'CallExpression p_arguments', p_arguments
+                # loog 'CallExpression p_arguments', p_arguments
 
 				if p_arguments && p_arguments.children.length > 0
 					var tlist = getTextList(p_arguments, ', ')
@@ -1297,23 +1297,23 @@
 				if ret.textified && node.extra && node.extra.parenthesized == true
 					set ret.textified = '(' + ret.textified + ')'
 
-			# log 'CallExpression', 'ret.name,textified', ret.name, ret.textified
+			# loog 'CallExpression', 'ret.name,textified', ret.name, ret.textified
 		
 		else
 
             # TODO implement node.optional
 
-			# log 'CallExpression', 
+			# loog 'CallExpression', 
                 \b 'p_callee.tag', p_callee.tag, 
                 \b 'p_callee.name', p_callee.name,
                 \b 'ret.tag', ret.tag
 			
 			foreach item in p_callee.children
-				# log 'CallExpression', 'p_callee.children', i, p_callee.children[i].tag, p_callee.children[i].name
+				# loog 'CallExpression', 'p_callee.children', i, p_callee.children[i].tag, p_callee.children[i].name
 			
 			if p_arguments
 				foreach item in p_arguments.children
-					# log 'CallExpression', 'p_arguments.children', i, p_arguments.children[i].tag, p_arguments.children[i].name
+					# loog 'CallExpression', 'p_arguments.children', i, p_arguments.children[i].tag, p_arguments.children[i].name
 			
 			if ['[', '{', 'new'].indexOf(p_callee.tag) > -1
 				set ret.tag = p_callee.tag
@@ -1324,7 +1324,7 @@
 
                 $$ Begin 19/3/21
                 if p_callee.children.length > 0
-                    # log 'p_callee.children.length > 0'
+                    # loog 'p_callee.children.length > 0'
                     set lastCallee = p_callee.children[p_callee.children.length-1]
                     if p_arguments && p_arguments.children.length > 0
                         if lastCallee.tag === '.'
@@ -1349,7 +1349,7 @@
                         if lastCallee.tag === '.'
                             set lastCallee.tag = '._'
                 else
-                    # log 'p_callee.children.length == 0'
+                    # loog 'p_callee.children.length == 0'
                     set ret.tag = "_"
                     set ret.name = p_callee.tag
                     if p_arguments && p_arguments.children.length > 0
@@ -1358,12 +1358,12 @@
                                 set item.tag = '@'
                             _ ret.children.push
                                 @ item
-                    # log 'CallExpression', p_callee, ret
-                # log 'node.callee.type', node.callee.type, ret.tag
+                    # loog 'CallExpression', p_callee, ret
+                # loog 'node.callee.type', node.callee.type, ret.tag
                 $$ End 19/3/21
 
             else
-                # log '1203'
+                # loog '1203'
                 var temp = [p_callee]
                 set lastCallee = p_callee.children[p_callee.children.length-1]
                 if lastCallee.tag === '.'
@@ -1383,7 +1383,7 @@
                 if p_callee.children.length > 0
                     var tempCallee = []
                     foreach item in p_callee.children
-                        log 'item.tag', item.tag
+                        # loog 'item.tag', item.tag
                         if item.tag == '._'
                             _ temp.push
                                 @ item
@@ -1397,7 +1397,7 @@
             $$ Was here 19/3/21
 			
 			if node.callee.type === 'FunctionExpression' && ret.tag === '_'
-				# log 'node.callee.type 2', node.callee.type, ret.tag
+				# loog 'node.callee.type 2', node.callee.type, ret.tag
 				set ret.tag = 'iife' // 9/1/19
 
 		if node.extra && node.extra.parenthesized == true && !ret.textified
@@ -1408,7 +1408,7 @@
 						@ ret
 			set ret = temp
 
-		# log 'CallExpression.exit.ret', ret
+		# loog 'CallExpression.exit.ret', ret
 
     f( NewExpression, new;could-be-text
 		f_a_in_tag( arguments, arguments
@@ -1423,16 +1423,16 @@
 		var argumentsNode = getChildByTag(ret, 'arguments')
 		set ret.children = []
 
-        # log 'NewExpression.ret', ret
-        log 'NewExpression.p_typeParameters', p_typeParameters
-        log 'NewExpression.argumentsNode', argumentsNode
+        # loog 'NewExpression.ret', ret
+        # loog 'NewExpression.p_typeParameters', p_typeParameters
+        # loog 'NewExpression.argumentsNode', argumentsNode
 
 		var tlist
         if node.arguments && node.arguments.length > 0
             # log 101
             if !p_typeParameters
                 set tlist = getTextList(argumentsNode, ', ')
-			log 'NewExpression.tlist', tlist
+			# loog 'NewExpression.tlist', tlist
             if tlist 
 				set ret.name += '(' + tlist + ')'
 				set ret.textified = 'new ' + ret.name
@@ -1455,7 +1455,7 @@
                         @ item
             else
 			    set ret.textified = 'new ' + ret.name + '()'
-		# log 'NewExpression.ret', ret
+		# loog 'NewExpression.ret', ret
 
     f( SequenceExpression, sequence
 		f_a( expressions, true, Expression 
@@ -1470,7 +1470,7 @@
     f( TemplateLiteral, `lit
 		f_a_temp( quasis, true, TemplateElement
 		f_a_temp( expressions, true, Expression 
-        # log 'TemplateLiteral', model
+        # loog 'TemplateLiteral', model
 		var i = 0, j
 		for i = 0; i < p_expressions.children.length; i++
 			var q = p_quasis.children[i]
@@ -1478,7 +1478,7 @@
 				set item = q.children[j]
 				_ ret.children.push(item)
 			var e = p_expressions.children[i]
-			# log 'TemplateLiteral.e', e
+			# loog 'TemplateLiteral.e', e
 			if ['@expr', '@id', 'literal', 'set'].indexOf(e.tag) > -1
 				set e.tag = '@'
 			_ ret.children.push(e)
@@ -1515,9 +1515,9 @@
 		# f_p_p( value, raw
 
     f( ObjectPattern, {
-		# log 'ObjectPattern enter options.mustBeText', options.mustBeText
+		# loog 'ObjectPattern enter options.mustBeText', options.mustBeText
 		f_a( properties, true, AssignmentProperty | RestElement 
-		# log 'wizzifiers.js.ObjectPattern.ret', JSON.stringify(ret, null, 2)
+		# loog 'wizzifiers.js.ObjectPattern.ret', JSON.stringify(ret, null, 2)
 		if options.mustBeText
 			if setTextList(ret, ', ') && !!node.typeAnnotation == false
 				set ret.textified = '{' + ret.textified + '}'
@@ -1545,7 +1545,7 @@
 		f_a( elements, false, Pattern | null
 		if setTextList(ret, ', ')
 			set ret.textified = '[' + ret.textified + ']'
-			# log '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
+			# loog '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
 		else
 			throw new Error('ArrayPattern must be textual: ' + JSON.stringify(node, null, 2))
 
@@ -1556,13 +1556,13 @@
 		$$ set ret.name = '...' + ret.name
         $$ set ret.textified = ret.name
         set ret.textified = '...' + ret.name
-        log 'RestElement', ret.tag, ret.name, ret.textified
+        # loog 'RestElement', ret.tag, ret.name, ret.textified
 
     f( AssignmentPattern, node.operator||'=';tag-is-var
 		f_p_temp( left, true, true, Pattern | Expression
 		f_p_temp( right, true, true, Expression
-		# log 'AssignmentPattern.p_left', JSON.stringify(p_left, null, 2)
-		# log 'AssignmentPattern.p_right', JSON.stringify(p_right, null, 2)
+		# loog 'AssignmentPattern.p_left', JSON.stringify(p_left, null, 2)
+		# loog 'AssignmentPattern.p_right', JSON.stringify(p_right, null, 2)
 		if isTextualNode(p_left)
 			set ret.name = getNodeText(p_left) 
 			if isTextualNode(p_right)
@@ -1577,7 +1577,7 @@
 				@ p_left
 			_ ret.children.push
 				@ p_right
-		log 'AssignmentPattern', JSON.stringify(ret, null, 2)
+		# loog 'AssignmentPattern', JSON.stringify(ret, null, 2)
 
 	f( Class, class
 		f_p_name(id, Identifier | null
@@ -1775,7 +1775,7 @@
         f_p_temp(superTypeParameters, false, true
 		if p_superClass
 			if isTextualNode(p_superClass)
-                # log 'p_superTypeParameters', p_superTypeParameters
+                # loog 'p_superTypeParameters', p_superTypeParameters
                 var superchildren = p_superTypeParameters ? p_superTypeParameters.children : []
 				_ ret.children.push
 					{
@@ -1909,7 +1909,7 @@
 
 	f( CommentBlock, #
 		var values = verify.replaceAll(node.value, '\r\n', '\n').split('\n')
-		# log 'options.replaceds', options.replaceds
+		# loog 'options.replaceds', options.replaceds
 		foreach value in values
 			# var v = codeReplacer.restore(value, options.replaceds)
 			_ ret.children.push
@@ -1919,7 +1919,7 @@
 					[ children
 	
 	f( CommentLine, #
-		# log 'options.replaceds', options.replaceds
+		# loog 'options.replaceds', options.replaceds
 		# var v = codeReplacer.restore(node.value, options.replaceds)
 		set ret.name = node.value
 
@@ -1934,7 +1934,7 @@
 		else
 			throw new Error('JSXAttribute.name must be textual:' + JSON.stringify(node, null, 2))
 
-		# log 'JSXAttribute.p_value', p_value, isTextualNode(p_value)
+		# loog 'JSXAttribute.p_value', p_value, isTextualNode(p_value)
 
 		if p_value
 			if isTextualNode(p_value)
@@ -1951,8 +1951,8 @@
 		f_p_temp( openingElement, true, true, JSXOpeningElement
 		# f_p( closingElement, true, JSXClosingElement
 		f_a_temp( children, true, JSXText | JSXExpressionContainer | JSXSpreadChild | JSXElement | JSXFragment
-		# log 'p_openingElement', p_openingElement
-		# log 'p_children', p_children
+		# loog 'p_openingElement', p_openingElement
+		# loog 'p_children', p_children
 		if p_openingElement.name && p_openingElement.name.length > 0
 			var char = p_openingElement.name[0]
 			if char == char.toUpperCase() || html_supported_tags.indexOf(p_openingElement.name) < 0
@@ -1964,15 +1964,15 @@
 			set ret.tag = '<'
 			set ret.children = p_openingElement.children
 		
-		# log 'JSXElement.ret', ret
+		# loog 'JSXElement.ret', ret
 		var
 			decl isStyle = ret.tag === 'style'
 		
 		foreach item in p_children.children
-			# log 'JSXElement.children.item', item
+			# loog 'JSXElement.children.item', item
 			if !(item.tag === '+' && item.name.trim().length == 0)
 				if isStyle
-					# log 'isStyle', isStyle, item.children
+					# loog 'isStyle', isStyle, item.children
 					foreach c in item.children
 						if c.tag === '`lit'
 							set ret.tag = "style-jsx"
@@ -1981,7 +1981,7 @@
 									@ kind 'css'
 									@ node ret
 									@ literal getLiteral(c)
-							# log 'JSXElement.children.item.lit', c, getLiteral(c)
+							# loog 'JSXElement.children.item.lit', c, getLiteral(c)
 					if ret.tag !== "style-jsx"
 						_ ret.children.push
 							@ item
@@ -2015,15 +2015,15 @@
 			_ options.stateAST.push
 				@ 'JSXExpressionContainer'
 		f_p_temp( expression
-        # log 'JSXExpressionContainer.p_expression', p_expression, isTextualNode(p_expression)
+        # loog 'JSXExpressionContainer.p_expression', p_expression, isTextualNode(p_expression)
 		if isTextualNode(p_expression)
 			set ret.tag = '+'
 			set ret.name = '{' + getNodeText(p_expression) + '}'
 			set ret.textified = ret.name
 		else
-			# log 'JSXExpressionContainer.options.stateAST', options.stateAST
-			# log 'JSXExpressionContainer.options.p_expression', p_expression
-            # log 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
+			# loog 'JSXExpressionContainer.options.stateAST', options.stateAST
+			# loog 'JSXExpressionContainer.options.p_expression', p_expression
+            # loog 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
 			$* 24/3/21 waiting for BIG damage but we must manage this*$
             set p_expression.textified = null
             if options.stateAST[options.stateAST.length-1] === 'JSXAttribute'
@@ -2060,7 +2060,7 @@
         
 		# selfClosing boolean
 
-		# log 'JSXOpeningElement p_name', p_name
+		# loog 'JSXOpeningElement p_name', p_name
 		if isTextualNode(p_name)
 			set ret.name = getNodeText(p_name)
         elif isTextualCommentedNode(p_name)

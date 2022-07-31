@@ -4,7 +4,7 @@
 		var lineParser = require('../util/lineParser')
 
     stm( statement
-		# log 'wizzi-js.module.statements.statement', model.wzParent.wzElement, u.isTopStatement(model, ctx), model.wzName, model.__templateChild
+		# loog 'wizzi-js.module.statements.statement', model.wzParent.wzElement, u.isTopStatement(model, ctx), model.wzName, model.__templateChild
         var text = model.wzName
 		if model.__templateChild || ctx.__inside_html
 			set text 
@@ -128,7 +128,7 @@
 
 	stm( exportDefault
         if ctx.__ecma === 'es5'
-			# log 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
+			# loog 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
             _ ctx.artifactGenerationError('export statement invalid in ecma 5', 'js/module', model)
 			r_cb()
 
@@ -156,7 +156,7 @@
         var typekey = model.__isType ? 'type ' : ''
 		
         if ctx.__ecma === 'es5'
-			# log 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
+			# loog 'wizzi-codegen.js2.statements.ecma,jskind', ctx.__ecma, ctx.__jskind
             _ ctx.artifactGenerationError('export statement invalid in ecma 5', 'js/module', model)
 			r_cb()
 
@@ -171,7 +171,7 @@
 		var name = model.wzName || ''
 		_ ctx.write('export ' + typekey + name)
 
-		# log 'js.module.xexport', 'model.__isType', model.__isType, name, model.from, model.statements.length, model.specifiers.length
+		# loog 'js.module.xexport', 'model.__isType', model.__isType, name, model.from, model.statements.length, model.specifiers.length
 		
 		if model.from
             if model.statements.length == 1
@@ -266,12 +266,12 @@
             else 
                 _ ctx.w('//' + (model.wzName ? (' ' + model.wzName) : ''))
                 if model.wzName.indexOf('@ts-ignore') > -1 
-                    log '§§§ statements.comment', model.wzName
+                    # loog '§§§ statements.comment', model.wzName
                     set ctx.__inlineNext = true
 			set ctx.__needs_crlf = false
 			r_cb()
 
-		# log 'ctx.__inside_comment', ctx.__inside_comment
+		# loog 'ctx.__inside_comment', ctx.__inside_comment
 		var enter_inside_comment = ctx.__inside_comment
 		if !ctx.__inside_comment
 			_ ctx.w('/**')
@@ -317,7 +317,7 @@
         _ u.checkInlineEnter(model, ctx)
 
 		var text
-        # log 'set,wzParent,wzName', model.wzParent.wzElement, model.wzName, '|'
+        # loog 'set,wzParent,wzName', model.wzParent.wzElement, model.wzName, '|'
 		# FIXME this hack require refactoring
 		if model.wzName === 'work.textSep = "__TS__"'
 			set text = model.wzName
@@ -344,7 +344,7 @@
 		if model.statements[0].wzEntity === 'function'
             _ ctx.w('')
         
-		# log 'set,model.statements.length', model.wzName, model.statements.length
+		# loog 'set,model.statements.length', model.wzName, model.statements.length
         if model.statements.length == 2
             if model.statements[0].wzElement == 'comment'
                 _ ctx.w

@@ -10,7 +10,7 @@
 					@ err
 					@ null
 					@ 2
-			log 'Error fullErr', fullErr
+			error 'Error fullErr', fullErr
 			throw
 				new Error
 					_ JSON.stringify

@@ -31,7 +31,7 @@ module
 
 		var nodes = nodifier(lines, mTree)
 
-		log 'nodifier nodes', nodes
+		# loog 'nodifier nodes', nodes
 
         _ printNodes(nodes)
 

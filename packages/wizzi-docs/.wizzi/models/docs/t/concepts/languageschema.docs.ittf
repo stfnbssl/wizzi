@@ -32,7 +32,7 @@
 					- param name
 					- base name
 				- m say
-					- log 'Hiiii i am ' + this.name
+					- success 'Hiiii i am ' + this.name
 		
 				- m create
 					- static

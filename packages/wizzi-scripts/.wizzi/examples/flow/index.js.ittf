@@ -18,10 +18,10 @@
 
 	_ flow
 		f_cb_test(result)
-			log 'flow.result', result
+			# loog 'flow.result', result
 			_ flowToEventStream
 				f_cb_test(result)
-					log 'flowToEventStream.result', result
+					# loog 'flowToEventStream.result', result
 	
 	function flow
 		param callback
@@ -38,9 +38,9 @@
 			@ options1
 			@ res
 			f_cb_test(result)
-				log 'res.head', res.head
-				log 'res.stdout', res.stdout
-				log 'res.stderr', res.stderr
+				# loog 'res.head', res.head
+				# loog 'res.stdout', res.stdout
+				# loog 'res.stderr', res.stderr
 				_ callback
 					@ null
 					@ result

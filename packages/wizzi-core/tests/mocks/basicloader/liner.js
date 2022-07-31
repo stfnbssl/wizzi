@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\mocks\basicloader\liner.js.ittf
 */
 'use strict';
@@ -129,18 +129,18 @@ module.exports = function(textContent, ittfDocumentData) {
         
         // remove escape state
         
-        // log 'macroState', macroState, ch
+        // loog 'macroState', macroState, ch
         if (macroState == 2) {
             macroState = 1;
         }
         else {
             if (chUni == 96) {
                 
-                // log 'macroState', macroState, ch
+                // loog 'macroState', macroState, ch
                 if (macroState > 0) {
                     macroState = 0;
                 }
-                // log 'macroState', macroState, ch
+                // loog 'macroState', macroState, ch
                 else {
                     macroState = 1;
                 }
@@ -148,7 +148,7 @@ module.exports = function(textContent, ittfDocumentData) {
             else {
                 if (macroState == 1) {
                     
-                    // log 'macroState', macroState, ch
+                    // loog 'macroState', macroState, ch
                     if (ch == '$') {
                         ch = '#';
                         lineHasMacro = true;
@@ -156,7 +156,7 @@ module.exports = function(textContent, ittfDocumentData) {
                     
                     // could be an escape of a macro inside a macro
                     
-                    // log 'macroState', macroState, ch
+                    // loog 'macroState', macroState, ch
                     else if (ch == '\\') {
                         macroState = 2;
                     }

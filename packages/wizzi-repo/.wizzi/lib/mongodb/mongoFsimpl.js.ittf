@@ -49,7 +49,7 @@
 					set that.mounted_db = db
 					var fsmongo = new FsMongo(db)
 					set that.mongoDb = new Document(fsmongo)
-					# log '***** mongodb connected'
+					# loog '***** mongodb connected'
 					return
 						_ callback
 							@ null
@@ -57,11 +57,11 @@
 
 		m close
 			if this.mounted_db
-				# log '***** mongodb start closing'
+				# loog '***** mongodb start closing'
 				_ this.mounted_db.close
 				set this.mounted_db = null
 				set this.mongoDb = null
-				# log '***** mongodb closed'
+				# loog '***** mongodb closed'
 
 		mongoFsimpl/m( stat )
 			_ mongoDb.stat
@@ -95,7 +95,7 @@
 				f_cb( result )
 					var dir = []
 					foreach item in result
-						# log 'wizzi-repo.mongodb.mongoFsImpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
+						# loog 'wizzi-repo.mongodb.mongoFsImpl.readdir.parsedUri.internalPath, item', parsedUri.internalPath, item
 						_ dir.push(item.basename)
 					_ callback(null, dir)
 		

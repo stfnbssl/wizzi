@@ -149,25 +149,25 @@
 				if macroState == 2
 					# remove escape state
 					set macroState = 1
-					# log 'macroState', macroState, ch
+					# loog 'macroState', macroState, ch
 				else
 					if chUni == 96
 						if macroState > 0 
 							set macroState = 0
-							# log 'macroState', macroState, ch
+							# loog 'macroState', macroState, ch
 						else
 							set macroState = 1
-							# log 'macroState', macroState, ch
+							# loog 'macroState', macroState, ch
 					else
 						if macroState == 1
 							if ch == '$'
 								set ch = '#'
 								set lineHasMacro = true
-								# log 'macroState', macroState, ch
+								# loog 'macroState', macroState, ch
 							elif ch == '\\'
 								# could be an escape of a macro inside a macro
 								set macroState = 2
-								# log 'macroState', macroState, ch
+								# loog 'macroState', macroState, ch
 				
 				_ processChar(ch)
 

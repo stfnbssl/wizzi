@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\css2\document\gen\rule.js.ittf
 */
 'use strict';
@@ -69,7 +69,7 @@ md.load = function(cnt) {
         }
         ctx.indent();
         var selector = model.getSelector();
-        // log '*** selector', selector
+        // loog '*** selector', selector
         if (selector && selector.length > 0) {
             ctx.w(model.getSelector() + ' {');
             ctx.indent();
@@ -209,7 +209,7 @@ md.load = function(cnt) {
 }
 ;
 function writeRule(cnt, model, ctx, callback) {
-    // log 'writeRule, model.ruleParts', model.ruleParts
+    // loog 'writeRule, model.ruleParts', model.ruleParts
     var wzName = model.wzElement === 'ampersand' ? '&' + model.wzName : model.wzName;
     var ruleText = model.getSelector(true);
     ctx.w(ruleText + ' {');
@@ -240,7 +240,7 @@ function getWriteProperty(ctx) {
                             if (err) {
                                 return callback(err);
                             }
-                            console.log(myname, 'artifactText', artifactText);
+                            console.log(myname, 'artifactText', artifactText, __filename);
                             ctx.w('background-image: url("data:image/svg+xml,' + artifactText + '");');
                             callback();
                         })

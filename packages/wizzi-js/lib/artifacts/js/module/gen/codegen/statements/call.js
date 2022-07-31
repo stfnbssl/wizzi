@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\call.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -113,7 +113,7 @@ md.load = function(cnt) {
                 return callback(null, null);
             })
         }
-        // log 'call', 'u.isTopStatement(xmodel, ctx)', u.isTopStatement(xmodel, ctx), "u.isDescendentOf(xmodel, 'iif')", u.isDescendentOf(xmodel, 'iif')
+        // loog 'call', 'u.isTopStatement(xmodel, ctx)', u.isTopStatement(xmodel, ctx), "u.isDescendentOf(xmodel, 'iif')", u.isDescendentOf(xmodel, 'iif')
         else {
             name = hasParens ? name : (name + '()');
             ctx.write(name);
@@ -218,7 +218,7 @@ md.load = function(cnt) {
     }
     ;
     function doCallChildStatements_one(model, name, hasParens, ctx, callback) {
-        // log 'doCallChildStatements_one.model', model
+        // loog 'doCallChildStatements_one.model', model
         ctx.write(name);
         if (model.typeParameterInsts && model.typeParameterInsts.length > 0) {
             ctx.write('<');
@@ -267,9 +267,9 @@ md.load = function(cnt) {
         }
     }
     function doCallChildStatements_two(model, name, hasParens, ctx, callback) {
-        // log 'doCallChildStatements_two', name, hasParens
+        // loog 'doCallChildStatements_two', name, hasParens
         
-        // log 'doCallChildStatements_two 1', model.wzElement
+        // loog 'doCallChildStatements_two 1', model.wzElement
         
         // VIA 20/2/19 if name.length > 0
         
@@ -304,7 +304,7 @@ md.load = function(cnt) {
             if (!first) {
                 ctx.write(', ');
             }
-            // log 'doCallChildStatements_two', item_1
+            // loog 'doCallChildStatements_two', item_1
             if (item_1.wzElement == 'comment') {
                 ctx.w();
             }
@@ -323,7 +323,7 @@ md.load = function(cnt) {
         repeater_1(0);
         function next_1() {
             ;
-            // log 'doCallChildStatements_two 2'
+            // loog 'doCallChildStatements_two 2'
             if (hasParens === false) {
                 ctx.write(')');
             }
@@ -362,11 +362,11 @@ md.load = function(cnt) {
             repeater_1(0);
             function next_1() {
                 
-                // log 'doCallChildStatements_call. w()', model.wzElement, model.wzName
+                // loog 'doCallChildStatements_call. w()', model.wzElement, model.wzName
                 if (u.isTopStatement(model, ctx) && u.isDescendentOf(model, 'iif') == false && model.wzElement !== 'decoratorCall' && !u.parentIs(model, 'arrowfunction')) {
                     ctx.w(';');
                 }
-                // log 'doCallChildStatements_call. w()', model.wzElement, model.wzName
+                // loog 'doCallChildStatements_call. w()', model.wzElement, model.wzName
                 // TODO when inside a statement // 13/6/2018
                 // _ ctx.write()
                 else {

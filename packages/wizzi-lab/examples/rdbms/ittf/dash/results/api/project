@@ -1,0 +1,307 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.8
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-lab\lib\artifacts\rdbms\jsonmodel\gen\ittf\jsonmodel.js.ittf
+    utc time: Sat, 30 Jul 2022 16:00:34 GMT
+*/
+'use strict';
+
+//
+
+var projectPersister = require('../persisters/project');
+
+var md = module.exports = {};
+
+md.getProjects = function(userName, projectName, callback) {
+    projectPersister.getProjects(userName, projectName, callback)
+}
+;
+
+md.getProject = function(userName, projectName, callback) {
+    
+    // Persister.get must give back a NotFoundError if item does not exists
+    
+    projectPersister.get(userName, projectName, callback)
+}
+;
+
+md.insertProject = function(userName, projectName, callback) {
+    projectPersister.exists(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        if (result) {
+            return callback(new errors.AlreadyExistsError('project', utils.buildResourcePath(userName, projectName)));
+        }
+        var newItem = {
+            type: 'project', 
+            userName: null, 
+            projectName: null, 
+            schemas: [], 
+            sections: [], 
+            projectModels: [], 
+            projectFragments: []
+         };
+        projectPersister.putProject(newItem, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            //
+            // TODO add to oneTable ?
+            // TODO or always make the oneTable api call this insert ?
+            //
+            callback(null, result);
+        })
+    })
+}
+;
+
+.prototype.updateProject = function(item, callback) {
+    projectPersister.put(item, callback)
+}
+
+.prototype.deleteProject = function(item, callback) {
+    projectPersister.delete(item, callback)
+}
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getProjectSchema = function(userName, projectName, schemaName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.schemas, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'schemaName': schemaName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'schema'), utils.buildResourcePath(userName, projectName, schemaName)));
+        }
+    })
+}
+;
+
+md.addProjectSchema = function(userName, projectName, schemaName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'schema'), utils.buildResourcePath(userName, projectName, schemaName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+md.removeProjectSchema = function(userName, projectName, schemaName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'schema'), utils.buildResourcePath(userName, projectName, schemaName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getProjectSection = function(userName, projectName, sectionName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.sections, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'sectionName': sectionName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'section'), utils.buildResourcePath(userName, projectName, sectionName)));
+        }
+    })
+}
+;
+
+md.addProjectSection = function(userName, projectName, sectionName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'section'), utils.buildResourcePath(userName, projectName, sectionName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+md.removeProjectSection = function(userName, projectName, sectionName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'section'), utils.buildResourcePath(userName, projectName, sectionName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getProjectProjectmodel = function(userName, projectName, modelSchema, modelName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.projectModels, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'modelSchema': modelSchema, 
+            'modelName': modelName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectmodel'), utils.buildResourcePath(userName, projectName, modelSchema, modelName)));
+        }
+    })
+}
+;
+
+md.addProjectProjectmodel = function(userName, projectName, modelSchema, modelName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectmodel'), utils.buildResourcePath(userName, projectName, modelSchema, modelName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+md.removeProjectProjectmodel = function(userName, projectName, modelSchema, modelName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectmodel'), utils.buildResourcePath(userName, projectName, modelSchema, modelName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+// TODO r.manyTable().keyColumns() - table.keyColumns()
+md.getProjectProjectfragment = function(userName, projectName, fragmentName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        var ret = util.aFind(result.projectFragments, {
+            'userName': userName, 
+            'projectName': projectName, 
+            'fragmentName': fragmentName
+         });
+        if (ret) {
+            return callback(null, ret);
+        }
+        else {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectfragment'), utils.buildResourcePath(userName, projectName, fragmentName)));
+        }
+    })
+}
+;
+
+md.addProjectProjectfragment = function(userName, projectName, fragmentName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectfragment'), utils.buildResourcePath(userName, projectName, fragmentName)));
+        }
+        
+        _.addFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+
+md.removeProjectProjectfragment = function(userName, projectName, fragmentName, callback) {
+    
+    md.getProject(userName, projectName, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        
+        if (!result) {
+            return callback(new errors.NotFoundError(utils.buildResourceName('project', 'projectfragment'), utils.buildResourcePath(userName, projectName, fragmentName)));
+        }
+        
+        _.removeFragment(result, fragmentSchema, fragmentName)
+        
+        persisterProject.put(userName, projectName, result, callback)
+        
+    })
+}
+;
+

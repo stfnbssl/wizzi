@@ -22,4 +22,4 @@
 			@ copyInclude ['*']
 			@ copyExclude []
 		f_cb_test(schemaPaths)
-			log 'genFolder wrote generated and copied files to dest folder\n', schemaPaths
+			info 'genFolder wrote generated and copied files to dest folder\n', schemaPaths

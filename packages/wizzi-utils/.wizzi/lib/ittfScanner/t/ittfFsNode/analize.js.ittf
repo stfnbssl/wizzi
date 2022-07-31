@@ -3,7 +3,7 @@
 	m analize
 		callback
 
-		# log 'wizzi-utils.ittfFsNode.analize.relPath', this.isDirectory, this.basename
+		# loog 'wizzi-utils.ittfFsNode.analize.relPath', this.isDirectory, this.basename
 		
 		var r = this.root()
 		
@@ -53,7 +53,7 @@
 
 		else
 			
-			# log 'ittfFsNode.analize this.parts.join("/")', this.parts.join('/')
+			# loog 'ittfFsNode.analize this.parts.join("/")', this.parts.join('/')
             var that = this
             _ IttfDocumentGraph.createFrom
                 @ this.parts.join('/')
@@ -61,7 +61,7 @@
 					@ file r.file
 				f_cb( ittfDocumentGraph )
 					
-					# log 'wizzi-utils.ittfFsNode.analize.created ittfDocumentGraph'
+					# loog 'wizzi-utils.ittfFsNode.analize.created ittfDocumentGraph'
 					
 					var ctx
 						{
@@ -75,7 +75,7 @@
 						@ ctx
 						f_cb()
 
-							# log 'wizzi-utils.ittfFsNode.analize.ctx.fragments from ittfDocumentGraph', ctx.fragments
+							# loog 'wizzi-utils.ittfFsNode.analize.ctx.fragments from ittfDocumentGraph', ctx.fragments
                             set that.ittfDocumentGraph = ittfDocumentGraph
 							set that.fragments = ctx.fragments
 
@@ -85,7 +85,7 @@
 							function repeat
 								param count
 						
-								# log 'wizzi-utils.ittfFsNode.analize.repeat count', count
+								# loog 'wizzi-utils.ittfFsNode.analize.repeat count', count
 						
 								if Object.keys(ctx.externalFragments).length < 1 || count > max_repeat
 									return
@@ -97,10 +97,10 @@
 									function
 										param k
 										param callback
-										# log 'wizzi-utils.ittfFsNode.analize.repeat externalFragment', ctx.externalFragments[k].uri
+										# loog 'wizzi-utils.ittfFsNode.analize.repeat externalFragment', ctx.externalFragments[k].uri
 										var dnode
 											_ r.addExternalDocument(ctx.externalFragments[k].uri)
-										# log 'external dnode', dnode
+										# loog 'external dnode', dnode
 										_ dnode.setIds
 										_ dnode.analize
 											f_cb()
@@ -110,7 +110,7 @@
 													@ ctx
                                                     f_cb()
                                                         set that.fragments = ctx.fragments
-                                                        # log 'wizzi-utils.ittfFsNode.analize.externalFragments', ctx.externalFragments
+                                                        # loog 'wizzi-utils.ittfFsNode.analize.externalFragments', ctx.externalFragments
                                                         return
                                                             _ callback
                                                                 @ null
@@ -138,9 +138,9 @@
 	
 	m __searchDocument
 		param dFullPath
-		# log '__searchDocument, this.fullPath, dFullPath', this.fullPath, dFullPath
+		# loog '__searchDocument, this.fullPath, dFullPath', this.fullPath, dFullPath
 		if this.fullPath === dFullPath
-            # log '__searchDocument, found'
+            # loog '__searchDocument, found'
 			return this
 		else if this.isDirectory
 			var ret = null

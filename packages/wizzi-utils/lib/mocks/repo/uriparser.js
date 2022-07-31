@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\mocks\repo\uriparser.js.ittf
 */
 'use strict';
@@ -15,7 +15,7 @@ module.exports = function(uri, callback) {
     }
     var protocol = parsedUri.protocol.substr(-1, 1) === ':' ? parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1)) : parsedUri.protocol;
     ;
-    // log 'parseuri.parsedUri', parsedUri
+    // loog 'parseuri.parsedUri', parsedUri
     var name, parts = parsedUri.pathname ? parsedUri.pathname.split('/') : [];
     if (parsedUri.pathname && parsedUri.pathname.length > 0 && parsedUri.pathname[0] == '/') {
         parts.shift();
@@ -34,13 +34,15 @@ module.exports = function(uri, callback) {
         ret.path = parts.join('/');
         name = parts[parts.length-1];
     }
+    
+    // loog 'parsedUri.parts', parts
+    
+    // loog 'parsedUri', parsedUri
     else if (protocol === 'repo') {
         if (parts.length < 2) {
             var error = new errors.InvalidRequestError('Invalid uri for an IttfDocument. Too short: ' + uri, 'UriError');
             return callback(error);
         }
-        console.log('parsedUri.parts', parts);
-        console.log('parsedUri', parsedUri);
         ret.storeKind = 'repo';
         ret.userId = parsedUri.host;
         ret.projectId = parts[0];

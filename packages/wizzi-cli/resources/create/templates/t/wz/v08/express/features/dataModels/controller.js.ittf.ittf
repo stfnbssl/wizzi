@@ -32,7 +32,7 @@ $group
                         param err
                         param ${'$'}{schema.collectionName}
                         if err
-                            log '${'$'}{schema.Name}Controller.get${'$'}{schema.CollectionName}.err', err
+                            error '${'$'}{schema.Name}Controller.get${'$'}{schema.CollectionName}.err', err
                             return
                                 _ sendFailure
                                     @ res
@@ -63,7 +63,7 @@ $group
                     ._ catch
                         => 
                             param err
-                            log '${'$'}{schema.Name}Controller.create${'$'}{schema.Name}.err', err
+                            error '${'$'}{schema.Name}Controller.create${'$'}{schema.Name}.err', err
                             _ sendFailure
                                 @ res
                                 {
@@ -80,7 +80,7 @@ $group
                         param err
                         param ${'$'}{schema.name}
                         if err
-                            log '${'$'}{schema.Name}Controller.get${'$'}{schema.Name}ById.err', err
+                            error '${'$'}{schema.Name}Controller.get${'$'}{schema.Name}ById.err', err
                             return
                                 _ sendFailure
                                     @ res
@@ -102,7 +102,7 @@ $group
                         param err
                         param ${'$'}{schema.name}
                         if err
-                            log '${'$'}{schema.Name}Controller.update${'$'}{schema.Name}.err', err
+                            error '${'$'}{schema.Name}Controller.update${'$'}{schema.Name}.err', err
                             return
                                 _ sendFailure
                                     @ res
@@ -133,7 +133,7 @@ $group
                                 ._ catch
                                     => 
                                         param err
-                                        log '${'$'}{schema.Name}Controller.update${'$'}{schema.Name}.err', err
+                                        error '${'$'}{schema.Name}Controller.update${'$'}{schema.Name}.err', err
                                         _ sendFailure
                                             @ res
                                             {
@@ -152,7 +152,7 @@ $group
                         param err
                         param ${'$'}{schema.name}
                         if err
-                            log 'delete${'$'}{schema.Name}.err', err
+                            error 'delete${'$'}{schema.Name}.err', err
                             return
                                 _ sendFailure
                                     @ res

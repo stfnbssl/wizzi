@@ -2,10 +2,13 @@
 
 A Wizzi Plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API..
 
+
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## Features
 ### Implemented Wizzi Models
@@ -187,9 +190,11 @@ yes<td>
 ## Source and generation
 wizzi-core is generated using the Wizzi factory ver 0.7
 
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>

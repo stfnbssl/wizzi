@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\fs\file.js.ittf
 */
 'use strict';
@@ -37,7 +37,7 @@ describe("file", function() {
     });
     it("should split a text into lines", function() {
         var lines = file.readLines(path.join(__dirname, 'ittf', 'gc_one.ittf'));
-        // log 'file lines', lines
+        // loog 'file lines', lines
         expect(lines[0]).to.be.a('string');
         expect(lines[0]).to.be('first one');
         expect(lines[1]).to.be.a('string');

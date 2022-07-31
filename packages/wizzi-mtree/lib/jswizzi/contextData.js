@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\contextData.js.ittf
 */
 'use strict';
@@ -41,7 +41,7 @@ var ContextData = (function () {
         this.values[name] = init;
         // TODO debug only
         
-        // log 'ContextData declare', name, init, 'kind', this.kind, this.brickKey
+        // loog 'ContextData declare', name, init, 'kind', this.kind, this.brickKey
         if (f_verify.isObject(init) == false) {
         }
     }
@@ -54,7 +54,7 @@ var ContextData = (function () {
         }
     }
     ContextData.prototype.isDeclared = function(name) {
-        // log 'wizzi-mtree.contextData.isDeclared', name, this.declares[name]
+        // loog 'wizzi-mtree.contextData.isDeclared', name, this.declares[name]
         if (this.declares[name] == true) {
             return true;
         }
@@ -62,7 +62,7 @@ var ContextData = (function () {
             var i, i_len=this.declaresStack.length, item;
             for (i= (i_len-1); i>-1; i--) {
                 item = this.declaresStack[i];
-                // log 'wizzi-mtree.contextData.isDeclared for', name, this.declaresStack.length, item[name]
+                // loog 'wizzi-mtree.contextData.isDeclared for', name, this.declaresStack.length, item[name]
                 if (item[name] == true) {
                     return true;
                 }
@@ -80,7 +80,7 @@ var ContextData = (function () {
         this.declare(name, value);
         // TODO debug only
         
-        // log 'ContextData setValue', name, value, 'kind', this.kind, this.brickKey
+        // loog 'ContextData setValue', name, value, 'kind', this.kind, this.brickKey
         if (f_verify.isObject(value) == false) {
         }
     }
@@ -102,7 +102,7 @@ var ContextData = (function () {
     }
     ContextData.prototype.getValue = function(name) {
         
-        // log 'wizzi-mtree.contextData.getValue found for', name, this.values[name], this.declaresStack.length
+        // loog 'wizzi-mtree.contextData.getValue found for', name, this.values[name], this.declaresStack.length
         if (this.declares[name] == true) {
             return this.values[name];
         }
@@ -111,13 +111,13 @@ var ContextData = (function () {
             for (i= (i_len-1); i>-1; i--) {
                 item = this.declaresStack[i];
                 
-                // log 'wizzi-mtree.contextData.getValue found for', name, this.declaresStack.length
+                // loog 'wizzi-mtree.contextData.getValue found for', name, this.declaresStack.length
                 if (item[name] == true) {
                     return this.valuesStack[i][name];
                 }
             }
         }
-        // log 'wizzi-mtree.contextData.getValue not found for', name, this.kind, this.brickKey
+        // loog 'wizzi-mtree.contextData.getValue not found for', name, this.kind, this.brickKey
         else {
             return undefined;
         }
@@ -182,7 +182,7 @@ var ContextData = (function () {
         console.log('Dump context value for debug', this.kind);
         for (var k in this.declares) {
             if (f_verify.isObject(this.values[k]) == false) {
-                console.log(k, this.values[k]);
+                console.log(k, this.values[k], __filename);
             }
         }
     }
@@ -190,7 +190,7 @@ var ContextData = (function () {
         console.log('Dump context value for debug', this.kind);
         for (var k in this.declares) {
             if (f_verify.isObject(this.values[k]) == false) {
-                console.log(k, this.values[k]);
+                console.log(k, this.values[k], __filename);
             }
         }
     }

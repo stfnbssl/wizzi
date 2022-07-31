@@ -1,0 +1,36 @@
+﻿module
+    kind es6
+
+    $
+        var md = {
+            name: 'py_examples_step_1',
+            description: 'First `py` Wizzi Model',
+            level: 0,
+            step: 1
+        }
+
+    example_step( &md )
+
+        _ wizzi.fsFactory
+            {
+                @ plugins
+                    {
+                        [ items
+                            @ './index'
+                        @ pluginsBaseFolder
+                            _ path.resolve
+                                @ __dirname
+                                @ '..'
+                                @ '..'
+            f_cb_throw( wf )
+                _ wf.loadModelAndGenerateArtifact
+                    _ path.join
+                        @ __dirname
+                        @ 'step_1'
+                        @ 'first.py.ittf'
+                    {
+                        @ modelRequestContext {}
+                        @ artifactRequestContext {}
+                    @ 'py/module'
+                    f_cb_throw( artifactText )
+                        info artifactText

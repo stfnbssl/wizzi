@@ -6,7 +6,7 @@ $group
         var title = mTreeData.title
         var mTree = mTreeData.mTree
         var item = mTreeData.ittf
-        log 'prettifyJs.mTreeData', mTreeData
+        # loog 'prettifyJs.mTreeData', mTreeData
         var itemResult = {}
         var lines = []
         if mTreeData.ittf && mTreeData.ittf.children && mTreeData.ittf.children.length > 0

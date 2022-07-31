@@ -105,7 +105,7 @@
 						@ hasMacro node.hasMacro
                         @ parent parent
                         @ model clonedModel
-                # log 'clone node', node.name, node.value, node.$params
+                # loog 'clone node', node.name, node.value, node.$params
                 if node.$params
                     # $fragment
                     set clnode.$params = node.$params
@@ -135,7 +135,7 @@
 					@ hasMacro node.hasMacro
 					@ parent parent
 					@ model clonedModel
-			# log 'clone node', node.name, node.value, node.$params
+			# loog 'clone node', node.name, node.value, node.$params
 			if node.$params
 				# $fragment
 				set clnode.$params = node.$params

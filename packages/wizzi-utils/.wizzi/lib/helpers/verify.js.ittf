@@ -97,7 +97,7 @@
             param replace
             if md.isEmpty(text)
                 return text
-            # log 'replaceAll', text, '-', find, '-', md.escapeRegExp(find), '-', replace
+            # loog 'replaceAll', text, '-', find, '-', md.escapeRegExp(find), '-', replace
 			return 
                 _ text.replace
                     new RegExp

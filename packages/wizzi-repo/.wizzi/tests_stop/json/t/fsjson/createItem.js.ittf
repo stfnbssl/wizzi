@@ -11,7 +11,7 @@
 					@ dirname null
 					@ kind 0
 				f_cb_test( r )
-					log 'insertItem.r', err, r
+					info 'insertItem.r', err, r
 					tobe_number( r.insertedCount, 1 )
 					tobe_string( r.code, FSITEM_INSERTED )
 					tobe_object( r.item )
@@ -25,7 +25,7 @@
 					@ parentId null
 					@ basename 'c:'
 				f_cb_test( r )
-					log 'getItem.r', err, r
+					info 'getItem.r', err, r
 					tobe_object( r )
 					tobe_null( r.parentId )
 					tobe_string( r.basename, c: )
@@ -40,7 +40,7 @@
 					@ dirname null
 					@ kind 0
 				f_cb_test( r )
-					log 'insertItem.r', err, r
+					# loog 'insertItem.r', err, r
 					tobe_string( r.code, FSITEM_EXISTS )
 					tobe_object( r.item )
 					tobe_string( r.item.path, c: )
@@ -59,7 +59,7 @@
 							@ dirname r.basename
 							@ kind 1
 						f_cb_test( r )
-							log 'insertItem.r', err, r
+							# loog 'insertItem.r', err, r
 							tobe_number( r.insertedCount, 1 )
 							tobe_string( r.code, FSITEM_INSERTED )
 							tobe_object( r.item )

@@ -9,9 +9,9 @@
 		set context = context || {}
 
 		var formsFolder = path.resolve(__dirname, '../ittf/forms')
-		log 'formsFolder', formsFolder
+		# loog 'formsFolder', formsFolder
 		var formPath = path.join(formsFolder, formRelativePath)
-		log 'formPath', formPath
+		# loog 'formPath', formPath
 		
 		_ wizzi.runnerServer.loadWizziModel
 			@ 'form'

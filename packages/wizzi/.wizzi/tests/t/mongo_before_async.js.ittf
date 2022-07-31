@@ -12,15 +12,15 @@
 					param err
 					param result
 					if err
-						log 'FSITEMS.drop failed'
+						error 'FSITEMS.drop failed'
 					else
-						log 'FSITEMS.drop result', result
+						info 'FSITEMS.drop result', result
 					_ db.collection(DOCUMENTS).drop
 						function
 							param err
 							param result
 							if err
-								log 'DOCUMENTS.drop failed'
+								error 'DOCUMENTS.drop failed'
 							else
-								log 'DOCUMENTS.drop result', result
+								info 'DOCUMENTS.drop result', result
 							_ done()

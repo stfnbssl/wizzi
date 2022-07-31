@@ -41,12 +41,18 @@
             var flags = ''
             set flags += model.isAbstract ? 'is-abstract ' : ''
             set flags += model.addToChildren ? 'add-to-children ' : ''
+            var tagEscaped = verify.replaceAll(model.tagName, '\\|', '__&%%&__')
+            var tagsEscaped = tagEscaped.split('|')
+            var tags = []
+            foreach tag in tagsEscaped
+                _ tags.push
+                    _ verify.replaceAll(tag, '__&%%&__', '|')
             var node
                 {
                     @ name model.wzId
                     @ super model.superId
                     @ isRoot model.isRoot
-                    @ tags model.tagName.split('|')
+                    @ tags tags
                     @ flags flags
                     @ attributes
                         [
@@ -69,10 +75,16 @@
                 _ node.relations.push(r)
 
             foreach d in model.derived
+                var tagEscaped = verify.replaceAll(d.tagName, '\\|', '__&%%&__')
+                var tagsEscaped = tagEscaped.split('|')
+                var tags = []
+                foreach tag in tagsEscaped
+                    _ tags.push
+                        _ verify.replaceAll(tag, '__&%%&__', '|')
                 _ node.derived.push
                     {
                         @ name d.wzId
-                        @ tags d.tagName.split('|')
+                        @ tags tags
 
             foreach m in model.methods
                 var methodNode 

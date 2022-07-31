@@ -72,7 +72,7 @@
                             @ copyInclude ['*']
                             @ copyExclude []
                         f_cb_test(genFolderResult)
-                            log 'genFolderResult', genFolderResult
+                            # loog 'genFolderResult', genFolderResult
                             return
 
             _ newpkg

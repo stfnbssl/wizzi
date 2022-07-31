@@ -19,7 +19,7 @@ $group
                 @ onfocusout
                     function 
                         param element
-                        log 'onfocusout', element
+                        # loog 'onfocusout', element
                         _ $(element).valid
                         log $(element).valid()
 

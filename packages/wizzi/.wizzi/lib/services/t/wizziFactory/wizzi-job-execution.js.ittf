@@ -21,7 +21,7 @@ $group
 			{ productionOptions
 		callback
 		+
-		log 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest
+		# loog 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest
 		+
 		if verify.isNotEmpty(jobRequest.path)
 			# jobRequest type 1
@@ -48,7 +48,7 @@ $group
 							r_cb_error( NotFound, _executeJob_by_path )
 								@ 'Cannot find wfjob ittf document: ' + jobRequest.path
 						else
-							log 'wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext
+							info 'wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext
 							checked_call( pman
 								_ that.createProductionManager
 									@ jobRequest.productionOptions
@@ -60,7 +60,7 @@ $group
 										{ wfjob
 											@ ittfDocumentUri jobRequest.path
 							+
-							log 'wizzi.wizziFactory._executeJob_by_path,pman.globalContext()', pman.globalContext()
+							info 'wizzi.wizziFactory._executeJob_by_path,pman.globalContext()', pman.globalContext()
 							+
 							_ pman.run
 								f_cb( result )

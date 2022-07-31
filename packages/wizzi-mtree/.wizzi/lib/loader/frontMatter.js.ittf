@@ -33,7 +33,7 @@
                         _ utilnode.jsonifyProperty
                             @ node
                     if prop.__is_error
-                        log 'wizzi-mtree.includer.jsonifyProperty.err', prop
+                        # loog 'wizzi-mtree.includer.jsonifyProperty.err', prop
                         var errItem = prop.__errItem ? prop.__errItem : node
                         set prop.errorLines
                             _ item.model.loadHistory.getIttfDocumentErrorLines
@@ -43,7 +43,7 @@
                                     @ col errItem.col + errItem.name.length + 1
                                     @ description 'jsonify error in front matter'
                                 @ true
-                        log 'wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines
+                        # loog 'wizzi-mtree.includer.jsonifyProperty.lineErrors', prop.errorLines
                         return
                             _ callback(prop)
 

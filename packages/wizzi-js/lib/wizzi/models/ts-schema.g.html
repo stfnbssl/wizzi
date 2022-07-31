@@ -35,7 +35,7 @@
     </head>
     <body>
         <div class="main">
-            <h1>Wizzi schema ts</h1>
+            <h1>Wizzi Schema ts</h1>
             <div class="main-left">
                 <ul>
                     <li><a href="#element_statement">statement</a>
@@ -346,7 +346,11 @@
                     </li>
                     <li><a href="#element_log">log</a>
                     </li>
+                    <li><a href="#element_info">info</a>
+                    </li>
                     <li><a href="#element_inspect">inspect</a>
+                    </li>
+                    <li><a href="#element_success">success</a>
                     </li>
                     <li><a href="#element_warn">warn</a>
                     </li>
@@ -1309,7 +1313,7 @@
                             <td>
                                 <b>or</b>
                             </td>
-                            <td>\|\||op\|\|</td>
+                            <td>|||op||</td>
                             <td>statement</td>
                             <td></td>
                         </tr>
@@ -1939,7 +1943,7 @@
                             <td>
                                 <b>bit_or</b>
                             </td>
-                            <td>op\|</td>
+                            <td>op|</td>
                             <td>statement</td>
                             <td></td>
                         </tr>
@@ -3265,7 +3269,7 @@
                 <div>
                     <span>ittf &nbsp;</span>
                     <span>foreach item in arr5 &nbsp;</span>
-                    <span>log 'item ', i, item &nbsp;</span>
+                    <span>info 'item ', i, item &nbsp;</span>
                     <span> &nbsp;</span>
                     <span>js &nbsp;</span>
                     <span>var i, i_len=arr5.length, item; &nbsp;</span>
@@ -3324,7 +3328,7 @@
                 <div>
                     <span>ittf &nbsp;</span>
                     <span>backeach item in arr5 &nbsp;</span>
-                    <span>log 'item ', i, item &nbsp;</span>
+                    <span>info 'item ', i, item &nbsp;</span>
                     <span>js &nbsp;</span>
                     <span>var i, i_len=arr5.length, item; &nbsp;</span>
                     <span>for (i= (i_len-1); i>-1; i--) { &nbsp;</span>
@@ -3382,7 +3386,7 @@
                 <div>
                     <span>ittf &nbsp;</span>
                     <span>each item in arr5 [this] &nbsp;</span>
-                    <span>log 'item ', i, item &nbsp;</span>
+                    <span>info 'item ', i, item &nbsp;</span>
                     <span>js &nbsp;</span>
                     <span>arr5.forEach(function(item, i, array) { &nbsp;</span>
                     <span>console.log('item ', i, item); &nbsp;</span>
@@ -3777,7 +3781,7 @@
                     <span># The second for statement is labeled "loop2" &nbsp;</span>
                     <span>if i === 1 && j === 1 &nbsp;</span>
                     <span>continue loop1 &nbsp;</span>
-                    <span>log 'i = ' + i + ', j = ' + j &nbsp;</span>
+                    <span>info 'i = ' + i + ', j = ' + j &nbsp;</span>
                 </div>
                 <h5>Relations</h5>
                 <small>
@@ -6717,7 +6721,7 @@
                                 <td>
                                     <div>wzinitialize</div>
                                     <div>
-                                        <span>log 'typeInterface.statements', this.statements &nbsp;</span>
+                                        <span>loog 'typeInterface.statements', this.statements &nbsp;</span>
                                     </div>
                                 </td>
                                 <td>
@@ -7281,7 +7285,7 @@
                                 <td>
                                     <div>wzInitialize</div>
                                     <div>
-                                        <span>log 'wizzi-js.model.class.modelState', ctx.modelState &nbsp;</span>
+                                        <span>loog 'wizzi-js.model.class.modelState', ctx.modelState &nbsp;</span>
                                     </div>
                                 </td>
                                 <td>
@@ -8040,11 +8044,13 @@
                             <tr>
                                 <td>
                                     <div>wzInitialize</div>
+                                    <div>
+                                        <span>loog 'wzInitialize', this.statements.length &nbsp;</span>
+                                    </div>
                                 </td>
                                 <td>
                                     <div>var tpi = [];</div>
                                     <div>var ss = [];</div>
-                                    <div>log 'wzInitialize', this.statements.length;</div>
                                     <div>foreach s in this.statements;</div>
                                     <div>if tpi.length > 0;</div>
                                 </td>
@@ -8192,7 +8198,7 @@
                                 <td>
                                     <div>wzInitialize</div>
                                     <div>
-                                        <span>log 'wizzi-js.model.class.modelState', ctx.modelState &nbsp;</span>
+                                        <span>loog 'wizzi-js.model.class.modelState', ctx.modelState &nbsp;</span>
                                     </div>
                                 </td>
                                 <td>
@@ -43148,7 +43154,60 @@
                 <h5>Description</h5>
                 <div>
                     <span>ittf: &nbsp;</span>
-                    <span>log 'xxx', yyy, ... &nbsp;</span>
+                    <span>info 'xxx', yyy, ... &nbsp;</span>
+                    <span>js: &nbsp;</span>
+                    <span>console.log( 'xxx', yyy, ..., __filename ); &nbsp;</span>
+                    <span> &nbsp;</span>
+                </div>
+                <h5>Relations</h5>
+                <small>
+                    <table class="table table-condensed table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Cardinality</th>
+                                <th>Inherited</th>
+                                <th>Flags</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>statement</td>
+                                <td>statements</td>
+                                <td>one-to-many</td>
+                                <td>statement</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </small>
+                <table id="element_info" class="pretty-table">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Tag</th>
+                            <th>Super</th>
+                            <th>Flags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>info</b>
+                            </td>
+                            <td>info</td>
+                            <td>statement</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Description</h5>
+                <div>
+                    <span>ittf: &nbsp;</span>
+                    <span>info 'xxx', yyy, ... &nbsp;</span>
                     <span>js: &nbsp;</span>
                     <span>console.log( 'xxx', yyy, ... ); &nbsp;</span>
                     <span> &nbsp;</span>
@@ -43210,6 +43269,59 @@
                     <span>log? label xxx &nbsp;</span>
                     <span>js: &nbsp;</span>
                     <span>console.log('label', util.inspect(xxx, { depth: null } ); &nbsp;</span>
+                    <span> &nbsp;</span>
+                </div>
+                <h5>Relations</h5>
+                <small>
+                    <table class="table table-condensed table-bordered" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Cardinality</th>
+                                <th>Inherited</th>
+                                <th>Flags</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>statement</td>
+                                <td>statements</td>
+                                <td>one-to-many</td>
+                                <td>statement</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </small>
+                <table id="element_success" class="pretty-table">
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Tag</th>
+                            <th>Super</th>
+                            <th>Flags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>success</b>
+                            </td>
+                            <td>success</td>
+                            <td>statement</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Description</h5>
+                <div>
+                    <span>ittf: &nbsp;</span>
+                    <span>warn 'xxx', yyy, ... &nbsp;</span>
+                    <span>js: &nbsp;</span>
+                    <span>console.log( ... &nbsp;</span>
                     <span> &nbsp;</span>
                 </div>
                 <h5>Relations</h5>

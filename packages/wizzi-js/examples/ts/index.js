@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\ts\index.js.ittf
 */
 'use strict';
@@ -28,7 +28,7 @@ function executeExample() {
         }
         var item_1 = example_files[index_1];
         console.log('======================================================================================');
-        console.log(index_1 + 1, '/', len_1, '', 'file', item_1);
+        console.log(index_1 + 1, '/', len_1, '', 'file', item_1, __filename);
         console.log('--------------------------------------------------------------------------------------');
         execute(item_1.name, function(err, notUsed) {
             if (err) {
@@ -52,14 +52,14 @@ function executeExample() {
         var tsOutput = path.join(__dirname, 'ittf', name + '.g.ts');
         loadModel(ittfSource, getLoadModelContext({}), function(err, tsWizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'tsWizziModel', stringify(tsWizziModel, null, 2)
+            // loog 'tsWizziModel', stringify(tsWizziModel, null, 2)
             var ctx = new mocks.getGenContext();
             ts_artifact.gen(tsWizziModel, ctx, function(err, ctxout) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 console.log('ctxout', ctxout.getContent());
@@ -147,16 +147,20 @@ function executeWizziJob(wfjobDocumentUri, options) {
     options = options || {};
     options.plugins = options.plugins || [];
     options.globalContext = options.globalContext || {};
-    var jobPlugins = [
-        'wizzi-core', 
-        'wizzi-meta', 
-        'wizzi-js', 
-        'wizzi-web'
-    ];
-    var i, i_items=options.plugins, i_len=options.plugins.length, item;
-    for (i=0; i<i_len; i++) {
-        item = options.plugins[i];
-        jobPlugins.push(item);
+    var pluginsBaseFolder = null;
+    var wfBaseFolder = null;
+    var jobPlugins = [];
+    if (options.plugins) {
+        wfBaseFolder = options.wfBaseFolder;
+        pluginsBaseFolder = options.pluginsBaseFolder;
+        jobPlugins = options.plugins;
+    }
+    else {
+        jobPlugins = [
+            'wizzi-core', 
+            'wizzi-js', 
+            'wizzi-web'
+        ];
     }
     if (wizzi == null) {
         wizzi = require('wizzi');
@@ -166,7 +170,8 @@ function executeWizziJob(wfjobDocumentUri, options) {
         role: 'admin', 
         storeKind: 'filesystem', 
         config: {
-            wfBaseFolder: 'c:/my/wizzi/v5', 
+            wfBaseFolder: wfBaseFolder, 
+            pluginsBaseFolder: pluginsBaseFolder, 
             plugins: jobPlugins
          }, 
         job: {
@@ -181,7 +186,7 @@ function executeWizziJob(wfjobDocumentUri, options) {
          }
      }, function(err) {
         if (err) {
-            wizzi.printWizziJobError($name, err);
+            wizzi.printWizziJobError(wfjobDocumentUri, err);
         }
     })
 }

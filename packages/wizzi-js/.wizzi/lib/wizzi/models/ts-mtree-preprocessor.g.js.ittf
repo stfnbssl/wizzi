@@ -9,7 +9,7 @@
 			param mTree
 			param context
 
-			# log 'preprocess.mTree', mTree
+			# loog 'preprocess.mTree', mTree
 
 			var state
                 {

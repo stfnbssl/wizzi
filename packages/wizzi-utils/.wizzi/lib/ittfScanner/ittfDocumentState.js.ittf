@@ -23,7 +23,7 @@
 			set this.scanId = options.scanIdCounter
 			set this.id = 'p_' + this.scanId + '_1'
 			set this.idCounter = 2
-			# log 'wizzi-utils.IttfDocumentState', this.primaryPath, this.primaryUri
+			# loog 'wizzi-utils.IttfDocumentState', this.primaryPath, this.primaryUri
 
 		m getFragment
 			param uri

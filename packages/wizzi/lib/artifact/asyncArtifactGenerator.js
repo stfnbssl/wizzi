@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\artifact\asyncArtifactGenerator.js.ittf
 */
 'use strict';
@@ -82,7 +82,7 @@ var AsyncArtifactGenerator =
                 'InvalidArgument', '', { parameter: 'mainSourceModels', message: 'The mainSourceModels parameter must be an array. Received: ' + mainSourceModels }
             ));
         }
-        // log 'wizzi.production.AsyncArtifactGenerator.generate, modelInfos', modelInfos, 'mainSourceModels', mainSourceModels
+        // loog 'wizzi.production.AsyncArtifactGenerator.generate, modelInfos', modelInfos, 'mainSourceModels', mainSourceModels
         if (verify.isObject(generator) == false || verify.isFunction(generator.gen) == false) {
             return callback(error('The parameter "generator" must be an object and must contain the "gen" function.', 'generate', artifactInfo));
         }

@@ -27,14 +27,14 @@
 				@ models
 					{
 			
-		# log 'wizzi-factory/productionManager/state models length', this.___state.models.length
+		# loog 'wizzi-factory/productionManager/state models length', this.___state.models.length
 			
 		for var m in this.___state.models
 			var mo = this.___state.models[m]
 			var modelState = {}
 			set logState[m] = modelState
 			for var k in mo
-				# log 'wizzi-factory/productionManager/state model prop', k
+				# loog 'wizzi-factory/productionManager/state model prop', k
 				if mo.loadHistory
 					set modelState.ittfSources = mo.loadHistory.getIttfDocuments()
 
@@ -42,14 +42,14 @@
 						var idm_o = mo.loadHistory.ittfDocumentDatas[idm]
 						+ delete idm_o.mTree
 						for var idm_k in idm_o
-							# log 'wizzi-factory/productionManager/state model loadHistory ittfDocumentData prop', idm_k
+							# loog 'wizzi-factory/productionManager/state model loadHistory ittfDocumentData prop', idm_k
 							
 					# set modelState.ittfDocumentDatas = mo.loadHistory.ittfDocumentDatas
 
 					for var z in mo.loadHistory
-						# log 'wizzi-factory/productionManager/state model loadHistory prop', z
+						# loog 'wizzi-factory/productionManager/state model loadHistory prop', z
 					if mo.loadHistory.ittfSources
 						for var z in mo.loadHistory.ittfSources
-							# log 'wizzi-factory/productionManager/state model ittfSources prop', z
+							# loog 'wizzi-factory/productionManager/state model ittfSources prop', z
 
 		return logState

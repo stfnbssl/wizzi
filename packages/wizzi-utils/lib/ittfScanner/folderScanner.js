@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\folderScanner.js.ittf
 */
 'use strict';
@@ -54,7 +54,7 @@ md.scanExec = function(file, folderPath, options, callback) {
             return callback(error('999', 'scanExec', 'Parameter folderPath must be an existing folder, ' + folderPath + ' not found'));
         }
         var removeRoot = path.dirname(folderPath);
-        // log 'folderPath, removeRoot', folderPath, removeRoot
+        // loog 'folderPath, removeRoot', folderPath, removeRoot
         var baseFolder = path.basename(folderPath);
         file.getGlobbedFilesEx(path.join(folderPath, '**/*.ittf'), {
             removeRoot: removeRoot, 
@@ -62,10 +62,10 @@ md.scanExec = function(file, folderPath, options, callback) {
             ignore: path.join(folderPath, '**/node_modules/**/*.*')
          }, function(err, ittfs) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // log 'ittfs\n', JSON.stringify(ittfs, null, 2)
+            // loog 'ittfs\n', JSON.stringify(ittfs, null, 2)
             ittfGraph.createIttfDocumentGraphFrom(null, {
                 createEmpty: true, 
                 name: 'wzpackage', 
@@ -96,13 +96,13 @@ md.scanExec = function(file, folderPath, options, callback) {
                 // outside (up) of folderPath
                 root.analize(function(err, notUsed) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     // export folder infos to an mTree conformant to the
                     // 'wzpackage' schema.
                     root.toIttf(ittfDocumentGraph);
-                    // log 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                    // loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
                     return callback(null, ittfDocumentGraph);
                 })
             })

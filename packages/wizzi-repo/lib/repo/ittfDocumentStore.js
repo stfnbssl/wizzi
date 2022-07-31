@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\ittfDocumentStore.js.ittf
 */
 'use strict';
@@ -73,7 +73,7 @@ var IttfDocumentStore = (function () {
             })
         }
         
-        // log 'storeInfo', storeInfo
+        // loog 'storeInfo', storeInfo
         else if (storeInfo.storeKind === 'json') {
             this.storeImpl = new JsonDbStore();
             var that = this;

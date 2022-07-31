@@ -7,7 +7,7 @@
 		
 			set options.wizziIncludes = options.wizziIncludes || []
 
-			# log 'options.wizziIncludes', options.wizziIncludes
+			# loog 'options.wizziIncludes', options.wizziIncludes
 
 			_ async.map
 				@ options.wizziIncludes
@@ -21,7 +21,7 @@
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								if err
 									_ item.node.children.push
 										{
@@ -39,10 +39,10 @@
 								r_cb()
 					elif item.kind === 'ts'
 						if !jswizzifier
-							# log 'jswizzifier import 1'
+							# loog 'jswizzifier import 1'
 							set jswizzifier = require('../../jsparser/babel/wizzifier')
-							# log 'jswizzifier import 2'
-						# log 'jswizzifier', jswizzifier
+							# loog 'jswizzifier import 2'
+						# loog 'jswizzifier', jswizzifier
 						_ jswizzifier.getWizziTree
 							@ item.literal
 							{
@@ -51,7 +51,7 @@
 										@ sourceType 'module'
 										@ ts_or_flow 'typescript'
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								if err
 									_ item.node.children.push
 										{
@@ -71,15 +71,15 @@
 								r_cb()
 					else
 						if !jswizzifier
-							# log 'jswizzifier import 1'
+							# loog 'jswizzifier import 1'
 							set jswizzifier = require('../../jsparser/babel/wizzifier')
-							# log 'jswizzifier import 2'
-						# log 'jswizzifier', jswizzifier
+							# loog 'jswizzifier import 2'
+						# loog 'jswizzifier', jswizzifier
 						_ jswizzifier.getWizziTree
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								if err
 									_ item.node.children.push
 										{
@@ -157,7 +157,7 @@
 										$$ BAX 27/2/21 no trim !!!important _ text.trim()
                                         @ text
 								if wizziTree.swig
-									# log '++++++++++ wizziTree.swig'
+									# loog '++++++++++ wizziTree.swig'
 									_ lines.forEach
 										function 
 											param l
@@ -172,7 +172,7 @@
 											_ wizziTree.children.push(n)
 								elif 'script' === wizziTree.tag
 									var literal = lines.join('\n')
-									# log 'literal', literal, wizziTree.attribs['lang']
+									# loog 'literal', literal, wizziTree.attribs['lang']
 									_ options.wizziIncludes.push
 										{
 											@ kind wizziTree.attribs['lang'] || wizziTree.attribs['language'] || 'js'
@@ -180,7 +180,7 @@
 											@ literal literal
 								elif 'style' === wizziTree.tag
 									var literal = lines.join('\n')
-									# log 'literal', literal
+									# loog 'literal', literal
 									_ options.wizziIncludes.push
 										{
 											@ kind 'css'
@@ -218,7 +218,7 @@
 						@ onclosetag
 							function 
 								param tagname
-								# log 'onclosetag', tagname
+								# loog 'onclosetag', tagname
 								if wizziTree.parent != null
 									set wizziTree = wizziTree.parent
 								else 
@@ -296,20 +296,20 @@
 			try
 				if html && html.length > 0
                     if html.substr(0,'<html>'.length) == '<html>' || html.substr(0,'<!doctype>'.length) == '<!doctype>'
-                        # log 'html document has root tag html'
+                        # loog 'html document has root tag html'
                     else
                         # log html.substr(0,'<html>'.length), html.substr(0,'<!doctype>'.length)
                         var i1 = html.indexOf('<')
                         var i2 = html.indexOf('>')
                         if i1 > -1 && i2 > -1
                             var temp = html.substr(i1+1, i2-i1-1)
-                            # log 'wizzi-tools.htmlparser.addedWrapper.temp', temp
+                            # loog 'wizzi-tools.htmlparser.addedWrapper.temp', temp
                             if temp.toLowerCase().indexOf('!doctype') > -1
                                 set html = '<html>' + html.substr(i2+1) + '</html>'
                             else
                                 set html = '<html>' + html + '</html>'
                             set addedWrapper = true
-                            # log 'wizzi-tools.htmlparser.addedWrapper.html', html
+                            # loog 'wizzi-tools.htmlparser.addedWrapper.html', html
                     _ parser.write(html)
                     _ parser.end()
 			catch ex
@@ -320,11 +320,11 @@
 				set wizziTree = wizziTree.parent
 			if addedWrapper
 				set wizziTree.children = wizziTree.children[0].children
-			# log 'wizziTree', wizziTree
-			# log 'wizzi-tools.htmlparser.wizzify.options.embedTag,wizziTree.children.length', options.embedTag, wizziTree.children.length
+			# loog 'wizziTree', wizziTree
+			# loog 'wizzi-tools.htmlparser.wizzify.options.embedTag,wizziTree.children.length', options.embedTag, wizziTree.children.length
 			var synthax
 			if wizziTree.children.length > 1 && typeof (options.embedTag) === 'string'
-				# log 'wizzi-tools.htmlparser.wizzify.options.embedTag, wizziTree.children[0]', options.embedTag, wizziTree.children[0]
+				# loog 'wizzi-tools.htmlparser.wizzify.options.embedTag, wizziTree.children[0]', options.embedTag, wizziTree.children[0]
 				if options.embedTag === wizziTree.children[0].tag
 					set synthax = wizziTree.children[0]
 				else
@@ -366,7 +366,7 @@
         param html
         param options
         param callback
-		# log 'wizzi-tools.htmlparser.wizzify.html', html
+		# loog 'wizzi-tools.htmlparser.wizzify.html', html
 		_ parseInternal
 			@ html
 			@ options

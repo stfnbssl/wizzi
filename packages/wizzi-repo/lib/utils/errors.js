@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\utils\errors.js.ittf
 */
 'use strict';
@@ -10,7 +10,7 @@ var md = module.exports = {};
 
 function RepoCollectionError(message) {
     this.name = 'RepoCollectionError';
-    console.log('message', message);
+    console.log("[31m%s[0m", 'message', message);
     this.message = message;
     // 5/8/17 set this.stack = (new Error()).stack
 }

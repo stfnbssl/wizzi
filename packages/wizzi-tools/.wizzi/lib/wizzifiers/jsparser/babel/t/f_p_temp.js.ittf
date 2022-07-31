@@ -26,14 +26,14 @@
 			if !node.${name}.type
 				throw 'Node ${namevar} has no type: ' + JSON.stringify(node, null, 2)
 		
-			# log 'f_p_temp ${namevar} before format'
+			# loog 'f_p_temp ${namevar} before format'
 
 			_ format
 				@ p_${namevar} 
 				@ node.${name}
 				@ options
 
-			# log 'f_p_temp ${namevar} after format', p_${namevar}.children.length, p_${namevar}
+			# loog 'f_p_temp ${namevar} after format', p_${namevar}.children.length, p_${namevar}
 
             var ${namevar}_comments = extractCommentsIf(p_${namevar}, 1)
 

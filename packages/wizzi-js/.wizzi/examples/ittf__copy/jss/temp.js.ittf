@@ -3,4 +3,4 @@ module
 
 	function sayHello
         string name
-		log 'Hello', name
+		success 'Hello', name

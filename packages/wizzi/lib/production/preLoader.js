@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\preLoader.js.ittf
 */
 'use strict';
@@ -31,7 +31,7 @@ var PreLoader = (function () {
     }
     PreLoader.prototype.runGlobalModel = function(callback) {
         // loadInfo alias of ModelInfo
-        // log 'wizzi.production.preLoader.runGlobalModel.start', this.loadInfo
+        // loog 'wizzi.production.preLoader.runGlobalModel.start', this.loadInfo
         this.wizziFactory.loadModel(this.loadInfo.schema, this.loadInfo.srcFullPath(), {
             mTreeBuildupContext: {}, 
             globalContext: {}
@@ -47,13 +47,13 @@ var PreLoader = (function () {
     }
     PreLoader.prototype.runArtifactCollection = function(callback) {
         // loadInfo alias of ArtifactInfo
-        // log 'wizzi.production.preLoader.runArtifact.start.artifactInfo.name', this.loadInfo.name
+        // loog 'wizzi.production.preLoader.runArtifact.start.artifactInfo.name', this.loadInfo.name
         AsyncRunner.runFrontMatter(this.loadInfo, (err, result) => {
         
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi.production.preLoader.runArtifact.runFrontMatter.result', result
+            // loog 'wizzi.production.preLoader.runArtifact.runFrontMatter.result', result
             this.productionContext.addArtifactCollection(this.loadInfo, result)
             return callback(null, result);
         }

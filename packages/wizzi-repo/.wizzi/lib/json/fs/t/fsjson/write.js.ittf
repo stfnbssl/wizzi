@@ -11,14 +11,14 @@
 		_ this.readDocument
 			@ id
 			f_cb( f )
-				# log 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
+				# loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
 				if f === content
-					# log 'wizzi-repo.json.FsJson.writeDocument not modified', f
+					# loog 'wizzi-repo.json.FsJson.writeDocument not modified', f
 					r_cb()
 						{
 							@ code 'DOCUMENT_NOT_MODIFIED'
 						
-				# log 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
+				# loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
 				var lastModified = new Date()
 				_ that.documents.replaceOne
 					{
@@ -30,14 +30,14 @@
 					{
 						@ upsert true
 					f_cb( r )
-						# log 'wizzi-repo.json.FsJson.writeDocument', r
+						# loog 'wizzi-repo.json.FsJson.writeDocument', r
 						var modified = r.modifiedCount + r.upsertedCount
 						_ assert.equal(1, modified)
 						_ that.updateItemLastModified
 							@ id
 							@ lastModified
 							f_cb( rUpd )
-								# log 'wizzi-repo.json.FsJson.writeDocument upd', rUpd
+								# loog 'wizzi-repo.json.FsJson.writeDocument upd', rUpd
 								r_cb()
 									{
 										@ code 'DOCUMENT_WRITTEN'

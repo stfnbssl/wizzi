@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\liner.js.ittf
 */
 'use strict';
@@ -39,12 +39,12 @@ function evaluate(uri, callback) {
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             appender(mixedModel, function(err, appendedModel) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 evaluator(appendedModel, loadContext, callback)
@@ -58,7 +58,7 @@ describe("liner", function() {
         var lines = liner(file.read(path.join(__dirname, 'repo', 'data', 'liner_1.tests.ittf')), {
             sourceKey: 'f1'
          });
-        // log 'liner lines', lines
+        // loog 'liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(7);
         expect(lines[0].indent).to.be.a('number');
@@ -123,7 +123,7 @@ describe("liner", function() {
         ].join('\n'), {
             sourceKey: 'f1'
          });
-        // log 'should skip comments liner lines', lines
+        // loog 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);
         expect(lines[0].indent).to.be.a('number');
@@ -157,7 +157,7 @@ describe("liner", function() {
         ].join('\n'), {
             sourceKey: 'f1'
          });
-        // log 'should skip comments liner lines', lines
+        // loog 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);
         expect(lines[0].indent).to.be.a('number');
@@ -187,7 +187,7 @@ describe("liner", function() {
         ].join('\n'), {
             sourceKey: 'f1'
          });
-        // log 'should skip comments liner lines', lines
+        // loog 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(3);
         expect(lines[0].indent).to.be.a('number');
@@ -203,11 +203,11 @@ describe("liner", function() {
             '    node1 value1', 
             '    `my ${name}`'
         ].join('\n');
-        // log 'source', source
+        // loog 'source', source
         var lines = liner(source, {
             sourceKey: 'f1'
          });
-        // log 'should skip comments liner lines', lines
+        // loog 'should skip comments liner lines', lines
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(3);
         expect(lines[0].indent).to.be.a('number');
@@ -231,11 +231,11 @@ describe("liner", function() {
             '    node2 ' + template, 
             '    node3 value2'
         ].join('\n');
-        // log 'should escape javascript string macro delimiters with escapes.source', source
+        // loog 'should escape javascript string macro delimiters with escapes.source', source
         var lines = liner(source, {
             sourceKey: 'f1'
          });
-        // log 'should escape javascript string macro delimiters with escapes.lines', lines, 'template_expected', template_expected
+        // loog 'should escape javascript string macro delimiters with escapes.lines', lines, 'template_expected', template_expected
         expect(lines).to.be.an('array');
         expect(lines.length).to.be(4);
         expect(lines[0].indent).to.be.a('number');

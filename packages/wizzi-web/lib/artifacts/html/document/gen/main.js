@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\html\document\gen\main.js.ittf
 */
 'use strict';
@@ -40,7 +40,7 @@ md.gen = function(model, ctx, callback) {
         if (err) {
             return callback(err);
         }
-        // log 'exit', myname, 'err', err
+        // loog 'exit', myname, 'err', err
         return callback(null, ctx);
     })
 }
@@ -71,7 +71,7 @@ md.genItems = function(items, ctx, options, callback) {
 ;
 md.getGenItem = function(ctx) {
     return function(model, callback) {
-            // log 'wizzi-web.artifacts.html.main', model.wzElement
+            // loog 'wizzi-web.artifacts.html.main', model.wzElement
             
             // model.wzName is a TEXTNODE
             
@@ -81,7 +81,7 @@ md.getGenItem = function(ctx) {
             
             // var text = verify.startsWith(model.wzName, "' '") ? '&nbsp;' + model.wzName.substr(3) : model.wzName;
             
-            // log 'text', text
+            // loog 'text', text
             if (['_text','_textLF'].indexOf(model.wzElement) >= 0) {
                 var text = model.wzName;
                 if (ctx.__iscode || model.wzElement === '_textLF') {
@@ -425,7 +425,7 @@ md.stm.readyInclude = function(model, ctx, callback) {
 }
 ;
 md.stm.img = function(model, ctx, callback) {
-    // log '***** known element', model.wzElement, model.get_svg
+    // loog '***** known element', model.wzElement, model.get_svg
     // may be here because img with model.get_svg undefined
     // has no specific handler (is standard element)
     if (model.get_svg) {
@@ -442,7 +442,7 @@ md.stm.img = function(model, ctx, callback) {
 }
 ;
 md.stm.svgInclude = function(model, ctx, callback) {
-    // log '***** known element', model.wzElement, model.get_svg
+    // loog '***** known element', model.wzElement, model.get_svg
     if (model.get_svg) {
         return include_writers.writeIncludeSvg(ctx, model, function(err, notUsed) {
                 if (err) {
@@ -457,7 +457,7 @@ md.stm.svgInclude = function(model, ctx, callback) {
 }
 ;
 md.stm.jsonObjectInclude = function(model, ctx, callback) {
-    // log '***** known element', model.wzElement, model.get_json
+    // loog '***** known element', model.wzElement, model.get_json
     if (model.get_json) {
         ctx.w('<script type="application/json" id="' + model.wzName + '" >');
         include_writers.writeIncludeJson(ctx, model, function(err, notUsed) {
@@ -474,7 +474,7 @@ md.stm.jsonObjectInclude = function(model, ctx, callback) {
 }
 ;
 md.stm.jsonArrayInclude = function(model, ctx, callback) {
-    // log '***** known element', model.wzElement, model.get_json
+    // loog '***** known element', model.wzElement, model.get_json
     if (model.get_json) {
         ctx.w('<script type="application/json" id="' + model.wzName + '" >');
         include_writers.writeIncludeJson(ctx, model, function(err, notUsed) {
@@ -631,7 +631,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('<!--');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-web@0.7.10');
+        ctx.w('    package: wizzi-web@0.7.11');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         if ((!!ctx.values.isPackageDeploy) == false) {
             ctx.w('    utc time: ' + new Date().toUTCString());
@@ -680,7 +680,7 @@ function prettifyIttf(mTreeData, callback) {
             return callback(err);
         }
         itemResult.ittfPretty = pretty;
-        console.log('prettifyIttf', itemResult);
+        // loog 'prettifyIttf', itemResult
         return callback(null, itemResult);
     })
 }
@@ -730,7 +730,7 @@ var schemaIttfRootMap = {
     vtt: 'vtt'
  };
 function ittfRootFromSchema(schema) {
-    // log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+    // loog 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
     return schemaIttfRootMap[schema];
 }
 var schemaPrismLanguageMap = {
@@ -751,7 +751,7 @@ function prettifyJs(mTreeData, callback) {
     var title = mTreeData.title;
     var mTree = mTreeData.mTree;
     var item = mTreeData.ittf;
-    console.log('prettifyJs.mTreeData', mTreeData);
+    // loog 'prettifyJs.mTreeData', mTreeData
     var itemResult = {};
     var lines = [];
     if (mTreeData.ittf && mTreeData.ittf.children && mTreeData.ittf.children.length > 0) {
@@ -769,7 +769,7 @@ function prettifyBash(mTreeData, callback) {
     var title = mTreeData.title;
     var mTree = mTreeData.mTree;
     var item = mTreeData.ittf;
-    console.log('prettifyBash.mTreeData', mTreeData);
+    // loog 'prettifyBash.mTreeData', mTreeData
     var itemResult = {};
     var lines = [];
     if (mTreeData.ittf && mTreeData.ittf.children && mTreeData.ittf.children.length > 0) {
@@ -966,7 +966,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-web@0.7.10.lib.artifacts.html.document.gen.main.' + method,
+        method: 'wizzi-web@0.7.11.lib.artifacts.html.document.gen.main.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

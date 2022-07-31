@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\fs\fsmongo.js.ittf
 */
 'use strict';
@@ -44,7 +44,7 @@ var FsMongo = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.mongodb.FsMongo.getItem.r', key, r
+            // loog 'wizzi-repo.mongodb.FsMongo.getItem.r', key, r
             if (r.length == 1) {
                 return callback(null, r[0]);
             }
@@ -123,7 +123,7 @@ var FsMongo = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.mongodb.FsMongo.getItemChildren.r', parentId, r
+            // loog 'wizzi-repo.mongodb.FsMongo.getItemChildren.r', parentId, r
             return callback(null, r);
         })
         
@@ -149,7 +149,7 @@ var FsMongo = (function () {
                 'InvalidArgument', 'insertItem', { parameter: 'fsItem.kind', message: 'The fsItem.kind parameter must be a number. Received: ' + fsItem.kind }
             ));
         }
-        // log 'wizzi-repo.mongodb.FsMongo.insertItem.fsItem', fsItem
+        // loog 'wizzi-repo.mongodb.FsMongo.insertItem.fsItem', fsItem
         var basename = fsItem.basename;
         var dirname = fsItem.dirname;
         var parentId = fsItem.parentId;
@@ -166,7 +166,7 @@ var FsMongo = (function () {
                     }
                     delete r.connection
                     delete r.message
-                    // log 'wizzi-repo.mongodb.FsMongo.insertItem.insertOne.r', r
+                    // loog 'wizzi-repo.mongodb.FsMongo.insertItem.insertOne.r', r
                     assert.equal(1, r.insertedCount);
                     assert.equal(1, r.ops.length);
                     return callback(null, {
@@ -214,7 +214,7 @@ var FsMongo = (function () {
             }
             delete r_upd.connection
             delete r_upd.message
-            // log 'wizzi-repo.mongodb.FsMongo.updateItem', r_upd
+            // loog 'wizzi-repo.mongodb.FsMongo.updateItem', r_upd
             if (r_upd.result.nModified == 1) {
                 return callback(null, {
                         code: 'FSITEM_UPDATED', 
@@ -243,7 +243,7 @@ var FsMongo = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.mongodb.FsMongo.updateItemLastModified, getItemById', id, r
+            // loog 'wizzi-repo.mongodb.FsMongo.updateItemLastModified, getItemById', id, r
             if (r != null) {
                 r.lastModified = lastModified;
                 that.db.collection(FSITEMS).replaceOne({
@@ -254,7 +254,7 @@ var FsMongo = (function () {
                     }
                     delete r_upd.connection
                     delete r_upd.message
-                    // log 'wizzi-repo.mongodb.FsMongo.updateItemLastModified', r_upd
+                    // loog 'wizzi-repo.mongodb.FsMongo.updateItemLastModified', r_upd
                     if (r_upd.result.nModified == 1) {
                         return callback(null, {
                                 code: 'FSITEM_LASTMODIFIED_UPDATED', 
@@ -303,7 +303,7 @@ var FsMongo = (function () {
                     }
                     delete r.connection
                     delete r.message
-                    // log 'wizzi-repo.mongodb.FsMongo.deleteItem,r', r
+                    // loog 'wizzi-repo.mongodb.FsMongo.deleteItem,r', r
                     if (r.deletedCount == 1 && r.result.ok == 1) {
                         return callback(null, {
                                 code: 'FSITEM_DELETED', 
@@ -326,13 +326,13 @@ var FsMongo = (function () {
             }
             delete r.connection
             delete r.message
-            // log 'wizzi-repo.mongodb.FsMongo._deleteDocument.r', r
+            // loog 'wizzi-repo.mongodb.FsMongo._deleteDocument.r', r
             
-            // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
+            // loog 'wizzi-repo.mongodb.FsMongo._deleteDocument', true
             if (r.deletedCount == 1 && r.result.ok == 1) {
                 return callback(null, true);
             }
-            // log 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
+            // loog 'wizzi-repo.mongodb.FsMongo._deleteDocument', false
             else {
                 return callback(null, false);
             }
@@ -355,7 +355,7 @@ var FsMongo = (function () {
             if (err) {
                 return callback(err);
             }
-            // log 'wizzi-repo.mongodb.FsMongo.read.r', id, r
+            // loog 'wizzi-repo.mongodb.FsMongo.read.r', id, r
             if (r.length == 1) {
                 return callback(null, r[0].content);
             }
@@ -384,19 +384,19 @@ var FsMongo = (function () {
         }
         var that = this;
         this.readDocument(id, function(err, f) {
-            // log 'wizzi-repo.mongodb.FsMongo.writeDocument.readDocument.f', id, f, content === f
+            // loog 'wizzi-repo.mongodb.FsMongo.writeDocument.readDocument.f', id, f, content === f
             if (err && err.code == 'MongoRepoError') {
             }
             else {
                 
-                // log 'wizzi-repo.mongodb.FsMongo.writeDocument not modified', f
+                // loog 'wizzi-repo.mongodb.FsMongo.writeDocument not modified', f
                 if (f === content) {
                     return callback(null, {
                             code: 'DOCUMENT_NOT_MODIFIED'
                          });
                 }
             }
-            // log 'wizzi-repo.mongodb.FsMongo.writeDocument.readDocument.upsert', id, content, lastModified
+            // loog 'wizzi-repo.mongodb.FsMongo.writeDocument.readDocument.upsert', id, content, lastModified
             var lastModified = new Date();
             that.db.collection(DOCUMENTS).replaceOne({
                 _id: id
@@ -412,14 +412,14 @@ var FsMongo = (function () {
                 }
                 delete r.connection
                 delete r.message
-                // log 'wizzi-repo.mongodb.FsMongo.writeDocument.r', r
+                // loog 'wizzi-repo.mongodb.FsMongo.writeDocument.r', r
                 var modified = r.modifiedCount + r.upsertedCount;
                 assert.equal(1, modified);
                 that.updateItemLastModified(id, lastModified, function(err, rUpd) {
                     if (err) {
                         return callback(err);
                     }
-                    // log 'wizzi-repo.mongodb.FsMongo.writeDocument upd', rUpd
+                    // loog 'wizzi-repo.mongodb.FsMongo.writeDocument upd', rUpd
                     return callback(null, {
                             code: 'DOCUMENT_WRITTEN', 
                             item: r.ops[0]
@@ -430,9 +430,9 @@ var FsMongo = (function () {
     }
     FsMongo.prototype.close = function() {
         
-        // log '***** wizzi-repo.mongodb.FsMongo start closing'
+        // loog '***** wizzi-repo.mongodb.FsMongo start closing'
         
-        // log '***** wizzi-repo.mongodb.FsMongo closed'
+        // loog '***** wizzi-repo.mongodb.FsMongo closed'
         if (this.db) {
             this.db.close();
             this.db = null;

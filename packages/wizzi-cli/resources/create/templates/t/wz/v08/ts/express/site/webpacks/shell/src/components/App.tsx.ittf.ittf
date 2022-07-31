@@ -73,7 +73,7 @@ $group
                         @ variant "secondary"
                         @ onClick
                             => 
-                                log 'App button clicked'
+                                # loog 'App button clicked'
                         + {'\u00A0'}
                     < StyledAvatar
                     

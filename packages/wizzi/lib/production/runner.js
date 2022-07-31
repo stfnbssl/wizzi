@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\runner.js.ittf
 */
 'use strict';
@@ -73,7 +73,7 @@ var Runner = (function () {
         var that = this;
         log.warn('runWizziModelTypesArtifact ' + this.artifactInfo.name);
         var outputPackageFolder = this.artifactInfo.getDestinationUri();
-        // log 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
+        // loog 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
         modelInfo.getModelInfos({
             final: false
          }, function(err, modelInfos) {
@@ -112,17 +112,17 @@ var Runner = (function () {
             if (err) {
                 return callback(err);
             }
-            // log '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
+            // loog '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
             modelInfo.getArtifactGenerator(gen.generator, function(err, generator) {
                 if (err) {
                     return callback(err);
                 }
-                // log '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
+                // loog '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
                 AsyncModelLoader.loadMany(modelInfos, function(err, mainSourceModels) {
                     if (err) {
                         return callback(err);
                     }
-                    // log '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
+                    // loog '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
                     AsyncArtifactGenerator.generate(that.artifactInfo, generator, modelInfos, mainSourceModels, function(err, notUsed) {
                         if (err) {
                             return callback(err);
@@ -243,7 +243,7 @@ var Runner = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // log 'runFrontMatter.modelInfos', modelInfos.length
+                // loog 'runFrontMatter.modelInfos', modelInfos.length
                 AsyncFrontMatterLoader.loadMany(modelInfos, (err, frontMatters) => {
                 
                     if (err) {
@@ -258,7 +258,7 @@ var Runner = (function () {
             }
             )
         }
-        // log 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
+        // loog 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
         else {
             AsyncFrontMatterLoader.loadMany(this.artifactInfo.contextInfos, (err, frontMatters) => {
             

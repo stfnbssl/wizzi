@@ -66,7 +66,7 @@
 		_ this.__getVFile
 			@ options
 			f_cb( file )
-                # log '__loadMTree, this.file', that.file
+                # loog '__loadMTree, this.file', that.file
 				set options.file = file
                 if options.createEmpty
                     return
@@ -74,7 +74,7 @@
                             @ null
                             @ that
 				if verify.isObject(mTreeOrFilepathOrContent)
-					# log 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is an object'
+					# loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is an object'
 					if verify.isArray(mTreeOrFilepathOrContent.nodes) && mTreeOrFilepathOrContent.nodes.length == 1
 						_ that.loadFromNode(mTreeOrFilepathOrContent.nodes[0], mTreeOrFilepathOrContent.$params)
 					elif (mTreeOrFilepathOrContent.name || mTreeOrFilepathOrContent.n) && mTreeOrFilepathOrContent.children
@@ -92,20 +92,20 @@
 							@ that
 
 				elif verify.isNotEmpty(mTreeOrFilepathOrContent)
-					# log 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is a string'
+					# loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is a string'
 					set that.model
 						{
 							@ uri (options.fromString ? 'string://' : mTreeOrFilepathOrContent)
 							@ dirname (options.fromString ? '' : path.dirname(mTreeOrFilepathOrContent))
 			
 					if options.fromString
-						# log 'ittfDocumentGraph.__loadMTree. Loading from text string'
+						# loog 'ittfDocumentGraph.__loadMTree. Loading from text string'
 						_ asIsLoader.createFromString
 							@ mTreeOrFilepathOrContent
 							@ options
 							f_cb( asisMTree )
 								set that.content = asisMTree.content
-								# log 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+								# loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
 								_ that.loadFromNode
 									@ asisMTree.nodes[0]
 									@ asisMTree.$params
@@ -114,7 +114,7 @@
 										@ null
 										@ that
 					else
-						# log 'ittfDocumentGraph.__loadMTree. Loading from file'
+						# loog 'ittfDocumentGraph.__loadMTree. Loading from file'
 						# load from file using the vfile class
 						_ file.isFile
 							@ mTreeOrFilepathOrContent
@@ -132,7 +132,7 @@
 										@ options
 										f_cb( asisMTree )
 											set that.content = asisMTree.content
-											# log 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+											# loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
 											_ that.loadFromNode
 												@ asisMTree.nodes[0]
 												@ asisMTree.$params
@@ -147,7 +147,7 @@
 														_ path.join
 															@ that.model.dirname
 															@ that.model.seedName + '.json.ittf'
-											# log 'ittfDocumentGraph.loadFrom.ittf.model', that.model
+											# loog 'ittfDocumentGraph.loadFrom.ittf.model', that.model
 											return
 												_ callback
 													@ null
@@ -202,7 +202,7 @@
 			@ mTreeOrFilepathOrContent
 			@ options
 			f_cb( ittfDocuGraph )
-				# log 'wizzi-utils.ittfDocumentGraph.createFrom. Received ittfDocuGraph', ittfDocuGraph.name, ittfDocuGraph.value
+				# loog 'wizzi-utils.ittfDocumentGraph.createFrom. Received ittfDocuGraph', ittfDocuGraph.name, ittfDocuGraph.value
 				if options.clean
 					_ clean(ittfDocuGraph)
 				_ callback

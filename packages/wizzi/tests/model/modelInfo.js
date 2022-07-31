@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\model\modelInfo.js.ittf
 */
 'use strict';
@@ -37,7 +37,7 @@ describe("modelInfo", function() {
              }
          }, function(err, wf) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             var pman = wf.createProductionManager({
@@ -83,7 +83,7 @@ describe("modelInfo", function() {
     it("should retrieve a loadModel function", function(done) {
         mi.getLoadModel(function(err, loadModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(loadModel).to.be.a('function');
@@ -93,7 +93,7 @@ describe("modelInfo", function() {
     it("should retrieve a model transformer", function(done) {
         mi.getModelTransformer('tests/trans1', function(err, transformModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(transformModel.trans).to.be.a('function');
@@ -103,7 +103,7 @@ describe("modelInfo", function() {
     it("should retrieve an artifact generator", function(done) {
         mi.getArtifactGenerator('tests/gen1', function(err, artifactGenerator) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(artifactGenerator.gen).to.be.a('function');
@@ -113,7 +113,7 @@ describe("modelInfo", function() {
     it("should get a single source", function(done) {
         mi.getSource(function(err, source) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(source.length).to.be.a('number');
@@ -123,7 +123,7 @@ describe("modelInfo", function() {
     });
     it("should get an error trying to ges sources (not a directory)", function(done) {
         mi.getSources(function(err, sources) {
-            console.log('should get sources.sources', err, sources);
+            // loog 'should get sources.sources', err, sources
             expect(err.__is_error).to.be(true);
             expect(err.name).to.be.a('string');
             expect(err.name).to.be('InvalidOperation');
@@ -143,7 +143,7 @@ describe("modelInfo", function() {
             final: false
          }, function(err, modelInfos) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(modelInfos).to.be.an('array');
@@ -162,7 +162,7 @@ describe("modelInfo", function() {
     it("should read a JSON file", function(done) {
         mi.readJSON(path.join(__dirname, 'data', 'simple.tests.json'), function(err, json) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(json).to.be.an('object');
@@ -180,7 +180,7 @@ describe("modelInfo", function() {
     it("should check if the source exists", function(done) {
         mi.exists(function(err, exists) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(exists).to.be(true);
@@ -190,7 +190,7 @@ describe("modelInfo", function() {
     it("should check if the source is a directory", function(done) {
         mi.isDirectory(function(err, isDirectory) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(isDirectory).to.be(false);
@@ -200,7 +200,7 @@ describe("modelInfo", function() {
     it("should check if the source is a file", function(done) {
         mi.isFile(function(err, isFile) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             expect(isFile).to.be(true);

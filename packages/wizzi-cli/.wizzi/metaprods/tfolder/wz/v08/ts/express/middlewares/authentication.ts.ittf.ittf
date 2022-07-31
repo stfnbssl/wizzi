@@ -55,5 +55,5 @@ $group
                         _ app.use
                             _ auth
                                 @ authConfig
-                        log 'AuthenticationMiddleware installed. Config', authConfig
+                        success 'AuthenticationMiddleware installed. Config', authConfig
                     ${'$'}hook

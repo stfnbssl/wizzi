@@ -37,7 +37,7 @@
 				(
 					@ model
 					f_cb( notUsed )
-						# log 'exit', myname, 'err', err
+						# loog 'exit', myname, 'err', err
 						return
 							_ callback(null, ctx)
 
@@ -66,7 +66,7 @@
 
 	async/md-gen-item( )
 		if md.stm[model.wzElement]
-			# log '***** known element', model.wzElement
+			# loog '***** known element', model.wzElement
 			_ md.stm[model.wzElement]
 				@ model
 				@ ctx
@@ -89,7 +89,7 @@
 					@ callback
 
 	async/md-stm( standardElement )
-        # log '***** standard element', model.wzElement
+        # loog '***** standard element', model.wzElement
 		_ writeBeginTag
 			@ ctx
 			@ model.wzTag

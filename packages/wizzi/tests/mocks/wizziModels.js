@@ -1,13 +1,13 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\mocks\wizziModels.js.ittf
 */
 'use strict';
 var path = require('path');
 var md = module.exports = {};
 md.getModels = function(schema, mockBaseDir) {
-    console.log('wizzi.tests.wizziModels.getModels: schema, mockBaseDir', schema, mockBaseDir);
+    // loog 'wizzi.tests.wizziModels.getModels: schema, mockBaseDir', schema, mockBaseDir
     var ret = {};
     if (schema === 'wfjob') {
         var wfjob_mock1_path = path.join(mockBaseDir, 'ittf', 'mock1.wfjob.ittf');

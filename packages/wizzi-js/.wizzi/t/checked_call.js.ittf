@@ -4,5 +4,5 @@
 	var ${varName}
 		$hook
 	if ${varName} && ${varName}.__is_error
-		log '__is_error ${message}', ${varName}
+		error '__is_error ${message}', ${varName}
 		return callback(${varName})

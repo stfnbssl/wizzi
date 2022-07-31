@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziContext.js.ittf
 */
 'use strict';
@@ -221,12 +221,12 @@ var JsWizziContext = (function () {
         // divide by a million to get nano to milli
         if (typeof window === 'undefined') {
             var elapsed = process.hrtime(this.startTimer)[1] / 1000000;
-            console.log(process.hrtime(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note);
+            console.log(process.hrtime(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note, __filename);
             this.startTimer = process.hrtime();
         }
         else {
             var elapsed = window.performance.now(this.startTimer)[1] / 1000000;
-            console.log(window.performance.now(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note);
+            console.log(window.performance.now(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note, __filename);
             this.startTimer = window.performance.now();
         }
     }
@@ -253,7 +253,7 @@ var JsWizziContext = (function () {
         }
     }
     JsWizziContext.prototype.declareCallParam = function(name, value) {
-        // log 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
+        // loog 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
         this.callContext.declare(name, value);
     }
     JsWizziContext.prototype.undeclare = function(name) {
@@ -354,9 +354,9 @@ var JsWizziContext = (function () {
                 }
             }
             
-            // log 'wizzi-mtree.jsWizziContext.brickEvalContext.declaresStack', this.brickEvalContext.declaresStack
+            // loog 'wizzi-mtree.jsWizziContext.brickEvalContext.declaresStack', this.brickEvalContext.declaresStack
             
-            // log 'wizzi-mtree.jsWizziContext.brickEvalContext.valuesStack', this.brickEvalContext.valuesStack
+            // loog 'wizzi-mtree.jsWizziContext.brickEvalContext.valuesStack', this.brickEvalContext.valuesStack
             if (!ok) {
                 throw new Error('jsWizziContext.put error. Not declared: ' + name);
             }
@@ -413,9 +413,9 @@ var JsWizziContext = (function () {
                 return fn;
             }
             // return undefined
-            // log 'JsWizziContext.getValue context value not found for', name
-            // log 'JsWizziContext.getValue ittf_state ', this.ittf_state
-            // log 'JsWizziContext.getValue currentMTreeBrickKey ', this.currentMTreeBrickKey
+            // loog 'JsWizziContext.getValue context value not found for', name
+            // loog 'JsWizziContext.getValue ittf_state ', this.ittf_state
+            // loog 'JsWizziContext.getValue currentMTreeBrickKey ', this.currentMTreeBrickKey
             // _ this.dumpValues
             else {
                 throw new Error('jsWizziContext.getValue error. Not declared: ' + name);
@@ -509,7 +509,7 @@ var JsWizziContext = (function () {
         if (this.ittf_state === ittfStates.nodeContext) {
             return ;
         }
-        // log '*** => set_NodeContext'
+        // loog '*** => set_NodeContext'
         this.ittf_state = ittfStates.nodeContext;
         this.currentMTreeBrickKey = null;
         this.brickEvalContext = null;
@@ -538,7 +538,7 @@ var JsWizziContext = (function () {
         if (this.ittf_state === ittfStates.globalContext) {
             return ;
         }
-        // log '*** => set_GlobalContext'
+        // loog '*** => set_GlobalContext'
         this.ittf_state = ittfStates.globalContext;
         // via 7/8/17 set this.currentMTreeBrickKey = null
         // via 7/8/17 set this.brickEvalContext = null
@@ -561,7 +561,7 @@ var JsWizziContext = (function () {
             return this.brickEvalContext;
         }
         assert(this.brickEvalContext, 'set_MTreeBrickEvalContext brickEvalContext for key ' + brickKey + ' undefined');
-        // log '*** => set_MTreeBrickEvalContext', brickKey
+        // loog '*** => set_MTreeBrickEvalContext', brickKey
         return this.brickEvalContext;
     }
     JsWizziContext.prototype.get_currentMTreeBrickKey = function() {

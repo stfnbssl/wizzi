@@ -33,7 +33,7 @@
 								function
 									param c
 									param mapcallback
-									# log 'return analizeFragment, c.name', c.name
+									# loog 'return analizeFragment, c.name', c.name
                                     if c.commentState == 0
 										return
 											_ c.analize
@@ -94,7 +94,7 @@
 			return
 				_ callback
 
-		# log '******* analizeFragment', this.name, this.value
+		# loog '******* analizeFragment', this.name, this.value
 
 		var r = this.root()
 

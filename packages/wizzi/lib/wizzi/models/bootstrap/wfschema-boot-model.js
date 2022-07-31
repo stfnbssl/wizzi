@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\wizzi\models\bootstrap\wfschema-boot-model.js.ittf
 */
 'use strict';
@@ -312,7 +312,7 @@ var Include = (function (Node) {
         this.actualNameLower = this.actualName.toLowerCase();
         this.actualNameId = schemautil.getIdentifier(this.actualName, true);
         this.rootEntityNameId = schemautil.getIdentifier(this.rootEntityName, true);
-        console.log('wizzi.models.bootstrap.wfschema.include', this.actualNameLower, this.actualNameId, this.rootEntityNameId);
+        // loog 'wizzi.models.bootstrap.wfschema.include', this.actualNameLower, this.actualNameId, this.rootEntityNameId
     }
     return Include;
 })(Node);
@@ -422,6 +422,9 @@ var Element = (function (Node) {
             return true;
         }
         if (this.includes.length > 0) {
+            return true;
+        }
+        if (schemautil.isNotEmpty(this.acceptAnyTag)) {
             return true;
         }
         return false;
@@ -594,7 +597,7 @@ var Element = (function (Node) {
     Element.prototype.getTags = function(ctx) {
         // set ctx.tagElementMapping
         // return array of element tags
-        // log 'element.getTags', this.tagName, ctx.tagElementMapping
+        // loog 'element.getTags', this.tagName, ctx.tagElementMapping
         var tagElMap = ctx.tagElementMapping;
         if (tagElMap == null) {
             ctx.tagElementMapping = tagElMap = {};
@@ -624,35 +627,6 @@ var Element = (function (Node) {
                 retval.push(tagString);
             }
         }
-        /**
-            OLD VIA
-            if (schemautil.startsWith(this.tagName, "|") || schemautil.endsWith(this.tagName, "|")) {
-                var tagString = this.tagName;
-                if (tagString != elId && typeof tagElMap[tagString] === 'undefined') {
-                    tagElMap[tagString] = elId;
-                }
-                retval.push(tagString);
-            }
-            else {
-                var ss = this.tagName.split('|');
-                var i, i_items=ss, i_len=ss.length, s;
-                for (i=0; i<i_len; i++) {
-                    s = ss[i];
-                    tagString = s;
-                    if (tagString != elId && typeof tagElMap[tagString] === 'undefined') {
-                        tagElMap[tagString] = elId;
-                    }
-                    retval.push(tagString);
-                    if (s.indexOf("-") > 0) {
-                        tagString = schemautil.replaceAll(s, '-', '');
-                        if (tagString != elId && typeof tagElMap[tagString] === 'undefined') {
-                            tagElMap[tagString] = elId;
-                        }
-                        retval.push(tagString);
-                    }
-                }
-            }
-        */
         return retval;
     }
     Element.prototype.initializeLoad = function(ctx) {
@@ -663,7 +637,7 @@ var Element = (function (Node) {
         this.initializeLoad_includes(ctx, choiceSet, typeTagSet);
         this.choiceOrdered = choiceSet.createOrdered();
         this.typeTags = typeTagSet.typeTags;
-        // log 'wizzi.models.bootstrap.this.typeTags', this.wzId, this.typeTags
+        // loog 'wizzi.models.bootstrap.this.typeTags', this.wzId, this.typeTags
     }
     Element.prototype.initializeLoad_attributes = function(ctx, choiceSet) {
         var i, i_items=this.attributes, i_len=this.attributes.length, attribute;
@@ -1061,7 +1035,7 @@ var Choice = (function () {
         this.length = test.length;
         this.char = verify.escapeQuotes(test[0]);
         this.test = verify.escapeQuotes(test);
-        // log 'wizzi.bootstrap.choice', this.length, this.char, this.test
+        // loog 'wizzi.bootstrap.choice', this.length, this.char, this.test
         this.codelines = [];
     }
     return Choice;

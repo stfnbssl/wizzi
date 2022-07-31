@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\glob\sync.js.ittf
 */
 'use strict';
@@ -30,7 +30,7 @@ var ownProp = common.ownProp;
 var childrenIgnored = common.childrenIgnored;
 var isIgnored = common.isIgnored;
 function globSync(pattern, virtFS, options) {
-    // log 'typeof (options), arguments.length', typeof (options), arguments.length
+    // loog 'typeof (options), arguments.length', typeof (options), arguments.length
     if ((typeof (options) === 'function') || (arguments.length === 4)) {
         throw new TypeError(('callback provided to sync glob\n' + 'See: https://github.com/isaacs/node-glob/issues/167'));
     }
@@ -54,7 +54,7 @@ var GlobSync = (function () {
             return this;
         }
         var n = this.minimatch.set.length;
-        // log 'pattern,this.minimatch.set', pattern, this.minimatch.set
+        // loog 'pattern,this.minimatch.set', pattern, this.minimatch.set
         this.matches = new Array(n);
         for (var i = 0; i < n; i++) {
             this._process(this.minimatch.set[i], i, false)
@@ -108,7 +108,7 @@ var GlobSync = (function () {
             }
         }
         var remain = pattern.slice(n);
-        // log 'pattern, remain', pattern, '-- / --', remain
+        // loog 'pattern, remain', pattern, '-- / --', remain
         var read;
         if (prefix === null) {
             read = '.';
@@ -127,7 +127,7 @@ var GlobSync = (function () {
             return ;
         }
         var isGlobStar = remain[0] === minimatch.GLOBSTAR;
-        // log 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
+        // loog 'read, abs, remain, isGlobStar', read, abs, remain, isGlobStar
         if (isGlobStar) {
             this._processGlobStar(prefix, read, abs, remain, index, inGlobStar);
         }

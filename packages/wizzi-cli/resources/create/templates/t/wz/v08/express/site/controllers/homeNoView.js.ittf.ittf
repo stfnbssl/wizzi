@@ -12,7 +12,7 @@ $group
             m initialize
                 param initValues
                 
-                log 'Entering HomeNoViewController.initialize'
+                warn 'Entering HomeNoViewController.initialize'
                 
                 _ this.router.get(`/`, this.home)
                 _ this.router.get(`/about`, this.about)

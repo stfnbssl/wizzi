@@ -18,13 +18,13 @@
 			_ doc.isFile
 				@ filePath
 				f_cb_done( r )
-					log 'doc.isFile', r
+					info 'doc.isFile', r
 					tobe_true( r )
 
 		it-async should be a folder item
 			_ doc.isFolder
 				@ folderPath
 				f_cb_done( r )
-					log 'doc.isFolder', r
+					info 'doc.isFolder', r
 					tobe_true( r )
 

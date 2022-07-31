@@ -22,7 +22,7 @@
 				@ this.globalContext
 				@ loadContext.mTreeBuildupContext
 		+
-		# log 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
+		# loog 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
 		+
 		return
 			{
@@ -55,7 +55,7 @@
 				_ Object.assign
 					@ options
 					@ this.testOptions
-		# log '*=*=*=*= temporary wizzi.wizziFactory.createProductionManager. options : ', options
+		# loog '*=*=*=*= temporary wizzi.wizziFactory.createProductionManager. options : ', options
 		var ProductionManager = getProductionManager()
 		var pman
 			new ProductionManager

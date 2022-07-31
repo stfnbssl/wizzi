@@ -32,12 +32,12 @@ wfschema regexp
 			if this.executables[name]
 				_ this.executables[name].exec(string)
 			else
-				log 'Executable not found: ', name
+				info 'Executable not found: ', name
 
 		m execTests
 			var results = []
 			for var k in this.executables
-				# log 'execTests.executable', k
+				# loog 'execTests.executable', k
 				foreach r in this.executables[k].execTests()
 					_ results.push(r)
 			return results
@@ -65,7 +65,7 @@ wfschema regexp
 		m execTests
 			var results = []
 			foreach t in this.tests
-				# log 'execTests.executableRegExp', t.wzName
+				# loog 'execTests.executableRegExp', t.wzName
 				var r = this.exec(t.wzName)
 				_ results.push
 					{
@@ -137,8 +137,8 @@ wfschema regexp
 						return false
 				return true
 			else
-				log 'res', JSON.stringify(results)
-				log 'exp', JSON.stringify(this.expected) 
+				info 'res', JSON.stringify(results)
+				info 'exp', JSON.stringify(this.expected) 
 				return JSON.stringify(results) === JSON.stringify(this.expected) 
 
 	e expected : node
@@ -146,12 +146,12 @@ wfschema regexp
 			default ,
 
 		m toValue
-			log 'expected', this
+			info 'expected', this
 			if verify.isEmpty(this.wzName)
 				if this.nodes.length === 0
 					return null
 				else
-					log 'expected is object'
+					info 'expected is object'
 					return this.nodes[0].toValue().value
 			else
 				if this.wzName === 'null'
@@ -300,7 +300,7 @@ wfschema regexp
 			foreach item in this.nodes
 				var v = item.toValue()
 				set ret.value[v.name] = v.value
-			log 'graph.toValue.ret', ret
+			info 'graph.toValue.ret', ret
 			return ret
 
 	e_tag( parenQuestionMarkEqual, (?=, node )
@@ -393,7 +393,7 @@ wfschema regexp
 			return null
 		var re = /\<(\w+\-?\w+)\>/g;
 		var match = re.exec(wzName);
-		# log 'match', re, wzName, match
+		# loog 'match', re, wzName, match
 		if match != null
 			var elName = match[1]
 			if builtInElements[elName]
@@ -403,13 +403,13 @@ wfschema regexp
 						@ builtInElements[elName]
 						@ 'builtIn'
 			var el = root.elements[elName]
-			# log 'getElement', elName, el.wzTag, el.wzName
+			# loog 'getElement', elName, el.wzTag, el.wzName
 			return
 				[
 					@ match[0]
 					@ el
 		else
-			# log 'getElement not found: ' + wzName
+			# loog 'getElement not found: ' + wzName
 			return null
 
 	m getReFromName

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -15,7 +15,7 @@ var _ = require('lodash');
 var file = require('wizzi-utils').file;
 var verify = require('wizzi-utils').verify;
 
-var pluginsManager = require('../../lib/services/pluginsManager');
+var pluginsManager = require('../../../lib/services/pluginsManager');
 
 describe("pluginsManager", function() {
     
@@ -29,7 +29,7 @@ describe("pluginsManager", function() {
             pluginsBaseFolder: __dirname
          }, function(err, pm) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", 'err', err);
                 throw new Error(err);
             }
             pluginsManagerInstance = pm;

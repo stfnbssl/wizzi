@@ -21,8 +21,8 @@
 	+
 	loadMTree( 1, first.regexp.ittf, print:dump )
 		loadModel_with_config( 1, first.regexp.ittf, save;print:json )
-			log 'wizziModel.executables', Object.keys(wizziModel.executables)
-			log 'wizziModel.elements', Object.keys(wizziModel.elements)
+			info 'wizziModel.executables', Object.keys(wizziModel.executables)
+			info 'wizziModel.elements', Object.keys(wizziModel.elements)
 			var results = wizziModel.execTests()
 			foreach r in results
 				var e = r.expected
@@ -31,11 +31,11 @@
 				delete r.isExpected
 				_ printValue('test', r, 'dashes')
 				if ie
-					log '     ', 'OK'
+					success '     ', 'OK'
 				elif ie === null
-					log '     ', 'unknown expected value'
+					warn '     ', 'unknown expected value'
 				else
-					log '     ', '*****', 'ERROR', 'expected', e
+					error '     ', '*****', 'ERROR', 'expected', e
 			if step_callback
 				_ step_callback
 					@ null

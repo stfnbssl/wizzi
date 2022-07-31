@@ -104,7 +104,7 @@
             
 			_ log.warn('runWizziModelTypesArtifact ' + this.artifactInfo.name)
 			var outputPackageFolder = this.artifactInfo.getDestinationUri()
-			# log 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
+			# loog 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
             
 			_ modelInfo.getModelInfos
 				{
@@ -147,15 +147,15 @@
 					@ final false
 				f_cb( modelInfos )
 					
-					# log '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
+					# loog '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
 					_ modelInfo.getArtifactGenerator
 						@ gen.generator
 						f_cb( generator )
-							# log '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
+							# loog '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
 							_ AsyncModelLoader.loadMany
 								@ modelInfos
 								f_cb( mainSourceModels )
-									# log '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
+									# loog '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
 									_ AsyncArtifactGenerator.generate
 										@ that.artifactInfo
 										@ generator
@@ -280,7 +280,7 @@
                     {
                         @ final false
                     a_cb( modelInfos )
-                        # log 'runFrontMatter.modelInfos', modelInfos.length
+                        # loog 'runFrontMatter.modelInfos', modelInfos.length
                         _ AsyncFrontMatterLoader.loadMany
                             @ modelInfos
                             a_cb( frontMatters )
@@ -291,7 +291,7 @@
                                             @ collection this.artifactInfo.collection
                                             @ items frontMatters
 			else 
-                # log 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
+                # loog 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
                 _ AsyncFrontMatterLoader.loadMany
                     @ this.artifactInfo.contextInfos
                     a_cb( frontMatters )

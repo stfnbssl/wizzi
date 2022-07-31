@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\mocks\misc.js.ittf
 */
 'use strict';
@@ -25,7 +25,7 @@ md.getWizziFactory = function(options, callback) {
          }
      }, function(err, wf) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", 'err', err);
             throw new Error(err);
         }
         return callback(null, wf);

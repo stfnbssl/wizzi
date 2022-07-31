@@ -8,7 +8,7 @@
 		function
 			param schema
 			param mockBaseDir
-			log 'wizzi.tests.wizziModels.getModels: schema, mockBaseDir', schema, mockBaseDir
+			# loog 'wizzi.tests.wizziModels.getModels: schema, mockBaseDir', schema, mockBaseDir
 			var ret = {}
 			
 			if schema === 'wfjob'

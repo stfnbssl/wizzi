@@ -17,7 +17,7 @@
         param name
         param nodeArray
         param parent
-        # log 'appendChilds.name', name
+        # loog 'appendChilds.name', name
 		foreach node in nodeArray
             if verify.isString(node)
                 set parent.name = node

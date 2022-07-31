@@ -3,7 +3,15 @@
 	e log : statement
 		
 		# ittf:
-		#     log 'xxx', yyy, ...
+		#     info 'xxx', yyy, ...
+		# js:
+		#     console.log( 'xxx', yyy, ..., __filename );
+		#
+
+	e info : statement
+		
+		# ittf:
+		#     info 'xxx', yyy, ...
 		# js:
 		#     console.log( 'xxx', yyy, ... );
 		#
@@ -24,6 +32,14 @@
 		#     console.log('label', util.inspect(xxx, { depth: null } );
 		#
 	
+	e success : statement
+		
+		# ittf:
+		#     warn 'xxx', yyy, ...
+		# js:
+		#     console.log( ...
+		#
+
 	e warn : statement
 		
 		# ittf:

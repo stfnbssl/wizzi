@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\runnerServer.js.ittf
 */
 'use strict';
@@ -100,7 +100,7 @@ var RunnerServer = (function () {
             name: name, 
             options: options
          })
-        console.log(chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name));
+        console.log(chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name), __filename);
     }
     RunnerServer.prototype.getWizziFactory = function(name) {
         var i, i_items=this.wizziFactoryDatas, i_len=this.wizziFactoryDatas.length, wfData;
@@ -172,7 +172,7 @@ var RunnerServer = (function () {
                 return callback(err);
             }
             that.models[modelTicket] = wizziModel;
-            console.log(chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket));
+            console.log(chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket), __filename);
             return callback(null, wizziModel);
         })
     }
@@ -216,7 +216,7 @@ var RunnerServer = (function () {
                 return callback(err);
             }
             that.models[modelTicket] = transformedModel;
-            console.log(chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket));
+            console.log(chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket), __filename);
             return callback(null, wizziModel);
         })
     }
@@ -235,7 +235,7 @@ var RunnerServer = (function () {
             );
         }
         this.apis[apiName] = apiFunction;
-        console.log(chalk.yellow('WIZZI RunnerServer. Registered Api: ' + apiName));
+        console.log(chalk.yellow('WIZZI RunnerServer. Registered Api: ' + apiName), __filename);
     }
     RunnerServer.prototype.callApi = function(apiName) {
         if (verify.isNotEmpty(apiName) === false) {

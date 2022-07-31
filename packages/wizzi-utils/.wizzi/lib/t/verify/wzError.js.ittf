@@ -38,7 +38,7 @@
 				foreach l in this.errorLines
 					_ ret.push(l)
 			if this.inner
-				# log 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
+				# loog 'wizzi-utils.verify.wzError.toString.this.inner', this.inner
 				var inner = this.inner
 				while inner
 					var stack = inner.stack

@@ -16,4 +16,4 @@
 				@ sourceFilePath
 				@ destFilePath
 				f_cb_done( r )
-					log 'copy hello from to', r
+					info 'copy hello from to', r

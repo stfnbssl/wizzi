@@ -91,10 +91,10 @@
 						if err
 							return
 								_ callback(err)
-						# log 'readFile.contents', contents
+						# loog 'readFile.contents', contents
 						if options.encoding !== null
 							if verify.isString(contents)
-								# log 'wizzi-utils.file.read.isString', path_string, content
+								# loog 'wizzi-utils.file.read.isString', path_string, content
 							set contents = iconv.decode(contents, (options.encoding || md.defaultEncoding))
 							if !md.preserveBOM && contents.charCodeAt(0) === 0xFEFF
 								set contents = contents.substring(1)
@@ -273,7 +273,7 @@
 			function 
 				param path_string
 				param options
-				# log 'wizzi-utils.file.getFiles', path_string, options
+				# loog 'wizzi-utils.file.getFiles', path_string, options
 				set options = _.assign({}, getFilesDefaults, (options || {}))
 				var result
 				if md.isDirectory(path_string)
@@ -312,7 +312,7 @@
 				param relPath
 				param options
 				var dir = fs.readdirSync(String(path_string))
-				# log 'wizzi-utils.file.appendFiles', dir
+				# loog 'wizzi-utils.file.appendFiles', dir
 				var folders = []
 				foreach item in dir
 					var filePath = path.join(path_string, item)
@@ -442,11 +442,11 @@
 					if urlRegex.test(globPatterns)
 						_ output.push(globPatterns)
 					else 
-						# log 'wizzi-utils.globPatterns, options', globPatterns, options
+						# loog 'wizzi-utils.globPatterns, options', globPatterns, options
 						var files = glob.sync(globPatterns, options)
-						# log 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
+						# loog 'wizzi-meta.file.globPatterns ', globPatterns, 'files', files.length
 						if removeRoot
-							log 'removeRoot', removeRoot
+							# loog 'removeRoot', removeRoot
 							set files =
 								_ files.map
 									function 

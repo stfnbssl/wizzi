@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\json-model.g.js.ittf
 */
 'use strict';
@@ -10,7 +10,7 @@ var verify = require('wizzi-utils').verify;
 var errors = require('wizzi-utils').errors;
 
 module.exports = function(mTree, ittfDocumentUri, request, callback) {
-    // log 'wizzi-core.wizzi.models.json-model.g', mTree
+    // loog 'wizzi-core.wizzi.models.json-model.g', mTree
     if (!(mTree.nodes && mTree.nodes.length == 1)) {
         return callback(error('Malformed mTree. Must have one root node. Found mTree.nodes: ' + mTree.nodes, {}));
     }
@@ -22,14 +22,14 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
     if (root.n === "{") {
         var json = toJsonObject(root.children);
         if (json && json.__is_error) {
-            console.log('__is_error ', json);
+            console.log("[31m%s[0m", '__is_error ', json);
             return callback(json);
         }
     }
     else {
         var json = toJsonArray(root.children);
         if (json && json.__is_error) {
-            console.log('__is_error ', json);
+            console.log("[31m%s[0m", '__is_error ', json);
             return callback(json);
         }
     }
@@ -175,7 +175,7 @@ function unquote(str) {
     return str.substr(1, str.length -2);
 }
 function error(message, node) {
-    console.log('wizzi-core.wizzi.models.json-model.g.error', node);
+    // loog 'wizzi-core.wizzi.models.json-model.g.error', node
     nodeInfo(node, message)
     return {
             __is_error: true, 

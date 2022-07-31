@@ -12,7 +12,7 @@
 			function
 				param id
 				param callback
-				log 'wizzi-repo.${source}.document.getContentsByIds', id
+				# loog 'wizzi-repo.${source}.document.getContentsByIds', id
 				_ fsCommon.readDocument
 					@ id
 					@ callback

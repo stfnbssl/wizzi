@@ -40,7 +40,7 @@
         param parent
 
 		if node.n === 'function'
-			# log 'normalizeJSTNode 2', node
+			# loog 'normalizeJSTNode 2', node
 			set node.paramNames = []
 			set node.constrainedParams = []
         set node.wzParent = parent
@@ -59,6 +59,6 @@
 					_ normalizeJSTNode(item, node)
 
 		if node.n === 'function'
-			# log 'normalizeJSTNode 2 ended'
+			# loog 'normalizeJSTNode 2 ended'
 
         return node

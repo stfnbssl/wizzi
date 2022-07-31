@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\tests\models\ittf\model_ittf.js.ittf
 */
 'use strict';
@@ -29,14 +29,14 @@ describe("model ittf", function() {
     it("should load a basic ittf ittf document", function(done) {
         loadModel(path.join(__dirname, 'ittf', 'basic.ittf.ittf'), getLoadModelContext({}), function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err);
             }
             // log? wizziModel
             var ctx = new mocks.getGenContext();
             ittf_artifact.gen(wizziModel, ctx, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err);
                 }
                 var artifactText = result.getContent();
@@ -49,14 +49,14 @@ describe("model ittf", function() {
     it("should load a mixed ittf ittf document", function(done) {
         loadModel(path.join(__dirname, 'ittf', 'mixed.ittf.ittf'), getLoadModelContext({}), function(err, wizziModel) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err);
             }
             // log? wizziModel
             var ctx = new mocks.getGenContext();
             ittf_artifact.gen(wizziModel, ctx, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err);
                 }
                 var artifactText = result.getContent();

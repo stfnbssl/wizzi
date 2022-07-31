@@ -21,14 +21,14 @@
             param options
             var formatter = format[ast.type]
             if verbose
-                log 'ast.type', ast.type
+                info 'ast.type', ast.type
             if formatter
                 return formatter(ast, options)
             throw 
                 new Error('no formatter for type: ' + ast.type)
     
 	f( stylesheet
-        # log 'stylesheet.ast', ast
+        # loog 'stylesheet.ast', ast
         var ret
             { 
                 @ tag 'css'

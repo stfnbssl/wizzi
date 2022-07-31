@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\model\modelInfo.js.ittf
 */
 'use strict';
@@ -206,7 +206,7 @@ var ModelInfo = (function () {
         if (typeof (value) === 'undefined') {
             return this.productionManagerInstance;
         }
-        // log 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
+        // loog 'wizzi.model.modelInfo.set_productionManager.globalContext', value.globalContext()
         else {
             if (verify.isObject(value) === false) {
                 throw new Error("value parameter must be an object. Instead is: " + value);
@@ -304,7 +304,7 @@ var ModelInfo = (function () {
                 error('InvalidArgument', 'getSource', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        // log 'wizzi.modelinfo.getsource', this.srcFullPath()
+        // loog 'wizzi.modelinfo.getsource', this.srcFullPath()
         var fileService = this.getFileService();
         var that = this;
         this.exists(function(err, exists) {
@@ -331,7 +331,7 @@ var ModelInfo = (function () {
                 error('InvalidArgument', 'getSources', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        // log 'wizzi.modelinfo.getsources', this.srcFullPath()
+        // loog 'wizzi.modelinfo.getsources', this.srcFullPath()
         var fileService = this.getFileService();
         var that = this;
         this.exists(function(err, exists) {
@@ -516,7 +516,7 @@ var ModelInfo = (function () {
     }
     ModelInfo.prototype.getGlobalContextForLoading = function() {
         var context = Object.assign({}, this.productionManager().globalContext() || {}, this.productionManager().productionContext.getGlobalModels(), this.productionManager().productionContext.getArtifactCollections());
-        // log 'getGlobalContextForLoading', context
+        // loog 'getGlobalContextForLoading', context
         return context;
     }
     ModelInfo.prototype.getLoadFrontMatter = function(callback) {
@@ -545,7 +545,7 @@ var ModelInfo = (function () {
         if (verify.isNotEmpty(this.schema)) {
             var loadModel = this.productionManager().getLoadModel(this.schema);
             if (loadModel && loadModel.__is_error) {
-                console.log('__is_error ', loadModel);
+                console.log("[31m%s[0m", '__is_error ', loadModel);
                 return callback(loadModel);
             }
             if (loadModel == null) {
@@ -691,7 +691,7 @@ var ModelInfo = (function () {
         }
         var modelTransformer = this.productionManager().getModelTransformer(trasformerName);
         if (modelTransformer && modelTransformer.__is_error) {
-            console.log('__is_error ', modelTransformer);
+            console.log("[31m%s[0m", '__is_error ', modelTransformer);
             return callback(modelTransformer);
         }
         if (modelTransformer == null) {
@@ -707,7 +707,7 @@ var ModelInfo = (function () {
         }
         var generator = this.productionManager().getArtifactGenerator(generatorName);
         if (generator && generator.__is_error) {
-            console.log('__is_error ', generator);
+            console.log("[31m%s[0m", '__is_error ', generator);
             return callback(generator);
         }
         if (generator == null) {

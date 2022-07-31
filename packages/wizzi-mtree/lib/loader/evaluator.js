@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
 */
 'use strict';
@@ -24,7 +24,7 @@ module.exports = function(composedMTree, loadContext, callback) {
         startTime: dateUtil.now_GMYHMS(), 
         isCompile: isCompile
      };
-    // log 'isCompile', isCompile
+    // loog 'isCompile', isCompile
     scriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
     if (isCompile) {
         scriptCoder.w('module.exports = function($, $ctx) {')
@@ -49,7 +49,7 @@ module.exports = function(composedMTree, loadContext, callback) {
     }
     productionContext.addMTreeBuildupScript(composedMTree.uri, scriptCoder)
     
-    // log 'scriptCoder.toCode()', scriptCoder.toCode()
+    // loog 'scriptCoder.toCode()', scriptCoder.toCode()
     if (isCompile) {
         if (requireFromString === null) {
             requireFromString = require('./requireFromString');

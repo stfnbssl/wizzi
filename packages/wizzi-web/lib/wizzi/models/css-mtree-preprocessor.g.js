@@ -1,11 +1,11 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\wizzi\models\css-mtree-preprocessor.g.js.ittf
 */
 'use strict';
 module.exports = function(mTree, context) {
-    // log 'wizzi-web.css.preprocess.mTree', mTree
+    // loog 'wizzi-web.css.preprocess.mTree', mTree
     var state = {
         actions: [
             
@@ -58,7 +58,7 @@ function traverse(node, state) {
     state.parent = saveParent;
 }
 function preprocessNode(node, state) {
-    // log 'css-mtree-processor preprocessNode', node.n, node.v
+    // loog 'css-mtree-processor preprocessNode', node.n, node.v
     if (node.n === 'styled') {
         if (node.children.length == 1 && node.children[0].n == "css") {
             return false;

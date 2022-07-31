@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\wfjobLoader.js.ittf
 */
 'use strict';
@@ -118,15 +118,15 @@ var WfjobLoader = (function () {
         var i, i_items=wfjobModel.productions, i_len=wfjobModel.productions.length, wfjobProductionElement;
         for (i=0; i<i_len; i++) {
             wfjobProductionElement = wfjobModel.productions[i];
-            // log 'wizzi.wfjobLoader.processWfjobModel.production', wfjobProductionElement.wzName, util.inspect(wfjobProductionElement, { depth: 2 })
+            // loog 'wizzi.wfjobLoader.processWfjobModel.production', wfjobProductionElement.wzName, util.inspect(wfjobProductionElement, { depth: 2 })
             var j, j_items=wfjobProductionElement.lines, j_len=wfjobProductionElement.lines.length, wfjobLineElement;
             for (j=0; j<j_len; j++) {
                 wfjobLineElement = wfjobProductionElement.lines[j];
-                // log 'wizzi.wfjobLoader.processWfjobModel.line', wfjobLineElement.wzName, util.inspect(wfjobLineElement, { depth: null })
+                // loog 'wizzi.wfjobLoader.processWfjobModel.line', wfjobLineElement.wzName, util.inspect(wfjobLineElement, { depth: null })
                 var k, k_items=wfjobLineElement.artifacts, k_len=wfjobLineElement.artifacts.length, wfjobArtifactElement;
                 for (k=0; k<k_len; k++) {
                     wfjobArtifactElement = wfjobLineElement.artifacts[k];
-                    // log 'wizzi.wfjobLoader.processWfjobModel.artifact', util.inspect(wfjobArtifactElement, { depth: 1 })
+                    // loog 'wizzi.wfjobLoader.processWfjobModel.artifact', util.inspect(wfjobArtifactElement, { depth: 1 })
                     
                     /**
                         * THIS IS A CODEWRITE artifact
@@ -154,13 +154,13 @@ var WfjobLoader = (function () {
                         var l, l_items=wfjobArtifactElement.modelRefs, l_len=wfjobArtifactElement.modelRefs.length, modelRef;
                         for (l=0; l<l_len; l++) {
                             modelRef = wfjobArtifactElement.modelRefs[l];
-                            // log 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
+                            // loog 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
                             var modelInfoConfig = this._createContextModelInfoConfig(wfjobModel, modelRef);
                             artifactInfoConfig.contexts.push(modelInfoConfig);
                         }
                     }
                     // This is a WIZZIMODEL artifact or WFJOB artifact
-                    // log 'WizziJob.getArtifactInfoConfigs.art', wfjobArtifactElement.wzName, wfjobLineElement.srcFolder, wfjobArtifactElement.src, wfjobArtifactElement.schema
+                    // loog 'WizziJob.getArtifactInfoConfigs.art', wfjobArtifactElement.wzName, wfjobLineElement.srcFolder, wfjobArtifactElement.src, wfjobArtifactElement.schema
                     else {
                         artifactInfoConfig = {
                             name: wfjobArtifactElement.wzName, 
@@ -194,12 +194,12 @@ var WfjobLoader = (function () {
                         var l, l_items=wfjobArtifactElement.modelRefs, l_len=wfjobArtifactElement.modelRefs.length, modelRef;
                         for (l=0; l<l_len; l++) {
                             modelRef = wfjobArtifactElement.modelRefs[l];
-                            // log 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
+                            // loog 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
                             var modelInfoConfig = this._createContextModelInfoConfig(wfjobModel, modelRef);
                             artifactInfoConfig.model.contexts.push(modelInfoConfig);
                         }
                     }
-                    // log 'WizziJob.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 1 })
+                    // loog 'WizziJob.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 1 })
                     if (wfjobArtifactElement.isWfJob) {
                         this.addPendingWfjobRequest(artifactInfoConfig);
                     }

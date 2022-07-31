@@ -65,7 +65,7 @@
 						set that.fileService = file
 						r_cb( null )
 			elif this.storeKind === 'json'
-				# log 'repoOptions', repoOptions
+				# loog 'repoOptions', repoOptions
 				_ repo.jsonfile
 					{
 						@ fsJson this.repoOptions.storeFsJson
@@ -73,7 +73,7 @@
 						set that.fileService = file
 						r_cb( null )
 			elif this.storeKind === 'browser'
-				# log 'repoOptions', repoOptions
+				# loog 'repoOptions', repoOptions
 				_ repo.browserfile
 					f_cb( file )
 						set that.fileService = file

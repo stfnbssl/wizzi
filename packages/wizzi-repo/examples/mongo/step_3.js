@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\mongo\step_3.js.ittf
 */
 'use strict';
@@ -45,12 +45,12 @@ var Mongo_Step_3 = function(step_callback) {
     heading1('start');
     Document.create(function(err, doc) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
         doc.isFile(file_1_path, function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             heading2('clear');
@@ -58,7 +58,7 @@ var Mongo_Step_3 = function(step_callback) {
             if (result) {
                 doc.deleteFile(file_1_path, function(err, result) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     printValue('deleted.file_1', result)
@@ -72,14 +72,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _clear2() {
             doc.isFile(file_2_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('isFile.file_2', result)
                 if (result) {
                     doc.deleteFile(file_2_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('deleted.file_2', result)
@@ -94,14 +94,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _clear3() {
             doc.isFile(file_3_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('isFile.file_3', result)
                 if (result) {
                     doc.deleteFile(file_3_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('deleted.file_3', result)
@@ -116,14 +116,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _clear4() {
             doc.isFile(file_4_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('isFile.file_4', result)
                 if (result) {
                     doc.deleteFile(file_4_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('deleted.file_4', result)
@@ -138,14 +138,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _clear5() {
             doc.isFile(file_5_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('isFile.file_5', result)
                 if (result) {
                     doc.deleteFile(file_5_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('deleted.file_5', result)
@@ -160,14 +160,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _clear6() {
             doc.isFile(file_6_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('isFile.file_6', result)
                 if (result) {
                     doc.deleteFile(file_6_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('deleted.file_6', result)
@@ -182,7 +182,7 @@ var Mongo_Step_3 = function(step_callback) {
         function _writeFile() {
             doc.writeFile(file_1_path, 'Hello wizzi factory\n\t from folder1/hello.js.ittf', function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 heading2('writeFile');
@@ -198,7 +198,7 @@ var Mongo_Step_3 = function(step_callback) {
             stream.write('Welcome\n');
             stream.end(function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('result', result)
@@ -208,14 +208,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _readFile() {
             doc.readFile(file_1_path, function(err, content) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 heading2('readFile');
                 printValue('content', content)
                 doc.readFile(file_7_path, function(err, content) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     printValue('content', content)
@@ -227,7 +227,7 @@ var Mongo_Step_3 = function(step_callback) {
             heading2('uploadFolder');
             doc.uploadFolder(path.join(__dirname, 'ittf', 'mongoDocument'), folder_3_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printValue('result', result)
@@ -237,20 +237,20 @@ var Mongo_Step_3 = function(step_callback) {
         function _renameFile() {
             doc.isFile(file_2_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 heading2('renameFile');
                 printValue('isFile.before.rename', result)
                 doc.renameFile(file_1_path, file_2_path, function(err, result) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     printValue('rename.result', result)
                     doc.isFile(file_2_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('isFile.after.rename', result)
@@ -262,20 +262,20 @@ var Mongo_Step_3 = function(step_callback) {
         function _copyFile() {
             doc.isFile(file_3_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 heading2('copyFile');
                 printValue('isFile.before.copy', result)
                 doc.copyFile(file_2_path, file_3_path, function(err, result) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     printValue('copy.result', result)
                     doc.isFile(file_3_path, function(err, result) {
                         if (err) {
-                            console.log('err', err);
+                            console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         printValue('isFile.after.copy', result)
@@ -288,7 +288,7 @@ var Mongo_Step_3 = function(step_callback) {
             heading2('copyFolder');
             doc.copyFolder(folder_1_path, folder_2_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 printArray('copied', result, [
@@ -300,14 +300,14 @@ var Mongo_Step_3 = function(step_callback) {
         function _getDir() {
             doc.copyFile(file_2_path, file_4_path, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 heading2('getDir');
                 printValue('copied.file_4_path', result)
                 doc.getDir(folder_1_path, function(err, result) {
                     if (err) {
-                        console.log('err', err);
+                        console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     printArray('dir', result, [
@@ -410,14 +410,14 @@ function __printObject(v, level, limit) {
         for (var k in v) {
             prop = v[k];
             if (verify.isObject(prop)) {
-                console.log(indent, k, '{');
+                console.log(indent, k, '{', __filename);
                 __printObject(prop, level+1, limit);
             }
             else if (verify.isFunction(prop)) {
-                console.log(indent, k, 'function');
+                console.log(indent, k, 'function', __filename);
             }
             else if (verify.isArray(prop)) {
-                console.log(indent, k, '[');
+                console.log(indent, k, '[', __filename);
                 var indent2 = new Array(1 + (level+1) * 4).join(' ');
                 var i, i_items=prop, i_len=prop.length, item;
                 for (i=0; i<i_len; i++) {
@@ -426,15 +426,15 @@ function __printObject(v, level, limit) {
                         __printObject(item, level+1, limit);
                     }
                     else if (verify.isFunction(item)) {
-                        console.log(indent2, 'function');
+                        console.log(indent2, 'function', __filename);
                     }
                     else {
-                        console.log(indent2, item);
+                        console.log(indent2, item, __filename);
                     }
                 }
             }
             else {
-                console.log(indent, k, prop);
+                console.log(indent, k, prop, __filename);
             }
         }
     }
@@ -462,8 +462,8 @@ function printNodes(nodes, title) {
     if (nodes.length != 1) {
         console.log('Invalid nodes array, must be of length == 1');
     }
-    // log 'nodes.mTreeBrick', nodes[0].mTreeBrick
-    // log 'nodes[0]', nodes[0]
+    // loog 'nodes.mTreeBrick', nodes[0].mTreeBrick
+    // loog 'nodes[0]', nodes[0]
     else {
         var mTreeModel = nodes[0].model || nodes[0].mTreeBrick;
         if (mTreeModel) {
@@ -514,7 +514,7 @@ function meterLine(len, indent) {
             x = formatNum(j, numW);
             sb.push(x.substr(i,1));
         }
-        console.log(indent, sb.join(''));
+        console.log(indent, sb.join(''), __filename);
         sb = [];
     }
 }

@@ -11,7 +11,7 @@
 			@ 'sample.js.ittf'
 		{
 		f_cb_throw( artifact )
-			log 'js artifact', artifact
+			info 'js artifact', artifact
 			_ legacy.htmlDocument
 				_ path.join
 					@ __dirname
@@ -19,4 +19,4 @@
 					@ 'sample.html.ittf'
 				{
 				f_cb_throw( artifact )
-					log 'html artifact', artifact
+					info 'html artifact', artifact

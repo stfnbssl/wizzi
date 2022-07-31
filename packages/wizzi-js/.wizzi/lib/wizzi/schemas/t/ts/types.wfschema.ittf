@@ -24,9 +24,9 @@
 		m wzinitialize
 			set this.extends = []
 			var temp = []
-			# log 'typeInterface.statements', this.statements
+			# loog 'typeInterface.statements', this.statements
 			foreach s in this.statements
-				# log 'typeInterface.s.wzElement', s.wzElement
+				# loog 'typeInterface.s.wzElement', s.wzElement
 				if s.wzElement === 'typeExtends'
 					_ this.extends.push
 						@ s

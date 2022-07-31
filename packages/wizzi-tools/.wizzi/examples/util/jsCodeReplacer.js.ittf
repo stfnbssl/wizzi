@@ -9,7 +9,7 @@
 			@ 'var y = 2;'
 			._ join('\n')
 
-	log 'code', code
+	info 'code', code
 	var r = cr.clean(code)
-	log 'cr.clean', r
-	log 'cr.restore', cr.restore(r.codeCleaned, r.replaceds)
+	info 'cr.clean', r
+	info 'cr.restore', cr.restore(r.codeCleaned, r.replaceds)

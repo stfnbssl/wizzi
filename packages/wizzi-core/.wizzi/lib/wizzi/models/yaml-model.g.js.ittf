@@ -16,7 +16,7 @@
 			param request
 			param callback
 
-			# log 'wizzi-core.wizzi.models.yaml-model.g', mTree
+			# loog 'wizzi-core.wizzi.models.yaml-model.g', mTree
 
 			if !(mTree.nodes && mTree.nodes.length == 1)
 				return
@@ -190,7 +190,7 @@
 	function error
 		param message
 		param node
-		log 'wizzi-core.wizzi.models.yaml-model.g.error', node
+		# loog 'wizzi-core.wizzi.models.yaml-model.g.error', node
 		_ nodeInfo
 			@ node
 			@ message

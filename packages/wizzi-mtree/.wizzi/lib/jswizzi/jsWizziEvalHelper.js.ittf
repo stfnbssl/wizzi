@@ -55,7 +55,7 @@
 			# Set the JsWizziContext state to MTreeBrickEvalContext
 		m s
 			param brickKey
-			# log 'JsWizziEvalHelper called $.s(' + brickKey +')'
+			# loog 'JsWizziEvalHelper called $.s(' + brickKey +')'
 			checked_call_return( notUsed
 				_ this.jsWizziContext.set_MTreeBrickEvalContext(brickKey)
     
@@ -64,7 +64,7 @@
 			# supershort method name
 			# Set the JsWizziContext state to NodeContext
 		m n
-			# log 'JsWizziEvalHelper called $.n()'
+			# loog 'JsWizziEvalHelper called $.n()'
 			_ this.jsWizziContext.set_NodeContext()
     
 		#
@@ -73,7 +73,7 @@
 			# Set the JsWizziContext state to GlobalContext
 		m g
 			param brickKey
-			# log 'JsWizziEvalHelper called $.g("brickKey")'
+			# loog 'JsWizziEvalHelper called $.g("brickKey")'
 			_ this.jsWizziContext.set_GlobalContext(brickKey)
     
 		#
@@ -84,7 +84,7 @@
 			param parent
 			param node
 			param line
-			# log 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
+			# loog 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
 			_ assert(parent, "wizzi-mtree.JsWizziEvalHelper error. Parent undefined in add. At line " + line)
 			set node.parent = parent
 			if typeof (parent.children) === 'undefined'
@@ -103,7 +103,7 @@
 			var ret
 			try
                 $*
-				log 'wizzi-mtree.JsWizziEvalHelper.ip templatedValue', templatedValue 
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip templatedValue', templatedValue 
                     \b , 'brickKey', brickKey
                     \b , 'type', type
                     \b , 'line', line
@@ -114,7 +114,7 @@
 				checked_call_return( notUsed
 					_ this.jsWizziContext.set_MTreeBrickEvalContext(brickKey, line)
 				
-				# log 'wizzi-mtree.JsWizziEvalHelper.2', 2
+				# loog 'wizzi-mtree.JsWizziEvalHelper.2', 2
 
                 $*
                 checked_call_return( ret, JsWizziEvalHelper.ip )
@@ -134,11 +134,11 @@
                     set ret.templatedValue = templatedValue
                     return ret
 				
-				# log 'wizzi-mtree.JsWizziEvalHelper.ip.interpolated result', ret
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip.interpolated result', ret
 				
 				# Stop 7/7/17 if hasMacro
 				set ret = remacro(ret)
-                # log 'wizzi-mtree.JsWizziEvalHelper.ret', ret
+                # loog 'wizzi-mtree.JsWizziEvalHelper.ret', ret
 				
 				if save === null
 					_ this.jsWizziContext.set_NodeContext(brickKey)
@@ -150,9 +150,9 @@
 				var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey)
 				var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
 				var mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
-				log 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', save, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext
-				log 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2})
-                log 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', save, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2})
+                # loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message
 				return 
                     $*
 					_ error

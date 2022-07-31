@@ -46,12 +46,12 @@
 			_ log.setLevel
 				@ modelInfos[0].productionManager().options.verbose
         
-		# log '+ asyncModelLoader.loadMany, modelInfos', modelInfos
+		# loog '+ asyncModelLoader.loadMany, modelInfos', modelInfos
 		_ async.map
             @ modelInfos
             @ _load_item
 			f_cb( wizziModels )
-				# log 'asyncModelLoader.loadMany, wizziModels', wizziModels
+				# loog 'asyncModelLoader.loadMany, wizziModels', wizziModels
 				r_cb( wizziModels )
 
 	wz-function load
@@ -62,7 +62,7 @@
 		_ _load_item
 			@ modelInfo
 			f_cb( wizziModel )
-				# log 'asyncModelLoader.load, wizziModel', wizziModel
+				# loog 'asyncModelLoader.load, wizziModel', wizziModel
 				r_cb( wizziModel )
 
 	#
@@ -84,7 +84,7 @@
         param masterModelInfo
         param callback
 
-		# log '+ asyncModelLoader._load_item, masterModelInfo', masterModelInfo
+		# loog '+ asyncModelLoader._load_item, masterModelInfo', masterModelInfo
         
 		_ logme
             @ 'AsyncModelLoader._load_item.masterModelInfo.config'
@@ -105,7 +105,7 @@
                     @ contextModelInfo.id
                     _ contextModelInfo.srcFullPath()
             +
-			# log '====== ++++++ masterModelInfo.contexts', masterModelInfo.contexts
+			# loog '====== ++++++ masterModelInfo.contexts', masterModelInfo.contexts
 			+
 			# step 2 - recurse contextModelInfo loading
 			_ async.map
@@ -114,7 +114,7 @@
                 function 
                     param err
                     param contextWizziModels
-					# log '+ asyncModelLoader._load_item, after load contexts.contextWizziModels', contextWizziModels
+					# loog '+ asyncModelLoader._load_item, after load contexts.contextWizziModels', contextWizziModels
                     if err
                         _ log.error
                             @ 'Error.AsyncModelLoader._load_item'
@@ -123,7 +123,7 @@
                                 { 
                                     @ depth null
                         return callback(err, null)
-                    # log '====== ++++++ contextWizziModels.length', contextWizziModels.length
+                    # loog '====== ++++++ contextWizziModels.length', contextWizziModels.length
 					# step 3 - Prepare the loading context object for the master model loading.
 					#          If one context is a model collection, prepare the model collection context
 					var 
@@ -139,7 +139,7 @@
                             set wizziModelWithModelCollection = contextWizziModel
                             set modelCollectionContextWizziModelIndex = i
                     
-					# log '====== ++++++ modelCollectionContextWizziModelIndex', modelCollectionContextWizziModelIndex
+					# loog '====== ++++++ modelCollectionContextWizziModelIndex', modelCollectionContextWizziModelIndex
 
 					if modelCollectionContextWizziModelIndex > -1
 						# Yes one of the loaded context models is a model collection.
@@ -197,13 +197,13 @@
 										@ options
 											{
 												@ isCompile masterModelInfo.isCompile
-								# log '====== ++++++ wizziModelFactory, masterModelInfo.srcFullPath()', wizziModelFactory, masterModelInfo.srcFullPath(), Object.keys(masterLoadingContext)
+								# loog '====== ++++++ wizziModelFactory, masterModelInfo.srcFullPath()', wizziModelFactory, masterModelInfo.srcFullPath(), Object.keys(masterLoadingContext)
 								_ wizziModelFactory
 									_ masterModelInfo.srcFullPath()
 									@ loadContext
 									f_cb( wizziModel ) 
 										set wizziModel.___exportName = (masterModelInfo.exportName || masterModelInfo.schema)
-										# log '====== ++++++ wizziModel.___exportName', wizziModel.___exportName
+										# loog '====== ++++++ wizziModel.___exportName', wizziModel.___exportName
 										if masterModelInfo.coll
 											set wizziModel.___coll = masterModelInfo.coll
 										_ logme
@@ -257,7 +257,7 @@
 											@ masterModelInfo.id
 											@ 'exportName'
 											@ wizziModel.___exportName
-										# log '+ asyncModelLoader._load_item.after transformations', transformedWizziModel
+										# loog '+ asyncModelLoader._load_item.after transformations', transformedWizziModel
 										return
 											_ callback(null, transformedWizziModel)
 							else 
@@ -409,7 +409,7 @@
 							{
 								@ isCompile modelInfo.isCompile
 				
-				# log 'asyncModelLoader.load_collection_item.loadContext', loadContext
+				# loog 'asyncModelLoader.load_collection_item.loadContext', loadContext
         
 				_ wizziModelFactory
 					_ modelInfo.srcFullPath()

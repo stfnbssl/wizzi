@@ -44,7 +44,7 @@
 						_ callback
 							@ errors[0]
             for var key in appends
-				# log 'wizzi-mtree.loader.appender.appends.key', key, appends[key]
+				# loog 'wizzi-mtree.loader.appender.appends.key', key, appends[key]
                 var appobj = appends[key]
                 _ utilnode.replace
                     @ appobj.appto
@@ -112,7 +112,7 @@
 						_ item.value.trim()
 						@ 0
 				if appto == null
-					log 'mixedMTreePiece.dump\n', mixedMTreePiece.toText()
+					# loog 'mixedMTreePiece.dump\n', mixedMTreePiece.toText()
 					_ errors.push
 						_ local_error
 							@ 'InvalidIttfError'

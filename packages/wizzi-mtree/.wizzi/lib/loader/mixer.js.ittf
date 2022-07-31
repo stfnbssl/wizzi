@@ -101,9 +101,9 @@
 												@ col mixerNode.col
 												@ description 'fragment not found'
 											@ true
-									log 'wizzi-mtree.includer.item.model.loadHistory.lineErrors', err.errorLines
-								# log 'wizzi-mtree.loader.mixer.err', err
-								# log 'wizzi-mtree.loader.mixer.mixerNode', mixerNode.name, mixerNode.value
+									# loog 'wizzi-mtree.includer.item.model.loadHistory.lineErrors', err.errorLines
+								# loog 'wizzi-mtree.loader.mixer.err', err
+								# loog 'wizzi-mtree.loader.mixer.mixerNode', mixerNode.name, mixerNode.value
                                 return
 									_ callback
 										@ err
@@ -198,7 +198,7 @@
 						# we are done, return the result
 						var firstSemanticNode = getFirstSemanticNode(mixedNodesAccumulation)
 						if firstSemanticNode != null
-							# log 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
+							# loog 'wizzi-mtree.mixer.firstSemanticNode' , firstSemanticNode.name, firstSemanticNode.value
 							set firstSemanticNode.__firstOfMixedNodes = true
                         return callback(null, mixedNodesAccumulation)
                     set mixedRootNode = mixedRootNodes[index]

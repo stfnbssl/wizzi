@@ -15,7 +15,7 @@
         var IttfFinder = require('../../lib/ittfGraph/ittfFinder')
         var ittfGraph = require('../../lib/ittfGraph/index')
 
-        log 'wizzi-utils.examples.ittfGraph'
+        info 'wizzi-utils.examples.ittfGraph'
         
         _ step_1
 
@@ -53,7 +53,7 @@
                     @ fromString true
                     @ clean true
                 f_cb_test( result )
-                    log 'result.findByRow(3). should be react node.', result.findByRow(3)
+                    info 'result.findByRow(3). should be react node.', result.findByRow(3)
                     _ file.write
                         _ path.join
                             @ __dirname
@@ -82,7 +82,7 @@
                                     @ result
                                     @ null
                                     @ 2
-                            log 'step_3, result', msg
+                            info 'step_3, result', msg
                             _ step_4
 
         function step_4
@@ -102,6 +102,6 @@
                                     @ result
                                     @ null
                                     @ 2
-                            log 'step_4, result', msg
+                            info 'step_4, result', msg
 
         $include ittfFinder

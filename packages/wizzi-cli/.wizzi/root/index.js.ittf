@@ -14,7 +14,7 @@
 		=>
 			const args = minimist(process.argv.slice(2))
 			
-			log 'args', args
+			# loog 'args', args
 
 			let cmd = args._[0] || 'generate'
 
@@ -24,7 +24,7 @@
 			if args.help || args.h || args['?']
 				set cmd = 'help'
 
-			log 'cmd', cmd
+			# loog 'cmd', cmd
 
 			switch cmd
 				case 'generate'

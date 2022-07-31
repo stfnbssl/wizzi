@@ -25,7 +25,7 @@
 							@ deep true
 							@ documentContent true
 
-				# log 'wizzi-repo.${source}.document.uploadFolder.documents', sourcePath, options, documents
+				# loog 'wizzi-repo.${source}.document.uploadFolder.documents', sourcePath, options, documents
 
 				var d, destFilePath, len = documents.length
 				var uploaded = []

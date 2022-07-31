@@ -4,7 +4,7 @@
 	function
 		param err
 		param ${result}
-		log 'err', err
+		error err
 		if err
 			throw
 				new Error

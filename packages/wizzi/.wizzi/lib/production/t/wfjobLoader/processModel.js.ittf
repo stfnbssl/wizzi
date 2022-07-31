@@ -49,13 +49,13 @@
                 _ this.addGlobalModelInfoConfig(globalModelInfoConfig)
 
         foreach wfjobProductionElement in wfjobModel.productions
-			# log 'wizzi.wfjobLoader.processWfjobModel.production', wfjobProductionElement.wzName, util.inspect(wfjobProductionElement, { depth: 2 })
+			# loog 'wizzi.wfjobLoader.processWfjobModel.production', wfjobProductionElement.wzName, util.inspect(wfjobProductionElement, { depth: 2 })
 						
 			foreach wfjobLineElement in wfjobProductionElement.lines
-				# log 'wizzi.wfjobLoader.processWfjobModel.line', wfjobLineElement.wzName, util.inspect(wfjobLineElement, { depth: null })
+				# loog 'wizzi.wfjobLoader.processWfjobModel.line', wfjobLineElement.wzName, util.inspect(wfjobLineElement, { depth: null })
 							
 				foreach wfjobArtifactElement in wfjobLineElement.artifacts
-					# log 'wizzi.wfjobLoader.processWfjobModel.artifact', util.inspect(wfjobArtifactElement, { depth: 1 })
+					# loog 'wizzi.wfjobLoader.processWfjobModel.artifact', util.inspect(wfjobArtifactElement, { depth: 1 })
 								
 					if verify.isEmpty(wfjobArtifactElement.src)
 						#
@@ -84,7 +84,7 @@
 
 								
 						foreach modelRef in wfjobArtifactElement.modelRefs
-							# log 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
+							# loog 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
 							var modelInfoConfig
 								_ this._createContextModelInfoConfig
 									@ wfjobModel
@@ -127,17 +127,17 @@
 										return 'Artifact info config: ' + this.name + '/' + this.model.src + '/' + this.model.schema
 
 								
-						# log 'WizziJob.getArtifactInfoConfigs.art', wfjobArtifactElement.wzName, wfjobLineElement.srcFolder, wfjobArtifactElement.src, wfjobArtifactElement.schema
+						# loog 'WizziJob.getArtifactInfoConfigs.art', wfjobArtifactElement.wzName, wfjobLineElement.srcFolder, wfjobArtifactElement.src, wfjobArtifactElement.schema
 
 						foreach modelRef in wfjobArtifactElement.modelRefs
-							# log 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
+							# loog 'WizziJob.getArtifactInfoConfigs.modelRef', modelRef.wzName, modelRef.collName, modelRef.modelCollections.length, util.inspect(modelRef, { depth: 2 })
 							var modelInfoConfig
 								_ this._createContextModelInfoConfig
 									@ wfjobModel
 									@ modelRef
 							_ artifactInfoConfig.model.contexts.push(modelInfoConfig);
 								
-					# log 'WizziJob.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 1 })
+					# loog 'WizziJob.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 1 })
 					if wfjobArtifactElement.isWfJob
 						_ this.addPendingWfjobRequest(artifactInfoConfig)
 					else

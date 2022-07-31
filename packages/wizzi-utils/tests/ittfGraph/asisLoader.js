@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\ittfGraph\asisLoader.js.ittf
 */
 'use strict';
@@ -22,7 +22,7 @@ describe("asIsLoader", function() {
     it("should load an ITTF Document as is", function(done) {
         vfile(function(err, vfileImpl) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             asIsLoader(path.join(__dirname, 'ittf', 'basic.tests.ittf'), {
@@ -30,7 +30,7 @@ describe("asIsLoader", function() {
                 file: vfileImpl
              }, function(err, result) {
                 if (err) {
-                    console.log('err', err);
+                    console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 expect(result).to.be.an('object');

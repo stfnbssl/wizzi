@@ -15,7 +15,7 @@ module wizzi.js.artifacts.module.gen.codegen.react.html
 			param attrs
 			param callback
 
-			# log 'enter in react/html *****************', tag
+			# loog 'enter in react/html *****************', tag
 			
 			if u.isGraphEnclosed(tag)
 				_ ctx.w(tag);
@@ -50,7 +50,7 @@ module wizzi.js.artifacts.module.gen.codegen.react.html
                             @ tag
                             @ text
                             f_cb()
-                                # log 'exit from react/html *****************', tag
+                                # loog 'exit from react/html *****************', tag
                                 # @ callback
                                 r_cb()
 
@@ -74,7 +74,7 @@ module wizzi.js.artifacts.module.gen.codegen.react.html
 				f_cb()
 					repeater_increment(1)
 			$append next
-                # log 'htmlelement_open.model.statements.length', model.statements.length
+                # loog 'htmlelement_open.model.statements.length', model.statements.length
                 if model.statements.length > 0
 				    _ ctx.w(">");
 				    # end of open tag

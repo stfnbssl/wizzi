@@ -132,7 +132,7 @@ $group
                     param req
                     param res
                     const uid = req.params.uid
-                    log 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
+                    # loog 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
                     _ sendSuccess
                         @ res
                         {

@@ -7,7 +7,7 @@
 		
 			set options.wizziIncludes = options.wizziIncludes || []
 
-			# log 'options.wizziIncludes', options.wizziIncludes
+			# loog 'options.wizziIncludes', options.wizziIncludes
 
 			_ async.map
 				@ options.wizziIncludes
@@ -19,7 +19,7 @@
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								if err
 									_ item.node.children.push
 										{
@@ -35,7 +35,7 @@
 							@ item.literal
 							{
 							f_cb_no_err( ittf )
-								# log 'getWizzifierIncludes.item.ittf', ittf
+								# loog 'getWizzifierIncludes.item.ittf', ittf
 								if err
 									_ item.node.children.push
 										{

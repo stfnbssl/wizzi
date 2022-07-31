@@ -40,7 +40,7 @@
                 @ '**/*.ittf'
             @ file
             f_cb_test( result )
-                log 'result', result
+                info 'result', result
 
         var result
             _ glob
@@ -52,4 +52,4 @@
                 @ file
                 {
                     @ sync true
-        log 'result', result
+        info 'result', result

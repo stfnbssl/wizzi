@@ -7,7 +7,7 @@
 			{ mtreeBrickBuildupContext
 			callback
 
-			log '${schema}${artifact} created by legacy package in ', __dirname
+			info '${schema}${artifact} created by legacy package in ', __dirname
 
 			var loadModel
 				_ ${schema}Factory.createLoadModel
@@ -36,7 +36,7 @@
 							param err
 							param result
 							if err
-								log 'wizzi.legacy.${schema}${artifact}', typeof(err), err.length, err.length && err.length > 0 && err[0]
+								error 'wizzi.legacy.${schema}${artifact}', typeof(err), err.length, err.length && err.length > 0 && err[0]
 								r_cb_wz_err( ArtifactGenerationError, generateArtifact, err )
 									@ 'Error in generation: ${schema}/${artifact}. For artifactModel: ' + ittfDocumentUri +
 										\b '. See inner error.'

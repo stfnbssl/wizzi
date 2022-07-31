@@ -9,7 +9,7 @@ $group
 	# 
 		# Elements supporting debug statements
 
-	log 'obj', obj, 'name', obj.name
+	info 'obj', obj, 'name', obj.name
 
 	log? obj
 

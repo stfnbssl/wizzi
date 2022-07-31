@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\directoryTree.js.ittf
 */
 'use strict';
@@ -48,11 +48,11 @@ function directoryTree(path) {
     catch (e) {
         return null;
     } 
-    // log 'stats', stats
+    // loog 'stats', stats
     
     // Skip if it does not match the extension regex
     
-    // log 'ext', ext
+    // loog 'ext', ext
     
     // File size in bytes
     

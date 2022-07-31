@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -66,7 +66,7 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
                     ));
                 }
             }
-            // log 'wizzi-mtree.loadMTree.loadContext', loadContext
+            // loog 'wizzi-mtree.loadMTree.loadContext', loadContext
             if (!useCache || !ittfDocumentStore) {
                 createStore(function(err, store) {
                     if (err) {

@@ -22,15 +22,15 @@ $group
 			optional
 		param testOnlyMockBaseDir
 		+
-		# log 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
+		# loog 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
 		var loadModel = this.modelLoaders[schemaName] || null
 		if loadModel == null
 			checked_call_r( factory )
 				_ this.pluginsManager.getModelFactory
 					@ schemaName
 					@ (testOnlyMockBaseDir || this.testOnlyMockBaseDir)
-			# log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
-			# log 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
+			# loog 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+			# loog 'wizzi.wizziFactory.getLoadModel.this.__loadMTree.loadHistory', this.__loadMTree.loadHistory
 			set loadModel
 				_ factory.createLoadModel
 					{
@@ -40,7 +40,7 @@ $group
 						@ errors errors
 						@ wizziFactory this
 					@ globalContext
-			# log 'getLoadModel.loadModel', loadModel
+			# loog 'getLoadModel.loadModel', loadModel
 			set this.modelLoaders[schemaName] = loadModel
 		return loadModel
 
@@ -61,7 +61,7 @@ $group
 				_ this.pluginsManager.getModelFactory
 					@ schemaName
 					@ null
-			# log 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
+			# loog 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
 			set loadModel
 				_ factory.createLoadModel
 					{
@@ -74,7 +74,7 @@ $group
 							{
 								@ loadFromMTree true
 					@ {}
-			# log 'getLoadModel.loadModel', loadModel
+			# loog 'getLoadModel.loadModel', loadModel
 			set this.modelLoaders[schemaName + 'FromMTree'] = loadModel
 		return loadModel
 	
@@ -114,7 +114,7 @@ $group
 				_ detectSchema(ittfDocumentUri)
 		check_wz_not_empty( ittfDocumentUri, loadModel )
 		+
-		# log 'wizzi.wizziFactory.loadModel: schemaName, ittfDocumentUri, testOnlyMockBaseDir', schemaName, ittfDocumentUri, testOnlyMockBaseDir
+		# loog 'wizzi.wizziFactory.loadModel: schemaName, ittfDocumentUri, testOnlyMockBaseDir', schemaName, ittfDocumentUri, testOnlyMockBaseDir
 		+
 		set loadContext = loadContext || {}
 		+
@@ -170,7 +170,7 @@ $group
 		if typeof(callback) == 'undefined'
 			set callback = loadContext
 			set loadContext = {}
-		# log 'wizzi.wizziFactory.loadModelFromMtree 2', schemaName, mTree, mTree.nodes[0].children, loadContext, callback
+		# loog 'wizzi.wizziFactory.loadModelFromMtree 2', schemaName, mTree, mTree.nodes[0].children, loadContext, callback
 		+
 		check_wz_callback( loadModelFromMtree )
 		+
@@ -266,7 +266,7 @@ $group
 		if typeof(callback) == 'undefined'
 			set callback = loadContext
 			set loadContext = {}
-		# log 'wizzi.wizziFactory.loadModelFromText', ittfContent, schema, loadContext, callback
+		# loog 'wizzi.wizziFactory.loadModelFromText', ittfContent, schema, loadContext, callback
 		+
 		check_wz_callback( loadModelFromText )
 

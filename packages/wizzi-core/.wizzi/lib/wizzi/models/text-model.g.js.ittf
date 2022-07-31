@@ -25,8 +25,8 @@
 						_ error
 							@ 'The root node of a text ittf document must be : "text". Found: ' + root.n + ' ' + root.v + ', mTree: ' + util.inspect(mTree, { depth: null } )
 
-			# log 'wizzi-core.wizzi.models.text-model root', root
-			# log 'wizzi-core.wizzi.models.text-model root.children[0].children', root.children[0].children
+			# loog 'wizzi-core.wizzi.models.text-model root', root
+			# loog 'wizzi-core.wizzi.models.text-model root.children[0].children', root.children[0].children
 
 			var sb = []
 
@@ -59,7 +59,7 @@
 		param nodes
 
 		foreach node in nodes
-			# log 'wizzi-core/wizzi/models/text-model/toText', node.n, node.v
+			# loog 'wizzi-core/wizzi/models/text-model/toText', node.n, node.v
             var n = node.n
             var v = node.v
 			var nextIndent = '    '

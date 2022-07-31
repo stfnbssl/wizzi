@@ -32,7 +32,7 @@
                 _ msg.push((' at row: ' + node.row))
                 _ msg.push((', col: ' + node.col))
         set this.message = msg.join('')
-		# log 'NodeError', this.message
+		# loog 'NodeError', this.message
         # VIA set this.node = node
 
 	#

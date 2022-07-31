@@ -1,11 +1,11 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\wizzi\models\vue-mtree-preprocessor.g.js.ittf
 */
 'use strict';
 module.exports = function(mTree, context) {
-    // log 'preprocess.mTree', mTree
+    // loog 'preprocess.mTree', mTree
     var i, i_items=mTree.nodes[0].children, i_len=mTree.nodes[0].children.length, item;
     for (i=0; i<i_len; i++) {
         item = mTree.nodes[0].children[i];
@@ -76,7 +76,7 @@ function extractRemove(model, n) {
     return ret;
 }
 function wrapChilds(model, newN) {
-    // log 'wrapChild', model.children
+    // loog 'wrapChild', model.children
     copyNodeAttrsDeep(model, newN)
     var children = model.children;
     newN.parent = model.parent;
@@ -115,19 +115,22 @@ function traverse(node, state) {
     }
 }
 function preprocessNode(node, state) {
+    
+    // loog 'preprocessNode', node.n, node.v
     if (state.isTemplate) {
-        console.log('preprocessNode', node.n, node.v);
         if (['<', '@', '.', '#', '+'].indexOf(node.n) < 0) {
             if (isVueStdAttribute(node) == false) {
+                
+                // loog 'preprocessNode 2', node.n, node.v
                 if (node.n.substr(0, 2) === 'v-' || ['router-link', 'router-view'].indexOf(node.n) > -1) {
                     node.v = node.n + ' ' + node.v;
                     node.n = '<';
-                    console.log('preprocessNode 2', node.n, node.v);
                 }
+                
+                // loog 'preprocessNode 2', node.n, node.v
                 else if (isHtmlTag(node) == false) {
                     node.v = node.n + ' ' + node.v;
                     node.n = '@';
-                    console.log('preprocessNode 2', node.n, node.v);
                 }
             }
         }

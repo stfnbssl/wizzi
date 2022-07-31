@@ -36,7 +36,7 @@
 				# or a sibling we skip it and its descendants
 				return null
             
-			# log 'util.node.findIttfCommand', cmdtype, item.name, cmdname, item.value
+			# loog 'util.node.findIttfCommand', cmdtype, item.name, cmdname, item.value
             if item.name === ('$' + cmdtype)
 				if item.value && item.value.trim() === cmdname
                     if multi 
@@ -87,7 +87,7 @@
 			param mixedNode
 
 			if typeof mixedNode === 'undefined'
-				# log 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
+				# loog 'md.findHookExtDeep.enter first', item.name, item.value, item.model.brickKey
 				# this must be the first call for a new mixed node
 				_ assert.ok(typeof(item.model.$mixerBrickKey) !== 'undefined', 'wizzi-mtree.util.node.findHookExtDeep Error. In a first call the paramater item must be the root node of a mixed document. Found: ' + item.model.$mixerBrickKey)
 				set mixedNode = item
@@ -105,10 +105,10 @@
 				if item.model.brickKey == mixedNode.model.brickKey
 					if item.name === ('$hook')
 						if item.value && item.value.trim() === hookname
-							# log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
+							# loog 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
 							return item
 						if !item.value && hookname === 'default'
-							# log 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
+							# loog 'md.findHookExtDeep.found', item.name, item.value, item.model.brickKey, 'mixedNode', mixedNode.name, mixedNode.value, mixedNode.model.brickKey
 							return item
 			else
 				if item.name === ('$hook')
@@ -137,7 +137,7 @@
             param hookname
 			param searchType
 			param startAppendNode
-			# log 'md.findHookExt.enter:', item.name, item.value, 'id', item.id, 'brickKey', item.model.brickKey
+			# loog 'md.findHookExt.enter:', item.name, item.value, 'id', item.id, 'brickKey', item.model.brickKey
 			# the startitem (the $append command) is saved
 			# and will be checked when the search descends, to avoid 
 			# searching descendants of the $append command itself.
@@ -148,7 +148,7 @@
             if !prn
                 return null
 			else
-				# log 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
+				# loog 'md.findHookExt.parent.mixin', prn.name, prn.value, 'id', prn.id, 'brickKey', prn.model.brickKey, 'mixed by', prn.model.$mixerBrickKey
 				var hook = md.findHookExtDeep(prn, hookname, searchType, startAppendNode)
 				if hook
 					return hook
@@ -176,10 +176,10 @@
         function 
             param item
 			var prn = item.parent
-            # log 'util.node.findParentMixinRoot', prn.model.$mixerBrickKey
+            # loog 'util.node.findParentMixinRoot', prn.model.$mixerBrickKey
             while prn != null && ( typeof(prn.model) === 'undefined' || typeof(prn.model.$mixerBrickKey) === 'undefined' )
                 set prn = prn.parent
-                # log 'util.node.findParentMixinRoot', prn ? prn.model.$mixerBrickKey : prn
+                # loog 'util.node.findParentMixinRoot', prn ? prn.model.$mixerBrickKey : prn
 			return prn
 
 	set md.replace
@@ -187,9 +187,9 @@
             param item
             param replacers
 			if !item.parent
-				# log 'util/node/replace/item', item
+				# loog 'util/node/replace/item', item
 				foreach repl in replacers
-					# log 'util/node/replace/repl', repl
+					# loog 'util/node/replace/repl', repl
             var nodes = item.parent.children
             set item.parent.children = []
             foreach child in nodes

@@ -108,9 +108,9 @@
                 set i = state.pos
                 set ch = input[i]
                 set state.pos++
-				# log 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
+				# loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
                 if state.cur === COULD_BE_ENDOFTEXT
-					# log '+COULD_BE_ENDOFTEXT, ch', ch
+					# loog '+COULD_BE_ENDOFTEXT, ch', ch
                     if ch === '/'
                         _ priv.ontext(state)
                         _ priv.resetStateOpenTag(state)
@@ -152,11 +152,11 @@
             param ch
             param state
             set state.col++
-			# log 'priv.loop', ch, stateText['n'+state.cur], state.pos, state.quote
+			# loog 'priv.loop', ch, stateText['n'+state.cur], state.pos, state.quote
             if ch === '\r' || ch === '\n'
-                # log '===================================rn', ch === '\r', ch === '\n'
+                # loog '===================================rn', ch === '\r', ch === '\n'
                 if ch === '\n' && state.chprev === '\r'
-                    # log '===================================n prev r'
+                    # loog '===================================n prev r'
                     return 
                 set state.line++
                 set state.col = 0
@@ -200,10 +200,10 @@
         function 
             param ch
             param state
-            # log 'specialCases.state.currenttagname', state.currenttagname
+            # loog 'specialCases.state.currenttagname', state.currenttagname
             if state.currenttagname === 'script' || state.currenttagname === 'style'
                 if isEndTag(state.currenttagname, ch, state)
-                    # log 'isEndTag', state.currenttagname
+                    # loog 'isEndTag', state.currenttagname
                     _ priv.ontext(state)
                     _ priv.resetStateOpenTag(state)
                     set state.cur = TEXT
@@ -214,7 +214,7 @@
                     set state.text = (state.text || '') + ch
                     return true
             if state.cur === TEXT && state.text
-				# log 'TEXT', ch, state.quote, state.text.length
+				# loog 'TEXT', ch, state.quote, state.text.length
             if state.cur === COMMENT && ch !== '-'
                 set state.comment = (state.comment || '') + ch
                 return true
@@ -249,12 +249,12 @@
 	set priv.doLT =
         function 
             param state
-			# log 'doLT', state.cur
+			# loog 'doLT', state.cur
             if state.cur === START
                 + ;
             elif state.cur === TEXT
                 set state.cur = COULD_BE_ENDOFTEXT
-				# log 'doLT', state.cur
+				# loog 'doLT', state.cur
                 return 
             elif state.cur === WAIT_ATTR_EQU
 				# be tolerant
@@ -294,7 +294,7 @@
 	set priv.doSlash =
         function 
             param state
-			# log 'doSlash', state.tag, state.cur
+			# loog 'doSlash', state.tag, state.cur
             if state.cur === ATTR_VALUE && state.quote == null
                 set state.attribs[state.attrname] = state.attrvalue
                 set state.attrname = state.attrvalue = null
@@ -383,7 +383,7 @@
         function 
             param ch
             param state
-			# log 'doWhite', ch, state.cur
+			# loog 'doWhite', ch, state.cur
             if state.cur === START
                 + ;
             elif state.cur === TAG_NAME
@@ -404,7 +404,7 @@
 	set priv.doLF =
         function 
             param state
-			# log 'doLf'
+			# loog 'doLf'
             if state.cur === START
                 + ;
             else 
@@ -414,7 +414,7 @@
         function 
             param ch
             param state
-			# log 'doQuote', ch, state.cur
+			# loog 'doQuote', ch, state.cur
             if state.cur === WAIT_ATTR_VALUE
                 set state.cur = ATTR_VALUE
                 set state.quote = ch
@@ -469,7 +469,7 @@
             _ state.stack.push
                 @ state.tagname
 			if state.tagname == 'script' || state.tagname == 'style'
-                # log 'onopentag', state.tagname, 'line', state.line
+                # loog 'onopentag', state.tagname, 'line', state.line
             set state.currenttagname = state.tagname
             if state.onopentag
                 _ state.onopentag
@@ -485,13 +485,13 @@
         function 
             param state
 			if state.tagname == 'script' || state.tagname == 'style'
-                # log 'onclosetag', state.tagname, 'line', state.line
+                # loog 'onclosetag', state.tagname, 'line', state.line
             if state.onclosetag 
 				if state.tagname in voidElements
 					# done already
 				else
 					_ state.stack.pop
-                    # log 'state.stack after onclosetag', state.stack
+                    # loog 'state.stack after onclosetag', state.stack
 					_ state.onclosetag
 						@ state.tagname
                     set state.currenttagname = null
@@ -539,7 +539,7 @@
             param message
             param state
             delete state.input
-            # log 'current state', state
+            # loog 'current state', state
             throw 
                 new Error(message + ' at line ' + state.line + ' col ' + state.col + ' text ' + state.text)
     
@@ -566,13 +566,13 @@
         while i < len && ch !== '>' && isWhite(ch) == false
             set tag += ch
             set ch = input[++i]
-        # log 'isOpenTag', tag, ch
+        # loog 'isOpenTag', tag, ch
 		if tag.substr(-1, 1) == '/'
             var ttag = tag.substr(0, tag.length - 1)
             var istag = tagNameRegExp.test(ttag)
             return istag
         var istag = tagNameRegExp.test(tag)
-		# log 'isOpenTag.istag', tag, istag
+		# loog 'isOpenTag.istag', tag, istag
         return istag
     
 	function isOpenComment
@@ -585,23 +585,23 @@
         param tagName
         param ch
         param state
-        # log 'isEndTag 1', ch, state.pos-1
+        # loog 'isEndTag 1', ch, state.pos-1
         if ch != '<'
             return false
         var ch2 = state.input[state.pos]
-        # log 'isEndTag 2', ch2, state.pos
+        # loog 'isEndTag 2', ch2, state.pos
         if ch2 != '/'
             return false
         for var i = 0; i < tagName.length; i++
             set ch2 = state.input[state.pos+1+i]
-            # log 'isEndTag 3', ch2, state.pos+1+i, i, tagName.length, tagName
+            # loog 'isEndTag 3', ch2, state.pos+1+i, i, tagName.length, tagName
             if isTagChar(ch2) == false
                 return false
         set ch2 = state.input[state.pos+1+tagName.length]
-        # log 'isEndTag 4', ch2
+        # loog 'isEndTag 4', ch2
         if ch2 != '>'
             return false
-        # log 'isEndTag 5', true
+        # loog 'isEndTag 5', true
         set state.pos += 2+tagName.length
         return true
 

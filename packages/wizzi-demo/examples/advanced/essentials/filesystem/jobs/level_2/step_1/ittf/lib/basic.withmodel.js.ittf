@@ -3,7 +3,7 @@ module
 
 	function sayHello
 		param name
-		log 'Hello ' + name
+		success 'Hello ' + name
 
 	$foreach item in wf.nodesOfType('wf:Package')
 		_ sayHello

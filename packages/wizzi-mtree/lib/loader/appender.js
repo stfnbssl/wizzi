@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\appender.js.ittf
 */
 'use strict';
@@ -42,7 +42,7 @@ module.exports = function(mixedMTreePiece, callback) {
         }
     }
     for (var key in appends) {
-        // log 'wizzi-mtree.loader.appender.appends.key', key, appends[key]
+        // loog 'wizzi-mtree.loader.appender.appends.key', key, appends[key]
         var appobj = appends[key];
         utilnode.replace(appobj.appto, appobj.items)
     }
@@ -89,8 +89,9 @@ function searchAppend(item, root, appends, groups, overrides, fragments, errors,
         if (appto == null) {
             appto = utilnode.findHookExt(item, item.value.trim(), 0)
             ;
+            
+            // loog 'mixedMTreePiece.dump\n', mixedMTreePiece.toText()
             if (appto == null) {
-                console.log('mixedMTreePiece.dump\n', mixedMTreePiece.toText());
                 errors.push(local_error('InvalidIttfError', 'searchAppend', 'Cannot find hook ' + (item.value || '') + ', root is ' + root.name + ' ' + (root.value || '') + ', in ' + item.model.uri + ', brickKey ' + item.model.brickKey + ', remember that $hook/$append does not work between sibling nodes.' + 'After mixup the $hook node must be a parent node or a descendant of a parent node of $append' + ', but not a sibling node.', item))
                 return ;
             }

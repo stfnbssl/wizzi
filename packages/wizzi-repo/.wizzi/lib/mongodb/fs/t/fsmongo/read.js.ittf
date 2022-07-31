@@ -9,7 +9,7 @@
 				@ _id id
 			._ toArray
 				f_cb( r )
-					# log 'wizzi-repo.mongodb.FsMongo.read.r', id, r
+					# loog 'wizzi-repo.mongodb.FsMongo.read.r', id, r
 					if r.length == 1
 						r_cb( r[0].content )
 					else

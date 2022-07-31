@@ -62,7 +62,7 @@
             param err
             param errcode
             
-			log 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null })
+			error 'wizzi-utils.errors.fatal', util.inspect(err, { depth: null })
 			throw new Error(err)
 			_ logerror
 				@ "Fatal error: " + String(err.message || err)

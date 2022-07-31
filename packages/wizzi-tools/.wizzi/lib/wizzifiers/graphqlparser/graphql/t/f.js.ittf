@@ -32,13 +32,13 @@
 				$if couldBeText
 					set options.couldBeText = true
 
-				log 'node : ${name} ----------------------------------------- parent ittf tag : ', parent.tag
+				info 'node : ${name} ----------------------------------------- parent ittf tag : ', parent.tag
 				foreach item in Object.keys(node)
 					if ['kind', 'start', 'end', 'loc'].indexOf(item) < 0
 						if verify.isNotEmpty(node[item])
-							log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+							info 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
 						else
-							log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+							info 'property', item, verify.isArray(node[item]) ? 'array' : ''
 
 				$if skip
 					var ret = parent
@@ -65,7 +65,7 @@
 					set parent.name = ret.name
 			
 				$elif skip == false
-					# log '### add ', ret.tag , 'to', parent.tag
+					# loog '### add ', ret.tag , 'to', parent.tag
 					$if retIsArray
 						foreach item in ret
 							_ parent.children.push(item)

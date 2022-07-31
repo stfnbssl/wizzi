@@ -15,7 +15,7 @@
 						@ __dirname
 						@ 'dummy.tests.ittf'
 			f_cb_no_err( result )
-				# log 'should get an IttfNotFound error.err', err
+				# loog 'should get an IttfNotFound error.err', err
 				tobe_string( err.name, IttfNotFound )
 				tobe_true( err.__is_error )
 				_ done

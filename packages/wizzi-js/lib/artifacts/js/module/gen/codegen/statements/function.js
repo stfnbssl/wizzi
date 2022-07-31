@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\statements\function.js.ittf
 */
 'use strict';
@@ -47,7 +47,7 @@ function writeComments(model, ctx) {
     return model;
 }
 function __writeComments(model, ctx, multi) {
-    // log '__writeComments-model', model
+    // loog '__writeComments-model', model
     if (multi || model.statements.length > 0) {
         ctx.w('/**');
         ctx.indent();
@@ -465,11 +465,11 @@ md.load = function(cnt) {
             )
         }
         
-        // log 'isImplicitReturn', model.wzElement, model.wzName
+        // loog 'isImplicitReturn', model.wzElement, model.wzName
         
-        // log 'function.isSingleParam', isSingleParam
+        // loog 'function.isSingleParam', isSingleParam
         
-        // log 'function.firstChildIs template', firstChildIsTemplate
+        // loog 'function.firstChildIs template', firstChildIsTemplate
         else if (u.isImplicitReturn(model)) {
             var isSingleParam = u.isSingleParamForArrowFunction(model);
             var firstChildIsTemplate = u.firstChildIs(model, ['template']);
@@ -784,13 +784,13 @@ md.load = function(cnt) {
         }
         var async_str = model.xasync ? 'async ' : '';
         /**
-            console.log('++++ arrowfunction', model.wzName, async_str, model.xasync, model.statements[0]);
-            console.log('ctx.__is_react_class', ctx.__is_react_class);
-            console.log('model.wzParent.wzElement', model.wzParent.wzElement);
-            console.log('u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue'));
-            console.log('u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model));
-            console.log('u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction'));
-            console.log("u.isImplicitReturn(model)", u.isImplicitReturn(model));
+             loog '++++ arrowfunction', model.wzName, async_str, model.xasync, model.statements[0]
+             loog 'ctx.__is_react_class', ctx.__is_react_class
+             loog 'model.wzParent.wzElement', model.wzParent.wzElement
+             loog 'u.onlyChildIs(model, "callOnValue")', u.onlyChildIs(model, 'callOnValue')
+             loog 'u.onlyChildIsHtmlElement(model)', u.onlyChildIsHtmlElement(model)
+             loog 'u.onlyChildIs(model, "arrowfunction")', u.onlyChildIs(model, 'arrowfunction')
+            console.log("u.isImplicitReturn(model)", u.isImplicitReturn(model), __filename);
         */
         if (ctx.__is_react_class && model.wzParent.wzElement == 'reactComponent') {
             var implicitReturn = u.isImplicitReturn(model);
@@ -829,11 +829,11 @@ md.load = function(cnt) {
              }, callback)
         }
         
-        // log 'isImplicitReturn', model.wzElement, model.wzName
+        // loog 'isImplicitReturn', model.wzElement, model.wzName
         
-        // log 'function.isSingleParam', isSingleParam
+        // loog 'function.isSingleParam', isSingleParam
         
-        // log 'function.firstChildIs template', firstChildIsTemplate
+        // loog 'function.firstChildIs template', firstChildIsTemplate
         else if (u.isImplicitReturn(model)) {
             var isSingleParam = u.isSingleParamForArrowFunction(model);
             var firstChildIsTemplate = u.firstChildIs(model, ['template']);
@@ -927,7 +927,7 @@ md.load = function(cnt) {
         for (i=0; i<i_len; i++) {
             p = parameters[i];
             var state = prmAnalizeParam(p);
-            // log 'wizzi-codegen.js2.function.generateParamConstraints.state', state
+            // loog 'wizzi-codegen.js2.function.generateParamConstraints.state', state
             var j, j_items=state.candidates, j_len=state.candidates.length, item;
             for (j=0; j<j_len; j++) {
                 item = state.candidates[j];
@@ -1078,7 +1078,7 @@ md.load = function(cnt) {
         return callback(null, null);
     }
     function invalidParam(methodName, name, type, hasCallback, ctx) {
-        // log 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type
+        // loog 'wizzi-codegen.js2.function.invalidParam.methodName', methodName, name, type
         if (hasCallback) {
             ctx.w("    return callback(error(");
             ctx.w("        'InvalidArgument', '" + methodName + "', { parameter: '" + name + "', message: 'The " + name + " parameter must be " + type + ". Received: ' + " + name + " }");
@@ -1114,7 +1114,7 @@ md.load = function(cnt) {
         return state;
     }
     function prmSelectAnalizer(candidate, state) {
-        // log 'wizzi-codegen.js2.paramAnalizer.prmSelectAnalizer.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmSelectAnalizer.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
         if (candidate.prm.wzElement === 'objectParam') {
             prmAnalizeObject(candidate, state);
         }
@@ -1127,7 +1127,7 @@ md.load = function(cnt) {
     }
     function prmAnalizeObject(candidate, state) {
         prmAnalizeLeaf(candidate, state);
-        // log 'wizzi-codegen.js2.paramAnalizer.prmAnalizeObject.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmAnalizeObject.candidate.name', candidate.prm.wzElement, candidate.prm.wzName
         var i, i_items=candidate.prm.params, i_len=candidate.prm.params.length, item;
         for (i=0; i<i_len; i++) {
             item = candidate.prm.params[i];
@@ -1150,7 +1150,7 @@ md.load = function(cnt) {
         }
     }
     function prmAnalizeLeaf(candidate, state) {
-        // log 'wizzi-codegen.js2.paramAnalizer.prmAnalizeLeaf.candidate.name', candidate.prm.wzElement, candidate.prm.wzName, candidate.accessPath
+        // loog 'wizzi-codegen.js2.paramAnalizer.prmAnalizeLeaf.candidate.name', candidate.prm.wzElement, candidate.prm.wzName, candidate.accessPath
         if (candidate.prm.isRequired || candidate.prm.isOptional) {
             candidate.constraints.push({
                 constraintType: (candidate.prm.isRequired ? 'required' : 'optional'), 
