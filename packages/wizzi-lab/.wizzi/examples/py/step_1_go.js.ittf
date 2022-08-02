@@ -10,6 +10,8 @@
         }
 
     example_step( &md )
+        $append imports
+            const spawn = require("child_process").spawn;
 
         _ wizzi.fsFactory
             {
@@ -34,3 +36,20 @@
                     @ 'py/module'
                     f_cb_throw( artifactText )
                         info artifactText
+                        const scriptPath
+                            _ path.join
+                                @ __dirname
+                                @ 'result'
+                                @ 'step${md.step}.py'
+                        _ fsfile.write
+                            @ scriptPath
+                            @ artifactText
+                        const pythonProcess = spawn('python',[scriptPath$*, arg1, arg2, ...*$])
+                        _ pythonProcess.stdout.on
+                            @ 'data'
+                            function
+                                param data
+                                _ printValue
+                                    @ 'python std.out'
+                                    _ data.toString
+                                    @ 'dashes'

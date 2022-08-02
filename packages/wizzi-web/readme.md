@@ -2,10 +2,13 @@
 
 A Wizzi Core Plugin for html css svg markdown
 
+
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## Features
 ### Implemented Wizzi Models
@@ -190,9 +193,11 @@ no<td>
 ## Source and generation
 wizzi-web is generated using the Wizzi factory ver 0.7
 
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>

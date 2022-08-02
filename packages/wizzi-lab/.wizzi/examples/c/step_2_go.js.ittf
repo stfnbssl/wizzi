@@ -1,0 +1,80 @@
+module
+    kind es6
+
+    $
+        var md = {
+            name: 'c_examples_step_2',
+            description: 'Second `c` Wizzi Model',
+            level: 0,
+            step: 2
+        }
+
+    example_step( &md )
+        $append imports
+            const spawn = require("child_process").spawn;
+            const exec = require('child_process').exec;
+
+        _ wizzi.fsFactory
+            {
+                @ plugins
+                    {
+                        [ items
+                            @ './index'
+                        @ pluginsBaseFolder
+                            _ path.resolve
+                                @ __dirname
+                                @ '..'
+                                @ '..'
+            f_cb_throw( wf )
+                _ wf.loadModelAndGenerateArtifact
+                    _ path.join
+                        @ __dirname
+                        @ 'step_1'
+                        @ 'first.c.ittf'
+                    {
+                        @ modelRequestContext {}
+                        @ artifactRequestContext {}
+                    @ 'c/module'
+                    f_cb_throw( artifactText )
+                        info artifactText
+                        const scriptPath
+                            _ path.join
+                                @ __dirname
+                                @ 'result'
+                                @ 'step${md.step}.c'
+                        const exePath
+                            _ path.join
+                                @ __dirname
+                                @ 'result'
+                                @ 'step${md.step}.exe'
+                        _ fsfile.write
+                            @ scriptPath
+                            @ artifactText
+                        var options
+                            {
+                                @ timeout 100
+                                @ stdio 'inherit'
+                                @ shell true
+                        _ exec
+                            @ 'C:\\MinGW\\bin\\gcc ' + scriptPath + ' -o ' + exePath
+                            =>
+                                param error
+                                param stdout
+                                param stderr
+                                info `stdout: ${stdout}`
+                                info `stderr: ${stderr}`
+                                if error
+                                    info `exec error: ${error}`
+                                else
+                                    _ exec
+                                        @ exePath
+                                        @ options
+                                        =>
+                                            param error
+                                            param stdout
+                                            param stderr
+                                            info `stdout: ${stdout}`
+                                            info `stderr: ${stderr}`
+                                            if error
+                                                info `exec error: ${error}`
+                                            return 0

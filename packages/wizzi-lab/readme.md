@@ -34,6 +34,18 @@ no<td>
 
 <table>
 <tr>
+<td>rdbms/html_docs</td>
+</tr>
+<tr>
+<td>rdbms/jsoncrud</td>
+</tr>
+<tr>
+<td>rdbms/jsonmodel</td>
+</tr>
+<tr>
+<td>rdbms/jsoncontext</td>
+</tr>
+<tr>
 <td>rdbms/jsonpersister</td>
 </tr>
 </table>
@@ -51,6 +63,12 @@ no<td>
 <td>
 
 <table>
+<tr>
+<td>raml/html_docs</td>
+</tr>
+<tr>
+<td>raml/nodejs_server</td>
+</tr>
 <tr>
 <td>raml/js_client</td>
 </tr>
@@ -84,6 +102,45 @@ no<td>
 <td>
 
 <table>
+<tr>
+<td>py/document</td>
+</tr>
+</table>
+
+</tr>
+<tr>
+<td>
+go<td>go language</td>
+<td>
+no<td>
+
+<table>
+</table>
+
+<td>
+
+<table>
+<tr>
+<td>go/package</td>
+</tr>
+</table>
+
+</tr>
+<tr>
+<td>
+c<td>c language</td>
+<td>
+no<td>
+
+<table>
+</table>
+
+<td>
+
+<table>
+<tr>
+<td>c/document</td>
+</tr>
 </table>
 
 </tr>

@@ -87,10 +87,25 @@ md.loadStatementWriters = function(mainWriter) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.xfunction. Got: ' + callback);
         }
         var name = model.wzName.trim();
-        ctx.w('def ' + name + '()');
-        mainWriter.genItems(model.statements, ctx, {
-            indent: true
-         }, callback)
+        ctx.write('def ' + name + '(');
+        var param_count = 0;
+        (function next() {
+            var param = model.params[param_count++];
+            if (!param) {
+                ctx.w('):');
+                return body();
+            }
+            if (param_count > 1) {
+                ctx.write(', ');
+            }
+            ctx.write(param.wzName);
+            next();
+        })();
+        function body() {
+            mainWriter.genItems(model.statements, ctx, {
+                indent: true
+             }, callback)
+        }
     }
     ;
     mainWriter.statementsContainer.xreturn = function(model, ctx, callback) {

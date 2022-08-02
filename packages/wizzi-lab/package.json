@@ -27,7 +27,9 @@
         "examples:rdbms": "node examples/rdbms",
         "examples:raml": "node examples/raml",
         "examples:regexp": "node examples/regexp",
-        "examples:py": "node examples/py"
+        "examples:py": "node examples/py",
+        "examples:go": "node examples/go",
+        "examples:c": "node examples/c"
     },
     "dependencies": {
         "async": "^3.2.0",

@@ -16,6 +16,8 @@ module.exports = {
         // 'rdbms',
         // 'regexp',
         'py',
+        'go',
+        'c',
     ],
     globalContext: {
         isPackageDeploy: true,

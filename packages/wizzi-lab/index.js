@@ -155,12 +155,23 @@ module.exports = {
             'rdbms', 
             'raml', 
             'regexp', 
-            'py'
+            'py', 
+            'go', 
+            'c'
         ], 
         modelTransformers: [], 
         artifactGenerators: [
+            'rdbms/html_docs', 
+            'rdbms/jsoncrud', 
+            'rdbms/jsonmodel', 
+            'rdbms/jsoncontext', 
             'rdbms/jsonpersister', 
-            'raml/js_client'
+            'raml/html_docs', 
+            'raml/nodejs_server', 
+            'raml/js_client', 
+            'py/document', 
+            'go/package', 
+            'c/document'
         ]
      }, 
     createFactoryPlugin: function(wizziPackage, options, callback) {

@@ -10,16 +10,17 @@ var myname = 'wizzi-lab.artifacts.py.module.gen.writers.index';
 var verify = require('wizzi-utils').verify;
 
 var xfunction = require('./function');
+var xclass = require('./class');
 
 var md = module.exports = {};
 md.statementsContainer = {};
 md.statementsContainer.codeline = function(model, ctx, callback) {
-    ctx.write(model.wzTag + ' ' + model.wzName);
+    ctx.w(model.wzTag + ' ' + model.wzName);
     md.genItems(model.statements, ctx, callback);
 }
 ;
 md.statementsContainer.statement = function(model, ctx, callback) {
-    ctx.write(model.wzName);
+    ctx.w('# ' + model.wzName);
     md.genItems(model.statements, ctx, callback);
 }
 ;
@@ -102,4 +103,5 @@ md.genItems = function(statements, ctx, options, callback) {
 ;
 
 xfunction.loadStatementWriters(md);
+xclass.loadStatementWriters(md);
 

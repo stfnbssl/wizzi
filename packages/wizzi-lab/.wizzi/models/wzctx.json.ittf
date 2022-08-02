@@ -13,9 +13,13 @@
             [ artifacts
                 {
                     name 'rdbms/html_docs'
+                {
 					name 'rdbms/jsoncrud'
+                {
 					name 'rdbms/jsonmodel'
+                {
 					name 'rdbms/jsoncontext'
+                {
 					name 'rdbms/jsonpersister'
         {
             name 'raml'
@@ -24,7 +28,9 @@
             [ artifacts
                 {
                     name 'raml/html_docs'
+                {
 					name 'raml/nodejs_server'
+                {
 					name 'raml/js_client'
         {
             name 'regexp'
@@ -36,3 +42,19 @@
             title 'python language'
             [ transformers
             [ artifacts            
+                {
+                    name 'py/document'           
+        {
+            name 'go'
+            title 'go language'
+            [ transformers
+            [ artifacts                        
+                {
+                    name 'go/package'
+        {
+            name 'c'
+            title 'c language'
+            [ transformers
+            [ artifacts                        
+                {
+                    name 'c/document'                    

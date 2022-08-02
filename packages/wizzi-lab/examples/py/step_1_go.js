@@ -15,6 +15,7 @@ var wzutils = require('wizzi-utils');
 var verify = require('wizzi-utils').verify;
 var vfile = require('wizzi-utils').vfile;
 var fsfile = vfile();
+const spawn = require("child_process").spawn;
 var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
@@ -41,6 +42,12 @@ var py_examples_step_1 = function(step_callback) {
                 throw new Error(err.message);
             }
             console.log(artifactText);
+            const scriptPath = path.join(__dirname, 'result', 'step1.py');
+            fsfile.write(scriptPath, artifactText)
+            const pythonProcess = spawn('python',[scriptPath]);
+            pythonProcess.stdout.on('data', function(data) {
+                printValue('python std.out', data.toString(), 'dashes')
+            })
         })
     })
 };

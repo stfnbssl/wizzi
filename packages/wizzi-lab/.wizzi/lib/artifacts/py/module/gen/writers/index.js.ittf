@@ -6,6 +6,7 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
     var verify = require('wizzi-utils').verify
 	+
 	var xfunction = require('./function')
+    var xclass = require('./class')
 	+
 	var md = module.exports = {}
 	set md.statementsContainer = {}
@@ -14,14 +15,14 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
             param model
             param ctx
             param callback
-            _ ctx.write(model.wzTag + ' ' + model.wzName)
+            _ ctx.w(model.wzTag + ' ' + model.wzName)
             _ md.genItems(model.statements, ctx, callback)    
     set md.statementsContainer.statement
         function
             param model
             param ctx
             param callback
-            _ ctx.write(model.wzName)
+            _ ctx.w('# ' + model.wzName)
             _ md.genItems(model.statements, ctx, callback)    
 	set md.gen
 		function
@@ -116,4 +117,5 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
 
 	+
 	_ xfunction.loadStatementWriters(md)
+    _ xclass.loadStatementWriters(md)
 	+
