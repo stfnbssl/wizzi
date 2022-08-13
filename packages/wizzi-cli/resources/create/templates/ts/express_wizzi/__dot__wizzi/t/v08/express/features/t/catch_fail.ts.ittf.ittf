@@ -1,0 +1,4 @@
+${'$'}group
+    ${'$'}params method
+
+    $include wz/v08/ts/express/t/site/catch_fail.ts

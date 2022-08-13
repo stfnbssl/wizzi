@@ -1,0 +1,3 @@
+${'$'}group
+
+    $include wz/v08/eslint/rc/extends.js

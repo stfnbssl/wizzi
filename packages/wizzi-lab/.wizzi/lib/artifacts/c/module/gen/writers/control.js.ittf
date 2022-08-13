@@ -1,0 +1,116 @@
+﻿v08/artifacts/statements-writer(control)
+
+	$append imports
+            
+	v08/artifacts/statement( xif
+        _ ctx.w('if (' + name + ') {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xelse
+        _ ctx.w('else {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( elif
+        _ ctx.w('else if (' + name + ') {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xfor
+        _ ctx.w('for (' + name + ') {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xwhile
+        _ ctx.w('while (' + name + ') {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xdo
+        _ ctx.w('do {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                _ ctx.w('while (' + name + ');')
+                r_cb()
+
+	v08/artifacts/statement( xswitch
+        _ ctx.w('switch (' + name + ') {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xcase
+        # _ ctx.w('case ' + name + ': {')
+        _ ctx.w('case ' + name + ':')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                # _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( xdefault
+        _ ctx.w('default: {')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.w('}')
+                r_cb()
+
+	v08/artifacts/statement( label
+        var save = ctx.forceIndent(1)
+        _ ctx.w(name + ':')
+        _ mainWriter.genItems
+            @ model.statements
+            @ ctx
+            {
+                @ indent true
+            a_cb()
+                _ ctx.forceIndent(save)
+                r_cb()                

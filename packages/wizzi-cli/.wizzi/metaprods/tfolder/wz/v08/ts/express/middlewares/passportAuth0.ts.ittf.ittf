@@ -67,3 +67,6 @@ $group
                         _ app.use
                             _ passport.session
                         success 'PassportAuth0Middleware installed'
+    ${'$'}else
+        # <--wizzi!file!exclude-->                
+

@@ -6,12 +6,20 @@
 		# In itself works as a comment line.
 		tag //
 		r statement/s
+        any codeline/statements
 
 	e codeline : statement
 
-    e c : statement
+    e c
 		is-root
+        r statement/s
         any codeline/statements
+
+	e multilinecomment : statement
+        tag /*
+
+	e plusline : statement
+        tag +
 
 	e param
 
@@ -19,8 +27,9 @@
         a rtype
             # return type
         r param/s
-        any codeline/statements
 	
     e return : statement
 
-    $$ $include c/...
+    $include c/set
+    $include c/control
+    $include c/debug

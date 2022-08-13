@@ -15,6 +15,10 @@
 			model-ref ${jobCtx.job_model}
 				export-name ${jobCtx.job_model}
 
+        any_text()
+			model-ref ${jobCtx.job_model}
+				export-name ${jobCtx.job_model}
+
         any_md()
 			model-ref ${jobCtx.job_model}
 				export-name ${jobCtx.job_model}

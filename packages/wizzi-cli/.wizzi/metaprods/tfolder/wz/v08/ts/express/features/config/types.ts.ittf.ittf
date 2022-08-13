@@ -5,8 +5,9 @@ $group
             :{ 
                 :p port
                     :number 
-                :p sessionSecret
-                    :string 
+                ${'$'}if wzCtx.Build.useSession
+                    :p sessionSecret
+                        :string 
                 :p noCache
                     :boolean
                 ${'$'}if wzCtx.Build.useCors

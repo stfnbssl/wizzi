@@ -68,7 +68,7 @@ $group
             await 
                 _ filesystemStart(config)
     
-    ${'$'}if wzCtx.Build.useWizzi
+    ${'$'}if wzCtx.Build.useWizzi && wzCtx.Build.wizzi.useRunner    
         await 
             _ wizziStart(config)
 

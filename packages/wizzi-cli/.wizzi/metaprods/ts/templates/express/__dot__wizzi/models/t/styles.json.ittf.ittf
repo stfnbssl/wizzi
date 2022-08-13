@@ -1,0 +1,21 @@
+${'$'}group
+        
+        { styles
+            usePalx true
+        
+        useStyledComponents false
+        { styledComponents
+
+        useStyledSystem false
+        { styledSystem
+
+        useAphrodite true
+        { aphrodite
+            disableImportant true
+
+        useTailwindcss false
+        { tailwindcss
+
+        useExpoStyles false
+        { expoStyles
+

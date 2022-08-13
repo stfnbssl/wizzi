@@ -11,6 +11,7 @@ ${'$'}group
         host "mongodb+srv"
         dbName "wizzi"
         dbPath "@cluster0.idlk7.mongodb.net"
+        [ schemas
     
     useFilesystem false
     { filesystem

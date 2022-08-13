@@ -58,8 +58,6 @@ md.gen = function(model, ctx, callback) {
 }
 ;
 function mainStart(model, ctx) {
-    ctx.w('#include <stdio.h>');
-    ctx.w('');
 }
 function mainFinish(model, ctx) {
 }

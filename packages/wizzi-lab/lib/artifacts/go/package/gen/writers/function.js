@@ -87,6 +87,7 @@ md.loadStatementWriters = function(mainWriter) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.xfunction. Got: ' + callback);
         }
         var name = model.wzName.trim();
+        var name = model.wzName.trim();
         ctx.write('func ' + name + '(');
         var param_count = 0;
         (function next() {
@@ -127,6 +128,7 @@ md.loadStatementWriters = function(mainWriter) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.xreturn. Got: ' + callback);
         }
+        var name = model.wzName.trim();
         var name = model.wzName.trim();
         ctx.w('return ' + name);
         return callback(null);

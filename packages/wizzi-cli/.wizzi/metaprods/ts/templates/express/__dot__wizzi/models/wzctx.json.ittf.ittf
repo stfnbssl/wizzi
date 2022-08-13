@@ -1,249 +1,89 @@
 {
+    ${'$'}
+        var md = {
+            useSsl: false,
+            host: 'localhost',
+            port: 3900,
+            apiVersion: 'v1'
+        };
+        md.http = md.useSsl ? 'https' : 'http';
+    ---
     $include cli/v08/wzctx-info.json
-
-    $
-        var useSsl = false;
-        var http = useSsl ? 'https' : 'http';
-
-    $$ type "module"
-
+    ---
     { App
-        siteUrl "${http}://localhost"
-        port 5000
-        baseUrl "${http}://localhost:5000"
+        siteUrl "${'$'}{md.http}://localhost"
+        port ${'$'}{md.port}
+        baseUrl "${'$'}{md.http}://localhost:${'$'}{md.port}"
         [ Components
-    
+
+    ---
+    { Styles
+        vpadRatio 0.25
+        bodyFontSize "12px"
+        bodyLineHeight 1.3165
+
+    ---
     { Build
-        useRegeneratorRuntime true
-        { utils
-            useEscapeRegexp true
-            useNullThrows true
-            useLodash true
-            useStringifySafe true
-            useParseUrl true
-            useEs6Error true
-            useJsCookie true
-            useQueryString true
-            useSanitizeHtml true
-            useDateFns true
-            useFetchPonyfill true
-            useNanoId true
-        
-        useTypescript true
-        { typescript
 
-        useExpress true
-        { express
-            useSsl ${useSsl ? 'true' : 'false'}
-            useErrors false
-            useStaticFiles true
-            { staticFiles
-                basePath "__dirname, '..', '..', '..'"
+        ---
+        isClientServer true
+        useEnvCmd true
 
-        useSession true
-        { session
-            name "${cliCtx.name}"
-
-        noCache true
-
-        useSocketIO false 
-        { socketIO
-        
-        useCookie true
-        { cookie
-
+        ---
         useSite true
         { site
         
-        useIttfStatic true
-        { ittfStatic
-        
+        ---
         useNetlify false
         { netlify
-        
-        useWizzi true
-        { wizzi
-            isDev true
-            [ plugins
-                "./wizzi-core/dist/index.js"
-                "./wizzi-js/dist/index.js" 
-                "./wizzi-web/dist/index.js" 
-                "./wizzi-meta/dist/index.js"
-            pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi/packages"
-            { globalContext
-                wzConfigIsDevelopment true
-        useWizziViewEngine true
-        { wizziViewEngine
-        
-        usePacki true
-        { packi
-            endPoint "${http}://localhost:5000/api/v1"
-            templatesFolder "data/packi/templates"
-            apiId_rem "identifier for the API. This value will be used as the audience parameter on authorization calls."
-            apiId "https://packi/api/v1" $$ AUTH0_PACKI_API_ID
-            clientId_rem ""
-            clientId "gPb1dqyNzRHfJgNVawKxPFP65LuNcUI8" $$ AUTH0_PACKI_CLIENT_ID
-            clientSecret_rem ""
-            clientSecret "-DVUr9qiz5hivZUmfiJtFDEV-zylvAem8P-X0OH8zwlry06rZNCIDUTF7s9sgWNm" $$ AUTH0_PACKI_CLIENT_SECRET
-            backendId_rem ""
-            backendId "awRaG0ilBVlaHQ2xK5JgehLjkBzLNthp" $$ AUTH0_PACKI_BACKEND_APP_ID
-            backendSecret_rem ""
-            backendSecret "1iDRuv92BtmZA521Od3BIU923cDL-EsoSNNTAUJkGfrpNmEDr85I_lsWqZAe5UNG" $$ AUTH0_PACKI_BACKEND_APP_SECRET
 
-        useAuthentication true
-        { authentication
-            tenant "dev-qwf9-zob.eu"
-            clientId "dJoAkgjkJmbElAgqMxqsBPlfoZ3xdAdV"
-            longRandomString "gdftr75ujgklfòlvposg908495r7o34tklvgklgeòmvojg"
-            baseURL "${http}://localhost:5000"
-            authRequired false
-            userInfo false
-            useLocal true
-            { local
-            useGithub true
-            { github
-                clientId "6a42cd4cb7247bb4e823"
-                clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
-                callbackURL "${http}://localhost:5000/authenticate/github/callback"
-            
-        useCrypto true
-        { crypto
-        useJwt true
-        { jwt
+        ---
+        useStorybook false
+        { storybook
         
+        ---
         useGithub true
         { github
             clientId "6a42cd4cb7247bb4e823"
             clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
-            callbackURL "${http}://localhost:5000/authenticate/github/callback" 
+            callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/authenticate/github/callback" 
 
-        useAuthorization false
-        { authorization
-        
-        useAccount false
+        ---
+        useAccount true
         { account
         
+        ---
         useConfig true
         { config
             useEnvalid true
             { envalid
-        
-        useLogger false
-        { logger
-            useMorgan false
-            { morgan
-        
-        useCors true
-        { cors
-            clientOrigin "${http}://localhost:5000"
-        
-        usePassport false
-        { passport
-        
-        usePassportAuth0 false
-        { passportAuth0
 
-        useCompression false
-        { compression
-        
-        useHelmet false
-        { helmet
-        
+        ---
+        useMarked false
 
-        useTailwindcss true
-        { tailwindcss
-        
+        ---
+        useMonacoEditor false
+        { monacoEditor
 
-        useWebpackApp true
-        { webpackApp
-            [ items
-                {
-                    name "hello"
-                    writeToDisk false
-                {
-                    name "shell"
-                    writeToDisk false
-
-        useBabel true
-        { babel
-            useParser true
-            useRuntime false
-
-        useReact true
-        { react
-            useV16 true
-            useRedux true
-            { redux
-            useRouter true
-            useHelmetAsync true
-            useSimpleCodeEditor true
-            useTextareaAutosize true
-            useVirtualized false
-            
-        useHoistNonReactStatic true
-        
-        useStyledComponents true
-        { styledComponents
-
-        useAphrodite true
-        { aphrodite
-
-        useMarked true
-
-        useExpoStyles true
-        { expoStyles
-
-        useMonacoEditor true
-
-        usePrettier true
-        { prettier
-
-        usePrismjs true
-
-        useGraphql true
-        
-        useMongoDb false
-        { mongoDb
-            user "yanez"
-            password "x5csosPN5YAsrl4Z"
-            dbPath "@cluster0.idlk7.mongodb.net"
-            dbName "wizzi"
-        
-        useFilesystem true
-        { filesystem
-
-        useBlog false
-        { blog
-            name "blog"
-            Name "Blog"
-            [ dataModels
-                { 
-                    name "post"
-                    Name "Post"
-                    Title "Blog post"
-                    Titles "Blog posts"
-                    collectionName "posts"
-                    [ fields
-                        {
-                            name "_id"
-                            type "oid"
-                            isListItem true
-                            ctrlId "fd_1_post_id"
-                            test "id"
-                        {
-                            name "author"
-                            type "string"
-                            isListItem true
-                            ctrlId "fd_1_post_author"
-                            test "Stefi"
-                        {
-                            name "title"
-                            type "string"
-                            isListItem true
-                            ctrlId "fd_1_post_title"
-                            test "My postulates"
-                        {
-                            name "content"
-                            type "string"
-                            ctrlId "fd_1_post_content"
-                            test "Bla bla"
+        ---
+        ${'$'}include auth.json
+        ---
+        ${'$'}include babel.webpack.json
+        ---
+        ${'$'}include code.json
+        ---
+        ${'$'}include db.json
+        ---
+        ${'$'}include express.json
+        ---
+        ${'$'}include react.json
+        ---
+        ${'$'}include styles.json
+        ---
+        ${'$'}include test.json
+        ---
+        ${'$'}include utils.json
+        ---
+        ${'$'}include wizzi.json
+        ---
+        ${'$'}include data.json

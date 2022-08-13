@@ -16,4 +16,5 @@
                 throw
                     new Error
                         @ 'The callback parameter must be a function. In ' + myname + '.${name}. Got: ' + callback		
+            var name = model.wzName.trim()
             $hook

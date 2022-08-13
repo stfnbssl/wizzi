@@ -87,6 +87,7 @@ md.loadStatementWriters = function(mainWriter) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.xclass. Got: ' + callback);
         }
         var name = model.wzName.trim();
+        var name = model.wzName.trim();
         ctx.w('class ' + name + ':');
         mainWriter.genItems(model.statements, ctx, {
             indent: true
@@ -101,6 +102,7 @@ md.loadStatementWriters = function(mainWriter) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.property. Got: ' + callback);
         }
         var name = model.wzName.trim();
+        var name = model.wzName.trim();
         ctx.w(name);
         return callback(null);
     }
@@ -112,6 +114,7 @@ md.loadStatementWriters = function(mainWriter) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.ctor. Got: ' + callback);
         }
+        var name = model.wzName.trim();
         ctx.write('def __init__(self');
         var param_count = 0;
         (function next() {
@@ -138,6 +141,7 @@ md.loadStatementWriters = function(mainWriter) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.destructor. Got: ' + callback);
         }
+        var name = model.wzName.trim();
         ctx.w('def __del__(self):');
         mainWriter.genItems(model.statements, ctx, {
             indent: true
@@ -151,6 +155,7 @@ md.loadStatementWriters = function(mainWriter) {
         if (typeof callback !== 'function') {
             throw new Error('The callback parameter must be a function. In ' + myname + '.method. Got: ' + callback);
         }
+        var name = model.wzName.trim();
         var name = model.wzName.trim();
         ctx.write('def ' + name + '(self');
         var param_count = 0;

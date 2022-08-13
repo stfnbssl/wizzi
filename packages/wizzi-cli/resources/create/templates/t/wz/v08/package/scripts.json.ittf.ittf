@@ -12,13 +12,13 @@ $group
                 build:client:prod "webpack --mode production"
         ${'$'}if wzCtx.Build.useExpress
             ${'$'}if wzCtx.Build.useTypescript
-                start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ts-node src/server/index.ts"
+                start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/server/index.ts"
                 watch "env-cmd -f deploy/client/development.env tsnd --require tsconfig-paths/register --inspect=9211 --quiet src/server/index.ts"
                 build:server "babel --source-maps --extensions '.ts,.tsx' --out-dir build/ src/"
     ${'$'}if wzCtx.Build.isServer
         ${'$'}if wzCtx.Build.useExpress
             ${'$'}if wzCtx.Build.useTypescript
-                start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ts-node src/index.ts"
+                start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/index.ts"
                 watch "env-cmd -f deploy/development.env tsnd --require tsconfig-paths/register --inspect=9211 --quiet src/index.ts"
                 build:server "babel --source-maps --extensions '.ts,.tsx' --out-dir build/ src/"
     ${'$'}if wzCtx.Build.isClient
@@ -70,9 +70,9 @@ $group
         ${'$'}else
             ${'$'}if wzCtx.Build.useTypescript
                 ${'$'}if wzCtx.Build.isClientServer
-                    start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ts-node src/server/index.ts"
+                    start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/server/index.ts"
                 ${'$'}else 
-                    start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ts-node src/index.ts"
+                    start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/index.ts"
             ${'$'}else 
                 start "set NODE_ENV=development && nodemon src/index && start ${'$'}{wzCtx.App.baseUrl}"
         ${'$'}if wzCtx.Build.express.useSsl
@@ -81,8 +81,12 @@ $group
     ${'$'}if wzCtx.Build.useLint
         ${'$'} var debug = false;
         ${'$'}if wzCtx.Build.useTypescript
-            lint "eslint -c ./.eslintrc.js ./src/**/*.tsx ${'$'}{debug ? '--debug' : ''}"
-            lint:write "eslint -c ./.eslintrc.js --fix ./src/**/*.tsx ${'$'}{debug ? '--debug' : ''}"
+            ${'$'}if wzCtx.Build.typescript.useTsxFiles
+                lint "eslint -c ./.eslintrc.js ./src/**/*.ts ./src/**/*.tsx ${'$'}{debug ? '--debug' : ''}"
+                lint:write "eslint -c ./.eslintrc.js --fix ./src/**/*.ts ./src/**/*.tsx ${'$'}{debug ? '--debug' : ''}"
+            ${'$'}else
+                lint "eslint -c ./.eslintrc.js ./src/**/*.ts ${'$'}{debug ? '--debug' : ''}"
+                lint:write "eslint -c ./.eslintrc.js --fix ./src/**/*.ts ${'$'}{debug ? '--debug' : ''}"
         ${'$'}else
             lint "eslint -c ./.eslintrc.js ./src/**/*.js ${'$'}{debug ? '--debug' : ''}"
             lint:write "eslint -c ./.eslintrc.js --fix ./src/**/*.js ${'$'}{debug ? '--debug' : ''}"
@@ -94,7 +98,10 @@ $group
     
     ${'$'}if wzCtx.Build.usePrettier
         ${'$'}if wzCtx.Build.useTypescript
-            prettier "prettier --write src/**/*.tsx"
+            ${'$'}if wzCtx.Build.typescript.useTsxFiles
+                prettier "prettier --write src/**/*.ts src/**/*.tsx"
+            ${'$'}else
+                prettier "prettier --write src/**/*.ts"
         ${'$'}else
             prettier "prettier --write src/**/*.js"
 

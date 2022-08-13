@@ -1,9 +1,10 @@
 $group
     ---
-    ${'$'}if wzCtx.Build.useLint
+    ${'$'}if wzCtx.Build.useLint && (wzCtx.Build.useReact || wzCtx.Build.useJest)
         { eslintConfig
             [ extends
-                "react-app" 
+                ${'$'}if wzCtx.Build.useReact
+                    "react-app" 
                 ${'$'}if wzCtx.Build.useJest
                     "react-app/jest" 
     ---

@@ -129,5 +129,5 @@ $group
                             + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
                             @ usedPort
                             + 
-    ${'$'}if wzCtx.Build.useNetlify == false
+    ${'$'}if !wzCtx.Build.useNetlify
         export-default App

@@ -9,7 +9,22 @@ module
 	let cmd = args._[0]
     info 'args', args, 'cmd', cmd
 
-    if cmd == 'js-express'
+    if cmd == 'ts-express'
+        _ create
+            {
+                @ template 'ts/express'
+                @ pkgName 'demo.ts.express'
+    elif cmd == 'ts-express-hello'
+        _ create
+            {
+                @ template 'ts/express_hello'
+                @ pkgName 'demo.ts.express.hello'
+    elif cmd == 'ts-express-wizzi'
+        _ create
+            {
+                @ template 'ts/express_wizzi'
+                @ pkgName 'demo.ts.express.wizzi'
+    elif cmd == 'js-express'
         _ create
             {
                 @ template 'js/express'

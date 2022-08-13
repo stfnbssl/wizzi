@@ -104,9 +104,13 @@ $group
                             _ expectedScopes.some
                                 => 
                                     param scope
+                                        :any
                                     _ scopes.includes(scope)
                         return 
                             iif allowed
                                 then
                                     _ next
                                 else error(res)
+    ${'$'}else
+        # <--wizzi!file!exclude-->                
+

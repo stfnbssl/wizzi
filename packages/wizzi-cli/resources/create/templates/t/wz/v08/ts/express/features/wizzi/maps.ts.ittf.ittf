@@ -1,0 +1,275 @@
+$group
+
+    import path from 'path'
+
+    :type parsedFilePath
+        :{
+            :p seedname
+                :string
+            :p schema
+                :string
+            :p isIttfDocument
+                :boolean
+    +
+    export
+        function parseFilePath
+            param filePath
+                :string
+            :return
+                :ref parsedFilePath
+            const nameParts = path.basename(filePath).split('.')
+            if nameParts[nameParts.length - 1] === 'ittf'
+                return
+                    {
+                        @ isIttfDocument true
+                        @ schema nameParts[nameParts.length - 2]
+                        @ seedname nameParts.slice(0, -2).join('.')
+            else
+                return
+                    {
+                        @ isIttfDocument false
+                        @ schema nameParts[nameParts.length - 1]
+                        @ seedname nameParts.slice(0, -1).join('.')
+
+	var schemaArtifactMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+		{
+			@ js 'js/module'
+            @ jsx 'js/module'
+			@ ts 'ts/module'
+			@ html 'html/document'
+			@ css 'css/document'
+			@ scss 'scss/document'
+			@ svg 'svg/document'
+			@ vtt 'vtt/document'
+			@ md 'md/document'
+			@ json 'json/document'
+            @ xml 'xml/document'
+            @ yaml 'yaml/document'
+            @ text 'text/document'
+			@ ittf 'ittf/document'
+	export
+        function artifactNameFromSchema
+            param schema
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            # log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
+            return schemaArtifactMap[schema]
+    +
+	var schemaIttfRootMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+		{
+			@ js 'module'
+            @ jsx 'module'
+			@ ts 'module'
+			@ html 'html'
+			@ css 'css'
+			@ scss 'scss'
+			@ svg 'svg'
+			@ md 'vtt'
+			@ vtt 'vtt'
+			@ json '{'
+            @ xml 'xml'
+            @ yaml 'yaml'
+            @ text 'any'
+			@ ittf 'any'
+    export
+        function ittfRootFromSchema
+            param schema
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            # log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+            return schemaIttfRootMap[schema]   
+
+    +
+    const schemaPluginMap
+        :{
+            :index
+                :[
+                    :string
+                param k
+                    :string
+        =
+            {
+                [ wfjob
+                    @ 'wizzi-core'
+                [ wfschema
+                    @ 'wizzi-core'
+                [ js
+                    @ 'wizzi-js'
+                [ ts
+                    @ 'wizzi-js'
+                [ html
+                    @ 'wizzi-web'
+                    @ 'wizzi-js'
+                    @ 'wizzi-core'
+                [ css
+                    @ 'wizzi-web'
+                [ scss
+                    @ 'wizzi-web'
+                [ graphql
+                    @ 'wizzi-web'
+                [ vml
+                    @ 'wizzi-web'
+                [ vue
+                    @ 'wizzi-web'
+                [ json
+                    @ 'wizzi-core'
+                [ text
+                    @ 'wizzi-core'
+                [ xml
+                    @ 'wizzi-core'
+                [ yaml
+                    @ 'wizzi-core'
+                [ ittf
+                    @ 'wizzi-core'
+    export
+        function pluginsFor
+            param file
+                :string
+            :return
+                :[
+                    :string
+            const nameParts = path.basename(file).split('.')
+            if nameParts[nameParts.length - 1] === 'ittf'
+                return schemaPluginMap[nameParts[nameParts.length - 2]] || []
+            return []
+    +
+    const schemaModuleMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+        =
+            {
+                @ css 'css/document'
+                @ graphql 'graphql/document'
+                @ ittf 'ittf/document'
+                @ js 'js/module'
+                @ json 'json/document'
+                @ html 'html/document'
+                @ md 'md/document'
+                @ scss 'scss/document'
+                @ svg 'svg/document'
+                @ text 'text/document'
+                @ ts 'ts/module'
+                @ vml 'vml/document'
+                @ vue 'vue/document'
+                @ xml 'xml/document'
+    export
+        function generatorFor
+            param filePath
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            const pf = parseFilePath(filePath)
+            if pf.isIttfDocument
+                return schemaModuleMap[pf.schema]
+            return undefined
+    +
+    const extSchemaMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+        =
+            {
+                @ '.js' 'js'
+                @ '.jsx' 'js'
+                @ '.ts' 'ts'
+                @ '.tsx' 'ts'
+                @ '.html' 'html'
+                @ '.css' 'css'
+                @ '.svg' 'svg'
+                @ '.md' 'md'
+                @ '.xml' 'xml'
+                @ '.json' 'json'
+                @ '.graphql' 'graphql'
+    +
+    export
+        function schemaFromExtension
+            param extension
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            return extSchemaMap[extension]
+    +
+    const schemaTransformerMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+        =
+            {
+                @ meta 'ittf/cheatsheet'
+    +
+    export
+        function transformerFor
+            param filePath
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            const pf = parseFilePath(filePath)
+            if pf.isIttfDocument
+                return schemaTransformerMap[pf.schema]
+            return undefined
+    +
+    export
+        function schemaFromFilePath
+            param filePath
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            const pf = parseFilePath(filePath)
+            if pf.isIttfDocument
+                return pf.schema
+            return undefined
+    +
+    export
+        function wrapperForSchema
+            param schema
+                :string
+            if schema === 'js' || schema === 'jsx'
+                return
+                    {
+                        @ n 'module'
+                        [ children
+                            {
+                                @ n 'kind'
+                                @ v 'react'
+                                [ children
+            elif schema === 'ts'
+                return
+                    {
+                        @ n 'module'
+                        [ children
+            else
+                return
+                    {
+                        @ n schema
+                        [ children

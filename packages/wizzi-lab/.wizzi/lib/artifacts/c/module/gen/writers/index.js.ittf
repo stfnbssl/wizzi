@@ -6,10 +6,13 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
     var verify = require('wizzi-utils').verify
 	+
 	var xfunction = require('./function')
-    $$ var xclass = require('./class')
+    var set = require('./set')
+    var control = require('./control')
+    var debug = require('./debug')
 	+
 	var md = module.exports = {}
 	set md.statementsContainer = {}
+    
     set md.statementsContainer.codeline
         function
             param model
@@ -17,6 +20,7 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
             param callback
             _ ctx.w(model.wzTag + ' ' + model.wzName)
             _ md.genItems(model.statements, ctx, callback)    
+    
     set md.statementsContainer.statement
         function
             param model
@@ -24,7 +28,42 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
             param callback
             _ ctx.w('// ' + model.wzName)
             _ md.genItems(model.statements, ctx, callback)    
-	set md.gen
+    
+    set md.statementsContainer.plusline
+        function
+            param model
+            param ctx
+            param callback
+            _ ctx.w(model.wzName)
+            _ md.genItems(model.statements, ctx, callback)    
+    
+    set md.statementsContainer.multilinecomment
+        function
+            param model
+            param ctx
+            param callback
+            _ ctx.w(model.wzTag + ' ' + model.wzName)
+            _ ctx.indent
+            _ md.writeLinesTreeAsIs
+                @ model
+                @ ctx
+            _ ctx.deindent
+            _ ctx.w('*/')
+            r_cb()
+	
+    set md.writeLinesTreeAsIs
+		function
+			param model
+			param ctx
+            foreach item in model.statements
+                _ ctx.w(item.wzTag + ' ' + item.wzName)
+                _ ctx.indent
+                _ md.writeLinesTreeAsIs
+                    @ item
+                    @ ctx
+                _ ctx.deindent
+
+    set md.gen
 		function
 			param model
 			param ctx
@@ -93,6 +132,7 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
 			var
 				decl opt = options || {}
 				decl from = opt.from || 0
+                decl sep = opt.sep
 				decl indent = typeof opt.indent === 'undefined' ? true : opt.indent
 				decl first = true
 
@@ -106,20 +146,45 @@ module wizzi-lab.artifacts.py.module.gen.writers.index
 					if indent
 						_ ctx.deindent()
                     r_cb()
-				if options.sep && !first
-					_ ctx.write(options.sep)
+				if sep && !first
+					_ ctx.write(sep)
 				_ md.genItem
 					@ item
 					@ ctx
 					f_cb()
                         set first = false
 						_ next
+    set md.isTopStatement
+        function
+            param model
+            if !model.wzParent
+                return true
+            var prnElement = model.wzParent.wzElement
+            return notTopElement.indexOf(prnElement) < 0
     set md.withSemicolon
         function
             param text
             return text.endsWith(';') ? text : text + ';'                        
-
+    set md.getFirstChildren
+        function
+            param model
+            param elements
+            set elements = elements || []
+            if model.statements && model.statements.length > 0
+                foreach stm in model.statements
+                    if elements.indexOf(stm.wzElement) > -1
+                        return stm
+            return null
+    +
+    var notTopElement
+        [
+            @ 'set'
+            @ 'call'
+            @ 'object'
+            @ 'array'
 	+
 	_ xfunction.loadStatementWriters(md)
-    $$ _ xclass.loadStatementWriters(md)
+    _ set.loadStatementWriters(md)
+    _ control.loadStatementWriters(md)
+    _ debug.loadStatementWriters(md)
 	+

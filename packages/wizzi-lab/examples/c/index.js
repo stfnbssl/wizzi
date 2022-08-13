@@ -6,7 +6,7 @@
 'use strict';
 var async = require('async');
 var samples = [
-    require('./step_1_go')
+    require('./step_3_go')
 ];
 function execute(callback) {
     async.series(samples, function(err, notUsed) {

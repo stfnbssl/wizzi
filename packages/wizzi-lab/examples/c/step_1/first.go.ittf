@@ -1,4 +1,0 @@
-c 
-
-    function main
-        printf("Hello world");

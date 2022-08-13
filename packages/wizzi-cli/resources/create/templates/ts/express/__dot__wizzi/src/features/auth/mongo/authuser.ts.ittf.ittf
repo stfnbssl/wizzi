@@ -1,0 +1,10 @@
+module
+    $
+        var call = '(&md)';
+    
+    ${'$'}
+        var md = {
+        }
+
+    ${'$'}if wzCtx.Build.useMongoDb
+        v08/express/features/auth/mongo/authuser${call}

@@ -2,12 +2,10 @@ $group
     $
         var call = '(&md)';
 
-    ${'$'}if wzCtx.Build.useNetlify == false
-        index/imports${call}
-    
     ${'$'}if wzCtx.Build.useNetlify
         index/start${call}
     ${'$'}else
+        index/imports${call}
         async-function start
             index/start${call}
             _ app.listen

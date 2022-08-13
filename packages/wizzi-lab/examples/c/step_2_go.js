@@ -16,7 +16,6 @@ var verify = require('wizzi-utils').verify;
 var vfile = require('wizzi-utils').vfile;
 var fsfile = vfile();
 const spawn = require("child_process").spawn;
-const exec = require('child_process').exec;
 var mTreeBuildupContext = {};
 var artifactContext = {};
 var globalContext = {};
@@ -34,7 +33,7 @@ var c_examples_step_2 = function(step_callback) {
             console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        wf.loadModelAndGenerateArtifact(path.join(__dirname, 'step_1', 'first.c.ittf'), {
+        wf.loadModelAndGenerateArtifact(path.join(__dirname, 'step_2', 'first.c.ittf'), {
             modelRequestContext: {}, 
             artifactRequestContext: {}
          }, 'c/module', function(err, artifactText) {
@@ -46,32 +45,63 @@ var c_examples_step_2 = function(step_callback) {
             const scriptPath = path.join(__dirname, 'result', 'step2.c');
             const exePath = path.join(__dirname, 'result', 'step2.exe');
             fsfile.write(scriptPath, artifactText)
-            var options = {
-                timeout: 100, 
+            const cProcess = spawn('C:\\msys64\\mingw64\\bin\\gcc.exe', [
+                '-g', 
+                scriptPath, 
+                "-o", 
+                exePath
+            ], {
+                cwd: "C:\\msys64\\mingw64\\bin", 
+                timeout: 1000, 
+                killSignal: "SIGTERM", 
                 stdio: 'inherit', 
                 shell: true
-             };
-            exec('C:\\MinGW\\bin\\gcc ' + scriptPath + ' -o ' + exePath, (error, stdout, stderr) => {
-            
-                console.log(`stdout: ${stdout}`);
-                console.log(`stderr: ${stderr}`);
-                if (error) {
-                    console.log(`exec error: ${error}`);
-                }
-                else {
-                    exec(exePath, options, (error, stdout, stderr) => {
-                    
-                        console.log(`stdout: ${stdout}`);
-                        console.log(`stderr: ${stderr}`);
-                        if (error) {
-                            console.log(`exec error: ${error}`);
-                        }
-                        return 0;
-                    }
-                    )
-                }
+             });
+            if (cProcess.stdout) {
+                cProcess.stdout.on('data', function(data) {
+                    printValue('c stdout', data.toString(), 'dashes')
+                })
             }
-            )
+            if (cProcess.stderr) {
+                cProcess.stderr.on('data', function(data) {
+                    printValue('c stderr', data.toString(), 'dashes')
+                })
+            }
+            cProcess.on('message', function(message) {
+                console.log(`child process message`, message);
+            })
+            cProcess.on('error', function(err) {
+                console.log(`child process error`, err);
+            })
+            cProcess.on('exit', function(code) {
+                console.log(`child process exited with code ${code}`);
+                const cResultExe = spawn(exePath, [], {
+                    cwd: path.dirname(exePath), 
+                    timeout: 1000, 
+                    killSignal: "SIGTERM", 
+                    stdio: 'inherit', 
+                    shell: true
+                 });
+                if (cResultExe.stdout) {
+                    cResultExe.stdout.on('data', function(data) {
+                        printValue('c stdout', data.toString(), 'dashes')
+                    })
+                }
+                if (cResultExe.stderr) {
+                    cResultExe.stderr.on('data', function(data) {
+                        printValue('c stderr', data.toString(), 'dashes')
+                    })
+                }
+                cResultExe.on('message', function(message) {
+                    console.log(`child process message`, message);
+                })
+                cResultExe.on('error', function(err) {
+                    console.log(`child process error`, err);
+                })
+                cResultExe.on('exit', function(code) {
+                    console.log(`child process exited with code ${code}`);
+                })
+            })
         })
     })
 };

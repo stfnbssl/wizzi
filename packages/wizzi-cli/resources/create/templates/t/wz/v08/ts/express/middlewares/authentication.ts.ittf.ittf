@@ -1,7 +1,6 @@
 $group
     
     ${'$'}if wzCtx.Build.useAuthentication
-
         import 
             @ Application
             from 'express'
@@ -57,3 +56,5 @@ $group
                                 @ authConfig
                         success 'AuthenticationMiddleware installed. Config', authConfig
                     ${'$'}hook
+    ${'$'}else
+        # <--wizzi!file!exclude-->

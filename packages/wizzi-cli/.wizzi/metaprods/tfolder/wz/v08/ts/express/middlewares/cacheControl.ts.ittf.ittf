@@ -25,8 +25,11 @@ $group
                         _ app.use
                             => 
                                 param req
+                                    :any $$ TODO ref Request
                                 param res
+                                    :any $$ TODO ref Response
                                 param next
+                                    :any $$ TODO ref Function
                                 _ res.set('Cache-Control', 'no-store')
                                 _ next
                         success 'CacheControlMiddleware installed'

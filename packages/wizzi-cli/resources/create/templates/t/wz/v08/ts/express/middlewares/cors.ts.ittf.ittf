@@ -1,18 +1,23 @@
 $group
 
-    import 
-        @ Application
-        from 'express'
-    import cors from 'cors'
-    import 
-        @ MiddlewareType
-        from '../features/app/types'
-    export 
-        const CorsMiddleware
-            :ref MiddlewareType
-            =
-                => 
-                    param app
-                        :ref Application
-                    _ app.use(cors())
-                    success 'CorsMiddleware installed'
+    ${'$'}if wzCtx.Build.useCors
+        import 
+            @ Application
+            from 'express'
+        import cors from 'cors'
+        import 
+            @ MiddlewareType
+            from '../features/app/types'
+        export 
+            const CorsMiddleware
+                :ref MiddlewareType
+                =
+                    => 
+                        param app
+                            :ref Application
+                        _ app.use
+                            _ cors
+                        success 'CorsMiddleware installed'
+    ${'$'}else
+        # <--wizzi!file!exclude-->                
+

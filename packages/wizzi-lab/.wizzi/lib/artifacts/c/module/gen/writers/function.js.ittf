@@ -3,16 +3,13 @@
 	$append imports
             
 	v08/artifacts/statement( xfunction
-        var name = model.wzName.trim()
-        var rtype = model.rtype || 'int'
+        var rtype = model.rtype || 'void'
         _ ctx.write(rtype + ' ' + name + '(')
         var param_count = 0
         iife next
             var param = model.params[param_count++]
             if !param
                 _ ctx.write(')')
-                if model.rtype && model.rtype.length > 0
-                    _ ctx.write(' ' + model.rtype)
                 _ ctx.w(' {')
                 return
                     _ body
@@ -31,6 +28,5 @@
                     r_cb()
 
 	v08/artifacts/statement( xreturn
-        var name = model.wzName.trim()
         _ ctx.w(mainWriter.withSemicolon('return ' + name))
         r_cb()

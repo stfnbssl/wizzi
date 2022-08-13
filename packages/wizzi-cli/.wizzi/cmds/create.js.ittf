@@ -45,7 +45,7 @@
                             @ copy "copy 2021"
                         { github
                 var fileCtx = {}
-                if options.template = "wizzi/plugin"
+                if options.template == "wizzi/plugin"
                     set cliCtx.wizzi_plugin_type = options.wizzi_plugin_type
                     set cliCtx.Schemas
                         [

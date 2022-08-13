@@ -1,5 +1,16 @@
 #include <stdio.h>
 
+int Sum(int a, int b) {
+    return a + b;
+}
 int main() {
-    printf ("Hello world");
+    int i = 1;
+    int a, b, c;
+    a = i;
+    b = 2;
+    c = Sum(a, Sum(a, b));
+    printf("%d + %d = %d", a, b, c); printf("\n");
+    goto STOP;
+    STOP:
+        return 0;
 }

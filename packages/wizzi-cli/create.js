@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\root\create.js.ittf
-    utc time: Sun, 31 Jul 2022 09:15:50 GMT
+    utc time: Fri, 12 Aug 2022 16:51:09 GMT
 */
 'use strict';
 const minimist = require('minimist');
@@ -10,7 +10,25 @@ const create = require('./cmds/create');
 const args = minimist(process.argv.slice(2));
 let cmd = args._[0];
 console.log('args', args, 'cmd', cmd);
-if (cmd == 'js-express') {
+if (cmd == 'ts-express') {
+    create({
+        template: 'ts/express', 
+        pkgName: 'demo.ts.express'
+     })
+}
+else if (cmd == 'ts-express-hello') {
+    create({
+        template: 'ts/express_hello', 
+        pkgName: 'demo.ts.express.hello'
+     })
+}
+else if (cmd == 'ts-express-wizzi') {
+    create({
+        template: 'ts/express_wizzi', 
+        pkgName: 'demo.ts.express.wizzi'
+     })
+}
+else if (cmd == 'js-express') {
     create({
         template: 'js/express', 
         pkgName: 'demo.js.express'

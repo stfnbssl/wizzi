@@ -31,8 +31,6 @@ module
         function mainStart
             param model
             param ctx
-            _ ctx.w('#include <stdio.h>')
-            _ ctx.w('')
         
         function mainFinish
             param model

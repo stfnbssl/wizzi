@@ -28,7 +28,7 @@
                 _ wf.loadModelAndGenerateArtifact
                     _ path.join
                         @ __dirname
-                        @ 'step_1'
+                        @ 'step_${md.step}'
                         @ 'first.c.ittf'
                     {
                         @ modelRequestContext {}
@@ -51,14 +51,14 @@
                             @ artifactText
                         const cProcess
                             _ spawn
-                                @ 'C:\\MinGW\\bin\\gcc.exe'
+                                @ 'C:\\msys64\\mingw64\\bin\\gcc.exe'
                                 [
                                     @ '-g'
                                     @ scriptPath
                                     @ "-o"
                                     @ exePath
                                 {
-                                    @ cwd "C:\\MinGW\\bin"
+                                    @ cwd "C:\\msys64\\mingw64\\bin"
                                     @ timeout 1000
                                     @ killSignal "SIGTERM"
                                     @ stdio 'inherit'
@@ -81,17 +81,6 @@
                                         @ 'c stderr'
                                         _ data.toString
                                         @ 'dashes'
-                        if cProcess.stdio 
-                            $*
-                            _ cProcess.stdio.on
-                                @ 'data'
-                                function
-                                    param data
-                                    _ printValue
-                                        @ 'c stdio'
-                                        _ data.toString
-                                        @ 'dashes'
-                            *$
                         _ cProcess.on
                             @ 'message'
                             function
@@ -103,11 +92,6 @@
                                 param err
                                 info `child process error`, err
                         _ cProcess.on
-                            @ 'close'
-                            function
-                                param code
-                                info `child process closed with code ${code}`                                 
-                        _ cProcess.on
                             @ 'exit'
                             function
                                 param code
@@ -116,6 +100,12 @@
                                     _ spawn
                                         @ exePath
                                         [
+                                        {
+                                            @ cwd path.dirname(exePath)
+                                            @ timeout 1000
+                                            @ killSignal "SIGTERM"
+                                            @ stdio 'inherit'
+                                            @ shell true
                                 if cResultExe.stdout 
                                     _ cResultExe.stdout.on
                                         @ 'data'
@@ -145,12 +135,7 @@
                                         param err
                                         info `child process error`, err
                                 _ cResultExe.on
-                                    @ 'close'
-                                    function
-                                        param code
-                                        info `child process closed with code ${code}`                                 
-                                _ cResultExe.on
                                     @ 'exit'
                                     function
                                         param code
-                                        info `child process exited with code ${code}`                                 
+                                        info `child process exited with code ${code}`

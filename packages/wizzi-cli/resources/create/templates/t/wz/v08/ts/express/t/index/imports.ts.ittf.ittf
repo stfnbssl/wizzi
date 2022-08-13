@@ -23,10 +23,8 @@ $group
     ${'$'}if wzCtx.Build.useMongoDb
         import { mongodbStart } from '${'$'}{baseDir}/services/mongodb'
     
-    ${'$'}if wzCtx.Build.useWizzi
+    ${'$'}if wzCtx.Build.useWizzi && wzCtx.Build.wizzi.useRunner
         import wizziStart from '${'$'}{baseDir}/services/wizzi'
-        ${'$'}if wzCtx.Build.wizzi.useSite
-            import { siteControllers } from './site/index'
 
     ${'$'}if wzCtx.Build.useAuthentication
         $$ For now auth needs MongoDb
@@ -86,5 +84,5 @@ $group
             @ auth0Secured
         from '${'$'}{baseDir}/middlewares/index'
     
-    ${'$'}if wzCtx.Build.useNetlify == false
+    ${'$'}if !wzCtx.Build.useNetlify
         import App from './App'

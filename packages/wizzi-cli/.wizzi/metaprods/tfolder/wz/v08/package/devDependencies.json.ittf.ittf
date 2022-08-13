@@ -51,7 +51,7 @@
         ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useFlash
             @types/connect-flash "^0.0.37"
         ${'$'}if wzCtx.Build.useMongoDb
-            @types/connect-mongo "3.1.3"
+            $$ unnecessary @types/connect-mongo "3.1.3"
         ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useCors
             @types/cors "^2.8.10"
         @types/express "^4.16.1"
@@ -87,7 +87,7 @@
             ${'$'}else
                 @types/marked "^2.0.2"
         ${'$'}if wzCtx.Build.useMongoDb
-            @types/mongoose "^5.10.4"
+            $$ unnecessary @types/mongoose "^5.10.4"
         ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useLogger
             ${'$'}if wzCtx.Build.logger.useMorgan
                 @types/morgan "^1.9.3"
@@ -152,10 +152,11 @@
             ${'$'}else
                 @types/webpack "^5.28.0"
                 @types/webpack-dev-middleware "^4.1.2"
-                @types/webpack-dev-server "^3.11.3"
+                $$ 11/8/2022 @types/webpack-dev-server "^3.11.3"
+                @types/webpack-dev-server "^4.10.0"
         ${'$'}if wzCtx.Build.useLint
-            @typescript-eslint/parser "^4.22.0"
-            @typescript-eslint/eslint-plugin "^4.22.0"
+            @typescript-eslint/parser "^5.33.0"
+            @typescript-eslint/eslint-plugin "^5.33.0"
     ${'$'}if wzCtx.Build.useLint
         babel-eslint "^8.2.3"
     ${'$'}if wzCtx.Build.useTest && wzCtx.Build.test.useJest
@@ -187,23 +188,26 @@
         enzyme "^3.3.0"
         enzyme-adapter-react-16 "^1.1.1"
     ${'$'}if wzCtx.Build.useLint
-        eslint "^7.24.0"
-        ${'$'}if wzCtx.Build.lint.useAirbnb
-            eslint-config-airbnb "^18.2.1"
-        ${'$'}if wzCtx.Build.useTest && wzCtx.Build.test.useJest
-            eslint-config-jest-enzyme "^6.0.2"
-        ${'$'}if wzCtx.Build.usePrettier
-            eslint-config-prettier "^8.2.0"
-        eslint-config-standard "^16.0.2"
-        eslint-plugin-babel "^5.3.1"
-        eslint-plugin-import "^2.22.1"
+        eslint "^8.21.0"
+        ${'$'}if wzCtx.Build.useJavascript
+            ${'$'}if wzCtx.Build.lint.useAirbnb
+                eslint-config-airbnb "^18.2.1"
+            ${'$'}if wzCtx.Build.useTest && wzCtx.Build.test.useJest
+                eslint-config-jest-enzyme "^6.0.2"
+            ${'$'}if wzCtx.Build.usePrettier
+                eslint-config-prettier "^8.2.0"
+        eslint-config-standard "^17.0.0"
+        ${'$'}if wzCtx.Build.useBabel
+            eslint-plugin-babel "^5.3.1"
+        eslint-plugin-import "^2.26.0"
         ${'$'}if wzCtx.Build.useTest && wzCtx.Build.test.useJest
             eslint-plugin-jest "^21.18.0"
-        eslint-plugin-jsx-a11y "^6.4.1"
-        eslint-plugin-node "^11.1.0"
+        ${'$'}if wzCtx.Build.useJavascript
+            eslint-plugin-jsx-a11y "^6.4.1"
+        eslint-plugin-n "^15.2.4"
         ${'$'}if wzCtx.Build.usePrettier
-            eslint-plugin-prettier "^3.4.0"
-        eslint-plugin-promise "^4.2.1"
+            eslint-plugin-prettier "^4.2.1"
+        eslint-plugin-promise "^6.0.0"
         ${'$'}if wzCtx.Build.useReact
             eslint-plugin-react "^7.23.2"
             ${'$'}if wzCtx.Build.react.useRedux
@@ -256,6 +260,8 @@
     ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
         ts-node "^10.8.1"
         ts-node-dev "^1.1.6"
+    ${'$'}if wzCtx.Build.useTypescript
+        typescript "^4.2.3"
     ${'$'}if wzCtx.Build.useVue
         vue "^2.5.22"
         vue-loader "^15.6.0"
@@ -281,7 +287,8 @@
         webpack-dev-middleware "4.1.0"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useDevServer
-            webpack-dev-server "^3.11.2"
+            $$ 11/8/2022 webpack-dev-server "^3.11.2"
+            webpack-dev-server "^4.10.0"
         ${'$'}if wzCtx.Build.webpack.useMerge
             webpack-merge "^4.1.3"
         ${'$'}if wzCtx.Build.webpack.useStatsWriter
@@ -289,4 +296,4 @@
         ${'$'}if wzCtx.Build.webpack.useVisualizer
             webpack-visualizer-plugin "^0.1.11"
         ${'$'}if wzCtx.Build.webpack.useWorker
-            worker-plugin "^5.0.0"            
+            worker-plugin "^5.0.0"

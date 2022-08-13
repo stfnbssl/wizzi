@@ -1,0 +1,24 @@
+${'$'}group
+
+    useGraphql false
+    { graphql
+        excludePolyfill true
+
+    useMongoDb true
+    { mongoDb
+        user "yanez"
+        password "x5csosPN5YAsrl4Z"
+        host "mongodb+srv"
+        dbName "wizzi"
+        dbPath "@cluster0.idlk7.mongodb.net"
+        [ schemas
+            {
+                name 'user'
+                [ fields
+    
+    useFilesystem false
+    { filesystem
+
+    useLocalStorage false
+    { localStorage
+        key "wr-state"

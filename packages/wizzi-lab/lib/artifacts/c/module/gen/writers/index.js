@@ -10,6 +10,9 @@ var myname = 'wizzi-lab.artifacts.py.module.gen.writers.index';
 var verify = require('wizzi-utils').verify;
 
 var xfunction = require('./function');
+var set = require('./set');
+var control = require('./control');
+var debug = require('./debug');
 
 var md = module.exports = {};
 md.statementsContainer = {};
@@ -21,6 +24,31 @@ md.statementsContainer.codeline = function(model, ctx, callback) {
 md.statementsContainer.statement = function(model, ctx, callback) {
     ctx.w('// ' + model.wzName);
     md.genItems(model.statements, ctx, callback);
+}
+;
+md.statementsContainer.plusline = function(model, ctx, callback) {
+    ctx.w(model.wzName);
+    md.genItems(model.statements, ctx, callback);
+}
+;
+md.statementsContainer.multilinecomment = function(model, ctx, callback) {
+    ctx.w(model.wzTag + ' ' + model.wzName);
+    ctx.indent();
+    md.writeLinesTreeAsIs(model, ctx)
+    ctx.deindent();
+    ctx.w('*/');
+    return callback(null);
+}
+;
+md.writeLinesTreeAsIs = function(model, ctx) {
+    var i, i_items=model.statements, i_len=model.statements.length, item;
+    for (i=0; i<i_len; i++) {
+        item = model.statements[i];
+        ctx.w(item.wzTag + ' ' + item.wzName);
+        ctx.indent();
+        md.writeLinesTreeAsIs(item, ctx)
+        ctx.deindent();
+    }
 }
 ;
 md.gen = function(model, ctx, callback) {
@@ -73,6 +101,7 @@ md.genItems = function(statements, ctx, options, callback) {
     }
     var opt = options || {},
         from = opt.from || 0,
+        sep = opt.sep,
         indent = typeof opt.indent === 'undefined' ? true : opt.indent,
         first = true;
     if (indent) {
@@ -87,8 +116,8 @@ md.genItems = function(statements, ctx, options, callback) {
             }
             return callback(null);
         }
-        if (options.sep && !first) {
-            ctx.write(options.sep);
+        if (sep && !first) {
+            ctx.write(sep);
         }
         md.genItem(item, ctx, function(err, notUsed) {
             if (err) {
@@ -100,10 +129,42 @@ md.genItems = function(statements, ctx, options, callback) {
     })();
 }
 ;
+md.isTopStatement = function(model) {
+    if (!model.wzParent) {
+        return true;
+    }
+    var prnElement = model.wzParent.wzElement;
+    return notTopElement.indexOf(prnElement) < 0;
+}
+;
 md.withSemicolon = function(text) {
     return text.endsWith(';') ? text : text + ';';
 }
 ;
+md.getFirstChildren = function(model, elements) {
+    elements = elements || [];
+    if (model.statements && model.statements.length > 0) {
+        var i, i_items=model.statements, i_len=model.statements.length, stm;
+        for (i=0; i<i_len; i++) {
+            stm = model.statements[i];
+            if (elements.indexOf(stm.wzElement) > -1) {
+                return stm;
+            }
+        }
+    }
+    return null;
+}
+;
+
+var notTopElement = [
+    'set', 
+    'call', 
+    'object', 
+    'array'
+];
 
 xfunction.loadStatementWriters(md);
+set.loadStatementWriters(md);
+control.loadStatementWriters(md);
+debug.loadStatementWriters(md);
 

@@ -45,13 +45,13 @@ var c_examples_step_1 = function(step_callback) {
             const scriptPath = path.join(__dirname, 'result', 'step1.c');
             const exePath = path.join(__dirname, 'result', 'step1.exe');
             fsfile.write(scriptPath, artifactText)
-            const cProcess = spawn('C:\\MinGW\\bin\\gcc.exe', [
+            const cProcess = spawn('C:\\msys64\\mingw64\\bin\\gcc.exe', [
                 '-g', 
                 scriptPath, 
                 "-o", 
                 exePath
             ], {
-                cwd: "C:\\MinGW\\bin", 
+                cwd: "C:\\msys64\\mingw64\\bin", 
                 timeout: 1000, 
                 killSignal: "SIGTERM", 
                 stdio: 'inherit', 
@@ -67,20 +67,21 @@ var c_examples_step_1 = function(step_callback) {
                     printValue('c stderr', data.toString(), 'dashes')
                 })
             }
-            if (cProcess.stdio) {
-            }
             cProcess.on('message', function(message) {
                 console.log(`child process message`, message);
             })
             cProcess.on('error', function(err) {
                 console.log(`child process error`, err);
             })
-            cProcess.on('close', function(code) {
-                console.log(`child process closed with code ${code}`);
-            })
             cProcess.on('exit', function(code) {
                 console.log(`child process exited with code ${code}`);
-                const cResultExe = spawn(exePath, []);
+                const cResultExe = spawn(exePath, [], {
+                    cwd: path.dirname(exePath), 
+                    timeout: 1000, 
+                    killSignal: "SIGTERM", 
+                    stdio: 'inherit', 
+                    shell: true
+                 });
                 if (cResultExe.stdout) {
                     cResultExe.stdout.on('data', function(data) {
                         printValue('c stdout', data.toString(), 'dashes')
@@ -96,9 +97,6 @@ var c_examples_step_1 = function(step_callback) {
                 })
                 cResultExe.on('error', function(err) {
                     console.log(`child process error`, err);
-                })
-                cResultExe.on('close', function(code) {
-                    console.log(`child process closed with code ${code}`);
                 })
                 cResultExe.on('exit', function(code) {
                     console.log(`child process exited with code ${code}`);

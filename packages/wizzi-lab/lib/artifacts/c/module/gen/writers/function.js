@@ -87,16 +87,13 @@ md.loadStatementWriters = function(mainWriter) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.xfunction. Got: ' + callback);
         }
         var name = model.wzName.trim();
-        var rtype = model.rtype || 'int';
+        var rtype = model.rtype || 'void';
         ctx.write(rtype + ' ' + name + '(');
         var param_count = 0;
         (function next() {
             var param = model.params[param_count++];
             if (!param) {
                 ctx.write(')');
-                if (model.rtype && model.rtype.length > 0) {
-                    ctx.write(' ' + model.rtype);
-                }
                 ctx.w(' {');
                 return body();
             }

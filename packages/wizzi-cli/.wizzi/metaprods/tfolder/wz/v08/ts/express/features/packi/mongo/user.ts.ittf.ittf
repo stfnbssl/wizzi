@@ -3,6 +3,7 @@ $group
     $
         var call_md = '(&md)';
 
+    $*
     ${'$'}
         var schemas = wzCtx.Build.mongoDb.schemas
         function getSchema(name) {
@@ -13,6 +14,7 @@ $group
         var md = getSchema('user')
 
     v08/mongo/model${call_md}
+    *$
 
     $*
     import 

@@ -13,10 +13,6 @@ $group
                 import 
                     @ DemoWizziController
                     from './controllers/demoWizzi'
-            ${'$'}if wzCtx.Build.useAuthentication
-                import 
-                    @ DemoAccountController
-                    from './controllers/demoAccount'
         ${'$'}hook imports
     
     const siteControllers
@@ -29,8 +25,6 @@ $group
                         @ new DemoHomeController()
                         ${'$'}if wzCtx.Build.useWizziViewEngine
                             @ new DemoWizziController()
-                        ${'$'}if wzCtx.Build.useAuthentication
-                            @ new DemoAccountController()
                 ${'$'}hook controllers
     export
         @ siteControllers

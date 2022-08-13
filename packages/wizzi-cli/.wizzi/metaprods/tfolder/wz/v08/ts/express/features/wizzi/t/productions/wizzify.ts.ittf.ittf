@@ -1,0 +1,72 @@
+$group
+    ${'$'}if wzCtx.Build.usePacki    
+        +
+        export
+            async-function wizzify
+                param files
+                    :ref packiTypes.PackiFiles
+                :return
+                    :ref Promise
+                        :param
+                            :ref packiTypes.PackiFiles
+                return
+                    new Promise
+                        async=>
+                            param resolve
+                            param reject
+                            var result
+                                :ref packiTypes.PackiFiles
+                                =
+                                    {
+                            for const k of Object.keys(files)
+                                var extension = path.extname(k)
+                                # loog 'productions.wizzify', k, extension
+                                const ittfResult
+                                    await
+                                        _ handleWizzify
+                                            @ extension
+                                            @ files[k].contents
+                                set result[k + '.ittf']
+                                    {
+                                        @ type 'CODE'
+                                        @ contents ittfResult
+                            return
+                                _ resolve
+                                    @ result
+
+        +
+        function handleWizzify
+            param extension
+                :string
+            param codeSnippet
+                :string
+            :return
+                :ref Promise
+                    :param
+                        :string
+            return
+                new Promise
+                    async=>
+                        param resolve
+                        param reject
+                        var schema = wizziMaps.schemaFromExtension(extension)
+                        if schema
+                            _ wizziTools.wizzify
+                                @ schema
+                                @ codeSnippet
+                                {
+                                function
+                                    param err
+                                        :any
+                                    param ittfResult
+                                        :string
+                                    if err
+                                        _ reject
+                                            @ err
+                                    _ resolve
+                                        @ ittfResult
+                        else
+                            _ reject
+                                new Error
+                                    @ 'Extension "' + extension + '" has no wizzifier'
+

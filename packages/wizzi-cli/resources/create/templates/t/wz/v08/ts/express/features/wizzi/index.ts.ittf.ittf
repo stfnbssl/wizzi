@@ -1,0 +1,33 @@
+$group
+
+    import
+        @ ControllerType
+        from '../app/types'
+    import
+        as wizziTypes
+        from './types'
+    import
+        as WizziFactory
+        from './factory'
+    import
+        as wizziProds
+        from './productions'
+    import
+        as wizziMaps
+        from './maps'
+    import
+        @ ProductionController
+        from './controllers/production'
+    +
+    const wizziControllers
+        :[
+            :ref ControllerType
+        =
+            [
+                @ new ProductionController()
+    export
+        @ wizziTypes
+        @ wizziProds
+        @ WizziFactory
+        @ wizziMaps
+        @ wizziControllers

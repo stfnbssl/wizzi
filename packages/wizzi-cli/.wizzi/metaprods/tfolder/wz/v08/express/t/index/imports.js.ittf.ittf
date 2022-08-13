@@ -49,5 +49,5 @@ $group
         @ appMiddlewaresPost
         from '${'$'}{baseDir}/middlewares/index.js'
     
-    ${'$'}if wzCtx.Build.useNetlify == false
+    ${'$'}if !wzCtx.Build.useNetlify
         import App from './App.js'

@@ -60,7 +60,7 @@ $group
         dom-helpers "^3.4.0"
     ---
     ${'$'}if wzCtx.Build.useConfig && wzCtx.Build.config.useEnvalid
-        dotenv "8.2.0"
+        dotenv "16.0.1"
     ${'$'}if wzCtx.Build.useReact
         ${'$'}if wzCtx.Build.react.useDraftJs
             draft-js "^0.10.5"
@@ -195,8 +195,6 @@ $group
         ${'$'}if wzCtx.Build.react.useRedux
             ${'$'}if wzCtx.Build.react.redux.useSaga
                 typesafe-actions "^5.1.0"
-    ${'$'}if wzCtx.Build.useTypescript
-        typescript "^4.2.3"
     ---    
     ${'$'}if wzCtx.Build.useUnderscore
         underscore "^1.9.1"

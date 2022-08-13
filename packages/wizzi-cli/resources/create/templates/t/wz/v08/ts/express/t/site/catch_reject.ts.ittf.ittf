@@ -1,0 +1,8 @@
+$group
+    
+    ._ catch
+        => 
+            param err
+                :any
+            log '${'$'}{method}.error', err
+            return reject(err)

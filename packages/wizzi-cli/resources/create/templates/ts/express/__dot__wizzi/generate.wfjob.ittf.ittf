@@ -10,7 +10,7 @@ wfjob ${cliCtx.name}/job
 		    ittf_root_folder: path.join(__dirname, 'root'),
             ittf_static_folder: path.join(__dirname, 'static'),
             ittf_ittf_folder: path.join(__dirname, 'ittf'),
-		    dest_folder: path.join(__dirname, '..', 'dist'),
+		    dest_folder: path.join(__dirname, '..'),
             job_model: 'wzCtx'
         }
     ---
