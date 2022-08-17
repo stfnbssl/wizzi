@@ -13,4 +13,4 @@ $group
                     + to continue. 
         h1 Hello from a Wizzi generated Html document 
         p I am generated on the fly and served by the 'wizziViewEngine' middleware,
-            \b from a views folder.
+            \b from the src/site/views folder.

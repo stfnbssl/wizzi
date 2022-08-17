@@ -1,0 +1,5 @@
+{ 
+   ${'$'} 
+       var md = {
+       } 
+   $include wz/v08/express/site/views/demoWizzi/index.json

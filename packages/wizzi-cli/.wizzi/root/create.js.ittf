@@ -3,6 +3,7 @@ module
 
     const minimist = require('minimist')
     const create = require('./cmds/create')
+    const createEx = require('./cmds/createEx')
 
 	const args = minimist(process.argv.slice(2))
 	
@@ -15,15 +16,27 @@ module
                 @ template 'ts/express'
                 @ pkgName 'demo.ts.express'
     elif cmd == 'ts-express-hello'
+        _ createEx
+            {
+                @ templateGroup 'ts-express'
+                @ template 'hello'
+                @ pkgName 'demo.ts.express.helloEx'
+    elif cmd == 'ts-express-api'
         _ create
             {
-                @ template 'ts/express_hello'
-                @ pkgName 'demo.ts.express.hello'
+                @ template 'ts/express_api'
+                @ pkgName 'demo.ts.express.api'
+    elif cmd == 'ts-webpack-pageforms'
+        _ create
+            {
+                @ template 'ts/webpack_pageforms'
+                @ pkgName 'demo.ts.webpack.pageforms'
     elif cmd == 'ts-express-wizzi'
-        _ create
+        _ createEx
             {
-                @ template 'ts/express_wizzi'
-                @ pkgName 'demo.ts.express.wizzi'
+                @ templateGroup 'ts-express'
+                @ template 'wizzi'
+                @ pkgName 'demo.ts.express.wizziEx'
     elif cmd == 'js-express'
         _ create
             {

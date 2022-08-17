@@ -8,7 +8,7 @@ var util = require('util');
 var wizziUtils = require('wizzi-utils');
 var f_verify = require('./functions/verify');
 
-var pkgVersioned = ' (@wizzi/mtree.0.7.12)';
+var pkgVersioned = ' (@wizzi/mtree.0.7.13)';
 
 var md = module.exports = {};
 

@@ -1,0 +1,13 @@
+${'$'}group 
+   useTypescript true
+   { typescript
+       $$ for webpack client
+       useBabelLoader true
+       useTsxFiles false
+   usePrettier true
+   { prettier
+   usePrismjs true
+   { prismjs
+       [ modes
+   useLint true
+   { lint

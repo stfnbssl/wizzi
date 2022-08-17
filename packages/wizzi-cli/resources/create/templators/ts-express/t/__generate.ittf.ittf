@@ -1,0 +1,85 @@
+$group
+    $file __dot__wizzi/generate.wfjob.ittf.ittf
+        wfjob ££{cliCtx.name}/job
+            ££
+                var mix = '(';
+        
+            ---
+        	££{'££'}
+                var jobCtx = {
+        		    ittf_models_folder: path.join(__dirname, 'models'),
+                    ittf_src_folder: path.join(__dirname, 'src'),
+        		    ittf_root_folder: path.join(__dirname, 'root'),
+                    ittf_static_folder: path.join(__dirname, 'static'),
+                    ittf_ittf_folder: path.join(__dirname, 'ittf'),
+        		    dest_folder: path.join(__dirname, '..'),
+                    job_model: 'wzCtx'
+                }
+            ---
+            model ££{'££'}{jobCtx.job_model}
+                schema json
+                src ££{'££'}{jobCtx.ittf_models_folder}/wzctx.json.ittf
+            ---
+            line ittf-models
+                cwd-folder ££{'££'}{jobCtx.ittf_models_folder}
+                wfjobs££{mix}any_json, &jobCtx)
+            ---
+        	line ittf-root
+        		cwd-folder ££{'££'}{jobCtx.ittf_root_folder}
+        
+        		wfjobs££{mix}any_js, &jobCtx)
+                wfjobs££{mix}any_ts, &jobCtx)
+                wfjobs££{mix}any_tsx, &jobCtx)
+                wfjobs££{mix}any_json, &jobCtx)
+                wfjobs££{mix}any_md, &jobCtx)
+                wfjobs££{mix}.env, &jobCtx)
+                wfjobs££{mix}.gitignore, &jobCtx)
+                wfjobs££{mix}.eslintrc, &jobCtx)
+                wfjobs££{mix}.eslintignore, &jobCtx)
+                wfjobs££{mix}.prettierrc, &jobCtx)
+                wfjobs££{mix}.prettierignore, &jobCtx)
+        	---
+            line ittf-src
+        		cwd-folder ££{'££'}{jobCtx.ittf_src_folder}
+        		dest-folder ££{'££'}{jobCtx.dest_folder}/src
+        
+                wfjobs££{mix}any_js, &jobCtx)
+                wfjobs££{mix}any_ts, &jobCtx)
+                wfjobs££{mix}any_tsx, &jobCtx)
+                wfjobs££{mix}any_css, &jobCtx)
+                wfjobs££{mix}any_json, &jobCtx)
+                wfjobs££{mix}any_md, &jobCtx)
+                wfjobs££{mix}any_plain, &jobCtx, js)
+                wfjobs££{mix}any_plain, &jobCtx, d.ts)
+                wfjobs££{mix}any_plain, &jobCtx, html)
+                wfjobs££{mix}any_plain, &jobCtx, html.ittf)
+                wfjobs££{mix}any_plain, &jobCtx, css)
+                wfjobs££{mix}any_plain, &jobCtx, css.ittf)
+                wfjobs££{mix}any_plain_image, &jobCtx)
+        	---
+            line ittf-static
+                cwd-folder ££{'££'}{jobCtx.ittf_static_folder}
+                dest-folder ££{'££'}{jobCtx.dest_folder}/static
+        
+                wfjobs££{mix}any_js, &jobCtx)
+                wfjobs££{mix}any_html, &jobCtx)
+                wfjobs££{mix}any_css, &jobCtx)
+                wfjobs££{mix}any_plain, &jobCtx, html)
+                wfjobs££{mix}any_plain, &jobCtx, css)
+                wfjobs££{mix}any_plain, &jobCtx, js)
+                wfjobs££{mix}any_plain_image, &jobCtx)
+        	---
+            line ittf-ittf
+                cwd-folder ££{'££'}{jobCtx.ittf_ittf_folder}
+                dest-folder ££{'££'}{jobCtx.dest_folder}/ittf
+        
+                wfjobs££{mix}any_plain, &jobCtx, ittf)
+                wfjobs££{mix}any_plain_image, &jobCtx)
+            ---
+            production
+        		dest-folder ££{'££'}{jobCtx.dest_folder}
+                line-ref ittf-models
+                line-ref ittf-root
+                line-ref ittf-static
+        		line-ref ittf-src
+                line-ref ittf-ittf

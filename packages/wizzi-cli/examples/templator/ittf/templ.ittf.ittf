@@ -1,0 +1,4 @@
+template
+    $file index.js.ittf
+        module
+            kind es6

@@ -1,0 +1,37 @@
+${'$'}group
+        
+    useExpress true
+    { express
+        useSsl ${'$'}{md.useSsl ? 'true' : 'false'}
+        useErrors false
+        useStaticFiles false
+        { staticFiles
+            basePath "__dirname, '..', '..'"
+
+    useSession false
+    { session
+        name "${cliCtx.name}"
+        secret "${'$'}{stfnbssl_env.sessionSecret}"
+
+    noCache true
+
+    useSocketIO false 
+    { socketIO
+    
+    useCookie true
+    { cookie
+
+    useLogger true
+    { logger
+        useMorgan false
+        { morgan
+
+    useCompression true
+    { compression
+    
+    useHelmet true
+    { helmet
+    
+    useCors false
+    { cors
+        clientOrigin "${'$'}{md.http}://localhost:${'$'}{md.port}"

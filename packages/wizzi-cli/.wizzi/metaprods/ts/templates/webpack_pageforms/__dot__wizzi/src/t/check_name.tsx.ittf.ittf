@@ -1,0 +1,4 @@
+${'$'}group
+    ${'$'}params prod, prefix
+
+    $include wz/v08/ts/react/pageforms/t/check_name.tsx

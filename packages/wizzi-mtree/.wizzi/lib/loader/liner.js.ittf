@@ -79,6 +79,8 @@
 			@ DOUBLE_QUOTE 34
 			@ BACKTICK 96
 			@ MACRO_REPLACE 198
+            @ HYPHEN 39 
+            @ DOUBLEHYPHEN 34
 
 	set module.exports
         function 
@@ -104,6 +106,7 @@
                 decl i
                 decl l = chunk.length
 				decl waitValue = false
+                decl noTagSuffix = false
 				decl nameAcc = []
 				decl valueAcc = []
             
@@ -285,10 +288,12 @@
 				else
                     if line
                         if waitValue == false
-							if cp == CP.OPEN_PAREN 
+							if cp == CP.OPEN_PAREN && noTagSuffix == false
 								set line.tagSuffix = String.fromCodePoint(cp)
 								set waitValue = true
 							else
+                                if cp == CP.HYPHEN || cp == CP.DOUBLEHYPHEN
+                                    set noTagSuffix = true
 								_ nameAcc.push
 									@ String.fromCodePoint(cp)
 								# set line.name += String.fromCodePoint(cp)
@@ -340,3 +345,4 @@
 				set nameAcc.length = 0
 				set valueAcc.length = 0
 				set lineHasMacro = false
+                set noTagSuffix = false

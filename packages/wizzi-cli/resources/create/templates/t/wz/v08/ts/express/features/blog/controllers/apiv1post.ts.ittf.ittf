@@ -1,0 +1,132 @@
+$group
+    
+    ${'$'}
+        var ctrl = {
+            name: 'ApiV1Post',
+            path: '/api/v1/blog/post',
+        }
+    
+    v08/ts/controller${'('}&ctrl)
+            
+        ${'$'}append imports
+            import
+                @ validatePost
+                @ getListPost
+                @ getPost
+                @ createPost
+                @ updatePost
+                @ deletePost
+                from '../api/post'
+            +
+            const myname = 'features/blog/controllers/apiv1post'
+
+        _ this.router.get('/:owner', this.getPostList)
+        _ this.router.get('/checkname/:owner/:name', this.getCheckPostName)
+        _ this.router.get('/:owner/:name', this.getPost)
+        _ this.router.post('/:owner/:name', this.postPost)
+        _ this.router.delete('/:id', this.deletePost)
+        
+        ${'$'}append handlers
+            
+            v08/ts/handler${'('}getPostList)
+
+                # loog 'getPostList.request.params', request.params
+                _ getListPost
+                    {
+                        { query
+                            @ owner request.params.owner
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            # loog 'getPostList.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}getPostList)
+
+            v08/ts/handler${'('}getCheckPostName)
+                _ validatePost
+                    @ request.params.owner
+                    @ request.params.name
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'getCheckPostName.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}getCheckPostName)
+
+            v08/ts/handler${'('}getPost)
+
+                # loog 'getPost.request.params', request.params
+                _ getPost
+                    @ request.params.owner
+                    @ request.params.name
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            # loog 'getPost.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}getPost)
+
+            v08/ts/handler${'('}postPost)
+
+                log 'postPost.request.params', request.params
+                log 'postPost.request.body', request.body
+                _ createPost
+                    @ request.params.owner
+                    @ request.params.name
+                    @ request.body.title
+                    @ request.body.content
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'postPost.create.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}postPost)
+
+            v08/ts/handler${'('}putPost)
+
+                log 'putPost.request.params', request.params
+                log 'putPost.request.body', request.body
+                _ updatePost
+                    @ request.params.id
+                    @ request.body.owner
+                    @ request.body.name
+                    @ request.body.title
+                    @ request.body.content
+                    @ request.body.state
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'putPost.update.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}putPost)
+
+            v08/ts/handler${'('}deletePost)
+
+                log 'deletePost.request.params', request.params
+                log 'deletePost.request.body', request.body
+                _ deletePost
+                    @ request.params.id
+                    ._ then
+                        =>
+                            param result
+                                :any
+                            log 'deletePost.update.result', result
+                            _ sendSuccess
+                                @ response
+                                @ result
+                    v08/ts/catch_fail${'('}deletePost)

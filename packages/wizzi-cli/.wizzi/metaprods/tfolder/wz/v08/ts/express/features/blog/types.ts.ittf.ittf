@@ -1,0 +1,30 @@
+$group
+
+    +
+    import
+        @ Document
+        from "mongoose"
+
+    ${'$'}
+        var md = {
+            Name: 'Post'
+        }
+
+    v08/mongo/crud/modeltype${'('}&md)
+        ${'$'}append fields
+            :p owner
+                :string
+            :p name
+                :string
+            :p title
+                :string
+            :p content
+                :string
+            :p state
+                :string
+            :p created_at
+                :ref Date
+            :p updated_at
+                :ref Date
+            :p published_at
+                :ref Date

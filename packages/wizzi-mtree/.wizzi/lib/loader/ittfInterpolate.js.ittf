@@ -1,4 +1,4 @@
-﻿module wizzi-mtree.loader.interpolate
+﻿module wizzi-mtree.loader.ittfinterpolate
 	kind jsfile
 
     $include versions

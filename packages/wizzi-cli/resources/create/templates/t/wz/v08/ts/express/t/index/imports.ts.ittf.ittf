@@ -76,7 +76,17 @@ $group
         import 
             @ ittfApi
             from './features/ittf/index'
-
+    
+    ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
+        ${'$'}foreach feature in wzCtx.Build.features
+            ${'$'}if feature.hasController || feature.useMongo
+                import 
+                    ${'$'}if feature.hasController
+                        @ ${'$'}{feature.name}Controllers
+                    ${'$'}if feature.useMongo
+                        @ ${'$'}{feature.name}ModelBuilders
+                    from './features/${'$'}{feature.name}/index'
+    
     import 
         @ appMiddlewaresPre
         @ appMiddlewaresPost

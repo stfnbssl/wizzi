@@ -1,0 +1,39 @@
+﻿wfjob wizzi-cli/metaproductions/ts
+	
+	$
+        var folders = {
+            ittf_contexts: path.join(__dirname, 'contexts'),
+            ittf_templates: path.join(__dirname, 'templates'),
+            dest: path.join(__dirname, '..', '..', '..', 'resources', 'create'),
+        }
+
+	line ittf-contexts
+		cwd-folder ${folders.ittf_contexts}
+		dest-folder ${folders.dest}/contexts/ts
+        
+        wfjob/any_plain(ittf)
+        wfjob/any_plain(css)
+        wfjob/any_plain(html)
+        wfjob/any_plain(d.ts)
+        wfjob/any_plain(js)
+        wfjob/any_plain(svg)
+        wfjob/any_plain(json)
+        wfjob/any_md()
+
+	line ittf-templates
+		cwd-folder ${folders.ittf_templates}
+		dest-folder ${folders.dest}/templates/ts
+        
+        wfjob/any_plain(ittf)
+        wfjob/any_plain(css)
+        wfjob/any_plain(html)
+        wfjob/any_plain(d.ts)
+        wfjob/any_plain(js)
+        wfjob/any_plain(svg)
+        wfjob/any_plain(json)
+        wfjob/any_md()
+
+	production
+		dest-folder ${folders.dest}
+        line-ref ittf-contexts
+        line-ref ittf-templates

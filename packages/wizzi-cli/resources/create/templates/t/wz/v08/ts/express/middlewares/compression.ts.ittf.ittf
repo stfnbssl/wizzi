@@ -12,7 +12,7 @@ $group
         # see other options here http://expressjs.com/en/resources/middleware/compression.html
         const options
             {
-                @ filter shouldCompress
+                # TODO
         +
         export 
             const CompressionMiddleware

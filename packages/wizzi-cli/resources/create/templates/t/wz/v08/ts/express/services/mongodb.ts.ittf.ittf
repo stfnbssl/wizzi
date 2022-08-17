@@ -29,13 +29,9 @@ $group
             return
                 _ mongoose.connect
                     @ connectUrl
-                    { 
-                        @ useNewUrlParser true
-                        @ useUnifiedTopology true
                     ._ then
                         => 
                             success 'Mongodb. Connected to', mongoPath
-                            _ mongoose.set('useFindAndModify', false)
                             _ modelBuilders.forEach
                                 => 
                                     param builder

@@ -102,7 +102,7 @@
                 @types/passport-local "^1.0.33"
             ${'$'}if wzCtx.Build.authentication.useGithub
                 @types/passport-github2 "^1.2.4"
-        ${'$'}if wzCtx.Build.styles.usePalx || wzCtx.Build.useStorybook
+        ${'$'}if (wzCtx.Build.styles && wzCtx.Build.styles.usePalx) || wzCtx.Build.useStorybook
             @types/palx "^1.0.1"
         ${'$'}if wzCtx.Build.usePrettier
             @types/prettier "^2.0.0"
@@ -153,7 +153,8 @@
                 @types/webpack "^5.28.0"
                 @types/webpack-dev-middleware "^4.1.2"
                 $$ 11/8/2022 @types/webpack-dev-server "^3.11.3"
-                @types/webpack-dev-server "^4.10.0"
+                ${'$'}if wzCtx.Build.webpack.useDevServer
+                    @types/webpack-dev-server "^4.10.0"
         ${'$'}if wzCtx.Build.useLint
             @typescript-eslint/parser "^5.33.0"
             @typescript-eslint/eslint-plugin "^5.33.0"

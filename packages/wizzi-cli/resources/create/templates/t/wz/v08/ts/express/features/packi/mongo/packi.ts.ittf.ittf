@@ -29,7 +29,7 @@ $group
                     @ lastCommitWhenCloned String
         # mongoose models creation is centralized
         # mongodb calls buildModel() when starting, after connection has been established
-        # controllers call PackiModel() when initialized, after buildModel() has benn called
+        # controllers call GetPackiModel() when initialized, after buildModel() has benn called
     
     export 
         :type PackiModelType
@@ -38,7 +38,7 @@ $group
                     :ref IPackiModel
         # mongoose models creation is centralized
         # mongodb calls buildModel() when starting, after connection has been established
-        # controllers call PackiModel() when initialized, after buildModel() has benn called
+        # controllers call GetPackiModel() when initialized, after buildModel() has benn called
     
     let packiModel
         :ref PackiModelType

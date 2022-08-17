@@ -1,0 +1,11 @@
+module
+	
+	var Context = require('../../lib/jswizzi/jsWizziContext')
+    var ip = require('../../lib/loader/ittfInterpolate')
+
+	var ctx = new Context()
+    _ ctx.setValue('name', 'stefi') 
+    
+    var result = ip('dark-light-icon${'$'}{ \'(\' } &md )', ctx)
+	log 'result', result
+

@@ -1,6 +1,6 @@
 {
     "name": "@wizzi/mtree",
-    "version": "0.7.12",
+    "version": "0.7.13",
     "title": "Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup.",
     "license": "MIT",
     "schemas": []

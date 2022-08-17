@@ -1,0 +1,14 @@
+module
+	kind es6
+
+    const path = require('path')
+	const fs = require('fs')
+	const wizzi = require('wizzi')
+    var templify = require('../../cmds/templify');
+
+    _ templify
+        @ "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-cli/.wizzi/metaprods/ts-express/templates/express_wizzi"
+        _ path.join
+            @ __dirname
+            @ 'output'
+            @ 'express_wizzi.ittf.ittf'

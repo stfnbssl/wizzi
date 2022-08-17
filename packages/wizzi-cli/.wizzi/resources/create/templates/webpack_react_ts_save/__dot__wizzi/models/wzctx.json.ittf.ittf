@@ -255,7 +255,7 @@
         { prismjs
             [ modes
 
-        useGraphql true
+        useGraphql false
         { graphql
             excludePolyfill true
         

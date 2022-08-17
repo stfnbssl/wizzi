@@ -1,0 +1,31 @@
+$group
+    $file __dot__wizzi/t/v08/express/site/index.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params &md
+            
+            ££include wz/v08/ts/express/site/index.ts
+    $file __dot__wizzi/t/v08/express/site/controllers/demoWizzi.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params &md
+            
+            ££include wz/v08/ts/express/site/controllers/demoWizzi.ts
+    $file __dot__wizzi/t/v08/express/site/controllers/demoHome.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params &md
+            
+            ££include wz/v08/ts/express/site/controllers/demoHome.ts
+    $file __dot__wizzi/t/v08/express/site/t/authHandler.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params name
+        
+            ££include wz/v08/ts/t/authHandler.ts
+    $file __dot__wizzi/t/v08/express/site/t/controller.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params &ctrl
+        
+            wz/v08/ts/t/controller.ts£'('£2)
+    $file __dot__wizzi/t/v08/express/site/t/handler.ts.ittf.ittf
+        ££{'££'}group
+            ££{'££'}params name
+        
+            ££include wz/v08/ts/t/handler.ts

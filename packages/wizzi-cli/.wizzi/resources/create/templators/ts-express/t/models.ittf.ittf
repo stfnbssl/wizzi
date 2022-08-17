@@ -1,0 +1,186 @@
+$group
+    $file __dot__wizzi/ittf/models/sitectx.json.ittf.ittf
+        {
+            ££include cli/v08/wzctx-info.json
+    $file __dot__wizzi/models/wzctx.json.ittf.ittf
+        {
+            ££{'££'}include v08/env/vars
+            ---
+            ££{'££'}
+                var md = {
+                    useSsl: false,
+                    host: 'localhost',
+                    port: 3900,
+                    apiVersion: 'v1'
+                };
+                md.http = md.useSsl ? 'https' : 'http';
+            
+            ---
+            ££include cli/v08/wzctx-info.json
+            
+            ---
+            { App
+                siteUrl "££{'££'}{md.http}://localhost"
+                port ££{'££'}{md.port}
+                baseUrl "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+                [ Components
+        
+            ---
+            { Styles
+            
+            ---
+            { Build
+                useSite true
+                { site
+                    useIttfStatic false
+                    { ittfStatic
+                useDemoControllers true
+                ££{'££'}include config.json
+                ---
+                ££{'££'}include code.json
+                ---
+                ££{'££'}include express.json
+                ---
+                ££{'££'}include styles.json
+                ---
+                ££{'££'}include test.json
+                ---
+                ££{'££'}include wizzi.json
+                ---
+                ££{'££'}include utils.json
+    $file __dot__wizzi/models/t/code.json.ittf.ittf
+        ££{'££'}group
+        
+            useTypescript true
+            { typescript
+                ££££ for webpack client
+                useBabelLoader true
+                useTsxFiles false
+                
+            usePrettier true
+            { prettier
+        
+            usePrismjs true
+            { prismjs
+                [ modes
+        
+            useLint true
+            { lint
+    $file __dot__wizzi/models/t/config.json.ittf.ittf
+        ££{'££'}group
+                
+            useConfig true
+            { config
+                useEnvalid true
+                { envalid
+        
+    $file __dot__wizzi/models/t/express.json.ittf.ittf
+        ££{'££'}group
+                
+            useExpress true
+            { express
+                useSsl ££{'££'}{md.useSsl ? 'true' : 'false'}
+                useErrors false
+                useStaticFiles true
+                { staticFiles
+                    basePath "__dirname, '..', '..'"
+        
+            useSession true
+            { session
+                name "££{cliCtx.name}"
+                secret "££{'££'}{stfnbssl_env.sessionSecret}"
+        
+            noCache true
+        
+            useSocketIO false 
+            { socketIO
+            
+            useCookie true
+            { cookie
+        
+            useLogger false
+            { logger
+                useMorgan false
+                { morgan
+        
+            useCompression false
+            { compression
+            
+            useHelmet false
+            { helmet
+            
+            useCors true
+            { cors
+                clientOrigin "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+        
+    $file __dot__wizzi/models/t/styles.json.ittf.ittf
+        ££{'££'}group
+                
+                { styles
+                    usePalx false
+                
+                useStyledComponents false
+                { styledComponents
+        
+                useStyledSystem false
+                { styledSystem
+        
+                useAphrodite false
+                { aphrodite
+                    disableImportant true
+        
+                useTailwindcss true
+                { tailwindcss
+        
+                useExpoStyles false
+                { expoStyles
+        
+        
+    $file __dot__wizzi/models/t/test.json.ittf.ittf
+        ££{'££'}group
+                
+            useJest false
+            { jest
+        
+    $file __dot__wizzi/models/t/utils.json.ittf.ittf
+        ££{'££'}group
+                
+            { utils
+                useAxios false
+                useEscapeRegexp false
+                useEscapeHtml false
+                useNullThrows false
+                useLodash false
+                useStringifySafe true
+                useParseUrl true
+                useEs6Error false
+                useJsCookie false
+                useQueryString false
+                useSanitizeHtml false
+                useDateFns false
+                useFetchPonyfill false
+                useNanoId false
+                useGitUrlParse false
+                useJsonToAst false
+    $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
+        ££{'££'}group
+                
+            useWizzi true
+            { wizzi
+                isDev true
+                [ plugins
+                    "./wizzi-core/index.js"
+                    "./wizzi-js/index.js" 
+                    "./wizzi-web/index.js" 
+                    "./wizzi-meta/index.js"
+                pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi/packages"
+                { globalContext
+                    wzConfigIsDevelopment true
+                useRunner false
+            
+            useIttfStatic true
+            { ittfStatic
+        
+            useWizziViewEngine true
+            { wizziViewEngine
+

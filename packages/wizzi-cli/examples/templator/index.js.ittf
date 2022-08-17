@@ -1,0 +1,33 @@
+module
+	kind es6
+
+    const path = require('path')
+	const fs = require('fs')
+	const wizzi = require('wizzi')
+    var templator = require('../../cmds/templator');
+
+    var ctx
+        {
+            @ useExpress true
+
+    _ templator
+        _ path.join
+            @ __dirname
+            @ 'ittf'
+            @ 'express_wizzi.ittf.ittf'
+        _ path.join
+            @ __dirname
+            @ 'output'
+            @ 'express_wizzi'
+        @ ctx
+
+    _ templator
+        _ path.join
+            @ __dirname
+            @ 'ittf'
+            @ 'templ.ittf.ittf'
+        _ path.join
+            @ __dirname
+            @ 'output'
+            @ 'templ'
+        @ ctx

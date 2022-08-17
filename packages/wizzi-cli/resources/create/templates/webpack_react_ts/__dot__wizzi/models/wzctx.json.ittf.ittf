@@ -288,7 +288,7 @@
         useLint true
         { lint
 
-        useGraphql true
+        useGraphql false
         { graphql
             excludePolyfill true
         

@@ -1,0 +1,168 @@
+$group
+    $file __dot__wizzi/src/middlewares/auth0Secured.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/auth0secured££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/authorization.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/authorization££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/authentication.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/authentication££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/bodyParser.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/bodyParser££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/compression.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/compression££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/cacheControl.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/cacheControl££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/cookie.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/cookie££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/cors.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/cors££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/errors.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/errors££{'('}&md)
+    $file __dot__wizzi/src/middlewares/helmet.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/helmet££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/index.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/index££{'('}&md)
+    $file __dot__wizzi/src/middlewares/ittfStatic.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/ittfStatic££{'('}&md)
+    $file __dot__wizzi/src/middlewares/logger.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/logger££{'('}&md)
+    $file __dot__wizzi/src/middlewares/passport.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/passport££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/passportAuth0.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/passportAuth0££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/session.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/session££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/static.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/static££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/userInViews.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/userInViews££{'('}&md)
+        
+        
+    $file __dot__wizzi/src/middlewares/webpackApp.js.ittf.ittf
+        module
+            kind es6
+            ££{'££'}
+                var md = {
+                }
+        
+            ££{'££'}if wzCtx.Build.useWebpackApp
+                v08/express/middlewares/webpackApp££{'('}&md)
+        
+    $file __dot__wizzi/src/middlewares/wizziViewEngine.ts.ittf.ittf
+        module
+            ££{'££'}
+                var md = {
+                }
+        
+            v08/express/middlewares/wizziViewEngine££{'('}&md)
+        

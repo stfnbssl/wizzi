@@ -14,6 +14,11 @@ $group
                         @ ...accountModelBuilders
                     ${'$'}if wzCtx.Build.useBlog
                         @ ...postModelBuilders
+                    ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
+                        ${'$'}foreach feature in wzCtx.Build.features
+                                ${'$'}if feature.useMongo
+                                    @ ...${'$'}{feature.name}ModelBuilders
+
         await mongodbStart(config, modelBuilders)
         +
     let middlewaresPre
@@ -59,6 +64,10 @@ $group
                 ${'$'}if wzCtx.Build.useWizzi
                     ${'$'}if wzCtx.Build.wizzi.useControllers
                         @ ...wizziControllers
+                ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
+                    ${'$'}foreach feature in wzCtx.Build.features
+                            ${'$'}if feature.useMongo
+                                @ ...${'$'}{feature.name}Controllers
 
         +
     warn 'Starting app. Config:', config

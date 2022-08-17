@@ -1,0 +1,7 @@
+$group
+    $file __dot__wizzi/ittf/demo.wizzi.html.ittf.ittf
+        html
+            body
+                h1 Hello from a Wizzi generated Html document 
+                p I am generated on the fly and served by the 'ittfStatic' middleware,
+                    \b from the "ittf" static folder.

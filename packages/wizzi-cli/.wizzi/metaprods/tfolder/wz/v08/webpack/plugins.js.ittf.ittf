@@ -10,8 +10,9 @@
     ---
     ${'$'}if wzCtx.Build.webpack.useIgnore
         new webpack.IgnorePlugin
-            @ /^((fs)|(path)|(os)|(crypto)|(source-map-support))$/
-            @ /vs(\/|\\)language(\/|\\)typescript(\/|\\)lib/
+            {
+                @ resourceRegExp /^((fs)|(path)|(os)|(crypto)|(source-map-support))$/
+                @ contextRegExp /vs(\/|\\)language(\/|\\)typescript(\/|\\)lib/
     ---
     ${'$'}if wzCtx.Build.webpack.useNodePolifills
         new webpack.ProvidePlugin

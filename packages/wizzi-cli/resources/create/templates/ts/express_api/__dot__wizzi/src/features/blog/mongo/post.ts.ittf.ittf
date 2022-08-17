@@ -1,0 +1,4 @@
+module
+
+    $include wz/v08/ts/express/features/blog/mongo/post.ts
+

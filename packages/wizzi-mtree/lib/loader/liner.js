@@ -38,7 +38,9 @@ var CP = {
     SINGLE_QUOTE: 39, 
     DOUBLE_QUOTE: 34, 
     BACKTICK: 96, 
-    MACRO_REPLACE: 198
+    MACRO_REPLACE: 198, 
+    HYPHEN: 39, 
+    DOUBLEHYPHEN: 34
  };
 module.exports = function(textContent, ittfDocumentData) {
     // TODO ensure textContent is red as utf-8 and avoid this
@@ -59,6 +61,7 @@ module.exports = function(textContent, ittfDocumentData) {
         i,
         l = chunk.length,
         waitValue = false,
+        noTagSuffix = false,
         nameAcc = [],
         valueAcc = [];
     // TODO replace ch with chUni
@@ -286,12 +289,15 @@ module.exports = function(textContent, ittfDocumentData) {
         else {
             if (line) {
                 if (waitValue == false) {
-                    if (cp == CP.OPEN_PAREN) {
+                    if (cp == CP.OPEN_PAREN && noTagSuffix == false) {
                         line.tagSuffix = String.fromCodePoint(cp);
                         waitValue = true;
                     }
                     // set line.name += String.fromCodePoint(cp)
                     else {
+                        if (cp == CP.HYPHEN || cp == CP.DOUBLEHYPHEN) {
+                            noTagSuffix = true;
+                        }
                         nameAcc.push(String.fromCodePoint(cp))
                     }
                 }
@@ -355,6 +361,7 @@ module.exports = function(textContent, ittfDocumentData) {
         nameAcc.length = 0;
         valueAcc.length = 0;
         lineHasMacro = false;
+        noTagSuffix = false;
     }
 }
 ;

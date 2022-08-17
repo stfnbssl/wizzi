@@ -1,0 +1,4 @@
+${'$'}group
+    ${'$'}params label, href, bg|success
+
+    $include wz/v08/ts/react/pageforms/t/a_icon.tsx

@@ -2,11 +2,12 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\root\create.js.ittf
-    utc time: Fri, 12 Aug 2022 16:51:09 GMT
+    utc time: Wed, 17 Aug 2022 15:01:10 GMT
 */
 'use strict';
 const minimist = require('minimist');
 const create = require('./cmds/create');
+const createEx = require('./cmds/createEx');
 const args = minimist(process.argv.slice(2));
 let cmd = args._[0];
 console.log('args', args, 'cmd', cmd);
@@ -17,15 +18,29 @@ if (cmd == 'ts-express') {
      })
 }
 else if (cmd == 'ts-express-hello') {
+    createEx({
+        templateGroup: 'ts-express', 
+        template: 'hello', 
+        pkgName: 'demo.ts.express.helloEx'
+     })
+}
+else if (cmd == 'ts-express-api') {
     create({
-        template: 'ts/express_hello', 
-        pkgName: 'demo.ts.express.hello'
+        template: 'ts/express_api', 
+        pkgName: 'demo.ts.express.api'
+     })
+}
+else if (cmd == 'ts-webpack-pageforms') {
+    create({
+        template: 'ts/webpack_pageforms', 
+        pkgName: 'demo.ts.webpack.pageforms'
      })
 }
 else if (cmd == 'ts-express-wizzi') {
-    create({
-        template: 'ts/express_wizzi', 
-        pkgName: 'demo.ts.express.wizzi'
+    createEx({
+        templateGroup: 'ts-express', 
+        template: 'wizzi', 
+        pkgName: 'demo.ts.express.wizziEx'
      })
 }
 else if (cmd == 'js-express') {

@@ -2,10 +2,13 @@
 
 Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup..
 
+
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## Features
 * Loads an ittf document into an mTree instance ( [wizzi-mtree.mTree]()
@@ -51,6 +54,7 @@ callback
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
