@@ -1,15 +1,12 @@
 $group
 
-    $
-        var lp = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'Packi',
             path: '/api/v1/packi'
         }
 
-    controller${lp} &ctrl )
+    controller${'('} &ctrl )
         ${'$'}append imports
             import path from 'path'
             import 

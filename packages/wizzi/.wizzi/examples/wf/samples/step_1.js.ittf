@@ -38,17 +38,21 @@ module
             @ '..'
             @ '..'
             @ '..'
-            @ '..'
 
     _ wizziIndex.createFactory
         {
             { repo
                 @ storeKind 'filesystem'
             { plugins
-                @ pluginsBaseFolder pluginsBaseFolder
-                [ items
-                    @ './wizzi-web/dist/index'
-                    @ './wizzi-core/dist/index'
+                $if false
+                    @ pluginsBaseFolder pluginsBaseFolder
+                    [ items
+                        @ './wizzi-web/index'
+                        @ './wizzi-core/index'
+                $else
+                    [ items
+                        @ 'wizzi-web'
+                        @ 'wizzi-core'
             { globalContext
         f_cb_test( wf ) 
             var htmlFriendsPath

@@ -7,8 +7,8 @@
 var util = require('util');
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
 var JsWizziContext = require('../jswizzi/jsWizziContext');
-var dateUtil = require('../jswizzi/functions/dateutil');
-var JsWizziScriptCoder = require('../jswizzi/JsWizziScriptCoder');
+var dateUtil = require('../jswizzi/functions/dateUtil');
+var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
 var mTreeBuildUpScripter = require('./mTreeBuildUpScripter');
 /**
      The final step of an mTree loading.

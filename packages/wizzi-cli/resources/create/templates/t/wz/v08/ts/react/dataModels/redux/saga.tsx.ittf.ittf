@@ -1,8 +1,5 @@
 $group
 
-    $
-        var lp = '(';
-
     ${'$'}
         var schema = md.schema;
 
@@ -30,7 +27,7 @@ $group
         as ${'$'}{schema.name}Actions
         from './actions'
     +
-    saga_handler${lp} ${'$'}{schema.name}, get${'$'}{schema.Name}ListRequest, get${'$'}{schema.Name}ListError )
+    saga_handler${'('} ${'$'}{schema.name}, get${'$'}{schema.Name}ListRequest, get${'$'}{schema.Name}ListError )
         const res
             :[
                 :ref I${'$'}{schema.Name}
@@ -44,7 +41,7 @@ $group
                         @ ${'$'}{schema.collectionName} res
                         @ message "${'$'}{schema.Name} created"
     +
-    saga_handler${lp} ${'$'}{schema.name}, get${'$'}{schema.Name}ByIdRequest, get${'$'}{schema.Name}ByIdError )
+    saga_handler${'('} ${'$'}{schema.name}, get${'$'}{schema.Name}ByIdRequest, get${'$'}{schema.Name}ByIdError )
         const res
             :ref I${'$'}{schema.Name}
             =
@@ -57,7 +54,7 @@ $group
                         @ ${'$'}{schema.name} res
                         @ message "${'$'}{schema.Name} retrieved"
     +
-    saga_handler${lp} ${'$'}{schema.name}, create${'$'}{schema.Name}Request, create${'$'}{schema.Name}Error )
+    saga_handler${'('} ${'$'}{schema.name}, create${'$'}{schema.Name}Request, create${'$'}{schema.Name}Error )
         const res
             :ref I${'$'}{schema.Name}
             =
@@ -70,7 +67,7 @@ $group
                         @ ${'$'}{schema.name} res
                         @ message "${'$'}{schema.Name} created"
     +
-    saga_handler${lp} ${'$'}{schema.name}, update${'$'}{schema.Name}Request, update${'$'}{schema.Name}Error )
+    saga_handler${'('} ${'$'}{schema.name}, update${'$'}{schema.Name}Request, update${'$'}{schema.Name}Error )
         const res
             :ref I${'$'}{schema.Name}
             =
@@ -83,7 +80,7 @@ $group
                         @ ${'$'}{schema.name} res
                         @ message "${'$'}{schema.Name} updated"
     +
-    saga_handler${lp} ${'$'}{schema.name}, delete${'$'}{schema.Name}Request, delete${'$'}{schema.Name}Error )
+    saga_handler${'('} ${'$'}{schema.name}, delete${'$'}{schema.Name}Request, delete${'$'}{schema.Name}Error )
         const res
             :ref I${'$'}{schema.Name}
             =

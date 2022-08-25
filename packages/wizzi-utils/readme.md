@@ -2,10 +2,13 @@
 
 Utility library for the wizzi factory.
 
+
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## vfile - virtual file system
 #### var vfile = require('wizzi-utils').vfile
@@ -23,6 +26,7 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 * `content` `String` 
 * `options` `Object` 
 * `callback` `Function` If absent the call is sync. When the call is sync if `fsimpl` does not implement `readFileSync` throw Error.
+
 * `err` 
 * `content` 
 
@@ -162,6 +166,7 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>

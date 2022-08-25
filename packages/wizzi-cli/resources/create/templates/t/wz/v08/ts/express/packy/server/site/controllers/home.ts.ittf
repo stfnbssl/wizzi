@@ -23,7 +23,7 @@ module
                 _ this.router.get
                     `lit 
                         + /
-                    @expr this.home
+                    @ this.home
             p home
                 :private 
                 async=> 

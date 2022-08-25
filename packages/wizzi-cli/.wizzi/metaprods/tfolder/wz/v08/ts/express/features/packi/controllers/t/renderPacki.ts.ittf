@@ -1,9 +1,6 @@
 $group
     $params kind
 
-    $
-        var lp = '(';
-
     $if kind == 'route'
         _ this.router.get
             `lit 
@@ -12,7 +9,7 @@ $group
 
     $if kind == 'handler'
         +
-        handler${lp} renderPacki )
+        handler${'('} renderPacki )
             const id = request.params.id
             const entry = request.params.entry
 

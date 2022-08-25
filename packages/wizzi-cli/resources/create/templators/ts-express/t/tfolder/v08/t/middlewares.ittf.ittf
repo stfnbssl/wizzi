@@ -2,110 +2,111 @@ $group
 
     $if cliCtx.useAuthentication
         $file __dot__wizzi/t/v08/express/middlewares/auth0Secured.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/auth0secured.ts
+                ${'$'}include wz/v08/ts/express/middlewares/auth0secured.ts
         $file __dot__wizzi/t/v08/express/middlewares/authentication.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/authentication.ts
+                ${'$'}include wz/v08/ts/express/middlewares/authentication.ts
             
         $file __dot__wizzi/t/v08/express/middlewares/authorization.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/authorization.ts
+                ${'$'}include wz/v08/ts/express/middlewares/authorization.ts
         $file __dot__wizzi/t/v08/express/middlewares/passport.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/passport.ts
+                ${'$'}include wz/v08/ts/express/middlewares/passport.ts
         $file __dot__wizzi/t/v08/express/middlewares/passportAuth0.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/passportAuth0.ts
+                ${'$'}include wz/v08/ts/express/middlewares/passportAuth0.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/bodyParser.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/bodyParser.ts
+            ${'$'}include wz/v08/ts/express/middlewares/bodyParser.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/cacheControl.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cacheControl.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cacheControl.ts
     $file __dot__wizzi/t/v08/express/middlewares/compression.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/compression.ts
+            ${'$'}include wz/v08/ts/express/middlewares/compression.ts
     $file __dot__wizzi/t/v08/express/middlewares/cookie.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cookie.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cookie.ts
     $file __dot__wizzi/t/v08/express/middlewares/cors.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cors.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cors.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/errors.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/errors.ts
+            ${'$'}include wz/v08/ts/express/middlewares/errors.ts
     $file __dot__wizzi/t/v08/express/middlewares/helmet.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/helmet.ts
+            ${'$'}include wz/v08/ts/express/middlewares/helmet.ts
     $file __dot__wizzi/t/v08/express/middlewares/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/index.ts
+            ${'$'}include wz/v08/ts/express/middlewares/index.ts
     $file __dot__wizzi/t/v08/express/middlewares/logger.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/logger.ts
+            ${'$'}include wz/v08/ts/express/middlewares/logger.ts
     $file __dot__wizzi/t/v08/express/middlewares/session.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/session.ts
+            ${'$'}include wz/v08/ts/express/middlewares/session.ts
     $file __dot__wizzi/t/v08/express/middlewares/static.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/static.ts
-        
+            ${'$'}include wz/v08/ts/express/middlewares/static.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/webpackApp.js.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/webpackApp.js
+            ${'$'}include wz/v08/ts/express/middlewares/webpackApp.js
     $file __dot__wizzi/t/v08/express/middlewares/userInViews.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/userInViews.ts
+            ${'$'}include wz/v08/ts/express/middlewares/userInViews.ts
     
-    $if cliCtx.useWizzi
+    $if cliCtx.useIttfStatic
         $file __dot__wizzi/t/v08/express/middlewares/ittfStatic.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/ittfStatic.ts
+                ${'$'}include wz/v08/ts/express/middlewares/ittfStatic.ts
+    
+    $if cliCtx.useWizziViewEngine
         $file __dot__wizzi/t/v08/express/middlewares/wizziViewEngine.ts.ittf.ittf
-            ££{'££'}group
-                ££{'££'}params &md
+            ${"${'$'}"}group
+                ${"${'$'}"}params &md
             
-                ££include wz/v08/ts/express/middlewares/wizziViewEngine.ts
+                ${'$'}include wz/v08/ts/express/middlewares/wizziViewEngine.ts

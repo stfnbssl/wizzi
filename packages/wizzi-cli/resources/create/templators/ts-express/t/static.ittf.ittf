@@ -1,5 +1,5 @@
 $group
-    $file __dot__wizzi/static/pure.html
+    $file __dot__wizzi/${pkgPath}static/pure.html
         <html>
             <body>
                 <h1>Hello from a pure Html document</h1>

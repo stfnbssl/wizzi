@@ -50,19 +50,19 @@ $group
                         + 
                         @ this.path
                         + /:id
-                    @expr this.getTemplateById
+                    @ this.getTemplateById
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /__starter
-                    @expr this.getStarterTemplate
+                    @ this.getStarterTemplate
                 _ this.router.post
                     `lit 
                         + 
                         @ this.path
                         + /:uid/:id
-                    @expr this.saveTemplate
+                    @ this.saveTemplate
             
             +
             p getAllTemplates

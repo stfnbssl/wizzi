@@ -2,21 +2,21 @@ template express_wizzi
     $file wizzi.config.js.ittf
         module
             kind jsfile
-            ££
+            ${'$'}
                 var development = true;
             const path = require('path')
             set module.exports
                 { 
-                    @ wfjobName "££{cliCtx.name}/job"
+                    @ wfjobName "${'$'}{cliCtx.name}/job"
                     @ wfjobPath path.join(__dirname, '.wizzi', 'generate.wfjob.ittf')
                     @ destPath __dirname
-                    ££if development
+                    ${'$'}if development
                         [ plugins
                             @ './wizzi-core/index.js' 
                             @ './wizzi-js/index.js' 
                             @ './wizzi-web/index.js' 
                         @ pluginsBaseFolder path.join(__dirname, '..', '..', '..', 'wizzi', 'packages') 
-                    ££else
+                    ${'$'}else
                         [ plugins
                             @ 'wizzi-core'
                             @ 'wizzi-js'
@@ -25,12 +25,12 @@ template express_wizzi
                     { globalContext
                         @ wzConfigIsDevelopment true
     $file __dot__wizzi/generate.wfjob.ittf.ittf
-        wfjob ££{cliCtx.name}/job
-            ££
+        wfjob ${'$'}{cliCtx.name}/job
+            ${'$'}
                 var mix = '(';
         
             ---
-        	££{'££'}
+        	${"${'$'}"}
                 var jobCtx = {
         		    ittf_models_folder: path.join(__dirname, 'models'),
                     ittf_src_folder: path.join(__dirname, 'src'),
@@ -41,68 +41,68 @@ template express_wizzi
                     job_model: 'wzCtx'
                 }
             ---
-            model ££{'££'}{jobCtx.job_model}
+            model ${"${'$'}"}{jobCtx.job_model}
                 schema json
-                src ££{'££'}{jobCtx.ittf_models_folder}/wzctx.json.ittf
+                src ${"${'$'}"}{jobCtx.ittf_models_folder}/wzctx.json.ittf
             ---
             line ittf-models
-                cwd-folder ££{'££'}{jobCtx.ittf_models_folder}
-                wfjobs££{mix}any_json, &jobCtx)
+                cwd-folder ${"${'$'}"}{jobCtx.ittf_models_folder}
+                wfjobs${'$'}{mix}any_json, &jobCtx)
             ---
         	line ittf-root
-        		cwd-folder ££{'££'}{jobCtx.ittf_root_folder}
+        		cwd-folder ${"${'$'}"}{jobCtx.ittf_root_folder}
         
-        		wfjobs££{mix}any_js, &jobCtx)
-                wfjobs££{mix}any_ts, &jobCtx)
-                wfjobs££{mix}any_tsx, &jobCtx)
-                wfjobs££{mix}any_json, &jobCtx)
-                wfjobs££{mix}any_md, &jobCtx)
-                wfjobs££{mix}.env, &jobCtx)
-                wfjobs££{mix}.gitignore, &jobCtx)
-                wfjobs££{mix}.eslintrc, &jobCtx)
-                wfjobs££{mix}.eslintignore, &jobCtx)
-                wfjobs££{mix}.prettierrc, &jobCtx)
-                wfjobs££{mix}.prettierignore, &jobCtx)
+        		wfjobs${'$'}{mix}any_js, &jobCtx)
+                wfjobs${'$'}{mix}any_ts, &jobCtx)
+                wfjobs${'$'}{mix}any_tsx, &jobCtx)
+                wfjobs${'$'}{mix}any_json, &jobCtx)
+                wfjobs${'$'}{mix}any_md, &jobCtx)
+                wfjobs${'$'}{mix}.env, &jobCtx)
+                wfjobs${'$'}{mix}.gitignore, &jobCtx)
+                wfjobs${'$'}{mix}.eslintrc, &jobCtx)
+                wfjobs${'$'}{mix}.eslintignore, &jobCtx)
+                wfjobs${'$'}{mix}.prettierrc, &jobCtx)
+                wfjobs${'$'}{mix}.prettierignore, &jobCtx)
         	---
             line ittf-src
-        		cwd-folder ££{'££'}{jobCtx.ittf_src_folder}
-        		dest-folder ££{'££'}{jobCtx.dest_folder}/src
+        		cwd-folder ${"${'$'}"}{jobCtx.ittf_src_folder}
+        		dest-folder ${"${'$'}"}{jobCtx.dest_folder}/src
         
-                wfjobs££{mix}any_js, &jobCtx)
-                wfjobs££{mix}any_ts, &jobCtx)
-                wfjobs££{mix}any_tsx, &jobCtx)
-                wfjobs££{mix}any_css, &jobCtx)
-                wfjobs££{mix}any_json, &jobCtx)
-                wfjobs££{mix}any_md, &jobCtx)
-                wfjobs££{mix}any_plain, &jobCtx, js)
-                wfjobs££{mix}any_plain, &jobCtx, d.ts)
-                wfjobs££{mix}any_plain, &jobCtx, html)
-                wfjobs££{mix}any_plain, &jobCtx, html.ittf)
-                wfjobs££{mix}any_plain, &jobCtx, css)
-                wfjobs££{mix}any_plain, &jobCtx, css.ittf)
-                wfjobs££{mix}any_plain_image, &jobCtx)
+                wfjobs${'$'}{mix}any_js, &jobCtx)
+                wfjobs${'$'}{mix}any_ts, &jobCtx)
+                wfjobs${'$'}{mix}any_tsx, &jobCtx)
+                wfjobs${'$'}{mix}any_css, &jobCtx)
+                wfjobs${'$'}{mix}any_json, &jobCtx)
+                wfjobs${'$'}{mix}any_md, &jobCtx)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, js)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, d.ts)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, html)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, html.ittf)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, css)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, css.ittf)
+                wfjobs${'$'}{mix}any_plain_image, &jobCtx)
         	---
             line ittf-static
-                cwd-folder ££{'££'}{jobCtx.ittf_static_folder}
-                dest-folder ££{'££'}{jobCtx.dest_folder}/static
+                cwd-folder ${"${'$'}"}{jobCtx.ittf_static_folder}
+                dest-folder ${"${'$'}"}{jobCtx.dest_folder}/static
         
-                wfjobs££{mix}any_js, &jobCtx)
-                wfjobs££{mix}any_html, &jobCtx)
-                wfjobs££{mix}any_css, &jobCtx)
-                wfjobs££{mix}any_plain, &jobCtx, html)
-                wfjobs££{mix}any_plain, &jobCtx, css)
-                wfjobs££{mix}any_plain, &jobCtx, js)
-                wfjobs££{mix}any_plain_image, &jobCtx)
+                wfjobs${'$'}{mix}any_js, &jobCtx)
+                wfjobs${'$'}{mix}any_html, &jobCtx)
+                wfjobs${'$'}{mix}any_css, &jobCtx)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, html)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, css)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, js)
+                wfjobs${'$'}{mix}any_plain_image, &jobCtx)
         	---
             line ittf-ittf
-                cwd-folder ££{'££'}{jobCtx.ittf_ittf_folder}
-                dest-folder ££{'££'}{jobCtx.dest_folder}/ittf
+                cwd-folder ${"${'$'}"}{jobCtx.ittf_ittf_folder}
+                dest-folder ${"${'$'}"}{jobCtx.dest_folder}/ittf
         
-                wfjobs££{mix}any_plain, &jobCtx, ittf)
-                wfjobs££{mix}any_plain_image, &jobCtx)
+                wfjobs${'$'}{mix}any_plain, &jobCtx, ittf)
+                wfjobs${'$'}{mix}any_plain_image, &jobCtx)
             ---
             production
-        		dest-folder ££{'££'}{jobCtx.dest_folder}
+        		dest-folder ${"${'$'}"}{jobCtx.dest_folder}
                 line-ref ittf-models
                 line-ref ittf-root
                 line-ref ittf-static
@@ -116,12 +116,12 @@ template express_wizzi
                     \b from the "ittf" static folder.
     $file __dot__wizzi/ittf/models/sitectx.json.ittf.ittf
         {
-            ££include cli/v08/wzctx-info.json
+            ${'$'}include cli/v08/wzctx-info.json
     $file __dot__wizzi/models/wzctx.json.ittf.ittf
         {
-            ££{'££'}include v08/env/vars
+            ${"${'$'}"}include v08/env/vars
             ---
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                     useSsl: false,
                     host: 'localhost',
@@ -131,13 +131,13 @@ template express_wizzi
                 md.http = md.useSsl ? 'https' : 'http';
             
             ---
-            ££include cli/v08/wzctx-info.json
+            ${'$'}include cli/v08/wzctx-info.json
             
             ---
             { App
-                siteUrl "££{'££'}{md.http}://localhost"
-                port ££{'££'}{md.port}
-                baseUrl "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+                siteUrl "${"${'$'}"}{md.http}://localhost"
+                port ${"${'$'}"}{md.port}
+                baseUrl "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
                 [ Components
         
             ---
@@ -150,25 +150,25 @@ template express_wizzi
                     useIttfStatic false
                     { ittfStatic
                 useDemoControllers true
-                ££{'££'}include config.json
+                ${"${'$'}"}include config.json
                 ---
-                ££{'££'}include code.json
+                ${"${'$'}"}include code.json
                 ---
-                ££{'££'}include express.json
+                ${"${'$'}"}include express.json
                 ---
-                ££{'££'}include styles.json
+                ${"${'$'}"}include styles.json
                 ---
-                ££{'££'}include test.json
+                ${"${'$'}"}include test.json
                 ---
-                ££{'££'}include wizzi.json
+                ${"${'$'}"}include wizzi.json
                 ---
-                ££{'££'}include utils.json
+                ${"${'$'}"}include utils.json
     $file __dot__wizzi/models/t/code.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
             useTypescript true
             { typescript
-                ££££ for webpack client
+                ${'$'}${'$'} for webpack client
                 useBabelLoader true
                 useTsxFiles false
                 
@@ -182,7 +182,7 @@ template express_wizzi
             useLint true
             { lint
     $file __dot__wizzi/models/t/config.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useConfig true
             { config
@@ -190,11 +190,11 @@ template express_wizzi
                 { envalid
         
     $file __dot__wizzi/models/t/express.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useExpress true
             { express
-                useSsl ££{'££'}{md.useSsl ? 'true' : 'false'}
+                useSsl ${"${'$'}"}{md.useSsl ? 'true' : 'false'}
                 useErrors false
                 useStaticFiles true
                 { staticFiles
@@ -202,8 +202,8 @@ template express_wizzi
         
             useSession true
             { session
-                name "££{cliCtx.name}"
-                secret "££{'££'}{stfnbssl_env.sessionSecret}"
+                name "${'$'}{cliCtx.name}"
+                secret "${"${'$'}"}{stfnbssl_env.sessionSecret}"
         
             noCache true
         
@@ -226,10 +226,10 @@ template express_wizzi
             
             useCors true
             { cors
-                clientOrigin "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+                clientOrigin "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
         
     $file __dot__wizzi/models/t/styles.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
                 { styles
                     usePalx false
@@ -252,13 +252,13 @@ template express_wizzi
         
         
     $file __dot__wizzi/models/t/test.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useJest false
             { jest
         
     $file __dot__wizzi/models/t/utils.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             { utils
                 useAxios false
@@ -278,7 +278,7 @@ template express_wizzi
                 useGitUrlParse false
                 useJsonToAst false
     $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useWizzi true
             { wizzi
@@ -300,384 +300,384 @@ template express_wizzi
             { wizziViewEngine
     $file __dot__wizzi/root/package.json.ittf.ittf
         {
-            ££include cli/v08/package-info.json
-            ££include cli/v08/package-base.json
+            ${'$'}include cli/v08/package-info.json
+            ${'$'}include cli/v08/package-base.json
     $file __dot__wizzi/root/tsconfig.json.ittf.ittf
         {
-            ££{'££'}
+            ${"${'$'}"}
         		var md = {};
         	
-            v08/ts/tsconfig££{'('}&md)
+            v08/ts/tsconfig${'$'}{'('}&md)
     $file __dot__wizzi/root/__dot__env.text.ittf.ittf
         text
-            ££include cli/v08/env.text
+            ${'$'}include cli/v08/env.text
     $file __dot__wizzi/root/__dot__eslintignore.text.ittf.ittf
         text
         
-        	££include wz/v08/eslint/eslintignore.text
+        	${'$'}include wz/v08/eslint/eslintignore.text
         
     $file __dot__wizzi/root/__dot__eslintrc.js.ittf.ittf
         module
             kind es6
-        	££include cli/v08/eslintrc-base.js
+        	${'$'}include cli/v08/eslintrc-base.js
     $file __dot__wizzi/root/__dot__gitignore.text.ittf.ittf
         text
-        	££include cli/v08/gitignore-base.text
+        	${'$'}include cli/v08/gitignore-base.text
     $file __dot__wizzi/root/__dot__prettierignore.text.ittf.ittf
         text
         
-        	££include wz/v08/prettier/prettierignore.text
+        	${'$'}include wz/v08/prettier/prettierignore.text
         
     $file __dot__wizzi/root/__dot__prettierrc.json.ittf.ittf
         {
-        	££include wz/v08/prettier/rc.json
+        	${'$'}include wz/v08/prettier/rc.json
     $file __dot__wizzi/src/App.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/App££{'('}&md)
+            v08/express/App${'$'}{'('}&md)
         
     $file __dot__wizzi/src/httpException.ts.ittf.ittf
         module
             
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/httpException££{'('}&md)
+            v08/express/httpException${'$'}{'('}&md)
     $file __dot__wizzi/src/index.ts.ittf.ittf
         module
             
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/index££{'('}&md)
+            v08/express/index${'$'}{'('}&md)
         
     $file __dot__wizzi/src/features/app/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/features/app/index££{'('}&md)
+            v08/express/features/app/index${'$'}{'('}&md)
     $file __dot__wizzi/src/features/app/types.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/features/app/types££{'('}&md)
+            v08/express/features/app/types${'$'}{'('}&md)
         
     $file __dot__wizzi/src/features/config/env.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useConfig
-                v08/express/features/config/env££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useConfig
+                v08/express/features/config/env${'$'}{'('}&md)
     $file __dot__wizzi/src/features/config/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useConfig
-                v08/express/features/config/index££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useConfig
+                v08/express/features/config/index${'$'}{'('}&md)
         
     $file __dot__wizzi/src/features/config/types.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useConfig
-                v08/express/features/config/types££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useConfig
+                v08/express/features/config/types${'$'}{'('}&md)
         
     $file __dot__wizzi/src/features/wizzi/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/index££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/index${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/factory.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/factory££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/factory${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/maps.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/maps££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/maps${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/productions.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/productions££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/productions${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/types.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/types££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/types${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/api/context.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/api/context££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/api/context${'$'}{'('}&md)
     $file __dot__wizzi/src/features/wizzi/controllers/production.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWizzi
-                v08/express/features/wizzi/controllers/production££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWizzi
+                v08/express/features/wizzi/controllers/production${'$'}{'('}&md)
     $file __dot__wizzi/src/middlewares/auth0Secured.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/auth0secured££{'('}&md)
+            v08/express/middlewares/auth0secured${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/authorization.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/authorization££{'('}&md)
+            v08/express/middlewares/authorization${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/authentication.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/authentication££{'('}&md)
+            v08/express/middlewares/authentication${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/bodyParser.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/bodyParser££{'('}&md)
+            v08/express/middlewares/bodyParser${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/compression.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/compression££{'('}&md)
+            v08/express/middlewares/compression${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/cacheControl.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/cacheControl££{'('}&md)
+            v08/express/middlewares/cacheControl${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/cookie.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/cookie££{'('}&md)
+            v08/express/middlewares/cookie${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/cors.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/cors££{'('}&md)
+            v08/express/middlewares/cors${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/errors.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/errors££{'('}&md)
+            v08/express/middlewares/errors${'$'}{'('}&md)
     $file __dot__wizzi/src/middlewares/helmet.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/helmet££{'('}&md)
+            v08/express/middlewares/helmet${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/index££{'('}&md)
+            v08/express/middlewares/index${'$'}{'('}&md)
     $file __dot__wizzi/src/middlewares/ittfStatic.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/ittfStatic££{'('}&md)
+            v08/express/middlewares/ittfStatic${'$'}{'('}&md)
     $file __dot__wizzi/src/middlewares/logger.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/logger££{'('}&md)
+            v08/express/middlewares/logger${'$'}{'('}&md)
     $file __dot__wizzi/src/middlewares/passport.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/passport££{'('}&md)
+            v08/express/middlewares/passport${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/passportAuth0.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/passportAuth0££{'('}&md)
+            v08/express/middlewares/passportAuth0${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/session.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/session££{'('}&md)
+            v08/express/middlewares/session${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/static.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/static££{'('}&md)
+            v08/express/middlewares/static${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/userInViews.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/userInViews££{'('}&md)
+            v08/express/middlewares/userInViews${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/middlewares/webpackApp.js.ittf.ittf
         module
             kind es6
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££{'££'}if wzCtx.Build.useWebpackApp
-                v08/express/middlewares/webpackApp££{'('}&md)
+            ${"${'$'}"}if wzCtx.Build.useWebpackApp
+                v08/express/middlewares/webpackApp${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/wizziViewEngine.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/middlewares/wizziViewEngine££{'('}&md)
+            v08/express/middlewares/wizziViewEngine${'$'}{'('}&md)
         
         
     $file __dot__wizzi/src/site/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/site/index££{'('}&md)
+            v08/express/site/index${'$'}{'('}&md)
         
     $file __dot__wizzi/src/site/controllers/demoHome.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/site/controllers/demoHome££{'('}&md)
+            v08/express/site/controllers/demoHome${'$'}{'('}&md)
         
     $file __dot__wizzi/src/site/controllers/demoWizzi.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 };
         
-            v08/express/site/controllers/demoWizzi££{'('}&md)
+            v08/express/site/controllers/demoWizzi${'$'}{'('}&md)
     $file __dot__wizzi/src/site/views/error.html.ittf.ittf
         html
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££££ TODO ££if cliCtx.useIttfStatic
-            ££include wz/v08/express/site/views/error.html
+            ${'$'}${'$'} TODO ${'$'}if cliCtx.useIttfStatic
+            ${'$'}include wz/v08/html/views/error.html
     $file __dot__wizzi/src/site/views/demoWizzi/index.html.ittf.ittf
         html
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££include wz/v08/express/site/views/demoWizzi/index.html
+            ${'$'}include wz/v08/html/views/demoWizzi/index.html
     $file __dot__wizzi/src/site/views/demoWizzi/index.json.ittf.ittf
         {
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            ££include wz/v08/express/site/views/demoWizzi/index.json
+            ${'$'}include wz/v08/html/views/demoWizzi/index.json
     $file __dot__wizzi/src/site/views/t/demo_layout.html.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/express/site/views/t/demo_layout.html
+            ${'$'}include wz/v08/html/views/t/demo_layout.html
     $file __dot__wizzi/src/utils/sendResponse.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/utils/sendResponse££{'('}&md)
+            v08/express/utils/sendResponse${'$'}{'('}&md)
     $file __dot__wizzi/static/pure.html
         <html>
             <body>
@@ -686,652 +686,652 @@ template express_wizzi
             </body>
         </html>
     $file __dot__wizzi/t/wfjobs.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name, &jobCtx, ext|@@null
+        ${"${'$'}"}group
+            ${"${'$'}"}params name, &jobCtx, ext|@@null
         
-            ££include wz/v08/wfjob/commons.wfjob
+            ${'$'}include wz/v08/wfjob/commons.wfjob
         
         
     $file __dot__wizzi/t/v08/env/index.text.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/env/index.text
+            ${'$'}include wz/v08/env/index.text
     $file __dot__wizzi/t/v08/eslint/rc/extends.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/extends.js
+            ${'$'}include wz/v08/eslint/rc/extends.js
     $file __dot__wizzi/t/v08/eslint/rc/overrides.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/overrides.js
+            ${'$'}include wz/v08/eslint/rc/overrides.js
     $file __dot__wizzi/t/v08/eslint/rc/parser.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/parser.js
+            ${'$'}include wz/v08/eslint/rc/parser.js
     $file __dot__wizzi/t/v08/eslint/rc/plugins.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/plugins.js
+            ${'$'}include wz/v08/eslint/rc/plugins.js
     $file __dot__wizzi/t/v08/eslint/rc/rules.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/rules.js
+            ${'$'}include wz/v08/eslint/rc/rules.js
     $file __dot__wizzi/t/v08/eslint/rc/settings.js.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/eslint/rc/settings.js
+            ${'$'}include wz/v08/eslint/rc/settings.js
     $file __dot__wizzi/t/v08/express/App.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/App.ts
+            ${'$'}include wz/v08/ts/express/App.ts
     $file __dot__wizzi/t/v08/express/httpException.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/httpException.ts
+            ${'$'}include wz/v08/ts/express/httpException.ts
     $file __dot__wizzi/t/v08/express/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/index.ts
+            ${'$'}include wz/v08/ts/express/index.ts
     $file __dot__wizzi/t/v08/express/server.cert.text.ittf.ittf
-        ££{'££'}group
-            ££include wz/v08/express/server.cert.text
+        ${"${'$'}"}group
+            ${'$'}include wz/v08/express/server.cert.text
     $file __dot__wizzi/t/v08/express/server.key.text.ittf.ittf
-        ££{'££'}group
-            ££include wz/v08/express/server.key.text
+        ${"${'$'}"}group
+            ${'$'}include wz/v08/express/server.key.text
     $file __dot__wizzi/t/v08/express/common/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/common/types.ts
+            ${'$'}include wz/v08/ts/express/common/types.ts
     $file __dot__wizzi/t/v08/express/common/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/common/index.ts
+            ${'$'}include wz/v08/ts/express/common/index.ts
     $file __dot__wizzi/t/v08/express/features/app/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/app/index.ts
+            ${'$'}include wz/v08/ts/express/features/app/index.ts
     $file __dot__wizzi/t/v08/express/features/app/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/app/types.ts
+            ${'$'}include wz/v08/ts/express/features/app/types.ts
     $file __dot__wizzi/t/v08/express/features/auth/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/index.ts
+            ${'$'}include wz/v08/ts/express/features/auth/index.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/manager.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/manager.ts
+            ${'$'}include wz/v08/ts/express/features/auth/manager.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/types.ts
+            ${'$'}include wz/v08/ts/express/features/auth/types.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/controllers/authentication.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/controllers/authentication.ts
+            ${'$'}include wz/v08/ts/express/features/auth/controllers/authentication.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/mongo/account.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/mongo/account.ts
+            ${'$'}include wz/v08/ts/express/features/auth/mongo/account.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/mongo/token.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/mongo/token.ts
+            ${'$'}include wz/v08/ts/express/features/auth/mongo/token.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/mongo/authuser.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/mongo/authuser.ts
+            ${'$'}include wz/v08/ts/express/features/auth/mongo/authuser.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/strategies/github.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/strategies/github.ts
+            ${'$'}include wz/v08/ts/express/features/auth/strategies/github.ts
         
     $file __dot__wizzi/t/v08/express/features/auth/strategies/local.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/auth/strategies/local.ts
+            ${'$'}include wz/v08/ts/express/features/auth/strategies/local.ts
         
     $file __dot__wizzi/t/v08/express/features/config/env.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/config/env.ts
+            ${'$'}include wz/v08/ts/express/features/config/env.ts
         
     $file __dot__wizzi/t/v08/express/features/config/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/config/types.ts
+            ${'$'}include wz/v08/ts/express/features/config/types.ts
         
     $file __dot__wizzi/t/v08/express/features/config/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/config/index.ts
+            ${'$'}include wz/v08/ts/express/features/config/index.ts
         
     $file __dot__wizzi/t/v08/express/features/filesystem/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/filesystem/types.ts
+            ${'$'}include wz/v08/ts/express/features/filesystem/types.ts
     $file __dot__wizzi/t/v08/express/features/filesystem/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/filesystem/index.ts
+            ${'$'}include wz/v08/ts/express/features/filesystem/index.ts
     $file __dot__wizzi/t/v08/express/features/github/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/github/index.ts
+            ${'$'}include wz/v08/ts/express/features/github/index.ts
     $file __dot__wizzi/t/v08/express/features/github/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/github/types.ts
+            ${'$'}include wz/v08/ts/express/features/github/types.ts
     $file __dot__wizzi/t/v08/express/features/github/apicalls.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/github/apicalls.ts
+            ${'$'}include wz/v08/ts/express/features/github/apicalls.ts
     $file __dot__wizzi/t/v08/express/features/github/utils.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/github/utils.ts
+            ${'$'}include wz/v08/ts/express/features/github/utils.ts
     $file __dot__wizzi/t/v08/express/features/packi/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/index.ts
+            ${'$'}include wz/v08/ts/express/features/packi/index.ts
     $file __dot__wizzi/t/v08/express/features/packi/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/types.ts
+            ${'$'}include wz/v08/ts/express/features/packi/types.ts
     $file __dot__wizzi/t/v08/express/features/packi/controllers/productions.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/controllers/productions.ts
+            ${'$'}include wz/v08/ts/express/features/packi/controllers/productions.ts
     $file __dot__wizzi/t/v08/express/features/packi/controllers/github.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/controllers/github.ts
+            ${'$'}include wz/v08/ts/express/features/packi/controllers/github.ts
     $file __dot__wizzi/t/v08/express/features/packi/controllers/templates.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/controllers/templates.ts
+            ${'$'}include wz/v08/ts/express/features/packi/controllers/templates.ts
     $file __dot__wizzi/t/v08/express/features/packi/mongo/packi.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/mongo/packi.ts
+            ${'$'}include wz/v08/ts/express/features/packi/mongo/packi.ts
     $file __dot__wizzi/t/v08/express/features/packi/mongo/user.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/packi/mongo/user.ts
+            ${'$'}include wz/v08/ts/express/features/packi/mongo/user.ts
     $file __dot__wizzi/t/v08/express/features/repo/apicalls.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/repo/apicalls.ts
+            ${'$'}include wz/v08/ts/express/features/repo/apicalls.ts
     $file __dot__wizzi/t/v08/express/features/repo/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/repo/types.ts
+            ${'$'}include wz/v08/ts/express/features/repo/types.ts
     $file __dot__wizzi/t/v08/express/features/repo/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/features/repo/index.ts
+            ${'$'}include wz/v08/ts/express/features/repo/index.ts
     $file __dot__wizzi/t/v08/express/features/t/authHandler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/t/authHandler.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_reject.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params method
+        ${"${'$'}"}group
+            ${"${'$'}"}params method
         
-            ££include wz/v08/ts/t/catch_reject.ts
+            ${'$'}include wz/v08/ts/t/catch_reject.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_fail.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params method
+        ${"${'$'}"}group
+            ${"${'$'}"}params method
         
-            ££include wz/v08/ts/t/catch_fail.ts
+            ${'$'}include wz/v08/ts/t/catch_fail.ts
     $file __dot__wizzi/t/v08/express/features/t/controller.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &ctrl
+        ${"${'$'}"}group
+            ${"${'$'}"}params &ctrl
         
             wz/v08/ts/t/controller
     $file __dot__wizzi/t/v08/express/features/t/handler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/t/handler.ts
     $file __dot__wizzi/t/v08/express/features/wizzi/factory.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/factory.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/factory.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/index.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/index.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/maps.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/maps.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/maps.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/productions.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/productions.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/productions.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/types.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/types.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/api/context.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/api/context.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/api/context.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/controllers/production.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/controllers/production.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/controllers/production.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/controllers/t/productions/resolveContexts.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/controllers/t/productions/resolveContexts.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/controllers/t/productions/resolveContexts.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/executeJob.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/executeJob.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/executeJob.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/generateFolderArtifacts.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/generateFolderArtifacts.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateFolderArtifacts.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/generateArtifact.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/generateArtifact.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateArtifact.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/loadModel.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/loadModel.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/loadModel.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/inferAndLoadContext.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/inferAndLoadContext.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/inferAndLoadContext.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/mTreeBuildupScript.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/mTreeBuildupScript.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTreeBuildupScript.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/mTree.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/mTree.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTree.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/scanIttfDocument.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/scanIttfDocument.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/scanIttfDocument.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/transformModel.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/transformModel.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/transformModel.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/wizzify.ts.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi_old/factory.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/factory.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/factory.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi_old/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/index.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/index.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi_old/productions.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/productions.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/productions.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi_old/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/features/wizzi/types.ts
+            ${'$'}include wz/v08/ts/express/features/wizzi/types.ts
         
     $file __dot__wizzi/t/v08/express/index/imports.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/t/index/imports.ts
+            ${'$'}include wz/v08/ts/express/t/index/imports.ts
     $file __dot__wizzi/t/v08/express/index/start.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/t/index/start.ts
+            ${'$'}include wz/v08/ts/express/t/index/start.ts
         
         
     $file __dot__wizzi/t/v08/express/middlewares/auth0Secured.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/auth0secured.ts
+            ${'$'}include wz/v08/ts/express/middlewares/auth0secured.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/authentication.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/authentication.ts
+            ${'$'}include wz/v08/ts/express/middlewares/authentication.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/authorization.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/authorization.ts
+            ${'$'}include wz/v08/ts/express/middlewares/authorization.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/bodyParser.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/bodyParser.ts
+            ${'$'}include wz/v08/ts/express/middlewares/bodyParser.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/cacheControl.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cacheControl.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cacheControl.ts
     $file __dot__wizzi/t/v08/express/middlewares/compression.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/compression.ts
+            ${'$'}include wz/v08/ts/express/middlewares/compression.ts
     $file __dot__wizzi/t/v08/express/middlewares/cookie.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cookie.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cookie.ts
     $file __dot__wizzi/t/v08/express/middlewares/cors.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/cors.ts
+            ${'$'}include wz/v08/ts/express/middlewares/cors.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/errors.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/errors.ts
+            ${'$'}include wz/v08/ts/express/middlewares/errors.ts
     $file __dot__wizzi/t/v08/express/middlewares/helmet.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/helmet.ts
+            ${'$'}include wz/v08/ts/express/middlewares/helmet.ts
     $file __dot__wizzi/t/v08/express/middlewares/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/index.ts
+            ${'$'}include wz/v08/ts/express/middlewares/index.ts
     $file __dot__wizzi/t/v08/express/middlewares/ittfStatic.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/ittfStatic.ts
+            ${'$'}include wz/v08/ts/express/middlewares/ittfStatic.ts
     $file __dot__wizzi/t/v08/express/middlewares/logger.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/logger.ts
+            ${'$'}include wz/v08/ts/express/middlewares/logger.ts
     $file __dot__wizzi/t/v08/express/middlewares/passport.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/passport.ts
+            ${'$'}include wz/v08/ts/express/middlewares/passport.ts
     $file __dot__wizzi/t/v08/express/middlewares/passportAuth0.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/passportAuth0.ts
+            ${'$'}include wz/v08/ts/express/middlewares/passportAuth0.ts
     $file __dot__wizzi/t/v08/express/middlewares/session.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/session.ts
+            ${'$'}include wz/v08/ts/express/middlewares/session.ts
     $file __dot__wizzi/t/v08/express/middlewares/static.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/static.ts
+            ${'$'}include wz/v08/ts/express/middlewares/static.ts
         
         
     $file __dot__wizzi/t/v08/express/middlewares/webpackApp.js.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/webpackApp.js
+            ${'$'}include wz/v08/ts/express/middlewares/webpackApp.js
     $file __dot__wizzi/t/v08/express/middlewares/userInViews.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/userInViews.ts
+            ${'$'}include wz/v08/ts/express/middlewares/userInViews.ts
     $file __dot__wizzi/t/v08/express/middlewares/wizziViewEngine.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/express/middlewares/wizziViewEngine.ts
+            ${'$'}include wz/v08/ts/express/middlewares/wizziViewEngine.ts
     $file __dot__wizzi/t/v08/express/services/filesystem.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/filesystem.ts
+            ${'$'}include wz/v08/ts/express/services/filesystem.ts
     $file __dot__wizzi/t/v08/express/services/mongodb.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/mongodb.ts
+            ${'$'}include wz/v08/ts/express/services/mongodb.ts
     $file __dot__wizzi/t/v08/express/services/wizzi/config.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/wizzi/config.ts
+            ${'$'}include wz/v08/ts/express/services/wizzi/config.ts
     $file __dot__wizzi/t/v08/express/services/wizzi/wizzifile.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/wizzi/wizzifile.ts
+            ${'$'}include wz/v08/ts/express/services/wizzi/wizzifile.ts
     $file __dot__wizzi/t/v08/express/services/wizzi/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/wizzi/index.ts
+            ${'$'}include wz/v08/ts/express/services/wizzi/index.ts
     $file __dot__wizzi/t/v08/express/services/wizzi/types.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/services/wizzi/types.ts
+            ${'$'}include wz/v08/ts/express/services/wizzi/types.ts
     $file __dot__wizzi/t/v08/express/site/index.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/site/index.ts
+            ${'$'}include wz/v08/ts/express/site/index.ts
     $file __dot__wizzi/t/v08/express/site/controllers/demoWizzi.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/site/controllers/demoWizzi.ts
+            ${'$'}include wz/v08/ts/express/site/controllers/demoWizzi.ts
     $file __dot__wizzi/t/v08/express/site/controllers/demoHome.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/site/controllers/demoHome.ts
+            ${'$'}include wz/v08/ts/express/site/controllers/demoHome.ts
     $file __dot__wizzi/t/v08/express/site/t/authHandler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/t/authHandler.ts
     $file __dot__wizzi/t/v08/express/site/t/controller.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &ctrl
+        ${"${'$'}"}group
+            ${"${'$'}"}params &ctrl
         
-            wz/v08/ts/t/controller.ts(2)
+            $include wz/v08/ts/t/controller.ts
     $file __dot__wizzi/t/v08/express/site/t/handler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/t/handler.ts
     $file __dot__wizzi/t/v08/express/utils/sendResponse.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/express/utils/sendResponse.ts
+            ${'$'}include wz/v08/ts/express/utils/sendResponse.ts
     $file __dot__wizzi/t/v08/mongo/model.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/mongo/model.ts
+            ${'$'}include wz/v08/ts/mongo/model.ts
     $file __dot__wizzi/t/v08/mongo/modelcontroller.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/ts/mongo/modelcontroller.ts
+            ${'$'}include wz/v08/ts/mongo/modelcontroller.ts
     $file __dot__wizzi/t/v08/mongo/t/authHandler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/t/authHandler.ts
     $file __dot__wizzi/t/v08/mongo/t/controller.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &ctrl
+        ${"${'$'}"}group
+            ${"${'$'}"}params &ctrl
         
-            wz/v08/ts/t/controller.ts(3)
+            $include wz/v08/ts/t/controller.ts
     $file __dot__wizzi/t/v08/mongo/t/handler.ts.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name
+        ${"${'$'}"}group
+            ${"${'$'}"}params name
         
-            ££include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/t/handler.ts
     $file __dot__wizzi/t/v08/package/browser.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/browser.json
+            ${'$'}include wz/v08/package/browser.json
     $file __dot__wizzi/t/v08/package/dependencies.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/dependencies.json
+            ${'$'}include wz/v08/package/dependencies.json
     $file __dot__wizzi/t/v08/package/devDependencies.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/devDependencies.json
+            ${'$'}include wz/v08/package/devDependencies.json
     $file __dot__wizzi/t/v08/package/resolutions.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/resolutions.json
+            ${'$'}include wz/v08/package/resolutions.json
     $file __dot__wizzi/t/v08/package/scripts.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/scripts.json
+            ${'$'}include wz/v08/package/scripts.json
     $file __dot__wizzi/t/v08/package/tools.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
             
-            ££include wz/v08/package/tools.json
+            ${'$'}include wz/v08/package/tools.json
     $file __dot__wizzi/t/v08/prettier/rc.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/prettier/rc.json
+            ${'$'}include wz/v08/prettier/rc.json
     $file __dot__wizzi/t/v08/styles/tailwind.css.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
             
-            ££include wz/v08/styles/tailwind.css
+            ${'$'}include wz/v08/styles/tailwind.css
     $file __dot__wizzi/t/v08/ts/tsconfig.json.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params &md
+        ${"${'$'}"}group
+            ${"${'$'}"}params &md
         
-            ££include wz/v08/ts/tsconfig.json
+            ${'$'}include wz/v08/ts/tsconfig.json
     $file __dot__wizzi/t/v08/ts/react/component.tsx.ittf.ittf
-        ££{'££'}group
-        	££{'££'}params &md
+        ${"${'$'}"}group
+        	${"${'$'}"}params &md
         
-            ££include wz/v08/ts/react/component.tsx
+            ${'$'}include wz/v08/ts/react/component.tsx
         
         
     $file __dot__wizzi/t/v08/ts/react/function.tsx.ittf.ittf
-        ££{'££'}group
-        	££{'££'}params &md
+        ${"${'$'}"}group
+        	${"${'$'}"}params &md
         
-            ££include wz/v08/ts/react/function.tsx
+            ${'$'}include wz/v08/ts/react/function.tsx
         
         
     $file __dot__wizzi/t/v08/ts/react/t/misc.tsx.ittf.ittf
-        ££{'££'}group
-            ££{'££'}params name, &md    
+        ${"${'$'}"}group
+            ${"${'$'}"}params name, &md    
         
-            ££include wz/v08/ts/react/t/misc.tsx
+            ${'$'}include wz/v08/ts/react/t/misc.tsx
         
         
     $file __dot__wizzi/t/v08/ts/react/t/setPropType.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
-            ££include wz/v08/ts/react/t/setPropType.tsx
+            ${'$'}include wz/v08/ts/react/t/setPropType.tsx
         
         

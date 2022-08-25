@@ -19,8 +19,8 @@ $group
                     :ref Application
                 ${'$'}if wzCtx.Build.express.useStaticFiles
                     success 'StaticFilesMiddleware. Folder served from ', 
-                        \b path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'static')
-                    _ app.use('/static', expressStatic(path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'static')))
+                        \b path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'public')
+                    _ app.use('/public', expressStatic(path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'public')))
                     ${'$'}if wzCtx.Build.useIttfStatic
                         success 'StaticFilesMiddleware. Folder served from ', 
                             \b path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf')

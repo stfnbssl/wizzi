@@ -3,9 +3,6 @@ $group
     # taken from https://github.com/expo/snack/blob/main/website/src/client/components/ThemeProvider.tsx
     # modified
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             aphrodite: true,
@@ -18,7 +15,7 @@ $group
             ]
         }
 
-    v08/ts/react/function${call}
+    v08/ts/react/function${'('}&md)
 
         ${'$'}append imports
 

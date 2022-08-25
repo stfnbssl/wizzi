@@ -277,7 +277,7 @@ var AsyncArtifactGenerator =
             throw new error(generatingPath + ' generation did not termitate');
         }
         var gNum = ++g_generationsCheckCounter;
-        g_generationsCheck['timer' + gNum] = setTimeout(checkCallback, 2000);
+        g_generationsCheck['timer' + gNum] = setTimeout(checkCallback, 4000);
         ;
         new genInfo.generator.gen(genInfo.mainSourceModel, genInfo.genContext, function(err, result) {
             if (err) {

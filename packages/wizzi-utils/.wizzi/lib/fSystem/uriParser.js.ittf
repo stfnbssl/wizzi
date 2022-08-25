@@ -91,11 +91,13 @@
 
 				$else
 				
-					r_or_cb_wz_err( InvalidArgument, parse )
+					$*
+                    r_or_cb_wz_err( InvalidArgument, parse )
 						@ 'Uri must have a protocol (must be an absolute url). Received: ' + uri
+                    *$
 
 			var protocol
-				iif parsedUri.protocol.substr(-1, 1) === ':'
+				iif parsedUri.protocol && parsedUri.protocol.substr(-1, 1) === ':'
 					then 
 						_ parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1))
 					else 
@@ -183,7 +185,7 @@
 			_ parsed.parts.push(part)
 		if parsed.basename.length > 0
 			_ parsed.parts.push(parsed.basename)
-		set parsed.internalPath = [parsed.protocol + ':'].concat(parsed.parts).join('/')
+		set parsed.internalPath = [(parsed.protocol ? parsed.protocol + ':' : '')].concat(parsed.parts).join('/')
 
 	function returnOrCb
 		param ret

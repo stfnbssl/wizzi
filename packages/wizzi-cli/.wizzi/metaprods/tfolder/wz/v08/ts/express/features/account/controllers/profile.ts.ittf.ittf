@@ -1,15 +1,12 @@
 $group
 
-    $
-        var lparen = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'Profile',
             path: '/account/profile'
         }
 
-    controller${lparen} &ctrl )
+    controller${'('} &ctrl )
 
         _ this.router.get
             @ `/`
@@ -27,7 +24,7 @@ $group
                         const { requiresAuth } = eoic
 
         ${'$'}append handlers
-            handler${lparen} get )
+            handler${'('} get )
                 _ response.render
                     @ 'account/profile/index.html.ittf'
                     {

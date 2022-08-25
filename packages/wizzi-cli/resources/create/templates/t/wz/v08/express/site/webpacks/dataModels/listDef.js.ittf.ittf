@@ -1,13 +1,10 @@
 ${'$'}group
 
-    $
-        var call = '(i)';
-
     ${'$'}
         var schema = md.schema;
         var testItems = [101,102];
         for (var i=0; i<8 ; i++) { 
-            testItems.push${call}; 
+            testItems.push${'('}i); 
         }
 
     const ${'$'}{schema.name}ListDef

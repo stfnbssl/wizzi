@@ -1,6 +1,4 @@
 ﻿$group
-    $
-        var call = '(&md)'; 
 
 	import React from 'react'
 	import PropTypes from 'prop-types'
@@ -105,7 +103,7 @@
 
     ${'$'}*
 	${'$'}if wzCtx.Build.react.useRedux && wzCtx.useNextjs && md.connect
-		redux-maps${call}
+		redux-maps${'('}&md)
 	+
 	${'$'}
 		var nameSuffix = '';

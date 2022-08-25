@@ -37,8 +37,8 @@ function createWizziFactory(globalContext, callback) {
     wizzi.fsFactory({
         plugins: {
             items: [
-                './wizzi-js/dist/index', 
-                './wizzi-web/dist/index'
+                './wizzi-js/index', 
+                './wizzi-web/index'
             ], 
             pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..', '..')
          }, 

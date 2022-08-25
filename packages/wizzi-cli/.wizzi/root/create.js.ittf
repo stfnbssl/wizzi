@@ -36,7 +36,14 @@ module
             {
                 @ templateGroup 'ts-express'
                 @ template 'wizzi'
-                @ pkgName 'demo.ts.express.wizziEx'
+                $$ @ pkgName 'demo.ts.express.wizziex'
+                @ pkgName 'wizzi-app'
+    elif cmd == 'ts-express-wizzi-heroku'
+        _ createEx
+            {
+                @ templateGroup 'ts-express'
+                @ template 'wizzi-heroku'
+                @ pkgName 'wizzi-heroku'
     elif cmd == 'js-express'
         _ create
             {

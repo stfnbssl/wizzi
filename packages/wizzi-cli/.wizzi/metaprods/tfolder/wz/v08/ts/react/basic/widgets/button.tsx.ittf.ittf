@@ -1,8 +1,5 @@
 $group
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             name: "Button",
@@ -33,7 +30,7 @@ $group
         }
 
     
-    v08/ts/react/function${call}
+    v08/ts/react/function${'('}&md)
         
         ${'$'}append styles
             :interface ButtonStyleProps

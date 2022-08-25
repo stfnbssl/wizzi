@@ -1,8 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\newpackage.js.ittf
-    utc time: Wed, 17 Aug 2022 15:01:09 GMT
 */
 'use strict';
 // This example shows specifying the arguments for the program to pass to the action handler.

@@ -1,8 +1,5 @@
 $group
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             styled: true,
@@ -12,7 +9,7 @@ $group
             ]
         }
 
-    v08/ts/react/function${call}
+    v08/ts/react/function${'('}&md)
         < StyledLayout
             + {children}
 

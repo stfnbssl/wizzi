@@ -5,8 +5,8 @@ common/example/withMonoRepoWizziFactory()
     $append plugins
         [ items
             @ 'wizzi-js'
-            @ './wizzi-web/dist/index'
-            @ './wizzi-core/dist/index'
+            @ './wizzi-web/index'
+            @ './wizzi-core/index'
         @ pluginsBaseFolder
             _ path.resolve
                 @ __dirname

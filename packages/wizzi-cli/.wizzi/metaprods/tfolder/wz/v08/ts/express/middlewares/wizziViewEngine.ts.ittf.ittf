@@ -43,8 +43,8 @@ $group
                                             @ locals options._locals
                                             @ siteCtx
                                             @ ...twinJsonContext
-                                    # loog 'WizziViewEngineMiddleware.filePath', filePath
-                                    # loog 'WizziViewEngineMiddleware.options', JSON.stringify(options, null, 2)
+                                    log 'WizziViewEngineMiddleware.filePath', filePath
+                                    log 'WizziViewEngineMiddleware.options', JSON.stringify(options, null, 2)
                                     _ wizziProds.generateArtifactFs(filePath, context).then
                                         =>
                                             param generated
@@ -52,8 +52,10 @@ $group
                                         ._ catch
                                             =>
                                                 param err
+                                                error 'WizziViewEngineMiddleware. wizziProds.generateArtifactFs error', err
                                                 return callback(err)
                                 catch ex
+                                    error 'WizziViewEngineMiddleware. Exception', ex
                                     _ callback(ex)
                         const viewsFolder = path.resolve(__dirname, '..', 'site', 'views')
                         _ app.set('views', viewsFolder)

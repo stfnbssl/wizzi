@@ -43,8 +43,7 @@ $group
                 set this.profilePromise = this._getUserProfile()
                 try 
                     const profile
-                        await 
-                            @expr this.profilePromise
+                        await this.profilePromise
                     set this.profilePromise = undefined
                     return profile
                 catch err

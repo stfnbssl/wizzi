@@ -1,15 +1,12 @@
 $group
 
-    $
-        var lp = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'Productions',
             path: '/api/v1/productions'
         }
 
-    controller${lp} &ctrl )
+    controller${'('} &ctrl )
         ${'$'}append imports
             import fs
                 from 'fs'
@@ -53,7 +50,7 @@ $group
 
         ${'$'}append handlers
 
-            handler${lp} mTreeBuildupScript )
+            handler${'('} mTreeBuildupScript )
                 const id = request.params.id
                 const files
                     :ref PackiFiles
@@ -73,7 +70,7 @@ $group
                             error 'features.packi.controllers.production.mTreeBuildupScript.err', err
                             _ sendFailure(response, err, 501)
 
-            handler${lp} generateArtifact )
+            handler${'('} generateArtifact )
                 const id = request.params.id
                 const files
                     :ref PackiFiles
@@ -93,7 +90,7 @@ $group
                             error 'features.packi.controllers.production.generateArtifact.err', err
                             _ sendFailure(response, err, 501)
             
-            handler${lp} transformModel )
+            handler${'('} transformModel )
                 const id = request.params.id
                 const transformer = request.params.transformer
                 const files
@@ -120,7 +117,7 @@ $group
                             error 'features.packi.controllers.production.generateArtifact.err', err
                             _ sendFailure(response, err, 501)
 
-            handler${lp} executeJob )
+            handler${'('} executeJob )
                 const files
                     :ref PackiFiles
                     = request.body
@@ -142,7 +139,7 @@ $group
                             error 'features.packi.controllers.production.executeJob.err', err
                             _ sendFailure(response, err, 501)
 
-            handler${lp} wizzify )
+            handler${'('} wizzify )
                 const id = request.params.id
                 const files
                     :ref PackiFiles

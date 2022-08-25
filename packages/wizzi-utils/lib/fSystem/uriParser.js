@@ -32,14 +32,8 @@ module.exports = function parse(uri, callback) {
     ret.pathname = parsedUri.hostname && parsedUri.hostname.length > 0 ? pathname && pathname.length > 0 ? parsedUri.hostname + '/' + pathname : parsedUri.hostname : pathname || '';
     // loog 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
     if (typeof(parsedUri.protocol) !== 'string') {
-        if (callback) {
-            return callback(error('InvalidArgument', 'parse', 'Uri must have a protocol (must be an absolute url). Received: ' + uri));
-        }
-        else {
-            return error('InvalidArgument', 'parse', 'Uri must have a protocol (must be an absolute url). Received: ' + uri);
-        }
     }
-    var protocol = parsedUri.protocol.substr(-1, 1) === ':' ? parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1)) : parsedUri.protocol;
+    var protocol = parsedUri.protocol && parsedUri.protocol.substr(-1, 1) === ':' ? parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1)) : parsedUri.protocol;
     ;
     // loog 'parsed.protocol', protocol
     ret.protocol = protocol;
@@ -126,7 +120,7 @@ function setParsed(parsed, parsedUri) {
     if (parsed.basename.length > 0) {
         parsed.parts.push(parsed.basename);
     }
-    parsed.internalPath = [parsed.protocol + ':'].concat(parsed.parts).join('/');
+    parsed.internalPath = [(parsed.protocol ? parsed.protocol + ':' : '')].concat(parsed.parts).join('/');
 }
 function returnOrCb(ret, callback) {
     if (callback) {

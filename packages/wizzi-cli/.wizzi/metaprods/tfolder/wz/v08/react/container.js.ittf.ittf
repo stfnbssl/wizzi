@@ -1,6 +1,4 @@
 ﻿$group
-    $
-        var call = '(&md)'; 
 
 	import React from 'react'
 	import PropTypes from 'prop-types'
@@ -95,7 +93,7 @@
     
     ${'$'}else
         ${'$'}if wzCtx.Build.react.useRedux
-            redux-maps${call}
+            redux-maps${'('}&md)
             ${'$'}if md.withRouter
                 set ${'$'}{md.name}
                     _ withRouter

@@ -1,8 +1,5 @@
 $group
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             styled: true,
@@ -10,7 +7,7 @@ $group
             props: []
         }
 
-    v08/ts/react/function${call}
+    v08/ts/react/function${'('}md)
         < StyledRoot
             h1 Animated (sob) logo
 

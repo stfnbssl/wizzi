@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\ts\step_1.js.ittf
 */
 'use strict';
@@ -37,10 +37,10 @@ function createWizziFactory(globalContext, callback) {
     wizzi.fsFactory({
         plugins: {
             items: [
-                './wizzi-js/dist/index', 
-                './wizzi-web/dist/index'
+                './wizzi-js/index', 
+                './wizzi-web/index'
             ], 
-            pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..', '..')
+            pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..')
          }, 
         globalContext: globalContext || {}
      }, callback)

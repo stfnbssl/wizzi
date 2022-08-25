@@ -1,0 +1,8 @@
+{ 
+   $include cli/v08/package-info.json
+   { scripts
+       $include wz/v08/package/scripts_deploy.json
+   { dependencies
+       ${'$'}include v08/package/dependencies
+   { engines
+       node "^${'$'}{wzCtx.Build.heroku.nodejsVersion}"

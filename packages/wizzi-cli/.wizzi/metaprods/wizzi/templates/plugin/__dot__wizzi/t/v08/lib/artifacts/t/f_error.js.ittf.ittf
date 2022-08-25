@@ -25,5 +25,5 @@
                 {
                     @ errorName errorName
                     @ method '${'$'}{module}.' + method
-                    @ sourcePath __filename
+                    @ sourcePath $filename
                     @ inner innerError

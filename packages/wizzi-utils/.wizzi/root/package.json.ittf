@@ -10,9 +10,11 @@ common/kernel_utils_package( ${ isBrowserTarget ? 'wizzi-browser' : 'wizzi-utils
 	glob "^7.1.2"
 	$if isWebpackTarget == false
 		graceful-fs "^4.1.11"
-	hashids "latest"
-	i "^0.3.5"
-	isomorphic-git "${versions['isomorphic-git']}"
+    $if wzCtx_useCrypto
+	    hashids "latest"
+	i "^0.3.7"
+	$if false
+        isomorphic-git "${versions['isomorphic-git']}"
 	promise "^7.1.1"
 	randomstring "latest"
 

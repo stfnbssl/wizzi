@@ -1,28 +1,26 @@
 $group
 
-    $
-        var lparen = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'DemoWizzi',
-            path: '/demo/wizzi'
+            path: '/demo/wizzi',
+            kind: 'site'
         }
 
-    controller${lparen} &ctrl )
+    v08/ts/controller${'('} &ctrl )
         
         _ this.router.get(`/`, this.index)
         _ this.router.post(`${this.path}/alpha/:id`, this.test)
         
         ${'$'}append handlers
 
-            handler${lparen} index )
+            v08/ts/handler${'('} index )
                 _ response.render
                     @ 'demoWizzi/index.html.ittf'
                     {
-                        @ title 'Wizzi section'
+                        @ title 'Hello demo wizzi'
 
-            handler${lparen} test )
+            v08/ts/handler${'('} test )
                 _ response.render
                     @ 'demoWizzi/index.html.ittf'
                     {

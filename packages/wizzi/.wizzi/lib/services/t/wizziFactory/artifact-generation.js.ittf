@@ -40,8 +40,9 @@ $group
 			optional
 		string ittfDocumentUri
 		string artifactName
-		param artifactRequestContext
-		param callback
+		{ artifactRequestContext
+            optional
+		callback
 		+
 		# loog 'generateArtifact.artifactModel', artifactModel
 		+

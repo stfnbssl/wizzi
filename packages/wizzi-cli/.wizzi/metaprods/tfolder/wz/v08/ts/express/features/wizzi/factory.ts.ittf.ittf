@@ -87,7 +87,8 @@ $group
                                     [ items
                                         ${'$'}foreach item in wzCtx.Build.wizzi.plugins
                                             @ '${'$'}{item}'
-                                    @ pluginsBaseFolder '${'$'}{wzCtx.Build.wizzi.pluginsBaseFolder}'
+                                    ${'$'}if wzCtx.Build.wizzi.pluginsBaseFolder
+                                        @ pluginsBaseFolder '${'$'}{wzCtx.Build.wizzi.pluginsBaseFolder}'
                                 @ globalContext
                                     _ Object.assign
                                         {

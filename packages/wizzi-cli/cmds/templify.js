@@ -1,8 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\templify.js.ittf
-    utc time: Wed, 17 Aug 2022 15:01:09 GMT
 */
 'use strict';
 const path = require('path');
@@ -35,7 +34,7 @@ module.exports = (sourceFolder, outputPath) => {
             var j, j_items=lines, j_len=lines.length, line;
             for (j=0; j<j_len; j++) {
                 line = lines[j];
-                sb.push('        ' + verify.replaceAll(line, '$', '££'))
+                sb.push('        ' + verify.replaceAll(line, '$', '$'))
             }
         }
         file.write(outputPath, sb.join('\n'))

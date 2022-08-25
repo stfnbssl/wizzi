@@ -1,0 +1,7 @@
+$group
+
+    layout${'('}&md)
+        div
+            style padding 500px
+            a Github login
+                href /api/v1/authenticate/github

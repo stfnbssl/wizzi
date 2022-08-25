@@ -52,7 +52,7 @@
 			_ ctx.w('    artifact generator: ' + __filename)
             _ ctx.w('    package: wizzi-js@${versions['wizzi-js@next']}')
 			_ ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'))
-			if (!!ctx.values.isPackageDeploy) == false
+            $if isPackageDeploy == false
 				_ ctx.w('    utc time: ' + new Date().toUTCString())
 			_ ctx.w('*/')
 			

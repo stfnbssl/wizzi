@@ -111,7 +111,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-web@0.7.11');
+        ctx.w('    package: wizzi-web@0.7.14');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         if ((!!ctx.values.isPackageDeploy) == false) {
             ctx.w('    utc time: ' + new Date().toUTCString());

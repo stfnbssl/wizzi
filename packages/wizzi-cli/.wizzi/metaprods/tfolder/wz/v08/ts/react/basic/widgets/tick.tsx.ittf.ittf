@@ -1,8 +1,5 @@
 $group
 
-    $
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             name: "Tick",
@@ -16,7 +13,7 @@ $group
             ]
         }
 
-    v08/ts/react/component${call}
+    v08/ts/react/component${'('}&md)
         +
         m tick
             _ this.setState

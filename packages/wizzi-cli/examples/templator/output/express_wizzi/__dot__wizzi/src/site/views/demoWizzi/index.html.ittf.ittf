@@ -2,4 +2,4 @@ html
    ${'$'} 
        var md = {
        } 
-   $include wz/v08/express/site/views/demoWizzi/index.html
+   $include wz/v08/html/views/demoWizzi/index.html

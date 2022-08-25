@@ -15,7 +15,7 @@
 
 	import assert
     import util
-    var f_dateutil = require('./functions/dateutil')
+    var f_dateUtil = require('./functions/dateUtil')
     var f_verify = require('./functions/verify')
     var f_underscore = require('./functions/underscore')
 	var errors = require('./errors')
@@ -44,7 +44,7 @@
 			@ 'JSON' JSON
             @ 'path' require('path')
 			@ 'util' util
-            @ 'dateUtil' f_dateutil
+            @ 'dateUtil' f_dateUtil
             @ 'verify' f_verify
 			@ 'Infinity' Infinity
 			@ 'NaN' NaN

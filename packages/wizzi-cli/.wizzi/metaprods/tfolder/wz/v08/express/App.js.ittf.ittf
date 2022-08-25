@@ -1,11 +1,9 @@
 $group
-    $
-        var call = '(&md)';
     
     import express from 'express'
     ${'$'}if wzCtx.Build.useNetlify
         import serverless from 'serverless-http'
-        index/imports${call}
+        index/imports${'('}&md)
     ${'$'}else
         ${'$'}if wzCtx.Build.express.useSsl
             import fs from 'fs'

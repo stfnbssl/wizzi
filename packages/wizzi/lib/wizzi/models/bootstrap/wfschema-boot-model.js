@@ -1617,6 +1617,11 @@ var WizziSchema = (function (Node) {
             element.xmlTagInternal = eFrom.xmlTagInternal;
             element.tagType = eFrom.tagType;
             element.acceptAnyTag = eFrom.acceptAnyTag;
+            if (schemautil.isNotEmpty(eFrom.acceptAnyTag)) {
+                var anyTags = eFrom.acceptAnyTag.split('/');
+                element.acceptAnyTag = anyTags[0];
+                element.acceptAnyTagCollection = anyTags[1];
+            }
             element.nameIsRequired = eFrom.nameIsRequired;
             element.addToChildren = eFrom.addToChildren;
             element.suppressCollectionEmit = eFrom.suppressCollectionEmit;

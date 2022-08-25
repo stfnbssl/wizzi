@@ -48,8 +48,11 @@
 					_ callback(null, options.items)
 		+
 		var itemsOptions = options.items
-		var pluginsBaseFolder = options.pluginsBaseFolder || process.cwd()
-		# loog 'pluginsBaseFolder', pluginsBaseFolder
+        # loog 'pluginsBaseFolder before', options.pluginsBaseFolder
+        # loog '__dirname', __dirname
+		var pluginsBaseFolder = options.pluginsBaseFolder 
+            \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
+        log 'pluginsBaseFolder', pluginsBaseFolder
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext

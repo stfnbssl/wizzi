@@ -5,7 +5,7 @@ example( scriptBuilder, 1 )
 
 	$append imports
         var packageIndex = require('../../index')
-		var JsWizziScriptCoder = require('../../lib/jswizzi/JsWizziScriptCoder')
+		var JsWizziScriptCoder = require('../../lib/jswizzi/jsWizziScriptCoder')
         var mTreeBuildupScripter = require('../../lib/loader/mTreeBuildupScripter')
 
     var loadMTree

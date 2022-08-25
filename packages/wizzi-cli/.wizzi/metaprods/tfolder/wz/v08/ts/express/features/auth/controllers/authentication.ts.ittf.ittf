@@ -1,8 +1,5 @@
 $group
 
-    $
-        var lparen = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'Authentication',
@@ -16,7 +13,7 @@ $group
         Authorization callback URL
         https://dev-qwf9-zob.eu.auth0.com/login/callback
     *$
-    controller${lparen} &ctrl )
+    controller${'('} &ctrl )
         ${'$'}append imports
             import 
                 @ AuthRequest
@@ -81,9 +78,9 @@ $group
             _ this.getGithubLoggedIn.bind(this)
 
         ${'$'}append handlers
-            handler${lparen} githubConnect )
+            handler${'('} githubConnect )
             
-            handler${lparen} githubConnectCallback )
+            handler${'('} githubConnectCallback )
                 # loog '============================================================'
                 # loog 'Successful authentication'
                 # Successful authentication
@@ -140,7 +137,7 @@ $group
                 _ response.redirect('/account/profile')
 
             +
-            handler${lparen} getGithubLoggedIn )
+            handler${'('} getGithubLoggedIn )
                 const uid = request.params.uid
                 # loog 'features.auth.controllers.auth.getGithubLoggedIn.uid', uid
                 ${'$'}if wzCtx.Build.useMongoDb

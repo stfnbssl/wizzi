@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\wizzi\models\yaml-model.g.js.ittf
 */
 'use strict';
@@ -24,12 +24,17 @@ module.exports = function(mTree, ittfDocumentUri, request, callback) {
         node = root.children[i];
         appendNode(node, 0, sb)
     }
-    var yaml = jsyaml.safeLoad(sb.join('\n'));
+    console.log('yaml source', '\n' + sb.join('\n'), __filename);
+    var yaml = jsyaml.load(sb.join('\n'));
+    if (verify.isString(yaml)) {
+        return callback(error('Invalid yaml format. js-yaml returned a string.', root));
+    }
     return callback(null, yaml);
 }
 ;
 function appendNode(node, indent, sb) {
-    var indentString = new Array(indent).join(' ');
+    console.log('appendNode', indent, node.n + ' ' + node.v, __filename);
+    var indentString = new Array(indent * 2).join(' ');
     if (node.n === '-') {
         sb.push(indentString + node.n + ' ' + node.v)
     }

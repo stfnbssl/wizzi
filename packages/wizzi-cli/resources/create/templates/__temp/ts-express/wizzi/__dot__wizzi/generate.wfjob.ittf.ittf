@@ -1,14 +1,16 @@
 wfjob ${cliCtx.name}/job
-   $ 
-       var mix = '(';
    --- 
    ${'$'} 
        var jobCtx = {
            ittf_models_folder: path.join(__dirname, 'models'),
            ittf_src_folder: path.join(__dirname, 'src'),
            ittf_root_folder: path.join(__dirname, 'root'),
+           ittf_tests_folder: path.join(__dirname, 'Tests'),
            ittf_static_folder: path.join(__dirname, 'static'),
            ittf_ittf_folder: path.join(__dirname, 'ittf'),
+           ittf_deploy_folder: path.join(__dirname, 'deploy'),
+           ittf_armTemplates_folder: path.join(__dirname, 'armTemplates'),
+           ittf_github_folder: path.join(__dirname, '.github'),
            dest_folder: path.join(__dirname, '..'),
            job_model: 'wzCtx'
        } 
@@ -19,55 +21,97 @@ wfjob ${cliCtx.name}/job
    --- 
    line ittf-models
        cwd-folder ${'$'}{jobCtx.ittf_models_folder}
-       wfjobs${mix}any_json, &jobCtx)
+       wfjobs${'('}any_json, &jobCtx)
    --- 
    line ittf-root
        cwd-folder ${'$'}{jobCtx.ittf_root_folder}
-       wfjobs${mix}any_js, &jobCtx)
-       wfjobs${mix}any_ts, &jobCtx)
-       wfjobs${mix}any_tsx, &jobCtx)
-       wfjobs${mix}any_json, &jobCtx)
-       wfjobs${mix}any_md, &jobCtx)
-       wfjobs${mix}.env, &jobCtx)
-       wfjobs${mix}.gitignore, &jobCtx)
-       wfjobs${mix}.eslintrc, &jobCtx)
-       wfjobs${mix}.eslintignore, &jobCtx)
-       wfjobs${mix}.prettierrc, &jobCtx)
-       wfjobs${mix}.prettierignore, &jobCtx)
+       dest-folder ${'$'}{jobCtx.dest_folder}/Build
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_ts, &jobCtx)
+       wfjobs${'('}any_tsx, &jobCtx)
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_xml, &jobCtx)
+       wfjobs${'('}any_md, &jobCtx)
+       wfjobs${'('}.env, &jobCtx)
+       wfjobs${'('}www, &jobCtx)
+       wfjobs${'('}.gitignore, &jobCtx)
+       wfjobs${'('}.eslintrc, &jobCtx)
+       wfjobs${'('}.eslintignore, &jobCtx)
+       wfjobs${'('}.prettierrc, &jobCtx)
+       wfjobs${'('}.prettierignore, &jobCtx)
+       wfjobs${'('}.azure_deployment, &jobCtx)
    --- 
    line ittf-src
        cwd-folder ${'$'}{jobCtx.ittf_src_folder}
-       dest-folder ${'$'}{jobCtx.dest_folder}/src
-       wfjobs${mix}any_js, &jobCtx)
-       wfjobs${mix}any_ts, &jobCtx)
-       wfjobs${mix}any_tsx, &jobCtx)
-       wfjobs${mix}any_css, &jobCtx)
-       wfjobs${mix}any_json, &jobCtx)
-       wfjobs${mix}any_md, &jobCtx)
-       wfjobs${mix}any_plain, &jobCtx, js)
-       wfjobs${mix}any_plain, &jobCtx, d.ts)
-       wfjobs${mix}any_plain, &jobCtx, html)
-       wfjobs${mix}any_plain, &jobCtx, html.ittf)
-       wfjobs${mix}any_plain, &jobCtx, css)
-       wfjobs${mix}any_plain, &jobCtx, css.ittf)
-       wfjobs${mix}any_plain_image, &jobCtx)
+       dest-folder ${'$'}{jobCtx.dest_folder}/Build/src
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_ts, &jobCtx)
+       wfjobs${'('}any_tsx, &jobCtx)
+       wfjobs${'('}any_css, &jobCtx)
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_md, &jobCtx)
+       wfjobs${'('}any_plain, &jobCtx, js)
+       wfjobs${'('}any_plain, &jobCtx, d.ts)
+       wfjobs${'('}any_plain, &jobCtx, html)
+       wfjobs${'('}any_plain, &jobCtx, html.ittf)
+       wfjobs${'('}any_plain, &jobCtx, css)
+       wfjobs${'('}any_plain, &jobCtx, css.ittf)
+       wfjobs${'('}any_plain_image, &jobCtx)
+   --- 
+   line ittf-tests
+       cwd-folder ${'$'}{jobCtx.ittf_tests_folder}
+       dest-folder ${'$'}{jobCtx.dest_folder}/Tests
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_ts, &jobCtx)
+       wfjobs${'('}any_tsx, &jobCtx)
+       wfjobs${'('}any_css, &jobCtx)
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_md, &jobCtx)
+       wfjobs${'('}any_plain, &jobCtx, js)
+       wfjobs${'('}any_plain, &jobCtx, d.ts)
+       wfjobs${'('}any_plain, &jobCtx, html)
+       wfjobs${'('}any_plain, &jobCtx, html.ittf)
+       wfjobs${'('}any_plain, &jobCtx, css)
+       wfjobs${'('}any_plain, &jobCtx, css.ittf)
+       wfjobs${'('}any_plain_image, &jobCtx)
    --- 
    line ittf-static
        cwd-folder ${'$'}{jobCtx.ittf_static_folder}
-       dest-folder ${'$'}{jobCtx.dest_folder}/static
-       wfjobs${mix}any_js, &jobCtx)
-       wfjobs${mix}any_html, &jobCtx)
-       wfjobs${mix}any_css, &jobCtx)
-       wfjobs${mix}any_plain, &jobCtx, html)
-       wfjobs${mix}any_plain, &jobCtx, css)
-       wfjobs${mix}any_plain, &jobCtx, js)
-       wfjobs${mix}any_plain_image, &jobCtx)
+       dest-folder ${'$'}{jobCtx.dest_folder}/Build/static
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_html, &jobCtx)
+       wfjobs${'('}any_css, &jobCtx)
+       wfjobs${'('}any_plain, &jobCtx, html)
+       wfjobs${'('}any_plain, &jobCtx, css)
+       wfjobs${'('}any_plain, &jobCtx, js)
+       wfjobs${'('}any_plain_image, &jobCtx)
    --- 
    line ittf-ittf
        cwd-folder ${'$'}{jobCtx.ittf_ittf_folder}
-       dest-folder ${'$'}{jobCtx.dest_folder}/ittf
-       wfjobs${mix}any_plain, &jobCtx, ittf)
-       wfjobs${mix}any_plain_image, &jobCtx)
+       dest-folder ${'$'}{jobCtx.dest_folder}/Build/ittf
+       wfjobs${'('}any_plain, &jobCtx, ittf)
+       wfjobs${'('}any_plain_image, &jobCtx)
+   --- 
+   line ittf-armTemplates
+       cwd-folder ${'$'}{jobCtx.ittf_armTemplates_folder}
+       dest-folder ${'$'}{jobCtx.dest_folder}/armTemplates
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_js, &jobCtx)
+   --- 
+   line ittf-github
+       cwd-folder ${'$'}{jobCtx.ittf_github_folder}
+       dest-folder ${'$'}{jobCtx.dest_folder}/.github
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_yaml, &jobCtx)
+   --- 
+   line ittf-deploy
+       cwd-folder ${'$'}{jobCtx.ittf_deploy_folder}
+       dest-folder ${'$'}{jobCtx.dest_folder}/Build/deploy
+       wfjobs${'('}any_json, &jobCtx)
+       wfjobs${'('}any_js, &jobCtx)
+       wfjobs${'('}any_yaml, &jobCtx)
+       wfjobs${'('}.gitignore, &jobCtx)
    --- 
    production 
        dest-folder ${'$'}{jobCtx.dest_folder}
@@ -75,4 +119,8 @@ wfjob ${cliCtx.name}/job
        line-ref ittf-root
        line-ref ittf-static
        line-ref ittf-src
+       line-ref ittf-tests
        line-ref ittf-ittf
+       line-ref ittf-armTemplates
+       line-ref ittf-github
+       line-ref ittf-deploy

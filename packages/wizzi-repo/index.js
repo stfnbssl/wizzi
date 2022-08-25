@@ -12,8 +12,8 @@ var fileInfoByPath = require('wizzi-utils').fileInfoByPath;
 
 var md = module.exports = {};
 
-var MongoDocument = require('./lib/mongodb/fs/document');
-var MongoFsImpl = require('./lib/mongodb/mongoFsImpl');
+var MongoDocument = {};
+var MongoFsImpl = {};
 var JsonFsImpl = require('./lib/json/jsonFsimpl');
 var IttfDocumentStore = require('./lib/repo/ittfDocumentStore');
 md.ObjectId = require('./lib/utils/objectId');

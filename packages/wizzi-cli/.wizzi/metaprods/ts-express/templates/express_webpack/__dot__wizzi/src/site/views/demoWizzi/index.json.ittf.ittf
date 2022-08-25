@@ -3,4 +3,4 @@
         var md = {
         }
 
-    $include wz/v08/express/site/views/demoWizzi/index.json
+    $include wz/v08/html/views/demoWizzi/index.json

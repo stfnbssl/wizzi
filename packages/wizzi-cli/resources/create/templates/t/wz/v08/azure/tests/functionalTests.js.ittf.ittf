@@ -1,0 +1,73 @@
+$group
+
+    const process = require('process')
+    const webdriver = require('selenium-webdriver')
+    const 
+        { 
+            @ until
+        = require('selenium-webdriver')
+    set process.env['Path'] = process.env['Path'] + ';' + process.env['ChromeWebDriver']
+    _ describe
+        @ '${'$'}{wzCtx.Build.azure.webAppName}FunctionalTests'
+        function 
+            _ this.timeout(0)
+            let driver
+            var capabilities = webdriver.Capabilities.chrome()
+            _ capabilities.set
+                @ 'chromeOptions'
+                { 
+                    [ 'args'
+                        @ '--no-sandbox'
+            _ before
+                async=> 
+                    log 'functionalTest.before.new webdriver'
+                    set driver = new webdriver.Builder().forBrowser('chrome').withCapabilities(capabilities).build()
+                    await 
+                        _ driver.manage().setTimeouts
+                            { 
+                                @ pageLoad 300000
+                    log 'functionalTest.before.webdriver managed'
+            _ after
+                => 
+                    param done
+                    log 'functionalTest.after.quitting driver'
+                    _ driver.quit().then
+                        => 
+                            log 'functionalTest.after.driver quitted.done'
+                            _ done()
+                        ._ catch
+                            => 
+                                log 'functionalTest.after.error quitting driver.done'
+                                _ done()
+            _ it
+                @ 'Assert page title'
+                async=> 
+                    param done
+                    var startTimestamp = Date.now()
+                    var endTimestamp = startTimestamp + 60 * 2 * 1000
+                    log 'functionalTest.Assert page title.enter'
+                    while true
+                        try 
+                            log 'functionalTest.Assert page title.wait driver.get'
+                            await 
+                                _ driver.get(process.env['webAppUrl'])
+                            log 'functionalTest.Assert page source', driver.page_source
+                            log 'functionalTest.Assert page title.wait driver.until.titleIs'
+                            await 
+                                _ driver.wait(until.titleIs('${'$'}{wzCtx.Build.azure.testTitle}'), 2000)
+                            log 'functionalTest.Assert page title.Ok break'
+                            break 
+                        catch err
+                            var currentTimestamp = Date.now()
+                            log 'Date.now() - currentTimestamp', Date.now() - currentTimestamp
+                            if currentTimestamp > endTimestamp
+                                _ console.log("##vso[task.logissue type=error;]Failed with error " + err)
+                                _ done
+                                throw new Error('Failed with error ' + err)
+                            await 
+                                new Promise
+                                    => 
+                                        param resolve
+                                        log 'functionalTest.Assert page title.repeating.setTimeout'
+                                        _ setTimeout(resolve, 5000)
+                    log 'functionalTest.Assert page title.Ok exiting. done'

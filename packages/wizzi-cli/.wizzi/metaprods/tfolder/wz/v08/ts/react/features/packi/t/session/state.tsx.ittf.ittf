@@ -216,7 +216,7 @@ $group
                 set state.online = !!transports['pubnub'] && !disabled
                 set state.url =
                     _ createURL
-                        @expr this.host
+                        @ this.host
                         @ sdkVersion
                         @ channel
                         iif savedSDKVersion && savedSDKVersion !== sdkVersion

@@ -134,7 +134,7 @@ $group
                                             @ className {css(styles.button)}
                                             @ onClick {action.action ?? this._handleDismiss}
                                             + {action.label}
-                        @expr this._container
+                        @ this._container
     +
     const fadeIn
         { 

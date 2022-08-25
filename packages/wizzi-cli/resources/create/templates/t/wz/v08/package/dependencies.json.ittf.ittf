@@ -1,5 +1,9 @@
 $group
     ---
+    ${'$'}if wzCtx.Build.useAzure && wzCtx.Build.azure.useSecrets
+        @azure/identity "^2.0.4"
+        @azure/keyvault-secrets "^4.4.0"
+    ---
     ${'$'}if wzCtx.Build.useBabel
         ${'$'}if wzCtx.Build.babel.useParser
             @babel/parser "^7.12.16"
@@ -55,7 +59,8 @@ $group
             ${'$'}if wzCtx.Build.react.materialUI.usePickers
                 $$ date-fns "^1.30.1"
                 date-fns "2.0.0"
-                
+    ${'$'}elif wzCtx.Build.useExpress
+        debug "~2.6.9"
     ${'$'}if wzCtx.Build.useDomHelpers
         dom-helpers "^3.4.0"
     ---
@@ -106,7 +111,7 @@ $group
     ${'$'}if wzCtx.Build.useFetch
         isomorphic-fetch "^2.2.1"
     ${'$'}if wzCtx.Build.useGithub
-        isomorphic-git "^1.8.1"
+        isomorphic-git "^1.19.2"
     ${'$'}if wzCtx.Build.useIsomorphicUnfetch
         isomorphic-unfetch "^3.0.0"
     ---
@@ -162,9 +167,6 @@ $group
                 passport-local "^1.0.0"
     ${'$'}if wzCtx.Build.usePrismjs
         prismjs "^1.21.0"
-    ${'$'}if wzCtx.Build.useTailwindcss
-        postcss "^8.1.13"
-        postcss-cli "^8.3.1"
     ---
     ${'$'}if wzCtx.Build.utils.useQueryString
         query-string "^7.0.0"
@@ -189,11 +191,8 @@ $group
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.useStyledSystem
         styled-system "^5.1.5"
     ---
-    ${'$'}if wzCtx.Build.useTailwindcss
-        tailwindcss "^2.0.4"
     ${'$'}if wzCtx.Build.useTypescript
-        tslib "^2.2.0"
-        tsconfig-paths "^3.9.0"
+        tslib "^2.4.0"
     ${'$'}if wzCtx.Build.useReact
         ${'$'}if wzCtx.Build.react.useRedux
             ${'$'}if wzCtx.Build.react.redux.useSaga
@@ -211,10 +210,14 @@ $group
     ${'$'}if wzCtx.Build.utils.useWebVitals
         web-vitals "^1.0.1"
     ${'$'}if wzCtx.Build.useWizzi
-        wizzi "^0.7.24"
-        wizzi.proto "^0.0.1"
-        wizzi-tools "^0.7.4"
-        wizzi-utils "^0.7.16"
+        wizzi "^0.7.32"
+        ${'$'}if !wzCtx.Build.useAzure
+            wizzi.proto "^0.0.1"
+            wizzi-tools "^0.7.4"
+        wizzi-utils "^0.7.19"
+        wizzi-core "^0.7.6"
+        wizzi-web "^0.7.14"
+        wizzi-js "^0.7.9"
     ---
     ${'$'}if wzCtx.Build.useYup
         yup "^0.27.0"

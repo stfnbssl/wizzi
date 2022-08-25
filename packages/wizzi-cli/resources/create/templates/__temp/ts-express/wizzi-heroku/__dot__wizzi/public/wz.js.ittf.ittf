@@ -1,0 +1,4 @@
+module 
+   kind react
+   $include wz/v08/js/wz/core.js
+   $include wz/v08/js/wz/stringFunctions.js

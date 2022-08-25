@@ -1,5 +1,5 @@
 $group
-    $file __dot__wizzi/ittf/demo.wizzi.html.ittf.ittf
+    $file __dot__wizzi/${pkgPath}ittf/demo.wizzi.html.ittf.ittf
         html
             body
                 h1 Hello from a Wizzi generated Html document 

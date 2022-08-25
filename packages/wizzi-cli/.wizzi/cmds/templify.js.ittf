@@ -29,7 +29,7 @@ module
                         var lines = item.content.split('\n')
                         foreach line in lines
                             _ sb.push
-                                @ '        ' + verify.replaceAll(line, '$', '££')
+                                @ '        ' + verify.replaceAll(line, '$', '${'$'}')
                     _ file.write
                         @ outputPath
                         _ sb.join

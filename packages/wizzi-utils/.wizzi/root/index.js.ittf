@@ -13,13 +13,15 @@
         # isWebpackTarget ${isWebpackTarget}
     
     # features
-    var ittfGraph = require('./lib/ittfGraph/index')
-    var ittfScanner = require('./lib/ittfScanner/index')
+    $if wzCtx_useScanner    
+        var ittfGraph = require('./lib/ittfGraph/index')
+        var ittfScanner = require('./lib/ittfScanner/index')
     var pretty = require('./lib/pretty/index')
     var fSystem = require('./lib/fSystem/index')
     var helpers = require('./lib/helpers/index')
     var lorem = require('./lib/lorem/index')
-    var crypto = require('./lib/crypto/index')
+    $if wzCtx_useCrypto
+        var crypto = require('./lib/crypto/index')
     var errors = require('./lib/errors/index')
     $if isWebpackTarget == false
         var mocks = require('./lib/mocks/index')
@@ -30,11 +32,13 @@
             { 
 
     # features
-    set md.ittfGraph = ittfGraph
-    set md.ittfScanner = ittfScanner
+    $if wzCtx_useScanner    
+        set md.ittfGraph = ittfGraph
+        set md.ittfScanner = ittfScanner
     set md.pretty = pretty
     set md.fSystem = fSystem  
-    set md.crypto = crypto  
+    $if wzCtx_useCrypto
+        set md.crypto = crypto  
     set md.lorem = lorem  
     set md.helpers = helpers  
     set md.errors = errors  
@@ -42,10 +46,11 @@
         set md.mocks = mocks  
 
 	# legacy
-	set md.ittfFinder = ittfGraph.ittfFinder
-    set md.ittfWriter = ittfGraph.ittfWriter
-    set md.asIsLoader = ittfGraph.asIsLoader
-    set md.IttfDocumentGraph = ittfGraph.IttfDocumentGraph
+    $if wzCtx_useScanner    
+	    set md.ittfFinder = ittfGraph.ittfFinder
+        set md.ittfWriter = ittfGraph.ittfWriter
+        set md.asIsLoader = ittfGraph.asIsLoader
+        set md.IttfDocumentGraph = ittfGraph.IttfDocumentGraph
     set md.fail = helpers.fail
 	set md.option = helpers.option
 	set md.config = helpers.config
@@ -55,7 +60,8 @@
 	$if isWebpackTarget == false
 		set md.requireFromString = helpers.requireFromString
 	set md.Coder = helpers.coder
-	set md.encdec = crypto
+    $if wzCtx_useCrypto
+	    set md.encdec = crypto
 	$if isWebpackTarget == false
 		set md.file = fSystem.file
 	    set md.vfile = fSystem.vfile

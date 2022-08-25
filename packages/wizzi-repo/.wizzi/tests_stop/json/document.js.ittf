@@ -3,14 +3,14 @@
 	$append imports
 		var 
 			decl assert = require('assert')
-			decl FsJson = require('../../lib/json/fs/fsjson')
-			decl Document = require('../../lib/json/fs/document')
+			decl FsJson = require('../../../lib/json/fs/fsjson')
+			decl Document = require('../../../lib/json/fs/document')
 
 	var FSITEMS = 'fsitems'
 	var DOCUMENTS = 'documents'
 	var fsCommon, doc
 
-	$include json_before_async
+	$include fsjson/json_before_async
 	fscommon/document/createFolder()
 	fscommon/document/write_read_File()
 	fscommon/document/isFile()
@@ -19,7 +19,7 @@
 	fscommon/document/renameFile()
 	fscommon/document/getFolder()
 	fscommon/document/isFolder()
-	$include json_after_async
+	$include fsjson/json_after_async
 
 	$*
 

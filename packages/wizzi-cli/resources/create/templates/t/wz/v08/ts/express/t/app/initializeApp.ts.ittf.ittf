@@ -1,0 +1,49 @@
+$group
+
+    +
+    function normalizePort
+        param val
+            :any
+        var port = parseInt(val, 10)
+        if isNaN(port)
+            return val
+        if port >= 0
+            return port
+        return false
+        #
+            # 
+            # Normalize a port into a number, string, or false.
+            # 
+    +
+    function initializeApp
+        param app
+            :ref express.Application
+        param initValues
+            :ref AppInitializerType
+        +
+        var port = normalizePort(process.env.PORT || '3000')
+        _ app.set('port', port)
+        +
+        _ initValues.middlewaresPre.forEach
+            => 
+                param middleware
+                _ middleware(app)
+        +
+        _ initValues.apis.forEach
+            => 
+                param api
+                warn 'installing api: ', api.name
+                _ api.initialize(initValues)
+                set initValues.globalApi[api.name] = api
+        +
+        _ initValues.controllers.forEach
+            => 
+                param controller
+                warn 'installing router on path: ', controller.path
+                _ controller.initialize(initValues)
+                _ app.use(controller.path, controller.router)
+        +
+        _ initValues.middlewaresPost.forEach
+            => 
+                param middleware
+                _ middleware(app)

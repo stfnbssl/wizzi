@@ -16,7 +16,7 @@ $group
                         @ ...postModelBuilders
                     ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
                         ${'$'}foreach feature in wzCtx.Build.features
-                                ${'$'}if feature.useMongo
+                                ${'$'}if feature.useMongoDb
                                     @ ...${'$'}{feature.name}ModelBuilders
 
         await mongodbStart(config, modelBuilders)
@@ -66,7 +66,7 @@ $group
                         @ ...wizziControllers
                 ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
                     ${'$'}foreach feature in wzCtx.Build.features
-                            ${'$'}if feature.useMongo
+                            ${'$'}if feature.hasControllers
                                 @ ...${'$'}{feature.name}Controllers
 
         +
@@ -96,6 +96,6 @@ $group
                 ${'$'}if wzCtx.Build.useAuthentication
                     @ auth0Secured
 
-    const app = new App(appInitializer)
+    set app.instance = new App(appInitializer)
 
 

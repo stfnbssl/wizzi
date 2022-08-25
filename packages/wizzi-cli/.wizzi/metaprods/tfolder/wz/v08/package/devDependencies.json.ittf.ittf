@@ -176,6 +176,8 @@
                 babel-plugin-webpack-chunkname "^1.2.0"
     ${'$'}if wzCtx.Build.usePrismjs
         babel-plugin-prismjs "^2.0.1"
+    ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
+        copyfiles "^2.4.1"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useCopy
             copy-webpack-plugin "^4.5.1"
@@ -237,32 +239,39 @@
         ${'$'}if wzCtx.Build.webpack.useSass
             node-sass "5.0.0"
     ${'$'}if wzCtx.Build.useExpress || (wzCtx.Build.isClient && wzCtx.Build.useExistingDevServer)
-        nodemon "^1.19.2"
+        nodemon "^2.0.19"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useOptimizeCss
             optimize-css-assets-webpack-plugin "^4.0.0"
+    ${'$'}if wzCtx.Build.useTailwindcss
+        postcss "^8.1.13"
+        postcss-cli "^8.3.1"
     ${'$'}if wzCtx.Build.usePrettier
         prettier "^2.2.1"
     ${'$'}if wzCtx.Build.useReact  && !!wzCtx.Build.useReactCreateApp == false
         prop-types "^15.7.2"
     ${'$'}if wzCtx.Build.useStorybook
         react-docgen-typescript "^1.22.0"
+    ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
+        rimraf "^3.0.2"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useSass
             sass-loader "10.1.1"
         ${'$'}if wzCtx.Build.webpack.useCss
             style-loader "^2.0.0"
+    ${'$'}if wzCtx.Build.useTailwindcss
+        tailwindcss "^2.0.4"
     ${'$'}if wzCtx.Build.useWebpack || wzCtx.Build.useWebpackApp
         ${'$'}if wzCtx.Build.useTypescript
             ts-loader "^8.1.0"
+    ${'$'}if wzCtx.Build.useTypescript
+        ts-node "^10.8.1"
+        ts-node-dev "^1.1.6"
+        $$ tsconfig-paths "^3.9.0"
+        typescript "^4.2.3"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useUglifyJS
             uglifyjs-webpack-plugin "^1.2.5"
-    ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
-        ts-node "^10.8.1"
-        ts-node-dev "^1.1.6"
-    ${'$'}if wzCtx.Build.useTypescript
-        typescript "^4.2.3"
     ${'$'}if wzCtx.Build.useVue
         vue "^2.5.22"
         vue-loader "^15.6.0"

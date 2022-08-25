@@ -35,9 +35,17 @@
                     @ 0
                     @ sb
 
+            log 'yaml source', '\n' + sb.join('\n')
             var yaml
-                _ jsyaml.safeLoad
+                _ jsyaml.load
                     _ sb.join('\n')
+
+            if verify.isString(yaml)
+                return 
+                    _ callback
+                        _ error
+                            @ 'Invalid yaml format. js-yaml returned a string.'
+                            @ root
 
 			return
 				_ callback
@@ -48,7 +56,8 @@
         param node
         param indent
         param sb
-        var indentString = new Array(indent).join(' ')
+        log 'appendNode', indent, node.n + ' ' + node.v 
+        var indentString = new Array(indent * 2).join(' ')
         if node.n === '-'
             _ sb.push
                 @ indentString + node.n + ' ' + node.v

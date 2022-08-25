@@ -1,7 +1,7 @@
 $group
-    $file __dot__wizzi/src/utils/sendResponse.ts.ittf.ittf
+    $file __dot__wizzi/${pkgPath}src/utils/sendResponse.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
-            v08/express/utils/sendResponse££{'('}&md)
+            v08/express/utils/sendResponse${'$'}{'('}&md)

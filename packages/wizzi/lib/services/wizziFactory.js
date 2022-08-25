@@ -818,22 +818,34 @@ var WizziFactory = (function () {
     }
     //
     WizziFactory.prototype.generateArtifact = function(artifactModel, ittfDocumentUri, artifactName, artifactRequestContext, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'generateArtifact', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
         if (verify.isNullOrUndefined(artifactModel) === false) {
             if (verify.isArrayOrObject(artifactModel) === false) {
-                return error(
+                return callback(error(
                     'InvalidArgument', 'generateArtifact', { parameter: 'artifactModel', message: 'The artifactModel parameter must be an array or an object. Received: ' + artifactModel }
-                );
+                ));
             }
         }
         if (verify.isNotEmpty(ittfDocumentUri) === false) {
-            return error(
+            return callback(error(
                 'InvalidArgument', 'generateArtifact', { parameter: 'ittfDocumentUri', message: 'The ittfDocumentUri parameter must be a string. Received: ' + ittfDocumentUri }
-            );
+            ));
         }
         if (verify.isNotEmpty(artifactName) === false) {
-            return error(
+            return callback(error(
                 'InvalidArgument', 'generateArtifact', { parameter: 'artifactName', message: 'The artifactName parameter must be a string. Received: ' + artifactName }
-            );
+            ));
+        }
+        if (verify.isNullOrUndefined(artifactRequestContext) === false) {
+            if (verify.isObject(artifactRequestContext) === false) {
+                return callback(error(
+                    'InvalidArgument', 'generateArtifact', { parameter: 'artifactRequestContext', message: 'The artifactRequestContext parameter must be an object. Received: ' + artifactRequestContext }
+                ));
+            }
         }
         
         // loog 'generateArtifact.artifactModel', artifactModel
@@ -1468,7 +1480,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.25.wizziFactory.' + method,
+        method: 'wizzi@0.7.33.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

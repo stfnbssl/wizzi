@@ -15,7 +15,7 @@ var errors = require('./errors');
 // var uriParser = require('./uriParser')
 var uriParser = require('wizzi-utils').uriParser;
 var FileSystemStore = require('./fileSystemStore');
-var MongoDbStore = require('./mongoDbStore');
+var MongoDbStore = {};
 var BrowserFSStore = {};
 var JsonDbStore = require('./jsonDbStore');
 //
@@ -57,20 +57,6 @@ var IttfDocumentStore = (function () {
             this.storeImpl = new FileSystemStore();
             this.storeKind = this.storeImpl.storeKind;
             return callback(null);
-        }
-        else if (storeInfo.storeKind === 'mongodb') {
-            this.storeImpl = new MongoDbStore();
-            var that = this;
-            this.storeImpl.init({
-                mongoUri: storeInfo.storeUri, 
-                mongoBaseFolder: storeInfo.storeBaseFolder
-             }, function(err, notUsed) {
-                if (err) {
-                    return callback(err);
-                }
-                that.storeKind = that.storeImpl.storeKind;
-                return callback(null);
-            })
         }
         
         // loog 'storeInfo', storeInfo

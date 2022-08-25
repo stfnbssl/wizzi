@@ -14,7 +14,7 @@ var file = vfile();
 var mocks = require('wizzi-utils').mocks;
 var repo = mocks.repo;
 var packageIndex = require('../../index');
-var JsWizziScriptCoder = require('../../lib/jswizzi/JsWizziScriptCoder');
+var JsWizziScriptCoder = require('../../lib/jswizzi/jsWizziScriptCoder');
 var mTreeBuildupScripter = require('../../lib/loader/mTreeBuildupScripter');
 var scriptBuilder = function(step_callback) {
     heading1('EXAMPLE')

@@ -5,6 +5,9 @@ $group
         from '../features/app'
 
     ${'$'}if wzCtx.Build.useSite
+        import 
+            @ HomeController
+            from './controllers/home'
         ${'$'}if wzCtx.Build.useDemoControllers
             import 
                 @ DemoHomeController
@@ -21,6 +24,7 @@ $group
         =
             [ 
                 ${'$'}if wzCtx.Build.useSite
+                    @ new HomeController()
                     ${'$'}if wzCtx.Build.useDemoControllers
                         @ new DemoHomeController()
                         ${'$'}if wzCtx.Build.useWizziViewEngine

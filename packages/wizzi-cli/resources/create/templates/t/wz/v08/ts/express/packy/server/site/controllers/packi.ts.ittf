@@ -25,7 +25,7 @@ module
                         + 
                         @ this.path
                         + 
-                    @expr this.app
+                    @ this.app
             p app
                 :private 
                 async=> 

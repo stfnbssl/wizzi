@@ -29,7 +29,7 @@ module
                         + 
                         @ this.path
                         + /public
-                    @expr this.getPublic
+                    @ this.getPublic
                 _ this.router.get
                     `lit 
                         + 
@@ -39,7 +39,7 @@ module
                     _ checkScopes
                         [ 
                             @ 'read:messages'
-                    @expr this.getPrivate
+                    @ this.getPrivate
             p getPublic
                 :private 
                 async=> 

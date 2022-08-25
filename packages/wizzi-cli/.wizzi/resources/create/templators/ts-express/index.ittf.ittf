@@ -1,14 +1,24 @@
 template ts-express
-    
+
+    $
+        // var pkgPath = cliCtx.useAzure ? 'Application/' : '';
+        var pkgPath = '';
+
+    $include azure
+    $include predeploy
     $include ittf
     $include models
     $include root
+    $include src/common
     $include src/features
+    $include src/features-blog
     $include src/middlewares
+    $include src/services
     $include src/site
     $include src/utils
     $include src/index
-    $include static
+    $include public
+    $include tests
     $include tfolder/v08/index
     $include tfolder/wfjobs
     $include __generate

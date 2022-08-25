@@ -41,7 +41,7 @@ var FactoryPlugin = (function () {
         return __filename;
     }
     FactoryPlugin.prototype.getVersion = function() {
-        return '0.7.11';
+        return '0.7.14';
     }
     FactoryPlugin.prototype.getProvides = function() {
         return this.provides;

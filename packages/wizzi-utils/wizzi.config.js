@@ -19,6 +19,8 @@ module.exports = {
         isBrowserTarget: false,
         isWizziUtilsPackage: true,
         isDevelopment: false,
+        wzCtx_useScanner: false,
+        wzCtx_useCrypto: false,
     },
     globalContext_default: {
         isPackageDeploy: true,

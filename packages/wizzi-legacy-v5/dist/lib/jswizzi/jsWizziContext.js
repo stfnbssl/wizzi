@@ -11,7 +11,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 var assert = require('assert');
 var util = require('util');
-var f_dateutil = require('./functions/dateutil');
+var f_dateUtil = require('./functions/dateUtil');
 var f_verify = require('./functions/verify');
 var f_underscore = require('./functions/underscore');
 var errors = require('./errors');
@@ -37,7 +37,7 @@ var knownCallables = {
     'JSON': JSON, 
     'path': require('path'), 
     'util': util, 
-    'dateUtil': f_dateutil, 
+    'dateUtil': f_dateUtil, 
     'verify': f_verify, 
     'Infinity': Infinity, 
     'NaN': NaN

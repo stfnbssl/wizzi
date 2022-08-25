@@ -154,4 +154,4 @@ $group
                                                 @ result.mTree.nodes[0]
                                             _ resolve
                                                 _ result.mTree.toIttf(wrapperNode)
-                                catch_reject${op} features.wizzi.productions.wrapIttfText.mTree )
+                                catch_reject${'('} features.wizzi.productions.wrapIttfText.mTree )

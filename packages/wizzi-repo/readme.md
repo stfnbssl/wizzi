@@ -2,10 +2,13 @@
 
 Ittf documents repository manager for the wizzi factory..
 
+
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## Features
 * Filesystem ittf documents store 
@@ -57,6 +60,7 @@ function (err, createStore) {
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>

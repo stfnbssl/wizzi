@@ -9,9 +9,10 @@ $group
         @ MiddlewareType
         from '${'$'}{baseDir}/features/app/types'
     
-    import 
-        @ ModelBuilderType
-        from '${'$'}{baseDir}/features/app'
+    ${'$'}if wzCtx.Build.useMongoDb
+        import 
+            @ ModelBuilderType
+            from '${'$'}{baseDir}/features/app'
 
     import 
         @ config
@@ -52,9 +53,9 @@ $group
     
     ${'$'}if wzCtx.Build.useBlog
         import 
-            @ postControllers
-            @ postModelBuilders
-            from './features/post/index'
+            @ blogControllers
+            @ blogModelBuilders
+            from './features/blog/index'
     
     ${'$'}if wzCtx.Build.useSite
         import 
@@ -79,11 +80,11 @@ $group
     
     ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
         ${'$'}foreach feature in wzCtx.Build.features
-            ${'$'}if feature.hasController || feature.useMongo
+            ${'$'}if feature.hasControllers || feature.useMongoDb
                 import 
-                    ${'$'}if feature.hasController
+                    ${'$'}if feature.hasControllers
                         @ ${'$'}{feature.name}Controllers
-                    ${'$'}if feature.useMongo
+                    ${'$'}if feature.useMongoDb
                         @ ${'$'}{feature.name}ModelBuilders
                     from './features/${'$'}{feature.name}/index'
     

@@ -1,13 +1,33 @@
-{ 
+$group
+    ---
     { compilerOptions
         target "es6"
         module "commonjs"
-        rootDir "./"
-        outDir "./build"
+        moduleResolution "node"
+        { paths
+            * 
+                [
+                    "node_modules/*"
         esModuleInterop true
-        strict true
+        sourceMap true
+        rootDir "./"
+        ${'$'}if wzCtx.Build.useAzure
+            outDir "../Application"
+        ${'$'}elif wzCtx.Build.useHeroku
+            outDir "./deploy"
+        ${'$'}else
+            outDir "./dist"
+        baseUrl "."
+        $*
+        emitDecoratorMetadata true
+        experimentalDecorators true
+        *$
+        importHelpers true $$ see https://www.npmjs.com/package/tslib 
+        ${'$'}if wzCtx.Build.typescript.useStrict
+            strict true
     [ include
-        "src"
+        "src/**/*"
         ${'$'}hook include
     [ exclude
-        "src/**/*.spec.*"        
+        "src/**/*.spec.*"
+

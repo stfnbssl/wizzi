@@ -1,24 +1,29 @@
 $group
 
-    $
-        var lparen = '(';
-    
     ${'$'}
         var ctrl = {
             name: 'DemoHome',
-            path: ''
+            path: '/demo/home',
+            kind: 'site'
         }
 
-    controller${lparen} &ctrl )
+    v08/ts/controller${'('} &ctrl )
         
         _ this.router.get
             `lit 
                 + /
-            @expr this.home
+            @ this.home
 
         ${'$'}append handlers
 
-            handler${lparen} home )
-                _ sendHtml
-                    @ response
-                    @ '<h1>Hello world</h1>'
+            v08/ts/handler${'('} home )
+                log 'Demo Home controller. Received request'
+                ${'$'}if wzCtx.Build.useWizzi
+                    _ response.render
+                        @ 'demoHome/index.html.ittf'
+                        {
+                            @ title 'Hello demo home'
+                ${'$'}else
+                    _ sendHtml
+                        @ response
+                        @ '<html><head><title>Hello demo home</title></head><body><h1>Hello world</h1></body></html>'

@@ -36,7 +36,7 @@ ${'$'}group
 		
 		+
         m getFilename
-			return __filename
+			return $filename
 		
 		+
         m getProvides
@@ -63,7 +63,7 @@ ${'$'}group
                 {
                     @ errorName errorName
                     @ method md.name + '.' + method
-                    @ sourcePath __filename
+                    @ sourcePath $filename
                     @ inner innerError           
 	+
 	set module.exports

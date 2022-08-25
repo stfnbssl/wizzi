@@ -32,21 +32,21 @@ module
                         @ this.path
                         + /list
                     _ initValues.auth0Secured()
-                    @expr this.list
+                    @ this.list
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /view/:owner/:repo
                     _ initValues.auth0Secured()
-                    @expr this.view
+                    @ this.view
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /clone/:owner/:repo
                     _ initValues.auth0Secured()
-                    @expr this.clone
+                    @ this.clone
             p list
                 :private 
                 async=> 

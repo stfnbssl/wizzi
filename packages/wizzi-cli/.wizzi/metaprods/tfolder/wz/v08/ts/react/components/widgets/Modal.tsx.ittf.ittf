@@ -1,8 +1,5 @@
 $group
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             styled: true,
@@ -19,7 +16,7 @@ $group
             ]
         }
 
-    v08/ts/react/component${call}
+    v08/ts/react/component${'('}&md)
         +
         m getDerivedStateFromProps
             static

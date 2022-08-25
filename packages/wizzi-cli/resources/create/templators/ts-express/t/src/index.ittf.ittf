@@ -1,26 +1,35 @@
 $group
-    $file __dot__wizzi/src/App.ts.ittf.ittf
+    $file __dot__wizzi/${pkgPath}src/App.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/App££{'('}&md)
+            v08/express/App${'$'}{'('}&md)
         
-    $file __dot__wizzi/src/httpException.ts.ittf.ittf
+    $file __dot__wizzi/${pkgPath}src/getApp.ts.ittf.ittf
+        module
+            ${"${'$'}"}
+                var md = {
+                    isGetApp: true
+                }
+        
+            v08/express/getApp${'$'}{'('}&md)
+
+    $file __dot__wizzi/${pkgPath}src/httpException.ts.ittf.ittf
         module
             
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/httpException££{'('}&md)
-    $file __dot__wizzi/src/index.ts.ittf.ittf
+            v08/express/httpException${'$'}{'('}&md)
+    $file __dot__wizzi/${pkgPath}src/index.ts.ittf.ittf
         module
             
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/index££{'('}&md)
+            v08/express/index${'$'}{'('}&md)
         

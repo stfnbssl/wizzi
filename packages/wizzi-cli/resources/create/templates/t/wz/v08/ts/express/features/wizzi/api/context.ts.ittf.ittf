@@ -1,8 +1,5 @@
 $group
 
-    $
-        var op = '(';
-
     ${'$'}
         var md = {
             myname: 'features.wizzi.api.context'
@@ -54,7 +51,7 @@ $group
                                                 {
                                                     @ name contextItem.name
                                                     @ value context
-                                    catch_reject${op} ${'$'}{md.myname}.resolveContexts.resolveContext )
+                                    catch_reject${'('} ${'$'}{md.myname}.resolveContexts.resolveContext )
             
             log myname + '.resolveContexts.promises', promises.length
             return 
@@ -83,7 +80,7 @@ $group
                                                         @ value.value
                                     _ resolve
                                         @ context
-                            catch_reject${op} ${'$'}{md.myname}.resolveContexts.Promise.all )
+                            catch_reject${'('} ${'$'}{md.myname}.resolveContexts.Promise.all )
 
     function resolveContext
         param contextItem
@@ -105,7 +102,7 @@ $group
                                         :any
                                     log myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
                                     _ resolve(value)
-                            catch_reject${op} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifactFs )
+                            catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifactFs )
         ${'$'}if wzCtx.Build.usePacki
             elif contextItem.source == 'json-packiIttf'
                 return 
@@ -122,7 +119,7 @@ $group
                                             :any
                                         log myname + '.resolveContext', contextItem.source, 'mainIttf', contextItem.mainIttf, Object.keys(value)
                                         _ resolve(value)
-                                catch_reject${op} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifact )
+                                catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifact )
         elif contextItem.source == 'json-dbIttf'
             throw new Error('ContextItem source not yet implemented: ' + contextItem.source)
         elif contextItem.source == 'json-fsFile'
@@ -158,7 +155,7 @@ $group
                                         :any
                                     log myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
                                     _ resolve(value)
-                            catch_reject${op} ${'$'}{md.myname}.resolveContext.wizziProds.loadModelFs )
+                            catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModelFs )
         ${'$'}if wzCtx.Build.usePacki        
             elif contextItem.source == 'model-packiIttf'
                 return 
@@ -175,7 +172,7 @@ $group
                                             :any
                                         log myname + '.resolveContext', 'mainIttf', contextItem.mainIttf, Object.keys(value)
                                         _ resolve(value)
-                                catch_reject${op} ${'$'}{md.myname}.resolveContext.wizziProds.loadModel )
+                                catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModel )
         elif contextItem.source == 'model-dbIttf'
             throw new Error('ContextItem source not yet implemented: ' + contextItem.source)
         else

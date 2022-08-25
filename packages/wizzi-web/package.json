@@ -1,7 +1,7 @@
 {
     "name": "wizzi-web",
     "sideEffects": false,
-    "version": "0.7.11",
+    "version": "0.7.14",
     "description": "A Wizzi Core Plugin for html css svg markdown",
     "author": {
         "name": "Stefano Bassoli",
@@ -35,12 +35,12 @@
     "dependencies": {
         "async": "^3.2.0",
         "chalk": "^4.1.0",
-        "i": "^0.3.5",
+        "i": "^0.3.7",
         "iconv-lite": "^0.6.2",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
-        "wizzi-mtree": "0.7.12",
-        "wizzi-utils": "0.7.17",
+        "wizzi-mtree": "0.7.16",
+        "wizzi-utils": "0.7.19",
         "postcss": "^7.0.16",
         "postcss-color-function": "^4.1.0"
     },

@@ -1,28 +1,28 @@
 $group
     $file __dot__wizzi/ittf/models/sitectx.json.ittf.ittf
         {
-            ££include cli/v08/wzctx-info.json
+            ${'$'}include cli/v08/wzctx-info.json
     $file __dot__wizzi/models/wzctx.json.ittf.ittf
         {
-            ££{'££'}include v08/env/vars
+            ${"${'$'}"}include v08/env/vars
             ---
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                     useSsl: false,
                     host: 'localhost',
-                    port: 3900,
+                    port: 3000,
                     apiVersion: 'v1'
                 };
                 md.http = md.useSsl ? 'https' : 'http';
             
             ---
-            ££include cli/v08/wzctx-info.json
+            ${'$'}include cli/v08/wzctx-info.json
             
             ---
             { App
-                siteUrl "££{'££'}{md.http}://localhost"
-                port ££{'££'}{md.port}
-                baseUrl "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+                siteUrl "${"${'$'}"}{md.http}://localhost"
+                port ${"${'$'}"}{md.port}
+                baseUrl "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
                 [ Components
         
             ---
@@ -35,39 +35,93 @@ $group
                     useIttfStatic false
                     { ittfStatic
                 useDemoControllers true
-                ££{'££'}include config.json
+                [ features
+                    $if cliCtx.useBlog
+                        {
+                            name "blog"
+                            hasControllers true
+                            useMongoDb true
+                $if cliCtx.useAzure
+                    ${"${'$'}"}include azure.json
+                    ---
+                $if cliCtx.useHeroku
+                    ${"${'$'}"}include heroku.json
+                    ---
+                ${"${'$'}"}include config.json
                 ---
-                ££{'££'}include code.json
+                ${"${'$'}"}include code.json
                 ---
-                ££{'££'}include express.json
+                ${"${'$'}"}include express.json
                 ---
-                ££{'££'}include styles.json
+                ${"${'$'}"}include styles.json
                 ---
-                ££{'££'}include test.json
+                ${"${'$'}"}include test.json
                 ---
-                ££{'££'}include wizzi.json
+                ${"${'$'}"}include wizzi.json
                 ---
-                ££{'££'}include utils.json
+                ${"${'$'}"}include utils.json
+                $if cliCtx.useMongoDb
+                    ---
+                    ${"${'$'}"}include db.json
+
+    $if cliCtx.useAzure
+        $file __dot__wizzi/models/t/azure.json.ittf.ittf
+            ${"${'$'}"}group
+
+                useAzure true
+                { azure
+                    webAppName "wizzi"
+                    resourceGroupName "wizzi-rg"
+                    hostingPlanName "wizzi-plan"
+                    sku "S1 Standard"
+                    databaseAccountId "wizzi-app"
+                    webAppLocation "West Europe"
+                    appInsightsLocation "West Europe"
+                    databaseAccountLocation "eastasia"
+                    nodejsVersion "16.2.0"
+                    packagePath "Application"
+                    webAppPort 3000
+                    testTitle "Hello home"
+                    timeoutMinutesShort 10
+                    timeoutMinutesMedium 20
+                    timeoutMinutesLong 60
+
+    $if cliCtx.useHeroku
+        $file __dot__wizzi/models/t/heroku.json.ittf.ittf
+            ${"${'$'}"}group
+
+                useHeroku true
+                { heroku
+                    webAppName "wizzi"
+                    nodejsVersion "16.2.0"
+                    packagePath "deploy"
+                    webAppPort 3000
+                    Procfile "server.js"
+                    testTitle "Hello home"
+                    timeoutMinutesShort 10
+                    timeoutMinutesMedium 20
+                    timeoutMinutesLong 60
+
     $file __dot__wizzi/models/t/code.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
         
             useTypescript true
             { typescript
-                ££££ for webpack client
+                ${'$'}${'$'} for webpack client
                 useBabelLoader true
                 useTsxFiles false
                 
             usePrettier true
             { prettier
         
-            usePrismjs true
+            usePrismjs false
             { prismjs
                 [ modes
         
             useLint true
             { lint
     $file __dot__wizzi/models/t/config.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useConfig true
             { config
@@ -75,11 +129,11 @@ $group
                 { envalid
         
     $file __dot__wizzi/models/t/express.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useExpress true
             { express
-                useSsl ££{'££'}{md.useSsl ? 'true' : 'false'}
+                useSsl ${"${'$'}"}{md.useSsl ? 'true' : 'false'}
                 useErrors false
                 useStaticFiles true
                 { staticFiles
@@ -87,8 +141,8 @@ $group
         
             useSession true
             { session
-                name "££{cliCtx.name}"
-                secret "££{'££'}{stfnbssl_env.sessionSecret}"
+                name "${'$'}{cliCtx.name}"
+                secret "${"${'$'}"}{stfnbssl_env.sessionSecret}"
         
             noCache true
         
@@ -111,10 +165,10 @@ $group
             
             useCors true
             { cors
-                clientOrigin "££{'££'}{md.http}://localhost:££{'££'}{md.port}"
+                clientOrigin "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
         
     $file __dot__wizzi/models/t/styles.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
                 { styles
                     usePalx false
@@ -129,21 +183,20 @@ $group
                 { aphrodite
                     disableImportant true
         
-                useTailwindcss true
+                useTailwindcss false
                 { tailwindcss
         
                 useExpoStyles false
                 { expoStyles
         
-        
     $file __dot__wizzi/models/t/test.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useJest false
             { jest
         
     $file __dot__wizzi/models/t/utils.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             { utils
                 useAxios false
@@ -163,17 +216,23 @@ $group
                 useGitUrlParse false
                 useJsonToAst false
     $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
-        ££{'££'}group
+        ${"${'$'}"}group
                 
             useWizzi true
             { wizzi
                 isDev true
-                [ plugins
-                    "./wizzi-core/index.js"
-                    "./wizzi-js/index.js" 
-                    "./wizzi-web/index.js" 
-                    "./wizzi-meta/index.js"
-                pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi/packages"
+                $if cliCtx.useAzure || cliCtx.useHeroku
+                    [ plugins
+                        "wizzi-core"
+                        "wizzi-js" 
+                        "wizzi-web" 
+                $else
+                    [ plugins
+                        "./wizzi-core/index.js"
+                        "./wizzi-js/index.js" 
+                        "./wizzi-web/index.js" 
+                        "./wizzi-meta/index.js"
+                    pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi/packages"
                 { globalContext
                     wzConfigIsDevelopment true
                 useRunner false
@@ -184,3 +243,17 @@ $group
             useWizziViewEngine true
             { wizziViewEngine
 
+    $if cliCtx.useMongoDb
+        $file __dot__wizzi/models/t/db.json.ittf.ittf
+            ${"${'$'}"}group
+
+                useMongoDb true
+                { mongoDb
+                    host "mongodb+srv"
+                    user "yanez"
+                    password "${"${'$'}"}{stfnbssl_env.mongoDbPsw}"
+                    dbPath "@cluster0.idlk7.mongodb.net"
+                    dbName "wizzi"
+                    { options
+                        useNewUrlParser true
+                        useUnifiedTopology true

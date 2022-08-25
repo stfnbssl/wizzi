@@ -25,16 +25,15 @@ var mocks = wizziUtils.mocks;
 // wizzi Package
 var wizziIndex = require('../../../index');
 
-var pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..', '..');
+var pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..');
 wizziIndex.createFactory({
     repo: {
         storeKind: 'filesystem'
      }, 
     plugins: {
-        pluginsBaseFolder: pluginsBaseFolder, 
         items: [
-            './wizzi-web/dist/index', 
-            './wizzi-core/dist/index'
+            'wizzi-web', 
+            'wizzi-core'
         ]
      }, 
     globalContext: {

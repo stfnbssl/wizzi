@@ -44,20 +44,20 @@ module
                         + 
                         @ this.path
                         + /callback
-                    @expr this.callback
+                    @ this.callback
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /logout
-                    @expr this.logout
+                    @ this.logout
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /user
                     _ initValues.auth0Secured()
-                    @expr this.user
+                    @ this.user
             p callback
                 :private 
                 async=> 

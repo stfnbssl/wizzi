@@ -158,7 +158,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.13.loader.includer.' + method,
+        method: 'wizzi-mtree@0.7.16.loader.includer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

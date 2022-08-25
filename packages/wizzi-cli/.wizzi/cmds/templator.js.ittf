@@ -16,7 +16,8 @@ module
 
             _ wizzi.model
                 @ sourcePath
-                @ ctx
+                {
+                    @ cliCtx ctx
                 =>
                     param err
                     param templateModel
@@ -64,5 +65,5 @@ module
 
     function decode
         param text
-        set text = verify.replaceAll(text, "££", "$")
+        set text = verify.replaceAll(text, "${'$'}", "$")
         return verify.replaceAll(text, "£'('£", "(")

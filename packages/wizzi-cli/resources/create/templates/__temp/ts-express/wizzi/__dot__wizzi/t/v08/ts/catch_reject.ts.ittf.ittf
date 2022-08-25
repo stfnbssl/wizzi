@@ -1,0 +1,3 @@
+${'$'}group 
+   ${'$'}params method
+   $include wz/v08/ts/t/catch_reject.ts

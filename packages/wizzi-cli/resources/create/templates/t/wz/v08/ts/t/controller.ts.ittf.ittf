@@ -1,5 +1,4 @@
 $group
-    $params level:integer|2, isAuth:boolean|false
 
     import
         @ Router
@@ -10,17 +9,17 @@ $group
     import 
         @ ControllerType
         @ AppInitializerType
-        $if level == 2
+        ${'$'}if ctrl.kind == 'site'
             from '../../features/app/types'
-        $elif level == 3
+        ${'$'}else
             from '../../../features/app/types'
 
-    $if isAuth
+    ${'$'}if ctrl.isAuth
         import 
             @ AuthRequest
-            $if level == 2
+            ${'$'}if ctrl.kind == 'site'
                 from '../../features/auth/types'
-            $elif level == 3
+            ${'$'}else
                 from '../../../features/auth/types'
 
     import
@@ -28,9 +27,9 @@ $group
         @ sendSuccess
         @ sendPromiseResult
         @ sendFailure
-        $if level == 2
+        ${'$'}if ctrl.kind == 'site'
             from '../../utils/sendResponse'
-        $elif level == 3
+        ${'$'}else
             from '../../../utils/sendResponse'
 
     ${'$'}if ctrl.modelName

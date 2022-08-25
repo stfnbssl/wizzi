@@ -1,35 +1,17 @@
 $group
-    $
-        var call = '(&md)';
-    
-    import express from 'express'
 
-    import 
-        @ AppInitializerType
-        from './features/app'
-    
-    import 
-        @ ConfigType
-        from './features/config'
+    ${'$'}
+        var md = {
+            isGetApp: false,
+            createHttpServer: wzCtx.Build.express.useSsl || wzCtx.Build.useSocketIO
+        }
 
+    app/appImports${'('}&md)
     ${'$'}if wzCtx.Build.useNetlify
         import serverless from 'serverless-http'
-        index/imports${call}
-    
-    ${'$'}else
-        
-        ${'$'}if wzCtx.Build.express.useSsl
-            import fs from 'fs'
-            import https from 'https'
-        ${'$'}else
-            ${'$'}if wzCtx.Build.useSocketIO
-                import http from 'http'
-        ${'$'}if wzCtx.Build.useSocketIO
-            import socketio from 'socket.io'
-        ${'$'}if wzCtx.Build.express.useSsl
-            +
-            const ssl_key = fs.readFileSync('server.key')
-            const ssl_cert = fs.readFileSync('server.cert')
+        index/imports${'('}&md)
+
+    ${'$'}include app/initializeApp
 
     +
     class App
@@ -40,6 +22,9 @@ $group
             :public 
             :ref ConfigType
         p port
+            :public 
+            :number 
+        p usedPort
             :public 
             :number 
         p server
@@ -54,6 +39,11 @@ $group
             set this.port = this.config.port
             set this.app
                 _ express
+            +
+            _ initializeApp
+                @ this.app
+                @ initValues
+            +
             ${'$'}if wzCtx.Build.express.useSsl
                 set this.server
                     _ https.createServer
@@ -64,26 +54,6 @@ $group
             ${'$'}elif wzCtx.Build.useSocketIO
                 set this.server = http.createServer(this.app)
             +
-            _ initValues.middlewaresPre.forEach
-                => 
-                    param middleware
-                    _ middleware(this.app)
-
-            +
-            _ initValues.apis.forEach
-                => 
-                    param api
-                    warn 'installing api: ', api.name
-                    _ api.initialize(initValues)
-                    set initValues.globalApi[api.name] = api
-            +
-            _ initValues.controllers.forEach
-                => 
-                    param controller
-                    warn 'installing router on path: ', controller.path
-                    _ controller.initialize(initValues)
-                    _ this.app.use(controller.path, controller.router)
-
             ${'$'}if wzCtx.Build.useSocketIO
                 +
                 # Connecting sockets to the server and adding them to the request
@@ -109,25 +79,45 @@ $group
                         param res
                         _ res.send('👍')
 
-            +
-            _ initValues.middlewaresPost.forEach
-                => 
-                    param middleware
-                    _ middleware(this.app)
-
         m listen
             :public 
             param port
                 :number
                 :optional
-            var usedPort = port || this.port
-            _ ${'$'}{(wzCtx.Build.useSocketIO || wzCtx.Build.express.useSsl) ? 'this.server' : 'this.app'}.listen
-                @ usedPort
-                => 
+            set this.usedPort = port || this.port
+            ${'$'}if md.createHttpServer
+                _ this.server.listen
+                    @ this.usedPort
+                    => 
+                        _ console.log
+                            `lit 
+                                + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                                @ this.usedPort
+            ${'$'}else
+                set this.server
+                    _ this.app.listen
+                        @ this.usedPort
+                        => 
+                            _ console.log
+                                `lit 
+                                    + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                                    @ this.usedPort
+
+        m close
+            :public 
+            param done
+            _ console.log
+                `lit 
+                    + Server closing. App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                    @ this.usedPort
+
+            _ this.server.close
+                =>
                     _ console.log
                         `lit 
-                            + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
-                            @ usedPort
-                            + 
+                            + Server stopped. App was listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                            @ this.usedPort
+                    _ done
+
     ${'$'}if !wzCtx.Build.useNetlify
         export-default App

@@ -1,100 +1,89 @@
 $group
-    $file __dot__wizzi/src/features/app/index.ts.ittf.ittf
+    $file __dot__wizzi/${pkgPath}src/features/app/index.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/features/app/index££{'('}&md)
-    $file __dot__wizzi/src/features/app/types.ts.ittf.ittf
+            v08/express/features/app/index${'$'}{'('}&md)
+    $file __dot__wizzi/${pkgPath}src/features/app/types.ts.ittf.ittf
         module
-            ££{'££'}
+            ${"${'$'}"}
                 var md = {
                 }
         
-            v08/express/features/app/types££{'('}&md)
-        
+            v08/express/features/app/types${'$'}{'('}&md)
     $if cliCtx.useConfig
-        $file __dot__wizzi/src/features/config/env.ts.ittf.ittf
+        $file __dot__wizzi/${pkgPath}src/features/config/env.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useConfig
-                    v08/express/features/config/env££{'('}&md)
-        $file __dot__wizzi/src/features/config/index.ts.ittf.ittf
+                v08/express/features/config/env${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/config/index.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useConfig
-                    v08/express/features/config/index££{'('}&md)
+                v08/express/features/config/index${'$'}{'('}&md)
             
-        $file __dot__wizzi/src/features/config/types.ts.ittf.ittf
+        $file __dot__wizzi/${pkgPath}src/features/config/types.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useConfig
-                    v08/express/features/config/types££{'('}&md)
+                v08/express/features/config/types${'$'}{'('}&md)
         
     $if cliCtx.useWizzi
-        $file __dot__wizzi/src/features/wizzi/index.ts.ittf.ittf
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/index.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/index££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/factory.ts.ittf.ittf
+                v08/express/features/wizzi/index${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/factory.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/factory££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/maps.ts.ittf.ittf
+                v08/express/features/wizzi/factory${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/maps.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/maps££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/productions.ts.ittf.ittf
+                v08/express/features/wizzi/maps${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/productions.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/productions££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/types.ts.ittf.ittf
+                v08/express/features/wizzi/productions${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/types.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/types££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/api/context.ts.ittf.ittf
+                v08/express/features/wizzi/types${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/api/context.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/api/context££{'('}&md)
-        $file __dot__wizzi/src/features/wizzi/controllers/production.ts.ittf.ittf
+                v08/express/features/wizzi/api/context${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/controllers/production.ts.ittf.ittf
             module
-                ££{'££'}
+                ${"${'$'}"}
                     var md = {
                     }
             
-                ££{'££'}if wzCtx.Build.useWizzi
-                    v08/express/features/wizzi/controllers/production££{'('}&md)
+                v08/express/features/wizzi/controllers/production${'$'}{'('}&md)

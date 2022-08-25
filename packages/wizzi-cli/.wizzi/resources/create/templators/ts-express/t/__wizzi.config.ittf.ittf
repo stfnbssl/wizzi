@@ -2,21 +2,21 @@ $group
     $file wizzi.config.js.ittf
         module
             kind jsfile
-            ££
+            ${'$'}
                 var development = true;
             const path = require('path')
             set module.exports
                 { 
-                    @ wfjobName "££{cliCtx.name}/job"
+                    @ wfjobName "${'$'}{cliCtx.name}/job"
                     @ wfjobPath path.join(__dirname, '.wizzi', 'generate.wfjob.ittf')
                     @ destPath __dirname
-                    ££if development
+                    ${'$'}if development
                         [ plugins
                             @ './wizzi-core/index.js' 
                             @ './wizzi-js/index.js' 
                             @ './wizzi-web/index.js' 
                         @ pluginsBaseFolder path.join(__dirname, '..', '..', '..', 'wizzi', 'packages') 
-                    ££else
+                    ${'$'}else
                         [ plugins
                             @ 'wizzi-core'
                             @ 'wizzi-js'

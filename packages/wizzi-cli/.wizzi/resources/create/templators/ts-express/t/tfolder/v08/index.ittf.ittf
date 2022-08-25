@@ -1,4 +1,5 @@
 $group
+    $include azure
     $include env
     $include express
     $include features

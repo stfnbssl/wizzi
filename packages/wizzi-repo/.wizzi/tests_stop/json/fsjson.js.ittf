@@ -2,7 +2,7 @@
 	+
 	$append imports
 		var 
-			decl FsJson = require('../../lib/json/fs/fsjson')
+			decl FsJson = require('../../../lib/json/fs/fsjson')
 	
 	var fsJson
 		new FsJson

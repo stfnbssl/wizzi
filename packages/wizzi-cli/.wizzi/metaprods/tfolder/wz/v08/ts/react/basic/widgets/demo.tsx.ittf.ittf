@@ -1,8 +1,5 @@
 $group
 
-    $ 
-        var call = '(&md)';
-
     ${'$'}
         var md = {
             name: "WidgetsDemo",
@@ -24,7 +21,7 @@ $group
         @ Tick
         from './tick'
 
-    v08/ts/react/function${call}
+    v08/ts/react/function${'('}&md)
         aside 
             h2 
                 + {title}

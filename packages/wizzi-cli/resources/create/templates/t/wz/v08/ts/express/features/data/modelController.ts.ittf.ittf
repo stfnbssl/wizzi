@@ -1,8 +1,5 @@
 $group
 
-    $
-        var lp = '(';
-    
     ${'$'}
         var schema = md.schema;
         var ctrl = {
@@ -10,7 +7,7 @@ $group
             path: '/api/v1/' + schema.collectionName
         }
 
-    controller${lp} &ctrl )
+    controller${'('} &ctrl )
         ${'$'}append imports
             import 
                 @ I${'$'}{schema.Name}
@@ -29,7 +26,7 @@ $group
         _ this.router.delete(`/:id`, this.delete${'$'}{schema.Name}.bind(this))
 
         ${'$'}append handlers
-            handler${lp} get${'$'}{schema.CollectionName} )
+            handler${'('} get${'$'}{schema.CollectionName} )
                 _ this.${'$'}{schema.name}Model.find
                     =>
                         param err
@@ -51,7 +48,7 @@ $group
                                 {
                                     @ ${'$'}{schema.collectionName} ${'$'}{schema.collectionName}
 
-            handler${lp} create${'$'}{schema.Name} )
+            handler${'('} create${'$'}{schema.Name} )
                 # loog 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, request.body', request.body
                 const data = request.body.data
                 let ${'$'}{schema.name} = new this.${'$'}{schema.name}Model(data)
@@ -78,7 +75,7 @@ $group
                                     @ origErrorDetail err.errors
                                 @ 400
 
-            handler${lp} get${'$'}{schema.Name}ById )
+            handler${'('} get${'$'}{schema.Name}ById )
                 let id = request.params.id
                 _ this.${'$'}{schema.name}Model.findById
                     @ id
@@ -102,7 +99,7 @@ $group
                             { 
                                 @ ${'$'}{schema.name} ${'$'}{schema.name}
             
-            handler${lp} update${'$'}{schema.Name} )
+            handler${'('} update${'$'}{schema.Name} )
                 const id = request.params.id;
                 _ this.${'$'}{schema.name}Model.findById
                     @ id
@@ -154,7 +151,7 @@ $group
                                                 @ origErrorDetail err.errors
                                             @ 400
 
-            handler${lp} delete${'$'}{schema.Name} )
+            handler${'('}} delete${'$'}{schema.Name} )
                 const id = request.params.id;
                 _ this.${'$'}{schema.name}Model.findByIdAndRemove
                     { 

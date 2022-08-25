@@ -1,0 +1,18 @@
+${'$'}group 
+   useAzure true
+   { azure
+       webAppName "wizzi"
+       resourceGroupName "wizzi-rg"
+       hostingPlanName "wizzi-plan"
+       sku "S1 Standard"
+       databaseAccountId "wizzi-app"
+       webAppLocation "West Europe"
+       appInsightsLocation "West Europe"
+       databaseAccountLocation "eastasia"
+       nodejsVersion "16.2.0"
+       packagePath "Application"
+       webAppPort 3000
+       testTitle "Hello home"
+       timeoutMinutesShort 10
+       timeoutMinutesMedium 20
+       timeoutMinutesLong 60

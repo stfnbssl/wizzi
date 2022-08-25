@@ -23,9 +23,9 @@
                     _ wizzi.fsFactory
                         { plugins
                             [ items
-                                @ './packages/wizzi-core/dist/index.js'
-                                @ './packages/wizzi-js/dist/index.js'
-                                @ './packages/wizzi-web/dist/index.js'
+                                @ './packages/wizzi-core/index.js'
+                                @ './packages/wizzi-js/index.js'
+                                @ './packages/wizzi-web/index.js'
                             @ pluginsBaseFolder
                                 _ path.resolve
                                     @ __dirname

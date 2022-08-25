@@ -28,9 +28,9 @@ function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
             items: [
-                './wizzi-js/dist/index', 
-                './wizzi-web/dist/index', 
-                './wizzi-core/dist/index'
+                './wizzi-js/index', 
+                './wizzi-web/index', 
+                './wizzi-core/index'
             ], 
             pluginsBaseFolder: pluginsBaseFolder
          }, 

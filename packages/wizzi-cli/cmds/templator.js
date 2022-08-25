@@ -1,8 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\templator.js.ittf
-    utc time: Wed, 17 Aug 2022 15:01:09 GMT
 */
 'use strict';
 const path = require('path');
@@ -13,7 +12,9 @@ const verify = wizziUtils.verify;
 const file = wizziUtils.file;
 module.exports = (sourcePath, destPath, ctx) => 
 
-    wizzi.model(sourcePath, ctx, (err, templateModel) => {
+    wizzi.model(sourcePath, {
+        cliCtx: ctx
+     }, (err, templateModel) => {
     
         if (err) {
             console.log('err', err, __filename);
@@ -50,6 +51,6 @@ function processContent(sb, node, indent) {
     }
 }
 function decode(text) {
-    text = verify.replaceAll(text, "££", "$");
+    text = verify.replaceAll(text, "$", "$");
     return verify.replaceAll(text, "£'('£", "(");
 }

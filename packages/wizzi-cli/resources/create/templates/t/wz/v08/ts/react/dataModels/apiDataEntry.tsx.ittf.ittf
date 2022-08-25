@@ -1,8 +1,5 @@
 $group
 
-    $
-        var lp = '(';
-
     ${'$'}
         var schema = md.schema;
         md.name = schema.Name + "ApiDataEntry";
@@ -10,7 +7,7 @@ $group
         // md.styled = true;
         md.props = [];
 
-    v08\react\component${lp} &md )
+    v08\react\component${'('} &md )
         ${'$'}append imports
             $*
             import 

@@ -39,13 +39,13 @@ module
                         + 
                         @ this.path
                         + /users
-                    @expr this.getUsers
+                    @ this.getUsers
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /users/:id
-                    @expr this.getUser
+                    @ this.getUser
             p getUsers
                 :private 
                 async=> 

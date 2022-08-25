@@ -7,7 +7,7 @@
 var util = require('util');
 
 var md = module.exports = {};
-var pkgVersioned = ' (wizzi.0.7.25)';
+var pkgVersioned = ' (wizzi.0.7.33)';
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';

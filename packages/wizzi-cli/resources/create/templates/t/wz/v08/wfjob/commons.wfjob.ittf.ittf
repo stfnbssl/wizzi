@@ -11,6 +11,7 @@ $group
             schema js
             generator js/module
             extension js
+            ignore /**/bin/**/*.js
             ${'$'}if jobCtx.job_model
                 model-ref ${'$'}{jobCtx.job_model}
                     export-name ${'$'}{jobCtx.job_model}
@@ -82,6 +83,39 @@ $group
                     export-name ${'$'}{jobCtx.job_model}
             ${'$'}hook
 
+    ${'$'}elif name == 'any_xml'
+        artifact any_xml
+            src ./**/*.xml.ittf
+            schema xml
+            generator xml/document
+            extension xml
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
+    ${'$'}elif name == 'any_yml'
+        artifact any_yml
+            src ./**/*.yml.ittf
+            schema yaml
+            generator yaml/document
+            extension yml
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
+    ${'$'}elif name == 'any_yaml'
+        artifact any_yaml
+            src ./**/*.yaml.ittf
+            schema yaml
+            generator yaml/document
+            extension yaml
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
     ${'$'}elif name == 'any_md'
         artifact any_md
             src ./**/*.md.ittf
@@ -133,6 +167,18 @@ $group
             generator text/document
             dest-path .env
             extension env
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
+    ${'$'}elif name == 'www'
+        artifact www
+            src bin/www.js.ittf
+            schema js
+            generator js/module
+            dest-path bin/www
+            extension 
             ${'$'}if jobCtx.job_model
                 model-ref ${'$'}{jobCtx.job_model}
                     export-name ${'$'}{jobCtx.job_model}
@@ -215,6 +261,29 @@ $group
             schema text
             generator text/document
             dest-path .npmignore
+            extension text
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
+    ${'$'}elif name == 'Procfile'
+        artifact Procfile
+            src Procfile.text.ittf
+            schema text
+            generator text/document
+            dest-path Procfile
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
+    ${'$'}elif name == '.azure_deployment'
+        artifact .azure_deployment
+            src .deployment.text.ittf
+            schema text
+            generator text/document
+            dest-path .deployment
             extension text
             ${'$'}if jobCtx.job_model
                 model-ref ${'$'}{jobCtx.job_model}

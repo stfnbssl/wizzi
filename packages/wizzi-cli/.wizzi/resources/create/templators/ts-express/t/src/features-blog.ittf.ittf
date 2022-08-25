@@ -1,0 +1,17 @@
+$group
+    $if cliCtx.useBlog
+        $file __dot__wizzi/${pkgPath}src/features/blog/index.ts.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/express/features/blog/index.ts
+        $file __dot__wizzi/${pkgPath}src/features/blog/types.ts.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/express/features/blog/types.ts
+        $file __dot__wizzi/${pkgPath}src/features/blog/api/post.ts.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/express/features/blog/api/post.ts
+        $file __dot__wizzi/${pkgPath}src/features/blog/controllers/apiv1post.ts.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/express/features/blog/controllers/apiv1post.ts
+        $file __dot__wizzi/${pkgPath}src/features/blog/mongo/post.ts.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/express/features/blog/mongo/post.ts

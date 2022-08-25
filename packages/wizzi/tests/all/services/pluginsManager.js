@@ -24,7 +24,7 @@ describe("pluginsManager", function() {
     before(function(done) {
         pluginsManager.createManager({
             items: [
-                '../mocks/plugin'
+                '../../mocks/plugin'
             ], 
             pluginsBaseFolder: __dirname
          }, function(err, pm) {

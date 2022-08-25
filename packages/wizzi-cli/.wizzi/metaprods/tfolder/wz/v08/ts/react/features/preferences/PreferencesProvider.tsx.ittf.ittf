@@ -174,7 +174,7 @@ $group
                             { preferences
                                 @ ...state.preferences
                                 @ ...overrides
-                @expr this._persistPreferences
+                @ this._persistPreferences
         m render
             return 
                 < PreferencesContext.Provider 

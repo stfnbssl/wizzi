@@ -5,8 +5,8 @@
 */
 'use strict';
 var JsWizziContext = require('../jswizzi/jsWizziContext');
-var dateUtil = require('../jswizzi/functions/dateutil');
-var JsWizziScriptCoder = require('../jswizzi/JsWizziScriptCoder');
+var dateUtil = require('../jswizzi/functions/dateUtil');
+var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
 var mTreeBuildupScripter = require('./mTreeBuildupScripter');
 var requireFromString = null;
 //

@@ -1,10 +1,5 @@
 ﻿import {
-    GetFilesOptions,
-    GetFoldersOptions,
-    FolderDef,
-    FileDef,
-    GlobOptions,
-    VFile
+    fSystem,
 } from 'wizzi-utils';
 type cb<T> = (err: any, result: T) => void;
 
@@ -93,7 +88,7 @@ interface FsJson {
     readDocument(id: ObjectID, callback: cb<string>): void;
     writeDocument(id: ObjectID, content: string, callback: cb<FsJsonWriteResult>): void;
     toJson(callback: cb<JsonFsData>): void;
-    toFiles(options: { removeRoot: string }, callback: cb<FileDef[]>): void;
+    toFiles(options: { removeRoot: string }, callback: cb<fSystem.FileDef[]>): void;
 }
 
 interface UploadedFileDef {
@@ -117,9 +112,9 @@ interface FsJsonDocumentManager {
     moveFolder(fromFolder: string, toFolder: string, callback: cb<any>): void;
     isFile(filePath: string, callback: cb<boolean>): void;
     isDirectory(folderPath: string, callback: cb<boolean>): void;
-    getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
-    getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
-    glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
+    getFiles(folderPath: string, options: fSystem.GetFilesOptions, callback: cb<fSystem.FileDef[]>): void;
+    getFolders(folderPath: string, options: fSystem.GetFoldersOptions, callback: cb<fSystem.FolderDef[]>): void;
+    glob(globExpr: string, options: fSystem.GlobOptions, callback: cb<fSystem.FileDef[]>): void;
     uploadFolder(sourcePath: string, destPath: string, callback: cb<UploadedFileDef[]>): void; 
 }
 
@@ -152,7 +147,7 @@ export namespace JsonComponents {
     export function addToJsonFsData(fsJsonData: JsonFsData, documents: JsonDocumentDto[], callback: cb<object>): void;
 }
 
-export function jsonfile(options: { jsonFsData?: JsonFsData, fsJson?: FsJson }, callback: cb<VFile>): void;
+export function jsonfile(options: { jsonFsData?: JsonFsData, fsJson?: FsJson }, callback: cb<fSystem.VFile>): void;
 
 /**
  * The interface implemented by Wizzi Store Systems
@@ -179,7 +174,7 @@ interface StoreInitOptions {
  * The interface implemented by Wizzi Store Systems
  */
 interface Store {
-    init(options: StoreInitOptions, callback: cb<VFile>): void;
+    init(options: StoreInitOptions, callback: cb<fSystem.VFile>): void;
     documentExists(filePath: string, callback: cb<boolean>): void;
     getModelContent(filePath: string, callback: cb<string>): void;
 }

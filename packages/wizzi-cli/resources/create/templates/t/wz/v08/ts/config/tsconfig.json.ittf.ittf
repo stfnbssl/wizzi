@@ -1,0 +1,125 @@
+$group
+    ---
+    { compilerOptions
+
+        $if false
+            target "es6"
+            module "commonjs"
+            rootDir "./"
+            $$ outDir "./build"
+            esModuleInterop true
+            strict true
+            jsx "react-jsx"
+            allowJs true
+            checkJs false
+            isolatedModules true
+            noEmit true
+            moduleResolution "node"
+            resolveJsonModule true
+            skipLibCheck true
+        $if true
+            target "es5"
+            [ lib
+                "dom" 
+                "dom.iterable" 
+                "esnext" 
+                ${'$'}hook lib
+            allowJs true
+            skipLibCheck true
+            esModuleInterop true
+            allowSyntheticDefaultImports true
+            strict true
+            forceConsistentCasingInFileNames true
+            noFallthroughCasesInSwitch true
+            ${'$'}if wzCtx.Build.useExpress
+                module "commonjs"
+            ${'$'}else
+                module "esnext"
+            moduleResolution "node"
+            resolveJsonModule true
+            isolatedModules true
+            ${'$'}if wzCtx.Build.useReactCreateApp
+                noEmit true
+            ${'$'}else
+                noEmit false
+            jsx "react-jsx"
+            [ typeRoots
+                "node_modules/@types"
+                "./src/types"
+                ${'$'}hook typeRoots
+            ${'$'}hook
+
+
+
+        $*
+        
+        ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useRedux
+            baseUrl "./"
+            outDir "dist/"
+            allowSyntheticDefaultImports true
+            esModuleInterop true
+            allowJs true
+            checkJs false
+            declaration false
+            emitDecoratorMetadata true
+            experimentalDecorators true
+            forceConsistentCasingInFileNames true
+            importHelpers true
+            noEmitHelpers true
+            jsx "preserve"
+            [ lib
+                "dom" 
+                "es2017" 
+            skipLibCheck true
+            [ types
+                "jest" 
+            target "es5"
+            module "esnext"
+            moduleResolution "node"
+            resolveJsonModule true
+            isolatedModules true
+            noEmit true
+            noEmitOnError false
+            noFallthroughCasesInSwitch true
+            noUnusedLocals true
+            strict true
+            pretty true
+            removeComments true
+            sourceMap true
+        ${'$'}else
+            target "es5"
+            [ lib
+                "dom" 
+                "dom.iterable" 
+                "esnext" 
+                ${'$'}hook lib
+            allowJs true
+            skipLibCheck true
+            esModuleInterop true
+            allowSyntheticDefaultImports true
+            strict true
+            forceConsistentCasingInFileNames true
+            noFallthroughCasesInSwitch true
+            ${'$'}if wzCtx.Build.useExpress
+                module "commonjs"
+            ${'$'}else
+                module "esnext"
+            moduleResolution "node"
+            resolveJsonModule true
+            isolatedModules true
+            ${'$'}if wzCtx.Build.useReactCreateApp
+                noEmit true
+            ${'$'}else
+                noEmit false
+            jsx "react-jsx"
+            [ typeRoots
+                "node_modules/@types"
+                "./src/types"
+                ${'$'}hook typeRoots
+            ${'$'}hook
+        *$
+    [ include
+        "src"
+        ${'$'}hook include
+    [ exclude
+        "src/**/*.spec.*"

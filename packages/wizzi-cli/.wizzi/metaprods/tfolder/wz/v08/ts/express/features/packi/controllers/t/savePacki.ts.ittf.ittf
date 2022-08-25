@@ -1,9 +1,6 @@
 $group
     $params kind
 
-    $
-        var lp = '(';
-
     $if kind == 'route'
         _ this.router.post
             `lit 
@@ -12,7 +9,7 @@ $group
 
     $if kind == 'handler'
         +
-        handler${lp} savePacki )
+        handler${'('} savePacki )
             const id = request.params.id
             const files
                 :ref PackiFiles

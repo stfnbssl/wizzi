@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-core\.wizzi\lib\artifacts\xml\document\gen\main.js.ittf
 */
 'use strict';
@@ -25,33 +25,38 @@ md.gen = function(model, ctx, callback) {
 ;
 md.genItem = function(model, ctx) {
     if (model.tag) {
-        ctx.write('<' + model.tag);
-        var i, i_items=model.attributes, i_len=model.attributes.length, item;
-        for (i=0; i<i_len; i++) {
-            item = model.attributes[i];
-            ctx.write(' ' + item.name + '="');
-            ctx.write(item.value)
-            ctx.write('"');
-        }
-        if ((model.elements && model.elements.length > 0) || model.text) {
-            ctx.write('>');
-            if (model.text) {
-                ctx.write(model.text);
-            }
-            if (model.elements && model.elements.length > 0) {
-                ctx.w();
-                ctx.indent();
-                var i, i_items=model.elements, i_len=model.elements.length, item;
-                for (i=0; i<i_len; i++) {
-                    item = model.elements[i];
-                    md.genItem(item, ctx);
-                }
-                ctx.deindent();
-            }
-            ctx.w('</' + model.tag + '>');
+        if (model.tag == '<--') {
+            ctx.w('<-- ' + model.text + ' -->');
         }
         else {
-            ctx.w(' />');
+            ctx.write('<' + model.tag);
+            var i, i_items=model.attributes, i_len=model.attributes.length, item;
+            for (i=0; i<i_len; i++) {
+                item = model.attributes[i];
+                ctx.write(' ' + item.name + '="');
+                ctx.write(item.value)
+                ctx.write('"');
+            }
+            if ((model.elements && model.elements.length > 0) || model.text) {
+                ctx.write('>');
+                if (model.text) {
+                    ctx.write(model.text);
+                }
+                if (model.elements && model.elements.length > 0) {
+                    ctx.w();
+                    ctx.indent();
+                    var i, i_items=model.elements, i_len=model.elements.length, item;
+                    for (i=0; i<i_len; i++) {
+                        item = model.elements[i];
+                        md.genItem(item, ctx);
+                    }
+                    ctx.deindent();
+                }
+                ctx.w('</' + model.tag + '>');
+            }
+            else {
+                ctx.w(' />');
+            }
         }
     }
     else {

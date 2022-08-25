@@ -969,7 +969,7 @@ $*module
                                                             { 
                                                                 @ connectedClients
                                                         else null
-                                    @expr this.reloadTimeout
+                                    @ this.reloadTimeout
                             return null
                         else
                             const connectedClients = State.removeObject(state.connectedClients, connectedClientId)

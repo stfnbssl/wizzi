@@ -1,9 +1,0 @@
-$group
-    $
-        var call = '(&md)';
-
-    layout${call}
-        div
-            style padding 500px
-            a Github login
-                href /api/v1/authenticate/github

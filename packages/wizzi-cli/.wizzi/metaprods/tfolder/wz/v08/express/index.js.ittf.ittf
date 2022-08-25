@@ -1,13 +1,11 @@
 $group
-    $
-        var call = '(&md)';
 
     ${'$'}if wzCtx.Build.useNetlify
-        index/start${call}
+        index/start${'('}&md)
     ${'$'}else
-        index/imports${call}
+        index/imports${'('}&md)
         async-function start
-            index/start${call}
+            index/start${'('}&md)
             _ app.listen
     
         try 

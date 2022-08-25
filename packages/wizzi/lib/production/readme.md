@@ -1,16 +1,23 @@
 ## Production
 ### The wizzi.production.productionManager
 Manages a production of software artifacts. It is instantiated by a wizzi.wizziFactory instance which sets up the production environment (plugins, global context, store system). Clients use its 'addJobRequest' and 'addArtifactRequest' methods to add artifact requests and then use the 'run' and 'persistToFile' methods to execute the generations and save to file the generated artifacts.
+
 ### The wizzi.production.wfjobLoader
 Async loads a 'wfjob' wizzi model and accumulates wfjobArtifactModel elements. If the model contains 'wfjob' requests also check that they have not already been processed and add them to pendingWfjobRequests. If the model contains wfjobArtifactModel elements check that they have not already been added and add them to the artifactInfoConfigs collection.
+
 ### The wizzi.production.runner
 Executes the generations described by a wizzi.artifact.artifactInfo instance. It is instantiated by the wizzi.production.productionManager, selects the artifact type, and asynchronously run the generations using the wizzi.artifact.asyncArtifactGenerator.
+
 The generated artifacts are added to the 'genContexts' collection of the wizzi.artifact.artifactInfo instance.
+
 ### The wizzi.production.persister
 Executes the write to file of the generated artifacts added to the 'genContexts' collection of a wizzi.artifact.artifactInfo instance. It is instantiated by the wizzi.production.productionManager, and asynchronously executes the writes using the wizzi.production.asyncArtifactFilePersister.
+
 ### The global context
 The default value in options.js is empty ( = {} )
+
 The user can pass a global context to
+
 * A Wizzi Job execution 
 * An mTree load 
 * A Wizzi Model load 
@@ -18,4 +25,6 @@ The user can pass a global context to
 using the property globalContext of the options parameter of* The wizzi.executeInstanceJob method 
 * The wizzi.createFactory method 
 Creating a wizziFactory instance always is preliminar to executing an mTree load, a Wizzi Model load or an Artifact Generation.
+
 The wizzi.executeInstanceJob creates its wizziFactory instance from the options that receives.
+

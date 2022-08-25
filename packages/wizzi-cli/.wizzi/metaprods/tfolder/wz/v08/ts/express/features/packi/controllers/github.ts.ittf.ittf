@@ -51,19 +51,19 @@ $group
                         + 
                         @ this.path
                         + /ownedrepos/:uid
-                    @expr this.getOwnedRepositories
+                    @ this.getOwnedRepositories
                 _ this.router.get
                     `lit 
                         + 
                         @ this.path
                         + /clone/:uid/:owner/:name/:branch/:kind
-                    @expr this.cloneRepository
+                    @ this.cloneRepository
                 _ this.router.post
                     `lit 
                         + 
                         @ this.path
                         + /commit/:uid/:owner/:name/:branch
-                    @expr this.commitRepository
+                    @ this.commitRepository
             p getOwnedRepositories
                 :private 
                 async=> 
