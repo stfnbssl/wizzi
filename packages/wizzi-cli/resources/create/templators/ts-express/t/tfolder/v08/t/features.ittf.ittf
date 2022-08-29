@@ -9,60 +9,6 @@ $group
             ${"${'$'}"}params &md
             
             ${'$'}include wz/v08/ts/express/features/app/types.ts
-    $file __dot__wizzi/t/v08/express/features/auth/index.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/index.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/manager.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/manager.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/types.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/types.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/controllers/authentication.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/controllers/authentication.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/mongo/account.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/mongo/account.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/mongo/token.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/mongo/token.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/mongo/authuser.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/mongo/authuser.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/strategies/github.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/strategies/github.ts
-        
-    $file __dot__wizzi/t/v08/express/features/auth/strategies/local.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/auth/strategies/local.ts
-        
     $file __dot__wizzi/t/v08/express/features/config/env.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &md
@@ -165,27 +111,27 @@ $group
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/tfolder/authHandler.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_reject.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params method
         
-            ${'$'}include wz/v08/ts/t/catch_reject.ts
+            ${'$'}include wz/v08/ts/tfolder/catch_reject.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_fail.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params method
         
-            ${'$'}include wz/v08/ts/t/catch_fail.ts
+            ${'$'}include wz/v08/ts/tfolder/catch_fail.ts
     $file __dot__wizzi/t/v08/express/features/t/controller.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &ctrl
         
-            wz/v08/ts/t/controller.ts${'('}3)
+            wz/v08/ts/tfolder/controller.ts${'('}3)
     $file __dot__wizzi/t/v08/express/features/t/handler.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/tfolder/handler.ts
     $file __dot__wizzi/t/v08/express/features/wizzi/factory.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &md

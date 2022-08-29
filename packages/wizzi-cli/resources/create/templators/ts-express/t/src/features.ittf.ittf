@@ -1,4 +1,7 @@
 $group
+    $file __dot__wizzi/${pkgPath}src/features/types.ts.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/express/features/types.ts
     $file __dot__wizzi/${pkgPath}src/features/app/index.ts.ittf.ittf
         module
             ${"${'$'}"}
@@ -37,53 +40,3 @@ $group
             
                 v08/express/features/config/types${'$'}{'('}&md)
         
-    $if cliCtx.useWizzi
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/index.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/index${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/factory.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/factory${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/maps.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/maps${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/productions.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/productions${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/types.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/types${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/api/context.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/api/context${'$'}{'('}&md)
-        $file __dot__wizzi/${pkgPath}src/features/wizzi/controllers/production.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/controllers/production${'$'}{'('}&md)

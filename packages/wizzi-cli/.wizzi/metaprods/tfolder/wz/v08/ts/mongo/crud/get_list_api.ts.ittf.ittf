@@ -1,4 +1,5 @@
 $group
+    ${'$'}params &md
 
     +
     export
@@ -41,7 +42,7 @@ $group
                                 if err
                                     log myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
-                                # loog myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
+                                $$ loog myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
                                 const resultItem = []
                                 foreach item in result
                                     const item_obj

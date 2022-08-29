@@ -16,6 +16,8 @@ $group
                 var jobCtx = {
         		    ittf_models_folder: path.join(__dirname, 'models'),
                     ittf_src_folder: path.join(__dirname, 'src'),
+                    ittf_src_t_images: path.join(__dirname, 'src', 't', 'images'),
+                    ittf_src_t_models: path.join(__dirname, 'src', 't', 'models'),
         		    ittf_root_folder: path.join(__dirname, 'root'),
                     $if cliCtx.useAzure
                         ittf_tests_folder: path.join(__dirname, 'Tests'),
@@ -77,6 +79,19 @@ $group
                 wfjobs${'$'}{'('}any_plain, &jobCtx, css)
                 wfjobs${'$'}{'('}any_plain, &jobCtx, css.ittf)
                 wfjobs${'$'}{'('}any_plain_image, &jobCtx)
+
+        	---
+            line ittf-src-images
+        		cwd-folder ${"${'$'}"}{jobCtx.ittf_src_t_images}
+        		dest-folder ${"${'$'}"}{jobCtx.dest_folder}/${srcPath}/t/images
+                wfjobs${'$'}{'('}any_plain, &jobCtx, ittf)
+
+        	---
+            line ittf-src-models
+        		cwd-folder ${"${'$'}"}{jobCtx.ittf_src_t_models}
+        		dest-folder ${"${'$'}"}{jobCtx.dest_folder}/${srcPath}/t/models
+                wfjobs${'$'}{'('}any_plain, &jobCtx, ittf)
+
         	$if cliCtx.useAzure
                 ---
                 line ittf-tests
@@ -151,6 +166,8 @@ $group
                 line-ref ittf-root
                 line-ref ittf-public
         		line-ref ittf-src
+                line-ref ittf-src-images
+                line-ref ittf-src-models
                 line-ref ittf-ittf
                 $if cliCtx.useAzure
                     line-ref ittf-tests

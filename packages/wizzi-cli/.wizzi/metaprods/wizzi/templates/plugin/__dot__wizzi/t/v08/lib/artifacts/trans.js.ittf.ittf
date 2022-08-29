@@ -24,7 +24,7 @@
 	md-trans-main${call}
 		${'$'}if md.checkSchema
             if model.wzElement !== '${'$'}{md.rootElement}'
-				# loog 'wizzi-core', 'transformer', 'model', model
+				$$ loog 'wizzi-core', 'transformer', 'model', model
 				_ callback
 					_ error
 						@ 'InvalidArgument'

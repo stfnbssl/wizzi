@@ -6,7 +6,7 @@ $group
     import
         @ FsJson
         from 'wizzi-repo'
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         import
             @ packiTypes
             from '../packi'
@@ -76,7 +76,7 @@ $group
                 :p rootFolder
                     :string
                     :optional
-                ${'$'}if wzCtx.Build.usePacki
+                ${'$'}if wzCtx.Build.useWizziJsonFactory
                     :p packiFiles
                         :ref packiTypes.PackiFiles
                         :optional
@@ -102,7 +102,7 @@ $group
                 :p mainIttf
                     :string
                     :optional
-                ${'$'}if wzCtx.Build.usePacki                    
+                ${'$'}if wzCtx.Build.useWizziJsonFactory                    
                     :p packiFiles
                         :ref packiTypes.PackiFiles
                         :optional

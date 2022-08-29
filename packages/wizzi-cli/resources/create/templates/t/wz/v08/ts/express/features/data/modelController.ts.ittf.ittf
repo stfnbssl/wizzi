@@ -42,14 +42,14 @@ $group
                                     @ err
                                     @ 501
                         else
-                            # loog 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
+                            $$ loog 'get${'$'}{schema.CollectionName}.${'$'}{schema.collectionName}', ${'$'}{schema.collectionName}
                             _ sendSuccess
                                 @ response
                                 {
                                     @ ${'$'}{schema.collectionName} ${'$'}{schema.collectionName}
 
             handler${'('} create${'$'}{schema.Name} )
-                # loog 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, request.body', request.body
+                $$ loog 'Entering ${'$'}{schema.Name}Controller.create${'$'}{schema.Name}, request.body', request.body
                 const data = request.body.data
                 let ${'$'}{schema.name} = new this.${'$'}{schema.name}Model(data)
                 _ ${'$'}{schema.name}.save

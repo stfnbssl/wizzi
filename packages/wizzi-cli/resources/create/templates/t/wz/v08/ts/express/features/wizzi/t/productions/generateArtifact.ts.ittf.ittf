@@ -1,6 +1,6 @@
 $group
 
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         +
         export 
             async-function generateArtifact
@@ -33,7 +33,7 @@ $group
                             const generator = options && options.generator 
                                 \b ? options.generator 
                                 \b : wizziMaps.generatorFor(filePath)
-                            # loog 'wizzi.productions.generateArtifact.using artifact generator', generator
+                            $$ loog 'wizzi.productions.generateArtifact.using artifact generator', generator
                             if generator
                                 let jsonwf
                                     :any 
@@ -72,7 +72,7 @@ $group
                                                 ... 
                                                     await 
                                                         _ inferAndLoadContextJson(jsonwf.wf, files, ittfDocumentUri, 'twin')
-                                    # loog myname + 'generateArtifact.context', Object.keys(generationContext)
+                                    $$ loog myname + 'generateArtifact.context', Object.keys(generationContext)
                                     _ jsonwf.wf.loadModelAndGenerateArtifact
                                         @ ittfDocumentUri
                                         { 
@@ -91,7 +91,7 @@ $group
                                                     @ artifactContent result
                                                     @ sourcePath filePath
                                                     @ artifactGenerator generator
-                                                # loog 'Generated artifact', result
+                                                $$ loog 'Generated artifact', result
                                 catch ex
                                     return reject(ex)
 
@@ -122,11 +122,11 @@ $group
                             \b ? options.generator 
                             \b : wizziMaps.generatorFor(filePath)
                         if generator
-                            # loog 'wizzi.productions.using artifact generator', generator
+                            $$ loog 'wizzi.productions.using artifact generator', generator
                             const wf
                                 await 
                                     _ createFilesystemFactory()
-                            # loog myname + '.generateArtifactFs.context', Object.keys(context || {})
+                            $$ loog myname + '.generateArtifactFs.context', Object.keys(context || {})
                             try
                                 _ wf.loadModelAndGenerateArtifact
                                     @ filePath
@@ -137,7 +137,7 @@ $group
                                     => 
                                         param err
                                         param result
-                                        # loog myname + '.generateArtifactFs.err', err
+                                        $$ loog myname + '.generateArtifactFs.err', err
                                         if err
                                             return reject(err)
                                         _ resolve
@@ -145,7 +145,7 @@ $group
                                                 @ artifactContent result
                                                 @ sourcePath filePath
                                                 @ artifactGenerator generator
-                                            # loog 'Generated artifact', result
+                                            $$ loogg 'Generated artifact', result
                             catch ex
                                 return reject(ex)
                         else

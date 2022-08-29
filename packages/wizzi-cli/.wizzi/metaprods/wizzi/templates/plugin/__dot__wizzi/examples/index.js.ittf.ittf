@@ -30,7 +30,7 @@ module
                     if err.inner
                         error '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.err.inner.toString()', err.inner.toString()
                 else
-                    # loog '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.result', result
+                    $$ loog '${cliCtx.Schemas[0].name}.examples.executeGenerateModules.result', result
 
         function executeGenerateModules
             param modules

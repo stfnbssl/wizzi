@@ -1,6 +1,6 @@
 $group
 
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory    
         +
         export 
             async-function generateFolderArtifacts
@@ -29,7 +29,7 @@ $group
                                             @ action 'wizzi.productions.generateFolderArtifacts'
                                             @ message 'files parameter must be an object of type PackiFiles'
                                             @ files
-                            # loog myname, 'generateFolderArtifacts.sourceFolderUri,destFolderUri', sourceFolderUri, destFolderUri
+                            $$ loog myname, 'generateFolderArtifacts.sourceFolderUri,destFolderUri', sourceFolderUri, destFolderUri
                             let jsonwf
                                 :any 
                                 =
@@ -52,7 +52,7 @@ $group
                                             :string 
                                         if err
                                             return reject(err)
-                                        # loog myname, 'generateFolderArtifacts.result', result
+                                        $$ loog myname, 'generateFolderArtifacts.result', result
                                         _ jsonwf.wf.fileService.getFiles
                                             @ packiFilePrefix + destFolderUri
                                             {

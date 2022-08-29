@@ -25,29 +25,6 @@ $group
                     :p mongoConnectUrl
                         :string 
                 ${'$'}if wzCtx.Build.useAuthentication
-                    :p auth0Domain
-                        :string 
-                    ${'$'}if wzCtx.Build.usePacki
-                        :p auth0PackiClientId
-                            :string 
-                        :p auth0PackiClientSecret
-                            :string 
-                        :p auth0PackiCallbackUrl
-                            :string 
-                        :p auth0PackiBackendAppId
-                            :string 
-                        :p auth0PackiBackendAppSecret
-                            :string 
-                        :p auth0PackiApiId
-                            :string 
-                    :p auth0IssuerBaseURL
-                        :string 
-                    :p auth0ClientId
-                        :string 
-                    :p auth0BaseURL
-                        :string 
-                    :p auth0Secret
-                        :string 
                     ${'$'}if wzCtx.Build.authentication.useGithub
                         :p githubClientId
                             :string 

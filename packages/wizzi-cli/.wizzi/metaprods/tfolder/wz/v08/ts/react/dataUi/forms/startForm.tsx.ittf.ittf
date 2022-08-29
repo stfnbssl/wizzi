@@ -20,7 +20,7 @@ $group
                 foreach item in form_def.controls
                     if !!item.isKey == false || form_def.__state.status != 'add'
                         set formData[item.id] = $( "#" + item.ctrlId ).val()
-                # loog 'formData', formData, 'form_def.__state', form_def.__state
+                $$ loog 'formData', formData, 'form_def.__state', form_def.__state
                 _ event.preventDefault()
                 if form_def.__state.status == 'update'
                     if form_def.onConfirmUpdate
@@ -60,7 +60,7 @@ $group
                 _ selectBox.select2
                     { 
                         @ dropdownParent selectDropdown
-                # loog 'select', item.id, 'activated'
+                $$ loog 'select', item.id, 'activated'
             catch err
                 log err
         elif item.type == 'date'
@@ -79,7 +79,7 @@ $group
                         param ev
                         param picker
                         _ $(this).val(picker.startDate.format('DD/MM/YYYY'))
-                # loog 'datepicker', item.id, 'activated'
+                $$ loog 'datepicker', item.id, 'activated'
             catch err
                 log err
         elif item.type == 'checkbox' || item.type == 'radio'
@@ -176,7 +176,7 @@ $group
                 @ onDoneAddItem
                     function
                         param values
-                        # loog 'form.onDoneAddItem', values
+                        $$ loog 'form.onDoneAddItem', values
                         _ resetForm
                             @ $
                             @ form_def
@@ -184,7 +184,7 @@ $group
                 @ onDoneUpdateItem
                     function
                         param newvalues
-                        # loog 'form.onDoneUpdateItem', newvalues
+                        $$ loog 'form.onDoneUpdateItem', newvalues
                         _ resetForm
                             @ $
                             @ form_def
@@ -193,7 +193,7 @@ $group
                 @ onDoneDeleteItem
                     function
                         param itemId
-                        # loog 'form.onDoneDeleteItem', itemId
+                        $$ loog 'form.onDoneDeleteItem', itemId
                         _ resetForm
                             @ $
                             @ form_def

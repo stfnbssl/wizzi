@@ -3,8 +3,6 @@ $group
     ${'$'}if wzCtx.Build.useMongoDb
         let modelBuilders
             [ 
-                ${'$'}if wzCtx.Build.useAuthentication
-                    @ ...authenticationModelBuilders
                 ${'$'}if wzCtx.Build.useAuthorization
                     @ ...authorizationModelBuilders
                 ${'$'}if wzCtx.Build.useAccount
@@ -24,8 +22,6 @@ $group
         [ 
             ${'$'}if wzCtx.Build.useSite
                 @ ...siteControllers
-            ${'$'}if wzCtx.Build.useAuthentication
-                @ ...authenticationControllers
             ${'$'}if wzCtx.Build.useAuthorization
                 @ ...authorizationControllers
             ${'$'}if wzCtx.Build.useAccount

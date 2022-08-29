@@ -72,7 +72,7 @@ ${'$'}group
 		param node
 		param newN
 		
-		# loog 'wrapChild', node.children
+		$$ loog 'wrapChild', node.children
 
 		_ copyNodeAttrsDeep
 			@ node

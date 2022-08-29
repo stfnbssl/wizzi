@@ -12,7 +12,7 @@ module
         param lang
         set lang = lang || 'js'
         const highlightedCode = hljs.highlight(lang, code).value
-        # loog 'highlightedCode', highlightedCode
+        $$ loog 'highlightedCode', highlightedCode
         return highlightedCode
 
     set module.exports = hjsMe

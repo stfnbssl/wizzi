@@ -4,7 +4,7 @@ ${'$'}group
        webAppName "wizzi"
        nodejsVersion "16.2.0"
        packagePath "deploy"
-       webAppPort 3000
+       webAppPort 5000
        Procfile "server.js"
        testTitle "Hello home"
        timeoutMinutesShort 10

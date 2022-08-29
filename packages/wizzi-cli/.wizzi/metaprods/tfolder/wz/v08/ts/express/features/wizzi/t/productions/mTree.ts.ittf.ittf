@@ -2,7 +2,7 @@ $group
     $
         var op = '(';
 
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         +
         export
             async-function mTree
@@ -106,7 +106,7 @@ $group
             throw new Error(myname + '.mTreeDb not yet implemented')
 
     +
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         export
             async-function wrapIttfText
                 param schema

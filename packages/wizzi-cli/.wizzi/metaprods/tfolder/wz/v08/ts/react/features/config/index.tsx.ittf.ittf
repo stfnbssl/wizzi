@@ -99,7 +99,7 @@ $group
                         @ BROWSERFS_PACKIES_FOLDER '/ixdb/packies'
                         @ BROWSERFS_PACKI_CONFIG_FILE 'packi.config.json'
                     @ PREFERENCES_KEY 'packi.preferences.config'
-            # loog 'features.config', _config
+            $$ loog 'features.config', _config
         return _config
     +
     export 

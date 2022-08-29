@@ -182,13 +182,13 @@ $group
                             const pf = parseFilePath(filePath)
                             if pf.isIttfDocument && pf.schema !== 'json'
                                 var twinJsonBaseName = pf.seedname + '.json.ittf'
-                                # loog 'features.wizzi.productions.inferAndLoadContextJson.twinJsonBaseName', twinJsonBaseName
+                                $$ loog 'features.wizzi.productions.inferAndLoadContextJson.twinJsonBaseName', twinJsonBaseName
                                 const twinDocumentUri
                                     _ Object.keys(files).find
                                         => 
                                             param k
                                             _ k.endsWith('/' + twinJsonBaseName)
-                                # loog 'features.wizzi.productions.inferAndLoadContextJson.twinDocumentUri', twinDocumentUri, Object.keys(files)
+                                $$ loogg 'features.wizzi.productions.inferAndLoadContextJson.twinDocumentUri', twinDocumentUri, Object.keys(files)
                                 if twinDocumentUri
                                     _ loadModelJson
                                         @ wf

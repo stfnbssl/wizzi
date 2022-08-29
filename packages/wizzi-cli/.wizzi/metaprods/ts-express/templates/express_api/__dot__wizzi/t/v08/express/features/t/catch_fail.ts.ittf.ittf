@@ -1,4 +1,4 @@
 ${'$'}group
     ${'$'}params method
 
-    $include wz/v08/ts/t/catch_fail.ts
+    $include wz/v08/ts/tfolder/catch_fail.ts

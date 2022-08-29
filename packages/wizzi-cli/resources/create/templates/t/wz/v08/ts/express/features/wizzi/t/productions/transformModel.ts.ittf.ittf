@@ -1,5 +1,5 @@
 $group
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         +
         export
             async-function transformModel
@@ -30,7 +30,7 @@ $group
                                             @ message 'files parameter must be an object of type PackiFiles'
                                             @ files
                             const transformer = options && options.transformer ? options.transformer : wizziMaps.transformerFor(filePath)
-                            # loog 'wizzi.productions.transformModel.using artifact transformer', transformer
+                            $$ loog 'wizzi.productions.transformModel.using artifact transformer', transformer
                             if transformer
                                 let jsonwf
                                     :any
@@ -67,7 +67,7 @@ $group
                                             ...
                                                 await
                                                     _ inferAndLoadContextJson(jsonwf.wf, files, ittfDocumentUri, 'twin')
-                                    # loog 'wizzi.productions.transformModel.transformationContext', Object.keys(transformationContext)
+                                    $$ loog 'wizzi.productions.transformModel.transformationContext', Object.keys(transformationContext)
                                     _ jsonwf.wf.loadAndTransformModel
                                         @ ittfDocumentUri
                                         {
@@ -85,7 +85,7 @@ $group
                                                     @ transformResult result
                                                     @ sourcePath filePath
                                                     @ modelTransformer transformer
-                                                # loog 'Transformed result', result
+                                                $$ loog 'Transformed result', result
                                 catch ex
                                     return reject(ex)
                             else
@@ -112,7 +112,7 @@ $group
                         param reject
                         const transformer = options && options.transformer ? options.transformer : wizziMaps.transformerFor(filePath)
                         if transformer
-                            # loog 'wizzi.productions.using model transformer', transformer
+                            $$ loog 'wizzi.productions.using model transformer', transformer
                             const wf
                                 await
                                     _ createFilesystemFactory()
@@ -139,6 +139,6 @@ $group
                                             @ transformResult result
                                             @ sourcePath filePath
                                             @ modelTransformer transformer
-                                        # loog 'Transformed model', result
+                                        $$ loogg 'Transformed model', result
                         else
                             _ reject('No model transformer available for document ' + filePath)

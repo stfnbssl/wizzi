@@ -19,9 +19,9 @@ $group
                 @ onfocusout
                     function 
                         param element
-                        # loog 'onfocusout', element
+                        $$ loog 'onfocusout', element
                         _ $(element).valid
-                        # loog $(element).valid()
+                        $$ loog $(element).valid()
 
     function setControlRule
         param $

@@ -3,14 +3,14 @@ $group
     import path from 'path'
     import fs from 'fs'
     import wizzi from 'wizzi'
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         import wizziTools from 'wizzi-tools'
     import
         @ ittfScanner
         @ ittfGraph
         @ verify
         from 'wizzi-utils'
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         import
             @ packiFilePrefix
             from '../config/env'
@@ -24,7 +24,7 @@ $group
         as wizziMaps
         from './maps'
     import
-        ${'$'}if wzCtx.Build.usePacki
+        ${'$'}if wzCtx.Build.useWizziJsonFactory
             @ createFsJsonAndFactory
             @ ensurePackiFilePrefix
         @ createFilesystemFactory

@@ -33,7 +33,7 @@ $group
                 :ref I${'$'}{schema.Name}
             =
                 yield get${'$'}{schema.Name}List()
-        # loog 'Saga ${'$'}{schema.name}.getList', res
+        $$ loog 'Saga ${'$'}{schema.name}.getList', res
         yield 
             _ put
                 _ ${'$'}{schema.name}Actions.get${'$'}{schema.Name}ListSuccess
@@ -46,7 +46,7 @@ $group
             :ref I${'$'}{schema.Name}
             =
                 yield get${'$'}{schema.Name}ById(action.payload)
-        # loog 'Saga ${'$'}{schema.name}.getById', res
+        $$ loog 'Saga ${'$'}{schema.name}.getById', res
         yield 
             _ put
                 _ ${'$'}{schema.name}Actions.get${'$'}{schema.Name}ByIdSuccess
@@ -59,7 +59,7 @@ $group
             :ref I${'$'}{schema.Name}
             =
                 yield create${'$'}{schema.Name}(action.payload)
-        # loog 'Saga ${'$'}{schema.name}.create.res', res
+        $$ loog 'Saga ${'$'}{schema.name}.create.res', res
         yield 
             _ put
                 _ ${'$'}{schema.name}Actions.create${'$'}{schema.Name}Success
@@ -72,7 +72,7 @@ $group
             :ref I${'$'}{schema.Name}
             =
                 yield update${'$'}{schema.Name}(action.payload.id, action.payload.post)
-        # loog 'Saga ${'$'}{schema.name}.update', res
+        $$ loog 'Saga ${'$'}{schema.name}.update', res
         yield 
             _ put
                 _ ${'$'}{schema.name}Actions.update${'$'}{schema.Name}Success
@@ -85,7 +85,7 @@ $group
             :ref I${'$'}{schema.Name}
             =
                 yield delete${'$'}{schema.Name}(action.payload)
-        # loog 'Saga ${'$'}{schema.name}.delete', res
+        $$ loog 'Saga ${'$'}{schema.name}.delete', res
         yield 
             _ put
                 _ ${'$'}{schema.name}Actions.delete${'$'}{schema.Name}Success

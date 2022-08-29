@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
 */
 'use strict';
@@ -288,7 +288,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.16.loader.mixer.' + method,
+        method: 'wizzi-mtree@0.7.17.loader.mixer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\includer.js.ittf
 */
 'use strict';
@@ -67,6 +67,12 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
                 }
                 mTreeBrickProvider.exitFragmentCall();
                 // _ mTreeBrickProvider.callChain.pop()
+                if (!item.parent) {
+                    return callback(local_error('IttfIncludeError', 'includer', 'A $include command cannot be a root node.', item, err, {
+                            includerUri: mixeruri, 
+                            includedRelPath: v
+                         }));
+                }
                 utilnode.replace(item, includeResult.nodes)
                 return callback(null);
             })
@@ -158,7 +164,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.16.loader.includer.' + method,
+        method: 'wizzi-mtree@0.7.17.loader.includer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

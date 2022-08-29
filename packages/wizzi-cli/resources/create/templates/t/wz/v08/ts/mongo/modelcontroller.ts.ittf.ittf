@@ -1,5 +1,5 @@
 $group
-    
+    ${'$'}params &md
    
     ${'$'}
         var ctrl = {
@@ -8,7 +8,7 @@ $group
             modelName: md.Name
         }
 
-    controller${'('} &ctrl )
+    v08/ts/controller${'('} &ctrl )
         _ this.router.get('/', this.get${'$'}{md.Names})
         _ this.router.post('/', this.addNew${'$'}{md.Name})
         _ this.router.get('/:id', this.get${'$'}{md.Name}ById)
@@ -40,7 +40,7 @@ $group
         
         ${'$'}append handlers
             
-            handler${'('} addNew${'$'}{md.Name} )
+            v08/ts/handler${'('} addNew${'$'}{md.Name} )
                 let new${'$'}{md.Name} = new this.${'$'}{md.Name}Model(request.body)
                 _ new${'$'}{md.Name}.save
                     => 
@@ -56,7 +56,7 @@ $group
                             {
                                 @ data ${'$'}{md.name}
             
-            handler${'('} get${'$'}{md.Names} )
+            v08/ts/handler${'('} get${'$'}{md.Names} )
                 _ this.${'$'}{md.Name}Model.find
                     { 
                     => 
@@ -72,7 +72,7 @@ $group
                             {
                                 @ data ${'$'}{md.name}
 
-            handler${'('} get${'$'}{md.Name}ById )
+            v08/ts/handler${'('} get${'$'}{md.Name}ById )
                 _ this.${'$'}{md.Name}Model.findById
                     @ request.params.id
                     => 
@@ -91,7 +91,7 @@ $group
                                 @ data ${'$'}{md.name}
 
             ${'$'}if md.fkey
-                handler${'('} get${'$'}{md.Name}By_${'$'}{md.fkey} )
+                v08/ts/handler${'('} get${'$'}{md.Name}By_${'$'}{md.fkey} )
                     _ this.${'$'}{md.Name}Model.find
                         { 
                             @ _id request.params.id
@@ -110,7 +110,7 @@ $group
                                     @ data ${'$'}{md.name}
             ${'$'}foreach field in md.fields
                 ${'$'}if field.unique
-                    handler${'('} get${'$'}{md.Name}By_${'$'}{field.name} )
+                    v08/ts/handler${'('} get${'$'}{md.Name}By_${'$'}{field.name} )
                         _ this.${'$'}{md.Name}Model.find
                             { 
                                 @ ${'$'}{field.name} request.params.${'$'}{field.name}
@@ -127,7 +127,7 @@ $group
                                     {
                                         @ data ${'$'}{md.name}
                 ${'$'}elif field.type == 'arrayRef'
-                    handler${'('} add_${'$'}{field.path}
+                    v08/ts/handler${'('} add_${'$'}{field.path}
                         _ this.${'$'}{md.Name}Model.updateOne
                             {
                                 @ _id request.params.id
@@ -147,7 +147,7 @@ $group
                                     {
                                         @ message 'Successfully added ${'$'}{field.path} to ${'$'}{md.Name}!'                                        
                     
-                    handler${'('} remove_${'$'}{field.path}
+                    v08/ts/handler${'('} remove_${'$'}{field.path}
                         _ this.${'$'}{md.Name}Model.updateOne
                             {
                                 @ _id request.params.id
@@ -170,7 +170,7 @@ $group
             ${'$'}if md.indexes
                 ${'$'}foreach index in md.indexes
                     ${'$'}if index.fields.length > 1
-                        handler${'('} get${'$'}{md.Name}By_${'$'}{index.name} )
+                        v08/ts/handler${'('} get${'$'}{md.Name}By_${'$'}{index.name} )
                             _ this.${'$'}{md.Name}Model.find
                                 { 
                                     ${'$'}foreach field in index.fields
@@ -188,7 +188,7 @@ $group
                                         {
                                             @ data ${'$'}{md.name}
 
-            handler${'('} update${'$'}{md.Name} )
+            v08/ts/handler${'('} update${'$'}{md.Name} )
                 # Note that update(), updateMany(), findOneAndUpdate(), etc. do not execute save() middleware. 
                 # If you need save middleware and full validation, first query for the document and then save() it.
                 _ this.${'$'}{md.Name}Model.findOneAndUpdate
@@ -210,7 +210,7 @@ $group
                             {
                                 @ data ${'$'}{md.name}
 
-            handler${'('} delete${'$'}{md.Name} )
+            v08/ts/handler${'('} delete${'$'}{md.Name} )
                 _ this.${'$'}{md.Name}Model.remove
                     { 
                         @ _id request.params.id

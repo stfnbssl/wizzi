@@ -26,7 +26,7 @@ $group
                             const generator = options && options.generator 
                                 \b ? options.generator 
                                 \b : generatorFor(filePath)
-                            # loog 'wizzi.productions.generateArtifact.using artifact generator', generator
+                            $$ loog 'wizzi.productions.generateArtifact.using artifact generator', generator
                             if generator
                                 let jsonwf
                                     :any 
@@ -63,7 +63,7 @@ $group
                                             ... 
                                                 await 
                                                     _ inferAndLoadContextJson(jsonwf.wf, files, ittfDocumentUri, 'twin')
-                                    # loog 'wizzi.productions.generateArtifact.context', Object.keys(context)
+                                    $$ loog 'wizzi.productions.generateArtifact.context', Object.keys(context)
                                     _ jsonwf.wf.loadModelAndGenerateArtifact
                                         @ ittfDocumentUri
                                         { 
@@ -112,7 +112,7 @@ $group
                             \b ? options.generator 
                             \b : generatorFor(filePath)
                         if generator
-                            # loog 'wizzi.productions.using artifact generator', generator
+                            $$ loogg 'wizzi.productions.using artifact generator', generator
                             const wf
                                 await 
                                     _ createFilesystemFactory()

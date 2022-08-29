@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
 */
 'use strict';
@@ -8,7 +8,7 @@ var util = require('util');
 var wizziUtils = require('wizzi-utils');
 var f_verify = require('./functions/verify');
 
-var pkgVersioned = ' (@wizzi/mtree.0.7.16)';
+var pkgVersioned = ' (@wizzi/mtree.0.7.17)';
 
 var md = module.exports = {};
 

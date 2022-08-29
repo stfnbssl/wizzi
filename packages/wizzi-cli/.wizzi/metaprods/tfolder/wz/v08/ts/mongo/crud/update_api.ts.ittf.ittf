@@ -1,4 +1,5 @@
 $group
+    ${'$'}params &md
 
     +
     export
@@ -67,7 +68,7 @@ $group
                                     log myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'error', err
                                     return reject(err)
                                 +
-                                # loog myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'result', result
+                                $$ loog myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'result', result
                                 return
                                     _ resolve
                                         {

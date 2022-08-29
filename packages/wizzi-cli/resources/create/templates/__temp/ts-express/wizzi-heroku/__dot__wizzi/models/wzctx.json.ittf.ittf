@@ -5,7 +5,7 @@
        var md = {
            useSsl: false,
            host: 'localhost',
-           port: 3000,
+           port: 5000,
            apiVersion: 'v1'
        }; 
        md.http = md.useSsl ? 'https' : 'http';
@@ -13,9 +13,14 @@
    $include cli/v08/wzctx-info.json
    --- 
    { App
+       name "Wizzi Hub"
        siteUrl "${'$'}{md.http}://localhost"
        port ${'$'}{md.port}
        baseUrl "${'$'}{md.http}://localhost:${'$'}{md.port}"
+       apiVersion "1"
+       { constants
+           { preview
+               minWidth 700
        [ Components
    --- 
    { Styles
@@ -25,12 +30,32 @@
        { site
            useIttfStatic false
            { ittfStatic
-       useDemoControllers true
+       useDemoControllers false
        [ features
+           { 
+               name "auth"
+               hasControllers true
+               useMongoDb false
+           { 
+               name "account"
+               hasControllers true
+               useMongoDb true
            { 
                name "blog"
                hasControllers true
                useMongoDb true
+           { 
+               name "docs"
+               hasControllers true
+               useMongoDb false
+           { 
+               name "production"
+               hasControllers true
+               useMongoDb true
+           { 
+               name "packi"
+               hasControllers true
+               useMongoDb false
        ${'$'}include heroku.json
        --- 
        ${'$'}include config.json
@@ -48,3 +73,7 @@
        ${'$'}include utils.json
        --- 
        ${'$'}include db.json
+       --- 
+       ${'$'}include auth.json
+       --- 
+       ${'$'}include react.json

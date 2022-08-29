@@ -128,7 +128,7 @@ $group
                                     param item
                                     if plugins.indexOf(item) < 0
                                         _ plugins.push(item)
-                # loog 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length
+                $$ loog 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length
                 return 
                     new Promise
                         => 

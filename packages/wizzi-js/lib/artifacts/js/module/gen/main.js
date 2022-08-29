@@ -89,7 +89,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-js@0.7.10');
+        ctx.w('    package: wizzi-js@0.7.11');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         ctx.w('*/');
     }

@@ -469,13 +469,6 @@ template express_wizzi
         
             v08/express/middlewares/authorization${'$'}{'('}&md)
         
-    $file __dot__wizzi/src/middlewares/authentication.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/authentication${'$'}{'('}&md)
         
     $file __dot__wizzi/src/middlewares/bodyParser.ts.ittf.ittf
         module
@@ -918,27 +911,27 @@ template express_wizzi
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/tfolder/authHandler.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_reject.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params method
         
-            ${'$'}include wz/v08/ts/t/catch_reject.ts
+            ${'$'}include wz/v08/ts/tfolder/catch_reject.ts
     $file __dot__wizzi/t/v08/express/features/t/catch_fail.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params method
         
-            ${'$'}include wz/v08/ts/t/catch_fail.ts
+            ${'$'}include wz/v08/ts/tfolder/catch_fail.ts
     $file __dot__wizzi/t/v08/express/features/t/controller.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &ctrl
         
-            wz/v08/ts/t/controller
+            wz/v08/ts/tfolder/controller
     $file __dot__wizzi/t/v08/express/features/t/handler.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/tfolder/handler.ts
     $file __dot__wizzi/t/v08/express/features/wizzi/factory.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &md
@@ -1079,11 +1072,6 @@ template express_wizzi
         
             ${'$'}include wz/v08/ts/express/middlewares/auth0secured.ts
         
-    $file __dot__wizzi/t/v08/express/middlewares/authentication.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/middlewares/authentication.ts
         
     $file __dot__wizzi/t/v08/express/middlewares/authorization.ts.ittf.ittf
         ${"${'$'}"}group
@@ -1229,17 +1217,17 @@ template express_wizzi
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/tfolder/authHandler.ts
     $file __dot__wizzi/t/v08/express/site/t/controller.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &ctrl
         
-            $include wz/v08/ts/t/controller.ts
+            $include wz/v08/ts/tfolder/controller.ts
     $file __dot__wizzi/t/v08/express/site/t/handler.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/tfolder/handler.ts
     $file __dot__wizzi/t/v08/express/utils/sendResponse.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &md
@@ -1259,17 +1247,17 @@ template express_wizzi
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/tfolder/authHandler.ts
     $file __dot__wizzi/t/v08/mongo/t/controller.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &ctrl
         
-            $include wz/v08/ts/t/controller.ts
+            $include wz/v08/ts/tfolder/controller.ts
     $file __dot__wizzi/t/v08/mongo/t/handler.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params name
         
-            ${'$'}include wz/v08/ts/t/handler.ts
+            ${'$'}include wz/v08/ts/tfolder/handler.ts
     $file __dot__wizzi/t/v08/package/browser.json.ittf.ittf
         ${"${'$'}"}group
             

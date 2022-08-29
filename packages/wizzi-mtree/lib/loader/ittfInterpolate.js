@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.10
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
 */
 'use strict';
@@ -163,7 +163,7 @@ function evalKeyOrCode(keyOrCode, jsWizziContext) {
     
     // TODO verify.logError does not exist any more 25/02/21
     
-    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.16.loader.ittfInterpolate.evalKeyOrCode' )
+    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.17.loader.ittfInterpolate.evalKeyOrCode' )
     
     // _ verify.logError( 'checked_call_return.error.forTest',  'stm',  stm )
     

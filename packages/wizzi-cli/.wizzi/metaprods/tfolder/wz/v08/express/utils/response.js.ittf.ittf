@@ -50,12 +50,12 @@ $group
             _ message.then
                 => 
                     param result
-                    # loog 'sendPromiseResult.ok', result
+                    $$ loog 'sendPromiseResult.ok', result
                     _ sendSuccess(res, result)
                 ._ catch
                     => 
                         param err
-                        # loog 'sendPromiseResult.err', err
+                        $$ loog 'sendPromiseResult.err', err
                         _ sendFailure(res, err, 500)
     
     export 
@@ -65,5 +65,5 @@ $group
             _ message.then
                 => 
                     param result
-                    # loog 'sendPromiseLikeResult.ok', result
+                    $$ loog 'sendPromiseLikeResult.ok', result
                     _ sendSuccess(res, result)

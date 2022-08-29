@@ -1,5 +1,5 @@
 $group
-    ${'$'}if wzCtx.Build.usePacki    
+    ${'$'}if wzCtx.Build.useWizziJsonFactory    
         +
         export
             async-function wizzify
@@ -20,7 +20,7 @@ $group
                                     {
                             for const k of Object.keys(files)
                                 var extension = path.extname(k)
-                                # loog 'productions.wizzify', k, extension
+                                $$ loog 'productions.wizzify', k, extension
                                 const ittfResult
                                     await
                                         _ handleWizzify

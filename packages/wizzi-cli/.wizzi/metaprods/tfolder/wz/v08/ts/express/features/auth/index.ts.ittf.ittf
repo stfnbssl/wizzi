@@ -1,80 +1,16 @@
 $group
-
-    import 
-        @ ModelBuilderType
+    import
         @ ControllerType
         from '../app/types'
-    import 
-        as authTypes
-        from './types'
-    ${'$'}if wzCtx.Build.useMongoDb
-        import 
-            @ AuthUserModelBuilder
-            @ GetAuthUserModel
-            from './mongo/authuser'
-        import 
-            @ TokenModelBuilder
-            @ GetTokenModel
-            from './mongo/token'
-        import 
-            @ AccountModelBuilder
-            @ GetAccountModel
-            from './mongo/account'
-    import 
-        @ AuthenticationController
-        from './controllers/authentication'
     import
-        @ ensureAuthenticated
-        from './ensureAuthenticated'
-    import 
-        as authManager
-        from './manager'
-    ${'$'}if wzCtx.Build.useMongoDb
-        +
-        const authModelGetters
-            { 
-                @ GetAuthUserModel
-                @ GetTokenModel
-                @ GetAccountModel
-        +
-        const authenticationModelBuilders
-            :[ 
-                :ref ModelBuilderType
-            =
-                [ 
-                    @ AuthUserModelBuilder
-                    @ TokenModelBuilder
-                    @ AccountModelBuilder
-
+        @ ApiV1AuthenticateController
+        from './controllers/apiv1authenticate'
     +
-    const authorizationModelBuilders
-        :[ 
-            :ref ModelBuilderType
-        =
-            [ 
-    +
-    const authenticationControllers
-        :[ 
+    const authControllers
+        :[
             :ref ControllerType
         =
-            [ 
-                @ new AuthenticationController()
-
-    +
-    const authorizationControllers
-        :[ 
-            :ref ControllerType
-        =
-            [ 
-
-    +
-    export 
-        @ authTypes
-        ${'$'}if wzCtx.Build.useMongoDb
-            @ authModelGetters
-            @ authenticationModelBuilders
-            @ authorizationModelBuilders
-        @ authenticationControllers
-        @ authorizationControllers
-        @ ensureAuthenticated
-        @ authManager
+            [
+                @ new ApiV1AuthenticateController()
+    export
+        @ authControllers

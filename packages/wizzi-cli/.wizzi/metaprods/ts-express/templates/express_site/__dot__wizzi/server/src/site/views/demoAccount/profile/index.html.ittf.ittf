@@ -3,4 +3,4 @@ html
         var md = {
         }
 
-    $include wz/v08/html/views/demoAccount/profile/index.html
+    $include wz/v08/html/views/demoauth/profile/index.html

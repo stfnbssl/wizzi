@@ -9,7 +9,17 @@ ${'$'}group
        { globalContext
            wzConfigIsDevelopment true
        useRunner false
+   useWizziDocs true
+   { wizziDocs
+   useWizziProductions true
+   { wizziProductions
+       useCachedProductions false
+   usePacki true
+   { packi
+       useAdmin false
    useIttfStatic true
    { ittfStatic
    useWizziViewEngine true
    { wizziViewEngine
+   useWizziJsonFactory true
+   { wizziJsonFactory

@@ -9,7 +9,7 @@
         ${'$'}if wzCtx.Build.react.useV16
             react "^16.8.1"
             react-dom "^16.8.1"
-        ${'$'}if wzCtx.Build.react.useV17
+        ${'$'}elif wzCtx.Build.react.useV17
             react "^17.0.1"
             react-dom "^17.0.1"
         ${'$'}else

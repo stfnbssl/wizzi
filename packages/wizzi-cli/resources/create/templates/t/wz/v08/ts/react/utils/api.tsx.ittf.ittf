@@ -10,7 +10,7 @@ $group
             param data
                 :any 
                 :optional 
-            # loog 'callApi', method, url, path, data
+            $$ loog 'callApi', method, url, path, data
             _ console.log
                 @ 'url'
                 `lit 

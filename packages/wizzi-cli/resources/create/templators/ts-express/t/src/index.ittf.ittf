@@ -7,15 +7,6 @@ $group
         
             v08/express/App${'$'}{'('}&md)
         
-    $file __dot__wizzi/${pkgPath}src/getApp.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                    isGetApp: true
-                }
-        
-            v08/express/getApp${'$'}{'('}&md)
-
     $file __dot__wizzi/${pkgPath}src/httpException.ts.ittf.ittf
         module
             
@@ -24,6 +15,7 @@ $group
                 }
         
             v08/express/httpException${'$'}{'('}&md)
+    
     $file __dot__wizzi/${pkgPath}src/index.ts.ittf.ittf
         module
             

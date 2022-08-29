@@ -32,7 +32,7 @@ $group
                                 @ ...options
                                 @ locals options._locals
                                 @ ...twinJsonContext
-                        # loog 'WizziViewEngineMiddleware.context', stringify(context, null, 2)
+                        $$ loog 'WizziViewEngineMiddleware.context', stringify(context, null, 2)
                         _ wizziProds.generateArtifactFs(filePath, context).then
                             => 
                                 param generated

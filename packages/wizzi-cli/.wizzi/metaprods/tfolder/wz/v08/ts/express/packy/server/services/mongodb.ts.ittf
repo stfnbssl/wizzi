@@ -30,7 +30,7 @@ module
                     + 
                     @ mongoPath
                     + 
-            # loog 'Connecting to ', mongoPath
+            $$ loog 'Connecting to ', mongoPath
             _ mongoose.connect
                 @ connectUrl
                 { 

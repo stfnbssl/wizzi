@@ -31,7 +31,7 @@ $group
                                     param result
                                     if err
                                         return reject(err)
-                                    # loog 'Job executed. result', result
+                                    $$ loog 'Job executed. result', result
                                     _ resolve(jsonwf.fsJson)
         
         +
@@ -53,7 +53,7 @@ $group
                                     => 
                                         param k
                                         _ k.endsWith('.wfjob.ittf')
-                            # loog 'Executing jobs', jobDocumentUris, 'files', Object.keys(files)
+                            $$ loog 'Executing jobs', jobDocumentUris, 'files', Object.keys(files)
                             const jsonwf
                                 await 
                                     _ createFsJsonAndFactory(files)
@@ -64,10 +64,10 @@ $group
                                     :return
                                         :void 
                                     if index == jobDocumentUris.length
-                                        # loog 'Jobs executed.'
+                                        $$ loog 'Jobs executed.'
                                         return resolve(jsonwf.fsJson)
                                     const ittfDocumentUri = ensurePackiFilePrefix(jobDocumentUris[index])
-                                    # loog 'Executing job', ittfDocumentUri
+                                    $$ loog 'Executing job', ittfDocumentUri
                                     _ jsonwf.wf.executeJob
                                         { 
                                             @ name ''
@@ -78,6 +78,6 @@ $group
                                             param result
                                             if err
                                                 return reject(err)
-                                            # loog 'Job executed. result', result
+                                            $$ loog 'Job executed. result', result
                                             _ execJob(index + 1)
                             _ execJob(0)

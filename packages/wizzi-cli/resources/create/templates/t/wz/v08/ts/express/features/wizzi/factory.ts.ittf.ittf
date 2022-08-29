@@ -2,12 +2,15 @@ $group
 
     import path from 'path'
     import wizzi from 'wizzi'
+    import 
+        @ fSystem
+        from 'wizzi-utils'    
     import
         @ JsonComponents
         @ JsonDocumentDto
         @ FsJson
         from 'wizzi-repo'
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         import
             @ packiFilePrefix
             from '../config/env'
@@ -28,7 +31,7 @@ $group
     +
     const myname = 'features/wizzi/factory'
     +
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         export
             function packiFilesToJsonDocuments
                 param files
@@ -105,7 +108,7 @@ $group
                                     return reject(err)
                                 _ resolve(wf)
     +
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         export
             async-function createFsJsonAndFactory
                 param files
@@ -137,7 +140,7 @@ $group
                                     param item
                                     if plugins.indexOf(item) < 0
                                         _ plugins.push(item)
-                # loog myname, 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length
+                $$ loog myname, 'createFactory', plugins, 'jsonDocuments.length', jsonDocuments.length
                 return
                     new Promise
                         =>
@@ -162,10 +165,10 @@ $group
                                             param err
                                                 :any
                                             param wf
-                                                :ref JsonWizziFactory
+                                                :ref wizzi.WizziFactory
                                             if err
                                                 return reject(err)
-                                            # loog myname, 'createFactory', 'done'
+                                            $$ loog myname, 'createFactory', 'done'
                                             _ resolve
                                                 {
                                                     @ wf
@@ -192,7 +195,7 @@ $group
                                 {
                                     @ path filePath
                                     @ content files[value].contents
-                # loog 'createFsJson', 'jsonDocuments.length', jsonDocuments.length
+                $$ loog 'createFsJson', 'jsonDocuments.length', jsonDocuments.length
                 return
                     new Promise
                         =>
@@ -228,39 +231,29 @@ $group
                             param reject
                             _ fsJson.toFiles
                                 {
-                                    @ removeRoot ''
+                                    @ removeRoot packiFilePrefix
                                 =>
                                     param err
                                         :any
-                                    param rfiles
-                                        :ref packiTypes.PackiFiles
-                                    # loog 'wizzi.factory.extractGeneratedFiles.rfiles', rfiles
-                                    # loog 'wizzi.factory.extractGeneratedFiles.packiFilePrefix', packiFilePrefix
-                                    _ fsJson.toFiles
-                                        {
-                                            @ removeRoot packiFilePrefix
+                                    param result
+                                        :ref fSystem.FileDef[]
+                                    if err
+                                        _ reject(err)
+                                    _ result.forEach
                                         =>
-                                            param err
-                                                :any
-                                            param result
-                                                :ref packiTypes.PackiFiles
-                                            if err
-                                                _ reject(err)
-                                            _ result.forEach
-                                                =>
-                                                    param value
-                                                    # loog 'wizzi.factory.extractGeneratedFiles.value.fullPath', value.fullPath,
-                                                        \b value.fullPath.substr(packiFilePrefix.length)
-                                                    if value.relPath.endsWith('.ittf') == false
-                                                        set files[value.relPath] =
-                                                            {
-                                                                @ type 'CODE'
-                                                                @ contents
-                                                                    @expr value.content
-                                                                        :as
-                                                                            :string
-                                                                @ generated true
-                                            _ resolve(files)
+                                            param value
+                                            $$ loogg 'wizzi.factory.extractGeneratedFiles.value.fullPath', value.fullPath,
+                                            $$    \b value.fullPath.substr(packiFilePrefix.length)
+                                            if value.relPath.endsWith('.ittf') == false
+                                                set files[value.relPath] =
+                                                    {
+                                                        @ type 'CODE'
+                                                        @ contents
+                                                            @expr value.content
+                                                                :as
+                                                                    :string
+                                                        @ generated true
+                                    _ resolve(files)
         +
         export
             function ensurePackiFilePrefix

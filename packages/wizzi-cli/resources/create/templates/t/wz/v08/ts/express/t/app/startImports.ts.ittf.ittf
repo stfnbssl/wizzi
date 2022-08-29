@@ -34,15 +34,6 @@ $group
     ${'$'}if wzCtx.Build.useWizzi && wzCtx.Build.wizzi.useRunner
         import wizziStart from '${'$'}{baseDir}/services/wizzi'
 
-    ${'$'}if wzCtx.Build.useAuthentication
-        $$ For now auth needs MongoDb
-        ${'$'}if wzCtx.Build.useMongoDb
-            import 
-                @ authenticationControllers
-                ${'$'}if wzCtx.Build.useMongoDb
-                    @ authenticationModelBuilders
-                from './features/auth/index'
-    
     ${'$'}if wzCtx.Build.useAuthorization
         $$ For now auth needs MongoDb
         ${'$'}if wzCtx.Build.useMongoDb
@@ -69,11 +60,6 @@ $group
             @ siteControllers
             from './site/index'
     
-    ${'$'}if wzCtx.Build.usePacki
-        import 
-            @ packiControllers
-            from './features/packi/index'
-
     ${'$'}if wzCtx.Build.useWizzi
         ${'$'}if wzCtx.Build.wizzi.useControllers
             import 
@@ -87,7 +73,7 @@ $group
     
     ${'$'}if wzCtx.Build.features && wzCtx.Build.features.length > 0
         ${'$'}foreach feature in wzCtx.Build.features
-            ${'$'}if feature.hasController || feature.useMongoDb
+            ${'$'}if feature.hasControllers || feature.useMongoDb
                 import 
                     ${'$'}if feature.hasControllers
                         @ ${'$'}{feature.name}Controllers

@@ -43,7 +43,7 @@ $group
                             `lit 
                                 + module&lf;
                                 + &nbsp; kind es6&lf;
-                                + &nbsp; # loog 'Hello world'&lf;
+                                + &nbsp; $$ loog 'Hello world'&lf;
                                 + &nbsp;&nbsp;
                         @ type 'CODE'
                     { '.wizzi/main.wfjob.ittf'

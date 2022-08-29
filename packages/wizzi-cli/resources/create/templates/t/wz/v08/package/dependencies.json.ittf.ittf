@@ -81,8 +81,8 @@ $group
         express "^4.16.3"
         ${'$'}if wzCtx.Build.useJwt
             express-jwt "^6.0.0"
-        ${'$'}if wzCtx.Build.useAuthentication || wzCtx.Build.useAuthorization
-            express-openid-connect "^2.2.1"
+        $$ ${'$'}if wzCtx.Build.useAuthentication || wzCtx.Build.useAuthorization
+        $$     express-openid-connect "^2.2.1"
         ${'$'}if wzCtx.Build.useSession
             express-session "^1.17.1"
     ---
@@ -158,13 +158,6 @@ $group
         palx '^1.0.3'
     ${'$'}if wzCtx.Build.utils.useParseUrl
         parseurl "^1.3.3"
-    ${'$'}if wzCtx.Build.useExpress
-        ${'$'}if wzCtx.Build.useAuthentication
-            passport "^0.4.1"
-            ${'$'}if wzCtx.Build.authentication.useGithub
-                passport-github2 "^0.1.12"
-            ${'$'}if wzCtx.Build.authentication.useLocal
-                passport-local "^1.0.0"
     ${'$'}if wzCtx.Build.usePrismjs
         prismjs "^1.21.0"
     ---
@@ -211,13 +204,13 @@ $group
         web-vitals "^1.0.1"
     ${'$'}if wzCtx.Build.useWizzi
         wizzi "^0.7.32"
-        ${'$'}if !wzCtx.Build.useAzure
+        ${'$'}if false
             wizzi.proto "^0.0.1"
-            wizzi-tools "^0.7.4"
+        wizzi-tools "^0.7.4"
         wizzi-utils "^0.7.19"
-        wizzi-core "^0.7.6"
+        wizzi-core "^0.7.7"
         wizzi-web "^0.7.14"
-        wizzi-js "^0.7.9"
+        wizzi-js "^0.7.11"
     ---
     ${'$'}if wzCtx.Build.useYup
         yup "^0.27.0"

@@ -1,4 +1,0 @@
-{ 
-   ${'$'} 
-       var md = {};
-   $include wz/v08/azure/arm/windows.webapp.template.json

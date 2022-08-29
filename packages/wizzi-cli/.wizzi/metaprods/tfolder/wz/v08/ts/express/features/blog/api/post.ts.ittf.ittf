@@ -56,7 +56,7 @@ $group
                                     :any
                                 param result
                                     :any
-                                # loog myname, 'validatePost', 'Post.find', 'error', err
+                                $$ loog myname, 'validatePost', 'Post.find', 'error', err
                                 if err
                                     return reject(err)
                                 if result.length == 1

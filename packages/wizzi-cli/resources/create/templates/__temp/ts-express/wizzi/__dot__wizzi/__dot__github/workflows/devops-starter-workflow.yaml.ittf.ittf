@@ -1,4 +1,0 @@
-yaml 
-   ${'$'} 
-       var md = {};
-   $include wz/v08/azure/github/devops-starter-workflow.yaml

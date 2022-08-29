@@ -113,18 +113,18 @@ $group
                     const extname = path.extname(filePath)
                     var queryMeta = (request.query.meta as string)
                     var queryTransform = (request.query.transform as string)
-                    $$ # loog 'middleware.ittfStatic', 'urlPathName', urlPathName, 'pathname', pathname, 'filePath', filePath, 'path.extname(filePath)', path.extname(filePath), 'queryMeta', queryMeta
+                    $$ $$ loog 'middleware.ittfStatic', 'urlPathName', urlPathName, 'pathname', pathname, 'filePath', filePath, 'path.extname(filePath)', path.extname(filePath), 'queryMeta', queryMeta
                     if fs.existsSync(filePath) === false
-                        # loog 'filePath do not exists', filePath
+                        $$ loog 'filePath do not exists', filePath
                         return next()
                     if fs.statSync(filePath).isDirectory()
-                        # loog 'filePath is directory', filePath
+                        $$ loog 'filePath is directory', filePath
                         return sendFolderScan(filePath, basePath, queryMeta, request, response)
                     if queryTransform && queryTransform.indexOf('/') > 0
                         return sendTransform(filePath, queryTransform, response)
                     let ittfSchema = ittfSchemaOf(filePath)
                     let contentType = contentTypeFor(filePath)
-                    $$ # loog 'contentType', contentType, 'ittfSchema', ittfSchema, 'queryMeta', queryMeta
+                    $$ $$ loog 'contentType', contentType, 'ittfSchema', ittfSchema, 'queryMeta', queryMeta
                     if !contentType
                         _ next
                     _ loadJsonIttfModel
@@ -149,13 +149,13 @@ $group
                                                         { locals
                                                             @ user (request.session as any).user
                                                         @ siteCtx
-                                            # loog 'generated.meta.document', generated.artifactContent
+                                            $$ loog 'generated.meta.document', generated.artifactContent
                                         _ response.writeHead
                                             @ 200
                                             {
                                                 @ 'Content-Type' 'text/html'
                                                 @ 'Content-Length' generated.artifactContent.length
-                                            # loog 'generated.meta.document', generated.artifactContent
+                                            $$ loog 'generated.meta.document', generated.artifactContent
                                         _ response.end(generated.artifactContent)
                                     catch ex
                                         _ sendError
@@ -175,7 +175,7 @@ $group
                                         ._ then
                                             =>
                                                 param generated
-                                                # loog 'generated.meta.ittf.json', filePath
+                                                $$ loog 'generated.meta.ittf.json', filePath
                                                 _ response.writeHead
                                                     @ 200
                                                     {
@@ -219,7 +219,7 @@ $group
                                                 _ wizziProds.generateArtifactFs(filePath, modelContext).then
                                                     =>
                                                         param generated
-                                                        # loog 'generated.artifactContent', generated.artifactContent
+                                                        $$ loog 'generated.artifactContent', generated.artifactContent
                                                         _ response.writeHead
                                                             @ 200
                                                             {
@@ -310,7 +310,7 @@ $group
                                     @ fullPath undefined
                                     @ relPath undefined
                         const type_path = (request.query['_' + element] as string)
-                        # loog 'contextLoader exportName, type_path', element, type_path
+                        $$ loog 'contextLoader exportName, type_path', element, type_path
                         if !type_path
                             return
                                 (
@@ -324,15 +324,15 @@ $group
                             set ctxRequest.relPath = './index.' + tp[0] + '.ittf'
                         else
                             set ctxRequest.relPath = tp[1]
-                        # loog 'contextLoader exportName, type_path, relPath', element, type_path, ctxRequest.relPath
+                        $$ loog 'contextLoader exportName, type_path, relPath', element, type_path, ctxRequest.relPath
                         if ctxRequest.type === 'cheatsheet'
                             set ctxRequest.name = ctxRequest.relPath
                             _ ctxRequests.push(ctxRequest)
                         else
                             set ctxRequest.fullPath = path.join(path.dirname(resourceFilePath), ctxRequest.relPath)
                             _ ctxRequests.push(ctxRequest)
-                        # loog 'contextLoader ctxRequest', ctxRequest
-                # loog 'contextLoader.ctxRequests', ctxRequests
+                        $$ loog 'contextLoader ctxRequest', ctxRequest
+                $$ loog 'contextLoader.ctxRequests', ctxRequests
                 const resultContext
                     :{
                         :index
@@ -393,7 +393,7 @@ $group
                     await
                         _ loadJsonIttfModel
                             @ 'sitectx.json.ittf'
-                # loog 'sendFolderScan', 'folderState.keys', Object.keys(folderState)
+                $$ loog 'sendFolderScan', 'folderState.keys', Object.keys(folderState)
                 if meta === 'json'
                     return sendJSONStringified(response, folderState)
                 else
@@ -408,13 +408,13 @@ $group
                                     { locals
                                         @ user (request.session as any).user
                                     @ siteCtx
-                        # loog 'generated.meta.document', generated.artifactContent
+                        $$ loog 'generated.meta.document', generated.artifactContent
                     _ response.writeHead
                         @ 200
                         {
                             @ 'Content-Type' 'text/html'
                             @ 'Content-Length' generated.artifactContent.length
-                        # loog 'generated.meta.document', generated.artifactContent
+                        $$ loogg 'generated.meta.document', generated.artifactContent
                     _ response.end(generated.artifactContent)
             catch ex
                 log 'sendFolderScan.exception', ex

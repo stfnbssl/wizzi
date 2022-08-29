@@ -10,8 +10,8 @@ $group
         versions['wizzi-mtree@next'] = '0.7.17';
         versions['wizzi-repo'] = '0.7.9';
         versions['wizzi-repo@next'] = '0.7.10';
-        versions['wizzi-js'] = '0.7.10';
-        versions['wizzi-js@next'] = '0.7.11';
+        versions['wizzi-js'] = '0.7.11';
+        versions['wizzi-js@next'] = '0.7.12';
         versions['wizzi-web'] = '0.7.14';
         versions['wizzi-web@next'] = '0.7.15';
         versions['wizzi-core'] = '0.7.7';

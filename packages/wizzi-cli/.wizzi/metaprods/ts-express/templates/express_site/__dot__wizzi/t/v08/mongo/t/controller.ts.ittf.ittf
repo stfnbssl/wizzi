@@ -1,4 +1,4 @@
 ${'$'}group
     ${'$'}params &ctrl
 
-    $include wz/v08/ts/t/controller.ts
+    $include wz/v08/ts/tfolder/older/controller.ts

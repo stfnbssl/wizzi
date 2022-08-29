@@ -22,7 +22,7 @@ $group
                     :string
                     :optional
     +
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.usePacki || wzCtx.Build.useWizziJsonFactory
         :type RequiredPackiFileAttributes
             :{ 
                 :p contents

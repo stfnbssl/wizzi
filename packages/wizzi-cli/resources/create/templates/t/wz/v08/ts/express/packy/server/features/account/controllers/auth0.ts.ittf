@@ -56,7 +56,7 @@ module
                     const users
                         await 
                             _ auth0ApiCalls.getUsers()
-                    # loog 'getUsers.received users', JSON.stringify(users, null, 2)
+                    $$ loog 'getUsers.received users', JSON.stringify(users, null, 2)
                     _ sendSuccess
                         @ response
                         { 
@@ -71,7 +71,7 @@ module
                     const user
                         await 
                             _ auth0ApiCalls.getUser(request.params.id)
-                    # loog 'getUser.received user', JSON.stringify(user, null, 2)
+                    $$ loog 'getUser.received user', JSON.stringify(user, null, 2)
                     _ sendSuccess
                         @ response
                         { 

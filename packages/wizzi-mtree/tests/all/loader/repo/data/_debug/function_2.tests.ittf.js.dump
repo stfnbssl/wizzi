@@ -1,4 +1,4 @@
-// 31/7/2022:8:5:24  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
+// 26/8/2022:14:22:22  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
 $.n(); // set the context state to NodeContext
 var $0 = {}; // the root node of the MTree buildup
 var $1 = { n: "alfa", v: "", r: 1, c: 1, s: "f1", u: "f1",  }; //10

@@ -10,9 +10,22 @@ $group
     ${'$'}if wzCtx.Build.useNetlify
         import serverless from 'serverless-http'
         index/imports${'('}&md)
-
+    +
+    function normalizePort
+        param val
+            :any
+        var port = parseInt(val, 10)
+        if isNaN(port)
+            return val
+        if port >= 0
+            return port
+        return false
+        #
+            # 
+            # Normalize a port into a number, string, or false.
+            # 
+    +
     ${'$'}include app/initializeApp
-
     +
     class App
         p app
@@ -23,10 +36,7 @@ $group
             :ref ConfigType
         p port
             :public 
-            :number 
-        p usedPort
-            :public 
-            :number 
+            :any 
         p server
             :public 
             :any 
@@ -36,9 +46,10 @@ $group
                 :ref AppInitializerType
             +
             set this.config = initValues.config
-            set this.port = this.config.port
+            set this.port = normalizePort(process.env.PORT || this.config.port) || "3000"
             set this.app
                 _ express
+            _ this.app.set('port', this.port)
             +
             _ initializeApp
                 @ this.app
@@ -84,24 +95,23 @@ $group
             param port
                 :number
                 :optional
-            set this.usedPort = port || this.port
             ${'$'}if md.createHttpServer
                 _ this.server.listen
-                    @ this.usedPort
+                    @ this.port
                     => 
                         _ console.log
                             `lit 
                                 + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
-                                @ this.usedPort
+                                @ this.port
             ${'$'}else
                 set this.server
                     _ this.app.listen
-                        @ this.usedPort
+                        @ this.port
                         => 
                             _ console.log
                                 `lit 
                                     + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
-                                    @ this.usedPort
+                                    @ this.port
 
         m close
             :public 
@@ -109,14 +119,14 @@ $group
             _ console.log
                 `lit 
                     + Server closing. App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
-                    @ this.usedPort
+                    @ this.port
 
             _ this.server.close
                 =>
                     _ console.log
                         `lit 
                             + Server stopped. App was listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
-                            @ this.usedPort
+                            @ this.port
                     _ done
 
     ${'$'}if !wzCtx.Build.useNetlify

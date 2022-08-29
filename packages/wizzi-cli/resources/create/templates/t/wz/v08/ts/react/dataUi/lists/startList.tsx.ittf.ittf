@@ -42,7 +42,7 @@ $group
         if !keyId || keyId.length < 1
             throw new Error('Id key missing on list ' + list_def.id)
         
-        # loog 'starting list', list_def.id, $('#' + list_def.id)[0]
+        $$ loog 'starting list', list_def.id, $('#' + list_def.id)[0]
         
         # Init list
         var listObj = new List(list_def.id, options)
@@ -141,14 +141,14 @@ $group
                 @ onDoneAddItem
                     function
                         param values
-                        # loog 'onDoneAddItem', values
+                        $$ loog 'onDoneAddItem', values
                         _ listObj.add
                             @ values
                 
                 @ onDoneUpdateItem
                     function
                         param newValues
-                        # loog 'onDoneUpdateItem', newValues, newValues[keyId]
+                        $$ loog 'onDoneUpdateItem', newValues, newValues[keyId]
                         var item = listObj.get(keyId, newValues[keyId])[0]
                         _ item.values
                             @ newValues
@@ -156,7 +156,7 @@ $group
                 @ onDoneDeleteItem
                     function
                         param itemId
-                        # loog 'onDoneDeleteItem', itemId
+                        $$ loog 'onDoneDeleteItem', itemId
 
                         _ listObj.remove(keyId, itemId)
 

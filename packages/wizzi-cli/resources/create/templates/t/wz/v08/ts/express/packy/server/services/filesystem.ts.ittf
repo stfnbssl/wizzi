@@ -65,7 +65,7 @@ module
                     @ packiTemplatesFolder
                 = config
             var packiTemplatesPath = path.join(__dirname, '..', '..', '..', packiTemplatesFolder)
-            # loog 'filesystem.start.Packi templates path: ', packiTemplatesPath
+            $$ loog 'filesystem.start.Packi templates path: ', packiTemplatesPath
             return 
                 new Promise
                     => 
@@ -78,7 +78,7 @@ module
                                 param fsJson
                                 if err
                                     _ rejects(err)
-                                # loog 'filesystem.start.created FsJson'
+                                $$ loog 'filesystem.start.created FsJson'
                                 _ jsonfile
                                     { 
                                         @ fsJson
@@ -86,7 +86,7 @@ module
                                         param err
                                         param result
                                         set vfile = result
-                                        # loog 'filesystem.start.created json vfile'
+                                        $$ loog 'filesystem.start.created json vfile'
                                         set docman = JsonComponents.createDocumentManager(fsJson)
                                         _ docman.uploadFolder
                                             @ packiTemplatesPath
@@ -101,7 +101,7 @@ module
                                                 _ list.then
                                                     => 
                                                         param value
-                                                        # loog 'filesystem.start.At start got packi templates', value
+                                                        $$ loog 'filesystem.start.At start got packi templates', value
                                                         _ resolve(FsDbDriver)
                                                     ._ catch
                                                         => 
@@ -219,23 +219,23 @@ module
                                 @ packiTemplatesFolder
                             = saveConfig
                         var templateFolder = path.join(__dirname, '..', '..', '..', packiTemplatesFolder, id)
-                        # loog 'filesystem.savePackiTemplate.id,path: ', id, templateFolder
+                        $$ loog 'filesystem.savePackiTemplate.id,path: ', id, templateFolder
                         try 
                             let result
                                 await 
                                     _ deleteFolder(templateFolder)
-                            # loog 'filesystem.savePackiTemplate.deleteFolder.result: ', result
+                            $$ loog 'filesystem.savePackiTemplate.deleteFolder.result: ', result
                             await 
                                 _ asyncForEach
                                     _ Object.keys(files)
                                     async=> 
                                         param file
                                             :string 
-                                        # loog 'filesystem.savePackiTemplate.writeFile.begin: ', path.join(templateFolder, file)
+                                        $$ loog 'filesystem.savePackiTemplate.writeFile.begin: ', path.join(templateFolder, file)
                                         let result
                                             await 
                                                 _ writeFile(path.join(templateFolder, file), files[file].contents)
-                                        # loog 'filesystem.savePackiTemplate.writeFile.result: ', result
+                                        $$ loogg 'filesystem.savePackiTemplate.writeFile.result: ', result
                             return 
                                 _ Promise.resolve
                                     { 

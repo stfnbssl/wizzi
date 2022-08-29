@@ -23,7 +23,7 @@ $group
             import
                 as wizziProds
                 from '../productions'
-            ${'$'}if wzCtx.Build.usePacki
+            ${'$'}if wzCtx.Build.useWizziJsonFactory
                 import
                     @ packiTypes
                     from '../../packi'
@@ -42,7 +42,7 @@ $group
         _ this.router.post('/mtree', this.mTree)
         _ this.router.post('/mtreescript', this.mTreeBuildupScript)
         _ this.router.post('/mtreescan', this.mTreeScan)
-        ${'$'}if wzCtx.Build.usePacki
+        ${'$'}if wzCtx.Build.useWizziJsonFactory
             _ this.router.post('/wrapittf', this.wrapIttfText)
         
         ${'$'}append handlers
@@ -72,7 +72,7 @@ $group
                                                 @ response
                                                 @ generatedArtifact
                                     catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifactFs )
-                            ${'$'}if wzCtx.Build.usePacki
+                            ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.generateArtifact
                                         @ artifactRequest.ittfDocument.mainIttf as string 
@@ -130,7 +130,7 @@ $group
                                                 {
                                                     @ mTree mTree.mTreeIttf
                                     catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTreeFs )
-                            ${'$'}if wzCtx.Build.usePacki
+                            ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.mTree
                                         @ artifactRequest.ittfDocument.mainIttf as string 
@@ -189,7 +189,7 @@ $group
                                                 @ response
                                                 @ mTreeBuildupScript
                                     catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScriptFs )
-                            ${'$'}if wzCtx.Build.usePacki
+                            ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.mTreeBuildupScript
                                         @ artifactRequest.ittfDocument.mainIttf as string 
@@ -241,7 +241,7 @@ $group
                                     {
                                         @ mTreeScan mTreeScan
                         catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScanFs )
-                ${'$'}if wzCtx.Build.usePacki
+                ${'$'}if wzCtx.Build.useWizziJsonFactory
                     elif artifactRequest.ittfDocument.source == 'packi'
                         var rootFolder = artifactRequest.ittfDocument.rootFolder || ''
                         _ wizziProds.scanIttfDocument
@@ -282,7 +282,7 @@ $group
                                 @ message 'Invalid artifactRequest.ittfDocument.source ' + artifactRequest.ittfDocument.source
                         @ 501                        
 
-            ${'$'}if wzCtx.Build.usePacki
+            ${'$'}if wzCtx.Build.useWizziJsonFactory
                 handler${'('} wrapIttfText )
                     _ wizziProds.wrapIttfText
                         @ request.body.schema

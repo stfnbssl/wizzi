@@ -36,7 +36,7 @@ $group
 
     +
     ${'$'}foreach f in ssfuncs
-        # loog '${'$'}{f}', ${'$'}{f}
+        $$ loogg '${'$'}{f}', ${'$'}{f}
 
     +
     export

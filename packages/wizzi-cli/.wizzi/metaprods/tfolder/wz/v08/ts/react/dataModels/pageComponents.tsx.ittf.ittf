@@ -50,7 +50,7 @@ $group
             set ${'$'}{schema.name}FormDef.onAdd
                 =>
                     param formData
-                    # loog 'pageComponent ${'$'}{schema.name}', 'form onSubmit', 'formData', formData
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'form onSubmit', 'formData', formData
                     apiCall${openParen} create${'$'}{schema.Name}, formData )
                         if listMethods && listMethods.onDoneAddItem
                             _ listMethods.onDoneAddItem
@@ -61,18 +61,18 @@ $group
             
             set ${'$'}{schema.name}FormDef.onCancel
                 =>
-                    # loog 'pageComponent ${'$'}{schema.name}', 'form onCancel'
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'form onCancel'
 
             set ${'$'}{schema.name}FormDef.onConfirmUpdate
                 =>
                     param formData
-                    # loog 'pageComponent ${'$'}{schema.name}', 'form onConfirmUpdate', 'formData', formData
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'form onConfirmUpdate', 'formData', formData
                     apiCall${openParen} update${'$'}{schema.Name}, formData._id, formData )
-                        # loog 'listMethods && listMethods.onDoneUpdate', listMethods && listMethods.onDoneUpdateItem
+                        $$ loog 'listMethods && listMethods.onDoneUpdate', listMethods && listMethods.onDoneUpdateItem
                         if listMethods && listMethods.onDoneUpdateItem
                             _ listMethods.onDoneUpdateItem
                                 @ formData
-                        # loog 'formMethods && formMethods.onDoneUpdate', formMethods && formMethods.onDoneUpdateItem
+                        $$ loog 'formMethods && formMethods.onDoneUpdate', formMethods && formMethods.onDoneUpdateItem
                         if formMethods && formMethods.onDoneUpdateItem
                             _ formMethods.onDoneUpdateItem
                                 @ formData
@@ -80,7 +80,7 @@ $group
             set ${'$'}{schema.name}FormDef.onConfirmDelete
                 =>
                     param formData
-                    # loog 'pageComponent ${'$'}{schema.name}', 'form onConfirmDelete', 'formData', formData
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'form onConfirmDelete', 'formData', formData
                     apiCall${openParen} delete${'$'}{schema.Name}, formData._id )
                         if listMethods && listMethods.onDoneDeleteItem
                             _ listMethods.onDoneDeleteItem
@@ -107,7 +107,7 @@ $group
             set ${'$'}{schema.name}ListDef.onSelectItem
                 =>
                     param item
-                    # loog 'pageComponent ${'$'}{schema.name}', 'list onSelectItem', item
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'list onSelectItem', item
                     apiCall${openParen} get${'$'}{schema.Name}ById, item._id ) 
                         _ formMethods.setUpdateItem
                             @ data.${'$'}{schema.name}
@@ -115,7 +115,7 @@ $group
             set ${'$'}{schema.name}ListDef.onDeleteItem
                 =>
                     param item
-                    # loog 'pageComponent ${'$'}{schema.name}', 'list onDeleteItem', item
+                    $$ loog 'pageComponent ${'$'}{schema.name}', 'list onDeleteItem', item
                     apiCall${openParen} get${'$'}{schema.Name}ById, item._id ) 
                         _ formMethods.setDeleteItem
                             @ data.${'$'}{schema.name}

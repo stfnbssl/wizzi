@@ -30,7 +30,7 @@ $group
             
             v08/ts/handler${'('}getPostList)
 
-                # loog 'getPostList.request.params', request.params
+                $$ loog 'getPostList.request.params', request.params
                 _ getListPost
                     {
                         { query
@@ -39,7 +39,7 @@ $group
                         =>
                             param result
                                 :any
-                            # loog 'getPostList.result', result
+                            $$ loog 'getPostList.result', result
                             _ sendSuccess
                                 @ response
                                 @ result
@@ -61,7 +61,7 @@ $group
 
             v08/ts/handler${'('}getPost)
 
-                # loog 'getPost.request.params', request.params
+                $$ loog 'getPost.request.params', request.params
                 _ getPost
                     @ request.params.owner
                     @ request.params.name
@@ -69,7 +69,7 @@ $group
                         =>
                             param result
                                 :any
-                            # loog 'getPost.result', result
+                            $$ loog 'getPost.result', result
                             _ sendSuccess
                                 @ response
                                 @ result

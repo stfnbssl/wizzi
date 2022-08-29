@@ -24,6 +24,12 @@ $group
                         {
                             @ title 'Hello home'
                 ${'$'}else
-                    _ sendHtml
-                        @ response
-                        @ '<html><head><title>Hello home</title></head><body><h1>Hello world</h1></body></html>'
+                    ${'$'}if wzCtx.Build.useWizziViewEngine
+                        _ response.render
+                            @ 'home/index.html.ittf'
+                            {
+                                @ title '${'$'}{wzCtx.App.name}'
+                    ${'$'}else
+                        _ sendHtml
+                            @ response
+                            @ '<html><head><title>Hello home</title></head><body><h1>Hello world</h1></body></html>'

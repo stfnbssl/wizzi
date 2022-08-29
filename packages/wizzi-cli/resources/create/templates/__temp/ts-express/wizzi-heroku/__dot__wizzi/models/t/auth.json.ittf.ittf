@@ -1,0 +1,17 @@
+${'$'}group 
+   useAuthentication true
+   { authentication
+       authRequired false
+       userInfo false
+       useLocal true
+       { local
+       useGithub true
+       { github
+           clientId "${'$'}{stfnbssl_env.githubClientId}"
+           clientSecret "${'$'}{stfnbssl_env.githubClientSecret}"
+           callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/api/${'$'}{md.apiVersion}/authenticate/github/callback"
+       useGoogle true
+       { google
+           clientId "${'$'}{stfnbssl_env.googleClientId}"
+           clientSecret "${'$'}{stfnbssl_env.googleClientSecret}"
+           callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/api/${'$'}{md.apiVersion}/authenticate/google/callback"

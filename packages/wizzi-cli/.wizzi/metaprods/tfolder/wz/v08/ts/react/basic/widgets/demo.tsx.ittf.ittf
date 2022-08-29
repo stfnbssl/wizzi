@@ -37,7 +37,7 @@ $group
             div
                 < Button
                     @ active {true}
-                    @ icon https://material.io/resources/icons/static/ic_material_192px_light.svg
+                    @ icon https://material.io/resources/icons/public/ic_material_192px_light.svg
                     @ theme dark
                     @ onClick  
                         =>

@@ -55,11 +55,11 @@ $group
                 const files
                     :ref PackiFiles
                     = request.body
-                # loog 'mTreeBuildupScript.received files', Object.keys(files)
+                $$ loog 'mTreeBuildupScript.received files', Object.keys(files)
                 _ wizziProds.mTreeBuildupScript(id, files, {}).then
                     => 
                         param value
-                        # loog 'mTreeBuildupScript.result', value
+                        $$ loog 'mTreeBuildupScript.result', value
                         _ sendSuccess
                             @ response
                             { 
@@ -75,11 +75,11 @@ $group
                 const files
                     :ref PackiFiles
                     = request.body
-                # loog 'generateArtifact.received files', Object.keys(files)
+                $$ loog 'generateArtifact.received files', Object.keys(files)
                 _ wizziProds.generateArtifact(id, files).then
                     => 
                         param value
-                        # loog 'generateArtifact.result', value
+                        $$ loog 'generateArtifact.result', value
                         _ sendSuccess
                             @ response
                             { 
@@ -96,7 +96,7 @@ $group
                 const files
                     :ref PackiFiles
                     = request.body
-                # loog 'transformModel.received files', Object.keys(files)
+                $$ loog 'transformModel.received files', Object.keys(files)
                 _ wizziProds.transformModel
                     @ id
                     @ files
@@ -106,7 +106,7 @@ $group
                     ._ then
                         => 
                             param value
-                            # loog 'generateArtifact.result', value
+                            $$ loog 'generateArtifact.result', value
                             _ sendSuccess
                                 @ response
                                 { 
@@ -121,14 +121,14 @@ $group
                 const files
                     :ref PackiFiles
                     = request.body
-                # loog 'ProductionsController.executeJob.received files', Object.keys(files)
+                $$ loog 'ProductionsController.executeJob.received files', Object.keys(files)
                 _ wizziProds.executeJobs(files).then
                     async=> 
                         param fsJson
                         const files
                             await 
                                 _ WizziFactory.extractGeneratedFiles(fsJson)
-                        # loog 'features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files)
+                        $$ loog 'features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files)
                         _ sendSuccess
                             @ response
                             { 
@@ -144,12 +144,12 @@ $group
                 const files
                     :ref PackiFiles
                     = request.body
-                # loog 'wizzify.received files', Object.keys(files)
+                $$ loog 'wizzify.received files', Object.keys(files)
                 _ wizziProds.wizzify(files).then
                     async=> 
                         param ittfResult
                             :ref PackiFiles
-                        # loog 'features.packi.controllers.production.wizzify.ittfResult', ittfResult
+                        $$ loog 'features.packi.controllers.production.wizzify.ittfResult', ittfResult
                         _ sendSuccess
                             @ response
                             { 

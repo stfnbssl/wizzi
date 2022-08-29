@@ -31,11 +31,11 @@ nav
             class top-link
         a Log Out
             id qsLogoutBtn
-            href /account/logout
+            href /auth/logout
             class top-link
     $else
         a Log In
             id qsLoginBtn
-            href /account/login
+            href /auth/login
             class top-link
 

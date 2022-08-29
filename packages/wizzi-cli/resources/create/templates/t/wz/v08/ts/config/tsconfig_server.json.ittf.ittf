@@ -9,6 +9,7 @@ $group
                 [
                     "node_modules/*"
         esModuleInterop true
+        jsx "react-jsx"
         sourceMap true
         rootDir "./"
         ${'$'}if wzCtx.Build.useAzure

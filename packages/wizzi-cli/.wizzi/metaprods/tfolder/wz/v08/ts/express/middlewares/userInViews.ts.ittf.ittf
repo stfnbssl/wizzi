@@ -31,11 +31,11 @@ $group
                                 param next
                                     :ref Function
                                 ${'$'}if wzCtx.Build.useMongoDb
-                                    # loog 'UserInViewMiddleware.req.session.user', (req.session as any).user
+                                    $$ loog 'UserInViewMiddleware.req.session.user', (req.session as any).user
                                     set res.locals.user = (req.session as any).user
                                 ${'$'}else
-                                    # loog 'UserInViewMiddleware.req.user', req.user
-                                    set res.locals.user = req.user
+                                    $$ loog 'UserInViewMiddleware.req.user', (req as any).user
+                                    set res.locals.user = (req as any).user
                                 _ next()
     ${'$'}else
         # <--wizzi!file!exclude-->

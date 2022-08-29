@@ -79,7 +79,7 @@ module
                                 ._ then
                                     => 
                                         param responseData
-                                        # loog responseData
+                                        $$ loog responseData
                                         return responseData
     export 
         async-function getUser

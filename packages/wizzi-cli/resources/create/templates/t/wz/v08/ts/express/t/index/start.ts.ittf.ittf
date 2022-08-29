@@ -6,8 +6,6 @@ $group
                 :ref ModelBuilderType
             =
                 [ 
-                    ${'$'}if wzCtx.Build.useAuthentication
-                        @ ...authenticationModelBuilders
                     ${'$'}if wzCtx.Build.useAuthorization
                         @ ...authorizationModelBuilders
                     ${'$'}if wzCtx.Build.useAccount
@@ -51,16 +49,12 @@ $group
                     @ ...siteControllers
                 $$ For now auth needs MongoDb
                 ${'$'}if wzCtx.Build.useMongoDb
-                    ${'$'}if wzCtx.Build.useAuthentication
-                        @ ...authenticationControllers
                     ${'$'}if wzCtx.Build.useAuthorization
                         @ ...authorizationControllers
                 ${'$'}if wzCtx.Build.useAccount
                     @ ...accountControllers
                 ${'$'}if wzCtx.Build.useBlog
                     @ ...postControllers
-                ${'$'}if wzCtx.Build.usePacki
-                    @ ...packiControllers
                 ${'$'}if wzCtx.Build.useWizzi
                     ${'$'}if wzCtx.Build.wizzi.useControllers
                         @ ...wizziControllers

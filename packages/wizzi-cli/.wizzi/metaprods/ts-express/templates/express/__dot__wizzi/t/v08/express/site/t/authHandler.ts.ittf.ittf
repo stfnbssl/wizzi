@@ -1,4 +1,4 @@
 ${'$'}group
     ${'$'}params name
 
-    $include wz/v08/ts/t/authHandler.ts
+    $include wz/v08/ts/tfolder/older/authHandler.ts

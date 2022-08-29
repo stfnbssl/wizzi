@@ -101,6 +101,18 @@
 									f_cb( includeResult )
 										_ mTreeBrickProvider.exitFragmentCall()
 										# _ mTreeBrickProvider.callChain.pop()
+                                        if !item.parent
+                                            return
+                                                _ callback
+                                                    _ local_error
+                                                        @ 'IttfIncludeError'
+                                                        @ 'includer'
+                                                        @ 'A $include command cannot be a root node.'
+                                                        @ item
+                                                        @ err
+                                                        {
+                                                            @ includerUri mixeruri
+                                                            @ includedRelPath v
 										_ utilnode.replace
 											@ item
 											@ includeResult.nodes

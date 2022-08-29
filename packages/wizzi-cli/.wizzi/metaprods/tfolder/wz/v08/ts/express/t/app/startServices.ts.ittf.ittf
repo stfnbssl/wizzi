@@ -10,8 +10,6 @@ $group
                     :ref ModelBuilderType
                 =
                     [ 
-                        ${'$'}if wzCtx.Build.useAuthentication
-                            @ ...authenticationModelBuilders
                         ${'$'}if wzCtx.Build.useAuthorization
                             @ ...authorizationModelBuilders
                         ${'$'}if wzCtx.Build.useAccount

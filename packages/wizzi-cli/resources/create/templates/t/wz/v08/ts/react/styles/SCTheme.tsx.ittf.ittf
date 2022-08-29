@@ -348,4 +348,4 @@ $group
     +
     export-default theme
 
-    # loog 'SCTheme', theme
+    $$ loog 'SCTheme', theme

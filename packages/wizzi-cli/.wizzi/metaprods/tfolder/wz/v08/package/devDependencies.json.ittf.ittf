@@ -96,12 +96,6 @@
             @types/node-fetch "^2.1.6"
         ${'$'}if wzCtx.Build.utils.useParseUrl
             @types/parseurl "^1.3.1"
-        ${'$'}if wzCtx.Build.useAuthentication
-            @types/passport "^1.0.6"
-            ${'$'}if wzCtx.Build.authentication.useLocal
-                @types/passport-local "^1.0.33"
-            ${'$'}if wzCtx.Build.authentication.useGithub
-                @types/passport-github2 "^1.2.4"
         ${'$'}if (wzCtx.Build.styles && wzCtx.Build.styles.usePalx) || wzCtx.Build.useStorybook
             @types/palx "^1.0.1"
         ${'$'}if wzCtx.Build.usePrettier

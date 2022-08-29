@@ -78,12 +78,12 @@ $group
                     start:bin "set NODE_ENV=development && node ../Application/bin/www"
                 ${'$'}if wzCtx.Build.useAzure
                     build "rimraf ../Application && tsc"
-                    distfiles "copyfiles bin/** ittf/** src/site/views/** .env .deployment server.js Web.config.xml Web.Debug.config.xml ../Application &&
+                    distfiles "copyfiles bin/** ittf/** src/t/** src/site/views/** .env .deployment server.js Web.config.xml Web.Debug.config.xml ../Application &&
                         \b  copyfiles -f predeploy/.gitignore predeploy/** ../Application && 
                         \b  copyfiles -f predeploy/.gitignore ../Tests"
                 ${'$'}if wzCtx.Build.useHeroku
                     build "rimraf ./deploy/src && tsc"
-                    distfiles "copyfiles public/** ittf/** src/site/views/** .env server.js ./deploy &&
+                    distfiles "copyfiles public/** ittf/** src/t/** src/site/views/** .env server.js ./deploy &&
                         \b  copyfiles -f predeploy/.gitignore predeploy/** ./deploy"
             ${'$'}else 
                 start "set NODE_ENV=development && nodemon src/index && start ${'$'}{wzCtx.App.baseUrl}"

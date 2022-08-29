@@ -1,28 +1,11 @@
 $group
 
     +
-    function normalizePort
-        param val
-            :any
-        var port = parseInt(val, 10)
-        if isNaN(port)
-            return val
-        if port >= 0
-            return port
-        return false
-        #
-            # 
-            # Normalize a port into a number, string, or false.
-            # 
-    +
     function initializeApp
         param app
             :ref express.Application
         param initValues
             :ref AppInitializerType
-        +
-        var port = normalizePort(process.env.PORT || '3000')
-        _ app.set('port', port)
         +
         _ initValues.middlewaresPre.forEach
             => 

@@ -16,6 +16,21 @@ $group
                 import 
                     @ DemoWizziController
                     from './controllers/demoWizzi'
+        ${'$'}if wzCtx.Build.useAuthentication
+            import 
+                @ AccountController
+                from './controllers/account'
+            import 
+                @ AuthController
+                from './controllers/auth'
+        ${'$'}if wzCtx.Build.useWizziDocs
+            import 
+                @ DocsController
+                from './controllers/docs'
+        ${'$'}if wzCtx.Build.useWizziProductions
+            import 
+                @ ProductionsController
+                from './controllers/productions'
         ${'$'}hook imports
     
     const siteControllers
@@ -29,6 +44,13 @@ $group
                         @ new DemoHomeController()
                         ${'$'}if wzCtx.Build.useWizziViewEngine
                             @ new DemoWizziController()
+                    ${'$'}if wzCtx.Build.useAuthentication
+                        @ new AccountController()
+                        @ new AuthController()
+                    ${'$'}if wzCtx.Build.useWizziDocs
+                        @ new DocsController()
+                    ${'$'}if wzCtx.Build.useWizziProductions
+                        @ new ProductionsController()
                 ${'$'}hook controllers
     export
         @ siteControllers

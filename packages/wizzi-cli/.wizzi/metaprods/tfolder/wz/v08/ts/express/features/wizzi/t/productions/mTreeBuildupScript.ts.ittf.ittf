@@ -1,5 +1,5 @@
 $group
-    ${'$'}if wzCtx.Build.usePacki
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
         +
         export
             async-function mTreeBuildupScript

@@ -71,7 +71,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'getRepositories.responseData', responseData
+                            $$ loog 'getRepositories.responseData', responseData
                             return responseData
         # const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'test-'));
     +
@@ -103,7 +103,7 @@ $group
                         async=> 
                             param responseData
                                 :any
-                            # loog 'getRepository.responseData', responseData
+                            $$ loog 'getRepository.responseData', responseData
                             set responseData._revisions =
                                 await 
                                     _ getRevisions(owner, repo, accessToken)
@@ -134,7 +134,7 @@ $group
                             param responseData
                                 :[ 
                                     :ref GithubApiRepository
-                            # loog 'getRepositories.responseData', responseData
+                            $$ loog 'getRepositories.responseData', responseData
                             return 
                                 _ responseData.filter
                                     => 
@@ -163,7 +163,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'createRepository.responseData', responseData
+                            $$ loog 'createRepository.responseData', responseData
                             return responseData
     +
     export 
@@ -194,7 +194,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'getRevisions.responseData', responseData
+                            $$ loogg 'getRevisions.responseData', responseData
                             return responseData
     +
     export 
@@ -225,7 +225,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'getBranches.responseData', responseData
+                            $$ loog 'getBranches.responseData', responseData
                             return responseData
     +
     export 
@@ -266,7 +266,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'createBranch.responseData', responseData
+                            $$ loog 'createBranch.responseData', responseData
                             return responseData
     +
     export 
@@ -402,8 +402,8 @@ $group
                                 @ singleBranch true
                                 @ depth 10
                     let files = fs.readdirSync(dir)
-                    # loog 'updateBranch - packiFiles', Object.keys(packiFiles)
-                    # loog 'updateBranch - cloned files', files
+                    $$ loog 'updateBranch - packiFiles', Object.keys(packiFiles)
+                    $$ loog 'updateBranch - cloned files', files
                         #
                             # 
                             # Object.keys(packiFiles).forEach(filePath=> {
@@ -425,7 +425,7 @@ $group
                                     => 
                                         param entryName
                                         if result[entryName].kind === '+' || result[entryName].kind === '<>'
-                                            # loog 'updateBranch - write file', path.join(dir, entryName)
+                                            $$ loog 'updateBranch - write file', path.join(dir, entryName)
                                             _ wizzifs.write
                                                 _ path.join(dir, entryName)
                                                 @expr 
@@ -446,9 +446,9 @@ $group
                                                             ._ indexOf
                                                                 @ entryName
                                                         + 0
-                                                # loog 'updateBranch - delete file', path.join(dir, entryName)
+                                                $$ loog 'updateBranch - delete file', path.join(dir, entryName)
                                                 _ fs.unlinkSync(path.join(dir, entryName))
-                                # loog 'updateBranch - 1 - status of files in work area'
+                                $$ loog 'updateBranch - 1 - status of files in work area'
                                 await 
                                     _ printStatus(dir)
                                 _ Object.keys(result).forEach
@@ -478,7 +478,7 @@ $group
                                                             @ fs
                                                             @ dir
                                                             @ filepath entryName
-                                # loog 'updateBranch - 2 - status of files in work area'
+                                $$ loog 'updateBranch - 2 - status of files in work area'
                                 await 
                                     _ printStatus(dir)
                                 let msg
@@ -495,7 +495,7 @@ $group
                                 await 
                                     _ printStatus(dir)
                                     # let msg = await git.listFiles({fs, dir});
-                                # loog 'before push. repo,branch', repo, branch
+                                $$ loog 'before push. repo,branch', repo, branch
                                     # let msg = await git.listFiles({fs, dir});
                                 let pushResponse
                                     await 
@@ -564,7 +564,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'getCommits.responseData', responseData
+                            $$ loog 'getCommits.responseData', responseData
                             return responseData
     +
     export 
@@ -595,7 +595,7 @@ $group
                         => 
                             param responseData
                                 :any
-                            # loog 'getContents.responseData', responseData
+                            $$ loog 'getContents.responseData', responseData
                             return responseData
     +
     function filesDiff
@@ -633,7 +633,7 @@ $group
                     => 
                         param entry
                         if entry.relPath.startsWith('.git/') == false
-                            # loog 'diff -', entry.relPath
+                            $$ loog 'diff -', entry.relPath
                             set diff[entry.relPath] =
                                 { 
                                     @ kind '-'
@@ -659,17 +659,17 @@ $group
                                                             :ref FileDiffItem
                                                 . content
                                             + packiFiles[entryName].contents
-                                # loog 'delete', entryName
+                                $$ loog 'delete', entryName
                                 delete diff[entryName]
                             else
-                                # loog 'diff <>', entryName
+                                $$ loog 'diff <>', entryName
                                 set diff[entryName].kind = '<>'
                                 set diff[entryName].b =
                                     { 
                                         @ path entryName
                                         @ content packiFiles[entryName].contents
                         else
-                            # loog 'diff +', entryName
+                            $$ loog 'diff +', entryName
                             set diff[entryName] =
                                 { 
                                     @ kind '+'
@@ -711,7 +711,7 @@ $group
                                                     @ fs
                                                     @ dir
                                                     @ filepath file.relPath
-                                    # loog 'path', file.relPath, 'status', msg
+                                    $$ loogg 'path', file.relPath, 'status', msg
                             _ resolve()
     +
     function getOptions

@@ -57,7 +57,7 @@
                 @ dispatchChangeUserState
                     =>
                         param userState
-                        # loog 'dispatchChangeTheme', userState
+                        $$ loog 'dispatchChangeTheme', userState
                         _ dispatch
                             _ changeUserState
                                 @ userState

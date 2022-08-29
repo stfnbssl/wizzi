@@ -18,7 +18,7 @@ $group
                                 ._ then
                                     =>
                                         param context
-                                        # loog myname + 'resolveContext.resolved', contextItem.name, context
+                                        $$ loog myname + 'resolveContext.resolved', contextItem.name, context
                                         _ resolve
                                             {
                                                 @ name contextItem.name
@@ -28,7 +28,7 @@ $group
                                         param err
                                         _ reject
                                             @ err
-        # loog myname + '.resolveContexts.promises', promises.length
+        $$ loog myname + '.resolveContexts.promises', promises.length
         return 
             new Promise
                 =>
@@ -39,7 +39,7 @@ $group
                         ._ then
                             =>
                                 param items
-                                # loog myname + '.resolveContexts.all.items', items
+                                $$ loog myname + '.resolveContexts.all.items', items
                                 const context: any = {}
                                 _ items.map
                                     =>
@@ -51,7 +51,7 @@ $group
                         ._ catch
                             =>
                                 param err
-                                # loog myname + '.resolveContexts.all.err', err
+                                $$ loog myname + '.resolveContexts.all.err', err
                                 _ reject(err)
 
     function resolveContext
@@ -71,7 +71,7 @@ $group
                                 =>
                                     param value
                                         :any
-                                    # loog myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
+                                    $$ loog myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
                                     _ resolve(value)
                             ._ catch
                                 =>
@@ -92,7 +92,7 @@ $group
                                 =>
                                     param value
                                         :any
-                                    # loog myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
+                                    $$ loog myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
                                     _ resolve(value)
                             ._ catch
                                 =>
@@ -131,7 +131,7 @@ $group
                                 =>
                                     param value
                                         :any
-                                    # loog myname + '.resolveContext', 'sourcePath', contextItem.sourcePath, value
+                                    $$ loog myname + '.resolveContext', 'sourcePath', contextItem.sourcePath, value
                                     _ resolve(value)
                             ._ catch
                                 =>
@@ -154,7 +154,7 @@ $group
                                 =>
                                     param value
                                         :any
-                                    # loog myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
+                                    $$ loogg myname + '.resolveContext', contextItem.type, 'sourcePath', contextItem.sourcePath, value
                                     _ resolve(value)
                             ._ catch
                                 =>

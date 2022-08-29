@@ -43,7 +43,7 @@ $group
                                 param result
                                 if err
                                     return reject(err)
-                                # loog 'features.wizzi.productions.loadModelFs.result', result
+                                $$ loog 'features.wizzi.productions.loadModelFs.result', result
                                 _ resolve(result)
     
     export 
@@ -57,7 +57,7 @@ $group
                         param reject
                         const generator = generatorFor(filePath)
                         if generator
-                            # loog 'features.wizzi.productions.generateArtifactFs.using artifact generator', generator
+                            $$ loog 'features.wizzi.productions.generateArtifactFs.using artifact generator', generator
                             const wf
                                 await 
                                     _ createFilesystemFactory
@@ -71,7 +71,7 @@ $group
                                     param result
                                     if err
                                         return reject(err)
-                                    # loog 'features.wizzi.productions.generateArtifactFs.result', result
+                                    $$ loog 'features.wizzi.productions.generateArtifactFs.result', result
                                     _ resolve
                                         { 
                                             @ artifactContent result

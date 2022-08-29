@@ -1,7 +1,5 @@
 $group
-    $file __dot__wizzi/ittf/models/sitectx.json.ittf.ittf
-        {
-            ${'$'}include cli/v08/wzctx-info.json
+
     $file __dot__wizzi/models/wzctx.json.ittf.ittf
         {
             ${"${'$'}"}include v08/env/vars
@@ -10,7 +8,7 @@ $group
                 var md = {
                     useSsl: false,
                     host: 'localhost',
-                    port: 3000,
+                    port: 5000,
                     apiVersion: 'v1'
                 };
                 md.http = md.useSsl ? 'https' : 'http';
@@ -20,11 +18,15 @@ $group
             
             ---
             { App
+                name "Wizzi Hub"
                 siteUrl "${"${'$'}"}{md.http}://localhost"
                 port ${"${'$'}"}{md.port}
                 baseUrl "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
+                apiVersion "1"
+                { constants
+                    { preview
+                        minWidth 700
                 [ Components
-        
             ---
             { Styles
             
@@ -34,13 +36,37 @@ $group
                 { site
                     useIttfStatic false
                     { ittfStatic
-                useDemoControllers true
+                useDemoControllers false
                 [ features
+                    $if cliCtx.useAuthentication
+                        {
+                            name "auth"
+                            hasControllers true
+                            useMongoDb false
+                        {
+                            name "account"
+                            hasControllers true
+                            useMongoDb true
                     $if cliCtx.useBlog
                         {
                             name "blog"
                             hasControllers true
                             useMongoDb true
+                    $if cliCtx.useWizziDocs
+                        {
+                            name "docs"
+                            hasControllers true
+                            useMongoDb false
+                    $if cliCtx.useWizziProductions
+                        {
+                            name "production"
+                            hasControllers true
+                            useMongoDb true
+                    $if cliCtx.usePacki
+                        {
+                            name "packi"
+                            hasControllers true
+                            useMongoDb false
                 $if cliCtx.useAzure
                     ${"${'$'}"}include azure.json
                     ---
@@ -63,6 +89,12 @@ $group
                 $if cliCtx.useMongoDb
                     ---
                     ${"${'$'}"}include db.json
+                $if cliCtx.useAuthentication
+                    ---
+                    ${"${'$'}"}include auth.json
+                $if cliCtx.usePages
+                    ---
+                    ${"${'$'}"}include react.json
 
     $if cliCtx.useAzure
         $file __dot__wizzi/models/t/azure.json.ittf.ittf
@@ -80,7 +112,7 @@ $group
                     databaseAccountLocation "eastasia"
                     nodejsVersion "16.2.0"
                     packagePath "Application"
-                    webAppPort 3000
+                    webAppPort 5000
                     testTitle "Hello home"
                     timeoutMinutesShort 10
                     timeoutMinutesMedium 20
@@ -95,7 +127,7 @@ $group
                     webAppName "wizzi"
                     nodejsVersion "16.2.0"
                     packagePath "deploy"
-                    webAppPort 3000
+                    webAppPort 5000
                     Procfile "server.js"
                     testTitle "Hello home"
                     timeoutMinutesShort 10
@@ -120,6 +152,7 @@ $group
         
             useLint true
             { lint
+    
     $file __dot__wizzi/models/t/config.json.ittf.ittf
         ${"${'$'}"}group
                 
@@ -199,7 +232,7 @@ $group
         ${"${'$'}"}group
                 
             { utils
-                useAxios false
+                useAxios true
                 useEscapeRegexp false
                 useEscapeHtml false
                 useNullThrows false
@@ -208,13 +241,14 @@ $group
                 useParseUrl true
                 useEs6Error false
                 useJsCookie false
-                useQueryString false
+                useQueryString true
                 useSanitizeHtml false
                 useDateFns false
                 useFetchPonyfill false
                 useNanoId false
                 useGitUrlParse false
                 useJsonToAst false
+    
     $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
         ${"${'$'}"}group
                 
@@ -236,12 +270,29 @@ $group
                 { globalContext
                     wzConfigIsDevelopment true
                 useRunner false
+
+            $if cliCtx.useWizziDocs
+                useWizziDocs true
+                { wizziDocs
             
+            $if cliCtx.useWizziProductions
+                useWizziProductions true
+                { wizziProductions
+                    useCachedProductions false
+
+            $if cliCtx.usePacki
+                usePacki true
+                { packi
+                    useAdmin false
+
             useIttfStatic true
             { ittfStatic
         
             useWizziViewEngine true
             { wizziViewEngine
+
+            useWizziJsonFactory true
+            { wizziJsonFactory
 
     $if cliCtx.useMongoDb
         $file __dot__wizzi/models/t/db.json.ittf.ittf
@@ -257,3 +308,29 @@ $group
                     { options
                         useNewUrlParser true
                         useUnifiedTopology true
+
+    $if cliCtx.useAuthentication
+        $file __dot__wizzi/models/t/auth.json.ittf.ittf
+            ${"${'$'}"}group
+                useAuthentication true
+                { authentication
+                    authRequired false
+                    userInfo false
+                    useLocal true
+                    { local
+                    useGithub true
+                    { github
+                        clientId "${"${'$'}"}{stfnbssl_env.githubClientId}"
+                        clientSecret "${"${'$'}"}{stfnbssl_env.githubClientSecret}"
+                        callbackURL "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}/api/${"${'$'}"}{md.apiVersion}/authenticate/github/callback"
+                    useGoogle true
+                    { google
+                        clientId "${"${'$'}"}{stfnbssl_env.googleClientId}"
+                        clientSecret "${"${'$'}"}{stfnbssl_env.googleClientSecret}"
+                        callbackURL "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}/api/${"${'$'}"}{md.apiVersion}/authenticate/google/callback"
+
+    $if cliCtx.usePages
+        $file __dot__wizzi/models/t/react.json.ittf.ittf
+            ${"${'$'}"}group
+                useReact true
+                { react

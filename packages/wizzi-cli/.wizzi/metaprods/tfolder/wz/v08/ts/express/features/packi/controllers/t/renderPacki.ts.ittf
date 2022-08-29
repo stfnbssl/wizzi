@@ -26,7 +26,7 @@ $group
                 _ wizziProds.generateArtifact(entry, files).then
                     => 
                         param generated
-                        # loog 'generateArtifact.result', generated
+                        $$ loog 'generateArtifact.result', generated
                         _ sendHtml
                             @ response
                             @ generated.artifactContent

@@ -1,36 +1,28 @@
 $group
-    $file __dot__wizzi/t/v08/ts/controller.ts.ittf.ittf
+    $file __dot__wizzi/t/v08/ts/controller.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params &ctrl
-        
-            ${'$'}include wz/v08/ts/t/controller.ts
-    $file __dot__wizzi/t/v08/ts/handler.ts.ittf.ittf
+            ${'$'}include wz/v08/ts/tfolder/controller.ts
+    $file __dot__wizzi/t/v08/ts/handler.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params name
-        
-            ${'$'}include wz/v08/ts/t/handler.ts
-    $file __dot__wizzi/t/v08/ts/handler.json.ittf.ittf
+            ${'$'}include wz/v08/ts/tfolder/handler.ts
+    $file __dot__wizzi/t/v08/ts/catch_fail.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/tsconfig.json
-    $file __dot__wizzi/t/v08/ts/catch_fail.ts.ittf.ittf
+            ${'$'}include wz/v08/ts/tfolder/catch_fail.ts
+    $file __dot__wizzi/t/v08/ts/catch_fail_html.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params method
-        
-            ${'$'}include wz/v08/ts/t/catch_fail.ts
-    $file __dot__wizzi/t/v08/ts/catch_reject.ts.ittf.ittf
+            ${'$'}include wz/v08/ts/tfolder/catch_fail_html.ts
+    $file __dot__wizzi/t/v08/ts/catch_reject.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params method
-        
-            ${'$'}include wz/v08/ts/t/catch_reject.ts
-    $file __dot__wizzi/t/v08/ts/authHandler.ts.ittf.ittf
+            ${'$'}include wz/v08/ts/tfolder/catch_reject.ts
+    $file __dot__wizzi/t/v08/ts/catch_error_page.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params name
-        
-            ${'$'}include wz/v08/ts/t/authHandler.ts
+            ${'$'}include wz/v08/ts/tfolder/catch_error_page.ts
+    $file __dot__wizzi/t/v08/ts/else_send_fail.ittf.ittf
+        ${"${'$'}"}group
+            ${'$'}include wz/v08/ts/tfolder/else_send_fail.ts
+    $file __dot__wizzi/t/v08/ts/authHandler.ittf.ittf
+        ${"${'$'}"}group
+            ${'$'}include wz/v08/ts/tfolder/authHandler.ts
     $file __dot__wizzi/t/v08/ts/tsconfig.json.ittf.ittf
         ${"${'$'}"}group
-            ${"${'$'}"}params name
-        
             ${'$'}include wz/v08/ts/config/tsconfig_server.json

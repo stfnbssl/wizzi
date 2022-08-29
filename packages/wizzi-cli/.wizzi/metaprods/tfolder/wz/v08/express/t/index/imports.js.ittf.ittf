@@ -14,13 +14,6 @@ $group
         ${'$'}if wzCtx.Build.wizzi.useSite
             import { siteControllers } from './site/index.js'
 
-    ${'$'}if wzCtx.Build.useAuthentication
-        import 
-            @ authenticationControllers
-            ${'$'}if wzCtx.Build.useMongoDb
-                @ authenticationModelBuilders
-            from './features/auth/index.js'
-    
     ${'$'}if wzCtx.Build.useAuthorization
         import 
             @ authorizationControllers

@@ -1,6 +1,6 @@
 ${'$'}group 
    { utils
-       useAxios false
+       useAxios true
        useEscapeRegexp false
        useEscapeHtml false
        useNullThrows false
@@ -9,7 +9,7 @@ ${'$'}group
        useParseUrl true
        useEs6Error false
        useJsCookie false
-       useQueryString false
+       useQueryString true
        useSanitizeHtml false
        useDateFns false
        useFetchPonyfill false

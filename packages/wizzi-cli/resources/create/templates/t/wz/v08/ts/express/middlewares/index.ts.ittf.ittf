@@ -3,8 +3,6 @@ $group
     import
         @ MiddlewareType
         from '../features/app'
-    ${'$'}if wzCtx.Build.useAuthentication
-        import { AuthenticationMiddleware } from './authentication'
     ${'$'}if wzCtx.Build.useAuthorization
         import { AuthorizationMiddleware } from './authorization'
     ${'$'}if wzCtx.Build.useLogger
@@ -15,10 +13,6 @@ $group
         import { FlashMiddleware } from './flash'
     ${'$'}if wzCtx.Build.useSession
         import { SessionMiddleware } from './session'
-    ${'$'}if wzCtx.Build.usePassport
-        import { PassportMiddleware } from './passport'
-    ${'$'}if wzCtx.Build.usePassportAuth0
-        import { PassportAuth0Middleware } from './passportAuth0'
     ${'$'}if wzCtx.Build.useIttfStatic
         import { IttfStaticMiddleware } from './ittfStatic'
     ${'$'}if wzCtx.Build.usePackiStatic
@@ -48,8 +42,6 @@ $group
             :ref MiddlewareType
         =
             [
-                ${'$'}if wzCtx.Build.useAuthentication
-                    @ AuthenticationMiddleware
                 ${'$'}if wzCtx.Build.useLogger
                     @ LoggerMiddleware
                 ${'$'}if wzCtx.Build.useCors
@@ -58,10 +50,6 @@ $group
                     @ FlashMiddleware
                 ${'$'}if wzCtx.Build.useSession
                     @ SessionMiddleware
-                ${'$'}if wzCtx.Build.usePassport
-                    @ PassportMiddleware
-                ${'$'}if wzCtx.Build.usePassportAuth0
-                    @ PassportAuth0Middleware
                 ${'$'}if wzCtx.Build.useIttfStatic
                     @ IttfStaticMiddleware
                 ${'$'}if wzCtx.Build.usePackiBrowse

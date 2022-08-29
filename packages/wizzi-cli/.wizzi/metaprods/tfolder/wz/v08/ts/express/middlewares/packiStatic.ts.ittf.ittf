@@ -57,15 +57,15 @@ $group
                     if !parsedUrl || !parsedUrl.pathname
                         return next()
 
-                    # loog 'packiStatic parsedUrl', parsedUrl
-                    # loog 'packiStatic request.path', request.path
+                    $$ loog 'packiStatic parsedUrl', parsedUrl
+                    $$ loog 'packiStatic request.path', request.path
                     
                     const reqpath = parsedUrl && parsedUrl.path
 
                     if false
                         return response.redirect(307, 'http://localhost:3000/packi' + reqpath);
                     else
-                        # loog 'packiStatic parsedUrl.path', reqpath
+                        $$ loog 'packiStatic parsedUrl.path', reqpath
                         _ axios.get
                             @ 'http://localhost:3000/packi' + reqpath
                             ._ then

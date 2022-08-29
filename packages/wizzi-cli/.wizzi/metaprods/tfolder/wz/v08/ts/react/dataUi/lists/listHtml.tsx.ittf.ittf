@@ -4,7 +4,7 @@ $group
         param __html
         param list
 
-        # loog 'listHtml', list
+        $$ loog 'listHtml', list
 
         if list.def.kind == "table"
             _ listTableHtml

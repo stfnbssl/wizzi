@@ -13,17 +13,36 @@
     useExpress true
     { express
     
+    useAuthentication true
+    { authentication
+
     useMongoDb true
     { mongoDb
 
     useBlog true
     { blog
 
+    usePages true
+    { pages    
+
     useWizzi true
     { wizzi
+
+    useWizziDocs true
+    { wizziDocs
+
+    useWizziProductions true
+    { wizziProductions
 
     useIttfStatic true
     { ittfStatic
 
     useWizziViewEngine true
     { wizziViewEngine
+
+    useWizziJsonFactory true
+    { wizziJsonFactory
+
+    usePacki true
+    { packi
+    

@@ -46,7 +46,7 @@ $group
                 _ getConfigValues
                     @ appConfig.ittfPath
                     @ appConfig.dataPath
-            # loog 'wizziConfig', wizziConfig
+            $$ loog 'wizziConfig', wizziConfig
             set runnerModelsFolder
                 _ path.join
                     @ appConfig.ittfPath
@@ -155,7 +155,7 @@ $group
                 :any 
             param callback
                 :ref Function
-            # loog 'wizzifile.onPrepare.enter.factoryName', factoryName
+            $$ loogg 'wizzifile.onPrepare.enter.factoryName', factoryName
             if factoryName === FACTORY_SITE
                 _ loadRuntimeModels
                     function 

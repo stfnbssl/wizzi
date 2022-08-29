@@ -1,0 +1,30 @@
+$group
+    
+    ${'$'}
+        var ctrl = {
+            name: 'Docs',
+            path: '/docs',
+            kind: 'site'
+        }
+
+    v08/ts/controller${'('} &ctrl )
+        
+        ${'$'}append imports
+            import
+                @ cheatsheetApi
+                from '../../features/docs'
+        
+        _ this.router.get('/cheatsheet/:name', this.cheatsheet)
+
+        ${'$'}append handlers
+            v08/ts/handler${'('} cheatsheet )
+                _ cheatsheetApi.getCheatsheet
+                    @ request.params.name
+                    ._ then
+                        =>
+                            param result
+                            _ response.render
+                                @ 'wizzi/docs/cheatsheet.html.ittf'
+                                {
+                                    @ cs result
+                    v08/ts/catch_fail_html${'('} docs.cheatsheet )
