@@ -17,7 +17,7 @@
     { App
         siteUrl "${'$'}{md.http}://localhost"
         port ${'$'}{md.port}
-        baseUrl "${'$'}{md.http}://localhost:${'$'}{md.port}"
+        baseUrl "${'$'}{wzCtx.App.baseUrl}"
         [ Components
 
     ---

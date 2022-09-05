@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/middlewares/wizziViewEngine${'('}&md) 
+   $include wz/v08/ts/express/middlewares/wizziViewEngine.ts

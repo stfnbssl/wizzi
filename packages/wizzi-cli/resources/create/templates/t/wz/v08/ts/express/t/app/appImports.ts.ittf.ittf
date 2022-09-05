@@ -1,4 +1,5 @@
 $group
+    ${'$'}params &md
 
     import express from 'express'
 
@@ -11,7 +12,7 @@ $group
         from './features/config'
 
     ${'$'}if !wzCtx.Build.useNetlify
-        ${'$'}if wzCtx.Build.express.useSsl
+        ${'$'}if wzCtx.Build.express.useSslCert
             import fs from 'fs'
             import https from 'https'
         ${'$'}else
@@ -19,7 +20,7 @@ $group
                 import http from 'http'
         ${'$'}if wzCtx.Build.useSocketIO
             import socketio from 'socket.io'
-        ${'$'}if wzCtx.Build.express.useSsl
+        ${'$'}if wzCtx.Build.express.useSslCert
             +
             const ssl_key = fs.readFileSync('server.key')
             const ssl_cert = fs.readFileSync('server.cert')

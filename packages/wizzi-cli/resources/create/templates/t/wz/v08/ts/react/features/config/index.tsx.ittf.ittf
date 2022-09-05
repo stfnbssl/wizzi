@@ -79,10 +79,10 @@ $group
         if _config == null
             set _config =
                 { 
-                    @ SERVER_URL 'http://localhost:5000'
-                    @ API_URL 'http://localhost:5000/api/v1'
-                    @ AUTH_URL 'http://localhost:5000/api/v1/auth'
-                    @ AUTH_PROVIDERS_URL 'http://localhost:5000/auth'
+                    @ SERVER_URL '${'$'}{wzCtx.App.baseUrl}'
+                    @ API_URL '${'$'}{wzCtx.App.baseUrl}/api/v1'
+                    @ AUTH_URL '${'$'}{wzCtx.App.baseUrl}/api/v1/auth'
+                    @ AUTH_PROVIDERS_URL '${'$'}{wzCtx.App.baseUrl}/auth'
                     @ VERSION
                     @ DEFAULT_PACKI_NAME defaults.DEFAULT_PACKI_NAME
                     @ DEFAULT_METADATA_NAME defaults.DEFAULT_PACKI_NAME

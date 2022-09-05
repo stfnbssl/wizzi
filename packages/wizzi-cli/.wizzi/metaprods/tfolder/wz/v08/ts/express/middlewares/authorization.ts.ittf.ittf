@@ -66,15 +66,15 @@ $group
                     throw new Error('Parameter expectedScopes must be an array of strings representing the scopes for the endpoint(s)')
                 return 
                     => 
-                        param req
+                        param request
                             :ref Request
-                        param res
+                        param response
                             :ref Response
                         param next
                             :ref Function
                         const error
                             => 
-                                param res
+                                param response
                                     :ref Response
                                 const err_message = 'Insufficient scope'
                                 if options && options.failWithError
@@ -84,7 +84,7 @@ $group
                                                 @ statusCode 403
                                                 @ error 'Forbidden'
                                                 @ message err_message
-                                _ res.append
+                                _ response.append
                                     @ 'WWW-Authenticate'
                                     `lit 
                                         + Bearer scope="
@@ -92,13 +92,13 @@ $group
                                         + ", error="
                                         @ err_message
                                         + "
-                                _ res.status(403).send(err_message)
+                                _ response.status(403).send(err_message)
                         if expectedScopes.length === 0
                             return 
                                 _ next
-                        const ruser = ((req as any).user as any)
+                        const ruser = ((request as any).user as any)
                         if !ruser || typeof ruser.scope !== 'string'
-                            return error(res)
+                            return error(response)
                         const scopes = ruser.scope.split(' ')
                         const allowed
                             _ expectedScopes.some
@@ -110,7 +110,7 @@ $group
                             iif allowed
                                 then
                                     _ next
-                                else error(res)
+                                else error(response)
     ${'$'}else
         # <--wizzi!file!exclude-->                
 

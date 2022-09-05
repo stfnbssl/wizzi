@@ -14,5 +14,6 @@ ${'$'}group
        useDateFns false
        useFetchPonyfill false
        useNanoId false
+       useNodeCache true
        useGitUrlParse false
        useJsonToAst false

@@ -29,7 +29,7 @@ $group
                 _ response.render
                     @ 'account/profile.html.ittf'
                     {
-                        @ title (request.session as any).user ? (request.session as any).user.name + ' profile · Wizzi' : 'User unknown'
+                        @ title (request as any).session.user ? (request as any).session.user.name + ' profile · Wizzi' : 'User unknown'
                 $*
                 const options
                     {
@@ -55,20 +55,21 @@ $group
                             _ response.render
                                 @ 'home/profile.html.ittf'
                                 {
-                                    @ title (request.session as any).user ? (request.session as any).user.name + ' profile · Wizzi' : 'User unknown'
+                                    @ title (request as any).session.user ? (request as any).session.user.name + ' profile · Wizzi' : 'User unknown'
                                     @ artifacts artifacts.item
                                     @ packages packages.item
                                     @ tfolders tfolders.item
                 *$          
 
             v08/ts/handler${'('} profileGithub )
-                $$ loog myname, 'profileGithub'
+                log myname, 'profileGithub', (request as any).session.github_access_token
+                log myname, 'profileGithub', (request as any).session
                 _ axios
                     {
                         @ method 'get'
                         @ url `https://api.github.com/user`
                         { headers
-                            @ Authorization 'token ' + (request.session as any).github_access_token
+                            @ Authorization 'token ' + (request as any).session.github_access_token
                     ._ then
                         =>
                             param githubResult
@@ -89,7 +90,7 @@ $group
                                                 :any
                                             log myname, 'profileGithub', 'getUserByEmail', 'wizziresult', wizziresult
                                             if wizziresult.found
-                                                set (request.session as any).user = wizziresult.user
+                                                set (request as any).session.user = wizziresult.user
                                                 _ response.redirect('/account/profile')
                                                 # _ response.send('<pre><code>' +  JSON.stringify({ userData: user /*result.data*/ }, null, 2) + '</code></pre>')
                                             else
@@ -119,7 +120,7 @@ $group
                         @ method 'get'
                         @ url `https://www.googleapis.com/oauth2/v2/userinfo`
                         { headers
-                            @ Authorization 'Bearer ' + (request.session as any).google_access_token
+                            @ Authorization 'Bearer ' + (request as any).session.google_access_token
                     ._ then
                         =>
                             param googleResult
@@ -140,7 +141,7 @@ $group
                                                 :any
                                             $$ loog og myname, 'profileGoogle', 'getUserByEmail', 'wizziresult', wizziresult
                                             if wizziresult.found
-                                                set (request.session as any).user = wizziresult.user
+                                                set (request as any).session.user = wizziresult.user
                                                 _ response.redirect('/account/profile')
                                                 # _ response.send('<pre><code>' +  JSON.stringify({ userData: user /*result.data*/ }, null, 2) + '</code></pre>')
                                             else
@@ -165,6 +166,6 @@ $group
 
                             $*
                             # _ response.json({ userData: googleResult.data })
-                            set (request.session as any).user = googleResult.data
+                            set (request as any).session.user = googleResult.data
                             _ response.send('<pre><code>' +  JSON.stringify({ userData: googleResult.data }, null, 2) + '</code></pre>')
                             *$

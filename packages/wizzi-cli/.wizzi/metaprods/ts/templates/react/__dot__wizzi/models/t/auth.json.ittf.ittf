@@ -12,14 +12,14 @@ ${'$'}group
             tenant "dev-qwf9-zob.eu"
             clientId "dJoAkgjkJmbElAgqMxqsBPlfoZ3xdAdV"
             longRandomString "gdftr75ujgklfòlvposg908495r7o34tklvgklgeòmvojg"
-            baseURL "${'$'}{md.http}://localhost:${'$'}{md.port}"
+            baseURL "${'$'}{wzCtx.App.baseUrl}"
         useLocal false
         { local
         useGithub false
         { github
             clientId "6a42cd4cb7247bb4e823"
             clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
-            callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/api/${'$'}{md.apiVersion}/authenticate/github/callback"
+            callbackURL "${'$'}{wzCtx.App.baseUrl}/api/${'$'}{md.apiVersion}/authenticate/github/callback"
 
     useAuthorization false
     { authorization

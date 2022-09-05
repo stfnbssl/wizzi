@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/middlewares/cookie${'('}&md) 
+   $include wz/v08/ts/express/middlewares/cookie.ts

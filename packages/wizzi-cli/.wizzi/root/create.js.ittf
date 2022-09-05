@@ -44,6 +44,7 @@ module
                 @ templateGroup 'ts-express'
                 @ template 'wizzi-heroku'
                 @ pkgName 'wizzi-heroku'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi-heroku'
     elif cmd == 'js-express'
         _ create
             {

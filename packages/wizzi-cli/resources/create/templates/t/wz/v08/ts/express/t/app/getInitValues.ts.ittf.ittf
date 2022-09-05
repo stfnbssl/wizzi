@@ -1,5 +1,6 @@
 $group
-
+    ${'$'}params &md
+    
     async-function getInitValues
         param config
             :ref ConfigType
@@ -64,6 +65,6 @@ $group
                     ${'$'}if wzCtx.Build.useFilesystem
                         @ startedServices.fsDb
                     ${'$'}if wzCtx.Build.useAuthentication
-                        @ auth0Secured
+                        @ apiSecured
 
         return appInitializer

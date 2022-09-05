@@ -127,7 +127,8 @@ $group
                     $$ $$ loog 'contentType', contentType, 'ittfSchema', ittfSchema, 'queryMeta', queryMeta
                     if !contentType
                         _ next
-                    _ loadJsonIttfModel
+                    $$ _ loadJsonIttfModel
+                    _ wizziProds.loadSiteJsonModel
                         @ 'sitectx.json.ittf'
                         ._ then
                             async=>
@@ -147,8 +148,9 @@ $group
                                                         @ request
                                                         @ ds documentState
                                                         { locals
-                                                            @ user (request.session as any).user
+                                                            @ user (request as any).session.user
                                                         @ siteCtx
+                                                        @ isWizziStudio true
                                             $$ loog 'generated.meta.document', generated.artifactContent
                                         _ response.writeHead
                                             @ 200
@@ -168,8 +170,9 @@ $group
                                         @ filePath
                                         {
                                             { locals
-                                                @ user (request.session as any).user
+                                                @ user (request as any).session.user
                                             @ siteCtx
+                                            @ isWizziStudio true
                                         {
                                             @ generator 'ittf/tojson'
                                         ._ then
@@ -214,8 +217,9 @@ $group
                                                         @ modelContext
                                                         {
                                                             { locals
-                                                                @ user (request.session as any).user 
+                                                                @ user (request as any).session.user 
                                                             @ siteCtx
+                                                            @ isWizziStudio true
                                                 _ wizziProds.generateArtifactFs(filePath, modelContext).then
                                                     =>
                                                         param generated
@@ -355,6 +359,7 @@ $group
                             _ wizziProds.loadModelFs
                                 @expr ctxRequest.fullPath
                                 {
+                                    @ isWizziStudio true
                                 ._ then
                                     =>
                                         param model
@@ -391,7 +396,8 @@ $group
                         _ wizziProds.scanIttfFolder(folderPath, path.dirname(root))
                 const siteCtx
                     await
-                        _ loadJsonIttfModel
+                        $$ _ loadJsonIttfModel
+                        _ wizziProds.loadSiteJsonModel
                             @ 'sitectx.json.ittf'
                 $$ loog 'sendFolderScan', 'folderState.keys', Object.keys(folderState)
                 if meta === 'json'
@@ -406,8 +412,9 @@ $group
                                     @ path folderPath
                                     @ fs folderState
                                     { locals
-                                        @ user (request.session as any).user
+                                        @ user (request as any).session.user
                                     @ siteCtx
+                                    @ isWizziStudio true
                         $$ loog 'generated.meta.document', generated.artifactContent
                     _ response.writeHead
                         @ 200
@@ -434,6 +441,7 @@ $group
             _ wizziProds.transformModelFs
                 @ filePath
                 {
+                    @ isWizziStudio true
                 {
                     @ transformer transformer
                 ._ then
@@ -559,6 +567,7 @@ $group
                     @ null
                     @ 4
 
+        $* VIA
         async-function loadJsonIttfModel
             param relPath
                 :string
@@ -573,6 +582,7 @@ $group
                                 @ 'models'
                                 @ relPath
                             {
+                                @ isWizziStudio true
                             ._ then
                                 =>
                                     param model
@@ -583,5 +593,6 @@ $group
                                 =>
                                     param err
                                     _ reject(err)
+        *$
     ${'$'}else
         # <--wizzi!file!exclude-->                

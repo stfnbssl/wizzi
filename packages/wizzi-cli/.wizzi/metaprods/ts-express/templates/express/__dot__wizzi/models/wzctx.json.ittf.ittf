@@ -46,7 +46,7 @@
         { github
             clientId "6a42cd4cb7247bb4e823"
             clientSecret "dedced0ac262cae62557e4c3f567a6227b17bfb7"
-            callbackURL "${'$'}{md.http}://localhost:${'$'}{md.port}/authenticate/github/callback" 
+            callbackURL "${'$'}{wzCtx.App.baseUrl}/authenticate/github/callback" 
 
         ---
         useAccount true

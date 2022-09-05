@@ -1,5 +1,7 @@
 $group
     ${'$'}params method
+
+    $$ Deprecated. Use catch_send_fail instead.
    
     ._ catch
         => 

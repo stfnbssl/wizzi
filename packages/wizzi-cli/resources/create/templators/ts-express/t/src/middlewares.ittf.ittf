@@ -1,144 +1,23 @@
 $group
-    
-    $if cliCtx.useAuthentication
-        $file __dot__wizzi/${pkgPath}src/middlewares/auth0Secured.ts.ittf.ittf
+
+    $
+        var mwItems = [
+            "bodyParser","compression",
+            "cacheControl","cookie","cors","errors",
+            "helmet","index","logger",
+            "session","static","userInViews"
+        ];
+        if (cliCtx.useAuthentication) {
+            mwItems.push("webSecured");
+            mwItems.push("apiSecured");
+            mwItems.push("authorization");
+        }
+        if (cliCtx.useWizzi) {
+            mwItems.push("ittfStatic");
+            mwItems.push("wizziViewEngine");
+        }
+
+    $foreach item in mwItems
+        $file __dot__wizzi/${pkgPath}src/middlewares/${item}.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/middlewares/auth0secured${'$'}{'('}&md)
-            
-        $file __dot__wizzi/${pkgPath}src/middlewares/authorization.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/middlewares/authorization${'$'}{'('}&md)
-            
-    $file __dot__wizzi/${pkgPath}src/middlewares/bodyParser.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/bodyParser${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/compression.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/compression${'$'}{'('}&md)
-        
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/cacheControl.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/cacheControl${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/cookie.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/cookie${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/cors.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/cors${'$'}{'('}&md)
-        
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/errors.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/errors${'$'}{'('}&md)
-    $file __dot__wizzi/${pkgPath}src/middlewares/helmet.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/helmet${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/index.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/index${'$'}{'('}&md)
-    $if cliCtx.useIttfStatic
-        $file __dot__wizzi/${pkgPath}src/middlewares/ittfStatic.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/middlewares/ittfStatic${'$'}{'('}&md)
-    $file __dot__wizzi/${pkgPath}src/middlewares/logger.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/logger${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/session.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/session${'$'}{'('}&md)
-        
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/static.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/static${'$'}{'('}&md)
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/userInViews.ts.ittf.ittf
-        module
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            v08/express/middlewares/userInViews${'$'}{'('}&md)
-        
-        
-    $file __dot__wizzi/${pkgPath}src/middlewares/webpackApp.js.ittf.ittf
-        module
-            kind es6
-            ${"${'$'}"}
-                var md = {
-                }
-        
-            ${"${'$'}"}if wzCtx.Build.useWebpackApp
-                v08/express/middlewares/webpackApp${'$'}{'('}&md)
-        
-    $if cliCtx.useWizziViewEngine
-        $file __dot__wizzi/${pkgPath}src/middlewares/wizziViewEngine.ts.ittf.ittf
-            module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/middlewares/wizziViewEngine${'$'}{'('}&md)
-            
+                ${'$'}include wz/v08/ts/express/middlewares/${item}.ts

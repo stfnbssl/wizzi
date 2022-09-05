@@ -1,5 +1,8 @@
 $group
 
+    $
+        var db = 'mongo';
+
     ${'$'}
         var md = {
             Name: 'Post',
@@ -25,7 +28,7 @@ $group
     import path from 'path'
     import
         @ GetPostModel
-        from '../mongo/post'
+        from '../${db}/post'
     import
         @ IPostModel
         from '../types'
@@ -69,8 +72,8 @@ $group
                                     {
                                         @ isValid true
     
-    v08/mongo/crud/get_list_api${'('}&md)
-    v08/mongo/crud/get_api${'('}&md)
-    v08/mongo/crud/create_api${'('}&md)
-    v08/mongo/crud/update_api${'('}&md)
-    v08/mongo/crud/delete_api${'('}&md)
+    v08/${db}/crud/get_list_api${'('}&md)
+    v08/${db}/crud/get_api${'('}&md)
+    v08/${db}/crud/create_api${'('}&md)
+    v08/${db}/crud/update_api${'('}&md)
+    v08/${db}/crud/delete_api${'('}&md)

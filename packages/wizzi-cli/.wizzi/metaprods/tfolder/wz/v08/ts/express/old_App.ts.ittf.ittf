@@ -16,7 +16,7 @@ $group
     
     ${'$'}else
         
-        ${'$'}if wzCtx.Build.express.useSsl
+        ${'$'}if wzCtx.Build.express.useSslCert
             import fs from 'fs'
             import https from 'https'
         ${'$'}else
@@ -24,7 +24,7 @@ $group
                 import http from 'http'
         ${'$'}if wzCtx.Build.useSocketIO
             import socketio from 'socket.io'
-        ${'$'}if wzCtx.Build.express.useSsl
+        ${'$'}if wzCtx.Build.express.useSslCert
             +
             const ssl_key = fs.readFileSync('server.key')
             const ssl_cert = fs.readFileSync('server.cert')
@@ -52,7 +52,7 @@ $group
             set this.port = this.config.port
             set this.app
                 _ express
-            ${'$'}if wzCtx.Build.express.useSsl
+            ${'$'}if wzCtx.Build.express.useSslCert
                 set this.server
                     _ https.createServer
                         {
@@ -119,12 +119,12 @@ $group
                 :number
                 :optional
             var usedPort = port || this.port
-            _ ${'$'}{(wzCtx.Build.useSocketIO || wzCtx.Build.express.useSsl) ? 'this.server' : 'this.app'}.listen
+            _ ${'$'}{(wzCtx.Build.useSocketIO || wzCtx.Build.express.useSslCert) ? 'this.server' : 'this.app'}.listen
                 @ usedPort
                 => 
                     _ console.log
                         `lit 
-                            + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                            + App listening at ${'$'}{wzCtx.App.baseUrl}:
                             @ usedPort
                             + 
     ${'$'}if !wzCtx.Build.useNetlify

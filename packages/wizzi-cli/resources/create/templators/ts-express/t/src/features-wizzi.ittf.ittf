@@ -22,13 +22,59 @@ $group
                     }
             
                 v08/express/features/wizzi/maps${'$'}{'('}&md)
+
         $file __dot__wizzi/${pkgPath}src/features/wizzi/productions.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
+                ${'$'}include wz/v08/ts/express/features/wizzi/productions.ts
+
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/executeJob.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/executeJob.ts
             
-                v08/express/features/wizzi/productions${'$'}{'('}&md)
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/generateFolderArtifacts.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateFolderArtifacts.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/generateArtifact.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateArtifact.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/loadModel.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/loadModel.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/inferAndLoadContext.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/inferAndLoadContext.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/mTreeBuildupScript.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTreeBuildupScript.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/mTree.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTree.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/scanIttfDocument.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/scanIttfDocument.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/transformModel.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/transformModel.ts
+            
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/wizzify.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
+
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/wizzify.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
+
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/loadSiteJsonModel.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/loadSiteJsonModel.ts
+
         $file __dot__wizzi/${pkgPath}src/features/wizzi/types.ts.ittf.ittf
             module
                 ${"${'$'}"}

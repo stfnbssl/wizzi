@@ -1,6 +1,8 @@
 $group
 
     import 
+        @ Request
+        @ Response
         @ Application
         from 'express'
     
@@ -24,13 +26,13 @@ $group
                     if config.noCache
                         _ app.use
                             => 
-                                param req
-                                    :any $$ TODO ref Request
-                                param res
-                                    :any $$ TODO ref Response
+                                param request
+                                    :ref Request
+                                param response
+                                    :ref Response
                                 param next
-                                    :any $$ TODO ref Function
-                                _ res.set('Cache-Control', 'no-store')
+                                    :ref Function
+                                _ response.set('Cache-Control', 'no-store')
                                 _ next
                         success 'CacheControlMiddleware installed'
                     ${'$'}hook

@@ -66,7 +66,9 @@ $group
                                     _ resolve
                                         @ ittfResult
                         else
-                            _ reject
-                                new Error
-                                    @ 'Extension "' + extension + '" has no wizzifier'
-
+                            const ittfResult = [extension.substring(1)]
+                            _ ittfResult.push('\t$' + '*')
+                            _ ittfResult.push(codeSnippet)
+                            _ ittfResult.push('\t*' + '$')
+                            _ resolve
+                                @ ittfResult.join('\n')

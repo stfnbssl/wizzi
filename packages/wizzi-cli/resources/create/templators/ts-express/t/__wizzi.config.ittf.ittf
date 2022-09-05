@@ -15,7 +15,7 @@ $group
                             @ './wizzi-core/index.js' 
                             @ './wizzi-js/index.js' 
                             @ './wizzi-web/index.js' 
-                        @ pluginsBaseFolder path.join(__dirname, '..', '..', '..', 'wizzi', 'packages') 
+                        @ pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi/packages"
                     ${'$'}else
                         [ plugins
                             @ 'wizzi-core'

@@ -36,7 +36,7 @@ $group
                             set jsonwf =
                                 await
                                     _ createFsJsonAndFactory(files)
-                            _ jsonwf.wf.loadMTreeDebugInfo
+                            _ jsonwf.wf.loadMTreeBuildupScript
                                 @ ittfDocumentUri
                                 @ context
                                 =>

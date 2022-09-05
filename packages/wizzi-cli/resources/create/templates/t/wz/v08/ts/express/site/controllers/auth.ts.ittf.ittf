@@ -40,14 +40,14 @@ $group
                         {
                             @ client_id config.googleClientId
                             @ scope 'openid email profile'
-                            @ redirect_uri '${'$'}{wzCtx.App.baseUrl}/api/v${'$'}{wzCtx.App.apiVersion}/authenticate/google/callback'
+                            @ redirect_uri '${'$'}{wzCtx.App.baseUrl}/api/${'$'}{wzCtx.App.apiVersion}/authenticate/google/callback'
                             @ nonce 'gartps'
                             @ response_type 'code'
                 _ response.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${queryParams}`)
            
             v08/ts/handler${'('} logout )
-                set (request.session as any).user = null
-                set (request.session as any).github_access_token = null
-                set (request.session as any).google_access_token = null
+                set (request as any).session.user = null
+                set (request as any).session.github_access_token = null
+                set (request as any).session.google_access_token = null
                 _ response.redirect('/')
 

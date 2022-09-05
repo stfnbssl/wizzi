@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/utils/sendResponse${'('}&md) 
+   $include wz/v08/ts/express/utils/sendResponse.ts

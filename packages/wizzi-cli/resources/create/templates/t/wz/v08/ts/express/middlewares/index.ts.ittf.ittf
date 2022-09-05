@@ -87,7 +87,8 @@ $group
             @ checkScopes
             from './authorization'
     ${'$'}if wzCtx.Build.useAuthentication
-        import auth0Secured from './auth0Secured'
+        import webSecured from './webSecured'
+        import apiSecured from './apiSecured'
     export
         @ appMiddlewaresPre
         @ appMiddlewaresPost
@@ -95,4 +96,5 @@ $group
             @ checkJwt
             @ checkScopes
         ${'$'}if wzCtx.Build.useAuthentication
-            @ auth0Secured
+            @ webSecured
+            @ apiSecured

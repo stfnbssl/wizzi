@@ -42,7 +42,7 @@ module.exports = (options) => {
                 cliCtx: cliCtx, 
                 fileCtx: fileCtx
              }, {
-                destFolder: path.join('C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages', options.pkgName), 
+                destFolder: options.destPath ? options.destPath : path.join('C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages', options.pkgName), 
                 copyInclude: ['*'], 
                 copyExclude: []
              }, function(err, genFolderResult) {

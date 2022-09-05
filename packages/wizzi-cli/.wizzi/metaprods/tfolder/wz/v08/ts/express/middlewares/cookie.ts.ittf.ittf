@@ -3,9 +3,6 @@ $group
     ${'$'}if wzCtx.Build.useCookieParser
         import 
             @ Application
-            @ Request
-            @ Response
-            @ RequestHandler
             from 'express'
         import 
             @ MiddlewareType

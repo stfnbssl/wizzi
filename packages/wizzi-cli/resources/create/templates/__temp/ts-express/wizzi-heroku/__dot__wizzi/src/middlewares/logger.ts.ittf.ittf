@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/middlewares/logger${'('}&md) 
+   $include wz/v08/ts/express/middlewares/logger.ts

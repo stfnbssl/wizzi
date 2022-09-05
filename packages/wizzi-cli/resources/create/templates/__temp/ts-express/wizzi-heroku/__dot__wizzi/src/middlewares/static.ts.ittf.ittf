@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/middlewares/static${'('}&md) 
+   $include wz/v08/ts/express/middlewares/static.ts

@@ -49,3 +49,4 @@ $group
     ${'$'}include productions/inferAndLoadContext
     ${'$'}include productions/scanIttfDocument
     ${'$'}include productions/wizzify
+    ${'$'}include productions/loadSiteJsonModel

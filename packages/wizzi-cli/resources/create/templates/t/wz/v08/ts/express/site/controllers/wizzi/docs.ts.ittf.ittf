@@ -4,7 +4,8 @@ $group
         var ctrl = {
             name: 'Docs',
             path: '/docs',
-            kind: 'site'
+            kind: 'site',
+            webSecured: true
         }
 
     v08/ts/controller${'('} &ctrl )
@@ -14,7 +15,7 @@ $group
                 @ cheatsheetApi
                 from '../../features/docs'
         
-        _ this.router.get('/cheatsheet/:name', this.cheatsheet)
+        v08/ts/route_web_secured${'('} get, /cheatsheet/:name, this.cheatsheet)
 
         ${'$'}append handlers
             v08/ts/handler${'('} cheatsheet )

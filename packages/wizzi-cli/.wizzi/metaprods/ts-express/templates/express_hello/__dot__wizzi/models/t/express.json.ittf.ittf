@@ -33,4 +33,4 @@ ${'$'}group
     
     useCors true
     { cors
-        clientOrigin "${'$'}{md.http}://localhost:${'$'}{md.port}"
+        clientOrigin "${'$'}{wzCtx.App.baseUrl}"

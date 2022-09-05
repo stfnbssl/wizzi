@@ -4,32 +4,25 @@ $group
         {
             ${"${'$'}"}include v08/env/vars
             ---
-            ${"${'$'}"}
-                var md = {
-                    useSsl: false,
-                    host: 'localhost',
-                    port: 5000,
-                    apiVersion: 'v1'
-                };
-                md.http = md.useSsl ? 'https' : 'http';
-            
-            ---
             ${'$'}include cli/v08/wzctx-info.json
-            
             ---
             { App
                 name "Wizzi Hub"
-                siteUrl "${"${'$'}"}{md.http}://localhost"
-                port ${"${'$'}"}{md.port}
-                baseUrl "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
-                apiVersion "1"
+                isLocal ${cliCtx.isLocal ? "true" : "false"}
+                isProduction ${cliCtx.isProduction ? "true" : "false"}
+                port "${cliCtx.port}"
+                useSsl ${cliCtx.useSsl ? "true" : "false"}
+                siteUrl "${cliCtx.siteUrl}"
+                baseUrl "${cliCtx.baseUrl}"
+                siteUrlLocal "${cliCtx.siteUrlLocal}"
+                baseUrlLocal "${cliCtx.baseUrlLocal}"
+                apiVersion "${cliCtx.apiVersion}"
                 { constants
                     { preview
                         minWidth 700
                 [ Components
             ---
             { Styles
-            
             ---
             { Build
                 useSite true
@@ -166,11 +159,12 @@ $group
                 
             useExpress true
             { express
-                useSsl ${"${'$'}"}{md.useSsl ? 'true' : 'false'}
+                useSslCert ${cliCtx.useSslCert ? "true" : "false"}
                 useErrors false
                 useStaticFiles true
                 { staticFiles
                     basePath "__dirname, '..', '..'"
+                useSessionStore false
         
             useSession true
             { session
@@ -192,13 +186,14 @@ $group
         
             useCompression false
             { compression
+                level 6
             
             useHelmet false
             { helmet
             
             useCors true
             { cors
-                clientOrigin "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}"
+                clientOrigin "${cliCtx.corsOrigin}"
         
     $file __dot__wizzi/models/t/styles.json.ittf.ittf
         ${"${'$'}"}group
@@ -246,6 +241,7 @@ $group
                 useDateFns false
                 useFetchPonyfill false
                 useNanoId false
+                useNodeCache true
                 useGitUrlParse false
                 useJsonToAst false
     
@@ -284,6 +280,9 @@ $group
                 usePacki true
                 { packi
                     useAdmin false
+            $if cliCtx.usePackiBrowse
+                usePackiBrowse true
+                { packiBrowse 
 
             useIttfStatic true
             { ittfStatic
@@ -314,20 +313,34 @@ $group
             ${"${'$'}"}group
                 useAuthentication true
                 { authentication
+                    $if cliCtx.isProduction
+                        isProduction true
+                    $else
+                        isProduction false
+                    $if cliCtx.isLocal
+                        isLocal true
+                    $else
+                        isLocal false
                     authRequired false
                     userInfo false
                     useLocal true
                     { local
                     useGithub true
                     { github
+                        clientIdLocal "${"${'$'}"}{stfnbssl_env.githubClientIdLocal}"
+                        clientSecretLocal "${"${'$'}"}{stfnbssl_env.githubClientSecretLocal}"
+                        callbackURLLocal "${cliCtx.baseUrlLocal}/api/${cliCtx.apiVersion}/authenticate/github/callback"
                         clientId "${"${'$'}"}{stfnbssl_env.githubClientId}"
                         clientSecret "${"${'$'}"}{stfnbssl_env.githubClientSecret}"
-                        callbackURL "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}/api/${"${'$'}"}{md.apiVersion}/authenticate/github/callback"
+                        callbackURL "${cliCtx.baseUrl}/api/${cliCtx.apiVersion}/authenticate/github/callback"
                     useGoogle true
                     { google
+                        clientIdLocal "${"${'$'}"}{stfnbssl_env.googleClientIdLocal}"
+                        clientSecretLocal "${"${'$'}"}{stfnbssl_env.googleClientSecretLocal}"
+                        callbackURLLocal "${cliCtx.baseUrlLocal}/api/${cliCtx.apiVersion}/authenticate/google/callback"
                         clientId "${"${'$'}"}{stfnbssl_env.googleClientId}"
                         clientSecret "${"${'$'}"}{stfnbssl_env.googleClientSecret}"
-                        callbackURL "${"${'$'}"}{md.http}://localhost:${"${'$'}"}{md.port}/api/${"${'$'}"}{md.apiVersion}/authenticate/google/callback"
+                        callbackURL "${cliCtx.baseUrl}/api/${cliCtx.apiVersion}/authenticate/google/callback"
 
     $if cliCtx.usePages
         $file __dot__wizzi/models/t/react.json.ittf.ittf

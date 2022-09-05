@@ -39,8 +39,16 @@ $group
                             param _token
                                 :string
                             log myname, 'githubCallback', '_token', _token
-                            set (request.session as any).github_access_token = _token
-                            _ response.redirect('/account/profile/github')
+                            set (request as any).session.github_access_token = _token
+                            _ (request as any).session.save
+                                function
+                                    param err
+                                    if err
+                                        $$ TODO return next(err)
+                                        error myname, 'githubCallback', 'error saving session', err
+                                        return response.status(500).json({ message: err.message })
+                                    log myname, 'githubCallback', 'session saved before redirect to /account/profile/github'
+                                    _ response.redirect('/account/profile/github')
                     ._ catch
                         =>
                             param err
@@ -55,7 +63,7 @@ $group
                         @ client_id config.googleClientId
                         @ client_secret config.googleClientSecret
                         @ code request.query.code
-                        @ redirect_uri '${'$'}{wzCtx.App.baseUrl}/api/v${'$'}{wzCtx.App.apiVersion}/authenticate/google/callback'
+                        @ redirect_uri '${'$'}{wzCtx.App.baseUrl}/api/${'$'}{wzCtx.App.apiVersion}/authenticate/google/callback'
                         @ grant_type 'authorization_code'
                 const options = { headers: { accept: 'application/json' } }
                 _ axios.post(`https://oauth2.googleapis.com/token`, body, options)
@@ -70,8 +78,16 @@ $group
                             param _token
                                 :string
                             $$ loog og myname, '_token:', _token
-                            set (request.session as any).google_access_token = _token
-                            _ response.redirect('/account/profile/google')
+                            set (request as any).session.google_access_token = _token
+                            _ (request as any).session.save
+                                function
+                                    param err
+                                    if err
+                                        $$ TODO return next(err)
+                                        error myname, 'githubCallback', 'error saving session', err
+                                        return response.status(500).json({ message: err.message })
+                                        log myname, 'githubCallback', 'session saved before redirect to /account/profile/google'
+                                    _ response.redirect('/account/profile/google')
                     ._ catch
                         =>
                             param err

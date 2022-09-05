@@ -15,7 +15,7 @@ $group
     ${'$'}else
         import HttpException from '../httpException'
 
-    export 
+    export-default
         const ErrorsMiddleware
             :ref MiddlewareType
             =
@@ -25,7 +25,7 @@ $group
                     # catch 404 and forward to error handler
                     _ app.use
                         function 
-                            param req
+                            param request
                                 :ref Request
                             param res
                                 :ref Response
@@ -45,7 +45,7 @@ $group
                             function 
                                 param err
                                     :ref HttpException
-                                param req
+                                param request
                                     :ref Request
                                 param res
                                     :ref Response
@@ -64,7 +64,7 @@ $group
                             function 
                                 param err
                                     :ref HttpException
-                                param req
+                                param request
                                     :ref Request
                                 param res
                                     :ref Response

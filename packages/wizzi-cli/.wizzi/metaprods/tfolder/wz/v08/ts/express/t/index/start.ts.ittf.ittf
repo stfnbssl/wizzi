@@ -1,5 +1,6 @@
 $group
-
+    ${'$'}params &md
+    
     ${'$'}if wzCtx.Build.useMongoDb
         let modelBuilders
             :[ 
@@ -87,8 +88,6 @@ $group
                 @ middlewaresPost
                 ${'$'}if wzCtx.Build.useFilesystem
                     @ fsDb
-                ${'$'}if wzCtx.Build.useAuthentication
-                    @ auth0Secured
 
     set app.instance = new App(appInitializer)
 

@@ -82,7 +82,7 @@ $group
                                 :ref CreateUserResult
                             $$ loog myname + '.postNewUser.createUserFromSignup.result', JSON.stringify(result, null, 2)
                             if result.created
-                                set (request.session as any).user = result.user
+                                set (request as any).session.user = result.user
                                 _ response.redirect('/account/profile')
                             else
                                 _ response.render

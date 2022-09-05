@@ -11,9 +11,6 @@ $group
         import 
             @ fsTypes
             from '../filesystem'
-    import 
-        @ RequestHandlerParams
-        from 'express-serve-static-core'
     
     export 
         :type ModelBuilderType
@@ -75,7 +72,3 @@ $group
                 ${'$'}if wzCtx.Build.useFilesystem
                     :p fsDb
                         :ref fsTypes.FsDb
-                ${'$'}if wzCtx.Build.useAuthentication
-                    :p auth0Secured
-                        :=> 
-                            :ref RequestHandlerParams

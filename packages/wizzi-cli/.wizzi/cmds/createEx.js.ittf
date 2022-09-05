@@ -107,9 +107,13 @@
                                 @ fileCtx fileCtx
                             {
                                 @ destFolder
-                                    _ path.join
-                                        @ 'C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages'
-                                        @ options.pkgName
+                                    iif options.destPath
+                                        then
+                                            + options.destPath
+                                        else
+                                            _ path.join
+                                                @ 'C:/My/wizzi/stfnbssl/wizzi.meta.demos/packages'
+                                                @ options.pkgName
                                 @ copyInclude ['*']
                                 @ copyExclude []
                             f_cb_test(genFolderResult)

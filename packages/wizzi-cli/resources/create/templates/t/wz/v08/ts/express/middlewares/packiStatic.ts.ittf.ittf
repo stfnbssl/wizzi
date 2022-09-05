@@ -63,11 +63,11 @@ $group
                     const reqpath = parsedUrl && parsedUrl.path
 
                     if false
-                        return response.redirect(307, 'http://localhost:3000/packi' + reqpath);
+                        return response.redirect(307, '${'$'}{wzCtx.App.baseUrl}/packi' + reqpath);
                     else
                         $$ loog 'packiStatic parsedUrl.path', reqpath
                         _ axios.get
-                            @ 'http://localhost:3000/packi' + reqpath
+                            @ '${'$'}{wzCtx.App.baseUrl}/packi' + reqpath
                             ._ then
                                 =>
                                     param res

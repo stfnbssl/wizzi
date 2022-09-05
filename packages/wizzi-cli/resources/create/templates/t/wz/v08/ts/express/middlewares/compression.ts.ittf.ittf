@@ -3,6 +3,8 @@ $group
     ${'$'}if wzCtx.Build.useCompression
         import 
             @ Application
+            @ Request
+            @ Response
             from 'express'
         import compression from 'compression'
         import 
@@ -10,9 +12,22 @@ $group
             from '../features/app/types'
         +
         # see other options here http://expressjs.com/en/resources/middleware/compression.html
+        const shouldCompress
+            =>
+                param request
+                    :ref Request
+                param response
+                    :ref Response
+                if request.headers['x-no-compression']
+                    # don't compress responses with this request header
+                    return false;
+                }
+                # fallback to standard filter function
+                return compression.filter(request, response)
         const options
             {
-                # TODO
+                @ filter shouldCompress
+                @ level ${'$'}{wzCtx.Build.compression.level} || 6
         +
         export 
             const CompressionMiddleware

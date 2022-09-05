@@ -23,6 +23,17 @@ $group
             ${'$'}else
                 from '../../../features/auth/types'
 
+    ${'$'}if ctrl.apiSecured || ctrl.webSecured
+        import 
+            ${'$'}if ctrl.apiSecured
+                @ apiSecured
+            ${'$'}if ctrl.webSecured
+                @ webSecured
+            ${'$'}if ctrl.kind == 'site'
+                from '../../middlewares/index'
+            ${'$'}else
+                from '../../../middlewares/index'
+
     import
         @ sendHtml
         @ sendSuccess
@@ -33,12 +44,63 @@ $group
         ${'$'}else
             from '../../../utils/sendResponse'
 
+    import
+        @ FcError
+        @ SYSTEM_ERROR
+        ${'$'}if ctrl.kind == 'site'
+            from '../../utils/error'
+        ${'$'}else
+            from '../../../utils/error'
+
+    import
+        @ statusCode
+        ${'$'}if ctrl.kind == 'site'
+            from '../../utils'
+        ${'$'}else
+            from '../../../utils'
+
     ${'$'}if ctrl.modelName
         import
             @ I${'$'}{ctrl.modelName}
             from '../types'
     
     ${'$'}hook imports
+    +
+    function makeHandlerAwareOfAsyncErrors
+            param handler
+            return 
+                async-function 
+                    param request
+                        :ref Request
+                    param response
+                        :ref Response
+                    param next
+                        :ref Function
+                    log 'makeHandlerAwareOfAsyncErrors called'
+                    try 
+                        await 
+                            _ handler(request, response, next)
+                        log 'makeHandlerAwareOfAsyncErrors ok'
+                    catch error
+                        if error instanceof FcError
+                            _ response.status(statusCode.BAD_REQUEST).send
+                                { 
+                                    @ code error.code
+                                    @ message error.message
+                                    @ data
+                                        || 
+                                            + error.data
+                                            { 
+                        else
+                            const fcError = new FcError(SYSTEM_ERROR)
+                            _ response.status(statusCode.BAD_REQUEST).send
+                                { 
+                                    @ code fcError.code
+                                    @ message error.message
+                                    @ data
+                                        || 
+                                            + fcError.data
+                                            { 
     +
     export
         class ${'$'}{ctrl.name}Controller

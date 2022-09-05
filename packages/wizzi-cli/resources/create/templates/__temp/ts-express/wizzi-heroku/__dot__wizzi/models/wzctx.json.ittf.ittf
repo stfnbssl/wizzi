@@ -1,23 +1,19 @@
 { 
    ${'$'}include v08/env/vars
    --- 
-   ${'$'} 
-       var md = {
-           useSsl: false,
-           host: 'localhost',
-           port: 5000,
-           apiVersion: 'v1'
-       }; 
-       md.http = md.useSsl ? 'https' : 'http';
-   --- 
    $include cli/v08/wzctx-info.json
    --- 
    { App
        name "Wizzi Hub"
-       siteUrl "${'$'}{md.http}://localhost"
-       port ${'$'}{md.port}
-       baseUrl "${'$'}{md.http}://localhost:${'$'}{md.port}"
-       apiVersion "1"
+       isLocal true
+       isProduction false
+       port "5000"
+       useSsl false
+       siteUrl "http://localhost"
+       baseUrl "http://localhost:5000"
+       siteUrlLocal "http://localhost"
+       baseUrlLocal "http://localhost:5000"
+       apiVersion "v1"
        { constants
            { preview
                minWidth 700

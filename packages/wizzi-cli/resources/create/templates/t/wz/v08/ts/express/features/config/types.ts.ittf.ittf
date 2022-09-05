@@ -24,6 +24,13 @@ $group
                         :string 
                     :p mongoConnectUrl
                         :string 
+                ${'$'}if wzCtx.Build.useRedis
+                    :p redisCa
+                        :string 
+                    :p redisUrl
+                        :string 
+                    :p redisPassword
+                        :string 
                 ${'$'}if wzCtx.Build.useAuthentication
                     ${'$'}if wzCtx.Build.authentication.useGithub
                         :p githubClientId
@@ -53,11 +60,4 @@ $group
                     :p metaFolderIttfPath
                         :string 
                     :p metaHtmlTextPath
-                        :string 
-                ${'$'}if wzCtx.Build.usePacki
-                    :p packiStoreFolder
-                        :string 
-                    :p packiTemplatesFolder
-                        :string 
-                    :p packiApiEndpoint
                         :string 

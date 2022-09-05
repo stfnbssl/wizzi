@@ -36,7 +36,7 @@ $group
                             value "true" 
                         {
                             name "CORS_CLIENT_ORIGIN"
-                            value "http://localhost:3000"
+                            value "${'$'}{wzCtx.Build.cors.clientOrigin}"
                         {
                             name "IS_WIZZI_DEV"
                             value "true" 

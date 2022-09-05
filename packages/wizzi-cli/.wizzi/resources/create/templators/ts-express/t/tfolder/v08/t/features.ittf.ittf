@@ -1,32 +1,4 @@
 $group
-    $file __dot__wizzi/t/v08/express/features/app/index.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-            
-            ${'$'}include wz/v08/ts/express/features/app/index.ts
-    $file __dot__wizzi/t/v08/express/features/app/types.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-            
-            ${'$'}include wz/v08/ts/express/features/app/types.ts
-    $file __dot__wizzi/t/v08/express/features/config/env.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/config/env.ts
-        
-    $file __dot__wizzi/t/v08/express/features/config/types.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/config/types.ts
-        
-    $file __dot__wizzi/t/v08/express/features/config/index.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/config/index.ts
-        
     $file __dot__wizzi/t/v08/express/features/filesystem/types.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &md
@@ -125,7 +97,6 @@ $group
     $file __dot__wizzi/t/v08/express/features/t/controller.ts.ittf.ittf
         ${"${'$'}"}group
             ${"${'$'}"}params &ctrl
-        
             wz/v08/ts/tfolder/controller.ts${'('}3)
     $file __dot__wizzi/t/v08/express/features/t/handler.ts.ittf.ittf
         ${"${'$'}"}group
@@ -150,11 +121,6 @@ $group
         
             ${'$'}include wz/v08/ts/express/features/wizzi/maps.ts
         
-    $file __dot__wizzi/t/v08/express/features/wizzi/productions.ts.ittf.ittf
-        ${"${'$'}"}group
-            ${"${'$'}"}params &md
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/productions.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi/types.ts.ittf.ittf
         ${"${'$'}"}group
@@ -179,56 +145,6 @@ $group
             ${"${'$'}"}params &md
         
             ${'$'}include wz/v08/ts/express/features/wizzi/controllers/t/productions/resolveContexts.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/executeJob.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/executeJob.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/generateFolderArtifacts.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateFolderArtifacts.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/generateArtifact.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateArtifact.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/loadModel.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/loadModel.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/inferAndLoadContext.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/inferAndLoadContext.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/mTreeBuildupScript.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTreeBuildupScript.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/mTree.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/mTree.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/scanIttfDocument.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/scanIttfDocument.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/transformModel.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/transformModel.ts
-        
-    $file __dot__wizzi/t/v08/express/features/wizzi/t/productions/wizzify.ts.ittf.ittf
-        ${"${'$'}"}group
-        
-            ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
         
     $file __dot__wizzi/t/v08/express/features/wizzi_old/factory.ts.ittf.ittf
         ${"${'$'}"}group

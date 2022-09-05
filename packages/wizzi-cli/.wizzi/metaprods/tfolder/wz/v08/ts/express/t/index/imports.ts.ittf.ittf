@@ -1,5 +1,6 @@
 $group
-
+    ${'$'}params &md
+    
     ${'$'} var baseDir = wzCtx.Build.useNetlify ? '..' : '.'
 
     import 
@@ -78,8 +79,6 @@ $group
     import 
         @ appMiddlewaresPre
         @ appMiddlewaresPost
-        ${'$'}if wzCtx.Build.useAuthentication
-            @ auth0Secured
         from '${'$'}{baseDir}/middlewares/index'
     
     ${'$'}if !wzCtx.Build.useNetlify

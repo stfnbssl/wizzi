@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/middlewares/cors${'('}&md) 
+   $include wz/v08/ts/express/middlewares/cors.ts

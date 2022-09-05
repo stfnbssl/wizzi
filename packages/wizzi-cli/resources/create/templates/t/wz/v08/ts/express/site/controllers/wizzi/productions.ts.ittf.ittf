@@ -4,7 +4,8 @@ $group
         var ctrl = {
             name: 'Productions',
             path: '/productions',
-            kind: 'site'
+            kind: 'site',
+            webSecured: true
         }
 
     v08/ts/controller${'('} &ctrl )
@@ -19,11 +20,11 @@ $group
                 @ tFolderApi
                 from '../../features/production'
         
-        _ this.router.get('/artifacts', this.artifacts)
-        _ this.router.get('/packages', this.packages)
-        _ this.router.get('/plugins', this.plugins)
-        _ this.router.get('/metas', this.metas)
-        _ this.router.get('/tfolders', this.tfolders)
+        v08/ts/route_web_secured${'('} get, /artifacts, this.artifacts)
+        v08/ts/route_web_secured${'('} get, /packages, this.packages
+        v08/ts/route_web_secured${'('} get, /plugins, this.plugins)
+        v08/ts/route_web_secured${'('} get, /metas, this.metas)
+        v08/ts/route_web_secured${'('} get, /tfolders, this.tfolders)
 
         ${'$'}append handlers
             v08/ts/handler${'('} artifacts )

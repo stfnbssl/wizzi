@@ -17,6 +17,8 @@ ${'$'}group
    usePacki true
    { packi
        useAdmin false
+   usePackiBrowse true
+   { packiBrowse
    useIttfStatic true
    { ittfStatic
    useWizziViewEngine true

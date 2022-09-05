@@ -21,7 +21,7 @@ $group
                 function 
                     param done
                     _ http.get
-                        @ 'http://localhost:${'$'}{wzCtx.Build.azure.webAppPort}'
+                        @ '${'$'}{wzCtx.App.baseUrl}'
                         function 
                             param res
                             log 'uniTests. Should return 200, is:', res.statusCode
@@ -33,7 +33,7 @@ $group
                     function 
                         param done
                         _ http.get
-                            @ 'http://localhost:${'$'}{wzCtx.Build.azure.webAppPort}'
+                            @ '${'$'}{wzCtx.App.baseUrl}'
                             function 
                                 param res
                                 log 'uniTests. Assert title. Should return 200, is:', res.statusCode

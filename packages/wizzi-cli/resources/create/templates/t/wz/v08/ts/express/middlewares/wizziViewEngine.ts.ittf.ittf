@@ -33,18 +33,21 @@ $group
                                     const twinJsonContext
                                         await
                                             _ wizziProds.inferAndLoadContextFs(filePath, 'wzCtx')
-                                    const siteCtx
-                                        await
-                                            _ loadJsonIttfModel
-                                                @ 'sitectx.json.ittf'
                                     const context
                                         {
                                             @ ...options
                                             @ locals options._locals
-                                            @ siteCtx
                                             @ ...twinJsonContext
+                                            @ isWizziStudio true
+                                    const siteCtx
+                                        await
+                                            $$ _ loadJsonIttfModel
+                                            _ wizziProds.loadSiteJsonModel
+                                                @ 'sitectx.json.ittf'
+                                                @ context
+                                    set context.siteCtx = siteCtx
                                     log 'WizziViewEngineMiddleware.filePath', filePath
-                                    log 'WizziViewEngineMiddleware.options', JSON.stringify(options, null, 2)
+                                    log 'WizziViewEngineMiddleware.options', Object.keys(options)
                                     _ wizziProds.generateArtifactFs(filePath, context).then
                                         =>
                                             param generated
@@ -64,6 +67,7 @@ $group
                             # register the template engine
                         log 'WizziViewEngineMiddleware installed, on folder', viewsFolder
 
+        $*
         async-function loadJsonIttfModel
             param relPath
                 :string
@@ -78,6 +82,7 @@ $group
                                 @ 'models'
                                 @ relPath
                             {
+                                @ isWizziStudio true
                             ._ then
                                 =>
                                     param model
@@ -88,5 +93,6 @@ $group
                                 =>
                                     param err
                                     _ reject(err)
+            *$
     ${'$'}else
         # <--wizzi!file!exclude-->

@@ -1,7 +1,10 @@
 $group
+    $file __dot__wizzi/${pkgPath}src/utils/index.ts.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/express/utils/index.ts
     $file __dot__wizzi/${pkgPath}src/utils/sendResponse.ts.ittf.ittf
         module
-            ${"${'$'}"}
-                var md = {
-                }
-            v08/express/utils/sendResponse${'$'}{'('}&md)
+            ${'$'}include wz/v08/ts/express/utils/sendResponse.ts            
+    $file __dot__wizzi/${pkgPath}src/utils/error.ts.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/express/utils/error.ts

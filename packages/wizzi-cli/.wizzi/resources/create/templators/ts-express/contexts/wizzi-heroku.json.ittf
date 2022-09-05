@@ -1,5 +1,34 @@
 {
+    $
+        var isLocal = true; 
+        var isProduction = false;
+        var cloudDomain = "www.wizzihub.com";
+        var port = 5000;
+        var useSslCert = false;
+        var useSsl = isLocal ? false : true;
+        var http = useSsl ? 'https' : 'http';
+        var domain = isLocal ? "localhost" : cloudDomain;
+
     $include commons
+
+    isLocal ${isLocal ? "true" : "false"}
+    isProduction ${isProduction ? "true" : "false"}
+    { production
+
+    useSsl ${useSsl ? "true" : "false"}
+    useSslCert ${useSslCert ? "true" : "false"}
+    domain "${domain}"
+    port "${port}"
+    siteUrl "${http}://${domain}"
+    $if domain == "localhost"
+        baseUrl "${http}://${domain}:${port}"
+        corsOrigin "${http}://${domain}:${port}"
+    $else
+        baseUrl "${http}://${domain}"
+        corsOrigin "${http}://${domain}"
+    siteUrlLocal "${http}://localhost"
+    baseUrlLocal "${http}://localhost:${port}"
+    apiVersion "v1"
     
     useAzure false
     { azure
@@ -12,7 +41,7 @@
 
     useExpress true
     { express
-    
+
     useAuthentication true
     { authentication
 
@@ -45,4 +74,7 @@
 
     usePacki true
     { packi
-    
+
+    usePackiBrowse true
+    { packiBrowse
+

@@ -87,7 +87,7 @@ $group
                         \b  copyfiles -f predeploy/.gitignore predeploy/** ./deploy"
             ${'$'}else 
                 start "set NODE_ENV=development && nodemon src/index && start ${'$'}{wzCtx.App.baseUrl}"
-        ${'$'}if wzCtx.Build.express.useSsl
+        ${'$'}if wzCtx.Build.express.useSslCert
             certificate "C:\"Program Files"\Git\usr\ssl\openssl.exe req -nodes -new -x509 -keyout server.key -out server.cert"
 
     ${'$'}if wzCtx.Build.useLint

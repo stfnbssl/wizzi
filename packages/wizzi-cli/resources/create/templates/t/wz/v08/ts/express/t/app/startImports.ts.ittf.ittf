@@ -1,5 +1,6 @@
 $group
-
+    ${'$'}params &md
+    
     ${'$'} var baseDir = wzCtx.Build.useNetlify ? '..' : '.'
 
     ${'$'}if md.isGetApp
@@ -85,7 +86,7 @@ $group
         @ appMiddlewaresPre
         @ appMiddlewaresPost
         ${'$'}if wzCtx.Build.useAuthentication
-            @ auth0Secured
+            @ apiSecured
         from '${'$'}{baseDir}/middlewares/index'
     
     ${'$'}if !md.isGetApp

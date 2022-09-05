@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/index${'('}&md) 
+   $include wz/v08/ts/express/index.ts

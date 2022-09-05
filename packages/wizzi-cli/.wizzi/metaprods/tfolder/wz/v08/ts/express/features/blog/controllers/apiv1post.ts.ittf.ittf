@@ -4,6 +4,7 @@ $group
         var ctrl = {
             name: 'ApiV1Post',
             path: '/api/v1/blog/post',
+            apiSecured: true,
         }
     
     v08/ts/controller${'('}&ctrl)
@@ -20,11 +21,11 @@ $group
             +
             const myname = 'features/blog/controllers/apiv1post'
 
-        _ this.router.get('/:owner', this.getPostList)
-        _ this.router.get('/checkname/:owner/:name', this.getCheckPostName)
-        _ this.router.get('/:owner/:name', this.getPost)
-        _ this.router.post('/:owner/:name', this.postPost)
-        _ this.router.delete('/:id', this.deletePost)
+        v08/ts/route_api_secured${'('} get, /:owner, this.getPostList)
+        v08/ts/route_api_secured${'('} get, /checkname/:owner/:name, this.getCheckPostName)
+        v08/ts/route_api_secured${'('} get, /:owner/:name, this.getPost)
+        v08/ts/route_api_secured${'('} post, /:owner/:name, this.postPost)
+        v08/ts/route_api_secured${'('} delete, /:id, this.deletePost)
         
         ${'$'}append handlers
             

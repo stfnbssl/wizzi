@@ -46,7 +46,8 @@ else if (cmd == 'ts-express-wizzi-heroku') {
     createEx({
         templateGroup: 'ts-express', 
         template: 'wizzi-heroku', 
-        pkgName: 'wizzi-heroku'
+        pkgName: 'wizzi-heroku', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi-heroku'
      })
 }
 else if (cmd == 'js-express') {

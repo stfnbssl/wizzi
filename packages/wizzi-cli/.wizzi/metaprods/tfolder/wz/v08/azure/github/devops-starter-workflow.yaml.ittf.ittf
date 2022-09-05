@@ -22,7 +22,7 @@ $group
         : PORT 3000 
         : SESSION_SECRET "axr45hngmuoil9********0ofgt*kjj6767648%$£3f5&/4bnsa-----qq4)$35670qq4q"
         : NO_CACHE true 
-        : CORS_CLIENT_ORIGIN "http://localhost:3000"
+        : CORS_CLIENT_ORIGIN "${'$'}{wzCtx.Build.cors.clientOrigin}"
         : IS_WIZZI_DEV true 
         : WIZZI_BASE_PATH "" 
     

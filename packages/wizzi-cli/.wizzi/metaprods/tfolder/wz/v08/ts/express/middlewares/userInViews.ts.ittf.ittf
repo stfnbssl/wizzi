@@ -24,18 +24,18 @@ $group
                             :ref Application
                         _ app.use
                             => 
-                                param req
+                                param request
                                     :ref Request
-                                param res
+                                param response
                                     :ref Response
                                 param next
                                     :ref Function
                                 ${'$'}if wzCtx.Build.useMongoDb
-                                    $$ loog 'UserInViewMiddleware.req.session.user', (req.session as any).user
-                                    set res.locals.user = (req.session as any).user
+                                    $$ loog 'UserInViewMiddleware.request.session.user', (request as any).session.user
+                                    set response.locals.user = (request as any).session.user
                                 ${'$'}else
-                                    $$ loog 'UserInViewMiddleware.req.user', (req as any).user
-                                    set res.locals.user = (req as any).user
+                                    $$ loog 'UserInViewMiddleware.request.user', (request as any).user
+                                    set response.locals.user = (request as any).user
                                 _ next()
     ${'$'}else
         # <--wizzi!file!exclude-->

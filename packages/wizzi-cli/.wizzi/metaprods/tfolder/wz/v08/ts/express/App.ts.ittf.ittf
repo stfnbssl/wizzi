@@ -3,7 +3,7 @@ $group
     ${'$'}
         var md = {
             isGetApp: false,
-            createHttpServer: wzCtx.Build.express.useSsl || wzCtx.Build.useSocketIO
+            createHttpServer: wzCtx.Build.express.useSslCert || wzCtx.Build.useSocketIO
         }
 
     app/appImports${'('}&md)
@@ -55,7 +55,7 @@ $group
                 @ this.app
                 @ initValues
             +
-            ${'$'}if wzCtx.Build.express.useSsl
+            ${'$'}if wzCtx.Build.express.useSslCert
                 set this.server
                     _ https.createServer
                         {
@@ -101,7 +101,7 @@ $group
                     => 
                         _ console.log
                             `lit 
-                                + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                                + App listening at ${'$'}{wzCtx.App.siteUrl}:
                                 @ this.port
             ${'$'}else
                 set this.server
@@ -110,7 +110,7 @@ $group
                         => 
                             _ console.log
                                 `lit 
-                                    + App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                                    + App listening at ${'$'}{wzCtx.App.siteUrl}:
                                     @ this.port
 
         m close
@@ -118,14 +118,14 @@ $group
             param done
             _ console.log
                 `lit 
-                    + Server closing. App listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                    + Server closing. App listening at ${'$'}{wzCtx.App.siteUrl}:
                     @ this.port
 
             _ this.server.close
                 =>
                     _ console.log
                         `lit 
-                            + Server stopped. App was listening at ${'$'}{wzCtx.Build.express.useSsl ? 'https' : 'http'}://localhost:
+                            + Server stopped. App was listening at ${'$'}{wzCtx.App.siteUrl}:
                             @ this.port
                     _ done
 

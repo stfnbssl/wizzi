@@ -34,5 +34,6 @@ template ts-express
     $include tests
     $include tfolder/v08/index
     $include tfolder/wfjobs
+    $include tfolder/commons
     $include __generate
     $include __wizzi.config
