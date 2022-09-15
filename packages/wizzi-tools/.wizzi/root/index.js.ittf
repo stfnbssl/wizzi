@@ -251,7 +251,7 @@ module
 					return
 						_ callback
 							new Error
-								@ "Non wizzifier found for schema: " + schemaName
+								@ "Wizzifier not found for schema: " + schemaName
 				_ wizzifier
 					@ codeSnippet
 					@ options
