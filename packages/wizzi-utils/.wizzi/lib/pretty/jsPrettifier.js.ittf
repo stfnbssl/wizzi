@@ -15,5 +15,5 @@
 			param data
 			if err
 				throw err;
-			log beautify(data, { indent_size: 2 })
+			$$ loog beautify(data, { indent_size: 2 })
     *$

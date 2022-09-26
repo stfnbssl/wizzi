@@ -127,15 +127,15 @@
 	set md.jsonFactory
 		function
 			{ options
-				{ fsJson
+				{ jsonFs
 			callback
 			+
-			# loog 'wizzi.index.jsonFactory.fsJson', options.fsJson
+			# loog 'wizzi.index.jsonFactory.jsonFs', options.jsonFs
 			+
 			set options.repo
 				{
 					@ storeKind 'json'
-					@ storeFsJson options.fsJson
+					@ storeJsonFs options.jsonFs
 			_ md.createFactory
 				@ options
 				@ callback

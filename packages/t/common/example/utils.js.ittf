@@ -22,23 +22,23 @@ $group
         var ittfGraph = require('../lib/ittfGraph/index')
 
     $elif opt.folderLevel == 2
-        var vfile = require('../../lib/fs/vfile')    
-        var uriParser = require('../../lib/fs/uriParser')
-        var fsUtils = require('../../lib/fs/utils')
+        var vfile = require('../../lib/fSystem/vfile')    
+        var uriParser = require('../../lib/fSystem/uriParser')
+        var fsUtils = require('../../lib/fSystem/utils')
         var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph')
         var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode')
         var ittfScanner = require('../../lib/ittfScanner/index')
-        var fs = require('../../lib/fs/index')
+        var fs = require('../../lib/fSystem/index')
         var ittfGraph = require('../../lib/ittfGraph/index')
 
     $elif opt.folderLevel == 3
-        var vfile = require('../../../lib/fs/vfile')    
-        var uriParser = require('../../../lib/fs/uriParser')
-        var fsUtils = require('../../../lib/fs/utils')
+        var vfile = require('../../../lib/fSystem/vfile')    
+        var uriParser = require('../../../lib/fSystem/uriParser')
+        var fsUtils = require('../../../lib/fSystem/utils')
         var IttfDocumentGraph = require('../../../lib/ittfGraph/ittfDocumentGraph')
         var IttfFsNode = require('../../../lib/ittfScanner/ittfFsNode')
         var ittfScanner = require('../../../lib/ittfScanner/index')
-        var fs = require('../../../lib/fs/index')
+        var fs = require('../../../lib/fSystem/index')
         var ittfGraph = require('../../../lib/ittfGraph/index')
 
 	$hook imports

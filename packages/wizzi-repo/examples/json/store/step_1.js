@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\json\store\step_1.js.ittf
 */
 'use strict';
@@ -23,8 +23,10 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var vfile = require('wizzi-utils').vfile;
 var repoIndex = require('../../../index');
 var json = require('../../../lib/json/index');
+var JsonFsImpl = require('../../../lib/json/jsonFsimpl');
 var MongoFsImpl = require('../../../lib/mongodb/mongoFsimpl');
 var FsMongo = require('../../../lib/mongodb/fs/fsmongo');
 var Document = require('../../../lib/mongodb/fs/document');
@@ -33,11 +35,25 @@ var Json_Store_Step_1 = function(step_callback) {
     heading1('start');
     repoIndex.JsonComponents.createJsonFsData([
         {
-            path: 'c:\\folder1\\test.html.ittf', 
+            path: 'json:/folder1/test.html.ittf', 
             content: [
                 'html', 
                 '    head', 
                 '    body'
+            ].join('\n')
+         }, 
+        {
+            path: 'json:/folder1/t/test.html.ittf', 
+            content: [
+                'li', 
+                '    a'
+            ].join('\n')
+         }, 
+        {
+            path: 'json:/folder1/t/folder2/test.html.ittf', 
+            content: [
+                'li', 
+                '    a'
             ].join('\n')
          }
     ], function(err, jsonFsData) {
@@ -45,7 +61,7 @@ var Json_Store_Step_1 = function(step_callback) {
             console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        printObject('jsonFsData', jsonFsData)
+        printValue('jsonFsData', jsonFsData)
         repoIndex.jsonfile({
             jsonFsData: jsonFsData
          }, function(err, vfile) {
@@ -53,13 +69,14 @@ var Json_Store_Step_1 = function(step_callback) {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            printObject('vfile', vfile)
-            repoIndex.folderFilesInfoByPath('c:\\folder1', vfile, {}, (err, items) => {
+            repoIndex.folderFilesInfoByPath('json:/folder1', vfile, {
+                deep: true
+             }, (err, items) => {
             
                 if (err) {
                     return callback(err);
                 }
-                printObject('items', items)
+                printValue('items', items)
             }
             )
         })

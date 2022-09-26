@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -113,17 +113,17 @@ md.jsonfile = function jsonfile(options, callback) {
             ));
         }
     }
-    if (verify.isNullOrUndefined(options.fsJson) === false) {
-        if (verify.isObject(options.fsJson) === false) {
+    if (verify.isNullOrUndefined(options.jsonFs) === false) {
+        if (verify.isObject(options.jsonFs) === false) {
             return callback(error(
-                'InvalidArgument', 'jsonfile', { parameter: 'options.fsJson', message: 'The options.fsJson parameter must be an object. Received: ' + options.fsJson }
+                'InvalidArgument', 'jsonfile', { parameter: 'options.jsonFs', message: 'The options.jsonFs parameter must be an object. Received: ' + options.jsonFs }
             ));
         }
     }
-    if (options.fsJson) {
+    if (options.jsonFs) {
         var fsimpl = new JsonFsImpl({});
         fsimpl.open({
-            fsJson: options.fsJson
+            jsonFs: options.jsonFs
          }, function(err, notUsed) {
             if (err) {
                 return callback(err);
@@ -195,8 +195,8 @@ md.createStoreFactory = function createStoreFactory(options, callback) {
         }
     }
     else if (storeKind == 'json') {
-        if (verify.isObject(options.storeJsonFsData) === false && verify.isObject(options.storeFsJson) === false) {
-            return callback(error('InvalidArgument', 'createStoreFactory', 'The parameter `options.storeJsonFsData` or `options.storeFsJson`is required and must be an object.'));
+        if (verify.isObject(options.storeJsonFsData) === false && verify.isObject(options.storeJsonFs) === false) {
+            return callback(error('InvalidArgument', 'createStoreFactory', 'The parameter `options.storeJsonFsData` or `options.storeJsonFs`is required and must be an object.'));
         }
     }
     return callback(null, getCreateStore(storeKind, options));
@@ -220,7 +220,7 @@ function getCreateStore(storeKind, options) {
                 storeUri: options.storeUri, 
                 storeBaseFolder: options.storeBaseFolder, 
                 storeJsonFsData: options.storeJsonFsData, 
-                storeFsJson: options.storeFsJson
+                storeJsonFs: options.storeJsonFs
              }, function(err, notUsed) {
                 if (err) {
                     return callback(err);
@@ -234,7 +234,6 @@ function checkStoreKind(kind) {
 }
 // TODO fileService.getFilesAsync
 md.folderFilesInfoByPath = function(folderPath, fileService, options, callback) {
-    // loog 'wizzi-repo.folderFilesInfoByPath', folderPath
     options = options || { deep: true };
     fileService.getFilesAsync(folderPath, options, function(err, files) {
         if (err) {

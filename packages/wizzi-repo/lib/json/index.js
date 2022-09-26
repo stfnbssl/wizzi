@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\index.js.ittf
 */
 'use strict';
@@ -9,34 +9,34 @@ var md = {};
 module.exports = md;
 var Collection = require('../utils/collection');
 md.directoryTree = require('./directoryTree');
-md.FsJson = require('./fs/fsjson');
+md.JsonFs = require('./fs/fsjson');
 md.DocumentManager = require('./fs/documentmanager');
 //
-md.createDocumentManager = function(fsJsonDataOrFsJson) {
-    if (fsJsonDataOrFsJson && fsJsonDataOrFsJson.classType === 'wizzi-repo.json.FsJson') {
-        return new md.DocumentManager(fsJsonDataOrFsJson);
+md.createDocumentManager = function(jsonFsDataOrJsonFs) {
+    if (jsonFsDataOrJsonFs && jsonFsDataOrJsonFs.classType === 'wizzi-repo.json.JsonFs') {
+        return new md.DocumentManager(jsonFsDataOrJsonFs);
     }
     else {
-        var jsonFsData = fsJsonDataOrFsJson || {};
+        var jsonFsData = jsonFsDataOrJsonFs || {};
         jsonFsData.items = jsonFsData.items || [];
         jsonFsData.documents = jsonFsData.documents || [];
-        return new md.DocumentManager(new md.FsJson(jsonFsData));
+        return new md.DocumentManager(new md.JsonFs(jsonFsData));
     }
 }
 ;
-md.createFsJson = function(documents, callback) {
+md.createJsonFs = function(documents, callback) {
     md.createJsonFsData(documents, function(err, jsonFsData) {
         if (err) {
             return callback(err);
         }
-        var fsJson = new md.FsJson(jsonFsData);
-        return callback(null, fsJson);
+        var jsonFs = new md.JsonFs(jsonFsData);
+        return callback(null, jsonFs);
     })
 }
 ;
-md.createFsJsonByJsonFsData = function(jsonFsData, callback) {
-    var fsJson = new md.FsJson(jsonFsData);
-    return callback(null, fsJson);
+md.createJsonFsByJsonFsData = function(jsonFsData, callback) {
+    var jsonFs = new md.JsonFs(jsonFsData);
+    return callback(null, jsonFs);
 }
 ;
 md.createJsonFsData = function(documents, callback) {

@@ -17,7 +17,7 @@
 				if fsitem == null
 					_ that.fsCommon.toJson
 						f_cb( json )
-							# loog 'fsJson.readFile not found', JSON.stringify(json, null, 4)
+							# loog 'jsonFs.readFile not found', JSON.stringify(json, null, 4)
 							r_cb_wz_err( ${fsname}RepoError, readFile )
 								@ 'Document read file error. Not found: ' + filePath
 				elif fsitem.kind == 0

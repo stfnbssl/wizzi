@@ -107,6 +107,7 @@ type Readonly<P, T> = {
     
     interface FsImpl {
         stat(path: string, callback: cb<object>): any;
+        // TODO and many others
     }
     
     export function vfile(fsImpl: FsImpl): VFileFS;

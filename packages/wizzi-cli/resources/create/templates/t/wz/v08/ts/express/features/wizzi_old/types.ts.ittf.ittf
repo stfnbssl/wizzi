@@ -4,7 +4,7 @@ $group
         as wizzi
         from 'wizzi'
     import 
-        @ FsJson
+        @ JsonFs
         from 'wizzi-repo'
     +
     export 
@@ -17,8 +17,8 @@ $group
             :{ 
                 :p wf
                     :ref wizzi.WizziFactory
-                :p fsJson
-                    :ref FsJson
+                :p jsonFs
+                    :ref JsonFs
     export 
         :type GeneratedArtifact
             :{ 

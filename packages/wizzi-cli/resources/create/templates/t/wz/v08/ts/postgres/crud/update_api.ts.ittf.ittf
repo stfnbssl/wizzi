@@ -65,7 +65,7 @@ $group
                                 param result
                                     :any
                                 if err
-                                    log myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'error', err
+                                    error myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'error', err
                                     return reject(err)
                                 +
                                 $$ loog myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'result', result

@@ -15,59 +15,27 @@
         $append functions
 
             function dump
-                param fsJson
+                param obj
+                param title
                 _ printValue
-                    @ 'fsJson.items'
-                    @ fsJson.items
-
-                _ printValue
-                    @ 'fsJson.documents'
-                    @ fsJson.documents    
-
+                    @ title
+                    _ stringify
+                        @ obj
+                        @ null
+                        @ 2
 
         _ heading1('start')
 
         # create an array of document data for test
-        var documents = []
-        _ documents.push
-            {
-                @ path 'c:/root/folder1/index.html.ittf'
-                @ content
-                    [
-                        @ 'html'
-                        @ '    body'
-                        @ '        ul'
-                        @ '            lia( stefi )'
-                        @ '            lia_img( annie, photo.jpg )'
-                        ._ join('\n')
-
-        _ documents.push
-            {
-                @ path 'c:/root/folder1/t/lia.html.ittf'
-                @ content
-                    [
-                        @ 'li'
-                        @ '    a'
-                        @ '        href'
-                        ._ join('\n')
-
-        _ documents.push
-            {
-                @ path 'c:/root/folder1/t/lia_img.html.ittf'
-                @ content
-                    [
-                        @ 'li'
-                        @ '    a'
-                        @ '        href'
-                        @ '        img'
-                        ._ join('\n')
+        var documents = data_get_documents_folder1()
 
         _ json.createJsonFsData
             @ documents
             f_cb_throw( jsonFsData)
                 _ heading2('created JsonFilesystem')
-                _ printValue
+                _ dump
                     @ jsonFsData
+                    @ "jsonFsData added folder1"
                 _ addDocuments
                     @ jsonFsData
 
@@ -75,21 +43,14 @@
             param jsonFsData
             _ heading2('write documents to JsonFilesystem')
 
-            var documents = []
-            _ documents.push
-                {
-                    @ path 'c:/root/folder2/index.html.ittf'
-                    @ content
-                        [
-                            @ 'module'
-                            @ '    kind react'
-                            ._ join('\n')
+            var documents = data_get_documents_folder2()
             _ json.addToJsonFsData
                 @ jsonFsData
                 @ documents
                 f_cb_throw( jsonFsData)
-                    _ printValue
+                    _ dump
                         @ jsonFsData
+                        @ "jsonFsData added folder2"
                     _ extractDocuments
                         @ jsonFsData
 
@@ -100,10 +61,13 @@
                 _ json.createDocumentManager
                     @ jsonFsData
             _ doc.getFiles
-                @ 'c:/'
+                @ 'json:'
                 {
                     @ deep true
                     @ documentContent true
                 f_cb_throw( files )
-                    _ printValue
+                    _ dump
                         @ files
+                        @ "Total documents"
+
+        $include ./data

@@ -17,6 +17,7 @@ template ts-express
     $include src/features-auth
     $include src/features-blog
     $include src/features-packi
+    $include src/features-project
     $include src/features-wizzi
     $include src/middlewares
     $include src/services

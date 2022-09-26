@@ -29,24 +29,4 @@ $group
                 ${'$'}include wz/v08/ts/mongo/modelcontroller.ts
         $file __dot__wizzi/t/v08/mongo/type.ts.ittf.ittf
             ${"${'$'}"}group
-                ${'$'}include wz/v08/ts/mongo/type.ts
-        
-        $*
-            TODO VIA ???
-        
-        $file __dot__wizzi/t/v08/mongo/t/authHandler.ts.ittf.ittf
-            ${"${'$'}"}group
-                ${"${'$'}"}params name
-            
-                ${'$'}include wz/v08/ts/tfolder/authHandler.ts
-        $file __dot__wizzi/t/v08/mongo/t/controller.ts.ittf.ittf
-            ${"${'$'}"}group
-                ${"${'$'}"}params &ctrl
-            
-                ${'$'}include wz/v08/ts/tfolder/controller.ts
-        $file __dot__wizzi/t/v08/mongo/t/handler.ts.ittf.ittf
-            ${"${'$'}"}group
-                ${"${'$'}"}params name
-            
-                ${'$'}include wz/v08/ts/tfolder/handler.ts
-        *$
+                ${'$'}include wz/v08/ts/mongo/type.ts      

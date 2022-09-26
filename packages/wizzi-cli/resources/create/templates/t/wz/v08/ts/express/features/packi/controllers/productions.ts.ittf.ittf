@@ -124,10 +124,10 @@ $group
                 $$ loog 'ProductionsController.executeJob.received files', Object.keys(files)
                 _ wizziProds.executeJobs(files).then
                     async=> 
-                        param fsJson
+                        param jsonFs
                         const files
                             await 
-                                _ WizziFactory.extractGeneratedFiles(fsJson)
+                                _ WizziFactory.extractGeneratedFiles(jsonFs)
                         $$ loog 'features.packi.controllers.production.executeJob.generatedArtifacts', Object.keys(files)
                         _ sendSuccess
                             @ response

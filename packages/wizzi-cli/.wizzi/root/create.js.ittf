@@ -45,6 +45,13 @@ module
                 @ template 'wizzi-heroku'
                 @ pkgName 'wizzi-heroku'
                 @ destPath 'C:/My/wizzi/stfnbssl/wizzi-heroku'
+    elif cmd == 'ts-client-webpack-react'
+        _ createEx
+            {
+                @ templateGroup 'ts-client'
+                @ template 'webpack-react'
+                @ pkgName 'lab.webpack.react'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
     elif cmd == 'js-express'
         _ create
             {

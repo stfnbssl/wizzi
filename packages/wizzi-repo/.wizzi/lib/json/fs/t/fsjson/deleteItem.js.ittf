@@ -11,7 +11,7 @@
 			f_cb( fsitem )
 				if fsitem == null
 					r_cb_wz_err( JsonRepoError, deleteItem )
-						@ 'FsJson item not found: ' + id
+						@ 'JsonFs item not found: ' + id
 				_ that._deleteDocument
 					@ id
 					f_cb( r )
@@ -19,7 +19,7 @@
 							{
 								@ _id id
 							f_cb( r )
-								# loog '*** wizzi-repo.json.FsJson.deleteItem,r', r
+								# loog '*** wizzi-repo.json.JsonFs.deleteItem,r', r
 								if r.deletedCount == 1 && r.result.ok == 1
 									r_cb()
 										{
@@ -28,7 +28,7 @@
 											@ ok r.ok
 								else
 									r_cb_wz_err( JsonRepoError, deleteItem )
-										@ 'FsJson error deleting item. Result: ' + util.inspect( r )
+										@ 'JsonFs error deleting item. Result: ' + util.inspect( r )
 
 	m _deleteDocument
 		param id
@@ -37,10 +37,10 @@
 			{
 				@ _id id
 			f_cb( r )
-				# loog '*** wizzi-repo.json.FsJson._deleteDocument.r', r
+				# loog '*** wizzi-repo.json.JsonFs._deleteDocument.r', r
 				if r.deletedCount == 1 && r.result.ok == 1
-					# loog 'wizzi-repo.json.FsJson._deleteDocument', true
+					# loog 'wizzi-repo.json.JsonFs._deleteDocument', true
 					r_cb(true)
 				else
-					# loog 'wizzi-repo.json.FsJson._deleteDocument', false
+					# loog 'wizzi-repo.json.JsonFs._deleteDocument', false
 					r_cb(false)

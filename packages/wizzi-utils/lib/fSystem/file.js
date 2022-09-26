@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\file.js.ittf
 */
 'use strict';
@@ -407,7 +407,6 @@ md.getGlobbedFiles = function(globPatterns, removeRoot, options) {
                             file = file.replace(removeRoot[i], '');
                         }
                     }
-                    // log md.unixifyPath(file), removeRoot
                     else {
                         file = md.unixifyPath(file).replace(md.unixifyPath(removeRoot), '')
                         ;

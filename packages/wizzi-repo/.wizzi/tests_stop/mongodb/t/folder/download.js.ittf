@@ -47,5 +47,5 @@
 							._ on
 								@ 'finish'
 								function
-									log downloadZipFile + " written."
+									info downloadZipFile + " written."
 									_ done()

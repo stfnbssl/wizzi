@@ -22,14 +22,14 @@
 						_ modelInfo.productionManager()
 					var wizziFactory = productionManager.wizziFactory
 
-					# log "AsyncWizziModelTypesRunner.run: I should run " + wmtRequest.wfschemaIttfDocumentUri
+					$$ loog"AsyncWizziModelTypesRunner.run: I should run " + wmtRequest.wfschemaIttfDocumentUri
 					_ wizziFactory.generateModelDoms
 						@ wmtRequest.wfschemaIttfDocumentUri
 						@ wmtRequest.outputPackageFolder
 						@ wmtRequest.schemaName
 						{
 						f_cb( result )
-							log chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + wmtRequest.schemaName)
+							info chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + wmtRequest.schemaName)
 							_ callback
 								@ null
 								@ result

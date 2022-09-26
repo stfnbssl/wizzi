@@ -1,0 +1,97 @@
+$group
+
+	m metaGenerate
+		string ittfMetaFilePath
+		{ context
+		{ options
+		callback
+        +
+        var tempFolder = options.tempFolder
+        check_wz_not_empty( tempFolder, metaGenerate.options )
+        var destFolder = options.destFolder
+        check_wz_not_empty( destFolder, metaGenerate.options )
+        +
+        log myname, 'metaGenerate', 'tempFolder', tempFolder, 'destFolder', destFolder
+        +
+        if ittfMetaFilePath.toLowerCase().endsWith('.ittf.ittf') == false
+            return
+                _ callback
+                    _ error
+                        @ 'InvalidArgument'
+                        @ 'metaGenerate'
+                        {
+                            @ parameter 'ittfMetaFilePath'
+                            @ message "'ittfMetaFilePath' must have a Wizzi Schema of type 'ittf'. Received: " + ittfMetaFilePath
+        +
+        const fileService = this.fileService
+        const that = this
+        + 
+        _ this.loadModel
+            @ 'ittf'
+            @ ittfMetaFilePath
+            {
+                @ mTreeBuildupContext context
+            a_cb( metaFileModel )
+
+                var f_count = 0
+                iife next
+                    var child = metaFileModel.children[f_count++]
+                    if !child
+                        return
+                            _ that.generateFolderArtifacts
+                                @ tempFolder
+                                { 
+                                    @ modelRequestContext context.modelRequestContext
+                                    @ artifactRequestContext context.artifactRequestContext || context.modelRequestContext
+                                { 
+                                    @ deep true
+                                    @ destFolder destFolder
+                                    @ copyInclude options.copyInclude || ['*']
+                                    @ copyExclude options.copyExclude || []
+                                @ callback
+                    if child.name == '$file'
+                        _ processFile
+                            @ child
+                            @ tempFolder
+                            a_cb()
+                                _ next
+                    else
+                        _ next
+
+        function processFile
+            param node
+            param tempFolder
+            param callback
+            var outputPath
+                _ path.join
+                    @ tempFolder
+                    @ node.value
+            var sb = []
+            foreach child in node.children
+                _ processContent
+                    @ sb
+                    @ child
+                    @ 0
+            _ fileService.write
+                @ outputPath
+                _ sb.join
+                    @ '\n'
+                @ callback
+
+        function processContent
+            param sb
+            param node
+            param indent
+            $$ loognew Array(indent).join(' ') + node.name + ' ' + node.value
+            _ sb.push
+                @ new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value)
+            foreach child in node.children
+                _ processContent
+                    @ sb
+                    @ child
+                    @ indent + 4
+
+        function decode
+            param text
+            set text = verify.replaceAll(text, "${'$'}", "$")
+            return verify.replaceAll(text, "£'('£", "(")

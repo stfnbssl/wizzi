@@ -26,6 +26,8 @@
 	var ModelInfo = null
 	var AsyncModelLoader = null
 	+
+    var myname = 'wizzi.services.wizzifactory'
+    +
 	class WizziFactory
 		ctor
 			param user
@@ -62,6 +64,7 @@
 		$include wizziFactory/schema-definition
 		$include wizziFactory/modelTypes-generation
 		$include wizziFactory/wizzi-job-execution
+        $include wizziFactory/meta-generation
 		$include wizziFactory/json-factory
 		$include wizziFactory/getInfo
 	

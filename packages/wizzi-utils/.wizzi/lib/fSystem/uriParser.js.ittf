@@ -3,10 +3,10 @@
 
 	import path
 	import url
-	# var verify = require('../helpers/verify')
 
 	#
-		# params
+		#
+        # params
 		#   string uri
 		# returns
 		#   {
@@ -61,40 +61,6 @@
 							else parsedUri.hostname
 					else pathname || ''
 			# loog 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
-
-			if typeof(parsedUri.protocol) !== 'string'
-
-				$if isWebpackTarget
-
-					set ret.browser = true
-					set ret.storeKind = null
-					if verify.startsWith(parsedUri.path, '/tmp')
-						set ret.protocol = 'tmp'
-						set ret.storeKind = 'browser'
-					elif verify.startsWith(parsedUri.path, '/ixdb')
-						set ret.protocol = 'ixdb'
-						set ret.storeKind = 'browser'
-					else
-						r_or_cb_wz_err( InvalidArgument, parse )
-							@ 'Uri must have a protocol (must be an absolute url). Received: ' + uri
-
-					_ setParsed
-						@ ret
-						@ parsedUri
-					
-					# loog 'wizzi-utils.uriParser.parsed', '\n', JSON.stringify(ret, null, 2)
-
-					return
-						_ returnOrCb
-							@ ret
-							@ callback
-
-				$else
-				
-					$*
-                    r_or_cb_wz_err( InvalidArgument, parse )
-						@ 'Uri must have a protocol (must be an absolute url). Received: ' + uri
-                    *$
 
 			var protocol
 				iif parsedUri.protocol && parsedUri.protocol.substr(-1, 1) === ':'

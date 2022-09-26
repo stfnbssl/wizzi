@@ -21,7 +21,7 @@ module
             [
                 @ 'module'
                 @ '    kind es6'
-                @ '    log "Hello"'
+                @ '    info "Hello"'
                 ._ join
                     @ '\n'
         +
@@ -56,12 +56,12 @@ module
                     @ content wfjobContent
 
         +
-        _ wizziIndex.JsonComponents.createFsJson
+        _ wizziIndex.JsonComponents.createJsonFs
             @ documents
-            f_cb_test( fsJson )
+            f_cb_test( jsonFs )
                 var options
                     {
-                        @ fsJson fsJson
+                        @ jsonFs jsonFs
                         { plugins
                             [ items
                                 @ 'wizzi-js'
@@ -86,12 +86,12 @@ module
                                     @ 'job.result'
                                     @ result
                                 _ printObject
-                                    @ 'job.fsJson'
-                                    @ fsJson
+                                    @ 'job.jsonFs'
+                                    @ jsonFs
                                 # loog 'job.result', Object.keys(result)
-                                # loog 'job.fsJson', Object.keys(fsJson)
+                                # loog 'job.jsonFs', Object.keys(jsonFs)
                                 var files = {}
-                                _ fsJson.toFiles
+                                _ jsonFs.toFiles
                                     {
                                         @ removeRoot packiFilePrefix
                                     =>

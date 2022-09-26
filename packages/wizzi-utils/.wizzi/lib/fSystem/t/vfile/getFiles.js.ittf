@@ -225,4 +225,3 @@
                 var newRelPath = relPath.slice(0)
                 _ newRelPath.push(item)
                 _ this._appendFiles(filePath, files, newRelPath, options)
-    

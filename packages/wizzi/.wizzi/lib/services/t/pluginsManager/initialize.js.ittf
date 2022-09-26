@@ -52,7 +52,7 @@
         # loog '__dirname', __dirname
 		var pluginsBaseFolder = options.pluginsBaseFolder 
             \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
-        log 'pluginsBaseFolder', pluginsBaseFolder
+        $$ loog'pluginsBaseFolder', pluginsBaseFolder
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext

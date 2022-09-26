@@ -97,7 +97,7 @@ $group
                             ._ catch
                                 =>
                                     param err
-                                    log myname + '.resolveContext', contextItem.type, 'err', err
+                                    error myname + '.resolveContext', contextItem.type, 'err', err
                                     _ reject(err)
         
         elif contextItem.type == 'json-fsFile'

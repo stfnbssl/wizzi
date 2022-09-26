@@ -18,13 +18,13 @@ $group
                 {
                     @ dot '.'
 
-		# loog 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,modelRequestContext.fileCtx', ittfFolderUri, fileCtx
+		$$ loog'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,modelRequestContext.fileCtx', ittfFolderUri, fileCtx
         _ repo.folderFilesInfoByPath
 			@ ittfFolderUri
 			@ this.fileService
             @ options
 			a_cb( items )
-				# loog 'generateFolderArtifacts\n', stringify(items, null, 2)
+				$$ loog'generateFolderArtifacts\n', stringify(items, null, 2)
 				_ async.mapSeries
 					@ items
 					=>
@@ -40,7 +40,7 @@ $group
                                     @ artifactRequestContext requestContext.artifactRequestContext
                                 @ artifactName
 								a_cb(artifactText)
-                                    # loog 'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
+                                    $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
 									_ this.fileService.write
 										_ path.join
 											@ options.destFolder

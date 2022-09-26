@@ -62,7 +62,7 @@ $group
                         @ dropdownParent selectDropdown
                 $$ loog 'select', item.id, 'activated'
             catch err
-                log err
+                error 'startControl', err
         elif item.type == 'date'
             try 
                 _ $('input[name="' + item.id + '"]').daterangepicker
@@ -81,7 +81,7 @@ $group
                         _ $(this).val(picker.startDate.format('DD/MM/YYYY'))
                 $$ loog 'datepicker', item.id, 'activated'
             catch err
-                log err
+                error 'startControl', err
         elif item.type == 'checkbox' || item.type == 'radio'
             const skin = item.skin || 'square'
             const colorScheme = item.color || 'blue'
@@ -93,7 +93,7 @@ $group
                         @ radioClass 'iradio_' + skin + '-' + colorScheme
                         @ increaseArea increaseArea + '%'
             catch err
-                log err
+                error 'startControl', err
         elif item.type == 'slider'
             try 
                 _ noUiSlider.create
@@ -117,7 +117,7 @@ $group
                                     @ thousand ','
                                     @ prefix '$ '
             catch err
-                log err
+                error 'startControl', err
 
         elif item.type == 'code'
             try 
@@ -136,7 +136,7 @@ $group
                                 @ "Ctrl-Space" "autocomplete"
                             @ value "<!doctype html>\n<html>\n  " + $('#' + item.id)[0].innerHTML + "\n</html>"
             catch err
-                log err
+                error 'startControl', err
 
     function resetForm
         param $

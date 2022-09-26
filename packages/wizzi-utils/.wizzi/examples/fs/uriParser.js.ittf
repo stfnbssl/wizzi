@@ -40,4 +40,4 @@
 		var parsed
 			_ uriParser
 				@ uri
-		log uri, '\n', path.dirname(uri), '\n', JSON.stringify(parsed, null, 2)
+		info uri, '\n', path.dirname(uri), '\n', JSON.stringify(parsed, null, 2)

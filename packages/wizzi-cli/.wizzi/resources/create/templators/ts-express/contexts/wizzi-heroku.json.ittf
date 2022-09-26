@@ -48,6 +48,9 @@
     useMongoDb true
     { mongoDb
 
+    useSequelize true
+    { sequelize
+
     useBlog true
     { blog
 
@@ -78,3 +81,5 @@
     usePackiBrowse true
     { packiBrowse
 
+    useData true
+    { data

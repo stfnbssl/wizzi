@@ -54,7 +54,7 @@ $group
                                         set result[itemTop.n] = itemTop.v
                                 
                                 foreach itemTop in mTree.nodes[0].children
-                                    # log itemTop.n, itemTop.v
+                                    $$ loog itemTop.n, itemTop.v
                                     if itemTop.n === 'element'
                                         var elementResult
                                             :any
@@ -71,7 +71,7 @@ $group
                                                         @ render 'artifact'
                                                 foreach item in itemEl.children
                                                     if item.n === 'ittf'
-                                                        # log item.n, mTree.toIttf(item.children[0])
+                                                        $$ loog item.n, mTree.toIttf(item.children[0])
                                                         if item.children.length == 1
                                                             if (result.schema === 'json' && (item.children[0].n === '{' || item.children[0].n === '[')) ||
                                                                 \b item.children[0].n === wizziMaps.ittfRootFromSchema(result.schema) ||
@@ -106,7 +106,7 @@ $group
                                                                 ._ trim
                                                     else
                                                         set itemResult[item.n] = item.v
-                                                        # log item.n, item.v
+                                                        $$ loog item.n, item.v
                                                 _ elementResult.items.push
                                                     @ itemResult
                                                 _ _all_items.push
@@ -123,7 +123,7 @@ $group
                                         return
                                             _ resolve
                                                 @ result
-                                    # log 'contextLoader.prettify', JSON.stringify(item.ittf, null, 2)
+                                    $$ loog 'contextLoader.prettify', JSON.stringify(item.ittf, null, 2)
                                     _ pretty.prettifyIttfHtmlFromString
                                         @ item.ittf
                                         f_cb_no_err${'('} pretty )

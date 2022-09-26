@@ -12,6 +12,11 @@
                 {
                     "name": "js/module"
                 }
+            ],
+            "aliases": [
+                {
+                    "name": "jsx"
+                }
             ]
         },
         {
@@ -21,6 +26,11 @@
             "artifacts": [
                 {
                     "name": "ts/module"
+                }
+            ],
+            "aliases": [
+                {
+                    "name": "tsx"
                 }
             ]
         }

@@ -38,7 +38,7 @@ $group
                 display flex
 
         m render
-            log 'App.render', 'props', this.props, 'state', this.state
+            $$ loog 'App.render', 'props', this.props, 'state', this.state
             let Comp
             if this.props.formName == '***'
                 throw new Error("Don't make me laugh!")

@@ -11,6 +11,9 @@
             @babel/polyfill "^7.12.1" 
         ${'$'}if wzCtx.Build.babel.useRuntime
             @babel/runtime "^7.12.5"
+    ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useMui
+        @emotion/react "latest"
+        @emotion/styled "latest"
     ${'$'}if wzCtx.Build.useExpoStyles
         @expo/styleguide "^2.1.4"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.useStyledSystem
@@ -38,6 +41,8 @@
         connect-flash "^0.1.1"
     ${'$'}if wzCtx.Build.useMongoDb
         connect-mongo "^4.4.1"
+    ${'$'}if wzCtx.Build.usePostgres
+        connect-pg-simple "^7.0.0"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useRouter && wzCtx.Build.react.useRedux
         connected-react-router "^6.9.1"
     ${'$'}if wzCtx.Build.useExpress
@@ -162,9 +167,11 @@
         parseurl "^1.3.3"
     ${'$'}if wzCtx.Build.usePrismjs
         prismjs "^1.21.0"
-    ${'$'}if wzCtx.Build.usePostgres
+    ${'$'}if wzCtx.Build.usePostgres || (wzCtx.Build.useSequelize && wzCtx.Build.sequelize.usePostgres)
         pg "^8.8.0"
-        connect-pg-simple "^7.0.0"
+            $$ pg short for postgres is a Postgres client for Node.js
+        pg-hstore "^2.3.4"
+            $$ pg-hstore is a node package for serializing and deserializing JSON data to hstore format.
     ---
     ${'$'}if wzCtx.Build.utils.useQueryString
         query-string "^7.0.0"
@@ -182,6 +189,11 @@
     ${'$'}if wzCtx.Build.useExpress
         ${'$'}if wzCtx.Build.useNetlify
             serverless-http "^1.6.0"
+    ${'$'}if wzCtx.Build.useSequelize
+        sequelize "^6.21.4"
+        sequelize-cli "^6.4.1"
+            $$ sequelize-cli is a package that enables us interact with the database through sequelize from the CLI.
+
     ${'$'}if wzCtx.Build.useSocketIO
         socket.io-client "^2.2.0"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.useStyledComponents
@@ -208,14 +220,14 @@
     ${'$'}if wzCtx.Build.utils.useWebVitals
         web-vitals "^1.0.1"
     ${'$'}if wzCtx.Build.useWizzi
-        wizzi "^0.7.32"
+        wizzi "^0.7.33"
         ${'$'}if false
             wizzi.proto "^0.0.1"
         wizzi-tools "^0.7.4"
-        wizzi-utils "^0.7.19"
-        wizzi-core "^0.7.7"
-        wizzi-web "^0.7.14"
-        wizzi-js "^0.7.11"
+        wizzi-utils "^0.7.20"
+        wizzi-core "^0.7.8"
+        wizzi-web "^0.7.15"
+        wizzi-js "^0.7.12"
     ---
     ${'$'}if wzCtx.Build.useYup
         yup "^0.27.0"

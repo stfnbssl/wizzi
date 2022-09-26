@@ -15,20 +15,20 @@
         $append functions
 
             function dump
-                param fsJson
+                param jsonFs
                 _ printValue
-                    @ 'fsJson.items'
-                    @ fsJson.items
+                    @ 'jsonFs.items'
+                    @ jsonFs.items
 
                 _ printValue
-                    @ 'fsJson.documents'
-                    @ fsJson.documents    
+                    @ 'jsonFs.documents'
+                    @ jsonFs.documents    
 
 
         _ heading1('start')
 
-        var fsJson = new json.FsJson()
-        var doc = new json.DocumentManager(fsJson)
+        var jsonFs = new json.JsonFs()
+        var doc = new json.DocumentManager(jsonFs)
 
         $include folder_data
 
@@ -36,4 +36,4 @@
 
         function terminate
             _ dump
-                @ fsJson
+                @ jsonFs

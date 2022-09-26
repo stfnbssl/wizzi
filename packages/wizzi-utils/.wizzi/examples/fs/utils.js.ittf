@@ -15,15 +15,13 @@ module
             _ path.join
                 @ __dirname
                 @ 'test.html.ittf'
-        var fi  
+        _ printObject
             _ fsUtils.fileInfoByPath
                 @ fname
-        _ printObject
-            @ fi
         set fname
             _ path.join
                 @ __dirname
-                @ 'folder1'
+                @ 't'
                 @ 'test.html.ittf'
         _ printObject
             _ fsUtils.fileInfoByPath

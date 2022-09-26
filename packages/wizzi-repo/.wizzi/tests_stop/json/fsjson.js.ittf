@@ -2,10 +2,10 @@
 	+
 	$append imports
 		var 
-			decl FsJson = require('../../../lib/json/fs/fsjson')
+			decl JsonFs = require('../../../lib/json/fs/fsjson')
 	
-	var fsJson
-		new FsJson
+	var jsonFs
+		new JsonFs
 
 	var hellotxt_item = null
 

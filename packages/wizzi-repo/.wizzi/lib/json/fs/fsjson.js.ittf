@@ -1,4 +1,4 @@
-﻿module wizzi-repo.json.FsJson
+﻿module wizzi-repo.json.JsonFs
 	kind jsfile
 
 	import assert
@@ -8,7 +8,7 @@
 	var Collection = require('../../utils/collection')
 
 	#
-		# class FsJson 
+		# class JsonFs 
         # implements an in-memory json Filesystem (a set of documents organized in a tree of folders)
 		#
 		# Filesystem item
@@ -28,35 +28,35 @@
 		#   ISODate lastModified
         #
 		# ctor params
-		#  { fsJsonData
+		#  { jsonFsData
 		#    [ items
 		#    [ documents
 
-	class FsJson
+	class JsonFs
 		ctor
-			param fsJsonData
-			set this.classType = 'wizzi-repo.json.FsJson'
-			if verify.isObject(fsJsonData)
-				if verify.isArray(fsJsonData.items) === false
+			param jsonFsData
+			set this.classType = 'wizzi-repo.json.JsonFs'
+			if verify.isObject(jsonFsData)
+				if verify.isArray(jsonFsData.items) === false
 					throw
 						new Error
 							_ error
 								@ 'InvalidArgument'
 								@ 'ctor'
 								{
-									@ parameter 'fsJsonData.items'
-									@ message 'The fsJsonData.items parameter must be an array. Received: ' + fsJsonData.items
-				if verify.isArray(fsJsonData.documents) === false
+									@ parameter 'jsonFsData.items'
+									@ message 'The jsonFsData.items parameter must be an array. Received: ' + jsonFsData.items
+				if verify.isArray(jsonFsData.documents) === false
 					throw
 						new Error
 							_ error
 								@ 'InvalidArgument'
 								@ 'ctor'
 								{
-									@ parameter 'fsJsonData.documents'
-									@ message 'The fsJsonData.documents parameter must be an array. Received: ' + fsJsonData.documents
-				set this.items = new Collection(fsJsonData.items)
-				set this.documents = new Collection(fsJsonData.documents)
+									@ parameter 'jsonFsData.documents'
+									@ message 'The jsonFsData.documents parameter must be an array. Received: ' + jsonFsData.documents
+				set this.items = new Collection(jsonFsData.items)
+				set this.documents = new Collection(jsonFsData.documents)
 			else
 				set this.items = new Collection([])
 				set this.documents = new Collection([])
@@ -107,44 +107,44 @@
 			# nothing to do
 
 	#
-		# Creates a FsJson instance
+		# Creates a JsonFs instance
 		# params
-		#  { fsJsonData
+		#  { jsonFsData
 		#    [ items
 		#    [ documents
         #  callback
-	set FsJson.create
+	set JsonFs.create
 		function
-			param fsJsonData
+			param jsonFsData
 			param callback
 			+
 			if verify.isUndefined(callback)
-				set callback = fsJsonData
-				set fsJsonData = null
+				set callback = jsonFsData
+				set jsonFsData = null
 			+
-			if fsJsonData == null
-				set fsJsonData
+			if jsonFsData == null
+				set jsonFsData
 					{
 						@ items []
 						@ documents []
 			else
-				if verify.isObject(fsJsonData) == false
+				if verify.isObject(jsonFsData) == false
 					return
 						_ callback
-							_ errorMsg('create', 'parameter fsJsonData must be an object')
-				if verify.isArray(fsJsonData.items) == false
+							_ errorMsg('create', 'parameter jsonFsData must be an object')
+				if verify.isArray(jsonFsData.items) == false
 					return
 						_ callback
-							_ errorMsg('create', 'parameter fsJsonData must contain an items property')
-				if verify.isArray(fsJsonData.documents) == false
+							_ errorMsg('create', 'parameter jsonFsData must contain an items property')
+				if verify.isArray(jsonFsData.documents) == false
 					return
 						_ callback
-							_ errorMsg('create', 'parameter fsJsonData must contain a documents property')
+							_ errorMsg('create', 'parameter jsonFsData must contain a documents property')
 			+
 			return
 				_ callback
 					@ null
-					new FsJson(fsJsonData)
+					new JsonFs(jsonFsData)
 
 	function errorMsg
 		param method
@@ -159,4 +159,4 @@
 		param path
 		return path.trim().replace(/\\/g,'/').toLowerCase()
 					
-	set module.exports = FsJson
+	set module.exports = JsonFs

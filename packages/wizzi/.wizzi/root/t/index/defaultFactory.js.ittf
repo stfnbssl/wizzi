@@ -90,7 +90,7 @@
 				{
 					{ plugins
 						@ items pluginItems
-					@ fsJson options.fsJson
+					@ jsonFs options.jsonFs
 					@ globalContext options.globalContext || {}
 				@ callback
 

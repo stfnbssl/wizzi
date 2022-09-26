@@ -2,7 +2,7 @@ module
     import 
         @ JsonComponents
         @ jsonfile
-        @ FsJsonDocumentManager
+        @ JsonFsDocumentManager
         from 'wizzi-repo'
     import 
         as path
@@ -44,7 +44,7 @@ module
     let vfile
         :ref VFile
     let docman
-        :ref FsJsonDocumentManager
+        :ref JsonFsDocumentManager
     let packiTemplatesJsonUri = 'json://root/packi/templates'
     let lastTemplatesReload
         :number 
@@ -71,23 +71,23 @@ module
                     => 
                         param resolve
                         param rejects
-                        _ JsonComponents.createFsJson
+                        _ JsonComponents.createJsonFs
                             [ 
                             => 
                                 param err
-                                param fsJson
+                                param jsonFs
                                 if err
                                     _ rejects(err)
-                                $$ loog 'filesystem.start.created FsJson'
+                                $$ loog 'filesystem.start.created JsonFs'
                                 _ jsonfile
                                     { 
-                                        @ fsJson
+                                        @ jsonFs
                                     => 
                                         param err
                                         param result
                                         set vfile = result
                                         $$ loog 'filesystem.start.created json vfile'
-                                        set docman = JsonComponents.createDocumentManager(fsJson)
+                                        set docman = JsonComponents.createDocumentManager(jsonFs)
                                         _ docman.uploadFolder
                                             @ packiTemplatesPath
                                             @ packiTemplatesJsonUri

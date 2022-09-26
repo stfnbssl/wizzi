@@ -61,7 +61,7 @@ $group
                                 param err
                                 param result
                                 if err
-                                    log myname, 'getUserByEmail', 'User.find', 'error', err
+                                    error myname, 'getUserByEmail', 'User.find', 'error', err
                                     return reject(err)
                                 if result.length == 1
                                     return
@@ -101,7 +101,7 @@ $group
                                 param err
                                 param result
                                 if err
-                                    log myname, 'validateUserNotUsed', 'User.find', 'error', err
+                                    error myname, 'validateUserNotUsed', 'User.find', 'error', err
                                     return reject(err)
                                 if result.length == 1
                                     return 
@@ -120,7 +120,7 @@ $group
                                         param err
                                         param result
                                         if err
-                                            log myname, 'validateUserNotUsed', 'User.find', 'error', err
+                                            error myname, 'validateUserNotUsed', 'User.find', 'error', err
                                             return reject(err)
                                         if result.length == 1
                                             return 
@@ -169,7 +169,7 @@ $group
                                             param err
                                             param doc
                                             if err
-                                                log myname, 'createUserFromSignup', 'newUser.save', newUser, 'error', err
+                                                error myname, 'createUserFromSignup', 'newUser.save', newUser, 'error', err
                                                 return reject(err)
                                             return 
                                                 _ resolve

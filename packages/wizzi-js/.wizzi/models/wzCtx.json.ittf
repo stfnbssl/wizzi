@@ -13,6 +13,9 @@
             [ artifacts
                 {
                     name 'js/module'
+            [ aliases
+                {
+                    name 'jsx'
         {
             name 'ts'
             title 'typescript wizzi language model'
@@ -20,3 +23,6 @@
             [ artifacts
                 {
                     name 'ts/module'
+            [ aliases
+                {
+                    name 'tsx'

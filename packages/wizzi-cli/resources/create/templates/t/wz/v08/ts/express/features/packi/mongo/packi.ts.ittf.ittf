@@ -56,9 +56,17 @@ $group
                 { 
                     @ buildModel
                         => 
+                            param options
+                                :any
+                                :optional
                             set packiModel =
                                 _ model
                                     :param 
                                         :ref IPackiModel
                                     @ "Packi"
                                     @ PackiSchema
+                    @ applyExtraSetup
+                        =>
+                            param options
+                                :any
+                                :optional

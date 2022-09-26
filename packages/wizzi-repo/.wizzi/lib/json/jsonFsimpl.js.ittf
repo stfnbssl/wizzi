@@ -2,18 +2,19 @@
 	kind jsfile
 
 	var
-		decl FsJson = require('./fs/fsjson')
+		decl JsonFs = require('./fs/fsjson')
 		decl DocumentManager = require('./fs/documentmanager')
-		decl jsonUriParser = require('wizzi-utils').uriParser
+		$$ stop 12/9/2022 decl jsonUriParser = require('wizzi-utils').uriParser
+        decl jsonUriParser = require('wizzi-utils').jsonUriParser
 
 	#
         # class JsonFsImpl
         #
 		# Implements the `fsimpl` interface for a json backed file system.
         # It is used by repo/jsonDbStore that implements the json repo store.
-        # uses a json/DocumentManager instance to manage an in-memory json filesystem (json/fs/FsJson)
+        # uses a json/DocumentManager instance to manage an in-memory json filesystem (json/fs/JsonFs)
 		# ctor params
-		#  { fsJsonData
+		#  { jsonFsData
 		#    [ items
         #      # simple javascript array
 		#    [ documents
@@ -22,10 +23,10 @@
 	class JsonFsImpl
 
 		ctor
-			param fsJsonData
+			param jsonFsData
 			set this.classType = 'wizzi-repo.json.JsonFsImpl'
-			set this.fsJsonData = fsJsonData
-			set this.fsJson = null
+			set this.jsonFsData = jsonFsData
+			set this.jsonFs = null
 			set this.docManager = null
 		
 		m db
@@ -47,16 +48,16 @@
 					_ callback
 						@ null
 						@ this.docManager
-			set this.fsJson
-				iif options.fsJson
-					then options.fsJson
+			set this.jsonFs
+				iif options.jsonFs
+					then options.jsonFs
 					else
-						iif options.fsJsonData
+						iif options.jsonFsData
 							then
-								new FsJson(options.fsJsonData)
+								new JsonFs(options.jsonFsData)
 							else
-								new FsJson(this.fsJsonData)
-			set that.docManager = new DocumentManager(this.fsJson)
+								new JsonFs(this.jsonFsData)
+			set that.docManager = new DocumentManager(this.jsonFs)
 			# loog '***** json connected'
 			return
 				_ callback
@@ -129,7 +130,7 @@
 
 		m toJson
 			param callback
-			_ this.fsJson.toJson
+			_ this.jsonFs.toJson
 				f_cb_test( json )
 					return
 						_ callback(null, json)

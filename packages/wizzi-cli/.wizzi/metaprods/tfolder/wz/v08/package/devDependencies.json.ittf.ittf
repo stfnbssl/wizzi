@@ -146,9 +146,6 @@
             ${'$'}else
                 @types/webpack "^5.28.0"
                 @types/webpack-dev-middleware "^4.1.2"
-                $$ 11/8/2022 @types/webpack-dev-server "^3.11.3"
-                ${'$'}if wzCtx.Build.webpack.useDevServer
-                    @types/webpack-dev-server "^4.10.0"
         ${'$'}if wzCtx.Build.useLint
             @typescript-eslint/parser "^5.33.0"
             @typescript-eslint/eslint-plugin "^5.33.0"
@@ -246,6 +243,8 @@
         prop-types "^15.7.2"
     ${'$'}if wzCtx.Build.useStorybook
         react-docgen-typescript "^1.22.0"
+    ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useHotReload
+        react-hot-loader "latest"
     ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
         rimraf "^3.0.2"
     ${'$'}if wzCtx.Build.useWebpack

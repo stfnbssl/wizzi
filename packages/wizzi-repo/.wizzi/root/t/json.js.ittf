@@ -14,16 +14,16 @@
 			{ options
 				{ jsonFsData
 					optional
-				{ fsJson
+				{ jsonFs
 					optional
 			callback
-			if options.fsJson
+			if options.jsonFs
 				var fsimpl
 					new JsonFsImpl
 						{
 				_ fsimpl.open
 					{
-						@ fsJson options.fsJson
+						@ jsonFs options.jsonFs
 					f_cb( notUsed )
 						_ vfile
 							@ fsimpl

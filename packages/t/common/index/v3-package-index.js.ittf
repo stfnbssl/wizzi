@@ -90,6 +90,15 @@ module
 		$include ./v3-artifact-generation
 		$include ./v3-schema-definition
 	+
+    function getTrueSchemaName
+		param schemaOrAlias
+        $foreach schema in wzCtx.schemas
+            $if schema.aliases && schema.aliases.length
+                $foreach alias in schema.aliases
+                    if schemaOrAlias == '${alias.name}'
+                        return '${schema.name}'
+		return schemaOrAlias
+	+
 	function error
 		param code
 		param message
@@ -108,7 +117,11 @@ module
                         [
                             $foreach schema in wzCtx.schemas
                                 $ var sn = schema.name
-                                @ '${sn}' 
+                                @ '${sn}'
+
+                                $if schema.aliases && schema.aliases.length
+                                    $foreach alias in schema.aliases
+                                        @ '${alias.name}'
                     @ modelTransformers
                         [
                             $foreach schema in wzCtx.schemas

@@ -31,13 +31,15 @@ ${'$'}group
                 ${'$'}if wzCtx.Build.react.redux.useFirestore
                     react-redux-firebase "^2.2.6"
         ${'$'}if wzCtx.Build.react.useRouter
-            react-router-dom "^5.2.0"
+            react-router-dom "^6.4.0"
         ${'$'}if wzCtx.Build.useReactCreateApp
             react-scripts "^4.0.3"
         ${'$'}if wzCtx.Build.react.useSelect
             react-select "^4.3.0"
         ${'$'}if wzCtx.Build.react.useSimpleCodeEditor
             react-simple-code-editor "^0.11.0"
+        ${'$'}if wzCtx.Build.react.useSplitPane
+            react-multi-split-pane "latest"
         ${'$'}if wzCtx.Build.react.useSyntaxHighlighter
             react-syntax-highlighter "^15.4.3"
         ${'$'}if wzCtx.Build.react.useTextareaAutosize

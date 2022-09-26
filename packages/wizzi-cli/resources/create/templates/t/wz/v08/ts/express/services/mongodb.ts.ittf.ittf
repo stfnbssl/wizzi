@@ -1,11 +1,11 @@
 $group
-    import mongoose from 'mongoose'
     import 
         @ ModelBuilderType
         from '../features/app'
     import 
         @ ConfigType
         from '../features/config'
+    import mongoose from 'mongoose'
     +
     export
         function mongodbStart

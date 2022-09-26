@@ -46,14 +46,14 @@ $group
                                         =>
                                             param context
                                                 :any
-                                            log myname + 'resolveContext.resolved', contextItem.name, Object.keys(context)
+                                            $$ loog myname + 'resolveContext.resolved', contextItem.name, Object.keys(context)
                                             _ resolve
                                                 {
                                                     @ name contextItem.name
                                                     @ value context
-                                    catch_reject${'('} ${'$'}{md.myname}.resolveContexts.resolveContext )
+                                    v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContexts.resolveContext )
             
-            log myname + '.resolveContexts.promises', promises.length
+            $$ loog myname + '.resolveContexts.promises', promises.length
             return 
                 new Promise
                     =>
@@ -80,7 +80,7 @@ $group
                                                         @ value.value
                                     _ resolve
                                         @ context
-                            catch_reject${'('} ${'$'}{md.myname}.resolveContexts.Promise.all )
+                            v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContexts.Promise.all )
 
     function resolveContext
         param contextItem
@@ -100,9 +100,9 @@ $group
                                 =>
                                     param value
                                         :any
-                                    log myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
+                                    $$ loog myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
                                     _ resolve(value)
-                            catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifactFs )
+                            v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifactFs )
         ${'$'}if wzCtx.Build.usePacki
             elif contextItem.source == 'json-packiIttf'
                 return 
@@ -117,9 +117,9 @@ $group
                                     =>
                                         param value
                                             :any
-                                        log myname + '.resolveContext', contextItem.source, 'mainIttf', contextItem.mainIttf, Object.keys(value)
+                                        $$ loog myname + '.resolveContext', contextItem.source, 'mainIttf', contextItem.mainIttf, Object.keys(value)
                                         _ resolve(value)
-                                catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifact )
+                                v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.generateArtifact )
         elif contextItem.source == 'json-dbIttf'
             throw new Error('ContextItem source not yet implemented: ' + contextItem.source)
         elif contextItem.source == 'json-fsFile'
@@ -153,9 +153,9 @@ $group
                                 =>
                                     param value
                                         :any
-                                    log myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
+                                    $$ loog myname + '.resolveContext', contextItem.source, 'path', contextItem.path, Object.keys(value)
                                     _ resolve(value)
-                            catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModelFs )
+                            v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModelFs )
         ${'$'}if wzCtx.Build.usePacki        
             elif contextItem.source == 'model-packiIttf'
                 return 
@@ -170,9 +170,9 @@ $group
                                     =>
                                         param value
                                             :any
-                                        log myname + '.resolveContext', 'mainIttf', contextItem.mainIttf, Object.keys(value)
+                                        $$ loog myname + '.resolveContext', 'mainIttf', contextItem.mainIttf, Object.keys(value)
                                         _ resolve(value)
-                                catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModel )
+                                v08/ts/catch_reject${'('} ${'$'}{md.myname}.resolveContext.wizziProds.loadModel )
         elif contextItem.source == 'model-dbIttf'
             throw new Error('ContextItem source not yet implemented: ' + contextItem.source)
         else

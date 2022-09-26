@@ -40,6 +40,12 @@ $group
         function Get${'$'}{md.Name}Model
             :return
                 :ref ${'$'}{md.Name}ModelType
+            if !${'$'}{md.Name}Model
+                set ${'$'}{md.Name}Model
+                    _ model
+                        :param
+                            :ref I${'$'}{md.Name}Model
+                        @ "${'$'}{md.Name}"
             return ${'$'}{md.Name}Model
     +
     export
@@ -49,9 +55,17 @@ $group
                 {
                     @ buildModel
                         =>
+                            param options
+                                :any
+                                :optional
                             set ${'$'}{md.Name}Model =
                                 _ model
                                     :param
                                         :ref I${'$'}{md.Name}Model
                                     @ "${'$'}{md.Name}"
                                     @ ${'$'}{md.Name}Schema
+                    @ applyExtraSetup
+                        =>
+                            param options
+                                :any
+                                :optional

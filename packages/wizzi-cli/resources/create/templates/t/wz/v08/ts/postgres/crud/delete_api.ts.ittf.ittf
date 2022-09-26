@@ -53,7 +53,7 @@ $group
                                 param err
                                     :any
                                 if err
-                                    log myname, 'delete${'$'}{md.Name}', '${'$'}{md.Name}.deleteOne', 'error', err
+                                    error myname, 'delete${'$'}{md.Name}', '${'$'}{md.Name}.deleteOne', 'error', err
                                     return reject(err)
                                 $$ loog myname, 'delete${'$'}{md.Name}', '${'$'}{md.Name}.deleteOne'
                                 _ resolve

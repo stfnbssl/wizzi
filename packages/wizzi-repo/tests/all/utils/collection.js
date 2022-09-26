@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\all\utils\collection.js.ittf
 */
 'use strict';
@@ -137,7 +137,7 @@ describe("utils.collection", function() {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            console.log(result, __filename);
+            console.log(result);
             expect(result.deletedCount).to.be.a('number');
             expect(result.deletedCount).to.be(1);
             expect(result.result.n).to.be.a('number');
@@ -165,7 +165,7 @@ describe("utils.collection", function() {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            console.log(result, __filename);
+            console.log(result);
             expect(result.deletedCount).to.be.a('number');
             expect(result.deletedCount).to.be(2);
             expect(result.result.n).to.be.a('number');
@@ -190,7 +190,7 @@ describe("utils.collection", function() {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            console.log(result, __filename);
+            console.log(result);
             expect(result.modifiedCount).to.be.a('number');
             expect(result.modifiedCount).to.be(1);
             expect(result.upsertedCount).to.be.a('number');
@@ -222,7 +222,7 @@ describe("utils.collection", function() {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            console.log(result, __filename);
+            console.log(result);
             expect(result.modifiedCount).to.be.a('number');
             expect(result.modifiedCount).to.be(0);
             expect(result.upsertedCount).to.be.a('number');

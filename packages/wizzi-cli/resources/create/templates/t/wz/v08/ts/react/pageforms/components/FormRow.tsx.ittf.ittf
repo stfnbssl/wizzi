@@ -56,7 +56,7 @@ $group
 
         m componentDidMount
             if this.props.type == 'delete'
-                log 'FormRow.componentDidMount.props.value.name', this.props.value.name
+                $$ loog 'FormRow.componentDidMount.props.value.name', this.props.value.name
                 _ this.setState
                     {
                         @ name this.props.value.name
@@ -65,7 +65,7 @@ $group
             param prevProps
                 :ref ${'$'}{md.name}Props
             if this.props.type == 'delete' && prevProps.value !== this.props.value
-                log 'FormRow.componentDidUpdate.props.value.name', this.props.value.name
+                $$ loog 'FormRow.componentDidUpdate.props.value.name', this.props.value.name
                 _ this.setState
                     {
                         @ name this.props.value.name
@@ -75,7 +75,7 @@ $group
                 :ref React.ChangeEvent
                     :param 
                         :ref HTMLInputElement
-            log 'handleInputChange', ev.target.type, ev.target.checked, ev.target.value
+            $$ loog 'handleInputChange', ev.target.type, ev.target.checked, ev.target.value
             _ this.setState
                 { 
                     @ [ev.target.name] (ev.target.type == 'checkbox' ? ev.target.checked : ev.target.value)
@@ -101,7 +101,7 @@ $group
             _ ev.stopPropagation
 
         m render 
-            log 'FormRow.state', this.state, 'props', this.props
+            $$ loog 'FormRow.state', this.state, 'props', this.props
             return
                 div 
                     < StyledInput

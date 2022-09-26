@@ -4,12 +4,12 @@ $group
     $include express
     $include features
     $include lint
-    $include middlewares
     $include mongo
     $include package
     $include prettier
     $include react
+    $include sequelize
     $include services
     $include site
     $include styles
-    $include ts  
+    $include ts

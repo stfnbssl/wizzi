@@ -41,7 +41,9 @@ $group
                 @ '..'
                 @ '..'
                 @ '..'
-                @ '..'
+
+    const packiFilePrefix = 'json:/'
+    const packiFilePrefixExtract = 'json:/'
 
 	$hook imports
 
@@ -55,6 +57,85 @@ $group
                     $hook plugins
                 @ globalContext globalContext || {}
             @ callback
+
+    function createJsonWizziFactoryAndJsonFs
+        param packiFiles
+        param callback
+        $$ return JsonWizziFactory
+        const jsonDocuments
+            $$ :ref JsonDocumentDto
+            [
+        log 'createJsonWizziFactoryAndJsonFs'
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
+                    const filePath = ensurePackiFilePrefix(value)
+                    log 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ jsonDocuments
+            =>
+                param err
+                param jsonFs
+                if err
+                    return callback(err)
+                _ printValue
+                    @ 'createJsonWizziFactoryAndJsonFs.jsonFs'
+                    _ stringify
+                        @ jsonFs
+                        @ null
+                        @ 2
+                _ wizziIndex.jsonFactory
+                    {
+                        @ jsonFs jsonFs
+                        { plugins
+                            $hook json_wf_plugins
+                    =>
+                        param err
+                        param wf
+                        if err
+                            return callback(err)
+                        _ callback
+                            @ null
+                            {
+                                @ wf wf
+                                @ jsonFs jsonFs
+    +
+    function createJsonFs
+        param packiFiles
+        param callback
+        $$ :return :ref JsonFs
+        const jsonDocuments
+            [
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE'
+                    const filePath = ensurePackiFilePrefix(value)
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ jsonDocuments
+            =>
+                param err
+                param result
+                if err
+                    return callback(err)
+                _ callback(null, result)
+
+    function ensurePackiFilePrefix
+        param filePath
+        return
+            iif filePath.startsWith(packiFilePrefix)
+                then filePath
+                else packiFilePrefix + filePath
+
     
     $hook functions
 

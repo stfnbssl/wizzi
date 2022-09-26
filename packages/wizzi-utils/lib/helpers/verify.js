@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\verify.js.ittf
 */
 'use strict';
@@ -111,13 +111,10 @@ md.isAbsolutePath = function(test) {
     if (test === null || typeof(test) === 'undefined') {
         return false;
     }
+    if (test.substr(0,5) === 'json:' || test.substr(0,8) === 'mongodb:') {
+        return true;
+    }
     return isAbsolutePathRegExp.test(md.unixifyPath(test));
-    /**
-        if (test.substr(0,3) === 'db:' || test.substr(0,3) === 'ls:') {
-            return true;
-        }
-        return path.resolve(test) == path.normalize(test);
-    */
 }
 ;
 md.isIttfMacro = function(test) {

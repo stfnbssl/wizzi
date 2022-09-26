@@ -73,3 +73,5 @@
        ${'$'}include auth.json
        --- 
        ${'$'}include react.json
+       --- 
+       ${'$'}include data.json

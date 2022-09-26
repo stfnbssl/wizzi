@@ -31,59 +31,64 @@ $group
                         @ schema nameParts[nameParts.length - 1]
                         @ seedname nameParts.slice(0, -1).join('.')
 
-	var schemaArtifactMap
+	const schemaArtifactMap
         :{
             :index
                 :string
                 param k
                     :string
 		{
+            @ css 'css/document'
+            @ html 'html/document'
+            @ ittf 'ittf/document'
 			@ js 'js/module'
+            @ json 'json/document'
             @ jsx 'js/module'
-			@ ts 'ts/module'
-			@ html 'html/document'
-			@ css 'css/document'
+            @ md 'md/document'
 			@ scss 'scss/document'
 			@ svg 'svg/document'
+            @ text 'text/document'
+			@ ts 'ts/module'
+            @ tsx 'ts/module'
 			@ vtt 'vtt/document'
-			@ md 'md/document'
-			@ json 'json/document'
             @ xml 'xml/document'
             @ yaml 'yaml/document'
-            @ text 'text/document'
-			@ ittf 'ittf/document'
+            @ yml 'yaml/document'
+			
 	export
-        function artifactNameFromSchema
+        function artifactNameFromFileSchema
             param schema
                 :string
             :return
                 :union
                     :string
                     :undefined
-            # log 'artifactNameFromSchema', schema, schemaArtifactMap[schema]
+            $$ loog 'artifactNameFromFileSchema', schema, schemaArtifactMap[schema]
             return schemaArtifactMap[schema]
     +
-	var schemaIttfRootMap
+	const schemaIttfRootMap
         :{
             :index
                 :string
                 param k
                     :string
 		{
+            @ css 'css'
+            @ html 'html'
+            @ ittf 'any'
 			@ js 'module'
+            @ json '{'
             @ jsx 'module'
-			@ ts 'module'
-			@ html 'html'
-			@ css 'css'
+            @ md 'md'
 			@ scss 'scss'
 			@ svg 'svg'
-			@ md 'vtt'
+            @ text 'text'
+			@ ts 'module'
+            @ tsx 'module'
 			@ vtt 'vtt'
-			@ json '{'
             @ xml 'xml'
             @ yaml 'yaml'
-            @ text 'any'
-			@ ittf 'any'
+			
     export
         function ittfRootFromSchema
             param schema
@@ -92,7 +97,7 @@ $group
                 :union
                     :string
                     :undefined
-            # log 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
+            $$ loog 'ittfRootFromSchema', schema, schemaIttfRootMap[schema]
             return schemaIttfRootMap[schema]   
 
     +
@@ -105,37 +110,37 @@ $group
                     :string
         =
             {
-                [ wfjob
-                    @ 'wizzi-core'
-                [ wfschema
-                    @ 'wizzi-core'
-                [ js
-                    @ 'wizzi-js'
-                [ ts
-                    @ 'wizzi-js'
+                [ css
+                    @ 'wizzi-web'
+                [ graphql
+                    @ 'wizzi-web'
                 [ html
                     @ 'wizzi-web'
                     @ 'wizzi-js'
                     @ 'wizzi-core'
-                [ css
-                    @ 'wizzi-web'
+                [ ittf
+                    @ 'wizzi-core'
+                [ js
+                    @ 'wizzi-js'
+                [ json
+                    @ 'wizzi-core'
                 [ scss
                     @ 'wizzi-web'
-                [ graphql
-                    @ 'wizzi-web'
-                [ vml
+                [ text
+                    @ 'wizzi-core'
+                [ ts
+                    @ 'wizzi-js'
+                [ vtt
                     @ 'wizzi-web'
                 [ vue
                     @ 'wizzi-web'
-                [ json
+                [ wfjob
                     @ 'wizzi-core'
-                [ text
+                [ wfschema
                     @ 'wizzi-core'
                 [ xml
                     @ 'wizzi-core'
                 [ yaml
-                    @ 'wizzi-core'
-                [ ittf
                     @ 'wizzi-core'
     export
         function pluginsFor
@@ -149,28 +154,6 @@ $group
                 return schemaPluginMap[nameParts[nameParts.length - 2]] || []
             return []
     +
-    const schemaModuleMap
-        :{
-            :index
-                :string
-                param k
-                    :string
-        =
-            {
-                @ css 'css/document'
-                @ graphql 'graphql/document'
-                @ ittf 'ittf/document'
-                @ js 'js/module'
-                @ json 'json/document'
-                @ html 'html/document'
-                @ md 'md/document'
-                @ scss 'scss/document'
-                @ svg 'svg/document'
-                @ text 'text/document'
-                @ ts 'ts/module'
-                @ vml 'vml/document'
-                @ vue 'vue/document'
-                @ xml 'xml/document'
     export
         function generatorFor
             param filePath
@@ -181,7 +164,7 @@ $group
                     :undefined
             const pf = parseFilePath(filePath)
             if pf.isIttfDocument
-                return schemaModuleMap[pf.schema]
+                return artifactNameFromFileSchema(pf.schema)
             return undefined
     +
     const extSchemaMap
@@ -192,17 +175,22 @@ $group
                     :string
         =
             {
+                @ '.css' 'css'
+                @ '.graphql' 'graphql'
+                @ '.html' 'html'
+                @ '.ittf' 'ittf'
                 @ '.js' 'js'
+                @ '.json' 'json'
                 @ '.jsx' 'js'
+                @ '.md' 'md'
+                @ '.svg' 'svg'
+                @ '.text' 'text'
                 @ '.ts' 'ts'
                 @ '.tsx' 'ts'
-                @ '.html' 'html'
-                @ '.css' 'css'
-                @ '.svg' 'svg'
-                @ '.md' 'md'
+                @ '.vtt' 'vtt'
                 @ '.xml' 'xml'
-                @ '.json' 'json'
-                @ '.graphql' 'graphql'
+                @ '.yaml' 'yaml'
+                @ '.yml' 'yaml'
     +
     export
         function schemaFromExtension
@@ -273,3 +261,47 @@ $group
                     {
                         @ n schema
                         [ children
+
+    const extContentTypeMap
+        :{
+            :index
+                :string
+                param k
+                    :string
+        =
+            {
+                @ '.css' 'text/css'
+                @ '.gif' 'image/gif'
+                @ '.html' 'text/html'
+                @ '.ittf' 'text/plain'
+                @ '.jpeg' 'image/jpeg'
+                @ '.jpg' 'image/jpg'
+                @ '.js' 'text/javascript'
+                @ '.jsx' 'text/javascript'
+                @ '.json' 'application/json'
+                @ '.png' 'image/png'
+                @ '.scss' 'text/scss'
+                @ '.svg' 'image/svg+xml'
+                @ '.ts' 'text/typescript'
+                @ '.tsx' 'text/typescript'
+                @ '.ttf' 'application/x-font-ttf'
+                @ '.txt' 'text/plain'
+                @ '.vtt' 'text/vtt'
+                @ '.woff' 'application/x-font-woff'
+                @ '.xml' 'text/xml'
+                @ '.yaml' 'text/yanl'
+                @ '.yml' 'text/yanl'
+                
+    +
+    export
+        function contentTypeFor
+            param filePath
+                :string
+            :return
+                :union
+                    :string
+                    :undefined
+            const ittfSchema = schemaFromFilePath(filePath)
+            if ittfSchema
+                return extContentTypeMap['.' + ittfSchema]
+            return undefined

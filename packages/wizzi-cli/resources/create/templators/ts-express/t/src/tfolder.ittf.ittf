@@ -1,7 +1,21 @@
 $group
     
-    $$ Controllers
+    $$ Commons
+    $
+        var items = [
+            'a_cb',
+            'a_cb_throw',
+            'a_cb_no_err',
+            'a_reject',
+            'r_promise',
+            ];
 
+    $foreach item in items
+        $file __dot__wizzi/${pkgPath}src/t/${item}.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/tfolder/${item}.ts
+    
+    $$ Controllers
     $file __dot__wizzi/${pkgPath}src/t/controller.ittf.ittf
         ${"${'$'}"}group
             ${'$'}include wz/v08/ts/tfolder/controller.ts

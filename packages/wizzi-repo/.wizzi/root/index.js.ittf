@@ -78,9 +78,9 @@
 					r_cb_wz_err( InvalidArgument, createStoreFactory )
 						@ 'The parameter `options.storeBaseFolder` is required and must be a string. Received: ' + options.storeUri
 			elif storeKind == 'json'
-				if verify.isObject(options.storeJsonFsData) === false && verify.isObject(options.storeFsJson) === false
+				if verify.isObject(options.storeJsonFsData) === false && verify.isObject(options.storeJsonFs) === false
 					r_cb_wz_err( InvalidArgument, createStoreFactory )
-						@ 'The parameter `options.storeJsonFsData` or `options.storeFsJson`is required and must be an object.'
+						@ 'The parameter `options.storeJsonFsData` or `options.storeJsonFs`is required and must be an object.'
 			return
 				_ callback
 					@ null
@@ -102,7 +102,7 @@
 						@ storeUri options.storeUri
 						@ storeBaseFolder options.storeBaseFolder
 						@ storeJsonFsData options.storeJsonFsData
-						@ storeFsJson options.storeFsJson
+						@ storeJsonFs options.storeJsonFs
 					f_cb( notUsed )
 						return
 							_ callback
@@ -120,12 +120,13 @@
 			param fileService
             param options
             param callback
-            # loog 'wizzi-repo.folderFilesInfoByPath', folderPath
+            $$ loog 'wizzi-repo.folderFilesInfoByPath', folderPath
             set options = options || { deep: true }
             _ fileService.getFilesAsync
                 @ folderPath
                 @ options
                 f_cb( files )
+                    $$ loog 'wizzi-repo.folderFilesInfoByPath.result.getFilesAsync.files', files
                     var result = []
                     foreach f in files
                         _ result.push

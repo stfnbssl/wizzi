@@ -1,0 +1,16 @@
+template ts-client
+
+    $
+        // var pkgPath = cliCtx.useAzure ? 'Application/' : '';
+        var pkgPath = '';
+
+    $include ./root
+    $include ./models
+    $include ./src/index
+    $include ./src/widgets
+    $include ./tfolder/v08/index
+    $include ./tfolder/wfjobs
+    $include ./tfolder/commons
+    $include ./__generate
+    $include ./__wizzi.config    
+    $include ./__wizzi.override.config    

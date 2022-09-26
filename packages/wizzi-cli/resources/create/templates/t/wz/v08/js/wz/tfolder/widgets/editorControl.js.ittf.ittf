@@ -47,7 +47,7 @@ $group
 				=>
 					param value
 					if this.isSettingValue == false
-						# log 'editvaluechanged', this.key, value
+						$$ loog 'editvaluechanged', this.key, value
 						event_emit${'('} editvaluechanged
 							@ key this.key
 							@ value value
@@ -56,7 +56,7 @@ $group
 			event_on${'('} seteditvalue
 				var key = data.key
 				var value = data.value
-				# log 'seteditvalue', key, value
+				$$ loog 'seteditvalue', key, value
 				if key === this.key
 					set this.isSettingValue = true
 					_ this.value

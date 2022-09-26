@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\jsonDbStore.js.ittf
 */
 'use strict';
@@ -39,15 +39,15 @@ var JsonDbStore = (function () {
                 ));
             }
         }
-        if (verify.isNullOrUndefined(options.fsJson) === false) {
-            if (verify.isObject(options.fsJson) === false) {
+        if (verify.isNullOrUndefined(options.jsonFs) === false) {
+            if (verify.isObject(options.jsonFs) === false) {
                 return callback(error(
-                    'InvalidArgument', 'init', { parameter: 'options.fsJson', message: 'The options.fsJson parameter must be an object. Received: ' + options.fsJson }
+                    'InvalidArgument', 'init', { parameter: 'options.jsonFs', message: 'The options.jsonFs parameter must be an object. Received: ' + options.jsonFs }
                 ));
             }
         }
         var that = this;
-        if (!options.fsJson && options.jsonFsData) {
+        if (!options.jsonFs && options.jsonFsData) {
             this.fsimpl = new JsonFsImpl(options.jsonFsData);
             ;
         }
@@ -56,7 +56,7 @@ var JsonDbStore = (function () {
             ;
         }
         this.fsimpl.open({
-            fsJson: options.fsJson
+            jsonFs: options.jsonFs
          }, function(err, notUsed) {
             if (err) {
                 return callback(err);

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -85,7 +85,6 @@ var PluginsManager = (function () {
         // loog 'pluginsBaseFolder before', options.pluginsBaseFolder
         // loog '__dirname', __dirname
         var pluginsBaseFolder = options.pluginsBaseFolder || path.resolve(__dirname, '..', '..', '..');
-        console.log('pluginsBaseFolder', pluginsBaseFolder, __filename);
         var packagePathCache = this.packagePathCache;
         
         function resolveNext(i) {
@@ -750,7 +749,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.33.pluginsManager.' + method,
+        method: 'wizzi@0.7.34.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

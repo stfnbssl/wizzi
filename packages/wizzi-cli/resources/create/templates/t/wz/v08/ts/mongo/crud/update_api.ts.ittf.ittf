@@ -25,11 +25,12 @@ $group
                     :param
                         :ref CRUDResult
             +
-            _ console.log
-                @ myname
-                @ 'update${'$'}{md.Name}' 
-                ${'$'}foreach item in md.fields
-                    @ ${'$'}{item.name}
+            #
+                _ console.log
+                    @ myname
+                    @ 'update${'$'}{md.Name}' 
+                    ${'$'}foreach item in md.fields
+                        @ ${'$'}{item.name}
             +
             const ${'$'}{md.Name} = Get${'$'}{md.Name}Model()
             +
@@ -65,7 +66,7 @@ $group
                                 param result
                                     :any
                                 if err
-                                    log myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'error', err
+                                    error myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'error', err
                                     return reject(err)
                                 +
                                 $$ loog myname, 'update${'$'}{md.Name}', '${'$'}{md.Name}.findOneAndUpdate', 'result', result

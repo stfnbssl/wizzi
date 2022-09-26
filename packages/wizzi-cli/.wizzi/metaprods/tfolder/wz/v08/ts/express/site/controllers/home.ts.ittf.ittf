@@ -9,10 +9,7 @@ $group
 
     v08/ts/controller${'('}&ctrl)
        
-        _ this.router.get
-            `lit 
-                + /
-            @ this.home
+        v08/ts/route${'('} get, /, this.home )
 
         ${'$'}append handlers
 

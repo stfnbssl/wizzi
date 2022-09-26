@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\json\step_3.js.ittf
 */
 'use strict';
@@ -23,20 +23,22 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var vfile = require('wizzi-utils').vfile;
 var repoIndex = require('../../index');
 var json = require('../../lib/json/index');
+var JsonFsImpl = require('../../lib/json/jsonFsimpl');
 var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl');
 var FsMongo = require('../../lib/mongodb/fs/fsmongo');
 var Document = require('../../lib/mongodb/fs/document');
-function dump(fsJson) {
-    printValue('fsJson.items', fsJson.items)
-    printValue('fsJson.documents', fsJson.documents)
+function dump(jsonFs) {
+    printValue('jsonFs.items', jsonFs.items)
+    printValue('jsonFs.documents', jsonFs.documents)
 }
 var Json_Step_3 = function(step_callback) {
     heading1('EXAMPLE')
     heading1('start');
-    var fsJson = new json.FsJson();
-    var doc = new json.DocumentManager(fsJson);
+    var jsonFs = new json.JsonFs();
+    var doc = new json.DocumentManager(jsonFs);
     var baseFolder = 'c:/wz/users/docexample';
     var folder_1_path = path.join(baseFolder, 'folder1');
     var folder_1_sub_1_path = path.join(baseFolder, 'folder1', 'sub1');
@@ -330,7 +332,7 @@ var Json_Step_3 = function(step_callback) {
         })
     }
     function terminate() {
-        dump(fsJson)
+        dump(jsonFs)
     }
 };
 Json_Step_3.__name = 'Json_Step_3';

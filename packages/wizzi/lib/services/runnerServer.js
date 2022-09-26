@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\runnerServer.js.ittf
 */
 'use strict';
@@ -100,7 +100,7 @@ var RunnerServer = (function () {
             name: name, 
             options: options
          })
-        console.log(chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name), __filename);
+        console.log(chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name));
     }
     RunnerServer.prototype.getWizziFactory = function(name) {
         var i, i_items=this.wizziFactoryDatas, i_len=this.wizziFactoryDatas.length, wfData;
@@ -172,7 +172,7 @@ var RunnerServer = (function () {
                 return callback(err);
             }
             that.models[modelTicket] = wizziModel;
-            console.log(chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket), __filename);
+            console.log(chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket));
             return callback(null, wizziModel);
         })
     }
@@ -216,7 +216,7 @@ var RunnerServer = (function () {
                 return callback(err);
             }
             that.models[modelTicket] = transformedModel;
-            console.log(chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket), __filename);
+            console.log(chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket));
             return callback(null, wizziModel);
         })
     }
@@ -295,7 +295,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.33.runnerServer.' + method,
+        method: 'wizzi@0.7.34.runnerServer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

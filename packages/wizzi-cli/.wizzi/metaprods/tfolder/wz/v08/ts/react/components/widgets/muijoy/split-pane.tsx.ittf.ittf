@@ -1,0 +1,18 @@
+$group
+    import 
+        as React
+        from 'react'
+    import SplitPane from 'react-multi-split-pane'
+    +
+    export
+        function MuiSplitPane
+            param props
+            return
+                < SplitPane 
+                    @ split "vertical"
+                    @ minSize {50}
+                    div 
+                    < SplitPane 
+                        @ split "horizontal"
+                        div 
+                        div 

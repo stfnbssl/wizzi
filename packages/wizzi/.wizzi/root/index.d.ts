@@ -1,4 +1,4 @@
-import { JsonFsData, FsJson } from 'wizzi-repo';
+import { JsonFsData, JsonFs } from 'wizzi-repo';
 type cb<T> = (err: any, result: T) => void;
 
 type Readonly<P, T> = {
@@ -185,7 +185,7 @@ type RepositoryOptions = {
     storeKind: string;
     storeUri?: string;
     storeBaseFolder?: string;
-    storeFsJson?: FsJson;
+    storeJsonFs?: JsonFs;
 }
 
 /**
@@ -194,7 +194,7 @@ type RepositoryOptions = {
  */
  type JSONRepositoryOptions = {
     storeKind: string;
-    storeFsJson?: FsJson;
+    storeJsonFs?: JsonFs;
 }
 
 /**
@@ -233,7 +233,7 @@ type FactoryOptions = {
  * The JSON wizzi factory configuration object
  */
  type JSONFactoryOptions = {
-    fsJson: FsJson;
+    jsonFs: JsonFs;
     plugins: PluginsOptions;
     globalContext?: object;
     test?: FactoryTestOptions;

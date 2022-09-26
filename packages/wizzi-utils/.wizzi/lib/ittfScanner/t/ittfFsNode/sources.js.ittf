@@ -35,7 +35,7 @@
 		var r = this.root()
 		# cut '.ittf' from basename
 		var name = this.basename.substr(0, this.basename.length - 5)
-		# log r.jsCodeBasePath, this.parts.slice(1, this.parts.length -1).join('/'), name
+		$$ loog r.jsCodeBasePath, this.parts.slice(1, this.parts.length -1).join('/'), name
 		if this.schema == 'js'
 			return
 				_ file.read

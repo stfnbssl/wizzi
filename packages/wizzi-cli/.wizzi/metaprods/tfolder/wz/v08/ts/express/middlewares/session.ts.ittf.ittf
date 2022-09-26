@@ -24,7 +24,7 @@ $group
                     => 
                         param app
                             :ref Application
-                        log "SessionMiddleware process.env.NODE_ENV: " + process.env.NODE_ENV
+                        info "SessionMiddleware process.env.NODE_ENV: " + process.env.NODE_ENV
                         const cookieOptions
                             :ref CookieOptions
                             =
@@ -77,9 +77,9 @@ $group
                             _ app.set('trust proxy', 1)
                         _ app.use(session(sessionOptions))
                         ${'$'}if wzCtx.Build.useMongoDb && wzCtx.Build.express.useSessionStore
-                            log "SessionMiddleware installed, using MongoStore", connectUrl
-                            log "SessionMiddleware installed, mongoose.connection.getClient() was", mongoose.connection.getClient()
+                            info "SessionMiddleware installed, using MongoStore", connectUrl
+                            info "SessionMiddleware installed, mongoose.connection.getClient() was", mongoose.connection.getClient()
                         ${'$'}else
-                            log "SessionMiddleware installed"
+                            info "SessionMiddleware installed"
     ${'$'}else
         # <--wizzi!file!exclude-->

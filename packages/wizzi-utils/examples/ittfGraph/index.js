@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\ittfGraph\index.js.ittf
 */
 'use strict';
@@ -19,13 +19,13 @@ var fsfile = vfile();
 // utilities
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var vfile = require('../../lib/fs/vfile');
-var uriParser = require('../../lib/fs/uriParser');
-var fsUtils = require('../../lib/fs/utils');
+var vfile = require('../../lib/fSystem/vfile');
+var uriParser = require('../../lib/fSystem/uriParser');
+var fsUtils = require('../../lib/fSystem/utils');
 var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph');
 var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
 var ittfScanner = require('../../lib/ittfScanner/index');
-var fs = require('../../lib/fs/index');
+var fs = require('../../lib/fSystem/index');
 var ittfGraph = require('../../lib/ittfGraph/index');
 var ittfGraph_Step_1 = function(step_callback) {
     heading1('EXAMPLE')

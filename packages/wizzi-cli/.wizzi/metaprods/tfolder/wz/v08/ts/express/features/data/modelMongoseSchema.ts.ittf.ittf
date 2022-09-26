@@ -90,6 +90,9 @@ $group
             { 
                 @ buildModel
                     => 
+                        param options
+                            :any
+                            :optional
                         set ${'$'}{schema.name}Model
                             _ mongoose.model
                                 :param 
@@ -97,3 +100,8 @@ $group
                                 @ '${'$'}{schema.Name}'
                                 @ ${'$'}{schema.Name}
                         return ${'$'}{schema.name}Model
+                @ applyExtraSetup
+                    =>
+                        param options
+                            :any
+                            :optional

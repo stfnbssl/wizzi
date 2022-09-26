@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.10
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -48,23 +48,24 @@ var FactoryPlugin = (function () {
     }
     //
     FactoryPlugin.prototype.getModelFactory = function(schemaName) {
-        var factory = this.modelFactories[schemaName] || null;
+        var trueSchemaName = getTrueSchemaName(schemaName);
+        var factory = this.modelFactories[trueSchemaName] || null;
         if (factory == null) {
             if (typeof window !== 'undefined') {
-                factory = window_modelFactories[schemaName];
+                factory = window_modelFactories[trueSchemaName];
             }
             else {
-                var modulePath = path.resolve(__dirname, './lib/wizzi/models/' + schemaName + '-factory.g.js');
+                var modulePath = path.resolve(__dirname, './lib/wizzi/models/' + trueSchemaName + '-factory.g.js');
                 if (this.file.exists(modulePath)) {
                     try {
-                        factory = require('./lib/wizzi/models/' + schemaName + '-factory.g');
+                        factory = require('./lib/wizzi/models/' + trueSchemaName + '-factory.g');
                     } 
                     catch (ex) {
                         return error('WizziPluginError', 'Error loading wizzi model factory: ' + modulePath + ', in plugin: ' + this.getFilename() + ', err: ' + ex.message + ', stack: ' + ex.stack);
                     } 
                 }
             }
-            this.modelFactories[schemaName] = factory;
+            this.modelFactories[trueSchemaName] = factory;
         }
         return factory;
     }
@@ -140,6 +141,16 @@ var FactoryPlugin = (function () {
 })();
 
 
+function getTrueSchemaName(schemaOrAlias) {
+    if (schemaOrAlias == 'jsx') {
+        return 'js';
+    }
+    if (schemaOrAlias == 'tsx') {
+        return 'ts';
+    }
+    return schemaOrAlias;
+}
+
 function error(code, message) {
     return {
             __is_error: true, 
@@ -153,7 +164,9 @@ module.exports = {
     provides: {
         schemas: [
             'js', 
-            'ts'
+            'jsx', 
+            'ts', 
+            'tsx'
         ], 
         modelTransformers: [], 
         artifactGenerators: [

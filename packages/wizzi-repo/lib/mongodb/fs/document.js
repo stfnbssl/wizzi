@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\fs\document.js.ittf
 */
 'use strict';
@@ -965,38 +965,29 @@ var Document = (function () {
                 ));
             }
         }
-        // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.init', filePath
         filePath = normalize(filePath);
-        // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.normalized', filePath
         var that = this;
         this.fsCommon.getItemByPath(filePath, function(err, fsitem) {
             if (err) {
                 return callback(err);
             }
-            
-            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.1.exists, so update', filePath
             if (fsitem != null) {
                 return that._updateFile(fsitem._id, content, callback);
             }
-            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.2.not exists. try get dirname', dirname
             else {
                 var dirname = path.dirname(filePath);
                 that.fsCommon.getItemByPath(dirname, function(err, fsitem) {
                     if (err) {
                         return callback(err);
                     }
-                    
-                    // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
                     if (fsitem != null) {
                         return that._createFile(fsitem._id, dirname, path.basename(filePath), content, callback);
                     }
-                    // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
                     else {
                         that.createFolder(dirname, function(err, fsitem) {
                             if (err) {
                                 return callback(err);
                             }
-                            // loog 'wizzi-repo.fs.mongodb.document.writeFile.writeFile.5.dirname created. so create file', fsitem.item._id, dirname, path.basename(filePath)
                             return that._createFile(fsitem.item._id, dirname, path.basename(filePath), content, callback);
                         })
                     }
@@ -1038,7 +1029,7 @@ var Document = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // loog 'fsJson.readFile not found', JSON.stringify(json, null, 4)
+                    // loog 'jsonFs.readFile not found', JSON.stringify(json, null, 4)
                     return callback(error('MongoFSRepoError', 'readFile', 'Document read file error. Not found: ' + filePath));
                 })
             }

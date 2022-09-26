@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\vfile.js.ittf
 */
 'use strict';
@@ -1634,7 +1634,6 @@ var VFile = (function () {
                                     file = file.replace(removeRoot[i], '');
                                 }
                             }
-                            // log unixifyPath(file), removeRoot
                             else {
                                 file = unixifyPath(file).replace(unixifyPath(removeRoot), '')
                                 ;
@@ -1687,7 +1686,6 @@ var VFile = (function () {
                                 file = file.replace(removeRoot[i], '');
                             }
                         }
-                        // log unixifyPath(file), removeRoot
                         else {
                             file = unixifyPath(file).replace(unixifyPath(removeRoot), '')
                             ;

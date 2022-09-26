@@ -1,6 +1,6 @@
 {
     "name": "wizzi-core",
-    "version": "0.7.7",
+    "version": "0.7.8",
     "title": "A Wizzi Plugin with core schemas and artifact generators. This plugin is integrated in the Wizzi API.",
     "license": "MIT",
     "schemas": [

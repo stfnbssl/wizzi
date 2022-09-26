@@ -17,10 +17,10 @@ $group
                     from '../../features/config'
                 const myname = 'site.controllers.auth'
         
-        _ this.router.get('/login', this.login)
-        _ this.router.get('/login/github', this.loginGithub)
-        _ this.router.get('/login/google', this.loginGoogle)
-        _ this.router.get('/logout', this.logout)
+        v08/ts/route${'('} get, /login, this.login)
+        v08/ts/route${'('} get, /login/github, this.loginGithub)
+        v08/ts/route${'('} get, /login/google, this.loginGoogle)
+        v08/ts/route${'('} get, /logout, this.logout)
         
         ${'$'}append handlers
 

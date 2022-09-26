@@ -1,13 +1,12 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\uriParser.js.ittf
 */
 'use strict';
 var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var url = require('url');
-// var verify = require('../helpers/verify')
 //
 module.exports = function parse(uri, callback) {
     if (verify.isNotEmpty(uri) === false) {
@@ -31,8 +30,6 @@ module.exports = function parse(uri, callback) {
     // hostname is part of path
     ret.pathname = parsedUri.hostname && parsedUri.hostname.length > 0 ? pathname && pathname.length > 0 ? parsedUri.hostname + '/' + pathname : parsedUri.hostname : pathname || '';
     // loog 'ret.pathname', parsedUri.hostname, pathname, ret.pathname
-    if (typeof(parsedUri.protocol) !== 'string') {
-    }
     var protocol = parsedUri.protocol && parsedUri.protocol.substr(-1, 1) === ':' ? parsedUri.protocol.substr(0, (parsedUri.protocol.length - 1)) : parsedUri.protocol;
     ;
     // loog 'parsed.protocol', protocol

@@ -3,7 +3,7 @@
 
 	class Animal
 		m sayHello
-			log this.cry, ', I am ', this.name
+			info this.cry, ', I am ', this.name
 
 	class Horse
 		super Animal

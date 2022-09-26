@@ -95,7 +95,7 @@ $group
                                 else
                                     throw new Error('Invalid result: ' + result)
                             else
-                                # log 'wz.genFromText.result', result
+                                $$ loog 'wz.genFromText.result', result
                                 _ callback
                                     @ null
                                     @ result.generatedArtifact.artifactContent

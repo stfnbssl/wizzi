@@ -4,7 +4,7 @@
 
 		it-async should insert a root folder
 
-			_ fsJson.insertItem
+			_ jsonFs.insertItem
 				{
 					@ parentId null
 					@ basename 'c:'
@@ -20,7 +20,7 @@
 					_ done
 
 		it-async should get an existing item
-			_ fsJson.getItem
+			_ jsonFs.getItem
 				{
 					@ parentId null
 					@ basename 'c:'
@@ -33,7 +33,7 @@
 
 		it-async should say the item already exists
 
-			_ fsJson.insertItem
+			_ jsonFs.insertItem
 				{
 					@ parentId null
 					@ basename 'c:'
@@ -47,12 +47,12 @@
 					_ done
 
 		it-async should insert a root child
-			_ fsJson.getItem
+			_ jsonFs.getItem
 				{
 					@ parentId null
 					@ basename 'c:'
 				f_cb_test( r )
-					_ fsJson.insertItem
+					_ jsonFs.insertItem
 						{
 							@ parentId r.parentId
 							@ basename 'hello.txt'

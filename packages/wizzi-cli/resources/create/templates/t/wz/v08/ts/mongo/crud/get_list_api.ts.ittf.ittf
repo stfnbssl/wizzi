@@ -13,11 +13,12 @@ $group
                         :ref CRUDResult
             set options = options || {}
             +
-            _ console.log
-                @ myname
-                @ 'getList${'$'}{md.Name}' 
-                @ 'options'
-                @ options
+            #
+                _ console.log
+                    @ myname
+                    @ 'getList${'$'}{md.Name}' 
+                    @ 'options'
+                    @ options
             +
             
             const ${'$'}{md.Name} = Get${'$'}{md.Name}Model()
@@ -40,7 +41,7 @@ $group
                                 param result
                                     :any
                                 if err
-                                    log myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
+                                    error myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
                                 $$ loog myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
                                 const resultItem = []

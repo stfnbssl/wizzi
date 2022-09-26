@@ -4,7 +4,7 @@
 
 		it-async should delete a root child
 
-			_ fsJson.deleteItem
+			_ jsonFs.deleteItem
 				@ hellotxt_item._id
 				f_cb_test( r )
 					# loog 'deletedItem.r', err, r

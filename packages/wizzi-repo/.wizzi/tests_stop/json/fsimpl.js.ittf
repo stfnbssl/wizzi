@@ -3,9 +3,9 @@
 	$append imports
 		var
 			decl JsonFsImpl = require('../../../lib/json/jsonFsimpl')
-			decl FsJson = require('../../../lib/json/fs/fsjson')
+			decl JsonFs = require('../../../lib/json/fs/fsjson')
 			decl Document = require('../../../lib/json/fs/document')
-			decl fsJson
+			decl jsonFs
 			decl doc
 	
 	var fsimpl

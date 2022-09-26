@@ -46,9 +46,9 @@
 			optional
 		callback
 
-		# loog 'wizzi-repo.${source}.document.writeFile.writeFile.init', filePath
+		$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.init', filePath
 		set filePath = normalize(filePath)
-		# loog 'wizzi-repo.${source}.document.writeFile.writeFile.normalized', filePath
+		$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.normalized', filePath
 		
 		var that = this
 
@@ -56,7 +56,7 @@
 			@ filePath
 			f_cb( fsitem )
 				if fsitem != null
-					# loog 'wizzi-repo.${source}.document.writeFile.writeFile.1.exists, so update', filePath
+					$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.1.exists, so update', filePath
 					return
 						_ that._updateFile
 							@ fsitem._id
@@ -64,12 +64,12 @@
 							@ callback
 				else
 					var dirname = path.dirname(filePath)
-					# loog 'wizzi-repo.${source}.document.writeFile.writeFile.2.not exists. try get dirname', dirname
+					$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.2.not exists. try get dirname', dirname
 					_ that.fsCommon.getItemByPath
 						@ dirname
 						f_cb( fsitem )
 							if fsitem != null
-								# loog 'wizzi-repo.${source}.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
+								$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.3. dirname exists create file', fsitem._id, dirname, path.basename(filePath)
 								return
 									_ that._createFile
 										@ fsitem._id
@@ -78,11 +78,11 @@
 										@ content
 										@ callback
 							else
-								# loog 'wizzi-repo.${source}.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
+								$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.4.dirname not exists.create dirname', dirname
 								_ that.createFolder
 									@ dirname
 									f_cb( fsitem )
-										# loog 'wizzi-repo.${source}.document.writeFile.writeFile.5.dirname created. so create file', fsitem.item._id, dirname, path.basename(filePath)
+										$$ loog 'wizzi-repo.${source}.document.writeFile.writeFile.5.dirname created. so create file', fsitem.item._id, dirname, path.basename(filePath)
 										return
 											_ that._createFile
 												@ fsitem.item._id

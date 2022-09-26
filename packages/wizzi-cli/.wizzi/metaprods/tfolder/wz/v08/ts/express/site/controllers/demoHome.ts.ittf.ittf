@@ -17,7 +17,7 @@ $group
         ${'$'}append handlers
 
             v08/ts/handler${'('} home )
-                log 'Demo Home controller. Received request'
+                $$ loog 'Demo Home controller. Received request'
                 ${'$'}if wzCtx.Build.useWizzi
                     _ response.render
                         @ 'demoHome/index.html.ittf'

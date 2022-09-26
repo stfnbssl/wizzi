@@ -5,7 +5,7 @@
 		it-async should write a document content
 
 			set hellotxt_item.basename = 'hello2.txt'
-			_ fsJson.writeFile
+			_ jsonFs.writeFile
 				@ hellotxt_item._id
 				@ 'hello world'
 				f_cb_test( r )

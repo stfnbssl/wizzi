@@ -50,6 +50,14 @@ else if (cmd == 'ts-express-wizzi-heroku') {
         destPath: 'C:/My/wizzi/stfnbssl/wizzi-heroku'
      })
 }
+else if (cmd == 'ts-client-webpack-react') {
+    createEx({
+        templateGroup: 'ts-client', 
+        template: 'webpack-react', 
+        pkgName: 'lab.webpack.react', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
+     })
+}
 else if (cmd == 'js-express') {
     create({
         template: 'js/express', 

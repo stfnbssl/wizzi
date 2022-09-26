@@ -1,0 +1,16 @@
+﻿$group
+	${'$'}params result|notUsed, typen|@@null, typev|@@null, message|@@null, isObject|false
+
+    ._ then
+        =>
+            param ${'$'}{result}
+                ${'$'}if typen != null
+                    ${'$'}{typen} ${'$'}{typev!=null ? typev : ''}
+                ${'$'}else
+                    :any
+            ${'$'}if isObject
+                log myname, '${'$'}{message}', Object.keys(${'$'}{result})
+            ${'$'}else
+                log myname, '${'$'}{message}', ${'$'}{result}
+            ${'$'}hook
+    v08/ts/catch_reject( ${'$'}{message} )

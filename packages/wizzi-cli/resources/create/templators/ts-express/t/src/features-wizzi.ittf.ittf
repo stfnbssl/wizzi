@@ -3,25 +3,15 @@ $group
     $if cliCtx.useWizzi
         $file __dot__wizzi/${pkgPath}src/features/wizzi/index.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/index${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/features/wizzi/index.ts
+        
         $file __dot__wizzi/${pkgPath}src/features/wizzi/factory.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/factory${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/features/wizzi/factory.ts
+        
         $file __dot__wizzi/${pkgPath}src/features/wizzi/maps.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/maps${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/features/wizzi/maps.ts
 
         $file __dot__wizzi/${pkgPath}src/features/wizzi/productions.ts.ittf.ittf
             module
@@ -31,6 +21,10 @@ $group
             ${"${'$'}"}group
                 ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/executeJob.ts
             
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/metaGenerate.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/metaGenerate.ts
+
         $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/generateFolderArtifacts.ts.ittf.ittf
             ${"${'$'}"}group
                 ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/generateFolderArtifacts.ts
@@ -77,26 +71,16 @@ $group
 
         $file __dot__wizzi/${pkgPath}src/features/wizzi/types.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/types${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/features/wizzi/types.ts
+        
         $file __dot__wizzi/${pkgPath}src/features/wizzi/api/context.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/api/context${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/features/wizzi/api/context.ts
+        
         $file __dot__wizzi/${pkgPath}src/features/wizzi/controllers/production.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-            
-                v08/express/features/wizzi/controllers/production${'$'}{'('}&md)
-
+                ${'$'}include wz/v08/ts/express/features/wizzi/controllers/production.ts
+    
     $if cliCtx.useWizziDocs
          $file __dot__wizzi/${pkgPath}src/features/docs/index.ts.ittf.ittf
             module

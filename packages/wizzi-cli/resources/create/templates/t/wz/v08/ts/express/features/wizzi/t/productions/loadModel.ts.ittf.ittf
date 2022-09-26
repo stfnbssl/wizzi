@@ -37,7 +37,7 @@ $group
                                         :string
                             set jsonwf =
                                 await
-                                    _ createFsJsonAndFactory(files)
+                                    _ createJsonFsAndFactory(files)
                             _ jsonwf.wf.loadModel
                                 @ ittfDocumentUri
                                 {

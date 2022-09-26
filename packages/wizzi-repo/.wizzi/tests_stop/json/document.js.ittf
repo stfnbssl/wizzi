@@ -3,7 +3,7 @@
 	$append imports
 		var 
 			decl assert = require('assert')
-			decl FsJson = require('../../../lib/json/fs/fsjson')
+			decl JsonFs = require('../../../lib/json/fs/fsjson')
 			decl Document = require('../../../lib/json/fs/document')
 
 	var FSITEMS = 'fsitems'

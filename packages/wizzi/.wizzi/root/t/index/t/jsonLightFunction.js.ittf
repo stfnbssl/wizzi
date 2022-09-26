@@ -69,11 +69,11 @@
 						@ path tempIttfUri
 						@ content ittfContent
 
-			_ md.JsonComponents.createFsJson
+			_ md.JsonComponents.createJsonFs
 				@ documents
-				f_cb( fsJson )
+				f_cb( jsonFs )
 
-					set options.fsJson = fsJson
+					set options.jsonFs = jsonFs
 					_ md.createJsonFactoryLight
 						@ options
 						f_cb(wf)

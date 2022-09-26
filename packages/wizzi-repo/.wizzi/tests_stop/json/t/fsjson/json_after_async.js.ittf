@@ -7,7 +7,7 @@
 					_ JSON.stringify(json, null, 2)
 				_ done
 	else
-		_ fsJson.toJson
+		_ jsonFs.toJson
 			f_cb_test( json )
 				_ console.log
 					_ JSON.stringify(json, null, 2)

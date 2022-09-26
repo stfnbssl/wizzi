@@ -60,11 +60,12 @@
                     @ filename '${'$'}{wzCtx.Build.webpack.html.filename}'
                 ${'$'}else
                     @ filename './index.html'
+                @ hash true
     ---
     ${'$'}if wzCtx.Build.useVue
 		new VueLoaderPlugin()
     ---
-	${'$'}if wzCtx.Build.useHotReplacement
+	${'$'}if wzCtx.Build.webpack.useHotReplacement
 		new webpack.HotModuleReplacementPlugin()
     ---
     ${'$'}if wzCtx.Build.webpack.useCopy

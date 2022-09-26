@@ -77,7 +77,7 @@
 				_ this.storeImpl.init
 					{
 						@ jsonFsData storeInfo.storeJsonFsData
-						@ fsJson storeInfo.storeFsJson
+						@ jsonFs storeInfo.storeJsonFs
 					f_cb( notUsed )
 						set that.storeKind = that.storeImpl.storeKind
 						return

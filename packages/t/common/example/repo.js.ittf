@@ -13,21 +13,27 @@ $group
     
     var createStoreFactory = require('wizzi-repo').createStoreFactory
     
+    var vfile = require('wizzi-utils').vfile
+	
+
     $if opt.folderLevel == 1
         var repoIndex = require('../index')
         var json = require('../lib/json/index')
+        var JsonFsImpl = require('../lib/json/jsonFsimpl')
         var MongoFsImpl = require('../lib/mongodb/mongoFsimpl')
         var FsMongo = require('../lib/mongodb/fs/fsmongo')
         var Document = require('../lib/mongodb/fs/document')
     $elif opt.folderLevel == 2
         var repoIndex = require('../../index')
         var json = require('../../lib/json/index')
+        var JsonFsImpl = require('../../lib/json/jsonFsimpl')
         var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl')
         var FsMongo = require('../../lib/mongodb/fs/fsmongo')
         var Document = require('../../lib/mongodb/fs/document')
     $elif opt.folderLevel == 3
         var repoIndex = require('../../../index')
         var json = require('../../../lib/json/index')
+        var JsonFsImpl = require('../../../lib/json/jsonFsimpl')
         var MongoFsImpl = require('../../../lib/mongodb/mongoFsimpl')
         var FsMongo = require('../../../lib/mongodb/fs/fsmongo')
         var Document = require('../../../lib/mongodb/fs/document')

@@ -42,7 +42,7 @@
 	function preprocessNode
 		param node
 		param state
-		if node.n === 'p' && state.parent.n === 'class'
+		if state.parent && (node.n === 'p' && state.parent.n === 'class')
 			# do nothing
 		elif state.svgOn && svg_supported_attrs.indexOf(node.n) > -1
 			var name = svg_supported_attrs_map[node.n] || node.n

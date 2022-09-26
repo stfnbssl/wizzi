@@ -2,7 +2,4 @@ $group
     $if cliCtx.useMongoDb
         $file __dot__wizzi/${pkgPath}src/services/mongodb.ts.ittf.ittf
             module
-                ${"${'$'}"}
-                    var md = {
-                    }
-                v08/express/services/mongodb${'$'}{'('}&md)
+                ${'$'}include wz/v08/ts/express/services/mongodb.ts

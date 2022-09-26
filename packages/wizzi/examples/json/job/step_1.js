@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\json\job\step_1.js.ittf
 */
 'use strict';
@@ -22,8 +22,10 @@ var mocks = wizziUtils.mocks;
 var async = require('async');
 var pluginsBaseFolder = null;
 var wizziIndex = require('../../../index');
-pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..', '..')
+pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
+const packiFilePrefix = 'json:/';
+const packiFilePrefixExtract = 'json:/';
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
@@ -31,6 +33,72 @@ function createWizziFactory(globalContext, callback) {
          }, 
         globalContext: globalContext || {}
      }, callback)
+}
+function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
+    const jsonDocuments = [];
+    console.log('createJsonWizziFactoryAndJsonFs', __filename);
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
+            const filePath = ensurePackiFilePrefix(value);
+            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        printValue('createJsonWizziFactoryAndJsonFs.jsonFs', stringify(jsonFs, null, 2))
+        wizziIndex.jsonFactory({
+            jsonFs: jsonFs, 
+            plugins: {
+                
+             }
+         }, (err, wf) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                wf: wf, 
+                jsonFs: jsonFs
+             })
+        }
+        )
+    }
+    )
+}
+
+function createJsonFs(packiFiles, callback) {
+    const jsonDocuments = [];
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE') {
+            const filePath = ensurePackiFilePrefix(value);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, result) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        callback(null, result);
+    }
+    )
+}
+function ensurePackiFilePrefix(filePath) {
+    return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
 }
 var json_job_step_1 = function(step_callback) {
     heading1('EXAMPLE')
@@ -40,7 +108,7 @@ var json_job_step_1 = function(step_callback) {
     var jsContent = [
         'module', 
         '    kind es6', 
-        '    log "Hello"'
+        '    info "Hello"'
     ].join('\n');
     
     var wfjobContent = [
@@ -73,14 +141,14 @@ var json_job_step_1 = function(step_callback) {
          }
     ];
     
-    wizziIndex.JsonComponents.createFsJson(documents, function(err, fsJson) {
+    wizziIndex.JsonComponents.createJsonFs(documents, function(err, jsonFs) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
         var options = {
-            fsJson: fsJson, 
+            jsonFs: jsonFs, 
             plugins: {
                 items: [
                     'wizzi-js', 
@@ -111,11 +179,11 @@ var json_job_step_1 = function(step_callback) {
                     throw (err);
                 }
                 printObject('job.result', result)
-                printObject('job.fsJson', fsJson)
+                printObject('job.jsonFs', jsonFs)
                 // loog 'job.result', Object.keys(result)
-                // loog 'job.fsJson', Object.keys(fsJson)
+                // loog 'job.jsonFs', Object.keys(jsonFs)
                 var files = {};
-                fsJson.toFiles({
+                jsonFs.toFiles({
                     removeRoot: packiFilePrefix
                  }, (err, result) => {
                 

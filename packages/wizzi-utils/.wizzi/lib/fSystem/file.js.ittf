@@ -455,7 +455,7 @@
 											for var i in removeRoot
 												set file = file.replace(removeRoot[i], '')
 										else 
-											# log md.unixifyPath(file), removeRoot
+											$$ loog md.unixifyPath(file), removeRoot
 											set file
 												_ md.unixifyPath
 													@ file

@@ -1,6 +1,6 @@
 {
     "name": "@wizzi/web",
-    "version": "0.7.14",
+    "version": "0.7.16",
     "title": "A Wizzi Core Plugin for html css svg markdown, graphql, vtt and vue artifact generations.",
     "license": "MIT",
     "schemas": [

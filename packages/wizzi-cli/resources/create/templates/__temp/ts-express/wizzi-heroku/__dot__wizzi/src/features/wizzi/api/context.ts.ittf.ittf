@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/features/wizzi/api/context${'('}&md) 
+   $include wz/v08/ts/express/features/wizzi/api/context.ts

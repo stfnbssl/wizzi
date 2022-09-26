@@ -31,7 +31,7 @@ $group
                                 ._ then
                                     =>
                                         param model
-                                        # log 'loadJsonIttfModel', model
+                                        $$ loog 'loadJsonIttfModel', model
                                         _ resolve
                                             @ model
                                 ._ catch

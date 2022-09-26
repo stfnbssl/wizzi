@@ -12,7 +12,7 @@ $group
                 :return
                     :ref Promise
                         :param
-                            :ref FsJson
+                            :ref JsonFs
                 return
                     new Promise
                         async=>
@@ -28,7 +28,7 @@ $group
                             set wfjobFilePath = ensurePackiFilePrefix(wfjobFilePath)
                             const jsonwf
                                 await
-                                    _ createFsJsonAndFactory(packiFiles)
+                                    _ createJsonFsAndFactory(packiFiles)
                             _ jsonwf.wf.executeJob
                                 {
                                     @ name ''
@@ -41,7 +41,7 @@ $group
                                     if err
                                         return reject(err)
                                     $$ loog 'Job executed. result', result
-                                    _ resolve(jsonwf.fsJson)
+                                    _ resolve(jsonwf.jsonFs)
         +
         export
             async-function executeJobs
@@ -52,7 +52,7 @@ $group
                 :return
                     :ref Promise
                         :param
-                            :ref FsJson
+                            :ref JsonFs
                 return
                     new Promise
                         async=>
@@ -66,7 +66,7 @@ $group
                             $$ loog 'Executing jobs', wfjobFilePaths, 'packiFiles', Object.keys(packiFiles)
                             const jsonwf
                                 await
-                                    _ createFsJsonAndFactory(packiFiles)
+                                    _ createJsonFsAndFactory(packiFiles)
                             const execJob
                                 =>
                                     param index
@@ -75,7 +75,7 @@ $group
                                         :void
                                     if index == wfjobFilePaths.length
                                         $$ loog 'Jobs executed.'
-                                        return resolve(jsonwf.fsJson)
+                                        return resolve(jsonwf.jsonFs)
                                     const wfjobFilePath = ensurePackiFilePrefix(wfjobFilePaths[index])
                                     $$ loog 'Executing job', wfjobFilePath
                                     _ jsonwf.wf.executeJob

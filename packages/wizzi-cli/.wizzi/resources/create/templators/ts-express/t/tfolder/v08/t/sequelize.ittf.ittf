@@ -1,0 +1,17 @@
+$group
+    $if cliCtx.useSequelize
+        $file __dot__wizzi/t/v08/sequelize/attributes.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/sequelize/tfolder/attributes.ts
+        $file __dot__wizzi/t/v08/sequelize/model.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/sequelize/tfolder/model.ts
+        $file __dot__wizzi/t/v08/sequelize/modelBuilder.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/sequelize/tfolder/modelBuilder.ts
+        $file __dot__wizzi/t/v08/sequelize/modelTypes.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/sequelize/tfolder/modelTypes.ts
+        $file __dot__wizzi/t/v08/sequelize/modelController.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/sequelize/tfolder/modelController.ts                

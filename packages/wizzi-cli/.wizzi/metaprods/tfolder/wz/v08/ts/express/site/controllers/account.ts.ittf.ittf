@@ -4,7 +4,8 @@ $group
         var ctrl = {
             name: 'Account',
             path: '/account',
-            kind: 'site'
+            kind: 'site',
+            webSecured: true
         }
 
     v08/ts/controller${'('} &ctrl )
@@ -19,9 +20,9 @@ $group
 
                 const myname = 'site.controllers.account'
         
-        _ this.router.get('/profile', this.profile)
-        _ this.router.get('/profile/github', this.profileGithub)
-        _ this.router.get('/profile/google', this.profileGoogle)
+        v08/ts/route_web_secured${'('} get, /profile, this.profile)
+        v08/ts/route${'('} get, /profile/github, this.profileGithub)
+        v08/ts/route${'('} get, /profile/google, this.profileGoogle)
         
         ${'$'}append handlers
 
@@ -62,8 +63,8 @@ $group
                 *$          
 
             v08/ts/handler${'('} profileGithub )
-                log myname, 'profileGithub', (request as any).session.github_access_token
-                log myname, 'profileGithub', (request as any).session
+                $$ loog myname, 'profileGithub', (request as any).session.github_access_token
+                $$ loog myname, 'profileGithub', (request as any).session
                 _ axios
                     {
                         @ method 'get'
@@ -74,7 +75,7 @@ $group
                         =>
                             param githubResult
                                 :any
-                            log myname, 'profileGithub', 'githubResult.data', githubResult.data
+                            $$ loog myname, 'profileGithub', 'githubResult.data', githubResult.data
                             if githubResult.data.email == null
                                 _ response.render
                                     @ 'account/error-github-email-private.html.ittf'
@@ -88,7 +89,7 @@ $group
                                         =>
                                             param wizziresult
                                                 :any
-                                            log myname, 'profileGithub', 'getUserByEmail', 'wizziresult', wizziresult
+                                            $$ loog myname, 'profileGithub', 'getUserByEmail', 'wizziresult', wizziresult
                                             if wizziresult.found
                                                 set (request as any).session.user = wizziresult.user
                                                 _ response.redirect('/account/profile')

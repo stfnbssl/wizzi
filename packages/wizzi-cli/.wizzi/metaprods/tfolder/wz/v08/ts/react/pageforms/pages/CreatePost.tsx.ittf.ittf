@@ -46,7 +46,7 @@ $group
                 :ref React.ChangeEvent
                     :param 
                         :ref HTMLInputElement
-            log 'handlePostNameChange', ev.target.type, ev.target.checked, ev.target.value
+            $$ loog 'handlePostNameChange', ev.target.type, ev.target.checked, ev.target.value
             _ this.setState
                 { 
                     @ post_name ev.target.value
@@ -58,15 +58,15 @@ $group
                     :param 
                         :ref HTMLElement
             
-            log 'handleSubmitCreate', this.state.post_name_available
+            $$ loog 'handleSubmitCreate', this.state.post_name_available
             if !this.state.post_name_available
                 _ ev.preventDefault();
                 # _ this.formRef.dispatchEvent(new Event('submit'))
-                log 'handleSubmitCreate not dispatched'
+                $$ loog 'handleSubmitCreate not dispatched'
 
         +
         m render
-            log 'CreatePost.render', 'state', this.state
+            $$ loog 'CreatePost.render', 'state', this.state
             return
                 < FormContainer
                     < FormTitle

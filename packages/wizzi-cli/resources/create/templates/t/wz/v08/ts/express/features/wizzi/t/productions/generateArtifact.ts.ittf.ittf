@@ -55,7 +55,7 @@ $group
                                 try 
                                     set jsonwf =
                                         await 
-                                            _ createFsJsonAndFactory(files)
+                                            _ createJsonFsAndFactory(files)
                                     set generationContext =
                                         _ Object.assign
                                             @ context || {}

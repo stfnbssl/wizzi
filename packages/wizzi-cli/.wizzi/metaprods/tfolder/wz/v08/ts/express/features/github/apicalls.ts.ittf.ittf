@@ -491,7 +491,6 @@ $group
                                                 { author
                                                     @ name 'packi'
                                                     @ email 'packi@gmail.com'
-                                log msg
                                 await 
                                     _ printStatus(dir)
                                     # let msg = await git.listFiles({fs, dir});
@@ -522,7 +521,7 @@ $group
                                                                 # username: 'stfnbssl',
                                                                 # password: 'gi++++01',
 
-                                log pushResponse
+                                $$ loog pushResponse
                             catch ex
                                 error 'updateBranch.push. err', ex
                         #

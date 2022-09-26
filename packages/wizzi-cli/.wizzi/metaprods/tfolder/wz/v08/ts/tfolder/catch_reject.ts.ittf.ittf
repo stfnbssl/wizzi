@@ -5,5 +5,5 @@ $group
         => 
             param err
                 :any
-            log '${'$'}{method}.error', err
+            error '${'$'}{method}.error', err
             return reject(err)

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\fs\fsjson.js.ittf
 */
 'use strict';
@@ -16,32 +16,32 @@ var util = require('util');
 var verify = require('wizzi-utils').verify;
 var Collection = require('../../utils/collection');
 //
-var FsJson = (function () {
-    function FsJson(fsJsonData) {
-        _classCallCheck(this, FsJson);
-        this.classType = 'wizzi-repo.json.FsJson';
-        if (verify.isObject(fsJsonData)) {
-            if (verify.isArray(fsJsonData.items) === false) {
+var JsonFs = (function () {
+    function JsonFs(jsonFsData) {
+        _classCallCheck(this, JsonFs);
+        this.classType = 'wizzi-repo.json.JsonFs';
+        if (verify.isObject(jsonFsData)) {
+            if (verify.isArray(jsonFsData.items) === false) {
                 throw new Error(error('InvalidArgument', 'ctor', {
-                        parameter: 'fsJsonData.items', 
-                        message: 'The fsJsonData.items parameter must be an array. Received: ' + fsJsonData.items
+                        parameter: 'jsonFsData.items', 
+                        message: 'The jsonFsData.items parameter must be an array. Received: ' + jsonFsData.items
                      }));
             }
-            if (verify.isArray(fsJsonData.documents) === false) {
+            if (verify.isArray(jsonFsData.documents) === false) {
                 throw new Error(error('InvalidArgument', 'ctor', {
-                        parameter: 'fsJsonData.documents', 
-                        message: 'The fsJsonData.documents parameter must be an array. Received: ' + fsJsonData.documents
+                        parameter: 'jsonFsData.documents', 
+                        message: 'The jsonFsData.documents parameter must be an array. Received: ' + jsonFsData.documents
                      }));
             }
-            this.items = new Collection(fsJsonData.items);
-            this.documents = new Collection(fsJsonData.documents);
+            this.items = new Collection(jsonFsData.items);
+            this.documents = new Collection(jsonFsData.documents);
         }
         else {
             this.items = new Collection([]);
             this.documents = new Collection([]);
         }
     }
-    FsJson.prototype.getItem = function(key, callback) {
+    JsonFs.prototype.getItem = function(key, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getItem', 'The callback parameter must be a function. Received: ' + callback)
@@ -62,7 +62,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // loog 'wizzi-repo.json.FsJson.getItem.r', key, r
+            // loog 'wizzi-repo.json.JsonFs.getItem.r', key, r
             if (r.length == 1) {
                 return callback(null, r[0]);
             }
@@ -71,7 +71,7 @@ var FsJson = (function () {
             }
         })
     }
-    FsJson.prototype.getItemById = function(id, callback) {
+    JsonFs.prototype.getItemById = function(id, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getItemById', 'The callback parameter must be a function. Received: ' + callback)
@@ -86,7 +86,7 @@ var FsJson = (function () {
             _id: id
          }, callback)
     }
-    FsJson.prototype.getItemByPath = function(path, callback) {
+    JsonFs.prototype.getItemByPath = function(path, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getItemByPath', 'The callback parameter must be a function. Received: ' + callback)
@@ -101,7 +101,7 @@ var FsJson = (function () {
             path: path
          }, callback)
     }
-    FsJson.prototype.getItemByNameAndParent = function(basename, parentId, callback) {
+    JsonFs.prototype.getItemByNameAndParent = function(basename, parentId, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getItemByNameAndParent', 'The callback parameter must be a function. Received: ' + callback)
@@ -124,7 +124,7 @@ var FsJson = (function () {
             parentId: parentId
          }, callback)
     }
-    FsJson.prototype.getItemChildren = function(parentId, callback) {
+    JsonFs.prototype.getItemChildren = function(parentId, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getItemChildren', 'The callback parameter must be a function. Received: ' + callback)
@@ -135,18 +135,18 @@ var FsJson = (function () {
                 'InvalidArgument', 'getItemChildren', { parameter: 'parentId', message: 'The parentId parameter must be an object. Received: ' + parentId }
             ));
         }
-        // loog 'wizzi-repo.json.FsJson.getItemChildren.enter', parentId
+        // loog 'wizzi-repo.json.JsonFs.getItemChildren.enter', parentId
         this.items.find({
             parentId: parentId
          }).toArray(function(err, r) {
             if (err) {
                 return callback(err);
             }
-            // loog 'wizzi-repo.json.FsJson.getItemChildren.r', parentId, r
+            // loog 'wizzi-repo.json.JsonFs.getItemChildren.r', parentId, r
             return callback(null, r);
         })
     }
-    FsJson.prototype.insertItem = function(fsItem, callback) {
+    JsonFs.prototype.insertItem = function(fsItem, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'insertItem', 'The callback parameter must be a function. Received: ' + callback)
@@ -167,7 +167,7 @@ var FsJson = (function () {
                 'InvalidArgument', 'insertItem', { parameter: 'fsItem.kind', message: 'The fsItem.kind parameter must be a number. Received: ' + fsItem.kind }
             ));
         }
-        // loog 'wizzi-repo.json.FsJson.insertItem. fsItem:', fsItem
+        // loog 'wizzi-repo.json.JsonFs.insertItem. fsItem:', fsItem
         var basename = fsItem.basename;
         var dirname = fsItem.dirname;
         var parentId = fsItem.parentId;
@@ -178,13 +178,13 @@ var FsJson = (function () {
                 return callback(err);
             }
             
-            // loog 'wizzi-repo.json.FsJson.insertItem. Item does not exists. So insertOne'
+            // loog 'wizzi-repo.json.JsonFs.insertItem. Item does not exists. So insertOne'
             if (item == null) {
                 that.items.insertOne(fsItem, function(err, r) {
                     if (err) {
                         return callback(err);
                     }
-                    // loog 'wizzi-repo.json.FsJson.insertItem.insertOne', r
+                    // loog 'wizzi-repo.json.JsonFs.insertItem.insertOne', r
                     assert.equal(1, r.insertedCount);
                     assert.equal(1, r.ops.length);
                     return callback(null, {
@@ -195,7 +195,7 @@ var FsJson = (function () {
                          });
                 })
             }
-            // loog 'wizzi-repo.json.FsJson.insertItem. Item exists. So return it'
+            // loog 'wizzi-repo.json.JsonFs.insertItem. Item exists. So return it'
             else {
                 return callback(null, {
                         code: 'FSITEM_EXISTS', 
@@ -204,7 +204,7 @@ var FsJson = (function () {
             }
         })
     }
-    FsJson.prototype.updateItem = function(fsitem, callback) {
+    JsonFs.prototype.updateItem = function(fsitem, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'updateItem', 'The callback parameter must be a function. Received: ' + callback)
@@ -228,7 +228,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // loog 'wizzi-repo.json.FsJson.updateItem', r_upd.result
+            // loog 'wizzi-repo.json.JsonFs.updateItem', r_upd.result
             if (r_upd.modifiedCount == 1) {
                 return callback(null, {
                         code: 'FSITEM_UPDATED', 
@@ -241,7 +241,7 @@ var FsJson = (function () {
             }
         })
     }
-    FsJson.prototype.updateItemLastModified = function(id, lastModified, callback) {
+    JsonFs.prototype.updateItemLastModified = function(id, lastModified, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'updateItemLastModified', 'The callback parameter must be a function. Received: ' + callback)
@@ -265,7 +265,7 @@ var FsJson = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // loog 'wizzi-repo.json.FsJson.updateItemLastModified', r_upd.result
+                    // loog 'wizzi-repo.json.JsonFs.updateItemLastModified', r_upd.result
                     if (r_upd.modifiedCount == 1) {
                         return callback(null, {
                                 code: 'FSITEM_LASTMODIFIED_UPDATED', 
@@ -279,11 +279,11 @@ var FsJson = (function () {
                 })
             }
             else {
-                return callback(error('JsonRepoError', 'updateItemLastModified', 'FsJson item not found, id: ' + id));
+                return callback(error('JsonRepoError', 'updateItemLastModified', 'JsonFs item not found, id: ' + id));
             }
         })
     }
-    FsJson.prototype.deleteItem = function(id, callback) {
+    JsonFs.prototype.deleteItem = function(id, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'deleteItem', 'The callback parameter must be a function. Received: ' + callback)
@@ -300,7 +300,7 @@ var FsJson = (function () {
                 return callback(err);
             }
             if (fsitem == null) {
-                return callback(error('JsonRepoError', 'deleteItem', 'FsJson item not found: ' + id));
+                return callback(error('JsonRepoError', 'deleteItem', 'JsonFs item not found: ' + id));
             }
             that._deleteDocument(id, function(err, r) {
                 if (err) {
@@ -312,7 +312,7 @@ var FsJson = (function () {
                     if (err) {
                         return callback(err);
                     }
-                    // loog '*** wizzi-repo.json.FsJson.deleteItem,r', r
+                    // loog '*** wizzi-repo.json.JsonFs.deleteItem,r', r
                     if (r.deletedCount == 1 && r.result.ok == 1) {
                         return callback(null, {
                                 code: 'FSITEM_DELETED', 
@@ -321,32 +321,32 @@ var FsJson = (function () {
                              });
                     }
                     else {
-                        return callback(error('JsonRepoError', 'deleteItem', 'FsJson error deleting item. Result: ' + util.inspect( r )));
+                        return callback(error('JsonRepoError', 'deleteItem', 'JsonFs error deleting item. Result: ' + util.inspect( r )));
                     }
                 })
             })
         })
     }
-    FsJson.prototype._deleteDocument = function(id, callback) {
+    JsonFs.prototype._deleteDocument = function(id, callback) {
         this.documents.deleteOne({
             _id: id
          }, function(err, r) {
             if (err) {
                 return callback(err);
             }
-            // loog '*** wizzi-repo.json.FsJson._deleteDocument.r', r
+            // loog '*** wizzi-repo.json.JsonFs._deleteDocument.r', r
             
-            // loog 'wizzi-repo.json.FsJson._deleteDocument', true
+            // loog 'wizzi-repo.json.JsonFs._deleteDocument', true
             if (r.deletedCount == 1 && r.result.ok == 1) {
                 return callback(null, true);
             }
-            // loog 'wizzi-repo.json.FsJson._deleteDocument', false
+            // loog 'wizzi-repo.json.JsonFs._deleteDocument', false
             else {
                 return callback(null, false);
             }
         })
     }
-    FsJson.prototype.readDocument = function(id, callback) {
+    JsonFs.prototype.readDocument = function(id, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'readDocument', 'The callback parameter must be a function. Received: ' + callback)
@@ -363,7 +363,7 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // loog 'wizzi-repo.json.FsJson.read.r', id, r
+            // loog 'wizzi-repo.json.JsonFs.read.r', id, r
             if (r.length == 1) {
                 return callback(null, r[0].content);
             }
@@ -372,7 +372,7 @@ var FsJson = (function () {
             }
         })
     }
-    FsJson.prototype.writeDocument = function(id, content, callback) {
+    JsonFs.prototype.writeDocument = function(id, content, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'writeDocument', 'The callback parameter must be a function. Received: ' + callback)
@@ -395,15 +395,15 @@ var FsJson = (function () {
             if (err) {
                 return callback(err);
             }
-            // loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.f', id, f, content === f
+            // loog 'wizzi-repo.json.JsonFs.writeDocument.readDocument.f', id, f, content === f
             
-            // loog 'wizzi-repo.json.FsJson.writeDocument not modified', f
+            // loog 'wizzi-repo.json.JsonFs.writeDocument not modified', f
             if (f === content) {
                 return callback(null, {
                         code: 'DOCUMENT_NOT_MODIFIED'
                      });
             }
-            // loog 'wizzi-repo.json.FsJson.writeDocument.readDocument.upsert', id, content
+            // loog 'wizzi-repo.json.JsonFs.writeDocument.readDocument.upsert', id, content
             var lastModified = new Date();
             that.documents.replaceOne({
                 _id: id
@@ -417,14 +417,14 @@ var FsJson = (function () {
                 if (err) {
                     return callback(err);
                 }
-                // loog 'wizzi-repo.json.FsJson.writeDocument', r
+                // loog 'wizzi-repo.json.JsonFs.writeDocument', r
                 var modified = r.modifiedCount + r.upsertedCount;
                 assert.equal(1, modified);
                 that.updateItemLastModified(id, lastModified, function(err, rUpd) {
                     if (err) {
                         return callback(err);
                     }
-                    // loog 'wizzi-repo.json.FsJson.writeDocument upd', rUpd
+                    // loog 'wizzi-repo.json.JsonFs.writeDocument upd', rUpd
                     return callback(null, {
                             code: 'DOCUMENT_WRITTEN', 
                             item: r.ops[0]
@@ -433,7 +433,7 @@ var FsJson = (function () {
             })
         })
     }
-    FsJson.prototype.toJson = function(callback) {
+    JsonFs.prototype.toJson = function(callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'toJson', 'The callback parameter must be a function. Received: ' + callback)
@@ -455,7 +455,7 @@ var FsJson = (function () {
             })
         })
     }
-    FsJson.prototype.toFiles = function(options, callback) {
+    JsonFs.prototype.toFiles = function(options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'toFiles', 'The callback parameter must be a function. Received: ' + callback)
@@ -505,39 +505,39 @@ var FsJson = (function () {
         }
         )
     }
-    FsJson.prototype.close = function() {
+    JsonFs.prototype.close = function() {
         // nothing to do
     }
-    return FsJson;
+    return JsonFs;
 })();
 
 //
-FsJson.create = function(fsJsonData, callback) {
+JsonFs.create = function(jsonFsData, callback) {
     
     if (verify.isUndefined(callback)) {
-        callback = fsJsonData;
-        fsJsonData = null;
+        callback = jsonFsData;
+        jsonFsData = null;
     }
     
-    if (fsJsonData == null) {
-        fsJsonData = {
+    if (jsonFsData == null) {
+        jsonFsData = {
             items: [], 
             documents: []
          };
     }
     else {
-        if (verify.isObject(fsJsonData) == false) {
-            return callback(errorMsg('create', 'parameter fsJsonData must be an object'));
+        if (verify.isObject(jsonFsData) == false) {
+            return callback(errorMsg('create', 'parameter jsonFsData must be an object'));
         }
-        if (verify.isArray(fsJsonData.items) == false) {
-            return callback(errorMsg('create', 'parameter fsJsonData must contain an items property'));
+        if (verify.isArray(jsonFsData.items) == false) {
+            return callback(errorMsg('create', 'parameter jsonFsData must contain an items property'));
         }
-        if (verify.isArray(fsJsonData.documents) == false) {
-            return callback(errorMsg('create', 'parameter fsJsonData must contain a documents property'));
+        if (verify.isArray(jsonFsData.documents) == false) {
+            return callback(errorMsg('create', 'parameter jsonFsData must contain a documents property'));
         }
     }
     
-    return callback(null, new FsJson(fsJsonData));
+    return callback(null, new JsonFs(jsonFsData));
 }
 ;
 function errorMsg(method, message) {
@@ -550,7 +550,7 @@ function errorMsg(method, message) {
 function normalize(path) {
     return path.trim().replace(/\\/g,'/').toLowerCase();
 }
-module.exports = FsJson;
+module.exports = JsonFs;
 /**
   params
     string code
@@ -569,7 +569,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-repo.json.FsJson.' + method,
+        method: 'wizzi-repo.json.JsonFs.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

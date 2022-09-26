@@ -2,7 +2,7 @@ $group
     ${'$'}params method, err
     
     else
-        log '${'$'}{method}.error', ${'$'}{err}
+        error '${'$'}{method}.error', ${'$'}{err}
         _ sendFailure
             @ response
             {

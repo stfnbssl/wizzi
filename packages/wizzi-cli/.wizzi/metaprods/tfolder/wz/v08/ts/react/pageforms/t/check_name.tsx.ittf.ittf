@@ -17,7 +17,7 @@ $group
                 @ encodeURIComponent(owner)
                 + /
                 @ encodeURIComponent(${'$'}{prefix}_checked)
-        log 'Create${'$'}{Prod}._checkAvalible${'$'}{Prod}Name.endpoint', endpoint
+        $$ loog 'Create${'$'}{Prod}._checkAvalible${'$'}{Prod}Name.endpoint', endpoint
         const response
             await 
                 _ fetch(endpoint)
@@ -33,7 +33,7 @@ $group
         const result
             await 
                 _ response.json()
-        log 'Create${'$'}{Prod}._checkAvalible${'$'}{Prod}Name.result', result
+        $$ loog 'Create${'$'}{Prod}._checkAvalible${'$'}{Prod}Name.result', result
         _ this.setState
             {
                 @ ${'$'}{prefix}_name_available result.isValid

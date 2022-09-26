@@ -21,11 +21,12 @@ $group
                     :param
                         :ref CRUDResult
             +
-            _ console.log
-                @ myname
-                @ 'get${'$'}{md.Name}' 
-                ${'$'}foreach item in md.query
-                    @ ${'$'}{item.name}
+            #
+                _ console.log
+                    @ myname
+                    @ 'get${'$'}{md.Name}' 
+                    ${'$'}foreach item in md.query
+                        @ ${'$'}{item.name}
             +
             const ${'$'}{md.Name} = Get${'$'}{md.Name}Model()
             +
@@ -48,7 +49,7 @@ $group
                                 param result
                                     :any
                                 if err
-                                    log myname, 'get${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
+                                    error myname, 'get${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
                                 if result.length == 1
                                     return 
@@ -73,10 +74,11 @@ $group
                     :param
                         :ref CRUDResult
             +
-            _ console.log
-                @ myname
-                @ 'get${'$'}{md.Name}ById' 
-                @ id
+            #
+                _ console.log
+                    @ myname
+                    @ 'get${'$'}{md.Name}ById' 
+                    @ id
             +
             const ${'$'}{md.Name} = Get${'$'}{md.Name}Model()
             +
@@ -95,7 +97,7 @@ $group
                                 param result
                                     :ref I${'$'}{md.Name}Model[]
                                 if err
-                                    log myname, 'get${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
+                                    error myname, 'get${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
                                 if result.length == 1
                                     return 

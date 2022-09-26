@@ -28,7 +28,7 @@ $group
                         ._ then
                             =>
                                 param response
-                                # log 'callApi.response', response
+                                $$ loog 'callApi.response', response
                                 if response.ok
                                     _ resolve
                                         _ response.json
@@ -42,6 +42,6 @@ $group
                         ._ catch
                             =>
                                 param err
-                                # log 'callApi.err', err
+                                $$ loog 'callApi.err', err
                                 _ reject
                                     _ err

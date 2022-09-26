@@ -128,13 +128,13 @@
 				@ uri 'unknown'
 				@ id 'unknown'
 
-		# log 1,'wizzi-utils.ittfDocumentGraph.analizeFragment.__getFragmentPath'
+		$$ loog 1,'wizzi-utils.ittfDocumentGraph.analizeFragment.__getFragmentPath'
         var that = this
 		_ this.__getFragmentPath
 			@ ctx
 			f_cb( fragmentPath )
 			
-				log 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
+				$$ loog 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
 
                 if fragmentPath.__is_error
 				
@@ -143,7 +143,7 @@
 
 					_ r.errorFragments.push(fragment)
 				
-					# log 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
+					$$ loog 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
                     # throw new Error(fragmentPath)
 					
 					return
@@ -156,12 +156,12 @@
 					if ctx && ctx.ittfBasePath && ctx.ittfFsNode
 					
 				
-						# log 13, 'wizzi-utils.ittfDocumentGraph.analizeFragment search fragment in IttfFsNode', fragmentPath
+						$$ loog 13, 'wizzi-utils.ittfDocumentGraph.analizeFragment search fragment in IttfFsNode', fragmentPath
                         var fragmentDocument = ctx.ittfFsNode.searchDocument(fragmentPath)
                         					
 						if !fragmentDocument
 						
-							log 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
+							$$ loog 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
 							set fragment.__is_error = true
 							set fragment.message = 'NotFound in ittfFsNode documents.'
 							_ r.errorFragments.push(fragment)
@@ -170,7 +170,7 @@
 
 						else
 						
-							log 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
+							$$ loog 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
                             set fragment.id = fragmentDocument.id
 							if that.isReferenceToIttf()
 								if ctx.ittfReferences
@@ -208,7 +208,7 @@
 
 		if this.isReferenceToIttf() && ctx && verify.isNotEmpty(ctx.rootFolder)
 
-			# log 2, "ittfDocumentGraph.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
+			$$ loog 2, "ittfDocumentGraph.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
 
 			if this.fragmentName[0] === '/'
 				set fragmentPath
@@ -221,7 +221,7 @@
 						@ r.model.dirname
 						@ this.fragmentName
 			
-			# log 3, '__getFragmentPath.fragmentPath', fragmentPath
+			$$ loog 3, '__getFragmentPath.fragmentPath', fragmentPath
 			
 			_ r.file.isFile
 				@ fragmentPath
@@ -250,7 +250,7 @@
 					@ callerFullPath r.model.uri
 					@ fragmentName this.fragmentName
 				f_cb_no_err( result )
-                    # log 4, 'ittfFinder.resolvePath, err, this.fragmentName, result', err, r.model.uri, that.fragmentName, result
+                    $$ loog 4, 'ittfFinder.resolvePath, err, this.fragmentName, result', err, r.model.uri, that.fragmentName, result
 					if err
 						return
 							_ callback

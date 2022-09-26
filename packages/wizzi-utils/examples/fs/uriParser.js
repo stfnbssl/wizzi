@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\fs\uriParser.js.ittf
 */
 'use strict';
@@ -22,5 +22,5 @@ parse('./storybook')
 parse('/home/runner/work/wizzi-app/wizzi-app/Application/src/views/error.html.ittf')
 function parse(uri) {
     var parsed = uriParser(uri);
-    console.log(uri, '\n', path.dirname(uri), '\n', JSON.stringify(parsed, null, 2), __filename);
+    console.log(uri, '\n', path.dirname(uri), '\n', JSON.stringify(parsed, null, 2));
 }

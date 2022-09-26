@@ -1,0 +1,58 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 5,
+            name: 'VFile_Step_4',
+            title: 'VFile - step - 4 - virtual file system',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+
+            # create an array of document data for test
+            _ json.createJsonFsData
+                @ data_get_documents_folder1()
+                f_cb_throw( jsonFsData)
+                    _ printValue
+                        @ "jsonFsData"
+                        _ stringify
+                            @ jsonFsData
+                            @ null
+                            @ 2
+                    var fsimpl
+                        new JsonFsImpl
+                    _ fsimpl.open
+                        {
+                            @ jsonFsData jsonFsData
+                        f_cb_test( docManager )
+                            _ printValue
+                                @ "fsimpl.jsonFs"
+                                _ stringify
+                                    @ fsimpl.jsonFs
+                                    @ null
+                                    @ 2
+                            _ vfile
+                                @ fsimpl
+                                f_cb_test( jsonVFS )
+                                    _ jsonVFS.read
+                                        @ 'json:/root/folder1/index.html.ittf'
+                                        f_cb_test( content )
+                                            info 'readAsync', content
+                                            _ jsonVFS.write
+                                                @ 'json:/root/folder1/index.txt'
+                                                @ 'Hello'
+                                                f_cb_test( result )
+                                                    info 'writeAsync', result
+                                                    _ jsonVFS.read
+                                                        @ 'json:/root/folder1/index.txt'
+                                                        f_cb_test( content )
+                                                            info 'readAsync 2', content
+
+
+            $include ./data                                        
+

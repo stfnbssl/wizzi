@@ -4,10 +4,10 @@ module
 	class Speaker
         m sayHello
             $foreach item in members
-                log "Hello", "${item.name}"
+                info "Hello", "${item.name}"
         m sayPostTitles
             $foreach item in collection.posts
-                log "Title", "${item.title}"
-                log "Category", "${item.category}"
+                info "Title", "${item.title}"
+                info "Category", "${item.category}"
 
 

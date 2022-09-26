@@ -5,14 +5,14 @@ type cb<T> = (err: any, result: T) => void;
 
 /**
  * The json store types
- * FsJson: implements an in-memory set of documents organized in a tree of folders
- * FsJsonDocumentManager: wraps FsJson and exposes filesystem-like methods
- * FsJsonImpl: wraps FsJsonDocumentManager and implements the VFile interface
+ * JsonFs: implements an in-memory set of documents organized in a tree of folders
+ * JsonFsDocumentManager: wraps JsonFs and exposes filesystem-like methods
+ * JsonFsImpl: wraps JsonFsDocumentManager and implements the VFile interface
  */
 
 /**
- * @interface FsJsonItemData
- * @description An item object (directory or file) of a JSON file system
+ * @interface JsonFsItemData
+ * @description An item object (directory or file) of a JSON file system (JsonFs)
  * @property _id               Object ID of the item
  * @property basename          The base name of the item filepath
  * @property parentId          Object ID of the parent item
@@ -20,7 +20,7 @@ type cb<T> = (err: any, result: T) => void;
  * @property path              Item filepath
  * @property kind              Item kind: one-of 0 (directory), 1 (file)
 */
-interface FsJsonItemData {
+interface JsonFsItemData {
     _id: ObjectID;
     basename: string;
     parentId: ObjectID;
@@ -30,13 +30,13 @@ interface FsJsonItemData {
 }
 
 /**
- * @interface FsJsonDocumentData
- * @description The text content of an item object (file) of a JSON file system
+ * @interface JsonFsDocumentData
+ * @description A text content of an item file object (kind = 1) of a JSON file system (JsonFs)
  * @property _id               Object ID of the item
  * @property content           Text content of the item
  * @property lastModified      Date of last modification of the content
 */
-interface FsJsonDocumentData {
+interface JsonFsDocumentData {
     _id: ObjectID;
     content: string;
     lastModified: Date;
@@ -44,49 +44,49 @@ interface FsJsonDocumentData {
 
 type ObjectID = object;
 
-interface FsJsonInsertResult {
+interface JsonFsInsertResult {
     code: string;
     insertedId: ObjectID;
     insertedCount: number;
-    item: FsJsonItemData;
+    item: JsonFsItemData;
 }
 
-interface FsJsonDeleteResult {
+interface JsonFsDeleteResult {
     code: string;
     deletedCount: number;
     ok: boolean;
 }
 
-interface FsJsonUpdateResult {
+interface JsonFsUpdateResult {
     code: string;
     updatedCount: number;
-    item: FsJsonItemData;
+    item: JsonFsItemData;
 }
 
-interface FsJsonWriteResult {
+interface JsonFsWriteResult {
     code: string;
-    item: FsJsonItemData;
+    item: JsonFsItemData;
 }
 
 /**
- * @interface FsJson
+ * @interface JsonFs
  * @description A JSON file system database
- * @property items              Array of path infos (directories and files) of a JSON file system
- * @property documents          Array of content data (files) of a JSON file system 
+ * @property items              Array of path infos, directories and files (JsonFsItemData[])
+ * @property documents          Array of content data files (JsonFsDocumentData[])
  */
-interface FsJson {
-    items: FsJsonItemData[];
-    documents: FsJsonDocumentData[];
-    getItem(key: object, callback: cb<FsJsonItemData>): void;
-    getItemById(id: ObjectID, callback: cb<FsJsonItemData>): void;
-    getItemByPath(path: string, callback: cb<FsJsonItemData>): void;
-    getItemByNameAndParent(name: string, parent: ObjectID, callback: cb<FsJsonItemData>): void;
-    getItemChildren(parentId: ObjectID, callback: cb<FsJsonItemData[]>): void;
-    insertItem(item: FsJsonItemData, callback: cb<FsJsonInsertResult[]>): void;
-    updateItem(item: FsJsonItemData, callback: cb<FsJsonUpdateResult[]>): void;
-    deleteItem(id: ObjectID, callback: cb<FsJsonDeleteResult[]>): void;
+interface JsonFs {
+    items: JsonFsItemData[];
+    documents: JsonFsDocumentData[];
+    getItem(key: object, callback: cb<JsonFsItemData>): void;
+    getItemById(id: ObjectID, callback: cb<JsonFsItemData>): void;
+    getItemByPath(path: string, callback: cb<JsonFsItemData>): void;
+    getItemByNameAndParent(name: string, parent: ObjectID, callback: cb<JsonFsItemData>): void;
+    getItemChildren(parentId: ObjectID, callback: cb<JsonFsItemData[]>): void;
+    insertItem(item: JsonFsItemData, callback: cb<JsonFsInsertResult[]>): void;
+    updateItem(item: JsonFsItemData, callback: cb<JsonFsUpdateResult[]>): void;
+    deleteItem(id: ObjectID, callback: cb<JsonFsDeleteResult[]>): void;
     readDocument(id: ObjectID, callback: cb<string>): void;
-    writeDocument(id: ObjectID, content: string, callback: cb<FsJsonWriteResult>): void;
+    writeDocument(id: ObjectID, content: string, callback: cb<JsonFsWriteResult>): void;
     toJson(callback: cb<JsonFsData>): void;
     toFiles(options: { removeRoot: string }, callback: cb<fSystem.FileDef[]>): void;
 }
@@ -97,8 +97,8 @@ interface UploadedFileDef {
     result: any;
 }
 
-interface FsJsonDocumentManager {
-    fsdb: FsJson;
+interface JsonFsDocumentManager {
+    fsdb: JsonFs;
     createFolder(folderPath: string, callback: cb<any>): void;
     readFile(filePath: string, callback: cb<string>): void;
     writeFile(filePath: string, content: string, callback: cb<any>): void;
@@ -136,18 +136,41 @@ interface JsonDocumentDto {
  * @property documents          Array of content data (files) of a JSON file system 
  */
 interface JsonFsData {
-    items: FsJsonItemData[];
-    documents: FsJsonDocumentData[];
+    items: JsonFsItemData[];
+    documents: JsonFsDocumentData[];
+}
+
+/**
+ * @interface JsonFsImplOptions
+ * @description Contains two arrays of item objects (path info and content) of a JSON file system
+ * @property jsonFs          A JSON file system database
+ * @property jsonFsData      Items and content of a JSON file system database (alternative to jsonFs)
+ */
+ interface JsonFsImplOptions {
+    jsonFsData: JsonFsData;
+    jsonFs: JsonFs;
+}
+
+/**
+ * @interface JsonFsImpl
+ * @description Implements the `fsimpl` interface for a json backed file system.
+ *              It is used by repo/jsonDbStore that implements the json repo store.
+ *              uses a json/DocumentManager instance to manage an in-memory json filesystem (JsonFs) 
+*/
+interface JsonFsImpl extends fSystem.FsImpl {
+    jsonFs: JsonFs;
+    docManager: JsonFsDocumentManager;
+    init(options: JsonFsImplOptions, callback: cb<JsonFsDocumentManager>): void;
 }
 
 export namespace JsonComponents {
-    export function createFsJson(documents: JsonDocumentDto[], callback: cb<FsJson>): void;
-    export function createDocumentManager(fsJsonDataOrFsJson: JsonFsData | FsJson): FsJsonDocumentManager;
+    export function createJsonFs(documents: JsonDocumentDto[], callback: cb<JsonFs>): void;
+    export function createDocumentManager(jsonFsDataOrJsonFs: JsonFsData | JsonFs): JsonFsDocumentManager;
     export function createJsonFsData(documents: JsonDocumentDto[], callback: cb<JsonFsData>): void;
-    export function addToJsonFsData(fsJsonData: JsonFsData, documents: JsonDocumentDto[], callback: cb<object>): void;
+    export function addToJsonFsData(jsonFsData: JsonFsData, documents: JsonDocumentDto[], callback: cb<object>): void;
 }
 
-export function jsonfile(options: { jsonFsData?: JsonFsData, fsJson?: FsJson }, callback: cb<fSystem.VFile>): void;
+export function jsonfile(options: { jsonFsData?: JsonFsData, jsonFs?: JsonFs }, callback: cb<fSystem.VFile>): void;
 
 /**
  * The interface implemented by Wizzi Store Systems
@@ -167,7 +190,7 @@ interface StoreInitOptions {
     storeUri?: string;
     storeBaseFolder?: string;
     jsonFsData? : JsonFsData,
-    fsJson?: FsJson
+    jsonFs?: JsonFs
 }
 
 /**

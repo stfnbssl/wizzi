@@ -19,7 +19,15 @@
         _ repoIndex.JsonComponents.createJsonFsData
             [
                 {
-                    @ path 'c:\\folder1\\test.html.ittf'
+                    @ path 'json://folder1/test.html.ittf'
+                    @ content
+                        [
+                            @ 'html'
+                            @ '    head'
+                            @ '    body'
+                            ._ join('\n')
+                {
+                    @ path 'json://folder1/t/alfa.html.ittf'
                     @ content
                         [
                             @ 'html'
@@ -27,7 +35,20 @@
                             @ '    body'
                             ._ join('\n')
             f_cb_test( jsonFsData )
-                _ printObject
+                _ printValue
                     @ 'jsonFsData'
                     @ jsonFsData
+				_ repoIndex.jsonfile
+					{
+						@ jsonFsData jsonFsData
+					f_cb_test( file )
+						_ file.getFilesAsync
+                            @ "c://folder1"
+                            {
+                                @ deep true
+                                @ documentContent true
+                            f_cb_test( files )
+                                info 'json://folder1 files', files
+
+
                     

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.10
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\wizzi\models\ts-mtree-preprocessor.g.js.ittf
 */
 'use strict';
@@ -82,7 +82,7 @@ function traverse(node, state) {
 function preprocessNode(node, state) {
     
     // do nothing
-    if (node.n === 'p' && state.parent.n === 'class') {
+    if (state.parent && (node.n === 'p' && state.parent.n === 'class')) {
     }
     else if (state.svgOn && svg_supported_attrs.indexOf(node.n) > -1) {
         var name = svg_supported_attrs_map[node.n] || node.n;

@@ -54,7 +54,7 @@ $group
                         =>
                             param result
                                 :any
-                            log 'getCheckPostName.result', result
+                            $$ loog 'getCheckPostName.result', result
                             _ sendSuccess
                                 @ response
                                 @ result
@@ -78,8 +78,8 @@ $group
 
             v08/ts/handler${'('}postPost)
 
-                log 'postPost.request.params', request.params
-                log 'postPost.request.body', request.body
+                $$ loog 'postPost.request.params', request.params
+                $$ loog 'postPost.request.body', request.body
                 _ createPost
                     @ request.params.owner
                     @ request.params.name
@@ -89,7 +89,7 @@ $group
                         =>
                             param result
                                 :any
-                            log 'postPost.create.result', result
+                            $$ loog 'postPost.create.result', result
                             _ sendSuccess
                                 @ response
                                 @ result
@@ -97,8 +97,8 @@ $group
 
             v08/ts/handler${'('}putPost)
 
-                log 'putPost.request.params', request.params
-                log 'putPost.request.body', request.body
+                $$ loog 'putPost.request.params', request.params
+                $$ loog 'putPost.request.body', request.body
                 _ updatePost
                     @ request.params.id
                     @ request.body.owner
@@ -110,7 +110,7 @@ $group
                         =>
                             param result
                                 :any
-                            log 'putPost.update.result', result
+                            $$ loog 'putPost.update.result', result
                             _ sendSuccess
                                 @ response
                                 @ result
@@ -118,15 +118,15 @@ $group
 
             v08/ts/handler${'('}deletePost)
 
-                log 'deletePost.request.params', request.params
-                log 'deletePost.request.body', request.body
+                $$ loog 'deletePost.request.params', request.params
+                $$ loog 'deletePost.request.body', request.body
                 _ deletePost
                     @ request.params.id
                     ._ then
                         =>
                             param result
                                 :any
-                            log 'deletePost.update.result', result
+                            $$ loog 'deletePost.update.result', result
                             _ sendSuccess
                                 @ response
                                 @ result

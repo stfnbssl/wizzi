@@ -12,7 +12,7 @@
     var templateGroups
         [
             @ 'ts-express'
-            @ 'ts-webpack'
+            @ 'ts-client'
 	
     set module.exports
 		=>

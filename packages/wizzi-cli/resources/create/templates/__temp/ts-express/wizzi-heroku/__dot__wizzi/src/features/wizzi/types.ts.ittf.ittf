@@ -1,5 +1,2 @@
 module 
-   ${'$'} 
-       var md = {
-       } 
-   v08/express/features/wizzi/types${'('}&md) 
+   $include wz/v08/ts/express/features/wizzi/types.ts

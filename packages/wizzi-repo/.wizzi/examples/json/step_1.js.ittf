@@ -6,7 +6,7 @@
             level: 0,
             step: 1,
             name: 'Json_Step_1',
-            title: 'Json - step - 1 - FsJson',
+            title: 'Json - step - 1 - JsonFs',
             folderLevel: 2
         }
 
@@ -15,53 +15,54 @@
         $append functions
             
             function dump
-                param fsJson
+                param jsonFs
                 _ printValue
-                    @ 'fsJson.items'
-                    @ fsJson.items
+                    @ 'jsonFs.items'
+                    @ jsonFs.items
 
                 _ printValue
-                    @ 'fsJson.documents'
-                    @ fsJson.documents    
+                    @ 'jsonFs.documents'
+                    @ jsonFs.documents    
 
         _ heading1('start')
 
         
-        var fsJson = new json.FsJson()
+        var jsonFs = new json.JsonFs()
         _ dump
-            @ fsJson
+            @ jsonFs
 
-        _ fsJson.insertItem
+        _ jsonFs.insertItem
             {
+                @ dirname 'json:/zero'
                 @ basename 'alpha.js.ittf'
-                @ dirname 'w:/zero'
                 @ kind 1
             f_cb_test( result )
-                # loog 'insert.alpha.js.ittf.result', result
+                info 'insert.alpha.js.ittf.result', result
                 var insertedId = result.insertedId
                 _ dump
-                    @ fsJson
+                    @ jsonFs
+                
                 set result.item.basename = 'beta.js.ittf'
-                _ fsJson.updateItem
+                _ jsonFs.updateItem
                     @ result.item
                     f_cb_test( result )
-                        # loog 'update.beta.js.ittf.result', result
+                        info 'update.beta.js.ittf.result', result
                         _ dump
-                            @ fsJson
-                        _ fsJson.writeDocument
+                            @ jsonFs
+                        _ jsonFs.writeDocument
                             @ result.item._id
                             @ 'My content'
                             f_cb_test( result )
                                 # loog 'write.beta.js.ittf.result', result
                                 _ dump
-                                    @ fsJson
-                                _ fsJson.readDocument
+                                    @ jsonFs
+                                _ jsonFs.readDocument
                                     @ result.item._id
                                     f_cb_test( result )
                                         # loog 'read.beta.js.ittf.result', result
-                                        _ fsJson.deleteItem
+                                        _ jsonFs.deleteItem
                                             @ insertedId
                                             f_cb_test( result )
                                                 # loog 'delete.beta.js.ittf.result', result
                                                 _ dump
-                                                    @ fsJson
+                                                    @ jsonFs

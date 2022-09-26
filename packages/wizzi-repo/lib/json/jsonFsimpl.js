@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\jsonFsimpl.js.ittf
 */
 'use strict';
@@ -10,16 +10,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 var verify = require('wizzi-utils').verify;
-var FsJson = require('./fs/fsjson'),
+var JsonFs = require('./fs/fsjson'),
     DocumentManager = require('./fs/documentmanager'),
-    jsonUriParser = require('wizzi-utils').uriParser;
+    jsonUriParser = require('wizzi-utils').jsonUriParser;
 //
 var JsonFsImpl = (function () {
-    function JsonFsImpl(fsJsonData) {
+    function JsonFsImpl(jsonFsData) {
         _classCallCheck(this, JsonFsImpl);
         this.classType = 'wizzi-repo.json.JsonFsImpl';
-        this.fsJsonData = fsJsonData;
-        this.fsJson = null;
+        this.jsonFsData = jsonFsData;
+        this.jsonFs = null;
         this.docManager = null;
     }
     JsonFsImpl.prototype.db = function(callback) {
@@ -49,9 +49,9 @@ var JsonFsImpl = (function () {
         if (this.docManager) {
             return callback(null, this.docManager);
         }
-        this.fsJson = options.fsJson ? options.fsJson : options.fsJsonData ? new FsJson(options.fsJsonData) : new FsJson(this.fsJsonData);
+        this.jsonFs = options.jsonFs ? options.jsonFs : options.jsonFsData ? new JsonFs(options.jsonFsData) : new JsonFs(this.jsonFsData);
         ;
-        that.docManager = new DocumentManager(this.fsJson);
+        that.docManager = new DocumentManager(this.jsonFs);
         // loog '***** json connected'
         return callback(null, that.docManager);
     }
@@ -310,7 +310,7 @@ var JsonFsImpl = (function () {
         return this.docManager.createWriteStream(parsedUri.internalPath);
     }
     JsonFsImpl.prototype.toJson = function(callback) {
-        this.fsJson.toJson(function(err, json) {
+        this.jsonFs.toJson(function(err, json) {
             if (err) {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);

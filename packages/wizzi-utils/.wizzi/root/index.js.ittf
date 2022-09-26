@@ -66,6 +66,14 @@
 		set md.file = fSystem.file
 	    set md.vfile = fSystem.vfile
 	set md.uriParser = fSystem.uriParser
+    set md.jsonUriParser
+        function
+            param uri
+            # Dummy implementation after giving up the idea of a multi-filesystem wizzi production
+            # 12/9/2022
+            return
+                {
+                    @ internalPath uri
     set md.fileInfoByPath = fSystem.fileInfoByPath
 
     # errors - legacy

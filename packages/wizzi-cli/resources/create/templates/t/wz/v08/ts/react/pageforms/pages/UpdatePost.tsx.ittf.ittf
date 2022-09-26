@@ -38,7 +38,7 @@ $group
                 :ref React.ChangeEvent
                     :param 
                         :ref HTMLInputElement
-            log 'handleArtifactNameChange', ev.target.type, ev.target.checked, ev.target.value
+            $$ loog 'handleArtifactNameChange', ev.target.type, ev.target.checked, ev.target.value
             _ this.setState
                 { 
                     @ post_name_new ev.target.value
@@ -88,7 +88,7 @@ $group
 
         +
         m render
-            log 'UpdatePacki.render', 'state', this.state
+            $$ loog 'UpdatePacki.render', 'state', this.state
             return
                 < FormContainer
                     < FormTitle

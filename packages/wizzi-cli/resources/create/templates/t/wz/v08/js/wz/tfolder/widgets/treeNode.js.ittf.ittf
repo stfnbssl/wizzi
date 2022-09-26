@@ -62,7 +62,7 @@ $group
 			var oldEl = this.el
 			var newEl
 				_ this.render
-			# log 'replace', newEl, this.el
+			$$ loog 'replace', newEl, this.el
 			_ oldEl.parentNode.replaceChild(newEl, oldEl)
 		
 		m render
@@ -190,7 +190,7 @@ $group
 			var editOnInputKeyPress
 				=>
 					param event
-					# log 'keypress', event.keyCode
+					$$ loog 'keypress', event.keyCode
 					if event.keyCode == 13
 						_ editOnDocumentClick
 							{
@@ -270,7 +270,7 @@ $group
 		m getItemEl
 			param item
 			var kind
-			# log 'getItemEl', item
+			$$ loog 'getItemEl', item
 			if item.isFolder
 				set kind = item.expanded ? 'folder-opened' : 'folder-closed'
 			else

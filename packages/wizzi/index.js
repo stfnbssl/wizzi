@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -145,17 +145,17 @@ md.jsonFactory = function(options, callback) {
             'InvalidArgument', '', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
         ));
     }
-    if (verify.isObject(options.fsJson) === false) {
+    if (verify.isObject(options.jsonFs) === false) {
         return callback(error(
-            'InvalidArgument', '', { parameter: 'options.fsJson', message: 'The options.fsJson parameter must be an object. Received: ' + options.fsJson }
+            'InvalidArgument', '', { parameter: 'options.jsonFs', message: 'The options.jsonFs parameter must be an object. Received: ' + options.jsonFs }
         ));
     }
     
-    // loog 'wizzi.index.jsonFactory.fsJson', options.fsJson
+    // loog 'wizzi.index.jsonFactory.jsonFs', options.jsonFs
     
     options.repo = {
         storeKind: 'json', 
-        storeFsJson: options.fsJson
+        storeJsonFs: options.jsonFs
      };
     md.createFactory(options, callback)
 }
@@ -237,24 +237,24 @@ md.startRunnerServer = function(options, callback) {
                                     if (err) {
                                         return callback(err);
                                     }
-                                    console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
+                                    console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
                                     return callback(null);
                                 })
                             }
                             else {
-                                console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
+                                console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
                                 return callback(null);
                             }
                         })
                     }
                     else {
-                        console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD), __filename);
+                        console.log(chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD));
                         return callback(null);
                     }
                 })
             }
             else {
-                console.log(chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.'), __filename);
+                console.log(chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.'));
                 return callback(null);
             }
         }
@@ -280,11 +280,11 @@ md.loadWizzifile = function(options, callback) {
         var wizziFilePath = path.join(runnerServerCWD, 'wizzifile.js');
         if (md.file.isFile(wizziFilePath)) {
             md.wizzifile = require(wizziFilePath);
-            console.log(chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath), __filename);
+            console.log(chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath));
             return callback(null, md.wizzifile);
         }
         else {
-            console.log(chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.'), __filename);
+            console.log(chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.'));
             return callback(null);
         }
     }
@@ -608,7 +608,7 @@ md.createJsonFactoryLight = function(options, callback) {
         plugins: {
             items: pluginItems
          }, 
-        fsJson: options.fsJson, 
+        jsonFs: options.jsonFs, 
         globalContext: options.globalContext || {}
      }, callback)
 }
@@ -745,11 +745,11 @@ md.loadMTreeFromText = function(ittfContent, context, options, callback) {
             content: ittfContent
          }
     ];
-    md.JsonComponents.createFsJson(documents, function(err, fsJson) {
+    md.JsonComponents.createJsonFs(documents, function(err, jsonFs) {
         if (err) {
             return callback(err);
         }
-        options.fsJson = fsJson;
+        options.jsonFs = jsonFs;
         md.createJsonFactoryLight(options, function(err, wf) {
             if (err) {
                 return callback(err);
@@ -893,11 +893,11 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
             content: ittfContent
          }
     ];
-    md.JsonComponents.createFsJson(documents, function(err, fsJson) {
+    md.JsonComponents.createJsonFs(documents, function(err, jsonFs) {
         if (err) {
             return callback(err);
         }
-        options.fsJson = fsJson;
+        options.jsonFs = jsonFs;
         md.createJsonFactoryLight(options, function(err, wf) {
             if (err) {
                 return callback(err);
@@ -1117,11 +1117,11 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
             content: ittfContent
          }
     ];
-    md.JsonComponents.createFsJson(documents, function(err, fsJson) {
+    md.JsonComponents.createJsonFs(documents, function(err, jsonFs) {
         if (err) {
             return callback(err);
         }
-        options.fsJson = fsJson;
+        options.jsonFs = jsonFs;
         md.createJsonFactoryLight(options, function(err, wf) {
             if (err) {
                 return callback(err);
@@ -1274,11 +1274,11 @@ md.generateArtifactFromText = function(ittfContent, context, options, callback) 
             content: ittfContent
          }
     ];
-    md.JsonComponents.createFsJson(documents, function(err, fsJson) {
+    md.JsonComponents.createJsonFs(documents, function(err, jsonFs) {
         if (err) {
             return callback(err);
         }
-        options.fsJson = fsJson;
+        options.jsonFs = jsonFs;
         md.createJsonFactoryLight(options, function(err, wf) {
             if (err) {
                 return callback(err);

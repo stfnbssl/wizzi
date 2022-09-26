@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -35,6 +35,8 @@ var bootModelDefUri = "../wizzi/models/bootstrap/wfschema-boot-modelDef";
 var BootWizziSchema = null;
 var ModelInfo = null;
 var AsyncModelLoader = null;
+
+var myname = 'wizzi.services.wizzifactory';
 
 var WizziFactory = (function () {
     function WizziFactory(user, role) {
@@ -1047,13 +1049,11 @@ var WizziFactory = (function () {
         var fileCtx = Object.assign({}, modelRequestContext.fileCtx || {}, {
             dot: '.'
          });
-        // loog 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,modelRequestContext.fileCtx', ittfFolderUri, fileCtx
         repo.folderFilesInfoByPath(ittfFolderUri, this.fileService, options, (err, items) => {
         
             if (err) {
                 return callback(err);
             }
-            // loog 'generateFolderArtifacts\n', stringify(items, null, 2)
             async.mapSeries(items, (item, callback) => {
             
                 
@@ -1068,7 +1068,6 @@ var WizziFactory = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        // loog 'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
                         this.fileService.write(path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), artifactText, function(err, notUsed) {
                             if (err) {
                                 return callback(err);
@@ -1328,6 +1327,125 @@ var WizziFactory = (function () {
     WizziFactory.prototype._executeJob_by_wfjobModel = function(jobRequest, callback) {
         throw new Error('wizzi.wizziFactory._executeJob_by_wfjobModel not implemented.');
     }
+    WizziFactory.prototype.metaGenerate = function(ittfMetaFilePath, context, options, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'metaGenerate', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(ittfMetaFilePath) === false) {
+            return callback(error(
+                'InvalidArgument', 'metaGenerate', { parameter: 'ittfMetaFilePath', message: 'The ittfMetaFilePath parameter must be a string. Received: ' + ittfMetaFilePath }
+            ));
+        }
+        if (verify.isObject(context) === false) {
+            return callback(error(
+                'InvalidArgument', 'metaGenerate', { parameter: 'context', message: 'The context parameter must be an object. Received: ' + context }
+            ));
+        }
+        if (verify.isObject(options) === false) {
+            return callback(error(
+                'InvalidArgument', 'metaGenerate', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+            ));
+        }
+        
+        var tempFolder = options.tempFolder;
+        var resolved_tempFolder = verify.resolveToString(tempFolder);
+        // loog 'resolved_tempFolder', resolved_tempFolder
+        if (verify.isNotEmpty(resolved_tempFolder) === false) {
+            return callback(error('InvalidArgument', 'metaGenerate.options', {
+                    parameter: 'tempFolder', 
+                    message: "'tempFolder' must be a not empty string. Received: " + util.inspect(tempFolder, { depth: null })
+                 }));
+        }
+        else {
+            tempFolder = resolved_tempFolder;
+        }
+        var destFolder = options.destFolder;
+        var resolved_destFolder = verify.resolveToString(destFolder);
+        // loog 'resolved_destFolder', resolved_destFolder
+        if (verify.isNotEmpty(resolved_destFolder) === false) {
+            return callback(error('InvalidArgument', 'metaGenerate.options', {
+                    parameter: 'destFolder', 
+                    message: "'destFolder' must be a not empty string. Received: " + util.inspect(destFolder, { depth: null })
+                 }));
+        }
+        else {
+            destFolder = resolved_destFolder;
+        }
+        
+        console.log(myname, 'metaGenerate', 'tempFolder', tempFolder, 'destFolder', destFolder, __filename);
+        
+        if (ittfMetaFilePath.toLowerCase().endsWith('.ittf.ittf') == false) {
+            return callback(error('InvalidArgument', 'metaGenerate', {
+                    parameter: 'ittfMetaFilePath', 
+                    message: "'ittfMetaFilePath' must have a Wizzi Schema of type 'ittf'. Received: " + ittfMetaFilePath
+                 }));
+        }
+        
+        const fileService = this.fileService;
+        const that = this;
+        
+        this.loadModel('ittf', ittfMetaFilePath, {
+            mTreeBuildupContext: context
+         }, (err, metaFileModel) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            var f_count = 0;
+            (function next() {
+                var child = metaFileModel.children[f_count++];
+                if (!child) {
+                    return that.generateFolderArtifacts(tempFolder, {
+                            modelRequestContext: context.modelRequestContext, 
+                            artifactRequestContext: context.artifactRequestContext || context.modelRequestContext
+                         }, {
+                            deep: true, 
+                            destFolder: destFolder, 
+                            copyInclude: options.copyInclude || ['*'], 
+                            copyExclude: options.copyExclude || []
+                         }, callback);
+                }
+                if (child.name == '$file') {
+                    processFile(child, tempFolder, (err, notUsed) => {
+                    
+                        if (err) {
+                            return callback(err);
+                        }
+                        next();
+                    }
+                    )
+                }
+                else {
+                    next();
+                }
+            })();
+        }
+        )
+        function processFile(node, tempFolder, callback) {
+            var outputPath = path.join(tempFolder, node.value);
+            var sb = [];
+            var i, i_items=node.children, i_len=node.children.length, child;
+            for (i=0; i<i_len; i++) {
+                child = node.children[i];
+                processContent(sb, child, 0)
+            }
+            fileService.write(outputPath, sb.join('\n'), callback)
+        }
+        function processContent(sb, node, indent) {
+            sb.push(new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value))
+            var i, i_items=node.children, i_len=node.children.length, child;
+            for (i=0; i<i_len; i++) {
+                child = node.children[i];
+                processContent(sb, child, indent + 4)
+            }
+        }
+        function decode(text) {
+            text = verify.replaceAll(text, "$", "$");
+            return verify.replaceAll(text, "£'('£", "(");
+        }
+    }
     //
     WizziFactory.prototype.createSingleTextSourceFactory = function(ittfContent, schema, options, callback) {
         if (typeof callback === 'undefined') {
@@ -1480,7 +1598,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.33.wizziFactory.' + method,
+        method: 'wizzi@0.7.34.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -97,7 +97,7 @@
 			{
 				@ _id item_root._id
 			f_cb_test( result )
-				log result
+				info result
 				tobe_number( result.deletedCount, 1 )
 				tobe_number( result.result.n, 1 )
 				tobe_number( result.result.ok, 1 )
@@ -117,7 +117,7 @@
 			{
 				@ parentId item_a._id
 			f_cb_test( result )
-				log result
+				info result
 				tobe_number( result.deletedCount, 2 )
 				tobe_number( result.result.n, 2 )
 				tobe_number( result.result.ok, 1 )
@@ -136,7 +136,7 @@
 				@ _id item_root._id
 			@ item_root
 			f_cb_test( result )
-				log result
+				info result
 				tobe_number( result.modifiedCount, 1 )
 				tobe_number( result.upsertedCount, 0 )
 				tobe_number( result.result.ok, 1 )
@@ -159,7 +159,7 @@
 			{
 				@ upsert true
 			f_cb_test( result )
-				log result
+				info result
 				tobe_number( result.modifiedCount, 0 )
 				tobe_number( result.upsertedCount, 1 )
 				tobe_array( result.ops, 1 )

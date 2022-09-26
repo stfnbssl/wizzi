@@ -32,13 +32,13 @@ $group
                         =>
                             param result
                                 :any
-                            log myname, 'githubCallback', 'result', JSON.stringify(result.data,null,2)
+                            $$ loog myname, 'githubCallback', 'result', JSON.stringify(result.data,null,2)
                             return result.data['access_token']
                     ._ then
                         =>
                             param _token
                                 :string
-                            log myname, 'githubCallback', '_token', _token
+                            $$ loog myname, 'githubCallback', '_token', _token
                             set (request as any).session.github_access_token = _token
                             _ (request as any).session.save
                                 function
@@ -47,13 +47,13 @@ $group
                                         $$ TODO return next(err)
                                         error myname, 'githubCallback', 'error saving session', err
                                         return response.status(500).json({ message: err.message })
-                                    log myname, 'githubCallback', 'session saved before redirect to /account/profile/github'
+                                    $$ loog myname, 'githubCallback', 'session saved before redirect to /account/profile/github'
                                     _ response.redirect('/account/profile/github')
                     ._ catch
                         =>
                             param err
                                 :any
-                            log myname, 'githubCallback', 'error', err
+                            error myname, 'githubCallback', 'error', err
                             _ response.status(500).json({ message: err.message })
             
             v08/ts/handler${'('}googleCallback)

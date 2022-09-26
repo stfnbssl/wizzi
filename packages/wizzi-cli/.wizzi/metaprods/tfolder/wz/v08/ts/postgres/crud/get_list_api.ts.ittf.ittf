@@ -40,7 +40,7 @@ $group
                                 param result
                                     :any
                                 if err
-                                    log myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
+                                    error myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
                                 $$ loog myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
                                 const resultItem = []

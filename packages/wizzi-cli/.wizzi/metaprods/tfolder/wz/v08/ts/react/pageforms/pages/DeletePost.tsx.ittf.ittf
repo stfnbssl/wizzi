@@ -21,7 +21,7 @@ $group
 
         +
         m componentDidMount
-            log 'DeletePost.componentDidMount.props', this.props
+            $$ loog 'DeletePost.componentDidMount.props', this.props
             const
                 {
                     @ _id
@@ -46,7 +46,7 @@ $group
             _ this.formRef.dispatchEvent(new Event('submit'))
         +
         m render
-            log 'DeletePost.render', 'state', this.state
+            $$ loog 'DeletePost.render', 'state', this.state
             return
                 < FormContainer
                     < FormTitle

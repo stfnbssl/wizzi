@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\ittfFsNode.js.ittf
 */
 'use strict';
@@ -329,7 +329,6 @@ var IttfFsNode = (function () {
         var r = this.root();
         // cut '.ittf' from basename
         var name = this.basename.substr(0, this.basename.length - 5);
-        // log r.jsCodeBasePath, this.parts.slice(1, this.parts.length -1).join('/'), name
         if (this.schema == 'js') {
             return file.read(path.join(r.jsCodeBasePath, this.parts.slice(2, this.parts.length -1).join('/'), name));
         }

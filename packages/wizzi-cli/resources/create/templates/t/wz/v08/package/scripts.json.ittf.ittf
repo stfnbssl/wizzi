@@ -36,11 +36,17 @@ $group
             build "node server"
         ${'$'}else
             ${'$'}if wzCtx.Build.webpack.useEnv
-                start "env-cmd -f deploy/development.env webpack serve --open --mode development"
+                ${'$'}if wzCtx.Build.webpack.useDevServer
+                    start "env-cmd -f deploy/development.env webpack-dev-server"
+                ${'$'}else
+                    start "env-cmd -f deploy/development.env webpack serve --open --mode development"
                 build "env-cmd -f deploy/development.env webpack --mode development"
                 build:prod "env-cmd -f deploy/production.env webpack --mode production"
             ${'$'}else
-                start "webpack serve --open --mode development"
+                ${'$'}if wzCtx.Build.webpack.useDevServer
+                    start "webpack-dev-server"
+                ${'$'}else
+                    start "webpack serve --open --mode development"
                 build "webpack --mode development"
                 build:prod "webpack --mode production"
     ${'$'}elif wzCtx.Build.useReactCreateApp
@@ -136,3 +142,7 @@ $group
         *$
         storybook "start-storybook -p 6006"
         build-storybook "build-storybook"
+
+    ${'$'}if wzCtx.Build.useSequelize
+        sequelize:migrate "npx sequelize-cli db:migrate"
+        sequelize:migrate:reset "npx sequelize-cli db:migrate:undo:all && npm run migrate"

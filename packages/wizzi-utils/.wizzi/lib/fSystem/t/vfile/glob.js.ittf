@@ -76,7 +76,7 @@
 												for var i in removeRoot
 													set file = file.replace(removeRoot[i], '')
 											else 
-												# log unixifyPath(file), removeRoot
+												$$ loog unixifyPath(file), removeRoot
 												set file
 													_ unixifyPath
 														@ file
@@ -129,7 +129,7 @@
                                         for var i in removeRoot
                                             set file = file.replace(removeRoot[i], '')
                                     else 
-										# log unixifyPath(file), removeRoot
+										$$ loog unixifyPath(file), removeRoot
                                         set file
 											_ unixifyPath
 												@ file

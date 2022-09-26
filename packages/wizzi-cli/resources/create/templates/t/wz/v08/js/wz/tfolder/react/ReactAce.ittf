@@ -68,7 +68,7 @@ $group
 
 		m setValue
 			param value
-            # log 'ReactAce.setValue', value
+            $$ loog 'ReactAce.setValue', value
             if this.editor            
 			    _ this.editor.setValue(value == null ? '' : value, 1)
 			

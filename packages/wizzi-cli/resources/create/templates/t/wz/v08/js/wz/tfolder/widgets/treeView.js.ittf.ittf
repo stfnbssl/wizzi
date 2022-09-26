@@ -47,7 +47,7 @@ $group
 			if this.filesystem
 				_ this.filesystem.getFolderRoot
 					a_cb_throw${'('} data )
-						# log 'TreeView.folderRoot', data
+						$$ loog 'TreeView.folderRoot', data
 						set this.rootNode = new TreeNode(data, this)
 						r_cb${'('} this.rootNode.render() )
 			elif rootItem
@@ -60,7 +60,7 @@ $group
 
 		m handleContextMenu
 			param payload
-			# log 'handleContextMenu.payload', payload, payload.data
+			$$ loog 'handleContextMenu.payload', payload, payload.data
 
 			if this.filesystem
 				if payload.data.isFolder
@@ -91,7 +91,7 @@ $group
 						@ onClick
 							=>
 								param data
-								# log 'handleContextMenu_ittfDocument.onClick', data
+								$$ loog 'handleContextMenu_ittfDocument.onClick', data
 								if data.command === 'rename'
 									_ data.payload.treeNode.renameStart
 								elif data.command === 'create folder'
@@ -159,7 +159,7 @@ $group
 						@ onClick
 							=>
 								param data
-								# log 'handleContextMenu_ittfDocument.onClick', data
+								$$ loog 'handleContextMenu_ittfDocument.onClick', data
 								if data.command === 'rename'
 									_ data.payload.treeNode.renameStart
 								elif data.command === 'copy' || data.command === 'cut'
@@ -199,7 +199,7 @@ $group
 			_ this.filesystem.populateFolderItem
 				@ treeNode.item
 				a_cb_throw${'('} populatedItem )
-					# log 'TreeView.populate', populatedItem
+					$$ loog 'TreeView.populate', populatedItem
 					_ treeNode.replace
 						@ populatedItem
 					if callback

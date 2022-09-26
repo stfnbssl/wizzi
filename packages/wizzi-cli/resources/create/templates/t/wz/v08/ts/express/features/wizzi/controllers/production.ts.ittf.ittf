@@ -3,11 +3,12 @@ $group
     ${'$'}
         var ctrl = {
             name: 'Production',
-            path: '/api/v1/wizzi/production'
+            path: '/api/v1/wizzi/production',
+            apiSecured: true
         }
         var myname = 'features/wizzi/controller/productions';
     
-    controller${'('}&ctrl)
+    v08/ts/controller${'('}&ctrl)
         ${'$'}append imports
             import fs
                 from 'fs'
@@ -38,26 +39,27 @@ $group
                 from 'wizzi'
             const myname = '${'$'}{myname}'
 
-        _ this.router.post('/artifact', this.artifact)
-        _ this.router.post('/mtree', this.mTree)
-        _ this.router.post('/mtreescript', this.mTreeBuildupScript)
-        _ this.router.post('/mtreescan', this.mTreeScan)
+        v08/ts/route_api_secured${'('} post, /artifact, this.artifact)
+        v08/ts/route_api_secured${'('} post, /mtree, this.mTree)
+        v08/ts/route_api_secured${'('} post, /mtreescript, this.mTreeBuildupScript)
+        v08/ts/route_api_secured${'('} post, /mtreescan, this.mTreeScan)
+        
         ${'$'}if wzCtx.Build.useWizziJsonFactory
-            _ this.router.post('/wrapittf', this.wrapIttfText)
+            v08/ts/route_api_secured${'('} post, /wrapittf, this.wrapIttfText)
         
         ${'$'}append handlers
-            handler${'('} artifact )
+            v08/ts/handler${'('} artifact )
                 const artifactRequest
                     :ref ArtifactRequest
                     = request.body
-                log myname + '.handler.artifact.received request (keys)', Object.keys(artifactRequest)
+                $$ loog myname + '.handler.artifact.received request (keys)', Object.keys(artifactRequest)
                 _ resolveContexts
                     @ artifactRequest.contextItems
                     ._ then
                         =>
                             param context
                                 :any
-                            log myname, 'handler.artifact.resolvedContext', Object.keys(context)
+                            $$ loog myname, 'handler.artifact.resolvedContext', Object.keys(context)
                             if artifactRequest.ittfDocument.source == 'fs'
                                 _ wizziProds.generateArtifactFs
                                     _ path.join
@@ -67,11 +69,11 @@ $group
                                     ._ then
                                         =>
                                             param generatedArtifact
-                                            log myname, 'generateArtifactFs.result', generatedArtifact
+                                            $$ loog myname, 'generateArtifactFs.result', generatedArtifact
                                             _ sendSuccess
                                                 @ response
                                                 @ generatedArtifact
-                                    catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifactFs )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifactFs )
                             ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.generateArtifact
@@ -82,11 +84,11 @@ $group
                                             =>
                                                 param generatedArtifact
                                                     :any
-                                                log myname, 'generateArtifact.result', generatedArtifact
+                                                $$ loog myname, 'generateArtifact.result', generatedArtifact
                                                 _ sendSuccess
                                                     @ response
                                                     @ generatedArtifact
-                                        catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifact )
+                                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifact )
                             elif artifactRequest.ittfDocument.source == 'db'
                                 _ wizziProds.generateArtifactDb
                                     @ artifactRequest.ittfDocument.mainIttf as string 
@@ -96,25 +98,25 @@ $group
                                         =>
                                             param generatedArtifact
                                                 :any
-                                            log myname, 'generateArtifactDb.result', generatedArtifact
+                                            $$ loog myname, 'generateArtifactDb.result', generatedArtifact
                                             _ sendSuccess
                                                 @ response
                                                 @ generatedArtifact
-                                    catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifact )
-                    catch_fail${'('} ${'$'}{myname}.handler.artifact.resolveContexts )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.artifact.wizziProds.generateArtifact )
+                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.artifact.resolveContexts )
 
-            handler${'('} mTree )
+            v08/ts/handler${'('} mTree )
                 const artifactRequest
                     :ref ArtifactRequest
                     = request.body
-                log myname + '.handler.mTree.received request (keys)', Object.keys(artifactRequest)
+                $$ loog myname + '.handler.mTree.received request (keys)', Object.keys(artifactRequest)
                 _ resolveContexts
                     @ artifactRequest.contextItems
                     ._ then
                         =>
                             param context
                                 :any
-                            log myname, 'handler.mTree.resolvedContext', Object.keys(context)
+                            $$ loog myname, 'handler.mTree.resolvedContext', Object.keys(context)
                             if artifactRequest.ittfDocument.source == 'fs'
                                 _ wizziProds.mTreeFs
                                     _ path.join
@@ -124,12 +126,12 @@ $group
                                     ._ then
                                         =>
                                             param mTree
-                                            log myname, '.handle.mTreeFs.result', mTree.mTreeIttf
+                                            $$ loog myname, '.handle.mTreeFs.result', mTree.mTreeIttf
                                             _ sendSuccess
                                                 @ response
                                                 {
                                                     @ mTree mTree.mTreeIttf
-                                    catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTreeFs )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTreeFs )
                             ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.mTree
@@ -140,12 +142,12 @@ $group
                                             =>
                                                 param mTree
                                                     :any
-                                                log myname, '.handle.mTree.result', mTree.mTreeIttf
+                                                $$ loog myname, '.handle.mTree.result', mTree.mTreeIttf
                                                 _ sendSuccess
                                                     @ response
                                                     {
                                                         @ mTree mTree.mTreeIttf
-                                        catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTree )
+                                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTree )
                             elif artifactRequest.ittfDocument.source == 'db'
                                 _ wizziProds.mTreeDb
                                     @ artifactRequest.ittfDocument.mainIttf as string 
@@ -155,26 +157,26 @@ $group
                                         =>
                                             param mTree
                                                 :any
-                                            log myname, '.handle.mTreeDb.result', mTree.mTreeIttf
+                                            $$ loog myname, '.handle.mTreeDb.result', mTree.mTreeIttf
                                             _ sendSuccess
                                                 @ response
                                                 {
                                                     @ mTree mTree.mTreeIttf
-                                    catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTreeDb )
-                    catch_fail${'('}} ${'$'}{myname}.handler.mTree.resolveContexts )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTree.wizziProds.mTreeDb )
+                    v08/ts/catch_fail${'('}} ${'$'}{myname}.handler.mTree.resolveContexts )
 
-            handler${'('} mTreeBuildupScript )
+            v08/ts/handler${'('} mTreeBuildupScript )
                 const artifactRequest
                     :ref ArtifactRequest
                     = request.body
-                log myname + '.handler.mTreeBuildupScript.received request (keys)', Object.keys(artifactRequest)
+                $$ loog myname + '.handler.mTreeBuildupScript.received request (keys)', Object.keys(artifactRequest)
                 _ resolveContexts
                     @ artifactRequest.contextItems
                     ._ then
                         =>
                             param context
                                 :any
-                            log myname, 'handler.mTreeBuildupScript.resolvedContext', Object.keys(context)
+                            $$ loog myname, 'handler.mTreeBuildupScript.resolvedContext', Object.keys(context)
                             if artifactRequest.ittfDocument.source == 'fs'
                                 _ wizziProds.mTreeBuildupScriptFs
                                     _ path.join
@@ -184,11 +186,11 @@ $group
                                     ._ then
                                         =>
                                             param mTreeBuildupScript
-                                            log myname, '.handle.mTreeBuildupScriptFs.result', mTreeBuildupScript
+                                            $$ loog myname, '.handle.mTreeBuildupScriptFs.result', mTreeBuildupScript
                                             _ sendSuccess
                                                 @ response
                                                 @ mTreeBuildupScript
-                                    catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScriptFs )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScriptFs )
                             ${'$'}if wzCtx.Build.useWizziJsonFactory
                                 elif artifactRequest.ittfDocument.source == 'packi'
                                     _ wizziProds.mTreeBuildupScript
@@ -199,11 +201,11 @@ $group
                                             =>
                                                 param mTreeBuildupScript
                                                     :any
-                                                log myname, '.handle.mTreeBuildupScript.result', mTreeBuildupScript
+                                                $$ loog myname, '.handle.mTreeBuildupScript.result', mTreeBuildupScript
                                                 _ sendSuccess
                                                     @ response
                                                     @ mTreeBuildupScript
-                                        catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScript )
+                                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScript )
                             elif artifactRequest.ittfDocument.source == 'db'
                                 _ wizziProds.mTreeBuildupScriptDb
                                     @ artifactRequest.ittfDocument.mainIttf as string
@@ -213,18 +215,18 @@ $group
                                         =>
                                             param mTreeBuildupScript
                                                 :any
-                                            log myname, '.handle.mTreeBuildupScriptDb.result', mTreeBuildupScript
+                                            $$ loog myname, '.handle.mTreeBuildupScriptDb.result', mTreeBuildupScript
                                             _ sendSuccess
                                                 @ response
                                                 @ mTreeBuildupScript
-                                    catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScriptDb )
-                    catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.resolveContexts )
+                                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.wizziProds.mTreeBuildupScriptDb )
+                    v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeBuildupScript.resolveContexts )
 
-            handler${'('} mTreeScan )
+            v08/ts/handler${'('} mTreeScan )
                 const artifactRequest
                     :ref ArtifactRequest
                     = request.body
-                log myname + '.handler.mTreeScan.received request (keys)', Object.keys(artifactRequest)
+                $$ loog myname + '.handler.mTreeScan.received request (keys)', Object.keys(artifactRequest)
                 var rootFolder = artifactRequest.ittfDocument.rootFolder || ''
                 if artifactRequest.ittfDocument.source == 'fs'
                     _ wizziProds.scanIttfDocumentFs
@@ -235,12 +237,12 @@ $group
                         ._ then
                             =>
                                 param mTreeScan
-                                log myname, '.handle.mTreeScanFs.result', Object.keys(mTreeScan)
+                                $$ loog myname, '.handle.mTreeScanFs.result', Object.keys(mTreeScan)
                                 _ sendSuccess
                                     @ response
                                     {
                                         @ mTreeScan mTreeScan
-                        catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScanFs )
+                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScanFs )
                 ${'$'}if wzCtx.Build.useWizziJsonFactory
                     elif artifactRequest.ittfDocument.source == 'packi'
                         var rootFolder = artifactRequest.ittfDocument.rootFolder || ''
@@ -252,12 +254,12 @@ $group
                                 =>
                                     param mTreeScan
                                         :any
-                                    log myname, '.handle.mTreeScan.result', Object.keys(mTreeScan)
+                                    $$ loog myname, '.handle.mTreeScan.result', Object.keys(mTreeScan)
                                     _ sendSuccess
                                         @ response
                                         {
                                             @ mTreeScan mTreeScan
-                            catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScan )
+                            v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScan )
                 elif artifactRequest.ittfDocument.source == 'db'
                     var rootFolder = artifactRequest.ittfDocument.rootFolder || ''
                     _ wizziProds.scanIttfDocumentDb
@@ -268,12 +270,12 @@ $group
                             =>
                                 param mTreeScan
                                     :any
-                                log myname, '.handle.mTreeScanDb.result', Object.keys(mTreeScan)
+                                $$ loog myname, '.handle.mTreeScanDb.result', Object.keys(mTreeScan)
                                 _ sendSuccess
                                     @ response
                                     {
                                         @ mTreeScan mTreeScan
-                        catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScanDb )
+                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.mTreeScanDb )
                 else
                     _ sendFailure
                         @ response
@@ -283,7 +285,7 @@ $group
                         @ 501                        
 
             ${'$'}if wzCtx.Build.useWizziJsonFactory
-                handler${'('} wrapIttfText )
+                v08/ts/handler${'('} wrapIttfText )
                     _ wizziProds.wrapIttfText
                         @ request.body.schema
                         @ request.body.ittfText
@@ -291,10 +293,10 @@ $group
                             =>
                                 param wrappedIttfText
                                     :string
-                                log myname, '.handle.wrapIttfText.result', wrappedIttfText
+                                $$ loog myname, '.handle.wrapIttfText.result', wrappedIttfText
                                 _ sendSuccess
                                     @ response
                                     {
                                         @ wrappedIttfText wrappedIttfText
-                        catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.wrapIttfText )
+                        v08/ts/catch_fail${'('} ${'$'}{myname}.handler.mTreeScan.wizziProds.wrapIttfText )
 

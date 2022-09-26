@@ -25,3 +25,15 @@ $group
             ${'$'}if wzCtx.Build.react.materialUI.usePickers
                 @material-ui/pickers "^3.0.0"
             @material-ui/styles "^4.11.2"
+
+        ${'$'}if wzCtx.Build.react.useMui
+            ${'$'}if wzCtx.Build.react.mui.useBase
+                @mui/base "latest"
+            ${'$'}if wzCtx.Build.react.mui.useIcons
+                @mui/icons-material "latest"
+            ${'$'}if wzCtx.Build.react.mui.useJoy
+                @mui/joy "latest"
+            ${'$'}if wzCtx.Build.react.mui.useMaterial
+                @mui/material "latest"
+            ${'$'}if wzCtx.Build.react.mui.useSystem
+                @mui/system "latest"

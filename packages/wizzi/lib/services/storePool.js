@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\storePool.js.ittf
 */
 'use strict';
@@ -37,8 +37,8 @@ var StorePool = (function () {
         this.repoOptions = repoOptions;
         this.storeKind = repoOptions.storeKind || 'filesystem';
         
-        if (this.storeKind === 'json' && !repoOptions.storeFsJson && repoOptions.storeJsonFsData) {
-            this._initializeFsJson((err, notUsed) => {
+        if (this.storeKind === 'json' && !repoOptions.storeJsonFs && repoOptions.storeJsonFsData) {
+            this._initializeJsonFs((err, notUsed) => {
             
                 if (err) {
                     return callback(err);
@@ -52,19 +52,19 @@ var StorePool = (function () {
         }
         
     }
-    StorePool.prototype._initializeFsJson = function(callback) {
+    StorePool.prototype._initializeJsonFs = function(callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
-                error('InvalidArgument', '_initializeFsJson', 'The callback parameter must be a function. Received: ' + callback)
+                error('InvalidArgument', '_initializeJsonFs', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
         var JsonComponents = repo.JsonComponents;
-        JsonComponents.createFsJsonByJsonFsData(this.repoOptions.storeJsonFsData, (err, fsJson) => {
+        JsonComponents.createJsonFsByJsonFsData(this.repoOptions.storeJsonFsData, (err, jsonFs) => {
         
             if (err) {
                 return callback(err);
             }
-            this.repoOptions.storeFsJson = fsJson;
+            this.repoOptions.storeJsonFs = jsonFs;
             return callback(null);
         }
         )
@@ -127,7 +127,7 @@ var StorePool = (function () {
         // loog 'repoOptions', repoOptions
         else if (this.storeKind === 'json') {
             repo.jsonfile({
-                fsJson: this.repoOptions.storeFsJson
+                jsonFs: this.repoOptions.storeJsonFs
              }, function(err, file) {
                 if (err) {
                     return callback(err);
@@ -237,7 +237,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.33.storePool.' + method,
+        method: 'wizzi@0.7.34.storePool.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

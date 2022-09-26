@@ -8,6 +8,10 @@ $group
 
     ${mixMisc} setMyProps, &md )
 
+    ${'$'}if md.hotReload
+        import
+            @ hot
+            from 'react-hot-loader'
     import React
         @ FunctionComponent
         from 'react'
@@ -96,4 +100,7 @@ $group
                         @ ${'$'}{md.name}
         export-default ${'$'}{md.name}Connected
     ${'$'}else
-        export-default ${'$'}{md.name}
+        ${'$'}if md.hotReload
+            export-default hot(module)(${'$'}{md.name})
+        ${'$'}else
+            export-default ${'$'}{md.name}

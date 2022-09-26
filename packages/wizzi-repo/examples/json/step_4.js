@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\json\step_4.js.ittf
 */
 'use strict';
@@ -23,79 +23,46 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var vfile = require('wizzi-utils').vfile;
 var repoIndex = require('../../index');
 var json = require('../../lib/json/index');
+var JsonFsImpl = require('../../lib/json/jsonFsimpl');
 var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl');
 var FsMongo = require('../../lib/mongodb/fs/fsmongo');
 var Document = require('../../lib/mongodb/fs/document');
-function dump(fsJson) {
-    printValue('fsJson.items', fsJson.items)
-    printValue('fsJson.documents', fsJson.documents)
+function dump(obj, title) {
+    printValue(title, stringify(obj, null, 2))
 }
 var Json_Step_4 = function(step_callback) {
     heading1('EXAMPLE')
     heading1('start');
     // create an array of document data for test
-    var documents = [];
-    documents.push({
-        path: 'c:/root/folder1/index.html.ittf', 
-        content: [
-            'html', 
-            '    body', 
-            '        ul', 
-            '            lia( stefi )', 
-            '            lia_img( annie, photo.jpg )'
-        ].join('\n')
-     })
-    documents.push({
-        path: 'c:/root/folder1/t/lia.html.ittf', 
-        content: [
-            'li', 
-            '    a', 
-            '        href'
-        ].join('\n')
-     })
-    documents.push({
-        path: 'c:/root/folder1/t/lia_img.html.ittf', 
-        content: [
-            'li', 
-            '    a', 
-            '        href', 
-            '        img'
-        ].join('\n')
-     })
+    var documents = data_get_documents_folder1();
     json.createJsonFsData(documents, function(err, jsonFsData) {
         console.log("[31m%s[0m", err);
         if (err) {
             throw new Error(JSON.stringify(err, null, 2));
         }
         heading2('created JsonFilesystem');
-        printValue(jsonFsData)
+        dump(jsonFsData, "jsonFsData added folder1")
         addDocuments(jsonFsData)
     })
     function addDocuments(jsonFsData) {
         heading2('write documents to JsonFilesystem');
-        var documents = [];
-        documents.push({
-            path: 'c:/root/folder2/index.html.ittf', 
-            content: [
-                'module', 
-                '    kind react'
-            ].join('\n')
-         })
+        var documents = data_get_documents_folder2();
         json.addToJsonFsData(jsonFsData, documents, function(err, jsonFsData) {
             console.log("[31m%s[0m", err);
             if (err) {
                 throw new Error(JSON.stringify(err, null, 2));
             }
-            printValue(jsonFsData)
+            dump(jsonFsData, "jsonFsData added folder2")
             extractDocuments(jsonFsData)
         })
     }
     function extractDocuments(jsonFsData) {
         heading2('read documents from JsonFilesystem');
         var doc = json.createDocumentManager(jsonFsData);
-        doc.getFiles('c:/', {
+        doc.getFiles('json:', {
             deep: true, 
             documentContent: true
          }, function(err, files) {
@@ -103,8 +70,50 @@ var Json_Step_4 = function(step_callback) {
             if (err) {
                 throw new Error(JSON.stringify(err, null, 2));
             }
-            printValue(files)
+            dump(files, "Total documents")
         })
+    }
+    function data_get_documents_folder1() {
+        var documents = [];
+        documents.push({
+            path: 'json:/root/folder1/index.html.ittf', 
+            content: [
+                'html', 
+                '    body', 
+                '        ul', 
+                '            lia( stefi )', 
+                '            lia_img( annie, photo.jpg )'
+            ].join('\n')
+         })
+        documents.push({
+            path: 'json:/root/folder1/t/lia.html.ittf', 
+            content: [
+                'li', 
+                '    a', 
+                '        href'
+            ].join('\n')
+         })
+        documents.push({
+            path: 'json:/root/folder1/t/lia_img.html.ittf', 
+            content: [
+                'li', 
+                '    a', 
+                '        href', 
+                '        img'
+            ].join('\n')
+         })
+        return documents;
+    }
+    function data_get_documents_folder2() {
+        var documents = [];
+        documents.push({
+            path: 'json:/root/folder2/index.html.ittf', 
+            content: [
+                'module', 
+                '    kind react'
+            ].join('\n')
+         })
+        return documents;
     }
 };
 Json_Step_4.__name = 'Json_Step_4';

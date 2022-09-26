@@ -47,7 +47,7 @@ $group
 
         m render
             const cp = this.state.condProperty
-            log 'FormObject.render', cp.name, this.props.values[cp.name], this.props.values, this.state
+            $$ loog 'FormObject.render', cp.name, this.props.values[cp.name], this.props.values, this.state
             return
                 < Box
                     @ border '1px solid #bcbcbc'
@@ -79,7 +79,7 @@ $group
                                             param p
                                                 :any
                                             param ndx
-                                            log 'p', p
+                                            $$ loog 'p', p
                                             if p.type == 'string' || p.type == 'number'
                                                 return
                                                     < FormGroup

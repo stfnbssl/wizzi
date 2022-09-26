@@ -1,5 +1,5 @@
 ﻿before-async
 
-	set fsJson = new FsJson()
-	set doc = new Document(fsJson)
+	set jsonFs = new JsonFs()
+	set doc = new Document(jsonFs)
 	_ done()

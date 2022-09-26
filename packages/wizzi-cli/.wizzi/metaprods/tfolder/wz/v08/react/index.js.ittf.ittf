@@ -101,7 +101,7 @@ $group
 	${'$'}if wzCtx.Build.react.useCreateReactApp
 		_ registerServiceWorker
 
-	${'$'}if wzCtx.Build.useHotReload
+	${'$'}if wzCtx.Build.react.useHotReload
 		if process.env.NODE_ENV !== 'production' && module.hot
 			_ module.hot.accept
 				@ './containers/${'$'}{rootContainer}'

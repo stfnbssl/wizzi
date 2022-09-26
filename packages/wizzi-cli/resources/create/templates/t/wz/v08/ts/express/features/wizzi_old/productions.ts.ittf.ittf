@@ -19,7 +19,7 @@ $group
         from '../config'
     import 
         ${'$'}if wzCtx.Build.usePacki
-            @ createFsJsonAndFactory
+            @ createJsonFsAndFactory
             @ ensurePackiFilePrefix
         @ createFilesystemFactory
         from './factory'
@@ -28,7 +28,7 @@ $group
         @ TransformedModel
         from './types'
     import 
-        @ FsJson
+        @ JsonFs
         from 'wizzi-repo'
     $include productions/loadMTree.ts
     $include productions/generate.ts

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfGraph\ittfDocumentGraph.js.ittf
 */
 'use strict';
@@ -555,15 +555,11 @@ var IttfDocumentGraph = (function () {
             uri: 'unknown', 
             id: 'unknown'
          };
-        // log 1,'wizzi-utils.ittfDocumentGraph.analizeFragment.__getFragmentPath'
         var that = this;
         this.__getFragmentPath(ctx, function(err, fragmentPath) {
             if (err) {
                 return callback(err);
             }
-            console.log(11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath, __filename);
-            
-            // log 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
             
             // throw new Error(fragmentPath)
             if (fragmentPath.__is_error) {
@@ -574,12 +570,9 @@ var IttfDocumentGraph = (function () {
             }
             else {
                 fragment.uri = verify.unixifyPath(fragmentPath);
-                
-                // log 13, 'wizzi-utils.ittfDocumentGraph.analizeFragment search fragment in IttfFsNode', fragmentPath
                 if (ctx && ctx.ittfBasePath && ctx.ittfFsNode) {
                     var fragmentDocument = ctx.ittfFsNode.searchDocument(fragmentPath);
                     if (!fragmentDocument) {
-                        console.log(14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath), __filename);
                         fragment.__is_error = true;
                         fragment.message = 'NotFound in ittfFsNode documents.';
                         r.errorFragments.push(fragment);
@@ -588,7 +581,6 @@ var IttfDocumentGraph = (function () {
                         }
                     }
                     else {
-                        console.log(15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id, __filename);
                         fragment.id = fragmentDocument.id;
                         if (that.isReferenceToIttf()) {
                             if (ctx.ittfReferences) {
@@ -626,10 +618,6 @@ var IttfDocumentGraph = (function () {
     IttfDocumentGraph.prototype.__getFragmentPath = function(ctx, callback) {
         var r = this.root(),
             fragmentPath;
-        
-        // log 2, "ittfDocumentGraph.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
-        
-        // log 3, '__getFragmentPath.fragmentPath', fragmentPath
         if (this.isReferenceToIttf() && ctx && verify.isNotEmpty(ctx.rootFolder)) {
             if (this.fragmentName[0] === '/') {
                 fragmentPath = path.join(ctx.rootFolder, this.fragmentName)
@@ -661,7 +649,6 @@ var IttfDocumentGraph = (function () {
                 callerFullPath: r.model.uri, 
                 fragmentName: this.fragmentName
              }, function(err, result) {
-                // log 4, 'ittfFinder.resolvePath, err, this.fragmentName, result', err, r.model.uri, that.fragmentName, result
                 if (err) {
                     return callback(null, {
                             __is_error: true, 

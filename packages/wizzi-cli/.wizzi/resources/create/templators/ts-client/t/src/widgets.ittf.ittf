@@ -1,0 +1,68 @@
+$group
+    
+    $file __dot__wizzi/${pkgPath}src/widgets/demo.tsx.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/react/basic/widgets/demo.tsx
+
+    $if cliCtx.useReact && cliCtx.react.useRouter
+        $if cliCtx.react.useMui
+            $file __dot__wizzi/${pkgPath}src/widgets/demo-mui.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/basic/widgets/demo-mui.tsx
+
+    $file __dot__wizzi/${pkgPath}src/widgets/button.tsx.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/react/basic/widgets/button.tsx
+
+    $file __dot__wizzi/${pkgPath}src/widgets/card.tsx.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/react/basic/widgets/card.tsx
+
+    $file __dot__wizzi/${pkgPath}src/widgets/tick.tsx.ittf.ittf
+        module
+            ${'$'}include wz/v08/ts/react/basic/widgets/tick.tsx
+
+    $if cliCtx.useReact && cliCtx.react.useMui
+        
+        $if cliCtx.react.mui.useSystem
+            
+            $file __dot__wizzi/${pkgPath}src/widgets/muisystem/boxes.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muisystem/boxes.tsx
+
+            $file __dot__wizzi/${pkgPath}src/widgets/muisystem/styled-div.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muisystem/styled-div.tsx
+
+            $file __dot__wizzi/${pkgPath}src/widgets/muisystem/themed-div.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muisystem/themed-div.tsx
+
+        $if cliCtx.react.mui.useBase
+            
+            $file __dot__wizzi/${pkgPath}src/widgets/muibase/button.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muibase/button.tsx
+            
+            $file __dot__wizzi/${pkgPath}src/widgets/muibase/styled-button.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muibase/styled-button.tsx
+
+        $if cliCtx.react.mui.useJoy
+            
+            $file __dot__wizzi/${pkgPath}src/widgets/muijoy/button.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muijoy/button.tsx
+
+            $file __dot__wizzi/${pkgPath}src/widgets/muijoy/login.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muijoy/login.tsx
+
+        $if cliCtx.react.useSplitPane
+
+            $file __dot__wizzi/${pkgPath}src/widgets/muijoy/split-pane.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/components/widgets/muijoy/split-pane.tsx
+
+
+

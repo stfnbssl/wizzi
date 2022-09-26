@@ -21,7 +21,7 @@ module
             [
                 @ 'module'
                 @ '    kind es6'
-                @ '    log "Hello"'
+                @ '    info "Hello"'
                 ._ join
                     @ '\n'
         +
@@ -45,12 +45,12 @@ module
                     @ path htmlIttfUri
                     @ content htmlContent
         +
-        _ wizziIndex.JsonComponents.createFsJson
+        _ wizziIndex.JsonComponents.createJsonFs
             @ documents
-            f_cb_test( fsJson )
+            f_cb_test( jsonFs )
                 var options
                     {
-                        @ fsJson fsJson
+                        @ jsonFs jsonFs
                         { plugins
                             [ items
                                 @ 'wizzi-js'

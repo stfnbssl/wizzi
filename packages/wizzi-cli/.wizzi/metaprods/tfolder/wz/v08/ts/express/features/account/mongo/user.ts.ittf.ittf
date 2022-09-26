@@ -47,9 +47,17 @@ $group
                 {
                     @ buildModel
                         =>
+                            param options
+                                :any
+                                :optional
                             set UserModel =
                                 _ model
                                     :param
                                         :ref IUserModel
                                     @ "User"
                                     @ UserSchema
+                    @ applyExtraSetup
+                        =>
+                            param options
+                                :any
+                                :optional

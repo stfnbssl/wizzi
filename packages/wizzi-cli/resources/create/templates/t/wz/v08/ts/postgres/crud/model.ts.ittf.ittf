@@ -49,9 +49,17 @@ $group
                 {
                     @ buildModel
                         =>
+                            param options
+                                :any
+                                :optional                                    
                             set ${'$'}{md.Name}Model =
                                 _ model
                                     :param
                                         :ref I${'$'}{md.Name}Model
                                     @ "${'$'}{md.Name}"
                                     @ ${'$'}{md.Name}Schema
+                    @ applyExtraSetup
+                        =>
+                            param options
+                                :any
+                                :optional

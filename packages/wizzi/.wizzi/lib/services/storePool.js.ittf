@@ -18,8 +18,8 @@
 			set this.repoOptions = repoOptions
 			set this.storeKind = repoOptions.storeKind || 'filesystem'
 			+
-			if this.storeKind === 'json' && !repoOptions.storeFsJson && repoOptions.storeJsonFsData
-				_ this._initializeFsJson
+			if this.storeKind === 'json' && !repoOptions.storeJsonFs && repoOptions.storeJsonFsData
+				_ this._initializeJsonFs
 					a_cb()
 						_ this.initialize_next_1
 							@ callback
@@ -27,13 +27,13 @@
 				_ this.initialize_next_1
 					@ callback
 			+
-		m _initializeFsJson
+		m _initializeJsonFs
 			callback
 			var JsonComponents = repo.JsonComponents
-			_ JsonComponents.createFsJsonByJsonFsData
+			_ JsonComponents.createJsonFsByJsonFsData
 				@ this.repoOptions.storeJsonFsData
-				a_cb( fsJson )
-					set this.repoOptions.storeFsJson = fsJson
+				a_cb( jsonFs )
+					set this.repoOptions.storeJsonFs = jsonFs
 					r_cb()
 
 		m initialize_next_1
@@ -68,7 +68,7 @@
 				# loog 'repoOptions', repoOptions
 				_ repo.jsonfile
 					{
-						@ fsJson this.repoOptions.storeFsJson
+						@ jsonFs this.repoOptions.storeJsonFs
 					f_cb( file )
 						set that.fileService = file
 						r_cb( null )

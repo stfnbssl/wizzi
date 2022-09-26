@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -36,6 +36,14 @@ md.Coder = helpers.coder;
 md.file = fSystem.file;
 md.vfile = fSystem.vfile;
 md.uriParser = fSystem.uriParser;
+md.jsonUriParser = function(uri) {
+    // Dummy implementation after giving up the idea of a multi-filesystem wizzi production
+    // 12/9/2022
+    return {
+            internalPath: uri
+         };
+}
+;
 md.fileInfoByPath = fSystem.fileInfoByPath;
 // errors - legacy
 md.nodeErrors = require('./lib/errors/legacyErrors');

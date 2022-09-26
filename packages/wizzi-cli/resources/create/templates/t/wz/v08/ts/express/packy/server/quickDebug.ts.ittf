@@ -1,6 +1,6 @@
 module
     import 
-        @ createFsJsonAndFactory
+        @ createJsonFsAndFactory
         from './features/wizzi/factory'
     import 
         @ generateArtifact
@@ -44,7 +44,7 @@ module
     async-function testFactory
         const wf
             await 
-                _ createFsJsonAndFactory
+                _ createJsonFsAndFactory
                     { 
                         { 'x/d/a.js.ittf'
                             @ type 'CODE'

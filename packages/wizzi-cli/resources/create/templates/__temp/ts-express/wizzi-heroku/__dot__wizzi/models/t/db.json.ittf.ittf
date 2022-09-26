@@ -9,3 +9,6 @@ ${'$'}group
        { options
            useNewUrlParser true
            useUnifiedTopology true
+   useSequelize true
+   { sequelize
+       databaseUrl "${'$'}{stfnbssl_env.sequelizeDbUrl}"

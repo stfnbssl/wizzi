@@ -23,7 +23,7 @@
 			{
 				@ name name
 				@ options options
-		log chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name)
+		info chalk.yellow('WIZZI RunnerServer. Registered factory: ' + name)
 
 	m getWizziFactory
 		param name
@@ -74,7 +74,7 @@
 			@ loadContext
 			f_cb( wizziModel )
 				set that.models[modelTicket] = wizziModel
-				log chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket)
+				info chalk.yellow('WIZZI RunnerServer. Loaded model: ' + modelTicket)
 				r_cb( wizziModel )
     
 	m transformModel
@@ -97,7 +97,7 @@
 			@ context
 			f_cb( transformedModel )
 				set that.models[modelTicket] = transformedModel
-				log chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket)
+				info chalk.yellow('WIZZI RunnerServer. Loaded transformed model: ' + modelTicket)
 				r_cb( wizziModel )
 
 	m getModel

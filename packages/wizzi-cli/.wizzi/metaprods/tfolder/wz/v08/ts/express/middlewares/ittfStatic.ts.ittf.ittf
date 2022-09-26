@@ -21,6 +21,7 @@ $group
             from '../features/config'
         import
             @ wizziProds
+            @ wizziMaps
             from '../features/wizzi'
         import
             @ WizziModel
@@ -32,58 +33,8 @@ $group
                     =>
                         param app
                             :ref Application
-                        log 'IttfStaticMiddleware. Folder served from ', path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf')
+                        info 'IttfStaticMiddleware. Folder served from ', path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf')
                         _ app.use('/ittf', ittfMiddleware(path.resolve(${'$'}{wzCtx.Build.express.staticFiles.basePath}, 'ittf'), '/ittf'))
-        const extContentTypeMap
-            :{
-                :index
-                    :string
-                    param k
-                        :string
-            =
-                {
-                    @ '.css' 'text/css'
-                    @ '.gif' 'image/gif'
-                    @ '.html' 'text/html'
-                    @ '.ittf' 'text/plain'
-                    @ '.jpeg' 'image/jpeg'
-                    @ '.jpg' 'image/jpg'
-                    @ '.js' 'text/javascript'
-                    @ '.json' 'application/json'
-                    @ '.png' 'image/png'
-                    @ '.scss' 'text/scss'
-                    @ '.svg' 'image/svg+xml'
-                    @ '.ttf' 'application/x-font-ttf'
-                    @ '.txt' 'text/plain'
-                    @ '.vtt' 'text/vtt'
-                    @ '.woff' 'application/x-font-woff'
-                    @ '.yaml' 'text/yanl'
-                    @ '.yml' 'text/yanl'
-                    @ '.xml' 'text/xml'
-        +
-        function ittfSchemaOf
-            param file
-                :string
-            :return
-                :union
-                    :string
-                    :undefined
-            const nameParts = path.basename(file).split('.')
-            if nameParts[nameParts.length - 1] === 'ittf'
-                return nameParts[nameParts.length - 2]
-            return undefined
-        +
-        function contentTypeFor
-            param file
-                :string
-            :return
-                :union
-                    :string
-                    :undefined
-            const ittfSchema = ittfSchemaOf(file)
-            if ittfSchema
-                return extContentTypeMap['.' + ittfSchema]
-            return undefined
         +
         function ittfMiddleware
             param basePath
@@ -122,8 +73,8 @@ $group
                         return sendFolderScan(filePath, basePath, queryMeta, request, response)
                     if queryTransform && queryTransform.indexOf('/') > 0
                         return sendTransform(filePath, queryTransform, response)
-                    let ittfSchema = ittfSchemaOf(filePath)
-                    let contentType = contentTypeFor(filePath)
+                    let ittfSchema = wizziMaps.schemaFromFilePath(filePath)
+                    let contentType = wizziMaps.contentTypeFor(filePath)
                     $$ $$ loog 'contentType', contentType, 'ittfSchema', ittfSchema, 'queryMeta', queryMeta
                     if !contentType
                         _ next
@@ -424,7 +375,7 @@ $group
                         $$ loogg 'generated.meta.document', generated.artifactContent
                     _ response.end(generated.artifactContent)
             catch ex
-                log 'sendFolderScan.exception', ex
+                error 'sendFolderScan.exception', ex
                 _ sendError
                     @ response
                     @ ex
@@ -567,32 +518,5 @@ $group
                     @ null
                     @ 4
 
-        $* VIA
-        async-function loadJsonIttfModel
-            param relPath
-                :string
-            return
-                new Promise
-                    =>
-                        param resolve
-                        param reject
-                        _ wizziProds.loadModelFs
-                            _ path.join
-                                @ config.ittfPath
-                                @ 'models'
-                                @ relPath
-                            {
-                                @ isWizziStudio true
-                            ._ then
-                                =>
-                                    param model
-                                    # log 'loadJsonIttfModel', model
-                                    _ resolve
-                                        @ model
-                            ._ catch
-                                =>
-                                    param err
-                                    _ reject(err)
-        *$
     ${'$'}else
         # <--wizzi!file!exclude-->                

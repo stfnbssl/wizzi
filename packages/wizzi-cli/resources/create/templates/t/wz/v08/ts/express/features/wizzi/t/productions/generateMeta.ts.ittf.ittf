@@ -1,0 +1,34 @@
+    ${'$'}if wzCtx.Build.useWizziJsonFactory
+        +
+        export 
+            async-function metaGenerate
+                param files
+                    :ref packiTypes.PackiFiles
+                param context
+                    :any 
+                :return
+                    :ref Promise
+                        :param 
+                            :ref packiTypes.PackiFiles
+                _ jsonwf.wf.metaGenerate
+                    @ packiFilePrefix + 'index.ittf.ittf'
+                    {
+                        @ modelRequestContext context
+                    {
+                        @ tempFolder packiFilePrefix + 'template'
+                        @ destFolder packiFilePrefix + '.wizzi'
+                    a_cb(jsonFs)
+                        _ jsonFsToPackiFiles
+                            @ jsonwf.wf.jsonFs
+                            @ 'template'
+                            a_cb(templatePackiFiles)
+                                _ jsonFsToPackiFiles
+                                    @ jsonwf.wf.jsonFs
+                                    @ '.wizzi'
+                                    f_cb_test(wizziPackiFiles)
+                                        _ printValue
+                                            @ 'wizziPackiFiles'
+                                            _ stringify
+                                                @ wizziPackiFiles
+                                                @ null
+                                                @ 2

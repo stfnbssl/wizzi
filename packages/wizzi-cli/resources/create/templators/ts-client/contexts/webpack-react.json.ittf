@@ -1,0 +1,49 @@
+{
+    $include commons
+
+    $ 
+        var hotReload = false;
+        var isStandalone = true;
+
+    { App
+        name "Test Webpack React"
+
+    $if isStandalone
+        isStandalone true
+
+    useEnvCmd true
+    { envCmd
+
+    useTypescript true
+    { typescript
+
+   
+    useWebpack true
+    { webpack
+        { output
+            $if isStandalone
+                path "path.resolve(__dirname, 'dist')"
+                filename "bundle.js"
+            $else
+                path "C:/My/wizzi/stfnbssl/wizzi-heroku/public/reactlab"
+                publicPath "/public/reactlab/"
+
+    useReact true
+    { react
+        useRouter true
+        { router
+        useMui true
+        { mui
+            useSystem true
+            useBase true
+            useIcons false
+            useJoy true
+            useMaterial false
+        useSplitPane true
+        { splitPane
+        $if hotReload
+            useHotReload true
+            { hotReload
+
+    useTailwind true
+    { tailwind

@@ -43,16 +43,16 @@ $group
 														@ md.wizzifile
 														@ md.config
 														f_cb( notUsed )
-															log chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
+															info chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
 															return callback(null)
 												else
-													log chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
+													info chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
 													return callback(null)
 									else
-										log chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
+										info chalk.yellow('WIZZI RUNNER SERVER STARTED ON FOLDER ' + runnerServerCWD)
 										return callback(null)
 						else
-							log chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.')
+							info chalk.yellow('Method wizzifile.onConfig NOT FOUND. RUNNER SERVER NOT STARTED.')
 							return callback(null)
 
 	set md.loadWizzifile
@@ -66,8 +66,8 @@ $group
 				var wizziFilePath = path.join(runnerServerCWD, 'wizzifile.js')
 				if md.file.isFile(wizziFilePath)
 					set md.wizzifile = require(wizziFilePath)
-					log chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath)
+					info chalk.yellow('WIZZI FILE FOUND on path: ' + wizziFilePath)
 					r_cb( md.wizzifile )
 				else
-					log chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.')
+					info chalk.yellow('WIZZI FILE NOT FOUND. RUNNER SERVER NOT STARTED.')
 					return callback(null)

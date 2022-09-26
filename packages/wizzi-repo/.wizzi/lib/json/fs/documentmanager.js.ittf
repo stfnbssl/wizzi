@@ -6,25 +6,27 @@
 	import async
 	var vfile = require('wizzi-utils').vfile
 	var verify = require('wizzi-utils').verify
-	var jsonUriParser = require('wizzi-utils').uriParser
+	$$ stop 12/9/2022 var jsonUriParser = require('wizzi-utils').uriParser
+    var jsonUriParser = require('wizzi-utils').jsonUriParser
 	var errors = require('../../errors')
 	var FsStream = require('../../utils/fsstream')
 	var Promise = require('promise')
 	var JSZip = require('jszip')
-	var FsJson = null
+	var JsonFs = null
+    var myname = 'wizzi-repo.lib.json.fs.documentmanager'
 
 	#
 		# class DocumentManager (Manager)
-        # implements standard file operations (wizzi-utils/vfile interface) on a json\FsJson instance
+        # implements standard file operations (wizzi-utils/vfile interface) on a json\JsonFs instance
 		#
 		# ctor params
 		#  fsCommon
-		#    # instance of json/FsJson
+		#    # instance of json/JsonFs
 
 	class DocumentManager
 		ctor
 			param fsCommon
-			_ assert( true, fsCommon.classType === 'wizzi-repo.json.FsJson' );
+			_ assert( true, fsCommon.classType === 'wizzi-repo.json.JsonFs' );
 			_ assert( true, !!fsCommon.items && 
 				\b fsCommon.items.classType === 'wizzi-repo.utils.Collection');
 			_ assert( true, !!fsCommon.documents && 
@@ -70,20 +72,20 @@
 		# Creates a DocumentManager instance
 	set DocumentManager.create
 		function
-			param fsJsonData
+			param jsonFsData
 			param callback
 			+
-			if verify.isUndefined(callback) && verify.isFunction(fsJsonData)
-				set callback = fsJsonData
-				set fsJsonData = null
+			if verify.isUndefined(callback) && verify.isFunction(jsonFsData)
+				set callback = jsonFsData
+				set jsonFsData = null
 			+
-			if FsJson == null
-				set FsJson = require('./fsjson')
+			if JsonFs == null
+				set JsonFs = require('./fsjson')
 			return
 				_ callback
 					@ null
 					new DocumentManager
-						new FsJson(fsJsonData)
+						new JsonFs(jsonFsData)
 
 	function errorMsg
 		param method
@@ -99,14 +101,17 @@
 		param stripEndingSlash
 		if stripEndingSlash
 			var ret = path.trim().replace(/\\/g,'/').toLowerCase()
-			var parsedUri
+            var parsedUri
 				_ jsonUriParser
 					@ ret.substr(-1) === '/' ? ret.substr(0, ret.length-1) : ret
-			return parsedUri.internalPath
+			$$ loog myname, 'normalize stripEndingSlash(yes)', path, parsedUri.internalPath
+            return parsedUri.internalPath
 		else
+            var ret = path.trim().replace(/\\/g,'/').toLowerCase()
 			var parsedUri
 				_ jsonUriParser
 					@ path.trim().replace(/\\/g,'/').toLowerCase()
+            $$ loog myname, 'normalize stripEndingSlash(no)', path, parsedUri.internalPath
 			return parsedUri.internalPath
 
 	function denormalize

@@ -13,7 +13,7 @@ const templator = require('./templator');
 var file = vfile();
 var templateGroups = [
     'ts-express', 
-    'ts-webpack'
+    'ts-client'
 ];
 module.exports = (options) => {
 

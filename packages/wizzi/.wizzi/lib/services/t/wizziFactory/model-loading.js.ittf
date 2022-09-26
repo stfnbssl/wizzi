@@ -87,7 +87,6 @@ $group
 		#     { mTreeBuildupContext
 		#       optional
 		#     { globalContext
-		#         # Being the loadModel function called once this usually is not used.
 		#       optional
 		#     { formatOptions
 		#       optional

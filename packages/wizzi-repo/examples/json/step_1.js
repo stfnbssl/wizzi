@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.9
+    package: wizzi-js@0.7.12
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\json\step_1.js.ittf
 */
 'use strict';
@@ -23,60 +23,62 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var vfile = require('wizzi-utils').vfile;
 var repoIndex = require('../../index');
 var json = require('../../lib/json/index');
+var JsonFsImpl = require('../../lib/json/jsonFsimpl');
 var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl');
 var FsMongo = require('../../lib/mongodb/fs/fsmongo');
 var Document = require('../../lib/mongodb/fs/document');
-function dump(fsJson) {
-    printValue('fsJson.items', fsJson.items)
-    printValue('fsJson.documents', fsJson.documents)
+function dump(jsonFs) {
+    printValue('jsonFs.items', jsonFs.items)
+    printValue('jsonFs.documents', jsonFs.documents)
 }
 var Json_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
     heading1('start');
-    var fsJson = new json.FsJson();
-    dump(fsJson)
-    fsJson.insertItem({
+    var jsonFs = new json.JsonFs();
+    dump(jsonFs)
+    jsonFs.insertItem({
+        dirname: 'json:/zero', 
         basename: 'alpha.js.ittf', 
-        dirname: 'w:/zero', 
         kind: 1
      }, function(err, result) {
         if (err) {
             console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        // loog 'insert.alpha.js.ittf.result', result
+        console.log('insert.alpha.js.ittf.result', result);
         var insertedId = result.insertedId;
-        dump(fsJson)
+        dump(jsonFs)
         result.item.basename = 'beta.js.ittf';
-        fsJson.updateItem(result.item, function(err, result) {
+        jsonFs.updateItem(result.item, function(err, result) {
             if (err) {
                 console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
-            // loog 'update.beta.js.ittf.result', result
-            dump(fsJson)
-            fsJson.writeDocument(result.item._id, 'My content', function(err, result) {
+            console.log('update.beta.js.ittf.result', result);
+            dump(jsonFs)
+            jsonFs.writeDocument(result.item._id, 'My content', function(err, result) {
                 if (err) {
                     console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
                 // loog 'write.beta.js.ittf.result', result
-                dump(fsJson)
-                fsJson.readDocument(result.item._id, function(err, result) {
+                dump(jsonFs)
+                jsonFs.readDocument(result.item._id, function(err, result) {
                     if (err) {
                         console.log("[31m%s[0m", err);
                         throw new Error(err.message);
                     }
                     // loog 'read.beta.js.ittf.result', result
-                    fsJson.deleteItem(insertedId, function(err, result) {
+                    jsonFs.deleteItem(insertedId, function(err, result) {
                         if (err) {
                             console.log("[31m%s[0m", err);
                             throw new Error(err.message);
                         }
                         // loog 'delete.beta.js.ittf.result', result
-                        dump(fsJson)
+                        dump(jsonFs)
                     })
                 })
             })

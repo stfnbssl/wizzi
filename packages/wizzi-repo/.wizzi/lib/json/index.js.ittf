@@ -9,7 +9,7 @@
 	var Collection = require('../utils/collection')
 
 	set md.directoryTree = require('./directoryTree')
-	set md.FsJson = require('./fs/fsjson')
+	set md.JsonFs = require('./fs/fsjson')
 	set md.DocumentManager = require('./fs/documentmanager')
 
 	#
@@ -22,33 +22,33 @@
 		#    must call the toJson method of the DocumentManager instance
 	set md.createDocumentManager
 		function
-			param fsJsonDataOrFsJson
-			if fsJsonDataOrFsJson && fsJsonDataOrFsJson.classType === 'wizzi-repo.json.FsJson'
-				return new md.DocumentManager(fsJsonDataOrFsJson)
+			param jsonFsDataOrJsonFs
+			if jsonFsDataOrJsonFs && jsonFsDataOrJsonFs.classType === 'wizzi-repo.json.JsonFs'
+				return new md.DocumentManager(jsonFsDataOrJsonFs)
 			else
-				var jsonFsData = fsJsonDataOrFsJson || {}
+				var jsonFsData = jsonFsDataOrJsonFs || {}
 				set jsonFsData.items = jsonFsData.items || []
 				set jsonFsData.documents = jsonFsData.documents || []
 				return
 					new md.DocumentManager
-						new md.FsJson(jsonFsData)
+						new md.JsonFs(jsonFsData)
 
-	set md.createFsJson
+	set md.createJsonFs
 		function
 			param documents
 			param callback
 			_ md.createJsonFsData
 				@ documents
 				f_cb( jsonFsData )
-					var fsJson = new md.FsJson(jsonFsData)
-					r_cb( fsJson )
+					var jsonFs = new md.JsonFs(jsonFsData)
+					r_cb( jsonFs )
 
-	set md.createFsJsonByJsonFsData
+	set md.createJsonFsByJsonFsData
 		function
 			param jsonFsData
 			param callback
-			var fsJson = new md.FsJson(jsonFsData)
-			r_cb( fsJson )
+			var jsonFs = new md.JsonFs(jsonFsData)
+			r_cb( jsonFs )
 
 	set md.createJsonFsData
 		function
