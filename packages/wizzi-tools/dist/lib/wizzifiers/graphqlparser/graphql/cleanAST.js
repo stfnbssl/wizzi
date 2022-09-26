@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\graphqlparser\graphql\cleanAST.js.ittf
 */
 'use strict';
@@ -11,7 +11,7 @@ function cleanAst(ast) {
     for (i=0; i<i_len; i++) {
         k = Object.keys(ast)[i];
         
-        // log 'k', k
+        // loog 'k', k
         if (verify.isArray(ast[k])) {
             var temp = [];
             var j, j_items=ast[k], j_len=ast[k].length, node;
@@ -27,7 +27,7 @@ function cleanAst(ast) {
             ast[k] = temp;
         }
         
-        // log 'k', k
+        // loog 'k', k
         if (verify.isObject(ast[k])) {
             cleanAst(ast[k]);
         }

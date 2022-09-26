@@ -20,12 +20,7 @@ $group
                 from '../../wizzi'
             import 
                 @ PackiFiles
-                @ TemplateList
-                @ Template
                 from '../types'
-            import 
-                @ file
-                from 'wizzi'
     
         _ this.router.post
             `lit 

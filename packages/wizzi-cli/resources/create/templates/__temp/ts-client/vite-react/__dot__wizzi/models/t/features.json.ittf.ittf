@@ -1,0 +1,9 @@
+${'$'}group 
+   usePreferences true
+   { preferences
+       configKey "app.preferences"
+       [ items
+           { 
+               name "fileTreeShown"
+               type "boolean"
+               defaultValue "true"

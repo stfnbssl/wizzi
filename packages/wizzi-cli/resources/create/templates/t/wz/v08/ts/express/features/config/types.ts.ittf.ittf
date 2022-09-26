@@ -32,10 +32,16 @@ $group
                     :p redisPassword
                         :string 
                 ${'$'}if wzCtx.Build.useSequelize
-                    :p databaseUrl
-                        :string 
-                    :p dialect 
-                        :string 
+                    :p sequelizeDatabaseUrl
+                        :string
+                    :p sequelizeDatabase
+                        :string
+                    :p sequelizeDialect
+                        :string
+                    :p sequelizeUser
+                        :string
+                    :p sequelizePassword
+                        :string
                 ${'$'}if wzCtx.Build.useAuthentication
                     ${'$'}if wzCtx.Build.authentication.useGithub
                         :p githubClientId

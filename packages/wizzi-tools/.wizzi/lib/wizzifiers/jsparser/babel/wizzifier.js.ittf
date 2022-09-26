@@ -502,7 +502,7 @@
 
 		# loog 'VariableDeclarator 2 ret', ret
 
-    f( Decorator, @decorator
+    f( Decorator, @d
 		f_p_temp( expression, true, true, Expression
 		if isTextualNode(p_expression)
 			set ret.name = getNodeText(p_expression)
@@ -1709,11 +1709,13 @@
                 @ p_value
         else
             # do nothing
+        f_a( decorators, false, Decorator 
 
     f( ClassPrivateProperty, p
 		f_p( key, true, PrivateName
 		f_p( value, false, Expression
 		b( static
+        f_a( decorators, false, Decorator 
 
     f( ClassDeclaration, class
 		f_p_name( id, Identifier

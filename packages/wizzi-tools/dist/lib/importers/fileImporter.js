@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\importers\fileImporter.js.ittf
 */
 'use strict';
@@ -25,7 +25,7 @@ function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
     var baseImportPathNorm = verify.replaceAll(baseImportPath, '\\', '/');
     var baseExportPathNorm = verify.replaceAll(baseExportPath, '\\', '/');
     var folderNorm = dirname.substr(baseImportPathNorm.length + 1);
-    // log 'importFile', baseImportPath, folderNorm, name, schema, extension
+    // loog 'importFile', baseImportPath, folderNorm, name, schema, extension
     var source = vfile.read(filePath);
     var isVue = false;
     if (extension.toLowerCase() === 'vue') {
@@ -44,7 +44,7 @@ function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
         schema = extension;
     }
     
-    // log '0', folderNorm, basename
+    // loog '0', folderNorm, basename
     if (!packageRoot.canBeWizzified(schema)) {
         if (folderNorm.length > 0) {
             vfile.write(path.join(baseExportPathNorm, folderNorm, basename), source, callback)
@@ -66,19 +66,19 @@ function importFile(filePath, baseImportPath, baseExportPath, vfile, callback) {
         packageRoot.wizzify(schema, source, options, function(err, result) {
             var outpath;
             
-            // log '1', folderNorm, name + '.' + extension + '.ittf'
+            // loog '1', folderNorm, name + '.' + extension + '.ittf'
             if (folderNorm.length > 0) {
                 outpath = path.join(baseExportPathNorm, folderNorm, name + '.' + extension + '.ittf')
                 ;
             }
-            // log '2', folderNorm, name + '.' + extension + '.ittf'
+            // loog '2', folderNorm, name + '.' + extension + '.ittf'
             else {
                 outpath = path.join(baseExportPathNorm, name + '.' + extension + '.ittf')
                 ;
             }
             console.log('             to ' + outpath);
             if (err) {
-                console.log('Error', outpath, err);
+                console.log("[31m%s[0m", 'Error', outpath, err);
                 vfile.write(outpath, err, callback)
             }
             else {

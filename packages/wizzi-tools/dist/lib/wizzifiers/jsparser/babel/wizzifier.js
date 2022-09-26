@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsparser\babel\wizzifier.js.ittf
 */
 'use strict';
@@ -62,7 +62,7 @@ var format = function(parent, ast, options) {
         }
     }
     
-    // log 'ast.type', ast.type
+    // loog 'ast.type', ast.type
     if (options.verbose) {
     }
     if (ast.type == 'OptionalMemberExpression') {
@@ -230,11 +230,11 @@ format.Identifier = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.name, value: ', node.name, '
+    // loog 't/name.node.name, value: ', node.name, '
     if (typeof node.name !== 'undefined') {
         ret.name = node.name.toString();
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     // An identifier. Note that an identifier may be an expression or a destructuring pattern.
     
     // is the return value of an ArrowExpression
@@ -273,13 +273,13 @@ format.Identifier = function(parent, node, options) {
         ret.isText = false;
         ret.textified = null;
     }
-    // log 'Identifier', ret
+    // loog 'Identifier', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -349,7 +349,7 @@ format.PrivateName = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -384,7 +384,7 @@ format.RegExpLiteral = function(parent, node, options) {
      };
     ret.name = '/' + node.pattern + '/';
     
-    // log '*************** RegExpLiteral.ret.name', ret.name
+    // loog '*************** RegExpLiteral.ret.name', ret.name
     if (node.flags && node.flags.length > 0) {
         ret.name += node.flags;
     }
@@ -403,7 +403,7 @@ format.RegExpLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -452,7 +452,7 @@ format.NullLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -501,7 +501,7 @@ format.StringLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -534,11 +534,11 @@ format.BooleanLiteral = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.value, value: ', node.value, '
+    // loog 't/name.node.value, value: ', node.value, '
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     
     // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
@@ -554,7 +554,7 @@ format.BooleanLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -587,11 +587,11 @@ format.NumericLiteral = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.value, value: ', node.value, '
+    // loog 't/name.node.value, value: ', node.value, '
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     
     // is the return value of an ArrowExpression
     if (node.__parent && node.__parent.name === 'body' && node.__parent.len == 1) {
@@ -607,7 +607,7 @@ format.NumericLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -746,7 +746,7 @@ format.Function = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -798,7 +798,7 @@ format.ExpressionStatement = function(parent, node, options) {
     else if (replaceWithSingleChild(ret, '_')) {
     }
     else {
-        console.log('ExpressionStatement.failed.ret', ret);
+        console.log("[31m%s[0m", 'ExpressionStatement.failed.ret', ret);
         throw new Error();
     }
     if (ret != null) {
@@ -806,7 +806,7 @@ format.ExpressionStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -912,7 +912,7 @@ format.EmptyStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -950,7 +950,7 @@ format.DebuggerStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1016,7 +1016,7 @@ format.WithStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1059,7 +1059,7 @@ format.ReturnStatement = function(parent, node, options) {
         }
         format(ret, node.argument, options)
     }
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -1070,14 +1070,14 @@ format.ReturnStatement = function(parent, node, options) {
             got_text_1 = true;
         }
     }
-    // log 'ReturnStatement', ret
-    // log 'ReturnStatement.parent', parent.children[parent.children.length-1]
+    // loog 'ReturnStatement', ret
+    // loog 'ReturnStatement.parent', parent.children[parent.children.length-1]
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1123,8 +1123,8 @@ format.LabeledStatement = function(parent, node, options) {
         if (node.label == null) {
             p_label.text = "null";
         }
-        // log 'f_p_temp label before format'
-        // log 'f_p_temp label after format', p_label.children.length, p_label
+        // loog 'f_p_temp label before format'
+        // loog 'f_p_temp label after format', p_label.children.length, p_label
         else {
             if (!node.label.type) {
                 throw 'Node label has no type: ' + JSON.stringify(node, null, 2);
@@ -1178,7 +1178,7 @@ format.LabeledStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1247,7 +1247,7 @@ format.BreakStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1316,7 +1316,7 @@ format.ContinueStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1376,11 +1376,11 @@ format.IfStatement = function(parent, node, options) {
         p_test.tag = 'test';
         ret.children.push(p_test)
         
-        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        // loog '*** f_p_tag test children[0].textified', p_test.children[0].textified
         
-        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        // loog '*** f_p_tag test children[0].isText', p_test.children[0].isText
         
-        // log '*** f_p_tag test children[0].name', p_test.children[0].name
+        // loog '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
@@ -1396,7 +1396,7 @@ format.IfStatement = function(parent, node, options) {
     
     // process AST-node-property consequent and set it in a var
     
-    // log 'IfStatement', p_consequent
+    // loog 'IfStatement', p_consequent
     if (node.consequent) {
         var p_consequent = null;
         if (typeof(node.consequent) !== 'undefined' && node.consequent != null) {
@@ -1411,8 +1411,8 @@ format.IfStatement = function(parent, node, options) {
             if (node.consequent == null) {
                 p_consequent.text = "null";
             }
-            // log 'f_p_temp consequent before format'
-            // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
+            // loog 'f_p_temp consequent before format'
+            // loog 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
             else {
                 if (!node.consequent.type) {
                     throw 'Node consequent has no type: ' + JSON.stringify(node, null, 2);
@@ -1460,7 +1460,7 @@ format.IfStatement = function(parent, node, options) {
     
     // process AST-node-property alternate and set it in a var
     
-    // log 'IfStatement', p_consequent
+    // loog 'IfStatement', p_consequent
     if (node.alternate) {
         var p_alternate = null;
         if (typeof(node.alternate) !== 'undefined' && node.alternate != null) {
@@ -1475,8 +1475,8 @@ format.IfStatement = function(parent, node, options) {
             if (node.alternate == null) {
                 p_alternate.text = "null";
             }
-            // log 'f_p_temp alternate before format'
-            // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
+            // loog 'f_p_temp alternate before format'
+            // loog 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
             else {
                 if (!node.alternate.type) {
                     throw 'Node alternate has no type: ' + JSON.stringify(node, null, 2);
@@ -1536,7 +1536,7 @@ format.IfStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             var i, i_items=ret, i_len=ret.length, item;
             for (i=0; i<i_len; i++) {
@@ -1585,8 +1585,8 @@ format.SwitchStatement = function(parent, node, options) {
         if (node.discriminant == null) {
             p_discriminant.text = "null";
         }
-        // log 'f_p_temp discriminant before format'
-        // log 'f_p_temp discriminant after format', p_discriminant.children.length, p_discriminant
+        // loog 'f_p_temp discriminant before format'
+        // loog 'f_p_temp discriminant after format', p_discriminant.children.length, p_discriminant
         else {
             if (!node.discriminant.type) {
                 throw 'Node discriminant has no type: ' + JSON.stringify(node, null, 2);
@@ -1655,7 +1655,7 @@ format.SwitchStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1701,8 +1701,8 @@ format.SwitchCase = function(parent, node, options) {
         if (node.test == null) {
             p_test.text = "null";
         }
-        // log 'f_p_temp test before format'
-        // log 'f_p_temp test after format', p_test.children.length, p_test
+        // loog 'f_p_temp test before format'
+        // loog 'f_p_temp test after format', p_test.children.length, p_test
         else {
             if (!node.test.type) {
                 throw 'Node test has no type: ' + JSON.stringify(node, null, 2);
@@ -1775,7 +1775,7 @@ format.SwitchCase = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1821,8 +1821,8 @@ format.ThrowStatement = function(parent, node, options) {
         if (node.argument == null) {
             p_argument.text = "null";
         }
-        // log 'f_p_temp argument before format'
-        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
+        // loog 'f_p_temp argument before format'
+        // loog 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -1868,7 +1868,7 @@ format.ThrowStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -1901,7 +1901,7 @@ format.TryStatement = function(parent, node, options) {
             
         ]
      };
-    // log 'wizzifiers.js.TryStatement', JSON.stringify(node, null, 2)
+    // loog 'wizzifiers.js.TryStatement', JSON.stringify(node, null, 2)
     // process AST-node-property block and append ittfNode to `ret`
     f_astNode.props.push({
         name: "block", 
@@ -1930,8 +1930,8 @@ format.TryStatement = function(parent, node, options) {
         if (node.handler == null) {
             p_handler.text = "null";
         }
-        // log 'f_p_temp handler before format'
-        // log 'f_p_temp handler after format', p_handler.children.length, p_handler
+        // loog 'f_p_temp handler before format'
+        // loog 'f_p_temp handler after format', p_handler.children.length, p_handler
         else {
             if (!node.handler.type) {
                 throw 'Node handler has no type: ' + JSON.stringify(node, null, 2);
@@ -1976,8 +1976,8 @@ format.TryStatement = function(parent, node, options) {
         if (node.finalizer == null) {
             p_finalizer.text = "null";
         }
-        // log 'f_p_temp finalizer before format'
-        // log 'f_p_temp finalizer after format', p_finalizer.children.length, p_finalizer
+        // loog 'f_p_temp finalizer before format'
+        // loog 'f_p_temp finalizer after format', p_finalizer.children.length, p_finalizer
         else {
             if (!node.finalizer.type) {
                 throw 'Node finalizer has no type: ' + JSON.stringify(node, null, 2);
@@ -2009,13 +2009,13 @@ format.TryStatement = function(parent, node, options) {
         }
     }
     var tempRet = [ ret ];
-    // log 'TryStatement.p_handler', p_handler
-    // log 'TryStatement.p_finalizer', p_finalizer
+    // loog 'TryStatement.p_handler', p_handler
+    // loog 'TryStatement.p_finalizer', p_finalizer
     if (p_handler) {
         tempRet.push(p_handler);
     }
     
-    // log 'TryStatement', 'p_finalizer', p_finalizer
+    // loog 'TryStatement', 'p_finalizer', p_finalizer
     if (p_finalizer) {
         tempRet.push({
             tag: 'finally', 
@@ -2032,7 +2032,7 @@ format.TryStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             var i, i_items=ret, i_len=ret.length, item;
             for (i=0; i<i_len; i++) {
@@ -2113,13 +2113,13 @@ format.CatchClause = function(parent, node, options) {
     else {
         throw new Error('AST-node-property body undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'CatchClause.ret', ret
+    // loog 'CatchClause.ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -2178,11 +2178,11 @@ format.WhileStatement = function(parent, node, options) {
         p_test.tag = 'test';
         ret.children.push(p_test)
         
-        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        // loog '*** f_p_tag test children[0].textified', p_test.children[0].textified
         
-        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        // loog '*** f_p_tag test children[0].isText', p_test.children[0].isText
         
-        // log '*** f_p_tag test children[0].name', p_test.children[0].name
+        // loog '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
@@ -2194,7 +2194,7 @@ format.WhileStatement = function(parent, node, options) {
             }
         }
     }
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -2224,7 +2224,7 @@ format.WhileStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -2283,11 +2283,11 @@ format.DoWhileStatement = function(parent, node, options) {
         p_test.tag = 'test';
         ret.children.push(p_test)
         
-        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        // loog '*** f_p_tag test children[0].textified', p_test.children[0].textified
         
-        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        // loog '*** f_p_tag test children[0].isText', p_test.children[0].isText
         
-        // log '*** f_p_tag test children[0].name', p_test.children[0].name
+        // loog '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
@@ -2299,7 +2299,7 @@ format.DoWhileStatement = function(parent, node, options) {
             }
         }
     }
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -2329,7 +2329,7 @@ format.DoWhileStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -2388,11 +2388,11 @@ format.ForStatement = function(parent, node, options) {
         p_init.tag = 'init';
         ret.children.push(p_init)
         
-        // log '*** f_p_tag init children[0].textified', p_init.children[0].textified
+        // loog '*** f_p_tag init children[0].textified', p_init.children[0].textified
         
-        // log '*** f_p_tag init children[0].isText', p_init.children[0].isText
+        // loog '*** f_p_tag init children[0].isText', p_init.children[0].isText
         
-        // log '*** f_p_tag init children[0].name', p_init.children[0].name
+        // loog '*** f_p_tag init children[0].name', p_init.children[0].name
         if (p_init.children.length == 1) {
             if (p_init.children[0].textified) {
                 p_init.textified = p_init.children[0].textified;
@@ -2431,11 +2431,11 @@ format.ForStatement = function(parent, node, options) {
         p_test.tag = 'test';
         ret.children.push(p_test)
         
-        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        // loog '*** f_p_tag test children[0].textified', p_test.children[0].textified
         
-        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        // loog '*** f_p_tag test children[0].isText', p_test.children[0].isText
         
-        // log '*** f_p_tag test children[0].name', p_test.children[0].name
+        // loog '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
@@ -2474,11 +2474,11 @@ format.ForStatement = function(parent, node, options) {
         p_update.tag = 'update';
         ret.children.push(p_update)
         
-        // log '*** f_p_tag update children[0].textified', p_update.children[0].textified
+        // loog '*** f_p_tag update children[0].textified', p_update.children[0].textified
         
-        // log '*** f_p_tag update children[0].isText', p_update.children[0].isText
+        // loog '*** f_p_tag update children[0].isText', p_update.children[0].isText
         
-        // log '*** f_p_tag update children[0].name', p_update.children[0].name
+        // loog '*** f_p_tag update children[0].name', p_update.children[0].name
         if (p_update.children.length == 1) {
             if (p_update.children[0].textified) {
                 p_update.textified = p_update.children[0].textified;
@@ -2490,7 +2490,7 @@ format.ForStatement = function(parent, node, options) {
             }
         }
     }
-    // log 'p_init.textified', p_init.textified
+    // loog 'p_init.textified', p_init.textified
     var c1 = p_init.isText ? p_init.name : (p_init.textified ? p_init.textified : '');
     var c2 = p_test.isText ? p_test.name : (p_test.textified ? p_test.textified : '');
     var c3 = p_update.isText ? p_update.name : (p_update.textified ? p_update.textified : '');
@@ -2517,7 +2517,7 @@ format.ForStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -2563,8 +2563,8 @@ format.ForInStatement = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -2612,8 +2612,8 @@ format.ForInStatement = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -2686,7 +2686,7 @@ format.ForInStatement = function(parent, node, options) {
              })
         }
     }
-    // log 'node.await', node.await
+    // loog 'node.await', node.await
     if (!!node.await == true) {
         ret.children.push({
             tag: 'await', 
@@ -2714,7 +2714,7 @@ format.ForInStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -2760,8 +2760,8 @@ format.ForOfStatement = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -2809,8 +2809,8 @@ format.ForOfStatement = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -2844,7 +2844,7 @@ format.ForOfStatement = function(parent, node, options) {
     else {
         throw new Error('AST-node-property right undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'ForOfStatement', isTextualNode(p_left), isTextualNode(p_right)
+    // loog 'ForOfStatement', isTextualNode(p_left), isTextualNode(p_right)
     if (isTextualNode(p_left)) {
         ret.name = getNodeText(p_left);
         if (isTextualNode(p_right)) {
@@ -2886,7 +2886,7 @@ format.ForOfStatement = function(parent, node, options) {
              })
         }
     }
-    // log 'node.await', node.await
+    // loog 'node.await', node.await
     if (!!node.await == true) {
         ret.children.push({
             tag: 'await', 
@@ -2914,7 +2914,7 @@ format.ForOfStatement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3029,8 +3029,8 @@ format.FunctionDeclaration = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -3062,7 +3062,7 @@ format.FunctionDeclaration = function(parent, node, options) {
         }
     }
     
-    // log 'p_returnType', JSON.stringify(p_returnType)
+    // loog 'p_returnType', JSON.stringify(p_returnType)
     if (p_returnType) {
         p_returnType = {
             tag: ':return', 
@@ -3108,7 +3108,7 @@ format.FunctionDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3165,8 +3165,8 @@ format.VariableDeclaration = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection declarations undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '=== VariableDeclaration ittf result 1', JSON.stringify(ret, null, 2)
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog '=== VariableDeclaration ittf result 1', JSON.stringify(ret, null, 2)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -3177,12 +3177,12 @@ format.VariableDeclaration = function(parent, node, options) {
             got_text_1 = true;
         }
     }
-    // log '=== VariableDeclaration ittf result 2', ret, 'got_text_1', got_text_1
+    // loog '=== VariableDeclaration ittf result 2', ret, 'got_text_1', got_text_1
     if (got_text_1) {
         ret.textified = node.kind + ' ' + ret.textified;
     }
     
-    // log 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
+    // loog 'VariableDeclaration.ret.children[0].children.length', ret.children[0].children.length
     else if (ret.children.length == 1) {
         
         // no init value
@@ -3191,9 +3191,9 @@ format.VariableDeclaration = function(parent, node, options) {
             ret.children = [];
         }
         
-        // log 'ret.name', ret.name
+        // loog 'ret.name', ret.name
         
-        // log 'ret.children[0]', ret.children[0]
+        // loog 'ret.children[0]', ret.children[0]
         
         // set ret.textified = node.kind + ' ' + ret.name
         else if (ret.children[0].children.length == 1) {
@@ -3201,13 +3201,13 @@ format.VariableDeclaration = function(parent, node, options) {
             ret.children[0] = ret.children[0].children[0];
         }
         
-        // log 'ret.name', ret.name
+        // loog 'ret.name', ret.name
         
-        // log 'ret.children[0].name', ret.children[0].name
+        // loog 'ret.children[0].name', ret.children[0].name
         
-        // log 'child1.tag.name', child1.tag, child1.name
+        // loog 'child1.tag.name', child1.tag, child1.name
         
-        // log 'child2.tag.name', child2.tag, child2.name
+        // loog 'child2.tag.name', child2.tag, child2.name
         else if (ret.children[0].children.length == 2) {
             var child1 = ret.children[0].children[0];
             var child2 = ret.children[0].children[1];
@@ -3237,11 +3237,11 @@ format.VariableDeclaration = function(parent, node, options) {
             }
         }
         else {
-            console.log('Error VariableDeclaration. Case not managed.',);
+            console.log("[31m%s[0m", 'Error VariableDeclaration. Case not managed.',);
             var i, i_items=ret.children, i_len=ret.children.length, item;
             for (i=0; i<i_len; i++) {
                 item = ret.children[i];
-                console.log('VariableDeclaration.child', item);
+                console.log("[31m%s[0m", 'VariableDeclaration.child', item);
             }
             throw new Error("VariableDeclaration. Case not managed.");
         }
@@ -3277,7 +3277,7 @@ format.VariableDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3323,8 +3323,8 @@ format.VariableDeclarator = function(parent, node, options) {
         if (node.id == null) {
             p_id.text = "null";
         }
-        // log 'f_p_temp id before format'
-        // log 'f_p_temp id after format', p_id.children.length, p_id
+        // loog 'f_p_temp id before format'
+        // loog 'f_p_temp id after format', p_id.children.length, p_id
         else {
             if (!node.id.type) {
                 throw 'Node id has no type: ' + JSON.stringify(node, null, 2);
@@ -3358,7 +3358,7 @@ format.VariableDeclarator = function(parent, node, options) {
     else {
         throw new Error('AST-node-property id undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'VariableDeclarator,p_id, isTextualNode(p_id)', p_id, isTextualNode(p_id)
+    // loog 'VariableDeclarator,p_id, isTextualNode(p_id)', p_id, isTextualNode(p_id)
     if (isTextualNode(p_id)) {
         ret.name = getNodeText(p_id);
     }
@@ -3371,7 +3371,7 @@ format.VariableDeclarator = function(parent, node, options) {
             ret.children.push(p_id)
         }
     }
-    // log 'VariableDeclarator 1', ret
+    // loog 'VariableDeclarator 1', ret
     // process AST-node-property typeAnnotation and append ittfNode to `ret`
     f_astNode.props.push({
         name: "typeAnnotation", 
@@ -3397,8 +3397,8 @@ format.VariableDeclarator = function(parent, node, options) {
         if (node.init == null) {
             p_init.text = "null";
         }
-        // log 'f_p_temp init before format'
-        // log 'f_p_temp init after format', p_init.children.length, p_init
+        // loog 'f_p_temp init before format'
+        // loog 'f_p_temp init after format', p_init.children.length, p_init
         else {
             if (!node.init.type) {
                 throw 'Node init has no type: ' + JSON.stringify(node, null, 2);
@@ -3429,9 +3429,9 @@ format.VariableDeclarator = function(parent, node, options) {
             }
         }
     }
-    // log 'VariableDeclarator.p_init', p_init
+    // loog 'VariableDeclarator.p_init', p_init
     
-    // log 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
+    // loog 'VariableDeclarator.p_init', isTextualNode(p_id), 'p_id', p_id, 'p_init', p_init
     if (p_init) {
         if (isTextualNode(p_id)) {
             if (isTextualNode(p_init)) {
@@ -3465,13 +3465,13 @@ format.VariableDeclarator = function(parent, node, options) {
     }
     else {
     }
-    // log 'VariableDeclarator 2 ret', ret
+    // loog 'VariableDeclarator 2 ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3483,7 +3483,7 @@ format.VariableDeclarator = function(parent, node, options) {
 // process AST node Decorator
 var Decorator_astNode = {
     name: "Decorator", 
-    ittfTag: "@decorator", 
+    ittfTag: "@d", 
     props: [
         
     ]
@@ -3493,7 +3493,7 @@ format.Decorator = function(parent, node, options) {
     var f_astNode = Decorator_astNode;
     var __isText = false;
     var ret = {
-        tag: '@decorator', 
+        tag: '@d', 
         name: '', 
         isText: false, 
         textified: null, 
@@ -3517,8 +3517,8 @@ format.Decorator = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -3563,7 +3563,7 @@ format.Decorator = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3613,8 +3613,8 @@ format.Directive = function(parent, node, options) {
             if (node.value == null) {
                 p_value.text = "null";
             }
-            // log 'f_p_temp value before format'
-            // log 'f_p_temp value after format', p_value.children.length, p_value
+            // loog 'f_p_temp value before format'
+            // loog 'f_p_temp value after format', p_value.children.length, p_value
             else {
                 if (!node.value.type) {
                     throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -3657,7 +3657,7 @@ format.Directive = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3694,7 +3694,7 @@ format.DirectiveLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3732,7 +3732,7 @@ format.Expression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3772,7 +3772,7 @@ format.Super = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3810,7 +3810,7 @@ format.Import = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3850,7 +3850,7 @@ format.ThisExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -3931,8 +3931,8 @@ format.ArrowFunctionExpression = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -3995,7 +3995,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection body undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'node.expression', node.expression
+    // loog 'node.expression', node.expression
     if (!!node.expression == true) {
         ret.children.push({
             tag: 'expression', 
@@ -4004,8 +4004,8 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             ]
          })
     }
-    // log '*** ArrowFunctionExpression.ret.params', getChildByTag(ret, 'params')
-    // log '*** ArrowFunctionExpression.ret', ret
+    // loog '*** ArrowFunctionExpression.ret.params', getChildByTag(ret, 'params')
+    // loog '*** ArrowFunctionExpression.ret', ret
     // A fat arrow function expression, e.g., `let foo = (bar) => { /* body */ }`.
     if (node.async) {
         ret.tag = 'async=>';
@@ -4018,7 +4018,7 @@ format.ArrowFunctionExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4064,8 +4064,8 @@ format.YieldExpression = function(parent, node, options) {
         if (node.argument == null) {
             p_argument.text = "null";
         }
-        // log 'f_p_temp argument before format'
-        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
+        // loog 'f_p_temp argument before format'
+        // loog 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -4099,14 +4099,14 @@ format.YieldExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property argument undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'ObjectProperty.p_value', p_value
+    // loog 'ObjectProperty.p_value', p_value
     if (isTextualNode(p_argument)) {
         ret.name = getNodeText(p_argument);
     }
     else {
         ret.children.push(p_argument)
     }
-    // log 'node.delegate', node.delegate
+    // loog 'node.delegate', node.delegate
     if (!!node.delegate == true) {
         ret.children.push({
             tag: 'delegate', 
@@ -4121,7 +4121,7 @@ format.YieldExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4170,7 +4170,7 @@ format.AwaitExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4228,7 +4228,7 @@ format.ArrayExpression = function(parent, node, options) {
     // An array expression.
     if (options.mustBeText) {
         
-        // log '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
+        // loog '### ArrayExpression', 'name:', ret.name, 'textified', ret.textified, ret.isText
         if (setTextList(ret, ', ')) {
             ret.textified = '[' + ret.textified + ']';
         }
@@ -4279,7 +4279,7 @@ format.ArrayExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4355,7 +4355,7 @@ format.ObjectExpression = function(parent, node, options) {
         for (i=0; i<i_len; i++) {
             item = ret.children[i];
             
-            // log 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
+            // loog 'ObjectExpression, item.tag, item.children.length', item.tag, item.textified, item.children.length
             if (item.tag === '...') {
                 if (item.children.length == 0) {
                     item.name = item.textified;
@@ -4368,12 +4368,13 @@ format.ObjectExpression = function(parent, node, options) {
                     if (item.textified) {
                         item.children[0].textified = '...' + item.children[0].textified;
                     }
+                    
+                    // loog 'ObjectExpression length 1', item.tag, item.name, item.textified
                     if (item.children[0].name || item.textified) {
                         item.tag = item.children[0].tag;
                         item.textified = item.children[0].textified;
                         item.name = item.children[0].name;
                         item.children = item.children[0].children;
-                        console.log('ObjectExpression length 1', item.tag, item.name, item.textified);
                     }
                     // go on
                     else {
@@ -4381,7 +4382,7 @@ format.ObjectExpression = function(parent, node, options) {
                 }
             }
             
-            // log 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
+            // loog 'ObjectExpression', item.tag, item.name, getLiteral(item.children[0])
             if (item.tag === '@' && item.name === 'template' && item.children.length == 1 && item.children[0].tag === '`lit') {
                 options.wizziIncludes.push({
                     kind: 'html', 
@@ -4419,7 +4420,7 @@ format.ObjectExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4451,7 +4452,7 @@ format.ObjectProperty = function(parent, node, options) {
             
         ]
      };
-    // log 'ObjectProperty enter options.mustBeText', options.mustBeText
+    // loog 'ObjectProperty enter options.mustBeText', options.mustBeText
     const save = options.mustBeText;
     options.mustBeText = true;
     // process AST-node-property key and set it in a var
@@ -4468,8 +4469,8 @@ format.ObjectProperty = function(parent, node, options) {
         if (node.key == null) {
             p_key.text = "null";
         }
-        // log 'f_p_temp key before format'
-        // log 'f_p_temp key after format', p_key.children.length, p_key
+        // loog 'f_p_temp key before format'
+        // loog 'f_p_temp key after format', p_key.children.length, p_key
         else {
             if (!node.key.type) {
                 throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -4503,7 +4504,7 @@ format.ObjectProperty = function(parent, node, options) {
     else {
         throw new Error('AST-node-property key undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'ObjectProperty.p_key', p_key
+    // loog 'ObjectProperty.p_key', p_key
     options.mustBeText = save;
     if (isTextualNode(p_key)) {
         ret.name = getNodeText(p_key);
@@ -4541,15 +4542,15 @@ format.ObjectProperty = function(parent, node, options) {
             format(ret, item, options)
         }
     }
-    // log 'ObjectProperty.ret.name', ret.name, 'node.value.type', node.value.type
+    // loog 'ObjectProperty.ret.name', ret.name, 'node.value.type', node.value.type
     
     // process AST-node-property value.left and set it in a var
     
     // process AST-node-property value.right and set it in a var
     
-    // log 'p_value_left', p_value_left
+    // loog 'p_value_left', p_value_left
     
-    // log 'p_value_right', p_value_right
+    // loog 'p_value_right', p_value_right
     if (node.value.type === 'AssignmentPattern') {
         var p_value_left = null;
         if (typeof(node.value.left) !== 'undefined' && node.value.left != null) {
@@ -4564,8 +4565,8 @@ format.ObjectProperty = function(parent, node, options) {
             if (node.value.left == null) {
                 p_value_left.text = "null";
             }
-            // log 'f_p_temp value_left before format'
-            // log 'f_p_temp value_left after format', p_value_left.children.length, p_value_left
+            // loog 'f_p_temp value_left before format'
+            // loog 'f_p_temp value_left after format', p_value_left.children.length, p_value_left
             else {
                 if (!node.value.left.type) {
                     throw 'Node value_left has no type: ' + JSON.stringify(node, null, 2);
@@ -4612,8 +4613,8 @@ format.ObjectProperty = function(parent, node, options) {
             if (node.value.right == null) {
                 p_value_right.text = "null";
             }
-            // log 'f_p_temp value_right before format'
-            // log 'f_p_temp value_right after format', p_value_right.children.length, p_value_right
+            // loog 'f_p_temp value_right before format'
+            // loog 'f_p_temp value_right after format', p_value_right.children.length, p_value_right
             else {
                 if (!node.value.right.type) {
                     throw 'Node value_right has no type: ' + JSON.stringify(node, null, 2);
@@ -4715,7 +4716,7 @@ format.ObjectProperty = function(parent, node, options) {
         }
     }
     // process AST-node-property value and set it in a var
-    // log 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
+    // loog 'ObjectProperty.p_value', p_value, isTextualNode(p_value), isTextualNode(p_key)
     else {
         var p_value = null;
         if (typeof(node.value) !== 'undefined' && node.value != null) {
@@ -4730,8 +4731,8 @@ format.ObjectProperty = function(parent, node, options) {
             if (node.value == null) {
                 p_value.text = "null";
             }
-            // log 'f_p_temp value before format'
-            // log 'f_p_temp value after format', p_value.children.length, p_value
+            // loog 'f_p_temp value before format'
+            // loog 'f_p_temp value after format', p_value.children.length, p_value
             else {
                 if (!node.value.type) {
                     throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -4827,7 +4828,7 @@ format.ObjectProperty = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -4860,7 +4861,7 @@ format.ObjectMethod = function(parent, node, options) {
             
         ]
      };
-    // log 'ObjectMethod enter options.mustBeText', options.mustBeText
+    // loog 'ObjectMethod enter options.mustBeText', options.mustBeText
     // s( kind
     // enum "get" | "set" | "method"
     const save = options.mustBeText;
@@ -4879,8 +4880,8 @@ format.ObjectMethod = function(parent, node, options) {
         if (node.key == null) {
             p_key.text = "null";
         }
-        // log 'f_p_temp key before format'
-        // log 'f_p_temp key after format', p_key.children.length, p_key
+        // loog 'f_p_temp key before format'
+        // loog 'f_p_temp key after format', p_key.children.length, p_key
         else {
             if (!node.key.type) {
                 throw 'Node key has no type: ' + JSON.stringify(node, null, 2);
@@ -4916,7 +4917,7 @@ format.ObjectMethod = function(parent, node, options) {
     }
     ret.name = getNodeText(p_key);
     options.mustBeText = save;
-    // log 'node.async', node.async
+    // loog 'node.async', node.async
     if (!!node.async == true) {
         ret.children.push({
             tag: 'async', 
@@ -4971,8 +4972,8 @@ format.ObjectMethod = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -5039,7 +5040,7 @@ format.ObjectMethod = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5160,8 +5161,8 @@ format.FunctionExpression = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -5226,7 +5227,7 @@ format.FunctionExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5279,8 +5280,8 @@ format.UnaryExpression = function(parent, node, options) {
         if (node.argument == null) {
             p_argument.text = "null";
         }
-        // log 'f_p_temp argument before format'
-        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
+        // loog 'f_p_temp argument before format'
+        // loog 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -5365,7 +5366,7 @@ format.UnaryExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5415,7 +5416,7 @@ format.UpdateExpression = function(parent, node, options) {
         throw new Error('AST-node-property argument undefined: ' + JSON.stringify(node, null, 2));
     }
     // b( prefix
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -5466,7 +5467,7 @@ format.UpdateExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5519,8 +5520,8 @@ format.BinaryExpression = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -5554,7 +5555,7 @@ format.BinaryExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property left undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'BinaryExpression.p_left', p_left
+    // loog 'BinaryExpression.p_left', p_left
     // process AST-node-property right and set it in a var
     var p_right = null;
     if (typeof(node.right) !== 'undefined' && node.right != null) {
@@ -5569,8 +5570,8 @@ format.BinaryExpression = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -5604,7 +5605,7 @@ format.BinaryExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property right undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'BinaryExpression.p_right', p_right
+    // loog 'BinaryExpression.p_right', p_right
     if (isTextualNode(p_left) && isTextualNode(p_right)) {
         ret.tag = 'set';
         ret.name = getNodeText(p_left) + ' ' + node.operator + ' ' + getNodeText(p_right);
@@ -5646,7 +5647,7 @@ format.BinaryExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5678,7 +5679,7 @@ format.AssignmentExpression = function(parent, node, options) {
             
         ]
      };
-    // log 'AssignmentExpression enter options.mustBeText', options.mustBeText
+    // loog 'AssignmentExpression enter options.mustBeText', options.mustBeText
     // An assignment operator expression.
     // s( operator, AssignmentOperator
     // enum AssignmentOperator { "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "<<=" | ">>=" | ">>>=" | "|=" | "^=" | "&="
@@ -5698,8 +5699,8 @@ format.AssignmentExpression = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -5748,8 +5749,8 @@ format.AssignmentExpression = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -5790,8 +5791,8 @@ format.AssignmentExpression = function(parent, node, options) {
         ret.name = node.operator;
         ret.children.push(p_left)
     }
-    // log 'AssignmentExpression.isTextualNode(p_right)', isTextualNode(p_right)
-    // log 'AssignmentExpression.p_right', p_right
+    // loog 'AssignmentExpression.isTextualNode(p_right)', isTextualNode(p_right)
+    // loog 'AssignmentExpression.p_right', p_right
     if (isTextualNode(p_left) && isTextualNode(p_right)) {
         ret.name += getNodeText(p_right);
     }
@@ -5807,13 +5808,13 @@ format.AssignmentExpression = function(parent, node, options) {
             ret.children.push(p_right)
         }
     }
-    // log 'AssignmentExpression.ret final', ret
+    // loog 'AssignmentExpression.ret final', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -5862,8 +5863,8 @@ format.LogicalExpression = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -5911,8 +5912,8 @@ format.LogicalExpression = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -5947,16 +5948,16 @@ format.LogicalExpression = function(parent, node, options) {
         throw new Error('AST-node-property right undefined: ' + JSON.stringify(node, null, 2));
     }
     var parenthesized = node.extra && node.extra.parenthesized;
-    // log 'LogicalExpression', isTextualNode(p_left), isTextualNode(p_right)
-    // log 'LogicalExpression,p_left', p_left
-    // log 'LogicalExpression,p_right', p_right
+    // loog 'LogicalExpression', isTextualNode(p_left), isTextualNode(p_right)
+    // loog 'LogicalExpression,p_left', p_left
+    // loog 'LogicalExpression,p_right', p_right
     if (isTextualNode(p_left) && isTextualNode(p_right)) {
         ret.tag = '@expr';
         ret.name = parenthesize(getNodeText(p_left) + ' ' + node.operator + ' ' + getNodeText(p_right), parenthesized);
         ret.textified = ret.name;
     }
-    // log 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
-    // log 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
+    // loog 'LogicalExpression,isTextualNode(p_left),p_left', isTextualNode(p_left), p_left
+    // loog 'LogicalExpression,isTextualNode(p_right),p_right', isTextualNode(p_right), p_right
     else {
         ret.tag = node.operator;
         if (isTextualNode(p_left) || ['@id', 'literal','set'].indexOf(p_left.tag) > -1) {
@@ -6007,7 +6008,7 @@ format.LogicalExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6053,8 +6054,8 @@ format.SpreadElement = function(parent, node, options) {
         if (node.argument == null) {
             p_argument.text = "null";
         }
-        // log 'f_p_temp argument before format'
-        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
+        // loog 'f_p_temp argument before format'
+        // loog 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -6088,7 +6089,7 @@ format.SpreadElement = function(parent, node, options) {
     else {
         throw new Error('AST-node-property argument undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'SpreadElement.p_argument', p_argument
+    // loog 'SpreadElement.p_argument', p_argument
     if (isTextualNode(p_argument)) {
         ret.name = getNodeText(p_argument);
         ret.textified = '...' + ret.name;
@@ -6103,7 +6104,7 @@ format.SpreadElement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6149,8 +6150,8 @@ format.MemberExpression = function(parent, node, options) {
         if (node.object == null) {
             p_object.text = "null";
         }
-        // log 'f_p_temp object before format'
-        // log 'f_p_temp object after format', p_object.children.length, p_object
+        // loog 'f_p_temp object before format'
+        // loog 'f_p_temp object after format', p_object.children.length, p_object
         else {
             if (!node.object.type) {
                 throw 'Node object has no type: ' + JSON.stringify(node, null, 2);
@@ -6198,8 +6199,8 @@ format.MemberExpression = function(parent, node, options) {
         if (node.property == null) {
             p_property.text = "null";
         }
-        // log 'f_p_temp property before format'
-        // log 'f_p_temp property after format', p_property.children.length, p_property
+        // loog 'f_p_temp property before format'
+        // loog 'f_p_temp property after format', p_property.children.length, p_property
         else {
             if (!node.property.type) {
                 throw 'Node property has no type: ' + JSON.stringify(node, null, 2);
@@ -6244,7 +6245,7 @@ format.MemberExpression = function(parent, node, options) {
     if (isTextualNode(p_object)) {
         var obj = getNodeText(p_object);
         
-        // log 'MemberExpression.textified', ret.textified
+        // loog 'MemberExpression.textified', ret.textified
         if (isTextualNode(p_property)) {
             var prop = getNodeText(p_property);
             ret.name = node.computed ? obj + qmark + '[' + prop + ']' : obj + qmark + '.' + prop;
@@ -6263,9 +6264,9 @@ format.MemberExpression = function(parent, node, options) {
             ret.children.push(link)
         }
     }
-    // log 'MemberExpression.tag.name', ret.tag, ret.name
+    // loog 'MemberExpression.tag.name', ret.tag, ret.name
     else {
-        console.log(1011);
+        console.log(1011, __filename);
         if (node.computed) {
             p_property.tag = '.[';
         }
@@ -6292,7 +6293,7 @@ format.MemberExpression = function(parent, node, options) {
         var i, i_items=ret.children, i_len=ret.children.length, item;
         for (i=0; i<i_len; i++) {
             item = ret.children[i];
-            // log 'MemberExpression.child', i, ret.children[i].tag, ret.children[i].name
+            // loog 'MemberExpression.child', i, ret.children[i].tag, ret.children[i].name
         }
     }
     
@@ -6316,7 +6317,7 @@ format.MemberExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6379,7 +6380,7 @@ format.BindExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6439,11 +6440,11 @@ format.ConditionalExpression = function(parent, node, options) {
         p_test.tag = 'test';
         ret.children.push(p_test)
         
-        // log '*** f_p_tag test children[0].textified', p_test.children[0].textified
+        // loog '*** f_p_tag test children[0].textified', p_test.children[0].textified
         
-        // log '*** f_p_tag test children[0].isText', p_test.children[0].isText
+        // loog '*** f_p_tag test children[0].isText', p_test.children[0].isText
         
-        // log '*** f_p_tag test children[0].name', p_test.children[0].name
+        // loog '*** f_p_tag test children[0].name', p_test.children[0].name
         if (p_test.children.length == 1) {
             if (p_test.children[0].textified) {
                 p_test.textified = p_test.children[0].textified;
@@ -6469,8 +6470,8 @@ format.ConditionalExpression = function(parent, node, options) {
         if (node.consequent == null) {
             p_consequent.text = "null";
         }
-        // log 'f_p_temp consequent before format'
-        // log 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
+        // loog 'f_p_temp consequent before format'
+        // loog 'f_p_temp consequent after format', p_consequent.children.length, p_consequent
         else {
             if (!node.consequent.type) {
                 throw 'Node consequent has no type: ' + JSON.stringify(node, null, 2);
@@ -6518,8 +6519,8 @@ format.ConditionalExpression = function(parent, node, options) {
         if (node.alternate == null) {
             p_alternate.text = "null";
         }
-        // log 'f_p_temp alternate before format'
-        // log 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
+        // loog 'f_p_temp alternate before format'
+        // loog 'f_p_temp alternate after format', p_alternate.children.length, p_alternate
         else {
             if (!node.alternate.type) {
                 throw 'Node alternate has no type: ' + JSON.stringify(node, null, 2);
@@ -6553,12 +6554,12 @@ format.ConditionalExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property alternate undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'ConditionalExpression 1', ret.tag
+    // loog 'ConditionalExpression 1', ret.tag
     setNameFromChildByTag(ret, 'test', true);
-    // log 'ConditionalExpression 2', ret.tag
+    // loog 'ConditionalExpression 2', ret.tag
     setOrInlineIfTextualNode(ret, p_consequent, 'then')
     setOrInlineIfTextualNode(ret, p_alternate, 'else')
-    // log 'ConditionalExpression 3', ret.tag
+    // loog 'ConditionalExpression 3', ret.tag
     if (node.extra && node.extra.parenthesized == true) {
         ret = {
             tag: '(', 
@@ -6568,13 +6569,13 @@ format.ConditionalExpression = function(parent, node, options) {
             ]
          };
     }
-    // log 'ConditionalExpression 4', ret.tag
+    // loog 'ConditionalExpression 4', ret.tag
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6632,8 +6633,8 @@ format.CallExpression = function(parent, node, options) {
         if (node.callee == null) {
             p_callee.text = "null";
         }
-        // log 'f_p_temp callee before format'
-        // log 'f_p_temp callee after format', p_callee.children.length, p_callee
+        // loog 'f_p_temp callee before format'
+        // loog 'f_p_temp callee after format', p_callee.children.length, p_callee
         else {
             if (!node.callee.type) {
                 throw 'Node callee has no type: ' + JSON.stringify(node, null, 2);
@@ -6690,14 +6691,14 @@ format.CallExpression = function(parent, node, options) {
         }
     }
     var lastCallee = ret;
-    // log 'CallExpression.p_callee', p_callee
+    // loog 'CallExpression.p_callee', p_callee
     var qmark = node.optional ? '?.' : '';
     
-    // log 'CallExpression', 'isTextualNode(p_callee)', isTextualNode(p_callee), 'getNodeText(p_callee)', getNodeText(p_callee), 'node.typeParameters', node.typeParameters, 'p_arguments', p_arguments
+    // loog 'CallExpression', 'isTextualNode(p_callee)', isTextualNode(p_callee), 'getNodeText(p_callee)', getNodeText(p_callee), 'node.typeParameters', node.typeParameters, 'p_arguments', p_arguments
     
     // first of all try to set ret.textified
     
-    // log 'CallExpression', 'ret.name,textified', ret.name, ret.textified
+    // loog 'CallExpression', 'ret.name,textified', ret.name, ret.textified
     if (isTextualNode(p_callee)) {
         ret.name = getNodeText(p_callee) + qmark;
         if (node.typeParameters) {
@@ -6710,7 +6711,7 @@ format.CallExpression = function(parent, node, options) {
                 lastCallee.children.push(item)
             }
         }
-        // log 'CallExpression p_arguments', p_arguments
+        // loog 'CallExpression p_arguments', p_arguments
         else {
             if (p_arguments && p_arguments.children.length > 0) {
                 var tlist = getTextList(p_arguments, ', ');
@@ -6741,30 +6742,30 @@ format.CallExpression = function(parent, node, options) {
         }
     }
     // TODO implement node.optional
-    // log 'CallExpression', 'p_callee.tag', p_callee.tag, 'p_callee.name', p_callee.name, 'ret.tag', ret.tag
+    // loog 'CallExpression', 'p_callee.tag', p_callee.tag, 'p_callee.name', p_callee.name, 'ret.tag', ret.tag
     else {
         var i, i_items=p_callee.children, i_len=p_callee.children.length, item;
         for (i=0; i<i_len; i++) {
             item = p_callee.children[i];
-            // log 'CallExpression', 'p_callee.children', i, p_callee.children[i].tag, p_callee.children[i].name
+            // loog 'CallExpression', 'p_callee.children', i, p_callee.children[i].tag, p_callee.children[i].name
         }
         if (p_arguments) {
             var i, i_items=p_arguments.children, i_len=p_arguments.children.length, item;
             for (i=0; i<i_len; i++) {
                 item = p_arguments.children[i];
-                // log 'CallExpression', 'p_arguments.children', i, p_arguments.children[i].tag, p_arguments.children[i].name
+                // loog 'CallExpression', 'p_arguments.children', i, p_arguments.children[i].tag, p_arguments.children[i].name
             }
         }
         if (['[', '{', 'new'].indexOf(p_callee.tag) > -1) {
             ret.tag = p_callee.tag;
         }
         
-        // log 'node.callee.type', node.callee.type, ret.tag
+        // loog 'node.callee.type', node.callee.type, ret.tag
         if (['`lit','iif'].indexOf(p_callee.tag) < 0) {
             ret.name = p_callee.name;
             ret.children = p_callee.children;
             
-            // log 'p_callee.children.length > 0'
+            // loog 'p_callee.children.length > 0'
             if (p_callee.children.length > 0) {
                 lastCallee = p_callee.children[p_callee.children.length-1];
                 if (p_arguments && p_arguments.children.length > 0) {
@@ -6803,8 +6804,8 @@ format.CallExpression = function(parent, node, options) {
                     }
                 }
             }
-            // log 'p_callee.children.length == 0'
-            // log 'CallExpression', p_callee, ret
+            // loog 'p_callee.children.length == 0'
+            // loog 'CallExpression', p_callee, ret
             else {
                 ret.tag = "_";
                 ret.name = p_callee.tag;
@@ -6820,7 +6821,7 @@ format.CallExpression = function(parent, node, options) {
                 }
             }
         }
-        // log '1203'
+        // loog '1203'
         else {
             var temp = [p_callee];
             lastCallee = p_callee.children[p_callee.children.length-1];
@@ -6840,7 +6841,7 @@ format.CallExpression = function(parent, node, options) {
             }
         }
         
-        // log 'node.callee.type 2', node.callee.type, ret.tag
+        // loog 'node.callee.type 2', node.callee.type, ret.tag
         if (node.callee.type === 'FunctionExpression' && ret.tag === '_') {
             ret.tag = 'iife' // 9/1/19;
         }
@@ -6854,13 +6855,13 @@ format.CallExpression = function(parent, node, options) {
          };
         ret = temp;
     }
-    // log 'CallExpression.exit.ret', ret
+    // loog 'CallExpression.exit.ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -6939,8 +6940,8 @@ format.NewExpression = function(parent, node, options) {
         if (node.typeParameters == null) {
             p_typeParameters.text = "null";
         }
-        // log 'f_p_temp typeParameters before format'
-        // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
+        // loog 'f_p_temp typeParameters before format'
+        // loog 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
         else {
             if (!node.typeParameters.type) {
                 throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -6966,8 +6967,8 @@ format.NewExpression = function(parent, node, options) {
         if (node.callee == null) {
             p_callee.text = "null";
         }
-        // log 'f_p_temp callee before format'
-        // log 'f_p_temp callee after format', p_callee.children.length, p_callee
+        // loog 'f_p_temp callee before format'
+        // loog 'f_p_temp callee after format', p_callee.children.length, p_callee
         else {
             if (!node.callee.type) {
                 throw 'Node callee has no type: ' + JSON.stringify(node, null, 2);
@@ -7009,17 +7010,18 @@ format.NewExpression = function(parent, node, options) {
     }
     var argumentsNode = getChildByTag(ret, 'arguments');
     ret.children = [];
-    // log 'NewExpression.ret', ret
-    console.log('NewExpression.p_typeParameters', p_typeParameters);
-    console.log('NewExpression.argumentsNode', argumentsNode);
+    // loog 'NewExpression.ret', ret
+    // loog 'NewExpression.p_typeParameters', p_typeParameters
+    // loog 'NewExpression.argumentsNode', argumentsNode
     var tlist;
     
     // log 101
+    
+    // loog 'NewExpression.tlist', tlist
     if (node.arguments && node.arguments.length > 0) {
         if (!p_typeParameters) {
             tlist = getTextList(argumentsNode, ', ');
         }
-        console.log('NewExpression.tlist', tlist);
         if (tlist) {
             ret.name += '(' + tlist + ')';
             ret.textified = 'new ' + ret.name;
@@ -7056,13 +7058,13 @@ format.NewExpression = function(parent, node, options) {
             ret.textified = 'new ' + ret.name + '()';
         }
     }
-    // log 'NewExpression.ret', ret
+    // loog 'NewExpression.ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7131,7 +7133,7 @@ format.SequenceExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7182,7 +7184,7 @@ format.DoExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7258,7 +7260,7 @@ format.TemplateLiteral = function(parent, node, options) {
             format(p_expressions, item, options)
         }
     }
-    // log 'TemplateLiteral', model
+    // loog 'TemplateLiteral', model
     var i = 0, j;
     for (i = 0; i < p_expressions.children.length; i++) {
         var q = p_quasis.children[i];
@@ -7267,7 +7269,7 @@ format.TemplateLiteral = function(parent, node, options) {
             ret.children.push(item);
         }
         var e = p_expressions.children[i];
-        // log 'TemplateLiteral.e', e
+        // loog 'TemplateLiteral.e', e
         if (['@expr', '@id', 'literal', 'set'].indexOf(e.tag) > -1) {
             e.tag = '@';
         }
@@ -7284,7 +7286,7 @@ format.TemplateLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7330,8 +7332,8 @@ format.TaggedTemplateExpression = function(parent, node, options) {
         if (node.tag == null) {
             p_tag.text = "null";
         }
-        // log 'f_p_temp tag before format'
-        // log 'f_p_temp tag after format', p_tag.children.length, p_tag
+        // loog 'f_p_temp tag before format'
+        // loog 'f_p_temp tag after format', p_tag.children.length, p_tag
         else {
             if (!node.tag.type) {
                 throw 'Node tag has no type: ' + JSON.stringify(node, null, 2);
@@ -7385,8 +7387,8 @@ format.TaggedTemplateExpression = function(parent, node, options) {
         if (node.quasi == null) {
             p_quasi.text = "null";
         }
-        // log 'f_p_temp quasi before format'
-        // log 'f_p_temp quasi after format', p_quasi.children.length, p_quasi
+        // loog 'f_p_temp quasi before format'
+        // loog 'f_p_temp quasi after format', p_quasi.children.length, p_quasi
         else {
             if (!node.quasi.type) {
                 throw 'Node quasi has no type: ' + JSON.stringify(node, null, 2);
@@ -7430,7 +7432,7 @@ format.TaggedTemplateExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7489,7 +7491,7 @@ format.TemplateElement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7521,7 +7523,7 @@ format.ObjectPattern = function(parent, node, options) {
             
         ]
      };
-    // log 'ObjectPattern enter options.mustBeText', options.mustBeText
+    // loog 'ObjectPattern enter options.mustBeText', options.mustBeText
     // process AST-node-property-collection properties and append ittfNode(s) to `ret`
     f_astNode.props.push({
         name: "properties", 
@@ -7545,7 +7547,7 @@ format.ObjectPattern = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection properties undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'wizzifiers.js.ObjectPattern.ret', JSON.stringify(ret, null, 2)
+    // loog 'wizzifiers.js.ObjectPattern.ret', JSON.stringify(ret, null, 2)
     if (options.mustBeText) {
         if (setTextList(ret, ', ') && !!node.typeAnnotation == false) {
             ret.textified = '{' + ret.textified + '}';
@@ -7594,7 +7596,7 @@ format.ObjectPattern = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7647,7 +7649,7 @@ format.ArrayPattern = function(parent, node, options) {
         }
     }
     
-    // log '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
+    // loog '*** ArrayPattern len, textified: ', ret.children.length, ret.textified
     if (setTextList(ret, ', ')) {
         ret.textified = '[' + ret.textified + ']';
     }
@@ -7659,7 +7661,7 @@ format.ArrayPattern = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7705,7 +7707,7 @@ format.RestElement = function(parent, node, options) {
     else {
         throw new Error('AST-node-property argument undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -7728,13 +7730,13 @@ format.RestElement = function(parent, node, options) {
         format(ret, node.typeAnnotation, options)
     }
     ret.textified = '...' + ret.name;
-    console.log('RestElement', ret.tag, ret.name, ret.textified);
+    // loog 'RestElement', ret.tag, ret.name, ret.textified
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7781,8 +7783,8 @@ format.AssignmentPattern = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -7830,8 +7832,8 @@ format.AssignmentPattern = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -7865,8 +7867,8 @@ format.AssignmentPattern = function(parent, node, options) {
     else {
         throw new Error('AST-node-property right undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'AssignmentPattern.p_left', JSON.stringify(p_left, null, 2)
-    // log 'AssignmentPattern.p_right', JSON.stringify(p_right, null, 2)
+    // loog 'AssignmentPattern.p_left', JSON.stringify(p_left, null, 2)
+    // loog 'AssignmentPattern.p_right', JSON.stringify(p_right, null, 2)
     if (isTextualNode(p_left)) {
         ret.name = getNodeText(p_left);
         if (isTextualNode(p_right)) {
@@ -7883,13 +7885,13 @@ format.AssignmentPattern = function(parent, node, options) {
         ret.children.push(p_left)
         ret.children.push(p_right)
     }
-    console.log('AssignmentPattern', JSON.stringify(ret, null, 2));
+    // loog 'AssignmentPattern', JSON.stringify(ret, null, 2)
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -7967,8 +7969,8 @@ format.Class = function(parent, node, options) {
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
-        // log 'f_p_temp superClass before format'
-        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
+        // loog 'f_p_temp superClass before format'
+        // loog 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
@@ -8049,7 +8051,7 @@ format.Class = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -8153,11 +8155,11 @@ format.ClassMethod = function(parent, node, options) {
         p_key.tag = 'key';
         ret.children.push(p_key)
         
-        // log '*** f_p_tag key children[0].textified', p_key.children[0].textified
+        // loog '*** f_p_tag key children[0].textified', p_key.children[0].textified
         
-        // log '*** f_p_tag key children[0].isText', p_key.children[0].isText
+        // loog '*** f_p_tag key children[0].isText', p_key.children[0].isText
         
-        // log '*** f_p_tag key children[0].name', p_key.children[0].name
+        // loog '*** f_p_tag key children[0].name', p_key.children[0].name
         if (p_key.children.length == 1) {
             if (p_key.children[0].textified) {
                 p_key.textified = p_key.children[0].textified;
@@ -8172,7 +8174,7 @@ format.ClassMethod = function(parent, node, options) {
     // s( kind
     // enum "constructor" | "method" | "get" | "set"
     // b( computed
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -8181,7 +8183,7 @@ format.ClassMethod = function(parent, node, options) {
             ]
          })
     }
-    // log 'node.async', node.async
+    // loog 'node.async', node.async
     if (!!node.async == true) {
         ret.children.push({
             tag: 'async', 
@@ -8190,7 +8192,7 @@ format.ClassMethod = function(parent, node, options) {
             ]
          })
     }
-    // log 'node.generator', node.generator
+    // loog 'node.generator', node.generator
     if (!!node.generator == true) {
         ret.children.push({
             tag: 'generator', 
@@ -8274,8 +8276,8 @@ format.ClassMethod = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -8345,7 +8347,7 @@ format.ClassMethod = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -8393,7 +8395,7 @@ format.ClassPrivateMethod = function(parent, node, options) {
         throw new Error('AST-node-property key undefined: ' + JSON.stringify(node, null, 2));
     }
     // s( kind, "method" | "get" | "set"
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -8469,8 +8471,8 @@ format.ClassPrivateMethod = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -8529,7 +8531,7 @@ format.ClassPrivateMethod = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -8607,8 +8609,8 @@ format.ClassProperty = function(parent, node, options) {
         if (node.value == null) {
             p_value.text = "null";
         }
-        // log 'f_p_temp value before format'
-        // log 'f_p_temp value after format', p_value.children.length, p_value
+        // loog 'f_p_temp value before format'
+        // loog 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -8653,8 +8655,8 @@ format.ClassProperty = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -8688,7 +8690,7 @@ format.ClassProperty = function(parent, node, options) {
     if (node.optional) {
         ret.name = ret.name + '?';
     }
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -8730,12 +8732,32 @@ format.ClassProperty = function(parent, node, options) {
     // do nothing
     else {
     }
+    // process AST-node-property-collection decorators and append ittfNode(s) to `ret`
+    f_astNode.props.push({
+        name: "decorators", 
+        throwIfUndefined: false, 
+        descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
+     })
+    if (node.decorators) {
+        if (typeof node.decorators.length === 'undefined') {
+            throw new Error('Property node.decorators must be an array');
+        }
+        var i, i_items=node.decorators, i_len=node.decorators.length, item;
+        for (i=0; i<i_len; i++) {
+            item = node.decorators[i];
+            item.__parent = {
+                name: 'decorators', 
+                len: node.decorators.length
+             };
+            format(ret, item, options)
+        }
+    }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -8792,7 +8814,7 @@ format.ClassPrivateProperty = function(parent, node, options) {
         }
         format(ret, node.value, options)
     }
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -8801,12 +8823,32 @@ format.ClassPrivateProperty = function(parent, node, options) {
             ]
          })
     }
+    // process AST-node-property-collection decorators and append ittfNode(s) to `ret`
+    f_astNode.props.push({
+        name: "decorators", 
+        throwIfUndefined: false, 
+        descr: "process AST-node-property-collection decorators and append ittfNode(s) to `ret`"
+     })
+    if (node.decorators) {
+        if (typeof node.decorators.length === 'undefined') {
+            throw new Error('Property node.decorators must be an array');
+        }
+        var i, i_items=node.decorators, i_len=node.decorators.length, item;
+        for (i=0; i<i_len; i++) {
+            item = node.decorators[i];
+            item.__parent = {
+                name: 'decorators', 
+                len: node.decorators.length
+             };
+            format(ret, item, options)
+        }
+    }
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -8870,7 +8912,7 @@ format.ClassDeclaration = function(parent, node, options) {
             appto.name = tempid.name;
         }
     }
-    // log 'node.abstract', node.abstract
+    // loog 'node.abstract', node.abstract
     if (!!node.abstract == true) {
         ret.children.push({
             tag: ':abstract', 
@@ -8904,8 +8946,8 @@ format.ClassDeclaration = function(parent, node, options) {
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
-        // log 'f_p_temp superClass before format'
-        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
+        // loog 'f_p_temp superClass before format'
+        // loog 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
@@ -8950,8 +8992,8 @@ format.ClassDeclaration = function(parent, node, options) {
         if (node.superTypeParameters == null) {
             p_superTypeParameters.text = "null";
         }
-        // log 'f_p_temp superTypeParameters before format'
-        // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
+        // loog 'f_p_temp superTypeParameters before format'
+        // loog 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
         else {
             if (!node.superTypeParameters.type) {
                 throw 'Node superTypeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -9104,7 +9146,7 @@ format.ClassDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9182,8 +9224,8 @@ format.ClassExpression = function(parent, node, options) {
         if (node.superClass == null) {
             p_superClass.text = "null";
         }
-        // log 'f_p_temp superClass before format'
-        // log 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
+        // loog 'f_p_temp superClass before format'
+        // loog 'f_p_temp superClass after format', p_superClass.children.length, p_superClass
         else {
             if (!node.superClass.type) {
                 throw 'Node superClass has no type: ' + JSON.stringify(node, null, 2);
@@ -9228,8 +9270,8 @@ format.ClassExpression = function(parent, node, options) {
         if (node.superTypeParameters == null) {
             p_superTypeParameters.text = "null";
         }
-        // log 'f_p_temp superTypeParameters before format'
-        // log 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
+        // loog 'f_p_temp superTypeParameters before format'
+        // loog 'f_p_temp superTypeParameters after format', p_superTypeParameters.children.length, p_superTypeParameters
         else {
             if (!node.superTypeParameters.type) {
                 throw 'Node superTypeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -9262,7 +9304,7 @@ format.ClassExpression = function(parent, node, options) {
     }
     if (p_superClass) {
         
-        // log 'p_superTypeParameters', p_superTypeParameters
+        // loog 'p_superTypeParameters', p_superTypeParameters
         if (isTextualNode(p_superClass)) {
             var superchildren = p_superTypeParameters ? p_superTypeParameters.children : [];
             ret.children.push({
@@ -9294,7 +9336,7 @@ format.ClassExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9371,7 +9413,7 @@ format.MetaProperty = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9409,7 +9451,7 @@ format.ModuleDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9491,11 +9533,11 @@ format.ImportDeclaration = function(parent, node, options) {
         p_source.tag = 'from';
         ret.children.push(p_source)
         
-        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        // loog '*** f_p_tag source children[0].textified', p_source.children[0].textified
         
-        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        // loog '*** f_p_tag source children[0].isText', p_source.children[0].isText
         
-        // log '*** f_p_tag source children[0].name', p_source.children[0].name
+        // loog '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
@@ -9529,7 +9571,7 @@ format.ImportDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9628,7 +9670,7 @@ format.ImportSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9698,7 +9740,7 @@ format.ImportDefaultSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9745,7 +9787,7 @@ format.ImportNamespaceSpecifier = function(parent, node, options) {
         throw new Error('AST-node-property local undefined: ' + JSON.stringify(node, null, 2));
     }
     // A namespace import specifier, e.g., `* as foo` in `import * as foo from "mod.js"`.
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -9761,7 +9803,7 @@ format.ImportNamespaceSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9854,11 +9896,11 @@ format.ExportNamedDeclaration = function(parent, node, options) {
         p_source.tag = 'from';
         ret.children.push(p_source)
         
-        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        // loog '*** f_p_tag source children[0].textified', p_source.children[0].textified
         
-        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        // loog '*** f_p_tag source children[0].isText', p_source.children[0].isText
         
-        // log '*** f_p_tag source children[0].name', p_source.children[0].name
+        // loog '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
@@ -9886,7 +9928,7 @@ format.ExportNamedDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -9980,7 +10022,7 @@ format.ExportSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10026,8 +10068,8 @@ format.ExportDefaultSpecifier = function(parent, node, options) {
         if (node.exported == null) {
             p_exported.text = "null";
         }
-        // log 'f_p_temp exported before format'
-        // log 'f_p_temp exported after format', p_exported.children.length, p_exported
+        // loog 'f_p_temp exported before format'
+        // loog 'f_p_temp exported after format', p_exported.children.length, p_exported
         else {
             if (!node.exported.type) {
                 throw 'Node exported has no type: ' + JSON.stringify(node, null, 2);
@@ -10072,7 +10114,7 @@ format.ExportDefaultSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10119,8 +10161,8 @@ format.ExportDefaultDeclaration = function(parent, node, options) {
         if (node.declaration == null) {
             p_declaration.text = "null";
         }
-        // log 'f_p_temp declaration before format'
-        // log 'f_p_temp declaration after format', p_declaration.children.length, p_declaration
+        // loog 'f_p_temp declaration before format'
+        // loog 'f_p_temp declaration after format', p_declaration.children.length, p_declaration
         else {
             if (!node.declaration.type) {
                 throw 'Node declaration has no type: ' + JSON.stringify(node, null, 2);
@@ -10165,7 +10207,7 @@ format.ExportDefaultDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10211,8 +10253,8 @@ format.ExportNamespaceSpecifier = function(parent, node, options) {
         if (node.exported == null) {
             p_exported.text = "null";
         }
-        // log 'f_p_temp exported before format'
-        // log 'f_p_temp exported after format', p_exported.children.length, p_exported
+        // loog 'f_p_temp exported before format'
+        // loog 'f_p_temp exported after format', p_exported.children.length, p_exported
         else {
             if (!node.exported.type) {
                 throw 'Node exported has no type: ' + JSON.stringify(node, null, 2);
@@ -10257,7 +10299,7 @@ format.ExportNamespaceSpecifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10317,11 +10359,11 @@ format.ExportAllDeclaration = function(parent, node, options) {
         p_source.tag = 'from';
         ret.children.push(p_source)
         
-        // log '*** f_p_tag source children[0].textified', p_source.children[0].textified
+        // loog '*** f_p_tag source children[0].textified', p_source.children[0].textified
         
-        // log '*** f_p_tag source children[0].isText', p_source.children[0].isText
+        // loog '*** f_p_tag source children[0].isText', p_source.children[0].isText
         
-        // log '*** f_p_tag source children[0].name', p_source.children[0].name
+        // loog '*** f_p_tag source children[0].name', p_source.children[0].name
         if (p_source.children.length == 1) {
             if (p_source.children[0].textified) {
                 p_source.textified = p_source.children[0].textified;
@@ -10338,7 +10380,7 @@ format.ExportAllDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10371,7 +10413,7 @@ format.CommentBlock = function(parent, node, options) {
         ]
      };
     var values = verify.replaceAll(node.value, '\r\n', '\n').split('\n');
-    // log 'options.replaceds', options.replaceds
+    // loog 'options.replaceds', options.replaceds
     var i, i_items=values, i_len=values.length, value;
     for (i=0; i<i_len; i++) {
         value = values[i];
@@ -10389,7 +10431,7 @@ format.CommentBlock = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10421,7 +10463,7 @@ format.CommentLine = function(parent, node, options) {
             
         ]
      };
-    // log 'options.replaceds', options.replaceds
+    // loog 'options.replaceds', options.replaceds
     // var v = codeReplacer.restore(node.value, options.replaceds)
     ret.name = node.value;
     if (ret != null) {
@@ -10429,7 +10471,7 @@ format.CommentLine = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10476,8 +10518,8 @@ format.JSXAttribute = function(parent, node, options) {
         if (node.name == null) {
             p_name.text = "null";
         }
-        // log 'f_p_temp name before format'
-        // log 'f_p_temp name after format', p_name.children.length, p_name
+        // loog 'f_p_temp name before format'
+        // loog 'f_p_temp name after format', p_name.children.length, p_name
         else {
             if (!node.name.type) {
                 throw 'Node name has no type: ' + JSON.stringify(node, null, 2);
@@ -10525,8 +10567,8 @@ format.JSXAttribute = function(parent, node, options) {
         if (node.value == null) {
             p_value.text = "null";
         }
-        // log 'f_p_temp value before format'
-        // log 'f_p_temp value after format', p_value.children.length, p_value
+        // loog 'f_p_temp value before format'
+        // loog 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -10563,7 +10605,7 @@ format.JSXAttribute = function(parent, node, options) {
     else {
         throw new Error('JSXAttribute.name must be textual:' + JSON.stringify(node, null, 2));
     }
-    // log 'JSXAttribute.p_value', p_value, isTextualNode(p_value)
+    // loog 'JSXAttribute.p_value', p_value, isTextualNode(p_value)
     if (p_value) {
         if (isTextualNode(p_value)) {
             ret.name += ' ' + getNodeText(p_value);
@@ -10578,7 +10620,7 @@ format.JSXAttribute = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10616,7 +10658,7 @@ format.JSXClosingElement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10662,8 +10704,8 @@ format.JSXElement = function(parent, node, options) {
         if (node.openingElement == null) {
             p_openingElement.text = "null";
         }
-        // log 'f_p_temp openingElement before format'
-        // log 'f_p_temp openingElement after format', p_openingElement.children.length, p_openingElement
+        // loog 'f_p_temp openingElement before format'
+        // loog 'f_p_temp openingElement after format', p_openingElement.children.length, p_openingElement
         else {
             if (!node.openingElement.type) {
                 throw 'Node openingElement has no type: ' + JSON.stringify(node, null, 2);
@@ -10720,8 +10762,8 @@ format.JSXElement = function(parent, node, options) {
             format(p_children, item, options)
         }
     }
-    // log 'p_openingElement', p_openingElement
-    // log 'p_children', p_children
+    // loog 'p_openingElement', p_openingElement
+    // loog 'p_children', p_children
     if (p_openingElement.name && p_openingElement.name.length > 0) {
         var char = p_openingElement.name[0];
         if (char == char.toUpperCase() || html_supported_tags.indexOf(p_openingElement.name) < 0) {
@@ -10736,21 +10778,21 @@ format.JSXElement = function(parent, node, options) {
         ret.tag = '<';
         ret.children = p_openingElement.children;
     }
-    // log 'JSXElement.ret', ret
+    // loog 'JSXElement.ret', ret
     var isStyle = ret.tag === 'style';
     var i, i_items=p_children.children, i_len=p_children.children.length, item;
     for (i=0; i<i_len; i++) {
         item = p_children.children[i];
-        // log 'JSXElement.children.item', item
+        // loog 'JSXElement.children.item', item
         if (!(item.tag === '+' && item.name.trim().length == 0)) {
             
-            // log 'isStyle', isStyle, item.children
+            // loog 'isStyle', isStyle, item.children
             if (isStyle) {
                 var j, j_items=item.children, j_len=item.children.length, c;
                 for (j=0; j<j_len; j++) {
                     c = item.children[j];
                     
-                    // log 'JSXElement.children.item.lit', c, getLiteral(c)
+                    // loog 'JSXElement.children.item.lit', c, getLiteral(c)
                     if (c.tag === '`lit') {
                         ret.tag = "style-jsx";
                         options.wizziIncludes.push({
@@ -10801,7 +10843,7 @@ format.JSXElement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -10893,8 +10935,8 @@ format.JSXExpressionContainer = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -10928,15 +10970,15 @@ format.JSXExpressionContainer = function(parent, node, options) {
     else {
         throw new Error('AST-node-property expression undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'JSXExpressionContainer.p_expression', p_expression, isTextualNode(p_expression)
+    // loog 'JSXExpressionContainer.p_expression', p_expression, isTextualNode(p_expression)
     if (isTextualNode(p_expression)) {
         ret.tag = '+';
         ret.name = '{' + getNodeText(p_expression) + '}';
         ret.textified = ret.name;
     }
-    // log 'JSXExpressionContainer.options.stateAST', options.stateAST
-    // log 'JSXExpressionContainer.options.p_expression', p_expression
-    // log 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
+    // loog 'JSXExpressionContainer.options.stateAST', options.stateAST
+    // loog 'JSXExpressionContainer.options.p_expression', p_expression
+    // loog 'options.stateAST[options.stateAST.length-1]', options.stateAST[options.stateAST.length-1]
     else {
         p_expression.textified = null;
         if (options.stateAST[options.stateAST.length-1] === 'JSXAttribute') {
@@ -10955,7 +10997,7 @@ format.JSXExpressionContainer = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11001,8 +11043,8 @@ format.JSXSpreadChild = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -11044,7 +11086,7 @@ format.JSXSpreadChild = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11077,17 +11119,17 @@ format.JSXIdentifier = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.name, value: ', node.name, '
+    // loog 't/name.node.name, value: ', node.name, '
     if (typeof node.name !== 'undefined') {
         ret.name = node.name.toString();
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11164,7 +11206,7 @@ format.JSXMemberExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11203,7 +11245,7 @@ format.JSXNamespacedName = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11249,8 +11291,8 @@ format.JSXOpeningElement = function(parent, node, options) {
         if (node.name == null) {
             p_name.text = "null";
         }
-        // log 'f_p_temp name before format'
-        // log 'f_p_temp name after format', p_name.children.length, p_name
+        // loog 'f_p_temp name before format'
+        // loog 'f_p_temp name after format', p_name.children.length, p_name
         else {
             if (!node.name.type) {
                 throw 'Node name has no type: ' + JSON.stringify(node, null, 2);
@@ -11285,7 +11327,7 @@ format.JSXOpeningElement = function(parent, node, options) {
         throw new Error('AST-node-property name undefined: ' + JSON.stringify(node, null, 2));
     }
     // selfClosing boolean
-    // log 'JSXOpeningElement p_name', p_name
+    // loog 'JSXOpeningElement p_name', p_name
     if (isTextualNode(p_name)) {
         ret.name = getNodeText(p_name);
     }
@@ -11319,8 +11361,8 @@ format.JSXOpeningElement = function(parent, node, options) {
         if (node.typeParameters == null) {
             p_typeParameters.text = "null";
         }
-        // log 'f_p_temp typeParameters before format'
-        // log 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
+        // loog 'f_p_temp typeParameters before format'
+        // loog 'f_p_temp typeParameters after format', p_typeParameters.children.length, p_typeParameters
         else {
             if (!node.typeParameters.type) {
                 throw 'Node typeParameters has no type: ' + JSON.stringify(node, null, 2);
@@ -11422,7 +11464,7 @@ format.JSXOpeningElement = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11468,7 +11510,7 @@ format.JSXSpreadAttribute = function(parent, node, options) {
     else {
         throw new Error('AST-node-property argument undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'get_text_from_1_children', isChildrenCount(ret, 1)
+    // loog 'get_text_from_1_children', isChildrenCount(ret, 1)
     var got_text_1 = false;
     if (isChildrenCount(ret, 1)) {
         if (ret.children[0].textified || ret.children[0].isText) {
@@ -11484,7 +11526,7 @@ format.JSXSpreadAttribute = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11529,7 +11571,7 @@ format.JSXText = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11593,7 +11635,7 @@ format.JSXFragment = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11631,7 +11673,7 @@ format.JSXOpeningFragment = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11669,7 +11711,7 @@ format.JSXClosingFragment = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11761,7 +11803,7 @@ format.TypeAlias = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11852,7 +11894,7 @@ format.OpaqueType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -11959,11 +12001,11 @@ format.TypeParameter = function(parent, node, options) {
         p_bound.tag = 'bound';
         ret.children.push(p_bound)
         
-        // log '*** f_p_tag bound children[0].textified', p_bound.children[0].textified
+        // loog '*** f_p_tag bound children[0].textified', p_bound.children[0].textified
         
-        // log '*** f_p_tag bound children[0].isText', p_bound.children[0].isText
+        // loog '*** f_p_tag bound children[0].isText', p_bound.children[0].isText
         
-        // log '*** f_p_tag bound children[0].name', p_bound.children[0].name
+        // loog '*** f_p_tag bound children[0].name', p_bound.children[0].name
         if (p_bound.children.length == 1) {
             if (p_bound.children[0].textified) {
                 p_bound.textified = p_bound.children[0].textified;
@@ -12002,11 +12044,11 @@ format.TypeParameter = function(parent, node, options) {
         p_default.tag = 'default';
         ret.children.push(p_default)
         
-        // log '*** f_p_tag default children[0].textified', p_default.children[0].textified
+        // loog '*** f_p_tag default children[0].textified', p_default.children[0].textified
         
-        // log '*** f_p_tag default children[0].isText', p_default.children[0].isText
+        // loog '*** f_p_tag default children[0].isText', p_default.children[0].isText
         
-        // log '*** f_p_tag default children[0].name', p_default.children[0].name
+        // loog '*** f_p_tag default children[0].name', p_default.children[0].name
         if (p_default.children.length == 1) {
             if (p_default.children[0].textified) {
                 p_default.textified = p_default.children[0].textified;
@@ -12043,8 +12085,8 @@ format.TypeParameter = function(parent, node, options) {
         if (node.variance == null) {
             p_variance.text = "null";
         }
-        // log 'f_p_temp variance before format'
-        // log 'f_p_temp variance after format', p_variance.children.length, p_variance
+        // loog 'f_p_temp variance before format'
+        // loog 'f_p_temp variance after format', p_variance.children.length, p_variance
         else {
             if (!node.variance.type) {
                 throw 'Node variance has no type: ' + JSON.stringify(node, null, 2);
@@ -12075,13 +12117,13 @@ format.TypeParameter = function(parent, node, options) {
             }
         }
     }
-    // log 'p_variance', p_variance
+    // loog 'p_variance', p_variance
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12119,7 +12161,7 @@ format.Variance = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12201,7 +12243,7 @@ format.VoidTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12239,7 +12281,7 @@ format.UndefinedTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12276,7 +12318,7 @@ format.NullLiteralTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12356,7 +12398,7 @@ format.GenericTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12393,7 +12435,7 @@ format.StringTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12430,7 +12472,7 @@ format.TSSymbolKeyword = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12468,7 +12510,7 @@ format.AnyTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12520,7 +12562,7 @@ format.ArrayTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12559,7 +12601,7 @@ format.BooleanLiteralTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12597,7 +12639,7 @@ format.BooleanTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12678,7 +12720,7 @@ format.ClassImplements = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12767,8 +12809,8 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -12821,7 +12863,7 @@ format.FunctionTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -12903,8 +12945,8 @@ format.FunctionTypeParam = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -12971,7 +13013,7 @@ format.FunctionTypeParam = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13052,7 +13094,7 @@ format.InterfaceExtends = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13164,7 +13206,7 @@ format.InterfaceDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13225,7 +13267,7 @@ format.IntersectionTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13263,7 +13305,7 @@ format.MixedTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13301,8 +13343,8 @@ format.NullableTypeAnnotation = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -13383,7 +13425,7 @@ format.NumberLiteralTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13421,7 +13463,7 @@ format.NumberTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13460,7 +13502,7 @@ format.StringLiteralTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13498,7 +13540,7 @@ format.StringTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13559,7 +13601,7 @@ format.TupleTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13608,7 +13650,7 @@ format.TypeofTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13646,8 +13688,8 @@ format.TypeAnnotation = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -13766,8 +13808,8 @@ format.TypeCastExpression = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -13857,7 +13899,7 @@ format.TypeCastExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13958,7 +14000,7 @@ format.ObjectTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -13991,7 +14033,7 @@ format.ObjectTypeCallProperty = function(parent, node, options) {
         ]
      };
     // extends Node
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -14019,7 +14061,7 @@ format.ObjectTypeCallProperty = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14111,7 +14153,7 @@ format.ObjectTypeIndexer = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14190,8 +14232,8 @@ format.ObjectTypeProperty = function(parent, node, options) {
         if (node.value == null) {
             p_value.text = "null";
         }
-        // log 'f_p_temp value before format'
-        // log 'f_p_temp value after format', p_value.children.length, p_value
+        // loog 'f_p_temp value before format'
+        // loog 'f_p_temp value after format', p_value.children.length, p_value
         else {
             if (!node.value.type) {
                 throw 'Node value has no type: ' + JSON.stringify(node, null, 2);
@@ -14240,7 +14282,7 @@ format.ObjectTypeProperty = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14319,8 +14361,8 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
         if (node.qualification == null) {
             p_qualification.text = "null";
         }
-        // log 'f_p_temp qualification before format'
-        // log 'f_p_temp qualification after format', p_qualification.children.length, p_qualification
+        // loog 'f_p_temp qualification before format'
+        // loog 'f_p_temp qualification after format', p_qualification.children.length, p_qualification
         else {
             if (!node.qualification.type) {
                 throw 'Node qualification has no type: ' + JSON.stringify(node, null, 2);
@@ -14359,7 +14401,7 @@ format.QualifiedTypeIdentifier = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14420,7 +14462,7 @@ format.UnionTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14457,7 +14499,7 @@ format.ExistsTypeAnnotation = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14494,7 +14536,7 @@ format.InferredPredicate = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14543,7 +14585,7 @@ format.TSObjectKeyword = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14675,7 +14717,7 @@ format.TSInterfaceDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14810,7 +14852,7 @@ format.TSConstructorType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14901,7 +14943,7 @@ format.TSConstructSignatureDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -14992,7 +15034,7 @@ format.TSCallSignatureDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15082,8 +15124,8 @@ format.TSPropertySignature = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -15131,7 +15173,7 @@ format.TSPropertySignature = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15220,7 +15262,7 @@ format.TSIndexSignature = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15285,7 +15327,7 @@ format.TSIndexedAccessType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15374,7 +15416,7 @@ format.TSModuleDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15539,8 +15581,8 @@ format.TSDeclareFunction = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -15600,7 +15642,7 @@ format.TSDeclareFunction = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15694,8 +15736,8 @@ format.TSFunctionType = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -15735,13 +15777,13 @@ format.TSFunctionType = function(parent, node, options) {
          };
         ret.children.push(p_returnType);
     }
-    console.log('TSFunctionType', 'ret', ret);
+    // loog 'TSFunctionType', 'ret', ret
     if (ret != null) {
         if (__isText) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15867,7 +15909,7 @@ format.TSMethodSignature = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -15958,11 +16000,11 @@ format.TSTypeParameterInstantiation = function(parent, node, options) {
             format(p_params, item, options)
         }
     }
-    // log 'TSTypeParameterInstantiation.p_params', p_params
+    // loog 'TSTypeParameterInstantiation.p_params', p_params
     var i, i_items=p_params.children, i_len=p_params.children.length, p;
     for (i=0; i<i_len; i++) {
         p = p_params.children[i];
-        // log 'TSTypeParameterInstantiation.p before', p
+        // loog 'TSTypeParameterInstantiation.p before', p
         if (p.children.length == 0 && p.name.length == 0) {
             if (p.tag === ':{') {
                 p.name = '{}';
@@ -15984,7 +16026,7 @@ format.TSTypeParameterInstantiation = function(parent, node, options) {
                 ]
              };
         }
-        // log 'TSTypeParameterInstantiation.p after', p
+        // loog 'TSTypeParameterInstantiation.p after', p
         ret.children.push(p)
     }
     if (ret != null) {
@@ -16078,7 +16120,7 @@ format.TSTypeParameter = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16142,8 +16184,8 @@ format.TSParameterProperty = function(parent, node, options) {
         if (node.parameter == null) {
             p_parameter.text = "null";
         }
-        // log 'f_p_temp parameter before format'
-        // log 'f_p_temp parameter after format', p_parameter.children.length, p_parameter
+        // loog 'f_p_temp parameter before format'
+        // loog 'f_p_temp parameter after format', p_parameter.children.length, p_parameter
         else {
             if (!node.parameter.type) {
                 throw 'Node parameter has no type: ' + JSON.stringify(node, null, 2);
@@ -16177,7 +16219,7 @@ format.TSParameterProperty = function(parent, node, options) {
     else {
         throw new Error('AST-node-property parameter undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'p_parameter', p_parameter
+    // loog 'p_parameter', p_parameter
     ret.name = p_parameter.name;
     var i, i_items=p_parameter.children, i_len=p_parameter.children.length, item;
     for (i=0; i<i_len; i++) {
@@ -16190,7 +16232,7 @@ format.TSParameterProperty = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16236,8 +16278,8 @@ format.TSTypeReference = function(parent, node, options) {
         if (node.typeName == null) {
             p_typeName.text = "null";
         }
-        // log 'f_p_temp typeName before format'
-        // log 'f_p_temp typeName after format', p_typeName.children.length, p_typeName
+        // loog 'f_p_temp typeName before format'
+        // loog 'f_p_temp typeName after format', p_typeName.children.length, p_typeName
         else {
             if (!node.typeName.type) {
                 throw 'Node typeName has no type: ' + JSON.stringify(node, null, 2);
@@ -16298,7 +16340,7 @@ format.TSTypeReference = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16355,8 +16397,8 @@ format.TSExpressionWithTypeArguments = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -16400,7 +16442,7 @@ format.TSExpressionWithTypeArguments = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16446,8 +16488,8 @@ format.TSAsExpression = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -16495,8 +16537,8 @@ format.TSAsExpression = function(parent, node, options) {
         if (node.typeAnnotation == null) {
             p_typeAnnotation.text = "null";
         }
-        // log 'f_p_temp typeAnnotation before format'
-        // log 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
+        // loog 'f_p_temp typeAnnotation before format'
+        // loog 'f_p_temp typeAnnotation after format', p_typeAnnotation.children.length, p_typeAnnotation
         else {
             if (!node.typeAnnotation.type) {
                 throw 'Node typeAnnotation has no type: ' + JSON.stringify(node, null, 2);
@@ -16530,8 +16572,8 @@ format.TSAsExpression = function(parent, node, options) {
     else {
         throw new Error('AST-node-property typeAnnotation undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'p_expression', p_expression
-    // log 'p_typeAnnotation', p_typeAnnotation
+    // loog 'p_expression', p_expression
+    // loog 'p_typeAnnotation', p_typeAnnotation
     if (p_expression.isText || p_expression.textified) {
         p_expression.name = p_expression.textified;
         p_expression.textified = null;
@@ -16551,7 +16593,7 @@ format.TSAsExpression = function(parent, node, options) {
     if (['@id', 'literal'].indexOf(ret.tag) > -1) {
         ret.tag = '+';
     }
-    // log 'TSAsExpression.ret', ret
+    // loog 'TSAsExpression.ret', ret
     if (node.extra && node.extra.parenthesized) {
         ret = {
             tag: '(', 
@@ -16566,7 +16608,7 @@ format.TSAsExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16626,7 +16668,7 @@ format.TSTupleType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16683,7 +16725,7 @@ format.TSUnionType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16740,7 +16782,7 @@ format.TSIntersectionType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16832,7 +16874,7 @@ format.TSEnumDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16910,8 +16952,8 @@ format.TSEnumMember = function(parent, node, options) {
         if (node.initializer == null) {
             p_initializer.text = "null";
         }
-        // log 'f_p_temp initializer before format'
-        // log 'f_p_temp initializer after format', p_initializer.children.length, p_initializer
+        // loog 'f_p_temp initializer before format'
+        // loog 'f_p_temp initializer after format', p_initializer.children.length, p_initializer
         else {
             if (!node.initializer.type) {
                 throw 'Node initializer has no type: ' + JSON.stringify(node, null, 2);
@@ -16942,7 +16984,7 @@ format.TSEnumMember = function(parent, node, options) {
             }
         }
     }
-    // log 'TSEnumMember', 'p_initializer', p_initializer
+    // loog 'TSEnumMember', 'p_initializer', p_initializer
     if (p_initializer) {
         if (p_initializer.children.length == 0) {
             ret.name += ' ' + getNodeText(p_initializer);
@@ -16953,7 +16995,7 @@ format.TSEnumMember = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -16990,7 +17032,7 @@ format.TSNeverKeyword = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17073,7 +17115,7 @@ format.TSTypePredicate = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17130,7 +17172,7 @@ format.TSTypeLiteral = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17184,7 +17226,7 @@ format.TSTypeOperator = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17230,8 +17272,8 @@ format.TSNonNullExpression = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -17273,7 +17315,7 @@ format.TSNonNullExpression = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17364,7 +17406,7 @@ format.TSTypeAliasDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17410,8 +17452,8 @@ format.TSLiteralType = function(parent, node, options) {
         if (node.literal == null) {
             p_literal.text = "null";
         }
-        // log 'f_p_temp literal before format'
-        // log 'f_p_temp literal after format', p_literal.children.length, p_literal
+        // loog 'f_p_temp literal before format'
+        // loog 'f_p_temp literal after format', p_literal.children.length, p_literal
         else {
             if (!node.literal.type) {
                 throw 'Node literal has no type: ' + JSON.stringify(node, null, 2);
@@ -17451,7 +17493,7 @@ format.TSLiteralType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17497,8 +17539,8 @@ format.TSConditionalType = function(parent, node, options) {
         if (node.checkType == null) {
             p_checkType.text = "null";
         }
-        // log 'f_p_temp checkType before format'
-        // log 'f_p_temp checkType after format', p_checkType.children.length, p_checkType
+        // loog 'f_p_temp checkType before format'
+        // loog 'f_p_temp checkType after format', p_checkType.children.length, p_checkType
         else {
             if (!node.checkType.type) {
                 throw 'Node checkType has no type: ' + JSON.stringify(node, null, 2);
@@ -17546,8 +17588,8 @@ format.TSConditionalType = function(parent, node, options) {
         if (node.extendsType == null) {
             p_extendsType.text = "null";
         }
-        // log 'f_p_temp extendsType before format'
-        // log 'f_p_temp extendsType after format', p_extendsType.children.length, p_extendsType
+        // loog 'f_p_temp extendsType before format'
+        // loog 'f_p_temp extendsType after format', p_extendsType.children.length, p_extendsType
         else {
             if (!node.extendsType.type) {
                 throw 'Node extendsType has no type: ' + JSON.stringify(node, null, 2);
@@ -17592,8 +17634,8 @@ format.TSConditionalType = function(parent, node, options) {
         if (node.trueType == null) {
             p_trueType.text = "null";
         }
-        // log 'f_p_temp trueType before format'
-        // log 'f_p_temp trueType after format', p_trueType.children.length, p_trueType
+        // loog 'f_p_temp trueType before format'
+        // loog 'f_p_temp trueType after format', p_trueType.children.length, p_trueType
         else {
             if (!node.trueType.type) {
                 throw 'Node trueType has no type: ' + JSON.stringify(node, null, 2);
@@ -17641,8 +17683,8 @@ format.TSConditionalType = function(parent, node, options) {
         if (node.falseType == null) {
             p_falseType.text = "null";
         }
-        // log 'f_p_temp falseType before format'
-        // log 'f_p_temp falseType after format', p_falseType.children.length, p_falseType
+        // loog 'f_p_temp falseType before format'
+        // loog 'f_p_temp falseType after format', p_falseType.children.length, p_falseType
         else {
             if (!node.falseType.type) {
                 throw 'Node falseType has no type: ' + JSON.stringify(node, null, 2);
@@ -17709,7 +17751,7 @@ format.TSConditionalType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17777,7 +17819,7 @@ format.TSMappedType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17823,8 +17865,8 @@ format.TSTypeQuery = function(parent, node, options) {
         if (node.exprName == null) {
             p_exprName.text = "null";
         }
-        // log 'f_p_temp exprName before format'
-        // log 'f_p_temp exprName after format', p_exprName.children.length, p_exprName
+        // loog 'f_p_temp exprName before format'
+        // loog 'f_p_temp exprName after format', p_exprName.children.length, p_exprName
         else {
             if (!node.exprName.type) {
                 throw 'Node exprName has no type: ' + JSON.stringify(node, null, 2);
@@ -17869,7 +17911,7 @@ format.TSTypeQuery = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17917,7 +17959,7 @@ format.TSInferType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -17965,7 +18007,7 @@ format.TSParenthesizedType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18031,7 +18073,7 @@ format.TSDeclareMethod = function(parent, node, options) {
     }
     // TODO
     // s(kind
-    // log 'node.abstract', node.abstract
+    // loog 'node.abstract', node.abstract
     if (!!node.abstract == true) {
         ret.children.push({
             tag: ':abstract', 
@@ -18040,7 +18082,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             ]
          })
     }
-    // log 'node.static', node.static
+    // loog 'node.static', node.static
     if (!!node.static == true) {
         ret.children.push({
             tag: 'static', 
@@ -18108,8 +18150,8 @@ format.TSDeclareMethod = function(parent, node, options) {
         if (node.returnType == null) {
             p_returnType.text = "null";
         }
-        // log 'f_p_temp returnType before format'
-        // log 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
+        // loog 'f_p_temp returnType before format'
+        // loog 'f_p_temp returnType after format', p_returnType.children.length, p_returnType
         else {
             if (!node.returnType.type) {
                 throw 'Node returnType has no type: ' + JSON.stringify(node, null, 2);
@@ -18172,7 +18214,7 @@ format.TSDeclareMethod = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18218,8 +18260,8 @@ format.TSQualifiedName = function(parent, node, options) {
         if (node.left == null) {
             p_left.text = "null";
         }
-        // log 'f_p_temp left before format'
-        // log 'f_p_temp left after format', p_left.children.length, p_left
+        // loog 'f_p_temp left before format'
+        // loog 'f_p_temp left after format', p_left.children.length, p_left
         else {
             if (!node.left.type) {
                 throw 'Node left has no type: ' + JSON.stringify(node, null, 2);
@@ -18264,8 +18306,8 @@ format.TSQualifiedName = function(parent, node, options) {
         if (node.right == null) {
             p_right.text = "null";
         }
-        // log 'f_p_temp right before format'
-        // log 'f_p_temp right after format', p_right.children.length, p_right
+        // loog 'f_p_temp right before format'
+        // loog 'f_p_temp right after format', p_right.children.length, p_right
         else {
             if (!node.right.type) {
                 throw 'Node right has no type: ' + JSON.stringify(node, null, 2);
@@ -18316,7 +18358,7 @@ format.TSQualifiedName = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18362,8 +18404,8 @@ format.TSExportAssignment = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -18405,7 +18447,7 @@ format.TSExportAssignment = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18451,8 +18493,8 @@ format.TSImportType = function(parent, node, options) {
         if (node.argument == null) {
             p_argument.text = "null";
         }
-        // log 'f_p_temp argument before format'
-        // log 'f_p_temp argument after format', p_argument.children.length, p_argument
+        // loog 'f_p_temp argument before format'
+        // loog 'f_p_temp argument after format', p_argument.children.length, p_argument
         else {
             if (!node.argument.type) {
                 throw 'Node argument has no type: ' + JSON.stringify(node, null, 2);
@@ -18500,8 +18542,8 @@ format.TSImportType = function(parent, node, options) {
         if (node.qualifier == null) {
             p_qualifier.text = "null";
         }
-        // log 'f_p_temp qualifier before format'
-        // log 'f_p_temp qualifier after format', p_qualifier.children.length, p_qualifier
+        // loog 'f_p_temp qualifier before format'
+        // loog 'f_p_temp qualifier after format', p_qualifier.children.length, p_qualifier
         else {
             if (!node.qualifier.type) {
                 throw 'Node qualifier has no type: ' + JSON.stringify(node, null, 2);
@@ -18532,7 +18574,7 @@ format.TSImportType = function(parent, node, options) {
             }
         }
     }
-    // log 'TSImportType', p_qualifier
+    // loog 'TSImportType', p_qualifier
     if (isTextualNode(p_argument) && (p_qualifier == null || isTextualNode(p_qualifier))) {
         ret.textified = 'import(' + getNodeText(p_argument) + ')';
         if (p_qualifier) {
@@ -18551,7 +18593,7 @@ format.TSImportType = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18615,7 +18657,7 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
             appto.name = tempid.name;
         }
     }
-    // log 'node.isExport', node.isExport
+    // loog 'node.isExport', node.isExport
     if (!!node.isExport == true) {
         ret.children.push({
             tag: 'isExport', 
@@ -18640,7 +18682,7 @@ format.TSImportEqualsDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18709,7 +18751,7 @@ format.TSNamespaceExportDeclaration = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18755,8 +18797,8 @@ format.TSExternalModuleReference = function(parent, node, options) {
         if (node.expression == null) {
             p_expression.text = "null";
         }
-        // log 'f_p_temp expression before format'
-        // log 'f_p_temp expression after format', p_expression.children.length, p_expression
+        // loog 'f_p_temp expression before format'
+        // loog 'f_p_temp expression after format', p_expression.children.length, p_expression
         else {
             if (!node.expression.type) {
                 throw 'Node expression has no type: ' + JSON.stringify(node, null, 2);
@@ -18798,7 +18840,7 @@ format.TSExternalModuleReference = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18835,7 +18877,7 @@ format.TSUnknownKeyword = function(parent, node, options) {
             ret.textified = ret.name;
         }
         
-        // log '### add ', ret.tag , 'to', parent.tag
+        // loog '### add ', ret.tag , 'to', parent.tag
         if (typeof __skip === 'undefined' || __skip == false) {
             processLeadingComments(node, ret, options);
             processTrailingComments(node, ret, options);
@@ -18883,7 +18925,7 @@ function extractCommentsIf(ret, len) {
 }
 function assertNoComments(node) {
     if (node.leadingComments || node.trailingComments) {
-        console.log('Node should have no comments', node);
+        console.log("[31m%s[0m", 'Node should have no comments', node);
         throw new Error('Node should have no comments');
     }
 }
@@ -18899,10 +18941,10 @@ function processComments(comments, node, ittfNode, options, leading) {
         var i, i_items=comments, i_len=comments.length, item;
         for (i=0; i<i_len; i++) {
             item = comments[i];
-            // log 'processComments', node.type, item
+            // loog 'processComments', node.type, item
             if (item.type === 'CommentLine') {
                 
-                // log 'processComments. calling, codeReplacer.restoreInside', item.value
+                // loog 'processComments. calling, codeReplacer.restoreInside', item.value
                 if (false) {
                     if (options.commentManager.checkWritten(item) == true) {
                         options.commentManager.removeWritten(item);
@@ -18931,7 +18973,7 @@ function processComments(comments, node, ittfNode, options, leading) {
             }
             else if (item.type === 'CommentBlock') {
                 
-                // log 'codeReplacer.isKey', true
+                // loog 'codeReplacer.isKey', true
                 if (false) {
                     if (options.commentManager.checkWritten(item) == true) {
                         options.commentManager.removeWritten(item);
@@ -18945,7 +18987,7 @@ function processComments(comments, node, ittfNode, options, leading) {
                      };
                     ittfNode.children.push(hb)
                 }
-                // log 'codeReplacer.isKey', false
+                // loog 'codeReplacer.isKey', false
                 else {
                     var ss = item.value.split(/\r\n|\r|\n/);
                     hb = {
@@ -18977,7 +19019,7 @@ function processParams2(ret, p_params) {
         var i, i_items=p_params.children, i_len=p_params.children.length, item;
         for (i=0; i<i_len; i++) {
             item = p_params.children[i];
-            console.log('TSFunctionType', 'p_params.item', item);
+            // loog 'TSFunctionType', 'p_params.item', item
             if (item.tag == '@id') {
                 item.tag = 'param';
                 ret.children.push(item);
@@ -19029,7 +19071,7 @@ function processParams(ittfNode) {
             for (j=0; j<j_len; j++) {
                 p = item.children[j];
                 var plen = childrenLengthNoProps(p);
-                // log 'processParams. p.tag', p.tag, 'plen', plen, JSON.stringify(p, null, 2)
+                // loog 'processParams. p.tag', p.tag, 'plen', plen, JSON.stringify(p, null, 2)
                 
                 /**
                     * 
@@ -19060,7 +19102,7 @@ function processParams(ittfNode) {
                     }
                 }
                 
-                // log 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
+                // loog 'processParams', 'plen', plen, 'p.children[0].tag', p.children[0].tag, 'p.children[1].tag', p.children[1].tag
                 if (plen == 2) {
                     
                     // log 111
@@ -19101,7 +19143,7 @@ function processParams(ittfNode) {
             temp.push(item);
         }
     }
-    // log 'wizzifiers.js.processParams.result', JSON.stringify(temp, null, 2)
+    // loog 'wizzifiers.js.processParams.result', JSON.stringify(temp, null, 2)
     ittfNode.children = temp;
 }
 function getNodeText(ittfNode) {
@@ -19216,7 +19258,7 @@ function textifyChildren(ittfNode, tag) {
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
         
-        // log '@@@@@@@ item.tag.isText', item.tag, item.isText
+        // loog '@@@@@@@ item.tag.isText', item.tag, item.isText
         if (item.isText || item.textified) {
             ret.push({
                 tag: tag, 
@@ -19231,7 +19273,7 @@ function textifyChildren(ittfNode, tag) {
             ret.push(item);
         }
     }
-    // log '@@@@@@@@@@@@@@@ textifyChildren', ret
+    // loog '@@@@@@@@@@@@@@@ textifyChildren', ret
     return ret;
 }
 function setTextList(ittfNode, sep) {
@@ -19239,7 +19281,7 @@ function setTextList(ittfNode, sep) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
-        console.log('setTextList', item.tag, item.isText, item.name, item.textified);
+        // loog 'setTextList', item.tag, item.isText, item.name, item.textified
         if (item.isText) {
             sb.push(item.name);
         }
@@ -19259,14 +19301,14 @@ function getTextList(ittfNode, sep) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
-        // log 'getTextList', item
+        // loog 'getTextList', item
         if (item.isText && item.children.length == 0) {
             sb.push(item.name);
         }
         else if (item.textified && item.children.length == 0) {
             sb.push(item.textified);
         }
-        // log 'getTextList failed ***************', item
+        // loog 'getTextList failed ***************', item
         else {
             return null;
         }
@@ -19279,7 +19321,7 @@ function setNameFromChildByTag(ittfNode, tag, forceText) {
         item = ittfNode.children[i];
         if (item.tag === tag) {
             
-            // log '...................setNameFromChildByTag', item
+            // loog '...................setNameFromChildByTag', item
             if (forceText) {
             }
             if (item.isText) {
@@ -19334,7 +19376,7 @@ function getLiteral(ittfNode) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
-        // log 'getLiteral.item', item
+        // loog 'getLiteral.item', item
         if (item.tag === '+') {
             temp = verify.replaceAll(verify.replaceAll(item.name, '\\n', '\n'), '\\b', ' ');
             sb.push(temp);
@@ -19390,7 +19432,7 @@ md.parse = function(input, babelOptions) {
             'flow'
         ].concat(commonPlugins);
     }
-    // log 'jswizzifier.container.babelOptions', babelOptions
+    // loog 'jswizzifier.container.babelOptions', babelOptions
     return parser.parse(input, {
             sourceType: 'module', 
             plugins: plugins
@@ -19418,7 +19460,7 @@ md.getCodeAST = function(input, options, callback) {
 }
 ;
 md.getWizziTree = function(input, options, callback) {
-    // log 'options', options
+    // loog 'options', options
     options = options || {};
     options.input = input;
     options.stack = [];
@@ -19427,7 +19469,7 @@ md.getWizziTree = function(input, options, callback) {
     options.stateAST = [];
     var startTime = Date.now();
     var babelOptions = options.babel || {};
-    // log 'Parsed in ' + (Date.now() - startTime) + ' ms'
+    // loog 'Parsed in ' + (Date.now() - startTime) + ' ms'
     var syntax;
     var cr;
     try {
@@ -19437,7 +19479,7 @@ md.getWizziTree = function(input, options, callback) {
         // var lines = cr.codeCleaned.split('\n')
         var lines = input.split('\n');
         for (var i=0; i<lines.length-1; i++) {
-            console.log(i+1, lines[i]);
+            console.log(i+1, lines[i], __filename);
         }
         return callback(ex);
     } 
@@ -19446,8 +19488,8 @@ md.getWizziTree = function(input, options, callback) {
     }
     options.starter = true;
     options.commentManager = new CommentManager();
-    // log 'cr.codeCleaned', cr.codeCleaned
-    // log 'cr.replaceds', cr.replaceds
+    // loog 'cr.codeCleaned', cr.codeCleaned
+    // loog 'cr.replaceds', cr.replaceds
     var root = {
         tag: 'module', 
         children: [
@@ -19470,14 +19512,14 @@ md.getWizziTree = function(input, options, callback) {
         return callback(ex);
     } 
     // log "wizziTree", JSON.stringify(root, null, 2)
-    // log 'options.wizziIncludes', options.wizziIncludes
+    // loog 'options.wizziIncludes', options.wizziIncludes
     async.map(options.wizziIncludes, function(item, callback) {
         if (item.kind === 'css') {
             if (!csswizzifier) {
                 csswizzifier = require('../../cssparser/css/wizzifier');
             }
             csswizzifier.getWizziTree(item.literal, {}, function(err, ittf) {
-                // log 'getWizzifierIncludes.item.ittf', ittf
+                // loog 'getWizzifierIncludes.item.ittf', ittf
                 item.node.children.push(ittf)
                 return callback(null);
             })
@@ -19487,7 +19529,7 @@ md.getWizziTree = function(input, options, callback) {
                 htmlwizzifier = require('../../htmlparser/wizzi/wizzifier');
             }
             htmlwizzifier.getWizziTree(item.literal, {}, function(err, ittf) {
-                // log 'getWizzifierIncludes.item.ittf', ittf
+                // loog 'getWizzifierIncludes.item.ittf', ittf
                 item.node.children.push(ittf)
                 return callback(null);
             })
@@ -19501,7 +19543,7 @@ md.getWizziTree = function(input, options, callback) {
 }
 ;
 md.getWizziIttf = function(input, options, callback) {
-    // log '++++++++++ jswizzify.options', options
+    // loog '++++++++++ jswizzify.options', options
     md.getWizziTree(input, options, function(err, root) {
         if (err) {
             return callback(err);

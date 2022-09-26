@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\examples\typescript\index.js.ittf
 */
 'use strict';
@@ -34,15 +34,15 @@ function go(name) {
         verbose: false
      }, function(err, result) {
         if (err) {
-            console.log('err', err);
+            console.log("[31m%s[0m", 'err', err);
             file.write(out_ittf, JSON.stringify(err, null, 4))
         }
+        // loog 'r1', r1
+        // loog 'r1 after', r1
         else {
             var r1 = result.substring(0, 24);
             var r2 = result.substring(24);
-            console.log('r1', r1);
             r1 = r1.replace('jsfile', 'react ');
-            console.log('r1 after', r1);
             file.write(out_ittf, r1+r2)
         }
     })

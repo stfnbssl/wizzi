@@ -1,0 +1,30 @@
+${'$'}group 
+   useExpress true
+   { express
+       useSslCert false
+       useErrors false
+       useStaticFiles true
+       { staticFiles
+           basePath "__dirname, '..', '..'"
+       useSessionStore false
+   useSession true
+   { session
+       name "${cliCtx.name}"
+       secret "${'$'}{stfnbssl_env.sessionSecret}"
+   noCache true
+   useSocketIO false
+   { socketIO
+   useCookie true
+   { cookie
+   useLogger false
+   { logger
+       useMorgan false
+       { morgan
+   useCompression false
+   { compression
+       level 6
+   useHelmet false
+   { helmet
+   useCors true
+   { cors
+       clientOrigin "http://localhost:5000"

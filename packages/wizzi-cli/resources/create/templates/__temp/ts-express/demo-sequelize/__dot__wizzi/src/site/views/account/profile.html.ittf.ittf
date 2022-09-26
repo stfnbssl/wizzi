@@ -1,0 +1,2 @@
+html 
+   $include wz/v08/html/views/account/profile.html

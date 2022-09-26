@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\cssparser\css\wizzifier.js.ittf
 */
 'use strict';
@@ -46,7 +46,7 @@ md.getWizziTree = function(input, options, callback) {
         verbose = options.verbose;
     }
     var startTime = Date.now();
-    // log 'startTime', startTime
+    // loog 'startTime', startTime
     wizzify(input, options, function(err, syntax) {
         if (err) {
             return callback(err);
@@ -59,7 +59,7 @@ md.getWizziTree = function(input, options, callback) {
                 file.write(options.syntaxOutFile, JSON.stringify(syntax, null, 2))
             })
         }
-        // log 'Parsed in ' + Date.now() - startTime + ' ms'
+        // loog 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
 }
@@ -95,7 +95,7 @@ var format = function(ast, options) {
     throw new Error('no formatter for type: ' + ast.type);
 };
 format['stylesheet'] = function(ast) {
-    // log 'stylesheet.ast', ast
+    // loog 'stylesheet.ast', ast
     var ret = {
         tag: 'css', 
         children: []

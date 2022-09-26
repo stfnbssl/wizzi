@@ -17,40 +17,47 @@ md.gen = function(model, ctx, callback) {
     }
     var method = model.wzName;
     u.writeComments(model, ctx);
-    u.genAccessorsAndExtra(model, ctx)
-    if (model.static) {
-        ctx.write('static ');
-    }
-    if (model.async) {
-        ctx.write('async ');
-    }
-    ctx.write(method);
-    u.genTSTypeParameters(model, ctx, statement, (err, notUsed) => {
+    u.genTSDecorators(model, ctx, statement, (err, notUsed) => {
     
         if (err) {
             return callback(err);
         }
-        ctx.write('(');
-        u.genTSParams(model, ctx, statement, (err, notUsed) => {
+        u.genAccessorsAndExtra(model, ctx)
+        if (model.static) {
+            ctx.write('static ');
+        }
+        if (model.async) {
+            ctx.write('async ');
+        }
+        ctx.write(method);
+        u.genTSTypeParameters(model, ctx, statement, (err, notUsed) => {
         
             if (err) {
                 return callback(err);
             }
-            ctx.write(')');
-            if (model.typeReturn) {
-                ctx.write(': ');
-                statement.stm.typeReturn(model.typeReturn, ctx, (err, notUsed) => {
-                
-                    if (err) {
-                        return callback(err);
+            ctx.write('(');
+            u.genTSParams(model, ctx, statement, (err, notUsed) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                ctx.write(')');
+                if (model.typeReturn) {
+                    ctx.write(': ');
+                    statement.stm.typeReturn(model.typeReturn, ctx, (err, notUsed) => {
+                    
+                        if (err) {
+                            return callback(err);
+                        }
+                        method_step_1(model, ctx, callback)
                     }
+                    )
+                }
+                else {
                     method_step_1(model, ctx, callback)
                 }
-                )
             }
-            else {
-                method_step_1(model, ctx, callback)
-            }
+            )
         }
         )
     }

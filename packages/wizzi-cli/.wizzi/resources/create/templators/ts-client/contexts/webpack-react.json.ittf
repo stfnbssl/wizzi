@@ -2,11 +2,14 @@
     $include commons
 
     $ 
-        var hotReload = false;
         var isStandalone = true;
+        var demoName = 'MuiSplitPane'; // means use single page, no router, yes hotReload
+        // var demoName = null; // null means useRouter
+        var hotReload = demoName != null;
 
     { App
         name "Test Webpack React"
+        demoName "${demoName}"
 
     $if isStandalone
         isStandalone true
@@ -16,7 +19,6 @@
 
     useTypescript true
     { typescript
-
    
     useWebpack true
     { webpack
@@ -30,13 +32,14 @@
 
     useReact true
     { react
-        useRouter true
-        { router
+        $if demoName == null
+            useRouter true
+            { router
         useMui true
         { mui
             useSystem true
             useBase true
-            useIcons false
+            useIcons true
             useJoy true
             useMaterial false
         useSplitPane true

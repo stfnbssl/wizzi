@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\examples\import\index.js.ittf
 */
 'use strict';
@@ -31,19 +31,19 @@ function go() {
 function nextjs_folder(folder, outpackage) {
     importFolder(path.join(thrdfolder, 'zeit', 'learnnextjs-demo', folder), path.join(jsTutorial, 'zeit', outpackage, 'wizzi', 'ittf', 'src', folder), function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFolder done');
+        console.log("[32m%s[0m", 'importFolder done');
     })
 }
 function nextjs_file(file, outpackage) {
     importFile(path.join(thrdfolder, 'zeit', 'learnnextjs-demo', file), path.join(thrdfolder, 'zeit', 'learnnextjs-demo'), path.join(jsTutorial, 'zeit', outpackage, 'wizzi', 'ittf', 'root'), function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFile done');
+        console.log("[32m%s[0m", 'importFile done');
     })
 }
 function snack() {
@@ -54,36 +54,36 @@ function snack() {
         ]
      }, function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFolder done');
+        console.log("[32m%s[0m", 'importFolder done');
     })
 }
 function chrome_ext() {
     importFolder("C:/My/wizzi/v5/apps/js-tutorials/chrome/get_started_complete", "C:/My/wizzi/v5/apps/js-tutorials/chrome/ext1/wizzi/ittf/root", function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFolder done');
+        console.log("[32m%s[0m", 'importFolder done');
     })
 }
 function react_typescript() {
     importFolder("C:/My/wizzi/v5/apps/3dParty/react-redux-typescript-guide/playground", "C:/My/wizzi/v5/apps/3dParty/react-redux-typescript-guide/ittf", function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFolder done');
+        console.log("[32m%s[0m", 'importFolder done');
     })
 }
 function react_webpack_typescript_babel() {
     importFolder("C:/My/wizzi/v5/apps/3dParty/react-webpack-typescript-babel/original", "C:/My/wizzi/v5/apps/3dParty/react-webpack-typescript-babel/ittf", function(err, notUsed) {
         if (err) {
-            console.log('+++++++++++++++++++++++++++++++++++err', err);
+            console.log("[31m%s[0m", err);
             throw err;
         }
-        console.log('importFolder done');
+        console.log("[32m%s[0m", 'importFolder done');
     })
 }

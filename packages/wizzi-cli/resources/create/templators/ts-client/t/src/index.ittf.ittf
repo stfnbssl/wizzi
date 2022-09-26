@@ -20,7 +20,24 @@ $group
         css
             ${'$'}include wz/v08/ts/react/basic/App.css
 
-    $file __dot__wizzi/${pkgPath}src/index.html.ittf.ittf
-        html 
-            lang en
-            ${'$'}include wz/v08/webpack/html/index.html            
+    $if cliCtx.useAphrodite
+        $file __dot__wizzi/${pkgPath}src/components/ThemeProvider.tsx.ittf.ittf
+            module
+                ${'$'}include wz/v08/ts/react/components/ThemeProvider.tsx
+    
+    $if cliCtx.useWebpack
+        $file __dot__wizzi/${pkgPath}src/index.html.ittf.ittf
+            html 
+                lang en
+                ${'$'}include wz/v08/webpack/html/index.html       
+
+    $if cliCtx.useVite
+        $file __dot__wizzi/${pkgPath}src/vite-env.d.ts.text.ittf.ittf
+            text
+                ${'$'}include wz/v08/vite/vite-env.d.ts.text
+
+    $if cliCtx.useFeatures 
+        $if cliCtx.features.usePreferences
+            $file __dot__wizzi/${pkgPath}src/types.tsx.ittf.ittf
+                module
+                    ${'$'}include wz/v08/ts/react/types.tsx

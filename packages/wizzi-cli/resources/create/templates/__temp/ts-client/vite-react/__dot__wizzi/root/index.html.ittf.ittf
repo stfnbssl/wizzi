@@ -1,0 +1,3 @@
+html 
+   lang en
+   $include wz/v08/vite/html/index.html

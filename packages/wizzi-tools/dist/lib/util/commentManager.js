@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\util\commentManager.js.ittf
 */
 'use strict';
@@ -47,11 +47,11 @@ var CommentManager = (function () {
         return c.loc.start.line == c.loc.end.line;
     }
     CommentManager.prototype.leadingIsInline = function(c, node) {
-        console.log('leadingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line);
+        // loog 'leadingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
         return c.loc.end.line ==  node.loc.start.line;
     }
     CommentManager.prototype.trailingIsInline = function(c, node) {
-        console.log('trailingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line);
+        // loog 'trailingIsInline', c.value, c.loc.start.line, c.loc.end.line, node.type, node.loc.start.line, node.loc.end.line
         return c.loc.start.line ==  node.loc.end.line;
     }
     return CommentManager;

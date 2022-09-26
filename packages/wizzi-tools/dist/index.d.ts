@@ -12,3 +12,8 @@ interface WizzifyOptions {
 export function wizzify(
     schemaName: string, codeSnippet: string, options: WizzifyOptions, callback: cb<string>
 ): void;
+
+export function getCodeAST(
+    schemaName: string, codeSnippet: string, callback: cb<any>
+): void;
+

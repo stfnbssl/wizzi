@@ -65,6 +65,10 @@ $group
             ${"${'$'}"}group
                 ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/wizzify.ts
 
+        $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/getCodeAST.ts.ittf.ittf
+            ${"${'$'}"}group
+                ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/getCodeAST.ts
+
         $file __dot__wizzi/${pkgPath}src/features/wizzi/t/productions/loadSiteJsonModel.ts.ittf.ittf
             ${"${'$'}"}group
                 ${'$'}include wz/v08/ts/express/features/wizzi/t/productions/loadSiteJsonModel.ts

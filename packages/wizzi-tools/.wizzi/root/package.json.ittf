@@ -7,6 +7,8 @@ common/tools_package( wizzi-tools, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.li
 	@babel/preset-env "latest"
 	@babel/plugin-proposal-class-properties "latest"
 	@babel/plugin-proposal-object-rest-spread "latest"
+    @babel/plugin-proposal-decorators "latest"
+    babel-plugin-parameter-decorator "latest"   
 
     css "^3.0.0"
     scss-parser "^1.0.4"

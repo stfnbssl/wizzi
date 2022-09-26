@@ -20,7 +20,7 @@
 		param model
         var count = 0
         foreach item in model.statements
-            if item.wzElement != 'comment' && item.wzElement != 'commentmultiline'
+            if item.wzElement != 'comment' && item.wzElement != 'commentmultiline' && item.wzElement != 'decorator'
                 set count++
 		return count
 
@@ -75,6 +75,39 @@
                     @ item
                     @ ctx
             _ ctx.deindent
+
+	function writeDecorators
+		param model
+        param ctx
+        var temp = []
+        foreach item in model.statements
+            if item.wzElement == 'decorator'
+                _ __writeDecorator
+                    @ item
+                    @ ctx
+            else
+                _ temp.push(item)
+        set model.statements = temp
+        return model
+
+	function __writeDecorator
+		param model
+        param ctx
+        var name = (model.__name || '')
+        _ ctx.write('@' + name)
+        if model.statements && model.statements.length > 0
+            _ ctx.write('(')
+            _ u.checkInlineEnter(model, ctx)
+            _ cnt.genItems
+                @ model.statements
+                @ ctx
+                { 
+                f_cb()
+                    _ u.checkInlineExit(model, ctx)
+                    _ ctx.w(')')
+                    r_cb()
+        else
+            r_cb()        
 
 	set md.load
 		function

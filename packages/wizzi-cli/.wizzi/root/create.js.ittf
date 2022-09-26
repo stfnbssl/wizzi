@@ -10,7 +10,34 @@ module
 	let cmd = args._[0]
     info 'args', args, 'cmd', cmd
 
-    if cmd == 'ts-express'
+    if cmd == 'ts-express-demo-sequelize'
+        _ createEx
+            {
+                @ templateGroup 'ts-express'
+                @ template 'demo-sequelize'
+                @ pkgName 'demo.ts.express.sequelize'
+    elif cmd == 'ts-client-vite-react'
+        _ createEx
+            {
+                @ templateGroup 'ts-client'
+                @ template 'vite-react'
+                @ pkgName 'lab.vite.react'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.vite.react'
+    elif cmd == 'ts-client-webpack-react'
+        _ createEx
+            {
+                @ templateGroup 'ts-client'
+                @ template 'webpack-react'
+                @ pkgName 'lab.webpack.react'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
+    elif cmd == 'ts-express-wizzi-heroku'
+        _ createEx
+            {
+                @ templateGroup 'ts-express'
+                @ template 'wizzi-heroku'
+                @ pkgName 'wizzi-heroku'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi-heroku'
+    elif cmd == 'ts-express'
         _ create
             {
                 @ template 'ts/express'
@@ -38,20 +65,6 @@ module
                 @ template 'wizzi'
                 $$ @ pkgName 'demo.ts.express.wizziex'
                 @ pkgName 'wizzi-app'
-    elif cmd == 'ts-express-wizzi-heroku'
-        _ createEx
-            {
-                @ templateGroup 'ts-express'
-                @ template 'wizzi-heroku'
-                @ pkgName 'wizzi-heroku'
-                @ destPath 'C:/My/wizzi/stfnbssl/wizzi-heroku'
-    elif cmd == 'ts-client-webpack-react'
-        _ createEx
-            {
-                @ templateGroup 'ts-client'
-                @ template 'webpack-react'
-                @ pkgName 'lab.webpack.react'
-                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
     elif cmd == 'js-express'
         _ create
             {

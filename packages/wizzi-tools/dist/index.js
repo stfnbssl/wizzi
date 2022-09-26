@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -38,7 +38,7 @@ md.wizzify_js = function(codeSnippet, options, callback) {
             syntaxOutFile: null
          };
     }
-    // log 'wizzi-tools.wizzify_js.options', options
+    // loog 'wizzi-tools.wizzify_js.options', options
     jswizzifier.getWizziIttf(codeSnippet, options, callback)
 }
 ;
@@ -54,7 +54,7 @@ md.wizzify_ts = function(codeSnippet, options, callback) {
             syntaxOutFile: null
          };
     }
-    // log 'wizzi-tools.wizzify_ts.options', options
+    // loog 'wizzi-tools.wizzify_ts.options', options
     jswizzifier.getWizziIttf(codeSnippet, options, callback)
 }
 ;
@@ -175,14 +175,14 @@ md.wizzify = function(schemaName, codeSnippet, options, callback) {
     }
     try {
         var wizzifier = md['wizzify_' + schemaName.toLowerCase()];
-        // log 'wizzi-tools.wizzify', schemaName, wizzifier
+        // loog 'wizzi-tools.wizzify', schemaName, wizzifier
         if (!wizzifier) {
-            return callback(new Error("Non wizzifier found for schema: " + schemaName));
+            return callback(new Error("Wizzifier not found for schema: " + schemaName));
         }
         wizzifier(codeSnippet, options, callback)
     } 
     catch (ex) {
-        console.log(ex);
+        console.log(ex, __filename);
         return callback(ex);
     } 
 }
@@ -198,7 +198,7 @@ md.getCodeAST = function(schemaName, codeSnippet, callback) {
     try {
         var wizzifier = md[schemaName.toLowerCase() + 'wizzifier'];
         if (!wizzifier) {
-            return callback(new Error("Non wizzifier found for schema: " + schemaName));
+            return callback(new Error("No wizzifier found for schema: " + schemaName));
         }
         var options = {};
         if (schemaName === 'ts') {

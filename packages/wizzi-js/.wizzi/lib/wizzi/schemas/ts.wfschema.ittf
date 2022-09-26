@@ -15,7 +15,7 @@
 	e comment : statement
 		tag #
 
-	e_tag( xmodule, module, statement)
+	e_tag( xmodule, module, statement )
 		# The root element of the ts schema.
 		is-root
 		
@@ -33,6 +33,8 @@
 
 	e feature
 		# A known feature that this module require.
+
+    e_tag( decorator, @d, statement
 
 	$include js/vars
 	$include js/expressions

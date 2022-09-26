@@ -1,0 +1,25 @@
+${'$'}group 
+   useAuthentication true
+   { authentication
+       isProduction false
+       isLocal true
+       authRequired false
+       userInfo false
+       useLocal true
+       { local
+       useGithub true
+       { github
+           clientIdLocal "${'$'}{stfnbssl_env.githubClientIdLocal}"
+           clientSecretLocal "${'$'}{stfnbssl_env.githubClientSecretLocal}"
+           callbackURLLocal "http://localhost:5000/api/v1/authenticate/github/callback"
+           clientId "${'$'}{stfnbssl_env.githubClientId}"
+           clientSecret "${'$'}{stfnbssl_env.githubClientSecret}"
+           callbackURL "http://localhost:5000/api/v1/authenticate/github/callback"
+       useGoogle true
+       { google
+           clientIdLocal "${'$'}{stfnbssl_env.googleClientIdLocal}"
+           clientSecretLocal "${'$'}{stfnbssl_env.googleClientSecretLocal}"
+           callbackURLLocal "http://localhost:5000/api/v1/authenticate/google/callback"
+           clientId "${'$'}{stfnbssl_env.googleClientId}"
+           clientSecret "${'$'}{stfnbssl_env.googleClientSecret}"
+           callbackURL "http://localhost:5000/api/v1/authenticate/google/callback"

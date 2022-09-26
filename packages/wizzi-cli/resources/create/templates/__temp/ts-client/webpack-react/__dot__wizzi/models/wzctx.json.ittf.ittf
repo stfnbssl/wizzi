@@ -5,6 +5,7 @@
    --- 
    { App
        name "Test Webpack React"
+       demoName "MuiSplitPane"
        [ Components
    --- 
    { Styles

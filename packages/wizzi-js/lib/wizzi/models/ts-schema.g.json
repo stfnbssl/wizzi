@@ -40,6 +40,12 @@
           ]
         },
         {
+          "name": "decorator",
+          "tags": [
+            "@d"
+          ]
+        },
+        {
           "name": "xvar",
           "tags": [
             "var"
@@ -1435,6 +1441,33 @@
       "comments": [
         "A known feature that this module require."
       ]
+    },
+    {
+      "name": "decorator",
+      "super": "statement",
+      "isRoot": false,
+      "tags": [
+        "@d"
+      ],
+      "flags": "",
+      "attributes": [],
+      "relations": [
+        {
+          "name": "statement",
+          "role": "statements",
+          "tags": [
+            "+"
+          ],
+          "cardinality": "one-to-many",
+          "flags": "",
+          "inheritedFrom": "statement",
+          "comments": []
+        }
+      ],
+      "derived": [],
+      "restricts": [],
+      "methods": [],
+      "comments": []
     },
     {
       "name": "xvar",
@@ -50593,7 +50626,30 @@
         ":export-type"
       ],
       "flags": "",
-      "attributes": [],
+      "attributes": [
+        {
+          "name": "from",
+          "type": "string",
+          "tags": [
+            "from"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        },
+        {
+          "name": "xas",
+          "type": "string",
+          "tags": [
+            "as"
+          ],
+          "flags": "",
+          "inheritedFrom": null,
+          "restricts": [],
+          "comments": []
+        }
+      ],
       "relations": [
         {
           "name": "statement",

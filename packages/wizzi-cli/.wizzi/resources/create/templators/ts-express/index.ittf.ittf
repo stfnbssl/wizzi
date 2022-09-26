@@ -38,3 +38,4 @@ template ts-express
     $include tfolder/commons
     $include __generate
     $include __wizzi.config
+    $include __wizzi.override.config

@@ -1,13 +1,13 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsonparser\wizzi\cloner.js.ittf
 */
 'use strict';
 var util = require('util');
 var verify = require('wizzi-utils').verify;
 function transform(node, options) {
-    // log 'cloner.transform', node.tag, node.name
+    // loog 'cloner.transform', node.tag, node.name
     var ret = {
         tag: node.tag, 
         name: node.name, 

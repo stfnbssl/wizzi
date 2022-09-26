@@ -5,6 +5,7 @@ $group
 
     import path from 'path'
     import fs from 'fs'
+    import stringify from 'json-stringify-safe'
     import 
         @ fSystem
         from 'wizzi-utils'    
@@ -57,6 +58,7 @@ $group
     ${'$'}include productions/inferAndLoadContext
     ${'$'}include productions/scanIttfDocument
     ${'$'}include productions/wizzify
+    ${'$'}include productions/getCodeAST
     ${'$'}include productions/loadSiteJsonModel
 
     function jsonFsToPackiFiles

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\xmlparser\xml2js\wizzifier.js.ittf
 */
 'use strict';
@@ -45,7 +45,7 @@ md.getWizziTree = function(input, options, callback) {
         verbose = options.verbose;
     }
     var startTime = Date.now();
-    // log 'startTime', startTime
+    // loog 'startTime', startTime
     wizzify(input, options, function(err, syntax) {
         if (err) {
             return callback(err);
@@ -58,7 +58,7 @@ md.getWizziTree = function(input, options, callback) {
                 file.write(options.syntaxOutFile, JSON.stringify(syntax, null, 2))
             })
         }
-        // log 'Parsed in ' + Date.now() - startTime + ' ms'
+        // loog 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
 }
@@ -84,7 +84,7 @@ md.getWizzifierIncludes = function(options, callback) {
 }
 ;
 function appendChilds(name, nodeArray, parent) {
-    // log 'appendChilds.name', name
+    // loog 'appendChilds.name', name
     var i, i_items=nodeArray, i_len=nodeArray.length, node;
     for (i=0; i<i_len; i++) {
         node = nodeArray[i];
@@ -110,7 +110,7 @@ function appendChilds(name, nodeArray, parent) {
             for (j=0; j<j_len; j++) {
                 childnode = ac.c[j];
                 if (verify.isArray(childnode.value) === false) {
-                    console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value);
+                    console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value, __filename);
                 }
                 else {
                     appendChilds(childnode.name, childnode.value, tag)
@@ -181,7 +181,7 @@ function wizzify(xml, options, callback) {
                 for (var j = 0; j < ac.c.length; j++) {
                     var childnode = ac.c[j];
                     if (verify.isArray(childnode.value) === false) {
-                        console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value);
+                        console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value, __filename);
                     }
                     else {
                         appendChilds(childnode.name, childnode.value, wizziTree)
@@ -189,7 +189,7 @@ function wizzify(xml, options, callback) {
                 }
             }
         }
-        console.log("wizziTree", wizziTree);
+        console.log("wizziTree", wizziTree, __filename);
         callback(null, wizziTree);
     })
 }

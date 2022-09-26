@@ -28,8 +28,10 @@ module
                 @ 'types'
                 @ 'styled'
                 @ 'keyframes'
+                @ 'import-export'
                 *$
-                @ 'quick'
+                $$ @ 'quick'
+                @ 'decorators'
 
    		_ async.mapSeries
 			@ example_ittfs

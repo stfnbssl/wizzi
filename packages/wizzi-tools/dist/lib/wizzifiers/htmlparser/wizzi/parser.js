@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\parser.js.ittf
 */
 'use strict';
@@ -90,9 +90,9 @@ md.Parser.prototype.write = function(input) {
         i = state.pos;
         ch = input[i];
         state.pos++;
-        // log 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
+        // loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
         
-        // log '+COULD_BE_ENDOFTEXT, ch', ch
+        // loog '+COULD_BE_ENDOFTEXT, ch', ch
         if (state.cur === COULD_BE_ENDOFTEXT) {
             if (ch === '/') {
                 priv.ontext(state);
@@ -140,12 +140,12 @@ priv.resetStateOpenTag = function(state) {
 ;
 priv.loop = function(ch, state) {
     state.col++;
-    // log 'priv.loop', ch, stateText['n'+state.cur], state.pos, state.quote
+    // loog 'priv.loop', ch, stateText['n'+state.cur], state.pos, state.quote
     
-    // log '===================================rn', ch === '\r', ch === '\n'
+    // loog '===================================rn', ch === '\r', ch === '\n'
     if (ch === '\r' || ch === '\n') {
         
-        // log '===================================n prev r'
+        // loog '===================================n prev r'
         if (ch === '\n' && state.chprev === '\r') {
             return ;
         }
@@ -209,10 +209,10 @@ priv.loop = function(ch, state) {
 }
 ;
 priv.specialCases = function(ch, state) {
-    // log 'specialCases.state.currenttagname', state.currenttagname
+    // loog 'specialCases.state.currenttagname', state.currenttagname
     if (state.currenttagname === 'script' || state.currenttagname === 'style') {
         
-        // log 'isEndTag', state.currenttagname
+        // loog 'isEndTag', state.currenttagname
         
         // (NO done in priv.onclosetag) _ state.stack.pop
         if (isEndTag(state.currenttagname, ch, state)) {
@@ -228,7 +228,7 @@ priv.specialCases = function(ch, state) {
         }
     }
     
-    // log 'TEXT', ch, state.quote, state.text.length
+    // loog 'TEXT', ch, state.quote, state.text.length
     if (state.cur === TEXT && state.text) {
     }
     if (state.cur === COMMENT && ch !== '-') {
@@ -275,12 +275,12 @@ priv.specialCases = function(ch, state) {
 }
 ;
 priv.doLT = function(state) {
-    // log 'doLT', state.cur
+    // loog 'doLT', state.cur
     if (state.cur === START) {
         ;
     }
     
-    // log 'doLT', state.cur
+    // loog 'doLT', state.cur
     else if (state.cur === TEXT) {
         state.cur = COULD_BE_ENDOFTEXT;
         return ;
@@ -333,7 +333,7 @@ priv.doGT = function(state) {
 }
 ;
 priv.doSlash = function(state) {
-    // log 'doSlash', state.tag, state.cur
+    // loog 'doSlash', state.tag, state.cur
     if (state.cur === ATTR_VALUE && state.quote == null) {
         state.attribs[state.attrname] = state.attrvalue;
         state.attrname = state.attrvalue = null;
@@ -437,7 +437,7 @@ priv.doEq = function(state) {
 }
 ;
 priv.doWhite = function(ch, state) {
-    // log 'doWhite', ch, state.cur
+    // loog 'doWhite', ch, state.cur
     if (state.cur === START) {
         ;
     }
@@ -464,7 +464,7 @@ priv.doWhite = function(ch, state) {
 }
 ;
 priv.doLF = function(state) {
-    // log 'doLf'
+    // loog 'doLf'
     if (state.cur === START) {
         ;
     }
@@ -474,7 +474,7 @@ priv.doLF = function(state) {
 }
 ;
 priv.doQuote = function(ch, state) {
-    // log 'doQuote', ch, state.cur
+    // loog 'doQuote', ch, state.cur
     if (state.cur === WAIT_ATTR_VALUE) {
         state.cur = ATTR_VALUE;
         state.quote = ch;
@@ -540,7 +540,7 @@ priv.onopentag = function(state) {
     state.tagcount++;
     state.stack.push(state.tagname)
     
-    // log 'onopentag', state.tagname, 'line', state.line
+    // loog 'onopentag', state.tagname, 'line', state.line
     if (state.tagname == 'script' || state.tagname == 'style') {
     }
     state.currenttagname = state.tagname;
@@ -557,7 +557,7 @@ priv.onopentag = function(state) {
 ;
 priv.onclosetag = function(state) {
     
-    // log 'onclosetag', state.tagname, 'line', state.line
+    // loog 'onclosetag', state.tagname, 'line', state.line
     if (state.tagname == 'script' || state.tagname == 'style') {
     }
     if (state.onclosetag) {
@@ -565,7 +565,7 @@ priv.onclosetag = function(state) {
         // done already
         if (state.tagname in voidElements) {
         }
-        // log 'state.stack after onclosetag', state.stack
+        // loog 'state.stack after onclosetag', state.stack
         else {
             state.stack.pop();
             state.onclosetag(state.tagname)
@@ -608,7 +608,7 @@ priv.onswig = function(state) {
 ;
 priv.error = function(message, state) {
     delete state.input
-    // log 'current state', state
+    // loog 'current state', state
     throw new Error(message + ' at line ' + state.line + ' col ' + state.col + ' text ' + state.text);
 }
 ;
@@ -632,42 +632,42 @@ function isOpenTag(input, len, start) {
         tag += ch;
         ch = input[++i];
     }
-    // log 'isOpenTag', tag, ch
+    // loog 'isOpenTag', tag, ch
     if (tag.substr(-1, 1) == '/') {
         var ttag = tag.substr(0, tag.length - 1);
         var istag = tagNameRegExp.test(ttag);
         return istag;
     }
     var istag = tagNameRegExp.test(tag);
-    // log 'isOpenTag.istag', tag, istag
+    // loog 'isOpenTag.istag', tag, istag
     return istag;
 }
 function isOpenComment(input, len, start) {
     return (len - start) > 3 && input.substr(start, 3) === '!--';
 }
 function isEndTag(tagName, ch, state) {
-    // log 'isEndTag 1', ch, state.pos-1
+    // loog 'isEndTag 1', ch, state.pos-1
     if (ch != '<') {
         return false;
     }
     var ch2 = state.input[state.pos];
-    // log 'isEndTag 2', ch2, state.pos
+    // loog 'isEndTag 2', ch2, state.pos
     if (ch2 != '/') {
         return false;
     }
     for (var i = 0; i < tagName.length; i++) {
         ch2 = state.input[state.pos+1+i];
-        // log 'isEndTag 3', ch2, state.pos+1+i, i, tagName.length, tagName
+        // loog 'isEndTag 3', ch2, state.pos+1+i, i, tagName.length, tagName
         if (isTagChar(ch2) == false) {
             return false;
         }
     }
     ch2 = state.input[state.pos+1+tagName.length];
-    // log 'isEndTag 4', ch2
+    // loog 'isEndTag 4', ch2
     if (ch2 != '>') {
         return false;
     }
-    // log 'isEndTag 5', true
+    // loog 'isEndTag 5', true
     state.pos += 2+tagName.length;
     return true;
 }

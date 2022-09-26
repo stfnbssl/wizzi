@@ -59,6 +59,7 @@
 			# Value type: <number> ; Default value: none; Animatable: yes
         a fill
         a stroke
+        a_tag(strokeWidth, stroke-width)
         a opacity
 
 		$foreach pa in presentationAttributes
@@ -72,7 +73,7 @@
 
 		svg/getAttrs( 
 			\b id;class;dataName;href;rotate;transform;xmlns;xmlBase;xmlLang;xmlSpace;pathLength;
-            \ fill;stroke;opacity
+            \ fill;stroke;strokeWidth;opacity
 			\b )
 
 		m getStyleAttributes
@@ -175,8 +176,12 @@
 			tag font-family
 		a fontSize
 			tag font-size
-
-		svg/getAttrs( x;y;fontFamily;fontSize, item )
+        a fontWeight
+            tag font-weight
+        a textAnchor
+            tag text-anchor
+		
+        svg/getAttrs( x;y;fontFamily;fontSize;fontWeight;textAnchor, item )
 
 	e textPath : item
 

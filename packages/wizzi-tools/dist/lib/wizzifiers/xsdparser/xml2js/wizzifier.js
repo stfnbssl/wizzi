@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\xsdparser\xml2js\wizzifier.js.ittf
 */
 'use strict';
@@ -45,7 +45,7 @@ md.getWizziTree = function(input, options, callback) {
         verbose = options.verbose;
     }
     var startTime = Date.now();
-    // log 'startTime', startTime
+    // loog 'startTime', startTime
     wizzify(input, options, function(err, syntax) {
         if (err) {
             return callback(err);
@@ -58,7 +58,7 @@ md.getWizziTree = function(input, options, callback) {
                 file.write(options.syntaxOutFile, JSON.stringify(syntax, null, 2))
             })
         }
-        // log 'Parsed in ' + Date.now() - startTime + ' ms'
+        // loog 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
 }
@@ -116,8 +116,9 @@ function wizzify(xml, options, callback) {
 function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
     if (verify.isString(xmlNode)) {
         var ss = xmlNode.split('\n');
+        
+        // loog 'ss', ss
         if (ss.length > 1) {
-            console.log('ss', ss);
             parent.name = ss[0];
             for (var j=1; j<ss.length; j++) {
                 var tag = {
@@ -132,7 +133,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
             parent.name = xmlNode;
         }
     }
-    // log 'parent.tag, ac.n', parent.tag, ac.n
+    // loog 'parent.tag, ac.n', parent.tag, ac.n
     else {
         var parentTag = parent.tag;
         var ac = getAttribsAndChilds(ctx, xmlNode);
@@ -243,7 +244,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
         for (i=0; i<i_len; i++) {
             childnode = ac.c[i];
             if (verify.isArray(childnode.value) === false) {
-                console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value);
+                console.log("Error: value is not an array: " + childnode.name + ',' + childnode.value, __filename);
             }
             else {
                 var childXmlNodeName = resolveElementName(childnode.name);
@@ -261,7 +262,7 @@ function appendXmlNodeToIttfNode(ctx, xmlNode, parent) {
                     }
                 }
                 
-                // log 'parent.tag', parent.tag, childXmlNodeName, childnode.value
+                // loog 'parent.tag', parent.tag, childXmlNodeName, childnode.value
                 else if ((childXmlNodeName === 'restrict' || childXmlNodeName === 'extend') && (parent.tag === 'c-content' || parent.tag === 's-content') && childnode.value.length == 1) {
                     var ac2 = getAttribsAndChilds(ctx, childnode.value[0]);
                     parent.tag = parent.tag + '-' + childXmlNodeName;
@@ -566,6 +567,6 @@ function getNamespaces(rootXmlNode) {
             ret.xmlSchemaNsPrefix = item.prefix;
         }
     }
-    console.log('getNamespaces', ret);
+    // loog 'getNamespaces', ret
     return ret;
 }

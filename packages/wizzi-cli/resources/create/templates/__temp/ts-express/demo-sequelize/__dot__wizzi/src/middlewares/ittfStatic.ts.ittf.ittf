@@ -1,0 +1,2 @@
+module 
+   $include wz/v08/ts/express/middlewares/ittfStatic.ts

@@ -16,26 +16,33 @@ md.gen = function(model, ctx, callback) {
         throw new Error('The callback parameter must be a function. In ' + myname + '.gen. Got: ' + callback);
     }
     u.writeComments(model, ctx);
-    u.genAccessorsAndExtra(model, ctx)
-    if (model.static) {
-        ctx.write('static ');
-    }
-    ctx.write(model.wzName);
-    var ptype = u.extractTSSimpleType(model);
-    if (ptype) {
-        ctx.write(': ');
-        statement.stm[ptype.wzElement](ptype, ctx, (err, notUsed) => {
-        
-            if (err) {
-                return callback(err);
+    u.genTSDecorators(model, ctx, statement, (err, notUsed) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        u.genAccessorsAndExtra(model, ctx)
+        if (model.static) {
+            ctx.write('static ');
+        }
+        ctx.write(model.wzName);
+        var ptype = u.extractTSSimpleType(model);
+        if (ptype) {
+            ctx.write(': ');
+            statement.stm[ptype.wzElement](ptype, ctx, (err, notUsed) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                property_step_1(model, ctx, callback)
             }
+            )
+        }
+        else {
             property_step_1(model, ctx, callback)
         }
-        )
     }
-    else {
-        property_step_1(model, ctx, callback)
-    }
+    )
 }
 ;
 function property_step_1(model, ctx, callback) {

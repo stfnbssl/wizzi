@@ -10,7 +10,38 @@ const createEx = require('./cmds/createEx');
 const args = minimist(process.argv.slice(2));
 let cmd = args._[0];
 console.log('args', args, 'cmd', cmd);
-if (cmd == 'ts-express') {
+if (cmd == 'ts-express-demo-sequelize') {
+    createEx({
+        templateGroup: 'ts-express', 
+        template: 'demo-sequelize', 
+        pkgName: 'demo.ts.express.sequelize'
+     })
+}
+else if (cmd == 'ts-client-vite-react') {
+    createEx({
+        templateGroup: 'ts-client', 
+        template: 'vite-react', 
+        pkgName: 'lab.vite.react', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.vite.react'
+     })
+}
+else if (cmd == 'ts-client-webpack-react') {
+    createEx({
+        templateGroup: 'ts-client', 
+        template: 'webpack-react', 
+        pkgName: 'lab.webpack.react', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
+     })
+}
+else if (cmd == 'ts-express-wizzi-heroku') {
+    createEx({
+        templateGroup: 'ts-express', 
+        template: 'wizzi-heroku', 
+        pkgName: 'wizzi-heroku', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi-heroku'
+     })
+}
+else if (cmd == 'ts-express') {
     create({
         template: 'ts/express', 
         pkgName: 'demo.ts.express'
@@ -40,22 +71,6 @@ else if (cmd == 'ts-express-wizzi') {
         templateGroup: 'ts-express', 
         template: 'wizzi', 
         pkgName: 'wizzi-app'
-     })
-}
-else if (cmd == 'ts-express-wizzi-heroku') {
-    createEx({
-        templateGroup: 'ts-express', 
-        template: 'wizzi-heroku', 
-        pkgName: 'wizzi-heroku', 
-        destPath: 'C:/My/wizzi/stfnbssl/wizzi-heroku'
-     })
-}
-else if (cmd == 'ts-client-webpack-react') {
-    createEx({
-        templateGroup: 'ts-client', 
-        template: 'webpack-react', 
-        pkgName: 'lab.webpack.react', 
-        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.webpack.react'
      })
 }
 else if (cmd == 'js-express') {

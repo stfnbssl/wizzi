@@ -1006,4 +1006,28 @@
 					@ 'typeConditional'
 					. indexOf(model.wzElement) > -1
 
-			
+	set md.genTSDecorators
+        function
+            param model
+            param ctx
+            param cnt
+            param callback
+            var decorators = []
+            var temp = []
+            foreach s in model.statements
+                if s.wzElement == 'decorator'
+                    _ decorators.push(s)
+                else
+                    _ temp.push(s)
+            set model.statements = temp
+            if decorators.length > 0
+                repeater( 1, decorators
+                    _ cnt.stm.decorator
+                        @ item_1
+                        @ ctx
+                        a_cb()
+                            repeater_increment( 1 )
+                    $append next
+                        r_cb()
+            else
+                r_cb()	

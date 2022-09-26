@@ -24,6 +24,7 @@ module wizzi.ts.artifacts.module.gen.codegen.statement
 	var template = require('../../../../js/module/gen/codegen/statements/template')
 	var react = require('./statements/react')
 	var html = require('./statements/html')
+    var decorator = require('./statements/decorator')
 	var xittf = require('../../../../js/module/gen/codegen/statements/xittf_extensions')
 	+
 	var include_writers = require('../../../../js/module/gen/codegen/include_writers')
@@ -52,6 +53,7 @@ module wizzi.ts.artifacts.module.gen.codegen.statement
 	_ template.load(md)
 	_ react.load(md)
 	_ html.load(md)
+    _ decorator.load(md)
 	_ xittf.load(md)
 	+
 	set md.gen

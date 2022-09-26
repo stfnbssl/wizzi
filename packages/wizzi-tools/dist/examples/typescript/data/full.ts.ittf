@@ -1,8 +1,24 @@
 module
-    export 
-        :type RootState
-            :ref StateType
-                :param 
-                    :ref ReturnType
-                        :param 
-                            :typeof import('./root-reducer').default
+    class BugReport
+        p type
+            = "report"
+        p title
+            :string 
+        ctor 
+            param t
+                :string 
+            set this.title = t
+        m print
+            @d validate
+            param verbose
+                :boolean 
+            if verbose
+                return 
+                    `lit 
+                        + type:&nbsp;
+                        @ this.type
+                        + \ntitle:&nbsp;
+                        @ this.title
+                        + 
+            else
+                return this.title

@@ -9,35 +9,36 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.property
 	md-gen-class( gen )
 
         _ u.writeComments(model, ctx)
-        
-        _ u.genAccessorsAndExtra
-			@ model
-			@ ctx
 
-		if model.static
-			_ ctx.write('static ');
-
-		_ ctx.write(model.wzName);
-
-		var ptype 
-			_ u.extractTSSimpleType
-				@ model
-		
-		if ptype
-			_ ctx.write(': ')
-			_ statement.stm[ptype.wzElement]
-				@ ptype
-				@ ctx
-				a_cb()
-					_ property_step_1
-						@ model
-						@ ctx
-						@ callback
-		else
-			_ property_step_1
-				@ model
-				@ ctx
-				@ callback
+        _ u.genTSDecorators
+            @ model
+		    @ ctx
+		    @ statement
+		    a_cb()
+                _ u.genAccessorsAndExtra
+                    @ model
+                    @ ctx
+                if model.static
+                    _ ctx.write('static ');
+                _ ctx.write(model.wzName);
+                var ptype 
+                    _ u.extractTSSimpleType
+                        @ model
+                if ptype
+                    _ ctx.write(': ')
+                    _ statement.stm[ptype.wzElement]
+                        @ ptype
+                        @ ctx
+                        a_cb()
+                            _ property_step_1
+                                @ model
+                                @ ctx
+                                @ callback
+                else
+                    _ property_step_1
+                        @ model
+                        @ ctx
+                        @ callback
 
 	function property_step_1
 		param model

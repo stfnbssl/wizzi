@@ -1,0 +1,154 @@
+module
+    import 
+        as darkColors
+        from './colors-dark'
+    import 
+        as lightColors
+        from './colors-light'
+    const css = String.raw
+    const theme
+        => 
+            { 
+                @ ui
+                @ syntax
+                :{ 
+                    :p ui
+                        :ref lightColors.UIColors
+                    :p syntax
+                        :ref lightColors.SyntaxColors
+            _` css
+                + &lf;
+                + &nbsp; .prism-code {&lf;
+                + &nbsp;   background-color:&nbsp;
+                @ ui.background
+                + ;&lf;
+                + &nbsp;   color:&nbsp;
+                @ ui.text
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code ::selection {&lf;
+                + &nbsp;   background:&nbsp;
+                @ ui.selection
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code ::-moz-selection {&lf;
+                + &nbsp;   background:&nbsp;
+                @ ui.selection
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code textarea {&lf;
+                + &nbsp;   outline: 0;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.tag,&lf;
+                + &nbsp; .prism-code .token.property {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.property
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.function {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.constant
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.entity {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.property
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.string,&lf;
+                + &nbsp; .prism-code .token.selector,&lf;
+                + &nbsp; .prism-code .token.char,&lf;
+                + &nbsp; .prism-code .token.builtin,&lf;
+                + &nbsp; .prism-code .token.inserted {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.string
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.regexp,&lf;
+                + &nbsp; .prism-code .token.variable {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.regexp
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.keyword,&lf;
+                + &nbsp; .prism-code .token.atrule,&lf;
+                + &nbsp; .prism-code .token.tag > .token.punctuation,&lf;
+                + &nbsp; .prism-code .token.important {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.keyword
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.attr-name {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.number
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.attr-value {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.string
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.markup,&lf;
+                + &nbsp; .prism-code .token.special {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.predefined
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.comment,&lf;
+                + &nbsp; .prism-code .token.prolog,&lf;
+                + &nbsp; .prism-code .token.doctype,&lf;
+                + &nbsp; .prism-code .token.cdata {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.comment
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.number {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.number
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.constant,&lf;
+                + &nbsp; .prism-code .token.boolean,&lf;
+                + &nbsp; .prism-code .token.constant,&lf;
+                + &nbsp; .prism-code .token.symbol,&lf;
+                + &nbsp; .prism-code .token.deleted {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.constant
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.operator,&lf;
+                + &nbsp; .prism-code .token.entity,&lf;
+                + &nbsp; .prism-code .token.url,&lf;
+                + &nbsp; .prism-code .language-css .token.string,&lf;
+                + &nbsp; .prism-code .style .token.string {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.operator
+                + ;&lf;
+                + &nbsp; }&lf;
+                + &lf;
+                + &nbsp; .prism-code .token.punctuation {&lf;
+                + &nbsp;   color:&nbsp;
+                @ syntax.comment
+                + ;&lf;
+                + &nbsp; }&lf;
+                + 
+    export 
+        const light = theme(lightColors)
+    export 
+        const dark = theme(darkColors)

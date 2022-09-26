@@ -7,10 +7,11 @@ $group
     import
         as blogTypes
         from './types'
-    import
-        @ PostModelBuilder
-        @ GetPostModel
-        from './mongo/post'
+    ${'$'}if wzCtx.Build.useMongoDb
+        import
+            @ PostModelBuilder
+            @ GetPostModel
+            from './mongo/post'
     import
         @ ApiV1PostController
         from './controllers/apiv1post'

@@ -1,0 +1,65 @@
+module
+    $
+        var md = {
+            styled: true,
+            name: "SimpleEditor",
+            props: [
+                { name: "content", type: "string" },
+                { name: "language", type: "string" },
+            ]
+        }
+    v08/ts/react/function(&md)
+        $append imports
+            import
+                @ useState
+                @ useEffect
+                from "react"
+            import Prism from "prismjs"
+        +
+        const [contentValue, setContentValue] = useState(content)
+        const handleKeyDown
+            => 
+                param evt
+                    :ref React.KeyboardEvent
+                        :param 
+                            :ref HTMLInputElement
+                let 
+                    decl value = contentValue
+                    decl selStartPos = evt.currentTarget.selectionStart
+                _ console.log(evt.currentTarget)
+                    # handle 4-space indent on
+                if evt.key === "Tab"
+                    set value = value.substring(0, selStartPos) + "    " + value.substring(selStartPos, value.length)
+                    set evt.currentTarget.selectionStart = selStartPos + 3
+                    set evt.currentTarget.selectionEnd = selStartPos + 4
+                    _ evt.preventDefault()
+                    _ setContentValue(value)
+        _ useEffect
+            => 
+                _ Prism.highlightAll()
+            [ 
+                @ language
+                @ contentValue
+        return 
+            div 
+                @ className "code-edit-container"
+                textarea 
+                    @ className "code-input"
+                    @ value {contentValue}
+                    @ onChange
+                        => 
+                            param evt
+                                :ref React.ChangeEvent
+                                    :param 
+                                        :ref HTMLInputElement
+                            _ setContentValue(evt.target.value)
+                    @ onKeyDown {handleKeyDown}
+                pre 
+                    @ className "code-output"
+                    code 
+                        @ className
+                            `lit 
+                                + language-
+                                @ language
+                                + 
+                        + {contentValue}

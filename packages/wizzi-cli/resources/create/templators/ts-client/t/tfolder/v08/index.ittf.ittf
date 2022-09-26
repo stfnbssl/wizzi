@@ -6,6 +6,7 @@ $group
     $include package
     $include prettier
     $include react
+    $include react-mui
     $include webpack
     $$ $include services
     $$ $include site

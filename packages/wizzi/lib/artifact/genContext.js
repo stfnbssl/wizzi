@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.12
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\artifact\genContext.js.ittf
 */
 'use strict';
@@ -59,6 +59,7 @@ var GenContext = (function () {
         this.isEmpty = true;
         this.artifactGenerationErrors = [];
         this.forceInline = false;
+        this.forceInlineExtra = false;
     }
     GenContext.prototype.forceIndent = function(value) {
         return this.block.forceIndent(value);
@@ -86,7 +87,7 @@ var GenContext = (function () {
         }
         if (verify.isString(text)) {
             var iptext = text.indexOf('{') > -1 ? interpolate(text, this.values) : text;
-            if (this.forceInline) {
+            if (this.forceInline || this.forceInlineExtra) {
                 this.block.write(iptext + ' ');
             }
             else {
@@ -94,7 +95,7 @@ var GenContext = (function () {
             }
         }
         else {
-            if (this.forceInline) {
+            if (this.forceInline || this.forceInlineExtra) {
                 this.block.write(' ');
             }
             else {
@@ -135,11 +136,17 @@ var GenContext = (function () {
     GenContext.prototype.setLastNotEmptyLine = function() {
         this.block.setLastNotEmptyLine();
     }
-    GenContext.prototype.inlineOn = function() {
+    GenContext.prototype.inlineOn = function(extra) {
         this.forceInline = true;
+        if (extra) {
+            this.forceInlineExtra = true;
+        }
     }
-    GenContext.prototype.inlineOff = function() {
+    GenContext.prototype.inlineOff = function(extra) {
         this.forceInline = false;
+        if (extra) {
+            this.forceInlineExtra = false;
+        }
         this.w();
     }
     GenContext.prototype.appendFile = function(filePath) {

@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\tests\scanner\ittfFsNode.js.ittf
 */
 'use strict';
@@ -17,9 +17,9 @@ describe("the ittfFsNode class", function() {
     
     it("should add a document", function() {
         root = new ittfFsNode('root', null, true);
-        console.log('root', root);
+        // loog 'root', root
         var added = root.addDocument('root/readme.md.ittf');
-        console.log('root', root);
+        // loog 'root', root
         expect(added).to.be(true);
         expect(root.folders).to.be.an('array');
         expect(root.folders.length).to.be(0);
@@ -32,7 +32,7 @@ describe("the ittfFsNode class", function() {
     });
     it("should add a document fragment", function() {
         var added = root.addDocument('root/t/title.md.ittf');
-        console.log('root', root);
+        // loog 'root', root
         expect(added).to.be(true);
         expect(root.folders).to.be.an('array');
         expect(root.folders.length).to.be(1);
@@ -51,7 +51,7 @@ describe("the ittfFsNode class", function() {
     });
     it("should chhck infos", function() {
         root.setInfo();
-        console.log('root', root);
+        // loog 'root', root
         expect(root.info.schemas).to.be.an('object');
         expect(Object.keys(root.info.schemas).length).to.be(1);
         expect(root.info.schemas['md'].name).to.be.a('string');
@@ -64,7 +64,7 @@ describe("the ittfFsNode class", function() {
         root.toIttf(ittf);
         ittf.writeFile(path.join(__dirname, 'outputs', 'test.wzfs.ittf'), function(err, result) {
             if (err) {
-                console.log('err', err);
+                console.log("[31m%s[0m", err);
                 throw new Error(err.message);
             }
             done();

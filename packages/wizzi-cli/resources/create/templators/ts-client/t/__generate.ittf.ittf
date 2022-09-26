@@ -40,14 +40,17 @@ $group
                 wfjobs${'$'}{'('}any_tsx, &jobCtx)
                 wfjobs${'$'}{'('}any_json, &jobCtx)
                 wfjobs${'$'}{'('}any_xml, &jobCtx)
+                wfjobs${'$'}{'('}any_html, &jobCtx)
                 wfjobs${'$'}{'('}any_text_no_extension, &jobCtx)
                 wfjobs${'$'}{'('}any_md, &jobCtx)
                 wfjobs${'$'}{'('}.env, &jobCtx)
                 wfjobs${'$'}{'('}.gitignore, &jobCtx)
-                wfjobs${'$'}{'('}.eslintrc, &jobCtx)
-                wfjobs${'$'}{'('}.eslintignore, &jobCtx)
-                wfjobs${'$'}{'('}.prettierrc, &jobCtx)
-                wfjobs${'$'}{'('}.prettierignore, &jobCtx)
+                $if cliCtx.useLint
+                    wfjobs${'$'}{'('}.eslintrc, &jobCtx)
+                    wfjobs${'$'}{'('}.eslintignore, &jobCtx)
+                $if cliCtx.usePrettier
+                    wfjobs${'$'}{'('}.prettierrc, &jobCtx)
+                    wfjobs${'$'}{'('}.prettierignore, &jobCtx)
         	---
             line ittf-src
         		cwd-folder ${"${'$'}"}{jobCtx.ittf_src_folder}
@@ -61,6 +64,8 @@ $group
                 wfjobs${'$'}{'('}any_svg, &jobCtx)
                 wfjobs${'$'}{'('}any_json, &jobCtx)
                 wfjobs${'$'}{'('}any_md, &jobCtx)
+                $if cliCtx.useVite
+                    wfjobs${'$'}{'('}vite-env.d.ts, &jobCtx)
                 wfjobs${'$'}{'('}any_plain, &jobCtx, js)
                 wfjobs${'$'}{'('}any_plain, &jobCtx, d.ts)
                 wfjobs${'$'}{'('}any_plain, &jobCtx, html)
@@ -68,7 +73,6 @@ $group
                 wfjobs${'$'}{'('}any_plain, &jobCtx, css)
                 wfjobs${'$'}{'('}any_plain, &jobCtx, css.ittf)
                 wfjobs${'$'}{'('}any_plain_image, &jobCtx)
-
         	---
             line ittf-public
                 cwd-folder ${"${'$'}"}{jobCtx.ittf_public_folder}
@@ -88,7 +92,6 @@ $group
         
                 wfjobs${'$'}{'('}any_plain, &jobCtx, ittf)
                 wfjobs${'$'}{'('}any_plain_image, &jobCtx)
-            
             ---
             production
         		dest-folder ${"${'$'}"}{jobCtx.dest_folder}

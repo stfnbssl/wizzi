@@ -63,6 +63,7 @@
             @ loader "file-loader"
             { options
                 @ outputPath 'assets/'
+                @ name 'images/[hash]-[name].[ext]'
     ---
     ${'$'}if wzCtx.Build.useGraphql
         ${'$'}if wzCtx.Build.graphql.excludePolyfill

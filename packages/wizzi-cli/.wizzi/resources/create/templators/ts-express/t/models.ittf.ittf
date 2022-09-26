@@ -40,9 +40,14 @@ $group
                             name "account"
                             hasControllers true
                             useMongoDb true
-                    $if cliCtx.useBlog
+                    $if cliCtx.useFeatureBlog
                         {
                             name "blog"
+                            hasControllers true
+                            useMongoDb true
+                    $if cliCtx.useFeatureProject
+                        {
+                            name "project"
                             hasControllers true
                             useMongoDb true
                     $if cliCtx.useWizziDocs
@@ -366,6 +371,32 @@ $group
             ${"${'$'}"}group
                 useData true
                 { data
+                    { Blog
+                        { db
+                            Name "Blog"
+                            name "blog"
+                            [ tables
+                                { 
+                                    Name "Post"
+                                    Names "Posts"
+                                    name "post"
+                                    names "posts"
+                                    descr "Post"
+                                    [ indexes
+                                    [ fields
+                                        { 
+                                            name "id"
+                                            type "integer"
+                                            autoIncrement true
+                                            primaryKey true
+                                        { 
+                                            name "title"
+                                            type "string"
+                                            allowNull false
+                                        { 
+                                            name "content"
+                                            type "string"
+                                            allowNull false
                     { Project
                         { db
                             Name "Project"

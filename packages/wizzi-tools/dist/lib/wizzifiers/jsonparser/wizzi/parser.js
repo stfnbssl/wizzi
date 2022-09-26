@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsonparser\wizzi\parser.js.ittf
 */
 'use strict';
@@ -40,7 +40,7 @@ function isWhiteSpace(ch) {
     return false;
 }
 md.parse = function(input, handlers, callback) {
-    // log 'input', input
+    // loog 'input', input
     var state = {
         cur: START, 
         prev: null, 
@@ -98,7 +98,7 @@ md.parse = function(input, handlers, callback) {
     for (var i = 0; i < l; i++) {
         state.col++;
         ch = input[i];
-        // log 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
+        // loog 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
         function withEscapeCheck(arr) {
             // beware NO real ESCAPE !!!
             // this is not a real parser but simply a wizzifier !!!
@@ -124,7 +124,7 @@ md.parse = function(input, handlers, callback) {
             }
         }
         function tryCommentOrString(doSetString) {
-            // log 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
+            // loog 'ch, state.cur', ch, ch.charCodeAt(0), state.cur
             if (ch === '/') {
                 if (setString()) {
                     return true;
@@ -137,12 +137,12 @@ md.parse = function(input, handlers, callback) {
                     return true;
                 }
                 
-                // log 'COMMENT_MULTI_END_COULD done', state.before_comment
+                // loog 'COMMENT_MULTI_END_COULD done', state.before_comment
                 else if (state.cur === COMMENT_MULTI_END_COULD) {
                     state.cur = state.before_comment;
                     return true;
                 }
-                // log 'COMMENT_COULD prev', state.cur
+                // loog 'COMMENT_COULD prev', state.cur
                 else {
                     state.before_comment = state.cur;
                     state.cur = COMMENT_COULD;
@@ -161,7 +161,7 @@ md.parse = function(input, handlers, callback) {
                     return true;
                 }
                 
-                // log 'COMMENT_MULTI_END_COULD'
+                // loog 'COMMENT_MULTI_END_COULD'
                 else if (state.cur === COMMENT_MULTI_IS) {
                     state.cur = COMMENT_MULTI_END_COULD;
                     return true;
@@ -191,7 +191,7 @@ md.parse = function(input, handlers, callback) {
                     return true;
                 }
                 
-                // log 'COMMENT_SINGLE_IS', ch === '\n'
+                // loog 'COMMENT_SINGLE_IS', ch === '\n'
                 else if (state.cur === COMMENT_SINGLE_IS) {
                     if (ch === '\n') {
                         state.cur = state.before_comment;
@@ -220,7 +220,7 @@ md.parse = function(input, handlers, callback) {
             var j, chb, gop = 1;
             for (j = i+1; j < l; j++) {
                 chb = input[j];
-                // log 'tryHB state', state.cur, 'ch', chb, 'gop', gop
+                // loog 'tryHB state', state.cur, 'ch', chb, 'gop', gop
                 if (gop == 1) {
                     if (chb === '{') {
                         gop++;

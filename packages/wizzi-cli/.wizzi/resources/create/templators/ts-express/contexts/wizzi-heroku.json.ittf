@@ -51,8 +51,13 @@
     useSequelize true
     { sequelize
 
-    useBlog true
-    { blog
+    useFeatureBlog true
+    { featureBlog
+        store "mongoDb"
+
+    useFeatureProject false
+    { featureProject
+        store "sequelize"
 
     usePages true
     { pages    

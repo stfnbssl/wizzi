@@ -24,44 +24,51 @@ md.gen = function(model, ctx, callback) {
         zsuper = model.super;
     // loog 'ts.es6.class', model
     u.writeComments(model, ctx);
-    classDecorators(model, ctx, (err, notUsed) => {
+    u.genTSDecorators(model, ctx, statement, (err, notUsed) => {
     
         if (err) {
             return callback(err);
         }
-        u.genAccessorsAndExtra(model, ctx)
-        ctx.write('class ' + zclass);
-        // log myname, zclass, model.extends
-        u.genTSTypeParameters(model, ctx, statement, (err, notUsed) => {
+        classDecorators(model, ctx, (err, notUsed) => {
         
             if (err) {
                 return callback(err);
             }
-            classSuper(model, ctx, (err, notUsed) => {
+            u.genAccessorsAndExtra(model, ctx)
+            ctx.write('class ' + zclass);
+            // log myname, zclass, model.extends
+            u.genTSTypeParameters(model, ctx, statement, (err, notUsed) => {
             
                 if (err) {
                     return callback(err);
                 }
-                classImplements(model, ctx, (err, notUsed) => {
+                classSuper(model, ctx, (err, notUsed) => {
                 
                     if (err) {
                         return callback(err);
                     }
-                    ctx.w(' {');
-                    ctx.indent();
-                    classCTor(model, ctx, function(err, notUsed) {
+                    classImplements(model, ctx, (err, notUsed) => {
+                    
                         if (err) {
                             return callback(err);
                         }
-                        classMembers(model, ctx, function(err, notUsed) {
+                        ctx.w(' {');
+                        ctx.indent();
+                        classCTor(model, ctx, function(err, notUsed) {
                             if (err) {
                                 return callback(err);
                             }
-                            ctx.deindent();
-                            ctx.w('}');
-                            return callback(null, null);
+                            classMembers(model, ctx, function(err, notUsed) {
+                                if (err) {
+                                    return callback(err);
+                                }
+                                ctx.deindent();
+                                ctx.w('}');
+                                return callback(null, null);
+                            })
                         })
-                    })
+                    }
+                    )
                 }
                 )
             }

@@ -22,45 +22,50 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
         
         _ u.writeComments(model, ctx)
 
-        _ classDecorators
+        _ u.genTSDecorators
             @ model
-            @ ctx
-            a_cb()
-                _ u.genAccessorsAndExtra
+		    @ ctx
+		    @ statement
+		    a_cb()
+                _ classDecorators
                     @ model
                     @ ctx
-                _ ctx.write('class ' + zclass)
-                # log myname, zclass, model.extends
-                _ u.genTSTypeParameters
-                    @ model
-                    @ ctx
-                    @ statement
                     a_cb()
-                        _ classSuper
+                        _ u.genAccessorsAndExtra
                             @ model
                             @ ctx
+                        _ ctx.write('class ' + zclass)
+                        # log myname, zclass, model.extends
+                        _ u.genTSTypeParameters
+                            @ model
+                            @ ctx
+                            @ statement
                             a_cb()
-                                _ classImplements
+                                _ classSuper
                                     @ model
                                     @ ctx
                                     a_cb()
-                                        _ ctx.w(' {')
-                                        _ ctx.indent();
-                                        _ classCTor
+                                        _ classImplements
                                             @ model
                                             @ ctx
-                                            f_cb()
-                                                _ classMembers
+                                            a_cb()
+                                                _ ctx.w(' {')
+                                                _ ctx.indent();
+                                                _ classCTor
                                                     @ model
                                                     @ ctx
                                                     f_cb()
-                                                        _ ctx.deindent();
-                                                        _ ctx.w('}')
-                                                        r_cb()
+                                                        _ classMembers
+                                                            @ model
+                                                            @ ctx
+                                                            f_cb()
+                                                                _ ctx.deindent();
+                                                                _ ctx.w('}')
+                                                                r_cb()
 
 	fn( classDecorators )
         var count = 0
-		repeater( 1, model.statements )
+        repeater( 1, model.statements )
             if item_1.wzElement == 'decoratorCall'
                 if count > 0
                     _ ctx.write(', ')
@@ -72,9 +77,9 @@ module wizzi.ts.artifacts.module.gen.codegen.es6.class
                         _ ctx.w()
                         repeater_increment( 1 )
             else
-			    repeater_increment( 1 )
-			$append next
-				r_cb()
+                repeater_increment( 1 )
+            $append next
+                r_cb()
 
     fn( classImplements )
 		if model.implements.length == 0

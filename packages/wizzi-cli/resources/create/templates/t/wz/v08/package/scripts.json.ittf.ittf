@@ -15,13 +15,13 @@ $group
                 start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/server/index.ts"
                 watch "env-cmd -f deploy/client/development.env tsnd --require tsconfig-paths/register --inspect=9211 --quiet src/server/index.ts"
                 build:server "babel --source-maps --extensions '.ts,.tsx' --out-dir build/ src/"
-    ${'$'}if wzCtx.Build.isServer
+    ${'$'}elif wzCtx.Build.isServer
         ${'$'}if wzCtx.Build.useExpress
             ${'$'}if wzCtx.Build.useTypescript
                 start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/index.ts"
                 watch "env-cmd -f deploy/development.env tsnd --require tsconfig-paths/register --inspect=9211 --quiet src/index.ts"
                 build:server "babel --source-maps --extensions '.ts,.tsx' --out-dir build/ src/"
-    ${'$'}if wzCtx.Build.isClient
+    ${'$'}elif wzCtx.Build.isClient
         ${'$'}if wzCtx.Build.useTypescript
             serve:client "env-cmd -f deploy/client/development.env webpack serve --open --mode development"
             build:client "env-cmd -f deploy/client/development.env webpack --mode development"
@@ -60,6 +60,10 @@ $group
         build "gatsby build"
         serve "gatsby serve"
         clean "gatsby clean"
+    ${'$'}elif wzCtx.Build.useVite
+        dev "vite"
+        build "tsc && vite build"
+        preview "vite preview"
     ${'$'}elif wzCtx.Build.useExpress
         ${'$'}if wzCtx.Build.useNetlify
             ${'$'}if wzCtx.Build.useLocalServer

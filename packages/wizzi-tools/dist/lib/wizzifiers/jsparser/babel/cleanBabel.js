@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\jsparser\babel\cleanBabel.js.ittf
 */
 'use strict';
@@ -22,7 +22,7 @@ md.cleanAst = function(ast) {
                     
                     // throw new Error(ast)
                     if (!node) {
-                        console.log('cleanBabel.Null ast node', k, ast);
+                        console.log("[33m%s[0m", 'cleanBabel.Null ast node', k, ast);
                     }
                     else {
                         md.cleanAst(node);

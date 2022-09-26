@@ -166,8 +166,10 @@ $group
                 line-ref ittf-root
                 line-ref ittf-public
         		line-ref ittf-src
-                line-ref ittf-src-images
-                line-ref ittf-src-models
+                $if cliCtx.useWizziViewEngine
+                    line-ref ittf-src-images
+                    $if cliCtx.useWizziDocs
+                        line-ref ittf-src-models
                 line-ref ittf-ittf
                 $if cliCtx.useAzure
                     line-ref ittf-tests

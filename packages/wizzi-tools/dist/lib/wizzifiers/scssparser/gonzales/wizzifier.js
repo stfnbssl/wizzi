@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\scssparser\gonzales\wizzifier.js.ittf
 */
 'use strict';
@@ -44,7 +44,7 @@ md.getWizziTree = function(input, options, callback) {
         verbose = options.verbose;
     }
     var startTime = Date.now();
-    // log 'startTime', startTime
+    // loog 'startTime', startTime
     wizzify(input, options, function(err, syntax) {
         if (err) {
             return callback(err);
@@ -57,7 +57,7 @@ md.getWizziTree = function(input, options, callback) {
                 file.write(options.syntaxOutFile, JSON.stringify(syntax, null, 2))
             })
         }
-        // log 'Parsed in ' + Date.now() - startTime + ' ms'
+        // loog 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
 }
@@ -124,7 +124,7 @@ function wizzify(scss, options, callback) {
         if (err) {
             return callback(err);
         }
-        console.log(JSON.stringify(syntax, null, 2));
+        console.log(JSON.stringify(syntax, null, 2), __filename);
         var root = {
             tag: 'scss', 
             children: [
@@ -141,16 +141,16 @@ format.space = function(parent, node, options) {
 ;
 // process AST node variable
 format.variable = function(parent, node, options) {
-    console.log('node : variable ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : variable ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -198,22 +198,22 @@ format.variable = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node ident
 format.ident = function(parent, node, options) {
-    console.log('node : ident ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : ident ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -228,29 +228,29 @@ format.ident = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node id
 format.id = function(parent, node, options) {
-    console.log('node : id ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : id ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -265,29 +265,29 @@ format.id = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node value
 format.value = function(parent, node, options) {
-    console.log('node : value ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : value ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -335,22 +335,22 @@ format.value = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node number
 format.number = function(parent, node, options) {
-    console.log('node : number ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : number ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -365,29 +365,29 @@ format.number = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node string
 format.string = function(parent, node, options) {
-    console.log('node : string ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : string ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -402,29 +402,29 @@ format.string = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node color
 format.color = function(parent, node, options) {
-    console.log('node : color ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : color ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -439,29 +439,29 @@ format.color = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = '#' + ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node uri
 format.uri = function(parent, node, options) {
-    console.log('node : uri ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : uri ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -476,31 +476,31 @@ format.uri = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.name = 'url(' + ret.name + ')';
     ret.textified = ret.name;
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node percentage
 format.percentage = function(parent, node, options) {
-    console.log('node : percentage ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : percentage ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -515,29 +515,29 @@ format.percentage = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.textified = ret.name + '%';
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node important
 format.important = function(parent, node, options) {
-    console.log('node : important ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : important ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -552,22 +552,22 @@ format.important = function(parent, node, options) {
             
         ]
      };
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node block
 format.block = function(parent, node, options) {
-    console.log('node : block ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : block ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -600,22 +600,22 @@ format.block = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node declaration
 format.declaration = function(parent, node, options) {
-    console.log('node : declaration ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : declaration ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -669,22 +669,22 @@ format.declaration = function(parent, node, options) {
             }
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node property
 format.property = function(parent, node, options) {
-    console.log('node : property ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : property ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -754,8 +754,8 @@ format.property = function(parent, node, options) {
                 throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
             }
         }
-        // log 't/name.node.content, value: ', node.content, ', type: string'
-        // log 't/name ittf.ret', ret
+        // loog 't/name.node.content, value: ', node.content, ', type: string'
+        // loog 't/name ittf.ret', ret
         else {
             if (typeof node.content !== 'undefined') {
                 ret.name = node.content.toString();
@@ -763,7 +763,7 @@ format.property = function(parent, node, options) {
             }
         }
     */
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -777,16 +777,16 @@ format.declarationDelimiter = function(parent, node, options) {
 ;
 // process AST node stylesheet
 format.stylesheet = function(parent, node, options) {
-    console.log('node : stylesheet ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : stylesheet ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -814,16 +814,16 @@ format.stylesheet = function(parent, node, options) {
 ;
 // process AST node ruleset
 format.ruleset = function(parent, node, options) {
-    console.log('node : ruleset ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : ruleset ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -880,22 +880,22 @@ format.ruleset = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node selector
 format.selector = function(parent, node, options) {
-    console.log('node : selector ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : selector ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -932,22 +932,22 @@ format.selector = function(parent, node, options) {
         ret.children[0].name = ret.children[1].name;
         ret.children = [ ret.children[0] ];
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node typeSelector
 format.typeSelector = function(parent, node, options) {
-    console.log('node : typeSelector ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : typeSelector ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -962,28 +962,28 @@ format.typeSelector = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node parentSelector
 format.parentSelector = function(parent, node, options) {
-    console.log('node : parentSelector ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : parentSelector ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -999,22 +999,22 @@ format.parentSelector = function(parent, node, options) {
         ]
      };
     ret.tag = node.content;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node parentSelectorExtension
 format.parentSelectorExtension = function(parent, node, options) {
-    console.log('node : parentSelectorExtension ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : parentSelectorExtension ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1062,22 +1062,22 @@ format.parentSelectorExtension = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node attributeSelector
 format.attributeSelector = function(parent, node, options) {
-    console.log('node : attributeSelector ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : attributeSelector ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1110,22 +1110,22 @@ format.attributeSelector = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node universalSelector
 format.universalSelector = function(parent, node, options) {
-    console.log('node : universalSelector ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : universalSelector ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1158,22 +1158,22 @@ format.universalSelector = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node attributeName
 format.attributeName = function(parent, node, options) {
-    console.log('node : attributeName ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : attributeName ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1206,22 +1206,22 @@ format.attributeName = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node attributeMatch
 format.attributeMatch = function(parent, node, options) {
-    console.log('node : attributeMatch ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : attributeMatch ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1236,28 +1236,28 @@ format.attributeMatch = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node attributeValue
 format.attributeValue = function(parent, node, options) {
-    console.log('node : attributeValue ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : attributeValue ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1290,22 +1290,22 @@ format.attributeValue = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection content undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node pseudoClass
 format.pseudoClass = function(parent, node, options) {
-    console.log('node : pseudoClass ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : pseudoClass ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1355,22 +1355,22 @@ format.pseudoClass = function(parent, node, options) {
     else {
         ret.textified = ret.name;
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node class
 format.class = function(parent, node, options) {
-    console.log('node : class ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : class ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1418,22 +1418,22 @@ format.class = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node include
 format.include = function(parent, node, options) {
-    console.log('node : include ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : include ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1501,22 +1501,22 @@ format.include = function(parent, node, options) {
         ret.children.push(block);
         removeChildByTag(ret, 'block');
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node function
 format.function = function(parent, node, options) {
-    console.log('node : function ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : function ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1563,22 +1563,22 @@ format.function = function(parent, node, options) {
         }
         removeChildByTag(ret, 'xarguments');
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node xarguments
 format.xarguments = function(parent, node, options) {
-    console.log('node : xarguments ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : xarguments ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1647,7 +1647,7 @@ format.xarguments = function(parent, node, options) {
                 temp.tag = '@';
             }
             /**
-                // '*****', 'xarguments', 'item.tag', item.tag, item.name, isTextualNode(item.children)
+                // loog '*****', 'xarguments', 'item.tag', item.tag, item.name, isTextualNode(item.children)
                 // item.tag === 'selector' && isTextualNode(item.children)
                     // temp.name = getTextList(item, ' ')
                 // 
@@ -1671,22 +1671,22 @@ format.xarguments = function(parent, node, options) {
     if (temp.tag !== null) {
         ret.children.push(temp);
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node delimiter
 format.delimiter = function(parent, node, options) {
-    console.log('node : delimiter ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : delimiter ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1701,22 +1701,22 @@ format.delimiter = function(parent, node, options) {
             
         ]
      };
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node parentheses
 format.parentheses = function(parent, node, options) {
-    console.log('node : parentheses ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : parentheses ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1764,22 +1764,22 @@ format.parentheses = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node combinator
 format.combinator = function(parent, node, options) {
-    console.log('node : combinator ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : combinator ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1795,22 +1795,22 @@ format.combinator = function(parent, node, options) {
         ]
      };
     ret.tag = node.content;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node dimension
 format.dimension = function(parent, node, options) {
-    console.log('node : dimension ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : dimension ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1858,22 +1858,22 @@ format.dimension = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node operator
 format.operator = function(parent, node, options) {
-    console.log('node : operator ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : operator ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1888,30 +1888,30 @@ format.operator = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
+    // loog 't/name ittf.ret', ret
     ret.name = ' ' + ret.name + ' ';
     ret.textified = ret.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node atkeyword
 format.atkeyword = function(parent, node, options) {
-    console.log('node : atkeyword ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : atkeyword ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -1926,28 +1926,28 @@ format.atkeyword = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node atrule
 format.atrule = function(parent, node, options) {
-    console.log('node : atrule ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : atrule ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2014,22 +2014,22 @@ format.atrule = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node mixin
 format.mixin = function(parent, node, options) {
-    console.log('node : mixin ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : mixin ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2091,22 +2091,22 @@ format.mixin = function(parent, node, options) {
         }
         removeChildByTag(ret, 'block');
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node extend
 format.extend = function(parent, node, options) {
-    console.log('node : extend ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : extend ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2155,22 +2155,22 @@ format.extend = function(parent, node, options) {
             removeChildByTag(ret, 'selector');
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node placeholder
 format.placeholder = function(parent, node, options) {
-    console.log('node : placeholder ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : placeholder ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2218,22 +2218,22 @@ format.placeholder = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node interpolation
 format.interpolation = function(parent, node, options) {
-    console.log('node : interpolation ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : interpolation ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2281,22 +2281,22 @@ format.interpolation = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node conditionalStatement
 format.conditionalStatement = function(parent, node, options) {
-    console.log('node : conditionalStatement ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : conditionalStatement ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2340,22 +2340,22 @@ format.conditionalStatement = function(parent, node, options) {
         }
         removeChildByTag(ret, 'block');
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node condition
 format.condition = function(parent, node, options) {
-    console.log('node : condition ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : condition ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2393,22 +2393,22 @@ format.condition = function(parent, node, options) {
         ret.tag = '@' + p.name;
         removeChildByTag(ret, '@@');
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node loop
 format.loop = function(parent, node, options) {
-    console.log('node : loop ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : loop ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2465,22 +2465,22 @@ format.loop = function(parent, node, options) {
             ret.children.push(item);
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node default
 format.default = function(parent, node, options) {
-    console.log('node : default ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : default ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2495,28 +2495,28 @@ format.default = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node singlelineComment
 format.singlelineComment = function(parent, node, options) {
-    console.log('node : singlelineComment ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : singlelineComment ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2531,28 +2531,28 @@ format.singlelineComment = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
 // process AST node multilineComment
 format.multilineComment = function(parent, node, options) {
-    console.log('node : multilineComment ----------------------------------------- parent ittf tag : ', parent.tag);
+    // loog 'node : multilineComment ----------------------------------------- parent ittf tag : ', parent.tag
     var i, i_items=Object.keys(node), i_len=Object.keys(node).length, item;
     for (i=0; i<i_len; i++) {
         item = Object.keys(node)[i];
         if (['type', 'start', 'end', 'loc'].indexOf(item) < 0) {
             
-            // log 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, node[item], verify.isArray(node[item]) ? 'array' : ''
             if (verify.isNotEmpty(node[item])) {
             }
-            // log 'property', item, verify.isArray(node[item]) ? 'array' : ''
+            // loog 'property', item, verify.isArray(node[item]) ? 'array' : ''
             else {
             }
         }
@@ -2567,13 +2567,13 @@ format.multilineComment = function(parent, node, options) {
             
         ]
      };
-    // log 't/name.node.content, value: ', node.content, ', type: string'
+    // loog 't/name.node.content, value: ', node.content, ', type: string'
     if (typeof node.content !== 'undefined') {
         ret.name = node.content.toString();
         ret.textified = ret.name;
     }
-    // log 't/name ittf.ret', ret
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2604,7 +2604,7 @@ function processParams(ittfNode) {
             var j, j_items=item.children, j_len=item.children.length, p;
             for (j=0; j<j_len; j++) {
                 p = item.children[j];
-                // log 'processParams. p.tag', p.tag
+                // loog 'processParams. p.tag', p.tag
                 
                 /**
                     * 
@@ -2638,8 +2638,8 @@ function isTextualNode(ittfNode) {
         }
         return true;
     }
+    // loog 'isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified)
     else {
-        console.log('isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified));
         return ittfNode && (ittfNode.isText || ittfNode.textified);
     }
 }
@@ -2723,8 +2723,9 @@ function textifyChildren(ittfNode, tag) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
+        
+        // loog '@@@@@@@ item.tag.isText', item.tag, item.isText
         if (item.isText || item.textified) {
-            console.log('@@@@@@@ item.tag.isText', item.tag, item.isText);
             ret.push({
                 tag: tag, 
                 name: item.isText ? item.name : item.textified, 
@@ -2738,7 +2739,7 @@ function textifyChildren(ittfNode, tag) {
             ret.push(item);
         }
     }
-    // log '@@@@@@@@@@@@@@@ textifyChildren', ret
+    // loog '@@@@@@@@@@@@@@@ textifyChildren', ret
     return ret;
 }
 function setTextList(ittfNode, sep) {
@@ -2746,7 +2747,7 @@ function setTextList(ittfNode, sep) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
-        console.log('setTextList', item.tag, item.isText, item.textified);
+        // loog 'setTextList', item.tag, item.isText, item.textified
         if (item.isText) {
             sb.push(item.name);
         }
@@ -2772,8 +2773,8 @@ function getTextList(ittfNode, sep) {
         else if (item.textified) {
             sb.push(item.textified);
         }
+        // loog 'getTextList failed ***************', item
         else {
-            console.log('getTextList failed ***************', item);
             return null;
         }
     }
@@ -2784,8 +2785,9 @@ function setNameFromChildByTag(ittfNode, tag, forceText) {
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
         if (item.tag === tag) {
+            
+            // loog '...................setNameFromChildByTag', item
             if (forceText) {
-                console.log('...................setNameFromChildByTag', item);
             }
             if (item.isText) {
                 ittfNode.name = item.name;

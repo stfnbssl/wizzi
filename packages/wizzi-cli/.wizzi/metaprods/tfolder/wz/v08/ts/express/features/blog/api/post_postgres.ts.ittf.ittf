@@ -28,7 +28,7 @@ $group
     import path from 'path'
     import
         @ GetPostModel
-        from '../${'db'}/post'
+        from '../models/post'
     import
         @ IPostModel
         from '../types'

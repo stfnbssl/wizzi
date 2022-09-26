@@ -1,0 +1,61 @@
+{ 
+   ${'$'}include v08/env/vars
+   --- 
+   $include cli/v08/wzctx-info.json
+   --- 
+   { App
+       name "Wizzi Hub"
+       isLocal true
+       isProduction false
+       port "5000"
+       useSsl false
+       siteUrl "http://localhost"
+       baseUrl "http://localhost:5000"
+       siteUrlLocal "http://localhost"
+       baseUrlLocal "http://localhost:5000"
+       apiVersion "v1"
+       { constants
+           { preview
+               minWidth 700
+       [ Components
+   --- 
+   { Styles
+   --- 
+   { Build
+       useSite true
+       { site
+           useIttfStatic false
+           { ittfStatic
+       useDemoControllers false
+       [ features
+           { 
+               name "auth"
+               hasControllers true
+               useMongoDb false
+           { 
+               name "account"
+               hasControllers true
+               useMongoDb true
+           { 
+               name "blog"
+               hasControllers true
+               useMongoDb true
+       ${'$'}include config.json
+       --- 
+       ${'$'}include code.json
+       --- 
+       ${'$'}include express.json
+       --- 
+       ${'$'}include styles.json
+       --- 
+       ${'$'}include test.json
+       --- 
+       ${'$'}include wizzi.json
+       --- 
+       ${'$'}include utils.json
+       --- 
+       ${'$'}include db.json
+       --- 
+       ${'$'}include auth.json
+       --- 
+       ${'$'}include data.json

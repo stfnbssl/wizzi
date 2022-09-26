@@ -1,5 +1,5 @@
 $group
-    $if cliCtx.useMongoDb
+    $if true $$ (allow later mongo to be included) cliCtx.useMongoDb
         $file __dot__wizzi/t/v08/mongo/crud/get_api.ts.ittf.ittf
             ${"${'$'}"}group
                 ${'$'}include wz/v08/ts/mongo/crud/get_api.ts

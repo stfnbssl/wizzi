@@ -1114,3 +1114,45 @@ md.indexedTSNeedsGraphs = function(model) {
         ].indexOf(model.wzElement) > -1;
 }
 ;
+md.genTSDecorators = function(model, ctx, cnt, callback) {
+    var decorators = [];
+    var temp = [];
+    var i, i_items=model.statements, i_len=model.statements.length, s;
+    for (i=0; i<i_len; i++) {
+        s = model.statements[i];
+        if (s.wzElement == 'decorator') {
+            decorators.push(s);
+        }
+        else {
+            temp.push(s);
+        }
+    }
+    model.statements = temp;
+    if (decorators.length > 0) {
+        var len_1 = decorators.length;
+        function repeater_1(index_1) {
+            if (index_1 === len_1) {
+                return next_1();
+            }
+            var item_1 = decorators[index_1];
+            cnt.stm.decorator(item_1, ctx, (err, notUsed) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                process.nextTick(function() {
+                    repeater_1(index_1 + 1);
+                })
+            }
+            )
+        }
+        repeater_1(0);
+        function next_1() {
+            return callback(null, null);
+        }
+    }
+    else {
+        return callback(null, null);
+    }
+}
+;

@@ -80,6 +80,8 @@
 	e_tag( typeParameterInst, :param, statement
 
 	e_tag( typeExport, :export-type, statement
+		a from
+		a_tag( xas, as
 		m wzInitialize
 			set this.specifiers = []
 			var temp = []

@@ -280,7 +280,7 @@ module
 					return
 						_ callback
 							new Error
-								@ "Non wizzifier found for schema: " + schemaName
+								@ "No wizzifier found for schema: " + schemaName
 				var options = {}
 				if schemaName === 'ts'
 					set options

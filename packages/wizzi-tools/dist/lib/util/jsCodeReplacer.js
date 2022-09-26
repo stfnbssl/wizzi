@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\util\jsCodeReplacer.js.ittf
 */
 'use strict';
@@ -51,11 +51,12 @@ md.clean = function(code) {
         else if ((ch == ' ' || ch == '\t') && state == 3) {
             ws.push(ch);
         }
+        
+        // loog 'jsCodeReplacer.token', token
         else if (ch == '}' && state == 3) {
             counter++;
             var token = '""/*;;' + counter + ';;*/';
             var key = ';;' + counter + ';;';
-            console.log('jsCodeReplacer.token', token);
             replaceds.push({
                 token: token, 
                 key: key, 
@@ -85,14 +86,14 @@ md.clean = function(code) {
         else {
             codeCleaned.push(ch);
         }
-        // log '-', state, internalGraph, codeCleaned.join(''), '/', codeSpan.join('')
-        // log '-', state, internalGraph, codeSpan.join('')
+        // loog '-', state, internalGraph, codeCleaned.join(''), '/', codeSpan.join('')
+        // loog '-', state, internalGraph, codeSpan.join('')
         i++;
     }
 }
 ;
 md.restore = function(code, replaceds) {
-    console.log('md.restore', 'code', code);
+    // loog 'md.restore', 'code', code
     if (!code) {
         return ;
     }
@@ -109,7 +110,7 @@ md.restoreInside = function(code, replaceds) {
         return ;
     }
     var match = md.getKey(code, replaceds);
-    console.log('md.restoreInside', 'code', code, 'match', match);
+    // loog 'md.restoreInside', 'code', code, 'match', match
     if (match == null) {
         return ;
     }
@@ -119,7 +120,7 @@ md.restoreInside = function(code, replaceds) {
 }
 ;
 md.isInside = function(code, replaceds) {
-    console.log('md.isInside', 'code', code);
+    // loog 'md.isInside', 'code', code
     var match = md.getKey(code, replaceds);
     if (match == null) {
         return false;
@@ -137,7 +138,7 @@ md.getKey = function(code, replaceds) {
     var i, i_items=replaceds, i_len=replaceds.length, item;
     for (i=0; i<i_len; i++) {
         item = replaceds[i];
-        console.log('isKey', code, item.key);
+        // loog 'isKey', code, item.key
         if (code.indexOf(item.key) > -1) {
             return item;
         }

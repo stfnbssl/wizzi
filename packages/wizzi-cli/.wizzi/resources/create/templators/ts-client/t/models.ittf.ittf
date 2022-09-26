@@ -8,6 +8,7 @@ $group
             ---
             { App
                 name "${cliCtx.App.name}"
+                demoName "${cliCtx.App.demoName}"
                 [ Components
             ---
             { Styles
@@ -35,12 +36,18 @@ $group
                     $if cliCtx.usePacki
                         {
                             name "packi"
+                $if cliCtx.useMonacoEditor
+                    useMonacoEditor true
+                    { monacoEditor
                 $if cliCtx.useReact
                     ---
                     ${"${'$'}"}include react.json
                 $if cliCtx.useWebpack
                     ---
                     ${"${'$'}"}include webpack.json
+                $if cliCtx.useVite
+                    ---
+                    ${"${'$'}"}include vite.json
                 ${"${'$'}"}include code.json
                 ---
                 $if cliCtx.useConfig
@@ -60,6 +67,9 @@ $group
                 $if cliCtx.useData
                     ---
                     ${"${'$'}"}include data.json
+                $if cliCtx.useFeatures
+                    ---
+                    ${"${'$'}"}include features.json
 
     $if cliCtx.useReact
         $file __dot__wizzi/models/t/react.json.ittf.ittf
@@ -67,7 +77,12 @@ $group
                 useReact true
                 { react
                     useV16 false
-                    useV17 true
+                    $if cliCtx.useVite
+                        useV17 false
+                        useV18 true
+                    $else
+                        useV17 true
+                        useV18 false
                     $if cliCtx.react.useHotReload
                         useHotReload true
                         { hotReload
@@ -109,6 +124,12 @@ $group
                         { splitPane
 
 
+    $if cliCtx.useVite
+        $file __dot__wizzi/models/t/vite.json.ittf.ittf
+            ${"${'$'}"}group
+                useVite true
+                { vite
+    
     $if cliCtx.useWebpack
         $file __dot__wizzi/models/t/webpack.json.ittf.ittf
             ${"${'$'}"}group
@@ -189,18 +210,21 @@ $group
             useTypescript true
             { typescript
                 ${'$'}${'$'} for webpack client
-                useBabelLoader true
+                $if !!cliCtx.useVite == false
+                    useBabelLoader true
                 useTsxFiles false
                 
-            usePrettier true
-            { prettier
-        
-            usePrismjs false
-            { prismjs
-                [ modes
-        
-            useLint true
-            { lint
+            $if cliCtx.usePrettier
+                usePrettier true
+                { prettier
+            
+                usePrismjs false
+                { prismjs
+                    [ modes
+            
+            $if cliCtx.useLint
+                useLint true
+                { lint
     
     $if cliCtx.useConfig
         $file __dot__wizzi/models/t/config.json.ittf.ittf
@@ -223,12 +247,14 @@ $group
                 useStyledSystem false
                 { styledSystem
         
-                useAphrodite false
-                { aphrodite
-                    disableImportant true
+                $if cliCtx.useAphrodite
+                    useAphrodite true
+                    { aphrodite
+                        disableImportant true
         
-                useTailwindcss true
-                { tailwindcss
+                $if cliCtx.useTailwindcss
+                    useTailwindcss true
+                    { tailwindcss
         
                 useExpoStyles false
                 { expoStyles
@@ -247,7 +273,8 @@ $group
                 useEscapeRegexp false
                 useEscapeHtml false
                 useNullThrows false
-                useLodash false
+                $if cliCtx.useMonacoEditor
+                    useLodash true
                 useStringifySafe true
                 useParseUrl true
                 useEs6Error false
@@ -351,3 +378,16 @@ $group
                 { data
                     { Xxx
                     { Yyy
+
+    $if cliCtx.useFeatures
+        $file __dot__wizzi/models/t/features.json.ittf.ittf
+            ${"${'$'}"}group
+                $if cliCtx.features.usePreferences
+                    usePreferences true
+                    { preferences
+                        configKey "app.preferences"
+                        [ items
+                            {
+                                name "fileTreeShown"
+                                type "boolean"
+                                defaultValue "true"

@@ -3,6 +3,8 @@ ${'$'}group
    { react
        useV16 false
        useV17 true
+       useHotReload true
+       { hotReload
        useRedux false
        { redux
            useSaga true
@@ -14,8 +16,6 @@ ${'$'}group
                    { 
                        url "https://github.com/piotrwitek/react-redux-typescript-guide"
                        title "React & Redux in TypeScript - Complete Guide"
-       useRouter true
-       { router
        useHelmetAsync false
        useSimpleCodeEditor false
        useTextareaAutosize false
@@ -27,6 +27,7 @@ ${'$'}group
        { mui
            useSystem true
            useBase true
+           useIcons true
            useJoy true
        useSplitPane true
        { splitPane

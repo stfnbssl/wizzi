@@ -23,6 +23,15 @@
 
     wfjob/pkg_lib( &jobCtx )
     wfjob/pkg_root( &jobCtx )
+        artifact .babelrc
+            src .babelrc.json.ittf
+            schema json
+            generator json/document
+            dest-path .babelrc
+            extension babelrc
+            $if jobCtx.job_model
+                model-ref ${jobCtx.job_model}
+                    export-name ${jobCtx.job_model}
     wfjob/pkg_examples( &jobCtx )
     wfjob/pkg_tests( &jobCtx )
     wfjob/pkg_models( &jobCtx )

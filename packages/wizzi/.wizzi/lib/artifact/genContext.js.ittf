@@ -37,6 +37,7 @@
 			set this.isEmpty = true
 			set this.artifactGenerationErrors = []
             set this.forceInline = false
+            set this.forceInlineExtra = false
     
 		m forceIndent
             param value
@@ -76,12 +77,12 @@
                                 @ text
                                 @ this.values
                         else text
-                if this.forceInline
+                if this.forceInline || this.forceInlineExtra
                     _ this.block.write(iptext + ' ')
                 else
                     _ this.block.w(iptext)
             else
-                if this.forceInline
+                if this.forceInline || this.forceInlineExtra
                     _ this.block.write(' ')
                 else
                     _ this.block.w('')
@@ -128,10 +129,16 @@
             _ this.block.setLastNotEmptyLine
 
         m inlineOn
+            param extra
             set this.forceInline = true
+            if extra 
+                set this.forceInlineExtra = true
 
         m inlineOff
+            param extra
             set this.forceInline = false
+            if extra 
+                set this.forceInlineExtra = false
             _ this.w()
 
         m appendFile

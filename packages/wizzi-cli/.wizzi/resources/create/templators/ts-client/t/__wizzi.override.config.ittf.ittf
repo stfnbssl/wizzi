@@ -1,5 +1,5 @@
 $group
-    $file wizzi-override.config.js.ittf
+    $file wizzi.config.override.js.ittf
         module
             kind jsfile
             ${'$'}

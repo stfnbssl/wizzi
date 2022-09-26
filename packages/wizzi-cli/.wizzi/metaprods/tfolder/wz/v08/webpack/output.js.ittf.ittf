@@ -15,7 +15,7 @@
         @ filename '[name].bundle.js'
         @ chunkFilename '[id].[hash].chunk.js'
     ${'$'}else
-        @ path path.resolve(__dirname, '..', 'dist', 'scripts')
+        @ path path.resolve(__dirname, 'dist', 'scripts')
         @ filename '${'$'}{wzCtx.name}.js'
     ---
 	${'$'}if wzCtx.Build.isLibrary

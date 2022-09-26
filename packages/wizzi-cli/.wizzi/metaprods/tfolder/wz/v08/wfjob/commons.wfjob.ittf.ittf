@@ -267,6 +267,18 @@ $group
                     export-name ${'$'}{jobCtx.job_model}
             ${'$'}hook
 
+    ${'$'}elif name == 'vite-env.d.ts'
+        artifact vite-env.d.ts
+            src vite-env.d.ts.text.ittf
+            schema text
+            generator text/document
+            dest-path vite-env.d.ts
+            extension text
+            ${'$'}if jobCtx.job_model
+                model-ref ${'$'}{jobCtx.job_model}
+                    export-name ${'$'}{jobCtx.job_model}
+            ${'$'}hook
+
     ${'$'}elif name == 'Procfile'
         artifact Procfile
             src Procfile.text.ittf

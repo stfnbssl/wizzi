@@ -28,6 +28,7 @@ var debug = require('../../../../js/module/gen/codegen/statements/debug');
 var template = require('../../../../js/module/gen/codegen/statements/template');
 var react = require('./statements/react');
 var html = require('./statements/html');
+var decorator = require('./statements/decorator');
 var xittf = require('../../../../js/module/gen/codegen/statements/xittf_extensions');
 
 var include_writers = require('../../../../js/module/gen/codegen/include_writers');
@@ -56,6 +57,7 @@ debug.load(md);
 template.load(md);
 react.load(md);
 html.load(md);
+decorator.load(md);
 xittf.load(md);
 
 md.gen = function(model, ctx, callback) {

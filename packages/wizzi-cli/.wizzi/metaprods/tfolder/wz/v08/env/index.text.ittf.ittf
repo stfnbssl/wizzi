@@ -47,4 +47,7 @@ $group
 
     ${'$'}if wzCtx.Build.useSequelize
         SEQUELIZE_DATABASE_URL=${'$'}{wzCtx.Build.sequelize.databaseUrl}
+        SEQUELIZE_DATABASE=${'$'}{wzCtx.Build.sequelize.database}
         SEQUELIZE_DIALECT=${'$'}{wzCtx.Build.sequelize.dialect}
+        SEQUELIZE_USER=${'$'}{wzCtx.Build.sequelize.user}
+        SEQUELIZE_PASSWORD=${'$'}{wzCtx.Build.sequelize.password}

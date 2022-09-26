@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.8
+    artifact generator: C:\Users\Stefano Bassoli\AppData\Roaming\npm\node_modules\wizzi-cli\node_modules\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\graphqlparser\graphql\wizzifier.js.ittf
 */
 'use strict';
@@ -49,7 +49,7 @@ md.getWizziTree = function(input, options, callback) {
         verbose = options.verbose;
     }
     var startTime = Date.now();
-    // log 'startTime', startTime
+    // loog 'startTime', startTime
     wizzify(input, options, function(err, syntax) {
         if (err) {
             return callback(err);
@@ -62,7 +62,7 @@ md.getWizziTree = function(input, options, callback) {
                 file.write(options.syntaxOutFile, JSON.stringify(syntax, null, 2))
             })
         }
-        // log 'Parsed in ' + Date.now() - startTime + ' ms'
+        // loog 'Parsed in ' + Date.now() - startTime + ' ms'
         callback(null, syntax);
     })
 }
@@ -129,7 +129,7 @@ function wizzify(graphql, options, callback) {
         if (err) {
             return callback(err);
         }
-        console.log(JSON.stringify(syntax, null, 2));
+        console.log(JSON.stringify(syntax, null, 2), __filename);
         var root = {
             tag: 'graphql', 
             children: [
@@ -167,7 +167,7 @@ function processParams(ittfNode) {
             var j, j_items=item.children, j_len=item.children.length, p;
             for (j=0; j<j_len; j++) {
                 p = item.children[j];
-                // log 'processParams. p.tag', p.tag
+                // loog 'processParams. p.tag', p.tag
                 
                 /**
                     * 
@@ -201,8 +201,8 @@ function isTextualNode(ittfNode) {
         }
         return true;
     }
+    // loog 'isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified)
     else {
-        console.log('isTextualNode', ittfNode.tag, ittfNode.name, !!(ittfNode.isText || ittfNode.textified));
         return ittfNode && (ittfNode.isText || ittfNode.textified);
     }
 }
@@ -286,8 +286,9 @@ function textifyChildren(ittfNode, tag) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
+        
+        // loog '@@@@@@@ item.tag.isText', item.tag, item.isText
         if (item.isText || item.textified) {
-            console.log('@@@@@@@ item.tag.isText', item.tag, item.isText);
             ret.push({
                 tag: tag, 
                 name: item.isText ? item.name : item.textified, 
@@ -301,7 +302,7 @@ function textifyChildren(ittfNode, tag) {
             ret.push(item);
         }
     }
-    // log '@@@@@@@@@@@@@@@ textifyChildren', ret
+    // loog '@@@@@@@@@@@@@@@ textifyChildren', ret
     return ret;
 }
 function setTextList(ittfNode, sep) {
@@ -309,7 +310,7 @@ function setTextList(ittfNode, sep) {
     var i, i_items=ittfNode.children, i_len=ittfNode.children.length, item;
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
-        console.log('setTextList', item.tag, item.name, item.isText, item.textified);
+        // loog 'setTextList', item.tag, item.name, item.isText, item.textified
         if (item.isText) {
             sb.push(item.name);
         }
@@ -335,7 +336,7 @@ function getTextList(ittfNode, sep) {
         else if (item.textified) {
             sb.push(item.textified);
         }
-        // log 'getTextList failed ***************', item
+        // loog 'getTextList failed ***************', item
         else {
             return null;
         }
@@ -347,8 +348,9 @@ function setNameFromChildByTag(ittfNode, tag, forceText) {
     for (i=0; i<i_len; i++) {
         item = ittfNode.children[i];
         if (item.tag === tag) {
+            
+            // loog '...................setNameFromChildByTag', item
             if (forceText) {
-                console.log('...................setNameFromChildByTag', item);
             }
             if (item.isText) {
                 ittfNode.name = item.name;
@@ -417,18 +419,14 @@ format.Name = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
-    /**
-        console.log('Name.tag', ret.tag);
-        console.log('Name.name', ret.name);
-        console.log('Name.textified', ret.textified);
-    */
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    //
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -489,9 +487,9 @@ format.NonNullType = function(parent, node, options) {
     else {
         throw new Error('AST-node-property type undefined: ' + JSON.stringify(node, null, 2));
     }
-    console.log('NonNullType.p_type', p_type);
+    // loog 'NonNullType.p_type', p_type
     ret.name = p_type.name;
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -552,7 +550,7 @@ format.NamedType = function(parent, node, options) {
     else {
         throw new Error('AST-node-property name undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log 'NamedType.p_name', ret, p_name
+    // loog 'NamedType.p_name', ret, p_name
     if (isTextualNode(p_name)) {
         ret.name = getTypeName(getNodeText(p_name));
         ret.textified = ret.name;
@@ -560,7 +558,7 @@ format.NamedType = function(parent, node, options) {
     else {
         ret.children.push(p_name);
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -661,7 +659,7 @@ format.SchemaDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -690,11 +688,11 @@ format.OperationTypeDefinition = function(parent, node, options) {
             
         ]
      };
-    // log 't/tag.node.operation, value: ', node.operation, '
+    // loog 't/tag.node.operation, value: ', node.operation, '
     if (typeof node.operation !== 'undefined') {
         ret.tag = node.operation.toString();
     }
-    // log 't/tag ittf.ret', ret
+    // loog 't/tag ittf.ret', ret
     // process AST-node-property type and set it in a var
     var p_type = null;
     if (node.type) {
@@ -733,7 +731,7 @@ format.OperationTypeDefinition = function(parent, node, options) {
     else {
         new Error('InterfaceTypeDefinition. Expected textual name: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -866,7 +864,7 @@ format.ObjectTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1016,7 +1014,7 @@ format.FieldDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1149,7 +1147,7 @@ format.ObjectTypeExtension = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1252,7 +1250,7 @@ format.InterfaceTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1355,7 +1353,7 @@ format.InterfaceTypeExtension = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1465,7 +1463,7 @@ format.UnionTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1504,7 +1502,7 @@ format.ListType = function(parent, node, options) {
     else {
         throw new Error('AST-node-property type undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1568,7 +1566,7 @@ format.ScalarTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1643,7 +1641,7 @@ format.EnumTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1700,7 +1698,7 @@ format.EnumValueDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1729,11 +1727,11 @@ format.OperationDefinition = function(parent, node, options) {
             
         ]
      };
-    // log 't/tag.node.operation, value: ', node.operation, '
+    // loog 't/tag.node.operation, value: ', node.operation, '
     if (typeof node.operation !== 'undefined') {
         ret.tag = node.operation.toString();
     }
-    // log 't/tag ittf.ret', ret
+    // loog 't/tag ittf.ret', ret
     // process AST-node-property-collection variableDefinitions and append ittfNode(s) to `ret`
     if (node.variableDefinitions) {
         if (typeof node.variableDefinitions.length === 'undefined') {
@@ -1780,7 +1778,7 @@ format.OperationDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1827,7 +1825,7 @@ format.SelectionSet = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection selections undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -1949,7 +1947,7 @@ format.InputValueDefinition = function(parent, node, options) {
             }
         }
     }
-    console.log('InputValueDefinition', p_type, p_name);
+    // loog 'InputValueDefinition', p_type, p_name
     if (p_type.tag === 'namedType') {
         ret.tag = p_type.name;
         ret.name = p_name.name;
@@ -1980,7 +1978,7 @@ format.InputValueDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2090,7 +2088,7 @@ format.InputObjectTypeDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2202,7 +2200,7 @@ format.Field = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2276,7 +2274,7 @@ format.Argument = function(parent, node, options) {
     else {
         throw new Error('AST-node-property value undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2305,13 +2303,13 @@ format.IntValue = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2340,13 +2338,13 @@ format.FloatValue = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2375,13 +2373,13 @@ format.BooleanValue = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2410,13 +2408,13 @@ format.NullValue = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog 't/name ittf.ret', ret
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2445,12 +2443,12 @@ format.StringValue = function(parent, node, options) {
             
         ]
      };
-    console.log('t/name.node.value, value: ', node.value);
+    // loog 't/name.node.value, value: ', node.value
     if (typeof node.value !== 'undefined') {
         ret.name = node.value.toString();
         ret.textified = ret.name;
     }
-    console.log('t/name ittf.ret', ret);
+    // loog 't/name ittf.ret', ret
     var lines = ret.name.split(/\n\r|\n|\r/);
     if (lines.length > 1) {
         ret.name = lines[0];
@@ -2464,7 +2462,7 @@ format.StringValue = function(parent, node, options) {
              })
         }
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2511,7 +2509,7 @@ format.ListValue = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection values undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2558,7 +2556,7 @@ format.ObjectValue = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection fields undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2607,7 +2605,7 @@ format.ObjectField = function(parent, node, options) {
     else {
         throw new Error('AST-node-property value undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2748,7 +2746,7 @@ format.FragmentDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2805,7 +2803,7 @@ format.FragmentSpread = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2897,7 +2895,7 @@ format.InlineFragment = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection directives undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -2946,7 +2944,7 @@ format.VariableDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property type undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -3014,7 +3012,7 @@ format.Variable = function(parent, node, options) {
     else {
         ret.children.push(p_name);
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -3089,7 +3087,7 @@ format.DirectiveDefinition = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection locations undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
@@ -3146,7 +3144,7 @@ format.Directive = function(parent, node, options) {
     else {
         throw new Error('AST-node-property-collection arguments undefined: ' + JSON.stringify(node, null, 2));
     }
-    // log '### add ', ret.tag , 'to', parent.tag
+    // loog '### add ', ret.tag , 'to', parent.tag
     parent.children.push(ret);
 }
 ;
