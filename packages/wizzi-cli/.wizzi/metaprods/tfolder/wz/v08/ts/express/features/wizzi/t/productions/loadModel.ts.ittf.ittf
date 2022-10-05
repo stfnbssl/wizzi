@@ -35,6 +35,7 @@ $group
                                 _ ensurePackiFilePrefix(filePath)
                                     :as
                                         :string
+                            # TODO catch error
                             set jsonwf =
                                 await
                                     _ createJsonFsAndFactory(files)
@@ -69,6 +70,7 @@ $group
                         const schemaName = wizziMaps.schemaFromFilePath(filePath)
                         if !schemaName
                             return reject('File is not a known ittf document: ' + filePath)
+                        # TODO catch error
                         const wf
                             await
                                 _ createFilesystemFactory()

@@ -3,15 +3,17 @@
 	+
 	import path
 	import util
+    var file = require('wizzi-utils').file;
 	+
     var expect = require('expect.js')
 	var thisPackage = require('../../index')
 	+
 	var simpleSource
-		_ path.join
-			@ __dirname
-			@ 'data'
-			@ 'simple.tests.js'
+        _ file.read
+            _ path.join
+                @ __dirname
+                @ 'data'
+                @ 'simple.tests.js'
 	+
 	describe the js wizzifier
 		+ 
@@ -19,7 +21,7 @@
 
 			var ittfExpected = 'module \n    kind jsfile\n    function alfa\n        param beta\n        param gamma\n'
 			
-			_ thisPackage.jsWizzify
+			_ thisPackage.jswizzifier.getWizziIttf
 				@ simpleSource
 				{
 				f_cb_test( ittf )

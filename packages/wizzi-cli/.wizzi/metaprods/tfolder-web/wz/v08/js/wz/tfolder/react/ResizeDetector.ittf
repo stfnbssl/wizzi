@@ -42,7 +42,7 @@ $group
         did-mount
             const horiz = this._horizontal.current
             const verti = this._vertical.current
-            log 'horiz', horiz, this._horizontal.current
+            # loog 'horiz', horiz, this._horizontal.current
             _ horiz.contentWindow.addEventListener('resize', this._handleResize)
             _ verti.contentWindow.addEventListener('resize', this._handleResize)
 

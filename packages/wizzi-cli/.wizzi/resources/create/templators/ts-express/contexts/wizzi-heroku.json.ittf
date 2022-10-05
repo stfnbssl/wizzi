@@ -1,6 +1,6 @@
 {
     $
-        var isLocal = true; 
+        var isLocal = false; // it is enough to set this to false for deployong to heroku
         var isProduction = false;
         var cloudDomain = "www.wizzihub.com";
         var port = 5000;
@@ -10,6 +10,10 @@
         var domain = isLocal ? "localhost" : cloudDomain;
 
     $include commons
+
+    { App
+        name "Wizzi.Heroku"
+        kind "Server"
 
     isLocal ${isLocal ? "true" : "false"}
     isProduction ${isProduction ? "true" : "false"}
@@ -48,16 +52,25 @@
     useMongoDb true
     { mongoDb
 
-    useSequelize true
-    { sequelize
+    $if domain == "local"
+        useSequelize true
+        { sequelize
+
+    useFeatures true
+    { features
+        useGithub true
 
     useFeatureBlog true
     { featureBlog
         store "mongoDb"
 
-    useFeatureProject false
-    { featureProject
-        store "sequelize"
+    $if domain == "local"
+        useFeatureProject false
+        { featureProject
+            store "sequelize"
+
+    useFeatureGithub true
+    { featureGithub
 
     usePages true
     { pages    

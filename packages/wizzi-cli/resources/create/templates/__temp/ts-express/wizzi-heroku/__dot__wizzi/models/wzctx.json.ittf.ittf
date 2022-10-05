@@ -5,14 +5,15 @@
    --- 
    { App
        name "Wizzi Hub"
-       isLocal true
+       title "The public Wizzi Web App"
+       isLocal false
        isProduction false
        port "5000"
-       useSsl false
-       siteUrl "http://localhost"
-       baseUrl "http://localhost:5000"
-       siteUrlLocal "http://localhost"
-       baseUrlLocal "http://localhost:5000"
+       useSsl true
+       siteUrl "https://www.wizzihub.com"
+       baseUrl "https://www.wizzihub.com"
+       siteUrlLocal "https://localhost"
+       baseUrlLocal "https://localhost:5000"
        apiVersion "v1"
        { constants
            { preview
@@ -41,6 +42,10 @@
                hasControllers true
                useMongoDb true
            { 
+               name "github"
+               hasControllers true
+               useMongoDb false
+           { 
                name "docs"
                hasControllers true
                useMongoDb false
@@ -52,6 +57,9 @@
                name "packi"
                hasControllers true
                useMongoDb false
+       useFeatureGithub true
+       { featureGithub
+           accessToken "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"
        ${'$'}include heroku.json
        --- 
        ${'$'}include config.json

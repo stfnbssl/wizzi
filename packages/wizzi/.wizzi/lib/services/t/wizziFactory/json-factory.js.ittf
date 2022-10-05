@@ -8,8 +8,8 @@
 		#       optional
 
 	m createSingleTextSourceFactory
-		param ittfContent
-		param schema
+		string ittfContent
+		string schema
 		param options
 		param callback
 
@@ -17,26 +17,33 @@
 			set callback = options
 			set options = {}
 
+        check_wz_callback( WizziFactory.createSingleTextSourceFactory )
+
 		var tempIttfDocumentUri = "c:/basefolder/temp." + schema + '.ittf'
 		var documents
 			[
 				{
 					@ path tempIttfDocumentUri
 					@ content ittfContent
-
-		_ JsonComponents.createJsonFsData
-			@ documents
-			a_cb( jsonFsData )
-				set options.jsonFsData = jsonFsData
-				_ this.createJsonFactory
-					@ options
-					f_cb( wf )
-						return
-							_ callback
-								@ null
-								{
-									@ wizziFactory wf
-									@ ittfDocumentUri tempIttfDocumentUri
+		try
+            _ JsonComponents.createJsonFsData
+                @ documents
+                a_cb( jsonFsData )
+                    set options.jsonFsData = jsonFsData
+                    _ this.createJsonFactory
+                        @ options
+                        f_cb( wf )
+                            return
+                                _ callback
+                                    @ null
+                                    {
+                                        @ wizziFactory wf
+                                        @ ittfDocumentUri tempIttfDocumentUri
+        catch ex
+            r_cb_wz_err( WizziFactoryError, createSingleTextSourceFactory, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
 
 	m createJsonFactory
 		param options

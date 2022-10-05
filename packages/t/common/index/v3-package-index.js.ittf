@@ -11,48 +11,6 @@ module
 	var md = module.exports = {}
 	set md.name = '${pkgname}'
     +
-    $if isWebpackTarget
-        # preloads for webpack
-        $foreach schema in wzCtx.schemas
-            $ var sn = schema.name
-
-            set md.__preload_${sn}_model = require("./lib/wizzi/models/${sn}-model.g")
-            set md.__preload_${sn}_factory = require("./lib/wizzi/models/${sn}-factory.g")
-            $foreach transformer in schema.transformers
-                $ var tn = transformer.name
-                $ var tnx = _.replace(_.replace(transformer.name, '/', '_'), '-', '_')
-                set md.__preload_${tnx}_trans = require("./lib/artifacts/${tn}/trans/main")
-            $foreach artifact in schema.artifacts
-                $ var an = artifact.name
-                $ var anx = _.replace(_.replace(artifact.name, '/', '_'), '-', '_')
-                set md.__preload_${anx}_gen = require("./lib/artifacts/${an}/gen/main")
-        #
-        # window(s) vars must be declared even if empty
-        var window_modelFactories
-            {
-                $foreach schema in wzCtx.schemas
-                    $ var sn = schema.name
-
-                    @ ${sn} require("./lib/wizzi/models/${sn}-factory.g")
-        
-        var window_artifactGenerators
-            {
-                $foreach schema in wzCtx.schemas
-                    $foreach artifact in schema.artifacts
-                        $ var an = artifact.name
-                        @ '${an}' require("./lib/artifacts/${an}/gen/main")
-
-        var window_transformers
-            {
-                $foreach schema in wzCtx.schemas
-                    $foreach transformer in schema.transformers
-                        $ var tn = transformer.name
-                        @ '${tn}' require("./lib/artifacts/${tn}/trans/main")
-        
-        var window_schemaDefinitions
-            {
-        +
-
 	$hook model-transform-artifacts
 	+
 	#

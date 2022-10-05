@@ -1,15 +1,11 @@
 module
     kind es6
-    const compose
-        => 
-            param ...funcs
-            _ funcs.reduce
-                => 
-                    param a
-                    param b
-                    => 
-                        param ...args
-                        _ a(b(...args))
-                => 
-                    param arg
-                    + arg
+    function 
+        param todo
+        for 
+            left
+                var q
+            in query
+            if query[q] !== todo[q]
+                return false
+        return true

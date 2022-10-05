@@ -1,13 +1,13 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\io\errors.js.ittf
 */
 'use strict';
 var util = require('util');
 
 var md = module.exports = {};
-var pkgVersioned = ' (wizzi.0.7.34)';
+var pkgVersioned = ' (wizzi.0.7.35)';
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';

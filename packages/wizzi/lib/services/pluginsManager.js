@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -79,7 +79,6 @@ var PluginsManager = (function () {
         })
     }
     PluginsManager.prototype.loadPlugins = function(options, callback) {
-        
         
         var itemsOptions = options.items;
         // loog 'pluginsBaseFolder before', options.pluginsBaseFolder
@@ -749,7 +748,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.34.pluginsManager.' + method,
+        method: 'wizzi@0.7.35.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -10,10 +10,7 @@
 		var MongoDbStore = require('./mongoDbStore')
 	$else
 		var MongoDbStore = {}
-	$if isWebpackTarget
-		var BrowserFSStore = require('./browserFSStore')
-	$else
-		var BrowserFSStore = {}
+	var BrowserFSStore = {}
 	var JsonDbStore = require('./jsonDbStore')
     
 	#
@@ -45,16 +42,10 @@
 			callback
 
 			if storeInfo.storeKind === 'filesystem'
-				$if isWebpackTarget	
-					r_cb_wz_err( InvalidArgument, init )
-						{
-							@ parameter 'storeKind'
-							@ message "Invalid storeKind when isWebpackTarget == true : " + storeInfo.storeKind
-				$else
-					set this.storeImpl = new FileSystemStore()
-					set this.storeKind = this.storeImpl.storeKind
-					return
-						_ callback(null)
+                set this.storeImpl = new FileSystemStore()
+                set this.storeKind = this.storeImpl.storeKind
+                return
+                    _ callback(null)
 			
 			$if wzConfig_useMongo
 				
@@ -82,18 +73,6 @@
 						set that.storeKind = that.storeImpl.storeKind
 						return
 							_ callback(null)
-
-			$if isWebpackTarget
-
-				elif storeInfo.storeKind === 'browser'
-					set this.storeImpl = new BrowserFSStore()
-					var that = this
-					_ this.storeImpl.init
-						{
-						f_cb( notUsed )
-							set that.storeKind = that.storeImpl.storeKind
-							return
-								_ callback(null)
 
 			else 
 				r_cb_wz_err( InvalidArgument, init )

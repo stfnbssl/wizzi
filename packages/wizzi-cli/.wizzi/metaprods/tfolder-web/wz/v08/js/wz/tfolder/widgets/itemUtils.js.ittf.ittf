@@ -55,5 +55,5 @@
 				set item.isIttfDocument = newItem.isIttfDocument
 				set item.isFragment = newItem.isFragment
 
-			log 'itemUtils.rename.renamed', item
+			# loog 'itemUtils.rename.renamed', item
 

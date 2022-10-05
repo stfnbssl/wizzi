@@ -22,7 +22,7 @@ $group
                         param element
                         $$ loog 'onfocusout', element
                         _ $(element).valid
-                        log $(element).valid()
+                        # loog $(element).valid()
 
     function setControlRule
         param $

@@ -63,7 +63,7 @@ $group
 						@ value
 					set this.isSettingValue = false
 
-			log 'EditorControl initialized'
+			# loog 'EditorControl initialized'
 
 		m theme
 			param value

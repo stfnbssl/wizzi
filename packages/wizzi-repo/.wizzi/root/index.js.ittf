@@ -18,26 +18,23 @@
 	set md.ObjectId = require('./lib/utils/objectId') 
 	+
 	set md.MongoFsImpl = MongoFsImpl
-	$if isWebpackTarget == false
-		+
-		#
-			# Filesystem virtual file service
-			# noparams
-		set md.fsfile
-			function fsfile
-				callback
-				# vfile default
-				var fsfile = vfile()
-				return
-					_ callback
-						@ null
-						@ fsfile
+    +
+    #
+        # Filesystem virtual file service
+        # noparams
+    set md.fsfile
+        function fsfile
+            callback
+            # vfile default
+            var fsfile = vfile()
+            return
+                _ callback
+                    @ null
+                    @ fsfile
 	+
 	$include mongoDb
 	+
 	$include json
-	+
-	$include browser
 	+
 	set md.JsonComponents = require('./lib/json/index') 
 	+

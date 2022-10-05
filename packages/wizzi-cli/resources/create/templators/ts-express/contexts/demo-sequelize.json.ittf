@@ -11,6 +11,10 @@
 
     $include commons
 
+    { App
+        name "Demo.Sequelize"
+        kind "Server"
+
     isLocal ${isLocal ? "true" : "false"}
     isProduction ${isProduction ? "true" : "false"}
     { production

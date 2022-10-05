@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.12
+    package: wizzi-js@0.7.11
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\all\utils\collection.js.ittf
 */
 'use strict';
@@ -71,8 +71,6 @@ describe("utils.collection", function() {
             expect(result.result.ok).to.be(1);
             expect(result.result.n).to.be.a('number');
             expect(result.result.n).to.be(1);
-            expect(result.insertedId.id.length).to.be.a('number');
-            expect(result.insertedId.id.length).to.be(24);
             c.toArray(function(err, items) {
                 if (err) {
                     console.log("[31m%s[0m", err);

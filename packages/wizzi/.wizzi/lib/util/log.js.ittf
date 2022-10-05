@@ -102,12 +102,7 @@
             else 
                 set logger = consoleLogger
             return 
-                $if isWebpackTarget
-                    new Log
-                        @ module.id
-                        @ logger
-                $else
-                    new Log
-                        _ path.basename
-                            @ module.filename
-                        @ logger
+                new Log
+                    _ path.basename
+                        @ module.filename
+                    @ logger

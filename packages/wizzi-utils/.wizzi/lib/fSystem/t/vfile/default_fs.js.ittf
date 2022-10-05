@@ -1,47 +1,20 @@
 ﻿$group
 
 	#
-		$if isWebpackTarget
-			# The default fsimpl is 'browser'
-		$else
-			# The default fsimpl is 'filesystem'
+		# The default fsimpl is 'filesystem'
 	function default_fs
 		param options
 		param callback
 		if typeof callback === 'undefined'
 			set callback = options
 			set options = {}
-
-		$if isWebpackTarget
-
-			_ BrowserFS.install(window)
-			_ BrowserFS.configure
-				{ 
-					@ fs "MountableFileSystem"
-					{ options
-						{ '/tmp'
-							@ fs "InMemory"
-						{ '/ixdb'
-							@ fs "IndexedDB"
-							{ options
-								@ storeName options.storeName || 'wizziRepo'
-				f_cb()
-					var fs = BrowserFS.BFSRequire('fs')
-					return
-						_ callback
-							@ null
-							_ build_default_fsimpl
-								@ fs
-								@ 'browser'
-		
-		$else
-			$$ use fs from initial nodejs imports: var fs = require('fs')
-			return
-				_ callback
-					@ null
-					_ build_default_fsimpl
-						@ fs
-						@ 'filesystem'
+        $$ use fs from initial nodejs imports: var fs = require('fs')
+        return
+            _ callback
+                @ null
+                _ build_default_fsimpl
+                    @ fs
+                    @ 'filesystem'
 
 	function build_default_fsimpl
 		param fs

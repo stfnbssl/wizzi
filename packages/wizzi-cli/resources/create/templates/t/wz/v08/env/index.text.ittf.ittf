@@ -1,9 +1,10 @@
 $group
 
-    PORT=${'$'}{wzCtx.App.port}
-    ${'$'}if wzCtx.Build.useSession
-        SESSION_SECRET=${'$'}{wzCtx.Build.session.secret}
-    NO_CACHE=${'$'}{wzCtx.Build.noCache}
+    ${'$'}if wzCtx.Build.useExpress
+        PORT=${'$'}{wzCtx.App.port}
+        ${'$'}if wzCtx.Build.useSession
+            SESSION_SECRET=${'$'}{wzCtx.Build.session.secret}
+        NO_CACHE=${'$'}{wzCtx.Build.noCache}
 
     ${'$'}if wzCtx.Build.useCors
         CORS_CLIENT_ORIGIN=${'$'}{wzCtx.Build.cors.clientOrigin}
@@ -51,3 +52,6 @@ $group
         SEQUELIZE_DIALECT=${'$'}{wzCtx.Build.sequelize.dialect}
         SEQUELIZE_USER=${'$'}{wzCtx.Build.sequelize.user}
         SEQUELIZE_PASSWORD=${'$'}{wzCtx.Build.sequelize.password}
+
+    ${'$'}if wzCtx.Build.useFeatureGithub
+        GITHUB_ACCESS_TOKEN=${'$'}{wzCtx.Build.featureGithub.accessToken}

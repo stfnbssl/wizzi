@@ -1,8 +1,9 @@
 $group
 
-    import
-        @ ControllerType
-        from '../app/types'
+    ${'$'}if wzCtx.Build.useExpress
+        import
+            @ ControllerType
+            from '../app/types'
     import
         as wizziTypes
         from './types'
@@ -15,19 +16,22 @@ $group
     import
         as wizziMaps
         from './maps'
-    import
-        @ ProductionController
-        from './controllers/production'
+    ${'$'}if wzCtx.Build.useExpress
+        import
+            @ ProductionController
+            from './controllers/production'
     +
-    const wizziControllers
-        :[
-            :ref ControllerType
-        =
-            [
-                @ new ProductionController()
+    ${'$'}if wzCtx.Build.useExpress
+        const wizziControllers
+            :[
+                :ref ControllerType
+            =
+                [
+                    @ new ProductionController()
     export
         @ wizziTypes
         @ wizziProds
         @ WizziFactory
         @ wizziMaps
-        @ wizziControllers
+        ${'$'}if wzCtx.Build.useExpress
+            @ wizziControllers

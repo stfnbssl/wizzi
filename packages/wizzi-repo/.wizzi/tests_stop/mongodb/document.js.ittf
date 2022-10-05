@@ -12,7 +12,7 @@
 	var mounted_db
 	var FSITEMS = 'fsitems'
 	var DOCUMENTS = 'documents'
-	var fsCommon, doc
+	var jsonFs, doc
 
 	$include mongo_before_async
 	fscommon/document/createFolder()
@@ -26,17 +26,11 @@
 	$include mongo_after_async
 
 	$*
-
-	
 	$include file/isFile
 	$include file/copyFile
 	$include file/deleteFile
 	$include file/renameFile
-
-
 	$include file/createFolder
 	$include file/readFile
 	$include file/writeFile
 	*$
-
-	

@@ -113,6 +113,7 @@ $group
                         const transformer = options && options.transformer ? options.transformer : wizziMaps.transformerFor(filePath)
                         if transformer
                             $$ loog 'wizzi.productions.using model transformer', transformer
+                            # TODO catch error
                             const wf
                                 await
                                     _ createFilesystemFactory()

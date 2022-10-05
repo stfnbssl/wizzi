@@ -28,7 +28,6 @@ catch (ex) {
     fs = require('fs');
 } 
 
-
 var PATH_SEPARATOR_RE = /[\/\\]/g;
 var DEFAULT_DECODING = 'utf8';
 var PRESERVE_BOM = false;
@@ -74,17 +73,6 @@ module.exports = function(options, callback) {
     // options is fsimpl
     if (verify.isObject(options) && verify.isFunction(options.stat)) {
         return callback(null, new VFile(options));
-    }
-    
-    // options has storename for browserFS
-    else if (verify.isObject(options) && verify.isNotEmpty(options.storeName)) {
-        default_fs(options, function(err, fsimpl) {
-            if (err) {
-                return callback(err);
-            }
-            // loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
-            callback(null, new VFile(fsimpl))
-        })
     }
     else {
         default_fs(function(err, fsimpl) {

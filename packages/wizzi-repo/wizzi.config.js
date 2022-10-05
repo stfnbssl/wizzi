@@ -15,19 +15,11 @@ module.exports = {
     ],*/ 
     globalContext: {
         isPackageDeploy: true,
-        isWebpackTarget: false,
         isDevelopment: false,
         wzConfig_useMongo: false,
     },
     globalContext_default: {
         isPackageDeploy: true,
-        isWebpackTarget: false,
-        isDevelopment: false,
-        wzConfig_useMongo: false,
-    },
-    globalContext_webpack: {
-        isPackageDeploy: true,
-        isWebpackTarget: true,
         isDevelopment: false,
         wzConfig_useMongo: false,
     },

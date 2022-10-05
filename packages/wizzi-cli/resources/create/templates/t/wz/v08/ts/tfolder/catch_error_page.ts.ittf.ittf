@@ -5,6 +5,8 @@ $group
         =>
             param err
                 :any
+            if typeof err === 'object' && err !== null            
+                ${'$'}hook
             _ response.render
                 @ 'error.html.ittf'
                 {

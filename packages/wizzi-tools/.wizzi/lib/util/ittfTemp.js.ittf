@@ -1,7 +1,7 @@
 ﻿module 
     kind jsfile
 
-	var file = require('./file')
+    var file = require('wizzi-utils').file;
     
 	class IttfTemp
         ctor 

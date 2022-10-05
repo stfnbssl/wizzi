@@ -94,7 +94,7 @@
 			var clickThis
 				=>
 					param event
-					log 'clickThis', 'expanded', this.item.expanded, 'needs populate',  this.children.length == 0 && !this.item.loadedAt && this.item.isFolder
+					# loog 'clickThis', 'expanded', this.item.expanded, 'needs populate',  this.children.length == 0 && !this.item.loadedAt && this.item.isFolder
 					var selectThis
 						=>
 							if this.item.isFolder
@@ -144,7 +144,7 @@
 			param skipEmit
 			_ svg['folder-opened']
 				@ this.svg
-			log 'expand', this.children.length
+			# loog 'expand', this.children.length
 			if this.children.length > 0
 				var childrenEl = this.el.querySelector('.tree-child-leaves')
 				_ childrenEl.classList.remove('hidden')
@@ -160,7 +160,7 @@
 			param skipEmit
 			_ svg['folder-closed']
 				@ this.svg
-			log 'collapse', this.children.length
+			# loog 'collapse', this.children.length
 			if this.children.length > 0
 				var childrenEl = this.el.querySelector('.tree-child-leaves')
 				_ childrenEl.classList.add('hidden')
@@ -173,7 +173,7 @@
 					@ treeNode this
 
 		m renameStart
-			log 'renameStart', this
+			# loog 'renameStart', this
 			
 			if !this.input
 				set this.input = document.createElement('input')
@@ -223,7 +223,7 @@
 			var newName
 				_ wz.value
 					@ this.input
-			log 'renameFinish', newName, this.item.name
+			# loog 'renameFinish', newName, this.item.name
 			if newName !== this.item.name
 				_ this.getTreeview().rename
 					@ this
@@ -248,13 +248,13 @@
 
 		m copyCutStart
 			param oper
-			log 'copyCutStart', oper, this
+			# loog 'copyCutStart', oper, this
 			_ wz.addClass
 				@ this.el
 				@ oper === 'copy' ? 'copying' : 'cutting'
 
 		m copyCutFinish
-			log 'copyCutFinish', this
+			# loog 'copyCutFinish', this
 			_ wz.removeClass
 				@ this.el
 				@ 'copying'

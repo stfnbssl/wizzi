@@ -48,7 +48,7 @@ $group
                     @ schema
                     @ ittfText
                     a_cb${'('} result )
-                        log 'wz.wizzi.genFromText', 'wrapped.result', result
+                        # loog 'wz.wizzi.genFromText', 'wrapped.result', result
                         const mainIttfPath = 'index.' + schema + '.ittf'
                         var wrb = new WizziRequestBuilder()
                         _ wrb.setPackiDocument
@@ -60,7 +60,7 @@ $group
                         if contextValue
                             _ wrb.addJsonValueContext
                                 @ contextValue
-                        log 'wz.wizzi.genFromText.wizziRequest', wrb.toWizziRequest()
+                        # loog 'wz.wizzi.genFromText.wizziRequest', wrb.toWizziRequest()
                         _ wz.fetch.post
                             @ wz.wizzi.apiUrl + '/production/artifact'
                             [
@@ -86,7 +86,7 @@ $group
                 if contextValue
                     _ wrb.addJsonValueContext
                         @ contextValue
-                log 'wz.wizzi.mTreeFromText.wizziRequest', wrb.toWizziRequest()
+                # loog 'wz.wizzi.mTreeFromText.wizziRequest', wrb.toWizziRequest()
                 _ wz.fetch.post
                     @ wz.wizzi.apiUrl + '/production/mtree'
                     [
@@ -112,7 +112,7 @@ $group
                 if contextValue
                     _ wrb.addJsonValueContext
                         @ contextValue
-                log 'wz.wizzi.mTreeBuildupScriptFromText.wizziRequest', wrb.toWizziRequest()
+                # loog 'wz.wizzi.mTreeBuildupScriptFromText.wizziRequest', wrb.toWizziRequest()
                 _ wz.fetch.post
                     @ wz.wizzi.apiUrl + '/production/mtreescript'
                     [

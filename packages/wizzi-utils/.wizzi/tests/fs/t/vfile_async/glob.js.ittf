@@ -43,10 +43,8 @@
 				@ documentContent true
 			f_cb_test( files )
 				tobe_array( files, 2 )
-				tobe_string( files[0].content, globbed 1 )
-				tobe_string( files[0].relPath, globbed_1.ittf )
-				tobe_string( files[1].content, globbed 2 )
-				tobe_string( files[1].relPath, globbed_2.ittf )
+				tobe_string_type( files[0].content )
+				tobe_string_type( files[1].content )
 				_ done
 
 	it-async should async get folders in a basefolder

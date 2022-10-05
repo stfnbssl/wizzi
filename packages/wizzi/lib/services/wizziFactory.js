@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -251,9 +251,19 @@ var WizziFactory = (function () {
             ));
         }
         
-        this.__loadMTree(ittfDocumentUri, this.createLoadContext({
-            mTreeBuildupContext: mTreeBuildupContext
-         }), callback)
+        try {
+            this.__loadMTree(ittfDocumentUri, this.createLoadContext({
+                mTreeBuildupContext: mTreeBuildupContext
+             }), callback)
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'loadMTree', {
+                    message: 'See inner error', 
+                    parameter: {
+                        ittfDocumentUri: ittfDocumentUri
+                     }
+                 }, ex));
+        } 
     }
     //
     WizziFactory.prototype.loadMTreeFrontMatter = function(ittfDocumentUri, callback) {
@@ -451,12 +461,22 @@ var WizziFactory = (function () {
         }
         
         var that = this;
-        loadModel(ittfDocumentUri, this.createLoadContext(loadContext), function(err, wizziModel) {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, that.formatWizziModel(wizziModel, loadContext.formatOptions));
-        })
+        try {
+            loadModel(ittfDocumentUri, this.createLoadContext(loadContext), function(err, wizziModel) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, that.formatWizziModel(wizziModel, loadContext.formatOptions));
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'loadModel', {
+                    message: 'See inner error', 
+                    parameter: {
+                        ittfDocumentUri: ittfDocumentUri
+                     }
+                 }, ex));
+        } 
     }
     WizziFactory.prototype.formatWizziModel = function(model, formatOptions) {
         if (!formatOptions) {
@@ -496,12 +516,22 @@ var WizziFactory = (function () {
         }
         
         var that = this;
-        loadModel(mTree, this.createLoadContext(loadContext || {}), function(err, wizziModel) {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, that.formatWizziModel(wizziModel, loadContext.formatOptions));
-        })
+        try {
+            loadModel(mTree, this.createLoadContext(loadContext || {}), function(err, wizziModel) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, that.formatWizziModel(wizziModel, loadContext.formatOptions));
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'loadModelFromMtree', {
+                    message: 'See inner error', 
+                    parameter: {
+                        ittfDocumentUri: "Unavailable (loaded from mTree)"
+                     }
+                 }, ex));
+        } 
     }
     //
     WizziFactory.prototype.loadModelFromConfig = function(modelConfig, globalContext, callback) {
@@ -581,12 +611,22 @@ var WizziFactory = (function () {
         var mi = new ModelInfo(modelConfig);
         mi.productionManager(this.createProductionManager(null, globalContext))
         var that = this;
-        AsyncModelLoader.load(mi, function(err, wizziModel) {
-            if (err) {
-                return callback(err);
-            }
-            return callback(null, that.formatWizziModel(wizziModel, globalContext.formatOptions));
-        })
+        try {
+            AsyncModelLoader.load(mi, function(err, wizziModel) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, that.formatWizziModel(wizziModel, globalContext.formatOptions));
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'loadModelFromConfig', {
+                    message: 'See inner error', 
+                    parameter: {
+                        
+                     }
+                 }, ex));
+        } 
     }
     WizziFactory.prototype.loadModelFromText = function(ittfContent, schema, loadContext, callback) {
         
@@ -668,7 +708,17 @@ var WizziFactory = (function () {
         }
         
         context.wizziFactory = this;
-        transformer.trans(model, context, callback)
+        try {
+            transformer.trans(model, context, callback)
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'transformModel', {
+                    message: 'See inner error', 
+                    parameter: {
+                        transformerName: transformerName
+                     }
+                 }, ex));
+        } 
     }
     WizziFactory.prototype.loadAndTransformModel = function(ittfDocumentUri, requestContext, transformName, callback) {
         if (typeof(callback) !== 'function') {
@@ -884,31 +934,42 @@ var WizziFactory = (function () {
             pman: this.createProductionManager()
          });
         // loog 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
-        generator.gen(artifactModel, genContext, function(err, result) {
-            
-            /**
-                * err.artifactName = artifactName
-                * err.artifactIttfDocumentUri = ittfDocumentUri
-                * 
-                    * callback(err)
-            */
-            
-            // 
-            
-            // loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
-            if (err) {
-                return callback(error('WizziFactoryError', 'generateArtifact', {
-                        message: 'See inner error', 
-                        parameter: {
-                            artifactName: artifactName, 
-                            artifactIttfDocumentUri: ittfDocumentUri
-                         }
-                     }, err));
-            }
-            var sw = new StringWriter();
-            result.toStream(sw);
-            callback(null, sw.toString());
-        })
+        try {
+            generator.gen(artifactModel, genContext, function(err, result) {
+                
+                /**
+                    * err.artifactName = artifactName
+                    * err.artifactIttfDocumentUri = ittfDocumentUri
+                    * 
+                        * callback(err)
+                */
+                
+                // 
+                
+                // loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                if (err) {
+                    return callback(error('WizziFactoryError', 'generateArtifact', {
+                            message: 'See inner error', 
+                            parameter: {
+                                artifactName: artifactName, 
+                                artifactIttfDocumentUri: ittfDocumentUri
+                             }
+                         }, err));
+                }
+                var sw = new StringWriter();
+                result.toStream(sw);
+                callback(null, sw.toString());
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'generateArtifact', {
+                    message: 'See inner error', 
+                    parameter: {
+                        artifactName: artifactName, 
+                        artifactIttfDocumentUri: ittfDocumentUri
+                     }
+                 }, ex));
+        } 
     }
     //
     WizziFactory.prototype.loadModelAndGenerateArtifact = function(ittfDocumentUri, requestContext, artifactName, callback) {
@@ -951,16 +1012,27 @@ var WizziFactory = (function () {
         
         var that = this;
         // load the wizzi model from an ittfDocument
-        this.loadModel(ittfDocumentUri, {
-            mTreeBuildupContext: requestContext.modelRequestContext
-         }, function(err, artifactModel) {
-            if (err) {
-                return callback(err);
-            }
-            // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
-            // the loaded wizzi model becomes the artifactModel of the artifact generation
-            that.generateArtifact(artifactModel, ittfDocumentUri, artifactName, requestContext.artifactRequestContext, callback)
-        })
+        try {
+            this.loadModel(ittfDocumentUri, {
+                mTreeBuildupContext: requestContext.modelRequestContext
+             }, function(err, artifactModel) {
+                if (err) {
+                    return callback(err);
+                }
+                // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
+                // the loaded wizzi model becomes the artifactModel of the artifact generation
+                that.generateArtifact(artifactModel, ittfDocumentUri, artifactName, requestContext.artifactRequestContext, callback)
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'loadModelAndGenerateArtifact', {
+                    message: 'See inner error', 
+                    parameter: {
+                        artifactName: artifactName, 
+                        artifactIttfDocumentUri: ittfDocumentUri
+                     }
+                 }, ex));
+        } 
     }
     WizziFactory.prototype.loadModelAndGenerateArtifactFromText = function(ittfContent, requestContext, artifactName, callback) {
         if (typeof(callback) !== 'function') {
@@ -1009,7 +1081,6 @@ var WizziFactory = (function () {
             result.wizziFactory.loadModelAndGenerateArtifact(result.ittfDocumentUri, requestContext, artifactName, callback)
         })
     }
-    //
     WizziFactory.prototype.generateFolderArtifacts = function(ittfFolderUri, requestContext, options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -1049,56 +1120,67 @@ var WizziFactory = (function () {
         var fileCtx = Object.assign({}, modelRequestContext.fileCtx || {}, {
             dot: '.'
          });
-        repo.folderFilesInfoByPath(ittfFolderUri, this.fileService, options, (err, items) => {
-        
-            if (err) {
-                return callback(err);
-            }
-            async.mapSeries(items, (item, callback) => {
+        try {
+            repo.folderFilesInfoByPath(ittfFolderUri, this.fileService, options, (err, items) => {
             
+                if (err) {
+                    return callback(err);
+                }
+                async.mapSeries(items, (item, callback) => {
                 
-                // loog 'generating', item.fullPath
-                if (item.isIttfDocument) {
-                    var artifactName = getDefaultArtifact(item.schema);
-                    this.loadModelAndGenerateArtifact(item.fullPath, {
-                        modelRequestContext: modelRequestContext, 
-                        artifactRequestContext: requestContext.artifactRequestContext
-                     }, artifactName, (err, artifactText) => {
                     
-                        if (err) {
-                            return callback(err);
-                        }
-                        this.fileService.write(path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), artifactText, function(err, notUsed) {
+                    // loog 'generating', item.fullPath
+                    if (item.isIttfDocument) {
+                        var artifactName = getDefaultArtifact(item.schema);
+                        this.loadModelAndGenerateArtifact(item.fullPath, {
+                            modelRequestContext: modelRequestContext, 
+                            artifactRequestContext: requestContext.artifactRequestContext
+                         }, artifactName, (err, artifactText) => {
+                        
                             if (err) {
                                 return callback(err);
                             }
-                            // loog 'generateFolderArtifacts.written', item.destRelPath
+                            this.fileService.write(path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), artifactText, function(err, notUsed) {
+                                if (err) {
+                                    return callback(err);
+                                }
+                                // loog 'generateFolderArtifacts.written', item.destRelPath
+                                callback(null, path.join(options.destFolder, item.destRelPath))
+                            })
+                        }
+                        )
+                    }
+                    // loog 'generateFolderArtifacts.copying', item.fullPath
+                    else {
+                        this.fileService.copyFile(item.fullPath, path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), function(err, notUsed) {
+                            if (err) {
+                                return callback(err);
+                            }
                             callback(null, path.join(options.destFolder, item.destRelPath))
                         })
                     }
-                    )
                 }
-                // loog 'generateFolderArtifacts.copying', item.fullPath
-                else {
-                    this.fileService.copyFile(item.fullPath, path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), function(err, notUsed) {
-                        if (err) {
-                            return callback(err);
-                        }
-                        callback(null, path.join(options.destFolder, item.destRelPath))
-                    })
-                }
+                , function(err, result) {
+                    if (err) {
+                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                        console.log("[31m%s[0m", 'err', err);
+                        throw new Error(err.message);
+                    }
+                    // loog 'generateFolderArtifacts.result', result
+                    return callback(null, result);
+                })
             }
-            , function(err, result) {
-                if (err) {
-                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log("[31m%s[0m", 'err', err);
-                    throw new Error(err.message);
-                }
-                // loog 'generateFolderArtifacts.result', result
-                return callback(null, result);
-            })
-        }
-        )
+            )
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'generateFolderArtifacts', {
+                    message: 'See inner error', 
+                    parameter: {
+                        ittfFolderUri: ittfFolderUri
+                     }
+                 }, ex));
+        } 
+        //
     }
     //
     WizziFactory.prototype.getSchemaDefinition = function(schemaName) {
@@ -1156,29 +1238,39 @@ var WizziFactory = (function () {
             htmldocs: path.join(wizziModelFolder, wfschemaName + '-schema.g.html')
          };
         
-        this.generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildupContext, function(err, generatedArtifacts) {
-            if (err) {
-                return callback(err);
-            }
-            file.write(paths.model, generatedArtifacts.model)
-            log.success('Generated WizziModel: ' + paths.model);
-            file.write(paths.factory, generatedArtifacts.factory)
-            log.success('Generated WizziModelFactory: ' + paths.factory);
-            file.write(paths.lab, generatedArtifacts.lab)
-            log.success('Generated WizziModel test: ' + paths.lab);
-            file.write(paths.jsondocs, generatedArtifacts.jsondocs)
-            log.success('Generated WizziModel json docs: ' + paths.jsondocs);
-            file.write(paths.htmldocs, generatedArtifacts.htmldocs)
-            log.success('Generated WizziModel html docs: ' + paths.htmldocs);
-            callback(null, {
-                modelPath: paths.model, 
-                factoryPath: paths.factory, 
-                jsondocsPath: paths.jsondocs, 
-                htmldocsPath: paths.htmldocs
-             })
-        })
+        try {
+            this.generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildupContext, function(err, generatedArtifacts) {
+                if (err) {
+                    return callback(err);
+                }
+                file.write(paths.model, generatedArtifacts.model)
+                log.success('Generated WizziModel: ' + paths.model);
+                file.write(paths.factory, generatedArtifacts.factory)
+                log.success('Generated WizziModelFactory: ' + paths.factory);
+                file.write(paths.lab, generatedArtifacts.lab)
+                log.success('Generated WizziModel test: ' + paths.lab);
+                file.write(paths.jsondocs, generatedArtifacts.jsondocs)
+                log.success('Generated WizziModel json docs: ' + paths.jsondocs);
+                file.write(paths.htmldocs, generatedArtifacts.htmldocs)
+                log.success('Generated WizziModel html docs: ' + paths.htmldocs);
+                callback(null, {
+                    modelPath: paths.model, 
+                    factoryPath: paths.factory, 
+                    jsondocsPath: paths.jsondocs, 
+                    htmldocsPath: paths.htmldocs
+                 })
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'generateModelDoms', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wfschemaIttfDocumentUri: wfschemaIttfDocumentUri
+                     }
+                 }, ex));
+        } 
+        //
     }
-    //
     WizziFactory.prototype.generateModelDomsArtifacts = function(wfschemaIttfDocumentUri, mTreeBuildupContext, callback) {
         
         var loadContext = {
@@ -1302,24 +1394,34 @@ var WizziFactory = (function () {
                     
                     console.log('wizzi.wizziFactory._executeJob_by_path,pman.globalContext()', pman.globalContext());
                     
-                    pman.run(function(err, result) {
-                        if (err) {
-                            return callback(err);
-                        }
-                        log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' run completed');
-                        pman.persistToFile(function(err, persistResult) {
+                    try {
+                        pman.run(function(err, result) {
                             if (err) {
                                 return callback(err);
                             }
-                            log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' persistToFile completed');
-                            var result = {
-                                persistResult: persistResult, 
-                                productionContext: pman.productionContext
-                             };
-                            pman.terminate();
-                            return callback(null, result);
+                            log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' run completed');
+                            pman.persistToFile(function(err, persistResult) {
+                                if (err) {
+                                    return callback(err);
+                                }
+                                log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' persistToFile completed');
+                                var result = {
+                                    persistResult: persistResult, 
+                                    productionContext: pman.productionContext
+                                 };
+                                pman.terminate();
+                                return callback(null, result);
+                            })
                         })
-                    })
+                    } 
+                    catch (ex) {
+                        return callback(error('WizziFactoryError', '_executeJob_by_path', {
+                                message: 'See inner error', 
+                                parameter: {
+                                    wzjobIttfDocumentUri: jobRequest.path
+                                 }
+                             }, ex));
+                    } 
                 }
             })
         })
@@ -1408,14 +1510,24 @@ var WizziFactory = (function () {
                          }, callback);
                 }
                 if (child.name == '$file') {
-                    processFile(child, tempFolder, (err, notUsed) => {
-                    
-                        if (err) {
-                            return callback(err);
+                    try {
+                        processFile(child, tempFolder, (err, notUsed) => {
+                        
+                            if (err) {
+                                return callback(err);
+                            }
+                            next();
                         }
-                        next();
-                    }
-                    )
+                        )
+                    } 
+                    catch (ex) {
+                        return callback(error('WizziFactoryError', 'metaGenerate', {
+                                message: 'Processing $file. See inner error', 
+                                parameter: {
+                                    outputFileName: child.value
+                                 }
+                             }, ex));
+                    } 
                 }
                 else {
                     next();
@@ -1448,9 +1560,22 @@ var WizziFactory = (function () {
     }
     //
     WizziFactory.prototype.createSingleTextSourceFactory = function(ittfContent, schema, options, callback) {
+        if (verify.isNotEmpty(ittfContent) === false) {
+            return error(
+                'InvalidArgument', 'createSingleTextSourceFactory', { parameter: 'ittfContent', message: 'The ittfContent parameter must be a string. Received: ' + ittfContent }
+            );
+        }
+        if (verify.isNotEmpty(schema) === false) {
+            return error(
+                'InvalidArgument', 'createSingleTextSourceFactory', { parameter: 'schema', message: 'The schema parameter must be a string. Received: ' + schema }
+            );
+        }
         if (typeof callback === 'undefined') {
             callback = options;
             options = {};
+        }
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'WizziFactory.createSingleTextSourceFactory', 'The callback parameter must be a function. Received: ' + callback));
         }
         var tempIttfDocumentUri = "c:/basefolder/temp." + schema + '.ittf';
         var documents = [
@@ -1459,23 +1584,33 @@ var WizziFactory = (function () {
                 content: ittfContent
              }
         ];
-        JsonComponents.createJsonFsData(documents, (err, jsonFsData) => {
-        
-            if (err) {
-                return callback(err);
-            }
-            options.jsonFsData = jsonFsData;
-            this.createJsonFactory(options, function(err, wf) {
+        try {
+            JsonComponents.createJsonFsData(documents, (err, jsonFsData) => {
+            
                 if (err) {
                     return callback(err);
                 }
-                return callback(null, {
-                        wizziFactory: wf, 
-                        ittfDocumentUri: tempIttfDocumentUri
-                     });
-            })
-        }
-        )
+                options.jsonFsData = jsonFsData;
+                this.createJsonFactory(options, function(err, wf) {
+                    if (err) {
+                        return callback(err);
+                    }
+                    return callback(null, {
+                            wizziFactory: wf, 
+                            ittfDocumentUri: tempIttfDocumentUri
+                         });
+                })
+            }
+            )
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'createSingleTextSourceFactory', {
+                    message: 'See inner error', 
+                    parameter: {
+                        
+                     }
+                 }, ex));
+        } 
     }
     WizziFactory.prototype.createJsonFactory = function(options, callback) {
         var wf = new WizziFactory(this.user, this.role);
@@ -1598,7 +1733,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.34.wizziFactory.' + method,
+        method: 'wizzi@0.7.35.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

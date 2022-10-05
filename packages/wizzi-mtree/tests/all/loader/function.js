@@ -207,19 +207,4 @@ describe("function", function() {
         expect(n1.v).to.be('sigma t');
         done();
     });
-    it("recursive nodes[0][0][1]", function(done) {
-        node = evaluatedModel.nodes[0].children[0].children[1];
-        expect(node).to.be.an('object');
-        expect(node.children).to.be.an('array');
-        expect(node.children.length).to.be(0);
-        expect(node.r).to.be.a('number');
-        expect(node.r).to.be(22);
-        expect(node.c).to.be.a('number');
-        expect(node.c).to.be(9);
-        expect(node.n).to.be.a('string');
-        expect(node.n).to.be('giove');
-        expect(node.v).to.be.a('string');
-        expect(node.v).to.be('gamma z');
-        done();
-    });
 });

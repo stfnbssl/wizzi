@@ -24,7 +24,7 @@ $group
             function
                 param name
                 param callback
-                log 'wz.docs.getCheatsheet', name
+                # loog 'wz.docs.getCheatsheet', name
                 _ wz.fetch.get
                     `lit 
                         + 
@@ -40,8 +40,8 @@ $group
 				param packiFiles
 				param callback
 
-                log 'wz.docs.createItem.mainIttf', mainIttf
-                log 'wz.docs.createItem.packiFiles', packiFiles
+                # loog 'wz.docs.createItem.mainIttf', mainIttf
+                # loog 'wz.docs.createItem.packiFiles', packiFiles
 
                 _ wz.fetch.post
                     @ wz.docs.apiUrl + '/cheatsheet/:name'

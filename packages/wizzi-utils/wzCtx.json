@@ -1,6 +1,6 @@
 {
     "name": "@wizzi/utils",
-    "version": "0.7.20",
+    "version": "0.7.22",
     "title": "Utility library for the wizzi factory",
     "license": "MIT",
     "schemas": []

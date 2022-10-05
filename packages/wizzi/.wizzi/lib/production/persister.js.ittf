@@ -73,35 +73,18 @@
                     @ genInfo.filepath
                     _ genInfo.genContext.getContent()
                     
-				$if isWebpackTarget
-					# Browser-FS does not implement fs.createWriteStream
-					# In browsers simply use write
-					_ fileService.write
-						@ genInfo.filepath
-						_ genInfo.genContext.getContent
-						f_cb( result )
-							_ log.success('Written to file: ' + genInfo.filepath)
-							_ callback
-								@ null
-								{
-									@ oper 'persist-to-file'
-									@ item
-										{
-											@ filepath genInfo.filepath
-									@ status 'success'
-				$else
-					_ fileService.openWrite
-						@ genInfo.filepath
-						a_cb( stream )
-							_ genInfo.genContext.toStream(stream)
-							_ stream.end
-								a_cb()
-									_ log.success('Written to file: ' + genInfo.filepath)
-									_ callback
-										@ null
-										{
-											@ oper 'persist-to-file'
-											@ item
-												{
-													@ filepath genInfo.filepath
-											@ status 'success'
+                _ fileService.openWrite
+                    @ genInfo.filepath
+                    a_cb( stream )
+                        _ genInfo.genContext.toStream(stream)
+                        _ stream.end
+                            a_cb()
+                                _ log.success('Written to file: ' + genInfo.filepath)
+                                _ callback
+                                    @ null
+                                    {
+                                        @ oper 'persist-to-file'
+                                        @ item
+                                            {
+                                                @ filepath genInfo.filepath
+                                        @ status 'success'

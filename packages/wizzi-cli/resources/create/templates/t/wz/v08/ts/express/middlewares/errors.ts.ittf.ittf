@@ -15,14 +15,14 @@ $group
     ${'$'}else
         import HttpException from '../httpException'
 
-    export-default
+    export
         const ErrorsMiddleware
             :ref MiddlewareType
             =
                 => 
                     param app
                         :ref Application
-                    # catch 404 and forward to error handler
+                    
                     _ app.use
                         function 
                             param request
@@ -38,6 +38,7 @@ $group
                             ${'$'}else
                                 var err = new HttpException(404, 'Not Found')
                                 _ next(err)
+                            # catch 404 and forward to error handler
                     if app.get('env') === 'development'
                         # development error handler
                         # will print stacktrace

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -161,28 +161,6 @@ md.jsonFactory = function(options, callback) {
 }
 ;
 md.jsonFactory = md.jsonFactory;
-
-md.browserFactory = function(options, callback) {
-    if (typeof(callback) !== 'function') {
-        throw new Error(
-            error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
-        );
-    };
-    if (verify.isObject(options) === false) {
-        return callback(error(
-            'InvalidArgument', '', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
-        ));
-    }
-    
-    // loog 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
-    
-    options.repo = {
-        storeKind: 'browser'
-     };
-    md.createFactory(options, callback)
-}
-;
-md.browserFactory = md.browserFactory;
 
 //
 md.startRunnerServer = function(options, callback) {

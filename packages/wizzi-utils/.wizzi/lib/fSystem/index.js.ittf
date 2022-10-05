@@ -1,9 +1,8 @@
 module 
     kind jsfile
 
-    $if isWebpackTarget == false
-        var file = require('./file')
-        var vfile = require('./vfile')
+    var file = require('./file')
+    var vfile = require('./vfile')
     var uriParser = require('./uriParser')
     var glob = require('./glob/index')
     var fsUtils = require('./utils')
@@ -12,9 +11,8 @@ module
         set module.exports
             { 
 
-	$if isWebpackTarget == false
-        set md.file = file
-        set md.vfile = vfile
+    set md.file = file
+    set md.vfile = vfile
     set md.uriParser = uriParser
     set md.glob = glob
     set md.fileInfoByPath = fsUtils.fileInfoByPath    

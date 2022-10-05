@@ -141,21 +141,6 @@
 				@ callback
 	set md.jsonFactory = md.jsonFactory
 	+
-	set md.browserFactory
-		function
-			{ options
-			callback
-			+
-			# loog 'wizzi.index.jsonFactory.jsonFsData', options.jsonFsData
-			+
-			set options.repo
-				{
-					@ storeKind 'browser'
-			_ md.createFactory
-				@ options
-				@ callback
-	set md.browserFactory = md.browserFactory
-	+
 	$include index/start_runnerServer
 	$include index/wizzi_job
 	$include index/wizzi_modelTypes

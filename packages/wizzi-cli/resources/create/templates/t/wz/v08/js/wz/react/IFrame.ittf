@@ -13,8 +13,8 @@ $group
                     _ this._updateSrc
                     $$
                     if this.ifr && this.ifr.contentWindow && this.ifr.contentWindow.location
-                        log this.ifr.contentWindow.location
-                        log this.props.src
+                        # loog this.ifr.contentWindow.location
+                        # loog this.props.src
                         _ this.ifr.contentWindow.location.reload()
                     $$
                 @ 2000

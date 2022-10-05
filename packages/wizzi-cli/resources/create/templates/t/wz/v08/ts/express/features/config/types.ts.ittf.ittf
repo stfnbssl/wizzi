@@ -3,13 +3,14 @@ $group
     export 
         :type ConfigType
             :{ 
-                :p port
-                    :number 
-                ${'$'}if wzCtx.Build.useSession
-                    :p sessionSecret
-                        :string 
-                :p noCache
-                    :boolean
+                ${'$'}if wzCtx.Build.useExpress
+                    :p port
+                        :number 
+                    ${'$'}if wzCtx.Build.useSession
+                        :p sessionSecret
+                            :string 
+                    :p noCache
+                        :boolean
                 ${'$'}if wzCtx.Build.useCors
                     :p corsClientOrigin
                         :string 
@@ -57,6 +58,9 @@ $group
                             :string 
                         :p googleCallbackURL
                             :string 
+                ${'$'}if wzCtx.Build.useFeatureGithub
+                    :p githubAccessToken
+                        :string 
                 ${'$'}if wzCtx.Build.useWizzi
                     :p isWizziDev
                         :boolean 

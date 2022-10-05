@@ -152,7 +152,7 @@ $group
         { 
             @ css 'css/document'
             @ graphql 'graphql/document'
-            @ ittf 'ittf/document'
+            @ ittf 'ittf/tojson'
             @ js 'js/module'
             @ json 'json/document'
             @ html 'html/document'

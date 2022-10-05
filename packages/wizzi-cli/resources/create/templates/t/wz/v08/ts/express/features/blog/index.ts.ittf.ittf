@@ -11,7 +11,7 @@ $group
         import
             @ PostModelBuilder
             @ GetPostModel
-            from './mongo/post'
+            from './models/post'
     import
         @ ApiV1PostController
         from './controllers/apiv1post'

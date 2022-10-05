@@ -8,6 +8,7 @@
 
     { App
         name "Test Vite React"
+        kind "Client"
         demoName "${demoName}"
 
     $if isStandalone

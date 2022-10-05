@@ -128,17 +128,24 @@ $group
             return callback(loadModel)
 		+
 		var that = this
-        _ loadModel
-            @ ittfDocumentUri
-            _ this.createLoadContext
-                @ loadContext
-            f_cb( wizziModel )
-                return
-                    _ callback
-                        @ null
-                        _ that.formatWizziModel
-                            @ wizziModel
-                            @ loadContext.formatOptions
+        try
+            _ loadModel
+                @ ittfDocumentUri
+                _ this.createLoadContext
+                    @ loadContext
+                f_cb( wizziModel )
+                    return
+                        _ callback
+                            @ null
+                            _ that.formatWizziModel
+                                @ wizziModel
+                                @ loadContext.formatOptions
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadModel, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfDocumentUri ittfDocumentUri
 
 	m formatWizziModel
 		param model
@@ -182,18 +189,24 @@ $group
             return callback(loadModel)
 		+
 		var that = this
-		_ loadModel
-			@ mTree
-			_ this.createLoadContext
-				@ loadContext || {}
-			f_cb( wizziModel )
-				return
-					_ callback
-						@ null
-						_ that.formatWizziModel
-							@ wizziModel
-							@ loadContext.formatOptions
-
+		try
+            _ loadModel
+                @ mTree
+                _ this.createLoadContext
+                    @ loadContext || {}
+                f_cb( wizziModel )
+                    return
+                        _ callback
+                            @ null
+                            _ that.formatWizziModel
+                                @ wizziModel
+                                @ loadContext.formatOptions
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadModelFromMtree, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfDocumentUri "Unavailable (loaded from mTree)"
 	#
 		# Async load a wizzi model from a
 		# config object built programmatically
@@ -209,7 +222,7 @@ $group
 		#     string exportName
 		#     	optional - has meaning only for context models.
 		#     [ contexts
-		#     	optional - has the same format of modelConfig
+		#     	optional - each context has the same format of modelConfig
 		#     [ transformers
 		#     	optional
 		#   { formatOptions
@@ -246,15 +259,21 @@ $group
 				@ null
 				@ globalContext
 		var that = this
-		_ AsyncModelLoader.load
-			@ mi
-			f_cb( wizziModel )
-				return
-					_ callback
-						@ null
-						_ that.formatWizziModel
-							@ wizziModel
-							@ globalContext.formatOptions
+        try
+            _ AsyncModelLoader.load
+                @ mi
+                f_cb( wizziModel )
+                    return
+                        _ callback
+                            @ null
+                            _ that.formatWizziModel
+                                @ wizziModel
+                                @ globalContext.formatOptions
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadModelFromConfig, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
 
 	m loadModelFromText
         param ittfContent

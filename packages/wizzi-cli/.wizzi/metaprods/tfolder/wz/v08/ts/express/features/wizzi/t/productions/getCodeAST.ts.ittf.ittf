@@ -21,19 +21,29 @@ $group
                             for const k of Object.keys(files)
                                 var extension = path.extname(k)
                                 $$ loog 'productions.getCodeAST', k, extension
-                                const astResult
-                                    await
-                                        _ handleGetCodeAST
-                                            @ extension
-                                            @ files[k].contents
-                                set result[k + '.ast']
-                                    {
-                                        @ type 'CODE'
-                                        @ contents
-                                            _ stringify 
-                                                @ astResult
-                                                @ null
-                                                @ 2
+                                try
+                                    const astResult
+                                        await
+                                            _ handleGetCodeAST
+                                                @ extension
+                                                @ files[k].contents
+                                    set result[k + '.ast']
+                                        {
+                                            @ type 'CODE'
+                                            @ contents
+                                                _ stringify 
+                                                    @ astResult
+                                                    @ null
+                                                    @ 2
+                                catch ex
+                                    set result[k + '.ast']
+                                        {
+                                            @ type 'CODE'
+                                            @ contents 
+                                                _ stringify
+                                                    @ ex
+                                                    @ null
+                                                    @ 2
                             return
                                 _ resolve
                                     @ result

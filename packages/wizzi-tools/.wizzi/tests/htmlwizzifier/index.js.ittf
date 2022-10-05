@@ -3,23 +3,25 @@
 	+
 	import path
 	import util
+    var file = require('wizzi-utils').file;
 	+
     var expect = require('expect.js')
 	var thisPackage = require('../../index')
 	+
 	var simpleSource
-		_ path.join
-			@ __dirname
-			@ 'data'
-			@ 'simple.tests.html'
+        _ file.read
+            _ path.join
+                @ __dirname
+                @ 'data'
+                @ 'simple.tests.html'
 	+
-	describe the js wizzifier
+	describe the html wizzifier
 		+ 
-		it-async should wizzify a js file
+		it-async should wizzify an html file
 
 			var ittfExpected = 'html \n    head\n    body\n        div alfa\n'
 			
-			_ thisPackage.htmlWizzify
+			_ thisPackage.htmlwizzifier.getWizziIttf
 				@ simpleSource
 				{
 				f_cb_test( ittf )

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\root\create.js.ittf
 */
 'use strict';
@@ -10,7 +10,14 @@ const createEx = require('./cmds/createEx');
 const args = minimist(process.argv.slice(2));
 let cmd = args._[0];
 console.log('args', args, 'cmd', cmd);
-if (cmd == 'ts-express-demo-sequelize') {
+if (cmd == 'ts-node-demo-git') {
+    createEx({
+        templateGroup: 'ts-node', 
+        template: 'demo-git', 
+        pkgName: 'demo.ts.node.git'
+     })
+}
+else if (cmd == 'ts-express-demo-sequelize') {
     createEx({
         templateGroup: 'ts-express', 
         template: 'demo-sequelize', 
@@ -38,7 +45,7 @@ else if (cmd == 'ts-express-wizzi-heroku') {
         templateGroup: 'ts-express', 
         template: 'wizzi-heroku', 
         pkgName: 'wizzi-heroku', 
-        destPath: 'C:/My/wizzi/stfnbssl/wizzi-heroku'
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi-heroku'
      })
 }
 else if (cmd == 'ts-express') {

@@ -19,58 +19,78 @@ $group
                     @ dot '.'
 
 		$$ loog'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,modelRequestContext.fileCtx', ittfFolderUri, fileCtx
-        _ repo.folderFilesInfoByPath
-			@ ittfFolderUri
-			@ this.fileService
-            @ options
-			a_cb( items )
-				$$ loog'generateFolderArtifacts\n', stringify(items, null, 2)
-				_ async.mapSeries
-					@ items
-					=>
-						param item
-						param callback
-						if item.isIttfDocument
-                            # loog 'generating', item.fullPath
-                            var artifactName = getDefaultArtifact(item.schema)
-                            _ this.loadModelAndGenerateArtifact
-                                @ item.fullPath
-                                {
-                                    @ modelRequestContext modelRequestContext
-                                    @ artifactRequestContext requestContext.artifactRequestContext
-                                @ artifactName
-								a_cb(artifactText)
-                                    $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
-									_ this.fileService.write
-										_ path.join
-											@ options.destFolder
-                                            _ interpolate_filename
-											    @ item.destRelPath
-                                                @ fileCtx
-										@ artifactText
-										f_cb()
-                                            # loog 'generateFolderArtifacts.written', item.destRelPath
-											_ callback
-												@ null
-												_ path.join
-													@ options.destFolder
-													@ item.destRelPath
-						else
-                            # loog 'generateFolderArtifacts.copying', item.fullPath
-							_ this.fileService.copyFile
-								@ item.fullPath
-								_ path.join
-									@ options.destFolder
-                                    _ interpolate_filename
-                                        @ item.destRelPath
-                                        @ fileCtx
-								f_cb()
-									_ callback
-										@ null
-										_ path.join
-											@ options.destFolder
-											@ item.destRelPath
+        try
+            _ repo.folderFilesInfoByPath
+                @ ittfFolderUri
+                @ this.fileService
+                @ options
+                a_cb( items )
+                    $$ loog'generateFolderArtifacts\n', stringify(items, null, 2)
+                    _ async.mapSeries
+                        @ items
+                        =>
+                            param item
+                            param callback
+                            if item.isIttfDocument
+                                # loog 'generating', item.fullPath
+                                var artifactName = getDefaultArtifact(item.schema)
+                                _ this.loadModelAndGenerateArtifact
+                                    @ item.fullPath
+                                    {
+                                        @ modelRequestContext modelRequestContext
+                                        @ artifactRequestContext requestContext.artifactRequestContext
+                                    @ artifactName
+                                    a_cb(artifactText)
+                                        $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
+                                        _ this.fileService.write
+                                            _ path.join
+                                                @ options.destFolder
+                                                _ interpolate_filename
+                                                    @ item.destRelPath
+                                                    @ fileCtx
+                                            @ artifactText
+                                            f_cb()
+                                                # loog 'generateFolderArtifacts.written', item.destRelPath
+                                                _ callback
+                                                    @ null
+                                                    _ path.join
+                                                        @ options.destFolder
+                                                        @ item.destRelPath
+                            else
+                                # loog 'generateFolderArtifacts.copying', item.fullPath
+                                _ this.fileService.copyFile
+                                    @ item.fullPath
+                                    _ path.join
+                                        @ options.destFolder
+                                        _ interpolate_filename
+                                            @ item.destRelPath
+                                            @ fileCtx
+                                    f_cb()
+                                        _ callback
+                                            @ null
+                                            _ path.join
+                                                @ options.destFolder
+                                                @ item.destRelPath
 
-			        f_cb_test(result)
-				        # loog 'generateFolderArtifacts.result', result
-                        r_cb( result )
+                        f_cb_test(result)
+                            # loog 'generateFolderArtifacts.result', result
+                            r_cb( result )
+        catch ex
+            r_cb_wz_err( WizziFactoryError, generateFolderArtifacts, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfFolderUri ittfFolderUri
+        #
+            # Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
+            # params
+            #   string ittfFolderUri
+            #     # the uri of the ITTF Documents folder
+            #    { requestContext
+            #      { modelRequestContext
+            #        # Context data for the wizzi model loading
+            #      { artifactRequestContext
+            #        # Context data for the artifact generation
+            #   { options
+            #     boolean copyNonIttf
+            #   function callback

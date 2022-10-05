@@ -220,10 +220,10 @@ $group
 				set found
 					_ item.get
 						@ id
-				log 'select.item', id, item.id, found
+				# loog 'select.item', id, item.id, found
 				if found
 					break
-			log 'select', id, found
+			# loog 'select', id, found
 			if !found
 				return false
 			set this.current = found

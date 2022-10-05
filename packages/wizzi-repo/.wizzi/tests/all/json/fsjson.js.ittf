@@ -1,0 +1,22 @@
+﻿base_test( json.fsjson )
+	+
+	$append imports
+		var 
+			decl JsonFs = require('../../../lib/json/fs/fsjson')
+	
+	var jsonFs
+		new JsonFs
+
+	var hellotxt_item = null
+
+	$include fsjson/createItem
+	$include fsjson/updateItem
+	$include fsjson/writeDocument
+	$include fsjson/deleteItem
+
+	$*
+	$include fsjson/updateItem
+	$include fsjson/getItem
+	$include fsjson/read
+	$include fsjson/write
+	*$

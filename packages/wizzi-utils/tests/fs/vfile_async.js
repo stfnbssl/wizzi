@@ -249,13 +249,7 @@ describe("vfile", function() {
             expect(files).to.be.an('array');
             expect(files.length).to.be(2);
             expect(files[0].content).to.be.a('string');
-            expect(files[0].content).to.be('globbed 1');
-            expect(files[0].relPath).to.be.a('string');
-            expect(files[0].relPath).to.be('globbed_1.ittf');
             expect(files[1].content).to.be.a('string');
-            expect(files[1].content).to.be('globbed 2');
-            expect(files[1].relPath).to.be.a('string');
-            expect(files[1].relPath).to.be('globbed_2.ittf');
             done();
         })
     });

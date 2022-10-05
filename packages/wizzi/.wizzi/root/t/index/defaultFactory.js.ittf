@@ -1,18 +1,11 @@
 ﻿$group
 
 	function DEFAULT_PLUGINS
-		$if isWebpackTarget
-			return
-				[
-					@ wizziCore
-					@ wizziJs
-					@ wizziWeb
-		$else
-			return
-				[
-					@ 'wizzi-core'
-					@ 'wizzi-js'
-					@ 'wizzi-web'
+        return
+            [
+                @ 'wizzi-core'
+                @ 'wizzi-js'
+                @ 'wizzi-web'
 
 	var DEFAULT_ARTIFACTS
 		{

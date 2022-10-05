@@ -33,6 +33,7 @@ $group
                                 :any
                                 =
                                     {
+                            # TODO catch error
                             set jsonwf =
                                 await
                                     _ createJsonFsAndFactory(files)

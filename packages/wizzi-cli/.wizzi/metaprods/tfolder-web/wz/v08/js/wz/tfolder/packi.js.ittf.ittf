@@ -116,13 +116,13 @@ $group
                     ._ then
                         =>
                             param json
-                            log 'uploadPackiItem.response', json
+                            # loog 'uploadPackiItem.response', json
                             _ callback
                                 @ null
                                 @ json
                     ._ catch
                         =>
                             param err
-                            log 'uploadPackiItem.err', Object.keys(err)
+                            error 'uploadPackiItem.err', Object.keys(err)
                             _ callback
                                 @ err

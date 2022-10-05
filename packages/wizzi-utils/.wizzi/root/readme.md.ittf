@@ -1,4 +1,4 @@
-﻿common/kernel( ${ isBrowserTarget ? 'wizzi-browser' : 'wizzi-utils'}, ${wzCtx.title}. )
+﻿common/kernel( 'wizzi-utils', ${wzCtx.title}. )
 
 	h2 vfile - virtual file system
 	h4 var vfile = require('wizzi-utils').vfile

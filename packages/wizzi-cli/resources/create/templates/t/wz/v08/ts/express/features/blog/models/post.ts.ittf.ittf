@@ -23,8 +23,10 @@ $group
                 {
                     @ unique true
 
+    $*
     ${'$'}if wzCtx.Build.useSequelize
         ${'$'}foreach tb in wzCtx.Build.data.Blog.db.tables
             ${'$'}if tb.Name == 'Post'
                 ${'$'} tb.__db = wzCtx.Build.data.Blog.db
                 v08/sequelize/modelBuilder${'('}&tb)
+    *$

@@ -64,6 +64,7 @@ $group
                                         param k
                                         _ k.endsWith('.wfjob.ittf')
                             $$ loog 'Executing jobs', wfjobFilePaths, 'packiFiles', Object.keys(packiFiles)
+                            # TODO catch error
                             const jsonwf
                                 await
                                     _ createJsonFsAndFactory(packiFiles)

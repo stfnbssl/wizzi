@@ -123,6 +123,7 @@ $group
                             \b : wizziMaps.generatorFor(filePath)
                         if generator
                             $$ loog 'wizzi.productions.using artifact generator', generator
+                            # TODO catch error
                             const wf
                                 await 
                                     _ createFilesystemFactory()

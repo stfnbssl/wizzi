@@ -1,6 +1,6 @@
 {
     "name": "@wizzi/js",
-    "version": "0.7.11",
+    "version": "0.7.13",
     "title": "A Wizzi Core Plugin for javascript and typescript code-generation.",
     "license": "MIT",
     "schemas": [

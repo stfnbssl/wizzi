@@ -115,8 +115,8 @@ $group
     ---
     ${'$'}if wzCtx.Build.useFetch
         isomorphic-fetch "^2.2.1"
-    ${'$'}if wzCtx.Build.useGithub
-        isomorphic-git "^1.19.2"
+    ${'$'}if wzCtx.Build.useGithub || wzCtx.Build.useFeatureGithub
+        isomorphic-git "^1.21.0"
     ${'$'}if wzCtx.Build.useIsomorphicUnfetch
         isomorphic-unfetch "^3.0.0"
     ---
@@ -141,6 +141,8 @@ $group
             marked "^2.0.0"
         ${'$'}else
             marked "^2.0.3"
+    ${'$'}if wzCtx.Build.useGithub || wzCtx.Build.useFeatureGithub
+        memfs "^3.4.7"
     ${'$'}if wzCtx.Build.useMonacoEditor
         ${'$'}if wzCtx.Build.useVExpo
             monaco-editor "^0.18.1"
@@ -159,8 +161,8 @@ $group
         nanoid "^3.1.22"
     ${'$'}if wzCtx.Build.utils.useNodeCache
         node-cache "^5.1.2"
-    ${'$'}if wzCtx.Build.useGithub
-        node-fetch "^2.6.1"
+    ${'$'}if wzCtx.Build.useGithub || wzCtx.Build.useFeatureGithub
+        node-fetch "^2"
     ${'$'}if wzCtx.Build.utils.useNullThrows
         nullthrows "^1.1.1"
     ---
@@ -184,6 +186,8 @@ $group
     $include ./dependencies/redux.json
     ${'$'}if wzCtx.Build.useReact_stopped_25_06_2022
         recompose "^0.30.0"
+    ${'$'}if wzCtx.Build.useSequelize
+        reflect-metadata "^0.1.13"
     ${'$'}if wzCtx.Build.useRegeneratorRuntime
         regenerator-runtime "^0.13.7"
     ---    
@@ -195,10 +199,13 @@ $group
     ${'$'}if wzCtx.Build.useSequelize
         sequelize "^6.21.4"
         sequelize-cli "^6.4.1"
+        sequelize-typescript "^2.1.3"
             $$ sequelize-cli is a package that enables us interact with the database through sequelize from the CLI.
 
     ${'$'}if wzCtx.Build.useSocketIO
         socket.io-client "^2.2.0"
+    ${'$'}if wzCtx.Build.useExpress
+        strong-error-handler "^4.0.0"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.useStyledComponents
         styled-components "^5.2.1"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.useStyledSystem
@@ -223,14 +230,14 @@ $group
     ${'$'}if wzCtx.Build.utils.useWebVitals
         web-vitals "^1.0.1"
     ${'$'}if wzCtx.Build.useWizzi
-        wizzi "^0.7.33"
+        wizzi "^0.7.35"
         ${'$'}if false
             wizzi.proto "^0.0.1"
-        wizzi-tools "^0.7.4"
-        wizzi-utils "^0.7.20"
+        wizzi-tools "^0.7.5"
+        wizzi-utils "^0.7.22"
         wizzi-core "^0.7.8"
-        wizzi-web "^0.7.15"
-        wizzi-js "^0.7.12"
+        wizzi-web "^0.7.16"
+        wizzi-js "^0.7.13"
     ---
     ${'$'}if wzCtx.Build.useYup
         yup "^0.27.0"

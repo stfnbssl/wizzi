@@ -1,6 +1,8 @@
 $group
     ---
-    ${'$'}if wzCtx.Build.isClientServer
+    ${'$'}if wzCtx.Build.isCLI
+        start "set NODE_ENV=development && nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec ./node_modules/.bin/ts-node src/index.ts"
+    ${'$'}elif wzCtx.Build.isClientServer
         ${'$'}if wzCtx.Build.useWebpack
             ${'$'}if wzCtx.Build.webpack.useEnv
                 serve:client "env-cmd -f deploy/client/development.env webpack serve --open --mode development"
@@ -92,9 +94,9 @@ $group
                         \b  copyfiles -f predeploy/.gitignore predeploy/** ../Application && 
                         \b  copyfiles -f predeploy/.gitignore ../Tests"
                 ${'$'}if wzCtx.Build.useHeroku
-                    build "rimraf ./deploy/src && tsc"
-                    distfiles "copyfiles public/** ittf/** src/t/** src/site/views/** .env server.js ./deploy &&
-                        \b  copyfiles -f predeploy/.gitignore predeploy/** ./deploy"
+                    build "rimraf ../../../wizzi.apps.deploy/wizzi-heroku/src && tsc"
+                    distfiles "copyfiles public/** ittf/** src/t/** src/site/views/** .env server.js ../../../wizzi.apps.deploy/wizzi-heroku &&
+                        \b  copyfiles -f predeploy/.gitignore predeploy/** ../../../wizzi.apps.deploy/wizzi-heroku"
             ${'$'}else 
                 start "set NODE_ENV=development && nodemon src/index && start ${'$'}{wzCtx.App.baseUrl}"
         ${'$'}if wzCtx.Build.express.useSslCert

@@ -5,7 +5,7 @@ $group
         const model = this._editor.getModel()
         if model
             const value = model.getValue()
-            # log 'MonacoEditor._handleEditFile', value
+            # loog  'MonacoEditor._handleEditFile', value
             if value !== this.props.files[this.props.selectedFile].contents
                 _ this.updateDebounced
                     @ value

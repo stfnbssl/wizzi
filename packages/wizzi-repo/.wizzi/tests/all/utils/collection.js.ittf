@@ -50,7 +50,6 @@
 				tobe_number(result.insertedCount, 1)
 				tobe_number(result.result.ok, 1)
 				tobe_number(result.result.n, 1)
-				tobe_number(result.insertedId.id.length, 24)
 				_ c.toArray
 					f_cb_test( items )
 						tobe_array(items, 1)

@@ -13,18 +13,12 @@
 	var errors = require('../errors')
 	var uriParser = require('./uriParser')
 	+
-	$if isWebpackTarget
-		var BrowserFS = require('browserfs')
-	$else
-		var fs
-		try
-			# set fs = require('graceful-fs')
-			set fs = require('fs')
-		catch ex
-			set fs = require('fs')
-	+
-	$if isWebpackTarget
-		var DEFAULT_BROWSERFS_BACKEND = 'IndexedDB'
+    var fs
+    try
+        # set fs = require('graceful-fs')
+        set fs = require('fs')
+    catch ex
+        set fs = require('fs')
 	+
     var PATH_SEPARATOR_RE = /[\/\\]/g
 	var DEFAULT_DECODING = 'utf8'
@@ -65,15 +59,14 @@
 					# not used yet
 					set options = {}
 
-			$if isWebpackTarget == false
-				if typeof callback === 'undefined'
-					# allow this sync call defaulting to storeKind 'filesystem'
-					#   var file = vfile()
-					return
-						new VFile
-							_ build_default_fsimpl
-								@ fs
-								@ 'filesystem'
+            if typeof callback === 'undefined'
+                # allow this sync call defaulting to storeKind 'filesystem'
+                #   var file = vfile()
+                return
+                    new VFile
+                        _ build_default_fsimpl
+                            @ fs
+                            @ 'filesystem'
 			
 			if verify.isObject(options) && verify.isFunction(options.stat)
 				# options is fsimpl
@@ -83,16 +76,6 @@
 						new VFile
 							@ options
 
-			elif verify.isObject(options) && verify.isNotEmpty(options.storeName)
-				# options has storename for browserFS
-				_ default_fs
-					@ options
-					f_cb( fsimpl )
-						# loog 'wizzi-utils.lib.fs.vfile. Got fsimpl', fsimpl
-						_ callback
-							@ null
-							new VFile
-								@ fsimpl
 			else
 				_ default_fs
 					f_cb( fsimpl )

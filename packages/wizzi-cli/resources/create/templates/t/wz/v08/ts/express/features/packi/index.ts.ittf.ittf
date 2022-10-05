@@ -1,8 +1,9 @@
 $group
 
-    import 
-        @ ControllerType
-        from '../app/types'
+    ${'$'}if wzCtx.Build.useExpress
+        import 
+            @ ControllerType
+            from '../app/types'
     
     import 
         as packiTypes

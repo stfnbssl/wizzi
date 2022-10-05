@@ -163,7 +163,7 @@ function evalKeyOrCode(keyOrCode, jsWizziContext) {
     
     // TODO verify.logError does not exist any more 25/02/21
     
-    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.17.loader.ittfInterpolate.evalKeyOrCode' )
+    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.7.18.loader.ittfInterpolate.evalKeyOrCode' )
     
     // _ verify.logError( 'checked_call_return.error.forTest',  'stm',  stm )
     

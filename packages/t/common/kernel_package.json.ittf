@@ -7,8 +7,7 @@
 
     sideEffects false
 	
-    $if isWebpackTarget == false
-        version "${version}"
+    version "${version}"
 	
 	description "${description}"
     
@@ -49,8 +48,7 @@
 			iconv-lite "^0.6.2"
 			json-stringify-safe "^5.0.1"
 			lodash "^4.17.20"
-            $if isWebpackTarget == false
-			    wizzi-utils "${versions['wizzi-utils']}"
+			wizzi-utils "${versions['wizzi-utils']}"
 			$hook
 	
 	devDependencies

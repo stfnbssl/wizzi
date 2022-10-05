@@ -48,7 +48,7 @@ $group
             [
                 @ 'vs/editor/editor.main'
             function
-                log 'mounting MonacoEditor', options
+                # loog 'mounting MonacoEditor', options
                 $include js/monaco/ittf_monarch
                 const editor
                     _ monaco.editor.create
@@ -56,7 +56,7 @@ $group
                         @ options
                         $$ @ codeEditorService
                 set that._editor = editor
-                log 'mounted MonacoEditor'
+                # loog 'mounted MonacoEditor'
                 set that._disposables =
                     [ 
                         @ editor
@@ -93,7 +93,7 @@ $group
             
             if this._editor
                 _ this._editor.updateOptions(options)
-                log "MonacoEditor.ComponentDidUpdate, selectedFile, files", selectedFile, files
+                # loog "MonacoEditor.ComponentDidUpdate, selectedFile, files", selectedFile, files
                 const model = this._editor.getModel()
                 const value = files[selectedFile].contents
                 if selectedFile !== prevProps.selectedFile
@@ -119,7 +119,7 @@ $group
             if this.props.files && prevProps.files !== this.props.files
                 for const path in this.props.files
                     const file = this.props.files[path]
-                    log 'MonacoEditor.ComponentDidUpdate, path, file', path, file
+                    # loog 'MonacoEditor.ComponentDidUpdate, path, file', path, file
                     const prevContents = prevProps.files && prevProps.files[path] ? prevProps.files[path].contents : null
                     if file.type === 'CODE' && file.contents !== prevContents && path !== selectedFile
                         _ this._initializeDocument(path, file.contents)

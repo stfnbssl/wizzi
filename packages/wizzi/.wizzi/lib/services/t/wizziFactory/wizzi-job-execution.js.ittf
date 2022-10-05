@@ -62,19 +62,26 @@ $group
 							+
 							info 'wizzi.wizziFactory._executeJob_by_path,pman.globalContext()', pman.globalContext()
 							+
-							_ pman.run
-								f_cb( result )
-									_ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' run completed')
-									_ pman.persistToFile
-										f_cb( persistResult )
-											_ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' persistToFile completed')
-                                            var result
-                                                {
-                                                    @ persistResult persistResult
-                                                    @ productionContext pman.productionContext
-											_ pman.terminate
-											return
-												_ callback(null, result)
+                            try
+                                _ pman.run
+                                    f_cb( result )
+                                        _ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' run completed')
+                                        _ pman.persistToFile
+                                            f_cb( persistResult )
+                                                _ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' persistToFile completed')
+                                                var result
+                                                    {
+                                                        @ persistResult persistResult
+                                                        @ productionContext pman.productionContext
+                                                _ pman.terminate
+                                                return
+                                                    _ callback(null, result)
+                            catch ex
+                                r_cb_wz_err( WizziFactoryError, _executeJob_by_path, ex )
+                                    {
+                                        @ message 'See inner error'
+                                        { parameter
+                                            @ wzjobIttfDocumentUri jobRequest.path
 
 	m _executeJob_by_wfjobModel
 		param jobRequest

@@ -50,11 +50,18 @@ $group
                                     @ copyExclude options.copyExclude || []
                                 @ callback
                     if child.name == '$file'
-                        _ processFile
-                            @ child
-                            @ tempFolder
-                            a_cb()
-                                _ next
+                        try
+                            _ processFile
+                                @ child
+                                @ tempFolder
+                                a_cb()
+                                    _ next
+                        catch ex
+                            r_cb_wz_err( WizziFactoryError, metaGenerate, ex )
+                                {
+                                    @ message 'Processing $file. See inner error'
+                                    { parameter
+                                        @ outputFileName child.value
                     else
                         _ next
 

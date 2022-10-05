@@ -152,7 +152,7 @@ $group
                     ._ then
                         =>
                             param result
-                            log 'wz.transformModel', result
+                            # loog 'wz.transformModel', result
                             if wz.isString(result)
                                 const json = JSON.parse(result)
                                 if json.__is_error
@@ -216,7 +216,7 @@ $group
                     ._ then
                         =>
                             param result
-                            log 'result', result
+                            # loog 'result', result
                             if wz.isString(result)
                                 const json = JSON.parse(result)
                                 if json.__is_error
@@ -272,7 +272,7 @@ $group
                                     throw new Error('Invalid result: ' + result)
                             else
                                 var json = result.packiResult
-                                log 'wz.wizzify.json', json
+                                # loog 'wz.wizzify.json', json
                                 _ callback
                                     @ null
                                     @ json['x.' + schemaName + '.ittf'].contents

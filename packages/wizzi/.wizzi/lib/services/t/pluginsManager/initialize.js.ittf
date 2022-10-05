@@ -41,12 +41,6 @@
 		param options
 		param callback
 		+
-		$if isWebpackTarget
-			if typeof window !== 'undefined'
-				# when bundled wizzi.createFactory must be called passing plugin objects
-				return
-					_ callback(null, options.items)
-		+
 		var itemsOptions = options.items
         # loog 'pluginsBaseFolder before', options.pluginsBaseFolder
         # loog '__dirname', __dirname

@@ -40,7 +40,7 @@ $group
 		{
             @ css 'css/document'
             @ html 'html/document'
-            @ ittf 'ittf/document'
+            @ ittf 'ittf/tojson'
 			@ js 'js/module'
             @ json 'json/document'
             @ jsx 'js/module'

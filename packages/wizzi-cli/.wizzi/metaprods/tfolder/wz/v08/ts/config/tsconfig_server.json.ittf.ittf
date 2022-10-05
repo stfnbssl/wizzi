@@ -15,7 +15,7 @@ $group
         ${'$'}if wzCtx.Build.useAzure
             outDir "../Application"
         ${'$'}elif wzCtx.Build.useHeroku
-            outDir "./deploy"
+            outDir "../../../wizzi.apps.deploy/wizzi-heroku"
         ${'$'}else
             outDir "./dist"
         baseUrl "."
@@ -26,6 +26,9 @@ $group
         importHelpers true $$ see https://www.npmjs.com/package/tslib 
         ${'$'}if wzCtx.Build.typescript.useStrict
             strict true
+        ${'$'}if wzCtx.Build.useSequelize
+            experimentalDecorators true
+            emitDecoratorMetadata true
     [ include
         "src/**/*"
         ${'$'}hook include

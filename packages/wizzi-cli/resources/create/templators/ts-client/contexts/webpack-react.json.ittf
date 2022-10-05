@@ -9,6 +9,7 @@
 
     { App
         name "Test Webpack React"
+        kind "Client"
         demoName "${demoName}"
 
     $if isStandalone

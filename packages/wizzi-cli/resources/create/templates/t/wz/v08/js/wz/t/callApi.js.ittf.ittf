@@ -6,7 +6,7 @@ $group
         param path
         param data
         const API_URL = 'http://localhost:5000/api/v1' 
-        log 'callApi method', method, 'API_URL', API_URL, 'path', path, 'data', data
+        # loog 'callApi method', method, 'API_URL', API_URL, 'path', path, 'data', data
         return 
             new Promise
                 =>
@@ -28,7 +28,7 @@ $group
                         ._ then
                             =>
                                 param response
-                                # log 'callApi.response', response
+                                # loog 'callApi.response', response
                                 if response.ok
                                     _ resolve
                                         _ response.json
@@ -42,6 +42,6 @@ $group
                         ._ catch
                             =>
                                 param err
-                                # log 'callApi.err', err
+                                # loog  'callApi.err', err
                                 _ reject
                                     _ err

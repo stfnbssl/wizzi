@@ -10,7 +10,13 @@ module
 	let cmd = args._[0]
     info 'args', args, 'cmd', cmd
 
-    if cmd == 'ts-express-demo-sequelize'
+    if cmd == 'ts-node-demo-git'
+        _ createEx
+            {
+                @ templateGroup 'ts-node'
+                @ template 'demo-git'
+                @ pkgName 'demo.ts.node.git'
+    elif cmd == 'ts-express-demo-sequelize'
         _ createEx
             {
                 @ templateGroup 'ts-express'
@@ -36,7 +42,7 @@ module
                 @ templateGroup 'ts-express'
                 @ template 'wizzi-heroku'
                 @ pkgName 'wizzi-heroku'
-                @ destPath 'C:/My/wizzi/stfnbssl/wizzi-heroku'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi-heroku'
     elif cmd == 'ts-express'
         _ create
             {

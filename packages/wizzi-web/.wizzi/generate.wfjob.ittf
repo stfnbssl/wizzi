@@ -1,12 +1,7 @@
 ﻿wfjob wizzi-web
 
     $
-        var dest_folder;
-        if (isWebpackTarget) {
-            dest_folder           = path.join(__dirname, '..', '..', '..', '..', 'wizzi-browser', 'build', 'wizzi_modules', 'wizzi-mtree')
-        } else {
-            dest_folder           = path.join(__dirname, '..');
-        }
+        var dest_folder = path.join(__dirname, '..');
         var jobCtx = {
             pkgName: 'wizzi-web',
             ittf_models_folder: path.join(__dirname, 'models'),
@@ -32,7 +27,6 @@
 		dest-folder ${jobCtx.dest_folder}
 		line-ref ittf-lib
 		line-ref ittf-root
-        $if isWebpackTarget == false
-		    line-ref ittf-examples
-		    line-ref ittf-tests
+        line-ref ittf-examples
+        line-ref ittf-tests
         line-ref ittf-models

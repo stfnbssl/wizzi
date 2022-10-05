@@ -96,4 +96,3 @@
 								# loog 'pluginsManager', pluginsManager
 								return
 									_ callback(null, that)
-

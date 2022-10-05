@@ -6,7 +6,7 @@ $group
         param path
         param data
         const API_URL = '${'$'}{wzCtx.App.baseUrl}/api/v1' 
-        log 'callApi method', method, 'API_URL', API_URL, 'path', path, 'data', data
+        # loog 'callApi method', method, 'API_URL', API_URL, 'path', path, 'data', data
         return 
             new Promise
                 =>

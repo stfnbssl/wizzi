@@ -15,25 +15,14 @@ module.exports = {
     ],*/ 
     globalContext: {
         isPackageDeploy: true,
-        isWebpackTarget: false,
-        isBrowserTarget: false,
         isWizziUtilsPackage: true,
         isDevelopment: false,
-        wzCtx_useScanner: false,
-        wzCtx_useCrypto: false,
+        wzCtx_useScanner: true,
+        wzCtx_useCrypto: true,
     },
     globalContext_default: {
         isPackageDeploy: true,
-        isWebpackTarget: false,
-        isBrowserTarget: false,
         isWizziUtilsPackage: true,
         isDevelopment: false,
     },
-    globalContext_browser: {
-        isPackageDeploy: true,
-        isWebpackTarget: true,
-        isBrowserTarget: true,
-        isWizziUtilsPackage: true,
-        isDevelopment: false,
-    }
 };

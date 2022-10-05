@@ -89,7 +89,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-js@0.7.11');
+        ctx.w('    package: wizzi-js@0.7.13');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         ctx.w('*/');
     }
@@ -98,7 +98,7 @@ function main_init(model, ctx) {
         ctx.w("'use strict';");
     }
     main_es6_module(model, ctx)
-    if (model.hasFeature('argument-check') && !!ctx.values.isBrowserTarget == false) {
+    if (model.hasFeature('argument-check')) {
         if ((!!ctx.values.isLegacy) == false) {
             if ((!!ctx.values.isWizziUtilsPackage) == true) {
                 ctx.w("var verify = require('wizzi-helpers').verify;");
@@ -130,7 +130,7 @@ function main_close(model, ctx) {
     }
     
     // _ ctx.w('    innerError = innerError || new Error(\'Error created for trace.\');')
-    if (model.hasFeature('argument-check') && !!ctx.values.isBrowserTarget == false) {
+    if (model.hasFeature('argument-check')) {
         ctx.w('/**');
         ctx.w('  params');
         ctx.w('    string code');

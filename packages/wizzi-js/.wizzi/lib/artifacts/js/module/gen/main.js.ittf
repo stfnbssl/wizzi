@@ -67,7 +67,7 @@
 			@ model
 			@ ctx
 
-		if model.hasFeature('argument-check') && !!ctx.values.isBrowserTarget == false
+		if model.hasFeature('argument-check') 
 			if (!!ctx.values.isLegacy) == false
 				if (!!ctx.values.isWizziUtilsPackage) == true
                     _ ctx.w("var verify = require('wizzi-helpers').verify;")
@@ -95,7 +95,7 @@
 		param ctx
 		if ctx.__wzModule && ctx.__wzModule.seen
 			_ emit_top_WzModule(model, ctx)
-		if model.hasFeature('argument-check') && !!ctx.values.isBrowserTarget == false
+		if model.hasFeature('argument-check') 
 			_ ctx.w('/**')
 			_ ctx.w('  params')
 			_ ctx.w('    string code')

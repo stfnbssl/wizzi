@@ -8,6 +8,7 @@ $group
             ---
             { App
                 name "Wizzi Hub"
+                title "The public Wizzi Web App"
                 isLocal ${cliCtx.isLocal ? "true" : "false"}
                 isProduction ${cliCtx.isProduction ? "true" : "false"}
                 port "${cliCtx.port}"
@@ -50,6 +51,11 @@ $group
                             name "project"
                             hasControllers true
                             useMongoDb true
+                    $if cliCtx.useFeatureGithub
+                        {
+                            name "github"
+                            hasControllers true
+                            useMongoDb false
                     $if cliCtx.useWizziDocs
                         {
                             name "docs"
@@ -65,6 +71,10 @@ $group
                             name "packi"
                             hasControllers true
                             useMongoDb false
+                $if cliCtx.features.useGithub
+                    useFeatureGithub true
+                    { featureGithub
+                        accessToken "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"
                 $if cliCtx.useAzure
                     ${"${'$'}"}include azure.json
                     ---

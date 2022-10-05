@@ -1,9 +1,8 @@
 $group
     
     import 
-        @ commonTypes
-        from '../../common'
-    
+        @ packiTypes
+        from '../packi'
     +
     export 
         :type GithubRepoOptions
@@ -38,45 +37,35 @@ $group
                 :p has_projects
                     :optional 
                     :boolean 
-                    # Either true to enable issues for this repository or false to disable them. Default: true.
                     # Either true to enable projects for this repository or false to disable them. Default: true. Note: If you're creating a repository in an organization that has disabled repository projects, the default is false, and if you pass true, the API returns an error.
                 :p has_wiki
                     :optional 
                     :boolean 
-                    # Either true to enable projects for this repository or false to disable them. Default: true. Note: If you're creating a repository in an organization that has disabled repository projects, the default is false, and if you pass true, the API returns an error.
                     # Either true to enable the wiki for this repository or false to disable it. Default: true.
                 :p team_id
                     :optional 
                     :number 
-                    # Either true to enable the wiki for this repository or false to disable it. Default: true.
                     # The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
                 :p auto_init
                     :optional 
                     :boolean 
-                    # The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
                     # Pass true to create an initial commit with empty README. Default: false.
                 :p gitignore_template
                     :string 
-                    # Pass true to create an initial commit with empty README. Default: false.
-                    # Desired language or platform .gitignore template to apply. Use the name of the template without the extension. For example, "Haskell".
                 :p license_template
                     :string 
-                    # Desired language or platform .gitignore template to apply. Use the name of the template without the extension. For example, "Haskell".
                     # Choose an open source license template that best suits your needs, and then use the license keyword as the license_template string. For example, "mit" or "mpl-2.0".
                 :p allow_squash_merge
                     :optional 
                     :boolean 
-                    # Choose an open source license template that best suits your needs, and then use the license keyword as the license_template string. For example, "mit" or "mpl-2.0".
                     # Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true
                 :p allow_merge_commit
                     :optional 
                     :boolean 
-                    # Either true to allow squash-merging pull requests, or false to prevent squash-merging. Default: true
                     # Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true
                 :p allow_rebase_merge
                     :optional 
                     :boolean 
-                    # Either true to allow merging pull requests with a merge commit, or false to prevent merging pull requests with merge commits. Default: true
                     # Either true to allow rebase-merging pull requests, or false to prevent rebase-merging. Default: true
     +
     export 
@@ -144,4 +133,44 @@ $group
     +
     export 
         :type ClonedGitRepository
-            :ref commonTypes.ClonedGitRepository
+            :{ 
+                :p owner
+                    :string 
+                :p name
+                    :string 
+                :p description
+                    :string 
+                :p branch
+                    :string 
+                :p commitHistory
+                    :any 
+                :p files
+                    :ref packiTypes.PackiFiles
+    +
+    export 
+        :type FileDiffKind
+            :union 
+                :literal '+'
+                :literal '-'
+                :literal '<>'
+    +
+    export 
+        :type FileDiffItem
+            :{ 
+                :p path
+                    :string 
+                :p content
+                    :string 
+    +
+    export 
+        :type FileDiff
+            :{ 
+                :p kind
+                    :ref FileDiffKind
+                :p a
+                    :optional 
+                    :ref FileDiffItem
+                :p b
+                    :optional 
+                    :ref FileDiffItem
+

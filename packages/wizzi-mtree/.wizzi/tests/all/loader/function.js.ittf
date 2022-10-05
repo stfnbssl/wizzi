@@ -150,17 +150,3 @@
 		tobe_string( n1.n, 'giove' )
 		tobe_string( n1.v, 'sigma t' )
 		_ done()
-
-	it-async recursive nodes[0][0][1]
-		set node = evaluatedModel.nodes[0].children[0].children[1]
-		tobe_object( node )
-		tobe_array( node.children, 0 )
-			
-		tobe_number( node.r, 22 )
-		tobe_number( node.c, 9 )
-		tobe_string( node.n, 'giove' )
-		tobe_string( node.v, 'gamma z' )
-
-		_ done()
-
-			

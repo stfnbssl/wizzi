@@ -1,7 +1,7 @@
 {
     "name": "wizzi-utils",
     "sideEffects": false,
-    "version": "0.7.20",
+    "version": "0.7.22",
     "description": "Utility library for the wizzi factory.",
     "author": {
         "name": "Stefano Bassoli",
@@ -36,6 +36,7 @@
         "fs-extra": "latest",
         "glob": "^7.1.2",
         "graceful-fs": "^4.1.11",
+        "hashids": "latest",
         "i": "^0.3.7",
         "promise": "^7.1.1",
         "randomstring": "latest"

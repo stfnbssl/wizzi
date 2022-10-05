@@ -296,21 +296,20 @@ module
 			catch ex
 				return
 					_ callback(ex)
-
-	$if isWebpackTarget == false
-		set md.importFolder
-			function
-				param baseImportPath
-				param baseExportPath
-				param callback
-				try
-					_ importFolder
-						@ baseImportPath
-						@ baseExportPath
-						@ callback
-				catch ex
-					return
-						_ callback(ex)
+    
+    set md.importFolder
+        function
+            param baseImportPath
+            param baseExportPath
+            param callback
+            try
+                _ importFolder
+                    @ baseImportPath
+                    @ baseExportPath
+                    @ callback
+            catch ex
+                return
+                    _ callback(ex)
 
 	set md.toIttfTreeEx =
         function 
@@ -322,7 +321,6 @@ module
 						@ fromString true
 						@ clean true
 
-	$if isWebpackTarget == false
-		# Must be last because requires this module
-		var importFolder = require('./lib/importers').importFolder
-		var importFile = require('./lib/importers').importFile
+    # Must be last because requires this module
+    var importFolder = require('./lib/importers').importFolder
+    var importFile = require('./lib/importers').importFile

@@ -22,9 +22,9 @@
         var ret
             { 
                 @ tag node.tag
-                @ name node.name
-                @ attribs node.attribs
-                @ lines node.lines
+                @ name node.name || ""
+                @ attribs node.attribs || {}
+                @ lines node.lines || []
                 @ children
                     [ 
         if ret.tag === 'title'

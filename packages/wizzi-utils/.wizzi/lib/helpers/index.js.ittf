@@ -11,7 +11,6 @@ module
 	set md.verify = require('./verify')
 	set md.node = require('./node')
 	set md.lineparser = require('./lineparser')
-    $if isWebpackTarget == false
-		set md.requireFromString = require('./requireFromString')
+	set md.requireFromString = require('./requireFromString')
 	set md.Coder = require('./coder')
     set md.regexpExt = require('./regexpExt')

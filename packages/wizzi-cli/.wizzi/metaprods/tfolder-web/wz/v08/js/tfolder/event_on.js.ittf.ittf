@@ -5,5 +5,5 @@
 		@ '${'$'}{name}'
 		=>
 			param data
-			log 'on ${'$'}{name}', data
+			# loog 'on ${'$'}{name}', data
 			${'$'}hook

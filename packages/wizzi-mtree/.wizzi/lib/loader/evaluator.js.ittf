@@ -87,36 +87,25 @@
 
 			if isCompile
 
-                $if isWebpackTarget
-                    
-                    return
-                        _ callback
-                            _ local_error
-                                @ 'IttfLoadError'
-                                @ 'evaluator'
-                                @ 'The "isCompile" option cannot be used when "isWebpackTarget" is set to true'
-		               
-                $else
-
-                    # loog 'scriptCoder.toCode()', scriptCoder.toCode()
-                    
-                    if requireFromString === null
-                        set requireFromString = require('./requireFromString')
-                    
-                    var md
-                        _ requireFromString
-                            _ scriptCoder.toCode
-                    
-                    var $0
-                        _ md
-                            _ jsWizziContext.getValue('$')
-                            _ jsWizziContext.getGlobalValues
-                    
-                    _ finalize
-                        @ composedMTree
-                        @ $0
-                        @ ctx
-                        @ callback
+                # loog 'scriptCoder.toCode()', scriptCoder.toCode()
+                
+                if requireFromString === null
+                    set requireFromString = require('./requireFromString')
+                
+                var md
+                    _ requireFromString
+                        _ scriptCoder.toCode
+                
+                var $0
+                    _ md
+                        _ jsWizziContext.getValue('$')
+                        _ jsWizziContext.getGlobalValues
+                
+                _ finalize
+                    @ composedMTree
+                    @ $0
+                    @ ctx
+                    @ callback
 
 			else
 

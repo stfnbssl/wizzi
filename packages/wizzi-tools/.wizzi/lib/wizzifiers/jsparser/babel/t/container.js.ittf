@@ -176,11 +176,6 @@
 			var syntax
 			var cr
 			try
-                $* STOP codeReplacer (is for handlebars?)
-				set cr = codeReplacer.clean(input)
-                # loog 'jsparser.container.cr', cr
-				set syntax = md.parse(cr.codeCleaned, babelOptions)
-                *$
                 set syntax = md.parse(input, babelOptions)
 			catch ex
                 # var lines = cr.codeCleaned.split('\n')

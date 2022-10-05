@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-cli\.wizzi\cmds\createEx.js.ittf
 */
 'use strict';
@@ -12,6 +12,7 @@ const vfile = wizziUtils.vfile;
 const templator = require('./templator');
 var file = vfile();
 var templateGroups = [
+    'ts-node', 
     'ts-express', 
     'ts-client'
 ];

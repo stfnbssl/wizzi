@@ -78,30 +78,37 @@ $group
 								@ data artifactRequestContext
 					@ pman this.createProductionManager()
 		# loog 'wizzi.wizziFactory.generateArtifact', artifactName, ittfDocumentUri
-        _ generator.gen
-            @ artifactModel
-            @ genContext
-            function
-                param err
-                param result
-                if err
-                    #
-                        set err.artifactName = artifactName
-                        set err.artifactIttfDocumentUri = ittfDocumentUri
-                        return
-                            _ callback(err)
-                    #
-                    # loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
-                    r_cb_wz_err( WizziFactoryError, generateArtifact, err )
-                        {
-                            @ message 'See inner error'
-                            { parameter
-                                @ artifactName artifactName
-                                @ artifactIttfDocumentUri ittfDocumentUri
-                var sw = new StringWriter()
-                _ result.toStream(sw)
-                _ callback(null, sw.toString())
-
+        try
+            _ generator.gen
+                @ artifactModel
+                @ genContext
+                function
+                    param err
+                    param result
+                    if err
+                        #
+                            set err.artifactName = artifactName
+                            set err.artifactIttfDocumentUri = ittfDocumentUri
+                            return
+                                _ callback(err)
+                        #
+                        # loog 'wizzi.wizziFactory.generateArtifact', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, generateArtifact, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ artifactName artifactName
+                                    @ artifactIttfDocumentUri ittfDocumentUri
+                    var sw = new StringWriter()
+                    _ result.toStream(sw)
+                    _ callback(null, sw.toString())
+        catch ex
+            r_cb_wz_err( WizziFactoryError, generateArtifact, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ artifactName artifactName
+                        @ artifactIttfDocumentUri ittfDocumentUri
 	#
 		# Loads a wizzi model from an IttfDocument and use it as
 		# the artifactModel for the artifact generation.
@@ -131,19 +138,27 @@ $group
 		+
 		var that = this
 		# load the wizzi model from an ittfDocument
-        _ this.loadModel
-            @ ittfDocumentUri
-            {
-                @ mTreeBuildupContext requestContext.modelRequestContext
-            f_cb( artifactModel )
-                # loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
-                # the loaded wizzi model becomes the artifactModel of the artifact generation
-                _ that.generateArtifact
-                    @ artifactModel
-                    @ ittfDocumentUri
-                    @ artifactName
-                    @ requestContext.artifactRequestContext
-                    @ callback
+        try
+            _ this.loadModel
+                @ ittfDocumentUri
+                {
+                    @ mTreeBuildupContext requestContext.modelRequestContext
+                f_cb( artifactModel )
+                    # loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
+                    # the loaded wizzi model becomes the artifactModel of the artifact generation
+                    _ that.generateArtifact
+                        @ artifactModel
+                        @ ittfDocumentUri
+                        @ artifactName
+                        @ requestContext.artifactRequestContext
+                        @ callback
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadModelAndGenerateArtifact, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ artifactName artifactName
+                        @ artifactIttfDocumentUri ittfDocumentUri
 
 	m loadModelAndGenerateArtifactFromText
         string ittfContent
@@ -170,18 +185,3 @@ $group
 					@ requestContext
 					@ artifactName
 					@ callback
-
-	#
-		# Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
-		# params
-		#   string ittfFolderUri
-		#     # the uri of the ITTF Documents folder
-		#    { requestContext
-		#      { modelRequestContext
-		#        # Context data for the wizzi model loading
-		#      { artifactRequestContext
-		#        # Context data for the artifact generation
-		#   { options
-		#     boolean copyNonIttf
-		#   function callback
-

@@ -11,6 +11,7 @@
 
     var templateGroups
         [
+            @ 'ts-node'
             @ 'ts-express'
             @ 'ts-client'
 	

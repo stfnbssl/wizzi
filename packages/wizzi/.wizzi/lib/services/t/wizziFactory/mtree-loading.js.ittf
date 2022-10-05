@@ -13,12 +13,20 @@
 		{ mTreeBuildupContext
 		callback
 		+
-		_ this.__loadMTree
-			@ ittfDocumentUri
-			_ this.createLoadContext
-				{
-					@ mTreeBuildupContext mTreeBuildupContext
-			@ callback
+        try
+            _ this.__loadMTree
+                @ ittfDocumentUri
+                _ this.createLoadContext
+                    {
+                        @ mTreeBuildupContext mTreeBuildupContext
+                @ callback
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadMTree, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfDocumentUri ittfDocumentUri
+
 
 	#
 		# Async load the front matter of an ITTF Document

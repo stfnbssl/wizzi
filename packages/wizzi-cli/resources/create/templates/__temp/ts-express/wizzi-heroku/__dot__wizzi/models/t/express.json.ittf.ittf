@@ -27,4 +27,4 @@ ${'$'}group
    { helmet
    useCors true
    { cors
-       clientOrigin "http://localhost:5000"
+       clientOrigin "https://www.wizzihub.com"

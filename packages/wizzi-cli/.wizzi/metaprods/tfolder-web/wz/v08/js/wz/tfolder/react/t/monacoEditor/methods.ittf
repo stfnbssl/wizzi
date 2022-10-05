@@ -3,7 +3,7 @@ $group
     => getTheme
         param theme
         param filePath
-        log 'MonacoEditor.getTheme, theme, filePath', theme, filePath
+        # loog 'MonacoEditor.getTheme, theme, filePath', theme, filePath
         if filePath && filePath.endsWith('.ittf')
             return theme == 'ligth' ? 'ittfLight' : 'ittfDark'
         else
@@ -12,7 +12,7 @@ $group
     => _initializeDocument
         param path
         param value
-        log 'MonacoEditor._initializeDocument, path, value', path, value
+        # loog 'MonacoEditor._initializeDocument, path, value', path, value
         let model = findModel(path)
         if model && !model.isDisposed()
             _ model.pushEditOperations
@@ -52,7 +52,7 @@ $group
         param path
         param value
         param focus
-        log 'MonacoEditor._openDocument, path, value, focus', path, value, focus
+        # loog 'MonacoEditor._openDocument, path, value, focus', path, value, focus
         _ this._initializeDocument(path, value)
         const model = findModel(path)
         if this._editor && model

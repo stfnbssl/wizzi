@@ -9,14 +9,8 @@ $group
         @ Volume
         from 'memfs'
     import 
-        @ vfile
-        @ FsImpl
-        @ FileDef
+        @ fSystem
         from 'wizzi-utils'
-    import 
-        @ FileDiff
-        @ FileDiffItem
-        from '../repo/types'
     import 
         @ PackiFiles
         from '../packi/types'
@@ -26,6 +20,8 @@ $group
         @ CreateGithubBranchOptions
         @ ClonedGitRepository
         @ GithubApiRepository
+        @ FileDiff
+        @ FileDiffItem
         from './types'
     +
     const volume = new Volume()
@@ -34,10 +30,10 @@ $group
     +
     set (fs as any).kind = 'filesystem'
     const wizzifs
-        _ vfile
+        _ fSystem.vfile
             + fs
                 :as 
-                    :ref FsImpl
+                    :ref fSystem.FsImpl
     +
     :type cb
         :< T
@@ -666,7 +662,7 @@ $group
                                 set diff[entryName].b =
                                     { 
                                         @ path entryName
-                                        @ content packiFiles[entryName].contents
+                                        @ content packiFiles[entryName].contents as string
                         else
                             $$ loog 'diff +', entryName
                             set diff[entryName] =
@@ -674,7 +670,7 @@ $group
                                     @ kind '+'
                                     { b
                                         @ path entryName
-                                        @ content packiFiles[entryName].contents
+                                        @ content packiFiles[entryName].contents as string
                 _ callback(null, diff)
     +
     async-function printStatus

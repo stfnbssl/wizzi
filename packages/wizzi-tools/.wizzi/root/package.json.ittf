@@ -22,8 +22,10 @@ common/tools_package( wizzi-tools, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.li
 	$append devDependencies
 		cacheify "latest"
 
-	$append peerDependencies
+	$*
+    $append peerDependencies
 		@babel/core "^7.0.0"
+    *$
 
     $append scripts
         examples:css "node examples/css"

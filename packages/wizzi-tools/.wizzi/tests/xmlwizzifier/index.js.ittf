@@ -3,25 +3,28 @@
 	+
 	import path
 	import util
+    var file = require('wizzi-utils').file;
 	+
     var expect = require('expect.js')
 	var thisPackage = require('../../index')
 	+
 	var simpleSource
-		_ path.join
-			@ __dirname
-			@ 'data'
-			@ 'svg.tests.xml'
+        _ file.read
+            _ path.join
+                @ __dirname
+                @ 'data'
+                @ 'svg.tests.xml'
 	+
 	describe the xml wizzifier
 		+ 
 		it-async should wizzify a xml file
 
-			var ittfExpected = 'module \n    kind jsfile\n    function alfa\n        param beta\n        param gamma\n'
+			var ittfExpected = 'a C\n    b\n'
 			
-			_ thisPackage.xmlWizzify
+			_ thisPackage.xmlwizzifier.getWizziIttf
 				@ simpleSource
 				{
 				f_cb_test( ittf )
+                    log 'xml ittf', ittf
 					tobe_string_value.js( ittf, ittfExpected )
 					_ done()

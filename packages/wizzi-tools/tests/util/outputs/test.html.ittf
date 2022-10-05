@@ -1,0 +1,5 @@
+html
+	head
+	body
+		div
+			style margin: 10px;

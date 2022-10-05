@@ -5,6 +5,6 @@ $group
 		param err
 		param ${result}
 		if err
-			log 'err', err
+			erro 'err', err
 			throw err
 		$hook

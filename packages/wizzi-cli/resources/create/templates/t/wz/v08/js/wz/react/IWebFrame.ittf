@@ -22,7 +22,7 @@ $group
        
         m _updateSrc
             param url
-            log 'IWebFrame._updateSrc url', url 
+            # loog 'IWebFrame._updateSrc url', url 
             set this.ifr.src = url
                             
         render

@@ -34,10 +34,17 @@ $group
             return callback(transformer)
 		+
 		set context.wizziFactory = this
-		_ transformer.trans
-			@ model
-			@ context
-			@ callback
+        try
+            _ transformer.trans
+                @ model
+                @ context
+                @ callback
+        catch ex
+            r_cb_wz_err( WizziFactoryError, transformModel, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ transformerName transformerName
 
 	m loadAndTransformModel
 		string ittfDocumentUri
