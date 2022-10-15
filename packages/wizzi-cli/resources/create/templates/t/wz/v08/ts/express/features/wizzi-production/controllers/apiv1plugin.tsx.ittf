@@ -4,7 +4,7 @@ module
         var ctrl = {
             name: 'ApiV1PluginProduction',
             path: '/api/v1/production/plugin',
-            apiSecured: true,
+            apiSecured: wzCtx.App.isLocal == false,
         }
     
     v08/ts/controller( &ctrl )

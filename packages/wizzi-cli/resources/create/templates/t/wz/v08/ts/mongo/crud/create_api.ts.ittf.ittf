@@ -82,7 +82,7 @@ $group
                                         return 
                                             _ resolve
                                                 { 
-                                                    @ oper 'create'
+                                                    @ oper 'create${'$'}{md.Name}'
                                                     @ ok true
                                                     @ item doc._doc
                                                     @ message '${'$'}{md.descr} created'

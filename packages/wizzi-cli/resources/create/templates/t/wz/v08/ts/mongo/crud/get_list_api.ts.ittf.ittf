@@ -3,7 +3,7 @@ $group
 
     +
     export
-        async-function getList${'$'}{md.Name}
+        async-function get${'$'}{md.Name}List
             param options
                 :any
                 :optional
@@ -16,7 +16,7 @@ $group
             #
                 _ console.log
                     @ myname
-                    @ 'getList${'$'}{md.Name}' 
+                    @ 'get${'$'}{md.Name}List' 
                     @ 'options'
                     @ options
             +
@@ -41,9 +41,9 @@ $group
                                 param result
                                     :any
                                 if err
-                                    error myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'error', err
+                                    error myname, 'get${'$'}{md.Name}List', '${'$'}{md.Name}.find', 'error', err
                                     return reject(err)
-                                $$ loog myname, 'getList${'$'}{md.Name}', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
+                                $$ loog myname, 'get${'$'}{md.Name}List', '${'$'}{md.Name}.find', 'Object.keys(result)', Object.keys(result)
                                 const resultItem = []
                                 foreach item in result
                                     const item_obj
@@ -56,6 +56,6 @@ $group
                                         @ item_obj
                                 _ resolve
                                     {
-                                        @ oper 'getList'
+                                        @ oper 'get${'$'}{md.Name}List'
                                         @ ok true
                                         @ item resultItem

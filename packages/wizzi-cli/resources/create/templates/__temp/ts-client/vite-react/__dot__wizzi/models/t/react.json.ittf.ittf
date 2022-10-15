@@ -30,3 +30,5 @@ ${'$'}group
            useJoy true
        useSplitPane true
        { splitPane
+       useMarkdownPreview true
+       { markdownPreview

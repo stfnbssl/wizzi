@@ -227,6 +227,7 @@ md.load = function(cnt) {
             ctx.deindent();
             ctx.write('}');
             if (iife) {
+                console.log('xfunction_end', Object.keys(model), Object.keys(model.wzRoot().loadHistory), model.wzRoot().loadHistory.ittfDocumentDatas);
                 return cnt.genItems([
                         iifeInvoke
                     ], ctx, {

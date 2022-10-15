@@ -3,7 +3,7 @@ module
         var ctrl = {
             name: 'ApiV1Generations',
             path: '/api/v1/production/generations',
-            apiSecured: true
+            apiSecured: wzCtx.App.isLocal == false
         }
     
     v08/ts/controller( &ctrl )

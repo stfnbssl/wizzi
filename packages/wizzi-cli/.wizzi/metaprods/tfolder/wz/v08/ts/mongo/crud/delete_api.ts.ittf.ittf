@@ -59,6 +59,6 @@ $group
                                 $$ loog myname, 'delete${'$'}{md.Name}', '${'$'}{md.Name}.deleteOne'
                                 _ resolve
                                     {
-                                        @ oper 'delete'
+                                        @ oper 'delete${'$'}{md.Name}'
                                         @ ok true
                                         @ message '${'$'}{md.descr}'

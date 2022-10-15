@@ -122,7 +122,9 @@ $group
                     $if cliCtx.react.useSplitPane
                         useSplitPane true
                         { splitPane
-
+                    $if cliCtx.react.useMarkdownPreview
+                        useMarkdownPreview true
+                        { markdownPreview
 
     $if cliCtx.useVite
         $file __dot__wizzi/models/t/vite.json.ittf.ittf

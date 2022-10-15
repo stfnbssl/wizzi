@@ -47,6 +47,8 @@
             useMaterial false
         useSplitPane true
         { splitPane
+        useMarkdownPreview true
+        { markdownPreview
 
     useTailwind false
     { tailwind

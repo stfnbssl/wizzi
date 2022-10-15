@@ -15,9 +15,25 @@ $group
                     => 
                         param app
                             :ref Application
+                        ${'$'}if wzCtx.Build.cors.clientOrigins && wzCtx.Build.cors.clientOrigins.length > 0
+                            const options
+                                {
+                                    @ origin
+                                        [
+                                            ${'$'}foreach item in wzCtx.Build.cors.clientOrigins
+                                                @ '${'$'}{item}'
+                                    @ optionsSuccessStatus 200 
+                        _ app.options
+                            @ '*'
+                            _ cors
                         _ app.use
                             _ cors
-                        success 'CorsMiddleware installed'
+                                ${'$'}if wzCtx.Build.cors.clientOrigins && wzCtx.Build.cors.clientOrigins.length > 0
+                                    @ options
+                        ${'$'}if wzCtx.Build.cors.clientOrigins && wzCtx.Build.cors.clientOrigins.length > 0
+                            success 'CorsMiddleware installed. Options: ', options
+                        ${'$'}else
+                            success 'CorsMiddleware installed.'
     ${'$'}else
         # <--wizzi!file!exclude-->                
 

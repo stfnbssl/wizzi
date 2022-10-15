@@ -4,7 +4,7 @@ $group
         var ctrl = {
             name: 'Production',
             path: '/api/v1/wizzi/production',
-            apiSecured: true
+            apiSecured: wzCtx.App.isLocal == false
         }
         var myname = 'features/wizzi/controller/productions';
     

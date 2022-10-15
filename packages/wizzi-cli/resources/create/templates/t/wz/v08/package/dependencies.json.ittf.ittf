@@ -21,6 +21,9 @@ $group
     ---    
     $include ./dependencies/@material-ui.json
     ---
+    ${'$'}if wzCtx.Build.useReact &&  wzCtx.Build.react.useMarkdownPreview
+        @uiw/react-markdown-preview "latest"
+    ---
     ${'$'}if wzCtx.Build.useAphrodite
         aphrodite "^2.4.0"
     ${'$'}if wzCtx.Build.useTailwindcss

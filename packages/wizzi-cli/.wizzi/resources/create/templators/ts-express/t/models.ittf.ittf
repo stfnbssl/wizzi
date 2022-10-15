@@ -209,9 +209,13 @@ $group
             useHelmet false
             { helmet
             
-            useCors true
-            { cors
-                clientOrigin "${cliCtx.corsOrigin}"
+            $if cliCtx.useCors
+                useCors true
+                { cors
+                    $if cliCtx.cors.clientOrigins && cliCtx.cors.clientOrigins.length > 0
+                        [ clientOrigins
+                            $foreach item in cliCtx.cors.clientOrigins
+                                "${item}"
         
     $file __dot__wizzi/models/t/styles.json.ittf.ittf
         ${"${'$'}"}group

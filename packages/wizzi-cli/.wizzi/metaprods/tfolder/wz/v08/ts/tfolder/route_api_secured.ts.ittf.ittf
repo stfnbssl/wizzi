@@ -3,5 +3,6 @@ $group
 
     _ this.router.${'$'}{method}
         @ "${'$'}{path}"
-        _ makeHandlerAwareOfAsyncErrors(apiSecured)
+        ${'$'}if wzCtx.App.isLocal == false
+            _ makeHandlerAwareOfAsyncErrors(apiSecured)
         _ makeHandlerAwareOfAsyncErrors(${'$'}{handler})

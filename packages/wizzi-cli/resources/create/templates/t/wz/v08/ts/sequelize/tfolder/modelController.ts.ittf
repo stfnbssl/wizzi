@@ -6,7 +6,7 @@ $group
         var ctrl = {
             name: 'ApiV1' + tb.Name,
             path: '/api/v1/' + db.name + '/' + tb.name,
-            apiSecured: true,
+            apiSecured: wzCtx.App.isLocal == false,
             tb: tb,
         }
     +

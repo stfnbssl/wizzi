@@ -73,6 +73,6 @@ $group
                                 return
                                     _ resolve
                                         {
-                                            @ oper 'update'
+                                            @ oper 'update${'$'}{md.Name}'
                                             @ ok true
                                             @ message '${'$'}{md.descr} updated'

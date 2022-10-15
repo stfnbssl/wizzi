@@ -16,19 +16,21 @@ module
                 @ templateGroup 'ts-node'
                 @ template 'demo-git'
                 @ pkgName 'demo.ts.node.git'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/demo.ts.node.git'
     elif cmd == 'ts-express-demo-sequelize'
         _ createEx
             {
                 @ templateGroup 'ts-express'
                 @ template 'demo-sequelize'
                 @ pkgName 'demo.ts.express.sequelize'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/demo.ts.express.sequelize'
     elif cmd == 'ts-client-vite-react'
         _ createEx
             {
                 @ templateGroup 'ts-client'
                 @ template 'vite-react'
                 @ pkgName 'lab.vite.react'
-                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.vite.react'
+                @ destPath 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/lab.vite.react'
     elif cmd == 'ts-client-webpack-react'
         _ createEx
             {

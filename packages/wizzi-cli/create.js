@@ -14,14 +14,16 @@ if (cmd == 'ts-node-demo-git') {
     createEx({
         templateGroup: 'ts-node', 
         template: 'demo-git', 
-        pkgName: 'demo.ts.node.git'
+        pkgName: 'demo.ts.node.git', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/demo.ts.node.git'
      })
 }
 else if (cmd == 'ts-express-demo-sequelize') {
     createEx({
         templateGroup: 'ts-express', 
         template: 'demo-sequelize', 
-        pkgName: 'demo.ts.express.sequelize'
+        pkgName: 'demo.ts.express.sequelize', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/demo.ts.express.sequelize'
      })
 }
 else if (cmd == 'ts-client-vite-react') {
@@ -29,7 +31,7 @@ else if (cmd == 'ts-client-vite-react') {
         templateGroup: 'ts-client', 
         template: 'vite-react', 
         pkgName: 'lab.vite.react', 
-        destPath: 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/lab.vite.react'
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/lab.vite.react'
      })
 }
 else if (cmd == 'ts-client-webpack-react') {

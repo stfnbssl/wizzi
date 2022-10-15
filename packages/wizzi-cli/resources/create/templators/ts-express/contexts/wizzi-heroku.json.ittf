@@ -1,6 +1,6 @@
 {
     $
-        var isLocal = false; // it is enough to set this to false for deployong to heroku
+        var isLocal = true; // it is enough to set this to false for deployong to heroku
         var isProduction = false;
         var cloudDomain = "www.wizzihub.com";
         var port = 5000;
@@ -26,10 +26,17 @@
     siteUrl "${http}://${domain}"
     $if domain == "localhost"
         baseUrl "${http}://${domain}:${port}"
-        corsOrigin "${http}://${domain}:${port}"
+        useCors true
+        { cors
+            [ clientOrigins
+                "${http}://${domain}:${port}"
+                "${http}://${domain}:5173"
     $else
         baseUrl "${http}://${domain}"
-        corsOrigin "${http}://${domain}"
+        useCors true
+        { cors
+            [ clientOrigins
+                "${http}://${domain}"
     siteUrlLocal "${http}://localhost"
     baseUrlLocal "${http}://localhost:${port}"
     apiVersion "v1"
