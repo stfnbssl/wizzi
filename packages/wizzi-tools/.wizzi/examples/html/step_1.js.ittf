@@ -18,7 +18,8 @@ module
 
         const example_htmls
             [
-                @ 'beba'
+                @ 'quick'
+                $$ @ 'beba'
 
    		_ async.mapSeries
 			@ example_htmls
@@ -42,7 +43,7 @@ module
                                 @ __dirname
                                 @ '__dumps'
                                 @ name + '.html.dump'
-                    f_cb_no_err( ittf )
+                    f_cb_throw( ittf )
                         _ printValue(name, ittf)
             f_cb_test( result )
                 info 'result', result

@@ -40,6 +40,7 @@ $group
                         param resolve
                         param reject
                         +
+                        $* stop 5/11/22
                         let query
                             { 
                                 ${'$'}if md.update_delete_by_id
@@ -47,6 +48,24 @@ $group
                                 ${'$'}else
                                     ${'$'}foreach item in md.query
                                         @ ${'$'}{item.name} ${'$'}{item.name}
+                        *$
+                        ${'$'}if md.update_delete_by_id
+                            var query
+                            if id && id.length > 0
+                                set query
+                                    {
+                                        @ _id id
+                            else
+                                set query
+                                    {
+                                        ${'$'}foreach item in md.query
+                                            @ ${'$'}{item.name} ${'$'}{item.name}
+                        ${'$'}else
+                            const query
+                                { 
+                                    ${'$'}foreach item in md.query
+                                        @ ${'$'}{item.name} ${'$'}{item.name}
+
                         +
                         _ ${'$'}{md.Name}.deleteOne
                             @ query

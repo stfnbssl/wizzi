@@ -71,6 +71,11 @@ $group
                             name "packi"
                             hasControllers true
                             useMongoDb false
+                    $if cliCtx.useWizziCdn
+                        {
+                            name "cdn"
+                            hasControllers true
+                            useMongoDb true
                 $if cliCtx.features.useGithub
                     useFeatureGithub true
                     { featureGithub
@@ -266,7 +271,10 @@ $group
                 useNodeCache true
                 useGitUrlParse false
                 useJsonToAst false
-    
+                useRimRaf false
+                $if cliCtx.utils && cliCtx.utils.useDiffMatchPatch
+                    useDiffMatchPatch true
+                    
     $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
         ${"${'$'}"}group
                 
@@ -311,6 +319,9 @@ $group
         
             useWizziViewEngine true
             { wizziViewEngine
+
+            useWizziCdn true
+            { wizziCdn
 
             useWizziJsonFactory true
             { wizziJsonFactory

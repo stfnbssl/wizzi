@@ -245,7 +245,7 @@ $group
         react-docgen-typescript "^1.22.0"
     ${'$'}if wzCtx.Build.useReact && wzCtx.Build.react.useHotReload
         react-hot-loader "latest"
-    ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript
+    ${'$'}if wzCtx.Build.useExpress && wzCtx.Build.useTypescript && !wzCtx.Build.utils.useRimRaf
         rimraf "^3.0.2"
     ${'$'}if wzCtx.Build.useWebpack
         ${'$'}if wzCtx.Build.webpack.useSass

@@ -295,6 +295,7 @@
 			var addedWrapper = false
 			try
 				if html && html.length > 0
+                    log "parsing html of length: ", html.length
                     if html.substr(0,'<html>'.length) == '<html>' || html.substr(0,'<!doctype>'.length) == '<!doctype>'
                         # loog 'html document has root tag html'
                     else
@@ -310,8 +311,13 @@
                                 set html = '<html>' + html + '</html>'
                             set addedWrapper = true
                             # loog 'wizzi-tools.htmlparser.addedWrapper.html', html
+                    log "calling parser.write"
                     _ parser.write(html)
+                    log "parser.write done!"
                     _ parser.end()
+                    log "parser.end done!"
+                else
+                    log "no html to parse"
 			catch ex
 				return
 					_ callback

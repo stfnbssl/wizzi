@@ -28,7 +28,7 @@ $group
 
         ${'$'}append handlers
             v08/ts/handler${'('} artifacts )
-                _ artifactApi.getListArtifactProduction
+                _ artifactApi.getArtifactProductionList
                     ._ then
                         =>
                             param result
@@ -54,7 +54,7 @@ $group
                     v08/ts/catch_fail_html${'('} artifact productions )
 
             v08/ts/handler${'('} packages )
-                _ packageApi.getListPackageProduction
+                _ packageApi.getPackageProductionList
                     ._ then
                         =>
                             param result
@@ -81,7 +81,7 @@ $group
                     v08/ts/catch_fail_html${'('} package productions )
 
             v08/ts/handler${'('} plugins )
-                _ pluginApi.getListPluginProduction
+                _ pluginApi.getPluginProductionList
                     ._ then
                         =>
                             param result
@@ -108,7 +108,7 @@ $group
                     v08/ts/catch_fail_html${'('} plugin productions )
 
             v08/ts/handler${'('} metas )
-                _ metaApi.getListMetaProduction
+                _ metaApi.getMetaProductionList
                     ._ then
                         =>
                             param result
@@ -135,7 +135,7 @@ $group
                     v08/ts/catch_fail_html${'('} meta productions )
 
             v08/ts/handler${'('} tfolders )
-                _ tFolderApi.getListTFolder
+                _ tFolderApi.getTFolderList
                     ._ then
                         =>
                             param result

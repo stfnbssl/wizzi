@@ -3,6 +3,7 @@ $group
     $
         var items = [
             'catch_reject',
+            'catch_throw',
             ];
 
     $foreach item in items

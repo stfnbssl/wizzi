@@ -23,5 +23,7 @@ ${'$'}group
    { ittfStatic
    useWizziViewEngine true
    { wizziViewEngine
+   useWizziCdn true
+   { wizziCdn
    useWizziJsonFactory true
    { wizziJsonFactory

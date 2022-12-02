@@ -17,3 +17,5 @@ ${'$'}group
        useNodeCache true
        useGitUrlParse false
        useJsonToAst false
+       useRimRaf false
+       useDiffMatchPatch true

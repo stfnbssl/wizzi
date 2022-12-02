@@ -12,7 +12,7 @@ $group
         ${'$'}append imports
             import
                 @ validatePost
-                @ getListPost
+                @ getPostList
                 @ getPost
                 @ createPost
                 @ updatePost
@@ -32,7 +32,7 @@ $group
             v08/ts/handler${'('}getPostList)
 
                 $$ loog 'getPostList.request.params', request.params
-                _ getListPost
+                _ getPostList
                     {
                         { query
                             @ owner request.params.owner

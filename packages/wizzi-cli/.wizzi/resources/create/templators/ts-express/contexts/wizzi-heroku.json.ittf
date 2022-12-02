@@ -1,6 +1,6 @@
 {
     $
-        var isLocal = true; // it is enough to set this to false for deployong to heroku
+        var isLocal = true; // it is enough to set this to false and generate for deployong to heroku
         var isProduction = false;
         var cloudDomain = "www.wizzihub.com";
         var port = 5000;
@@ -97,8 +97,14 @@
     useWizziViewEngine true
     { wizziViewEngine
 
+    useWizziCdn true
+    { wizziCdn
+
     useWizziJsonFactory true
     { wizziJsonFactory
+
+    useWizziCdn true
+    { wizziCdn
 
     usePacki true
     { packi
@@ -108,3 +114,6 @@
 
     useData true
     { data
+
+    { utils
+        useDiffMatchPatch true

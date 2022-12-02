@@ -15,6 +15,7 @@ $group
         if (cliCtx.useWizzi) {
             mwItems.push("ittfStatic");
             mwItems.push("wizziViewEngine");
+            mwItems.push("wizziCdn");
         }
 
     $foreach item in mwItems

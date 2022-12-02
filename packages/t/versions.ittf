@@ -18,8 +18,8 @@ $group
         versions['wizzi-core@next'] = '0.7.9';
         versions['wizzi-meta'] = '0.6.6';
         versions['wizzi-meta@next'] = '0.7.0';
-        versions['wizzi-tools'] = '0.7.5';
-        versions['wizzi-tools@next'] = '0.7.6';
+        versions['wizzi-tools'] = '0.7.6';
+        versions['wizzi-tools@next'] = '0.7.7';
         versions['wizzi-cli'] = '0.0.29';
         versions['wizzi-cli@next'] = '0.0.30';
         versions['wizzi-demo'] = '0.4.5';

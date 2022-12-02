@@ -13,6 +13,7 @@ template ts-node
     $include src/features-github
     $include src/features-packi
     $include src/features-wizzi
+    $include src/features-wizzi-cdn
     $include src/features-wizzi-production
     $include src/index
     $include src/services

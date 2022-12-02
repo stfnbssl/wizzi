@@ -108,7 +108,7 @@
                 set i = state.pos
                 set ch = input[i]
                 set state.pos++
-				# loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
+				# loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname, 'state.quote', state.quote
                 if state.cur === COULD_BE_ENDOFTEXT
 					# loog '+COULD_BE_ENDOFTEXT, ch', ch
                     if ch === '/'
@@ -161,7 +161,7 @@
                 set state.line++
                 set state.col = 0
             if priv.specialCases(ch, state)
-                # log ch, "is specialCases"
+                # loog ch, "is specialCases"
                 return 
             if ch === '<'
                 _ priv.doLT(state)
@@ -186,6 +186,8 @@
                 _ priv.doCloseGraph(state)
             elif ch === '%'
                 _ priv.doPercent(state)
+            elif ch === '\\'
+                _ priv.doEscape(ch, state)
             elif ch === '\r' || ch === '\n'
 				_ priv.doWhite(ch, state)
                 # _ priv.doLF(state)
@@ -294,7 +296,7 @@
 	set priv.doSlash =
         function 
             param state
-			# loog 'doSlash', state.tag, state.cur
+			# loog 'doSlash', state.tag, state.cur, state.quote, state.attrname, state.attrvalue
             if state.cur === ATTR_VALUE && state.quote == null
                 set state.attribs[state.attrname] = state.attrvalue
                 set state.attrname = state.attrvalue = null
@@ -305,7 +307,7 @@
                 set state.cur = WAIT_EMPTY_ELEMENT_TAG_RIGHT_CLOSE
             elif state.cur === WAIT_ATTR_NAME
                 set state.cur = WAIT_EMPTY_ELEMENT_TAG_RIGHT_CLOSE
-            else 
+            else
                 _ priv.append('/', state)
     
 	set priv.doExclamation =
@@ -427,6 +429,13 @@
             else 
                 _ priv.append(ch, state)
     
+	set priv.doEscape =
+        function 
+            param ch
+            param state
+			# loog 'doEscape', ch, state.cur
+            # do nothing for now
+
 	set priv.append =
         function 
             param ch

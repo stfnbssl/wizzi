@@ -10,12 +10,12 @@ const createEx = require('./cmds/createEx');
 const args = minimist(process.argv.slice(2));
 let cmd = args._[0];
 console.log('args', args, 'cmd', cmd);
-if (cmd == 'ts-node-demo-git') {
+if (cmd == 'ts-node-wizzi-client') {
     createEx({
         templateGroup: 'ts-node', 
-        template: 'demo-git', 
-        pkgName: 'demo.ts.node.git', 
-        destPath: 'C:/My/wizzi/stfnbssl/wizzi.labs/wizzi.meta.demos/packages/demo.ts.node.git'
+        template: 'wizzi.client', 
+        pkgName: 'wizzi.client', 
+        destPath: 'C:/My/wizzi/stfnbssl/wizzi.client'
      })
 }
 else if (cmd == 'ts-express-demo-sequelize') {

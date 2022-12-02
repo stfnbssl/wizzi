@@ -57,6 +57,10 @@
                name "packi"
                hasControllers true
                useMongoDb false
+           { 
+               name "cdn"
+               hasControllers true
+               useMongoDb true
        useFeatureGithub true
        { featureGithub
            accessToken "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"

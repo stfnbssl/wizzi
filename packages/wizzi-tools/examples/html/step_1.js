@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\examples\html\step_1.js.ittf
 */
 'use strict';
@@ -19,7 +19,7 @@ var verify = wizziUtils.verify;
 var htmlwizzifier = require('../../lib/wizzifiers/htmlparser/wizzi/wizzifier');
 heading2('wizzify html')
 const example_htmls = [
-    'beba'
+    'quick'
 ];
 async.mapSeries(example_htmls, function(name, callback) {
     console.log('======================================================================================');
@@ -28,6 +28,10 @@ async.mapSeries(example_htmls, function(name, callback) {
     htmlwizzifier.getWizziIttf(file.read(path.join(__dirname, 'data', name + '.html')), {
         dumpfile: path.join(__dirname, '__dumps', name + '.html.dump')
      }, function(err, ittf) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+            throw err;
+        }
         printValue(name, ittf);
     })
 }, function(err, result) {

@@ -31,6 +31,9 @@
         useWizziProduction true
         { wizziProduction
 
+        useWizziCdn true
+        { wizziCdn
+
     useLint false
     { lint
 

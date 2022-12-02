@@ -31,6 +31,12 @@ $group
                                 fileName "wizzi-production"
                                 hasControllers false
                                 useMongoDb true
+                        $if cliCtx.features.useWizziCdn
+                            {
+                                name "cdn"
+                                fileName "wizzi-cdn"
+                                hasControllers false
+                                useMongoDb true
                     $if cliCtx.features.useGithub
                         useFeatureGithub true
                         { featureGithub
@@ -102,6 +108,7 @@ $group
                 useAxios true
                 useEscapeRegexp false
                 useEscapeHtml false
+                useMinimist true
                 useNullThrows false
                 useLodash false
                 useStringifySafe false
@@ -117,6 +124,7 @@ $group
                     useNodeCache true
                 useGitUrlParse false
                 useJsonToAst false
+                useRimRaf true
     
     $file __dot__wizzi/models/t/wizzi.json.ittf.ittf
         ${"${'$'}"}group

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\parser.js.ittf
 */
 'use strict';
@@ -90,7 +90,7 @@ md.Parser.prototype.write = function(input) {
         i = state.pos;
         ch = input[i];
         state.pos++;
-        // loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname
+        // loog 'main', 'pos,line,col', state.pos, state.line, state.col, 'ch,state', ch, stateText['n'+state.cur], 'currenttagname', state.currenttagname, 'state.quote', state.quote
         
         // loog '+COULD_BE_ENDOFTEXT, ch', ch
         if (state.cur === COULD_BE_ENDOFTEXT) {
@@ -153,7 +153,7 @@ priv.loop = function(ch, state) {
         state.col = 0;
     }
     
-    // log ch, "is specialCases"
+    // loog ch, "is specialCases"
     if (priv.specialCases(ch, state)) {
         return ;
     }
@@ -191,6 +191,9 @@ priv.loop = function(ch, state) {
     }
     else if (ch === '%') {
         priv.doPercent(state);
+    }
+    else if (ch === '\\') {
+        priv.doEscape(ch, state);
     }
     
     // _ priv.doLF(state)
@@ -333,7 +336,7 @@ priv.doGT = function(state) {
 }
 ;
 priv.doSlash = function(state) {
-    // loog 'doSlash', state.tag, state.cur
+    // loog 'doSlash', state.tag, state.cur, state.quote, state.attrname, state.attrvalue
     if (state.cur === ATTR_VALUE && state.quote == null) {
         state.attribs[state.attrname] = state.attrvalue;
         state.attrname = state.attrvalue = null;
@@ -488,6 +491,11 @@ priv.doQuote = function(ch, state) {
     else {
         priv.append(ch, state);
     }
+}
+;
+priv.doEscape = function(ch, state) {
+    // loog 'doEscape', ch, state.cur
+    // do nothing for now
 }
 ;
 priv.append = function(ch, state) {

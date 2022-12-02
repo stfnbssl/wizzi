@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\cloner.js.ittf
 */
 'use strict';
@@ -15,9 +15,9 @@ function transform(node, options) {
     // loog 'cloner.transform', node.tag, node.name
     var ret = {
         tag: node.tag, 
-        name: node.name, 
-        attribs: node.attribs, 
-        lines: node.lines, 
+        name: node.name || "", 
+        attribs: node.attribs || {}, 
+        lines: node.lines || [], 
         children: []
      };
     if (ret.tag === 'title') {

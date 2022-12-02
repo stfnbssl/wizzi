@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.13
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-tools\.wizzi\lib\wizzifiers\htmlparser\wizzi\wizzifier.js.ittf
 */
 'use strict';
@@ -193,6 +193,7 @@ function parseInternal(html, options, callback) {
     var addedWrapper = false;
     try {
         if (html && html.length > 0) {
+            console.log("parsing html of length: ", html.length, __filename);
             
             // loog 'html document has root tag html'
             if (html.substr(0,'<html>'.length) == '<html>' || html.substr(0,'<!doctype>'.length) == '<!doctype>') {
@@ -216,8 +217,14 @@ function parseInternal(html, options, callback) {
                     addedWrapper = true;
                 }
             }
+            console.log("calling parser.write", __filename);
             parser.write(html);
+            console.log("parser.write done!", __filename);
             parser.end();
+            console.log("parser.end done!", __filename);
+        }
+        else {
+            console.log("no html to parse", __filename);
         }
     } 
     catch (ex) {

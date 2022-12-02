@@ -69,6 +69,8 @@ $group
                 date-fns "2.0.0"
     ${'$'}elif wzCtx.Build.useExpress
         debug "~2.6.9"
+    ${'$'}if wzCtx.Build.utils.useDiffMatchPatch
+        diff-match-patch "^1.0.5"
     ${'$'}if wzCtx.Build.useDomHelpers
         dom-helpers "^3.4.0"
     ---
@@ -146,6 +148,8 @@ $group
             marked "^2.0.3"
     ${'$'}if wzCtx.Build.useGithub || wzCtx.Build.useFeatureGithub
         memfs "^3.4.7"
+    ${'$'}if wzCtx.Build.utils.useMinimist
+        minimist "latest"
     ${'$'}if wzCtx.Build.useMonacoEditor
         ${'$'}if wzCtx.Build.useVExpo
             monaco-editor "^0.18.1"
@@ -193,6 +197,8 @@ $group
         reflect-metadata "^0.1.13"
     ${'$'}if wzCtx.Build.useRegeneratorRuntime
         regenerator-runtime "^0.13.7"
+    ${'$'}if wzCtx.Build.utils.useRimRaf
+        rimraf "^3.0.2"
     ---    
     ${'$'}if wzCtx.Build.utils.useSanitizeHtml
         sanitize-html "^2.3.3"
