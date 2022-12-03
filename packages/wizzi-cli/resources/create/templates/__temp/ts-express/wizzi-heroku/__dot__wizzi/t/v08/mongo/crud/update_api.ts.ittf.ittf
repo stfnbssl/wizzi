@@ -1,2 +1,0 @@
-${'$'}group 
-   $include wz/v08/ts/mongo/crud/update_api.ts

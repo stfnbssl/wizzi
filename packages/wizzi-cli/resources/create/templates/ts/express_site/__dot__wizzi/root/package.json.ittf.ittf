@@ -1,3 +1,0 @@
-{
-    $include cli/v08/package-info.json
-    $include cli/v08/package-base.json

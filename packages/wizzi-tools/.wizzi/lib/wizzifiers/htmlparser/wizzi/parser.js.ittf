@@ -229,7 +229,8 @@
                 set state.text = (state.text || '') + ch
                 return true
             if state.cur === ATTR_VALUE && state.quote != null && ch !== state.quote
-                set state.attrvalue = (state.attrvalue || '') + ch
+                if ch !== '\\'
+                    set state.attrvalue = (state.attrvalue || '') + ch
                 return true
             if state.cur === START_COMMENT_1 && ch !== '-'
                 if state.tagcount == 0
@@ -434,7 +435,10 @@
             param ch
             param state
 			# loog 'doEscape', ch, state.cur
-            # do nothing for now
+            if state.cur === WAIT_ATTR_VALUE || state.cur === WAIT_EMPTY_ELEMENT_TAG_RIGHT_CLOSE
+                # do nothing for now
+            else
+                _ priv.append(ch, state)
 
 	set priv.append =
         function 

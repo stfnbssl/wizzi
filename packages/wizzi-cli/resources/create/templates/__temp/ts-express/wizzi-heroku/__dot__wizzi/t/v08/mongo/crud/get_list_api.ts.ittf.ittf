@@ -1,2 +1,0 @@
-${'$'}group 
-   $include wz/v08/ts/mongo/crud/get_list_api.ts

@@ -1,4 +1,0 @@
-html 
-    lang en
-
-    $include wz/v08/webpack/html/index.html

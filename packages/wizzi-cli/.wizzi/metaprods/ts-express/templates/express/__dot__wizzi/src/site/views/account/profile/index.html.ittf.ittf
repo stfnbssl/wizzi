@@ -1,6 +1,0 @@
-html
-    ${'$'}
-        var md = {
-        }
-
-    $include wz/v08/html/views/Demoauth/profile/index.html

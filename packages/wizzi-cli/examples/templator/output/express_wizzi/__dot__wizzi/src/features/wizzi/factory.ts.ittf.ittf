@@ -1,6 +1,0 @@
-module 
-   ${'$'} 
-       var md = {
-       } 
-   ${'$'}if wzCtx.Build.useWizzi
-       v08/express/features/wizzi/factory${'('}&md) 

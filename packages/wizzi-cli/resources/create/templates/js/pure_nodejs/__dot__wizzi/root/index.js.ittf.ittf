@@ -1,9 +1,0 @@
-module
-    kind es6
-    +
-    import
-        @ sayHello
-        from "./src/components.js"
-    +
-    _ sayHello
-        @ "John"

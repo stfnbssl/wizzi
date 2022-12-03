@@ -1,9 +1,0 @@
-module
-    $
-        var call = '(&md)'
-    
-    ${'$'}
-        var md = {
-        }
-
-    v08/express/middlewares/logger${call}

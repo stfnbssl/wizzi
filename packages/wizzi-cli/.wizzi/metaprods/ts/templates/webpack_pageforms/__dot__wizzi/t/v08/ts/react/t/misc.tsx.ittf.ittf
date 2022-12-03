@@ -1,5 +1,0 @@
-${'$'}group
-    ${'$'}params name, &md    
-
-    $include wz/v08/ts/react/t/misc.tsx
-

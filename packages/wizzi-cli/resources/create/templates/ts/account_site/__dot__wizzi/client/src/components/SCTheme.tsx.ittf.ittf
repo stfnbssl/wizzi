@@ -1,8 +1,0 @@
-module
-    $
-        var call_md = '(&md)'
-    
-    ${'$'}
-        var md = {};
-
-    v08/react/styles/SCTheme${call_md}

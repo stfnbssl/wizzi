@@ -1,7 +1,0 @@
-$group
-
-    import createStoreWithPreloadedState
-        from './createStore'
-    +
-    export
-        @ createStoreWithPreloadedState

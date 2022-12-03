@@ -1,5 +1,0 @@
-${'$'}group
-    ${'$'}params &md
-
-    $include wz/v08/ts/express/middlewares/static.ts
-

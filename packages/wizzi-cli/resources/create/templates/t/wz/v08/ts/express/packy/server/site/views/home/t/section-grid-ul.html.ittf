@@ -1,6 +1,0 @@
-section
-	$params name, grid|grid
-	id ${name}
-	class ${grid}
-	ul
-		$hook

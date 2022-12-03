@@ -250,7 +250,9 @@ priv.specialCases = function(ch, state) {
         return true;
     }
     if (state.cur === ATTR_VALUE && state.quote != null && ch !== state.quote) {
-        state.attrvalue = (state.attrvalue || '') + ch;
+        if (ch !== '\\') {
+            state.attrvalue = (state.attrvalue || '') + ch;
+        }
         return true;
     }
     if (state.cur === START_COMMENT_1 && ch !== '-') {
@@ -495,7 +497,13 @@ priv.doQuote = function(ch, state) {
 ;
 priv.doEscape = function(ch, state) {
     // loog 'doEscape', ch, state.cur
+    
     // do nothing for now
+    if (state.cur === WAIT_ATTR_VALUE || state.cur === WAIT_EMPTY_ELEMENT_TAG_RIGHT_CLOSE) {
+    }
+    else {
+        priv.append(ch, state);
+    }
 }
 ;
 priv.append = function(ch, state) {

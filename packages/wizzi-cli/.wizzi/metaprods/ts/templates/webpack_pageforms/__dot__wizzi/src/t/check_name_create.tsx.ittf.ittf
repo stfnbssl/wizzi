@@ -1,5 +1,0 @@
-${'$'}group
-    ${'$'}params prod
-    
-    $include wz/v08/ts/react/pageforms/t/check_name_create.tsx
-    

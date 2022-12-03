@@ -1,2 +1,0 @@
-${'$'}group 
-   $include wz/v08/ts/sequelize/tfolder/crud/create_api.ts

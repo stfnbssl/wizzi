@@ -1,4 +1,0 @@
-﻿${'$'}group
-    ${'$'}params &md
-
-    $include wz/v08/html/viewslayout.html

@@ -1,8 +1,0 @@
-module
-    $
-        var call_mdextra = '(&mdextra)'
-    
-    ${'$'}
-        var mdextra = {};
-
-    v08/react/styles/AphroditeTheme${call_mdextra}

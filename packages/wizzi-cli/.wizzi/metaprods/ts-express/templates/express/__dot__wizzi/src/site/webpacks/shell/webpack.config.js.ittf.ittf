@@ -1,4 +1,0 @@
-module
-    kind es6
-
-    $include wz/v08/ts/express/site/webpacks/shell/webpack.config.js

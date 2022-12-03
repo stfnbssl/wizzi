@@ -1,5 +1,0 @@
-module
-    kind jsfile
-
-    var gen = require('../../cmds/generate');
-    _ gen()

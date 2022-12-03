@@ -1,7 +1,0 @@
-module
-    $
-        var call = '()';
-    
-
-    ${'$'}if wzCtx.Build.useMongoDb
-        v08/express/features/packi/controllers/github${call}

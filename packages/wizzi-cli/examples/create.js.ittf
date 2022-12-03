@@ -1,5 +1,0 @@
-module
-    kind jsfile
-
-    var create = require('../cmds/create');
-    _ create()

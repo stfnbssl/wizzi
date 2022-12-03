@@ -1,9 +1,0 @@
-md
-    p This folder contains a preprocessing of the answers of the CLI command "create".
-    p Each package type that can be created has its own preprocessing.
-    p The resulting JSON object will be the context variable "cliCtx" in the wizzi production of the
-        \b package files.
-    +
-    p See the
-    a create command
-        href https://github.com/stfnbssl/wizzi/blob/master/packages/wizzi-cli/dist/cmds/create.js

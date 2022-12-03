@@ -1,7 +1,0 @@
-{
-    $
-        var call = '(&md)';
-	${'$'}
-		var md = {};
-	
-    v08/ts/tsconfig${call}    

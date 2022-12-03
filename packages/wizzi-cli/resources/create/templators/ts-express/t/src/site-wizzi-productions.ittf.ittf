@@ -1,6 +1,0 @@
-$group
-    
-    $if cliCtx.useWizziProductions
-        $file __dot__wizzi/${pkgPath}src/site/controllers/productions.ts.ittf.ittf
-            module
-                ${'$'}include wz/v08/ts/express/site/controllers/wizzi/productions.ts

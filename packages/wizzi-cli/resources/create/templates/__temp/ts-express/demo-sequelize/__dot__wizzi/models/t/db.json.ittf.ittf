@@ -1,7 +1,0 @@
-${'$'}group 
-   useSequelize true
-   { sequelize
-       databaseUrl "${'$'}{stfnbssl_env.sequelizeDbUrl}"
-       dialect "postgres"
-       usePostgres true
-       { postgres

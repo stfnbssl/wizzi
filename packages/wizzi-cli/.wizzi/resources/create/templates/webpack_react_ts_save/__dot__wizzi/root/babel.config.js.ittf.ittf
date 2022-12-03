@@ -1,3 +1,0 @@
-﻿module
-    kind es6
-	$include cli/v08/babel.config-base.js

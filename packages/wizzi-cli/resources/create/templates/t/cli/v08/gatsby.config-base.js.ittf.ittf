@@ -1,5 +1,0 @@
-$group
-
-    set module.exports
-        {
-            [ plugins

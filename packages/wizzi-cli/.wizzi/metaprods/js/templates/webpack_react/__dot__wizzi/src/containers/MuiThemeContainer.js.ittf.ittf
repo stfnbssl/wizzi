@@ -1,5 +1,0 @@
-﻿module
-	kind react
-
-	${'$'}include v08/react/containers/MuiThemeContainer
-

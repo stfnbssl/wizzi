@@ -1,3 +1,0 @@
-﻿module
-	kind nodejs.bin
-	_ require('../index')()

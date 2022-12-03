@@ -1,3 +1,0 @@
-module
-
-    $include wz/v08/ts/react/components/widgets/ContextMenu.tsx

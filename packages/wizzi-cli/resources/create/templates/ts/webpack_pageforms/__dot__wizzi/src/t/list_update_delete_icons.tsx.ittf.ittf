@@ -1,4 +1,0 @@
-${'$'}group
-    ${'$'}params prod
-
-    $include wz/v08/ts/react/pageforms/t/list_update_delete_icons.tsx

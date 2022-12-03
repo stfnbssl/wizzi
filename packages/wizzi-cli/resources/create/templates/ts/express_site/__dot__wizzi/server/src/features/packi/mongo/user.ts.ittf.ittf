@@ -1,4 +1,0 @@
-module
-    
-    ${'$'}if wzCtx.Build.useMongoDb
-        $include wz/v08/ts/express/features/packi/mongo/user.ts
