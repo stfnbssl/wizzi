@@ -1,3 +1,0 @@
-﻿e ${name} : rdbmsitem
-	$params name, tag|@@null
-	tag ${tag}

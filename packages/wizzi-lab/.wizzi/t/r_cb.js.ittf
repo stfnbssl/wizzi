@@ -1,6 +1,0 @@
-﻿return
-	$params result|@@null
-	_ callback
-		@ null
-		$if result != null
-			@ ${result}

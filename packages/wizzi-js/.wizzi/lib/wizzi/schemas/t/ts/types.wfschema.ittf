@@ -28,6 +28,7 @@
 			foreach s in this.statements
 				# loog 'typeInterface.s.wzElement', s.wzElement
 				if s.wzElement === 'typeExtends'
+                    _ s.wzInitialize
 					_ this.extends.push
 						@ s
 				else
@@ -36,6 +37,21 @@
 			set this.statements = temp
 
 	e_tag( typeExtends, :extends, statement
+		m wzInitialize
+            var tpi = []
+            var ss = []
+            # loog 'typeExtends.wzInitialize', this.statements.length
+            foreach s in this.statements
+                # loog 'wzInitialize.s', s.wzElement
+                if s.wzElement == 'typeParameterInst'
+                    _ tpi.push(s)
+                else
+                    _ ss.push(s)
+            if tpi.length > 0
+                set this.typeParameterInsts = tpi
+                set this.statements = ss
+                # loog 'typeExtends.typeParameterInsts', this.typeParameterInsts
+
 	
 	e_tag( typeProperty, :p, statement
 		a_flag( typeOptional, :optional )

@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\interface.js.ittf
 */
 'use strict';
@@ -122,6 +122,7 @@ md.load = function(cnt) {
             throw new Error('The callback parameter must be a function. In ' + myname + '.typeInterface. Got: ' + callback);
         }
         var model = writeComments(model, ctx);
+        // loog 'stm( typeInterface', model.extends
         ctx.write('interface ' + model.wzName);
         u.genTSTypeParameters(model, ctx, cnt, (err, notUsed) => {
         

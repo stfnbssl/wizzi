@@ -1,6 +1,0 @@
-{
-    name '@wizzi/scripts'
-    version '0.7.1'
-	title 'Scripts manager for the wizzi factory.'
-    license 'MIT'
-    [ schemas

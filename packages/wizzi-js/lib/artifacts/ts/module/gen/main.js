@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\main.js.ittf
 */
 'use strict';
@@ -83,7 +83,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('/*');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-js@0.7.13');
+        ctx.w('    package: wizzi-js@0.7.14');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         ctx.w('*/');
     }

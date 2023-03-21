@@ -1,5 +1,0 @@
-﻿tr
-	$params step
-	td step-${step}
-	td
-		$hook

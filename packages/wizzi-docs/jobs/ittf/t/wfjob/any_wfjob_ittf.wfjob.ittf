@@ -1,5 +1,0 @@
-$group
-
-	artifact any_tests_ittf
-		src ./**/*.wfjob.ittf
-		extension ittf

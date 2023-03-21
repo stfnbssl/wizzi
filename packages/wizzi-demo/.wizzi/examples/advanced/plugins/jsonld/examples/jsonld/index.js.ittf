@@ -1,9 +1,0 @@
-﻿module
-	kind jsfile
-
-	$
-		var name = 'plugins.jsonld';
-		var level = '0';
-		var steps = ['1', '2'];
-
-	$include exec_steps

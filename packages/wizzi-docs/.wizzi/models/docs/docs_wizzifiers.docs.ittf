@@ -1,5 +1,0 @@
-﻿docs Wizzifiers
-
-	$ var dollar = '$'
-
-	$include docs/wizzifiers/index

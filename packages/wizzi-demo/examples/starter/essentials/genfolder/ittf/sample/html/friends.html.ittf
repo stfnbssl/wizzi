@@ -1,5 +1,0 @@
-html
-	body
-		h1 My two Friends
-		$foreach friend in friends
-			h2 ${friend}

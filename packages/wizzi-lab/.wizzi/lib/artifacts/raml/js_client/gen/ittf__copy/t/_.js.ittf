@@ -1,3 +1,0 @@
-﻿wz-require ${name}
-	$params name
-	from lodash-compat/lang/${name}

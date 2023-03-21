@@ -1,9 +1,0 @@
-﻿module
-	kind jsfile
-
-	$
-		var name = 'wizzi jobs - mongodb';
-		var level = '0';
-		var steps = ['1'];
-
-	$include exec_steps

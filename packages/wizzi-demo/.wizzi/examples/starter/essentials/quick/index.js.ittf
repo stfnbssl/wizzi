@@ -1,7 +1,0 @@
-﻿example-essentials(quick)
-
-	$
-		var name = 'quick';
-		var levels = ['0'];
-
-	$include exec_levels

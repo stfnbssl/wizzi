@@ -1,5 +1,0 @@
-﻿docs Introduction
-
-	$ var dollar = '$'
-
-	$include docs/intro/index

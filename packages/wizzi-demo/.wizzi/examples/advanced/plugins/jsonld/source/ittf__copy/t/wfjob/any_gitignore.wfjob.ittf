@@ -1,5 +1,0 @@
-﻿$group
-
-	artifact any_gitignore
-		src ./**/.gitignore
-		$hook

@@ -943,37 +943,51 @@
 				a_cb()
 					if model.extends && model.extends.length > 0
 						_ ctx.write( ' extends ')
-						_ model.extends.forEach
-							=>
-								param e
-								param index
-								if index > 0
-									_ ctx.write(', ')
-								_ ctx.write(e.wzName)
-					r_cb()
+                        repeater( 1, model.extends
+                            if index_1 > 0
+                                _ ctx.write(', ')
+                            _ ctx.write(item_1.wzName)
+                            _ md.genTSTypeParameterInsts
+                                @ item_1
+                                @ ctx
+                                @ cnt
+                                a_cb()
+                                    repeater_increment( 1 )
+                            $append next
+                                r_cb()
+                            $* Old erroneous
+                            _ model.extends.forEach
+                                =>
+                                    param e
+                                    param index
+                                    if index > 0
+                                        _ ctx.write(', ')
+                                    _ ctx.write(e.wzName)
+                            *$
+                    else
+                        r_cb()
 
-	function genTSTypeParameters_partial
+    function genTSTypeParameters_partial
         param model
-		param ctx
-		param cnt
-		param callback
-		if model.typeParameterDecls && model.typeParameterDecls.length > 0
-			_ ctx.write('<')
-			repeater( 1, model.typeParameterDecls
-				if index_1 > 0
-					_ ctx.write(', ')
-				_ cnt.stm.typeParameterDecl
-					@ item_1
-					@ ctx
-					a_cb()
-						repeater_increment( 1 )
-				$append next
-					_ ctx.write('>')
-					r_cb()
-		else
-			r_cb()
+        param ctx
+        param cnt
+        param callback
+        if model.typeParameterDecls && model.typeParameterDecls.length > 0
+            _ ctx.write('<')
+            repeater( 1, model.typeParameterDecls
+                if index_1 > 0
+                    _ ctx.write(', ')
+                _ cnt.stm.typeParameterDecl
+                    @ item_1
+                    @ ctx
+                    a_cb()
+                        repeater_increment( 1 )
+                $append next
+                    _ ctx.write('>')
+                    r_cb()
+        else
+            r_cb()
 
-	
     set md.genTSTypeParameterInsts   
         function 
             param model

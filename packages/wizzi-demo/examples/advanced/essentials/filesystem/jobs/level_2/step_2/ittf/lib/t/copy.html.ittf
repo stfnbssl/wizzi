@@ -1,8 +1,0 @@
-$group
-
-	p
-		span author &nbsp;
-		b Stefano Bassoli
-	p
-		span license &nbsp;
-		b MIT

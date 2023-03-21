@@ -1,5 +1,0 @@
-$group
-
-	a maxLength
-	a minLength	
-	a pattern

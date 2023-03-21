@@ -1,8 +1,0 @@
-﻿$group
-
-	artifact any_text
-		src ./**/*.text.ittf
-		schema text
-		generator text/document
-		extension text
-		$hook

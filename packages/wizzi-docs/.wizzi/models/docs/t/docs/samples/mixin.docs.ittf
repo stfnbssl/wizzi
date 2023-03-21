@@ -1,7 +1,0 @@
-﻿sample-group Mixins
-
-	$ var ip = '${'
-
-	$include mixins/basic.mixin
-	$include mixins/hook.mixin
-	$include mixins/scope.mixin

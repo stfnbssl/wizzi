@@ -1,4 +1,0 @@
-﻿callback
-	exception null | exception
-		$hook error-types
-	$hook

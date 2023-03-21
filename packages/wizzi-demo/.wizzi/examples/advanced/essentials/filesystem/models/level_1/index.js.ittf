@@ -1,9 +1,0 @@
-﻿module
-	kind jsfile
-
-	$
-		var name = 'wizzimodels';
-		var level = '1';
-		var steps = ['1'];
-
-	$include exec_steps

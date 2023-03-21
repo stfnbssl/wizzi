@@ -1,6 +1,0 @@
-module
-	kind jsfile
-
-	wz-class Animal
-		m sayHello
-			log this.cry, ', I am ', this.name

@@ -1,7 +1,0 @@
-﻿example-essentials(html.languageschema)
-
-	$
-		var name = 'html.languageschema';
-		var levels = ['0'];
-
-	$include exec_levels

@@ -2,6 +2,7 @@
 
 	stm( typeInterface
         var model = writeComments(model, ctx)
+        # loog 'stm( typeInterface', model.extends
 		_ ctx.write('interface ' + model.wzName)
 		_ u.genTSTypeParameters
 			@ model

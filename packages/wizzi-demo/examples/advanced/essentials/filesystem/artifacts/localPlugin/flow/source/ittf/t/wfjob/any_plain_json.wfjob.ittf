@@ -1,5 +1,0 @@
-$group
-
-	artifact any_plain_json
-		src ./**/*.json
-		extension json

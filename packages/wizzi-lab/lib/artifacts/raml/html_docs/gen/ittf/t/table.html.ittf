@@ -1,8 +1,0 @@
-table
-	$params width, bordered:boolean|true
-	$if bordered
-		class table table-condensed table-bordered
-	$else
-		class table table-condensed table-borderless
-	style width:${width}%;
-	$hook

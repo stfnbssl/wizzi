@@ -1,7 +1,0 @@
-﻿docs Wizzi Jobs
-
-	$ var dollar = '$'
-
-	$include docs/jobs/index
-	$include docs/jobs/wfjob
-	$include docs/jobs/runnerServer

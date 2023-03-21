@@ -1,9 +1,0 @@
-﻿example-essentials( language_schema_vue, 0, 2 )
-
-	# 
-		# DEMO: component coded in 'vue' wizzi language schema
-	+
-	loadModelAndGenerateArtifact( 2, preprocessed.vue.ittf, vue, document, save;print:artifact dash )
-		return
-			_ step_callback
-

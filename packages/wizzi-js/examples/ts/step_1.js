@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\examples\ts\step_1.js.ittf
 */
 'use strict';
@@ -137,7 +137,7 @@ var ts_step_1 = function(step_callback) {
     heading1('EXAMPLE')
     heading2('basic ts generations')
     const example_ittfs = [
-        'decorators'
+        'import-export'
     ];
     async.mapSeries(example_ittfs, function(ittf, callback) {
         console.log('======================================================================================');

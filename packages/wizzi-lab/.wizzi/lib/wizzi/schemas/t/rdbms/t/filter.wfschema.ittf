@@ -1,9 +1,0 @@
-﻿$group
-	$params coll
-
-	return 
-		_ _.filter
-			@ ${coll}
-			function
-				param item
-				$hook

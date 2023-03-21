@@ -1,7 +1,0 @@
-﻿module
-	kind jsfile
-
-	var __processArgs = process.argv.slice(2)
-	var name = __processArgs[0]
-
-	success 'Hello world ' + name

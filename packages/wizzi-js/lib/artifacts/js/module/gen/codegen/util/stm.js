@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\js\module\gen\codegen\util\stm.js.ittf
 */
 'use strict';
@@ -1025,16 +1025,35 @@ md.genTSTypeParameters = function(model, ctx, cnt, callback) {
         }
         if (model.extends && model.extends.length > 0) {
             ctx.write( ' extends ');
-            model.extends.forEach((e, index) => {
-            
-                if (index > 0) {
+            var len_1 = model.extends.length;
+            function repeater_1(index_1) {
+                if (index_1 === len_1) {
+                    return next_1();
+                }
+                var item_1 = model.extends[index_1];
+                if (index_1 > 0) {
                     ctx.write(', ');
                 }
-                ctx.write(e.wzName);
+                ctx.write(item_1.wzName);
+                md.genTSTypeParameterInsts(item_1, ctx, cnt, (err, notUsed) => {
+                
+                    if (err) {
+                        return callback(err);
+                    }
+                    process.nextTick(function() {
+                        repeater_1(index_1 + 1);
+                    })
+                }
+                )
             }
-            )
+            repeater_1(0);
+            function next_1() {
+                return callback(null, null);
+            }
         }
-        return callback(null, null);
+        else {
+            return callback(null, null);
+        }
     }
     )
 }

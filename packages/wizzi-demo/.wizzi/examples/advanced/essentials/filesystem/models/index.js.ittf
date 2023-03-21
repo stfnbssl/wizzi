@@ -1,7 +1,0 @@
-﻿demo_module(wizzimodels)
-
-	$
-		var name = 'wizzimodels';
-		var levels = ['0'];
-
-	$include exec_levels

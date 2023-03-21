@@ -1,9 +1,0 @@
-base_example()
-
-    _ codemods.copyChangeWizziSchema
-        @ 'C:/My/wizzi/stfnbssl/__workings/wizzi-examples/packages/wizzi-studio/server/data/models/cheatsheets'
-        @ 'C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi.webapp/ittf/models/cheatsheets'
-        @ 'meta'
-        @ 'ittf'
-        f_cb( result )
-            # loog 'codemods.copyChangeWizziSchema', result

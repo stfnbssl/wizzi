@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\.wizzi\lib\artifacts\ts\module\gen\codegen\statements\function.js.ittf
 */
 'use strict';
@@ -227,7 +227,6 @@ md.load = function(cnt) {
             ctx.deindent();
             ctx.write('}');
             if (iife) {
-                console.log('xfunction_end', Object.keys(model), Object.keys(model.wzRoot().loadHistory), model.wzRoot().loadHistory.ittfDocumentDatas);
                 return cnt.genItems([
                         iifeInvoke
                     ], ctx, {

@@ -1,4 +1,0 @@
-﻿$group
-
-	artifact any_plain
-		src ./**/*.*

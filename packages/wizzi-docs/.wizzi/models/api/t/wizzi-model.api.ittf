@@ -1,4 +1,0 @@
-﻿$group
-
-	$include wizzi-model/modelType
-	$include wizzi-model/modelFactory

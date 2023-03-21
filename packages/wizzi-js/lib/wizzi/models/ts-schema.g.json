@@ -5814,6 +5814,12 @@
                     {
                       "tag": "_",
                       "name": "call",
+                      "value": "s.wzInitialize",
+                      "statements": []
+                    },
+                    {
+                      "tag": "_",
+                      "name": "call",
                       "value": "this.extends.push",
                       "statements": [
                         {
@@ -5886,7 +5892,83 @@
       ],
       "derived": [],
       "restricts": [],
-      "methods": [],
+      "methods": [
+        {
+          "name": "wzInitialize",
+          "isStatic": false,
+          "isKnownMethod": true,
+          "params": [],
+          "statements": [
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "tpi = []",
+              "statements": []
+            },
+            {
+              "tag": "var",
+              "name": "xvar",
+              "value": "ss = []",
+              "statements": []
+            },
+            {
+              "tag": "foreach",
+              "name": "foreach",
+              "value": "s in this.statements",
+              "statements": [
+                {
+                  "tag": "if",
+                  "name": "xif",
+                  "value": "s.wzElement == 'typeParameterInst'",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "tpi.push(s)",
+                      "statements": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "else",
+                  "name": "xelse",
+                  "value": "",
+                  "statements": [
+                    {
+                      "tag": "_",
+                      "name": "call",
+                      "value": "ss.push(s)",
+                      "statements": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "if",
+              "name": "xif",
+              "value": "tpi.length > 0",
+              "statements": [
+                {
+                  "tag": "set",
+                  "name": "set",
+                  "value": "this.typeParameterInsts = tpi",
+                  "statements": []
+                },
+                {
+                  "tag": "set",
+                  "name": "set",
+                  "value": "this.statements = ss",
+                  "statements": []
+                }
+              ]
+            }
+          ],
+          "comments": [
+            "loog 'typeExtends.wzInitialize', this.statements.length"
+          ]
+        }
+      ],
       "comments": []
     },
     {

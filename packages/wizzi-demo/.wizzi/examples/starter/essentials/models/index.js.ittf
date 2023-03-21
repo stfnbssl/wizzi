@@ -1,7 +1,0 @@
-﻿example-essentials(wizzi models)
-
-	$
-		var name = 'wizzi models';
-		var levels = ['0'];
-
-	$include exec_levels

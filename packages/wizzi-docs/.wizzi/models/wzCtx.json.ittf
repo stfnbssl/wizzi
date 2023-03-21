@@ -1,6 +1,0 @@
-{
-    name 'wizzi-docs'
-    version '0.5.1'
-    title 'Wizzi factory documentation'
-    license 'MIT'
-    [ schemas
