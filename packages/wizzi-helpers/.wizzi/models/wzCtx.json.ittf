@@ -1,0 +1,8 @@
+{
+    $include versions
+    
+    name '@wizzi/helpers'
+    version '${versions['wizzi-helpers@next']}'
+	title 'Helpers library for the wizzi factory, required by the @wizzi/util package'
+    license 'MIT'
+    [ schemas

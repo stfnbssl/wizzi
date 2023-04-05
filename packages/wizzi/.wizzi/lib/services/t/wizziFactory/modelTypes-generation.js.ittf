@@ -87,8 +87,8 @@ $group
 		_ this.loadModel
 			@ 'wfschema'
 			@ wfschemaIttfDocumentUri
-			@ loadContext
-			f_cb( schemaWizziModel )
+            @ loadContext
+            f_cb( schemaWizziModel )
 				# load the schemaWizziModel instance into the bootstrap wizzimodel.
 				#   This is required until the generation of the wizzi model of type 'wfschema'
 				#   is not completely automated.

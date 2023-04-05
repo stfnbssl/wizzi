@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -41,30 +41,31 @@ var FactoryPlugin = (function () {
         return __filename;
     }
     FactoryPlugin.prototype.getVersion = function() {
-        return '0.7.16';
+        return '0.7.17';
     }
     FactoryPlugin.prototype.getProvides = function() {
         return this.provides;
     }
     //
     FactoryPlugin.prototype.getModelFactory = function(schemaName) {
-        var factory = this.modelFactories[schemaName] || null;
+        var trueSchemaName = getTrueSchemaName(schemaName);
+        var factory = this.modelFactories[trueSchemaName] || null;
         if (factory == null) {
             if (typeof window !== 'undefined') {
-                factory = window_modelFactories[schemaName];
+                factory = window_modelFactories[trueSchemaName];
             }
             else {
-                var modulePath = path.resolve(__dirname, './lib/wizzi/models/' + schemaName + '-factory.g.js');
+                var modulePath = path.resolve(__dirname, './lib/wizzi/models/' + trueSchemaName + '-factory.g.js');
                 if (this.file.exists(modulePath)) {
                     try {
-                        factory = require('./lib/wizzi/models/' + schemaName + '-factory.g');
+                        factory = require('./lib/wizzi/models/' + trueSchemaName + '-factory.g');
                     } 
                     catch (ex) {
                         return error('WizziPluginError', 'Error loading wizzi model factory: ' + modulePath + ', in plugin: ' + this.getFilename() + ', err: ' + ex.message + ', stack: ' + ex.stack);
                     } 
                 }
             }
-            this.modelFactories[schemaName] = factory;
+            this.modelFactories[trueSchemaName] = factory;
         }
         return factory;
     }
@@ -139,6 +140,10 @@ var FactoryPlugin = (function () {
     return FactoryPlugin;
 })();
 
+
+function getTrueSchemaName(schemaOrAlias) {
+    return schemaOrAlias;
+}
 
 function error(code, message) {
     return {

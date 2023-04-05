@@ -12,6 +12,7 @@ $group
     $include example_includes
     var async = require('async')
     var pluginsBaseFolder = null
+    var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages'
     
     $if opt.folderLevel == 1
         var wizziIndex = require('../index')

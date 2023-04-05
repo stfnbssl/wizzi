@@ -50,6 +50,7 @@
 			set this.modelLoaders = {}
 			set this.modelTransformers = {}
 			set this.artifactGenerators = {}
+            set this.wizzifiers = {}
 			set this.schemaDefinitions = {}
 			set this.globalContext = {}
 
@@ -62,6 +63,7 @@
 		$include wizziFactory/artifact-generation
         $include wizziFactory/folder-generation
 		$include wizziFactory/schema-definition
+        $include wizziFactory/wizzification
 		$include wizziFactory/modelTypes-generation
 		$include wizziFactory/wizzi-job-execution
         $include wizziFactory/meta-generation

@@ -7,8 +7,15 @@
 	e_tag( selectionSet, {, selection
 		r argument/s
 		r selection/s
+        
+        + SelectionSet
+        +   {Selectionlist}
+        + Selection
+        +   Field
+        +   FragmentSpread
+        +   InlineFragment
 	
-	e_tag( field, ., selection
+    e_tag( field, ., selection
 		a_tag( alias, as
 		r argument/s
 

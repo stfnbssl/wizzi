@@ -29,6 +29,10 @@
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.js
 			extension js
 		
+		artifact any_plain_ts_inside___copy
+			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.ts
+			extension ts
+
 		artifact any_plain_html_inside___copy
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.html
 			extension html
@@ -36,6 +40,14 @@
 		artifact any_plain_css_inside___copy
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.css
 			extension css
+
+		artifact any_plain_svg_inside___copy
+			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.svg
+			extension svg
+
+		artifact any_plain_graphql_inside___copy
+			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.graphql
+			extension graphql
 
 		artifact any_plain_text_inside___copy
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.text

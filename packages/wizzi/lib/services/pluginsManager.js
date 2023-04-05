@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.13
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\pluginsManager.js.ittf
 */
 'use strict';
@@ -33,6 +33,7 @@ var PluginsManager = (function () {
         this.providedSchemas = [];
         this.providedModelTransformers = [];
         this.providedArtifactGenerators = [];
+        this.providedWizzifiers = [];
     }
     //
     PluginsManager.prototype.initialize = function(options, callback) {
@@ -394,6 +395,26 @@ var PluginsManager = (function () {
                  })
             }
         }
+        
+        // wizzifiers are implemented in plugins from version 0.8
+        if (factoryPlugin.provides.wizzifiers) {
+            var i, i_items=factoryPlugin.provides.wizzifiers, i_len=factoryPlugin.provides.wizzifiers.length, item;
+            for (i=0; i<i_len; i++) {
+                item = factoryPlugin.provides.wizzifiers[i];
+                found = _.find(this.providedWizzifiers, {
+                    name: item
+                 })
+                ;
+                if (found) {
+                    return error('DuplicatedPluginResource', 'addPluginProvides', 'Wizzifier ' + item + ' already provided');
+                }
+                else {
+                    this.providedWizzifiers.push({
+                        name: item
+                     })
+                }
+            }
+        }
     }
     PluginsManager.prototype.availableSchemas = function() {
         var ret = [];
@@ -418,6 +439,15 @@ var PluginsManager = (function () {
         var i, i_items=this.providedArtifactGenerators, i_len=this.providedArtifactGenerators.length, item;
         for (i=0; i<i_len; i++) {
             item = this.providedArtifactGenerators[i];
+            ret.push(item.name);
+        }
+        return ret;
+    }
+    PluginsManager.prototype.availableWizzifiers = function() {
+        var ret = [];
+        var i, i_items=this.providedWizzifiers, i_len=this.providedWizzifiers.length, item;
+        for (i=0; i<i_len; i++) {
+            item = this.providedWizzifiers[i];
             ret.push(item.name);
         }
         return ret;
@@ -545,6 +575,52 @@ var PluginsManager = (function () {
         return result;
     }
     //
+    PluginsManager.prototype.getWizzifier = function(wizzifierName) {
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return error(
+                'InvalidArgument', 'getWizzifier', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            );
+        }
+        // loog 'PluginsManager.getWizzifier.wizzifierName: ' + wizzifierName
+        var found = null,
+            foundInPlugin = null,
+            pluginVersion,
+            result = null;
+        // all factoryPlugins are searched, last matching encountered wins.
+        var i, i_items=this.factoryPlugins, i_len=this.factoryPlugins.length, item;
+        for (i=0; i<i_len; i++) {
+            item = this.factoryPlugins[i];
+            // loog 'searching artifact ', wizzifierName, ' in module', item.getName()
+            if (item.getWizzifier) {
+                found = item.getWizzifier(wizzifierName);
+                ;
+                if (found && found.__is_error) {
+                    return found;
+                }
+            }
+            else {
+                found = false;
+            }
+            // loog 'found', found, found && verify.isFunction(found.getWizziIttf)
+            if (found && verify.isFunction(found.getWizziIttf)) {
+                result = found;
+                foundInPlugin = item.getFilename();
+                if (verify.isFunction(item.getVersion)) {
+                    pluginVersion = item.getVersion();
+                }
+            }
+        }
+        if (!result) {
+            var msg = 'getWizzifier. Cannot find wizzifier: ' + wizzifierName + '\n' + 'availables wizzifiers: ' + this.availableWizzifiers().join(', ');
+            log.error(msg)
+            return error('NotFound', 'getWizzifier', msg);
+        }
+        else {
+            log.success('getWizzifier. Found wizzifier: ' + wizzifierName + ' in plugin: ' + foundInPlugin + ', version:' + (pluginVersion || 'unknown'))
+        }
+        return result;
+    }
+    //
     PluginsManager.prototype.getSchemaDefinition = function(schemaName) {
         if (verify.isNotEmpty(schemaName) === false) {
             return error(
@@ -596,6 +672,7 @@ var PluginsManager = (function () {
                 providedSchemas: this.providedSchemas, 
                 providedModelTransformers: this.providedModelTransformers, 
                 providedArtifactGenerators: this.providedArtifactGenerators, 
+                providedWizzifiers: this.providedWizzifiers, 
                 factoryPlugins: factoryPluginsInfo
              };
     }
@@ -748,7 +825,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.35.pluginsManager.' + method,
+        method: 'wizzi@0.8.01.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

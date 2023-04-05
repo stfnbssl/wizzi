@@ -18,6 +18,7 @@ Plugins are loaded at creation time and cannot be changed.
 * Wizzi Model loading 
 * Model transformation 
 * Artifact generation 
+* Wizzification 
 * Wizzi Model type generation 
 * Production manager creation 
 * Wizzi job execution 
@@ -33,6 +34,9 @@ TODO the 'modelContext' paramater can contain properties of type wizzi.model.mod
 Executes the transformation of a wizzi model or POJO.
 
 ### Artifact generation
+Executes the generation of a single software artifact.
+
+### Wizzification
 Executes the generation of a single software artifact.
 
 ### Wizzi Model type generation

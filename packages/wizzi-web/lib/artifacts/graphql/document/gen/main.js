@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\graphql\document\gen\main.js.ittf
 */
 'use strict';
@@ -550,7 +550,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-web@0.7.16.lib.artifacts.graphql.document.gen.main.' + method,
+        method: 'wizzi-web@0.7.17.lib.artifacts.graphql.document.gen.main.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

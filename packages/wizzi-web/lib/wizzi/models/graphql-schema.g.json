@@ -4716,7 +4716,14 @@
       "derived": [],
       "restricts": [],
       "methods": [],
-      "comments": []
+      "comments": [
+        "SelectionSet",
+        "{Selectionlist}",
+        "Selection",
+        "Field",
+        "FragmentSpread",
+        "InlineFragment"
+      ]
     },
     {
       "name": "field",

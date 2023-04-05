@@ -603,6 +603,22 @@ declare interface WizziFactory {
         modelTypesRequest: string, outputPackagePath: string, wfschemaName: string, mTreeBuildupContext: object, callback: cb<object>
     ): void;
     /**
+     * @param tobeWizzifiedUri The path to the source code to be wizzified
+     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param callback         Receives error | Ittf document
+    */
+    getWizziIttf(
+        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
+    ): void;
+    /**
+     * @param tobeWizzifiedUri The path to the source code to be wizzified
+     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param callback         Receives error | Ittf document
+    */
+    getCodeAST(
+        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
+    ): void;
+    /**
      * @param jobRequest     The JobRequest object
      * @param callback       Receives error | null
     */

@@ -1,0 +1,14 @@
+﻿module 
+    kind jsfile
+
+	$if isWebpackTarget
+		#
+			# This source targets the browser
+			# (isWebpackTarget == true)
+    
+	var md
+        set module.exports
+            { 
+	set md.verify = require('./lib/verify')
+	set md.errors = require('./lib/errors')
+

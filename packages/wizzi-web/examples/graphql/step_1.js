@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\examples\graphql\step_1.js.ittf
 */
 'use strict';
@@ -40,7 +40,7 @@ function createWizziFactory(globalContext, callback) {
                 './wizzi-js/index', 
                 './wizzi-web/index'
             ], 
-            pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..', '..')
+            pluginsBaseFolder: path.resolve(__dirname, '..', '..', '..')
          }, 
         globalContext: globalContext || {}
      }, callback)

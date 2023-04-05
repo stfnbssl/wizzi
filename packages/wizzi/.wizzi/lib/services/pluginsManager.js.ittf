@@ -26,12 +26,14 @@
 			set this.providedSchemas = []
 			set this.providedModelTransformers = []
 			set this.providedArtifactGenerators = []
+            set this.providedWizzifiers = []
 
 		$include pluginsManager/initialize
 		$include pluginsManager/register
 		$include pluginsManager/model-factory
 		$include pluginsManager/model-transformer
 		$include pluginsManager/artifact-generator
+        $include pluginsManager/wizzification
 		$include pluginsManager/schema-definition
 		$include pluginsManager/getInfo
 

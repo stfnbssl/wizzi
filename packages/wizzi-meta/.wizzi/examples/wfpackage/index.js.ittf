@@ -1,0 +1,95 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 2,
+            name: 'Meta_wfpackage_step_1',
+            title: 'Meta wfpackage step 1',
+            folderLevel: 2
+        }
+
+    common\example\meta(&opt)
+
+        _ heading2
+            @ 'Meta wfpackage - started'
+        
+        _ loadAndTransformModel
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'models'
+                @ 'wizzi.kernel.wfpackage.ittf'
+            {
+            @ "wfpackage/fs-scanner"
+            f_cb_test( transformed )
+                _ file.write
+                    _ path.join
+                        @ __dirname
+                        @ 'outputs'
+                        @ 'wizzi.kernel.package.json'
+                    _ stringify
+                        @ transformed
+                        @ null
+                        @ 2
+
+                _ heading2
+                    @ 'Meta wfpackage - ended, see outputs folder'
+
+                _ code_proprocess_job
+                # _ site_job
+
+        function code_proprocess_job
+            _ heading2
+                @ 'codeviewer_preprocess job - started'
+
+            _ executeWizziJob
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'jobs'
+                    @ 'codeviewer_preprocess.wfjob.ittf'
+                {
+                    { jobCtx
+                        @ kind 'kernel'
+                f_cb_test( jobResult )
+                    _ heading2
+                        @ 'codeviewer_preprocess job - ended'
+                    _ code_job
+
+        function code_job
+            _ heading2
+                @ 'codeviewer job - started'
+
+            _ executeWizziJob
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'jobs'
+                    @ 'codeviewer.wfjob.ittf'
+                {
+                    { jobCtx
+                        @ kind 'kernel'
+                f_cb_test( jobResult )
+                    _ heading2
+                        @ 'codeviewer job - ended'
+                    _ site_job
+        
+        function site_job
+            _ heading2
+                @ 'site job - started'
+
+            _ executeWizziJob
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'jobs'
+                    @ 'site.wfjob.ittf'
+                {
+                    { jobCtx
+                        @ kind 'kernel'
+                f_cb_test( jobResult )
+                    _ heading2
+                        @ 'site job - ended'
+

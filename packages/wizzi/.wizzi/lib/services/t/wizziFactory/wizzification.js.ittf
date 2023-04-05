@@ -1,0 +1,177 @@
+$group
+
+	#
+		# Retrieve a wizzifier
+		# Wizzifiers are searched in the PluginsManager
+		# They are cached
+	m getWizzifier
+		string wizzifierName
+		+
+		var wizzifier = this.wizzifiers[wizzifierName] || null
+		if wizzifier == null
+			checked_call_r_set( wizzifier )
+				_ this.pluginsManager.getWizzifier(wizzifierName)
+			set this.wizzifiers[wizzifierName] = wizzifier
+		return wizzifier
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The source code to be wizzified
+		#   string wizzifierName
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+
+	m getWizziIttf
+		string tobeWizzifiedUri
+		string wizzifierName
+		callback
+		+
+		check_wz_callback( getWizziIttf )
+		+
+		var wizzifier = this.getWizzifier(wizzifierName)
+        if wizzifier.__is_error
+			set wizzifier.wizzifierName = wizzifierName
+            return callback(wizzifier)
+		+
+        try
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziIttf, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wizzifierName wizzifierName
+                        @ tobeWizzifiedUri tobeWizzifiedUri
+        _ this.getWizziIttfFromText
+            @ tobeWizzifiedText
+            @ wizzifierName
+            @ callback
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedText
+		#     # The source code to be wizzified
+		#   string wizzifierName
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+    m getWizziIttfFromText
+		string tobeWizzifiedText
+		string wizzifierName
+		callback
+		+
+		check_wz_callback( getWizziIttf )
+		+
+		var wizzifier = this.getWizzifier(wizzifierName)
+        if wizzifier.__is_error
+			set wizzifier.wizzifierName = wizzifierName
+            return callback(wizzifier)
+		+
+        try
+            _ wizzifier.getWizziIttf
+                @ tobeWizzifiedText
+                {
+                function
+                    param err
+                    param result
+                    if err
+                        # loog 'wizzi.wizziFactory.getWizziIttf', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, getWizziIttf, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ wizzifierName wizzifierName
+                    _ callback(null, result)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziIttf, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wizzifierName wizzifierName
+
+	#
+		# Async get code AST from source code
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The source code to get the AST
+		#   string wizzifierName
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     object AST
+
+	m getCodeAST
+		string tobeWizzifiedUri
+		string wizzifierName
+		callback
+		+
+		check_wz_callback( getCodeAST )
+		+
+		var wizzifier = this.getWizzifier(wizzifierName)
+        if wizzifier.__is_error
+			set wizzifier.wizzifierName = wizzifierName
+            return callback(wizzifier)
+		+
+        try
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getCodeAST, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wizzifierName wizzifierName
+                        @ tobeWizzifiedUri tobeWizzifiedUri
+        _ this.getCodeASTFromText
+            @ tobeWizzifiedText
+            @ wizzifierName
+            @ callback
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedText
+		#     # The source code to be wizzified
+		#   string wizzifierName
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+    m getCodeASTFromText
+		string tobeWizzifiedText
+		string wizzifierName
+		callback
+		+
+		check_wz_callback( getCodeAST )
+		+
+		var wizzifier = this.getWizzifier(wizzifierName)
+        if wizzifier.__is_error
+			set wizzifier.wizzifierName = wizzifierName
+            return callback(wizzifier)
+		+
+        try
+            _ wizzifier.getCodeAST
+                @ tobeWizzifiedText
+                {
+                function
+                    param err
+                    param result
+                    if err
+                        # loog 'wizzi.wizziFactory.getCodeAST', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, getCodeAST, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ wizzifierName wizzifierName
+                    _ callback(null, result)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getCodeAST, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wizzifierName wizzifierName                        

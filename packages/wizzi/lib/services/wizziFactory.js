@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.13
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
 */
 'use strict';
@@ -59,6 +59,7 @@ var WizziFactory = (function () {
         this.modelLoaders = {};
         this.modelTransformers = {};
         this.artifactGenerators = {};
+        this.wizzifiers = {};
         this.schemaDefinitions = {};
         this.globalContext = {};
     }
@@ -1200,6 +1201,213 @@ var WizziFactory = (function () {
         return schema;
     }
     //
+    WizziFactory.prototype.getWizzifier = function(wizzifierName) {
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return error(
+                'InvalidArgument', 'getWizzifier', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            );
+        }
+        
+        var wizzifier = this.wizzifiers[wizzifierName] || null;
+        if (wizzifier == null) {
+            wizzifier = this.pluginsManager.getWizzifier(wizzifierName);
+            ;
+            if (wizzifier && wizzifier.__is_error) {
+                return wizzifier;
+            }
+            this.wizzifiers[wizzifierName] = wizzifier;
+        }
+        return wizzifier;
+    }
+    //
+    WizziFactory.prototype.getWizziIttf = function(tobeWizzifiedUri, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziIttf', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziIttf', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri);
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getWizziIttf', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName, 
+                        tobeWizzifiedUri: tobeWizzifiedUri
+                     }
+                 }, ex));
+        } 
+        this.getWizziIttfFromText(tobeWizzifiedText, wizzifierName, callback)
+    }
+    //
+    WizziFactory.prototype.getWizziIttfFromText = function(tobeWizzifiedText, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getWizziIttfFromText', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedText) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziIttfFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziIttfFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            wizzifier.getWizziIttf(tobeWizzifiedText, {}, function(err, result) {
+                
+                // loog 'wizzi.wizziFactory.getWizziIttf', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                if (err) {
+                    return callback(error('WizziFactoryError', 'getWizziIttf', {
+                            message: 'See inner error', 
+                            parameter: {
+                                wizzifierName: wizzifierName
+                             }
+                         }, err));
+                }
+                callback(null, result);
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getWizziIttf', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName
+                     }
+                 }, ex));
+        } 
+    }
+    //
+    WizziFactory.prototype.getCodeAST = function(tobeWizzifiedUri, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'getCodeAST', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getCodeAST', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri);
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getCodeAST', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName, 
+                        tobeWizzifiedUri: tobeWizzifiedUri
+                     }
+                 }, ex));
+        } 
+        this.getCodeASTFromText(tobeWizzifiedText, wizzifierName, callback)
+    }
+    //
+    WizziFactory.prototype.getCodeASTFromText = function(tobeWizzifiedText, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getCodeASTFromText', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedText) === false) {
+            return callback(error(
+                'InvalidArgument', 'getCodeASTFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getCodeASTFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            wizzifier.getCodeAST(tobeWizzifiedText, {}, function(err, result) {
+                
+                // loog 'wizzi.wizziFactory.getCodeAST', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                if (err) {
+                    return callback(error('WizziFactoryError', 'getCodeAST', {
+                            message: 'See inner error', 
+                            parameter: {
+                                wizzifierName: wizzifierName
+                             }
+                         }, err));
+                }
+                callback(null, result);
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getCodeAST', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName
+                     }
+                 }, ex));
+        } 
+    }
+    //
     WizziFactory.prototype.generateModelDoms = function(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -1733,7 +1941,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.7.35.wizziFactory.' + method,
+        method: 'wizzi@0.8.01.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

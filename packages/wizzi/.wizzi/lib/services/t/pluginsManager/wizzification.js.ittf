@@ -1,0 +1,51 @@
+﻿$group
+
+	# 
+		# retrieve a wizzifier searching the factoryPlugins
+		# registered to this plugins manager
+		# params
+		#  string wizzifierName
+		# returns
+		#  | api-ref wizzi-plugin.wizzifier
+		#  | wzError NotFound
+		
+	m getWizzifier
+		string wizzifierName
+		# loog 'PluginsManager.getWizzifier.wizzifierName: ' + wizzifierName
+			
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion
+			decl result = null
+
+		# all factoryPlugins are searched, last matching encountered wins.
+		foreach item in this.factoryPlugins
+			# loog 'searching artifact ', wizzifierName, ' in module', item.getName()
+            if item.getWizzifier
+                checked_call_r_set( found )
+                    _ item.getWizzifier(wizzifierName)
+            else
+                set found = false
+			# loog 'found', found, found && verify.isFunction(found.getWizziIttf)
+			if found && verify.isFunction(found.getWizziIttf)
+				set result = found
+				set foundInPlugin = item.getFilename()
+                if verify.isFunction(item.getVersion)
+                    set pluginVersion = item.getVersion()
+
+		if !result
+			var msg = 'getWizzifier. Cannot find wizzifier: ' + wizzifierName + '\n' +
+				\b 'availables wizzifiers: ' + this.availableWizzifiers().join(', ')
+			_ log.error
+				@ msg
+			r_wz_err( NotFound, getWizzifier )
+				@ msg
+		else
+			_ log.success
+                @ 'getWizzifier. Found wizzifier: ' + wizzifierName
+                    \b + ' in plugin: ' + foundInPlugin 
+                    \b + ', version:' + (pluginVersion || 'unknown')
+
+		return result
+

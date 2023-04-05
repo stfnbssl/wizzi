@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-web\.wizzi\lib\artifacts\html\document\gen\main.js.ittf
 */
 'use strict';
@@ -631,7 +631,7 @@ function main_init(model, ctx) {
     if ((!!ctx.values.noGeneratorComments) == false) {
         ctx.w('<!--');
         ctx.w('    artifact generator: ' + __filename);
-        ctx.w('    package: wizzi-web@0.7.16');
+        ctx.w('    package: wizzi-web@0.7.17');
         ctx.w('    primary source IttfDocument: ' + model.wzSourceFilepath('f1'));
         if ((!!ctx.values.isPackageDeploy) == false) {
             ctx.w('    utc time: ' + new Date().toUTCString());
@@ -966,7 +966,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-web@0.7.16.lib.artifacts.html.document.gen.main.' + method,
+        method: 'wizzi-web@0.7.17.lib.artifacts.html.document.gen.main.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

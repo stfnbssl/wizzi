@@ -170,12 +170,8 @@ declare interface WizziModel extends WizziModelElement { }
 /**
  * Supported repository kinds for ittf document sources and artifacts persistence.
  */
-declare enum StoreKind {
-    filesystem = 'filesystem',
-    mongodb = 'mongodb',
-    json = 'json',
-    browserfs = 'browserfs'
-}
+type StoreKind = "filesystem" | "mongodb" | "json" | "browserfs";
+
 
 /**
  * Repository config options. 
@@ -407,8 +403,7 @@ type GenerationContext = {
     modelRequestContext?: {
         mTreeBuildupContext?: {}
     };
-    artifactRequestContext?: {
-    };
+    artifactRequestContext?: {};
 }
 
 /**
@@ -421,6 +416,31 @@ type TransformationContext = {
 }
 
 /**
+* Job dump options.
+*/
+/**
+ * @type DumpsOptions
+ * @description Wizzi Job mTreeBuildupJsWizziScript options
+ * @property dump     The mTreeBuildupJsWizziScript should be dumped
+*/
+type mTreeBuildupJsWizziScriptOptions = {
+    dump: boolean;
+}
+/**
+* Job dump options.
+*/
+/**
+ * @type DumpsOptions
+ * @description Wizzi Job dumps options
+ * @property dumpsBaseFolder            The folder path for dumps
+ * @property mTreeBuildupJsWizziScript  Optional. Not implemented yet
+*/
+type DumpsOptions = {
+    dumpsBaseFolder: string;
+    mTreeBuildupJsWizziScript: mTreeBuildupJsWizziScriptOptions;
+}
+
+/**
 * Job production options.
 */
 /**
@@ -429,12 +449,13 @@ type TransformationContext = {
  * @property indentSpaces      Optional. Default: 4. The number of spaces of one indentation in a generated artifact
  * @property basedir           Optional. Not implemented yet
  * @property verbose           Optional. Not implemented yet
-
+ * @property dumps             Optional. Job dump options
 */
 type ProductionOptions = {
     indentSpaces?: number;
     basedir?: string;
     verbose?: number;
+    dumps?: DumpsOptions;
 }
 
 /**
@@ -463,6 +484,19 @@ type JsonFactoryOptions = {
     globalContext?: object;
 }
 
+/**
+ * @type FolderGenerationOptions
+ * @destFolder  Destination folder fpor the generated artifacts
+ * @copyNonIttf Yes if non ittf files must be copiedo in the destination folder
+ * @copyInclude TODO
+ * @copyExclude TODO
+*/
+type FolderGenerationOptions = {
+    destFolder: string;
+    copyNonIttf?: boolean;
+    copyInclude?: [string];
+    copyExclude?: [string];
+}
 
 /**
 * The Wizzi Factory instance interface
@@ -547,6 +581,15 @@ declare interface WizziFactory {
         ittfDocumentUri: string, context: TransformationContext, transformName: string, callback?: cb<object>
     )
     /**
+     * @param ittfFolderUri          The path to the folder with the Ittf Documents to be generated.
+     * @param context                The model loading and artifact generation context.
+     * @param options                Generation options (destFolder, copyNonIttf, ...).
+     * @param callback               Receives a message.
+    */
+    generateFolderArtifacts(
+        ittfFolderUri: string, context: GenerationContext, options: FolderGenerationOptions, callback: cb<string>
+    ): void;
+    /**
      * @param wfschemaIttfDocumentUri     The path to the source Wizzi Schema definition
      * @param outputPackagePath           The path to the folder where to write the generated modules
      * @param wfschemaName                The name of the Wizzi Schema
@@ -555,6 +598,25 @@ declare interface WizziFactory {
     */
     generateModelDoms(
         wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildupContext: object, callback: cb<object>
+    ): void;
+    generateWizziModelTypes(
+        modelTypesRequest: string, outputPackagePath: string, wfschemaName: string, mTreeBuildupContext: object, callback: cb<object>
+    ): void;
+    /**
+     * @param tobeWizzifiedUri The path to the source code to be wizzified
+     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param callback         Receives error | Ittf document
+    */
+    getWizziIttf(
+        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
+    ): void;
+    /**
+     * @param tobeWizzifiedUri The path to the source code to be wizzified
+     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param callback         Receives error | Ittf document
+    */
+    getCodeAST(
+        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
     ): void;
     /**
      * @param jobRequest     The JobRequest object
@@ -718,11 +780,20 @@ export function job(
 ): void;
 
 /**
+* Print wizzi job error
+*/
+export function printWizziJobError(
+    wfjobName: string, err: any
+): void;
+
+/**
 * Wizzi schema generation
 */
 export function schema(
     ittfDocumentPath: string, mTreeBuildupContext: object, options: LightSchemaOptions, callback: cb<string>
 ): void;
+
+
 
 /**
  * Wizzi runner server

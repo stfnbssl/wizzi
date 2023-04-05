@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.13
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\model\step_3.js.ittf
 */
 'use strict';
@@ -21,6 +21,7 @@ var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var async = require('async');
 var pluginsBaseFolder = null;
+var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
 var wizziIndex = require('../../../index');
 pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;

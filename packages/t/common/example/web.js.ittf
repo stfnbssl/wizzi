@@ -36,14 +36,11 @@ $group
                 $if opt.folderLevel == 1
                     @ '..'
                     @ '..'
-                    @ '..'
                 $if opt.folderLevel == 2
                     @ '..'
                     @ '..'
                     @ '..'
-                    @ '..'
                 $if opt.folderLevel == 3
-                    @ '..'
                     @ '..'
                     @ '..'
                     @ '..'

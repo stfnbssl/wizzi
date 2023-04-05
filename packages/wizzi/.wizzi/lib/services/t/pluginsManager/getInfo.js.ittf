@@ -13,4 +13,5 @@
 				@ providedSchemas this.providedSchemas
 				@ providedModelTransformers this.providedModelTransformers
 				@ providedArtifactGenerators this.providedArtifactGenerators
+                @ providedWizzifiers this.providedWizzifiers
 				@ factoryPlugins factoryPluginsInfo

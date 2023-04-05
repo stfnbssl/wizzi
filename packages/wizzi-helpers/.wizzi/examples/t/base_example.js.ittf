@@ -1,0 +1,11 @@
+﻿module
+	kind jsfile
+	+
+	import util
+	import path
+	var stringify = require('json-stringify-safe')
+	var verify = require('../../lib/verify')
+	$hook imports
+	+
+	+
+	$hook

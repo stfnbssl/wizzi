@@ -25,6 +25,7 @@
 		li Wizzi Model loading
 		li Model transformation
 		li Artifact generation
+        li Wizzification
 		li Wizzi Model type generation
 		li Production manager creation
 		li Wizzi job execution
@@ -43,6 +44,9 @@
 	h3 Artifact generation
 	p Executes the generation of a single software artifact.
 	
+	h3 Wizzification
+	p Executes the generation of a single software artifact.
+
 	h3 Wizzi Model type generation
 	p The generation of the javascript modules for loading and implement a wizzi model is a
 		\b fundamental part of a wizzi plugin development.

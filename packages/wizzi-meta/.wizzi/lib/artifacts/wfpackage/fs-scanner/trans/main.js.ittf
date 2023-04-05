@@ -1,0 +1,49 @@
+﻿transformer( wfpackage, fs-scanner, true )
+	
+	$append imports
+        var async = require('async')
+		var ittfScanner = require('wizzi-utils').ittfScanner
+
+	var transformed
+		{
+			@ generatedPackages []
+
+	var fsBaseUri = model.fsBaseUri
+	# log myname, 'fsBaseUri', fsBaseUri
+    _ async.map
+        @ model.generatedPackages
+        function
+            param item
+            param callback
+            var srcPath
+                _ path.join
+                    @ fsBaseUri
+                    @ item.sourceFolder
+            log myname, 'package', item.wzName, 'srcPath', srcPath
+            _ ittfScanner.scanFolder
+                @ srcPath
+                {
+                    @ name item.wzName
+                    @ gitPath item.gitBaseUri
+                f_cb( ittf )
+                    _ ittf.insertAt
+                        @ 'version'
+                        @ item.version
+                        @ 1
+                    _ ittf.insertAt
+                        @ 'title'
+                        @ item.title
+                        @ 2
+                    # TODO why folderScanner.scan already sets this
+                        _ ittf.insertAt
+                            @ 'src-cwd'
+                            @ srcPath
+                            @ 3
+                    _ transformed.generatedPackages.push
+                        @ ittf
+                    return
+                        _ callback
+        f_cb( result )
+            _ callback
+                @ null
+                @ transformed

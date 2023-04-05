@@ -1,6 +1,6 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.13
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
 */
 'use strict';
@@ -27,6 +27,7 @@ md.acl = acl;
 md.productionOptions = require('./lib/production/options');
 md.Filesystem = Filesystem;
 md.JsonComponents = require('wizzi-repo').JsonComponents;
+md.errors = require('./lib/errors');
 
 //
 md.createFactory = function createFactory(options, callback) {

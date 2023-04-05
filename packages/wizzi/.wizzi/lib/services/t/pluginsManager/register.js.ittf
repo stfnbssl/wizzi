@@ -135,6 +135,26 @@
 					{
 						@ name item
 
+		+
+        # wizzifiers are implemented in plugins from version 0.8
+        if factoryPlugin.provides.wizzifiers
+            foreach item in factoryPlugin.provides.wizzifiers
+                set found
+                    _ _.find
+                        @ this.providedWizzifiers
+                        {
+                            @ name item
+                if found
+                    return
+                        _ error
+                            @ 'DuplicatedPluginResource'
+                            @ 'addPluginProvides'
+                            @ 'Wizzifier ' + item + ' already provided'
+                else
+                    _ this.providedWizzifiers.push
+                        {
+                            @ name item
+
 	m availableSchemas
 		var ret = []
 		foreach item in this.providedSchemas
@@ -153,5 +173,10 @@
 			_ ret.push(item.name)
 		return ret
 
+	m availableWizzifiers
+		var ret = []
+		foreach item in this.providedWizzifiers
+			_ ret.push(item.name)
+		return ret
 
 
