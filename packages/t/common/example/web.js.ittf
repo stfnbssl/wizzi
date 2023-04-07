@@ -10,7 +10,7 @@ $group
 		#
 	
     $include example_includes
-    var wizziRepo = require('wizzi-repo')
+    var wizziRepo = require('@wizzi/repo')
     var fileInfoByPath = wizziUtils.fileInfoByPath
     var async = require('async')
     var wizzi = null

@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\pluginsManager.js.ittf
 */
@@ -14,9 +14,9 @@ var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
 var log = require('../util/log')(module);
-var verify = require('wizzi-utils').verify;
-var file = require('wizzi-utils').file;
-var fail = require('wizzi-utils').fail;
+var verify = require('@wizzi/utils').verify;
+var file = require('@wizzi/utils').file;
+var fail = require('@wizzi/utils').fail;
 var errors = require('../errors');
 var existsSync = fs.existsSync || path.existsSync;
 var realpathSync = fs.realpathSync;
@@ -825,7 +825,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.01.pluginsManager.' + method,
+        method: 'wizzi@0.8.2.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

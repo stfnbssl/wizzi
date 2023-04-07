@@ -14,13 +14,13 @@ module
     import path
 	import fs
 	var stringify = require('json-stringify-safe')
-	var wizziUtils = require('wizzi-utils')
+	var wizziUtils = require('@wizzi/utils')
     +
     # local disk filesystem
     var file = wizziUtils.file
 	+
     # virtual filesystem
-    var vfile = require('wizzi-utils').vfile
+    var vfile = require('@wizzi/utils').vfile
 	# defaults to local disk filesystem
 	var fsfile = vfile()
     +

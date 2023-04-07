@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
 */
 'use strict';
@@ -8,7 +8,7 @@ var verify = require('wizzi-utils').verify;
 var util = require('util');
 var path = require('path');
 var assert = require('assert');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var errors = require('../errors');
 var ContextData = require('./contextData');
 var interpolate = require('../loader/ittfInterpolate');
@@ -316,7 +316,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.18.jswizzi.jsWizziEvalHelper.' + method,
+        method: 'wizzi-mtree@0.8.1.jswizzi.jsWizziEvalHelper.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -7,7 +7,7 @@ module.exports = {
         './wizzi-js/index.js', 
         './wizzi-web/index.js', 
     ], 
-    pluginsBaseFolder: path.join(__dirname, '..'),
+    pluginsBaseFolder: path.join(__dirname, '..', '..', '..', 'wizzi.v07', 'packages'),
     /*plugins: [
         'wizzi-core', 
         'wizzi-js', 

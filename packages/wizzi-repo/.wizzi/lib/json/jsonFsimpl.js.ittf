@@ -4,8 +4,8 @@
 	var
 		decl JsonFs = require('./fs/fsjson')
 		decl DocumentManager = require('./fs/documentmanager')
-		$$ stop 12/9/2022 decl jsonUriParser = require('wizzi-utils').uriParser
-        decl jsonUriParser = require('wizzi-utils').jsonUriParser
+		$$ stop 12/9/2022 decl jsonUriParser = require('@wizzi/utils').uriParser
+        decl jsonUriParser = require('@wizzi/utils').jsonUriParser
 
 	#
         # class JsonFsImpl

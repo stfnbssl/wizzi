@@ -1,4 +1,4 @@
-﻿common/test/base_test( ittFsNode )
+﻿common/test/base_test( ittFsNode, true )
 
     $append imports
         var ittfGraph = require('../../lib/ittfGraph/index')

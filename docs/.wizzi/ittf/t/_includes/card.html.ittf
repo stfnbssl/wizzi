@@ -1,8 +1,0 @@
-﻿$group
-    $params title
-    li
-        . card
-            . card-content
-                h3 ${title}
-                    class card-title
-                $hook

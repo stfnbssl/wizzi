@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\ittfDocumentStore.js.ittf
 */
 'use strict';
@@ -13,7 +13,7 @@ var verify = require('wizzi-utils').verify;
 var util = require('util');
 var errors = require('./errors');
 // var uriParser = require('./uriParser')
-var uriParser = require('wizzi-utils').uriParser;
+var uriParser = require('@wizzi/utils').uriParser;
 var FileSystemStore = require('./fileSystemStore');
 var MongoDbStore = {};
 var BrowserFSStore = {};

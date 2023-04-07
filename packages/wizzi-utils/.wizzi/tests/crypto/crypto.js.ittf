@@ -1,4 +1,4 @@
-﻿common/test/base_test( crypto )
+﻿common/test/base_test( crypto, true )
 
     $append imports
         var crypto = require('../../lib/crypto/index')

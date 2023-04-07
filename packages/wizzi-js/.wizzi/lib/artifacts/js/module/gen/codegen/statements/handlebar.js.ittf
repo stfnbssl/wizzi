@@ -1,5 +1,0 @@
-﻿loader( handlebar )
-
-	stm( handlebar
-		_ ctx.w('{{' + model.wzName + '}}')
-		r_cb()

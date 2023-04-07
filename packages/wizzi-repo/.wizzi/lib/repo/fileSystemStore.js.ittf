@@ -1,7 +1,7 @@
 ﻿module wizzi-repo.fileSystemStore
     kind jsfile
 
-    var file = require('wizzi-utils').file
+    var file = require('@wizzi/utils').file
     var errors = require('./errors')
 
     class FileSystemStore

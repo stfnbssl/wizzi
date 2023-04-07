@@ -1,6 +1,9 @@
 ﻿module 
     kind jsfile
 
+    # legacy function container
+    # these now merged into underscore container
+
 	set module.exports
 		{
 			@ isEmpty

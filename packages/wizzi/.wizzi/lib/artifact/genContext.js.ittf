@@ -2,8 +2,8 @@
     kind jsfile
 
 	var StringWriter = require('../util/stringWriter')
-	var file = require('wizzi-utils').file
-	var verify = require('wizzi-utils').verify
+	var file = require('@wizzi/utils').file
+	var verify = require('@wizzi/utils').verify
     var block = require('./block')
     var interpolate = require('../util/interpolate')
     var errors = require('../errors')

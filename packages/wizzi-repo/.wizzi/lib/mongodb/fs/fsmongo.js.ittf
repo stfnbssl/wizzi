@@ -4,7 +4,7 @@
 	import assert
 	import path
 	import util
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var MongoClient = null
 
 	var FSITEMS = 'fsitems'

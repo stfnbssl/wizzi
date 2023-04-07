@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\jsonFsimpl.js.ittf
 */
 'use strict';
@@ -12,7 +12,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 var verify = require('wizzi-utils').verify;
 var JsonFs = require('./fs/fsjson'),
     DocumentManager = require('./fs/documentmanager'),
-    jsonUriParser = require('wizzi-utils').jsonUriParser;
+    jsonUriParser = require('@wizzi/utils').jsonUriParser;
 //
 var JsonFsImpl = (function () {
     function JsonFsImpl(jsonFsData) {

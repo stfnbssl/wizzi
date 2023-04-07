@@ -2,7 +2,7 @@
     kind jsfile
 
 	import path
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var config = require('../../config')
 	var errors = require('./errors')
 	var IttfDocumentStore = require('./ittfDocumentStore')

@@ -1,7 +1,7 @@
 ﻿module wizzi@${wzCtx.version}.storePool
 	kind jsfile
 
-	var repo = require('wizzi-repo')
+	var repo = require('@wizzi/repo')
 	
 
 	class StorePool

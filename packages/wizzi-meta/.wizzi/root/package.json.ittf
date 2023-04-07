@@ -1,9 +1,0 @@
-common/plugin_package( wizzi-meta, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license}  )
-
-    postcss "^7.0.16"
-    postcss-color-function "^4.1.0"
-
-    $append devDependencies
-
-    $append scripts
-        examples:wfpackage "node examples/wfpackage"

@@ -4,7 +4,7 @@
     var util = require('util')
     var escodegen = require('escodegen')
     var esprima = require('esprima')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     var mainErrors = require('../errors')
     var errors = require('./errors')
     var verbose = false

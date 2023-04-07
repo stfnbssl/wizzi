@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/repo",
-    "version": "0.7.11",
-    "title": "Ittf documents repository manager for the wizzi factory.",
+    "version": "0.8.2",
+    "description": "Ittf documents repository manager for the wizzi factory.",
     "license": "MIT",
     "schemas": []
 }

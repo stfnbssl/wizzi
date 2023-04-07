@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
 */
@@ -16,15 +16,15 @@ var path = require('path');
 var stringify = require('json-stringify-safe');
 var async = require('async');
 
-var repo = require('wizzi-repo');
-var mtree = require('wizzi-mtree');
+var repo = require('@wizzi/repo');
+var mtree = require('@wizzi/mtree');
 var acl = require('../acl');
 var productionOptions = require('../production/options');
 var ProductionManager = null;
 var GenContext = require('../artifact/genContext');
-var verify = require('wizzi-utils').verify;
-var file = require('wizzi-utils').file;
-var JsonComponents = require('wizzi-repo').JsonComponents;
+var verify = require('@wizzi/utils').verify;
+var file = require('@wizzi/utils').file;
+var JsonComponents = require('@wizzi/repo').JsonComponents;
 var StringWriter = require('../util/stringWriter');
 var errors = require('../errors');
 var log = require('../util/log')(module);
@@ -1492,14 +1492,7 @@ var WizziFactory = (function () {
             if (err) {
                 return callback(err);
             }
-            // load the schemaWizziModel instance into the bootstrap wizzimodel.
-            // This is required until the generation of the wizzi model of type 'wfschema'
-            // is not completely automated.
-            if (BootWizziSchema == null) {
-                BootWizziSchema = require(bootModelUri).WizziSchema;
-            }
-            var bootWizziModel = new BootWizziSchema(schemaWizziModel.wzName);
-            bootWizziModel.loadFromWizziModel(schemaWizziModel);
+            var bootWizziModel = schemaWizziModel;
             log.info('starting the artifact generator wfschema/model');
             that.generateArtifact(bootWizziModel, bootModelDefUri, 'wfschema/model', loadContext, function(err, wizziModelArtifact) {
                 if (err) {
@@ -1941,7 +1934,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.01.wizziFactory.' + method,
+        method: 'wizzi@0.8.2.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

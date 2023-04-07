@@ -2,7 +2,7 @@
 	
 	$append imports
 		var async = require('async')
-		var vfile = require('wizzi-utils').vfile
+		var vfile = require('@wizzi/utils').vfile
 		var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl')
 
 	var fsimpl

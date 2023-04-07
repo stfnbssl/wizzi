@@ -3,7 +3,7 @@
     var assert = require('assert')
     var path = require('path')
     var util = require('util')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     var log
         _ require('../util/log')
             ( 

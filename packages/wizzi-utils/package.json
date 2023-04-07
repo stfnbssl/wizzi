@@ -1,8 +1,8 @@
 {
-    "name": "wizzi-utils",
+    "name": "@wizzi/utils",
     "sideEffects": false,
-    "version": "0.7.22",
-    "description": "Utility library for the wizzi factory.",
+    "version": "0.8.2",
+    "description": "Utility library for the wizzi factory",
     "author": {
         "name": "Stefano Bassoli",
         "email": "stfn.bssl@gmail.com"
@@ -11,12 +11,17 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-utils/license.txt"
+            "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-utils/license.txt",
+            "directory": "packages/wizzi-utils"
         }
     ],
+    "bugs": {
+        "url": "https://github.com/stfnbssl/wizzi/issues"
+    },
     "repository": {
         "type": "git",
-        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-utils"
+        "url": "https://github.com/stfnbssl/wizzi",
+        "directory": "packages/wizzi-utils"
     },
     "engines": {
         "node": ">=0.10.28",
@@ -31,7 +36,8 @@
         "iconv-lite": "^0.4.15",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.4",
-        "wizzi-helpers": "0.7.1",
+        "@wizzi/helpers": "0.8.1",
+        "wizzi-utils": "0.7.22",
         "extsprintf": "^1.2.0",
         "fs-extra": "latest",
         "glob": "^7.1.2",

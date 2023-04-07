@@ -4,7 +4,7 @@
 	import util
 	var errors = require('./errors')
 	# var uriParser = require('./uriParser')
-	var uriParser = require('wizzi-utils').uriParser
+	var uriParser = require('@wizzi/utils').uriParser
 	var FileSystemStore = require('./fileSystemStore')
 	$if wzConfig_useMongo
 		var MongoDbStore = require('./mongoDbStore')

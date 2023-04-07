@@ -50,7 +50,7 @@
 			lodash "^4.17.20"
             $if !!isDevelopment == false
                 wizzi-mtree "${versions['wizzi-mtree']}"
-                wizzi-utils "${versions['wizzi-utils']}"
+                wizzi-utils "${versions['@wizzi/utils']}"
 			$hook
             
 	

@@ -3,7 +3,7 @@
 
     $include versions
 
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var jsWizziRunner = require('../jswizzi/jsWizziRunner')
 
 	#

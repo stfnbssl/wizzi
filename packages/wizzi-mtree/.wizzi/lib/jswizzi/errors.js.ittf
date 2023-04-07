@@ -2,7 +2,7 @@
 	kind jsfile
 
 	import util
-	var wizziUtils = require('wizzi-utils')
+	var wizziUtils = require('@wizzi/utils')
 	var f_verify = require('./functions/verify')
 	+
     var pkgVersioned = ' (${wzCtx.name}.${wzCtx.version})'

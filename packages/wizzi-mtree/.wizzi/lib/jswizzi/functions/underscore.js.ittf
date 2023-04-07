@@ -2,7 +2,7 @@
     kind jsfile
 
 	import util
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var inflect = require('i')(true)
     
     set module.exports
@@ -80,7 +80,12 @@
 					param obj
 					return toString.call(obj) === '[object Function]'
 
-			@ deinline
+			@ isUndefined
+				function
+					param obj
+					return obj === void 0
+			
+            @ deinline
 				function
 					param text
 					if this.isNotEmpty(text) == false
@@ -167,6 +172,42 @@
                         if result.indexOf(item) < 0
                             _ result.push(item)
                     return result
+
+			@ now_GMYHMS
+				function
+					var date = new Date()
+					+ return date.getDate() + '/' +
+						+ (date.getMonth() + 1) + '/' +
+						+ date.getFullYear() + ':' +
+						+ date.getHours() + ':' +
+						+ date.getMinutes() + ':' +
+						+ date.getSeconds();
+			@ GMYHMS
+				function
+                    param date
+					+ return date.getDate() + '/' +
+						+ (date.getMonth() + 1) + '/' +
+						+ date.getFullYear() + ':' +
+						+ date.getHours() + ':' +
+						+ date.getMinutes() + ':' +
+						+ date.getSeconds();
+			@ GMYHM
+				function
+                    param date
+					+ return date.getDate() + '/' +
+						+ (date.getMonth() + 1) + '/' +
+						+ date.getFullYear() + ':' +
+						+ date.getHours() + ':' +
+						+ date.getMinutes()
+			@ GMY
+				function
+                    param date
+					+ return date.getDate() + '/' +
+						+ (date.getMonth() + 1) + '/' +
+						+ date.getFullYear()                    
+
+
+
 
 
 

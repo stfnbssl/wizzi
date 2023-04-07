@@ -1,6 +1,8 @@
 # wizzi-mtree
 
-Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup..
+.
+
+
 
 
 ## Work still in progress
@@ -51,9 +53,12 @@ callback
 .</tr>
 </table>
 
+
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 

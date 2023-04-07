@@ -6,10 +6,10 @@
 	import util
 	import async
 	var stringify = require('json-stringify-safe')
-	var verify = require('wizzi-utils').verify
-	var vfile = require('wizzi-utils').vfile
+	var verify = require('@wizzi/utils').verify
+	var vfile = require('@wizzi/utils').vfile
 	var file = vfile()
-	var mocks = require('wizzi-utils').mocks
+	var mocks = require('@wizzi/utils').mocks
 	var repo = mocks.repo
 
 	$hook imports

@@ -6,7 +6,7 @@
 	import async
     var stringify = require('json-stringify-safe')
 	+
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var log = require('./lib/util/log')(module)
 	var acl = require('./lib/acl')
 	var ProductionManager = require('./lib/production/manager')
@@ -14,14 +14,14 @@
 	var wizziFactory = require('./lib/services/wizziFactory')
 	+
 	var md = module.exports = {}
-	set md.file = require('wizzi-utils').file
+	set md.file = require('@wizzi/utils').file
 	set md.verify = verify
-	set md.config = require('wizzi-utils').config
+	set md.config = require('@wizzi/utils').config
 	set md.genContext = require('./lib/artifact/genContext')
 	set md.acl = acl
 	set md.productionOptions = require('./lib/production/options')
 	set md.Filesystem = Filesystem
-	set md.JsonComponents = require('wizzi-repo').JsonComponents
+	set md.JsonComponents = require('@wizzi/repo').JsonComponents
     set md.errors = require('./lib/errors')
 	+
 	#

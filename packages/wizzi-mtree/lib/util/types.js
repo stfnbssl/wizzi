@@ -1,11 +1,11 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\util\types.js.ittf
 */
 'use strict';
 var errors = require('../errors');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 function objectify(value, type, node, unquote) {
     if (value === '@@null') {
         return null;

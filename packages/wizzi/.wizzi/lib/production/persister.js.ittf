@@ -4,7 +4,7 @@
     var path = require('path')
     var util = require('util')
     var async = require('async')
-    # TODO VIA var file = require('wizzi-utils').file
+    # TODO VIA var file = require('@wizzi/utils').file
     var log
         _ require('../util/log')
             ( 

@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\wizzi\models\bootstrap\wfschema-boot-model.js.ittf
 */
@@ -11,7 +11,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 var util = require('util');
 var _ = require('lodash');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var stringify = require('json-stringify-safe');
 var schemautil = require('./util');
 var md = module.exports = {};

@@ -5,9 +5,9 @@
 	var util = require('util')
 	var assert = require('assert')
 	var async = require('async')
-	var verify = require('wizzi-utils').verify
-	var file = require('wizzi-utils').file
-	var fail = require('wizzi-utils').fail
+	var verify = require('@wizzi/utils').verify
+	var file = require('@wizzi/utils').file
+	var fail = require('@wizzi/utils').fail
 	var GenContext = require('../artifact/genContext')
 	var StringWriter = require('../util/stringWriter')
 	var log = require('../util/log')(module)

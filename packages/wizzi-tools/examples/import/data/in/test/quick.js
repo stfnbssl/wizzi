@@ -1,1 +1,0 @@
-a = alpha({ a: 1 }).beta()

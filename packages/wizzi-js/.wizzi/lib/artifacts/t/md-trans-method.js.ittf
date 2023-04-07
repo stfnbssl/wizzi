@@ -1,8 +1,0 @@
-﻿$group
-    $params name
-
-    set md.trans.prototype.${name}
-        function
-            param model
-            param ctx
-            $hook

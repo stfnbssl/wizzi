@@ -1,9 +1,0 @@
-{
-
-    $
-        var ctx = {
-            page: 'howtos'
-        }
-
-    name "howtos"
-    

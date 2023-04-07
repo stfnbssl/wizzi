@@ -1,5 +1,7 @@
-common/kernel_utils_package( ${wfpackage.name}, ${wfpackage.version}, ${wfpackage.title}., ${wfpackage.license}  )
+{
 
-	extsprintf "^1.2.0"
+    common/kernel_utils_package(true)
 
-	$append devDependencies
+        extsprintf "^1.2.0"
+
+        $append devDependencies

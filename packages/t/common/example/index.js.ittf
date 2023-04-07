@@ -8,9 +8,9 @@
 	var path = require('path')
 	var fs = require('fs')
 	var stringify = require('json-stringify-safe')
-	var wizziUtils = require('wizzi-utils')
+	var wizziUtils = require('@wizzi/utils')
 	var mocks = wizziUtils.mocks
-	var mtree = require('wizzi-mtree')
+	var mtree = require('@wizzi/mtree')
 	#
 		$if folderLevel == 2
 			var mocks = require('../../tests/mocks')

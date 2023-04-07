@@ -1,6 +1,0 @@
-﻿$group
-	$params ext
-
-	artifact any_plain_${ext}
-		src ./**/*.${ext}
-		extension ${ext}

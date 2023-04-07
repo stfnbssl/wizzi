@@ -5,9 +5,9 @@
 	var fs = require('fs')
 	var _ = require('lodash')
 	var log = require('../util/log')(module)
-	var verify = require('wizzi-utils').verify
-	var file = require('wizzi-utils').file
-	var fail = require('wizzi-utils').fail
+	var verify = require('@wizzi/utils').verify
+	var file = require('@wizzi/utils').file
+	var fail = require('@wizzi/utils').fail
 	var errors = require('../errors')
     var existsSync = fs.existsSync || path.existsSync
     var realpathSync = fs.realpathSync

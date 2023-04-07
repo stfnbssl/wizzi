@@ -1,7 +1,0 @@
-module
-
-	
-	html_f
-		div
-			span Hello
-			span {{ ctx.name }}

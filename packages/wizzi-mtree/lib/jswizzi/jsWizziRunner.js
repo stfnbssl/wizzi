@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
 */
 'use strict';
@@ -8,7 +8,7 @@ var verify = require('wizzi-utils').verify;
 var util = require('util');
 var escodegen = require('escodegen');
 var esprima = require('esprima');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var mainErrors = require('../errors');
 var errors = require('./errors');
 var verbose = false;
@@ -1342,7 +1342,7 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
 function local_error_new(name, method, message, node, inner, other) {
     return new mainErrors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
             errorName: name, 
-            method: 'wizzi-mtree@0.7.18.jsWizzi.jsWizziRunner.' + method, 
+            method: 'wizzi-mtree@0.8.1.jsWizzi.jsWizziRunner.' + method, 
             ...other||{}, 
             inner: inner
          });
@@ -1495,7 +1495,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.7.18.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.8.1.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

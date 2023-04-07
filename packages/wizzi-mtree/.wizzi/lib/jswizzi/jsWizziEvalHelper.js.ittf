@@ -4,7 +4,7 @@
 	var util = require('util')
     var path = require('path')
     var assert = require('assert')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     var errors = require('../errors')
 	var ContextData = require('./contextData')
     var interpolate = require('../loader/ittfInterpolate')

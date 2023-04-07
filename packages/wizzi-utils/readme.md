@@ -3,6 +3,8 @@
 Utility library for the wizzi factory.
 
 
+
+
 ## Work still in progress
 
 Availability of features will be announced
@@ -163,9 +165,12 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 * * *
 ## Helpers Feature
 #### var helpers = require('wizzi-utils').helpers
+
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 

@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\persister.js.ittf
 */
@@ -12,7 +12,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 var path = require('path');
 var util = require('util');
 var async = require('async');
-// TODO VIA var file = require('wizzi-utils').file
+// TODO VIA var file = require('@wizzi/utils').file
 var log = require('../util/log')(module)
 ;
 

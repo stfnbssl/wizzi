@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/util-browser",
-    "version": "0.7.22",
-    "title": "Wizzi standalone for browser",
+    "version": "0.7.23",
+    "description": "Wizzi standalone for browser",
     "license": "MIT",
     "schemas": []
 }

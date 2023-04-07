@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\nodifier.js.ittf
 */
 'use strict';
@@ -12,8 +12,8 @@ var del = require('del');
 var expect = require('expect.js');
 
 var _ = require('lodash');
-var file = require('wizzi-utils').file;
-var verify = require('wizzi-utils').verify;
+var file = require('@wizzi/utils').file;
+var verify = require('@wizzi/utils').verify;
 var createStoreFactory = require('wizzi-repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
@@ -30,7 +30,7 @@ var liner = require('../../../lib/loader/liner');
 var nodifier = require('../../../lib/loader/nodifier');
 var MTreeBrick = require('../../../lib/loader/mTreeBrick').MTreeBrick;
 var LoadHistory = require('../../../lib/loader/loadHistory').LoadHistory;
-var file = require('wizzi-utils').file;
+var file = require('@wizzi/utils').file;
 
 function evaluate(uri, callback) {
     var loadContext = {

@@ -2,8 +2,8 @@
 	kind jsfile
 
 	import util
-	var fail = require('wizzi-utils').fail
-	var utilsErrors = require('wizzi-utils').errors
+	var fail = require('@wizzi/utils').fail
+	var utilsErrors = require('@wizzi/utils').errors
     var pkgVersioned = ' (${wzCtx.name}.${wzCtx.version})'
 
 	+

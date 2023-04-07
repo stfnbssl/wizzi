@@ -1,6 +1,8 @@
-# wizzi
+# @wizzi/factory
 
 The Wizzi Factory.
+
+
 
 
 ## Work still in progress
@@ -110,9 +112,12 @@ wizzi.model(
     ...
     });
 ```
+
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 

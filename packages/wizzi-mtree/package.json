@@ -1,8 +1,8 @@
 {
-    "name": "wizzi-mtree",
+    "name": "@wizzi/mtree",
     "sideEffects": false,
-    "version": "0.7.18",
-    "description": "Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup..",
+    "version": "0.8.1",
+    "description": "Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup.",
     "author": {
         "name": "Stefano Bassoli",
         "email": "stfn.bssl@gmail.com"
@@ -14,9 +14,13 @@
             "url": "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
         }
     ],
+    "bugs": {
+        "url": "https://github.com/stfnbssl/wizzi/issues"
+    },
     "repository": {
         "type": "git",
-        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi-mtree"
+        "url": "https://github.com/stfnbssl/wizzi",
+        "directory": "packages/"
     },
     "engines": {
         "node": ">=0.10.28",
@@ -33,6 +37,7 @@
         "iconv-lite": "^0.6.2",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
+        "@wizzi/utils": "0.8.1",
         "wizzi-utils": "0.7.22",
         "escodegen": "^1.8.1",
         "esprima": "^3.1.3",
@@ -44,6 +49,6 @@
         "del": "^6.0.0",
         "expect.js": "^0.3.1",
         "object-inspect": "^1.6.0",
-        "wizzi-repo": "file:../../wizzi-repo/dist"
+        "wizzi-repo": "latest"
     }
 }

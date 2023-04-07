@@ -1,13 +1,13 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\util\node.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var util = require('util');
 var assert = require('assert');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var md = module.exports = {};
 //
 //

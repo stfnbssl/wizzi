@@ -1,7 +1,7 @@
 {
-    "name": "wizzi",
-    "version": "0.8.01",
-    "title": "The Wizzi Factory.",
+    "name": "@wizzi/factory",
+    "version": "0.8.2",
+    "description": "The Wizzi Factory.",
     "license": "MIT",
     "schemas": []
 }

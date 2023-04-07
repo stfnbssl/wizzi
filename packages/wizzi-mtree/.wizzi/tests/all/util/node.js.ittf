@@ -1,7 +1,7 @@
 ﻿base_test( util.node )
 
 	$append imports
-		var ittfGraph = require('wizzi-utils').IttfDocumentGraph
+		var ittfGraph = require('@wizzi/utils').IttfDocumentGraph
 		var node = require('../../../lib/util/node')
 
 	$include nodeUpdates

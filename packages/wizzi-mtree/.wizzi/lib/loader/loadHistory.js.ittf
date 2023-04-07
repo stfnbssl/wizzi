@@ -3,7 +3,7 @@
     
 	var util = require('util')
     var MTreeBrickProvider = null
-	var utilsErrors = require('wizzi-utils').errors
+	var utilsErrors = require('@wizzi/utils').errors
     
 	#
 		# One mTree loading uses 1 mTreeBrickProvider and 1 loadHistory.

@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\io\filesystem.js.ittf
 */
@@ -13,7 +13,7 @@ var util = require('util');
 var path = require('path');
 var glob = require('glob');
 var async = require('async');
-var file = require('wizzi-utils').file;
+var file = require('@wizzi/utils').file;
 
 var isMounted = false,
     fsBaseFolderPath = null;

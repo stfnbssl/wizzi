@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\model\modelInfo.js.ittf
 */
@@ -15,8 +15,8 @@ var assert = require("assert");
 var path = require("path");
 var async = require("async");
 var errors = require('../errors');
-var verify = require('wizzi-utils').verify;
-var ittfs = require('wizzi-repo').Filesystem;
+var verify = require('@wizzi/utils').verify;
+var ittfs = require('@wizzi/repo').Filesystem;
 
 //
 

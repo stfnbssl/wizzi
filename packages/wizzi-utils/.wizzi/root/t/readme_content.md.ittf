@@ -1,7 +1,7 @@
 ﻿$group
 	
 	h2 vfile - virtual file system
-	h4 var vfile = require('wizzi-utils').vfile
+	h4 var vfile = require('@wizzi/utils').vfile
 	
 	h3 vfileInst - create a virtual file system instance
 	h4 var vfileInst = vfile([fsimpl])
@@ -34,7 +34,7 @@
 	$include ./fsimpl
 	
 	h2 verify - helper object
-	h4 var verify = require('wizzi-utils').verify
+	h4 var verify = require('@wizzi/utils').verify
 
 	h2 verify - type checks
 	h4 verify.isDefined(item)
@@ -92,7 +92,7 @@
 	h4 verify.fatal(err[, code])
 
 	h2 folderScanner - ittf documents folder scanner
-	h4 var folderScanner = require('wizzi-utils').folderScanner
+	h4 var folderScanner = require('@wizzi/utils').folderScanner
 
 
 	h2 folderScanner.scan(folderPath[, options])
@@ -102,7 +102,7 @@
 		li returns the root IttfFsNode of the 'folderPath' with its descendant folders as children.
 
 	h2 ittfDocumentGraph - enhanced mTree with import, export, analize capabilities
-	h4 var ittfDocumentGraph = require('wizzi-utils').ittfDocumentGraph
+	h4 var ittfDocumentGraph = require('@wizzi/utils').ittfDocumentGraph
 	h4 ittfDocumentGraph.loadFrom(path_string)
 	ul
 		li `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation)
@@ -113,7 +113,7 @@
 		li returns an ittfDocumentGraph instance
 
 	h2 ittfHtmlPrettifier - ittf html formatter for documentation
-	h4 var ittfHtmlPrettifier = require('wizzi-utils').ittfHtmlPrettifier
+	h4 var ittfHtmlPrettifier = require('@wizzi/utils').ittfHtmlPrettifier
 
 	h2 ittfHtmlPrettifier(rootNode[, options])
 	ul
@@ -121,7 +121,7 @@
 		li `options` `Object`
 
 	h2 jsHtmlPrettifier - javascript html formatter for documentation
-	h4 var jsHtmlPrettifier = require('wizzi-utils').jsHtmlPrettifier
+	h4 var jsHtmlPrettifier = require('@wizzi/utils').jsHtmlPrettifier
 
 	h2 jsHtmlPrettifier(script[, options])
 	ul

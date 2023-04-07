@@ -1,7 +1,8 @@
 {
     "name": "@wizzi/utils",
-    "version": "0.7.22",
-    "title": "Utility library for the wizzi factory",
+    "gitname": "wizzi-utils",
+    "version": "0.8.2",
+    "description": "Utility library for the wizzi factory",
     "license": "MIT",
     "schemas": []
 }

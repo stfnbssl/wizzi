@@ -1,6 +1,0 @@
-module
-	$params name|stefi
-	kind jsfile
-	var user
-		{
-			@ name '${name}'

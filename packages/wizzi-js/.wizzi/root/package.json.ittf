@@ -1,3 +1,0 @@
-common/plugin_package( wizzi-js, ${wzCtx.version}, ${wzCtx.title}., ${wzCtx.license}  )
-
-	$append devDependencies

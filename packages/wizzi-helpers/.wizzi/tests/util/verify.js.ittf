@@ -1,4 +1,4 @@
-﻿base_test( verify )
+﻿base_test( verify, true )
 	
 	$append imports
 		var verify = require('../../lib/verify')

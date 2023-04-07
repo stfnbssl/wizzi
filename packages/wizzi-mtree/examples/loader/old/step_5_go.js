@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\step_5_go.js.ittf
 */
 'use strict';
@@ -8,10 +8,10 @@ var path = require('path');
 var util = require('util');
 var async = require('async');
 var stringify = require('json-stringify-safe');
-var verify = require('wizzi-utils').verify;
-var vfile = require('wizzi-utils').vfile;
+var verify = require('@wizzi/utils').verify;
+var vfile = require('@wizzi/utils').vfile;
 var file = vfile();
-var mocks = require('wizzi-utils').mocks;
+var mocks = require('@wizzi/utils').mocks;
 var repo = mocks.repo;
 var loader_evaluator = function(step_callback) {
     heading1('EXAMPLE')

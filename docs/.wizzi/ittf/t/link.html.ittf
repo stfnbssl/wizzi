@@ -1,6 +1,0 @@
-﻿$group
-    $params title, href
-    div
-        style text-align: left
-        a ${title}
-            href ${href}

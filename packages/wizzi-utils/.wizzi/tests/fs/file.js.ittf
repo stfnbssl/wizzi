@@ -1,4 +1,4 @@
-﻿base_test( file )
+﻿base_test( file, true )
 	
 	$append imports
 		var file = require('../../lib/fSystem/file')

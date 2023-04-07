@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
 */
@@ -8,7 +8,7 @@ var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
 var async = require('async');
-var wizziUtils = require('wizzi-utils');
+var wizziUtils = require('@wizzi/utils');
 var verify = wizziUtils.verify;
 var file = wizziUtils.file;
 var wizzi = null;

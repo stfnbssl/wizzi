@@ -1,4 +1,4 @@
-﻿base_test( vfile )
+﻿base_test( vfile, true )
 	
 	$append imports
 		var async = require('async')

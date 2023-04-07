@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\crypto\crypto.js.ittf
 */
 'use strict';
@@ -11,12 +11,7 @@ var util = require('util');
 var del = require('del');
 var expect = require('expect.js');
 
-var _ = require('lodash');
-var mtree = require('wizzi-mtree');
-var file = require('wizzi-utils').file;
-var vfile = require('wizzi-utils').vfile;
-var verify = require('wizzi-utils').verify;
-var mocks = require('wizzi-utils').mocks;
+var verify = require('@wizzi/helpers').verify;
 
 var crypto = require('../../lib/crypto/index');
 
@@ -34,16 +29,6 @@ describe("crypto", function() {
         expect(text).to.eql(decrypt2Simple);
     });
 });
-
-function getWizziObject() {
-    return {
-            loadMTree: mtree.createLoadMTree(mocks.repo.getCreateFilesystemStore(), {
-                useCache: false
-             }), 
-            file: file, 
-            verify: verify
-         };
-}
 
 function getLoadModelContext(mTreeBuildupContext) {
     return mocks.getLoadModelContext(mTreeBuildupContext);

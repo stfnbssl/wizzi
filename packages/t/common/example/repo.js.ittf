@@ -11,9 +11,9 @@ $group
 	
     $include example_includes
     
-    var createStoreFactory = require('wizzi-repo').createStoreFactory
+    var createStoreFactory = require('@wizzi/repo').createStoreFactory
     
-    var vfile = require('wizzi-utils').vfile
+    var vfile = require('@wizzi/utils').vfile
 	
 
     $if opt.folderLevel == 1

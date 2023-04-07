@@ -1,4 +1,4 @@
-﻿base_test( mocks )
+﻿base_test( mocks, true )
 
 	$append imports
 		var mocks = require('../../lib/mocks')

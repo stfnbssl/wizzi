@@ -3,7 +3,7 @@
 
     var util = require('util')
     var path = require('path')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     set module.exports =
         function 
             param wzmodel

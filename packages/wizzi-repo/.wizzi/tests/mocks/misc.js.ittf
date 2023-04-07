@@ -2,7 +2,7 @@
 	kind jsfile
 
 	import path
-	var file = require('wizzi-utils').file
+	var file = require('@wizzi/utils').file
 	var IttfDocumentStore = require('../../../lib/repo/ittfDocumentStore')
 
 	set module.exports

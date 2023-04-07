@@ -1,15 +1,14 @@
-{
-	$params pkgName, version, description, license|MIT
+$group
 
     $include versions
 	
-	name  "${pkgName}"
+	name  "${wzCtx.name}"
 
     sideEffects false
 	
-    version "${version}"
+    version "${wzCtx.version}"
 	
-	description "${description}"
+	description "${wzCtx.description}"
     
 	author
 		{
@@ -20,15 +19,24 @@
 	
 	licenses
 		[
-			$if license == 'MIT'
-			{
-				type "MIT"
-				url "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
+			$if wzCtx.license == 'MIT'
+                {
+                    type "MIT"
+                    url "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
 	
-	repository
+
+    bugs
+        {
+            url "https://github.com/stfnbssl/wizzi/issues"
+  
+    $$ homepage "https://wizzihub.com/docs/packages/${wzCtx.gitname}.html",
+	
+    repository
 		{
 			type "git"
-			url "https://github.com/stfnbssl/wizzi/tree/master/packages/${pkgName}"
+			url "https://github.com/stfnbssl/wizzi"
+            directory "packages/${wzCtx.gitname}"
+
 
 	engines
 		{
@@ -48,7 +56,8 @@
 			iconv-lite "^0.6.2"
 			json-stringify-safe "^5.0.1"
 			lodash "^4.17.20"
-			wizzi-utils "${versions['wizzi-utils']}"
+			@wizzi/utils "${versions['@wizzi/utils']}"
+            wizzi-utils "${versions['wizzi-utils']}"
 			$hook
 	
 	devDependencies

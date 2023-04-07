@@ -11,7 +11,7 @@
         #
         # Static methods only
 
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
 	var interpolate = require('./ittfInterpolate')
 
 	wz-function codify

@@ -3,8 +3,8 @@
 
     var path = require('path')
     var util = require('util')
-    var file = require('wizzi-utils').file
-	var fail = require('wizzi-utils').fail
+    var file = require('@wizzi/utils').file
+	var fail = require('@wizzi/utils').fail
 	var runnerServer = null
 
 	#

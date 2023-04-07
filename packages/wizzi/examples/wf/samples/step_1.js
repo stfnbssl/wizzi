@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\samples\step_1.js.ittf
 */
@@ -8,13 +8,13 @@ var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
-var wizziUtils = require('wizzi-utils');
+var wizziUtils = require('@wizzi/utils');
 
 // local disk filesystem
 var file = wizziUtils.file;
 
 // virtual filesystem
-var vfile = require('wizzi-utils').vfile;
+var vfile = require('@wizzi/utils').vfile;
 // defaults to local disk filesystem
 var fsfile = vfile();
 

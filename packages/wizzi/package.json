@@ -1,8 +1,8 @@
 {
-    "name": "wizzi",
+    "name": "@wizzi/factory",
     "sideEffects": false,
-    "version": "0.8.01",
-    "description": "The Wizzi Factory..",
+    "version": "0.8.2",
+    "description": "The Wizzi Factory.",
     "author": {
         "name": "Stefano Bassoli",
         "email": "stfn.bssl@gmail.com"
@@ -14,9 +14,13 @@
             "url": "https://github.com/stfnbssl/wizzi/tree/master/license.txt"
         }
     ],
+    "bugs": {
+        "url": "https://github.com/stfnbssl/wizzi/issues"
+    },
     "repository": {
         "type": "git",
-        "url": "https://github.com/stfnbssl/wizzi/tree/master/packages/wizzi"
+        "url": "https://github.com/stfnbssl/wizzi",
+        "directory": "packages/"
     },
     "engines": {
         "node": ">=0.10.28",
@@ -37,10 +41,11 @@
         "iconv-lite": "^0.6.2",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
+        "@wizzi/utils": "0.8.1",
         "wizzi-utils": "0.7.22",
         "extsprintf": "^1.2.0",
-        "wizzi-mtree": "0.7.18",
-        "wizzi-repo": "0.7.11"
+        "@wizzi/mtree": "0.8.1",
+        "@wizzi/repo": "0.8.2"
     },
     "devDependencies": {
         "del": "^6.0.0",

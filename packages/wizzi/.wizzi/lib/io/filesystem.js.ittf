@@ -5,7 +5,7 @@
 	import path
 	import glob
 	import async
-	var file = require('wizzi-utils').file
+	var file = require('@wizzi/utils').file
 	+
     var
 		decl isMounted = false

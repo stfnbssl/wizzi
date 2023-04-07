@@ -4,10 +4,10 @@
 	import path
 	import assert
 	import async
-	var vfile = require('wizzi-utils').vfile
-	var verify = require('wizzi-utils').verify
-	$$ stop 12/9/2022 var jsonUriParser = require('wizzi-utils').uriParser
-    var jsonUriParser = require('wizzi-utils').jsonUriParser
+	var vfile = require('@wizzi/utils').vfile
+	var verify = require('@wizzi/utils').verify
+	$$ stop 12/9/2022 var jsonUriParser = require('@wizzi/utils').uriParser
+    var jsonUriParser = require('@wizzi/utils').jsonUriParser
 	var errors = require('../../errors')
 	var FsStream = require('../../utils/fsstream')
 	var Promise = require('promise')

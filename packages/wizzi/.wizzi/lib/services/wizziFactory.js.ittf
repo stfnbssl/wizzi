@@ -6,15 +6,15 @@
 	var stringify = require('json-stringify-safe')
     var async = require('async')
 	+
-	var repo = require('wizzi-repo')
-	var mtree = require('wizzi-mtree')
+	var repo = require('@wizzi/repo')
+	var mtree = require('@wizzi/mtree')
 	var acl = require('../acl')
 	var productionOptions = require('../production/options')
 	var ProductionManager = null
 	var GenContext = require('../artifact/genContext')
-	var verify = require('wizzi-utils').verify
-	var file = require('wizzi-utils').file
-	var JsonComponents = require('wizzi-repo').JsonComponents
+	var verify = require('@wizzi/utils').verify
+	var file = require('@wizzi/utils').file
+	var JsonComponents = require('@wizzi/repo').JsonComponents
 	var StringWriter = require('../util/stringWriter')
 	var errors = require('../errors')
 	var log = require('../util/log')(module)

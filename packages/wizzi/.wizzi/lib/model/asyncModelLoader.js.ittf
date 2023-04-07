@@ -28,7 +28,7 @@
     var util = require('util')
     var async = require('async')
     var _ = require('lodash')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     var log
         _ require('../util/log')
             ( 

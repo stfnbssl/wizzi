@@ -12,7 +12,7 @@ module
     var fs = require('fs')
     var stringify = require('json-stringify-safe')
     var async = require('async')
-	var wizziUtils = require('wizzi-utils')
+	var wizziUtils = require('@wizzi/utils')
 	var verify = wizziUtils.verify
 	var file = wizziUtils.file
     var wizzi = null

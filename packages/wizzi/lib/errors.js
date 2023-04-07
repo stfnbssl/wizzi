@@ -1,13 +1,13 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\errors.js.ittf
 */
 'use strict';
 var util = require('util');
-var fail = require('wizzi-utils').fail;
-var utilsErrors = require('wizzi-utils').errors;
-var pkgVersioned = ' (wizzi.0.8.01)';
+var fail = require('@wizzi/utils').fail;
+var utilsErrors = require('@wizzi/utils').errors;
+var pkgVersioned = ' (@wizzi/factory.0.8.2)';
 
 var md = module.exports = {};
 

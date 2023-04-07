@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\mongoDbStore.js.ittf
 */
 'use strict';
@@ -11,7 +11,7 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 var verify = require('wizzi-utils').verify;
 var util = require('util');
-var vfile = require('wizzi-utils').vfile;
+var vfile = require('@wizzi/utils').vfile;
 var MongoFsImpl = require('../mongodb/mongoFsimpl');
 var errors = require('./errors');
 var MongoDbStore = (function () {

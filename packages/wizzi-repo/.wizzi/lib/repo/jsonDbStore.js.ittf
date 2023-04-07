@@ -2,7 +2,7 @@
     kind jsfile
 
 	import util
-	var vfile = require('wizzi-utils').vfile
+	var vfile = require('@wizzi/utils').vfile
 	var JsonFsImpl = require('../json/jsonFsimpl')
 	var errors = require('./errors')
 

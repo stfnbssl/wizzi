@@ -1,4 +1,4 @@
-﻿base_test( asIsLoader )
+﻿base_test( asIsLoader, true )
 
 	$append imports
 		var file = require('../../lib/fSystem/file')

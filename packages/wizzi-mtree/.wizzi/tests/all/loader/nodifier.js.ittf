@@ -5,7 +5,7 @@
 		var nodifier = require('../../../lib/loader/nodifier')
 		var MTreeBrick = require('../../../lib/loader/mTreeBrick').MTreeBrick
 		var LoadHistory = require('../../../lib/loader/loadHistory').LoadHistory
-		var file = require('wizzi-utils').file
+		var file = require('@wizzi/utils').file
 
 	var loadHistory = new LoadHistory()
     

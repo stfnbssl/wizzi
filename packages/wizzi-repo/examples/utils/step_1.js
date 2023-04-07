@@ -1,6 +1,6 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\utils\step_1.js.ittf
 */
 'use strict';
@@ -12,18 +12,18 @@ var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
-var wizziUtils = require('wizzi-utils');
+var wizziUtils = require('@wizzi/utils');
 // local disk filesystem
 var file = wizziUtils.file;
 // virtual filesystem
-var vfile = require('wizzi-utils').vfile;
+var vfile = require('@wizzi/utils').vfile;
 // defaults to local disk filesystem
 var fsfile = vfile();
 // utilities
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var createStoreFactory = require('wizzi-repo').createStoreFactory;
-var vfile = require('wizzi-utils').vfile;
+var createStoreFactory = require('@wizzi/repo').createStoreFactory;
+var vfile = require('@wizzi/utils').vfile;
 var repoIndex = require('../../index');
 var json = require('../../lib/json/index');
 var JsonFsImpl = require('../../lib/json/jsonFsimpl');

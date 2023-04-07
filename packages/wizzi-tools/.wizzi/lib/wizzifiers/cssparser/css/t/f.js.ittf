@@ -1,7 +1,0 @@
-﻿$group
-	$params name
-
-	set format['${name}']
-        function
-            param ast
-			$hook

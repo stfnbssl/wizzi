@@ -1,7 +1,0 @@
-$group
-    $params kind|docs, title|@@null
-    
-    . table-${kind}
-        table
-            tbody
-                $hook

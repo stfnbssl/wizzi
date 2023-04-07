@@ -1,6 +1,8 @@
-# wizzi-repo
+# @wizzi/repo
 
-Ittf documents repository manager for the wizzi factory..
+Ittf documents repository manager for the wizzi factory.
+
+
 
 
 ## Work still in progress
@@ -45,7 +47,7 @@ the virtual filesystem base folder</tr>
 
 ### Usage
 ```javascript
-var repo = require('wizzi-repo');
+var repo = require('@wizzi/repo');
 
 ...
 
@@ -57,9 +59,12 @@ function (err, createStore) {
 }
 );
 ```
+
+
 ## Wizzi
 
 One machinery, many productions.
+
 
 
 

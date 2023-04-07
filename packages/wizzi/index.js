@@ -1,5 +1,5 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
 */
@@ -11,7 +11,7 @@ var chalk = require('chalk');
 var async = require('async');
 var stringify = require('json-stringify-safe');
 
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var log = require('./lib/util/log')(module);
 var acl = require('./lib/acl');
 var ProductionManager = require('./lib/production/manager');
@@ -19,14 +19,14 @@ var Filesystem = require('./lib/io/filesystem');
 var wizziFactory = require('./lib/services/wizziFactory');
 
 var md = module.exports = {};
-md.file = require('wizzi-utils').file;
+md.file = require('@wizzi/utils').file;
 md.verify = verify;
-md.config = require('wizzi-utils').config;
+md.config = require('@wizzi/utils').config;
 md.genContext = require('./lib/artifact/genContext');
 md.acl = acl;
 md.productionOptions = require('./lib/production/options');
 md.Filesystem = Filesystem;
-md.JsonComponents = require('wizzi-repo').JsonComponents;
+md.JsonComponents = require('@wizzi/repo').JsonComponents;
 md.errors = require('./lib/errors');
 
 //

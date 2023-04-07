@@ -14,7 +14,7 @@ $group
     var path = require('path')
 	var fs = require('fs')
 	var stringify = require('json-stringify-safe')
-	var wizziUtils = require('wizzi-utils')
+	var wizziUtils = require('@wizzi/utils')
     var file = wizziUtils.file
     var verify = wizziUtils.verify
     $if opt.folderLevel == 1

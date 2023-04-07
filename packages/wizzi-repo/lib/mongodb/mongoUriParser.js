@@ -1,13 +1,13 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.11
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@0.7.14
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\mongoUriParser.js.ittf
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var path = require('path');
 var url = require('url');
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 //
 module.exports = function parse(uri, mongoBaseFolder) {
     if (verify.isNotEmpty(uri) === false) {

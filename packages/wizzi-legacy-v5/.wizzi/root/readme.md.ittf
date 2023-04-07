@@ -1,8 +1,0 @@
-﻿common/kernel( wizzi-legacy, ${wzCtx.title}. )
-
-	h2 Features
-	ul
-		li TODO
-	br
-
-

@@ -3,7 +3,7 @@
 
 	# Copied from wizzi-repo.fileSystemStore
 
-	var file = require('wizzi-utils').file
+	var file = require('@wizzi/utils').file
 
     class FileSystemStore
         ctor

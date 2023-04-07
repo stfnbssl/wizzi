@@ -35,7 +35,7 @@
 		
     var path = require('path')
 	var util = require('util')
-	var verify = require('wizzi-utils').verify
+	var verify = require('@wizzi/utils').verify
     var errors = require('../errors')
     var types = require('../util/types')
     var liner = require('./liner')

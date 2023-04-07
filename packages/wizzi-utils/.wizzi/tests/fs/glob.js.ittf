@@ -1,4 +1,4 @@
-﻿base_test( glob )
+﻿base_test( glob, true )
 	
 	$append imports
 		var glob = require('../../lib/fSystem/glob')

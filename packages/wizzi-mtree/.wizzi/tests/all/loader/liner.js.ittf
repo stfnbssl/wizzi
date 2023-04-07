@@ -2,7 +2,7 @@
 	
 	$append imports
 		var liner = require('../../../lib/loader/liner')
-		var file = require('wizzi-utils').file
+		var file = require('@wizzi/utils').file
 
 	it should have : an indent, row and col number, name and value
 
