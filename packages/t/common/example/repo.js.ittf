@@ -2,7 +2,7 @@ $group
 	$params &opt
 
     #
-    # Example skeleton specific for the 'wizzi-repo' kernel package
+    # Example skeleton specific for the '@wizzi/repo' kernel package
     #
 
 	#
