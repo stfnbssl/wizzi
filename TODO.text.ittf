@@ -12,24 +12,6 @@ text
 
     9/6/1922
     Install on your pc for development of wizzi packages
-        git clone https://github.com/stfnbssl/wizzi.git
-        cd wizzi
-        npm install
-
-
-    npm config get prefix -g
-    npm config set <key>=<value> [<key>=<value> ...]
-    npm config get [<key> [<key> ...]]
-    npm config delete <key> [<key> ...]
-    npm config list [--json]
-    npm config edit
-    npm config fix
-
-    npm config set @wizzi:registry https://registry.npmjs.org
-    npm config set //registry.npmjs.org/:_authToken aa103c24-0c32-478d-8bbb-987b8b3481b1
-    npm config set //registry.npmjs.org/:_authToken=aa103c24-0c32-478d-8bbb-987b8b3481b1
-
-    npm login --scope=@wizzi --registry=https://registry.npmjs.org
-
-# log out, removing the link and the auth token
-npm logout --scope=@mycorp    
+    git clone https://github.com/stfnbssl/wizzi.git
+    cd wizzi
+    npm install
