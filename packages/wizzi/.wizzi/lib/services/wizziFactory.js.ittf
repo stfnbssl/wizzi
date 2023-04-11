@@ -69,6 +69,7 @@
         $include wizziFactory/meta-generation
 		$include wizziFactory/json-factory
 		$include wizziFactory/getInfo
+        $include wizziFactory/getProvides
 	
 	$include wizziFactory/detectSchema
 

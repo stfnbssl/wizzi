@@ -1836,6 +1836,18 @@ var WizziFactory = (function () {
                 testOptions: this.testOptions
              };
     }
+    WizziFactory.prototype.mapIttfDocumentPathToSchema = function(ittfDocumentPath) {
+        return this.pluginsManager.mapIttfDocumentPathToSchema(ittfDocumentPath);
+    }
+    WizziFactory.prototype.mapIttfDocumentPathToDefaultArtifact = function(ittfDocumentPath) {
+        return this.pluginsManager.mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath);
+    }
+    WizziFactory.prototype.mapSchemaToDefaultArtifact = function(schema) {
+        return this.pluginsManager.mapSchemaToDefaultArtifact(schema);
+    }
+    WizziFactory.prototype.getSchemaArtifacts = function(schema) {
+        return this.pluginsManager.getSchemaArtifacts(schema);
+    }
     return WizziFactory;
 })();
 
@@ -1934,7 +1946,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.2.wizziFactory.' + method,
+        method: 'wizzi@0.8.3.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -24,9 +24,15 @@
 			set this.packagePathCache = {}
 			set this.factoryPlugins = []
 			set this.providedSchemas = []
+            set this.providedSchemasExt = []
 			set this.providedModelTransformers = []
 			set this.providedArtifactGenerators = []
             set this.providedWizzifiers = []
+            set this.extensionSchemaMap = {}
+            set this.schemaDefaulArtifactMap = {}
+            set this.schemaArtifactsMap = {}
+            set this.schemaRootTagMap = {}
+            set this.artifactContentTypeMap = {}
 
 		$include pluginsManager/initialize
 		$include pluginsManager/register
@@ -36,6 +42,7 @@
         $include pluginsManager/wizzification
 		$include pluginsManager/schema-definition
 		$include pluginsManager/getInfo
+        $include pluginsManager/getProvides
 
 	# For test - begin
 	var packagePathCache = {}
@@ -43,7 +50,30 @@
 	$include pluginsManager/resolve-package
 	# For test - end
 
-	set module.exports
+    function schemaFromFilePath
+        param filePath
+        const pf = parseFilePath(filePath)
+        if pf.isIttfDocument
+            return pf.schema
+        return undefined
+    
+    function parseFilePath
+        param filePath
+        const nameParts = path.basename(filePath).split('.')
+        if nameParts[nameParts.length - 1] === 'ittf'
+            return
+                {
+                    @ isIttfDocument true 
+                    @ schema nameParts[nameParts.length - 2] 
+                    @ seedname nameParts.slice(0, -2).join('.')
+        else
+            return
+                {
+                    @ isIttfDocument false 
+                    @ schema nameParts[nameParts.length - 1] 
+                    @ seedname nameParts.slice(0, -1).join('.')
+	
+    set module.exports
 		{
 			@ createManager
 				function createManager
@@ -54,8 +84,12 @@
 						new PluginsManager
 					_ pm.initialize
 						@ options
-						@ callback
-			
+						a_cb( result )
+                            # test
+                            # log 'extensionSchemaMap', result.extensionSchemaMap
+                            # log 'schemaDefaulArtifactMap', result.schemaDefaulArtifactMap
+                            # log 'schemaArtifactsMap', result.schemaArtifactsMap
+                            r_cb(result)
 			@ PluginsManager PluginsManager
 			@ resolveModule resolveModule
 			@ resolvePackage resolvePackage

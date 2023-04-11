@@ -11,4 +11,3 @@
 				@ globalContext this.globalContext
 				@ __is_test this.__is_test
 				@ testOptions this.testOptions
-

@@ -101,6 +101,53 @@
 					{
 						@ name item
 		+
+        log 'factoryPlugin.provides.schemasExt', factoryPlugin.provides.schemasExt
+        if factoryPlugin.provides.schemasExt
+            foreach schema in factoryPlugin.provides.schemasExt
+                set found
+                    _ _.find
+                        @ this.providedSchemasExt
+                        {
+                            @ name schema.name
+                if found
+                    return
+                        _ error
+                            @ 'DuplicatedPluginResource'
+                            @ 'addPluginProvides'
+                            @ 'SchemaExt ' + schema.name + ' already provided'
+                set found
+                    _ _.find
+                        @ this.providedSchemas
+                        {
+                            @ name schema.name
+                if !found
+                    return
+                        _ error
+                            @ 'MissingPluginResourceReference'
+                            @ 'addPluginProvides'
+                            @ 'SchemaExt ' + schema.name + ' not found in providedSchemas'
+                else
+                    _ this.providedSchemasExt.push
+                        @ schema
+                    const schemaArtifacts = []
+                    foreach art in schema.artifactsGenerators
+                        _ schemaArtifacts.push
+                            {
+                                @ name schema.name + '/' + art.name
+                                @ outmime art.outmime
+                                @ isDefault art.isDefault
+                    set this.schemaArtifactsMap[schema.name] = schemaArtifacts
+                    set this.schemaDefaulArtifactMap[schema.name] = schema.name + '/' + schema.defaultArtifact
+                    foreach ext in schema.fileExtensions
+                        if this.extensionSchemaMap[ext]
+                            return
+                                _ error
+                                    @ 'DuplicatedPluginReference'
+                                    @ 'addPluginProvides'
+                                    @ 'Extensions ' + ext + ' for schema ' + schema.name + ' was already registered for schema ' + this.extensionSchemaMap[ext]
+                        else
+                            set this.extensionSchemaMap[ext] = schema.name
+        +
 		foreach item in factoryPlugin.provides.modelTransformers
 			set found
 				_ _.find

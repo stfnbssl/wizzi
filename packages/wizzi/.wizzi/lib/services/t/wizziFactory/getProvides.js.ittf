@@ -1,0 +1,25 @@
+﻿$group
+
+    m mapIttfDocumentPathToSchema
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToSchema(ittfDocumentPath)
+
+    m mapIttfDocumentPathToDefaultArtifact
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath)
+
+    m mapSchemaToDefaultArtifact
+        param schema
+        return this.pluginsManager.mapSchemaToDefaultArtifact(schema)
+
+    m getSchemaArtifacts
+        param schema
+        return this.pluginsManager.getSchemaArtifacts(schema)
+
+    m mapArtifactToContentType
+        param artifactName
+        return this.pluginsManager.mapArtifactToContentType(artifactName)
+
+    m mapSchemaToRootElement
+        param schema
+        return this.pluginsManager.mapSchemaToRootElement(schema)

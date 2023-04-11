@@ -31,9 +31,13 @@ var PluginsManager = (function () {
         this.packagePathCache = {};
         this.factoryPlugins = [];
         this.providedSchemas = [];
+        this.providedSchemasExt = [];
         this.providedModelTransformers = [];
         this.providedArtifactGenerators = [];
         this.providedWizzifiers = [];
+        this.extensionSchemaMap = {};
+        this.schemaDefaulArtifactMap = {};
+        this.schemaArtifactsMap = {};
     }
     //
     PluginsManager.prototype.initialize = function(options, callback) {
@@ -362,6 +366,53 @@ var PluginsManager = (function () {
             }
         }
         
+        console.log('factoryPlugin.provides.schemasExt', factoryPlugin.provides.schemasExt, __filename);
+        if (factoryPlugin.provides.schemasExt) {
+            var i, i_items=factoryPlugin.provides.schemasExt, i_len=factoryPlugin.provides.schemasExt.length, schema;
+            for (i=0; i<i_len; i++) {
+                schema = factoryPlugin.provides.schemasExt[i];
+                found = _.find(this.providedSchemasExt, {
+                    name: schema.name
+                 })
+                ;
+                if (found) {
+                    return error('DuplicatedPluginResource', 'addPluginProvides', 'SchemaExt ' + schema.name + ' already provided');
+                }
+                found = _.find(this.providedSchemas, {
+                    name: schema.name
+                 })
+                ;
+                if (!found) {
+                    return error('MissingPluginResourceReference', 'addPluginProvides', 'SchemaExt ' + schema.name + ' not found in providedSchemas');
+                }
+                else {
+                    this.providedSchemasExt.push(schema)
+                    const schemaArtifacts = [];
+                    var j, j_items=schema.artifactsGenerators, j_len=schema.artifactsGenerators.length, art;
+                    for (j=0; j<j_len; j++) {
+                        art = schema.artifactsGenerators[j];
+                        schemaArtifacts.push({
+                            name: schema.name + '/' + art.name, 
+                            outmime: art.outmime, 
+                            isDefault: art.isDefault
+                         })
+                    }
+                    this.schemaArtifactsMap[schema.name] = schemaArtifacts;
+                    this.schemaDefaulArtifactMap[schema.name] = schema.name + '/' + schema.defaultArtifact;
+                    var j, j_items=schema.fileExtensions, j_len=schema.fileExtensions.length, ext;
+                    for (j=0; j<j_len; j++) {
+                        ext = schema.fileExtensions[j];
+                        if (this.extensionSchemaMap[ext]) {
+                            return error('DuplicatedPluginReference', 'addPluginProvides', 'Extensions ' + ext + ' for schema ' + schema.name + ' was already registered for schema ' + this.extensionSchemaMap[ext]);
+                        }
+                        else {
+                            this.extensionSchemaMap[ext] = schema.name;
+                        }
+                    }
+                }
+            }
+        }
+        
         var i, i_items=factoryPlugin.provides.modelTransformers, i_len=factoryPlugin.provides.modelTransformers.length, item;
         for (i=0; i<i_len; i++) {
             item = factoryPlugin.provides.modelTransformers[i];
@@ -676,6 +727,23 @@ var PluginsManager = (function () {
                 factoryPlugins: factoryPluginsInfo
              };
     }
+    PluginsManager.prototype.mapIttfDocumentPathToSchema = function(ittfDocumentPath) {
+        const filePathSchema = schemaFromFilePath(ittfDocumentPath);
+        const wizziSchema = this.extensionSchemaMap[filePathSchema];
+        return wizziSchema;
+    }
+    PluginsManager.prototype.mapIttfDocumentPathToDefaultArtifact = function(ittfDocumentPath) {
+        const filePathSchema = schemaFromFilePath(ittfDocumentPath);
+        return this.mapSchemaToDefaultArtifact(filePathSchema);
+    }
+    PluginsManager.prototype.mapSchemaToDefaultArtifact = function(filePathSchema) {
+        const wizziSchema = this.extensionSchemaMap[filePathSchema];
+        return this.schemaDefaulArtifactMap[wizziSchema];
+    }
+    PluginsManager.prototype.getSchemaArtifacts = function(filePathSchema) {
+        const wizziSchema = this.extensionSchemaMap[filePathSchema];
+        return this.schemaArtifactsMap[wizziSchema];
+    }
     return PluginsManager;
 })();
 
@@ -788,6 +856,30 @@ function resolvePackage(pluginsBaseFolder, packagePath, callback) {
     }
 }
 // For test - end
+function schemaFromFilePath(filePath) {
+    const pf = parseFilePath(filePath);
+    if (pf.isIttfDocument) {
+        return pf.schema;
+    }
+    return undefined;
+}
+function parseFilePath(filePath) {
+    const nameParts = path.basename(filePath).split('.');
+    if (nameParts[nameParts.length - 1] === 'ittf') {
+        return {
+                isIttfDocument: true, 
+                schema: nameParts[nameParts.length - 2], 
+                seedname: nameParts.slice(0, -2).join('.')
+             };
+    }
+    else {
+        return {
+                isIttfDocument: false, 
+                schema: nameParts[nameParts.length - 1], 
+                seedname: nameParts.slice(0, -1).join('.')
+             };
+    }
+}
 module.exports = {
     createManager: function createManager(options, callback) {
         if (typeof(callback) !== 'function') {
@@ -801,7 +893,18 @@ module.exports = {
             ));
         }
         var pm = new PluginsManager();
-        pm.initialize(options, callback)
+        pm.initialize(options, (err, result) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            // test
+            // log 'extensionSchemaMap', result.extensionSchemaMap
+            // log 'schemaDefaulArtifactMap', result.schemaDefaulArtifactMap
+            // log 'schemaArtifactsMap', result.schemaArtifactsMap
+            return callback(null, result);
+        }
+        )
     }, 
     PluginsManager: PluginsManager, 
     resolveModule: resolveModule, 
@@ -825,7 +928,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.2.pluginsManager.' + method,
+        method: 'wizzi@0.8.3.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

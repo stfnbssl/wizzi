@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\model\step_1.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\provides\step_1.js.ittf
 */
 'use strict';
 //
@@ -107,79 +107,33 @@ function createJsonFs(packiFiles, callback) {
 function ensurePackiFilePrefix(filePath) {
     return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
 }
-var wf_model_step_1 = function(step_callback) {
+var wf_provides_step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    var htmlFriendsPath = path.join(__dirname, 'ittf', 'friends.html.ittf');
-    var htmlFriendsPathIttf = path.join(__dirname, 'ittf', 'friends.ittf.ittf');
-    var friendsArray = [
-        'arthur', 
-        'mary'
-    ];
     createWizziFactory({}, function(err, wf) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        // Generate the html model.
-        wf.loadModel('html', htmlFriendsPath, {
-            mTreeBuildupContext: {
-                friends: friendsArray
-             }
-         }, function(err, wizziModel) {
-            if (err) {
-                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                console.log("[31m%s[0m", 'err', err);
-                throw new Error(err.message);
-            }
-            printValue('wizziModel friends', stringify(wizziModel.elements, null, 2))
-            // Generate the html document artifact.
-            wf.loadModelAndGenerateArtifact(htmlFriendsPath, {
-                modelRequestContext: {
-                    friends: friendsArray
-                 }
-             }, 'html/document', function(err, artifactText) {
-                if (err) {
-                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                    console.log("[31m%s[0m", 'err', err);
-                    throw new Error(err.message);
-                }
-                printValue('artifact', artifactText)
-                wf.loadModel('ittf', htmlFriendsPathIttf, {
-                    mTreeBuildupContext: {
-                        friends: friendsArray
-                     }
-                 }, function(err, wizziModel) {
-                    if (err) {
-                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                        console.log("[31m%s[0m", 'err', err);
-                        throw new Error(err.message);
-                    }
-                    wf.transformModel(wizziModel, 'ittf/html-pretty', {}, function(err, prettyfied) {
-                        if (err) {
-                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-                            console.log("[31m%s[0m", 'err', err);
-                            throw new Error(err.message);
-                        }
-                        printValue('ittf/html-pretty', prettyfied)
-                    })
-                })
-            })
-        })
+        console.log("wf.mapIttfDocumentPathToSchema(hello.html.ittf)", wf.mapIttfDocumentPathToSchema("hello.html.ittf"))
+        console.log("wf.mapIttfDocumentPathToSchema(aaa/hello.html.ittf)", wf.mapIttfDocumentPathToSchema("aaa/hello.html.ittf"))
+        console.log("wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.html.ittf)", wf.mapIttfDocumentPathToDefaultArtifact("aaa/hello.html.ittf"))
+        console.log("wf.mapSchemaToDefaultArtifact(js)", wf.mapSchemaToDefaultArtifact("js"))
+        console.log("wf.getSchemaArtifacts(ittf)", wf.getSchemaArtifacts("ittf"))
     })
 };
-wf_model_step_1.__name = 'wf_model_step_1';
+wf_provides_step_1.__name = 'wf_provides_step_1';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - wf_model_step_1 - ' + text);
+    console.log('** level 0 - step 1 - wf_provides_step_1 - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- wf_model_step_1 - ' + text);
+    console.log('   ','-- wf_provides_step_1 - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -369,7 +323,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = wf_model_step_1;
+module.exports = wf_provides_step_1;
 if (typeof require != 'undefined' && require.main === module) {
-    wf_model_step_1();
+    wf_provides_step_1();
 }

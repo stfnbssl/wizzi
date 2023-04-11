@@ -13,11 +13,20 @@ module
     common\example\wizzi(&opt)
 
         $append plugins
-            [ items
-                @ 'wizzi-js'
-                @ './wizzi-web/index'
-                @ './wizzi-core/index'
-            @ pluginsBaseFolder pluginsBaseFolder
+            $if false
+                [ items
+                    @ 'wizzi-js'
+                    @ './wizzi-web/index'
+                    @ './wizzi-core/index'
+                @ pluginsBaseFolder pluginsBaseFolder
+
+            $if true
+                [ items
+                    @ './wizzi.plugin.html/index'
+                    @ './wizzi.plugin.js/index'
+                    @ './wizzi.plugin.css/index'
+                    @ './wizzi.plugin.ittf/index'
+                @ pluginsBaseFolder pluginsBaseFolderV08
 
         var htmlFriendsPath
 			_ path.join
@@ -39,7 +48,6 @@ module
         _ createWizziFactory
             {
             f_cb_test(wf)
-
                 # Generate the html model.
                     # The html schema is detected from the path.
                 _ wf.loadModel
