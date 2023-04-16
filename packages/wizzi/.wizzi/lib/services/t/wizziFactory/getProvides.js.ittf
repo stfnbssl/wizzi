@@ -8,6 +8,14 @@
         param ittfDocumentPath
         return this.pluginsManager.mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath)
 
+    m mapIttfDocumentPathToPluginDependencies
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToPluginDependencies(ittfDocumentPath)
+
+    m mapExtensionToSchema
+        param extension
+        return this.pluginsManager.mapExtensionToSchema(extension)
+
     m mapSchemaToDefaultArtifact
         param schema
         return this.pluginsManager.mapSchemaToDefaultArtifact(schema)
@@ -20,6 +28,6 @@
         param artifactName
         return this.pluginsManager.mapArtifactToContentType(artifactName)
 
-    m mapSchemaToRootElement
+    m mapSchemaToRootTag
         param schema
-        return this.pluginsManager.mapSchemaToRootElement(schema)
+        return this.pluginsManager.mapSchemaToRootTag(schema)

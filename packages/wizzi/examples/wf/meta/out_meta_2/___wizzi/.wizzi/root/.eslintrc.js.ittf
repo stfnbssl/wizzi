@@ -1,0 +1,20 @@
+module
+    kind es6
+    +
+    # https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/README.md
+    +
+    set module.exports =
+        {
+            @ root true
+                # do not look in parent folders for configuration files
+            $include eslint/0_0_1/rc/parser
+            [ extends
+                $include eslint/0_0_1/rc/extends
+            [ plugins
+                $include eslint/0_0_1/rc/plugins
+            { settings
+                $include eslint/0_0_1/rc/settings
+            { rules
+                $include eslint/0_0_1/rc/rules
+            [ overrides
+                $include eslint/0_0_1/rc/overrides

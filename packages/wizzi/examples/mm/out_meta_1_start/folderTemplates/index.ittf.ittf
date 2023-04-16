@@ -1,0 +1,15 @@
+template root
+    $
+        var pkgPath = ''
+        var metaVer = '0_0_1'
+    $include ./babel/index
+    $include ./babelrc/index
+    $include ./deploy/index
+    $include ./env/index
+    $include ./eslint/index
+    $include ./git/index
+    $include ./package/index
+    $include ./postcss/index
+    $include ./prettier/index
+    $include ./tailwind/index
+    $include ./webpack/index

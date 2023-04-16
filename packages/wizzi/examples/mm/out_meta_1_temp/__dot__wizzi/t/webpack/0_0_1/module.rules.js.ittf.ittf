@@ -1,0 +1,2 @@
+${'$'}group 
+   $include webpack/tfolder/module.rules.js

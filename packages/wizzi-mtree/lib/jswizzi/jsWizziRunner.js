@@ -1342,7 +1342,7 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
 function local_error_new(name, method, message, node, inner, other) {
     return new mainErrors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
             errorName: name, 
-            method: 'wizzi-mtree@0.8.1.jsWizzi.jsWizziRunner.' + method, 
+            method: 'wizzi-mtree@0.8.2.jsWizzi.jsWizziRunner.' + method, 
             ...other||{}, 
             inner: inner
          });
@@ -1495,7 +1495,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.1.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.8.2.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

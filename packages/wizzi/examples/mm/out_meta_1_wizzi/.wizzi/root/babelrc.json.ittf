@@ -1,0 +1,11 @@
+module
+    kind es6
+    plugins
+        [
+            $include babelrc/0_0_1/plugins
+    presets
+        [
+            $include babelrc/0_0_1/presets
+    env
+        {
+            $include babelrc/0_0_1/env

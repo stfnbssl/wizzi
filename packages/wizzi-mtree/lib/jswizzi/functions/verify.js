@@ -4,6 +4,8 @@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\functions\verify.js.ittf
 */
 'use strict';
+// legacy function container
+// these now merged into underscore container
 module.exports = {
     isEmpty: function(text) {
         return typeof text === 'string' && text.trim().length === 0;

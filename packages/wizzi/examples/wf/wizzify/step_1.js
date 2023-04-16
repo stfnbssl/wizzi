@@ -20,11 +20,15 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var async = require('async');
+var wizziUtils = require('@wizzi/utils');
 var pluginsBaseFolder = null;
 var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
+var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.cli/packages';
 var wizziIndex = require('../../../index');
 pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
+var pluginsManager = require('../../../lib/services/pluginsManager');
+var metasManager = require('../../../lib/services/metasManager');
 const packiFilePrefix = 'json:/';
 const packiFilePrefixExtract = 'json:/';
 function createWizziFactory(globalContext, callback) {
@@ -64,7 +68,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
         if (err) {
             return callback(err);
         }
-        printValue('createJsonWizziFactoryAndJsonFs.jsonFs', stringify(jsonFs, null, 2))
         wizziIndex.jsonFactory({
             jsonFs: jsonFs, 
             plugins: {
@@ -109,6 +112,45 @@ function createJsonFs(packiFiles, callback) {
 }
 function ensurePackiFilePrefix(filePath) {
     return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
+}
+function createPackifilesFromFs(folderPath, callback) {
+    const file = vfile();
+    file.getFiles(folderPath, {
+        deep: true, 
+        documentContent: true
+     }, (err, files) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        const packiFiles = {};
+        var i, i_items=files, i_len=files.length, file;
+        for (i=0; i<i_len; i++) {
+            file = files[i];
+            packiFiles[file.relPath] = {
+                type: 'CODE', 
+                contents: file.content
+             };
+        }
+        return callback(null, packiFiles);
+    }
+    )
+}
+function writePackifiles(folderPath, packiFiles) {
+    for (var k in packiFiles) {
+        file.write(path.join(folderPath, k), packiFiles[k].contents)
+    }
+}
+function createMetasManager(globalContext, callback) {
+    wizziIndex.metasManager({
+        metaPlugins: {
+            
+         }, 
+        wfPlugins: {
+            
+         }, 
+        globalContext: globalContext || {}
+     }, callback)
 }
 var wf_wizzify_step_1 = function(step_callback) {
     heading1('EXAMPLE')

@@ -8,6 +8,7 @@
         promise "^7.1.1"
         
         $append devDependencies
+            @wizzi/repo "latest" 
             object-inspect "^1.6.0"
             wizzi-repo "latest"
 

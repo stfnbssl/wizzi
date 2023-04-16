@@ -4,6 +4,8 @@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\functions\dateUtil.js.ittf
 */
 'use strict';
+// legacy function container
+// these now merged into underscore container
 module.exports = {
     now_GMYHMS: function() {
         var date = new Date();

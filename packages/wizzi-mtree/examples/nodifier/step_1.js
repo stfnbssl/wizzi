@@ -5,17 +5,17 @@
 */
 'use strict';
 //
-// Example skeleton specific for the 'wizzi-mtree' kernel package
+// Example skeleton specific for the '@wizzi/mtree' kernel package
 //
 //
 var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
-var wizziUtils = require('wizzi-utils');
+var wizziUtils = require('@wizzi/utils');
 var file = wizziUtils.file;
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var createStoreFactory = require('@wizzi/repo').createStoreFactory;
 var liner = require('../../lib/loader/liner');
 var nodifier = require('../../lib/loader/nodifier');
 var includer = require('../../lib/loader/includer');

@@ -22,12 +22,20 @@
     var JsWizziEvalHelper = require('./jsWizziEvalHelper')
 	var ContextData = require('./contextData')
 
+    var _$1 = '$'
+    var _$2 = '$' + '{$1}'
+    var _$3 = '$' + '{$2}'
+    var _$4 = '$' + '{$3}'
     var defaultValues
         { 
 			@ '__dollar'        '$'
             @ '__dollardollar'  '$' + '$'
             @ '__dollaraster'   '$' + '*'
             @ '__asterdollar'   '*' + '$'
+            @ '$1'  _$1
+            @ '$2'  _$2
+            @ '$3'  _$3
+            @ '$4'  _$4
     
 	var knownCallables
         { 

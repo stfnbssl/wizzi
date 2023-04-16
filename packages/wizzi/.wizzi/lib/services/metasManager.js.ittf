@@ -1,0 +1,133 @@
+module wizzi@${wzCtx.version}.metasManager
+	kind es6
+
+	const path = require('path')
+	const fs = require('fs')
+	const _ = require('lodash')
+	const log = require('../util/log')(module)
+	$$ const verify = require('@wizzi/utils').verify
+	const file = require('@wizzi/utils').file
+    const vfile = require('@wizzi/utils').vfile
+	const fail = require('@wizzi/utils').fail
+    var JsonComponents = require('@wizzi/repo').JsonComponents
+    const wizziFactory = require('./wizziFactory')
+	const errors = require('../errors')
+    const existsSync = fs.existsSync || path.existsSync
+    const realpathSync = fs.realpathSync
+    const exists = fs.exists || path.exists
+    const realpath = fs.realpath
+    const stringify = require('json-stringify-safe')
+    +
+    const mdDisplayName = "wizzi.metasManager"
+    +
+    const packiFilePrefix = 'json:/'
+    const packiFilePrefixExtract = 'json:/'
+    const metaProductionTempFolder = '___temp'
+    const metaProductionDestFolder = '.wizzi'
+    +
+	class MetasManager
+		
+		ctor
+			set this.packagePathCache = {}
+			set this.metaPlugins = []
+            set this.providedProductions = []
+            set this.globalContext = {}
+
+        $include metasManager/initialize
+        $include metasManager/register
+        $include metasManager/meta-production
+        $include metasManager/meta-production-starter
+        $include metasManager/metaProductions
+        $include metasManager/createJsonWizziFactoryAndJsonFs
+
+	set module.exports
+		{
+			@ createManager
+				function
+					param options
+					param callback
+					log 'wizzi.metasManager.createManager.options', options
+					var mm
+						new MetasManager
+					_ mm.initialize
+						@ options
+						@ callback
+
+    function ensurePackiFilePrefix
+        param filePath
+        return
+            iif filePath.startsWith(packiFilePrefix)
+                then filePath
+                else packiFilePrefix + filePath
+
+    function createPackifilesFromFs
+        param folderPath
+        param callback
+        const fsFile = vfile()
+        _ fsFile.getFiles
+            @ folderPath
+            {
+                @ deep true
+                @ documentContent true
+            a_cb(files)
+                const packiFiles = {}
+                foreach file in files
+                    set packiFiles[file.relPath]
+                        {
+                            @ type 'CODE'
+                            @ contents file.content
+                r_cb(packiFiles)
+
+    function jsonFsToPackiFiles
+        param jsonFs
+        param filterFolder
+        param callback
+        const packiFiles
+            {
+        _ jsonFs.toFiles
+            {
+                @ removeRoot packiFilePrefixExtract
+            a_cb( files ) 
+                $$ files :ref fSystem.FileDef[]
+                $*
+                _ printValue
+                    @ 'jsonFs.toFiles'
+                    _ stringify
+                        @ files
+                        @ null
+                        @ 2
+                *$
+                _ files.forEach
+                    =>
+                        param file
+                        if verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')
+                            const k = filterFolder ? file.relPath.substring(filterFolder.length) : file.realpath
+                            set packiFiles[k]
+                                {
+                                    @ type 'CODE'
+                                    @ contents file.content
+                                    @ generated true
+                r_cb(packiFiles)
+
+
+
+
+    function writePackifiles
+        param folderPath
+        param packiFiles
+        for var k in packiFiles
+            _ file.write
+                _ path.join
+                    @ folderPath
+                    @ k
+                @ packiFiles[k].contents
+
+    function dumpStringified
+        param message
+        param value
+        const dump
+            _ stringify
+                @ value
+                @ null
+                @ 2
+        log message, dump

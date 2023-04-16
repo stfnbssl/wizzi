@@ -60,6 +60,9 @@ module.exports = {
     isFunction: function(obj) {
         return toString.call(obj) === '[object Function]';
     }, 
+    isUndefined: function(obj) {
+        return obj === void 0;
+    }, 
     deinline: function(text) {
         if (this.isNotEmpty(text) == false) {
             return '';
@@ -130,5 +133,34 @@ module.exports = {
             }
         }
         return result;
+    }, 
+    now_GMYHMS: function() {
+        var date = new Date();
+        return date.getDate() + '/' +
+            (date.getMonth() + 1) + '/' +
+            date.getFullYear() + ':' +
+            date.getHours() + ':' +
+            date.getMinutes() + ':' +
+            date.getSeconds();
+    }, 
+    GMYHMS: function(date) {
+        return date.getDate() + '/' +
+            (date.getMonth() + 1) + '/' +
+            date.getFullYear() + ':' +
+            date.getHours() + ':' +
+            date.getMinutes() + ':' +
+            date.getSeconds();
+    }, 
+    GMYHM: function(date) {
+        return date.getDate() + '/' +
+            (date.getMonth() + 1) + '/' +
+            date.getFullYear() + ':' +
+            date.getHours() + ':' +
+            date.getMinutes()
+    }, 
+    GMY: function(date) {
+        return date.getDate() + '/' +
+            (date.getMonth() + 1) + '/' +
+            date.getFullYear()
     }
  };

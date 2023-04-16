@@ -1,0 +1,5 @@
+$group
+
+    head
+        @title Hello
+        css ./styles.css

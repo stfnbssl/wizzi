@@ -1,0 +1,2 @@
+${'$'}group 
+   $include package/scripts.json

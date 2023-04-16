@@ -1,0 +1,114 @@
+﻿$group
+
+	#
+		# params
+		#   { options
+		#     { wfPlugins
+		#         [ items
+		#           string pluginName
+		#         string pluginsBaseFolder
+		#     { metaPlugins
+		#         [ items
+		#           string pluginName
+		#         string metaPluginsBaseFolder
+        #     { globalContext
+        #     { test
+		
+	m initialize
+		{ options
+			{ plugins
+				optional
+			{ globalContext
+				optional
+			{ test
+				optional
+		callback
+
+		if options.test
+			set this.__is_test = true
+
+		if options.globalContext
+			set this.globalContext
+				_ Object.assign
+					{
+					@ this.globalContext
+					@ options.globalContext
+
+		log mdDisplayName + '.initialize.globalContext', this.globalContext
+	
+		# used for creating on the fly a json factory
+		set this.wfPluginsOptions = options.wfPlugins
+		
+		if verify.isObject(this.wfPluginsOptions) == false
+			set this.wfPluginsOptions = {}
+
+        set this.metaPluginsOptions = options.metaPlugins
+
+        log mdDisplayName + '.initialize.wfPluginsOptions', this.wfPluginsOptions
+        
+        log mdDisplayName + '.initialize.metaPluginsOptions', this.metaPluginsOptions
+
+		_ this.loadPlugins
+			@ this.metaPluginsOptions
+			a_cb( plugins )
+                const register
+                    => register
+                        param i
+                        if i >= plugins.length
+                            r_cb( this )
+                        var plugin = plugins[i]
+                        log mdDisplayName + 'Object.keys(plugin)', Object.keys(plugin)
+                        _ this.registerMetaPlugin
+                            @ plugin
+                            f_cb( notUsed )
+                                return register(++i)
+				_ register(0)
+
+	m loadPlugins
+		param options
+		param callback
+		+
+		var itemsOptions = options.items
+        log mdDisplayName + '.metaPluginsBaseFolder before', options.metaPluginsBaseFolder
+        log mdDisplayName + '.__dirname', __dirname
+		var metaPluginsBaseFolder = options.metaPluginsBaseFolder 
+            \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
+        log mdDisplayName + '.metaPluginsBaseFolder', metaPluginsBaseFolder
+		var packagePathCache = this.packagePathCache
+		+
+		function resolveNext
+            param i
+            if i >= itemsOptions.length
+				# loog 'itemsOptions', itemsOptions
+                return callback(null, itemsOptions)
+            var plugin = itemsOptions[i]
+            if typeof (plugin) === "string"
+                set plugin = itemsOptions[i] = {packagePath: plugin}
+            if plugin.hasOwnProperty("packagePath") && !(plugin.hasOwnProperty("setup"))
+                return 
+					_ resolveModule
+						@ metaPluginsBaseFolder
+						@ plugin.packagePath
+						function
+							param err
+							param moduleObject
+							if err
+								return callback(err)
+							_ Object.keys(moduleObject)
+								._ forEach
+									function 
+										param key
+										if !plugin.hasOwnProperty(key)
+											set plugin[key] = moduleObject[key]
+											# loog 'plugin key', key
+							set plugin.packageName = plugin.packagePath
+							set plugin.packagePath = moduleObject.packagePath
+							return resolveNext(++i)
+            else
+				return resolveNext(++i)
+        
+		_ resolveNext(0)
+		
+		$include ./resolve-module
+		$include ./resolve-package
+

@@ -1,0 +1,10 @@
+module
+    kind es6
+    set module.exports
+        {
+            [ purge
+            @ darkMode false
+            { theme
+                { extend
+            { variants
+            [ plugins

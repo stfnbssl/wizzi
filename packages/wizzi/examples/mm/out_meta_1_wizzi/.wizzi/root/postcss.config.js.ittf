@@ -1,0 +1,7 @@
+module
+    kind es6
+    set module.exports
+        {
+            { plugins
+                { tailwindcss
+                { autoprefixer

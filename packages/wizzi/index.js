@@ -17,6 +17,7 @@ var acl = require('./lib/acl');
 var ProductionManager = require('./lib/production/manager');
 var Filesystem = require('./lib/io/filesystem');
 var wizziFactory = require('./lib/services/wizziFactory');
+var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
 md.file = require('@wizzi/utils').file;
@@ -162,6 +163,22 @@ md.jsonFactory = function(options, callback) {
 }
 ;
 md.jsonFactory = md.jsonFactory;
+
+
+md.metasManager = function(options, callback) {
+    if (typeof(callback) !== 'function') {
+        throw new Error(
+            error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
+        );
+    };
+    if (verify.isObject(options) === false) {
+        return callback(error(
+            'InvalidArgument', '', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+        ));
+    }
+    metasManager.createManager(options, callback)
+}
+;
 
 //
 md.startRunnerServer = function(options, callback) {

@@ -1689,13 +1689,17 @@ var WizziFactory = (function () {
         const fileService = this.fileService;
         const that = this;
         
+        console.log('metaGenerate.context',  context, __filename);
+        
         this.loadModel('ittf', ittfMetaFilePath, {
-            mTreeBuildupContext: context
+            mTreeBuildupContext: context.modelRequestContext
          }, (err, metaFileModel) => {
         
             if (err) {
                 return callback(err);
             }
+            console.log("Object.keys(metaFileModel)", Object.keys(metaFileModel), __filename);
+            console.log("metaFileModel.children.length", metaFileModel.children.length, __filename);
             var f_count = 0;
             (function next() {
                 var child = metaFileModel.children[f_count++];
@@ -1710,6 +1714,8 @@ var WizziFactory = (function () {
                             copyExclude: options.copyExclude || []
                          }, callback);
                 }
+                console.log("Object.keys(child)", Object.keys(child), __filename);
+                console.log('child', child.name, child.value, __filename);
                 if (child.name == '$file') {
                     try {
                         processFile(child, tempFolder, (err, notUsed) => {
@@ -1744,6 +1750,7 @@ var WizziFactory = (function () {
                 child = node.children[i];
                 processContent(sb, child, 0)
             }
+            console.log('meta.processFile', outputPath, sb.join('\n'), __filename);
             fileService.write(outputPath, sb.join('\n'), callback)
         }
         function processContent(sb, node, indent) {
@@ -1842,11 +1849,23 @@ var WizziFactory = (function () {
     WizziFactory.prototype.mapIttfDocumentPathToDefaultArtifact = function(ittfDocumentPath) {
         return this.pluginsManager.mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath);
     }
+    WizziFactory.prototype.mapIttfDocumentPathToPluginDependencies = function(ittfDocumentPath) {
+        return this.pluginsManager.mapIttfDocumentPathToPluginDependencies(ittfDocumentPath);
+    }
+    WizziFactory.prototype.mapExtensionToSchema = function(extension) {
+        return this.pluginsManager.mapExtensionToSchema(extension);
+    }
     WizziFactory.prototype.mapSchemaToDefaultArtifact = function(schema) {
         return this.pluginsManager.mapSchemaToDefaultArtifact(schema);
     }
     WizziFactory.prototype.getSchemaArtifacts = function(schema) {
         return this.pluginsManager.getSchemaArtifacts(schema);
+    }
+    WizziFactory.prototype.mapArtifactToContentType = function(artifactName) {
+        return this.pluginsManager.mapArtifactToContentType(artifactName);
+    }
+    WizziFactory.prototype.mapSchemaToRootTag = function(schema) {
+        return this.pluginsManager.mapSchemaToRootTag(schema);
     }
     return WizziFactory;
 })();
@@ -1946,7 +1965,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.3.wizziFactory.' + method,
+        method: 'wizzi@0.8.5.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

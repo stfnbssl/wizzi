@@ -38,6 +38,8 @@ var PluginsManager = (function () {
         this.extensionSchemaMap = {};
         this.schemaDefaulArtifactMap = {};
         this.schemaArtifactsMap = {};
+        this.schemaRootTagMap = {};
+        this.artifactContentTypeMap = {};
     }
     //
     PluginsManager.prototype.initialize = function(options, callback) {
@@ -366,7 +368,6 @@ var PluginsManager = (function () {
             }
         }
         
-        console.log('factoryPlugin.provides.schemasExt', factoryPlugin.provides.schemasExt, __filename);
         if (factoryPlugin.provides.schemasExt) {
             var i, i_items=factoryPlugin.provides.schemasExt, i_len=factoryPlugin.provides.schemasExt.length, schema;
             for (i=0; i<i_len; i++) {
@@ -736,6 +737,30 @@ var PluginsManager = (function () {
         const filePathSchema = schemaFromFilePath(ittfDocumentPath);
         return this.mapSchemaToDefaultArtifact(filePathSchema);
     }
+    PluginsManager.prototype.mapIttfDocumentPathToPluginDependencies = function(ittfDocumentPath) {
+        const filePathSchema = schemaFromFilePath(ittfDocumentPath);
+        const wizziSchema = this.extensionSchemaMap[filePathSchema];
+        if (this.providedSchemasExt[wizziSchema]) {
+            const ret = [ "@wizzi/plugin." + wizziSchema ];
+            const schemaExt = this.providedSchemasExt[wizziSchema];
+            var i, i_items=schemaExt.dependencies, i_len=schemaExt.dependencies.length, dep;
+            for (i=0; i<i_len; i++) {
+                dep = schemaExt.dependencies[i];
+                ret.push("@wizzi/plugin." + dep)
+            }
+            return ret;
+        }
+        else {
+            return [];
+        }
+    }
+    PluginsManager.prototype.mapExtensionToSchema = function(extension) {
+        if (verify.isEmpty(extension)) {
+            return undefined;
+        }
+        const filePathSchema = extension.startsWith('.') ? extension.substring(1) : extension;
+        return this.extensionSchemaMap[filePathSchema];
+    }
     PluginsManager.prototype.mapSchemaToDefaultArtifact = function(filePathSchema) {
         const wizziSchema = this.extensionSchemaMap[filePathSchema];
         return this.schemaDefaulArtifactMap[wizziSchema];
@@ -743,6 +768,13 @@ var PluginsManager = (function () {
     PluginsManager.prototype.getSchemaArtifacts = function(filePathSchema) {
         const wizziSchema = this.extensionSchemaMap[filePathSchema];
         return this.schemaArtifactsMap[wizziSchema];
+    }
+    PluginsManager.prototype.mapArtifactToContentType = function(artifactName) {
+        return this.artifactContentTypeMap[artifactName];
+    }
+    PluginsManager.prototype.mapSchemaToRootTag = function(filePathSchema) {
+        const wizziSchema = this.extensionSchemaMap[filePathSchema];
+        return this.schemaRootTagMap[wizziSchema];
     }
     return PluginsManager;
 })();
@@ -928,7 +960,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.3.pluginsManager.' + method,
+        method: 'wizzi@0.8.5.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

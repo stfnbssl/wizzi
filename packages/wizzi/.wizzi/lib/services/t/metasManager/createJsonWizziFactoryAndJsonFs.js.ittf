@@ -1,0 +1,36 @@
+$group
+
+    m createJsonWizziFactoryAndJsonFs
+        param wfPluginsOptions
+        param packiFiles
+        param callback
+        const jsonDocuments
+            [
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)
+                    const filePath = ensurePackiFilePrefix(value)
+                    log mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        
+        _ JsonComponents.createJsonFs
+            @ jsonDocuments
+            a_cb( jsonFs )
+                log mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created'
+                _ wizziFactory.createFactory
+                    {
+                        @ plugins wfPluginsOptions
+                        { repo
+                            @ storeKind 'json'
+                            @ storeJsonFs jsonFs
+                    a_cb( wf )
+                        log mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created'
+                        _ callback
+                            @ null
+                            {
+                                @ wf wf
+                                @ jsonFs jsonFs

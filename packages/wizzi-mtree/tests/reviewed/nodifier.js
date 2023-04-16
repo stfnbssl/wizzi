@@ -14,7 +14,7 @@ var expect = require('expect.js');
 var _ = require('lodash');
 var file = require('@wizzi/utils').file;
 var verify = require('@wizzi/utils').verify;
-var createStoreFactory = require('wizzi-repo').createStoreFactory;
+var createStoreFactory = require('@wizzi/repo').createStoreFactory;
 function getFSDocumentStore(callback) {
     createStoreFactory({
         kind: 'filesystem'

@@ -295,7 +295,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.3.runnerServer.' + method,
+        method: 'wizzi@0.8.5.runnerServer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

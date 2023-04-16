@@ -25,14 +25,18 @@ $group
         +
         const fileService = this.fileService
         const that = this
-        + 
+        +
+        log 'metaGenerate.context',  context
+        +
         _ this.loadModel
             @ 'ittf'
             @ ittfMetaFilePath
             {
-                @ mTreeBuildupContext context
+                @ mTreeBuildupContext context.modelRequestContext
             a_cb( metaFileModel )
 
+                log "Object.keys(metaFileModel)", Object.keys(metaFileModel)
+                log "metaFileModel.children.length", metaFileModel.children.length
                 var f_count = 0
                 iife next
                     var child = metaFileModel.children[f_count++]
@@ -49,6 +53,8 @@ $group
                                     @ copyInclude options.copyInclude || ['*']
                                     @ copyExclude options.copyExclude || []
                                 @ callback
+                    log "Object.keys(child)", Object.keys(child)
+                    log 'child', child.name, child.value
                     if child.name == '$file'
                         try
                             _ processFile
@@ -79,6 +85,7 @@ $group
                     @ sb
                     @ child
                     @ 0
+            log 'meta.processFile', outputPath, sb.join('\n')
             _ fileService.write
                 @ outputPath
                 _ sb.join

@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/factory",
     "sideEffects": false,
-    "version": "0.8.3",
+    "version": "0.8.5",
     "description": "The Wizzi Factory.",
     "author": {
         "name": "Stefano Bassoli",
@@ -44,7 +44,7 @@
         "@wizzi/utils": "0.8.1",
         "wizzi-utils": "0.7.22",
         "extsprintf": "^1.2.0",
-        "@wizzi/mtree": "0.8.1",
+        "@wizzi/mtree": "0.8.2",
         "@wizzi/repo": "0.8.2"
     },
     "devDependencies": {

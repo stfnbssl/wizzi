@@ -101,7 +101,7 @@
 					{
 						@ name item
 		+
-        log 'factoryPlugin.provides.schemasExt', factoryPlugin.provides.schemasExt
+        $$ loog 'factoryPlugin.provides.schemasExt', factoryPlugin.provides.schemasExt
         if factoryPlugin.provides.schemasExt
             foreach schema in factoryPlugin.provides.schemasExt
                 set found

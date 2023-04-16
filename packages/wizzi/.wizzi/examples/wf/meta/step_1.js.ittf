@@ -1,5 +1,5 @@
 module
-	kind react
+	kind es6
 
     $
         var opt = {
@@ -10,51 +10,120 @@ module
             folderLevel: 3
         }
 
-    common\example\wizzi(&opt)
+    common\example\wizzi( &opt )
 
         $append json_wf_plugins
             [ items
-                @ './wizzi-core/index'
-            @ pluginsBaseFolder pluginsBaseFolder
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
 
-        _ createJsonWizziFactoryAndJsonFs
-            _ getMetaIttfFile
-            f_cb_test(wf_and_fsjson)
-                _ wf_and_fsjson.wf.metaGenerate
-                    @ packiFilePrefix + 'index.ittf.ittf'
-                    {
-                        @ modelRequestContext getMetaContext()
-                    {
-                        @ tempFolder packiFilePrefix + 'template'
-                        @ destFolder packiFilePrefix + '.wizzi'
-                    f_cb_test(jsonFs)
-                        $if false
-                            _ printValue
-                                @ 'jsonFs'
-                                _ stringify
-                                    @ wf_and_fsjson.jsonFs
-                                    @ null
-                                    @ 2
-                        _ jsonFsToPackiFiles
-                            @ wf_and_fsjson.jsonFs
-                            @ 'template'
-                            f_cb_test(templatePackiFiles)
+        _ createPackifilesFromFs
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'meta_1'
+            a_cb( metaPackiFiles )
+                _ printValue
+                    @ 'metaPackiFiles'
+                    _ stringify
+                        @ metaPackiFiles
+                        @ null
+                        @ 2
+                _ createJsonWizziFactoryAndJsonFs
+                    @ metaPackiFiles
+                    f_cb_test(wf_and_fsjson)
+                        _ wf_and_fsjson.wf.metaGenerate
+                            @ packiFilePrefix + 'index.ittf.ittf'
+                            {
+                                @ modelRequestContext getMetaContext()
+                            {
+                                @ tempFolder packiFilePrefix + 'template'
+                                @ destFolder packiFilePrefix + '.wizzi'
+                            f_cb_test(jsonFs)
+                                $if false
+                                    _ printValue
+                                        @ 'jsonFs'
+                                        _ stringify
+                                            @ wf_and_fsjson.jsonFs
+                                            @ null
+                                            @ 2
+                                $if true
+                                    _ jsonFsToPackiFiles
+                                        @ wf_and_fsjson.jsonFs
+                                        @ 'template'
+                                        f_cb_test(templatePackiFiles)
+                                            _ writePackifiles
+                                                _ path.join
+                                                    @ __dirname
+                                                    @ 'out'
+                                                @ templatePackiFiles
+                                            _ printValue
+                                                @ 'templatePackiFiles'
+                                                _ stringify
+                                                    @ templatePackiFiles
+                                                    @ null
+                                                    @ 2
+                                            _ jsonFsToPackiFiles
+                                                @ wf_and_fsjson.jsonFs
+                                                @ '.wizzi'
+                                                f_cb_test(wizziPackiFiles)
+                                                    _ writePackifiles
+                                                        _ path.join
+                                                            @ __dirname
+                                                            @ 'out'
+                                                        @ wizziPackiFiles
+                                                    _ printValue
+                                                        @ 'wizziPackiFiles'
+                                                        _ stringify
+                                                            @ wizziPackiFiles
+                                                            @ null
+                                                            @ 2
+
+
+        
+        $if false
+            _ createJsonWizziFactoryAndJsonFs
+                _ getMetaIttfFile
+                f_cb_test(wf_and_fsjson)
+                    _ wf_and_fsjson.wf.metaGenerate
+                        @ packiFilePrefix + 'index.ittf.ittf'
+                        {
+                            @ modelRequestContext getMetaContext()
+                        {
+                            @ tempFolder packiFilePrefix + 'template'
+                            @ destFolder packiFilePrefix + '.wizzi'
+                        f_cb_test(jsonFs)
+                            $if false
                                 _ printValue
-                                    @ 'templatePackiFiles'
+                                    @ 'jsonFs'
                                     _ stringify
-                                        @ templatePackiFiles
+                                        @ wf_and_fsjson.jsonFs
                                         @ null
                                         @ 2
-                                _ jsonFsToPackiFiles
-                                    @ wf_and_fsjson.jsonFs
-                                    @ '.wizzi'
-                                    f_cb_test(wizziPackiFiles)
-                                        _ printValue
-                                            @ 'wizziPackiFiles'
-                                            _ stringify
-                                                @ wizziPackiFiles
-                                                @ null
-                                                @ 2
+                            _ jsonFsToPackiFiles
+                                @ wf_and_fsjson.jsonFs
+                                @ 'template'
+                                f_cb_test(templatePackiFiles)
+                                    _ printValue
+                                        @ 'templatePackiFiles'
+                                        _ stringify
+                                            @ templatePackiFiles
+                                            @ null
+                                            @ 2
+                                    _ jsonFsToPackiFiles
+                                        @ wf_and_fsjson.jsonFs
+                                        @ '.wizzi'
+                                        f_cb_test(wizziPackiFiles)
+                                            _ printValue
+                                                @ 'wizziPackiFiles'
+                                                _ stringify
+                                                    @ wizziPackiFiles
+                                                    @ null
+                                                    @ 2
 
 
     function jsonFsToPackiFiles

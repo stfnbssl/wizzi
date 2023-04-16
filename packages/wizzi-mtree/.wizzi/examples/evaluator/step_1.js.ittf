@@ -15,7 +15,8 @@ module
                 @ __dirname
                 @ 'ittf'
                 $$ @ 'evaluator_1.js.ittf'
-                @ 'vars_1.js.ittf'
+                $$ @ 'vars_1.js.ittf'
+                @ 'builtin_1.js.ittf'
 
         var productionContext 
             _ mocks.createProductionContext

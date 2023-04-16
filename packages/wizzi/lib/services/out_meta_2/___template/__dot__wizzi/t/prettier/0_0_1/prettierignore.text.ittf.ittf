@@ -1,0 +1,2 @@
+${'$'}group 
+   $include prettier/prettierignore.text

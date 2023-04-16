@@ -17,6 +17,29 @@
             _ this.mapSchemaToDefaultArtifact
                 @ filePathSchema
 
+    m mapIttfDocumentPathToPluginDependencies
+        param ittfDocumentPath
+        const filePathSchema
+            _ schemaFromFilePath
+                @ ittfDocumentPath
+        const wizziSchema = this.extensionSchemaMap[filePathSchema]
+        if this.providedSchemasExt[wizziSchema]
+            const ret = [ "@wizzi/plugin." + wizziSchema ]
+            const schemaExt = this.providedSchemasExt[wizziSchema]
+            foreach dep in schemaExt.dependencies
+                _ ret.push
+                    @ "@wizzi/plugin." + dep
+            return ret
+        else
+            return []
+
+    m mapExtensionToSchema
+        param extension
+        if verify.isEmpty(extension)
+            return undefined
+        const filePathSchema = extension.startsWith('.') ? extension.substring(1) : extension
+        return this.extensionSchemaMap[filePathSchema]
+    
     m mapSchemaToDefaultArtifact
         param filePathSchema
         const wizziSchema = this.extensionSchemaMap[filePathSchema]
@@ -31,7 +54,7 @@
         param artifactName
         return this.artifactContentTypeMap[artifactName]
 
-    m mapSchemaToRootElement
+    m mapSchemaToRootTag
         param filePathSchema
         const wizziSchema = this.extensionSchemaMap[filePathSchema]
         return this.schemaRootTagMap[wizziSchema]

@@ -20,11 +20,15 @@ var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
 var async = require('async');
+var wizziUtils = require('@wizzi/utils');
 var pluginsBaseFolder = null;
 var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
+var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.cli/packages';
 var wizziIndex = require('../../../index');
 pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
+var pluginsManager = require('../../../lib/services/pluginsManager');
+var metasManager = require('../../../lib/services/metasManager');
 const packiFilePrefix = 'json:/';
 const packiFilePrefixExtract = 'json:/';
 function createWizziFactory(globalContext, callback) {
@@ -55,14 +59,17 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
         if (err) {
             return callback(err);
         }
-        printValue('createJsonWizziFactoryAndJsonFs.jsonFs', stringify(jsonFs, null, 2))
         wizziIndex.jsonFactory({
             jsonFs: jsonFs, 
             plugins: {
                 items: [
-                    './wizzi-core/index'
+                    './wizzi.plugin.html/index', 
+                    './wizzi.plugin.js/index', 
+                    './wizzi.plugin.css/index', 
+                    './wizzi.plugin.ittf/index', 
+                    './wizzi.plugin.json/index'
                 ], 
-                pluginsBaseFolder: pluginsBaseFolder
+                pluginsBaseFolder: pluginsBaseFolderV08
              }
          }, (err, wf) => {
         
@@ -104,43 +111,92 @@ function createJsonFs(packiFiles, callback) {
 function ensurePackiFilePrefix(filePath) {
     return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
 }
+function createPackifilesFromFs(folderPath, callback) {
+    const file = vfile();
+    file.getFiles(folderPath, {
+        deep: true, 
+        documentContent: true
+     }, (err, files) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        const packiFiles = {};
+        var i, i_items=files, i_len=files.length, file;
+        for (i=0; i<i_len; i++) {
+            file = files[i];
+            packiFiles[file.relPath] = {
+                type: 'CODE', 
+                contents: file.content
+             };
+        }
+        return callback(null, packiFiles);
+    }
+    )
+}
+function writePackifiles(folderPath, packiFiles) {
+    for (var k in packiFiles) {
+        file.write(path.join(folderPath, k), packiFiles[k].contents)
+    }
+}
+function createMetasManager(globalContext, callback) {
+    wizziIndex.metasManager({
+        metaPlugins: {
+            
+         }, 
+        wfPlugins: {
+            
+         }, 
+        globalContext: globalContext || {}
+     }, callback)
+}
 var wf_meta_step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    createJsonWizziFactoryAndJsonFs(getMetaIttfFile(), function(err, wf_and_fsjson) {
+    createPackifilesFromFs(path.join(__dirname, 'ittf', 'meta_1'), (err, metaPackiFiles) => {
+    
         if (err) {
-            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log("[31m%s[0m", 'err', err);
-            throw new Error(err.message);
+            return callback(err);
         }
-        wf_and_fsjson.wf.metaGenerate(packiFilePrefix + 'index.ittf.ittf', {
-            modelRequestContext: getMetaContext()
-         }, {
-            tempFolder: packiFilePrefix + 'template', 
-            destFolder: packiFilePrefix + '.wizzi'
-         }, function(err, jsonFs) {
+        printValue('metaPackiFiles', stringify(metaPackiFiles, null, 2))
+        createJsonWizziFactoryAndJsonFs(metaPackiFiles, function(err, wf_and_fsjson) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
-            jsonFsToPackiFiles(wf_and_fsjson.jsonFs, 'template', function(err, templatePackiFiles) {
+            wf_and_fsjson.wf.metaGenerate(packiFilePrefix + 'index.ittf.ittf', {
+                modelRequestContext: getMetaContext()
+             }, {
+                tempFolder: packiFilePrefix + 'template', 
+                destFolder: packiFilePrefix + '.wizzi'
+             }, function(err, jsonFs) {
                 if (err) {
                     console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                printValue('templatePackiFiles', stringify(templatePackiFiles, null, 2))
-                jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', function(err, wizziPackiFiles) {
+                jsonFsToPackiFiles(wf_and_fsjson.jsonFs, 'template', function(err, templatePackiFiles) {
                     if (err) {
                         console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                         console.log("[31m%s[0m", 'err', err);
                         throw new Error(err.message);
                     }
-                    printValue('wizziPackiFiles', stringify(wizziPackiFiles, null, 2))
+                    writePackifiles(path.join(__dirname, 'out'), templatePackiFiles)
+                    printValue('templatePackiFiles', stringify(templatePackiFiles, null, 2))
+                    jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', function(err, wizziPackiFiles) {
+                        if (err) {
+                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                            console.log("[31m%s[0m", 'err', err);
+                            throw new Error(err.message);
+                        }
+                        writePackifiles(path.join(__dirname, 'out'), wizziPackiFiles)
+                        printValue('wizziPackiFiles', stringify(wizziPackiFiles, null, 2))
+                    })
                 })
             })
         })
-    })
+    }
+    )
 };
 wf_meta_step_1.__name = 'wf_meta_step_1';
 function heading1(text) {

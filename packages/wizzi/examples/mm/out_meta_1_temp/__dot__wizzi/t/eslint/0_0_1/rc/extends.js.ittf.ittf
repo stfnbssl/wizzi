@@ -1,0 +1,2 @@
+${'$'}group 
+   $include eslint/rc/extends.js
