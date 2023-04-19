@@ -25,6 +25,7 @@ var GenContext = require('../artifact/genContext');
 var verify = require('@wizzi/utils').verify;
 var file = require('@wizzi/utils').file;
 var JsonComponents = require('@wizzi/repo').JsonComponents;
+const packiUtils = require('./packiUtils');
 var StringWriter = require('../util/stringWriter');
 var errors = require('../errors');
 var log = require('../util/log')(module);
@@ -35,6 +36,11 @@ var bootModelDefUri = "../wizzi/models/bootstrap/wfschema-boot-modelDef";
 var BootWizziSchema = null;
 var ModelInfo = null;
 var AsyncModelLoader = null;
+
+const packiFilePrefix = 'json:/';
+const packiFilePrefixExtract = 'json:/';
+const metaProductionTempFolder = '___temp';
+const metaProductionDestFolder = '.wizzi';
 
 var myname = 'wizzi.services.wizzifactory';
 
@@ -62,6 +68,7 @@ var WizziFactory = (function () {
         this.wizzifiers = {};
         this.schemaDefinitions = {};
         this.globalContext = {};
+        this.metasManager = null;
     }
     //
     WizziFactory.prototype.initialize = function(options, callback) {
@@ -120,6 +127,7 @@ var WizziFactory = (function () {
         if (verify.isObject(this.pluginsOptions) == false) {
             this.pluginsOptions = {};
         }
+        this.metaPluginsOptions = options.metaPlugins;
         this.storeKind = repoOptions.storeKind || 'filesystem';
         var that = this;
         this.storePool.initialize(repoOptions, function(err, pool) {
@@ -1630,6 +1638,7 @@ var WizziFactory = (function () {
     WizziFactory.prototype._executeJob_by_wfjobModel = function(jobRequest, callback) {
         throw new Error('wizzi.wizziFactory._executeJob_by_wfjobModel not implemented.');
     }
+    //
     WizziFactory.prototype.metaGenerate = function(ittfMetaFilePath, context, options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -1715,7 +1724,6 @@ var WizziFactory = (function () {
                          }, callback);
                 }
                 console.log("Object.keys(child)", Object.keys(child), __filename);
-                console.log('child', child.name, child.value, __filename);
                 if (child.name == '$file') {
                     try {
                         processFile(child, tempFolder, (err, notUsed) => {
@@ -1750,7 +1758,6 @@ var WizziFactory = (function () {
                 child = node.children[i];
                 processContent(sb, child, 0)
             }
-            console.log('meta.processFile', outputPath, sb.join('\n'), __filename);
             fileService.write(outputPath, sb.join('\n'), callback)
         }
         function processContent(sb, node, indent) {
@@ -1765,6 +1772,170 @@ var WizziFactory = (function () {
             text = verify.replaceAll(text, "$", "$");
             return verify.replaceAll(text, "£'('£", "(");
         }
+    }
+    //
+    WizziFactory.prototype.executeMetaProduction = function(options, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'executeMetaProduction', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        
+        const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf";
+        
+        this.getMetasManager({}, (err, mm) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            mm.getMetaProductionStarter({
+                metaCtx: options.metaCtx
+             }, (err, metaPackiFiles) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                console.log(myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles), __filename);
+                metaPackiFiles[folderTemplatesIndexPath] = {
+                    type: "CODE", 
+                    contents: this.getFolderTemplatesIndex(metaPackiFiles, {
+                        pkgPath: null, 
+                        metaVer: null
+                     })
+                 };
+                this.createJsonFactoryAndJsonFs(metaPackiFiles, {
+                    globalContext: options.globalContext || {}
+                 }, (err, wf_and_fsjson) => {
+                
+                    if (err) {
+                        return callback(err);
+                    }
+                    const tempFolder = options.paths.metaProductionTempFolder || metaProductionTempFolder;
+                    const destFolder = options.paths.metaProductionWizziFolder || metaProductionWizziFolder;
+                    wf_and_fsjson.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
+                        modelRequestContext: {
+                            metaCtx: options.metaCtx
+                         }
+                     }, {
+                        tempFolder: packiFilePrefix + tempFolder, 
+                        destFolder: packiFilePrefix + destFolder
+                     }, (err, jsonFs) => {
+                    
+                        if (err) {
+                            return callback(err);
+                        }
+                        packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, destFolder, (err, wizziPackiFiles) => {
+                        
+                            if (err) {
+                                return callback(err);
+                            }
+                            return callback(null, wizziPackiFiles);
+                        }
+                        )
+                    }
+                    )
+                }
+                )
+            }
+            )
+        }
+        )
+    }
+    //
+    WizziFactory.prototype.getFolderTemplatesIndex = function(metaPackiFiles, options) {
+        const pkgPath = options.pkgPath || '';
+        const metaVer = options.metaVer || '0_0_1';
+        const folderTemplatesIndex = [
+            "template root", 
+            "    $", 
+            "        var pkgPath = '" + pkgPath + "'", 
+            "        var metaVer = '" + metaVer + "'"
+        ];
+        for (var k in metaPackiFiles) {
+            if (k.startsWith("folderTemplates/")) {
+                if (k.indexOf("/t/") < 0) {
+                    folderTemplatesIndex.push("    $include ./" + k.substring(16, k.length - 10))
+                }
+                const newk = k.substring(0, 15) + '/t/' + k.substring(16);
+                metaPackiFiles[newk] = metaPackiFiles[k];
+                delete metaPackiFiles[k]
+            }
+            if (k.startsWith("ittfDocumentTemplates/")) {
+                const newk = 't/' + k.substring(22);
+                metaPackiFiles[newk] = metaPackiFiles[k];
+                delete metaPackiFiles[k]
+            }
+        }
+        console.log('folderTemplatesIndex.contents', folderTemplatesIndex.join('\n'), __filename);
+        return folderTemplatesIndex.join('\n');
+    }
+    WizziFactory.prototype.getMetasManager = function(globalContext, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getMetasManager', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        
+        if (this.metasManager) {
+            return callback(null, this.metasManager);
+        }
+        var metasManager = require('./metasManager');
+        metasManager.createManager({
+            metaPlugins: this.metaPluginsOptions, 
+            globalContext: globalContext || {}
+         }, (err, metasManager) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            this.metasManager = metasManager;
+            return callback(null, this.metasManager);
+        }
+        )
+    }
+    WizziFactory.prototype.getProvidedMetas = function(callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getProvidedMetas', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        this.getMetasManager({}, (err, mm) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            mm.getProvidedMetas((err, providedMetas) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, providedMetas);
+            }
+            )
+        }
+        )
+    }
+    WizziFactory.prototype.getMetaProductions = function(callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getMetaProductions', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        this.getMetasManager({}, (err, mm) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            mm.getMetaProductionStarter({}, (err, metaProductions) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, metaProductions);
+            }
+            )
+        }
+        )
     }
     //
     WizziFactory.prototype.createSingleTextSourceFactory = function(ittfContent, schema, options, callback) {
@@ -1820,11 +1991,50 @@ var WizziFactory = (function () {
                  }, ex));
         } 
     }
+    //
+    WizziFactory.prototype.createJsonFactoryAndJsonFs = function(packiFiles, options, callback) {
+        
+        const jsonDocuments = [];
+        Object.keys(packiFiles).map((key) => {
+        
+            if (packiFiles[key].type === 'CODE' && verify.isNotEmpty(packiFiles[key].contents)) {
+                const filePath = packiUtils.ensurePackiFilePrefix(key);
+                jsonDocuments.push({
+                    path: filePath, 
+                    content: packiFiles[key].contents
+                 })
+            }
+        }
+        )
+        JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            options.jsonFs = jsonFs;
+            this.createJsonFactory(options, (err, wf) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, {
+                    wf: wf, 
+                    jsonFs: jsonFs
+                 })
+            }
+            )
+        }
+        )
+    }
+    //
     WizziFactory.prototype.createJsonFactory = function(options, callback) {
+        
         var wf = new WizziFactory(this.user, this.role);
+        
         wf.initialize({
             repo: {
                 storeKind: 'json', 
+                storeJsonFs: options.jsonFs, 
                 storeJsonFsData: options.jsonFsData
              }, 
             plugins: this.pluginsOptions, 

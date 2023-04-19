@@ -23,7 +23,7 @@ var async = require('async');
 var wizziUtils = require('@wizzi/utils');
 var pluginsBaseFolder = null;
 var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
-var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.cli/packages';
+var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages';
 var wizziIndex = require('../../index');
 pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
@@ -62,6 +62,9 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
         wizziIndex.jsonFactory({
             jsonFs: jsonFs, 
             plugins: {
+                
+             }, 
+            metaPlugins: {
                 
              }
          }, (err, wf) => {
@@ -165,7 +168,7 @@ var mm_step_2 = function(step_callback) {
             console.log("[31m%s[0m", err);
             return ;
         }
-        mm.getMetaProductionStarter((err, metaProductionstarter) => {
+        mm.getMetaProductionStarter({}, (err, metaProductionstarter) => {
         
             if (err) {
                 console.log("[31m%s[0m", err);

@@ -15,6 +15,7 @@ const fail = require('@wizzi/utils').fail;
 var JsonComponents = require('@wizzi/repo').JsonComponents;
 const wizziFactory = require('./wizziFactory');
 const errors = require('../errors');
+const packiUtils = require('./packiUtils');
 const existsSync = fs.existsSync || path.existsSync;
 const realpathSync = fs.realpathSync;
 const exists = fs.exists || path.exists;
@@ -419,7 +420,7 @@ class MetasManager {
         search(0);
     }
     //
-    getMetaProductionStarter(callback) {
+    getMetaProductionStarter(options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getMetaProductionStarter', 'The callback parameter must be a function. Received: ' + callback)
@@ -434,7 +435,9 @@ class MetasManager {
             }
             var metaPlugin = this.metaPlugins[i];
             console.log(mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin), __filename);
-            metaPlugin.getMetaProductionStarter((err, metaProduction) => {
+            metaPlugin.getMetaProductionStarter({
+                metaCtx: options.metaCtx || {}
+             }, (err, metaProduction) => {
             
                 if (err) {
                     return callback(err);
@@ -453,7 +456,7 @@ class MetasManager {
         
         const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf";
         
-        createPackifilesFromFs(metaIttfFolder, (err, metaPackiFiles) => {
+        packiUtils.createPackifilesFromFs(metaIttfFolder, (err, metaPackiFiles) => {
         
             if (err) {
                 return callback(err);
@@ -495,7 +498,7 @@ class MetasManager {
         ;
         console.log(mdDisplayName, '.makeFromFs.folderTemplates/index', dump, __filename);
         if (options.dumpMetaStartFolder) {
-            writePackifiles(options.dumpMetaStartFolder, metaPackiFiles)
+            packiUtils.writePackifiles(options.dumpMetaStartFolder, metaPackiFiles)
         }
         this.createJsonWizziFactoryAndJsonFs(this.wfPluginsOptions, metaPackiFiles, (err, wf_and_fsjson) => {
         
@@ -513,21 +516,21 @@ class MetasManager {
                     return callback(err);
                 }
                 console.log(mdDisplayName, '.makeFromFs.metaGenerate done', __filename);
-                jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '___temp', (err, tempPackiFiles) => {
+                packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '___temp', (err, tempPackiFiles) => {
                 
                     if (err) {
                         return callback(err);
                     }
                     if (options.dumpProductionTempFolder) {
-                        writePackifiles(options.dumpProductionTempFolder, tempPackiFiles)
+                        packiUtils.writePackifiles(options.dumpProductionTempFolder, tempPackiFiles)
                     }
-                    jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', (err, wizziPackiFiles) => {
+                    packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', (err, wizziPackiFiles) => {
                     
                         if (err) {
                             return callback(err);
                         }
                         if (options.dumpProductionDestFolder) {
-                            writePackifiles(options.dumpProductionDestFolder, wizziPackiFiles)
+                            packiUtils.writePackifiles(options.dumpProductionDestFolder, wizziPackiFiles)
                         }
                         return callback(null, metaPackiFiles);
                     }
@@ -539,12 +542,46 @@ class MetasManager {
         }
         )
     }
+    getProvidedMetas(callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getProvidedMetas', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        console.log(mdDisplayName + '.getProvidedMetas', __filename);
+        var provides = {
+            metaProductions: [
+                
+            ], 
+            metaProductionSelectors: [
+                
+            ]
+         };
+        console.log('===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length, __filename);
+        const search = (ndx) => {
+        
+            if (ndx >= this.metaPlugins.length) {
+                return callback(null, provides);
+            }
+            var metaPlugin = this.metaPlugins[ndx];
+            console.log(mdDisplayName + '.metaPlugin.provides', metaPlugin.provides, __filename);
+            var i, i_items=metaPlugin.provides.metaProductions, i_len=metaPlugin.provides.metaProductions.length, item;
+            for (i=0; i<i_len; i++) {
+                item = metaPlugin.provides.metaProductions[i];
+                provides.metaProductions.push(item)
+                provides.metaProductionSelectors.push('use' + item[0].toUpperCase() + item.substring(1))
+            }
+            search(++ndx);
+        }
+        ;
+        search(0);
+    }
     createJsonWizziFactoryAndJsonFs(wfPluginsOptions, packiFiles, callback) {
         const jsonDocuments = [];
         Object.keys(packiFiles).map((value) => {
         
             if (packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)) {
-                const filePath = ensurePackiFilePrefix(value);
+                const filePath = packiUtils.ensurePackiFilePrefix(value);
                 console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
                 jsonDocuments.push({
                     path: filePath, 
@@ -588,62 +625,6 @@ module.exports = {
         mm.initialize(options, callback)
     }
  };
-function ensurePackiFilePrefix(filePath) {
-    return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
-}
-function createPackifilesFromFs(folderPath, callback) {
-    const fsFile = vfile();
-    fsFile.getFiles(folderPath, {
-        deep: true, 
-        documentContent: true
-     }, (err, files) => {
-    
-        if (err) {
-            return callback(err);
-        }
-        const packiFiles = {};
-        var i, i_items=files, i_len=files.length, file;
-        for (i=0; i<i_len; i++) {
-            file = files[i];
-            packiFiles[file.relPath] = {
-                type: 'CODE', 
-                contents: file.content
-             };
-        }
-        return callback(null, packiFiles);
-    }
-    )
-}
-function jsonFsToPackiFiles(jsonFs, filterFolder, callback) {
-    const packiFiles = {};
-    jsonFs.toFiles({
-        removeRoot: packiFilePrefixExtract
-     }, (err, files) => {
-    
-        if (err) {
-            return callback(err);
-        }
-        files.forEach((file) => {
-        
-            if (verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')) {
-                const k = filterFolder ? file.relPath.substring(filterFolder.length) : file.realpath;
-                packiFiles[k] = {
-                    type: 'CODE', 
-                    contents: file.content, 
-                    generated: true
-                 };
-            }
-        }
-        )
-        return callback(null, packiFiles);
-    }
-    )
-}
-function writePackifiles(folderPath, packiFiles) {
-    for (var k in packiFiles) {
-        file.write(path.join(folderPath, k), packiFiles[k].contents)
-    }
-}
 function dumpStringified(message, value) {
     const dump = stringify(value, null, 2);
     console.log(message, dump, __filename);

@@ -1,0 +1,31 @@
+﻿$group
+
+    m getProvidedMetas
+        callback
+
+		log mdDisplayName + '.getProvidedMetas'
+		var
+			decl provides
+                {
+                    [ metaProductions
+                    [ metaProductionSelectors
+			
+        log '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
+        const search
+            =>
+                param ndx
+                if ndx >= this.metaPlugins.length
+                    r_cb( provides )
+                var metaPlugin = this.metaPlugins[ndx]
+                log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
+                foreach item in metaPlugin.provides.metaProductions
+                    _ provides.metaProductions.push
+                        @ item
+                    _ provides.metaProductionSelectors.push
+                        @ 'use' + item[0].toUpperCase() + item.substring(1)
+                _ search(++ndx)
+        _ search(0)
+
+
+
+

@@ -1,5 +1,22 @@
 $group
 
+	#
+		# Execute a meta generation
+		# return
+		# | packifiles
+		# | wzError
+		# params
+        #   string ittfMetaFilePath
+        #   { context
+		#   { options
+		#     string tempFolder
+        #     string destFolder
+        #     string copyInclude
+        #       optional
+        #       default ['*']
+        #     string copyExclude
+        #       optional
+        #       default []
 	m metaGenerate
 		string ittfMetaFilePath
 		{ context
@@ -54,7 +71,7 @@ $group
                                     @ copyExclude options.copyExclude || []
                                 @ callback
                     log "Object.keys(child)", Object.keys(child)
-                    log 'child', child.name, child.value
+                    $$ loog 'child', child.name, child.value
                     if child.name == '$file'
                         try
                             _ processFile
@@ -85,7 +102,7 @@ $group
                     @ sb
                     @ child
                     @ 0
-            log 'meta.processFile', outputPath, sb.join('\n')
+            $$ loog 'meta.processFile', outputPath, sb.join('\n')
             _ fileService.write
                 @ outputPath
                 _ sb.join

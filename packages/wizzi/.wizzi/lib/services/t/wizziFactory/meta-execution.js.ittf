@@ -1,0 +1,100 @@
+$group
+
+	#
+		# Execute a meta production
+		# return
+		#   | packifiles
+		#   | wzError
+		# params
+		#   { options
+		#     { metaCtx
+        #     { globalContext
+		#     { paths
+        #        string tempProductionFolder
+        #          optional
+        #        string wizziProductionFolder
+        #          optional
+	m executeMetaProduction
+        param options
+		callback
+        +
+        const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
+        +
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaProductionStarter
+                    {
+                        @ metaCtx options.metaCtx
+                    a_cb( metaPackiFiles )
+                        log myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles)
+                        set metaPackiFiles[folderTemplatesIndexPath]
+                            {
+                                @ type "CODE"
+                                @ contents
+                                    _ this.getFolderTemplatesIndex
+                                        @ metaPackiFiles
+                                        {
+                                            @ pkgPath null
+                                            @ metaVer null
+                        _ this.createJsonFactoryAndJsonFs
+                            @ metaPackiFiles
+                            {
+                                @ globalContext options.globalContext || {}
+                            a_cb(wf_and_fsjson)
+                                const tempFolder = options.paths.metaProductionTempFolder || metaProductionTempFolder
+                                const destFolder = options.paths.metaProductionWizziFolder || metaProductionWizziFolder
+                                _ wf_and_fsjson.wf.metaGenerate
+                                    @ packiFilePrefix + folderTemplatesIndexPath
+                                    {
+                                        @ modelRequestContext
+                                            {
+                                                @ metaCtx options.metaCtx
+                                    {
+                                        @ tempFolder packiFilePrefix + tempFolder
+                                        @ destFolder packiFilePrefix + destFolder
+                                    a_cb(jsonFs)
+                                        _ packiUtils.jsonFsToPackiFiles
+                                            @ wf_and_fsjson.jsonFs
+                                            @ destFolder
+                                            a_cb(wizziPackiFiles)
+                                                r_cb( wizziPackiFiles )
+
+
+	#
+		# Create the folderTemplates index file
+        # for a given set of meta packiFiles
+		# return
+		# | string fileContent
+		# params
+		#   { metaPackiFiles
+        #   { options
+		#     string pkgPath
+        #       optional
+        #     string metaVer
+		#       optional
+    m getFolderTemplatesIndex
+        param metaPackiFiles
+        param options
+        const pkgPath = options.pkgPath || ''
+        const metaVer = options.metaVer || '0_0_1'
+        const folderTemplatesIndex
+            [
+                @ "template root"
+                @ "    $"
+                @ "        var pkgPath = '" + pkgPath + "'"
+                @ "        var metaVer = '" + metaVer + "'"
+        for var k in metaPackiFiles
+            if k.startsWith("folderTemplates/")
+                if k.indexOf("/t/") < 0
+                    _ folderTemplatesIndex.push
+                        @ "    $include ./" + k.substring(16, k.length - 10)
+                const newk = k.substring(0, 15) + '/t/' + k.substring(16)
+                set metaPackiFiles[newk] = metaPackiFiles[k]
+                delete metaPackiFiles[k]
+            if k.startsWith("ittfDocumentTemplates/")
+                const newk = 't/' + k.substring(22) 
+                set metaPackiFiles[newk] = metaPackiFiles[k]
+                delete metaPackiFiles[k]
+        log 'folderTemplatesIndex.contents', folderTemplatesIndex.join('\n')
+        return folderTemplatesIndex.join('\n')

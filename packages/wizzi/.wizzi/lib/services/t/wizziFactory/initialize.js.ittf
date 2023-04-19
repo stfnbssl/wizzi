@@ -16,6 +16,10 @@
 		#         [ items
 		#           string pluginName
 		#         string pluginsBaseFolder
+		#     { metaPlugins
+		#         [ items
+		#           string pluginName
+		#         string metaPluginsBaseFolder
 		#     { test
 		#         string testOnlyMockBaseDir
 		#       { dumps
@@ -60,7 +64,9 @@
 		if verify.isObject(this.pluginsOptions) == false
 			set this.pluginsOptions = {}
 
-		set this.storeKind = repoOptions.storeKind || 'filesystem'
+		set this.metaPluginsOptions = options.metaPlugins
+
+        set this.storeKind = repoOptions.storeKind || 'filesystem'
 
 		var that = this
 		_ this.storePool.initialize

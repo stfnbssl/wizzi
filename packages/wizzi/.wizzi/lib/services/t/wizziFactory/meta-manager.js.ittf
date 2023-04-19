@@ -1,0 +1,38 @@
+$group
+
+	m getMetasManager
+        param globalContext
+		callback
+        +
+        if this.metasManager
+            r_cb( this.metasManager )
+
+        var metasManager = require('./metasManager')
+        
+        _ metasManager.createManager
+            {
+                @ metaPlugins this.metaPluginsOptions
+                @ globalContext globalContext || {}
+            a_cb( metasManager )
+                set this.metasManager = metasManager
+                r_cb( this.metasManager )
+
+    m getProvidedMetas
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getProvidedMetas
+                    a_cb( providedMetas )
+                        r_cb( providedMetas )
+
+    m getMetaProductions
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaProductionStarter
+                    {
+                    a_cb( metaProductions )
+                        r_cb( metaProductions )
+

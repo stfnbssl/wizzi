@@ -15,6 +15,7 @@
 	var verify = require('@wizzi/utils').verify
 	var file = require('@wizzi/utils').file
 	var JsonComponents = require('@wizzi/repo').JsonComponents
+    const packiUtils = require('./packiUtils')
 	var StringWriter = require('../util/stringWriter')
 	var errors = require('../errors')
 	var log = require('../util/log')(module)
@@ -26,6 +27,11 @@
 	var ModelInfo = null
 	var AsyncModelLoader = null
 	+
+    const packiFilePrefix = 'json:/'
+    const packiFilePrefixExtract = 'json:/'
+    const metaProductionTempFolder = '___temp'
+    const metaProductionDestFolder = '.wizzi'
+    +
     var myname = 'wizzi.services.wizzifactory'
     +
 	class WizziFactory
@@ -53,6 +59,7 @@
             set this.wizzifiers = {}
 			set this.schemaDefinitions = {}
 			set this.globalContext = {}
+            set this.metasManager = null
 
 		$include wizziFactory/initialize
 		$include wizziFactory/terminate
@@ -67,6 +74,8 @@
 		$include wizziFactory/modelTypes-generation
 		$include wizziFactory/wizzi-job-execution
         $include wizziFactory/meta-generation
+        $include wizziFactory/meta-execution
+        $include wizziFactory/meta-manager
 		$include wizziFactory/json-factory
 		$include wizziFactory/getInfo
         $include wizziFactory/getProvides
@@ -116,8 +125,8 @@
             set text = remain
             set pos = text.indexOf('__')
         _ result.push(text)
-        return result.join('')        
-        
+        return result.join('')   
+
 	set module.exports
 		{
 			@ createFactory

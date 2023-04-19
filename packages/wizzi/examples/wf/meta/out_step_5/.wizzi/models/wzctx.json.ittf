@@ -1,0 +1,58 @@
+{
+    $include versions
+    name "wizzi.plugin.wizzi"
+    npnName "@wizzi/plugin.html"
+    pluginBasename "html"
+    version '${versions['@wizzi/plugin.html@next']}'
+    description "wizzi.plugin.wizzi"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { github
+        userid "stfnbssl"
+    { license
+        name "MIT"
+        copy "copy 2023"
+    { Build
+        isWizziPlugin true
+        useWizziV08 true
+        { wizziV08
+        { utils
+            useStringifySafe true
+            useObjectInspect true
+    [ Schemas
+        {
+            name "html"
+            title "html wizzi schema"
+            builtin false
+            hasWizzifier true
+            [ modelTransformers
+            [ artifactGenerators
+                {
+                    name "document"
+                    outmime "html"
+                    contentType "text/html"
+                    isDefault true
+            defaultArtifact "document"
+            [ wizzifiers
+                {
+                    name "html"
+            [ fileExtensions
+                "html"
+            [ includes
+                {
+                    Name "Js"
+                    name "js"
+                    [ options
+                {
+                    Name "Css"
+                    name "css"
+                    [ options
+                {
+                    Name "Svg"
+                    name "svg"
+                    [ options
+                {
+                    Name "Vtt"
+                    name "vtt"
+                    [ options

@@ -9,7 +9,7 @@
         +
         const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
         +
-        _ createPackifilesFromFs
+        _ packiUtils.createPackifilesFromFs
             @ metaIttfFolder
             a_cb( metaPackiFiles )
                 var dump
@@ -65,7 +65,7 @@
                 @ 2
         log mdDisplayName, '.makeFromFs.folderTemplates/index', dump
         if options.dumpMetaStartFolder
-            _ writePackifiles
+            _ packiUtils.writePackifiles
                 @ options.dumpMetaStartFolder
                 @ metaPackiFiles
         _ this.createJsonWizziFactoryAndJsonFs
@@ -84,21 +84,21 @@
                         $if false
                             _ dumpStringified('jsonFs', wf_and_fsjson.jsonFs)
                         $if true
-                            _ jsonFsToPackiFiles
+                            _ packiUtils.jsonFsToPackiFiles
                                 @ wf_and_fsjson.jsonFs
                                 @ '___temp'
                                 a_cb(tempPackiFiles)
                                     if options.dumpProductionTempFolder
-                                        _ writePackifiles
+                                        _ packiUtils.writePackifiles
                                             @ options.dumpProductionTempFolder
                                             @ tempPackiFiles
                                     $$ _ dumpStringified('tempPackiFiles', tempPackiFiles)
-                                    _ jsonFsToPackiFiles
+                                    _ packiUtils.jsonFsToPackiFiles
                                         @ wf_and_fsjson.jsonFs
                                         @ '.wizzi'
                                         a_cb(wizziPackiFiles)
                                             if options.dumpProductionDestFolder
-                                                _ writePackifiles
+                                                _ packiUtils.writePackifiles
                                                     @ options.dumpProductionDestFolder
                                                     @ wizziPackiFiles
                                             $$ _ dumpStringified('wizziPackiFiles', wizziPackiFiles)

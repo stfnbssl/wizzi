@@ -21,12 +21,11 @@ module
                 @ './wizzi.plugin.json/index'
             @ pluginsBaseFolder pluginsBaseFolderV08
 
-        $append meta_plugins            
+        $append meta_plugins
             [ items
                 @ './wizzi.meta.package/index'
                 @ './wizzi.meta.js/index'
             @ metaPluginsBaseFolder metaPluginsBaseFolder
-
         +
         const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
         +
@@ -39,6 +38,7 @@ module
                     error err
                     return
                 _ mm.getMetaProductionStarter
+                    {
                     =>
                         param err
                         param metaProductionstarter
@@ -46,5 +46,3 @@ module
                             error err
                             return
                         log 'metaProductionstarter', metaProductionstarter
-
-

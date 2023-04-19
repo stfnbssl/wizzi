@@ -10,7 +10,7 @@ $group
             =>
                 param value
                 if packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)
-                    const filePath = ensurePackiFilePrefix(value)
+                    const filePath = packiUtils.ensurePackiFilePrefix(value)
                     log mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
                     _ jsonDocuments.push
                         {
