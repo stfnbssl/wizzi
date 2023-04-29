@@ -70,7 +70,7 @@ $group
                                     @ copyInclude options.copyInclude || ['*']
                                     @ copyExclude options.copyExclude || []
                                 @ callback
-                    log "Object.keys(child)", Object.keys(child)
+                    $$ loog "Object.keys(child)", Object.keys(child)
                     $$ loog 'child', child.name, child.value
                     if child.name == '$file'
                         try

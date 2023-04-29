@@ -1,0 +1,7 @@
+$group
+    $params method, path, handler
+    _ this.router.${method}
+        @ "${path}"
+        $if wzCtx.App.isLocal == false
+            _ makeHandlerAwareOfAsyncErrors(apiSecured)
+        _ makeHandlerAwareOfAsyncErrors(${handler})

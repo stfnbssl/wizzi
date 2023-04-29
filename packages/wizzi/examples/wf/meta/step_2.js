@@ -142,6 +142,9 @@ function writePackifiles(folderPath, packiFiles) {
         file.write(path.join(folderPath, k), packiFiles[k].contents)
     }
 }
+function writeStringified(filePath, object) {
+    file.write(filePath, stringify(object, null, 2))
+}
 function createMetasManager(globalContext, callback) {
     wizziIndex.metasManager({
         metaPlugins: {

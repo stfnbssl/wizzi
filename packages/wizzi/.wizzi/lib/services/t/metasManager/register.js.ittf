@@ -24,8 +24,10 @@
 
 	m validateMetaPlugin
 		{ metaPlugin
-		for var k in metaPlugin
+		$*
+        for var k in metaPlugin
 			log mdDisplayName + '.validatemetaPlugin.key', k
+        *$
 		+
 		var methodNames
 			[
@@ -52,7 +54,7 @@
 						@ 'InvalidMetaPlugin'
 						@ 'validateMetaPlugin'
 						@ 'Missing property: ' + propName + ' in provides object'
-		log mdDisplayName + '.validateMetaPlugin', metaPlugin.getName(), true
+		$$ loog mdDisplayName + '.validateMetaPlugin', metaPlugin.getName(), true
 		return
 			{
 				@ __is_error false

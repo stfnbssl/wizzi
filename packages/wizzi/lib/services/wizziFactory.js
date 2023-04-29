@@ -1723,7 +1723,6 @@ var WizziFactory = (function () {
                             copyExclude: options.copyExclude || []
                          }, callback);
                 }
-                console.log("Object.keys(child)", Object.keys(child), __filename);
                 if (child.name == '$file') {
                     try {
                         processFile(child, tempFolder, (err, notUsed) => {

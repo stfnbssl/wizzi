@@ -176,6 +176,16 @@ $group
                     @ k
                 @ packiFiles[k].contents
 
+    function writeStringified
+        param filePath
+        param object
+        _ file.write
+            @ filePath
+            _ stringify
+                @ object
+                @ null
+                @ 2
+
     function createMetasManager
         param globalContext
         param callback

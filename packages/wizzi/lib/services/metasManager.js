@@ -301,9 +301,6 @@ class MetasManager {
                 'InvalidArgument', 'validateMetaPlugin', { parameter: 'metaPlugin', message: 'The metaPlugin parameter must be an object. Received: ' + metaPlugin }
             );
         }
-        for (var k in metaPlugin) {
-            console.log(mdDisplayName + '.validatemetaPlugin.key', k, __filename);
-        }
         
         var methodNames = [
             'getName', 
@@ -330,7 +327,6 @@ class MetasManager {
                 return error('InvalidMetaPlugin', 'validateMetaPlugin', 'Missing property: ' + propName + ' in provides object');
             }
         }
-        console.log(mdDisplayName + '.validateMetaPlugin', metaPlugin.getName(), true, __filename);
         return {
                 __is_error: false
              };

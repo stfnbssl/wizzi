@@ -11,6 +11,14 @@ module
         }
 
     common\example\wizzi( &opt )
+        $append imports
+            const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages"
+            $*1
+            const appsFolder
+                _ path.join
+                    @ __dirname
+                    @ 'out_step_5'
+            *$
 
         $append plugins
             [ items
@@ -32,36 +40,48 @@ module
 
         $append json_wf_meta_plugins            
             [ items
-                @ './wizzi.meta.package/index'
+                @ './wizzi.meta.cloud/index'
+                @ './wizzi.meta.commons/index'
+                @ './wizzi.meta.docs/index'
                 @ './wizzi.meta.js/index'
+                @ './wizzi.meta.ts/index'
+                @ './wizzi.meta.ts.express/index'
+                @ './wizzi.meta.ts.db/index'
+                @ './wizzi.meta.web/index'
                 @ './wizzi.meta.wizzi/index'
             @ metaPluginsBaseFolder metaPluginsBaseFolder
 
-        _ loadMetaContext
-            @ 'wizzi'
-            f_cb_test(metaCtx)
-                _ createJsonWizziFactoryAndJsonFs
-                    {
-                    f_cb_test(wf_and_fsjson)
-                        _ wf_and_fsjson.wf.executeMetaProduction
-                            {
-                                @ metaCtx metaCtx $$ getMetaContext()
-                                { paths
-                                    @ metaProductionTempFolder '___template'
-                                    @ metaProductionWizziFolder '.wizzi'
-                                { globalContext
-                            =>
-                                param err
-                                param wizziPackiFiles
-                                if err
-                                    error err
-                                    return
-                                log 'wizziPackiFiles', Object.keys(wizziPackiFiles)
-                                _ writePackifiles
-                                    _ path.join
-                                        @ __dirname
-                                        @ 'out_step_5'
-                                    @ wizziPackiFiles
+        _ metaProduce
+            $$ @ 'wizzi'
+            @ 'ts.express.app'
+
+        function metaProduce
+            param contextName
+            _ loadMetaContext
+                @ contextName
+                f_cb_test(metaCtx)
+                    _ createJsonWizziFactoryAndJsonFs
+                        {
+                        f_cb_test(wf_and_fsjson)
+                            _ wf_and_fsjson.wf.executeMetaProduction
+                                {
+                                    @ metaCtx metaCtx $$ getMetaContext()
+                                    { paths
+                                        @ metaProductionTempFolder '___template'
+                                        @ metaProductionWizziFolder '.wizzi'
+                                    { globalContext
+                                =>
+                                    param err
+                                    param wizziPackiFiles
+                                    if err
+                                        error err
+                                        return
+                                    log 'wizziPackiFiles', Object.keys(wizziPackiFiles)
+                                    _ writePackifiles
+                                        _ path.join
+                                            @ appsFolder
+                                            @ contextName
+                                        @ wizziPackiFiles
 
     function getMetaContext
         const npnName = "step_5"
@@ -121,4 +141,7 @@ module
                                 @ wizziModel
                                 @ null
                                 @ 2
+                        _ writeStringified                                
+                            @ jsonPath + '.json'
+                            @ wizziModel
                         r_cb( wizziModel )

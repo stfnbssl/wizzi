@@ -31,6 +31,7 @@ var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
 const packiFilePrefix = 'json:/';
 const packiFilePrefixExtract = 'json:/';
+const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages";
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
@@ -80,8 +81,14 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
              }, 
             metaPlugins: {
                 items: [
-                    './wizzi.meta.package/index', 
+                    './wizzi.meta.cloud/index', 
+                    './wizzi.meta.commons/index', 
+                    './wizzi.meta.docs/index', 
                     './wizzi.meta.js/index', 
+                    './wizzi.meta.ts/index', 
+                    './wizzi.meta.ts.express/index', 
+                    './wizzi.meta.ts.db/index', 
+                    './wizzi.meta.web/index', 
                     './wizzi.meta.wizzi/index'
                 ], 
                 metaPluginsBaseFolder: metaPluginsBaseFolder
@@ -154,6 +161,9 @@ function writePackifiles(folderPath, packiFiles) {
         file.write(path.join(folderPath, k), packiFiles[k].contents)
     }
 }
+function writeStringified(filePath, object) {
+    file.write(filePath, stringify(object, null, 2))
+}
 function createMetasManager(globalContext, callback) {
     wizziIndex.metasManager({
         metaPlugins: {
@@ -167,39 +177,42 @@ function createMetasManager(globalContext, callback) {
 }
 var wf_meta_step_5 = function(step_callback) {
     heading1('EXAMPLE')
-    loadMetaContext('wizzi', function(err, metaCtx) {
-        if (err) {
-            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-            console.log("[31m%s[0m", 'err', err);
-            throw new Error(err.message);
-        }
-        createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_fsjson) {
+    metaProduce('ts.express.app')
+    function metaProduce(contextName) {
+        loadMetaContext(contextName, function(err, metaCtx) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
-            wf_and_fsjson.wf.executeMetaProduction({
-                metaCtx: metaCtx, 
-                paths: {
-                    metaProductionTempFolder: '___template', 
-                    metaProductionWizziFolder: '.wizzi'
-                 }, 
-                globalContext: {
-                    
-                 }
-             }, (err, wizziPackiFiles) => {
-            
+            createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_fsjson) {
                 if (err) {
-                    console.log("[31m%s[0m", err);
-                    return ;
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
+                    throw new Error(err.message);
                 }
-                console.log('wizziPackiFiles', Object.keys(wizziPackiFiles), __filename);
-                writePackifiles(path.join(__dirname, 'out_step_5'), wizziPackiFiles)
-            }
-            )
+                wf_and_fsjson.wf.executeMetaProduction({
+                    metaCtx: metaCtx, 
+                    paths: {
+                        metaProductionTempFolder: '___template', 
+                        metaProductionWizziFolder: '.wizzi'
+                     }, 
+                    globalContext: {
+                        
+                     }
+                 }, (err, wizziPackiFiles) => {
+                
+                    if (err) {
+                        console.log("[31m%s[0m", err);
+                        return ;
+                    }
+                    console.log('wizziPackiFiles', Object.keys(wizziPackiFiles), __filename);
+                    writePackifiles(path.join(appsFolder, contextName), wizziPackiFiles)
+                }
+                )
+            })
         })
-    })
+    }
 };
 wf_meta_step_5.__name = 'wf_meta_step_5';
 function heading1(text) {
@@ -463,6 +476,7 @@ function loadMetaContext(name, callback) {
                 throw new Error(err.message);
             }
             printValue('wizziModel metaCtx', stringify(wizziModel, null, 2))
+            writeStringified(jsonPath + '.json', wizziModel)
             return callback(null, wizziModel);
         })
     })
