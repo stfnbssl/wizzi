@@ -162,20 +162,20 @@ function createMetasManager(globalContext, callback) {
 }
 var wf_meta_step_3 = function(step_callback) {
     heading1('EXAMPLE')
-    createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_fsjson) {
+    createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_jsonFs) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        wf_and_fsjson.wf.getProvidedMetas((err, metaProvides) => {
+        wf_and_jsonFs.wf.getProvidedMetas((err, metaProvides) => {
         
             if (err) {
                 console.log("[31m%s[0m", err);
                 return ;
             }
             console.log('metaProvides', metaProvides, __filename);
-            wf_and_fsjson.wf.getMetaProductions((err, metaProductions) => {
+            wf_and_jsonFs.wf.getMetaProductions((err, metaProductions) => {
             
                 if (err) {
                     console.log("[31m%s[0m", err);

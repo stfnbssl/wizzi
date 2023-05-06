@@ -61,12 +61,12 @@
 				set this.items = new Collection([])
 				set this.documents = new Collection([])
 
-		$include fsjson/getItem
-		$include fsjson/insertItem
-		$include fsjson/updateItem
-		$include fsjson/deleteItem
-		$include fsjson/read
-		$include fsjson/write
+		$include jsonFs/getItem
+		$include jsonFs/insertItem
+		$include jsonFs/updateItem
+		$include jsonFs/deleteItem
+		$include jsonFs/read
+		$include jsonFs/write
 
 		m toJson
 			callback
@@ -157,6 +157,6 @@
 
 	function normalize
 		param path
-		return path.trim().replace(/\\/g,'/').toLowerCase()
+		return path.trim().replace(/\\/g,'/') $$ VIA 4/5/2023 .toLowerCase()
 					
 	set module.exports = JsonFs

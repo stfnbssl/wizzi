@@ -5,7 +5,7 @@
 */
 'use strict';
 //
-// Example skeleton specific for the 'wizzi-repo' kernel package
+// Example skeleton specific for the '@wizzi/repo' kernel package
 //
 //
 var util = require('util');

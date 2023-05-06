@@ -13,12 +13,12 @@ $group
         versions['@wizzi/mtree@next'] = '0.8.3';
         versions['wizzi-mtree'] = '0.7.18';
         versions['wizzi-mtree@next'] = '0.8.1';
-        versions['@wizzi/repo'] = '0.8.2';
-        versions['@wizzi/repo@next'] = '0.8.3';
+        versions['@wizzi/repo'] = '0.8.5';
+        versions['@wizzi/repo@next'] = '0.8.6';
         versions['wizzi-repo'] = '0.7.11';
         versions['wizzi-repo@next'] = '0.8.1';
-        versions['@wizzi/factory'] = '0.8.4';
-        versions['@wizzi/factory@next'] = '0.8.5';
+        versions['@wizzi/factory'] = '0.8.5';
+        versions['@wizzi/factory@next'] = '0.8.6';
         versions['wizzi'] = '0.7.35';
         versions['wizzi@next'] = '0.8.1';
 

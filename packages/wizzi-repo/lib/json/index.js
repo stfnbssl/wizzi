@@ -9,7 +9,7 @@ var md = {};
 module.exports = md;
 var Collection = require('../utils/collection');
 md.directoryTree = require('./directoryTree');
-md.JsonFs = require('./fs/fsjson');
+md.JsonFs = require('./fs/jsonFs');
 md.DocumentManager = require('./fs/documentmanager');
 //
 md.createDocumentManager = function(jsonFsDataOrJsonFs) {

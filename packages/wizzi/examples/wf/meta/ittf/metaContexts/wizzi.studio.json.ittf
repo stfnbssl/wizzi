@@ -114,7 +114,15 @@
     useTsExpressFeatureConfig true
     { tsExpressFeatureConfig
         params/use( studioUserInfo )
+        [ values
+            {
+                name "jobsBasePath"
+                type "string"
+                value "C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi.studio/data/jobs"
         
+    useTsExpressFeatureCdn true
+    { tsExpressFeatureCdn
+
     useTsExpressFeatureFilesystem false
     { tsExpressFeatureFilesystem
         
@@ -124,7 +132,8 @@
     useTsExpressFeaturePacki true
     { tsExpressFeaturePacki
         params/use( studioFolderEdit )
-        
+        params/use( packiProductions )
+
     useTsExpressFeatureProject false
     { tsExpressFeatureProject
         
@@ -137,12 +146,18 @@
     useTsExpressFeatureWizzi true
     { tsExpressFeatureWizzi
         [ plugins
-            "./wizzi.plugin.js/index.js"
-            "./wizzi.plugin.html/index.js"
             "./wizzi.plugin.css/index.js"
-            "./wizzi.plugin.svg/index.js"
+            "./wizzi.plugin.graphql/index.js"
+            "./wizzi.plugin.html/index.js"
+            "./wizzi.plugin.ittf/index.js"
+            "./wizzi.plugin.js/index.js"
             "./wizzi.plugin.json/index.js"
+            "./wizzi.plugin.svg/index.js"
+            "./wizzi.plugin.text/index.js"
+            "./wizzi.plugin.ts/index.js"
+            "./wizzi.plugin.xml/index.js"
         pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
+        params/use( wizziDocs )
         params/use( wizziFs )
         params/use( wizziGist )
         params/use( wizziMeta )
@@ -162,9 +177,11 @@
     useTsExpressFeatureWizziDocs true
     { tsExpressFeatureWizziDocs
         
-    useTsExpressFeatureWizziProduction false
-    { tsExpressFeatureWizziProduction
-    
+  
+    useTsExpressIttf true
+    { tsExpressIttf
+        params/use( wizziDocs )
+
     useTsExpressStyles true   
     { tsExpressStyles
 
@@ -173,16 +190,18 @@
 
     useTsExpressUtils true
     { tsExpressUtils
+        params/use( scripts )
+        params/use( wizziFs )    
 
     useTsExpressWizziSite true
     { tsExpressWizziSite
-        useDemoHome true
-        { demoHome
-        useDemoWizzi true
-        { demoWizzi
+        params/use( demoHome )
+        params/use( demoWizzi )
+        params/use( wizziDocs )
+        params/use( packiProductions )
 
-    useTsDbMongodb true
-    { tsDbMongodb
+    useTsDbMongoDb true
+    { tsDbMongoDb
 
     useTsDbRedis false
     { tsDbRedis
@@ -249,4 +268,4 @@
     { docsPpt
     
     useDocsWord false
-    { docsWord        
+    { docsWord

@@ -162,13 +162,13 @@ function createMetasManager(globalContext, callback) {
 }
 var wf_meta_step_3 = function(step_callback) {
     heading1('EXAMPLE')
-    createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_fsjson) {
+    createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_jsonFs) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        wf_and_fsjson.wf.executeMetaProduction({
+        wf_and_jsonFs.wf.executeMetaProduction({
             metaCtx: getMetaContext(), 
             paths: {
                 metaProductionTempFolder: '___template', 

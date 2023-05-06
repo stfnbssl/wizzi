@@ -193,13 +193,13 @@ var wf_meta_step_2 = function(step_callback) {
         printValue('metaPackiFiles 2', stringify(Object.keys(metaPackiFiles), null, 2))
         printValue('folderTemplates/index', stringify(metaPackiFiles[folderTemplatesIndexPath], null, 2))
         writePackifiles(path.join(__dirname, 'out_meta_2_start'), metaPackiFiles)
-        createJsonWizziFactoryAndJsonFs(metaPackiFiles, function(err, wf_and_fsjson) {
+        createJsonWizziFactoryAndJsonFs(metaPackiFiles, function(err, wf_and_jsonFs) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
-            wf_and_fsjson.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
+            wf_and_jsonFs.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
                 modelRequestContext: getMetaContext()
              }, {
                 tempFolder: packiFilePrefix + '___template', 
@@ -210,7 +210,7 @@ var wf_meta_step_2 = function(step_callback) {
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '___template', function(err, templatePackiFiles) {
+                jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, '___template', function(err, templatePackiFiles) {
                     if (err) {
                         console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                         console.log("[31m%s[0m", 'err', err);
@@ -218,7 +218,7 @@ var wf_meta_step_2 = function(step_callback) {
                     }
                     writePackifiles(path.join(__dirname, 'out_meta_2'), templatePackiFiles)
                     printValue('templatePackiFiles', stringify(templatePackiFiles, null, 2))
-                    jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '___wizzi', function(err, wizziPackiFiles) {
+                    jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, '___wizzi', function(err, wizziPackiFiles) {
                         if (err) {
                             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                             console.log("[31m%s[0m", 'err', err);

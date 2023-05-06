@@ -1,4 +1,4 @@
-import { JsonFsData, JsonFs } from 'wizzi-repo';
+import { JsonFsData, JsonFs } from '@wizzi/repo';
 type cb<T> = (err: any, result: T) => void;
 
 type Readonly<P, T> = {
@@ -195,11 +195,20 @@ type RepositoryOptions = {
 
 /**
  * Required plugins.
- * The pluginsBaseFolder options is for local plugins.
+ * The pluginsBaseFolder option is for local plugins.
  */
 type PluginsOptions = {
     items: string[];
     pluginsBaseFolder?: string;
+}
+
+/**
+ * Required plugins.
+ * The metaPluginsBaseFolder option is for local plugins.
+ */
+type MetaPluginsOptions = {
+    items: string[];
+    metaPluginsBaseFolder?: string;
 }
 
 /**
@@ -221,6 +230,7 @@ type FactoryTestOptions = {
 type FactoryOptions = {
     repo: RepositoryOptions;
     plugins: PluginsOptions;
+    metaPlugins?: MetaPluginsOptions;
     globalContext?: object;
     test?: FactoryTestOptions;
 }
@@ -231,6 +241,7 @@ type FactoryOptions = {
  type JSONFactoryOptions = {
     jsonFs: JsonFs;
     plugins: PluginsOptions;
+    metaPlugins?: MetaPluginsOptions;
     globalContext?: object;
     test?: FactoryTestOptions;
 }

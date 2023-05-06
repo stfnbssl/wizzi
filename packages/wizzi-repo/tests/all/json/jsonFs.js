@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\all\json\fsjson.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\all\json\jsonFs.js.ittf
 */
 'use strict';
 
@@ -15,9 +15,9 @@ var _ = require('lodash');
 var file = require('@wizzi/utils').file;
 var verify = require('@wizzi/utils').verify;
 
-var JsonFs = require('../../../lib/json/fs/fsjson');
+var JsonFs = require('../../../lib/json/fs/jsonFs');
 
-describe("json.fsjson", function() {
+describe("json.jsonFs", function() {
     
     var jsonFs = new JsonFs();
     var hellotxt_item = null;

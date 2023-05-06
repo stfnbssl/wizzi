@@ -29,8 +29,8 @@ module
 
         _ createJsonWizziFactoryAndJsonFs
             {
-            f_cb_test(wf_and_fsjson)
-                _ wf_and_fsjson.wf.executeMetaProduction
+            f_cb_test(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.executeMetaProduction
                     {
                         @ metaCtx getMetaContext()
                         { paths

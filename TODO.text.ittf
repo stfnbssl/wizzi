@@ -15,3 +15,841 @@ text
     git clone https://github.com/stfnbssl/wizzi.git
     cd wizzi
     npm install
+
+
+
+
+
+    @@@this.fsimpl Collection {
+  items: [
+    {
+      basename: 'json:',
+      parentId: null,
+      dirname: '',
+      path: 'json:',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'folderTemplates',
+      parentId: [ObjectID],
+      dirname: 'json:',
+      path: 'json:/folderTemplates',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 't',
+      parentId: [ObjectID],
+      dirname: 'json:',
+      path: 'json:/t',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 't',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates',
+      path: 'json:/folderTemplates/t',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsDeploy',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsDeploy',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsEnv',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsEnv',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsGit',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsGit',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsPackage',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsPackage',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsServerCertificate',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsServerCertificate',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsWizzi',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/commonsWizzi',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'docsMarkdown',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/docsMarkdown',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsCommons',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsCommons',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpress',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpress',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressApp',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressApp',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressData',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressData',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureConfig',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressFeatureConfig',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeaturePacki',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressFeaturePacki',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureWizzi',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressFeatureWizzi',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureWizziDocs',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressFeatureWizziDocs',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressStyles',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressStyles',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressTests',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressTests',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressUtils',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressUtils',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressWizziSite',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/tsExpressWizziSite',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'webCss',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/webCss',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'webHtml',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/webHtml',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'webJs',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/webJs',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'webSiteDemo',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/webSiteDemo',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'webStudioMeta',
+      parentId: [ObjectID],
+      dirname: 'json:/t',
+      path: 'json:/t/webStudioMeta',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'index.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates',
+      path: 'json:/folderTemplates/index.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.008Z
+    },
+    {
+      basename: 'commonsDeploy',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsDeploy',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsEnv',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsEnv',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsGit',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsGit',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsPackage',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsPackage',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsServerCertificate',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsServerCertificate',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'commonsWizzi',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/commonsWizzi',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'development.env.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsDeploy',
+      path: 'json:/t/commonsDeploy/development.env.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.009Z
+    },
+    {
+      basename: 'production.env.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsDeploy',
+      path: 'json:/t/commonsDeploy/production.env.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.009Z
+    },
+    {
+      basename: 'index.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsEnv',
+      path: 'json:/t/commonsEnv/index.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.009Z
+    },
+    {
+      basename: 'gitignore-base.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsGit',
+      path: 'json:/t/commonsGit/gitignore-base.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.010Z
+    },
+    {
+      basename: 'browser.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/browser.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.010Z
+    },
+    {
+      basename: 'dependencies.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/dependencies.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.010Z
+    },
+    {
+      basename: 'package-info.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/package-info.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.010Z
+    },
+    {
+      basename: 'devDependencies.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/devDependencies.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.010Z
+    },
+    {
+      basename: 'resolutions.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/resolutions.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.011Z
+    },
+    {
+      basename: 'scripts.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/scripts.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.011Z
+    },
+    {
+      basename: 'scripts_deploy.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/scripts_deploy.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.011Z
+    },
+    {
+      basename: 'tools.json.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/tools.json.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.011Z
+    },
+    {
+      basename: 'dependencies',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsPackage',
+      path: 'json:/t/commonsPackage/dependencies',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'server.cert.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsServerCertificate',
+      path: 'json:/t/commonsServerCertificate/server.cert.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.012Z
+    },
+    {
+      basename: 'server.key.text.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsServerCertificate',
+      path: 'json:/t/commonsServerCertificate/server.key.text.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.012Z
+    },
+    {
+      basename: 'tfolder',
+      parentId: [ObjectID],
+      dirname: 'json:/t/commonsWizzi',
+      path: 'json:/t/commonsWizzi/tfolder',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'docsMarkdown',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/docsMarkdown',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'app.readme.md.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/docsMarkdown',
+      path: 'json:/t/docsMarkdown/app.readme.md.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.012Z
+    },
+    {
+      basename: 'tsCommons',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsCommons',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'config',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsCommons',
+      path: 'json:/t/tsCommons/config',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'fetch',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsCommons',
+      path: 'json:/t/tsCommons/fetch',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tfolder',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsCommons',
+      path: 'json:/t/tsCommons/tfolder',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'types',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsCommons',
+      path: 'json:/t/tsCommons/types',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'typings',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsCommons',
+      path: 'json:/t/tsCommons/typings',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpress',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpress',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressApp',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressApp',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressData',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressData',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureConfig',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressFeatureConfig',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeaturePacki',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressFeaturePacki',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureWizzi',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressFeatureWizzi',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressFeatureWizziDocs',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressFeatureWizziDocs',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressStyles',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressStyles',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressTests',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressTests',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressUtils',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressUtils',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tsExpressWizziSite',
+      parentId: [ObjectID],
+      dirname: 'json:/folderTemplates/t',
+      path: 'json:/folderTemplates/t/tsExpressWizziSite',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'common',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/common',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'examples',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/examples',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'features',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/features',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'middlewares',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/middlewares',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'pages',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/pages',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tests',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/tests',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'tfolder',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/tfolder',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'utils',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpress',
+      path: 'json:/t/tsExpress/utils',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'App.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressApp',
+      path: 'json:/t/tsExpressApp/App.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.016Z
+    },
+    {
+      basename: 'getApp.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressApp',
+      path: 'json:/t/tsExpressApp/getApp.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.017Z
+    },
+    {
+      basename: 'index.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressApp',
+      path: 'json:/t/tsExpressApp/index.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.017Z
+    },
+    {
+      basename: 'httpException.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressApp',
+      path: 'json:/t/tsExpressApp/httpException.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.018Z
+    },
+    {
+      basename: 'tfolder',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressApp',
+      path: 'json:/t/tsExpressApp/tfolder',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'xxx.js.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressData',
+      path: 'json:/t/tsExpressData/xxx.js.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.019Z
+    },
+    {
+      basename: 'tfolder',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressData',
+      path: 'json:/t/tsExpressData/tfolder',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'env.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureConfig',
+      path: 'json:/t/tsExpressFeatureConfig/env.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.019Z
+    },
+    {
+      basename: 'index.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureConfig',
+      path: 'json:/t/tsExpressFeatureConfig/index.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.019Z
+    },
+    {
+      basename: 'types.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureConfig',
+      path: 'json:/t/tsExpressFeatureConfig/types.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.019Z
+    },
+    {
+      basename: 'index.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeaturePacki',
+      path: 'json:/t/tsExpressFeaturePacki/index.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.020Z
+    },
+    {
+      basename: 'types.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeaturePacki',
+      path: 'json:/t/tsExpressFeaturePacki/types.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.021Z
+    },
+    {
+      basename: 'controllers',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeaturePacki',
+      path: 'json:/t/tsExpressFeaturePacki/controllers',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'studioFolderEdit',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeaturePacki',
+      path: 'json:/t/tsExpressFeaturePacki/studioFolderEdit',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'services',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/services',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi-cdn',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi-cdn',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi-fs',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi-fs',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi-gist',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi-gist',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi-meta',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi-meta',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'wizzi-package',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizzi',
+      path: 'json:/t/tsExpressFeatureWizzi/wizzi-package',
+      kind: 0,
+      _id: [ObjectID]
+    },
+    {
+      basename: 'index.ts.ittf.ittf',
+      parentId: [ObjectID],
+      dirname: 'json:/t/tsExpressFeatureWizziDocs',
+      path: 'json:/t/tsExpressFeatureWizziDocs/index.ts.ittf.ittf',
+      kind: 1,
+      _id: [ObjectID],
+      lastModified: 2023-05-04T15:20:58.025Z
+    },
+    ... 664 more items
+  ],
+  classType: 'wizzi-repo.utils.Collection'
+}

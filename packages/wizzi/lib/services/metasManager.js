@@ -496,12 +496,12 @@ class MetasManager {
         if (options.dumpMetaStartFolder) {
             packiUtils.writePackifiles(options.dumpMetaStartFolder, metaPackiFiles)
         }
-        this.createJsonWizziFactoryAndJsonFs(this.wfPluginsOptions, metaPackiFiles, (err, wf_and_fsjson) => {
+        this.createJsonWizziFactoryAndJsonFs(this.wfPluginsOptions, metaPackiFiles, (err, wf_and_jsonFs) => {
         
             if (err) {
                 return callback(err);
             }
-            wf_and_fsjson.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
+            wf_and_jsonFs.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
                 modelRequestContext: metaCtx
              }, {
                 tempFolder: packiFilePrefix + metaProductionTempFolder, 
@@ -512,7 +512,7 @@ class MetasManager {
                     return callback(err);
                 }
                 console.log(mdDisplayName, '.makeFromFs.metaGenerate done', __filename);
-                packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '___temp', (err, tempPackiFiles) => {
+                packiUtils.jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, '___temp', (err, tempPackiFiles) => {
                 
                     if (err) {
                         return callback(err);
@@ -520,7 +520,7 @@ class MetasManager {
                     if (options.dumpProductionTempFolder) {
                         packiUtils.writePackifiles(options.dumpProductionTempFolder, tempPackiFiles)
                     }
-                    packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', (err, wizziPackiFiles) => {
+                    packiUtils.jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, '.wizzi', (err, wizziPackiFiles) => {
                     
                         if (err) {
                             return callback(err);
@@ -643,7 +643,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.5.metasManager.' + method,
+        method: 'wizzi@0.8.6.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

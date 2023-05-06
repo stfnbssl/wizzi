@@ -27,7 +27,7 @@ $group
                     {
                         @ metaCtx options.metaCtx
                     a_cb( metaPackiFiles )
-                        log myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles)
+                        $$ loog myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles)
                         set metaPackiFiles[folderTemplatesIndexPath]
                             {
                                 @ type "CODE"
@@ -41,10 +41,10 @@ $group
                             @ metaPackiFiles
                             {
                                 @ globalContext options.globalContext || {}
-                            a_cb(wf_and_fsjson)
+                            a_cb(wf_and_jsonFs)
                                 const tempFolder = options.paths.metaProductionTempFolder || metaProductionTempFolder
                                 const destFolder = options.paths.metaProductionWizziFolder || metaProductionWizziFolder
-                                _ wf_and_fsjson.wf.metaGenerate
+                                _ wf_and_jsonFs.wf.metaGenerate
                                     @ packiFilePrefix + folderTemplatesIndexPath
                                     {
                                         @ modelRequestContext
@@ -55,7 +55,7 @@ $group
                                         @ destFolder packiFilePrefix + destFolder
                                     a_cb(jsonFs)
                                         _ packiUtils.jsonFsToPackiFiles
-                                            @ wf_and_fsjson.jsonFs
+                                            @ wf_and_jsonFs.jsonFs
                                             @ destFolder
                                             a_cb(wizziPackiFiles)
                                                 r_cb( wizziPackiFiles )
@@ -96,5 +96,5 @@ $group
                 const newk = 't/' + k.substring(22) 
                 set metaPackiFiles[newk] = metaPackiFiles[k]
                 delete metaPackiFiles[k]
-        log 'folderTemplatesIndex.contents', folderTemplatesIndex.join('\n')
+        $$ loog 'folderTemplatesIndex.contents', folderTemplatesIndex.join('\n')
         return folderTemplatesIndex.join('\n')

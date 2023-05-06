@@ -1043,7 +1043,7 @@ DocumentManager.create = function(jsonFsData, callback) {
     }
     
     if (JsonFs == null) {
-        JsonFs = require('./fsjson');
+        JsonFs = require('./jsonFs');
     }
     return callback(null, new DocumentManager(new JsonFs(jsonFsData)));
 }
@@ -1057,18 +1057,18 @@ function errorMsg(method, message) {
 }
 function normalize(path, stripEndingSlash) {
     if (stripEndingSlash) {
-        var ret = path.trim().replace(/\\/g,'/').toLowerCase();
+        var ret = path.trim().replace(/\\/g,'/');
         var parsedUri = jsonUriParser(ret.substr(-1) === '/' ? ret.substr(0, ret.length-1) : ret);
         return parsedUri.internalPath;
     }
     else {
-        var ret = path.trim().replace(/\\/g,'/').toLowerCase();
-        var parsedUri = jsonUriParser(path.trim().replace(/\\/g,'/').toLowerCase());
+        var ret = path.trim().replace(/\\/g,'/');
+        var parsedUri = jsonUriParser(path.trim().replace(/\\/g,'/'));
         return parsedUri.internalPath;
     }
 }
 function denormalize(path) {
-    return path.trim().replace(/\//g,'\\').toLowerCase();
+    return path.trim().replace(/\//g,'\\');
 }
 module.exports = DocumentManager;
 /**

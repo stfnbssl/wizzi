@@ -16,7 +16,7 @@ var file = require('@wizzi/utils').file;
 var verify = require('@wizzi/utils').verify;
 
 var JsonFsImpl = require('../../../lib/json/jsonFsimpl'),
-    JsonFs = require('../../../lib/json/fs/fsjson'),
+    JsonFs = require('../../../lib/json/fs/jsonFs'),
     Document = require('../../../lib/json/fs/documentmanager'),
     jsonFs,
     doc;

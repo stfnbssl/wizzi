@@ -88,8 +88,8 @@ module
                             $if true
                                 _ createJsonWizziFactoryAndJsonFs
                                     @ metaPackiFiles
-                                    f_cb_test(wf_and_fsjson)
-                                        _ wf_and_fsjson.wf.metaGenerate
+                                    f_cb_test(wf_and_jsonFs)
+                                        _ wf_and_jsonFs.wf.metaGenerate
                                             @ packiFilePrefix + folderTemplatesIndexPath
                                             {
                                                 @ modelRequestContext getMetaContext()
@@ -101,12 +101,12 @@ module
                                                     _ printValue
                                                         @ 'jsonFs'
                                                         _ stringify
-                                                            @ wf_and_fsjson.jsonFs
+                                                            @ wf_and_jsonFs.jsonFs
                                                             @ null
                                                             @ 2
                                                 $if true
                                                     _ jsonFsToPackiFiles
-                                                        @ wf_and_fsjson.jsonFs
+                                                        @ wf_and_jsonFs.jsonFs
                                                         @ '___template'
                                                         f_cb_test(templatePackiFiles)
                                                             _ writePackifiles
@@ -121,7 +121,7 @@ module
                                                                     @ null
                                                                     @ 2
                                                             _ jsonFsToPackiFiles
-                                                                @ wf_and_fsjson.jsonFs
+                                                                @ wf_and_jsonFs.jsonFs
                                                                 @ '___wizzi'
                                                                 f_cb_test(wizziPackiFiles)
                                                                     _ writePackifiles

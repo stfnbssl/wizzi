@@ -160,13 +160,13 @@ var wf_model_step_3 = function(step_callback) {
         'arthur', 
         'mary'
     ];
-    createJsonWizziFactoryAndJsonFs(getPackiFiles(), function(err, wf_and_fsjson) {
+    createJsonWizziFactoryAndJsonFs(getPackiFiles(), function(err, wf_and_jsonFs) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        wf_and_fsjson.wf.loadModelAndGenerateArtifact(packiFilePrefix + 'index.html.ittf', {
+        wf_and_jsonFs.wf.loadModelAndGenerateArtifact(packiFilePrefix + 'index.html.ittf', {
             modelRequestContext: {
                 friends: friendsArray
              }
@@ -177,7 +177,7 @@ var wf_model_step_3 = function(step_callback) {
                 throw new Error(err.message);
             }
             printValue('artifact', artifactText)
-            printValue('jsonFs', stringify(wf_and_fsjson.jsonFs, null, 2))
+            printValue('jsonFs', stringify(wf_and_jsonFs.jsonFs, null, 2))
         })
     })
 };

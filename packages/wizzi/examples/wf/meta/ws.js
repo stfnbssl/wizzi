@@ -1,12 +1,9 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\utils\step_1.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\ws.js.ittf
 */
 'use strict';
-//
-// Example skeleton specific for the '@wizzi/repo' kernel package
-//
 //
 var util = require('util');
 var path = require('path');
@@ -22,31 +19,213 @@ var fsfile = vfile();
 // utilities
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var createStoreFactory = require('@wizzi/repo').createStoreFactory;
-var vfile = require('@wizzi/utils').vfile;
-var repoIndex = require('../../index');
-var json = require('../../lib/json/index');
-var JsonFsImpl = require('../../lib/json/jsonFsimpl');
-var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl');
-var FsMongo = require('../../lib/mongodb/fs/fsmongo');
-var Document = require('../../lib/mongodb/fs/document');
-var Utils_Step_1 = function(step_callback) {
+var async = require('async');
+var wizziUtils = require('@wizzi/utils');
+var pluginsBaseFolder = null;
+var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
+var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages';
+var wizziIndex = require('../../../index');
+pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
+;
+var pluginsManager = require('../../../lib/services/pluginsManager');
+var metasManager = require('../../../lib/services/metasManager');
+const packiFilePrefix = 'json:/';
+const packiFilePrefixExtract = 'json:/';
+const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages";
+function createWizziFactory(globalContext, callback) {
+    wizziIndex.fsFactory({
+        plugins: {
+            items: [
+                './wizzi.plugin.html/index', 
+                './wizzi.plugin.js/index', 
+                './wizzi.plugin.css/index', 
+                './wizzi.plugin.ittf/index', 
+                './wizzi.plugin.json/index'
+            ], 
+            pluginsBaseFolder: pluginsBaseFolderV08
+         }, 
+        globalContext: globalContext || {}
+     }, callback)
+}
+function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
+    const jsonDocuments = [];
+    console.log('createJsonWizziFactoryAndJsonFs', __filename);
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
+            const filePath = ensurePackiFilePrefix(value);
+            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        wizziIndex.jsonFactory({
+            jsonFs: jsonFs, 
+            plugins: {
+                items: [
+                    './wizzi.plugin.html/index', 
+                    './wizzi.plugin.js/index', 
+                    './wizzi.plugin.css/index', 
+                    './wizzi.plugin.ittf/index', 
+                    './wizzi.plugin.json/index'
+                ], 
+                pluginsBaseFolder: pluginsBaseFolderV08
+             }, 
+            metaPlugins: {
+                items: [
+                    './wizzi.meta.cloud/index', 
+                    './wizzi.meta.commons/index', 
+                    './wizzi.meta.docs/index', 
+                    './wizzi.meta.js/index', 
+                    './wizzi.meta.ts/index', 
+                    './wizzi.meta.ts.express/index', 
+                    './wizzi.meta.ts.db/index', 
+                    './wizzi.meta.web/index', 
+                    './wizzi.meta.wizzi/index'
+                ], 
+                metaPluginsBaseFolder: metaPluginsBaseFolder
+             }
+         }, (err, wf) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                wf: wf, 
+                jsonFs: jsonFs
+             })
+        }
+        )
+    }
+    )
+}
+
+function createJsonFs(packiFiles, callback) {
+    const jsonDocuments = [];
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE') {
+            const filePath = ensurePackiFilePrefix(value);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, result) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        callback(null, result);
+    }
+    )
+}
+function ensurePackiFilePrefix(filePath) {
+    return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
+}
+function createPackifilesFromFs(folderPath, callback) {
+    const file = vfile();
+    file.getFiles(folderPath, {
+        deep: true, 
+        documentContent: true
+     }, (err, files) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        const packiFiles = {};
+        var i, i_items=files, i_len=files.length, file;
+        for (i=0; i<i_len; i++) {
+            file = files[i];
+            packiFiles[file.relPath] = {
+                type: 'CODE', 
+                contents: file.content
+             };
+        }
+        return callback(null, packiFiles);
+    }
+    )
+}
+function writePackifiles(folderPath, packiFiles) {
+    for (var k in packiFiles) {
+        file.write(path.join(folderPath, k), packiFiles[k].contents)
+    }
+}
+function writeStringified(filePath, object) {
+    file.write(filePath, stringify(object, null, 2))
+}
+function createMetasManager(globalContext, callback) {
+    wizziIndex.metasManager({
+        metaPlugins: {
+            
+         }, 
+        wfPlugins: {
+            
+         }, 
+        globalContext: globalContext || {}
+     }, callback)
+}
+var wf_meta_ws = function(step_callback) {
     heading1('EXAMPLE')
-    var infos = repoIndex.ittfDocumentInfoByPath(path.join(__dirname, 'temp.js.ittf'));
-    printObject(infos)
+    metaProduce('wizzi.studio')
+    function metaProduce(contextName) {
+        loadMetaContext(contextName, function(err, metaCtx) {
+            if (err) {
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
+                throw new Error(err.message);
+            }
+            createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_jsonFs) {
+                if (err) {
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
+                    throw new Error(err.message);
+                }
+                wf_and_jsonFs.wf.executeMetaProduction({
+                    metaCtx: metaCtx, 
+                    paths: {
+                        metaProductionTempFolder: '___template', 
+                        metaProductionWizziFolder: '.wizzi'
+                     }, 
+                    globalContext: {
+                        
+                     }
+                 }, (err, wizziPackiFiles) => {
+                
+                    if (err) {
+                        console.log("[31m%s[0m", err);
+                        return ;
+                    }
+                    console.log('wizziPackiFiles', Object.keys(wizziPackiFiles), __filename);
+                    writePackifiles(path.join(appsFolder, contextName), wizziPackiFiles)
+                }
+                )
+            })
+        })
+    }
 };
-Utils_Step_1.__name = 'Utils_Step_1';
+wf_meta_ws.__name = 'wf_meta_ws';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - Utils_Step_1 - ' + text);
+    console.log('** level 0 - step 3 - wf_meta_ws - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- Utils_Step_1 - ' + text);
+    console.log('   ','-- wf_meta_ws - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -236,7 +415,33 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = Utils_Step_1;
+module.exports = wf_meta_ws;
 if (typeof require != 'undefined' && require.main === module) {
-    Utils_Step_1();
+    wf_meta_ws();
+}
+function loadMetaContext(name, callback) {
+    var jsonPath = path.join(__dirname, 'ittf', 'metaContexts', name + '.json.ittf');
+    createWizziFactory({}, function(err, wf) {
+        if (err) {
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
+            throw new Error(err.message);
+        }
+        wf.loadModel('json', jsonPath, {
+            mTreeBuildupContext: {
+                metaCtx: {
+                    pkgName: 'wizzi.plugin.' + name
+                 }
+             }
+         }, function(err, wizziModel) {
+            if (err) {
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
+                throw new Error(err.message);
+            }
+            printValue('wizziModel metaCtx', stringify(wizziModel, null, 2))
+            writeStringified(jsonPath + '.json', wizziModel)
+            return callback(null, wizziModel);
+        })
+    })
 }

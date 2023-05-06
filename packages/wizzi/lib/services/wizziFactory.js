@@ -1794,7 +1794,6 @@ var WizziFactory = (function () {
                 if (err) {
                     return callback(err);
                 }
-                console.log(myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles), __filename);
                 metaPackiFiles[folderTemplatesIndexPath] = {
                     type: "CODE", 
                     contents: this.getFolderTemplatesIndex(metaPackiFiles, {
@@ -1804,14 +1803,14 @@ var WizziFactory = (function () {
                  };
                 this.createJsonFactoryAndJsonFs(metaPackiFiles, {
                     globalContext: options.globalContext || {}
-                 }, (err, wf_and_fsjson) => {
+                 }, (err, wf_and_jsonFs) => {
                 
                     if (err) {
                         return callback(err);
                     }
                     const tempFolder = options.paths.metaProductionTempFolder || metaProductionTempFolder;
                     const destFolder = options.paths.metaProductionWizziFolder || metaProductionWizziFolder;
-                    wf_and_fsjson.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
+                    wf_and_jsonFs.wf.metaGenerate(packiFilePrefix + folderTemplatesIndexPath, {
                         modelRequestContext: {
                             metaCtx: options.metaCtx
                          }
@@ -1823,7 +1822,7 @@ var WizziFactory = (function () {
                         if (err) {
                             return callback(err);
                         }
-                        packiUtils.jsonFsToPackiFiles(wf_and_fsjson.jsonFs, destFolder, (err, wizziPackiFiles) => {
+                        packiUtils.jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, destFolder, (err, wizziPackiFiles) => {
                         
                             if (err) {
                                 return callback(err);
@@ -1865,7 +1864,6 @@ var WizziFactory = (function () {
                 delete metaPackiFiles[k]
             }
         }
-        console.log('folderTemplatesIndex.contents', folderTemplatesIndex.join('\n'), __filename);
         return folderTemplatesIndex.join('\n');
     }
     WizziFactory.prototype.getMetasManager = function(globalContext, callback) {
@@ -2174,7 +2172,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.5.wizziFactory.' + method,
+        method: 'wizzi@0.8.6.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

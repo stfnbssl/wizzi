@@ -185,13 +185,13 @@ var wf_meta_step_5 = function(step_callback) {
                 console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
-            createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_fsjson) {
+            createJsonWizziFactoryAndJsonFs({}, function(err, wf_and_jsonFs) {
                 if (err) {
                     console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                wf_and_fsjson.wf.executeMetaProduction({
+                wf_and_jsonFs.wf.executeMetaProduction({
                     metaCtx: metaCtx, 
                     paths: {
                         metaProductionTempFolder: '___template', 

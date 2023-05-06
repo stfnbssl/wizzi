@@ -1,7 +1,7 @@
 {
-  "name": "wizzi.plugin.ts.express.app",
-  "npnName": "wizzi.plugin.ts.express.app",
-  "description": "wizzi.plugin.ts.express.app",
+  "name": "wizzi.plugin.wizzi.studio",
+  "npnName": "wizzi.plugin.wizzi.studio",
+  "description": "wizzi.plugin.wizzi.studio",
   "version": "0.0.1",
   "author": {
     "name": "Stefano Bassoli",
@@ -107,8 +107,17 @@
   "useTsExpressFeatureConfig": true,
   "tsExpressFeatureConfig": {
     "useStudioUserInfo": true,
-    "studioUserInfo": {}
+    "studioUserInfo": {},
+    "values": [
+      {
+        "name": "jobsBasePath",
+        "type": "string",
+        "value": "C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi.studio/data/jobs"
+      }
+    ]
   },
+  "useTsExpressFeatureCdn": true,
+  "tsExpressFeatureCdn": {},
   "useTsExpressFeatureFilesystem": false,
   "tsExpressFeatureFilesystem": {},
   "useTsExpressFeatureGithub": false,
@@ -116,7 +125,9 @@
   "useTsExpressFeaturePacki": true,
   "tsExpressFeaturePacki": {
     "useStudioFolderEdit": true,
-    "studioFolderEdit": {}
+    "studioFolderEdit": {},
+    "usePackiProductions": true,
+    "packiProductions": {}
   },
   "useTsExpressFeatureProject": false,
   "tsExpressFeatureProject": {},
@@ -127,13 +138,20 @@
   "useTsExpressFeatureWizzi": true,
   "tsExpressFeatureWizzi": {
     "plugins": [
-      "./wizzi.plugin.js/index.js",
-      "./wizzi.plugin.html/index.js",
       "./wizzi.plugin.css/index.js",
+      "./wizzi.plugin.graphql/index.js",
+      "./wizzi.plugin.html/index.js",
+      "./wizzi.plugin.ittf/index.js",
+      "./wizzi.plugin.js/index.js",
+      "./wizzi.plugin.json/index.js",
       "./wizzi.plugin.svg/index.js",
-      "./wizzi.plugin.json/index.js"
+      "./wizzi.plugin.text/index.js",
+      "./wizzi.plugin.ts/index.js",
+      "./wizzi.plugin.xml/index.js"
     ],
     "pluginsBaseFolder": "C:/My/wizzi/stfnbssl/wizzi.plugins/packages",
+    "useWizziDocs": true,
+    "wizziDocs": {},
     "useWizziFs": true,
     "wizziFs": {},
     "useWizziGist": true,
@@ -158,23 +176,35 @@
   },
   "useTsExpressFeatureWizziDocs": true,
   "tsExpressFeatureWizziDocs": {},
-  "useTsExpressFeatureWizziProduction": false,
-  "tsExpressFeatureWizziProduction": {},
+  "useTsExpressIttf": true,
+  "tsExpressIttf": {
+    "useWizziDocs": true,
+    "wizziDocs": {}
+  },
   "useTsExpressStyles": true,
   "tsExpressStyles": {},
   "useTsExpressTests": true,
   "tsExpressTests": {},
   "useTsExpressUtils": true,
-  "tsExpressUtils": {},
+  "tsExpressUtils": {
+    "useScripts": true,
+    "scripts": {},
+    "useWizziFs": true,
+    "wizziFs": {}
+  },
   "useTsExpressWizziSite": true,
   "tsExpressWizziSite": {
     "useDemoHome": true,
     "demoHome": {},
     "useDemoWizzi": true,
-    "demoWizzi": {}
+    "demoWizzi": {},
+    "useWizziDocs": true,
+    "wizziDocs": {},
+    "usePackiProductions": true,
+    "packiProductions": {}
   },
-  "useTsDbMongodb": true,
-  "tsDbMongodb": {},
+  "useTsDbMongoDb": true,
+  "tsDbMongoDb": {},
   "useTsDbRedis": false,
   "tsDbRedis": {},
   "useTsDbPostgres": false,

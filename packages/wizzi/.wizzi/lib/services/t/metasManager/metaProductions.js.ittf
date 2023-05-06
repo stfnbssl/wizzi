@@ -71,8 +71,8 @@
         _ this.createJsonWizziFactoryAndJsonFs
             @ this.wfPluginsOptions
             @ metaPackiFiles
-            a_cb(wf_and_fsjson)
-                _ wf_and_fsjson.wf.metaGenerate
+            a_cb(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.metaGenerate
                     @ packiFilePrefix + folderTemplatesIndexPath
                     {
                         @ modelRequestContext metaCtx
@@ -82,10 +82,10 @@
                     a_cb(jsonFs)
                         log mdDisplayName, '.makeFromFs.metaGenerate done'
                         $if false
-                            _ dumpStringified('jsonFs', wf_and_fsjson.jsonFs)
+                            _ dumpStringified('jsonFs', wf_and_jsonFs.jsonFs)
                         $if true
                             _ packiUtils.jsonFsToPackiFiles
-                                @ wf_and_fsjson.jsonFs
+                                @ wf_and_jsonFs.jsonFs
                                 @ '___temp'
                                 a_cb(tempPackiFiles)
                                     if options.dumpProductionTempFolder
@@ -94,7 +94,7 @@
                                             @ tempPackiFiles
                                     $$ _ dumpStringified('tempPackiFiles', tempPackiFiles)
                                     _ packiUtils.jsonFsToPackiFiles
-                                        @ wf_and_fsjson.jsonFs
+                                        @ wf_and_jsonFs.jsonFs
                                         @ '.wizzi'
                                         a_cb(wizziPackiFiles)
                                             if options.dumpProductionDestFolder

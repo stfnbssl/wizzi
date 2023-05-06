@@ -29,8 +29,8 @@ module
 
         _ createJsonWizziFactoryAndJsonFs
             {
-            f_cb_test(wf_and_fsjson)
-                _ wf_and_fsjson.wf.getProvidedMetas
+            f_cb_test(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.getProvidedMetas
                     =>
                         param err
                         param metaProvides
@@ -38,7 +38,7 @@ module
                             error err
                             return
                         log 'metaProvides', metaProvides
-                        _ wf_and_fsjson.wf.getMetaProductions
+                        _ wf_and_jsonFs.wf.getMetaProductions
                             =>
                                 param err
                                 param metaProductions

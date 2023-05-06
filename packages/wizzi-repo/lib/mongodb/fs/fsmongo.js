@@ -469,7 +469,7 @@ function error(method, message) {
          };
 }
 function normalize(path) {
-    return path.trim().replace(/\\/g,'/').toLowerCase();
+    return path.trim().replace(/\\/g,'/');
 }
 module.exports = FsMongo;
 /**

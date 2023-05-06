@@ -9,7 +9,7 @@
 	var Collection = require('../utils/collection')
 
 	set md.directoryTree = require('./directoryTree')
-	set md.JsonFs = require('./fs/fsjson')
+	set md.JsonFs = require('./fs/jsonFs')
 	set md.DocumentManager = require('./fs/documentmanager')
 
 	#

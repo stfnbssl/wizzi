@@ -80,7 +80,7 @@
 				set jsonFsData = null
 			+
 			if JsonFs == null
-				set JsonFs = require('./fsjson')
+				set JsonFs = require('./jsonFs')
 			return
 				_ callback
 					@ null
@@ -100,23 +100,23 @@
 		param path
 		param stripEndingSlash
 		if stripEndingSlash
-			var ret = path.trim().replace(/\\/g,'/').toLowerCase()
+			var ret = path.trim().replace(/\\/g,'/') $$ VIA 4/5/2023 .toLowerCase()
             var parsedUri
 				_ jsonUriParser
 					@ ret.substr(-1) === '/' ? ret.substr(0, ret.length-1) : ret
 			$$ loog myname, 'normalize stripEndingSlash(yes)', path, parsedUri.internalPath
             return parsedUri.internalPath
 		else
-            var ret = path.trim().replace(/\\/g,'/').toLowerCase()
+            var ret = path.trim().replace(/\\/g,'/') $$ VIA 4/5/2023 .toLowerCase()
 			var parsedUri
 				_ jsonUriParser
-					@ path.trim().replace(/\\/g,'/').toLowerCase()
+					@ path.trim().replace(/\\/g,'/') $$ VIA 4/5/2023 .toLowerCase()
             $$ loog myname, 'normalize stripEndingSlash(no)', path, parsedUri.internalPath
 			return parsedUri.internalPath
 
 	function denormalize
 		param path
-		return path.trim().replace(/\//g,'\\').toLowerCase()
+		return path.trim().replace(/\//g,'\\') $$ VIA 4/5/2023 .toLowerCase()
 
 	set module.exports = DocumentManager
 

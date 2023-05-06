@@ -537,7 +537,7 @@ md.batch = function(userId, actions, callback) {
 }
 ;
 function normalize(path) {
-    return path.trim().replace(/\\/g,'/').toLowerCase();
+    return path.trim().replace(/\\/g,'/');
 }
 function filesToFsitems(files) {
     var ret = [];

@@ -26,8 +26,8 @@ module
 
         _ createJsonWizziFactoryAndJsonFs
             _ getPackiFiles
-            f_cb_test(wf_and_fsjson)
-                _ wf_and_fsjson.wf.loadModelAndGenerateArtifact
+            f_cb_test(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.loadModelAndGenerateArtifact
                     @ packiFilePrefix + 'index.html.ittf'
                     {
                         { modelRequestContext
@@ -40,7 +40,7 @@ module
                         _ printValue
                             @ 'jsonFs'
                             _ stringify
-                                @ wf_and_fsjson.jsonFs
+                                @ wf_and_jsonFs.jsonFs
                                 @ null
                                 @ 2
 

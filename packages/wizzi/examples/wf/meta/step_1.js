@@ -164,13 +164,13 @@ var wf_meta_step_1 = function(step_callback) {
             return callback(err);
         }
         printValue('metaPackiFiles', stringify(metaPackiFiles, null, 2))
-        createJsonWizziFactoryAndJsonFs(metaPackiFiles, function(err, wf_and_fsjson) {
+        createJsonWizziFactoryAndJsonFs(metaPackiFiles, function(err, wf_and_jsonFs) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
                 throw new Error(err.message);
             }
-            wf_and_fsjson.wf.metaGenerate(packiFilePrefix + 'index.ittf.ittf', {
+            wf_and_jsonFs.wf.metaGenerate(packiFilePrefix + 'index.ittf.ittf', {
                 modelRequestContext: getMetaContext()
              }, {
                 tempFolder: packiFilePrefix + 'template', 
@@ -181,7 +181,7 @@ var wf_meta_step_1 = function(step_callback) {
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                jsonFsToPackiFiles(wf_and_fsjson.jsonFs, 'template', function(err, templatePackiFiles) {
+                jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, 'template', function(err, templatePackiFiles) {
                     if (err) {
                         console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                         console.log("[31m%s[0m", 'err', err);
@@ -189,7 +189,7 @@ var wf_meta_step_1 = function(step_callback) {
                     }
                     writePackifiles(path.join(__dirname, 'out'), templatePackiFiles)
                     printValue('templatePackiFiles', stringify(templatePackiFiles, null, 2))
-                    jsonFsToPackiFiles(wf_and_fsjson.jsonFs, '.wizzi', function(err, wizziPackiFiles) {
+                    jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, '.wizzi', function(err, wizziPackiFiles) {
                         if (err) {
                             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                             console.log("[31m%s[0m", 'err', err);

@@ -2,7 +2,7 @@
 	kind jsfile
 
 	var
-		decl JsonFs = require('./fs/fsjson')
+		decl JsonFs = require('./fs/jsonFs')
 		decl DocumentManager = require('./fs/documentmanager')
 		$$ stop 12/9/2022 decl jsonUriParser = require('@wizzi/utils').uriParser
         decl jsonUriParser = require('@wizzi/utils').jsonUriParser
