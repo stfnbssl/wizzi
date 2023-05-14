@@ -57,7 +57,7 @@
                         if i >= plugins.length
                             r_cb( this )
                         var plugin = plugins[i]
-                        log mdDisplayName + 'Object.keys(plugin)', Object.keys(plugin)
+                        $$ loog mdDisplayName + 'Object.keys(plugin)', Object.keys(plugin)
                         _ this.registerMetaPlugin
                             @ plugin
                             f_cb( notUsed )

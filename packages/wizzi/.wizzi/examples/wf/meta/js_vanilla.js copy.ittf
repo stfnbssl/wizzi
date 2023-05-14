@@ -5,14 +5,20 @@ module
         var opt = {
             level: 0,
             step: 3,
-            name: 'wf_meta_ws',
-            title: 'Meta generation - wizzi studio meta wizzi',
+            name: 'wf_meta_step_5',
+            title: 'Meta generation - test meta wizzi',
             folderLevel: 3
         }
 
     common\example\wizzi( &opt )
         $append imports
             const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages"
+            $*1
+            const appsFolder
+                _ path.join
+                    @ __dirname
+                    @ 'out_step_5'
+            *$
 
         $append plugins
             [ items
@@ -38,8 +44,10 @@ module
                 @ './wizzi.meta.commons/index'
                 @ './wizzi.meta.docs/index'
                 @ './wizzi.meta.js/index'
+                @ './wizzi.meta.js.vanilla/index'
                 @ './wizzi.meta.ts/index'
                 @ './wizzi.meta.ts.express/index'
+                @ './wizzi.meta.ts.react/index'
                 @ './wizzi.meta.ts.db/index'
                 @ './wizzi.meta.web/index'
                 @ './wizzi.meta.wizzi/index'
@@ -47,7 +55,7 @@ module
 
         _ metaProduce
             $$ @ 'wizzi'
-            @ 'wizzi.studio'
+            @ 'js.vanilla.app'
 
         function metaProduce
             param contextName
@@ -76,6 +84,39 @@ module
                                             @ appsFolder
                                             @ contextName
                                         @ wizziPackiFiles
+                                    # throw new Error("Stop")
+
+    function getMetaContext
+        const npnName = "step_5"
+        return
+            {
+                @ ver "0_0_1"
+                @ name "step_5"
+                @ usePackage true
+                @ useWizzimeta true
+                @ usePackageVersion true
+                @ npnName npnName
+                @ pluginBasename ""
+                $$ @ version "'${'${" + "$" + "}'}{versions['" + npnName + "@next']}'"
+                @ description ""
+                { author
+                    @ name ""
+                    @ email ""
+                { github
+                    @ userid ""
+                { license
+                    @ name ""
+                    @ copy ""
+                @ metaNamespace ""
+                
+                @ useWizziV08 true
+                { wizziV08
+                    [ plugins
+                        @ "ittf"
+                [ Productions
+                    {
+                        @ name "wizzimeta"
+
 
     function loadMetaContext
         param name

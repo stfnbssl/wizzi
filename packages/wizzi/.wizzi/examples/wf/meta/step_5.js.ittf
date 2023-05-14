@@ -44,8 +44,11 @@ module
                 @ './wizzi.meta.commons/index'
                 @ './wizzi.meta.docs/index'
                 @ './wizzi.meta.js/index'
+                @ './wizzi.meta.js.vanilla/index'
+                @ './wizzi.meta.js.react/index'
                 @ './wizzi.meta.ts/index'
                 @ './wizzi.meta.ts.express/index'
+                @ './wizzi.meta.ts.react/index'
                 @ './wizzi.meta.ts.db/index'
                 @ './wizzi.meta.web/index'
                 @ './wizzi.meta.wizzi/index'
@@ -53,7 +56,7 @@ module
 
         _ metaProduce
             $$ @ 'wizzi'
-            @ 'ts.express.app'
+            @ 'js.react.app'
 
         function metaProduce
             param contextName
@@ -82,6 +85,7 @@ module
                                             @ appsFolder
                                             @ contextName
                                         @ wizziPackiFiles
+                                    # throw new Error("Stop")
 
     function getMetaContext
         const npnName = "step_5"
@@ -133,7 +137,7 @@ module
                     {
                         { mTreeBuildupContext                    
                             { metaCtx
-                                @ pkgName 'wizzi.plugin.' + name
+                                @ pkgName name
                     f_cb_test(wizziModel)
                         _ printValue
                             @ 'wizziModel metaCtx'

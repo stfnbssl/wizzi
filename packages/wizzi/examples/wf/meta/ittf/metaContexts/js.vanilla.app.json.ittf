@@ -1,0 +1,36 @@
+{
+
+    $
+        var pluginBasename = null;
+
+    $include commons
+    $include v08
+
+    params/use( commonsBabel
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWebpack
+    params/use( commonsWizzi
+        useJsCommons false
+    params/use( jsVanillaWebpackGetStartedApp
+        params/use( webpackHtml, true
+        params/use( webpackCss
+            params/use( miniCssExtract, false
+        params/use( webpackSass, false
+        params/use( webpackImages
+        params/use( webpackFonts
+        params/use( webpackJson
+        params/use( webpackYaml
+        $*
+        [ webpackEntries
+            {
+                name 'print'
+                path './src/print.js'
+                importName 'printMe'
+                importPath './print'
+        *$
+        params/use( webpackPrintMe, false
+    params/use( jsVanillaUtils
+        params/use( lodash
+
+

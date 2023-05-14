@@ -1,7 +1,7 @@
 $group
-    $params name
+    $params name, use:boolean|true
     $
         var Name = _.capitalize(name);
-    use${Name} true
+    use${Name} ${use}
     { ${name}
         $hook

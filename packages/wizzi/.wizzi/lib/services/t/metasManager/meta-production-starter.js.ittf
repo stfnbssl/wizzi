@@ -13,7 +13,7 @@
         param options
         callback
 
-		log mdDisplayName + '.getMetaProductionStarter'
+		$$ loog mdDisplayName + '.getMetaProductionStarter'
 		var
 			decl result = {}
 			
@@ -23,7 +23,7 @@
                 if i >= this.metaPlugins.length
                     r_cb( result )
                 var metaPlugin = this.metaPlugins[i]
-                log mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+                $$ loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
                 _ metaPlugin.getMetaProductionStarter
                     {
                         @ metaCtx options.metaCtx || {}

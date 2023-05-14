@@ -105,8 +105,9 @@
     useTsExpressFeatureAccount false
     { tsExpressFeatureAccount
     
-    useTsExpressFeatureAuth false
+    useTsExpressFeatureAuth true
     { tsExpressFeatureAuth
+        params/use( localUserFromConfig )
         
     useTsExpressFeatureBlog false
     { tsExpressFeatureBlog

@@ -430,7 +430,7 @@ function loadMetaContext(name, callback) {
         wf.loadModel('json', jsonPath, {
             mTreeBuildupContext: {
                 metaCtx: {
-                    pkgName: 'wizzi.plugin.' + name
+                    pkgName: name
                  }
              }
          }, function(err, wizziModel) {

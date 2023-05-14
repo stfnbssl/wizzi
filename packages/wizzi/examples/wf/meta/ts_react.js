@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\step_5.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\ts_react.js.ittf
 */
 'use strict';
 //
@@ -85,8 +85,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
                     './wizzi.meta.commons/index', 
                     './wizzi.meta.docs/index', 
                     './wizzi.meta.js/index', 
-                    './wizzi.meta.js.vanilla/index', 
-                    './wizzi.meta.js.react/index', 
                     './wizzi.meta.ts/index', 
                     './wizzi.meta.ts.express/index', 
                     './wizzi.meta.ts.react/index', 
@@ -180,7 +178,7 @@ function createMetasManager(globalContext, callback) {
 }
 var wf_meta_step_5 = function(step_callback) {
     heading1('EXAMPLE')
-    metaProduce('js.react.app')
+    metaProduce('ts.react.app')
     function metaProduce(contextName) {
         loadMetaContext(contextName, function(err, metaCtx) {
             if (err) {

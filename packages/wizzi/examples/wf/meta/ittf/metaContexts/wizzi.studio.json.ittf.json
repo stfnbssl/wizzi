@@ -100,8 +100,11 @@
   "tsExpressData": {},
   "useTsExpressFeatureAccount": false,
   "tsExpressFeatureAccount": {},
-  "useTsExpressFeatureAuth": false,
-  "tsExpressFeatureAuth": {},
+  "useTsExpressFeatureAuth": true,
+  "tsExpressFeatureAuth": {
+    "useLocalUserFromConfig": true,
+    "localUserFromConfig": {}
+  },
   "useTsExpressFeatureBlog": false,
   "tsExpressFeatureBlog": {},
   "useTsExpressFeatureConfig": true,

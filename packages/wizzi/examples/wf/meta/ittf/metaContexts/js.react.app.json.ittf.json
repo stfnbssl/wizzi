@@ -1,0 +1,73 @@
+{
+  "name": "js.react.app",
+  "npnName": "js.react.app",
+  "description": "js.react.app",
+  "version": "0.0.1",
+  "author": {
+    "name": "Stefano Bassoli",
+    "email": "stfn.bssl@gmail.com"
+  },
+  "license": {
+    "type": "MIT",
+    "copy": "copy 2023",
+    "url": "TODO"
+  },
+  "github": {
+    "userid": "stfnbssl"
+  },
+  "useWizziV08": true,
+  "wizziV08": {
+    "plugins": [
+      "css",
+      "graphql",
+      "html",
+      "ittf",
+      "js",
+      "ts",
+      "json",
+      "md",
+      "text",
+      "svg",
+      "wzjob",
+      "wzschema",
+      "xml",
+      "yaml"
+    ]
+  },
+  "useCommonsBabel": true,
+  "commonsBabel": {},
+  "useCommonsGit": true,
+  "commonsGit": {},
+  "useCommonsPackage": true,
+  "commonsPackage": {},
+  "useCommonsWebpack": true,
+  "commonsWebpack": {},
+  "useCommonsWizzi": true,
+  "commonsWizzi": {
+    "useJsCommons": false
+  },
+  "useJsReactWebpackGetStartedApp": true,
+  "jsReactWebpackGetStartedApp": {
+    "useWebpackHtml": true,
+    "webpackHtml": {},
+    "useWebpackCss": true,
+    "webpackCss": {
+      "useMiniCssExtract": false,
+      "miniCssExtract": {}
+    },
+    "useWebpackSass": false,
+    "webpackSass": {},
+    "useWebpackImages": true,
+    "webpackImages": {},
+    "useWebpackFonts": true,
+    "webpackFonts": {},
+    "useWebpackJson": true,
+    "webpackJson": {},
+    "useWebpackYaml": true,
+    "webpackYaml": {},
+    "useWebpackPrintMe": false,
+    "webpackPrintMe": {}
+  },
+  "useJsReactUtils": true,
+  "jsReactUtils": {}
+}

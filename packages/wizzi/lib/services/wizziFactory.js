@@ -1698,7 +1698,6 @@ var WizziFactory = (function () {
         const fileService = this.fileService;
         const that = this;
         
-        console.log('metaGenerate.context',  context, __filename);
         
         this.loadModel('ittf', ittfMetaFilePath, {
             mTreeBuildupContext: context.modelRequestContext
@@ -1725,7 +1724,7 @@ var WizziFactory = (function () {
                 }
                 if (child.name == '$file') {
                     try {
-                        processFile(child, tempFolder, (err, notUsed) => {
+                        processIttfFile(child, tempFolder, (err, notUsed) => {
                         
                             if (err) {
                                 return callback(err);
@@ -1743,28 +1742,71 @@ var WizziFactory = (function () {
                              }, ex));
                     } 
                 }
+                else if (child.name == '$plain') {
+                    try {
+                        processPlainFile(child, tempFolder, (err, notUsed) => {
+                        
+                            if (err) {
+                                return callback(err);
+                            }
+                            next();
+                        }
+                        )
+                    } 
+                    catch (ex) {
+                        return callback(error('WizziFactoryError', 'metaGenerate', {
+                                message: 'Processing $plain. See inner error', 
+                                parameter: {
+                                    outputFileName: child.value
+                                 }
+                             }, ex));
+                    } 
+                }
                 else {
                     next();
                 }
             })();
         }
         )
-        function processFile(node, tempFolder, callback) {
+        function processIttfFile(node, tempFolder, callback) {
             var outputPath = path.join(tempFolder, node.value);
             var sb = [];
             var i, i_items=node.children, i_len=node.children.length, child;
             for (i=0; i<i_len; i++) {
                 child = node.children[i];
-                processContent(sb, child, 0)
+                processIttfContent(sb, child, 0)
             }
             fileService.write(outputPath, sb.join('\n'), callback)
         }
-        function processContent(sb, node, indent) {
+        function processIttfContent(sb, node, indent) {
             sb.push(new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value))
             var i, i_items=node.children, i_len=node.children.length, child;
             for (i=0; i<i_len; i++) {
                 child = node.children[i];
-                processContent(sb, child, indent + 4)
+                processIttfContent(sb, child, indent + 4)
+            }
+        }
+        function processPlainFile(node, tempFolder, callback) {
+            var outputPath = path.join(tempFolder, node.value);
+            console.log('meta.processPlainFile', outputPath, __filename);
+            if (node.children.length == 1 && node.children[0].name == '$from') {
+                fileService.read(packiFilePrefix + node.children[0].value, (err, content) => {
+                
+                    if (err) {
+                        return callback(err);
+                    }
+                    console.log('processPlainFile.content', content, __filename);
+                    fileService.write(outputPath, content, callback)
+                }
+                )
+            }
+            else {
+                return callback(error('WizziFactoryError', 'metaGenerate', {
+                        message: 'Missing $from node processing $plain file.', 
+                        parameter: {
+                            outputFileName: node.value
+                         }
+                     }));
             }
         }
         function decode(text) {
@@ -1801,6 +1843,7 @@ var WizziFactory = (function () {
                         metaVer: null
                      })
                  };
+                console.log(myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts'], __filename);
                 this.createJsonFactoryAndJsonFs(metaPackiFiles, {
                     globalContext: options.globalContext || {}
                  }, (err, wf_and_jsonFs) => {
@@ -1858,10 +1901,14 @@ var WizziFactory = (function () {
                 metaPackiFiles[newk] = metaPackiFiles[k];
                 delete metaPackiFiles[k]
             }
-            if (k.startsWith("ittfDocumentTemplates/")) {
+            else if (k.startsWith("ittfDocumentTemplates/")) {
                 const newk = 't/' + k.substring(22);
                 metaPackiFiles[newk] = metaPackiFiles[k];
                 delete metaPackiFiles[k]
+            }
+            else if (k.startsWith("plainDocuments/")) {
+                const newk = k.substring(16);
+                console.log('k, newk', k, newk, __filename);
             }
         }
         return folderTemplatesIndex.join('\n');
