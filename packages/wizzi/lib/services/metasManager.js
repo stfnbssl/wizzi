@@ -31,6 +31,8 @@ const metaProductionDestFolder = '.wizzi';
 
 class MetasManager {
     constructor() {
+        this.__type = 'MetasManager';
+        this.__version = '0.8.6';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -76,15 +78,18 @@ class MetasManager {
             this.globalContext = Object.assign({}, this.globalContext, options.globalContext)
             ;
         }
-        console.log(mdDisplayName + '.initialize.globalContext', this.globalContext, __filename);
         // used for creating on the fly a json factory
         this.wfPluginsOptions = options.wfPlugins;
         if (verify.isObject(this.wfPluginsOptions) == false) {
             this.wfPluginsOptions = {};
         }
         this.metaPluginsOptions = options.metaPlugins;
-        console.log(mdDisplayName + '.initialize.wfPluginsOptions', this.wfPluginsOptions, __filename);
-        console.log(mdDisplayName + '.initialize.metaPluginsOptions', this.metaPluginsOptions, __filename);
+        if (options.verbose) {
+            this.metaPluginsOptions.verbose = true;
+            var date = new Date();
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            console.log("[33m%s[0m", timeNow, "Starting ", this.__type, 'version', this.__version);
+        }
         this.loadPlugins(this.metaPluginsOptions, (err, plugins) => {
         
             if (err) {
@@ -111,10 +116,7 @@ class MetasManager {
     loadPlugins(options, callback) {
         
         var itemsOptions = options.items;
-        console.log(mdDisplayName + '.metaPluginsBaseFolder before', options.metaPluginsBaseFolder, __filename);
-        console.log(mdDisplayName + '.__dirname', __dirname, __filename);
         var metaPluginsBaseFolder = options.metaPluginsBaseFolder || path.resolve(__dirname, '..', '..', '..');
-        console.log(mdDisplayName + '.metaPluginsBaseFolder', metaPluginsBaseFolder, __filename);
         var packagePathCache = this.packagePathCache;
         
         function resolveNext(i) {
@@ -141,6 +143,13 @@ class MetasManager {
                         })
                         plugin.packageName = plugin.packagePath;
                         plugin.packagePath = moduleObject.packagePath;
+                        if (options.verbose) {
+                            var date = new Date();
+                            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                            var spaces = new Array(timeNow.length+1).join(' ');
+                            console.log("[33m%s[0m", timeNow, "Loaded meta plugin", plugin.packageName, 'version', plugin.version);
+                            console.log("[33m%s[0m", spaces, 'meta productions: ', plugin.provides.metaProductions.join(', '));
+                        }
                         return resolveNext(++i);
                     });
             }
@@ -523,7 +532,6 @@ class MetasManager {
 }
 module.exports = {
     createManager: function(options, callback) {
-        console.log('wizzi.metasManager.createManager.options', options, __filename);
         var mm = new MetasManager();
         mm.initialize(options, callback)
     }

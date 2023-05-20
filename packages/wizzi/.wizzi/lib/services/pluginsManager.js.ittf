@@ -21,6 +21,8 @@
 	class PluginsManager
 		
 		ctor
+			set this.__type = 'PluginsManager'
+            set this.__version = '${wzCtx.version}'
 			set this.packagePathCache = {}
 			set this.factoryPlugins = []
 			set this.providedSchemas = []

@@ -19,7 +19,12 @@
 		if typeof(itemsOptions) === 'undefined' || itemsOptions == null
 			set options.items = []
 		
-		var that = this
+		if options.verbose
+            var date = new Date()
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            warn timeNow, "Starting ", this.__type, 'version', this.__version
+
+        var that = this
 		_ this.loadPlugins
 			@ options
 			f_cb( plugins )
@@ -33,6 +38,7 @@
 					var plugin = plugins[i]
 					_ that.registerFactoryPlugin
 						@ plugin
+                        @ options
 						f_cb( notUsed )
 							return register(++i)
 				_ register(0)
@@ -76,6 +82,15 @@
 											# loog 'plugin key', key
 							set plugin.packageName = plugin.packagePath
 							set plugin.packagePath = moduleObject.packagePath
+                            if options.verbose
+                                var date = new Date()
+                                var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+                                var spaces = new Array(timeNow.length+1).join(' ')
+                                warn timeNow, "Loaded plugin", plugin.packageName, 'version', plugin.version
+                                warn spaces, 'schemas: ', plugin.provides.schemas.join(', ')
+                                warn spaces, 'artifact generators: ', plugin.provides.artifactGenerators.join(', ')
+                                if plugin.provides.modelTransformers.length > 0
+                                    warn spaces, 'model transformers: ', plugin.provides.modelTransformers.join(', ')
 							return resolveNext(++i)
             else
 				return resolveNext(++i)

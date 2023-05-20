@@ -39,6 +39,7 @@
 			param user
 			param role
 			set this.__type = 'WizziFactory'
+            set this.__version = '${wzCtx.version}'
 			set this.user = user
 			set this.role = role
 			set this.storeKind = null
@@ -60,6 +61,7 @@
 			set this.schemaDefinitions = {}
 			set this.globalContext = {}
             set this.metasManager = null
+            set this.verbose = false
 
 		$include wizziFactory/initialize
 		$include wizziFactory/terminate

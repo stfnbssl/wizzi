@@ -28,6 +28,8 @@ var availableFactories = [];
 var PluginsManager = (function () {
     function PluginsManager() {
         _classCallCheck(this, PluginsManager);
+        this.__type = 'PluginsManager';
+        this.__version = '0.8.6';
         this.packagePathCache = {};
         this.factoryPlugins = [];
         this.providedSchemas = [];
@@ -65,6 +67,11 @@ var PluginsManager = (function () {
         if (typeof(itemsOptions) === 'undefined' || itemsOptions == null) {
             options.items = [];
         }
+        if (options.verbose) {
+            var date = new Date();
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            console.log("[33m%s[0m", timeNow, "Starting ", this.__type, 'version', this.__version);
+        }
         var that = this;
         this.loadPlugins(options, function(err, plugins) {
             if (err) {
@@ -75,7 +82,7 @@ var PluginsManager = (function () {
                     return callback(null, that);
                 }
                 var plugin = plugins[i];
-                that.registerFactoryPlugin(plugin, function(err, notUsed) {
+                that.registerFactoryPlugin(plugin, options, function(err, notUsed) {
                     if (err) {
                         return callback(err);
                     }
@@ -117,6 +124,17 @@ var PluginsManager = (function () {
                         })
                         plugin.packageName = plugin.packagePath;
                         plugin.packagePath = moduleObject.packagePath;
+                        if (options.verbose) {
+                            var date = new Date();
+                            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                            var spaces = new Array(timeNow.length+1).join(' ');
+                            console.log("[33m%s[0m", timeNow, "Loaded plugin", plugin.packageName, 'version', plugin.version);
+                            console.log("[33m%s[0m", spaces, 'schemas: ', plugin.provides.schemas.join(', '));
+                            console.log("[33m%s[0m", spaces, 'artifact generators: ', plugin.provides.artifactGenerators.join(', '));
+                            if (plugin.provides.modelTransformers.length > 0) {
+                                console.log("[33m%s[0m", spaces, 'model transformers: ', plugin.provides.modelTransformers.join(', '));
+                            }
+                        }
                         return resolveNext(++i);
                     });
             }
@@ -233,7 +251,7 @@ var PluginsManager = (function () {
         }
     }
     //
-    PluginsManager.prototype.registerFactoryPlugin = function(pluginModule, callback) {
+    PluginsManager.prototype.registerFactoryPlugin = function(pluginModule, options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'registerFactoryPlugin', 'The callback parameter must be a function. Received: ' + callback)
@@ -247,6 +265,11 @@ var PluginsManager = (function () {
         if (verify.isFunction(pluginModule.createFactoryPlugin) === false) {
             return callback(error(
                 'InvalidArgument', 'registerFactoryPlugin', { parameter: 'pluginModule.createFactoryPlugin', message: 'The pluginModule.createFactoryPlugin parameter must be a function. Received: ' + pluginModule.createFactoryPlugin }
+            ));
+        }
+        if (verify.isObject(options) === false) {
+            return callback(error(
+                'InvalidArgument', 'registerFactoryPlugin', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
             ));
         }
         var that = this;

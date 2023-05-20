@@ -65,6 +65,7 @@ $group
                 { plugins
                     $hook plugins
                 @ globalContext globalContext || {}
+                @ verbose true
             @ callback
 
     function createJsonWizziFactoryAndJsonFs
@@ -106,6 +107,7 @@ $group
                             $hook json_wf_plugins
                         { metaPlugins
                             $hook json_wf_meta_plugins
+                        @ verbose true
                     =>
                         param err
                         param wf

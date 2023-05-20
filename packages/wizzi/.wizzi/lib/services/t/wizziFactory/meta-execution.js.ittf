@@ -37,7 +37,7 @@ $group
                                         {
                                             @ pkgPath null
                                             @ metaVer null
-                        log myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts']
+                        $$ loog myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts']
                         _ this.createJsonFactoryAndJsonFs
                             @ metaPackiFiles
                             {
@@ -99,7 +99,7 @@ $group
                 delete metaPackiFiles[k]
             elif k.startsWith("plainDocuments/")
                 const newk = k.substring(16)
-                log 'k, newk', k, newk
+                $$ loog 'k, newk', k, newk
 
         $$ loog 'folderTemplatesIndex.contents', folderTemplatesIndex.join('\n')
         return folderTemplatesIndex.join('\n')

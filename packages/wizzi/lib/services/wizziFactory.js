@@ -48,6 +48,7 @@ var WizziFactory = (function () {
     function WizziFactory(user, role) {
         _classCallCheck(this, WizziFactory);
         this.__type = 'WizziFactory';
+        this.__version = '0.8.6';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -69,6 +70,7 @@ var WizziFactory = (function () {
         this.schemaDefinitions = {};
         this.globalContext = {};
         this.metasManager = null;
+        this.verbose = false;
     }
     //
     WizziFactory.prototype.initialize = function(options, callback) {
@@ -129,6 +131,12 @@ var WizziFactory = (function () {
         }
         this.metaPluginsOptions = options.metaPlugins;
         this.storeKind = repoOptions.storeKind || 'filesystem';
+        if (options.verbose) {
+            this.verbose = true;
+            var date = new Date();
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            console.log("[33m%s[0m", timeNow, "Starting ", this.__type, 'version', this.__version);
+        }
         var that = this;
         this.storePool.initialize(repoOptions, function(err, pool) {
             if (err) {
@@ -175,6 +183,7 @@ var WizziFactory = (function () {
                     return callback(err);
                 }
                 that.store = store;
+                that.pluginsOptions.verbose = options.verbose;
                 PluginsManager.createManager(that.pluginsOptions, function(err, pluginsManager) {
                     if (err) {
                         return callback(err);
@@ -1288,7 +1297,7 @@ var WizziFactory = (function () {
         }
         
         if (typeof(callback) !== 'function') {
-            throw new Error(error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback));
+            throw new Error(error('InvalidArgument', 'getWizziIttfFromText', 'The callback parameter must be a function. Received: ' + callback));
         }
         
         var wizzifier = this.getWizzifier(wizzifierName);
@@ -1302,7 +1311,7 @@ var WizziFactory = (function () {
                 
                 // loog 'wizzi.wizziFactory.getWizziIttf', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                 if (err) {
-                    return callback(error('WizziFactoryError', 'getWizziIttf', {
+                    return callback(error('WizziFactoryError', 'getWizziIttfFromText', {
                             message: 'See inner error', 
                             parameter: {
                                 wizzifierName: wizzifierName
@@ -1313,7 +1322,101 @@ var WizziFactory = (function () {
             })
         } 
         catch (ex) {
-            return callback(error('WizziFactoryError', 'getWizziIttf', {
+            return callback(error('WizziFactoryError', 'getWizziIttfFromText', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName
+                     }
+                 }, ex));
+        } 
+    }
+    //
+    WizziFactory.prototype.getWizziTree = function(tobeWizzifiedUri, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getWizziTree', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziTree', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziTree', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getWizziTree', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri);
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getWizziTree', {
+                    message: 'See inner error', 
+                    parameter: {
+                        wizzifierName: wizzifierName, 
+                        tobeWizzifiedUri: tobeWizzifiedUri
+                     }
+                 }, ex));
+        } 
+        this.getWizziTreeFromText(tobeWizzifiedText, wizzifierName, callback)
+    }
+    //
+    WizziFactory.prototype.getWizziTreeFromText = function(tobeWizzifiedText, wizzifierName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getWizziTreeFromText', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(tobeWizzifiedText) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziTreeFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
+            ));
+        }
+        if (verify.isNotEmpty(wizzifierName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getWizziTreeFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+            ));
+        }
+        
+        if (typeof(callback) !== 'function') {
+            throw new Error(error('InvalidArgument', 'getWizziTreeFromText', 'The callback parameter must be a function. Received: ' + callback));
+        }
+        
+        var wizzifier = this.getWizzifier(wizzifierName);
+        if (wizzifier.__is_error) {
+            wizzifier.wizzifierName = wizzifierName;
+            return callback(wizzifier);
+        }
+        
+        try {
+            wizzifier.getWizziTree(tobeWizzifiedText, {}, function(err, result) {
+                
+                // loog 'wizzi.wizziFactory.getWizziTreeFromText', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                if (err) {
+                    return callback(error('WizziFactoryError', 'getWizziTreeFromText', {
+                            message: 'See inner error', 
+                            parameter: {
+                                wizzifierName: wizzifierName
+                             }
+                         }, err));
+                }
+                callback(null, result);
+            })
+        } 
+        catch (ex) {
+            return callback(error('WizziFactoryError', 'getWizziTreeFromText', {
                     message: 'See inner error', 
                     parameter: {
                         wizzifierName: wizzifierName
@@ -1686,7 +1789,6 @@ var WizziFactory = (function () {
             destFolder = resolved_destFolder;
         }
         
-        console.log(myname, 'metaGenerate', 'tempFolder', tempFolder, 'destFolder', destFolder, __filename);
         
         if (ittfMetaFilePath.toLowerCase().endsWith('.ittf.ittf') == false) {
             return callback(error('InvalidArgument', 'metaGenerate', {
@@ -1706,8 +1808,6 @@ var WizziFactory = (function () {
             if (err) {
                 return callback(err);
             }
-            console.log("Object.keys(metaFileModel)", Object.keys(metaFileModel), __filename);
-            console.log("metaFileModel.children.length", metaFileModel.children.length, __filename);
             var f_count = 0;
             (function next() {
                 var child = metaFileModel.children[f_count++];
@@ -1788,14 +1888,12 @@ var WizziFactory = (function () {
         }
         function processPlainFile(node, tempFolder, callback) {
             var outputPath = path.join(tempFolder, node.value);
-            console.log('meta.processPlainFile', outputPath, __filename);
             if (node.children.length == 1 && node.children[0].name == '$from') {
                 fileService.read(packiFilePrefix + node.children[0].value, (err, content) => {
                 
                     if (err) {
                         return callback(err);
                     }
-                    console.log('processPlainFile.content', content, __filename);
                     fileService.write(outputPath, content, callback)
                 }
                 )
@@ -1843,7 +1941,6 @@ var WizziFactory = (function () {
                         metaVer: null
                      })
                  };
-                console.log(myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts'], __filename);
                 this.createJsonFactoryAndJsonFs(metaPackiFiles, {
                     globalContext: options.globalContext || {}
                  }, (err, wf_and_jsonFs) => {
@@ -1908,7 +2005,6 @@ var WizziFactory = (function () {
             }
             else if (k.startsWith("plainDocuments/")) {
                 const newk = k.substring(16);
-                console.log('k, newk', k, newk, __filename);
             }
         }
         return folderTemplatesIndex.join('\n');
@@ -1926,7 +2022,8 @@ var WizziFactory = (function () {
         var metasManager = require('./metasManager');
         metasManager.createManager({
             metaPlugins: this.metaPluginsOptions, 
-            globalContext: globalContext || {}
+            globalContext: globalContext || {}, 
+            verbose: this.verbose
          }, (err, metasManager) => {
         
             if (err) {

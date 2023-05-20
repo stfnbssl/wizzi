@@ -1,7 +1,7 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@0.7.14
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\light\schema\step_1.js.ittf
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\wizzify\step_3.js.ittf
 */
 'use strict';
 //
@@ -35,10 +35,15 @@ function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
             items: [
-                'wizzi-js', 
-                'wizzi-web', 
-                'wizzi-core'
-            ]
+                './wizzi.plugin.html/index', 
+                './wizzi.plugin.js/index', 
+                './wizzi.plugin.ts/index', 
+                './wizzi.plugin.css/index', 
+                './wizzi.plugin.svg/index', 
+                './wizzi.plugin.graphql/index', 
+                './wizzi.plugin.json/index'
+            ], 
+            pluginsBaseFolder: pluginsBaseFolderV08
          }, 
         globalContext: globalContext || {}, 
         verbose: true
@@ -155,37 +160,92 @@ function createMetasManager(globalContext, callback) {
         globalContext: globalContext || {}
      }, callback)
 }
-var light_schema_step_1 = function(step_callback) {
+var wf_wizzify_step_3 = function(step_callback) {
     heading1('EXAMPLE')
-    var schemaFriendsPath = path.join(__dirname, 'ittf', 'friends.wfschema.ittf');
-    var schemaFriendsOutputPath = path.join(__dirname, 'plugins', 'friends');
-    // Generate the javascript modules for the wizzi schema
-    // of a new wizzi plugin.
-    wizziIndex.schema(schemaFriendsPath, {
-        comments: true
-     }, {
-        outputPackagePath: schemaFriendsOutputPath
-     }, function(err, schemaPaths) {
+    var htmlSourcePath = path.join(__dirname, 'data', 'first.html');
+    var cssSourcePath = path.join(__dirname, 'data', 'first.css');
+    var svgSourcePath = path.join(__dirname, 'data', 'first.svg');
+    var jsSourcePath = path.join(__dirname, 'data', 'first.js');
+    var graphqlSourcePath = path.join(__dirname, 'data', 'first.graphql');
+    var tsSourcePath = path.join(__dirname, 'data', 'first.ts');
+    var jsonSourcePath = path.join(__dirname, 'data', 'first.json');
+    createWizziFactory({}, function(err, wf) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        printValue('schemaPaths', schemaPaths)
+        // Load the model and transform.
+        wf.getWizziTree(htmlSourcePath, 'html', function(err, ittfDocument) {
+            if (err) {
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
+                throw new Error(err.message);
+            }
+            printValue('html Ittf document', ittfDocument)
+            wf.getWizziTree(cssSourcePath, 'css', function(err, ittfDocument) {
+                if (err) {
+                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                    console.log("[31m%s[0m", 'err', err);
+                    throw new Error(err.message);
+                }
+                printValue('css Ittf document', ittfDocument)
+                wf.getWizziTree(svgSourcePath, 'svg', function(err, ittfDocument) {
+                    if (err) {
+                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                        console.log("[31m%s[0m", 'err', err);
+                        throw new Error(err.message);
+                    }
+                    printValue('svg Ittf document', ittfDocument)
+                    wf.getWizziTree(jsSourcePath, 'js', function(err, ittfDocument) {
+                        if (err) {
+                            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                            console.log("[31m%s[0m", 'err', err);
+                            throw new Error(err.message);
+                        }
+                        printValue('js Ittf document', ittfDocument)
+                        wf.getWizziTree(graphqlSourcePath, 'graphql', function(err, ittfDocument) {
+                            if (err) {
+                                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                console.log("[31m%s[0m", 'err', err);
+                                throw new Error(err.message);
+                            }
+                            printValue('graphql Ittf document', ittfDocument)
+                            wf.getWizziTree(tsSourcePath, 'ts', function(err, ittfDocument) {
+                                if (err) {
+                                    console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                    console.log("[31m%s[0m", 'err', err);
+                                    throw new Error(err.message);
+                                }
+                                printValue('ts Ittf document', ittfDocument)
+                                wf.getWizziTree(jsonSourcePath, 'json', function(err, ittfDocument) {
+                                    if (err) {
+                                        console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                                        console.log("[31m%s[0m", 'err', err);
+                                        throw new Error(err.message);
+                                    }
+                                    printValue('json Ittf document', ittfDocument)
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
     })
 };
-light_schema_step_1.__name = 'light_schema_step_1';
+wf_wizzify_step_3.__name = 'wf_wizzify_step_3';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - light_schema_step_1 - ' + text);
+    console.log('** level 0 - step 1 - wf_wizzify_step_3 - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- light_schema_step_1 - ' + text);
+    console.log('   ','-- wf_wizzify_step_3 - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -375,7 +435,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = light_schema_step_1;
+module.exports = wf_wizzify_step_3;
 if (typeof require != 'undefined' && require.main === module) {
-    light_schema_step_1();
+    wf_wizzify_step_3();
 }

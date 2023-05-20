@@ -68,7 +68,13 @@
 
         set this.storeKind = repoOptions.storeKind || 'filesystem'
 
-		var that = this
+		if options.verbose
+            set this.verbose = true
+            var date = new Date()
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            warn timeNow, "Starting ", this.__type, 'version', this.__version
+
+        var that = this
 		_ this.storePool.initialize
 			@ repoOptions
 			f_cb( pool )
@@ -95,6 +101,7 @@
 				_ that.createStore
 					f_cb( store )
 						set that.store = store
+                        set that.pluginsOptions.verbose = options.verbose
 						_ PluginsManager.createManager
 							@ that.pluginsOptions
 							f_cb( pluginsManager )

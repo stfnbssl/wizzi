@@ -34,7 +34,7 @@
 					@ this.globalContext
 					@ options.globalContext
 
-		log mdDisplayName + '.initialize.globalContext', this.globalContext
+		
 	
 		# used for creating on the fly a json factory
 		set this.wfPluginsOptions = options.wfPlugins
@@ -44,9 +44,17 @@
 
         set this.metaPluginsOptions = options.metaPlugins
 
+        $* VIA
+        log mdDisplayName + '.initialize.globalContext', this.globalContext
         log mdDisplayName + '.initialize.wfPluginsOptions', this.wfPluginsOptions
-        
         log mdDisplayName + '.initialize.metaPluginsOptions', this.metaPluginsOptions
+        *$
+
+		if options.verbose
+            set this.metaPluginsOptions.verbose = true
+            var date = new Date()
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            warn timeNow, "Starting ", this.__type, 'version', this.__version
 
 		_ this.loadPlugins
 			@ this.metaPluginsOptions
@@ -69,11 +77,13 @@
 		param callback
 		+
 		var itemsOptions = options.items
-        log mdDisplayName + '.metaPluginsBaseFolder before', options.metaPluginsBaseFolder
-        log mdDisplayName + '.__dirname', __dirname
 		var metaPluginsBaseFolder = options.metaPluginsBaseFolder 
             \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
-        log mdDisplayName + '.metaPluginsBaseFolder', metaPluginsBaseFolder
+        $* VIA
+        loog mdDisplayName + '.metaPluginsBaseFolder before', options.metaPluginsBaseFolder
+        loog mdDisplayName + '.__dirname', __dirname
+        loog mdDisplayName + '.metaPluginsBaseFolder', metaPluginsBaseFolder
+        *$
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext
@@ -103,6 +113,18 @@
 											# loog 'plugin key', key
 							set plugin.packageName = plugin.packagePath
 							set plugin.packagePath = moduleObject.packagePath
+                            if options.verbose
+                                var date = new Date()
+                                var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+                                var spaces = new Array(timeNow.length+1).join(' ')
+                                warn timeNow, "Loaded meta plugin", plugin.packageName, 'version', plugin.version $$ , Object.keys(plugin.provides)
+                                warn spaces, 'meta productions: ', plugin.provides.metaProductions.join(', ')
+                                $*
+                                warn spaces, 'schemas: ', plugin.provides.schemas.join(',')
+                                warn spaces, 'artifact generators: ', plugin.provides.artifactGenerators.join(',')
+                                if plugin.provides.modelTransformers.length > 0
+                                    warn spaces, 'model transformers: ', plugin.provides.modelTransformers.join(',')
+                                *$
 							return resolveNext(++i)
             else
 				return resolveNext(++i)

@@ -5,6 +5,7 @@
 	m registerFactoryPlugin
 		{ pluginModule
 			func createFactoryPlugin
+        { options
 		callback
 		var that = this
 		_ pluginModule.createFactoryPlugin
@@ -21,6 +22,12 @@
 				_ that.factoryPlugins.push(factoryPlugin)
 				checked_call( providesAdded )
 					_ that.addPluginProvides(factoryPlugin)
+                $* VIA
+                if options.verbose
+                    var date = new Date()
+                    var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+                    warn timeNow, "Registered plugin", pluginModule.packageName
+                *$
 				return
 					_ callback(null)
 

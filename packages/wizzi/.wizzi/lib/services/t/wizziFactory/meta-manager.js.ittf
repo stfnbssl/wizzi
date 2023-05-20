@@ -13,6 +13,7 @@ $group
             {
                 @ metaPlugins this.metaPluginsOptions
                 @ globalContext globalContext || {}
+                @ verbose this.verbose
             a_cb( metasManager )
                 set this.metasManager = metasManager
                 r_cb( this.metasManager )

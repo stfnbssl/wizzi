@@ -41,7 +41,8 @@ function createWizziFactory(globalContext, callback) {
             ], 
             pluginsBaseFolder: pluginsBaseFolder
          }, 
-        globalContext: globalContext || {}
+        globalContext: globalContext || {}, 
+        verbose: true
      }, callback)
 }
 function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
@@ -71,7 +72,8 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
              }, 
             metaPlugins: {
                 
-             }
+             }, 
+            verbose: true
          }, (err, wf) => {
         
             if (err) {

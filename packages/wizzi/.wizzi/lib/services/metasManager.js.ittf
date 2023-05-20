@@ -29,6 +29,8 @@ module wizzi@${wzCtx.version}.metasManager
 	class MetasManager
 		
 		ctor
+			set this.__type = 'MetasManager'
+            set this.__version = '${wzCtx.version}'
 			set this.packagePathCache = {}
 			set this.metaPlugins = []
             set this.providedProductions = []
@@ -48,7 +50,7 @@ module wizzi@${wzCtx.version}.metasManager
 				function
 					param options
 					param callback
-					log 'wizzi.metasManager.createManager.options', options
+					$$ VIA loog 'wizzi.metasManager.createManager.options', options
 					var mm
 						new MetasManager
 					_ mm.initialize
