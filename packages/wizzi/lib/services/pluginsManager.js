@@ -29,7 +29,7 @@ var PluginsManager = (function () {
     function PluginsManager() {
         _classCallCheck(this, PluginsManager);
         this.__type = 'PluginsManager';
-        this.__version = '0.8.6';
+        this.__version = '0.8.8';
         this.packagePathCache = {};
         this.factoryPlugins = [];
         this.providedSchemas = [];
@@ -983,7 +983,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.6.pluginsManager.' + method,
+        method: 'wizzi@0.8.8.pluginsManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

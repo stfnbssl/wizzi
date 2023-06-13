@@ -43,6 +43,9 @@
 		# \n       // implements line continuation
 		#          //   the value is appendend to the value of the parent line
 		#          //   with a line break separator:  prevLine,value += '\n' + currentLine.value
+		# \r       // implements line continuation
+		#          //   the value is appendend to the value of the parent line
+		#          //   with a soft break separator:  prevLine,value += '\r' + currentLine.value
 		#
     
 	set module.exports
@@ -114,6 +117,10 @@
 					elif nameFirstChar == '\\' && line.name === '\\n'
 						# value continuation on new line with line break
                         set current.value += ('\n' + line.value)
+                        continue 
+					elif nameFirstChar == '\\' && line.name === '\\r'
+						# value continuation on new line with soft break
+                        set current.value += ('\r' + line.value)
                         continue 
                     else 
                         set line.parent = current

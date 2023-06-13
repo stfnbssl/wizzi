@@ -65,7 +65,7 @@ describe("function", function() {
             done();
         })
     });
-    it("should load and evaluate an ittf with a function", function(done) {
+    it("should load and evaluate an ittf (function_1) with a $function called by a $_ command", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_1.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
             evaluatedModel = result;
@@ -75,7 +75,7 @@ describe("function", function() {
             done();
         })
     });
-    it("nodes[0]", function(done) {
+    it("(function_1) results: nodes[0]", function(done) {
         expect(evaluatedModel).to.be.an('object');
         expect(evaluatedModel.nodes).to.be.an('array');
         expect(evaluatedModel.nodes.length).to.be(1);
@@ -89,7 +89,7 @@ describe("function", function() {
         expect(node.n).to.be('alfa');
         done();
     });
-    it("nodes [0][0]", function(done) {
+    it("(function_1) results: nodes [0][0]", function(done) {
         expect(evaluatedModel.nodes[0].children).to.be.an('array');
         expect(evaluatedModel.nodes[0].children.length).to.be(1);
         node = evaluatedModel.nodes[0].children[0];
@@ -103,7 +103,7 @@ describe("function", function() {
         expect(node.v).to.be('stefi');
         done();
     });
-    it("should load and evaluate an ittf with a complex function", function(done) {
+    it("should load and evaluate an ittf (function_2) results: with a complex $function called by a $_ command", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_2.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
             evaluatedModel = result;
@@ -113,7 +113,7 @@ describe("function", function() {
             done();
         })
     });
-    it("complex function nodes[0]", function(done) {
+    it("complex function (function_2) results: nodes[0]", function(done) {
         expect(evaluatedModel).to.be.an('object');
         expect(evaluatedModel.nodes).to.be.an('array');
         expect(evaluatedModel.nodes.length).to.be(1);
@@ -127,7 +127,7 @@ describe("function", function() {
         expect(node.n).to.be('alfa');
         done();
     });
-    it("complex function nodes [0][0]", function(done) {
+    it("complex function nodes (function_2) results: [0][0]", function(done) {
         // loog 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
         expect(evaluatedModel.nodes[0].children).to.be.an('array');
         expect(evaluatedModel.nodes[0].children.length).to.be(2);
@@ -154,7 +154,7 @@ describe("function", function() {
         expect(node.n).to.be('sigma');
         done();
     });
-    it("should load and evaluate an ittf with a recursive function", function(done) {
+    it("should load and evaluate an ittf (function_3) with a recursive $function", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_3.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
             // loog '================', err, result
@@ -165,7 +165,7 @@ describe("function", function() {
             done();
         })
     });
-    it("recursive nodes[0]", function(done) {
+    it("recursive (function_3) results: nodes[0]", function(done) {
         node = evaluatedModel.nodes[0];
         expect(node).to.be.an('object');
         expect(node.children).to.be.an('array');
@@ -182,7 +182,7 @@ describe("function", function() {
         expect(n1.v).to.be('alfa x');
         done();
     });
-    it("recursive nodes[0][0][0]", function(done) {
+    it("recursive (function_3) results: nodes[0][0][0]", function(done) {
         node = evaluatedModel.nodes[0].children[0].children[0];
         expect(node).to.be.an('object');
         expect(node.children).to.be.an('array');

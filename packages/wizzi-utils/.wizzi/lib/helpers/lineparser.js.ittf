@@ -9,7 +9,8 @@
         set module.exports =
             { 
     
-	$include lineparser/codifyInterpolation
+	$include lineParser/codifyInterpolation
+    $include lineParser/parseNameValueRaw
     
 	function match
 		param text

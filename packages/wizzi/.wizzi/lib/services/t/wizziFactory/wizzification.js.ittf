@@ -74,9 +74,12 @@ $group
             return callback(wizzifier)
 		+
         try
+            # the instance of the WizziFactory passed to the getWizziIttf function
+            # could be used for wizzifying included wizzi schemas
             _ wizzifier.getWizziIttf
                 @ tobeWizzifiedText
                 {
+                    @ wf this
                 function
                     param err
                     param result
@@ -112,11 +115,6 @@ $group
 		callback
 		+
 		check_wz_callback( getWizziTree )
-		+
-		var wizzifier = this.getWizzifier(wizzifierName)
-        if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
-            return callback(wizzifier)
 		+
         try
             var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
@@ -155,9 +153,12 @@ $group
             return callback(wizzifier)
 		+
         try
+            # the instance of the WizziFactory passed to the getWizziTree function
+            # could be used for wizzifying included wizzi schemas
             _ wizzifier.getWizziTree
                 @ tobeWizzifiedText
                 {
+                    @ wf this
                 function
                     param err
                     param result
@@ -193,11 +194,6 @@ $group
 		callback
 		+
 		check_wz_callback( getCodeAST )
-		+
-		var wizzifier = this.getWizzifier(wizzifierName)
-        if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
-            return callback(wizzifier)
 		+
         try
             var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
@@ -236,9 +232,12 @@ $group
             return callback(wizzifier)
 		+
         try
+            # the instance of the WizziFactory passed to the getCodeAST function
+            # (at the moment?) is not used; it is simply for coherence with other wizzifier calls.
             _ wizzifier.getCodeAST
                 @ tobeWizzifiedText
                 {
+                    @ wf this
                 function
                     param err
                     param result

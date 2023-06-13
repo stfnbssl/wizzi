@@ -32,7 +32,7 @@ const metaProductionDestFolder = '.wizzi';
 class MetasManager {
     constructor() {
         this.__type = 'MetasManager';
-        this.__version = '0.8.6';
+        this.__version = '0.8.8';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -558,7 +558,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.6.metasManager.' + method,
+        method: 'wizzi@0.8.8.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

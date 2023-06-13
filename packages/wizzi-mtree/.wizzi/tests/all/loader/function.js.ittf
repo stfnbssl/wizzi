@@ -18,7 +18,7 @@
 			f_cb_no_err( notUsed )
 				_ done
 
-	it-async should load and evaluate an ittf with a function
+	it-async should load and evaluate an ittf (function_1) with a $function called by a $_ command
 			
 		var content_filepath
 			_ path.join
@@ -36,7 +36,7 @@
 				tobe_array( evaluatedModel.nodes, 1 )
 				_ done()
 		
-	it-async nodes[0]
+	it-async (function_1) results: nodes[0]
 		tobe_object( evaluatedModel )
 		tobe_array( evaluatedModel.nodes, 1 )
 		tobe_object( evaluatedModel.nodes[0] )
@@ -46,7 +46,7 @@
 		tobe_string( node.n, 'alfa' )
 		_ done()
 
-	it-async nodes [0][0]
+	it-async (function_1) results: nodes [0][0]
 		tobe_array( evaluatedModel.nodes[0].children, 1 )
 		set node = evaluatedModel.nodes[0].children[0]
 		tobe_number( node.r, 4 )
@@ -55,7 +55,7 @@
 		tobe_string( node.v, 'stefi' )
 		_ done()
 
-	it-async should load and evaluate an ittf with a complex function
+	it-async should load and evaluate an ittf (function_2) results: with a complex $function called by a $_ command
 			
 		var content_filepath
 			_ path.join
@@ -73,7 +73,7 @@
 				tobe_array( evaluatedModel.nodes, 1 )
 				_ done()
 		
-	it-async complex function nodes[0]
+	it-async complex function (function_2) results: nodes[0]
 		tobe_object( evaluatedModel )
 		tobe_array( evaluatedModel.nodes, 1 )
 		tobe_object( evaluatedModel.nodes[0] )
@@ -83,7 +83,7 @@
 		tobe_string( node.n, 'alfa' )
 		_ done()
 
-	it-async complex function nodes [0][0]
+	it-async complex function nodes (function_2) results: [0][0]
 		# loog 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
 		tobe_array( evaluatedModel.nodes[0].children, 2 )
 		set node = evaluatedModel.nodes[0].children[0]
@@ -100,7 +100,7 @@
 		tobe_string( node.n, 'sigma' )
 		_ done()
 
-	it-async should load and evaluate an ittf with a recursive function
+	it-async should load and evaluate an ittf (function_3) with a recursive $function
 			
 		var content_filepath
 			_ path.join
@@ -119,7 +119,7 @@
 				tobe_array( evaluatedModel.nodes, 1 )
 				_ done()
 
-	it-async recursive nodes[0]
+	it-async recursive (function_3) results: nodes[0]
 		set node = evaluatedModel.nodes[0]
 		tobe_object( node )
 		tobe_array( node.children, 1 )
@@ -133,7 +133,7 @@
 		_ done()
 
 
-	it-async recursive nodes[0][0][0]
+	it-async recursive (function_3) results: nodes[0][0][0]
 		set node = evaluatedModel.nodes[0].children[0].children[0]
 		tobe_object( node )
 		tobe_array( node.children, 1 )

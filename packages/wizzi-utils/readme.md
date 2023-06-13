@@ -1,6 +1,6 @@
-# wizzi-utils
+# @wizzi/utils
 
-Utility library for the wizzi factory.
+Utility library for the wizzi factory
 
 
 
@@ -13,7 +13,7 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 
 
 ## vfile - virtual file system
-#### var vfile = require('wizzi-utils').vfile
+#### var vfile = require('@wizzi/utils').vfile
 ### vfileInst - create a virtual file system instance
 #### var vfileInst = vfile([fsimpl])
 * `fsimpl` `Object` Default: NodeJS fs object or fs-graceful if available. 
@@ -72,7 +72,7 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 #### mkdir(path[, options], callback)
 #### mkdirSync(path[, options])
 ## verify - helper object
-#### var verify = require('wizzi-utils').verify
+#### var verify = require('@wizzi/utils').verify
 ## verify - type checks
 #### verify.isDefined(item)
 #### verify.isNullOrUndefined(item)
@@ -121,13 +121,13 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 #### verify.error([inner,] [obj,] message, [arg-1[, arg-2[, arg-...]]])
 #### verify.fatal(err[, code])
 ## folderScanner - ittf documents folder scanner
-#### var folderScanner = require('wizzi-utils').folderScanner
+#### var folderScanner = require('@wizzi/utils').folderScanner
 ## folderScanner.scan(folderPath[, options])
 * `folderPath` `uri` 
 * `options` `Object` 
 * returns the root IttfFsNode of the 'folderPath' with its descendant folders as children. 
 ## ittfDocumentGraph - enhanced mTree with import, export, analize capabilities
-#### var ittfDocumentGraph = require('wizzi-utils').ittfDocumentGraph
+#### var ittfDocumentGraph = require('@wizzi/utils').ittfDocumentGraph
 #### ittfDocumentGraph.loadFrom(path_string)
 * `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation) 
 * returns an ittfDocumentGraph instance 
@@ -135,36 +135,36 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 * `mTree` `Object` An existent final or partial mTree. 
 * returns an ittfDocumentGraph instance 
 ## ittfHtmlPrettifier - ittf html formatter for documentation
-#### var ittfHtmlPrettifier = require('wizzi-utils').ittfHtmlPrettifier
+#### var ittfHtmlPrettifier = require('@wizzi/utils').ittfHtmlPrettifier
 ## ittfHtmlPrettifier(rootNode[, options])
 * `rootNode` `Object` ittfDocumentGraph instance 
 * `options` `Object` 
 ## jsHtmlPrettifier - javascript html formatter for documentation
-#### var jsHtmlPrettifier = require('wizzi-utils').jsHtmlPrettifier
+#### var jsHtmlPrettifier = require('@wizzi/utils').jsHtmlPrettifier
 ## jsHtmlPrettifier(script[, options])
 * `script` `String` javascript code 
 * `options` `Object` 
 * * *
 ## Ittf scanner Feature
-#### var ittfScanner = require('wizzi-utils').ittfScanner
+#### var ittfScanner = require('@wizzi/utils').ittfScanner
 * * *
 ## Ittf graph Feature
-#### var ittfGraph = require('wizzi-utils').ittfGraph
+#### var ittfGraph = require('@wizzi/utils').ittfGraph
 * * *
 ## Filesystem Feature
-#### var fSystem = require('wizzi-utils').fSystem
+#### var fSystem = require('@wizzi/utils').fSystem
 * * *
 ## Prettify Feature
-#### var pretty = require('wizzi-utils').pretty
+#### var pretty = require('@wizzi/utils').pretty
 * * *
 ## Lorem ipsum Feature
-#### var lorem = require('wizzi-utils').lorem
+#### var lorem = require('@wizzi/utils').lorem
 * * *
 ## Crypto Feature
-#### var crypto = require('wizzi-utils').crypto
+#### var crypto = require('@wizzi/utils').crypto
 * * *
 ## Helpers Feature
-#### var helpers = require('wizzi-utils').helpers
+#### var helpers = require('@wizzi/utils').helpers
 
 
 ## Wizzi

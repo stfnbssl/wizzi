@@ -48,7 +48,7 @@ var WizziFactory = (function () {
     function WizziFactory(user, role) {
         _classCallCheck(this, WizziFactory);
         this.__type = 'WizziFactory';
-        this.__version = '0.8.6';
+        this.__version = '0.8.8';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -1307,7 +1307,11 @@ var WizziFactory = (function () {
         }
         
         try {
-            wizzifier.getWizziIttf(tobeWizzifiedText, {}, function(err, result) {
+            // the instance of the WizziFactory passed to the getWizziIttf function
+            // could be used for wizzifying included wizzi schemas
+            wizzifier.getWizziIttf(tobeWizzifiedText, {
+                wf: this
+             }, function(err, result) {
                 
                 // loog 'wizzi.wizziFactory.getWizziIttf', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                 if (err) {
@@ -1350,12 +1354,6 @@ var WizziFactory = (function () {
         
         if (typeof(callback) !== 'function') {
             throw new Error(error('InvalidArgument', 'getWizziTree', 'The callback parameter must be a function. Received: ' + callback));
-        }
-        
-        var wizzifier = this.getWizzifier(wizzifierName);
-        if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
-            return callback(wizzifier);
         }
         
         try {
@@ -1401,7 +1399,11 @@ var WizziFactory = (function () {
         }
         
         try {
-            wizzifier.getWizziTree(tobeWizzifiedText, {}, function(err, result) {
+            // the instance of the WizziFactory passed to the getWizziTree function
+            // could be used for wizzifying included wizzi schemas
+            wizzifier.getWizziTree(tobeWizzifiedText, {
+                wf: this
+             }, function(err, result) {
                 
                 // loog 'wizzi.wizziFactory.getWizziTreeFromText', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                 if (err) {
@@ -1444,12 +1446,6 @@ var WizziFactory = (function () {
         
         if (typeof(callback) !== 'function') {
             throw new Error(error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback));
-        }
-        
-        var wizzifier = this.getWizzifier(wizzifierName);
-        if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
-            return callback(wizzifier);
         }
         
         try {
@@ -1495,7 +1491,11 @@ var WizziFactory = (function () {
         }
         
         try {
-            wizzifier.getCodeAST(tobeWizzifiedText, {}, function(err, result) {
+            // the instance of the WizziFactory passed to the getCodeAST function
+            // (at the moment?) is not used; it is simply for coherence with other wizzifier calls.
+            wizzifier.getCodeAST(tobeWizzifiedText, {
+                wf: this
+             }, function(err, result) {
                 
                 // loog 'wizzi.wizziFactory.getCodeAST', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
                 if (err) {
@@ -2316,7 +2316,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.6.wizziFactory.' + method,
+        method: 'wizzi@0.8.8.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

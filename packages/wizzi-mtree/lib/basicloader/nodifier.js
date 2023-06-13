@@ -61,6 +61,12 @@ module.exports = function(lines, mTree) {
                 current.value += ('\n' + line.value);
                 continue;
             }
+            
+            // value continuation on new line with soft break
+            else if (nameFirstChar == '\\' && line.name === '\\r') {
+                current.value += ('\r' + line.value);
+                continue;
+            }
             else {
                 line.parent = current;
                 current.children.push(line);

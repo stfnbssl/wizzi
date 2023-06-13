@@ -47,7 +47,7 @@
 	set md.config = helpers.config
 	set md.verify = helpers.verify
 	set md.node = helpers.node
-	set md.lineparser = helpers.lineparser
+	set md.lineParser = helpers.lineParser
 	set md.requireFromString = helpers.requireFromString
 	set md.Coder = helpers.coder
     $if wzCtx_useCrypto
