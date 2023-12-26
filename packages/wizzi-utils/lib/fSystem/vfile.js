@@ -1251,7 +1251,11 @@ var VFile = (function () {
                     }
                     // loog 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
                     if (isDirectory) {
-                        return callback(null, (options.deep ? item : null ));
+                        process.nextTick(() => {
+                        
+                            return callback(null, (options.deep ? item : null ));
+                        }
+                        )
                     }
                     else {
                         if (!options.extension || verify.endsWith(item, options.extension)) {
@@ -1260,7 +1264,11 @@ var VFile = (function () {
                                 relPath: unixifyPath(path.join(relPath.join('/'), item))
                              })
                         }
-                        return callback(null, null);
+                        process.nextTick(() => {
+                        
+                            return callback(null, null);
+                        }
+                        )
                     }
                 })
             }, function(err, items) {
@@ -1286,11 +1294,19 @@ var VFile = (function () {
                                 return callback(err);
                             }
                             // loog 'wizzi-utils.vfile._appendFiles.deep.async.files', files
-                            return repeat(index + 1);
+                            process.nextTick(() => {
+                            
+                                return repeat(index + 1);
+                            }
+                            )
                         })
                     }
                     else {
-                        return repeat(index + 1);
+                        process.nextTick(() => {
+                        
+                            return repeat(index + 1);
+                        }
+                        )
                     }
                 }
                 repeat(0);

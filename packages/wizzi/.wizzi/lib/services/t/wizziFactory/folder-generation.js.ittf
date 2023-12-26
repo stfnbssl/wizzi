@@ -51,11 +51,15 @@ $group
                                             @ artifactText
                                             f_cb()
                                                 # loog 'generateFolderArtifacts.written', item.destRelPath
-                                                _ callback
-                                                    @ null
-                                                    _ path.join
-                                                        @ options.destFolder
-                                                        @ item.destRelPath
+                                                # _ process.nextTick
+                                                _ setTimeout
+                                                    => 
+                                                        _ callback
+                                                            @ null
+                                                            _ path.join
+                                                                @ options.destFolder
+                                                                @ item.destRelPath
+                                                    @ 0
                             else
                                 # loog 'generateFolderArtifacts.copying', item.fullPath
                                 _ this.fileService.copyFile
@@ -66,11 +70,15 @@ $group
                                             @ item.destRelPath
                                             @ fileCtx
                                     f_cb()
-                                        _ callback
-                                            @ null
-                                            _ path.join
-                                                @ options.destFolder
-                                                @ item.destRelPath
+                                        # _ process.nextTick
+                                        _ setTimeout
+                                            => 
+                                                _ callback
+                                                    @ null
+                                                    _ path.join
+                                                        @ options.destFolder
+                                                        @ item.destRelPath
+                                            @ 0
 
                         f_cb_test(result)
                             # loog 'generateFolderArtifacts.result', result

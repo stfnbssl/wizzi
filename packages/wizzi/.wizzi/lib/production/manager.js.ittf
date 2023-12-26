@@ -225,7 +225,9 @@
 							if err
 								return callback(err);
 							set self.artifactInfos = result
-							_ callback(null, result)
+                            _ process.nextTick
+                                => 
+                                    _ callback(null, result)
 
 		m terminate
 			if this.wizziFactory

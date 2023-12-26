@@ -223,7 +223,10 @@ var ProductionManager = (function () {
                     return callback(err);
                 }
                 self.artifactInfos = result;
-                callback(null, result);
+                process.nextTick(() => 
+                
+                    callback(null, result)
+                )
             })
         })
     }

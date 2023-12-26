@@ -48,7 +48,7 @@ var WizziFactory = (function () {
     function WizziFactory(user, role) {
         _classCallCheck(this, WizziFactory);
         this.__type = 'WizziFactory';
-        this.__version = '0.8.8';
+        this.__version = '0.8.9';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -1163,7 +1163,11 @@ var WizziFactory = (function () {
                                     return callback(err);
                                 }
                                 // loog 'generateFolderArtifacts.written', item.destRelPath
-                                callback(null, path.join(options.destFolder, item.destRelPath))
+                                // _ process.nextTick
+                                setTimeout(() => 
+                                
+                                    callback(null, path.join(options.destFolder, item.destRelPath))
+                                , 0)
                             })
                         }
                         )
@@ -1174,7 +1178,11 @@ var WizziFactory = (function () {
                             if (err) {
                                 return callback(err);
                             }
-                            callback(null, path.join(options.destFolder, item.destRelPath))
+                            // _ process.nextTick
+                            setTimeout(() => 
+                            
+                                callback(null, path.join(options.destFolder, item.destRelPath))
+                            , 0)
                         })
                     }
                 }
@@ -2316,7 +2324,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.8.wizziFactory.' + method,
+        method: 'wizzi@0.8.9.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

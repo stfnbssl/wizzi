@@ -148,10 +148,12 @@
 								f_cb( isDirectory )
 									# loog 'wizzi-utils.vfile._appendFiles.async.isDirectory', filePath, isDirectory
 									if isDirectory
-										return
-											_ callback
-												@ null
-												@ (options.deep ? item : null )
+                                        _ process.nextTick                                                                
+                                            =>
+                                                return
+                                                    _ callback
+                                                        @ null
+                                                        @ (options.deep ? item : null )
 									else 
 										if !options.extension || verify.endsWith(item, options.extension)
 											_ files.push
@@ -162,10 +164,12 @@
 															_ path.join
 																_ relPath.join('/')
 																@ item
-										return
-											_ callback
-												@ null
-												@ null
+                                        _ process.nextTick                                                                
+                                            =>
+                                                return
+                                                    _ callback
+                                                        @ null
+                                                        @ null
 						f_cb( items )
 
 							# loog 'wizzi-utils.vfile._appendFiles.async.items', items
@@ -192,13 +196,17 @@
 										@ options
 										f_cb( result )
 											# loog 'wizzi-utils.vfile._appendFiles.deep.async.files', files
-											return
-												_ repeat
-													@ index + 1
+                                            _ process.nextTick
+                                                => 
+                                                    return
+                                                        _ repeat
+                                                            @ index + 1
 								else
-									return
-										_ repeat
-											@ index + 1
+                                    _ process.nextTick
+                                        => 
+                                            return
+                                                _ repeat
+                                                    @ index + 1
 							_ repeat(0)
 
 		$append sync
