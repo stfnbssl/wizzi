@@ -10,6 +10,8 @@
 		#         # when storeKind == mongodb
 		#       string storeBaseFolder
 		#         # when storeKind == mongodb
+		#       { storeJsonFs
+		#         # when storeKind == json
 		#       { storeJsonFsData
 		#         # when storeKind == json
 		#     { plugins
@@ -20,6 +22,7 @@
 		#         [ items
 		#           string pluginName
 		#         string metaPluginsBaseFolder
+		#     { globalContext
 		#     { test
 		#         string testOnlyMockBaseDir
 		#       { dumps

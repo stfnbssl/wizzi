@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\quick.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var path = require('path');
@@ -16,7 +17,9 @@ var repo = mocks.repo;
 var packageIndex = require('../../index');
 var quick = function(step_callback) {
     heading1('EXAMPLE')
-    //
+    /**
+         EXAMPLE: quick
+    */
     var loadMTree = packageIndex.createLoadMTree(repo.getCreateFilesystemStore(), {
         raw: false
      });

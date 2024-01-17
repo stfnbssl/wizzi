@@ -2,6 +2,7 @@ $group
 
 	#
 		# Execute a meta generation
+        # The current instance should be a json factory
 		# return
 		# | packifiles
 		# | wzError
@@ -17,6 +18,9 @@ $group
         #     string copyExclude
         #       optional
         #       default []
+        # returns
+        #   [
+        #     string generatedFilePath
 	m metaGenerate
 		string ittfMetaFilePath
 		{ context
@@ -51,25 +55,38 @@ $group
             {
                 @ mTreeBuildupContext context.modelRequestContext
             a_cb( metaFileModel )
-
                 $$ loog "Object.keys(metaFileModel)", Object.keys(metaFileModel)
                 $$ loog "metaFileModel.children.length", metaFileModel.children.length
                 var f_count = 0
                 iife next
                     var child = metaFileModel.children[f_count++]
                     if !child
+                        #
+                            # The tempFolder is ready
+                            # Go with the final generation into destFolder
+                            # The current instance should be a json factory
                         return
-                            _ that.generateFolderArtifacts
-                                @ tempFolder
-                                { 
-                                    @ modelRequestContext context.modelRequestContext
-                                    @ artifactRequestContext context.artifactRequestContext || context.modelRequestContext
-                                { 
-                                    @ deep true
-                                    @ destFolder destFolder
-                                    @ copyInclude options.copyInclude || ['*']
-                                    @ copyExclude options.copyExclude || []
-                                @ callback
+                            _ that.getPackiFilesFromJsonFactory
+                                @ ''
+                                a_cb(readyPackiFiles)
+                                    if context.modelRequestContext.metaCtx.__wz_fsc
+                                        _ context.modelRequestContext.metaCtx.__wz_fsc.addDebugObject
+                                            @ 'packi'
+                                            @ 'wf_metaGenerate_ready'
+                                            @ readyPackiFiles
+                                    _ that.generateFolderArtifacts
+                                        @ tempFolder
+                                        { 
+                                            @ modelRequestContext context.modelRequestContext
+                                            @ artifactRequestContext context.artifactRequestContext || context.modelRequestContext
+                                        { 
+                                            @ deep true
+                                            @ destFolder destFolder
+                                            @ generateFragments true
+                                            @ copyInclude options.copyInclude || ['*']
+                                            @ copyExclude options.copyExclude || []
+                                        @ callback
+
                     $$ loog "Object.keys(child)", Object.keys(child)
                     $$ loog 'child', child.name, child.value
                     if child.name == '$file'

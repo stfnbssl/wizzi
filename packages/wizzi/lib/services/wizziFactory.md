@@ -1,9 +1,9 @@
 ## The wizzi.WizziFactory class
 Every wizzi operation require an instance of the wizzi.WizziFactory class.
 
-* The store system (filesystem, mongodb, json or localstorage). 
-* The global context. 
-* The loading of plugins. 
+    * The store system (filesystem, mongodb, json or localstorage). 
+    * The global context. 
+    * The loading of plugins. 
 ### The store system
 The store system is set at creation time and cannot be changed.
 
@@ -14,14 +14,14 @@ The global context is set at creation time and cannot be changed.
 Plugins are loaded at creation time and cannot be changed.
 
 ### Operations
-* mTree loading 
-* Wizzi Model loading 
-* Model transformation 
-* Artifact generation 
-* Wizzification 
-* Wizzi Model type generation 
-* Production manager creation 
-* Wizzi job execution 
+    * mTree loading 
+    * Wizzi Model loading 
+    * Model transformation 
+    * Artifact generation 
+    * Wizzification 
+    * Wizzi Model type generation 
+    * Production manager creation 
+    * Wizzi job execution 
 ### mTree loading
 Executes the loading of a textual ittf document into a mTree memory object.
 

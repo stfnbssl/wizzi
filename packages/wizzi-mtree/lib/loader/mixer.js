@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -56,7 +57,14 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
         }
         repeater(0);
     }
-    //
+    /**
+         params
+         mixerNode: Object - may contain a mixin call if name ends with '('; example: class()
+         If the mixerNode is a mixin call
+         fetches the mixed document and mixes it
+         else
+         go down and execute the mix operation on the children nodes of the mixerNode.
+    */
     function mixNodeIfTheCase(mixerNode, callback) {
         var isMixinCall = false;
         if (mixerNode.tagSuffix === '(') {
@@ -155,7 +163,13 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
         var mixedRootNode,
             len = mixedRootNodes.length,
             mixedNodesAccumulation = [];
-        //
+        /**
+             The mixedNodifiedMTree may contain multiple root nodes.
+             The $group command is used as the root node of an IttfDocument
+             when multiple root nodes have to be declared.
+             So the repeater function execute the mixup of every child node of the mixedNodifiedMTree
+             and accumulates the resulting mixed nodes in the var "mixedNodesAccumulation"
+        */
         function repeater(index) {
             
             // we are done, return the result
@@ -220,7 +234,13 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                         mixedRootNode.children.push(item)
                     }
                 }
-                //
+                /**
+                     It seems we are done, but there is a notch.
+                     mixedRootNode could contain itself a mixin call.
+                     It must be analyzed and mixed if the case.
+                     Set the mixerNode.parent as its parent
+                     and add it to the resultMixedNodes collection.
+                */
                 mixNodeIfTheCase(mixedRootNode, function(err, mixedNodes) {
                     if (err) {
                         return callback(err);

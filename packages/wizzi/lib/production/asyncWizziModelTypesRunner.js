@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\production\asyncWizziModelTypesRunner.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:11 GMT
 */
 'use strict';
 var path = require('path');
@@ -10,7 +11,9 @@ var async = require('async');
 var chalk = require('chalk');
 var verify = require('@wizzi/utils').verify;
 var log = require('../util/log')(module);
-//
+/**
+    
+*/
 var AsyncWizziModelTypesRunner = {
     run: function(wmtRequest, callback) {
         var modelInfo = wmtRequest.modelInfo;

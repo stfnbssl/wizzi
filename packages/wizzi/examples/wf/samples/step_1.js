@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\samples\step_1.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:13 GMT
 */
 'use strict';
 var util = require('util');
@@ -51,7 +52,10 @@ wizziIndex.createFactory({
         'arthur', 
         'mary'
     ];
-    // Generate the html model.
+    /**
+        Generate the html model.
+         The html schema is detected from the path.
+    */
     wf.loadModel('html', htmlFriendsPath, {
         mTreeBuildupContext: {
             friends: friendsArray
@@ -63,7 +67,11 @@ wizziIndex.createFactory({
             throw new Error(err.message);
         }
         printValue('Loaded Wizzi Model Instance: friends', stringify(wizziModel.elements, null, 2))
-        // Generate the html document artifact.
+        /**
+            Generate the html document artifact.
+             No options, the default artifact generator
+             for the html schema will be used.
+        */
         wf.loadModelAndGenerateArtifact(htmlFriendsPath, {
             modelRequestContext: {
                 friends: friendsArray

@@ -40,7 +40,6 @@ module wizzi@${wzCtx.version}.metasManager
         $include metasManager/register
         $include metasManager/meta-production
         $include metasManager/meta-production-starter
-        $include metasManager/metaProductions
         $include metasManager/getProvides
         $include metasManager/createJsonWizziFactoryAndJsonFs
 

@@ -4,6 +4,7 @@
 	var loader = require('./lib/loader') 
 	+
 	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
 	#
 		#
 		# params

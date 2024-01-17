@@ -6,6 +6,7 @@
     var fileInfoByPath = require('@wizzi/utils').fileInfoByPath
 	+
 	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
 	+
 	$if wzConfig_useMongo
 		var MongoDocument = require('./lib/mongodb/fs/document')

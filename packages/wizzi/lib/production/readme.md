@@ -18,12 +18,12 @@ The default value in options.js is empty ( = {} )
 
 The user can pass a global context to
 
-* A Wizzi Job execution 
-* An mTree load 
-* A Wizzi Model load 
-* An Artifact Generation 
+    * A Wizzi Job execution 
+    * An mTree load 
+    * A Wizzi Model load 
+    * An Artifact Generation 
 using the property globalContext of the options parameter of* The wizzi.executeInstanceJob method 
-* The wizzi.createFactory method 
+    * The wizzi.createFactory method 
 Creating a wizziFactory instance always is preliminar to executing an mTree load, a Wizzi Model load or an Artifact Generation.
 
 The wizzi.executeInstanceJob creates its wizziFactory instance from the options that receives.

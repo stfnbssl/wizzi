@@ -1,10 +1,31 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\model\asyncModelLoader.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:11 GMT
 */
 'use strict';
-//
+/**
+     Objects
+     - Model
+     Is the core object of the model driven wizzi factory.
+     A model is a single object (wizzi model or POJO) acting as a context object in
+     mTree loadings, model transformations and artifact generations.
+     Models (single or group of similars) are described by wizzi.model.modelInfo api.
+     - Templated model
+     A templated model is a model that contains itself template commands and require
+     one or more context objects. The process is recursive and has no limit except
+     a guard to avoid infinite loops during recursive evaluation of contexts.
+     - Context models
+     Context models are an array of models acting as a context object for a templated
+     model.
+     Context models, being models themselves, are also described by wizzi.model.modelInfo api.
+     - Model collection
+     A model collection is an array property of a model, where each item of
+     the array is used as a model acting as a context object.
+     The properties of the item can be used to build the destination path of the generated artifact.
+     Model collections are described in the wizzi.model.ModelCollectionInfo api.
+*/
 // TODO Implement transformModel context objects.
 var path = require('path');
 var util = require('util');
@@ -43,7 +64,22 @@ function load(modelInfo, callback) {
         return callback(null, wizziModel);
     })
 }
-//
+/**
+     Load a single wizzi model using ModelInfo data
+     The master ModelInfo may contain one or many context ModelInfos
+     params
+     { masterModelInfo
+     string id
+     [ contexts
+     [ transformers
+     string exportName
+     string schema
+     { coll
+     boolean generatorRequireContextOnly
+     func getLoadModel
+     func productionManager
+     func srcFullPath
+*/
 function _load_item(masterModelInfo, callback) {
     // loog '+ asyncModelLoader._load_item, masterModelInfo', masterModelInfo
     logme('AsyncModelLoader._load_item.masterModelInfo.config', util.inspect(masterModelInfo.config, {
@@ -281,7 +317,20 @@ function prepareCollectionItemsContextObjects(modelInfo, wizziModelContexts, wiz
     }
     return itemContextObjects;
 }
-//
+/**
+     Load a single WizziModel using a single collection item as a context.
+     params
+     { collectionLoadData
+     { modelInfo
+     string schema
+     { ___state
+     { pman // ProductionManager
+     function srcFullPath
+     boolean isCompile
+     { context
+     # prepared by prepareCollectionItemsContextObjects
+     { itemObject
+*/
 function load_collection_item(collectionLoadData, callback) {
     var modelInfo = collectionLoadData.modelInfo,
         context = collectionLoadData.context,

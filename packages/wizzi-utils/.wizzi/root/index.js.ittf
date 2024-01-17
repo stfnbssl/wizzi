@@ -22,6 +22,7 @@
 	var md
         set module.exports
             { 
+    set md.version = "${wzCtx.version}"
 
     # features
     $if wzCtx_useScanner    

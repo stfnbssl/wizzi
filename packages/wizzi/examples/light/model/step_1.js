@@ -1,10 +1,14 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\light\model\step_1.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:13 GMT
 */
 'use strict';
-//
+/**
+     Example: light_model_step_1
+    
+*/
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
@@ -29,6 +33,7 @@ pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
 var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
+var packiUtils = require('../../../lib/services/packiUtils');
 const packiFilePrefix = 'json:/';
 const packiFilePrefixExtract = 'json:/';
 function createWizziFactory(globalContext, callback) {
@@ -164,7 +169,10 @@ var light_model_step_1 = function(step_callback) {
         'arthur', 
         'mary'
     ];
-    // Generate the html model.
+    /**
+        Generate the html model.
+         The html schema is detected from the path.
+    */
     wizziIndex.model(htmlFriendsPath, {
         friends: friendsArray
      }, function(err, wizziModel) {
@@ -174,7 +182,11 @@ var light_model_step_1 = function(step_callback) {
             throw new Error(err.message);
         }
         printValue('wizziModel friends', stringify(wizziModel.elements, null, 2))
-        // Generate the html document artifact.
+        /**
+            Generate the html document artifact.
+             No options, the default artifact generator
+             for the html schema will be used.
+        */
         wizziIndex.gen(htmlFriendsPath, {
             friends: friendsArray
          }, function(err, artifactText) {

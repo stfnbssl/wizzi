@@ -3,8 +3,8 @@ module
 
     $
         var opt = {
-            name: 'Evaluator_Step_1',
-            title: 'Evaluator - step - 1',
+            name: 'Errors_Step_1',
+            title: 'Errors - step - 1',
             folderLevel: 2
         }
 

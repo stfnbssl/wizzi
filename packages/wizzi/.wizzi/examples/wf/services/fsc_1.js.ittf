@@ -1,0 +1,69 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'fsc_1',
+            title: 'Factory service context - debug packifiles',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+        var FactoryServiceContext = wizziIndex.FactoryServiceContext
+        var fscInstance = new FactoryServiceContext()
+        _ fscInstance.addDebugObject
+            @ 'packi'
+            @ 'dbg1'
+            _ getSamplePackiFile1
+
+        _ fscInstance.addDebugObject
+            @ 'packi'
+            @ 'dbg1'
+            _ getSamplePackiFile1
+
+        _ fscInstance.dumpDebugObjects
+            {
+                @ kind 'packi'
+                @ destFolder
+                    _ path.join
+                        @ __dirname
+                        @ 'dumps'
+                        @ 'packi'
+
+    function getSamplePackiFile1
+        return
+            {
+                { ['t/src/index.ittf.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ '$group'
+                            @ '    $file t/lia.html.ittf.ittf'
+                            @ '        $' + '{$2}group'
+                            @ '            $' + '{$2}params text, href'
+                            @ '            li'
+                            @ '                a $' + '{$2}{text}'
+                            @ '                    href $' + '{$2}{href}'
+                            @ '    $file index.html.ittf.ittf'
+                            @ '        html'
+                            @ '            ul'
+                            @ '                lia.html$' + '{$p2} stefi, www.stefi.com'
+                            @ '                lia.html$' + '{$p2} annie, www.annie.com'
+                            @ '                $' + '{$2}foreach f in friends'
+                            @ '                    lia.html$' + '{$p2} $' + '{$2}{f}, www.$' + '{$2}{f}.com'
+                            ._ join
+                                @ '\n'                                
+                { ['index.ittf.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ 'template basic'
+                            @ '    ${'$'}'
+                            @ '        var $2 = "$' + '{\'$\'}";'
+                            @ '        var $p2 = "$' + '{\'(\'}"'
+                            @ '    ${'$'}include ./src/index'
+                            ._ join
+                                @ '\n'            
+

@@ -51,7 +51,7 @@
         #     { wf
         #       :ref WizziFactory
         #     { jsonFs
-        #       :ref WizziFactory
+        #       :ref @wizzi/repo/JsonFs
 		# params
 		#   { packiFiles
         #   { options
@@ -118,3 +118,18 @@
 				@ plugins this.pluginsOptions
 				@ globalContext options.globalContext || {}
 			@ callback
+
+    m getPackiFilesFromJsonFactory
+        param destFolder
+        callback
+        if this.storePool.getKind() == 'json'
+            _ packiUtils.jsonFsToPackiFiles
+                _ this.storePool.getJsonFs
+                @ destFolder
+                @ callback
+        else
+            _ callback
+                _ error
+                    @ 'InvalidOperation'
+                    @ 'getPackiFilesFromJsonFactory'
+                    @ 'This instance is not a json factory', this.storePool.kind

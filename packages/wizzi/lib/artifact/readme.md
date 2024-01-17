@@ -1,9 +1,9 @@
 
 <h2>Artifact<p>An artifact is a set of descriptors used to instantiate and execute an artifact production (alias generation process):</p>* Main source model 
-* Context models 
-* Generation module 
-* Transpilers 
-* Destination path 
+    * Context models 
+    * Generation module 
+    * Transpilers 
+    * Destination path 
 </h2>
 
 ### Main source model
@@ -22,10 +22,10 @@ A transpiler is a nodejs module that implements the wizzi-plugin.transpiler inte
 A destination path is the location where a generated artifact is persisted.
 
 ## Artifact types
-* Model artifact 
-* Model collection artifact 
-* Code write artifact 
-* Final artifact 
+    * Model artifact 
+    * Model collection artifact 
+    * Code write artifact 
+    * Final artifact 
 ### Model artifact
 A model artifact is an artifact which main source model is a wizzi model.
 

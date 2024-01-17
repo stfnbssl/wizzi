@@ -13,11 +13,11 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 
 
 ## Features
-* Loads an ittf document into an mTree instance ( [wizzi-mtree.mTree]()
-, executing documents composition and template evaluation.
+    * Loads an ittf document into an mTree instance ( [wizzi-mtree.mTree]()
+    , executing documents composition and template evaluation.
 ### Interface
 
-<p>This interface is used by the wizziFactory class and by`test and demo modules.`
+<p>This interface is used by the wizziFactory class and bytest and demo modules.
 </p>
 
 ```javascript
@@ -65,10 +65,10 @@ One machinery, many productions.
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
 
 ## Built With
-* [Nodejs](https://nodejs.org)
-
-* [Wizzi](https://github.com/stfnbssl/wizzi)
-
+    * [Nodejs](https://nodejs.org)
+    
+    * [Wizzi](https://github.com/stfnbssl/wizzi)
+    
 
 ## License
 

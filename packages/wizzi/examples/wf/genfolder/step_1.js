@@ -1,10 +1,14 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\genfolder\step_1.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:13 GMT
 */
 'use strict';
-//
+/**
+     Example: wf_genfolder_step_1
+    
+*/
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
@@ -29,16 +33,13 @@ pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
 var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
+var packiUtils = require('../../../lib/services/packiUtils');
 const packiFilePrefix = 'json:/';
 const packiFilePrefixExtract = 'json:/';
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
-            items: [
-                'wizzi-js', 
-                'wizzi-web', 
-                'wizzi-core'
-            ]
+            
          }, 
         globalContext: globalContext || {}, 
         verbose: true
@@ -155,7 +156,7 @@ function createMetasManager(globalContext, callback) {
         globalContext: globalContext || {}
      }, callback)
 }
-var light_genfolder_step_1 = function(step_callback) {
+var wf_genfolder_step_1 = function(step_callback) {
     heading1('EXAMPLE')
     var genFolderPath = path.join(__dirname, 'ittf', 'folder1');
     var genFolderDest = path.join(__dirname, 'ittf', 'folder1_out');
@@ -163,37 +164,62 @@ var light_genfolder_step_1 = function(step_callback) {
         'arthur', 
         'mary'
     ];
-    // Generate all the artifacts in a folder
-    wizziIndex.genFolder(genFolderPath, {
-        friends: friendsArray, 
-        fileCtx: {
-            name: 'stefi'
+    wizziIndex.createFactory({
+        repo: {
+            storeKind: 'filesystem'
+         }, 
+        plugins: {
+            pluginsBaseFolder: pluginsBaseFolderV08, 
+            items: [
+                "./wizzi.plugin.ittf/index.js", 
+                "./wizzi.plugin.html/index.js", 
+                "./wizzi.plugin.js/index.js"
+            ]
+         }, 
+        globalContext: {
+            
          }
-     }, {
-        destFolder: genFolderDest, 
-        copyInclude: ['*'], 
-        copyExclude: []
-     }, function(err, genFolderResult) {
+     }, function(err, wf) {
         if (err) {
             console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
             console.log("[31m%s[0m", 'err', err);
             throw new Error(err.message);
         }
-        printValue('genFolderResult', genFolderResult)
+        wf.generateFolderArtifacts(genFolderPath, {
+            modelRequestContext: {
+                metaCtx: {
+                    name: "Hello"
+                 }, 
+                friends: friendsArray
+             }, 
+            artifactRequestContext: {}
+         }, {
+            deep: true, 
+            destFolder: genFolderDest, 
+            copyInclude: ['*'], 
+            copyExclude: []
+         }, function(err, genFolderResult) {
+            if (err) {
+                console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+                console.log("[31m%s[0m", 'err', err);
+                throw new Error(err.message);
+            }
+            printValue('genFolderResult', genFolderResult)
+        })
     })
 };
-light_genfolder_step_1.__name = 'light_genfolder_step_1';
+wf_genfolder_step_1.__name = 'wf_genfolder_step_1';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - light_genfolder_step_1 - ' + text);
+    console.log('** level 0 - step 1 - wf_genfolder_step_1 - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- light_genfolder_step_1 - ' + text);
+    console.log('   ','-- wf_genfolder_step_1 - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -383,7 +409,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = light_genfolder_step_1;
+module.exports = wf_genfolder_step_1;
 if (typeof require != 'undefined' && require.main === module) {
-    light_genfolder_step_1();
+    wf_genfolder_step_1();
 }

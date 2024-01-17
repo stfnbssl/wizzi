@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -17,7 +18,24 @@ var JsWizziContext = null;
 var work = {};
 work.lineSep = "__LS__";
 work.textSep = "__TS__";
-//
+/**
+     This helper instance is declared in the global context
+     of the JsWizziContext and is in the global scope of the
+     JsWizziRunner when it runs the mTreeBrickBuildupScript.
+    
+     The mTreeBuildupScript may call the methods of
+     this instance for
+     . Setting the evalContext: global, mTreeBuildup or mTreeBrick.
+     . Adding nodes to the mTree that is been building.
+     . Executing interpolation of expressions.
+     . Calling api functions (declared in the wizzifile.js) on the runner server
+     . Retrieving wizzi models (loaded in wizzifile.js) from the runner server
+    
+     The evalContext(s) of mTreeBrick(s) are stored in the
+     the mTreeBrickDatas map of the wizzi.loader.loadHistory.
+     There are retrieved by the getMTreeBrickEvalContext method
+     every time the active mTreeBrick context changes.
+*/
 class JsWizziEvalHelper {
     constructor(jsWizziContext, primaryModel, productionContext) {
         if (verify.isObject(jsWizziContext) === false) {
@@ -50,7 +68,11 @@ class JsWizziEvalHelper {
             this.getModel = productionContext.runnerServer.getModel;
         }
     }
-    //
+    /**
+         mTree buildup method
+         supershort method name
+         Set the JsWizziContext state to MTreeBrickEvalContext
+    */
     s(brickKey) {
         // loog 'JsWizziEvalHelper called $.s(' + brickKey +')'
         var notUsed = this.jsWizziContext.set_MTreeBrickEvalContext(brickKey);
@@ -58,17 +80,29 @@ class JsWizziEvalHelper {
             return notUsed;
         }
     }
-    //
+    /**
+         mTree buildup method
+         supershort method name
+         Set the JsWizziContext state to NodeContext
+    */
     n() {
         // loog 'JsWizziEvalHelper called $.n()'
         this.jsWizziContext.set_NodeContext();
     }
-    //
+    /**
+         mTree buildup method
+         supershort method name
+         Set the JsWizziContext state to GlobalContext
+    */
     g(brickKey) {
         // loog 'JsWizziEvalHelper called $.g("brickKey")'
         this.jsWizziContext.set_GlobalContext(brickKey);
     }
-    //
+    /**
+         mTree buildup method
+         supershort method name
+         Append a child node to a parent node
+    */
     a(parent, node, line) {
         // loog 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
         assert(parent, "wizzi-mtree.JsWizziEvalHelper error. Parent undefined in add. At line " + line);
@@ -79,7 +113,9 @@ class JsWizziEvalHelper {
         node.children = [];
         parent.children.push(node);
     }
-    //
+    /**
+         Interpolate a templated node value
+    */
     ip(brickKey, templatedValue, type, line, hasMacro) {
         var ret;
         try {
@@ -160,7 +196,12 @@ class JsWizziEvalHelper {
             return local_error('IttfEvaluationError', 'model', 'A RunnerServer has not been started. You must create a wizzifile.js.');
         }
     }
-    //
+    /**
+         Helper method
+         called by jswizzi.jsWizziContext.set_MTreeBrickEvalContext
+         for retrieving the evaluation context of
+         an mTreeBrick by its brickKey.
+    */
     getMTreeBrickEvalContext(brickKey, line) {
         // mTreeBrick eval contexts are stored in the mTreeBrickDatas
         // map of the wizzi-mtree.loader.loadHistory
@@ -188,7 +229,10 @@ class JsWizziEvalHelper {
         }
         return mTreeBrick_EvalContext;
     }
-    //
+    /**
+         A refresh could be need for these reasons
+        
+    */
     _updateEvalContext(mTreeBrickData, mTreeBrick_EvalContext) {
         // If the mTreeBrick do not receives parameters
         // a refresh of the eval context is not required
@@ -230,7 +274,10 @@ class JsWizziEvalHelper {
                 return error('InterpolationError', '_updateEvalContext', 'Exception interpolating mixer args: ' + args + ', mTreeBrick uri: ' + mTreeBrickData.ittfDocumentUri + ', mixerMTreeBrick uri: ' + mixerUri + ', ex message: ' + exMessage + ', stack: ' + exStack, ex);
             } 
         }
-        //
+        /**
+             With the interpolated values of the arguments we may now calculate the
+             parameters received  by the mixed mTreeBrick, applying type conversions and default values
+        */
         var calculatedParamValues = mTreeBrickData.mTreeBrick.calcParamValues(args);
         if (calculatedParamValues && calculatedParamValues.__is_error) {
             return calculatedParamValues;

@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var util = require('util');
@@ -71,7 +72,11 @@ JsWizziSynthaxError.prototype = Object.create(Error.prototype);
 JsWizziSynthaxError.prototype.constructor = JsWizziSynthaxError;
 md.JsWizziSynthaxError = JsWizziSynthaxError;
 
-// For
+/**
+    For
+     vars or functions undeclared
+     invalid values
+*/
 function JsWizziTypeError(message, node) {
     this.name = 'JsWizziTypeError';
     this.message = message;

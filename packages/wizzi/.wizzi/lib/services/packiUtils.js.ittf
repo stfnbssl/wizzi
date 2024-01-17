@@ -46,6 +46,7 @@ module wizzi@${wzCtx.version}.packiUtils
             param jsonFs
             param filterFolder
             param callback
+            set filterFolder = filterFolder || ''
             const packiFiles
                 {
             _ jsonFs.toFiles
@@ -56,7 +57,7 @@ module wizzi@${wzCtx.version}.packiUtils
                         =>
                             param file
                             if verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')
-                                const k = filterFolder ? file.relPath.substring(filterFolder.length) : file.realpath
+                                const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length) 
                                 set packiFiles[k]
                                     {
                                         @ type 'CODE'

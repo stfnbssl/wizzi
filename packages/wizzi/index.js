@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:12 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -20,6 +21,7 @@ var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
+md.version = "0.8.9";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -28,9 +30,26 @@ md.acl = acl;
 md.productionOptions = require('./lib/production/options');
 md.Filesystem = Filesystem;
 md.JsonComponents = require('@wizzi/repo').JsonComponents;
+md.FactoryServiceContext = require('./lib/services/factoryServiceContext');
 md.errors = require('./lib/errors');
 
-//
+/**
+     params
+     { options
+     { repo
+     string storeKind
+     oneOf filesystem, mongodb, localstorage
+     { plugins
+     [ items
+     string pluginName
+     string
+     { globalContext
+     { dumps
+     string dumpsBaseFolder
+     { mTreeBuildupScript
+     boolean dump
+     string dumpsBaseFolder
+*/
 md.createFactory = function createFactory(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -50,7 +69,25 @@ md.createFactory = function createFactory(options, callback) {
 }
 ;
 
-//
+/**
+     params
+     string userid
+     string role
+     { options
+     { repo
+     string storeKind
+     oneOf filesystem, mongodb, localstorage
+     { plugins
+     [ items
+     string pluginName
+     string
+     { globalContext
+     { dumps
+     string dumpsBaseFolder
+     { mTreeBuildupScript
+     boolean dump
+     string dumpsBaseFolder
+*/
 md.createAclFactory = function createAclFactory(userid, role, options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -180,7 +217,15 @@ md.metasManager = function(options, callback) {
 }
 ;
 
-//
+/**
+     startRunnerServer is async.
+     Can be used at startup to load wizzi models, that is an async process,
+     implementing the onStart and onPrepare callbacks in the wizzifile.
+     During an mTree evaluation the calls to runnerServer
+     must be sync. Both $.api(name, query) and $.model(name, query)
+     are sync methods that operate on wizzi models or POJO
+     previously loaded and/or prepared.
+*/
 md.startRunnerServer = function(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -286,7 +331,50 @@ md.loadWizzifile = function(options, callback) {
     }
 }
 ;
-//
+/**
+     params
+     { request
+     string storeKind
+     default filesystem
+     { config
+     string wfBaseFolder
+     string storeUri
+     # when storeKind == 'mongodb'
+     string storeBaseFolder
+     # when storeKind == 'mongodb'
+     string pluginsBaseFolder
+     [ plugins
+     string name
+     { job
+     string name
+     # label for messages
+     string ittfDocumentUri
+     # 'wfjob' model primary ittf document
+     { productionOptions
+     integer indentSpaces
+     default 4
+     string basedir
+     TODO explain where used
+     integer verbose
+     default 2
+     { dumps
+     # dumps to files of transient objects for debug purposes
+     string dumpsBaseFolder
+     { mTreeBuildupJsWizziScript
+     boolean dump
+     string dumpsBaseFolder
+     { mixedMTree
+     boolean dump
+     string dumpsBaseFolder
+     { evaluatedMTree
+     boolean dump
+     string dumpsBaseFolder
+     { globalContext
+     # Every wizzi factory loading, transformation and generation
+     # executed by this job
+     # will have the properties of this object injected in its context
+     # at the global level.
+*/
 md.executeWizziJob = function(request, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -449,7 +537,17 @@ md.printWizziJobError = function(jobName, err) {
     process.exit(999);
 }
 ;
-//
+/**
+     PARAMS
+     { request
+     string storeKind
+     default filesystem
+     { configOptions
+     { wfschema
+     string name
+     string ittfDocumentUri
+     string outputPackageFolder
+*/
 md.generateWizziModelTypes = function(request, callback) {
     
     if (verify.isFunction(callback) == false) {
@@ -609,7 +707,11 @@ md.createJsonFactoryLight = function(options, callback) {
      }, callback)
 }
 ;
-//
+/**
+     { options
+     boolean raw
+     { globalContext
+*/
 //
 // params
 //
@@ -677,7 +779,11 @@ md.loadMTree = function(ittfDocumentPath, context, options, callback) {
 }
 ;
 md.mtree = md.loadMTree;
-//
+/**
+     { options
+     boolean raw
+     { globalContext
+*/
 //
 // params
 //
@@ -762,7 +868,10 @@ md.loadMTreeFromText = function(ittfContent, context, options, callback) {
 }
 ;
 md.mtreeFromText = md.loadMTreeFromText;
-//
+/**
+     { options
+     { globalContext
+*/
 //
 // params
 //
@@ -825,7 +934,10 @@ md.loadMTreeDebug = function(ittfDocumentPath, context, options, callback) {
 }
 ;
 md.mtreeDebug = md.loadMTreeDebug;
-//
+/**
+     { options
+     { globalContext
+*/
 //
 // params
 //
@@ -905,7 +1017,30 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
 }
 ;
 md.mtreeDebugFromText = md.loadMTreeDebugFromText;
-//
+/**
+     params
+     string ittfDocumentPath
+     or
+     { modelDescription
+     string src
+     string cwd
+     optional
+     string schema
+     optional
+     string format
+     optional
+     string exportName
+     optional - has meaning only for context models.
+     [ contexts
+     optional - has the same format of modelConfig
+     [ transformers
+     optional
+     { formatOptions
+     optional
+     boolean ittfSources
+     # if true returns not the model but its ittf source documents.
+     { globalContext
+*/
 //
 // params
 //
@@ -1049,7 +1184,10 @@ md.transformModel = function(ittfDocumentPath, context, options, callback) {
 }
 ;
 md.trans = md.transformModel;
-//
+/**
+     params
+     string ittfDocumentPath
+*/
 //
 // params
 //
@@ -1132,7 +1270,11 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
 }
 ;
 md.modelFromText = md.loadModelFromText;
-//
+/**
+     { options
+     { artifactContext
+     { globalContext
+*/
 //
 // params
 //
@@ -1206,7 +1348,11 @@ md.generateArtifact = function(ittfDocumentPath, context, options, callback) {
 ;
 md.gen = md.generateArtifact;
 md.artifact = md.generateArtifact;
-//
+/**
+     { options
+     { artifactContext
+     { globalContext
+*/
 //
 // params
 //
@@ -1352,7 +1498,14 @@ md.generateWizziSchema = function(ittfDocumentPath, context, options, callback) 
 }
 ;
 md.schema = md.generateWizziSchema;
-//
+/**
+     { options
+     string name
+     integer indentSpaces
+     integer verbose
+     { jobContext
+     { globalContext
+*/
 //
 // params
 //
@@ -1425,7 +1578,11 @@ md.executeWizziJob2 = function(ittfDocumentPath, context, options, callback) {
 }
 ;
 md.job = md.executeWizziJob2;
-//
+/**
+     { options
+     string destFolder
+     { globalContext
+*/
 //
 // params
 //

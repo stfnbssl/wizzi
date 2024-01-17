@@ -13,8 +13,10 @@
 	var Filesystem = require('./lib/io/filesystem')
 	var wizziFactory = require('./lib/services/wizziFactory')
     var metasManager = require('./lib/services/metasManager')
+	
 	+
 	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
 	set md.file = require('@wizzi/utils').file
 	set md.verify = verify
 	set md.config = require('@wizzi/utils').config
@@ -23,6 +25,7 @@
 	set md.productionOptions = require('./lib/production/options')
 	set md.Filesystem = Filesystem
 	set md.JsonComponents = require('@wizzi/repo').JsonComponents
+	set md.FactoryServiceContext = require('./lib/services/factoryServiceContext')
     set md.errors = require('./lib/errors')
 	+
 	#

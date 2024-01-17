@@ -3,16 +3,13 @@ module.exports = {
     wfjobName: "wizzi-mtree-job", 
     wfjobPath: path.join(__dirname, '.wizzi', 'generate.wfjob.ittf'), 
     plugins: [
-        './wizzi-core/index.js', 
-        './wizzi-js/index.js', 
-        './wizzi-web/index.js', 
+        "./wizzi.plugin.js/index.js", 
+        "./wizzi.plugin.json/index.js", 
+        "./wizzi.plugin.md/index.js", 
+        "./wizzi.plugin.text/index.js", 
+        "./wizzi.plugin.wzjob/index.js", 
     ], 
-    pluginsBaseFolder: path.join(__dirname, '..', '..', '..', 'wizzi.v07', 'packages'),
-    /*plugins: [
-        'wizzi-core', 
-        'wizzi-js', 
-        'wizzi-web'
-    ],*/ 
+    pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.lastsafe.plugins/packages", 
     globalContext: {
         isPackageDeploy: true,
         isDevelopment: true

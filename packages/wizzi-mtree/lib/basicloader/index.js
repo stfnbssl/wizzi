@@ -1,11 +1,20 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\basicloader\index.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
-//
+/**
+     This basic loader is for testing plugins.
+     The loadMTree function loads an mTree from a
+     single IttfDocument without include, mix, append and evaluate.
+     Does not require a loadContext.
+     The IttfDocument must be stored in the
+     filesystem (mongodb and localstorage store kinds
+     are not supported).
+*/
 var util = require('util');
 var path = require('path');
 var file = require('./file');

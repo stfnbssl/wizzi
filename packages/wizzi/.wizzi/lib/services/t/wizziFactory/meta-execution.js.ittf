@@ -2,6 +2,17 @@ $group
 
 	#
 		# Execute a meta production
+        # . retrieve the MetasManager instantiated by this WizziFactory
+        # . call the getMetaProductionStarter method of the MetasManager to scan the metaPlugins and retrieve 
+        #   a packiFiles object with every meta ittf document of the used MetaProductions
+        # . build and add to the received packiFiles object an index meta ittf document 
+        #   containing the $include of the 'folderTemplates/<ProductionName>/index.ittf.ittf' document 
+        #   of every used MetaProduction.
+        # . create a new json WizziFactory based on the received packiFiles object
+        # . call the WizziFactory.metaGenerate method on the new json WizziFactory. 
+        # . returns a packiFiles object with the full content of the json WizziFactory 
+        #   file system: meta ittf documents, tempProductionFolder and wizziProductionFolder.
+        # . the wizziProductionFolder contains the resulting WizziProduction that will be persisted by the calling agent.
 		# return
 		#   | packifiles
 		#   | wzError
@@ -28,15 +39,25 @@ $group
                         @ metaCtx options.metaCtx
                     a_cb( metaPackiFiles )
                         $$ loog myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles)
+                        if options.metaCtx.__wz_fsc
+                            _ options.metaCtx.__wz_fsc.addDebugObject
+                                @ 'packi'
+                                @ 'wf_metaProduction_input'
+                                @ metaPackiFiles
                         set metaPackiFiles[folderTemplatesIndexPath]
                             {
                                 @ type "CODE"
                                 @ contents
-                                    _ this.getFolderTemplatesIndex
+                                    _ this.prepareFilesAndGetFolderTemplatesIndex
                                         @ metaPackiFiles
                                         {
                                             @ pkgPath null
                                             @ metaVer null
+                        if options.metaCtx.__wz_fsc
+                            _ options.metaCtx.__wz_fsc.addDebugObject
+                                @ 'packi'
+                                @ 'wf_metaProduction_input_prepared'
+                                @ metaPackiFiles
                         $$ loog myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts']
                         _ this.createJsonFactoryAndJsonFs
                             @ metaPackiFiles
@@ -54,17 +75,24 @@ $group
                                     {
                                         @ tempFolder packiFilePrefix + tempFolder
                                         @ destFolder packiFilePrefix + destFolder
-                                    a_cb(jsonFs)
+                                    a_cb(generatedFilePaths)
                                         _ packiUtils.jsonFsToPackiFiles
                                             @ wf_and_jsonFs.jsonFs
                                             @ destFolder
                                             a_cb(wizziPackiFiles)
+                                                if options.metaCtx.__wz_fsc
+                                                    _ options.metaCtx.__wz_fsc.addDebugObject
+                                                        @ 'packi'
+                                                        @ 'wf_metaProduction_output'
+                                                        @ wizziPackiFiles
                                                 r_cb( wizziPackiFiles )
 
-
 	#
-		# Create the folderTemplates index file
-        # for a given set of meta packiFiles
+		# Prepare the file structure to allow includes 
+        # of ittfDocumentTemplates files by folderTemplates files
+        # and create the folderTemplates index file
+        # for a given set of meta packiFiles.
+        # ittfDocumentTemplates folders become subfolders of the top tFolder of the metaPackiFiles.
 		# return
 		# | string fileContent
 		# params
@@ -74,7 +102,7 @@ $group
         #       optional
         #     string metaVer
 		#       optional
-    m getFolderTemplatesIndex
+    m prepareFilesAndGetFolderTemplatesIndex
         param metaPackiFiles
         param options
         const pkgPath = options.pkgPath || ''

@@ -33,8 +33,6 @@
 					{
 					@ this.globalContext
 					@ options.globalContext
-
-		
 	
 		# used for creating on the fly a json factory
 		set this.wfPluginsOptions = options.wfPlugins
@@ -43,12 +41,6 @@
 			set this.wfPluginsOptions = {}
 
         set this.metaPluginsOptions = options.metaPlugins
-
-        $* VIA
-        log mdDisplayName + '.initialize.globalContext', this.globalContext
-        log mdDisplayName + '.initialize.wfPluginsOptions', this.wfPluginsOptions
-        log mdDisplayName + '.initialize.metaPluginsOptions', this.metaPluginsOptions
-        *$
 
 		if options.verbose
             set this.metaPluginsOptions.verbose = true
@@ -79,11 +71,6 @@
 		var itemsOptions = options.items
 		var metaPluginsBaseFolder = options.metaPluginsBaseFolder 
             \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
-        $* VIA
-        loog mdDisplayName + '.metaPluginsBaseFolder before', options.metaPluginsBaseFolder
-        loog mdDisplayName + '.__dirname', __dirname
-        loog mdDisplayName + '.metaPluginsBaseFolder', metaPluginsBaseFolder
-        *$
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext

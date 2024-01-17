@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
@@ -10,7 +11,27 @@ var dateUtil = require('../jswizzi/functions/dateUtil');
 var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
 var mTreeBuildupScripter = require('./mTreeBuildupScripter');
 var requireFromString = null;
-//
+/**
+     The final step of an mTree loading.
+     Executes the expression evaluations and the
+     template commands of the composedMTree and builds the final mTree:
+     . creates the mTreeBuildupScript from the composedMTree,
+     . creates the jsWizziContext and loads the loadContext.mTreeBuildupContext
+     in the global context,
+     . runs the script with the jsWizziRunner,
+     . returns the builded mTree.
+    
+     params
+     { composedMTree
+     { loadContext
+     { mTreeBuildupContext
+     { productionContext
+     { runnerServer
+     { options
+     boolean isCompile
+     callback
+    
+*/
 module.exports = function(composedMTree, loadContext, callback) {
     loadContext.options = loadContext.options || {};
     var isCompile = loadContext.options.isCompile;

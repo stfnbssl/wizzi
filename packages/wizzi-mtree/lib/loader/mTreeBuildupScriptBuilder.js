@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildupScriptBuilder.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var JsWizziContext = require('../jswizzi/jsWizziContext');
@@ -9,7 +10,10 @@ var dateUtil = require('../jswizzi/functions/dateUtil');
 var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
 var mTreeBuildupScripter = require('./mTreeBuildupScripter');
 var requireFromString = null;
-//
+/**
+     Returns for debug purposes:
+     . the mTreeBuildupScript
+*/
 module.exports = function(composedMTree, loadContext, callback) {
     var productionContext = loadContext.productionContext;
     loadContext.options = loadContext.options || {};

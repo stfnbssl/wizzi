@@ -19,13 +19,13 @@
             =>
                 param i
                 if i >= this.metaPlugins.length
-                    const message = 'Cannot find model loader: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ')
+                    const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ')
                     _ log.error('getMetaProduction. ' + message)
                     return
                         _ callback
                             @ message
                 var metaPlugin = this.metaPlugins[i]
-                log mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+                # loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
                 _ metaPlugin.getMetaProduction
                     @ productionName
                     a_cb( metaProduction )

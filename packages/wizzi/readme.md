@@ -15,19 +15,19 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 ## Features
 Exposes the main wizzi factory service components:
 
-* WizziFactory class 
-* PluginsManager class 
-* RunnerServer class 
+    * WizziFactory class 
+    * PluginsManager class 
+    * RunnerServer class 
 ## The WizziFactory class
 
-<p>Is the main access point to wizzi factory services. Can be`used to`
+<p>Is the main access point to wizzi factory services. Can beused to
 </p>
 
-* Execute [wizzi model types generations](#)
-.
-* Execute artifact generations 
-* Execute [wizzi jobs](#)
-.
+    * Execute [wizzi model types generations](#)
+    .
+    * Execute artifact generations 
+    * Execute [wizzi jobs](#)
+    .
 ### Instance creation
 ```javascript
 wizzi.createFactory(
@@ -124,10 +124,10 @@ One machinery, many productions.
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
 
 ## Built With
-* [Nodejs](https://nodejs.org)
-
-* [Wizzi](https://github.com/stfnbssl/wizzi)
-
+    * [Nodejs](https://nodejs.org)
+    
+    * [Wizzi](https://github.com/stfnbssl/wizzi)
+    
 
 ## License
 

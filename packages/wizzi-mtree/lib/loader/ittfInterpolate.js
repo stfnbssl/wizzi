@@ -1,12 +1,23 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
-//
+/**
+     rules:
+     Macro expressions are enclosed by ${ and } delimiters.
+     example: ${name}.
+     A macro expression can be escaped and used as a literal,
+     example: \$\{name}.
+     A macro expression may contain paired graphs { },
+     example: ${ for { var i=0; i<10; i++} ; return i; }.
+     An empty macro ${} is treated as a literal, it is not replaced.
+     An unclosed delimiter ${ is treated as a literal, it is not an error.
+*/
 var state_text = 0;
 var state_tag = 1;
 var state_key = 2;
@@ -21,6 +32,7 @@ function interpolate(template, jsWizziContext, options) {
     var l = template.length,
         result = [],
         ch,
+        chNext,
         key,
         inside_tags = 0,
         state = state_text,
@@ -31,6 +43,7 @@ function interpolate(template, jsWizziContext, options) {
     }
     for (var i=0; i<l; i++) {
         ch = template[i];
+        chNext = template[i+1];
         
         // loog 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
         if (ch == '\\') {
@@ -42,7 +55,12 @@ function interpolate(template, jsWizziContext, options) {
         }
         if (ch == '$') {
             if (state == state_text) {
-                state = state_tag;
+                if (chNext == '{') {
+                    state = state_tag;
+                }
+                else {
+                    result.push(ch);
+                }
             }
             else if (state == state_key) {
                 key.push(ch);

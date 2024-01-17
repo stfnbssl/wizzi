@@ -1,0 +1,97 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'genfolder_step_2',
+            title: 'Generate all the ittf documents in a folder using the json factory',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+
+        $append json_wf_plugins
+            @ pluginsBaseFolder pluginsBaseFolderV08
+            [ items
+                @ "./wizzi.plugin.ittf/index.js" 
+                @ "./wizzi.plugin.html/index.js" 
+                @ "./wizzi.plugin.js/index.js" 
+
+        var genFolderPathFs
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1'
+
+        var destFolderPathFs
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1_generated'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ createPackifilesFromFs
+            @ genFolderPathFs
+            a_cb( folder1PackiFiles )
+                _ printValue
+                    @ 'folder1PackiFiles'
+                    _ stringify
+                        @ folder1PackiFiles
+                        @ null
+                        @ 2
+                _ createJsonWizziFactoryAndJsonFs
+                    @ folder1PackiFiles
+                    f_cb_test(wf_and_jsonFs)
+                        var wf = wf_and_jsonFs.wf
+                        var jsonFs = wf_and_jsonFs.jsonFs
+                        _ printValue
+                            @ 'folder1PackiFiles_jsonFs'
+                            _ stringify
+                                @ jsonFs
+                                @ null
+                                @ 2
+                        var genFolderPath = 'root'
+                        var genFolderDest = 'result'
+                        _ wf.generateFolderArtifacts
+                            @ packiFilePrefix + genFolderPath
+                            { 
+                                @ modelRequestContext 
+                                    {
+                                        @ metaCtx
+                                            {
+                                                @ name "Hello"
+                                        @ friends friendsArray
+                                @ artifactRequestContext {}
+                            { 
+                                @ deep true
+                                @ destFolder packiFilePrefix + genFolderDest
+                                @ copyInclude ['*']
+                                @ copyExclude []
+                            f_cb_test(generatedFilePaths)
+                                _ printValue
+                                    @ 'generatedFilePaths'
+                                    @ generatedFilePaths
+                                _ printValue
+                                    @ 'folder1PackiFiles_after_gen_jsonFs'
+                                    _ stringify
+                                        @ jsonFs
+                                        @ null
+                                        @ 2
+                                _ packiUtils.jsonFsToPackiFiles
+                                    @ jsonFs
+                                    @ genFolderDest
+                                    a_cb(generatedPackiFiles)
+                                        _ printValue
+                                            @ 'generatedPackiFiles'
+                                            @ generatedPackiFiles
+                                        _ writePackifiles
+                                            @ destFolderPathFs
+                                            @ generatedPackiFiles
+
+

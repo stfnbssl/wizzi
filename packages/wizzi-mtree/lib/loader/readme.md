@@ -1,11 +1,11 @@
 ## Ittf document loading
 `A textual Ittf document is loaded into an mTree object by these modules that are run in sequence.`
-* liner 
-* nodifier 
-* includer 
-* mixer 
-* appender 
-* evaluator 
+    * liner 
+    * nodifier 
+    * includer 
+    * mixer 
+    * appender 
+    * evaluator 
 ## Glossary
 
 <table>
@@ -53,8 +53,8 @@ JsWizzi is a subset of the ECMA-262 javascript standard used by the wizzi factor
 <td>jsWizziContext</td>
 <td>
 The evaluation step of an mTree loading uses three types of value contexts.* One global context. 
-* One single node structure context, where the mTree is built. 
-* One value context for each mTree brick. 
+    * One single node structure context, where the mTree is built. 
+    * One value context for each mTree brick. 
 </tr>
 <tr>
 <td>jsWizziRunner</td>
@@ -87,8 +87,8 @@ A nodified ittf document.`mTree bricks are the items that compose an mTree.`
 <td>
 An mTree brick included in an including mTree brick`using the command <bold>$include [path]</bold>.`
 
-<p>Both the tree structure and the value context are included.`Context values declared in the included nodes are created in`
-`the scope of the includer.`
+<p>Both the tree structure and the value context are included.Context values declared in the included nodes are created in
+the scope of the includer.
 </p>
 
 </tr>
@@ -97,8 +97,8 @@ An mTree brick included in an including mTree brick`using the command <bold>$inc
 <td>
 An mTree brick mixed in a mixing mTree brick`using the command <bold>[path]([params])</bold>.`
 
-<p>The tree structure is mixed but the value context remain distinct.`Context values declared in the mixed nodes are created in`
-`the scope of the mixed mTree brick and do not interfere with the mixer.`
+<p>The tree structure is mixed but the value context remain distinct.Context values declared in the mixed nodes are created in
+the scope of the mixed mTree brick and do not interfere with the mixer.
 </p>
 
 </tr>
@@ -106,11 +106,11 @@ An mTree brick mixed in a mixing mTree brick`using the command <bold>[path]([par
 <td>mTree loading</td>
 <td>
 The creation of an mTree from an ittf document.* line parsing (of a source ittf document) 
-* nodification (produces one mTree brick from every source ittf document) 
-* mix-composition (recursive on mixed and included mTree bricks) 
-* include-composition (recursive on mixed and included mTree bricks) 
-* append-resolution (on the composed mTree piece) 
-* evaluation (on the mixed and appended mTree piece) 
+    * nodification (produces one mTree brick from every source ittf document) 
+    * mix-composition (recursive on mixed and included mTree bricks) 
+    * include-composition (recursive on mixed and included mTree bricks) 
+    * append-resolution (on the composed mTree piece) 
+    * evaluation (on the mixed and appended mTree piece) 
 </tr>
 <tr>
 <td>- line parsing</td>

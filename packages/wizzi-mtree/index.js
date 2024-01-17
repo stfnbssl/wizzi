@@ -1,14 +1,26 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\root\index.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var loader = require('./lib/loader');
 
 var md = module.exports = {};
-//
+/**
+    
+     params
+     function createStore
+     api-ref wizzi-repo.createStore
+     { options
+     boolean useCache
+     boolean frontMatter
+     boolean raw
+     boolean mTreeBuildupScript
+    
+*/
 md.createLoadMTree = function createLoadMTree(createStore, options) {
     if (verify.isFunction(createStore) === false) {
         return error(

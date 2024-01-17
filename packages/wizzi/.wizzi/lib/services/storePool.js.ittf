@@ -10,7 +10,17 @@
 			{ wizziFactory
 			set this.wizziFactory = wizziFactory
 			set this.stores = []
-		
+		#  { repoOptions
+		#    string storeKind
+		#      oneOf 'filesystem', 'mongodb', 'browserfs', 'json'
+		#    string storeUri
+		#      # when storeKind == mongodb
+		#    string storeBaseFolder
+		#      # when storeKind == mongodb
+		#    { storeJsonFs
+		#      # when storeKind == json
+		#    { storeJsonFsData
+		#      # when storeKind == json
 		m initialize
 			{ repoOptions
 			callback
@@ -97,6 +107,12 @@
 		m add
 			{ store
 			_ this.stores.push(store)
+		
+		m getKind
+			return this.storeKind
+
+		m getJsonFs
+			return this.repoOptions.storeJsonFs
 		
 		m get
 			callback

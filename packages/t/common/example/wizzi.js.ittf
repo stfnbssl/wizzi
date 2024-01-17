@@ -26,6 +26,7 @@ $group
                 @ '..'
         var pluginsManager = require('../lib/services/pluginsManager')
         var metasManager = require('../lib/services/metasManager')
+        var packiUtils = require('../lib/services/packiUtils')
 
     $elif opt.folderLevel == 2
         var wizziIndex = require('../../index')
@@ -38,6 +39,7 @@ $group
                 @ '..'
         var pluginsManager = require('../../lib/services/pluginsManager')
         var metasManager = require('../../lib/services/metasManager')
+        var packiUtils = require('../../lib/services/packiUtils')
 
     $elif opt.folderLevel == 3
         var wizziIndex = require('../../../index')
@@ -50,6 +52,7 @@ $group
                 @ '..'
         var pluginsManager = require('../../../lib/services/pluginsManager')
         var metasManager = require('../../../lib/services/metasManager')
+        var packiUtils = require('../../../lib/services/packiUtils')
 
     const packiFilePrefix = 'json:/'
     const packiFilePrefixExtract = 'json:/'

@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
+    utc time: Thu, 11 Jan 2024 15:48:37 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -18,7 +19,20 @@ var appender = require('./appender');
 var evaluator = require('./evaluator');
 var mTreeBuildupScriptBuilder = require('./mTreeBuildupScriptBuilder');
 var md = module.exports = {};
-//
+/**
+     The Big JOB of an mTree loading manages:
+     normalization of loadContext objects
+     instantiation of the modelProvider
+     liner
+     nodifier
+     includer
+     mixer
+     appender
+     evaluator
+     params
+     Are checked in wizzi-mtree/index.js. See there for doc.
+     There should be no direct access to this method except for testing.
+*/
 md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback) {
     var originalloadContext = loadContext;
     loadContext = normalizeRequestContext(loadContext);
@@ -84,7 +98,9 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
     })
 }
 ;
-//
+/**
+     Load the raw primaryIttfDocumentUri only and extract the front-matter values.
+*/
 md.loadMTreeFrontMatter = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -130,7 +146,10 @@ md.loadMTreeFrontMatter = function loadMTreeRaw(primaryIttfDocumentUri, loadCont
     })
 }
 ;
-//
+/**
+     Load the raw primaryIttfDocumentUri only.
+     This is mainly for debug or documentation purposes.
+*/
 md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -184,7 +203,10 @@ md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, cal
     })
 }
 ;
-//
+/**
+     Load mTree debug info.
+     This is mainly for debug or documentation purposes.
+*/
 md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadContext, callback) {
     var originalloadContext = loadContext;
     loadContext = normalizeRequestContext(loadContext);
@@ -238,10 +260,20 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
     })
 }
 ;
-//
+/**
+     normalized means:
+     { loadContext
+     { productionContext
+     { mTreeBuildupContext
+     { options
+    
+*/
 function normalizeRequestContext(loadContext) {
     // loog 'wizzi-mtree.loader.index.normalizeRequestContext.loadContext', loadContext
-    // for var k in loadContext
+    /**
+        for var k in loadContext
+         loog 'normalizeRequestContext.k', k
+    */
     loadContext.productionContext = loadContext.__productionManager.productionContext;
     if (verify.isObject(loadContext.mTreeBuildupContext) == false) {
         loadContext.mTreeBuildupContext = {};

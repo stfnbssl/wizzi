@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
+    utc time: Tue, 16 Jan 2024 12:38:11 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -38,7 +39,20 @@ class MetasManager {
         this.providedProductions = [];
         this.globalContext = {};
     }
-    //
+    /**
+         params
+         { options
+         { wfPlugins
+         [ items
+         string pluginName
+         string pluginsBaseFolder
+         { metaPlugins
+         [ items
+         string pluginName
+         string metaPluginsBaseFolder
+         { globalContext
+         { test
+    */
     initialize(options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -172,6 +186,7 @@ class MetasManager {
                     } 
                 }
                 (function(next) {
+                
                     if (err) {
                         var mp = verify.endsWith(modulePath, '.js') ? modulePath : modulePath + '.js';
                         resolvePackage(pluginsBaseFolder, mp, next);
@@ -265,7 +280,9 @@ class MetasManager {
             }
         }
     }
-    //
+    /**
+         Register a metaPlugin to this plugins manager
+    */
     registerMetaPlugin(metaPluginModule, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -382,7 +399,10 @@ class MetasManager {
         }
         return ret;
     }
-    //
+    /**
+         Retrieve a meta production searching the metaPlugins
+         registered to this metasManager
+    */
     getMetaProduction(productionName, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -402,12 +422,12 @@ class MetasManager {
         const search = (i) => {
         
             if (i >= this.metaPlugins.length) {
-                const message = 'Cannot find model loader: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ');
+                const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ');
                 log.error('getMetaProduction. ' + message);
                 return callback(message);
             }
             var metaPlugin = this.metaPlugins[i];
-            console.log(mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin), __filename);
+            // loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
             metaPlugin.getMetaProduction(productionName, (err, metaProduction) => {
             
                 if (err) {
@@ -423,7 +443,23 @@ class MetasManager {
         ;
         search(0);
     }
-    //
+    /**
+         Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+         and build a packiFiles object with every meta ittf document of the used MetaProductions.
+         Uses the metaPlugin method getMetaProductionStarter to retrieve the meta ittf documents.
+         The retrieved packiFiles filepaths are built this way:
+         - folderTemplates/<ProductionName><metaFilePath>
+         - ittfDocumentTemplates/<ProductionName><metaFilePath>
+         - plainDocuments/<ProductionName><metaFilePath>
+         For each metaProduction used the returned packiFiles object must contain a meta ittf document
+         with filePath 'folderTemplates/<ProductionName>/index.ittf.ittf'
+         return
+         | packifiles
+         | wzError
+         params
+         { options
+         { metaCtx
+    */
     getMetaProductionStarter(options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(

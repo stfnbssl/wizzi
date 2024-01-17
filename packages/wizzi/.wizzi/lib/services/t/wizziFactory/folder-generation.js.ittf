@@ -1,5 +1,21 @@
 $group
 
+    #
+        # Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
+        # params
+        #   string ittfFolderUri
+        #     # the uri of the ITTF Documents folder
+        #    { requestContext
+        #      { modelRequestContext
+        #        # Context data for the wizzi model loading
+        #      { artifactRequestContext
+        #        # Context data for the artifact generation
+        #   { options
+        #     boolean copyNonIttf
+        #   function callback
+        # returns
+        #   [
+        #     string generatedFilePath
 	m generateFolderArtifacts
 		string ittfFolderUri
 		{ requestContext
@@ -18,7 +34,8 @@ $group
                 {
                     @ dot '.'
 
-		$$ loog'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,modelRequestContext.fileCtx', ittfFolderUri, fileCtx
+		log 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,fileCtx', ittfFolderUri, fileCtx
+        log 'wizzi.wizzifactory.generateFolderArtifacts.object.keys(modelRequestContext)', Object.keys(modelRequestContext)
         try
             _ repo.folderFilesInfoByPath
                 @ ittfFolderUri
@@ -31,8 +48,14 @@ $group
                         =>
                             param item
                             param callback
-                            if item.isIttfDocument
-                                # loog 'generating', item.fullPath
+                            var okGenerate = item.isIttfDocument && (options.generateFragments || (!!item.isFragment == false))
+                            if okGenerate
+                                # loog 'wizzi.wizzifactory.generateFolderArtifacts.generating.item.fullPath', item.fullPath
+                                if item.fullPath == "json:/___template/__dot__wizzi/ittf/wizziMeta/folderTemplates/index.ittf.ittf.ittf"
+                                    if modelRequestContext.metaCtx && modelRequestContext.metaCtx.__wz_fsc 
+                                        _ modelRequestContext.metaCtx.__wz_fsc.addDebugObject
+                                            @ 'file'
+                                            @ ''
                                 var artifactName = getDefaultArtifact(item.schema)
                                 _ this.loadModelAndGenerateArtifact
                                     @ item.fullPath
@@ -89,16 +112,3 @@ $group
                     @ message 'See inner error'
                     { parameter
                         @ ittfFolderUri ittfFolderUri
-        #
-            # Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
-            # params
-            #   string ittfFolderUri
-            #     # the uri of the ITTF Documents folder
-            #    { requestContext
-            #      { modelRequestContext
-            #        # Context data for the wizzi model loading
-            #      { artifactRequestContext
-            #        # Context data for the artifact generation
-            #   { options
-            #     boolean copyNonIttf
-            #   function callback
