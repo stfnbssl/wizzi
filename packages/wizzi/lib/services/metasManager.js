@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Tue, 16 Jan 2024 12:38:11 GMT
+    utc time: Thu, 15 Feb 2024 18:31:18 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -400,41 +400,43 @@ class MetasManager {
         return ret;
     }
     /**
-         Retrieve a meta production searching the metaPlugins
-         registered to this metasManager
+         Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+         and build a packiFiles object with every meta parameters collection of the used MetaProduction.
+         Uses the metaPlugin method getMetaContextDefsStarter to retrieve the meta parameters.
+         The retrieved packiFiles filepaths are built this way:
+         - metaCtxSchema/parameters/<ProductionName>/...
+         - wzCtxSchema/parameters/<ProductionName>/...
+         Each meta production must have an index.json.ittf file.
+         return
+         | packifiles
+         | wzError
+         params
+         { options
+         { metaCtx
+         optional
+         use<Meta-production-name>
+         to filter metaproductions
     */
-    getMetaProduction(productionName, callback) {
+    getMetaParametersStarter(options, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
-                error('InvalidArgument', 'getMetaProduction', 'The callback parameter must be a function. Received: ' + callback)
+                error('InvalidArgument', 'getMetaParametersStarter', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        if (verify.isNotEmpty(productionName) === false) {
-            return callback(error(
-                'InvalidArgument', 'getMetaProduction', { parameter: 'productionName', message: 'The productionName parameter must be a string. Received: ' + productionName }
-            ));
-        }
-        console.log(mdDisplayName + '.getMetaProduction', productionName, __filename);
-        var found = null,
-            foundInPlugin = null,
-            pluginVersion = null,
-            result = null;
+        var result = {};
         const search = (i) => {
         
             if (i >= this.metaPlugins.length) {
-                const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ');
-                log.error('getMetaProduction. ' + message);
-                return callback(message);
+                return callback(null, result);
             }
             var metaPlugin = this.metaPlugins[i];
-            // loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
-            metaPlugin.getMetaProduction(productionName, (err, metaProduction) => {
+            metaPlugin.getMetaContextDefsStarter(options, (err, metaContextDefs) => {
             
                 if (err) {
                     return callback(err);
                 }
-                if (metaProduction) {
-                    return callback(null, metaProduction);
+                for (var k in metaContextDefs) {
+                    result[k] = metaContextDefs[k];
                 }
                 return search(++i);
             }
@@ -490,6 +492,89 @@ class MetasManager {
         ;
         search(0);
     }
+    /**
+         Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+         and retrieve their pluginCategories and pluginMetaProductions objects
+         params
+         { options
+         { metaCtx
+         return
+         {
+         [ metaProductions
+         string name
+         [ categories
+         [ categories
+         string name
+         [ productions
+    */
+    getCategoryAndMetaProductionStarter(options, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getCategoryAndMetaProductionStarter', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        var result = [];
+        const search = (i) => {
+        
+            if (i >= this.metaPlugins.length) {
+                return callback(null, result);
+            }
+            var metaPlugin = this.metaPlugins[i];
+            result.push({
+                plugin: metaPlugin.name, 
+                version: metaPlugin.version, 
+                metaProductions: metaPlugin.provides.pluginMetaProductions, 
+                categories: metaPlugin.provides.pluginCategories
+             })
+            return search(++i);
+        }
+        ;
+        search(0);
+    }
+    /**
+         Retrieve a meta production searching the metaPlugins
+         registered to this metasManager
+    */
+    getMetaProduction(productionName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getMetaProduction', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(productionName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getMetaProduction', { parameter: 'productionName', message: 'The productionName parameter must be a string. Received: ' + productionName }
+            ));
+        }
+        console.log(mdDisplayName + '.getMetaProduction', productionName, __filename);
+        var found = null,
+            foundInPlugin = null,
+            pluginVersion = null,
+            result = null;
+        const search = (i) => {
+        
+            if (i >= this.metaPlugins.length) {
+                const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ');
+                log.error('getMetaProduction. ' + message);
+                return callback(message);
+            }
+            var metaPlugin = this.metaPlugins[i];
+            // loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+            metaPlugin.getMetaProduction(productionName, (err, metaProduction) => {
+            
+                if (err) {
+                    return callback(err);
+                }
+                if (metaProduction) {
+                    return callback(null, metaProduction);
+                }
+                return search(++i);
+            }
+            )
+        }
+        ;
+        search(0);
+    }
     getProvidedMetas(callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
@@ -498,6 +583,9 @@ class MetasManager {
         };
         console.log(mdDisplayName + '.getProvidedMetas', __filename);
         var provides = {
+            metaCategories: [
+                
+            ], 
             metaProductions: [
                 
             ], 
@@ -512,12 +600,38 @@ class MetasManager {
                 return callback(null, provides);
             }
             var metaPlugin = this.metaPlugins[ndx];
-            console.log(mdDisplayName + '.metaPlugin.provides', metaPlugin.provides, __filename);
-            var i, i_items=metaPlugin.provides.metaProductions, i_len=metaPlugin.provides.metaProductions.length, item;
+            // log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
+            var i, i_items=metaPlugin.provides.metaProductions, i_len=metaPlugin.provides.metaProductions.length, mp;
             for (i=0; i<i_len; i++) {
-                item = metaPlugin.provides.metaProductions[i];
-                provides.metaProductions.push(item)
-                provides.metaProductionSelectors.push('use' + item[0].toUpperCase() + item.substring(1))
+                mp = metaPlugin.provides.metaProductions[i];
+                mp.plugin = metaPlugin.name;
+                provides.metaProductions.push(mp)
+                provides.metaProductionSelectors.push('use' + mp.name[0].toUpperCase() + mp.name.substring(1))
+                var j, j_items=mp.categories, j_len=mp.categories.length, c1;
+                for (j=0; j<j_len; j++) {
+                    c1 = mp.categories[j];
+                    var seen = false;
+                    var k, k_items=provides.metaCategories, k_len=provides.metaCategories.length, c2;
+                    for (k=0; k<k_len; k++) {
+                        c2 = provides.metaCategories[k];
+                        if (c1.name == c2.name) {
+                            c2.productions.push({
+                                name: mp.name, 
+                                plugin: mp.plugin
+                             })
+                            seen = true;
+                        }
+                    }
+                    if (seen == false) {
+                        c1.productions = [
+                            {
+                                name: mp.name, 
+                                plugin: mp.plugin
+                             }
+                        ];
+                        provides.metaCategories.push(c1)
+                    }
+                }
             }
             search(++ndx);
         }

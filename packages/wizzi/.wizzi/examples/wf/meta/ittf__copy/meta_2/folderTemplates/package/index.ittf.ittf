@@ -6,42 +6,42 @@ $group
         
             {
             
-                name "${"${'$'}"}{wzCtx.npnName ? wzCtx.npnName : wzCtx.name}"
+                name "${'$'}${'$'}{wzCtx.npnName ? wzCtx.npnName : wzCtx.name}"
                 
-                version "${"${'$'}"}{wzCtx.version}"
+                version "${'$'}${'$'}{wzCtx.version}"
                 
-                ${"${'$'}"}if wzCtx.author
+                ${'$'}${'$'}if wzCtx.author
                     { author
-                        name "${"${'$'}"}{wzCtx.author.name}"
-                        email "${"${'$'}"}{wzCtx.author.email}"
+                        name "${'$'}${'$'}{wzCtx.author.name}"
+                        email "${'$'}${'$'}{wzCtx.author.email}"
                 
                 private false
                 
-                ${"${'$'}"}if wzCtx.license
+                ${'$'}${'$'}if wzCtx.license
                     [ licenses
                         { 
-                            type "${"${'$'}"}{wzCtx.license.type}"
-                            url "${"${'$'}"}{wzCtx.license.url}"
-                main "${"${'$'}"}{wzCtx.main}"
+                            type "${'$'}${'$'}{wzCtx.license.type}"
+                            url "${'$'}${'$'}{wzCtx.license.url}"
+                main "${'$'}${'$'}{wzCtx.main}"
                 
-                ${"${'$'}"}if wzCtx.Build.useVite
+                ${'$'}${'$'}if wzCtx.Build.useVite
                     type "module"
-                ${"${'$'}"}else
-                    ${"${'$'}"}if wzCtx.type
-                        type "${"${'$'}"}{wzCtx.type}"
+                ${'$'}${'$'}else
+                    ${'$'}${'$'}if wzCtx.type
+                        type "${'$'}${'$'}{wzCtx.type}"
                 
                 { scripts
-                    ${"${'$'}"}include package/scripts
+                    ${'$'}${'$'}include package/scripts
 
                 { dependencies
-                    ${"${'$'}"}include package/dependencies
+                    ${'$'}${'$'}include package/dependencies
 
                 { devDependencies
-                    ${"${'$'}"}include package/devDependencies
+                    ${'$'}${'$'}include package/devDependencies
 
-                ${"${'$'}"}include package/tools
+                ${'$'}${'$'}include package/tools
 
-                ${"${'$'}"}include package/browser
+                ${'$'}${'$'}include package/browser
 
-                ${"${'$'}"}${"${'$'}"} see https://classic.yarnpkg.com/en/docs/selective-version-resolutions/
-                ${"${'$'}"}include package/resolutions
+                ${'$'}${'$'}${'$'}${'$'} see https://classic.yarnpkg.com/en/docs/selective-version-resolutions/
+                ${'$'}${'$'}include package/resolutions

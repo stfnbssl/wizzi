@@ -1,6 +1,16 @@
 ﻿$group
 
 	# 
+		# Check if a wizzi schema has a wizzifier
+		# params
+		#  string schemaName
+		# returns
+		#   true|false
+	m canWizzify
+		string schemaName
+		return this.availableWizzifiers().indexOf(schemaName) > -1
+
+	# 
 		# retrieve a wizzifier searching the factoryPlugins
 		# registered to this plugins manager
 		# params

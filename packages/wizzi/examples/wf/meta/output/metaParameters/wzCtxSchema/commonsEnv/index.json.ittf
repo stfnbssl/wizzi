@@ -1,0 +1,5 @@
+{
+    metaProduction "commonsEnv"
+    [ parameters
+        params/use( deployClient
+        $$ params/use( deployServer

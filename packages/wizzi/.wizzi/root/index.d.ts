@@ -510,6 +510,67 @@ type FolderGenerationOptions = {
 }
 
 /**
+ * @type PackiFile
+ * @description The content of a file included in a PackiFiles object
+ * @type File type. For now "CODE" only is managed.
+ * @contents The file content (textual data).
+ * @generated If the file content is an IttfDocument may contain the generated artifact.
+ * @error The error object
+*/
+type PackiFile = {
+    type: 'CODE';
+    contents: string;
+    generated?: boolean;
+    error?: Error;
+}
+
+/**
+ * @type PackiFiles
+ * @description Contains a file system in an object. The key is the path name and the value is a PackiFile
+*/
+type PackiFiles = {
+    [path: string]: PackiFile;
+}
+
+/**
+ * @type MetaProductionPaths
+ * @tempProductionFolder The folder for temporary files of the production
+ * @wizziProductionFolder The folder for the result of the production
+*/
+type MetaProductionPaths = {
+    tempProductionFolder: string;
+    wizziProductionFolder: string;
+}
+
+/**
+ * @type MetaProductionData
+ * @name The name of the meta production
+ * @folderTemplates Ittf documents templating the folder structure of the production
+ * @ittfDocumentTemplates Ittf documents templating the files of the production
+ * @plainDocuments (optional) Ittf documents with the plain content of files of the production
+*/
+type MetaProductionData = {
+    name: string;
+    folderTemplates?: PackiFiles;
+    ittfDocumentTemplates?: PackiFiles;
+    plainDocuments?: PackiFiles;
+}
+   
+/**
+ * @type MetaExecutionOptions
+ * @metaCtx  The meta production context object
+ * @globalContext A global context obiect for any wizzi generation executed preparing and processing the production
+ * @paths The names of the temporary and result folders of the meta production. Defaults are "___templates" and ".wizzi".
+ * @productions Array of MetaProductionData, containing meta productions that will add to or replace meta plugins productions.
+*/
+type MetaExecutionOptions = {
+    metaCtx: object;
+    globalContext?: object;
+    paths?: MetaProductionPaths;
+    productions?: [MetaProductionData];
+}
+
+/**
 * The Wizzi Factory instance interface
 */
 declare interface WizziFactory {
@@ -590,7 +651,7 @@ declare interface WizziFactory {
     */
     loadAndTransformModel(
         ittfDocumentUri: string, context: TransformationContext, transformName: string, callback?: cb<object>
-    )
+    ): void;
     /**
      * @param ittfFolderUri          The path to the folder with the Ittf Documents to be generated.
      * @param context                The model loading and artifact generation context.
@@ -664,6 +725,18 @@ declare interface WizziFactory {
      * @returns A ProductionManager instance
     */
     createProductionManager(options?: ProductionOptions, globalContext?: object): ProductionManager;
+    /**
+     * @method getProvidedMetas
+     * @description Retrieve the meta productions provided by the installed plugins
+     * @param callback Receives error | providedMetaProductions
+    */
+    getProvidedMetas(callback: cb<any>): void;
+    /**
+     * @method executeMetaProduction
+     * @description Execute a meta production
+     * @param metaExecutionOptions   Meta execution options
+     * @param callback               Receives error | producedPackiFiles
+    */
 }
 
 /**

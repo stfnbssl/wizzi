@@ -1,0 +1,6 @@
+{
+    $params name, defaultValue:boolean|false
+    name "use${_.capitalize(name)}"
+    type "use"
+    defaultValue "${defaultValue}"
+    [ parameters

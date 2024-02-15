@@ -4,7 +4,7 @@ $group
 
         $file __dot__wizzi/${pkgPath}root/__dot__eslintignore.text.ittf.ittf
             text
-                ${"${'$'}"}include eslint/eslintignore.text
+                ${'$'}${'$'}include eslint/eslintignore.text
         
         $file __dot__wizzi/${pkgPath}root/__dot__eslintrc.js.ittf.ittf
             module
@@ -16,14 +16,14 @@ $group
                     { 
                         @ root true
                             # do not look in parent folders for configuration files
-                        ${"${'$'}"}include eslint/rc/parser
+                        ${'$'}${'$'}include eslint/rc/parser
                         [ extends
-                            ${"${'$'}"}include eslint/rc/extends
+                            ${'$'}${'$'}include eslint/rc/extends
                         [ plugins
-                            ${"${'$'}"}include eslint/rc/plugins
+                            ${'$'}${'$'}include eslint/rc/plugins
                         { settings
-                            ${"${'$'}"}include eslint/rc/settings
+                            ${'$'}${'$'}include eslint/rc/settings
                         { rules
-                            ${"${'$'}"}include eslint/rc/rules
+                            ${'$'}${'$'}include eslint/rc/rules
                         [ overrides
-                            ${"${'$'}"}include eslint/rc/overrides
+                            ${'$'}${'$'}include eslint/rc/overrides

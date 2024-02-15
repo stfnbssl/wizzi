@@ -1,0 +1,4 @@
+{
+    metaProduction "commonsWizzi"
+    [ parameters
+        params/use( jsCommons )

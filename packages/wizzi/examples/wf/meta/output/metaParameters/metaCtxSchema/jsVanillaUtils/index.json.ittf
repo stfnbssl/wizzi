@@ -1,0 +1,5 @@
+{
+    metaProduction "jsVanillaUtils"
+    [ parameters
+        params/object(jsVanillaUtils)
+            params/boolean(lodash)

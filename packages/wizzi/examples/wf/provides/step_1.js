@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\provides\step_1.js.ittf
-    utc time: Tue, 16 Jan 2024 12:38:13 GMT
+    utc time: Thu, 15 Feb 2024 18:31:20 GMT
 */
 'use strict';
 /**
@@ -42,6 +42,7 @@ function createWizziFactory(globalContext, callback) {
             items: [
                 './wizzi.plugin.html/index', 
                 './wizzi.plugin.js/index', 
+                './wizzi.plugin.ts/index', 
                 './wizzi.plugin.css/index', 
                 './wizzi.plugin.ittf/index'
             ], 
@@ -173,6 +174,8 @@ var wf_provides_step_1 = function(step_callback) {
         console.log("wf.mapIttfDocumentPathToSchema(hello.html.ittf)", wf.mapIttfDocumentPathToSchema("hello.html.ittf"))
         console.log("wf.mapIttfDocumentPathToSchema(aaa/hello.html.ittf)", wf.mapIttfDocumentPathToSchema("aaa/hello.html.ittf"))
         console.log("wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.html.ittf)", wf.mapIttfDocumentPathToDefaultArtifact("aaa/hello.html.ittf"))
+        console.log("wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.ittf.ittf)", wf.mapIttfDocumentPathToDefaultArtifact("aaa/hello.ittf.ittf"))
+        console.log("wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.ts.ittf)", wf.mapIttfDocumentPathToDefaultArtifact("aaa/hello.ts.ittf"))
         console.log("wf.mapSchemaToDefaultArtifact(js)", wf.mapSchemaToDefaultArtifact("js"))
         console.log("wf.getSchemaArtifacts(ittf)", wf.getSchemaArtifacts("ittf"))
     })

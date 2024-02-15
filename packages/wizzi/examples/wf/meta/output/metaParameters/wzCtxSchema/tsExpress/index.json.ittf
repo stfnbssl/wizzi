@@ -1,0 +1,4 @@
+{
+    metaProduction "tsExpress"
+    [ parameters
+        params/use( reactPages )

@@ -1,0 +1,4 @@
+{
+    metaProduction "tsCommons"
+    [ parameters
+        params/use(wizziViewEngine)

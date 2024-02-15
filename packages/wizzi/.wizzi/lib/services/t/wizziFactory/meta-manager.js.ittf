@@ -27,13 +27,47 @@ $group
                     a_cb( providedMetas )
                         r_cb( providedMetas )
 
+    m getMetaParameters
+        param options
+        callback
+        log 'wizziFactory.getMetaParameters.options', options
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaParametersStarter
+                    @ options || {}
+                    a_cb( metaParameters )
+                        r_cb( metaParameters )
+
     m getMetaProductions
+        param options
         callback
         _ this.getMetasManager
             {
             a_cb( mm )
                 _ mm.getMetaProductionStarter
-                    {
+                    @ options | {}
                     a_cb( metaProductions )
                         r_cb( metaProductions )
+
+    m getCategoriesAndMetaProductions
+        param options
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getCategoryAndMetaProductionStarter
+                    @ options | {}
+                    a_cb( categoriesAndMetaProductions )
+                        r_cb( categoriesAndMetaProductions )
+
+    m getProvidedMetas
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getProvidedMetas
+                    a_cb( providedMetas )
+                        r_cb( providedMetas )
+
 

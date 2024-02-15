@@ -23,7 +23,7 @@ module
 
         $append json_wf_meta_plugins            
             [ items
-                @ './wizzi.meta.package/index'
+                @ './wizzi.meta.commons/index'
                 @ './wizzi.meta.js/index'
             @ metaPluginsBaseFolder metaPluginsBaseFolder
 

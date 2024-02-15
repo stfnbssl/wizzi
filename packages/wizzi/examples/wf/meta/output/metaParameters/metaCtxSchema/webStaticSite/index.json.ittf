@@ -1,0 +1,3 @@
+{
+    metaProduction "webStaticSite"
+    [ parameters

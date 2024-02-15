@@ -1,0 +1,3932 @@
+{
+    "metaCategories": [
+        {
+            "name": "cloud",
+            "productions": [
+                {
+                    "name": "cloudAzure",
+                    "plugin": "wizzi.meta.cloud"
+                },
+                {
+                    "name": "cloudHeroku",
+                    "plugin": "wizzi.meta.cloud"
+                }
+            ]
+        },
+        {
+            "name": "package",
+            "productions": [
+                {
+                    "name": "commonsBabel",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsBabelrc",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsDeploy",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsEnv",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsEslint",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsPackage",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsPostcss",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsPrettier",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsServerCertificate",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsTailwind",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsWebpack",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsWizzi",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "babel",
+            "productions": [
+                {
+                    "name": "commonsBabel",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsBabelrc",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "env",
+            "productions": [
+                {
+                    "name": "commonsEnv",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "lint",
+            "productions": [
+                {
+                    "name": "commonsEslint",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "git",
+            "productions": [
+                {
+                    "name": "commonsGit",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "css",
+            "productions": [
+                {
+                    "name": "commonsPostcss",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "commonsTailwind",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "webCss",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "prettier",
+            "productions": [
+                {
+                    "name": "commonsPrettier",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "ssl",
+            "productions": [
+                {
+                    "name": "commonsServerCertificate",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "security",
+            "productions": [
+                {
+                    "name": "commonsServerCertificate",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "jspackager",
+            "productions": [
+                {
+                    "name": "commonsWebpack",
+                    "plugin": "wizzi.meta.commons"
+                }
+            ]
+        },
+        {
+            "name": "wizzi",
+            "productions": [
+                {
+                    "name": "commonsWizzi",
+                    "plugin": "wizzi.meta.commons"
+                },
+                {
+                    "name": "tsExpressFeatureWizzi",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziDocs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziFs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziGist",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziMeta",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziProduction",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressWizziSite",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "webIttfStudioMeta",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webJsWz",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webWizziDocs",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "javascript",
+            "productions": [
+                {
+                    "name": "jsCLI",
+                    "plugin": "wizzi.meta.js"
+                },
+                {
+                    "name": "jsCommons",
+                    "plugin": "wizzi.meta.js"
+                },
+                {
+                    "name": "jsUtils",
+                    "plugin": "wizzi.meta.js"
+                },
+                {
+                    "name": "jsVanillaWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.vanilla"
+                },
+                {
+                    "name": "jsVanillaUtils",
+                    "plugin": "wizzi.meta.js.vanilla"
+                },
+                {
+                    "name": "jsReactApp",
+                    "plugin": "wizzi.meta.js.react"
+                },
+                {
+                    "name": "jsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.react"
+                },
+                {
+                    "name": "webJs",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webJsWz",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "CLI",
+            "productions": [
+                {
+                    "name": "jsCLI",
+                    "plugin": "wizzi.meta.js"
+                }
+            ]
+        },
+        {
+            "name": "utilities",
+            "productions": [
+                {
+                    "name": "jsUtils",
+                    "plugin": "wizzi.meta.js"
+                },
+                {
+                    "name": "jsVanillaUtils",
+                    "plugin": "wizzi.meta.js.vanilla"
+                },
+                {
+                    "name": "tsUtils",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsExpressUtils",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsReactUtils",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "vanillajs",
+            "productions": [
+                {
+                    "name": "jsVanillaWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.vanilla"
+                },
+                {
+                    "name": "jsVanillaUtils",
+                    "plugin": "wizzi.meta.js.vanilla"
+                }
+            ]
+        },
+        {
+            "name": "webpack",
+            "productions": [
+                {
+                    "name": "jsVanillaWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.vanilla"
+                },
+                {
+                    "name": "jsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.react"
+                },
+                {
+                    "name": "tsReactBasicWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactSiteWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackWidgetsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "react",
+            "productions": [
+                {
+                    "name": "jsReactApp",
+                    "plugin": "wizzi.meta.js.react"
+                },
+                {
+                    "name": "jsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.js.react"
+                },
+                {
+                    "name": "tsReact",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactAssets",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactBasicWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactBasicVite",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactComponents",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactEditor",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactFeatures",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactNextjsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactPageForms",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactRedux",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactSiteWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactStoryboard",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactThemes",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactTypings",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactUtils",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackWidgetsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWidgets",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "typescript",
+            "productions": [
+                {
+                    "name": "tsCommons",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsEsmWrapper",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsNode",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsNodeFeatureGithub",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsUtils",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsExpress",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressApp",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressData",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureAccount",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureAuth",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureBlog",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureConfig",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureCdn",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureFilesystem",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureGithub",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeaturePacki",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureProject",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureRepo",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureUser",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizzi",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziDocs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziFs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziGist",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziMeta",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziProduction",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressIttf",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressStyles",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressTests",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressUtils",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressWizziSite",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsReact",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactAssets",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactBasicWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactBasicVite",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactComponents",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactEditor",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactFeatures",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactNextjsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactPageForms",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactRedux",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactSiteWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactStoryboard",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactThemes",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactTypings",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactUtils",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackGetStartedApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWebpackWidgetsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWidgets",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsDbMongoDb",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbPostgres",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbRedis",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbSequelize",
+                    "plugin": "wizzi.meta.ts.db"
+                }
+            ]
+        },
+        {
+            "name": "commons",
+            "productions": [
+                {
+                    "name": "tsCommons",
+                    "plugin": "wizzi.meta.ts"
+                }
+            ]
+        },
+        {
+            "name": "esm",
+            "productions": [
+                {
+                    "name": "tsEsmWrapper",
+                    "plugin": "wizzi.meta.ts"
+                }
+            ]
+        },
+        {
+            "name": "nodejs",
+            "productions": [
+                {
+                    "name": "tsNode",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsNodeFeatureGithub",
+                    "plugin": "wizzi.meta.ts"
+                }
+            ]
+        },
+        {
+            "name": "github",
+            "productions": [
+                {
+                    "name": "tsNodeFeatureGithub",
+                    "plugin": "wizzi.meta.ts"
+                },
+                {
+                    "name": "tsExpressFeatureGithub",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "express",
+            "productions": [
+                {
+                    "name": "tsExpress",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressApp",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressData",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureAccount",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureAuth",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureBlog",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureConfig",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureCdn",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureFilesystem",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureGithub",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeaturePacki",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureProject",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureRepo",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureUser",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizzi",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziDocs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziFs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziGist",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziMeta",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziProduction",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressTests",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressWizziSite",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "webapp",
+            "productions": [
+                {
+                    "name": "tsExpressApp",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "feature",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureAccount",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureAuth",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureBlog",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureConfig",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureCdn",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureFilesystem",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureGithub",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeaturePacki",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureProject",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureRepo",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureUser",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizzi",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziDocs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziFs",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziGist",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziMeta",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziProduction",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "account",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureAccount",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "auth",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureAuth",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "blog",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureBlog",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "config",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureConfig",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "cdn",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureCdn",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "filesystem",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureFilesystem",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "tsExpressFeatureWizziFs",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "packi",
+            "productions": [
+                {
+                    "name": "tsExpressFeaturePacki",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "project",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureProject",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "repo",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureRepo",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "user",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureUser",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "documentation",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureWizziDocs",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "gist",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureWizziGist",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "meta",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureWizziMeta",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "wizzi-production",
+            "productions": [
+                {
+                    "name": "tsExpressFeatureWizziProduction",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "ittf",
+            "productions": [
+                {
+                    "name": "tsExpressIttf",
+                    "plugin": "wizzi.meta.ts.express"
+                },
+                {
+                    "name": "webIttfStudioMeta",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "styles",
+            "productions": [
+                {
+                    "name": "tsExpressStyles",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "tests",
+            "productions": [
+                {
+                    "name": "tsExpressTests",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "view-engine",
+            "productions": [
+                {
+                    "name": "tsExpressWizziSite",
+                    "plugin": "wizzi.meta.ts.express"
+                }
+            ]
+        },
+        {
+            "name": "app",
+            "productions": [
+                {
+                    "name": "tsReactApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "webAppCrud",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "asset",
+            "productions": [
+                {
+                    "name": "tsReactAssets",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "starter",
+            "productions": [
+                {
+                    "name": "tsReactBasicWebpack",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "vite",
+            "productions": [
+                {
+                    "name": "tsReactBasicVite",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "component",
+            "productions": [
+                {
+                    "name": "tsReactComponents",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "editor",
+            "productions": [
+                {
+                    "name": "tsReactEditor",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "features",
+            "productions": [
+                {
+                    "name": "tsReactFeatures",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "nextjs",
+            "productions": [
+                {
+                    "name": "tsReactNextjsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "redux",
+            "productions": [
+                {
+                    "name": "tsReactRedux",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "storyboard",
+            "productions": [
+                {
+                    "name": "tsReactStoryboard",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "theme",
+            "productions": [
+                {
+                    "name": "tsReactThemes",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "widgets",
+            "productions": [
+                {
+                    "name": "tsReactWebpackWidgetsApp",
+                    "plugin": "wizzi.meta.ts.react"
+                },
+                {
+                    "name": "tsReactWidgets",
+                    "plugin": "wizzi.meta.ts.react"
+                }
+            ]
+        },
+        {
+            "name": "database",
+            "productions": [
+                {
+                    "name": "tsDbMongoDb",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbPostgres",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbRedis",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "tsDbSequelize",
+                    "plugin": "wizzi.meta.ts.db"
+                },
+                {
+                    "name": "webAppCrud",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "mongodb",
+            "productions": [
+                {
+                    "name": "tsDbMongoDb",
+                    "plugin": "wizzi.meta.ts.db"
+                }
+            ]
+        },
+        {
+            "name": "postgres",
+            "productions": [
+                {
+                    "name": "tsDbPostgres",
+                    "plugin": "wizzi.meta.ts.db"
+                }
+            ]
+        },
+        {
+            "name": "redis",
+            "productions": [
+                {
+                    "name": "tsDbRedis",
+                    "plugin": "wizzi.meta.ts.db"
+                }
+            ]
+        },
+        {
+            "name": "sequelize",
+            "productions": [
+                {
+                    "name": "tsDbSequelize",
+                    "plugin": "wizzi.meta.ts.db"
+                }
+            ]
+        },
+        {
+            "name": "webdev",
+            "productions": [
+                {
+                    "name": "webAppCrud",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webCss",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webHtml",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webIttfSite",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webIttfStudioMeta",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webJs",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webJsWz",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webSiteDemo",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webSiteWebapi",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webStaticSite",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webSvg",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webWizziDocs",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "html",
+            "productions": [
+                {
+                    "name": "webHtml",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "site",
+            "productions": [
+                {
+                    "name": "webIttfSite",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webSiteDemo",
+                    "plugin": "wizzi.meta.web"
+                },
+                {
+                    "name": "webSiteWebapi",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "wizzi-studio",
+            "productions": [
+                {
+                    "name": "webIttfStudioMeta",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "demo",
+            "productions": [
+                {
+                    "name": "webSiteDemo",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "static-site",
+            "productions": [
+                {
+                    "name": "webStaticSite",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "svg",
+            "productions": [
+                {
+                    "name": "webSvg",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        },
+        {
+            "name": "wizzi-docs",
+            "productions": [
+                {
+                    "name": "webWizziDocs",
+                    "plugin": "wizzi.meta.web"
+                }
+            ]
+        }
+    ],
+    "metaProductions": [
+        {
+            "name": "cloudAzure",
+            "title": "cloudAzure wizzi meta production",
+            "categories": [
+                {
+                    "name": "cloud",
+                    "productions": [
+                        {
+                            "name": "cloudAzure",
+                            "plugin": "wizzi.meta.cloud"
+                        },
+                        {
+                            "name": "cloudHeroku",
+                            "plugin": "wizzi.meta.cloud"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.cloud"
+        },
+        {
+            "name": "cloudHeroku",
+            "title": "cloudHeroku wizzi meta production",
+            "categories": [
+                {
+                    "name": "cloud"
+                }
+            ],
+            "plugin": "wizzi.meta.cloud"
+        },
+        {
+            "name": "commonsBabel",
+            "title": "commonsBabel wizzi meta production",
+            "categories": [
+                {
+                    "name": "package",
+                    "productions": [
+                        {
+                            "name": "commonsBabel",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsBabelrc",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsDeploy",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsEnv",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsEslint",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsPackage",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsPostcss",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsPrettier",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsServerCertificate",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsTailwind",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsWebpack",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsWizzi",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                },
+                {
+                    "name": "babel",
+                    "productions": [
+                        {
+                            "name": "commonsBabel",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsBabelrc",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsBabelrc",
+            "title": "commonsBabelrc wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "babel"
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsDeploy",
+            "title": "commonsDeploy wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsEnv",
+            "title": "commonsEnv wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "env",
+                    "productions": [
+                        {
+                            "name": "commonsEnv",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsEslint",
+            "title": "commonsEslint wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "lint",
+                    "productions": [
+                        {
+                            "name": "commonsEslint",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsGit",
+            "title": "commonsGit wizzi meta production",
+            "categories": [
+                {
+                    "name": "git",
+                    "productions": [
+                        {
+                            "name": "commonsGit",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsPackage",
+            "title": "commonsPackage wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsPostcss",
+            "title": "commonsPostcss wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "css",
+                    "productions": [
+                        {
+                            "name": "commonsPostcss",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "commonsTailwind",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "webCss",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsPrettier",
+            "title": "commonsPrettier wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "prettier",
+                    "productions": [
+                        {
+                            "name": "commonsPrettier",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsServerCertificate",
+            "title": "commonsServerCertificate wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "ssl",
+                    "productions": [
+                        {
+                            "name": "commonsServerCertificate",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                },
+                {
+                    "name": "security",
+                    "productions": [
+                        {
+                            "name": "commonsServerCertificate",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsTailwind",
+            "title": "commonsTailwind wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "css"
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsWebpack",
+            "title": "commonsWebpack wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "jspackager",
+                    "productions": [
+                        {
+                            "name": "commonsWebpack",
+                            "plugin": "wizzi.meta.commons"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "commonsWizzi",
+            "title": "commonsWizzi wizzi meta production",
+            "categories": [
+                {
+                    "name": "package"
+                },
+                {
+                    "name": "wizzi",
+                    "productions": [
+                        {
+                            "name": "commonsWizzi",
+                            "plugin": "wizzi.meta.commons"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizzi",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziDocs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziFs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziGist",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziMeta",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziProduction",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressWizziSite",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "webIttfStudioMeta",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webJsWz",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webWizziDocs",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.commons"
+        },
+        {
+            "name": "docsHtml",
+            "title": "docsHtml wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.docs"
+        },
+        {
+            "name": "docsMarkdown",
+            "title": "docsMarkdown wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.docs"
+        },
+        {
+            "name": "docsPdf",
+            "title": "docsPdf wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.docs"
+        },
+        {
+            "name": "docsPpt",
+            "title": "docsPpt wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.docs"
+        },
+        {
+            "name": "docsWord",
+            "title": "docsWord wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.docs"
+        },
+        {
+            "name": "jsCLI",
+            "title": "jsCLI wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "javascript",
+                    "productions": [
+                        {
+                            "name": "jsCLI",
+                            "plugin": "wizzi.meta.js"
+                        },
+                        {
+                            "name": "jsCommons",
+                            "plugin": "wizzi.meta.js"
+                        },
+                        {
+                            "name": "jsUtils",
+                            "plugin": "wizzi.meta.js"
+                        },
+                        {
+                            "name": "jsVanillaWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        },
+                        {
+                            "name": "jsVanillaUtils",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        },
+                        {
+                            "name": "jsReactApp",
+                            "plugin": "wizzi.meta.js.react"
+                        },
+                        {
+                            "name": "jsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.react"
+                        },
+                        {
+                            "name": "webJs",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webJsWz",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                },
+                {
+                    "name": "CLI",
+                    "productions": [
+                        {
+                            "name": "jsCLI",
+                            "plugin": "wizzi.meta.js"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.js"
+        },
+        {
+            "name": "jsCommons",
+            "title": "jsCommons wizzi meta production",
+            "categories": [
+                {
+                    "name": "javascript"
+                }
+            ],
+            "plugin": "wizzi.meta.js"
+        },
+        {
+            "name": "jsUtils",
+            "title": "jsUtils wizzi meta production",
+            "categories": [
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "utilities",
+                    "productions": [
+                        {
+                            "name": "jsUtils",
+                            "plugin": "wizzi.meta.js"
+                        },
+                        {
+                            "name": "jsVanillaUtils",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        },
+                        {
+                            "name": "tsUtils",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsExpressUtils",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsReactUtils",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.js"
+        },
+        {
+            "name": "jsVanillaWebpackGetStartedApp",
+            "title": "jsVanillaWebpackGetStartedApp wizzi meta production",
+            "categories": [
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "vanillajs",
+                    "productions": [
+                        {
+                            "name": "jsVanillaWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        },
+                        {
+                            "name": "jsVanillaUtils",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        }
+                    ]
+                },
+                {
+                    "name": "webpack",
+                    "productions": [
+                        {
+                            "name": "jsVanillaWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.vanilla"
+                        },
+                        {
+                            "name": "jsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.react"
+                        },
+                        {
+                            "name": "tsReactBasicWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactSiteWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackWidgetsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.js.vanilla"
+        },
+        {
+            "name": "jsVanillaUtils",
+            "title": "jsVanillaUtils wizzi meta production",
+            "categories": [
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "vanillajs"
+                },
+                {
+                    "name": "utilities"
+                }
+            ],
+            "plugin": "wizzi.meta.js.vanilla"
+        },
+        {
+            "name": "jsReact",
+            "title": "jsReact wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.js.react"
+        },
+        {
+            "name": "jsReactApp",
+            "title": "jsReactApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "react",
+                    "productions": [
+                        {
+                            "name": "jsReactApp",
+                            "plugin": "wizzi.meta.js.react"
+                        },
+                        {
+                            "name": "jsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.js.react"
+                        },
+                        {
+                            "name": "tsReact",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactAssets",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactBasicWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactBasicVite",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactComponents",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactEditor",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactFeatures",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactNextjsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactPageForms",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactRedux",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactSiteWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactStoryboard",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactThemes",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactTypings",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactUtils",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackWidgetsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWidgets",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.js.react"
+        },
+        {
+            "name": "jsReactWebpackGetStartedApp",
+            "title": "jsReactWebpackGetStartedApp wizzi meta production",
+            "categories": [
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "webpack"
+                }
+            ],
+            "plugin": "wizzi.meta.js.react"
+        },
+        {
+            "name": "jsReactUtils",
+            "title": "jsReactUtils wizzi meta production",
+            "categories": [],
+            "plugin": "wizzi.meta.js.react"
+        },
+        {
+            "name": "tsCommons",
+            "title": "tsCommons wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript",
+                    "productions": [
+                        {
+                            "name": "tsCommons",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsEsmWrapper",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsNode",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsNodeFeatureGithub",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsUtils",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsExpress",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressApp",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressData",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureAccount",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureAuth",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureBlog",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureConfig",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureCdn",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureFilesystem",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureGithub",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeaturePacki",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureProject",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureRepo",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureUser",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizzi",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziDocs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziFs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziGist",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziMeta",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziProduction",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressIttf",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressStyles",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressTests",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressUtils",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressWizziSite",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsReact",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactAssets",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactBasicWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactBasicVite",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactComponents",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactEditor",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactFeatures",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactNextjsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactPageForms",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactRedux",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactSiteWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactStoryboard",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactThemes",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactTypings",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactUtils",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackGetStartedApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWebpackWidgetsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWidgets",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsDbMongoDb",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbPostgres",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbRedis",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbSequelize",
+                            "plugin": "wizzi.meta.ts.db"
+                        }
+                    ]
+                },
+                {
+                    "name": "commons",
+                    "productions": [
+                        {
+                            "name": "tsCommons",
+                            "plugin": "wizzi.meta.ts"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts"
+        },
+        {
+            "name": "tsEsmWrapper",
+            "title": "tsEsmWrapper wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "esm",
+                    "productions": [
+                        {
+                            "name": "tsEsmWrapper",
+                            "plugin": "wizzi.meta.ts"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts"
+        },
+        {
+            "name": "tsNode",
+            "title": "tsNode wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "nodejs",
+                    "productions": [
+                        {
+                            "name": "tsNode",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsNodeFeatureGithub",
+                            "plugin": "wizzi.meta.ts"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts"
+        },
+        {
+            "name": "tsNodeFeatureGithub",
+            "title": "tsNodeFeatureGithub wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "github",
+                    "productions": [
+                        {
+                            "name": "tsNodeFeatureGithub",
+                            "plugin": "wizzi.meta.ts"
+                        },
+                        {
+                            "name": "tsExpressFeatureGithub",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                },
+                {
+                    "name": "nodejs"
+                }
+            ],
+            "plugin": "wizzi.meta.ts"
+        },
+        {
+            "name": "tsUtils",
+            "title": "tsUtils wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "utilities"
+                }
+            ],
+            "plugin": "wizzi.meta.ts"
+        },
+        {
+            "name": "tsExpress",
+            "title": "tsExpress wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express",
+                    "productions": [
+                        {
+                            "name": "tsExpress",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressApp",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressData",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureAccount",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureAuth",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureBlog",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureConfig",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureCdn",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureFilesystem",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureGithub",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeaturePacki",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureProject",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureRepo",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureUser",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizzi",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziDocs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziFs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziGist",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziMeta",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziProduction",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressTests",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressWizziSite",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressApp",
+            "title": "tsExpressApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "webapp",
+                    "productions": [
+                        {
+                            "name": "tsExpressApp",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressData",
+            "title": "tsExpressData wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureAccount",
+            "title": "tsExpressFeatureAccount wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureAccount",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureAuth",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureBlog",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureConfig",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureCdn",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureFilesystem",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureGithub",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeaturePacki",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureProject",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureRepo",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureUser",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizzi",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziDocs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziFs",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziGist",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziMeta",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziProduction",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                },
+                {
+                    "name": "account",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureAccount",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureAuth",
+            "title": "tsExpressFeatureAuth wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "auth",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureAuth",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureBlog",
+            "title": "tsExpressFeatureBlog wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "blog",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureBlog",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureConfig",
+            "title": "tsExpressFeatureConfig wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "config",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureConfig",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureCdn",
+            "title": "tsExpressFeatureCdn wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "cdn",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureCdn",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureFilesystem",
+            "title": "tsExpressFeatureFilesystem wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "filesystem",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureFilesystem",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "tsExpressFeatureWizziFs",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureGithub",
+            "title": "tsExpressFeatureGithub wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "github"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeaturePacki",
+            "title": "tsExpressFeaturePacki wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "packi",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeaturePacki",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureProject",
+            "title": "tsExpressFeatureProject wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "project",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureProject",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureRepo",
+            "title": "tsExpressFeatureRepo wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "repo",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureRepo",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureUser",
+            "title": "tsExpressFeatureUser wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "user",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureUser",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizzi",
+            "title": "tsExpressFeatureWizzi wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizziDocs",
+            "title": "tsExpressFeatureWizziDocs wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "documentation",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureWizziDocs",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizziFs",
+            "title": "tsExpressFeatureWizziFs wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "filesystem"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizziGist",
+            "title": "tsExpressFeatureWizziGist wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "gist",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureWizziGist",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizziMeta",
+            "title": "tsExpressFeatureWizziMeta wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "meta",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureWizziMeta",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressFeatureWizziProduction",
+            "title": "tsExpressFeatureWizziProduction wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "feature"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "wizzi-production",
+                    "productions": [
+                        {
+                            "name": "tsExpressFeatureWizziProduction",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressIttf",
+            "title": "tsExpressIttf wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "ittf",
+                    "productions": [
+                        {
+                            "name": "tsExpressIttf",
+                            "plugin": "wizzi.meta.ts.express"
+                        },
+                        {
+                            "name": "webIttfStudioMeta",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressStyles",
+            "title": "tsExpressStyles wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "styles",
+                    "productions": [
+                        {
+                            "name": "tsExpressStyles",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressTests",
+            "title": "tsExpressTests wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "tests",
+                    "productions": [
+                        {
+                            "name": "tsExpressTests",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressUtils",
+            "title": "tsExpressUtils wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "utilities"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsExpressWizziSite",
+            "title": "tsExpressWizziSite wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "express"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "view-engine",
+                    "productions": [
+                        {
+                            "name": "tsExpressWizziSite",
+                            "plugin": "wizzi.meta.ts.express"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.express"
+        },
+        {
+            "name": "tsReact",
+            "title": "tsReact wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactApp",
+            "title": "tsReactApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "app",
+                    "productions": [
+                        {
+                            "name": "tsReactApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "webAppCrud",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactAssets",
+            "title": "tsReactAssets wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "asset",
+                    "productions": [
+                        {
+                            "name": "tsReactAssets",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactBasicWebpack",
+            "title": "tsReactBasicWebpack wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "webpack"
+                },
+                {
+                    "name": "starter",
+                    "productions": [
+                        {
+                            "name": "tsReactBasicWebpack",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactBasicVite",
+            "title": "tsReactBasicVite wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "vite",
+                    "productions": [
+                        {
+                            "name": "tsReactBasicVite",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactComponents",
+            "title": "tsReactComponents wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "component",
+                    "productions": [
+                        {
+                            "name": "tsReactComponents",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactEditor",
+            "title": "tsReactEditor wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "editor",
+                    "productions": [
+                        {
+                            "name": "tsReactEditor",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactFeatures",
+            "title": "tsReactFeatures wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "features",
+                    "productions": [
+                        {
+                            "name": "tsReactFeatures",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactNextjsApp",
+            "title": "tsReactNextjsApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "nextjs",
+                    "productions": [
+                        {
+                            "name": "tsReactNextjsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactPageForms",
+            "title": "tsReactPageForms wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactRedux",
+            "title": "tsReactRedux wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "redux",
+                    "productions": [
+                        {
+                            "name": "tsReactRedux",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactSiteWebpack",
+            "title": "tsReactSiteWebpack wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "webpack"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactStoryboard",
+            "title": "tsReactStoryboard wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "storyboard",
+                    "productions": [
+                        {
+                            "name": "tsReactStoryboard",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactThemes",
+            "title": "tsReactThemes wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "theme",
+                    "productions": [
+                        {
+                            "name": "tsReactThemes",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactTypings",
+            "title": "tsReactTypings wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactUtils",
+            "title": "tsReactUtils wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "utilities"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactWebpackGetStartedApp",
+            "title": "tsReactWebpackGetStartedApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "webpack"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactWebpackWidgetsApp",
+            "title": "tsReactWebpackWidgetsApp wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "webpack"
+                },
+                {
+                    "name": "widgets",
+                    "productions": [
+                        {
+                            "name": "tsReactWebpackWidgetsApp",
+                            "plugin": "wizzi.meta.ts.react"
+                        },
+                        {
+                            "name": "tsReactWidgets",
+                            "plugin": "wizzi.meta.ts.react"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsReactWidgets",
+            "title": "tsReactWidgets wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "react"
+                },
+                {
+                    "name": "widgets"
+                }
+            ],
+            "plugin": "wizzi.meta.ts.react"
+        },
+        {
+            "name": "tsDbMongoDb",
+            "title": "tsDbMongoDb wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "database",
+                    "productions": [
+                        {
+                            "name": "tsDbMongoDb",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbPostgres",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbRedis",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "tsDbSequelize",
+                            "plugin": "wizzi.meta.ts.db"
+                        },
+                        {
+                            "name": "webAppCrud",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                },
+                {
+                    "name": "mongodb",
+                    "productions": [
+                        {
+                            "name": "tsDbMongoDb",
+                            "plugin": "wizzi.meta.ts.db"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.db"
+        },
+        {
+            "name": "tsDbPostgres",
+            "title": "tsDbPostgres wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "database"
+                },
+                {
+                    "name": "postgres",
+                    "productions": [
+                        {
+                            "name": "tsDbPostgres",
+                            "plugin": "wizzi.meta.ts.db"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.db"
+        },
+        {
+            "name": "tsDbRedis",
+            "title": "tsDbRedis wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "database"
+                },
+                {
+                    "name": "redis",
+                    "productions": [
+                        {
+                            "name": "tsDbRedis",
+                            "plugin": "wizzi.meta.ts.db"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.db"
+        },
+        {
+            "name": "tsDbSequelize",
+            "title": "tsDbSequelize wizzi meta production",
+            "categories": [
+                {
+                    "name": "typescript"
+                },
+                {
+                    "name": "database"
+                },
+                {
+                    "name": "sequelize",
+                    "productions": [
+                        {
+                            "name": "tsDbSequelize",
+                            "plugin": "wizzi.meta.ts.db"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.ts.db"
+        },
+        {
+            "name": "webAppCrud",
+            "title": "webAppCrud wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev",
+                    "productions": [
+                        {
+                            "name": "webAppCrud",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webCss",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webHtml",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webIttfSite",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webIttfStudioMeta",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webJs",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webJsWz",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webSiteDemo",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webSiteWebapi",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webStaticSite",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webSvg",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webWizziDocs",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                },
+                {
+                    "name": "app"
+                },
+                {
+                    "name": "database"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webCss",
+            "title": "webCss wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "css"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webHtml",
+            "title": "webHtml wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "html",
+                    "productions": [
+                        {
+                            "name": "webHtml",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webIttfSite",
+            "title": "webIttfSite wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "site",
+                    "productions": [
+                        {
+                            "name": "webIttfSite",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webSiteDemo",
+                            "plugin": "wizzi.meta.web"
+                        },
+                        {
+                            "name": "webSiteWebapi",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webIttfStudioMeta",
+            "title": "webIttfStudioMeta wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "wizzi-studio",
+                    "productions": [
+                        {
+                            "name": "webIttfStudioMeta",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                },
+                {
+                    "name": "ittf"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webJs",
+            "title": "webJs wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "javascript"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webJsWz",
+            "title": "webJsWz wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "javascript"
+                },
+                {
+                    "name": "wizzi"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webSiteDemo",
+            "title": "webSiteDemo wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "site"
+                },
+                {
+                    "name": "demo",
+                    "productions": [
+                        {
+                            "name": "webSiteDemo",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webSiteWebapi",
+            "title": "webSiteWebapi wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "site"
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webStaticSite",
+            "title": "webStaticSite wizzi meta production",
+            "isPackageMain": true,
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "static-site",
+                    "productions": [
+                        {
+                            "name": "webStaticSite",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webSvg",
+            "title": "webSvg wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "svg",
+                    "productions": [
+                        {
+                            "name": "webSvg",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        },
+        {
+            "name": "webWizziDocs",
+            "title": "webWizziDocs wizzi meta production",
+            "categories": [
+                {
+                    "name": "webdev"
+                },
+                {
+                    "name": "wizzi"
+                },
+                {
+                    "name": "wizzi-docs",
+                    "productions": [
+                        {
+                            "name": "webWizziDocs",
+                            "plugin": "wizzi.meta.web"
+                        }
+                    ]
+                }
+            ],
+            "plugin": "wizzi.meta.web"
+        }
+    ],
+    "metaProductionSelectors": [
+        "useCloudAzure",
+        "useCloudHeroku",
+        "useCommonsBabel",
+        "useCommonsBabelrc",
+        "useCommonsDeploy",
+        "useCommonsEnv",
+        "useCommonsEslint",
+        "useCommonsGit",
+        "useCommonsPackage",
+        "useCommonsPostcss",
+        "useCommonsPrettier",
+        "useCommonsServerCertificate",
+        "useCommonsTailwind",
+        "useCommonsWebpack",
+        "useCommonsWizzi",
+        "useDocsHtml",
+        "useDocsMarkdown",
+        "useDocsPdf",
+        "useDocsPpt",
+        "useDocsWord",
+        "useJsCLI",
+        "useJsCommons",
+        "useJsUtils",
+        "useJsVanillaWebpackGetStartedApp",
+        "useJsVanillaUtils",
+        "useJsReact",
+        "useJsReactApp",
+        "useJsReactWebpackGetStartedApp",
+        "useJsReactUtils",
+        "useTsCommons",
+        "useTsEsmWrapper",
+        "useTsNode",
+        "useTsNodeFeatureGithub",
+        "useTsUtils",
+        "useTsExpress",
+        "useTsExpressApp",
+        "useTsExpressData",
+        "useTsExpressFeatureAccount",
+        "useTsExpressFeatureAuth",
+        "useTsExpressFeatureBlog",
+        "useTsExpressFeatureConfig",
+        "useTsExpressFeatureCdn",
+        "useTsExpressFeatureFilesystem",
+        "useTsExpressFeatureGithub",
+        "useTsExpressFeaturePacki",
+        "useTsExpressFeatureProject",
+        "useTsExpressFeatureRepo",
+        "useTsExpressFeatureUser",
+        "useTsExpressFeatureWizzi",
+        "useTsExpressFeatureWizziDocs",
+        "useTsExpressFeatureWizziFs",
+        "useTsExpressFeatureWizziGist",
+        "useTsExpressFeatureWizziMeta",
+        "useTsExpressFeatureWizziProduction",
+        "useTsExpressIttf",
+        "useTsExpressStyles",
+        "useTsExpressTests",
+        "useTsExpressUtils",
+        "useTsExpressWizziSite",
+        "useTsReact",
+        "useTsReactApp",
+        "useTsReactAssets",
+        "useTsReactBasicWebpack",
+        "useTsReactBasicVite",
+        "useTsReactComponents",
+        "useTsReactEditor",
+        "useTsReactFeatures",
+        "useTsReactNextjsApp",
+        "useTsReactPageForms",
+        "useTsReactRedux",
+        "useTsReactSiteWebpack",
+        "useTsReactStoryboard",
+        "useTsReactThemes",
+        "useTsReactTypings",
+        "useTsReactUtils",
+        "useTsReactWebpackGetStartedApp",
+        "useTsReactWebpackWidgetsApp",
+        "useTsReactWidgets",
+        "useTsDbMongoDb",
+        "useTsDbPostgres",
+        "useTsDbRedis",
+        "useTsDbSequelize",
+        "useWebAppCrud",
+        "useWebCss",
+        "useWebHtml",
+        "useWebIttfSite",
+        "useWebIttfStudioMeta",
+        "useWebJs",
+        "useWebJsWz",
+        "useWebSiteDemo",
+        "useWebSiteWebapi",
+        "useWebStaticSite",
+        "useWebSvg",
+        "useWebWizziDocs"
+    ]
+}

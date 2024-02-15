@@ -1,0 +1,4 @@
+{
+    metaProduction "webSiteWebapi"
+    [ parameters
+        params/use(blog)

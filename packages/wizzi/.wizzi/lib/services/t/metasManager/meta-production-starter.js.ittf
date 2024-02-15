@@ -39,3 +39,41 @@
                             set result[k] = metaProduction[k]
                         return search(++i)
         _ search(0)
+
+	# 
+		# Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+        # and retrieve their pluginCategories and pluginMetaProductions objects
+		# params
+		#   { options
+		#     { metaCtx
+		# return
+		# { 
+		#   [ metaProductions
+        #       string name
+        #       [ categories
+        #   [ categories
+        #       string name
+        #       [ productions
+	m getCategoryAndMetaProductionStarter
+        param options
+        callback
+
+		$$ loog mdDisplayName + '.getCategoryAndMetaProductionStarter'
+		var
+			decl result = []
+			
+        const search
+            =>
+                param i
+                if i >= this.metaPlugins.length
+                    r_cb( result )
+                var metaPlugin = this.metaPlugins[i]
+                _ result.push
+                    {
+                        @ plugin metaPlugin.name
+                        @ version metaPlugin.version
+                        @ metaProductions metaPlugin.provides.pluginMetaProductions
+                        @ categories metaPlugin.provides.pluginCategories
+                return search(++i)
+        _ search(0)        
+

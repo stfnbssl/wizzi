@@ -1,0 +1,5 @@
+{
+    metaProduction "tsExpressFeatureAuth"
+    [ parameters
+        params/boolean( useLocalUserFromConfig )
+        params/boolean( useJwt )

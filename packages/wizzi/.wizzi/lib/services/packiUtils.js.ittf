@@ -76,3 +76,38 @@ module wizzi@${wzCtx.version}.packiUtils
                         @ folderPath
                         @ k
                     @ packiFiles[k].contents
+    +
+    #
+        # params
+        # [ metaProductions 
+        #   {
+        #     string name
+        #     { folderTemplates 
+        #       :ref PackiFiles
+        #     { ittfDocumentTemplates 
+        #       :ref PackiFiles
+        #     { plainDocuments 
+        #       :ref PackiFiles
+        #       :optional
+        # result
+        #   { 
+        #     :ref PackiFiles
+    set md.createMetaPackifilesFromWizziHub
+        function 
+            param metaProductions
+            const result = {}
+            foreach mp in metaProductions
+                for var k in mp.folderTemplates
+                    var newk = 'folderTemplates/' + mp.productionName + '/' + k
+                    set result[newk] = mp.folderTemplates[k]
+                if mp.ittfDocumentTemplates
+                    for var k in mp.ittfDocumentTemplates
+                        var newk = 'ittfDocumentTemplates/' + mp.productionName + '/' + k
+                        set result[newk] = mp.ittfDocumentTemplates[k]
+                if mp.plainDocuments
+                    for var k in mp.plainDocuments
+                        var newk = 'plainDocuments/' + mp.productionName + '/' + k
+                        set result[newk] = mp.plainDocuments[k]
+            return result
+
+            

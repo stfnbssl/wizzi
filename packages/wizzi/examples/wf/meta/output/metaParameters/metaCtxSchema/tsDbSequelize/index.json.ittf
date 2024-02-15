@@ -1,0 +1,4 @@
+{
+    metaProduction "tsDbSequelize"
+    [ parameters
+        params/use( postgres )

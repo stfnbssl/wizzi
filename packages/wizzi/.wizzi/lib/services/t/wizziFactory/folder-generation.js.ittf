@@ -56,7 +56,11 @@ $group
                                         _ modelRequestContext.metaCtx.__wz_fsc.addDebugObject
                                             @ 'file'
                                             @ ''
-                                var artifactName = getDefaultArtifact(item.schema)
+                                $$ var artifactName = getDefaultArtifact(item.schema)
+                                var artifactName = this.mapSchemaToDefaultArtifact(item.schema)
+                                if !artifactName || artifactName.length < 3
+                                    r_cb_error( 999, generateFolderArtifacts
+                                        @ "Default artifact not found for schema: " + item.schema
                                 _ this.loadModelAndGenerateArtifact
                                     @ item.fullPath
                                     {
@@ -103,8 +107,7 @@ $group
                                                         @ item.destRelPath
                                             @ 0
 
-                        f_cb_test(result)
-                            # loog 'generateFolderArtifacts.result', result
+                        f_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
                             r_cb( result )
         catch ex
             r_cb_wz_err( WizziFactoryError, generateFolderArtifacts, ex )

@@ -1,0 +1,5 @@
+ittf
+    name "${'$'}{metaCtx.name}"
+    name "Hello"
+    # from t/fragment1
+    name "${'$'}{metaCtx.name}"

@@ -4,8 +4,8 @@ $group
 
         $file __dot__wizzi/${pkgPath}root/__dot__prettierignore.text.ittf.ittf
             text
-                ${"${'$'}"}include prettier/prettierignore.text
+                ${'$'}${'$'}include prettier/prettierignore.text
         
         $file __dot__wizzi/${pkgPath}root/__dot__prettierrc.json.ittf.ittf
             {
-                ${"${'$'}"}include prettier/rc.json
+                ${'$'}${'$'}include prettier/rc.json

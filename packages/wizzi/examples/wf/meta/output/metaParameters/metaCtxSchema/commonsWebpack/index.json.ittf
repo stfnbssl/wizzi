@@ -1,0 +1,4 @@
+{
+    metaProduction "commonsWebpack"
+    [ parameters
+        params/string( outputPath )

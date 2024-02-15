@@ -160,9 +160,10 @@ module
     function getMetaContext
         return
             {
-                [ friends
-                    @ 'arthur'
-                    @ 'mary'
+                { metaCtx
+                    [ friends
+                        @ 'arthur'
+                        @ 'mary'
 
 
     function getMetaIttfFile

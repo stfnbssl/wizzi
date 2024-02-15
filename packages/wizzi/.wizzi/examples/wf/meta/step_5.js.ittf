@@ -73,6 +73,22 @@ module
                                         @ metaProductionTempFolder '___template'
                                         @ metaProductionWizziFolder '.wizzi'
                                     { globalContext
+                                    [ productions
+                                        {
+                                            @ name 'wizzihub'
+                                            { folderTemplates
+                                                { ['index.ittf.ittf']
+                                                    @ type 'CODE'
+                                                    @ contents
+                                                        [
+                                                            @ '$group'
+                                                            @ '    $file __dot__wizzi/index.html.ittf.ittf'
+                                                            @ '        html'
+                                                            @ '            body'
+                                                            @ '                h1 Hello world'
+                                                            ._ join
+                                                                @ '\n'                                
+
                                 =>
                                     param err
                                     param wizziPackiFiles

@@ -1,0 +1,46 @@
+[
+    {
+        "plugin": "wizzi.meta.cloud",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.commons",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.docs",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.js",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.js.vanilla",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.js.react",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.ts",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.ts.express",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.ts.react",
+        "version": "0.0.2"
+    },
+    {
+        "plugin": "wizzi.meta.ts.db",
+        "version": ""
+    },
+    {
+        "plugin": "wizzi.meta.web",
+        "version": "0.0.2"
+    }
+]

@@ -25,6 +25,17 @@ $group
         #          optional
         #        string wizziProductionFolder
         #          optional
+        #        [ productions
+        #          optional
+        #          {
+        #            string name
+        #            { folderTemplates 
+        #              :ref PackiFiles
+        #            { ittfDocumentTemplates 
+        #              :ref PackiFiles
+        #            { plainDocuments 
+        #              :ref PackiFiles
+        #              :optional
 	m executeMetaProduction
         param options
 		callback
@@ -44,6 +55,10 @@ $group
                                 @ 'packi'
                                 @ 'wf_metaProduction_input'
                                 @ metaPackiFiles
+                        checked_call( testMergeOptionsProductions, Error merging meta plugins and options productions
+                            _ this.mergeOptionsProductions
+                                @ metaPackiFiles
+                                @ options 
                         set metaPackiFiles[folderTemplatesIndexPath]
                             {
                                 @ type "CODE"
@@ -86,6 +101,43 @@ $group
                                                         @ 'wf_metaProduction_output'
                                                         @ wizziPackiFiles
                                                 r_cb( wizziPackiFiles )
+
+	#
+		# Merge meta plugins productions with options.productions
+		# params
+		#   { metaPackiFiles
+        #   { options
+		#     [ productions
+        #       optional
+        #       {
+        #         string name
+        #         { folderTemplates 
+        #           :ref PackiFiles
+        #         { ittfDocumentTemplates 
+        #           :ref PackiFiles
+        #         { plainDocuments 
+        #           :ref PackiFiles
+        #           :optional
+		# return
+		# | void (options.productions are added to metaPackiFiles)
+
+    m mergeOptionsProductions
+        param metaPackiFiles
+        param options
+        if options.productions
+            const optionsPackiFiles
+                _ packiUtils.createMetaPackifilesFromWizziHub
+                    @ options.productions
+            for var k in optionsPackiFiles
+                if metaPackiFiles[k]
+                    return
+                        {
+                            @ __is_error true
+                            @ message 'The file ' + k + ' already exists in meta plugins packiFiles'
+                set metaPackiFiles[k] = optionsPackiFiles[k]
+        return
+            {
+                @ ok true
 
 	#
 		# Prepare the file structure to allow includes 

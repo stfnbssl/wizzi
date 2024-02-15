@@ -1,5 +1,4 @@
-$group
-    $params text, href
+}$group
     li
-        a ${text}
-            href ${href}
+        a
+            href

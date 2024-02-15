@@ -38,8 +38,9 @@ module wizzi@${wzCtx.version}.metasManager
 
         $include metasManager/initialize
         $include metasManager/register
-        $include metasManager/meta-production
+        $include metasManager/meta-parameters-starter
         $include metasManager/meta-production-starter
+        $include metasManager/meta-production
         $include metasManager/getProvides
         $include metasManager/createJsonWizziFactoryAndJsonFs
 

@@ -9,6 +9,8 @@ $group
 		# params
         #   string ittfMetaFilePath
         #   { context
+        #     { modelRequestContext
+        #       { metaCtx
 		#   { options
 		#     string tempFolder
         #     string destFolder

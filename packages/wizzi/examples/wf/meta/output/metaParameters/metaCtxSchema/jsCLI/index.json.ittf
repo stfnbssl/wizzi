@@ -1,0 +1,4 @@
+{
+    metaProduction "jsCLI"
+    [ parameters
+        use( config )

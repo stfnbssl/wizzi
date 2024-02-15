@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\step_1.js.ittf
-    utc time: Tue, 16 Jan 2024 12:38:13 GMT
+    utc time: Thu, 15 Feb 2024 18:31:20 GMT
 */
 'use strict';
 /**
@@ -443,10 +443,12 @@ function jsonFsToPackiFiles(jsonFs, folder, callback) {
 }
 function getMetaContext() {
     return {
-            friends: [
-                'arthur', 
-                'mary'
-            ]
+            metaCtx: {
+                friends: [
+                    'arthur', 
+                    'mary'
+                ]
+             }
          };
 }
 function getMetaIttfFile() {

@@ -1,0 +1,58 @@
+{
+    "metaCtxSchema/webWizziDocs/t/params/array.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name\n    name ${name}\n    type \"array\"\n    $append extend\n    { item\n        $hook\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/array.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    { \r\n        name ${name}\r\n        type \"array\"\r\n        $append extend\r\n        { item\r\n            $hook"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/boolean.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name, defaultValue:boolean|false\n    name \"${name}\"\n    type \"boolean\"\n    defaultValue \"${defaultValue}\"\n    $hook\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/boolean.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    {\r\n        name \"${name}\"\r\n        type \"boolean\"\r\n        $hook"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/enum.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name\n    name \"${name}\"\n    type \"string\"\n    kind \"enum\"\n    $append extend\n    [ enumValues\n        $hook\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/integer.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name, defaultValue:integer|-1\n    name \"${name}\"\n    type \"integer\"\n    $if defaultValue == null\n        defaultValue null\n    $else\n        defaultValue ${defaultValue}\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/integer.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    {\r\n        name \"${name}\"\r\n        type \"integer\"\r\n        $hook"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/object.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name\n    name ${name}\n    type \"object\"\n    $append extend\n    [ properties\n        $hook\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/object.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    { \r\n        name ${name}\r\n        type \"object\"\r\n        $append extend\r\n        [ properties\r\n            $hook    \r\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/string.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name, defaultValue|@@null\n    name \"${name}\"\n    type \"string\"\n    $if defaultValue == null\n        defaultValue null\n    $else\n        defaultValue \"${defaultValue}\"\n    $hook\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/string.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    {\r\n        name \"${name}\"\r\n        type \"string\"\r\n        $hook"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/use.ittf.ittf": {
+        "type": "CODE",
+        "contents": "{\n    $params name, defaultValue:boolean|false\n    name \"use${_.capitalize(name)}\"\n    type \"use\"\n    defaultValue \"${defaultValue}\"\n    [ parameters\n"
+    },
+    "metaCtxSchema/webWizziDocs/t/params/use.json.ittf": {
+        "type": "CODE",
+        "contents": "$group\r\n    $params name\r\n    {\r\n        name use\"${_.capitalize(name)}\"\r\n        type \"boolean\"\r\n    { \r\n        name ${name}\r\n        type \"object\"\r\n        [ properties\r\n            $hook"
+    },
+    "metaCtxSchema/webWizziDocs/index.json.ittf": {
+        "type": "CODE",
+        "contents": "{\r\n    metaProduction \"webWizziDocs\"\r\n    [ parameters\r\n"
+    }
+}

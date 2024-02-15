@@ -1,0 +1,10 @@
+{
+    metaProduction "tsExpressFeatureUser"
+    [ parameters
+        {
+            name "store"
+            type "string"
+            kind "enum"
+            [ enumValues
+                "mongoDb"
+                "sequelize"

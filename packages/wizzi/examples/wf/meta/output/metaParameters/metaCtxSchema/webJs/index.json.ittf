@@ -1,0 +1,10 @@
+{
+    metaProduction "webJs"
+    [ parameters
+        params/use( jsApi )
+        params/use( jsControls )
+        params/use( jsDb )
+        params/use( jsEditors )
+        params/use( jsMvc )
+        params/use( jsStyles )
+        params/use( jsUtils )

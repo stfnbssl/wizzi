@@ -1,2 +1,0 @@
-${'$'}group 
-   $include package/devDependencies.json

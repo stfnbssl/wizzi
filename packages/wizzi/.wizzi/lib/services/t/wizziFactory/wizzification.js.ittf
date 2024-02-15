@@ -1,5 +1,13 @@
 $group
 
+	# 
+		# Check if a wizzi schema has a wizzifier
+		# returns
+		#   true|false
+	m canWizzify
+		string schemaName
+		return this.pluginsManager.canWizzify(schemaName)
+
 	#
 		# Retrieve a wizzifier
 		# Wizzifiers are searched in the PluginsManager
