@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Thu, 15 Feb 2024 18:31:18 GMT
+    utc time: Fri, 23 Feb 2024 04:14:45 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -15,8 +15,11 @@ const vfile = require('@wizzi/utils').vfile;
 const fail = require('@wizzi/utils').fail;
 var JsonComponents = require('@wizzi/repo').JsonComponents;
 const wizziFactory = require('./wizziFactory');
+const inmemoryMetaPlugin = require('./inmemoryMetaPlugin');
 const errors = require('../errors');
+const costants = require('../costants');
 const packiUtils = require('./packiUtils');
+const validation = require('./validation');
 const existsSync = fs.existsSync || path.existsSync;
 const realpathSync = fs.realpathSync;
 const exists = fs.exists || path.exists;
@@ -25,15 +28,17 @@ const stringify = require('json-stringify-safe');
 
 const mdDisplayName = "wizzi.metasManager";
 
-const packiFilePrefix = 'json:/';
-const packiFilePrefixExtract = 'json:/';
-const metaProductionTempFolder = '___temp';
-const metaProductionDestFolder = '.wizzi';
+const {
+    packiFilePrefix, 
+    packiFilePrefixExtract, 
+    metaProductionTempFolder, 
+    metaProductionWizziFolder
+ } = costants;
 
 class MetasManager {
     constructor() {
         this.__type = 'MetasManager';
-        this.__version = '0.8.9';
+        this.__version = '0.8.13';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -50,6 +55,13 @@ class MetasManager {
          [ items
          string pluginName
          string metaPluginsBaseFolder
+         [ inMemoryItems
+         {
+         string name
+         [ pluginMetaProductions
+         :ref MetaProvidesProduction
+         { metaPackiFiles
+         :ref PackiFiles
          { globalContext
          { test
     */
@@ -64,10 +76,17 @@ class MetasManager {
                 'InvalidArgument', 'initialize', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
             ));
         }
-        if (verify.isNullOrUndefined(options.plugins) === false) {
-            if (verify.isObject(options.plugins) === false) {
+        if (verify.isNullOrUndefined(options.wfPlugins) === false) {
+            if (verify.isObject(options.wfPlugins) === false) {
                 return callback(error(
-                    'InvalidArgument', 'initialize', { parameter: 'options.plugins', message: 'The options.plugins parameter must be an object. Received: ' + options.plugins }
+                    'InvalidArgument', 'initialize', { parameter: 'options.wfPlugins', message: 'The options.wfPlugins parameter must be an object. Received: ' + options.wfPlugins }
+                ));
+            }
+        }
+        if (verify.isNullOrUndefined(options.metaPlugins) === false) {
+            if (verify.isObject(options.metaPlugins) === false) {
+                return callback(error(
+                    'InvalidArgument', 'initialize', { parameter: 'options.metaPlugins', message: 'The options.metaPlugins parameter must be an object. Received: ' + options.metaPlugins }
                 ));
             }
         }
@@ -129,41 +148,85 @@ class MetasManager {
     }
     loadPlugins(options, callback) {
         
-        var itemsOptions = options.items;
+        var pluginRequests = [];
+        var plugins = [];
+        if (options.items && options.items.length > 0) {
+            var i, i_items=options.items, i_len=options.items.length, item;
+            for (i=0; i<i_len; i++) {
+                item = options.items[i];
+                if (typeof (item) === "string") {
+                    pluginRequests.push({
+                        packagePath: item
+                     })
+                }
+                else if (verify.isNotEmpty(item.packagePath)) {
+                    pluginRequests.push(item)
+                }
+                else {
+                    return callback(error('ParameterError', 'loadPlugins', 'Missing "packagePath" property in meta plugin request option'));
+                }
+            }
+        }
+        if (options.inMemoryItems && options.inMemoryItems.length > 0) {
+            var i, i_items=options.inMemoryItems, i_len=options.inMemoryItems.length, item;
+            for (i=0; i<i_len; i++) {
+                item = options.inMemoryItems[i];
+                const valid = validation.validateInMemoryMetaPlugin(item);
+                if (valid.ok) {
+                    pluginRequests.push(item)
+                }
+                else {
+                    callback(error('ParameterError', 'loadPlugins', 'Invalid options requesting an inmemory meta plugin (see inner error)', valid.error))
+                }
+            }
+        }
         var metaPluginsBaseFolder = options.metaPluginsBaseFolder || path.resolve(__dirname, '..', '..', '..');
         var packagePathCache = this.packagePathCache;
         
         function resolveNext(i) {
             
-            // loog 'itemsOptions', itemsOptions
-            if (i >= itemsOptions.length) {
-                return callback(null, itemsOptions);
+            // loog 'pluginRequests', pluginRequests
+            if (i >= pluginRequests.length) {
+                return callback(null, plugins);
             }
-            var plugin = itemsOptions[i];
-            if (typeof (plugin) === "string") {
-                plugin = itemsOptions[i] = {packagePath: plugin};
-            }
-            if (plugin.hasOwnProperty("packagePath") && !(plugin.hasOwnProperty("setup"))) {
-                return resolveModule(metaPluginsBaseFolder, plugin.packagePath, function(err, moduleObject) {
+            var pluginRequest = pluginRequests[i];
+            if (pluginRequest.hasOwnProperty("packagePath")) {
+                return resolveModule(metaPluginsBaseFolder, pluginRequest.packagePath, function(err, moduleObject) {
                         if (err) {
                             return callback(err);
                         }
                         Object.keys(moduleObject).forEach(function(key) {
                             
-                            // loog 'plugin key', key
-                            if (!plugin.hasOwnProperty(key)) {
-                                plugin[key] = moduleObject[key];
+                            // loog 'pluginRequest key', key
+                            if (!pluginRequest.hasOwnProperty(key)) {
+                                pluginRequest[key] = moduleObject[key];
                             }
                         })
-                        plugin.packageName = plugin.packagePath;
-                        plugin.packagePath = moduleObject.packagePath;
+                        pluginRequest.packageName = pluginRequest.packagePath;
+                        pluginRequest.packagePath = moduleObject.packagePath;
                         if (options.verbose) {
                             var date = new Date();
                             var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
                             var spaces = new Array(timeNow.length+1).join(' ');
-                            console.log("[33m%s[0m", timeNow, "Loaded meta plugin", plugin.packageName, 'version', plugin.version);
-                            console.log("[33m%s[0m", spaces, 'meta productions: ', plugin.provides.metaProductions.join(', '));
+                            console.log("[33m%s[0m", timeNow, "Loaded meta plugin", pluginRequest.packageName, 'version', pluginRequest.version);
+                            console.log("[33m%s[0m", spaces, 'meta productions: ', pluginRequest.provides.metaProductions.join(', '));
                         }
+                        plugins.push(pluginRequest);
+                        return resolveNext(++i);
+                    });
+            }
+            else if (pluginRequest.hasOwnProperty("pluginMetaProductions")) {
+                return resolveInMemory(pluginRequest, function(err, moduleObject) {
+                        if (err) {
+                            return callback(err);
+                        }
+                        if (options.verbose) {
+                            var date = new Date();
+                            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                            var spaces = new Array(timeNow.length+1).join(' ');
+                            console.log("[33m%s[0m", timeNow, "Loaded meta plugin", moduleObject.name, 'version', moduleObject.version);
+                        }
+                        plugins.push(moduleObject);
                         return resolveNext(++i);
                     });
             }
@@ -172,6 +235,15 @@ class MetasManager {
             }
         }
         resolveNext(0);
+        function resolveInMemory(inMemoryMetaPluginOptions, callback) {
+            
+            inmemoryMetaPlugin.createMetaPlugin(inMemoryMetaPluginOptions, function(err, moduleObject) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, moduleObject);
+            })
+        }
         function resolveModule(pluginsBaseFolder, modulePath, callback) {
             
             resolvePackage(pluginsBaseFolder, (modulePath + "/package.json"), function(err, packagePath) {
@@ -408,7 +480,9 @@ class MetasManager {
          - wzCtxSchema/parameters/<ProductionName>/...
          Each meta production must have an index.json.ittf file.
          return
-         | packifiles
+         {
+         { [Meta-production-name]
+        
          | wzError
          params
          { options
@@ -583,6 +657,9 @@ class MetasManager {
         };
         console.log(mdDisplayName + '.getProvidedMetas', __filename);
         var provides = {
+            nodeModulePlugins: [
+                
+            ], 
             metaCategories: [
                 
             ], 
@@ -600,6 +677,11 @@ class MetasManager {
                 return callback(null, provides);
             }
             var metaPlugin = this.metaPlugins[ndx];
+            provides.nodeModulePlugins.push({
+                name: metaPlugin.name, 
+                version: metaPlugin.version, 
+                categories: metaPlugin.provides.categories
+             })
             // log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
             var i, i_items=metaPlugin.provides.metaProductions, i_len=metaPlugin.provides.metaProductions.length, mp;
             for (i=0; i<i_len; i++) {
@@ -708,7 +790,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.9.metasManager.' + method,
+        method: 'wizzi@0.8.13.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

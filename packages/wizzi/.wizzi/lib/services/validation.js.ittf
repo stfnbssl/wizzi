@@ -1,0 +1,34 @@
+module wizzi@${wzCtx.version}.services.validation
+    kind es6
+    +
+    var verify = require('@wizzi/utils').verify
+    +
+    const md = module.exports = {}
+    +
+    $include validation/plugin
+    $include validation/metaPlugin
+    $include validation/inmemoryMetaPlugin
+
+    class Validator
+        ctor
+            set this.errors = []
+        m error
+            param err
+            _ this.errors.push
+                @ err
+        m getValid
+            if this.errors.length == 0
+                return
+                    {
+                        @ ok true
+            else
+                return
+                    {
+                        @ __is_error true
+                        @ message ""
+                        @ error this.errors
+    
+    function startValidation
+        return 
+            new Validator
+

@@ -139,7 +139,15 @@
                     
                                             # loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
 
-                                            return
-                                                _ callback
-                                                    @ null
-                                                    @ ittfDocumentGraph
+                                            if options.getAll
+                                                return 
+													_ callback
+														@ null
+														{
+															@ wzPackageIttfDocumentGraph ittfDocumentGraph
+															@ ittfFsNode root
+											else									
+												return
+													_ callback
+														@ null
+														@ ittfDocumentGraph

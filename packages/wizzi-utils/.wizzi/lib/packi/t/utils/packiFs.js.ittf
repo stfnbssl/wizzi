@@ -1,0 +1,47 @@
+$group
+
+    set md.packiFilesToFs
+        function
+            param folderPath
+            param packiFiles
+            param options
+            param callback
+            set options = options || {}
+			if options.file
+				_ execPackiFilesToFs
+					@ options.file
+					@ folderPath
+					@ packiFiles
+                    @ options
+					@ callback
+			else
+				_ vfile
+					f_cb( file )
+						_ execPackiFilesToFs
+							@ file
+							@ folderPath
+							@ packiFiles
+                            @ options
+							@ callback
+    +
+    function execPackiFilesToFs
+        param vfile
+        param folderPath
+        param packiFiles
+        param options
+        param callback
+        const packiNames = Object.keys(packiFiles)
+        async_foreach( doWrite, ndx )
+            const packiName = packiNames[ndx]
+            if !packiName
+                r_cb()
+            const filePath
+                _ path.join
+                    @ folderPath
+                    @ packiName
+            _ vfile.write
+                @ filePath
+                @ packiFiles[packiName].contents
+                f_cb()
+                    _ doWrite
+                        @ ndx + 1

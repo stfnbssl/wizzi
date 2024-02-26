@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\errors\step_1.js.ittf
-    utc time: Thu, 11 Jan 2024 15:48:37 GMT
+    utc time: Tue, 20 Feb 2024 12:12:42 GMT
 */
 'use strict';
 //
 // Example skeleton specific for the '@wizzi/mtree' kernel package
 //
 /**
-     Examples: Evaluator_Step_1
+     Examples: Errors_Step_1
     
 */
 var path = require('path');
@@ -40,7 +40,7 @@ function getFSDocumentStore(callback) {
         return storeFactory(callback);
     })
 }
-var Evaluator_Step_1 = function(step_callback) {
+var Errors_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
     var ittfUri = path.join(__dirname, 'ittf', 'missingvar_1.js.ittf');
     var productionManager = mocks.getProductionManager();
@@ -82,18 +82,18 @@ var Evaluator_Step_1 = function(step_callback) {
         })
     })
 };
-Evaluator_Step_1.__name = 'Evaluator_Step_1';
+Errors_Step_1.__name = 'Errors_Step_1';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - Evaluator_Step_1 - ' + text);
+    console.log('** level 0 - step 1 - Errors_Step_1 - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- Evaluator_Step_1 - ' + text);
+    console.log('   ','-- Errors_Step_1 - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -283,7 +283,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = Evaluator_Step_1;
+module.exports = Errors_Step_1;
 if (typeof require != 'undefined' && require.main === module) {
-    Evaluator_Step_1();
+    Errors_Step_1();
 }

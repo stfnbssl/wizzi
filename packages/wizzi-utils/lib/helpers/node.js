@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\node.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 
@@ -12,7 +13,10 @@ work.lineSep = "__LS__";
 work.textSep = "__TS__";
 
 var md = module.exports = {};
-//
+/**
+     inline a node hierarchy in a single text line
+     separated by the "__LS__" sequence
+*/
 md.nodeToTextLine = function(node) {
     var acc = [];
     if (node.children) {
@@ -34,7 +38,9 @@ function textline(node, acc, indent) {
         textline(item, acc, (indent + '  '));
     }
 }
-//
+/**
+     extract the text lines from a text string inlined with `nodeToTextLine`
+*/
 md.inlinedTextToTextLines = function(text, options) {
     options = options || {};
     if (typeof(text) === 'undefined' || text == null) {

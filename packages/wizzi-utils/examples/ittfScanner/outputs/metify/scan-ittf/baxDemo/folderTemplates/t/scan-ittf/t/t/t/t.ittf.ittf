@@ -1,0 +1,4 @@
+$group
+    $file scan-ittf/tfolder/header.html.ittf.ittf
+       $group
+           ${'$'}include baxDemo/scan-ittf/tfolder/header.html

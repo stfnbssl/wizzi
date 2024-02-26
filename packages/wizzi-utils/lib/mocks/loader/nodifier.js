@@ -1,12 +1,56 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\mocks\loader\nodifier.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 var verify = require('wizzi-helpers').verify;
 var util = require('util');
-//
+/**
+     Nodifies the lines of an IttfDocument and creates a
+     tree structure object based on line indentation.
+     . detects the $params command
+     . implements line continuation
+     . assigns an id to each node
+     !!! A line object is transformed in place into a node object
+     without recreation (no cloning) !!!
+    
+     Inputs
+     - the lines produced by the liner
+     - a newly created, empty, mTreeBrick
+     Outputs
+     [ nodes
+     { line -> mTreeNode
+     { parent
+     // parent mTreeNode
+     { model
+     // the mTreeBrick to which the line belongs
+     [ children
+     // the children mTreeNodes
+     id: Number,
+     indent: Number,
+     name: String,
+     value: String,
+     row: Number,
+     col: Number,
+     sourceKey: String,
+     tagSuffix: undefined || '('
+     hasMacro: Boolean
+    
+     Ittf commands:
+     $params  // the param values are stored in the MTree
+     \        // implements line continuation
+     //   the value is appendend to the value of the parent line
+     //   without separators
+            // implements line continuation
+     //   the value is appendend to the value of the parent line
+     //   with a space separator:  prevLine,value += ' ' + currentLine.value
+     \n       // implements line continuation
+     //   the value is appendend to the value of the parent line
+     //   with a line break separator:  prevLine,value += '\n' + currentLine.value
+    
+*/
 module.exports = function(lines, mTreeBrick) {
     if (verify.isArray(lines) === false) {
         return error(

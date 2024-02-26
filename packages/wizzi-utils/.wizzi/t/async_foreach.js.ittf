@@ -1,0 +1,9 @@
+$group
+    $params doFunc, ndx
+
+    function ${doFunc}
+        param ${ndx}
+        $hook
+    return
+        _ ${doFunc}
+            @ 0

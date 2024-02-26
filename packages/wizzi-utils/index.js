@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\root\index.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 // TODO lots of clean up
@@ -14,11 +15,13 @@ var pretty = require('./lib/pretty/index');
 var fSystem = require('./lib/fSystem/index');
 var helpers = require('./lib/helpers/index');
 var lorem = require('./lib/lorem/index');
+var packi = require('./lib/packi/index');
 var crypto = require('./lib/crypto/index');
 var errors = require('./lib/errors/index');
 var mocks = require('./lib/mocks/index');
 //
 var md = module.exports = {};
+md.version = "0.8.5";
 // features
 md.ittfGraph = ittfGraph;
 md.ittfScanner = ittfScanner;
@@ -26,6 +29,7 @@ md.pretty = pretty;
 md.fSystem = fSystem;
 md.crypto = crypto;
 md.lorem = lorem;
+md.packi = packi;
 md.helpers = helpers;
 md.errors = errors;
 md.mocks = mocks;

@@ -37,13 +37,11 @@
 	+
 	$include json
 	+
-	set md.JsonComponents = require('./lib/json/index') 
-	+
 	#
 		# params
 		#   { options
 		#     string storeKind
-		#       oneOf filesystem, mongodb, localstorage
+		#       oneOf filesystem, mongodb, json
 		#     string storeUri
 		#       when storeKind == mongodb
 		#     string storeBaseFolder
@@ -109,7 +107,7 @@
 
 	function checkStoreKind
 		param kind
-		return ['filesystem', 'mongodb', 'json', 'browser'].indexOf(kind) > -1
+		return ['filesystem', 'mongodb', 'json'].indexOf(kind) > -1
 
 	# TODO fileService.getFilesAsync
 	set md.folderFilesInfoByPath
@@ -144,5 +142,3 @@
 					{
 						@ is_error true
 						@ message 'The file is not an ittfdocument: ' + result.fullPath
-
-

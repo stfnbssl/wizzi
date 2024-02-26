@@ -25,17 +25,17 @@ $group
         #          optional
         #        string wizziProductionFolder
         #          optional
-        #        [ productions
-        #          optional
-        #          {
-        #            string name
-        #            { folderTemplates 
-        #              :ref PackiFiles
-        #            { ittfDocumentTemplates 
-        #              :ref PackiFiles
-        #            { plainDocuments 
-        #              :ref PackiFiles
-        #              :optional
+        #     [ productions
+        #       optional
+        #       {
+        #         string name
+        #         { folderTemplates 
+        #           :ref PackiFiles
+        #         { ittfDocumentTemplates 
+        #           :ref PackiFiles
+        #         { plainDocuments 
+        #           :ref PackiFiles
+        #           :optional
 	m executeMetaProduction
         param options
 		callback
@@ -55,10 +55,12 @@ $group
                                 @ 'packi'
                                 @ 'wf_metaProduction_input'
                                 @ metaPackiFiles
+                        $* VIA old method
                         checked_call( testMergeOptionsProductions, Error merging meta plugins and options productions
                             _ this.mergeOptionsProductions
                                 @ metaPackiFiles
-                                @ options 
+                                @ options
+                        *$ 
                         set metaPackiFiles[folderTemplatesIndexPath]
                             {
                                 @ type "CODE"
@@ -79,8 +81,10 @@ $group
                             {
                                 @ globalContext options.globalContext || {}
                             a_cb(wf_and_jsonFs)
-                                const tempFolder = options.paths.metaProductionTempFolder || metaProductionTempFolder
-                                const destFolder = options.paths.metaProductionWizziFolder || metaProductionWizziFolder
+                                error 'options.paths && options.paths.metaProductionTempFolder', options.paths && options.paths.metaProductionTempFolder
+                                error 'metaProductionTempFolder', metaProductionTempFolder
+                                const tempFolder = (options.paths && options.paths.metaProductionTempFolder) || metaProductionTempFolder
+                                const destFolder = (options.paths && options.paths.metaProductionWizziFolder) || metaProductionWizziFolder
                                 _ wf_and_jsonFs.wf.metaGenerate
                                     @ packiFilePrefix + folderTemplatesIndexPath
                                     {
@@ -102,7 +106,8 @@ $group
                                                         @ wizziPackiFiles
                                                 r_cb( wizziPackiFiles )
 
-	#
+	$* VIA old method
+    #
 		# Merge meta plugins productions with options.productions
 		# params
 		#   { metaPackiFiles
@@ -138,6 +143,7 @@ $group
         return
             {
                 @ ok true
+    *$
 
 	#
 		# Prepare the file structure to allow includes 
@@ -145,6 +151,7 @@ $group
         # and create the folderTemplates index file
         # for a given set of meta packiFiles.
         # ittfDocumentTemplates folders become subfolders of the top tFolder of the metaPackiFiles.
+        # The object metaPackiFiles is modified in place.
 		# return
 		# | string fileContent
 		# params

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
-    utc time: Thu, 11 Jan 2024 15:48:37 GMT
+    utc time: Tue, 20 Feb 2024 12:12:41 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -1343,7 +1343,7 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
 function local_error_new(name, method, message, node, inner, other) {
     return new mainErrors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
             errorName: name, 
-            method: 'wizzi-mtree@0.8.3.jsWizzi.jsWizziRunner.' + method, 
+            method: 'wizzi-mtree@0.8.4.jsWizzi.jsWizziRunner.' + method, 
             ...other||{}, 
             inner: inner
          });
@@ -1496,7 +1496,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.3.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.8.4.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

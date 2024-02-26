@@ -23,7 +23,7 @@ module
 
         $append meta_plugins
             [ items
-                @ './wizzi.meta.package/index'
+                @ './wizzi.meta.commons/index'
                 @ './wizzi.meta.js/index'
             @ metaPluginsBaseFolder metaPluginsBaseFolder
         +
@@ -39,6 +39,7 @@ module
                     return
                 _ mm.getMetaProductionStarter
                     {
+                        @ useCommonsBabel true
                     =>
                         param err
                         param metaProductionstarter

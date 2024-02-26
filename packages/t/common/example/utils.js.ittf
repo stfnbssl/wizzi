@@ -9,9 +9,10 @@ $group
 		# Example: ${opt.name}
 		#
 	
-    $include example_includes
+    $include example_utils_includes
     
     $if opt.folderLevel == 1
+        var wizziUtils = require('../index')
         var vfile = require('../lib/fs/vfile')
         var uriParser = require('../lib/fs/uriParser')
         var fsUtils = require('../lib/fs/utils')
@@ -22,6 +23,7 @@ $group
         var ittfGraph = require('../lib/ittfGraph/index')
 
     $elif opt.folderLevel == 2
+        var wizziUtils = require('../../index')
         var vfile = require('../../lib/fSystem/vfile')    
         var uriParser = require('../../lib/fSystem/uriParser')
         var fsUtils = require('../../lib/fSystem/utils')
@@ -32,6 +34,7 @@ $group
         var ittfGraph = require('../../lib/ittfGraph/index')
 
     $elif opt.folderLevel == 3
+        var wizziUtils = require('../../index')
         var vfile = require('../../../lib/fSystem/vfile')    
         var uriParser = require('../../../lib/fSystem/uriParser')
         var fsUtils = require('../../../lib/fSystem/utils')
@@ -40,6 +43,11 @@ $group
         var ittfScanner = require('../../../lib/ittfScanner/index')
         var fs = require('../../../lib/fSystem/index')
         var ittfGraph = require('../../../lib/ittfGraph/index')
+
+    var file = wizziUtils.file
+	var fsfile = vfile()
+    var verify = wizziUtils.verify
+    var mocks = wizziUtils.mocks        
 
 	$hook imports
 

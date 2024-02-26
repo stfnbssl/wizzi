@@ -7,6 +7,7 @@
 		var
 			decl provides
                 {
+                    [ nodeModulePlugins
                     [ metaCategories
                     [ metaProductions
                     [ metaProductionSelectors
@@ -18,6 +19,11 @@
                 if ndx >= this.metaPlugins.length
                     r_cb( provides )
                 var metaPlugin = this.metaPlugins[ndx]
+                _ provides.nodeModulePlugins.push
+                    {
+                        @ name metaPlugin.name
+                        @ version metaPlugin.version
+                        @ categories metaPlugin.provides.categories
                 # log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
                 foreach mp in metaPlugin.provides.metaProductions
                     set mp.plugin = metaPlugin.name

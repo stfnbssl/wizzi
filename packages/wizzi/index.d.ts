@@ -5,6 +5,13 @@ type Readonly<P, T> = {
     readonly [P in keyof T]: T[P];
 }
 
+export const costants: {
+    packiFilePrefix: string,
+    packiFilePrefixExtract: string,
+    metaProductionTempFolder: string,
+    metaProductionWizziFolder: string
+};
+
 /**
  * Parsed line of an ittf document.
  */
@@ -203,12 +210,23 @@ type PluginsOptions = {
 }
 
 /**
+ * No filesystem meta plugins, implemented with json objects,
+ * that can be built in memory or retrieved from a database.
+ */
+type InMemoryMetaPluginOptions = {
+    name: string;
+    pluginMetaProductions: [MetaProvidesProduction];
+    metaPackiFiles: PackiFiles;
+}
+
+/**
  * Required plugins.
  * The metaPluginsBaseFolder option is for local plugins.
  */
 type MetaPluginsOptions = {
     items: string[];
     metaPluginsBaseFolder?: string;
+    inMemoryItems?: [InMemoryMetaPluginOptions];
 }
 
 /**
@@ -541,21 +559,34 @@ type MetaProductionPaths = {
     tempProductionFolder: string;
     wizziProductionFolder: string;
 }
-
 /**
  * @type MetaProductionData
  * @name The name of the meta production
  * @folderTemplates Ittf documents templating the folder structure of the production
- * @ittfDocumentTemplates Ittf documents templating the files of the production
+ * @ittfDocumentTemplates (optional) Ittf documents templating the files of the production
  * @plainDocuments (optional) Ittf documents with the plain content of files of the production
 */
 type MetaProductionData = {
     name: string;
-    folderTemplates?: PackiFiles;
+    folderTemplates: PackiFiles;
     ittfDocumentTemplates?: PackiFiles;
     plainDocuments?: PackiFiles;
 }
-   
+type MetaProvidesCategory = {
+    name: string,
+}
+type MetaProvidesProduction = {
+    name: string,
+    title: string,
+    isPackageMain: boolean,
+    categories: [MetaProvidesCategory],
+    plugin: string
+}
+type MetaProvidedMetas = {
+    metaCategories: [MetaProvidesCategory],
+    metaProductions: [MetaProvidesProduction],
+    metaProductionSelectors: [string]
+}
 /**
  * @type MetaExecutionOptions
  * @metaCtx  The meta production context object
@@ -728,15 +759,26 @@ declare interface WizziFactory {
     /**
      * @method getProvidedMetas
      * @description Retrieve the meta productions provided by the installed plugins
-     * @param callback Receives error | providedMetaProductions
+     * @param callback Receives error | MetaProvidedMetas
     */
-    getProvidedMetas(callback: cb<any>): void;
+    getProvidedMetas(callback: cb<MetaProvidedMetas>): void;
+    /**
+     * @method getMetaParameters
+     * @description Retrieve the parameters of the meta productions provided by the installed plugins
+     * @param callback Receives error | PackiFiles
+     *                 file://metaCtxSchema/<MetaProductionName>/t/params/<param.type>.ittf.ittf
+     *                 file://metaCtxSchema/<MetaProductionName>index.ittf.ittf
+     *                 [file://metaCtxSchema/<MetaProductionName>globals.ittf.ittf]
+    */
+    getMetaParameters(options: object, callback: cb<PackiFiles>): void;
     /**
      * @method executeMetaProduction
      * @description Execute a meta production
+     * @options An object with properties use<MetaProductionName> for filtering meta productions
      * @param metaExecutionOptions   Meta execution options
      * @param callback               Receives error | producedPackiFiles
     */
+    executeMetaProduction(metaExecutionOptions: MetaExecutionOptions, callback: cb<PackiFiles>): void;
 }
 
 /**
@@ -877,7 +919,10 @@ export function schema(
     ittfDocumentPath: string, mTreeBuildupContext: object, options: LightSchemaOptions, callback: cb<string>
 ): void;
 
-
+/**
+* Debug service for meta productions
+*/
+export function FactoryServiceContext() : void;
 
 /**
  * Wizzi runner server

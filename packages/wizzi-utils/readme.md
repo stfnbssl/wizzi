@@ -16,51 +16,51 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 #### var vfile = require('@wizzi/utils').vfile
 ### vfileInst - create a virtual file system instance
 #### var vfileInst = vfile([fsimpl])
-* `fsimpl` `Object` Default: NodeJS fs object or fs-graceful if available. 
+    * `fsimpl` `Object` Default: NodeJS fs object or fs-graceful if available. 
 ### vfileInst.read(path_string, options[, callback])
-* `path_string` 
-* `options` `Object` 
-* `callback` `Function` If absent the call is sync. * `err` 
-* `content` 
-
+    * `path_string` 
+    * `options` `Object` 
+    * `callback` `Function` If absent the call is sync. * `err` 
+        * `content` 
+    
 ### vfileInst.write(path_string, content, options[, callback])
-* `path_string` 
-* `content` `String` 
-* `options` `Object` 
-* `callback` `Function` If absent the call is sync. When the call is sync if `fsimpl` does not implement `readFileSync` throw Error.
-
-* `err` 
-* `content` 
-
+    * `path_string` 
+    * `content` `String` 
+    * `options` `Object` 
+    * `callback` `Function` If absent the call is sync. When the call is sync if `fsimpl` does not implement `readFileSync` throw Error.
+    
+        * `err` 
+        * `content` 
+    
 ### vfileInst.readJSON(path_string, options[, callback])
 ### vfileInst.writeJSON(path_string, obj, options[, callback])
 ## The `fsimpl` - interface
 
-<p>This interface must be implemented by file system objects`that expose their documents to the wizzi factory.`
+<p>This interface must be implemented by file system objectsthat expose their documents to the wizzi factory.
 </p>
 
 
-<p>The `Sync` methods are optional, but a `Sync` call to an`fsimpl that does not implement it throw an Error.`
+<p>The `Sync` methods are optional, but a `Sync` call to anfsimpl that does not implement it throw an Error.
 </p>
 
 #### stat(path, callback)
 
-<p>The returned `stats` object must implement: stats.isFile()`stats.isDirectory()`
+<p>The returned `stats` object must implement: stats.isFile()stats.isDirectory()
 </p>
 
 #### statSync(path)
 
-<p>The returned `stats` object must implement: stats.isFile()`stats.isDirectory()`
+<p>The returned `stats` object must implement: stats.isFile()stats.isDirectory()
 </p>
 
 #### lstat(path, callback)
 
-<p>The returned `stats` object must implement: stats.isFile()`stats.isDirectory()`
+<p>The returned `stats` object must implement: stats.isFile()stats.isDirectory()
 </p>
 
 #### lstatSync(path)
 
-<p>The returned `stats` object must implement: stats.isFile()`stats.isDirectory()`
+<p>The returned `stats` object must implement: stats.isFile()stats.isDirectory()
 </p>
 
 #### readFile(path[, options], callback)
@@ -91,12 +91,12 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 #### verify.isAbsolutePath(item)
 #### verify.isIttfMacro(item)
 ## verify.convert(value, type[, unquote])
-* `value` `String` If `@@null` return null; if `@@undefined` return undefined. 
-* `type` `String` One-of string, integer, float, boolean, date 
-* `options` `Object` 
+    * `value` `String` If `@@null` return null; if `@@undefined` return undefined. 
+    * `type` `String` One-of string, integer, float, boolean, date 
+    * `options` `Object` 
 ## verify.canConvertTo(value, type)
-* `value` `String` 
-* `type` `String` One-of string, integer, float, boolean, date 
+    * `value` `String` 
+    * `type` `String` One-of string, integer, float, boolean, date 
 ## verify - validations
 #### verify.isEmail(value)
 #### verify.isEmails(value)
@@ -123,27 +123,27 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 ## folderScanner - ittf documents folder scanner
 #### var folderScanner = require('@wizzi/utils').folderScanner
 ## folderScanner.scan(folderPath[, options])
-* `folderPath` `uri` 
-* `options` `Object` 
-* returns the root IttfFsNode of the 'folderPath' with its descendant folders as children. 
+    * `folderPath` `uri` 
+    * `options` `Object` 
+    * returns the root IttfFsNode of the 'folderPath' with its descendant folders as children. 
 ## ittfDocumentGraph - enhanced mTree with import, export, analize capabilities
 #### var ittfDocumentGraph = require('@wizzi/utils').ittfDocumentGraph
 #### ittfDocumentGraph.loadFrom(path_string)
-* `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation) 
-* returns an ittfDocumentGraph instance 
+    * `path_string` `uri` The uri of the ittf document that will be loaded as is (no composition, non template evaluation) 
+    * returns an ittfDocumentGraph instance 
 #### ittfDocumentGraph.loadFrom(mTree)
-* `mTree` `Object` An existent final or partial mTree. 
-* returns an ittfDocumentGraph instance 
+    * `mTree` `Object` An existent final or partial mTree. 
+    * returns an ittfDocumentGraph instance 
 ## ittfHtmlPrettifier - ittf html formatter for documentation
 #### var ittfHtmlPrettifier = require('@wizzi/utils').ittfHtmlPrettifier
 ## ittfHtmlPrettifier(rootNode[, options])
-* `rootNode` `Object` ittfDocumentGraph instance 
-* `options` `Object` 
+    * `rootNode` `Object` ittfDocumentGraph instance 
+    * `options` `Object` 
 ## jsHtmlPrettifier - javascript html formatter for documentation
 #### var jsHtmlPrettifier = require('@wizzi/utils').jsHtmlPrettifier
 ## jsHtmlPrettifier(script[, options])
-* `script` `String` javascript code 
-* `options` `Object` 
+    * `script` `String` javascript code 
+    * `options` `Object` 
 * * *
 ## Ittf scanner Feature
 #### var ittfScanner = require('@wizzi/utils').ittfScanner
@@ -177,10 +177,10 @@ One machinery, many productions.
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
 
 ## Built With
-* [Nodejs](https://nodejs.org)
-
-* [Wizzi](https://github.com/stfnbssl/wizzi)
-
+    * [Nodejs](https://nodejs.org)
+    
+    * [Wizzi](https://github.com/stfnbssl/wizzi)
+    
 
 ## License
 

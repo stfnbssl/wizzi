@@ -1,24 +1,22 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\fs\glob.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:02 GMT
 */
 'use strict';
-//
+/**
+     Example: glob_Step_1
+    
+*/
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
-var wizziUtils = require('@wizzi/utils');
 // local disk filesystem
-var file = wizziUtils.file;
 // virtual filesystem
-var vfile = require('@wizzi/utils').vfile;
 // defaults to local disk filesystem
-var fsfile = vfile();
-// utilities
-var verify = wizziUtils.verify;
-var mocks = wizziUtils.mocks;
+var wizziUtils = require('../../index');
 var vfile = require('../../lib/fSystem/vfile');
 var uriParser = require('../../lib/fSystem/uriParser');
 var fsUtils = require('../../lib/fSystem/utils');
@@ -27,6 +25,10 @@ var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
 var ittfScanner = require('../../lib/ittfScanner/index');
 var fs = require('../../lib/fSystem/index');
 var ittfGraph = require('../../lib/ittfGraph/index');
+var file = wizziUtils.file;
+var fsfile = vfile();
+var verify = wizziUtils.verify;
+var mocks = wizziUtils.mocks;
 var fs = require('../../lib/fSystem/index');
 var glob = fs.glob;
 var file = fs.vfile();

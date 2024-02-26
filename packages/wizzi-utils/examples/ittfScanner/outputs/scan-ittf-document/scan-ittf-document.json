@@ -1,0 +1,33 @@
+{
+  "primaryPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/index.html.ittf",
+  "primaryUri": "/index.html.ittf",
+  "breadCrumbs": [
+    {
+      "uri": "/index.html.ittf",
+      "name": "index.html.ittf",
+      "isLast": true
+    }
+  ],
+  "primaryHash": "82907acdf03d2556e7f958706c41781d:2e344213d0b0a5dbcc9caf0ec3a5edc03bf4ffbc47cf36450407a6c575c4cff8e3a6da61e84fbe9dc4ee7812e84a779b6c6368a4e1d3e81d17b09b48ed7f31bd6a40148eb3be063d4de1b668b3fd3d0bb72b67b85c7991a9ea1c09373f226ced6b2537ad712f2d939c5844e73ed6a980",
+  "primaryIttf": {
+    "content": "html\r\n    head\r\n    body\r\n        header( Great scan )\r\n",
+    "pretty": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-tag\">html</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">head</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">body</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-mix frag-to-link-a\" data-frag-id=\"unknown\">header(</span><span class=\"pp-arg\"> Great scan </span><span class=\"pp-mix\">)</span></div>"
+  },
+  "fragments": [
+    {
+      "oper": "mix",
+      "baseUri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+      "name": "header",
+      "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t/header.html.ittf",
+      "id": "f_1_2",
+      "relUri": "t/header.html.ittf",
+      "hash": "b33c5ba109a707dc715110738d73b4d2:0598a5743cd7ebf6123e0a281b78ab8e900e7a25f22607f6aaa6c6c505d4352fd3e0173a31cbc3967142720d17df18bf790e4fbb84b9487d1ff340f5f03ee7405b3b8e1ab3bb0e0c083f592081925d1103fc8fe7d3ef23dbc9aee182c78fb2bb439bcdd56bc295e71690e28f52f04fe7",
+      "ittfContent": "$group\r\n    $params title\r\n\r\n    section header\r\n        h1 ${title}",
+      "ittfPretty": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-kwd\">$group</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-kwd\">$params</span><span class=\"pp-pln\"> title</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">section</span><span class=\"pp-pln\"> header</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h1</span><span class=\"pp-kwd\"> ${</span><span class=\"pp-expr\">title</span><span class=\"pp-kwd\">}</span></div>"
+    }
+  ],
+  "ittfReferences": [],
+  "scanId": 1,
+  "id": "p_1_1",
+  "idCounter": 3
+}

@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\folderScanner.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 var verify = require('wizzi-helpers').verify;
@@ -11,7 +12,28 @@ var vfile = require('../fSystem/vfile');
 var ittfGraph = require('../ittfGraph/index');
 var IttfFsNode = require('./ittfFsNode');
 var md = module.exports = {};
-//
+/**
+    
+     Scans a folder searching for *.ittf files
+     Returns a wizzi.utils.IttfDocumentGraph instance
+     loaded with an mTree conformant to the
+     'wzpackage' schema.
+    
+     params
+     string folderPath
+     { options
+     string name
+     # the name of the 'wzpackage' wizzi model that
+     # will be generated from this folder
+     string gitPath
+     # the base path to the 'main' generated artifact
+     # in the future, could be used for linking the ittf document
+     # of a language type to the generated code.
+     { file
+     virtual filesystem
+     optional
+    
+*/
 md.scan = function(folderPath, options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -103,7 +125,15 @@ md.scanExec = function(file, folderPath, options, callback) {
                     // 'wzpackage' schema.
                     root.toIttf(ittfDocumentGraph);
                     // loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
-                    return callback(null, ittfDocumentGraph);
+                    if (options.getAll) {
+                        return callback(null, {
+                                wzPackageIttfDocumentGraph: ittfDocumentGraph, 
+                                ittfFsNode: root
+                             });
+                    }
+                    else {
+                        return callback(null, ittfDocumentGraph);
+                    }
                 })
             })
         })

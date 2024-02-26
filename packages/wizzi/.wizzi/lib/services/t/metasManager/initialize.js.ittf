@@ -11,12 +11,22 @@
 		#         [ items
 		#           string pluginName
 		#         string metaPluginsBaseFolder
+		#         [ inMemoryItems
+		#           {
+		#             string name
+		#             [ pluginMetaProductions
+		#               :ref MetaProvidesProduction
+		#             { metaPackiFiles
+		#               :ref PackiFiles
         #     { globalContext
         #     { test
-		
+
+
 	m initialize
 		{ options
-			{ plugins
+			{ wfPlugins
+				optional
+			{ metaPlugins
 				optional
 			{ globalContext
 				optional
@@ -68,56 +78,99 @@
 		param options
 		param callback
 		+
-		var itemsOptions = options.items
+		var pluginRequests = []
+		var plugins = []
+		if options.items && options.items.length > 0
+			foreach item in options.items
+            	if typeof (item) === "string"
+					_ pluginRequests.push
+						{
+							@ packagePath item
+				elif verify.isNotEmpty(item.packagePath)
+					_ pluginRequests.push
+						@ item
+				else
+					return
+						_ callback
+							_ error
+								@ 'ParameterError'
+								@ 'loadPlugins'
+								@ 'Missing "packagePath" property in meta plugin request option'
+		if options.inMemoryItems && options.inMemoryItems.length > 0
+			foreach item in options.inMemoryItems
+				const valid
+					_ validation.validateInMemoryMetaPlugin
+						@ item
+				if valid.ok
+					_ pluginRequests.push
+						@ item
+				else
+					_ callback
+						_ error
+							@ 'ParameterError'
+							@ 'loadPlugins'
+							@ 'Invalid options requesting an inmemory meta plugin (see inner error)'
+							@ valid.error
+		$$ var itemsOptions = options.items
 		var metaPluginsBaseFolder = options.metaPluginsBaseFolder 
             \b || path.resolve(__dirname, '..', '..', '..') $$ process.cwd()
 		var packagePathCache = this.packagePathCache
 		+
 		function resolveNext
             param i
-            if i >= itemsOptions.length
-				# loog 'itemsOptions', itemsOptions
-                return callback(null, itemsOptions)
-            var plugin = itemsOptions[i]
-            if typeof (plugin) === "string"
-                set plugin = itemsOptions[i] = {packagePath: plugin}
-            if plugin.hasOwnProperty("packagePath") && !(plugin.hasOwnProperty("setup"))
+            $$ if i >= itemsOptions.length
+			if i >= pluginRequests.length
+				# loog 'pluginRequests', pluginRequests
+                return callback(null, plugins)
+            $$ var plugin = itemsOptions[i]
+			var pluginRequest = pluginRequests[i]
+			$*
+            if typeof (pluginRequest) === "string"
+                set pluginRequest = itemsOptions[i] = {packagePath: pluginRequest}
+				log '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ !!!!!!'
+			*$
+            $$ loog 'loadPlugins.pluginRequest', pluginRequest
+			if pluginRequest.hasOwnProperty("packagePath")
                 return 
 					_ resolveModule
 						@ metaPluginsBaseFolder
-						@ plugin.packagePath
-						function
-							param err
-							param moduleObject
-							if err
-								return callback(err)
+						@ pluginRequest.packagePath
+						f_cb(moduleObject)
 							_ Object.keys(moduleObject)
 								._ forEach
 									function 
 										param key
-										if !plugin.hasOwnProperty(key)
-											set plugin[key] = moduleObject[key]
-											# loog 'plugin key', key
-							set plugin.packageName = plugin.packagePath
-							set plugin.packagePath = moduleObject.packagePath
+										if !pluginRequest.hasOwnProperty(key)
+											set pluginRequest[key] = moduleObject[key]
+											# loog 'pluginRequest key', key
+							set pluginRequest.packageName = pluginRequest.packagePath
+							set pluginRequest.packagePath = moduleObject.packagePath
                             if options.verbose
                                 var date = new Date()
                                 var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
                                 var spaces = new Array(timeNow.length+1).join(' ')
-                                warn timeNow, "Loaded meta plugin", plugin.packageName, 'version', plugin.version $$ , Object.keys(plugin.provides)
-                                warn spaces, 'meta productions: ', plugin.provides.metaProductions.join(', ')
-                                $*
-                                warn spaces, 'schemas: ', plugin.provides.schemas.join(',')
-                                warn spaces, 'artifact generators: ', plugin.provides.artifactGenerators.join(',')
-                                if plugin.provides.modelTransformers.length > 0
-                                    warn spaces, 'model transformers: ', plugin.provides.modelTransformers.join(',')
-                                *$
+                                warn timeNow, "Loaded meta plugin", pluginRequest.packageName, 'version', pluginRequest.version $$ , Object.keys(plugin.provides)
+                                warn spaces, 'meta productions: ', pluginRequest.provides.metaProductions.join(', ')
+							_ plugins.push(pluginRequest)
+							return resolveNext(++i)
+			elif pluginRequest.hasOwnProperty("pluginMetaProductions")
+                return 
+					_ resolveInMemory
+						@ pluginRequest
+						f_cb(moduleObject)
+                            if options.verbose
+                                var date = new Date()
+                                var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+                                var spaces = new Array(timeNow.length+1).join(' ')
+                                warn timeNow, "Loaded meta plugin", moduleObject.name, 'version', moduleObject.version
+							_ plugins.push(moduleObject)
 							return resolveNext(++i)
             else
 				return resolveNext(++i)
         
 		_ resolveNext(0)
 		
+		$include ./resolve-inmemory
 		$include ./resolve-module
 		$include ./resolve-package
 

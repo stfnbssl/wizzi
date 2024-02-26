@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\mm\step_1.js.ittf
-    utc time: Thu, 15 Feb 2024 18:31:20 GMT
+    utc time: Fri, 23 Feb 2024 04:14:47 GMT
 */
 'use strict';
 /**
@@ -33,9 +33,10 @@ pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
 var pluginsManager = require('../../lib/services/pluginsManager');
 var metasManager = require('../../lib/services/metasManager');
+var inmemoryMetaPlugin = require('../../lib/services/inmemoryMetaPlugin');
 var packiUtils = require('../../lib/services/packiUtils');
-const packiFilePrefix = 'json:/';
-const packiFilePrefixExtract = 'json:/';
+const packiFilePrefix = wizziIndex.costants.packiFilePrefix;
+const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract;
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
@@ -44,6 +45,46 @@ function createWizziFactory(globalContext, callback) {
         globalContext: globalContext || {}, 
         verbose: true
      }, callback)
+}
+function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlugins, callback) {
+    
+    const jsonDocuments = [];
+    // log 'createJsonWizziFactoryAndJsonFs'
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
+            const filePath = ensurePackiFilePrefix(value);
+            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        wizziIndex.jsonFactory({
+            jsonFs: jsonFs, 
+            plugins: plugins, 
+            metaPlugins: metaPlugins, 
+            verbose: true
+         }, (err, wf) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                wf: wf, 
+                jsonFs: jsonFs
+             })
+        }
+        )
+    }
+    )
 }
 function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     const jsonDocuments = [];
@@ -151,41 +192,94 @@ function createMetasManager(globalContext, callback) {
             
          }, 
         wfPlugins: {
-            items: [
-                './wizzi.plugin.html/index', 
-                './wizzi.plugin.js/index', 
-                './wizzi.plugin.css/index', 
-                './wizzi.plugin.ittf/index', 
-                './wizzi.plugin.json/index'
-            ], 
-            pluginsBaseFolder: pluginsBaseFolderV08
+            
          }, 
         globalContext: globalContext || {}
      }, callback)
 }
 var mm_step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    
-    const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf";
-    
-    createMetasManager({}, (err, mm) => {
-    
+    wizziIndex.metasManager({
+        verbose: true, 
+        metaPlugins: {
+            items: [
+                "./wizzi.meta.js.react/index"
+            ], 
+            metaPluginsBaseFolder: metaPluginsBaseFolder, 
+            inMemoryItems: [
+                {
+                    name: 'firstInMemory', 
+                    pluginMetaProductions: [
+                        {
+                            name: "demoJs", 
+                            title: "demoJs wizzi meta production", 
+                            categories: [
+                                {
+                                    name: "demo"
+                                 }, 
+                                {
+                                    name: "wizzi-starter"
+                                 }
+                            ]
+                         }
+                    ], 
+                    metaPackiFiles: {
+                        ['demoJs/folderTemplates/index.ittf.ittf']: {
+                            type: 'CODE', 
+                            contents: [
+                                '$group', 
+                                '    $file __dot__wizzi/index.html.ittf.ittf', 
+                                '        html', 
+                                '            body', 
+                                '                h1 Hello world'
+                            ].join('\n')
+                         }
+                     }
+                 }
+            ]
+         }, 
+        wfPlugins: {
+            items: [
+                './wizzi.plugin.ittf/index', 
+                './wizzi.plugin.json/index'
+            ], 
+            pluginsBaseFolder: pluginsBaseFolderV08
+         }, 
+        globalContext: {}
+     }, function(err, result) {
         if (err) {
-            return callback(err);
+            console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+            console.log("[31m%s[0m", 'err', err);
+            throw new Error(err.message);
         }
-        mm.execProductionFromFs("C:/My/wizzi/stfnbssl/wizzi.cli/packages/wizzi.meta.package/.wizzi-override/ittf", "0_0_1", getMetaContext(), {
-            dumpMetaStartFolder: path.join(__dirname, 'out_meta_1_start'), 
-            dumpProductionTempFolder: path.join(__dirname, 'out_meta_1_temp'), 
-            dumpProductionDestFolder: path.join(__dirname, 'out_meta_1_wizzi')
-         }, (err, metaPackiFiles) => {
-        
+        if (false) {
+            printObject('metasManager', result)
+        }
+        const options = {
+            metaCtx: {
+                useDemoJs: true, 
+                useJsReactUtils: true
+             }
+         };
+        result.getCategoryAndMetaProductionStarter(options, function(err, result) {
             if (err) {
                 return callback(err);
             }
-        }
-        )
-    }
-    )
+            printObject('getCategoryAndMetaProductionStarter', result)
+        })
+        result.getMetaParametersStarter(options, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            printObject('getMetaParametersStarter', result)
+        })
+        result.getMetaProductionStarter(options, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            printObject('getMetaProductionStarter', result)
+        })
+    })
 };
 mm_step_1.__name = 'mm_step_1';
 function heading1(text) {
@@ -391,63 +485,4 @@ function formatNum(num, len) {
 module.exports = mm_step_1;
 if (typeof require != 'undefined' && require.main === module) {
     mm_step_1();
-}
-function getMetaContext() {
-    return {
-            metaCtx: {
-                ver: "0_0_1", 
-                name: "meta_2", 
-                useBabel: true, 
-                useBabelrc: true, 
-                useDeploy: true, 
-                useEnv: true, 
-                useEslint: true, 
-                useGit: true, 
-                usePackage: true, 
-                usePostcss: true, 
-                usePrettier: true, 
-                useTailwind: true, 
-                useWebpack: true, 
-                version: "0.0.1", 
-                author: {
-                    name: "Stefano Bassoli", 
-                    email: "stfn.bssl@gmail.com"
-                 }, 
-                license: {
-                    name: "MIT", 
-                    copy: "copy 2023"
-                 }, 
-                github: {
-                    userid: "stfnbssl"
-                 }, 
-                Build: {
-                    
-                 }
-             }
-         };
-}
-function jsonFsToPackiFiles(jsonFs, folder, callback) {
-    const packiFiles = {};
-    jsonFs.toFiles({
-        removeRoot: packiFilePrefixExtract
-     }, (err, files) => {
-    
-        if (err) {
-            callback(err);
-        }
-        printValue('jsonFs.toFiles', stringify(files, null, 2))
-        files.forEach((file) => {
-        
-            if (file.relPath.startsWith(folder + '/')) {
-                packiFiles[file.relPath] = {
-                    type: 'CODE', 
-                    contents: file.content, 
-                    generated: true
-                 };
-            }
-        }
-        )
-        callback(null, packiFiles);
-    }
-    )
 }

@@ -1,13 +1,17 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\jsonComponents\step_1.js.ittf
+    utc time: Tue, 20 Feb 2024 12:12:13 GMT
 */
 'use strict';
 //
 // Example skeleton specific for the '@wizzi/repo' kernel package
 //
-//
+/**
+     Examples: JsonComponents_Step_1
+    
+*/
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
@@ -22,14 +26,13 @@ var fsfile = vfile();
 // utilities
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var createStoreFactory = require('@wizzi/repo').createStoreFactory;
+var fSystem = require('@wizzi/utils').fSystem;
 var vfile = require('@wizzi/utils').vfile;
 var repoIndex = require('../../index');
 var json = require('../../lib/json/index');
 var JsonFsImpl = require('../../lib/json/jsonFsimpl');
-var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl');
-var FsMongo = require('../../lib/mongodb/fs/fsmongo');
 var Document = require('../../lib/mongodb/fs/document');
+var createStoreFactory = repoIndex.createStoreFactory;
 var JsonComponents_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
     heading1('start');

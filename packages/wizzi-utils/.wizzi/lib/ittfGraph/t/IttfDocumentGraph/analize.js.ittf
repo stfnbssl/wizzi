@@ -28,26 +28,25 @@
 					@ ctx
 					f_cb()
 						if that.isCodeDeclare() == false && that.isMultilineDeclare() == false
-							_ async.map
-								@ that.children
-								function
-									param c
-									param mapcallback
-									# loog 'return analizeFragment, c.name', c.name
-                                    if c.commentState == 0
-										return
-											_ c.analize
-												@ ctx
-												@ mapcallback
-									else
-										return
-											_ mapcallback
-								f_cb()
+							async_foreach( doLoop, ndx )
+								var item = that.children[ndx]
+								if !item
+									r_cb()
+								# loog 'return analizeFragment, item.name', item.name
+								if item.commentState == 0
+									_ item.analize
+										@ ctx
+										f_cb()
+											return
+												_ doLoop
+													@ ndx + 1
+								else
 									return
-										_ callback
+										_ doLoop
+											@ ndx + 1
+
 						else
-							return
-								_ callback
+							r_cb()
 
 	m analizeRoot
 		param ctx

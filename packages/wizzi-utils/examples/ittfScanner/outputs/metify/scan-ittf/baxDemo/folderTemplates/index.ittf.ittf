@@ -1,0 +1,4 @@
+$group
+    $if metaCtx.useBaxDemo
+        $include wzCtxModel
+        $include scan-ittf

@@ -13,8 +13,8 @@ on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.
 
 
 ## Features
-* Filesystem ittf documents store 
-* MongoDb ittf documents store 
+    * Filesystem ittf documents store 
+    * MongoDb ittf documents store 
 ### Interface
 ```javascript
 repo.createStoreFactory(
@@ -71,10 +71,10 @@ One machinery, many productions.
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
 
 ## Built With
-* [Nodejs](https://nodejs.org)
-
-* [Wizzi](https://github.com/stfnbssl/wizzi)
-
+    * [Nodejs](https://nodejs.org)
+    
+    * [Wizzi](https://github.com/stfnbssl/wizzi)
+    
 
 ## License
 

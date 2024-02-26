@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/repo",
     "sideEffects": false,
-    "version": "0.8.5",
+    "version": "0.8.7",
     "description": "Ittf documents repository manager for the wizzi factory.",
     "author": {
         "name": "Stefano Bassoli",
@@ -36,7 +36,7 @@
         "iconv-lite": "^0.6.2",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
-        "@wizzi/utils": "0.8.1",
+        "@wizzi/utils": "0.8.4",
         "wizzi-utils": "0.7.22",
         "browserfs": "1.4.3",
         "co": "4.6.0",

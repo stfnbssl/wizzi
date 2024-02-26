@@ -1,0 +1,27 @@
+$group
+
+    set md.validateInMemoryMetaPlugin
+        function
+            param inMemoryMetaPluginOptions
+            const obj = inMemoryMetaPluginOptions
+            const vld
+                _ startValidation
+            const method = "validateInMemoryMetaPlugin"
+            const messageTail = ""
+            if verify.isNotEmpty(obj.name) == false
+                _ vld.error
+                    {
+                        @ method
+                        @ message 'Missing "name" property' + messageTail
+            if verify.isObject(obj.metaPackiFiles) == false
+                _ vld.error
+                    {
+                        @ method
+                        @ message 'Property "metaPackiFiles" must be an object of type PackiFiles' + messageTail
+            if verify.isArray(obj.pluginMetaProductions) == false
+                _ vld.error
+                    {
+                        @ method
+                        @ message 'Property "pluginMetaProductions" must be an array of type MetaProductionOptions' + messageTail
+            return 
+                _ vld.getValid

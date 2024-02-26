@@ -1,0 +1,25 @@
+﻿module
+	kind jsfile
+
+	var path = require('path')
+	var verify = require('../helpers/verify')
+	var vfile = require('../fSystem/vfile')
+
+	var md = module.exports = {}
+	+
+	set md.filePrefix = "json:/"
+	+
+	set md.ensurePackiFilePrefix
+		function
+			param filePath
+			var newFilePath = normalizePath(filePath)
+			return
+				iif newFilePath.startsWith(md.filePrefix)
+					then newFilePath
+					else md.filePrefix + newFilePath
+	+
+	$include utils/packiFs
+	+
+	function normalizePath
+		param path
+		return path.replace(/\\/g, '/')

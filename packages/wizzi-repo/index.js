@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\root\index.js.ittf
+    utc time: Tue, 20 Feb 2024 12:12:13 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -11,6 +12,7 @@ var vfile = require('@wizzi/utils').vfile;
 var fileInfoByPath = require('@wizzi/utils').fileInfoByPath;
 
 var md = module.exports = {};
+md.version = "0.8.7";
 
 var MongoDocument = {};
 var MongoFsImpl = {};
@@ -20,7 +22,10 @@ md.ObjectId = require('./lib/utils/objectId');
 
 md.MongoFsImpl = MongoFsImpl;
 
-//
+/**
+     Filesystem virtual file service
+     noparams
+*/
 md.fsfile = function fsfile(callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -33,7 +38,10 @@ md.fsfile = function fsfile(callback) {
 }
 ;
 
-//
+/**
+     Create an instance of the mongoDb Document class
+     for managing files and directory
+*/
 md.mongoDbDocumentManager = function mongoDbDocumentManager(mongoUri, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -54,7 +62,13 @@ md.mongoDbDocumentManager = function mongoDbDocumentManager(mongoUri, callback) 
 }
 ;
 
-//
+/**
+     mongoDb virtual file service
+     params
+     { options
+     string mongoUri
+     string mongoBaseFolder
+*/
 md.dbfile = function dbfile(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -91,10 +105,22 @@ md.dbfile = function dbfile(options, callback) {
 }
 ;
 
-//
+
+md.JsonComponents = require('./lib/json/index');
+
+/**
+     Create a json directory tree from a filesystem folder
+*/
 md.jsonDirectoryTreeFromFilesystem = JsonFsImpl.directoryTree;
 
-//
+md.packiFilesToUtilVFileJson = md.JsonComponents.packiFilesToUtilVFileJson;
+
+/**
+     json virtual file service
+     params
+     { options
+     { jsonFsData
+*/
 md.jsonfile = function jsonfile(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -153,9 +179,16 @@ md.jsonfile = function jsonfile(options, callback) {
 }
 ;
 
-md.JsonComponents = require('./lib/json/index');
-
-//
+/**
+     params
+     { options
+     string storeKind
+     oneOf filesystem, mongodb, json
+     string storeUri
+     when storeKind == mongodb
+     string storeBaseFolder
+     when storeKind == mongodb
+*/
 md.createStoreFactory = function createStoreFactory(options, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -229,7 +262,7 @@ function getCreateStore(storeKind, options) {
         };
 }
 function checkStoreKind(kind) {
-    return ['filesystem', 'mongodb', 'json', 'browser'].indexOf(kind) > -1;
+    return ['filesystem', 'mongodb', 'json'].indexOf(kind) > -1;
 }
 // TODO fileService.getFilesAsync
 md.folderFilesInfoByPath = function(folderPath, fileService, options, callback) {

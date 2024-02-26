@@ -1,0 +1,63 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfScanner_scan_ittf_document',
+            title: 'ittfScanner - scan - ittfDocument',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            const ittfDocumentPath
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scan-ittf'
+                    @ 'index.html.ittf'
+            const rootFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scan-ittf'
+
+            _ ittfScanner.scanIttfDocument
+                @ ittfDocumentPath
+                {
+                    @ rootFolder rootFolder
+                f_cb_test( result )
+                    if err
+                        error err
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'scan-ittf-document'
+                            @ 'scan-ittf-document.json'
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2
+                    _ ittfScanner.scanIttfDocument
+                        @ ittfDocumentPath
+                        {
+                            @ rootFolder rootFolder
+                            @ getNodeDetails true
+                        f_cb_test( result )
+                            if err
+                                error err
+                            # log 'result', result
+                            _ file.write
+                                _ path.join
+                                    @ __dirname
+                                    @ 'outputs'
+                                    @ 'scan-ittf-document'
+                                    @ 'scan-ittf-document-result-graph.json'
+                                _ stringify
+                                    @ result.ittfDocumentGraph
+                                    @ null
+                                    @ 2                  

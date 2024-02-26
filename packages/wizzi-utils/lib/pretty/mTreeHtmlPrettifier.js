@@ -1,7 +1,8 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\pretty\mTreeHtmlPrettifier.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 var verify = require('wizzi-helpers').verify;
@@ -15,7 +16,16 @@ var STYLE_DOCS_ITTF_NODE_MIX = 'pp-mix';
 var STYLE_DOCS_ITTF_NODE_ARG = 'pp-arg';
 var verify = require('../helpers/verify');
 var HtmlBuilder = require('./utils/htmlbuilder').HtmlBuilder;
-//
+/**
+     prettify an mTree
+     params
+     { ittfMTreeExRoot
+     api-ref wizzi-utils.ittfDocumentGraph
+     [ children
+     { fragments
+     string id
+    
+*/
 module.exports = function(ittfMTreeExRoot) {
     if (verify.isObject(ittfMTreeExRoot) === false) {
         return error(

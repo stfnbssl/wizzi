@@ -1,0 +1,85 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'mm_step_2',
+            title: 'Meta manager - generic meta plugin',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+        +
+        const metaDemoIttfFolder = "C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.demo/ittf"
+        +
+        _ wizziUtils.fSystem.fsFolderToPackiFiles
+            @ metaDemoIttfFolder
+            f_cb_test( packiFiles )
+                _ printValue
+                    @ 'packiFiles'
+                    _ stringify
+                        @ packiFiles
+                        @ null
+                        @ 2
+                _ inmemoryMetaPlugin.createMetaPlugin
+                    {
+                        @ metaPackiFiles packiFiles
+                        [ pluginCategories
+                            { 
+                                @ name "demo"
+                                [ productions
+                                    { 
+                                        @ name "demoJs"
+                            { 
+                                @ name "wizzi-starter"
+                                [ productions
+                                    { 
+                                        @ name "demoJs"
+                        [ pluginMetaProductions
+                            { 
+                                @ name "demoJs"
+                                @ title "demoJs wizzi meta production"
+                                [ categories
+                                    { 
+                                        @ name "demo"
+                                    { 
+                                        @ name "wizzi-starter"                        
+                    a_cb( gmp )
+                        _ gmp.getMetaCategoryStarter
+                            {
+                            a_cb(result)
+                                _ printValue
+                                    @ 'getMetaCategoryStarter'
+                                    _ stringify
+                                        @ result
+                                        @ null
+                                        @ 2
+                        _ gmp.getMetaContextDefsStarter
+                            {
+                                { metaCtx
+                                    @ useDemoJs true
+                                    { demoJs
+                                        @ name "Stefano"
+                            a_cb(result)
+                                _ printValue
+                                    @ 'getMetaContextDefsStarter'
+                                    _ stringify
+                                        @ result
+                                        @ null
+                                        @ 2
+                        _ gmp.getMetaProductionStarter
+                            {
+                                { metaCtx
+                                    @ useDemoJs true
+                                    { demoJs
+                                        @ name "Stefano"
+                            a_cb(result)
+                                _ printValue
+                                    @ 'getMetaProductionStarter'
+                                    _ stringify
+                                        @ result
+                                        @ null
+                                        @ 2
+

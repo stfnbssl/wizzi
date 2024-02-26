@@ -87,7 +87,13 @@ $group
                                             @ generateFragments true
                                             @ copyInclude options.copyInclude || ['*']
                                             @ copyExclude options.copyExclude || []
-                                        @ callback
+                                        a_cb_no_err( result )
+                                            if err
+                                                error err
+                                                return 
+                                                    _ callback(err)
+                                            r_cb( result )
+                                        $$ @ callback
 
                     $$ loog "Object.keys(child)", Object.keys(child)
                     $$ loog 'child', child.name, child.value

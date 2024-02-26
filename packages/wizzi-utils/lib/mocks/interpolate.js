@@ -1,10 +1,24 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\mocks\interpolate.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
-//
+/**
+     port of http://www.bbc.co.uk/glow/docs/1.7/api/glow.lang.shtml#interpolate
+     Modified to be stand-alone and offer support for delimters of random length
+     @description Replaces placeholders in a string with data from an object
+     @param {String} template The string containing {placeholders}
+     @param {Object} data Object containing the data to be merged in to the template
+     The object can contain nested data objects and arrays, with nested object properties and array elements are accessed using dot notation. eg foo.bar or foo.0.
+     The data labels in the object cannot contain characters used in the template delimiters, so if the data must be allowed to contain the default { and } delimiters, the delimters must be changed using the option below.
+     @param {Object} opts Options object {
+     # @param {String} [opts.delimiter="{}"] Alternative label delimiter(s) for the template.
+     Needs to be symmetric, i.e. '{{}}', '<%%>'
+     }
+     @returns {String}
+*/
 function interpolate(template, data, opts) {
     var regex,
         lDel,

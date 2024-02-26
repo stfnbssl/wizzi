@@ -11,8 +11,11 @@ module wizzi@${wzCtx.version}.metasManager
 	const fail = require('@wizzi/utils').fail
     var JsonComponents = require('@wizzi/repo').JsonComponents
     const wizziFactory = require('./wizziFactory')
+    const inmemoryMetaPlugin = require('./inmemoryMetaPlugin')
 	const errors = require('../errors')
+    const costants = require('../costants')
     const packiUtils = require('./packiUtils')
+    const validation = require('./validation')
     const existsSync = fs.existsSync || path.existsSync
     const realpathSync = fs.realpathSync
     const exists = fs.exists || path.exists
@@ -21,10 +24,13 @@ module wizzi@${wzCtx.version}.metasManager
     +
     const mdDisplayName = "wizzi.metasManager"
     +
-    const packiFilePrefix = 'json:/'
-    const packiFilePrefixExtract = 'json:/'
-    const metaProductionTempFolder = '___temp'
-    const metaProductionDestFolder = '.wizzi'
+    const 
+        {
+            @ packiFilePrefix
+            @ packiFilePrefixExtract
+            @ metaProductionTempFolder
+            @ metaProductionWizziFolder
+        = costants
     +
 	class MetasManager
 		

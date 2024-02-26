@@ -1,13 +1,37 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\uriParser.js.ittf
+    utc time: Mon, 26 Feb 2024 20:29:01 GMT
 */
 'use strict';
 var verify = require('wizzi-helpers').verify;
 var path = require('path');
 var url = require('url');
-//
+/**
+    
+     params
+     string uri
+     returns
+     {
+     string originalUri
+     string protocol
+     one-of 'db', 'ls', drive letter
+     string storeKind
+     one-of 'mongodb', 'localstorage', 'filesystem', 'memory', 'json', 'indexeddb'
+     string userId
+     # if storeKind === 'mongodb'
+     string projectId
+     # if storeKind === 'mongodb'
+     string path
+     boolean isIttfDocument
+     string basename
+     string schema
+     # if isIttfDocument === true
+     string extension
+     # if isIttfDocument === false
+    
+*/
 module.exports = function parse(uri, callback) {
     if (verify.isNotEmpty(uri) === false) {
         return error(

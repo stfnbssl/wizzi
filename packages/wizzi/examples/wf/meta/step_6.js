@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\step_6.js.ittf
-    utc time: Thu, 15 Feb 2024 18:31:20 GMT
+    utc time: Fri, 23 Feb 2024 04:14:47 GMT
 */
 'use strict';
 /**
@@ -33,9 +33,10 @@ pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
 ;
 var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
+var inmemoryMetaPlugin = require('../../../lib/services/inmemoryMetaPlugin');
 var packiUtils = require('../../../lib/services/packiUtils');
-const packiFilePrefix = 'json:/';
-const packiFilePrefixExtract = 'json:/';
+const packiFilePrefix = wizziIndex.costants.packiFilePrefix;
+const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract;
 const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages";
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
@@ -52,6 +53,46 @@ function createWizziFactory(globalContext, callback) {
         globalContext: globalContext || {}, 
         verbose: true
      }, callback)
+}
+function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlugins, callback) {
+    
+    const jsonDocuments = [];
+    // log 'createJsonWizziFactoryAndJsonFs'
+    Object.keys(packiFiles).map((value) => {
+    
+        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
+            const filePath = ensurePackiFilePrefix(value);
+            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+    
+        if (err) {
+            return callback(err);
+        }
+        wizziIndex.jsonFactory({
+            jsonFs: jsonFs, 
+            plugins: plugins, 
+            metaPlugins: metaPlugins, 
+            verbose: true
+         }, (err, wf) => {
+        
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                wf: wf, 
+                jsonFs: jsonFs
+             })
+        }
+        )
+    }
+    )
 }
 function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     const jsonDocuments = [];

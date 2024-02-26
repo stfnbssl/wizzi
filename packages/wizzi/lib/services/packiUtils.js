@@ -2,20 +2,23 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiUtils.js.ittf
-    utc time: Thu, 15 Feb 2024 18:31:18 GMT
+    utc time: Fri, 23 Feb 2024 04:14:45 GMT
 */
 'use strict';
 
 const file = require('@wizzi/utils').file;
 const vfile = require('@wizzi/utils').vfile;
 const verify = require('@wizzi/utils').verify;
+const costants = require('../costants');
 
 const mdDisplayName = "wizzi.services.packiUtils";
 
-const packiFilePrefix = 'json:/';
-const packiFilePrefixExtract = 'json:/';
-const metaProductionTempFolder = '___temp';
-const metaProductionDestFolder = '.wizzi';
+const {
+    packiFilePrefix, 
+    packiFilePrefixExtract, 
+    metaProductionTempFolder, 
+    metaProductionWizziFolder
+ } = costants;
 
 const md = module.exports = {};
 
@@ -62,7 +65,7 @@ md.jsonFsToPackiFiles = function(jsonFs, filterFolder, callback) {
         files.forEach((file) => {
         
             if (verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')) {
-                const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length);
+                const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length + 1);
                 packiFiles[k] = {
                     type: 'CODE', 
                     contents: file.content, 
@@ -93,6 +96,7 @@ md.writePackifiles = function(folderPath, packiFiles) {
      :ref PackiFiles
      { ittfDocumentTemplates
      :ref PackiFiles
+     :optional
      { plainDocuments
      :ref PackiFiles
      :optional

@@ -13,6 +13,7 @@
 
     # Scans a folder searching for *.ittf files
     # Returns a collection of ITTF Source Unit infos
+	# Does not go deep to subfolders
 	# params
 	#   string folderPath
 	#   { options

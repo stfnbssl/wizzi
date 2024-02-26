@@ -27,6 +27,15 @@ $group
                     a_cb( providedMetas )
                         r_cb( providedMetas )
 
+	#
+		# Retrieve the parameters for a given set of meta productions
+		# return
+		# | func wizzi-plugin.modelFactory.loadModel
+		# | wzError NotFound
+		# params
+        #   { options
+        #     { metaCtx
+        #       bool use<MetaProductionName>
     m getMetaParameters
         param options
         callback

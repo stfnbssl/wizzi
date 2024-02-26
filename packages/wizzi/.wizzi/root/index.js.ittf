@@ -26,7 +26,8 @@
 	set md.Filesystem = Filesystem
 	set md.JsonComponents = require('@wizzi/repo').JsonComponents
 	set md.FactoryServiceContext = require('./lib/services/factoryServiceContext')
-    set md.errors = require('./lib/errors')
+    set md.costants = require('./lib/costants')
+	set md.errors = require('./lib/errors')
 	+
 	#
 		# params

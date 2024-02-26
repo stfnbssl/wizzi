@@ -16,3 +16,22 @@ module
     set md.uriParser = uriParser
     set md.glob = glob
     set md.fileInfoByPath = fsUtils.fileInfoByPath    
+
+	set md.fsFolderToPackiFiles
+		function 
+			param folderPath
+			param callback
+			const fsFile = vfile()
+			_ fsFile.getFiles
+				@ folderPath
+				{
+					@ deep true
+					@ documentContent true
+				f_cb( files )
+					const packiFiles = {}
+					foreach file in files
+						set packiFiles[file.relPath]
+							{
+								@ type 'CODE'
+								@ contents file.content
+					r_cb( packiFiles )    

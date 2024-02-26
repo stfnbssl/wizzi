@@ -34,19 +34,33 @@
 				set options = {}
 
 			if options.file
-				_ scanExec
-					@ options.file
-					@ documentPath
-					@ options
-					@ callback
+				if options.getNodeDetails
+					_ scanMTreeEx
+						@ options.file
+						@ documentPath
+						@ options
+						@ callback
+				else	
+					_ scanExec
+						@ options.file
+						@ documentPath
+						@ options
+						@ callback
 			else
 				_ vfile
 					f_cb( file )
-						_ scanExec
-							@ file
-							@ documentPath
-							@ options
-							@ callback
+						if options.getNodeDetails
+							_ scanMTreeEx
+								@ file
+								@ documentPath
+								@ options
+								@ callback
+						else
+							_ scanExec
+								@ file
+								@ documentPath
+								@ options
+								@ callback
 
     function scanMTreeEx
 		param file

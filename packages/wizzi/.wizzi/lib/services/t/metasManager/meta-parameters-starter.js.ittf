@@ -9,7 +9,9 @@
         # - wzCtxSchema/parameters/<ProductionName>/...
         # Each meta production must have an index.json.ittf file.
 		# return
-		# | packifiles
+		# { 
+        #   { [Meta-production-name]
+        #      
 		# | wzError
 		# params
 		#   { options

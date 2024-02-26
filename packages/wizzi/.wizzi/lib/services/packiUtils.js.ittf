@@ -4,13 +4,17 @@ module wizzi@${wzCtx.version}.packiUtils
     const file = require('@wizzi/utils').file
     const vfile = require('@wizzi/utils').vfile
 	const verify = require('@wizzi/utils').verify
+    const costants = require('../costants')
     +
     const mdDisplayName = "wizzi.services.packiUtils"
     +
-    const packiFilePrefix = 'json:/'
-    const packiFilePrefixExtract = 'json:/'
-    const metaProductionTempFolder = '___temp'
-    const metaProductionDestFolder = '.wizzi'
+    const 
+        {
+            @ packiFilePrefix
+            @ packiFilePrefixExtract
+            @ metaProductionTempFolder
+            @ metaProductionWizziFolder
+        = costants
     +
     const md = module.exports = {}
     +
@@ -57,7 +61,7 @@ module wizzi@${wzCtx.version}.packiUtils
                         =>
                             param file
                             if verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')
-                                const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length) 
+                                const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length + 1) 
                                 set packiFiles[k]
                                     {
                                         @ type 'CODE'
@@ -86,6 +90,7 @@ module wizzi@${wzCtx.version}.packiUtils
         #       :ref PackiFiles
         #     { ittfDocumentTemplates 
         #       :ref PackiFiles
+        #       :optional
         #     { plainDocuments 
         #       :ref PackiFiles
         #       :optional

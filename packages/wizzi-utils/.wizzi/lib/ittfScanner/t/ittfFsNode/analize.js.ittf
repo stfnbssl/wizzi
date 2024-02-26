@@ -30,26 +30,22 @@
         var that = this
 
 		if this.isDirectory
-			
-			_ async.map
-				@ this.folders
-				function
-					param folder
-					param callback
-					_ folder.analize
-						@ callback
-				f_cb( folderResult )
-					_ async.map
-						@ that.documents
-						function
-							param d
-							param callback
-							_ d.analize
-								@ callback
-						f_cb( dResult )
-							return
-								_ callback
-									@ null
+
+			async_foreach( doLoopFolders, ndx )		
+				var folder = that.folders[ndx]
+				if !folder
+					async_foreach( doLoopDocuments, ndxDoc )
+						var document = that.documents[ndxDoc]
+						if !document
+							r_cb()
+						_ document.analize
+							f_cb()
+								_ doLoopDocuments
+									@ ndxDoc + 1
+				_ folder.analize
+					f_cb()
+						_ doLoopFolders
+							@ ndx + 1
 
 		else
 			

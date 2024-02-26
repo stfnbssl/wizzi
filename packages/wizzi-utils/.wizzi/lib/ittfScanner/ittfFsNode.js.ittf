@@ -13,7 +13,7 @@
 		#
 		# File or directory in a folder tree structure of ITTF Documents.
 		# Is the result of a scanners.folderScanner(folderPath, option) execution.
-		# Can export its content to a wizzi.utils.ittfDocumentGraph, calling the method 'toIttf'
+		# Can export its content to a wizzi.utils.ittfDocumentGraph, calling the method 'toIttf'.
 		# The root node collects mixed or included ittf fragments that are 
 		# outside (up) of root.ittfBasePath.
 		#
@@ -109,7 +109,7 @@
 		m setInfo
             callback
 			var r = this.root()
-            # loog 'called setInfo', this.basename, r === this
+            log 'called setInfo', this.basename, r === this
 			if r === this
 				_ this.setIds
                 var that = this
@@ -127,7 +127,7 @@
 		m __setInfo
             param r
             param callback
-            # loog 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
+            log 'called __setInfo', this.basename, this.isDirectory, this.isFragment, !this.isDirectory && !this.isFragment
 			if !this.isDirectory && !this.isFragment
 				var schema = r.info.schemas[this.schema]
 				if !schema
@@ -148,31 +148,24 @@
 					_ r.info.util.documents.push(this)
 				else
 					_ r.info.lib.documents.push(this)
+			var that = this
 			if this.isDirectory
-                var that = this
-                _ async.map
-                    @ this.folders
-                    function
-                        param item
-                        param callback
-                        _ item.setInfo
-                            @ callback
-                    f_cb()
-                        # loog 'folders setted info'
-                        _ async.map
-                            @ that.documents
-                            function
-                                param item
-                                param callback
-                                # loog 'document setted', item.basename
-                                _ item.setInfo
-                                    @ callback
-                            f_cb()
-                                # loog 'documents setted info'
-                                return
-                                    _ callback
-                                        @ null
-                                        @ r
+				async_foreach( doLoopFolders, ndx )
+					var folder = that.folders[ndx]
+					if !folder
+						async_foreach( doLoopDocuments, ndxDoc )
+							var document = that.documents[ndxDoc]
+							if !document
+								r_cb(r)
+							log 'document setted', document.basename
+							_ document.setInfo
+								f_cb()
+									_ doLoopDocuments
+										@ ndxDoc + 1
+					_ folder.setInfo
+						f_cb()
+                            _ doLoopFolders
+								@ ndx + 1
             else
                 return
                     _ callback

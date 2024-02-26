@@ -1,0 +1,7 @@
+$group
+        $include folder-alpha
+        $include folder-beta
+        $include t
+    $file scan-ittf/index.html.ittf.ittf
+       html
+           ${'$'}include baxDemo/scan-ittf/index.html

@@ -1,5 +1,5 @@
 ﻿module wizzi@${wzCtx.version}.wizziFactory
-	kind jsfile
+	kind es6
 	+
 	var util = require('util')
 	var path = require('path')
@@ -17,6 +17,7 @@
 	var JsonComponents = require('@wizzi/repo').JsonComponents
     const packiUtils = require('./packiUtils')
 	var StringWriter = require('../util/stringWriter')
+	var costants = require('../costants')
 	var errors = require('../errors')
 	var log = require('../util/log')(module)
 	var PluginsManager = require('./pluginsManager')
@@ -27,10 +28,13 @@
 	var ModelInfo = null
 	var AsyncModelLoader = null
 	+
-    const packiFilePrefix = 'json:/'
-    const packiFilePrefixExtract = 'json:/'
-    const metaProductionTempFolder = '___temp'
-    const metaProductionDestFolder = '.wizzi'
+    const 
+        {
+            @ packiFilePrefix
+            @ packiFilePrefixExtract
+            @ metaProductionTempFolder
+            @ metaProductionWizziFolder
+        = costants
     +
     var myname = 'wizzi.services.wizzifactory'
     +

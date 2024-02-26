@@ -1,14 +1,36 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.v07\packages\wizzi-js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@0.7.14
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\mongoUriParser.js.ittf
+    utc time: Tue, 20 Feb 2024 12:12:13 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var path = require('path');
 var url = require('url');
 var verify = require('@wizzi/utils').verify;
-//
+/**
+     In a mongodb repo, documents are stored
+     per user and per project.
+     Document uris must be in the form
+     db://userName/projectName/documentPath
+     The internal db path will be
+     `config.mongoBaseFolder`/userName/projectName/documentPath
+     params
+     string uri
+     string mongoBaseFolder
+     returns
+     {
+     string originalUri
+     string userId
+     string projectId
+     string path
+     string storeKind
+     boolean isIttfDocument
+     string basename
+     string schema
+     string extension
+*/
 module.exports = function parse(uri, mongoBaseFolder) {
     if (verify.isNotEmpty(uri) === false) {
         return error(
