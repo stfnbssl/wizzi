@@ -85,7 +85,7 @@
 		_ ctx.hb.closeTag('span', { inline: true })
 
 		_ ctx.hb.openTag('span', { inline: true })
-		if node.isCommand()
+		if node.isCommandCheck()
 			_ ctx.hb.writeAttribute('class', STYLE_DOCS_ITTF_NODE_COMMAND)
 		else
 			if node.isMixinCall()

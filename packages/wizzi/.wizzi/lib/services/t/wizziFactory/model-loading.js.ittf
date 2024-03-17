@@ -12,7 +12,7 @@ $group
 		#   { globalContext
 		#     optional
 		#     # A global context object can be used to add mTree buildup contex values
-		#     # to those contained in the mTreeBuildupContext parameter, every time
+		#     # to those contained in the mTreeBuildUpContext parameter, every time
 		#     # the returned loadModel function is called.
 		#   string testOnlyMockBaseDir
 		#     # used for test purposes
@@ -22,7 +22,7 @@ $group
 			optional
 		param testOnlyMockBaseDir
 		+
-		# loog 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
+		log 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
 		var loadModel = this.modelLoaders[schemaName] || null
 		if loadModel == null
 			checked_call_r( factory )
@@ -84,7 +84,7 @@ $group
 		#   string schemaName
 		#   string ittfDocumentUri
 		#   { loadContext
-		#     { mTreeBuildupContext
+		#     { mTreeBuildUpContext
 		#       optional
 		#     { globalContext
 		#       optional

@@ -1,0 +1,5 @@
+$group
+    head
+    body
+        div
+            h1 Hello ${metaCtx.metaProduction.sayHelloTo}

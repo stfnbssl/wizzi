@@ -1,0 +1,36 @@
+﻿$group
+
+	it-async should get an mTreeBrick param values
+		_ MTreeBrickProvider.createFromUri
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'toIttf_1.tests.ittf'
+			{
+				@ productionContext mocks.ProductionContext
+				@ mTreeBuildUpContext
+					{
+				@ __ittfDocumentStore store
+			f_cb_test( provider )
+				tobe_object( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+				tobe_object( mTree )
+				var nodes1Ittf
+					_ mTree.toIttf
+				tobe_string( nodes1Ittf, alpha 1\n    beta 2 )
+				var nodes
+					[
+						{
+							@ n "id"
+							@ v "value1"
+							[ children
+						{
+							@ n "id"
+							@ v "value2"
+							[ children
+				var nodes2Ittf
+					_ mTree.toIttf
+						@ nodes
+				tobe_string( nodes2Ittf, id value1\nid value2 )
+				_ done

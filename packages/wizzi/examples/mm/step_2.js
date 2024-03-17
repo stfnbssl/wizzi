@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\mm\step_2.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:47 GMT
+    utc time: Sun, 17 Mar 2024 16:14:49 GMT
 */
 'use strict';
 /**
@@ -163,6 +163,7 @@ function createPackifilesFromFs(folderPath, callback) {
      }, (err, files) => {
     
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         const packiFiles = {};
@@ -246,11 +247,13 @@ var mm_step_2 = function(step_callback) {
          }, (err, gmp) => {
         
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             gmp.getMetaCategoryStarter({}, (err, result) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 printValue('getMetaCategoryStarter', stringify(result, null, 2))
@@ -266,6 +269,7 @@ var mm_step_2 = function(step_callback) {
              }, (err, result) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 printValue('getMetaContextDefsStarter', stringify(result, null, 2))
@@ -281,6 +285,7 @@ var mm_step_2 = function(step_callback) {
              }, (err, result) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 printValue('getMetaProductionStarter', stringify(result, null, 2))

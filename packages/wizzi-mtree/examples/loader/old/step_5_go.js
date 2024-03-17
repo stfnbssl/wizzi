@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\step_5_go.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:42 GMT
+    utc time: Thu, 14 Mar 2024 21:16:16 GMT
 */
 'use strict';
 var path = require('path');
@@ -44,7 +44,7 @@ var loader_evaluator = function(step_callback) {
             throw new Error(err.message);
         }
         var loadContext = {
-            mTreeBuildupContext: {}, 
+            mTreeBuildUpContext: {}, 
             productionContext: mocks.ProductionContext, 
             __ittfDocumentStore: store
          };

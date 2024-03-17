@@ -1,0 +1,42 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'meta_metify_wh',
+            title: 'meta - metify wizziHub',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            const folderPath
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'wizziHub'
+            const rootFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'wizziHub'
+            const destFolder
+                _ path.join
+                    @ __dirname
+                    @ 'outputs'
+                    @ 'metify'
+
+            const metaProductionName = 'wizziHub'
+
+            _ meta.metify
+                @ folderPath
+                @ rootFolder
+                @ metaProductionName
+                {
+                    @ destFolder destFolder
+                    @ depth null
+                f_cb_test( result )
+

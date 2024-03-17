@@ -4,22 +4,29 @@ $group
 		# Check if a wizzi schema has a wizzifier
 		# returns
 		#   true|false
-	m canWizzify
+	m canWizzifySchema
 		string schemaName
-		return this.pluginsManager.canWizzify(schemaName)
+		return this.pluginsManager.canWizzifySchema(schemaName)
 
+	# 
+		# Check if a wizzi schema has a wizzifier
+		# returns
+		#   true|false
+	m canWizzify
+		string extension
+		return this.pluginsManager.canWizzify(extension)
 	#
 		# Retrieve a wizzifier
 		# Wizzifiers are searched in the PluginsManager
 		# They are cached
 	m getWizzifier
-		string wizzifierName
+		string extension
 		+
-		var wizzifier = this.wizzifiers[wizzifierName] || null
+		var wizzifier = this.wizzifiers[extension] || null
 		if wizzifier == null
 			checked_call_r_set( wizzifier )
-				_ this.pluginsManager.getWizzifier(wizzifierName)
-			set this.wizzifiers[wizzifierName] = wizzifier
+				_ this.pluginsManager.getWizzifier(extension)
+			set this.wizzifiers[extension] = wizzifier
 		return wizzifier
 
 	#
@@ -27,7 +34,7 @@ $group
 		#
 		# params
 		#   string tobeWizzifiedUri
-		#     # The source code to be wizzified
+		#     # The file path to the source to be wizzified
 		#   string wizzifierName
 		#     # The name for retrieving the wizzifier
 		#   callback

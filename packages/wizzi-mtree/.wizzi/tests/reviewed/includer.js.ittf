@@ -28,7 +28,7 @@
 		_ MTreeBrickProvider.createFromUri
 			@ uri
             {
-				@ mTreeBuildupContext
+				@ mTreeBuildUpContext
 					{
 				@ productionContext mocks.ProductionContext
 				@ __ittfDocumentStore store
@@ -67,7 +67,7 @@
 		_ MTreeBrickProvider.createFromUri
 			@ uri
             {
-				@ mTreeBuildupContext
+				@ mTreeBuildUpContext
 					{
 				@ productionContext mocks.ProductionContext
 				@ __ittfDocumentStore store

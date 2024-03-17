@@ -55,7 +55,7 @@ $group
             @ 'ittf'
             @ ittfMetaFilePath
             {
-                @ mTreeBuildupContext context.modelRequestContext
+                @ mTreeBuildUpContext context.modelRequestContext
             a_cb( metaFileModel )
                 $$ loog "Object.keys(metaFileModel)", Object.keys(metaFileModel)
                 $$ loog "metaFileModel.children.length", metaFileModel.children.length

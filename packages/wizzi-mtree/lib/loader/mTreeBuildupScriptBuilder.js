@@ -1,24 +1,24 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildupScriptBuilder.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScriptBuilder.js.ittf
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var JsWizziContext = require('../jswizzi/jsWizziContext');
 var dateUtil = require('../jswizzi/functions/dateUtil');
 var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
-var mTreeBuildupScripter = require('./mTreeBuildupScripter');
+var mTreeBuildUpScripter = require('./mTreeBuildUpScripter');
 var requireFromString = null;
 /**
      Returns for debug purposes:
-     . the mTreeBuildupScript
+     . the mTreeBuildUpScript
 */
 module.exports = function(composedMTree, loadContext, callback) {
     var productionContext = loadContext.productionContext;
     loadContext.options = loadContext.options || {};
     var jsWizziContext = new JsWizziContext(composedMTree, productionContext);
-    jsWizziContext.setGlobalValues(loadContext.mTreeBuildupContext)
+    jsWizziContext.setGlobalValues(loadContext.mTreeBuildUpContext)
     var ctx = {
         brickKey: null, 
         counter: 0, 
@@ -42,7 +42,7 @@ module.exports = function(composedMTree, loadContext, callback) {
     var i, i_items=composedMTree.nodes, i_len=composedMTree.nodes.length, item;
     for (i=0; i<i_len; i++) {
         item = composedMTree.nodes[i];
-        mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx);
+        mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx);
     }
     if (isCompile) {
         scriptCoder.w('return $0;')
@@ -50,7 +50,7 @@ module.exports = function(composedMTree, loadContext, callback) {
         scriptCoder.w('}')
     }
     callback(null, {
-        mTreeBuildupScript: scriptCoder.toCode()
+        mTreeBuildUpScript: scriptCoder.toCode()
      })
 }
 ;

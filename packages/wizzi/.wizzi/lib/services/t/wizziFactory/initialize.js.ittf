@@ -27,7 +27,7 @@
 		#         string testOnlyMockBaseDir
 		#       { dumps
 		#         string dumpsBaseFolder
-		# 	      { mTreeBuildupJsWizziScript
+		# 	      { mTreeBuildUpJsWizziScript
 		#           boolean dump
 		#           string dumpsBaseFolder
 
@@ -96,11 +96,11 @@
 						@ that.createStore
 						{
 							@ raw true
-				checked_call_set( that.__loadMTreeBuildupScript )
+				checked_call_set( that.__loadMTreeBuildUpScript )
 					_ mtree.createLoadMTree
 						@ that.createStore
 						{
-							@ mTreeBuildupScript true
+							@ mTreeBuildUpScript true
 				_ that.createStore
 					f_cb( store )
 						set that.store = store

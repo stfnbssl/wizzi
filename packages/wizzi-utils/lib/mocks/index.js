@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\mocks\index.js.ittf
-    utc time: Mon, 26 Feb 2024 20:29:01 GMT
+    utc time: Thu, 14 Mar 2024 20:24:16 GMT
 */
 'use strict';
 var verify = require('../helpers/verify');
@@ -50,6 +50,7 @@ md.getProductionManager = function() {
 }
 ;
 md.errors = require('./errors');
+md.ProductionContext = {};
 md.createProductionContext = function createProductionContext() {
     return {
             aclstat: {}, 
@@ -58,7 +59,7 @@ md.createProductionContext = function createProductionContext() {
             }, 
             addIttfDocument: function() {
             }, 
-            addMTreeBuildupScript: function(uri, ittfEvalScript) {
+            addMTreeBuildUpScript: function(uri, ittfEvalScript) {
                 this.ittfEvaluationScripts[uri] = {
                     uri: uri, 
                     ittfEvalScript: ittfEvalScript
@@ -86,6 +87,12 @@ md.createProductionContext = function createProductionContext() {
                 }
                 fail.warn(exception);
                 throw exception;
+            }, 
+            setEvaluationContextValue: function(name, value) {
+                md.ProductionContext[name] = value;
+            }, 
+            getEvaluationContextValue: function(name) {
+                return md.ProductionContext[name];
             }
          };
 }

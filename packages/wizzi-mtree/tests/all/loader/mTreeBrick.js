@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mTreeBrick.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:43 GMT
+    utc time: Thu, 14 Mar 2024 21:16:17 GMT
 */
 'use strict';
 
@@ -21,6 +21,7 @@ function getFSDocumentStore(callback) {
         kind: 'filesystem'
      }, function(err, storeFacory) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         return storeFacory(callback);
@@ -32,7 +33,7 @@ var mocks = require('../../mocks/misc');
 
 function evaluate(uri, callback) {
     var loadContext = {
-        mTreeBuildupContext: {}, 
+        mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
      };
@@ -69,7 +70,7 @@ describe("mTree", function() {
     it("should get an mTreeBrick param values", function(done) {
         MTreeBrickProvider.createFromUri(path.join(__dirname, 'repo', 'data', 'params_1.tests.ittf'), {
             productionContext: mocks.ProductionContext, 
-            mTreeBuildupContext: {}, 
+            mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
          }, function(err, provider) {
             if (err) {
@@ -95,6 +96,44 @@ describe("mTree", function() {
             expect(prms[3].value).to.eql(expected);
             expect(prms[4].value).to.be.a('number');
             expect(prms[4].value).to.be(9.99);
+            done();
+        })
+    });
+    it("should get an mTreeBrick param values", function(done) {
+        MTreeBrickProvider.createFromUri(path.join(__dirname, 'repo', 'data', 'toIttf_1.tests.ittf'), {
+            productionContext: mocks.ProductionContext, 
+            mTreeBuildUpContext: {}, 
+            __ittfDocumentStore: store
+         }, function(err, provider) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+                throw new Error(err.message);
+            }
+            expect(provider).to.be.an('object');
+            var mTree = provider.getPrimaryMTreeBrick();
+            expect(mTree).to.be.an('object');
+            var nodes1Ittf = mTree.toIttf();
+            expect(nodes1Ittf).to.be.a('string');
+            expect(nodes1Ittf).to.be('alpha 1\n    beta 2');
+            var nodes = [
+                {
+                    n: "id", 
+                    v: "value1", 
+                    children: [
+                        
+                    ]
+                 }, 
+                {
+                    n: "id", 
+                    v: "value2", 
+                    children: [
+                        
+                    ]
+                 }
+            ];
+            var nodes2Ittf = mTree.toIttf(nodes);
+            expect(nodes2Ittf).to.be.a('string');
+            expect(nodes2Ittf).to.be('id value1\nid value2');
             done();
         })
     });

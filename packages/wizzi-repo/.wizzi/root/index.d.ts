@@ -1,6 +1,4 @@
-﻿import {
-    fSystem,
-} from 'wizzi-utils';
+﻿import { fSystem } from 'wizzi-utils';
 type cb<T> = (err: any, result: T) => void;
 
 /**
@@ -206,17 +204,5 @@ type createStoreFn = (callback: cb<Store>) => void;
 
 export function createStoreFactory(options: CreateStoreFactoryOptions, callback: cb<createStoreFn>): void;
 
-interface FileInfo {
-    name: string;
-    basename: string;
-    isIttfDocument: boolean;
-    isFragment: boolean;
-    schema: string;
-    mime: string;
-    relFolder: string;
-    fullPath: string;
-    destBasename: string;
-    destRelPath: string;
-}
 
-export function fileInfoByPath(filePath: string, baseFolder: string): FileInfo; 
+

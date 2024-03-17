@@ -29,7 +29,7 @@ $group
 		#				{ dumps
 		#					# dumps to files of transient objects for debug purposes
 		#					string dumpsBaseFolder
-		#					{ mTreeBuildupJsWizziScript
+		#					{ mTreeBuildUpJsWizziScript
 		#						boolean dump
 		#						string dumpsBaseFolder
 		#					{ mixedMTree

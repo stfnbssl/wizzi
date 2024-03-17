@@ -156,7 +156,7 @@ The jsWizzi script that, once executed, by the`jsWizziRunner, will give as resul
 `of the source ittf document.`
 </tr>
 <tr>
-<td>mTreeBuildupScriptCoder</td>
+<td>mTreeBuildUpScriptCoder</td>
 <td>
 A module of the wizzi.mtree package that generates the`mTree build up script.`
 </tr>

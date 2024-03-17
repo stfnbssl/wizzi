@@ -188,7 +188,7 @@
 							f_cb( wizziModelFactory )
 								var loadContext
 									{
-										@ mTreeBuildupContext
+										@ mTreeBuildUpContext
 											_ _.assign
 												{ 
                                                 @ masterModelInfo.getGlobalContextForLoading()
@@ -224,7 +224,7 @@
 				f_cb( wizziModelFactory )
 					var loadContext
 						{
-							@ mTreeBuildupContext
+							@ mTreeBuildUpContext
 								_ _.assign
 									{ 
                                     @ masterModelInfo.getGlobalContextForLoading()
@@ -399,7 +399,7 @@
         
 				var loadContext
 					{
-						@ mTreeBuildupContext
+						@ mTreeBuildUpContext
 							_ _.assign
 								{ 
                                 @ modelInfo.getGlobalContextForLoading()

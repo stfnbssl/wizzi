@@ -9,7 +9,7 @@
 				@ 'params_1.tests.ittf'
 			{
 				@ productionContext mocks.ProductionContext
-				@ mTreeBuildupContext
+				@ mTreeBuildUpContext
 					{
 				@ __ittfDocumentStore store
 			f_cb_test( provider )

@@ -1,4 +1,4 @@
-﻿module wizzi-mtree.loader.mTreeBuildupScripter
+﻿module wizzi-mtree.loader.mTreeBuildUpScripter
     kind jsfile
 
 	#
@@ -428,6 +428,3 @@
 		*$
 		# Alt+146: Æ
         return verify.replaceAll(value, "Æ" + "{", "${");
-
-
-

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -181,7 +181,7 @@ function evalKeyOrCode(keyOrCode, jsWizziContext) {
     
     // TODO verify.logError does not exist any more 25/02/21
     
-    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@0.8.1.loader.ittfInterpolate.evalKeyOrCode' )
+    // _ verify.logError( 'checked_call_return.error.method',  'wizzi-mtree@.loader.ittfInterpolate.evalKeyOrCode' )
     
     // _ verify.logError( 'checked_call_return.error.forTest',  'stm',  stm )
     

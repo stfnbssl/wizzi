@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\root\index.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:16 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var loader = require('./lib/loader');
 
 var md = module.exports = {};
-md.version = "0.8.4";
+md.version = "0.8.13";
 /**
     
      params
@@ -19,7 +19,7 @@ md.version = "0.8.4";
      boolean useCache
      boolean frontMatter
      boolean raw
-     boolean mTreeBuildupScript
+     boolean mTreeBuildUpScript
     
 */
 md.createLoadMTree = function createLoadMTree(createStore, options) {
@@ -39,7 +39,7 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
     var useCache = options.useCache || false;
     var frontMatter = options.frontMatter || false;
     var raw = options.raw || false;
-    var mTreeBuildupScript = options.mTreeBuildupScript || false;
+    var mTreeBuildUpScript = options.mTreeBuildUpScript || false;
     var ittfDocumentStore;
     return function loadMTree(ittfDocumentUri, loadContext, callback) {
             if (typeof(callback) !== 'function') {
@@ -72,10 +72,10 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
                     'InvalidArgument', 'loadMTree', { parameter: 'loadContext.__productionManager.productionContext.aclstat', message: 'The loadContext.__productionManager.productionContext.aclstat parameter must be an object. Received: ' + loadContext.__productionManager.productionContext.aclstat }
                 ));
             }
-            if (verify.isNullOrUndefined(loadContext.mTreeBuildupContext) === false) {
-                if (verify.isObject(loadContext.mTreeBuildupContext) === false) {
+            if (verify.isNullOrUndefined(loadContext.mTreeBuildUpContext) === false) {
+                if (verify.isObject(loadContext.mTreeBuildUpContext) === false) {
                     return callback(error(
-                        'InvalidArgument', 'loadMTree', { parameter: 'loadContext.mTreeBuildupContext', message: 'The loadContext.mTreeBuildupContext parameter must be an object. Received: ' + loadContext.mTreeBuildupContext }
+                        'InvalidArgument', 'loadMTree', { parameter: 'loadContext.mTreeBuildUpContext', message: 'The loadContext.mTreeBuildUpContext parameter must be an object. Received: ' + loadContext.mTreeBuildUpContext }
                     ));
                 }
             }
@@ -83,6 +83,7 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
             if (!useCache || !ittfDocumentStore) {
                 createStore(function(err, store) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     ittfDocumentStore = store;
@@ -93,8 +94,8 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
                     else if (raw) {
                         loader.loadMTreeRaw(ittfDocumentUri, loadContext, callback)
                     }
-                    else if (mTreeBuildupScript) {
-                        loader.loadMTreeBuildupScript(ittfDocumentUri, loadContext, callback)
+                    else if (mTreeBuildUpScript) {
+                        loader.loadMTreeBuildUpScript(ittfDocumentUri, loadContext, callback)
                     }
                     else {
                         loader.loadMTree(ittfDocumentUri, loadContext, callback)
@@ -109,8 +110,8 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
                 else if (raw) {
                     loader.loadMTreeRaw(ittfDocumentUri, loadContext, callback)
                 }
-                else if (mTreeBuildupScript) {
-                    loader.loadMTreeBuildupScript(ittfDocumentUri, loadContext, callback)
+                else if (mTreeBuildUpScript) {
+                    loader.loadMTreeBuildUpScript(ittfDocumentUri, loadContext, callback)
                 }
                 else {
                     loader.loadMTree(ittfDocumentUri, loadContext, callback)

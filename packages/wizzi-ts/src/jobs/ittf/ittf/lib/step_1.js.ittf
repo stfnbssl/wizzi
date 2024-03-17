@@ -1,0 +1,28 @@
+﻿module
+	kind jsfile
+
+	$
+		var horses = [];
+		$.setCtx('horse.ribot', 'Ribot');
+
+	class Animal
+		m sayHello
+			info this.cry, ', I am ', this.name
+
+	var horses
+		[
+			$foreach item in Object.values($.getCtx('horse'))
+				@ '${item}'
+	
+	class Horse
+		super Animal
+		ctor
+			param name
+			set this.name = name
+			set this.cry = 'Hiii'
+
+	var horse = new Horse('Varenne')
+	_ horse.sayHello
+
+	$
+		$.setCtx('horse.varenne', 'Varenne');

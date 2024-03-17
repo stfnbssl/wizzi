@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -21,17 +21,17 @@ work.textSep = "__TS__";
 /**
      This helper instance is declared in the global context
      of the JsWizziContext and is in the global scope of the
-     JsWizziRunner when it runs the mTreeBrickBuildupScript.
+     JsWizziRunner when it runs the mTreeBrickBuildUpScript.
     
-     The mTreeBuildupScript may call the methods of
+     The mTreeBuildUpScript may call the methods of
      this instance for
-     . Setting the evalContext: global, mTreeBuildup or mTreeBrick.
+     . Setting the evalContext: global, mTreeBuildUp or mTreeBrick.
      . Adding nodes to the mTree that is been building.
      . Executing interpolation of expressions.
      . Calling api functions (declared in the wizzifile.js) on the runner server
      . Retrieving wizzi models (loaded in wizzifile.js) from the runner server
     
-     The evalContext(s) of mTreeBrick(s) are stored in the
+     The evalContext(s) of mTreeBrick(s) are stored in
      the mTreeBrickDatas map of the wizzi.loader.loadHistory.
      There are retrieved by the getMTreeBrickEvalContext method
      every time the active mTreeBrick context changes.
@@ -331,6 +331,16 @@ class JsWizziEvalHelper {
         interpolateArgsContext.setValues(mixer_mTreeBrick_EvalContext.getValues());
         return interpolateArgsContext;
     }
+    setCtx(kind, namePath, value) {
+        return this.productionContext.setEvaluationContextValue(kind, namePath, value);
+    }
+    removeCtx(kind, namePath) {
+        throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet');
+        return this.productionContext.removeEvaluationContextValue(kind, namePath);
+    }
+    getCtx(kind, namePath) {
+        return this.productionContext.getEvaluationContextValue(kind, namePath);
+    }
 }
 function remacro(value) {
     // Alt+146 = Æ
@@ -363,7 +373,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.4.jswizzi.jsWizziEvalHelper.' + method,
+        method: 'wizzi-mtree@0.8.13.jswizzi.jsWizziEvalHelper.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

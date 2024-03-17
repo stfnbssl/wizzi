@@ -1,0 +1,19 @@
+$group
+    $file t/package/0_0_1/browser.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/browser.json
+    $file t/package/0_0_1/dependencies.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/dependencies.json
+    $file t/package/0_0_1/devDependencies.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/devDependencies.json
+    $file t/package/0_0_1/resolutions.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/resolutions.json
+    $file t/package/0_0_1/scripts.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/scripts.json
+    $file t/package/0_0_1/tools.json.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziMeta/tfolder/package/0_0_1/tools.json

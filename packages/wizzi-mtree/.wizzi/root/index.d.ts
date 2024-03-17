@@ -225,21 +225,31 @@ export type CreateLoadMTreeOptions = {
     /**
      * default false
      */
-    mTreeBuildupScript?: boolean; 
+    mTreeBuildUpScript?: boolean; 
 };
+
+declare interface ProductionContext {
+}
+
+type EvaluationContextKind = 'string' | 'object' | 'object-property' | 'array' | 'array-item'
+
+type EvaluationContextValue = string | number | {}; 
+
+declare interface ProductionManager {
+    productionContext: ProductionContext;
+    mTreeBuildUpContext?: {};
+    options?: {
+        isCompile: boolean
+    }
+    setEvaluationContextValue(kind: string, namePath: string, value: EvaluationContextValue) : void;
+    removeEvaluationContextValue(kind: string, namePath) : void;
+    getEvaluationContextValue(kind: string, namePath) : void;
+}
 
 export type LoadMTreeContext = {
-    __productionManager: {
-        productionContext: {
-            aclstat: {}
-        },
-        mTreeBuildupContext?: {},
-        options?: {
-            isCompile: boolean
-        }
-    }
+    __productionManager: ProductionManager;
 };
 
-export type loadMTreeFn = (ittfDocumentUri: string, loadContext: LoadMTreeContext, callback: cb<MTree>) => void;
+export type loadMTreeFn = (ittfDocumentUri: string, loadContext: LoadMTreeContext, callback: cb<mTree>) => void;
 
 export function createLoadMTree(createStore: createStore, options?: CreateLoadMTreeOptions) : loadMTreeFn;

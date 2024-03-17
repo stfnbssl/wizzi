@@ -1,0 +1,5 @@
+module
+    kind es6
+    $
+        $.setCtx('name', 'annie');
+    var name = '${$.getCtx('name')}'

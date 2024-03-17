@@ -71,7 +71,9 @@
 				set name.parent = this
 				return name
 			else
-				return new IttfDocumentGraph(name, value, this)
+				var node = new IttfDocumentGraph(name, value, this)
+				set node.commentState = 0
+				return node
 
 		m insertAt
             param name
@@ -88,6 +90,7 @@
             param name
 			param value
 			var node = this.preAdd(name, value)
+			# log 'add', this.name, node.name
 			_ this.children.push(node)
 			return node
 

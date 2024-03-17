@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\reviewed\appender.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:43 GMT
+    utc time: Thu, 14 Mar 2024 21:16:17 GMT
 */
 'use strict';
 
@@ -21,6 +21,7 @@ function getFSDocumentStore(callback) {
         kind: 'filesystem'
      }, function(err, storeFacory) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         return storeFacory(callback);
@@ -34,7 +35,7 @@ var appender = require('../../../lib/loader/appender');
 
 function evaluate(uri, callback) {
     var loadContext = {
-        mTreeBuildupContext: {}, 
+        mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
      };
@@ -82,7 +83,7 @@ describe("appender", function() {
     it("should append a fragment", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'appender_1.tests.ittf');
         MTreeBrickProvider.createFromUri(content_filepath, {
-            mTreeBuildupContext: {}, 
+            mTreeBuildUpContext: {}, 
             productionContext: mocks.ProductionContext, 
             __ittfDocumentStore: store
          }, function(err, provider) {
@@ -139,7 +140,7 @@ describe("appender", function() {
     it("should ovveride a virtual node", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'appender_virtual_1.tests.ittf');
         MTreeBrickProvider.createFromUri(content_filepath, {
-            mTreeBuildupContext: {}, 
+            mTreeBuildUpContext: {}, 
             productionContext: mocks.ProductionContext, 
             __ittfDocumentStore: store
          }, function(err, provider) {

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:45 GMT
+    utc time: Sun, 17 Mar 2024 16:14:48 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -38,7 +38,7 @@ const {
 class MetasManager {
     constructor() {
         this.__type = 'MetasManager';
-        this.__version = '0.8.13';
+        this.__version = '0.8.21';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -126,6 +126,7 @@ class MetasManager {
         this.loadPlugins(this.metaPluginsOptions, (err, plugins) => {
         
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             const register = (i) => {
@@ -374,6 +375,7 @@ class MetasManager {
         metaPluginModule.createMetaPlugin({}, (err, metaPlugin) => {
         
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             var vld = this.validateMetaPlugin(metaPlugin);
@@ -507,6 +509,7 @@ class MetasManager {
             metaPlugin.getMetaContextDefsStarter(options, (err, metaContextDefs) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 for (var k in metaContextDefs) {
@@ -554,6 +557,7 @@ class MetasManager {
              }, (err, metaProduction) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 for (var k in metaProduction) {
@@ -637,6 +641,7 @@ class MetasManager {
             metaPlugin.getMetaProduction(productionName, (err, metaProduction) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 if (metaProduction) {
@@ -737,6 +742,7 @@ class MetasManager {
         JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
         
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created', __filename);
@@ -749,6 +755,7 @@ class MetasManager {
              }, (err, wf) => {
             
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created', __filename);
@@ -790,7 +797,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.13.metasManager.' + method,
+        method: 'wizzi@0.8.21.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

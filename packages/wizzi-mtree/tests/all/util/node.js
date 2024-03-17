@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\util\node.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:43 GMT
+    utc time: Thu, 14 Mar 2024 21:16:17 GMT
 */
 'use strict';
 
@@ -21,6 +21,7 @@ function getFSDocumentStore(callback) {
         kind: 'filesystem'
      }, function(err, storeFacory) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         return storeFacory(callback);
@@ -32,7 +33,7 @@ var node = require('../../../lib/util/node');
 
 function evaluate(uri, callback) {
     var loadContext = {
-        mTreeBuildupContext: {}, 
+        mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
      };
@@ -233,11 +234,13 @@ describe("util.node", function() {
             if (item.action === 'remove') {
                 ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     // loog 'original', original.toString()
                     ittfGraph.createFrom(item.expected, function(err, expected) {
                         if (err) {
+                            console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         var toremove = original.find(item.name);
@@ -252,15 +255,18 @@ describe("util.node", function() {
             if (item.action === 'replace') {
                 ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     // loog 'original', original.toString()
                     ittfGraph.createFrom(item.replacer, function(err, replacer) {
                         if (err) {
+                            console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         ittfGraph.createFrom(item.expected, function(err, expected) {
                             if (err) {
+                                console.log("[31m%s[0m", err);
                                 return callback(err);
                             }
                             var toreplace = original.find(item.name);
@@ -283,6 +289,7 @@ describe("util.node", function() {
             if (item.action === 'findCommand') {
                 ittfGraph.createFrom(item.original, function(err, original) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     // loog 'original', original.toString()

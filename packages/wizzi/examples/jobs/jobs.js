@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:47 GMT
+    utc time: Sun, 17 Mar 2024 16:14:49 GMT
 */
 'use strict';
 var path = require('path');
@@ -35,6 +35,7 @@ function createWizziFactory(globalContext, callback) {
 function loadMTree(ittfDocumentUri, context, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadMTree(ittfDocumentUri, context, callback)
@@ -44,10 +45,11 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
     var fi = fileInfoByPath(ittfDocumentUri);
     createWizziFactory({}, function(err, wf) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
-            mTreeBuildupContext: context, 
+            mTreeBuildUpContext: context, 
             globalContext: {}
          }, callback)
     })
@@ -56,6 +58,7 @@ function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, ca
     var fi = fileInfoByPath(ittfDocumentUri);
     createWizziFactory({}, function(err, wf) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadModelAndGenerateArtifact(ittfDocumentUri, {
@@ -67,6 +70,7 @@ function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, ca
 function executeWizziJob(ittfDocumentUri, context, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.executeJob({
@@ -82,12 +86,13 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
          }, callback)
     })
 }
-function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback) {
+function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
-        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildupContext, callback)
+        wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)
     })
 }
 function getFiles(srcpath, schema) {

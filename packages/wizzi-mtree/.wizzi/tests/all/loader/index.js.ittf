@@ -27,7 +27,7 @@
 				@ 'data'
 				@ 'ittf_object_args.tests.ittf'
             {
-				@ mTreeBuildupContext
+				@ mTreeBuildUpContext
 					{
 						@ items
 							[

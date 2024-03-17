@@ -1,0 +1,4 @@
+$group
+    $file wizziHub/meta/metaProduction/ittfDocumentTemplates/index.html.ittf.ittf
+       ${'$'}group
+           ${'$'}include wizziHub/wizziHub/meta/metaProduction/ittfDocumentTemplates/index.html

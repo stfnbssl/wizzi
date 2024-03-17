@@ -1,0 +1,18 @@
+$group
+
+    $
+        var items = [
+            personal.data.json,
+        ]
+
+    $foreach item in items
+        $file wizziHub/commons/sampleDemo/t/${item}.ittf.ittf
+            ${'$'}{'$'}group
+                ${'$'}include wizziHub/commons/sampleDemo/tfolder/${item}
+
+    $file wizziHub/commons/sampleDemo/sample.html.ittf.ittf
+       html
+           ${'$'}include wizziHub/wizziHub/commons/sampleDemo/sample.html
+    $file wizziHub/commons/sampleDemo/sampleCtx.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/commons/sampleDemo/sampleCtx.json

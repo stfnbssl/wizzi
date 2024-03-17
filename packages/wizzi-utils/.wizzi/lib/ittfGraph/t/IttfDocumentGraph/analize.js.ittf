@@ -27,12 +27,23 @@
 				_ that.analizeFragment
 					@ ctx
 					f_cb()
-						if that.isCodeDeclare() == false && that.isMultilineDeclare() == false
+						# loog 'name', that.name
+						if that.isCodeDeclareCheck()
+							set that.isCodeDeclare = true
+							r_cb()
+						elif that.isMultilineDeclareCheck()
+							set that.isMultilineDeclare = true
+							r_cb()
+						else
+							if that.isMetaCommandCheck()
+								set that.isMetaCommand = true
+							elif that.isCommandCheck()
+								set that.isCommand = true
 							async_foreach( doLoop, ndx )
 								var item = that.children[ndx]
 								if !item
 									r_cb()
-								# loog 'return analizeFragment, item.name', item.name
+								# loog 'return analizeFragment, item.name, item.commentState', item.name, item.commentState
 								if item.commentState == 0
 									_ item.analize
 										@ ctx
@@ -44,9 +55,6 @@
 									return
 										_ doLoop
 											@ ndx + 1
-
-						else
-							r_cb()
 
 	m analizeRoot
 		param ctx
@@ -110,11 +118,13 @@
 					@ false
 
 		if this.isMixinCall()
+			set this.isMixer = true
 			set this.fragmentName
 				iif verify.endsWith(this.name, '(')
 					then this.name.substr(0, this.name.length -1)
 					else this.name
 		elif this.isIncludeCall()
+			set this.isIncluder = true
 			set this.fragmentName = this.getValueStripComments()
 		else
 			set this.fragmentName = this.getValueStripComments()

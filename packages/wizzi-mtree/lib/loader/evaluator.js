@@ -2,21 +2,21 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
 var JsWizziContext = require('../jswizzi/jsWizziContext');
 var dateUtil = require('../jswizzi/functions/dateUtil');
 var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder');
-var mTreeBuildupScripter = require('./mTreeBuildupScripter');
+var mTreeBuildUpScripter = require('./mTreeBuildUpScripter');
 var requireFromString = null;
 /**
      The final step of an mTree loading.
      Executes the expression evaluations and the
      template commands of the composedMTree and builds the final mTree:
-     . creates the mTreeBuildupScript from the composedMTree,
-     . creates the jsWizziContext and loads the loadContext.mTreeBuildupContext
+     . creates the mTreeBuildUpScript from the composedMTree,
+     . creates the jsWizziContext and loads the loadContext.mTreeBuildUpContext
      in the global context,
      . runs the script with the jsWizziRunner,
      . returns the builded mTree.
@@ -24,7 +24,7 @@ var requireFromString = null;
      params
      { composedMTree
      { loadContext
-     { mTreeBuildupContext
+     { mTreeBuildUpContext
      { productionContext
      { runnerServer
      { options
@@ -38,7 +38,7 @@ module.exports = function(composedMTree, loadContext, callback) {
     var productionContext = loadContext.productionContext;
     var scriptCoder = new JsWizziScriptCoder();
     var jsWizziContext = new JsWizziContext(composedMTree, productionContext, scriptCoder);
-    jsWizziContext.setGlobalValues(loadContext.mTreeBuildupContext)
+    jsWizziContext.setGlobalValues(loadContext.mTreeBuildUpContext)
     var ctx = {
         brickKey: null, 
         counter: 0, 
@@ -61,14 +61,14 @@ module.exports = function(composedMTree, loadContext, callback) {
     var i, i_items=composedMTree.nodes, i_len=composedMTree.nodes.length, item;
     for (i=0; i<i_len; i++) {
         item = composedMTree.nodes[i];
-        mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx);
+        mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx);
     }
     if (isCompile) {
         scriptCoder.w('return $0;')
         scriptCoder.deindent();
         scriptCoder.w('}')
     }
-    productionContext.addMTreeBuildupScript(composedMTree.uri, scriptCoder)
+    productionContext.addMTreeBuildUpScript(composedMTree.uri, scriptCoder)
     
     // loog 'scriptCoder.toCode()', scriptCoder.toCode()
     if (isCompile) {

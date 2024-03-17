@@ -1,0 +1,42 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_wizzify_step_4',
+            title: 'Wizzi factory - compare wizzified/generated yaml',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.yaml/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        var yamlSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'comparable_1.yaml'
+
+        var yamlSource
+            _ file.read
+                @ yamlSourcePath
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                # compare wizzified / generated
+                _ wf.wizzifyWithCompare
+                    @ yamlSource
+                    @ 'yaml'
+                    @ 'yaml/document'
+                    f_cb_test(result)
+                        _ printValue
+                            @ 'compare yaml result'
+                            @ result

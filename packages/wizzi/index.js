@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:45 GMT
+    utc time: Sun, 17 Mar 2024 16:14:48 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -21,7 +21,7 @@ var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
-md.version = "0.8.13";
+md.version = "0.8.21";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -47,7 +47,7 @@ md.errors = require('./lib/errors');
      { globalContext
      { dumps
      string dumpsBaseFolder
-     { mTreeBuildupScript
+     { mTreeBuildUpScript
      boolean dump
      string dumpsBaseFolder
 */
@@ -85,7 +85,7 @@ md.createFactory = function createFactory(options, callback) {
      { globalContext
      { dumps
      string dumpsBaseFolder
-     { mTreeBuildupScript
+     { mTreeBuildUpScript
      boolean dump
      string dumpsBaseFolder
 */
@@ -361,7 +361,7 @@ md.loadWizzifile = function(options, callback) {
      { dumps
      # dumps to files of transient objects for debug purposes
      string dumpsBaseFolder
-     { mTreeBuildupJsWizziScript
+     { mTreeBuildUpJsWizziScript
      boolean dump
      string dumpsBaseFolder
      { mixedMTree
@@ -570,7 +570,7 @@ md.generateWizziModelTypes = function(request, callback) {
     
     var storeKind = request.storeKind || 'filesystem';
     
-    request.wfschema.mTreeBuildupContext = Object.assign({}, request.wfschema.mTreeBuildupContext);
+    request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext);
     request.globalContext = Object.assign({}, request.globalContext);
     
     console.log('wizzi.generateWizziModelTypes');
@@ -597,7 +597,7 @@ md.generateWizziModelTypes = function(request, callback) {
         plugins.push('wizzi-core');
     }
     console.log('- plugins', plugins);
-    for (var k in request.wfschema.mTreeBuildupContext) {
+    for (var k in request.wfschema.mTreeBuildUpContext) {
         console.log('- wfschemaContext property', k);
     }
     for (var k in request.globalContext) {
@@ -620,7 +620,7 @@ md.generateWizziModelTypes = function(request, callback) {
         // Now we can generate the wizzi model types
         // They will be written in the folder passed as second parameter.
         console.log(chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name));
-        wizziFactory.generateModelDoms(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildupContext, function(err, result) {
+        wizziFactory.generateModelDoms(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildUpContext, function(err, result) {
             if (err) {
                 return callback(err);
             }
@@ -930,7 +930,7 @@ md.loadMTreeDebug = function(ittfDocumentPath, context, options, callback) {
         if (err) {
             return callback(err);
         }
-        wf.loadMTreeBuildupScript(ittfDocumentPath, context, callback)
+        wf.loadMTreeBuildUpScript(ittfDocumentPath, context, callback)
     })
 }
 ;
@@ -1012,7 +1012,7 @@ md.loadMTreeDebugFromText = function(ittfContent, context, options, callback) {
                 return callback(err);
             }
             var ittfDocumentPath = tempIttfUri;
-            wf.loadMTreeBuildupScript(ittfDocumentPath, context, callback)
+            wf.loadMTreeBuildUpScript(ittfDocumentPath, context, callback)
         })
     })
 }
@@ -1104,7 +1104,7 @@ md.loadModel = function(ittfDocumentPath, context, options, callback) {
         }
         else {
             wf.loadModel(schema, ittfDocumentPath, {
-                mTreeBuildupContext: context, 
+                mTreeBuildUpContext: context, 
                 globalContext: {}
              }, callback)
         }
@@ -1263,7 +1263,7 @@ md.loadModelFromText = function(ittfContent, context, options, callback) {
             }
             var ittfDocumentPath = tempIttfUri;
             wf.loadModel(schema, ittfDocumentPath, {
-                mTreeBuildupContext: context, 
+                mTreeBuildUpContext: context, 
                 globalContext: {}
              }, callback)
         })

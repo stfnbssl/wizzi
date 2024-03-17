@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\lorem\lorem.js.ittf
-    utc time: Mon, 26 Feb 2024 20:29:02 GMT
+    utc time: Thu, 14 Mar 2024 20:24:16 GMT
 */
 'use strict';
 
@@ -34,8 +34,8 @@ describe("lorem", function() {
     });
 });
 
-function getLoadModelContext(mTreeBuildupContext) {
-    return mocks.getLoadModelContext(mTreeBuildupContext);
+function getLoadModelContext(mTreeBuildUpContext) {
+    return mocks.getLoadModelContext(mTreeBuildUpContext);
 }
 
 function getTestModelInfo(schemaName, modelName) {

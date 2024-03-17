@@ -27,7 +27,7 @@ module wizzi-utils.fs.utils
 			if ss[ss.length-1] === 'ittf'
 				var name = ss.slice(0, ss.length-2).join('.')
 				var schema = ss[ss.length-2]
-				var mime = DEFAULT_MIME[schema] || schema
+				$$ var mime = DEFAULT_MIME[schema] || schema
 				return
 					{
 						@ name name
@@ -35,7 +35,9 @@ module wizzi-utils.fs.utils
 						@ isIttfDocument true
 						@ isFragment filePath.indexOf('/t/') > -1
 						@ schema schema
-						@ mime mime
+						$$ 1/3/24, FIXME No, mime Via, plugins only can do this
+						$$ @ mime mime
+						@ extension ss[ss.length-1]
 						@ relFolder relFolder
 						@ fullPath filePath
 						@ destBasename name + '.' + mime
@@ -50,7 +52,9 @@ module wizzi-utils.fs.utils
 						@ basename basename
 						@ isIttfDocument false
 						@ schema null
-						@ mime ss[ss.length-1]
+						$$ 1/3/24, mime Via, plugins only can do this
+						$$ @ mime ss[ss.length-1]
+						@ extension ss[ss.length-1]
 						@ relFolder relFolder
 						@ fullPath filePath
 						@ destBasename basename
@@ -63,6 +67,8 @@ module wizzi-utils.fs.utils
         param filepath
         return verify.replaceAll(filepath, '\\', '/')
 
+	$$ FIXME No, mime Via, plugins only can do this
+	$* VIA
 	var DEFAULT_MIME
 		{
 			@ css 'css'
@@ -76,3 +82,4 @@ module wizzi-utils.fs.utils
 			@ xml 'xml'
 			@ vtt 'vtt'
 			@ vue 'vue'
+	*$

@@ -9,6 +9,7 @@
 		set this.col = node.col || node.c || ''
 		if node.id
 			set this.id = node.id
+		# loog 'loadFromNode', node.name, $params
 		if $params && $params.length > 0
 			_ this.add('$params', $params, this)
 		_ this.__importChilds(node.children)

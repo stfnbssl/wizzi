@@ -24,7 +24,7 @@ module
                 _ MTreeBrickProvider.createFromUri
                     @ ittfUri
                     {
-                        @ mTreeBuildupContext
+                        @ mTreeBuildUpContext
                             {
                         @ productionContext productionContext
                         @ __ittfDocumentStore fsStore
@@ -40,7 +40,7 @@ module
                                     f_cb_test( appendedModel )
                                         var loadContext
                                             {
-                                                @ mTreeBuildupContext
+                                                @ mTreeBuildUpContext
                                                     {
                                                 @ productionContext productionContext
                                                 @ __ittfDocumentStore fsStore

@@ -16,7 +16,7 @@
 			param callback
 			var loadContext
 				{
-					@ mTreeBuildupContext
+					@ mTreeBuildUpContext
 						{
 					@ productionContext mocks.ProductionContext
 					@ __ittfDocumentStore store

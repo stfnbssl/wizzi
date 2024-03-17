@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/mtree",
     "sideEffects": false,
-    "version": "0.8.4",
+    "version": "0.8.13",
     "description": "Loader component for Indented Text Tree Format (ittf) documents. Implements the Wizzi Magical Tree buildup.",
     "author": {
         "name": "Stefano Bassoli",
@@ -37,8 +37,7 @@
         "iconv-lite": "^0.6.2",
         "json-stringify-safe": "^5.0.1",
         "lodash": "^4.17.20",
-        "@wizzi/utils": "0.8.4",
-        "wizzi-utils": "0.7.22",
+        "@wizzi/utils": "0.8.13",
         "escodegen": "^1.8.1",
         "esprima": "^3.1.3",
         "glob": "^7.1.2",
@@ -48,8 +47,7 @@
     "devDependencies": {
         "del": "^6.0.0",
         "expect.js": "^0.3.1",
-        "@wizzi/repo": "latest",
-        "object-inspect": "^1.6.0",
-        "wizzi-repo": "latest"
+        "@wizzi/repo": "^0.8.16",
+        "object-inspect": "^1.6.0"
     }
 }

@@ -10,7 +10,7 @@
         glob "7.1.2"
         i "0.3.7"
         jszip "3.10.1"
-        minimatch "3.0.4"
+        minimatch "9.0.3"
         $if wzConfig_useMongo
             mongodb "2.2.26"
         promise "7.1.1"

@@ -52,7 +52,7 @@ module
                     @ fi.schema
                     @ ittfDocumentUri
                     {
-                        @ mTreeBuildupContext context
+                        @ mTreeBuildUpContext context
                         @ globalContext {}
                     @ callback
     
@@ -99,7 +99,7 @@ module
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
-        param mTreeBuildupContext
+        param mTreeBuildUpContext
         param callback
 
         _ createWizziFactory
@@ -109,7 +109,7 @@ module
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName
-                    @ mTreeBuildupContext
+                    @ mTreeBuildUpContext
                     @ callback
 
 	function getFiles

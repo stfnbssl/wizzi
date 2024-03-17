@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\includer.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -69,6 +69,7 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
             }
             includer(includedWipNodifiedMTree, mTreeBrickProvider, function(err, includeResult) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 mTreeBrickProvider.exitFragmentCall();
@@ -85,6 +86,7 @@ var includer = module.exports = function(primaryMTreeBrick, mTreeBrickProvider, 
         })
     }, function(err, results) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         var i, i_items=jsons, i_len=jsons.length, item;
@@ -170,7 +172,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.4.loader.includer.' + method,
+        method: 'wizzi-mtree@0.8.13.loader.includer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

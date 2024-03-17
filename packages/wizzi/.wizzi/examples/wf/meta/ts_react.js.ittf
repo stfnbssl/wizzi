@@ -133,7 +133,7 @@ module
                     @ 'json'
                     @ jsonPath
                     {
-                        { mTreeBuildupContext                    
+                        { mTreeBuildUpContext                    
                             { metaCtx
                                 @ pkgName name
                     f_cb_test(wizziModel)

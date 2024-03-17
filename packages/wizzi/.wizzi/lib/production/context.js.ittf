@@ -3,6 +3,7 @@
 
     var path = require('path')
     var util = require('util')
+    var stringify = require('json-stringify-safe')            
     var file = require('@wizzi/utils').file
 	var fail = require('@wizzi/utils').fail
 	var runnerServer = null
@@ -11,7 +12,7 @@
 		# { options
 		#   { dumps
 		#     string dumpsBaseFolder
-		# 	  { mTreeBuildupJsWizziScript
+		# 	  { mTreeBuildUpJsWizziScript
 		#       boolean dump
 		#       string dumpsBaseFolder
 	wz-class ProductionContext
@@ -25,6 +26,10 @@
                 { 
             set this.mTrees =
                 { 
+            set this.runningContextValues
+                {
+            set this.newRunningContextValues
+                [
             set this.evaluatedMTrees =
                 { 
             set this.globalModels
@@ -54,7 +59,7 @@
                         @ content content
                         @ cacheCount 0
     
-		m addMTreeBuildupScript
+		m addMTreeBuildUpScript
             param uri
             param ittfEvalScript
             set this.ittfEvaluationScripts[uri]
@@ -63,8 +68,8 @@
                     @ ittfEvalScript ittfEvalScript
             
 			# loog '*=*=*=*= temporary wizzi.production.productionContext. this.dumps : ', this.dumps
-			if this.dumps && this.dumps.mTreeBuildupJsWizziScript && this.dumps.mTreeBuildupJsWizziScript.dump
-				var dumpsFolder = this.dumps.mTreeBuildupJsWizziScript.dumpsBaseFolder || this.dumps.dumpsBaseFolder
+			if this.dumps && this.dumps.mTreeBuildUpJsWizziScript && this.dumps.mTreeBuildUpJsWizziScript.dump
+				var dumpsFolder = this.dumps.mTreeBuildUpJsWizziScript.dumpsBaseFolder || this.dumps.dumpsBaseFolder
                 _ file.write
                     _ path.join
                         @ dumpsFolder
@@ -163,3 +168,14 @@
                 set exception.message = '\nError evaluating ittf in uri: ' + uri + '\n' + exception.message + '\n'
             _ fail.warn(exception)
             throw exception  
+        
+        $include context\runningContextValues
+
+    function checkEquals
+        param a
+        param b
+        if a == null && b == null
+            return true
+        if a == undefined && b == undefined
+            return true      
+        return stringify(a) == stringify(b)

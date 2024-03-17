@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -17,7 +17,7 @@ var includer = require('./includer');
 var mixer = null;
 var appender = require('./appender');
 var evaluator = require('./evaluator');
-var mTreeBuildupScriptBuilder = require('./mTreeBuildupScriptBuilder');
+var mTreeBuildUpScriptBuilder = require('./mTreeBuildUpScriptBuilder');
 var md = module.exports = {};
 /**
      The Big JOB of an mTree loading manages:
@@ -57,11 +57,13 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
         // resolve $-- (front matter) commands
         frontMatter(primaryMTreeBrick, function(err, frontMatterResolvedMTreePiece) {
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             // resolve $include commands
             includer(frontMatterResolvedMTreePiece, createdProvider, function(err, includedMTreePiece) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 if (mixer == null) {
@@ -70,12 +72,14 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
                 // mix primary mTreeBrick and mixins
                 mixer(includedMTreePiece, createdProvider, function(err, mixedMTreePiece) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     loadContext.productionContext.addMixedMTree(primaryIttfDocumentUri, mixedMTreePiece);
                     // resolve $group, $hook and $append commands
                     appender(mixedMTreePiece, function(err, appendedMTreePiece) {
                         if (err) {
+                            console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         // evaluate
@@ -139,6 +143,7 @@ md.loadMTreeFrontMatter = function loadMTreeRaw(primaryIttfDocumentUri, loadCont
     }
     md.loadMTreeRaw(primaryIttfDocumentUri, loadContext, function(err, primaryMTreeBrick) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         // resolve $-- (front matter) commands
@@ -207,7 +212,7 @@ md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, cal
      Load mTree debug info.
      This is mainly for debug or documentation purposes.
 */
-md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadContext, callback) {
+md.loadMTreeBuildUpScript = function loadMTree(primaryIttfDocumentUri, loadContext, callback) {
     var originalloadContext = loadContext;
     loadContext = normalizeRequestContext(loadContext);
     if (loadContext.__is_error) {
@@ -230,11 +235,13 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
         // resolve $-- (front matter) commands
         frontMatter(primaryMTreeBrick, function(err, frontMatterResolvedMTreePiece) {
             if (err) {
+                console.log("[31m%s[0m", err);
                 return callback(err);
             }
             // resolve $include commands
             includer(primaryMTreeBrick, createdProvider, function(err, includedMTreePiece) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 if (mixer == null) {
@@ -243,16 +250,18 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
                 // mix primary mTreeBrick and mixins
                 mixer(includedMTreePiece, createdProvider, function(err, mixedMTreePiece) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     loadContext.productionContext.addMixedMTree(primaryIttfDocumentUri, mixedMTreePiece);
                     // resolve $group, $hook and $append commands
                     appender(mixedMTreePiece, function(err, appendedMTreePiece) {
                         if (err) {
+                            console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         // build debug info
-                        mTreeBuildupScriptBuilder(appendedMTreePiece, loadContext, callback)
+                        mTreeBuildUpScriptBuilder(appendedMTreePiece, loadContext, callback)
                     })
                 })
             })
@@ -264,7 +273,7 @@ md.loadMTreeBuildupScript = function loadMTree(primaryIttfDocumentUri, loadConte
      normalized means:
      { loadContext
      { productionContext
-     { mTreeBuildupContext
+     { mTreeBuildUpContext
      { options
     
 */
@@ -275,8 +284,8 @@ function normalizeRequestContext(loadContext) {
          loog 'normalizeRequestContext.k', k
     */
     loadContext.productionContext = loadContext.__productionManager.productionContext;
-    if (verify.isObject(loadContext.mTreeBuildupContext) == false) {
-        loadContext.mTreeBuildupContext = {};
+    if (verify.isObject(loadContext.mTreeBuildUpContext) == false) {
+        loadContext.mTreeBuildUpContext = {};
     }
     // TODO this seems out of place, remove
     // if verify.isObject(loadContext.artifactContext) == false

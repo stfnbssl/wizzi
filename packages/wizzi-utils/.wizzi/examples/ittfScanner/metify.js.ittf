@@ -17,18 +17,17 @@ module
                 _ path.join
                     @ __dirname
                     @ 'ittf'
-                    @ 'scan-ittf'
+                    @ 'scanMeta'
             const rootFolder
                 _ path.join
                     @ __dirname
                     @ 'ittf'
-                    @ 'scan-ittf'
+                    @ 'scanMeta'
             const destFolder
                 _ path.join
                     @ __dirname
                     @ 'outputs'
                     @ 'metify'
-                    @ 'scan-ittf'
 
             const metaProductionName = 'baxDemo'
 
@@ -58,6 +57,7 @@ module
                             @ metaProductionName metaProductionName
                             @ ft_basePath ''
                             @ id_basePath ''
+                            @ idf_basePath ''
 
                     set packiFiles[metaProductionName+'/folderTemplates/index.ittf.ittf']
                         {
@@ -91,47 +91,6 @@ module
                         @ f
                         @ sb
                         @ state
-                $*
-                foreach child in fsNode.children
-                    _ elabFsNode
-                        @ packiFiles
-                        @ fsNode
-                *$
-
-            $*
-            function elabMainFolder 
-                param packiFiles
-                param fsNode                   
-                param sb
-                param state
-                _ sb.folderTemplateFile.push
-                    @ '        $include ' + fsNode.basename
-                var save_sb_folderTemplateFile = sb.folderTemplateFile
-                set state.ft_basePath = state.ft_basePath + fsNode.basename + '/t/'
-                set state.id_basePath = state.id_basePath + fsNode.basename + '/'
-                set sb.folderTemplateFile
-                    [ 
-                        @ '$group'
-                foreach f in fsNode.folders
-                    _ elabFolder
-                        @ packiFiles
-                        @ f
-                        @ sb
-                        @ state
-                foreach d in fsNode.documents
-                    _ elabDocument
-                        @ packiFiles
-                        @ d
-                        @ sb
-                        @ state
-                set packiFiles[state.metaProductionName+'/folderTemplates/t/' + fsNode.basename + '.ittf.ittf']
-                    {
-                        @ type "CODE"
-                        @ contents sb.folderTemplateFile.join('\n')
-                set state.ft_basePath = state.ft_basePath + '/t/' + fsNode.basename 
-                set state.id_basePath = state.id_basePath + '/' + fsNode.basename 
-                set sb.folderTemplateFile = save_sb_folderTemplateFile
-            *$
             
             function elabFolder 
                 param packiFiles
@@ -139,18 +98,28 @@ module
                 param sb
                 param state
                 if fsNode.parent.isRoot
-                    _ sb.folderTemplateFile.push
-                        @ '        $include ' + fsNode.basename
+                    if !fsNode.isTFolder
+                        _ sb.folderTemplateFile.push
+                            @ '        $include ' + fsNode.basename
                 else
-                    _ sb.folderTemplateFile.push
-                        @ '    $include ' + fsNode.basename
+                    if !fsNode.isTFolder
+                        _ sb.folderTemplateFile.push
+                            @ '    $include ' + fsNode.basename
                 var save_sb_folderTemplateFile = sb.folderTemplateFile
                 var save_state_ft_basePath = state.ft_basePath
                 var save_state_id_basePath = state.id_basePath
+                var save_state_idf_basePath = state.idf_basePath
                 #
                 # prepare for children
-                set state.ft_basePath = state.ft_basePath + fsNode.basename + '/t/'
+                set state.ft_basePath = state.ft_basePath + '/t/' 
                 set state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/'
+                set state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/'
+                log 'state.ft_basePath', state.ft_basePath
+                if fsNode.isTFolder
+                    _ elabTFolder
+                        @ fsNode
+                        @ sb
+                        @ state
                 set sb.folderTemplateFile 
                     [ 
                         @ '$group'
@@ -160,28 +129,61 @@ module
                         @ f
                         @ sb
                         @ state
-                foreach d in fsNode.documents
-                    _ elabDocument
-                        @ packiFiles
-                        @ d
+                if fsNode.isTFolder
+                    _ elabTFolder
+                        @ fsNode
                         @ sb
                         @ state
+                else
+                    foreach d in fsNode.documents
+                        _ elabDocument
+                            @ packiFiles
+                            @ d
+                            @ sb
+                            @ state
                 #
-                set packiFiles[state.metaProductionName+'/folderTemplates/t/' + state.ft_basePath + fsNode.basename + '.ittf.ittf']
-                    {
-                        @ type "CODE"
-                        @ contents sb.folderTemplateFile.join('\n')
+                if !fsNode.isTFolder
+                    log 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
+                    set packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sb.folderTemplateFile.join('\n')
                 set sb.folderTemplateFile = save_sb_folderTemplateFile
                 set state.ft_basePath = save_state_ft_basePath
                 set state.id_basePath = save_state_id_basePath
+                set state.idf_basePath = save_state_idf_basePath
 
+            function elabTFolder 
+                param fsNode
+                param sb 
+                param state
+                _ sb.folderTemplateFile.push('')
+                _ sb.folderTemplateFile.push
+                    @ '    $'
+                _ sb.folderTemplateFile.push
+                    @ '        var items = ['
+                foreach d in fsNode.documents
+                    _ sb.folderTemplateFile.push
+                        @ '            ' + basenameIttfStripped(d) + ','
+                _ sb.folderTemplateFile.push
+                    @ '        ]'
+                _ sb.folderTemplateFile.push('')
+                _ sb.folderTemplateFile.push
+                    @ '    $foreach item in items'
+                foreach d in fsNode.documents
+                    _ sb.folderTemplateFile.push
+                        @ "        $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf'
+                        @ "            $" + "{'$'}{'$'}group"
+                        @ "                $" + "{'$'}include " + state.id_basePath + '$' + '{item}'
+                _ sb.folderTemplateFile.push('')
+            
             function elabDocument 
                 param packiFiles
                 param fsNode
                 param sb
                 param state
                 _ sb.folderTemplateFile.push
-                    @ "    $file " + state.id_basePath + fsNode.basename + '.ittf'
+                    @ "    $file " + state.idf_basePath + fsNode.basename + '.ittf'
                 _ sb.folderTemplateFile.push
                     _ documentLine
                         @ fsNode.ittfDocumentGraph
@@ -190,7 +192,7 @@ module
                     _ documentLine
                         {
                             @ name "${'$'}{'$'}include"
-                            @ value state.metaProductionName + '/' + state.id_basePath + fsNode.basename.substr(0, fsNode.basename.length - 5)
+                            @ value state.metaProductionName + '/' + state.id_basePath + basenameIttfStripped(fsNode)
                         @ 12
                 set sb.documentFile 
                     [
@@ -227,7 +229,7 @@ module
                 param fsNode
                 param indent
                 return new Array(indent).join(' ') + 
-                    \b fsNode.name + (verify.isNotEmpty(fsNode.value) ? ' ' + fsNode.value : '')
+                    \b documentLineName(fsNode) + documentLineValue(fsNode)
 
             function fsNodeIdName
                 param fsNode
@@ -236,8 +238,51 @@ module
                 else
                     return fsNode.basename
 
+            function fsNodeIdfName
+                param fsNode
+                return fsNode.basename
 
+            function basenameIttfStripped
+                param fsNode
+                if fsNode.basename && fsNode.basename.endsWith('.ittf')
+                    return fsNode.basename.substr(0, fsNode.basename.length - 5)
+                else
+                    return fsNode.basename
 
+            function documentLineName
+                param fsNode
+                if fsNode.isMixer
+                    return fsNode.fragmentName + '$' + "{'('}"
+                elif fsNode.isIncluder
+                    return '$' + "{'$'}include"
+                elif fsNode.isCommand
+                    return '$' + "{'$'}" + (fsNode.name && fsNode.name.substring(1))
+                else
+                    return fsNode.name
 
+            function documentLineValue
+                param fsNode
+                return
+                    _ buildLineValue
+                        @ fsNode
 
-                    
+            function buildLineValue
+                param fsNode
+                if !fsNode.getValueParsed
+                    return verify.isEmpty(fsNode.value) ? '' : ' ' + fsNode.value
+                var sb = []
+                var items = fsNode.getValueParsed()
+                var sp = ' '
+                foreach item in items
+                    if item.t == 0
+                        _ sb.push(sp + item.v)
+                        set sp = ''
+                    else
+                        _ sb.push(sp + '$' + "{'$'}")
+                        _ sb.push(sp + '{')
+                        set sp = ''
+                        _ sb.push(verify.htmlEscape(item.v))
+                        _ sb.push('}')  
+                return 
+                    _ sb.join
+                        @ ''

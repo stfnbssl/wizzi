@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:41 GMT
+    utc time: Thu, 14 Mar 2024 21:16:15 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -33,6 +33,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
     mTreePiece.mixed = false;
     mixNodeCollection(mTreePiece.nodes, null, function(err, mixedNodes) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         mTreePiece.nodes = mixedNodes;
@@ -47,6 +48,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
             }
             mixNodeIfTheCase(mixerNodes[index], function(err, mixedNodes) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 appendItemsToCollection(mixedNodes, mixedNodesAccumulator, resultingNodes_Parent);
@@ -119,11 +121,13 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 // resolve its eventual includes
                 includer(mixedNodifiedMTree, mTreeBrickProvider, function(err, mixedIncludedMTree) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     // now mix the mixed root nodes
                     mixCalleeRootNodes(mixedIncludedMTree.nodes, mixerNode, function(err, mixedNodes) {
                         if (err) {
+                            console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         mTreeBrickProvider.exitFragmentCall();
@@ -149,6 +153,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
         else {
             mixNodeCollection(mixerNode.children, mixerNode, function(err, mixedNodes) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 mixerNode.children = mixedNodes;
@@ -195,6 +200,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
             // must be added to each mixedRootNode.
             mixNodeCollection(mixerNode.children, mixedRootNode, function(err, mixedNodes) {
                 if (err) {
+                    console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 
@@ -243,6 +249,7 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 */
                 mixNodeIfTheCase(mixedRootNode, function(err, mixedNodes) {
                     if (err) {
+                        console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     appendItemsToCollection(mixedNodes, mixedNodesAccumulation, mixerNode.parent)
@@ -308,7 +315,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.4.loader.mixer.' + method,
+        method: 'wizzi-mtree@0.8.13.loader.mixer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -53,6 +53,10 @@
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.text
 			extension text
 
+		artifact any_plain_text_inside___copy
+			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.yaml
+			extension yaml
+
 		artifact any_ittf_inside___copy
 			src ${jobCtx.ittf_examples_folder}/**/*__copy/**/*.ittf
 			extension ittf

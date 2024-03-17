@@ -1,0 +1,22 @@
+$group
+    $file wizziHub/meta/t/params/array.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/array.json
+    $file wizziHub/meta/t/params/boolean.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/boolean.json
+    $file wizziHub/meta/t/params/enum.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/enum.json
+    $file wizziHub/meta/t/params/integer.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/integer.json
+    $file wizziHub/meta/t/params/object.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/object.json
+    $file wizziHub/meta/t/params/string.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/string.json
+    $file wizziHub/meta/t/params/use.json.ittf.ittf
+       {
+           ${'$'}include wizziHub/wizziHub/meta/tfolder/params/use.json

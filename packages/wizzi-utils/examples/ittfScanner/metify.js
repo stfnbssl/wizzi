@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\ittfScanner\metify.js.ittf
-    utc time: Mon, 26 Feb 2024 20:29:02 GMT
+    utc time: Thu, 14 Mar 2024 20:24:16 GMT
 */
 'use strict';
 /**
@@ -23,15 +23,17 @@ var fsUtils = require('../../lib/fSystem/utils');
 var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph');
 var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
 var ittfScanner = require('../../lib/ittfScanner/index');
+var meta = require('../../lib/meta/index');
+var packi = require('../../lib/packi/index');
 var fs = require('../../lib/fSystem/index');
 var ittfGraph = require('../../lib/ittfGraph/index');
 var file = wizziUtils.file;
 var fsfile = vfile();
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-const folderPath = path.join(__dirname, 'ittf', 'scan-ittf');
-const rootFolder = path.join(__dirname, 'ittf', 'scan-ittf');
-const destFolder = path.join(__dirname, 'outputs', 'metify', 'scan-ittf');
+const folderPath = path.join(__dirname, 'ittf', 'scanMeta');
+const rootFolder = path.join(__dirname, 'ittf', 'scanMeta');
+const destFolder = path.join(__dirname, 'outputs', 'metify');
 const metaProductionName = 'baxDemo';
 ittfScanner.scanFolder(folderPath, {
     rootFolder: rootFolder, 
@@ -56,7 +58,8 @@ ittfScanner.scanFolder(folderPath, {
      }, {
         metaProductionName: metaProductionName, 
         ft_basePath: '', 
-        id_basePath: ''
+        id_basePath: '', 
+        idf_basePath: ''
      })
     packiFiles[metaProductionName+'/folderTemplates/index.ittf.ittf'] = {
         type: "CODE", 
@@ -86,14 +89,29 @@ function elabFsNode(packiFiles, fsNode, sb, state) {
     }
 }
 function elabFolder(packiFiles, fsNode, sb, state) {
-    sb.folderTemplateFile.push('        $include ' + fsNode.basename)
+    if (fsNode.parent.isRoot) {
+        if (!fsNode.isTFolder) {
+            sb.folderTemplateFile.push('        $include ' + fsNode.basename)
+        }
+    }
+    else {
+        if (!fsNode.isTFolder) {
+            sb.folderTemplateFile.push('    $include ' + fsNode.basename)
+        }
+    }
     var save_sb_folderTemplateFile = sb.folderTemplateFile;
     var save_state_ft_basePath = state.ft_basePath;
     var save_state_id_basePath = state.id_basePath;
+    var save_state_idf_basePath = state.idf_basePath;
     //
     // prepare for children
-    state.ft_basePath = state.ft_basePath + fsNode.basename + '/t/';
+    state.ft_basePath = state.ft_basePath + '/t/';
     state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/';
+    state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/';
+    console.log('state.ft_basePath', state.ft_basePath, __filename);
+    if (fsNode.isTFolder) {
+        elabTFolder(fsNode, sb, state)
+    }
     sb.folderTemplateFile = [
         '$group'
     ];
@@ -102,26 +120,54 @@ function elabFolder(packiFiles, fsNode, sb, state) {
         f = fsNode.folders[i];
         elabFolder(packiFiles, f, sb, state)
     }
-    var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
-    for (i=0; i<i_len; i++) {
-        d = fsNode.documents[i];
-        elabDocument(packiFiles, d, sb, state)
+    if (fsNode.isTFolder) {
+        elabTFolder(fsNode, sb, state)
+    }
+    else {
+        var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
+        for (i=0; i<i_len; i++) {
+            d = fsNode.documents[i];
+            elabDocument(packiFiles, d, sb, state)
+        }
     }
     //
-    packiFiles[state.metaProductionName+'/folderTemplates/t/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'] = {
-        type: "CODE", 
-        contents: sb.folderTemplateFile.join('\n')
-     };
+    if (!fsNode.isTFolder) {
+        console.log('path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf', __filename);
+        packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'] = {
+            type: "CODE", 
+            contents: sb.folderTemplateFile.join('\n')
+         };
+    }
     sb.folderTemplateFile = save_sb_folderTemplateFile;
     state.ft_basePath = save_state_ft_basePath;
     state.id_basePath = save_state_id_basePath;
+    state.idf_basePath = save_state_idf_basePath;
+}
+function elabTFolder(fsNode, sb, state) {
+    sb.folderTemplateFile.push('');
+    sb.folderTemplateFile.push('    $')
+    sb.folderTemplateFile.push('        var items = [')
+    var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
+    for (i=0; i<i_len; i++) {
+        d = fsNode.documents[i];
+        sb.folderTemplateFile.push('            ' + basenameIttfStripped(d) + ',')
+    }
+    sb.folderTemplateFile.push('        ]')
+    sb.folderTemplateFile.push('');
+    sb.folderTemplateFile.push('    $foreach item in items')
+    var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
+    for (i=0; i<i_len; i++) {
+        d = fsNode.documents[i];
+        sb.folderTemplateFile.push("        $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf', "            $" + "{'$'}{'$'}group", "                $" + "{'$'}include " + state.id_basePath + '$' + '{item}')
+    }
+    sb.folderTemplateFile.push('');
 }
 function elabDocument(packiFiles, fsNode, sb, state) {
-    sb.folderTemplateFile.push("    $file " + state.id_basePath + fsNode.basename + '.ittf')
+    sb.folderTemplateFile.push("    $file " + state.idf_basePath + fsNode.basename + '.ittf')
     sb.folderTemplateFile.push(documentLine(fsNode.ittfDocumentGraph, 8))
     sb.folderTemplateFile.push(documentLine({
         name: "${'$'}include", 
-        value: state.metaProductionName + '/' + state.id_basePath + fsNode.basename.substr(0, fsNode.basename.length - 5)
+        value: state.metaProductionName + '/' + state.id_basePath + basenameIttfStripped(fsNode)
      }, 12))
     sb.documentFile = [
         '$group'
@@ -149,7 +195,7 @@ function elabDocumentNode(fsNode, sb, state) {
     state.documentIndent = save_state_documentIndent;
 }
 function documentLine(fsNode, indent) {
-    return new Array(indent).join(' ') + fsNode.name + (verify.isNotEmpty(fsNode.value) ? ' ' + fsNode.value : '');
+    return new Array(indent).join(' ') + documentLineName(fsNode) + documentLineValue(fsNode);
 }
 function fsNodeIdName(fsNode) {
     if (fsNode.isTFolder) {
@@ -158,6 +204,58 @@ function fsNodeIdName(fsNode) {
     else {
         return fsNode.basename;
     }
+}
+function fsNodeIdfName(fsNode) {
+    return fsNode.basename;
+}
+function basenameIttfStripped(fsNode) {
+    if (fsNode.basename && fsNode.basename.endsWith('.ittf')) {
+        return fsNode.basename.substr(0, fsNode.basename.length - 5);
+    }
+    else {
+        return fsNode.basename;
+    }
+}
+function documentLineName(fsNode) {
+    if (fsNode.isMixer) {
+        return fsNode.fragmentName + '$' + "{'('}";
+    }
+    else if (fsNode.isIncluder) {
+        return '$' + "{'$'}include";
+    }
+    else if (fsNode.isCommand) {
+        return '$' + "{'$'}" + (fsNode.name && fsNode.name.substring(1));
+    }
+    else {
+        return fsNode.name;
+    }
+}
+function documentLineValue(fsNode) {
+    return buildLineValue(fsNode);
+}
+function buildLineValue(fsNode) {
+    if (!fsNode.getValueParsed) {
+        return verify.isEmpty(fsNode.value) ? '' : ' ' + fsNode.value;
+    }
+    var sb = [];
+    var items = fsNode.getValueParsed();
+    var sp = ' ';
+    var i, i_items=items, i_len=items.length, item;
+    for (i=0; i<i_len; i++) {
+        item = items[i];
+        if (item.t == 0) {
+            sb.push(sp + item.v);
+            sp = '';
+        }
+        else {
+            sb.push(sp + '$' + "{'$'}");
+            sb.push(sp + '{');
+            sp = '';
+            sb.push(verify.htmlEscape(item.v));
+            sb.push('}');
+        }
+    }
+    return sb.join('');
 }
 var ittfScanner_metify = function(step_callback) {
     heading1('EXAMPLE')

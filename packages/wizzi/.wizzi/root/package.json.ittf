@@ -4,6 +4,7 @@
         $include versions
 
         extsprintf "^1.2.0"
+        json-diff "latest"
         @wizzi/mtree "${versions['@wizzi/mtree']}"
         @wizzi/repo "${versions['@wizzi/repo']}"
         @wizzi/utils "${versions['@wizzi/utils']}"

@@ -1,12 +1,12 @@
 example( scriptBuilder, 1 )
 
 	# 
-		# EXAMPLE: mTreeBuildupScripter
+		# EXAMPLE: mTreeBuildUpScripter
 
 	$append imports
         var packageIndex = require('../../index')
 		var JsWizziScriptCoder = require('../../lib/jswizzi/jsWizziScriptCoder')
-        var mTreeBuildupScripter = require('../../lib/loader/mTreeBuildupScripter')
+        var mTreeBuildUpScripter = require('../../lib/loader/mTreeBuildUpScripter')
 
     var loadMTree
         _ packageIndex.createLoadMTree
@@ -42,11 +42,11 @@ example( scriptBuilder, 1 )
 			{
 				@ __productionManager
 					_ mocks.getProductionManager
-				{ mTreeBuildupContext
+				{ mTreeBuildUpContext
             f_cb_throw( mTree )
 
                 foreach item in mTree.nodes
-                    _ mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx)
+                    _ mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx)
 
                 _ heading1
                     @ 'Script ' + name

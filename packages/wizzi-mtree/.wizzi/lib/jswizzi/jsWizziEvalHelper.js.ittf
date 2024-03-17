@@ -19,17 +19,17 @@
 	#
 		# This helper instance is declared in the global context 
 		# of the JsWizziContext and is in the global scope of the
-		# JsWizziRunner when it runs the mTreeBrickBuildupScript.
+		# JsWizziRunner when it runs the mTreeBrickBuildUpScript.
 		#
-		# The mTreeBuildupScript may call the methods of 
+		# The mTreeBuildUpScript may call the methods of 
 		# this instance for
-		# . Setting the evalContext: global, mTreeBuildup or mTreeBrick.
+		# . Setting the evalContext: global, mTreeBuildUp or mTreeBrick.
 		# . Adding nodes to the mTree that is been building.
 		# . Executing interpolation of expressions.
 		# . Calling api functions (declared in the wizzifile.js) on the runner server 
 		# . Retrieving wizzi models (loaded in wizzifile.js) from the runner server 
 		# 
-		# The evalContext(s) of mTreeBrick(s) are stored in the
+		# The evalContext(s) of mTreeBrick(s) are stored in 
 		# the mTreeBrickDatas map of the wizzi.loader.loadHistory.
 		# There are retrieved by the getMTreeBrickEvalContext method
 		# every time the active mTreeBrick context changes.
@@ -261,12 +261,13 @@
                         @ 'A RunnerServer has not been started. You must create a wizzifile.js.'
     
 		$include jsWizziEvalHelper/getMTreeBrickEvalContext
+		$include jsWizziEvalHelper/productionContextCalls
 
 	function remacro
 		param value
 		# Alt+146 = Æ
         return verify.replaceAll(value, "Æ" + "{", "${");
 
-	$include local_error        
+	$include local_error
 
 	set module.exports = JsWizziEvalHelper

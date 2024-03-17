@@ -1,0 +1,11 @@
+{
+    [ tfolders
+        {
+            $$ name "..name.."
+            $$ example name "html"
+    [ contexts
+        {
+            $$ propertyName "..name.."
+            $$ artifactName "..name.."
+            $$ propertyName "sampleCtx"
+            $$ artifactName "<name>!sampleCtx.json.ittf"

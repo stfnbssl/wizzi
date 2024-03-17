@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\old\scriptBuilder.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:42 GMT
+    utc time: Thu, 14 Mar 2024 21:16:16 GMT
 */
 'use strict';
 var path = require('path');
@@ -16,11 +16,11 @@ var mocks = require('@wizzi/utils').mocks;
 var repo = mocks.repo;
 var packageIndex = require('../../index');
 var JsWizziScriptCoder = require('../../lib/jswizzi/jsWizziScriptCoder');
-var mTreeBuildupScripter = require('../../lib/loader/mTreeBuildupScripter');
+var mTreeBuildUpScripter = require('../../lib/loader/mTreeBuildUpScripter');
 var scriptBuilder = function(step_callback) {
     heading1('EXAMPLE')
     /**
-         EXAMPLE: mTreeBuildupScripter
+         EXAMPLE: mTreeBuildUpScripter
     */
     var loadMTree = packageIndex.createLoadMTree(repo.getCreateFilesystemStore(), {
         raw: true
@@ -40,7 +40,7 @@ var scriptBuilder = function(step_callback) {
         var scriptCoder = new JsWizziScriptCoder();
         loadMTree(path.join(__dirname, 'ittf', name + '.html.ittf'), {
             __productionManager: mocks.getProductionManager(), 
-            mTreeBuildupContext: {
+            mTreeBuildUpContext: {
                 
              }
          }, function(err, mTree) {
@@ -60,7 +60,7 @@ var scriptBuilder = function(step_callback) {
             var i, i_items=mTree.nodes, i_len=mTree.nodes.length, item;
             for (i=0; i<i_len; i++) {
                 item = mTree.nodes[i];
-                mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx);
+                mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx);
             }
             heading1('Script ' + name)
             printValue('mTree', mTree)

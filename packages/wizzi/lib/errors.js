@@ -2,13 +2,13 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\errors.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:45 GMT
+    utc time: Sun, 17 Mar 2024 16:14:48 GMT
 */
 'use strict';
 var util = require('util');
 var fail = require('@wizzi/utils').fail;
 var utilsErrors = require('@wizzi/utils').errors;
-var pkgVersioned = ' (@wizzi/factory.0.8.13)';
+var pkgVersioned = ' (@wizzi/factory.0.8.21)';
 
 var md = module.exports = {};
 

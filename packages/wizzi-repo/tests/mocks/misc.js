@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\mocks\misc.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:13 GMT
+    utc time: Thu, 14 Mar 2024 20:30:44 GMT
 */
 'use strict';
 var path = require('path');
@@ -19,7 +19,7 @@ module.exports = {
             }, 
             addEvaluatedIttfModel: function(uri, content) {
             }, 
-            addMTreeBuildupScript: function(uri, jsScriptCoder) {
+            addMTreeBuildUpScript: function(uri, jsScriptCoder) {
             }
          }
      }, 
@@ -28,11 +28,11 @@ module.exports = {
         dump: true, 
         addIttfDocument: function(uri, content) {
         }, 
-        mTreeBuildupScripts: {}, 
-        addMTreeBuildupScript: function(uri, jsScriptCoder) {
+        mTreeBuildUpScripts: {}, 
+        addMTreeBuildUpScript: function(uri, jsScriptCoder) {
             var uri = uri;
             var script = jsScriptCoder.toCode();
-            this.mTreeBuildupScripts[uri] = {
+            this.mTreeBuildUpScripts[uri] = {
                 uri: uri, 
                 script: script
              };
@@ -42,7 +42,7 @@ module.exports = {
         }, 
         raiseIttfEvaluationScriptError: function(uri, exception) {
             var uri = uri;
-            var script = this.mTreeBuildupScripts[uri];
+            var script = this.mTreeBuildUpScripts[uri];
             if (script && script.ittfEvalScript && exception && exception.lineNumber) {
                 var lines = script.ittfEvalScript.getErrorLines(exception).join('\n');
                 exception.message = '\nError evaluating ittf in uri: ' + uri + '\n' + lines + '\n';

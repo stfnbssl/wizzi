@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:42 GMT
+    utc time: Thu, 14 Mar 2024 21:16:16 GMT
 */
 'use strict';
 var path = require('path');
@@ -53,7 +53,7 @@ var loader = function(step_callback) {
         console.log('EXAMPLE.loader.loading ittf/load_compile.html.ittf');
         loadMTree(path.join(__dirname, 'ittf', 'load_compile.html.ittf'), {
             __productionManager: mocks.getProductionManager(), 
-            mTreeBuildupContext: {
+            mTreeBuildUpContext: {
                 tree: {
                     id: 1, 
                     title: 'root node 1', 
@@ -112,7 +112,7 @@ var loader = function(step_callback) {
          });
         loadMTree(path.join(__dirname, 'ittf', ittfDocumentBasename), {
             __productionManager: mocks.getProductionManager(), 
-            mTreeBuildupContext: {
+            mTreeBuildUpContext: {
                 
              }
          }, function(err, mTree) {

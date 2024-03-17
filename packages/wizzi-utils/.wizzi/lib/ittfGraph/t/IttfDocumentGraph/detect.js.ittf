@@ -1,21 +1,24 @@
 ﻿$group
 	
-	m isCommand
+	m isCommandCheck
 		return this.name && this.name[0] === '$'
+
+	m isMetaCommandCheck
+		return this.isCommandCheck() && this.name === '$file'
 
 	m isExpressionCommand
 		return this.name && ['$if', '$elif', '$foreach', '$backeach', '$while'].indexOf(this.name) == 0
 
-	m isCodeDeclare
+	m isCodeDeclareCheck
 		return this.name && ['$', '$global'].indexOf(this.name) == 0
 
-	m isMultilineDeclare
+	m isMultilineDeclareCheck
 		return this.name && ['$.'].indexOf(this.name) == 0
 
 	m isCode
 		var test = this.parent
 		while test
-			if test.isCodeDeclare()
+			if test.isCodeDeclareCheck()
 				return true
 			set test = test.parent
 		return false
@@ -49,9 +52,9 @@
 		return ret
 
 	m getValueStripComments
-		var ndx = this.value.indexOf('$$')
+		var ndx = this.value.indexOf('$'+ '$')
 		if ndx < 0
-			set ndx = this.value.indexOf('$*')
+			set ndx = this.value.indexOf('$' + '*')
 		if ndx < 0
 			return this.value
 		return this.value.substr(0, ndx).trim()

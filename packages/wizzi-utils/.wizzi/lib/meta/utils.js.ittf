@@ -1,0 +1,11 @@
+module
+	kind jsfile
+
+	var verify = require('../helpers/verify')
+	+
+	var md = module.exports = {}
+	+
+	set md.wizzifyIttfNodeName
+        function
+            param name
+            return verify.replaceAll(name, "(", "$" + "{'('}")

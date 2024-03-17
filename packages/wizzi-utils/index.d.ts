@@ -73,6 +73,7 @@ type Readonly<P, T> = {
         getFiles(folderPath: string, options: GetFilesOptions): FileDef[];
         getFolders(folderPath: string, options: GetFoldersOptions): FolderDef[];
         glob(globExpr: string, options?: GlobOptions): FileDef[];
+        splitLines(text: string): string[];
         // Async
         mkdir(folderPath: string, callback: cb<any>): void;
         read(filePath: string, callback: cb<string>): void;
@@ -89,6 +90,7 @@ type Readonly<P, T> = {
         getFiles(folderPath: string, options: GetFilesOptions, callback: cb<FileDef[]>): void;
         getFolders(folderPath: string, options: GetFoldersOptions, callback: cb<FolderDef[]>): void;
         glob(globExpr: string, options: GlobOptions, callback: cb<FileDef[]>): void;
+        openWrite(filepath: string, callback: cb<any>): void;
     }
     
     interface ParsedUri {
@@ -117,6 +119,20 @@ type Readonly<P, T> = {
     }
     
     export function vfile(options: VFileOptions, callback: cb<VFile>): void;
+    
+    export interface FileInfo {
+        name: string;
+        basename: string;
+        extension: string;
+        isIttfDocument: boolean;
+        isFragment: boolean;
+        schema: string;
+        relFolder: string;
+        fullPath: string;
+        destBasename: string;
+        destRelPath: string;
+    }
+    export function fileInfoByPath(filePath: string, baseFolder?: string): FileInfo; 
  }
 
 /**
@@ -335,11 +351,57 @@ export namespace ittfScanner {
 }
 
 /**
+ * The Meta Feature
+ */
+interface MetaOptions {
+    destFolder: string;
+    depth: number;
+    compressFolders: [string];
+}
+export namespace meta {
+    export function metify(folderPath: string, rootFolder: string, metaProductionName: string, options: MetaOptions, callback:cb<string>): void;
+}
+
+/**
  * The Pretty Feature
  */
 export namespace pretty {
     export function prettifyIttfHtml(rootNode: ittfGraph.IttfDocumentGraph, callback:cb<string>): void;
     export function prettifyIttfHtmlFromString(ittfContent: string, callback:cb<string>): void;
+}
+
+/**
+ * The Packi Feature
+ */
+export interface PackiToFsOptions {
+    file: fSystem.VFile
+}
+export namespace packi {
+    export const filePrefix = "json:/";
+    /**
+     * @type PackiFile
+     * @description The content of a file included in a PackiFiles object
+     * @type File type. For now "CODE" only is managed.
+     * @contents The file content (textual data).
+     * @generated If the file content is an IttfDocument may contain the generated artifact.
+     * @error The error object
+    */
+    export type PackiFile = {
+        type: 'CODE';
+        contents: string;
+        generated?: boolean;
+        error?: Error;
+    }
+    /**
+     * @type PackiFiles
+     * @description Contains a file system in an object. The key is the path name and the value is a PackiFile
+    */
+    export type PackiFiles = {
+        [path: string]: PackiFile;
+    }
+
+	export function ensurePackiFilePrefix(filePath: string) : string;
+    export function packiFilesToFs(folderPath: string, packiFiles: PackiFiles, options: any, callback: cb<any>) : void;
 }
 
 /**

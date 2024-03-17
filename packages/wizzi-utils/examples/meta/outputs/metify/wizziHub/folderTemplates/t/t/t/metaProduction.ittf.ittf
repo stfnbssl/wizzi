@@ -1,0 +1,4 @@
+$group
+    $include folderTemplates
+    $include ittfDocumentTemplates
+    $include metaCtxSchemas

@@ -1,4 +1,0 @@
-$group
-    $file scan-ittf/folder-beta/beta_1.html.ittf.ittf
-       html
-           ${'$'}include baxDemo/scan-ittf/folder-beta/beta_1.html

@@ -1,15 +1,15 @@
-﻿module wizzi-mtree.loader.mTreeBuildupScriptBuilder
+﻿module wizzi-mtree.loader.mTreeBuildUpScriptBuilder
     kind jsfile
 
     var JsWizziContext = require('../jswizzi/jsWizziContext')
     var dateUtil = require('../jswizzi/functions/dateUtil')
 	var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder')
-    var mTreeBuildupScripter = require('./mTreeBuildupScripter')
+    var mTreeBuildUpScripter = require('./mTreeBuildUpScripter')
 	var requireFromString = null
 
 	#
 		# Returns for debug purposes:
-		# . the mTreeBuildupScript
+		# . the mTreeBuildUpScript
 	set module.exports =
         function 
             param composedMTree
@@ -22,7 +22,7 @@
 			var jsWizziContext
                 new JsWizziContext(composedMTree, productionContext)
 			_ jsWizziContext.setGlobalValues
-                @ loadContext.mTreeBuildupContext
+                @ loadContext.mTreeBuildUpContext
 
 			var ctx
                 { 
@@ -53,7 +53,7 @@
 				@ 'var $0 = {}; // the root node of the MTree buildup'
             
 			foreach item in composedMTree.nodes
-                _ mTreeBuildupScripter.codify(item, 0, scriptCoder, ctx)
+                _ mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx)
             
 			if isCompile
 				_ scriptCoder.w
@@ -65,4 +65,4 @@
 			_ callback
 				@ null
 				{
-					@ mTreeBuildupScript scriptCoder.toCode()
+					@ mTreeBuildUpScript scriptCoder.toCode()

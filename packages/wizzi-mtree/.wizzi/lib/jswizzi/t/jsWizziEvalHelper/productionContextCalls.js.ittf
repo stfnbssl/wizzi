@@ -1,0 +1,27 @@
+$group
+    m setCtx
+        param kind     $$ string,
+        param namePath $$ string,
+        param value    $$
+        return
+            _ this.productionContext.setEvaluationContextValue
+                @ kind
+                @ namePath
+                @ value
+    
+    m removeCtx
+        param kind $$ string, 
+        param namePath $$ string, 
+        throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet')
+        return
+            _ this.productionContext.removeEvaluationContextValue
+                @ kind
+                @ namePath
+    
+    m getCtx
+        param kind     $$ string, 
+        param namePath $$ string, 
+        return
+            _ this.productionContext.getEvaluationContextValue
+                @ kind
+                @ namePath

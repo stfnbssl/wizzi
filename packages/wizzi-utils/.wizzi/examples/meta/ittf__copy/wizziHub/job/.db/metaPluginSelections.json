@@ -1,0 +1,12 @@
+{
+    "metaPluginCategories": [
+      {
+        "name": "commons"
+      }
+    ],
+    "metaPlugins": [
+      {
+        "name": "wizzi.meta.commons"
+      }
+    ]
+  }

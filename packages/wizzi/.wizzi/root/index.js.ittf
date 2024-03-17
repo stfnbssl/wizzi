@@ -42,7 +42,7 @@
 		#     { globalContext
 		#     { dumps
 		#       string dumpsBaseFolder
-		# 	    { mTreeBuildupScript
+		# 	    { mTreeBuildUpScript
 		#         boolean dump
 		#         string dumpsBaseFolder
 	set md.createFactory
@@ -72,7 +72,7 @@
 		#     { globalContext
 		#     { dumps
 		#       string dumpsBaseFolder
-		# 	    { mTreeBuildupScript
+		# 	    { mTreeBuildUpScript
 		#         boolean dump
 		#         string dumpsBaseFolder
 	set md.createAclFactory

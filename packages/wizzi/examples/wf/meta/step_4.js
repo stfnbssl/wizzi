@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\step_4.js.ittf
-    utc time: Fri, 23 Feb 2024 04:14:47 GMT
+    utc time: Sun, 17 Mar 2024 16:14:49 GMT
 */
 'use strict';
 /**
@@ -174,6 +174,7 @@ function createPackifilesFromFs(folderPath, callback) {
      }, (err, files) => {
     
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         const packiFiles = {};

@@ -4,6 +4,7 @@
 	var util = require('util')
 	var path = require('path')
 	var stringify = require('json-stringify-safe')
+	var jsonDiff = require('json-diff')
     var async = require('async')
 	+
 	var repo = require('@wizzi/repo')
@@ -55,8 +56,8 @@
 			set this.__loadMTreeFrontMatter = null
 			# loadMTreeRaw is a method of this class, we need an alias
 			set this.__loadMTreeRaw = null
-			# loadMTreeBuildupScript is a method of this class, we need an alias
-			set this.__loadMTreeBuildupScript = null
+			# loadMTreeBuildUpScript is a method of this class, we need an alias
+			set this.__loadMTreeBuildUpScript = null
 			set this.pluginsManager = null
 			set this.modelLoaders = {}
 			set this.modelTransformers = {}
@@ -77,7 +78,8 @@
         $include wizziFactory/folder-generation
 		$include wizziFactory/schema-definition
         $include wizziFactory/wizzification
-		$include wizziFactory/modelTypes-generation
+		$include wizziFactory/compare
+		$include wizziFactory/modelDoms-generation
 		$include wizziFactory/wizzi-job-execution
         $include wizziFactory/meta-generation
         $include wizziFactory/meta-execution

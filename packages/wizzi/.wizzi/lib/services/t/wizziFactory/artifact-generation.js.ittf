@@ -130,11 +130,26 @@ $group
 				optional
 			{ artifactRequestContext
 				optional
-		string artifactName
+		$$ string artifactName
+		param artifactName
 		callback
 		+
 		# loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
 			\b 'artifactRequestContext', requestContext.artifactRequestContext
+		+
+		if verify.isEmpty(artifactName)
+			set artifactName 
+				_ this.mapIttfDocumentPathToDefaultArtifact
+					@ ittfDocumentUri
+		if verify.isEmpty(artifactName)
+			return 
+				_ callback
+					_ error
+						@ 'InvalidArgument'
+						@ 'loadModelAndGenerateArtifact'
+						{ 
+							@ parameter 'artifactName'
+							@ message 'The artifactName parameter must be a string. Received: ' + artifactName
 		+
 		var that = this
 		# load the wizzi model from an ittfDocument
@@ -142,7 +157,7 @@ $group
             _ this.loadModel
                 @ ittfDocumentUri
                 {
-                    @ mTreeBuildupContext requestContext.modelRequestContext
+                    @ mTreeBuildUpContext requestContext.modelRequestContext
                 f_cb( artifactModel )
                     # loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
                     # the loaded wizzi model becomes the artifactModel of the artifact generation

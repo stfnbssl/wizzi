@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\index.js.ittf
-    utc time: Tue, 20 Feb 2024 12:12:43 GMT
+    utc time: Thu, 14 Mar 2024 21:16:17 GMT
 */
 'use strict';
 
@@ -21,6 +21,7 @@ function getFSDocumentStore(callback) {
         kind: 'filesystem'
      }, function(err, storeFacory) {
         if (err) {
+            console.log("[31m%s[0m", err);
             return callback(err);
         }
         return storeFacory(callback);
@@ -34,7 +35,7 @@ var loader = require('../../../lib/loader');
 
 function evaluate(uri, callback) {
     var loadContext = {
-        mTreeBuildupContext: {}, 
+        mTreeBuildUpContext: {}, 
         productionContext: mocks.ProductionContext, 
         __ittfDocumentStore: store
      };
@@ -73,7 +74,7 @@ describe("index", function() {
     });
     it("should load an mTree", function(done) {
         loader.loadMTree(path.join(__dirname, 'repo', 'data', 'ittf_object_args.tests.ittf'), {
-            mTreeBuildupContext: {
+            mTreeBuildUpContext: {
                 items: [
                     {
                         name: 'stefi', 

@@ -57,6 +57,8 @@
 
 	set md.errors = require('./errors')
 
+	set md.ProductionContext = {}
+
 	set md.createProductionContext
         function createProductionContext
             return
@@ -69,7 +71,7 @@
                         function
                     @ addIttfDocument
                         function
-                    @ addMTreeBuildupScript
+                    @ addMTreeBuildUpScript
                         function
                             param uri
                             param ittfEvalScript
@@ -101,3 +103,12 @@
                                 set exception.message = '\nError evaluating ittf in uri: ' + uri + '\n' + exception.message + '\n'
                             _ fail.warn(exception)
                             throw exception  
+					@ setEvaluationContextValue
+						function
+							param name
+							param value
+							set md.ProductionContext[name] = value
+					@ getEvaluationContextValue
+						function
+							param name
+							return md.ProductionContext[name]

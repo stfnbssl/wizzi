@@ -46,7 +46,7 @@ module
                     @ 'ittf'
                     @ htmlFriendsPathIttf
                     {
-                        { mTreeBuildupContext                    
+                        { mTreeBuildUpContext                    
                             @ friends friendsArray
                     f_cb_no_err(wizziModel)
                         _ printObject

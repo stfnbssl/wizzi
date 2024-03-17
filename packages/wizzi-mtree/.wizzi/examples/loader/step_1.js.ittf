@@ -24,7 +24,7 @@
                 _ loader.loadMTree
                     @ ittfUri
                     {
-                        @ mTreeBuildupContext
+                        @ mTreeBuildUpContext
                             {
                                 @ items
                                     [

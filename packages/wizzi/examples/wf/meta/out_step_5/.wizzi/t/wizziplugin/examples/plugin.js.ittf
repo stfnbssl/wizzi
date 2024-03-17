@@ -37,7 +37,7 @@ $group
                 @ globalContext globalContext || {}
             @ callback
     $include wizzicommons/opers/loadMTree.js
-    $include wizzicommons/opers/loadMTreeBuildupScript.js
+    $include wizzicommons/opers/loadMTreeBuildUpScript.js
     $include wizzicommons/opers/loadWizziModel.js
     $include wizzicommons/opers/loadWizziModelAndSaveToJson.js
     $include wizzicommons/opers/loadModelAndGenerateArtifact.js

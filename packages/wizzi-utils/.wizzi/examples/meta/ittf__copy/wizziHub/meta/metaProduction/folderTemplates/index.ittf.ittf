@@ -1,0 +1,7 @@
+$group
+    $$ $include ./tfolder
+
+    $if true
+        $file __dot__wizzi/src/index.html.ittf.ittf
+            html
+                ${'$'}include labDevHtml/index.html

@@ -5,12 +5,12 @@
 		#
 		# params
 		#  string ittfDocumentUri
-		#  { mTreeBuildupContext
+		#  { mTreeBuildUpContext
 		#  callback
 	
 	m loadMTree
 		string ittfDocumentUri
-		{ mTreeBuildupContext
+		{ mTreeBuildUpContext
 		callback
 		+
         try
@@ -18,7 +18,7 @@
                 @ ittfDocumentUri
                 _ this.createLoadContext
                     {
-                        @ mTreeBuildupContext mTreeBuildupContext
+                        @ mTreeBuildUpContext mTreeBuildUpContext
                 @ callback
         catch ex
             r_cb_wz_err( WizziFactoryError, loadMTree, ex )
@@ -70,31 +70,31 @@
 		#  string ittfDocumentUri
 		#  callback
 
-	m loadMTreeBuildupScript
+	m loadMTreeBuildUpScript
 		string ittfDocumentUri
-		{ mTreeBuildupContext
+		{ mTreeBuildUpContext
 		callback
 		+
-		_ this.__loadMTreeBuildupScript
+		_ this.__loadMTreeBuildUpScript
 			@ ittfDocumentUri
 			_ this.createLoadContext
 				{
-					@ mTreeBuildupContext mTreeBuildupContext
+					@ mTreeBuildUpContext mTreeBuildUpContext
 			@ callback
 
-	m loadMTreeBuildupScriptFromText
+	m loadMTreeBuildUpScriptFromText
 		string ittfContent
-		{ mTreeBuildupContext
+		{ mTreeBuildUpContext
 		callback
 		+
-		# loog 'wizzi.wizziFactory.loadMTreeBuildupScriptFromText', ittfContent, mTreeBuildupContext, callback
+		# loog 'wizzi.wizziFactory.loadMTreeBuildUpScriptFromText', ittfContent, mTreeBuildUpContext, callback
 		_ this.createSingleTextSourceFactory
 			@ ittfContent
 			@ 'ittf'
 			{
 			f_cb( result )
-				_ result.wizziFactory.loadMTreeBuildupScript
+				_ result.wizziFactory.loadMTreeBuildUpScript
 					@ result.ittfDocumentUri
-					@ mTreeBuildupContext
+					@ mTreeBuildUpContext
 					@ callback
 

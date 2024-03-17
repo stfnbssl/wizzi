@@ -8,31 +8,31 @@
 		# But the method must become asynchronous !!!
 		# params
 		#   { loadContext
-		#     { mTreeBuildupContext
+		#     { mTreeBuildUpContext
 	m createLoadContext
 		param loadContext
+		param productionManager
 		+
 		if verify.isObject(loadContext) && verify.isObject(loadContext.__productionManager)
 			# Already a valid request context
 			return loadContext
 		+
-		var mTreeBuildupContext
+		var mTreeBuildUpContext
 			_ Object.assign
 				{
 				@ this.globalContext
-				@ loadContext.mTreeBuildupContext
+				@ loadContext.mTreeBuildUpContext
 		+
-		# loog 'wizzi.wizziFactory.createLoadContext.mTreeBuildupContext', mTreeBuildupContext
+		# loog 'wizzi.wizziFactory.createLoadContext.mTreeBuildUpContext', mTreeBuildUpContext
 		+
 		return
 			{
-				@ __productionManager
-					_ this.createProductionManager
-				@ mTreeBuildupContext mTreeBuildupContext
+				@ __productionManager (productionManager ? productionManager : this.createProductionManager())
+				@ mTreeBuildUpContext mTreeBuildUpContext
 	
 	#
 		# params
-		# { userProductionOptions
+		# { productionOptions
 		#   integer indentSpaces
 		#     default 4
 		#   string basedir

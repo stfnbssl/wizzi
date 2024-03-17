@@ -164,13 +164,19 @@
 			param node
             var buffer
                 [ 
-			if node && node.children
-				_ _toIttfNodeDeep(node, 0, buffer)
+			if node && (node.children || verify.isArray(node))
+				if verify.isArray(node)
+					_ node.forEach
+						function 
+							param item
+							_ _toIttfNodeDeep(item, 0, buffer)
+				else
+					_ _toIttfNodeDeep(node, 0, buffer)
 			else
 				_ this.nodes.forEach
 					function 
-						param node
-						_ _toIttfNodeDeep(node, 0, buffer)
+						param item
+						_ _toIttfNodeDeep(item, 0, buffer)
             return buffer.join('\n')
     
 		m toText

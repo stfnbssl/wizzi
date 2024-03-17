@@ -28,7 +28,7 @@ module
                 _ loader.loadMTree
                     @ ittfUri
                     {
-                        @ mTreeBuildupContext
+                        @ mTreeBuildUpContext
                             {
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore

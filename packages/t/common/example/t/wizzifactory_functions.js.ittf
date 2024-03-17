@@ -41,7 +41,7 @@
                     @ fi.schema
                     @ ittfDocumentUri
                     {
-                        @ mTreeBuildupContext context
+                        @ mTreeBuildUpContext context
                         @ globalContext {}
                     @ callback
     
@@ -76,7 +76,7 @@
                     @ fi.schema
                     @ ittfDocumentUri
                     {
-                        @ mTreeBuildupContext context
+                        @ mTreeBuildUpContext context
                         @ globalContext {}
                     f_cb( wizziModel )
                         _ wf.transformModel
@@ -111,7 +111,7 @@
         param wfschemaIttfDocumentUri
         param outputPackagePath
         param wfschemaName
-        param mTreeBuildupContext
+        param mTreeBuildUpContext
         param callback
 
         _ createWizziFactory
@@ -121,7 +121,7 @@
                     @ wfschemaIttfDocumentUri
                     @ outputPackagePath
                     @ wfschemaName
-                    @ mTreeBuildupContext
+                    @ mTreeBuildUpContext
                     @ callback
 
 	function getFiles

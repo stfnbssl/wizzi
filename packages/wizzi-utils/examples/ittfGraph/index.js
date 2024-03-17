@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\ittfGraph\index.js.ittf
-    utc time: Mon, 26 Feb 2024 20:29:02 GMT
+    utc time: Thu, 14 Mar 2024 20:24:16 GMT
 */
 'use strict';
 /**
@@ -23,6 +23,8 @@ var fsUtils = require('../../lib/fSystem/utils');
 var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph');
 var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
 var ittfScanner = require('../../lib/ittfScanner/index');
+var meta = require('../../lib/meta/index');
+var packi = require('../../lib/packi/index');
 var fs = require('../../lib/fSystem/index');
 var ittfGraph = require('../../lib/ittfGraph/index');
 var file = wizziUtils.file;

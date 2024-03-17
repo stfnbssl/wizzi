@@ -68,7 +68,7 @@
 			#   string basedir // uri
 			#   { dumps
 			#     string dumpsBaseFolder
-			# 	  { mTreeBuildupScript
+			# 	  { mTreeBuildUpScript
 			#       boolean dump
 			#       string dumpsBaseFolder
 		ctor
@@ -210,24 +210,32 @@
 
 		m run
 			callback
-
 			var self = this
 			_ this.initialize
 				f_cb()
 					# run artifact requests
 					# loog 'wizzi.productionManager.self.artifactInfos.length', self.artifactInfos.length
-					_ async.mapSeries
-						@ self.artifactInfos
-						@ AsyncRunner.run
-						function
-							param err
-							param result
-							if err
-								return callback(err);
-							set self.artifactInfos = result
-                            _ process.nextTick
-                                => 
-                                    _ callback(null, result)
+					var checkLoop = 0
+					function doRun
+						_ async.mapSeries
+							@ self.artifactInfos
+							@ AsyncRunner.run
+							function
+								param err
+								param result
+								if err
+									return callback(err);
+								set self.artifactInfos = result
+								_ process.nextTick
+									=> 
+										if self.productionContext.hasNewRunningContextValues() && checkLoop < 20
+											set checkLoop++
+											info 'Running context values have been changed. Rerunning artifacts generation. Times', checkLoop
+											_ self.productionContext.acceptNewRunningContextValues
+											_ doRun
+										else
+											_ callback(null, result)
+					_ doRun
 
 		m terminate
 			if this.wizziFactory

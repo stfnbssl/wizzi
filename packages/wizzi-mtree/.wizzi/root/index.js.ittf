@@ -14,7 +14,7 @@
 		#     boolean useCache
 		#     boolean frontMatter
         #     boolean raw
-		#     boolean mTreeBuildupScript
+		#     boolean mTreeBuildUpScript
 		#
 	set md.createLoadMTree
 		function createLoadMTree
@@ -25,7 +25,7 @@
 			var useCache = options.useCache || false
 			var frontMatter = options.frontMatter || false
             var raw = options.raw || false
-			var mTreeBuildupScript = options.mTreeBuildupScript || false
+			var mTreeBuildUpScript = options.mTreeBuildUpScript || false
 			var ittfDocumentStore
 			return
 				function loadMTree
@@ -34,7 +34,7 @@
 						{ __productionManager
 							{ productionContext
 								{ aclstat
-						{ mTreeBuildupContext
+						{ mTreeBuildUpContext
 							optional
 					callback
 
@@ -55,8 +55,8 @@
 										@ ittfDocumentUri
 										@ loadContext
 										@ callback
-								elif mTreeBuildupScript
-									_ loader.loadMTreeBuildupScript
+								elif mTreeBuildUpScript
+									_ loader.loadMTreeBuildUpScript
 										@ ittfDocumentUri
 										@ loadContext
 										@ callback
@@ -77,8 +77,8 @@
 								@ ittfDocumentUri
 								@ loadContext
 								@ callback
-						elif mTreeBuildupScript
-							_ loader.loadMTreeBuildupScript
+						elif mTreeBuildUpScript
+							_ loader.loadMTreeBuildUpScript
 								@ ittfDocumentUri
 								@ loadContext
 								@ callback

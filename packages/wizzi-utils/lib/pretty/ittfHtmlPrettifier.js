@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\pretty\ittfHtmlPrettifier.js.ittf
-    utc time: Mon, 26 Feb 2024 20:29:01 GMT
+    utc time: Thu, 14 Mar 2024 20:24:16 GMT
 */
 'use strict';
 // pretty print
@@ -103,7 +103,7 @@ function toHtmlPretty(node, ctx) {
     ctx.hb.writeText(spaces(ctx.__ittfNode.indent * ctx.indentSpaces));
     ctx.hb.closeTag('span', { inline: true });
     ctx.hb.openTag('span', { inline: true });
-    if (node.isCommand()) {
+    if (node.isCommandCheck()) {
         ctx.hb.writeAttribute('class', STYLE_DOCS_ITTF_NODE_COMMAND);
     }
     else {

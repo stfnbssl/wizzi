@@ -1,0 +1,1 @@
+npm link @wizzi/utils @wizzi/repo @wizzi/factory @wizzi/plugin.ittf @wizzi/plugin.json @wizzi/plugin.yaml @wizzi/plugin.js

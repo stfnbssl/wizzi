@@ -1,0 +1,11 @@
+$group
+    $include metaProduction
+
+    $
+        var items = [
+        ]
+
+    $foreach item in items
+        $file wizziHub/meta/t/${item}.ittf.ittf
+            ${'$'}{'$'}group
+                ${'$'}include wizziHub/meta/tfolder/${item}

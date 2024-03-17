@@ -14,6 +14,7 @@
     var helpers = require('./lib/helpers/index')
     var lorem = require('./lib/lorem/index')
     var packi = require('./lib/packi/index')
+    var meta = require('./lib/meta/index')
     $if wzCtx_useCrypto
         var crypto = require('./lib/crypto/index')
     var errors = require('./lib/errors/index')
@@ -35,6 +36,7 @@
         set md.crypto = crypto  
     set md.lorem = lorem  
     set md.packi = packi  
+    set md.meta = meta  
     set md.helpers = helpers  
     set md.errors = errors  
     set md.mocks = mocks  

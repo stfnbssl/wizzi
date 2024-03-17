@@ -1,0 +1,75 @@
+$group
+    m onRunningContextValueChange
+        param namePath
+        param value
+        log 'onRunningContextValueChange', namePath, value
+        _ this.newRunningContextValues.push
+            {
+                @ namePath namePath
+                @ value value
+    m hasNewRunningContextValues
+        return this.newRunningContextValues.length > 0
+    m acceptNewRunningContextValues
+        set this.newRunningContextValues = []
+    +
+    m setEvaluationContextValue
+        param namePath $$ string, 
+        param value    $$ 
+        if !namePath
+            return
+        var ss = namePath.split('.')
+        if ss.length < 2
+            if !checkEquals(this.runningContextValues[namePath], value)
+                set this.runningContextValues[namePath] = value
+                _ this.onRunningContextValueChange
+                    @ namePath
+                    @ value
+            return
+        var obj = this.runningContextValues[ss[0]]
+        # log 'obj 1', JSON.stringify(obj)
+        if !obj
+            set obj = this.runningContextValues[ss[0]] = {}
+        var i = 1
+        while i < ss.length - 1
+            # log 'i,ss[i]obj[ss[i]]', i, ss[i], obj[ss[i]]
+            if !obj[ss[i]]
+                set obj = obj[ss[i]] = {}
+            # log 'obj 4', JSON.stringify(obj)
+            set i++
+        # log 'obj 5', JSON.stringify(obj)
+        # log ss[i], obj[ss[i]], value 
+        if !checkEquals(obj[ss[i]], value)
+            set obj[ss[i]] = value
+            _ this.onRunningContextValueChange
+                @ namePath
+                @ value
+            
+    +
+    m removeEvaluationContextValue
+        param namePath $$ string, 
+        throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet')
+    +
+    m getEvaluationContextValue
+        param namePath $$ string, 
+        if !namePath
+            return
+        var ss = namePath.split('.')
+        if ss.length < 2
+            return this.runningContextValues[namePath]
+        var obj = this.runningContextValues[ss[0]]
+        # log 'get obj 0', obj
+        if obj
+            var i = 1
+            var found = true
+            while i < ss.length - 1
+                set obj = obj[ss[i]]
+                # log 'get i,ss[i],obj', i, ss[i], obj
+                if !obj
+                    set found = false
+                    set i = ss.length
+                else
+                    set i++
+            if found
+                # log 'get obj found', obj
+                return obj[ss[i]]
+        return null
