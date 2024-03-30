@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var util = require('util');
 var wizziUtils = require('@wizzi/utils');
 var f_verify = require('./functions/verify');
 
-var pkgVersioned = ' (@wizzi/mtree.0.8.13)';
+var pkgVersioned = ' (@wizzi/mtree.0.8.16)';
 
 var md = module.exports = {};
 
@@ -94,13 +94,41 @@ JsWizziTypeError.prototype = Object.create(Error.prototype);
 JsWizziTypeError.prototype.constructor = JsWizziTypeError;
 md.JsWizziTypeError = JsWizziTypeError;
 
+/**
+     params
+     { errorData
+     @ row
+     @ col
+     @ description
+     string source
+     boolean json
+    
+*/
+md.getErrorLines = function(errorData, source, json) {
+    console.log('jswizzi.errors.getErrorLines.loc', 'calling getErrorLines', errorData, __filename);
+    var statements = source.split('\n');
+    var start = Math.max(0, (errorData.row - 4));
+    var end = Math.min(statements.length, (errorData.row + 4));
+    var ret = [];
+    var parsedErrorLine;
+    for (var i = start; i < end; i++) {
+        ret.push(formatLineNumber(i + 1) + ' ' + statements[i]);
+        if (i == errorData.row - 1) {
+            var col = errorData.pos || errorData.col;
+            ret.push(spaces(col + 4) + '^ ' + (errorData.description + '  <--- --- --- --- --- ERROR' || ''));
+            parsedErrorLine = parseScriptLine(statements[i]);
+            console.log('jswizzi.errors.getErrorLines.statements[i])', statements[i], __filename);
+        }
+    }
+    return json ? { lines: ret, parsedErrorLine: parsedErrorLine } : ret.join('\n');
+}
+;
 md.esprimaNodeErrorLines = function(description, node, source, json) {
     
     // loog 'jswizzi.errors.esprimaNodeErrorLines.source', source
-    
-    // loog 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc
     if (node && node.loc) {
-        return wizziUtils.errors.getErrorLines({
+        console.log('jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc, 'calling getErrorLines', __filename);
+        return md.getErrorLines({
                 row: node.loc.start.line, 
                 col: node.loc.start.column, 
                 description: description
@@ -125,6 +153,31 @@ function getEsprimaErrorLines(esprimaException, source, json) {
         }
     }
     return json ? ret : ret.join('\n');
+}
+function parseScriptLine(line) {
+    var ndx = line.indexOf('//node:');
+    console.log('parseScriptLine', line, ndx, line[ndx+7], line[ndx+8], __filename);
+    var state = 1;
+    var ret = {
+        nodeId: ''
+     };
+    for (var i=ndx+7; i<line.length; i++) {
+        var ch = line[i];
+        if (state == 1) {
+            if (ch >= '0' && ch <= '9') {
+                ret.nodeId = ret.nodeId + ch;
+            }
+            else {
+                console.log('parseInt(ret.nodeId)', parseInt(ret.nodeId), __filename);
+                ret.nodeId = parseInt(ret.nodeId);
+                state = 2;
+            }
+        }
+    }
+    if (state == 1) {
+        ret.nodeId = parseInt(ret.nodeId);
+    }
+    return ret;
 }
 function spaces(num) {
     if (num > 0) {

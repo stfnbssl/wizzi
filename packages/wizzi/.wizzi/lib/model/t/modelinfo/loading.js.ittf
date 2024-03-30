@@ -53,6 +53,11 @@
 					_ callback
 						@ null
 						_ this._getLoadJsonModel()
+			elif this.format === 'yaml'
+				return
+					_ callback
+						@ null
+						_ this._getLoadYAMLModel()
 			elif this.format === 'xml'
 				return
 					_ callback
@@ -89,6 +94,21 @@
 					@ sourceUri
 					@ callback
 	
+	m _getLoadYAMLModel
+		var that = this
+		return 
+			function loadYAMLModel
+				string sourceUri
+				{ context
+					optional
+				callback
+				
+				# TODO interpolate object values of type string?
+				#      interpolate property names too?
+				_ that.readYAML
+					@ sourceUri
+					@ callback
+
 	m _getLoadXmlModel
 		var that = this
 		return

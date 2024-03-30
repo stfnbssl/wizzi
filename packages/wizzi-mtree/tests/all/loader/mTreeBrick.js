@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mTreeBrick.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:17 GMT
+    utc time: Sat, 30 Mar 2024 14:06:32 GMT
 */
 'use strict';
 
@@ -83,7 +83,7 @@ describe("mTree", function() {
             var expected = 'alfa, num:integer|9, ok:boolean|true, when:date|2015-8-23, cost:float|9.99';
             expect(mTree.$params).to.be.a('string');
             expect(mTree.$params).to.be(expected);
-            var prms = mTree.calcParamValues('pluto');
+            var prms = mTree.parseFragmentParamsValues('pluto');
             expect(prms).to.be.an('array');
             expect(prms.length).to.be(5);
             expect(prms[0].value).to.be.a('string');

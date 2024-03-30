@@ -1,0 +1,8 @@
+$group
+    f-node f-value1
+    $
+        function Subtract(a, b) {
+            return a - b;
+        }
+
+    f-node Subtraction ${Subtract(5, 2)}

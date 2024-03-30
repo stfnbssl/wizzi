@@ -6,7 +6,7 @@
 	var async = require('async')
     var errors = require('../errors')
 	var verify = require('@wizzi/utils').verify
-    var utilnode = require('../util/node')
+    var utilnode = require('../utils/node')
 
 	#
 		# Ittf commands
@@ -47,12 +47,12 @@
 						param item
 						param callback
 						var v = item.value.trim()
-						var mixeruri = item.model.uri
-						var mixerbasedir = path.dirname(mixeruri)
+						var includerUri = item.model.uri
+						var includerBaseDir = path.dirname(includerUri)
 						_ mTreeBrickProvider.get
 							{ 
 								@ from 'store'
-								@ basedir mixerbasedir
+								@ basedir includerBaseDir
 								@ relpath v
 								@ include true
 								@ includerBrickKey item.model.brickKey
@@ -82,16 +82,17 @@
                                                 @ item
                                                 @ err
                                                 {
-                                                    @ includerUri mixeruri
-                                                    @ includedRelPath v
+													{ mtree
+														@ includerUri includerUri
+														@ includedRelPath v
 								_ mTreeBrickProvider.enterFragmentCall
-									@ mixeruri
+									@ includerUri
 									@ includedWipNodifiedMTree.uri
 								if mTreeBrickProvider.checkForRecursion()
 									return
 										_ callback
 											_ local_error
-												@ 'InvalidIttfError'
+												@ 'IttfIncludeError'
 												@ 'default'
 												@ 'Recursive mixin or include: ' + v
 												@ node
@@ -111,8 +112,9 @@
                                                         @ item
                                                         @ err
                                                         {
-                                                            @ includerUri mixeruri
-                                                            @ includedRelPath v
+															{ mtree
+																@ includerUri includerUri
+																@ includedRelPath v
 										_ utilnode.replace
 											@ item
 											@ includeResult.nodes
@@ -188,4 +190,4 @@
         else
             set node.children = []
 
-	$include local_error
+	local_error( wizzi-mtree@${wzCtx.version}.loader.includer )

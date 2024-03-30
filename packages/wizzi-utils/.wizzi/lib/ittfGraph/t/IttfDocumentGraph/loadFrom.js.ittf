@@ -28,6 +28,11 @@
 				if node.id
 					set added.id = node.id
 				set added.commentState = node.commentState
+				if node.$params && node.$params.length > 0
+					_ added.add
+						@ '$params'
+						@ node.$params
+						@ node
 				_ added.__importChilds
 					@ node.children
 

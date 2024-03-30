@@ -35,7 +35,7 @@
 		#                                   // set by the lib/loader/mixer
 		#          $params:String           // params received by the mixed mTreeBrick
 		#          byRefParams:Array        // params passed by reference
-		#          calcParamValues:Function  // calculates the values  
+		#          parseFragmentParamsValues:Function  // calculates the values  
 		#        { evalContext
 		#        string sourceKey
 		#        string brickKey
@@ -58,6 +58,7 @@
 			set this.nodeCount = 0
 			set this.callChain
 				[ 
+			set this.contextsFromMTreeBuildUpScriptAst = null
     
 		m addIttfDocument
             param ittfDocumentUri
@@ -118,25 +119,6 @@
                         set ittfDocumentData.content
                     else 'Source content unavailable'
 
-		#
-			# params
-			#   string sourceKey
-			#   { errorData
-			#     @ row
-			#     @ column
-			#     @ description
-			#   boolean json
-			#
-		m getIttfDocumentErrorLines
-            param sourceKey
-			param errorData
-			param json
-			var source = this.getIttfDocumentContent(sourceKey)
-			return
-				_ utilsErrors.getErrorLines
-					@ errorData
-					@ source
-					@ json
 
 		m getSourceKey
             param ittfDocumentUri
@@ -155,6 +137,21 @@
                         @ sourceKey ittfDocumentData.sourceKey
             return ret
     
+		m findNodeById
+            param nodeId
+            for var k in this.mTreeBrickDatas
+				var mTreeBrickData = this.mTreeBrickDatas[k]
+				var mTreeNode 
+					_ mTreeBrickData.mTreeBrick.findNodeById
+						@ nodeId
+				if mTreeNode
+					return
+						{
+							@ mTreeNode mTreeNode
+							@ brickKey mTreeBrickData.brickKey
+							@ mTreeBrick mTreeBrickData.mTreeBrick
+			return null
+
 		m getNewNodeId
             return ++this.nodeCount
 
@@ -176,40 +173,45 @@
                 for var j = 0; j < this.callChain.length; j++
                     if ((this.callChain[j].mixerUri == this.callChain[i].mixedUri) && (this.callChain[j].mixedUri == this.callChain[i].mixerUri))
                         return true
-            return false
-    
-		m _old_getLoadStateAsync_VIA
-			static
-            param ittfDocumentUri
-            param loadContext
-            param callback
-            
-			if !MTreeBrickProvider
-                set MTreeBrickProvider = require('./mTreeBrickProvider')
-            _ MTreeBrickProvider.createFromUri
-                @ ittfDocumentUri
-                @ loadContext
-                function 
-                    param err
-                    param createdProvider
-                    if err
-                        return callback(err)
-                    _ callback
-                        @ null
-                        { 
-                            @ loadContext loadContext
-                            @ provider createdProvider
-                            @ getPrimaryMTreeBrick
-                                function 
-                                    return createdProvider.getPrimaryMTreeBrick()
-                            @ callChain
-                                [ 
-                            @ checkForLoops
-                                function 
-                                    for var i = 0; i < this.callChain.length; i++
-                                        if this.callChain[i].mixer == this.callChain[i].mixed
-                                            return true
-                                        for var j = 0; j < this.callChain.length; j++
-                                            if ((this.callChain[j].mixer == this.callChain[i].mixed) && (this.callChain[j].mixed == this.callChain[i].mixer))
-                                                return true
-                                    return false
+            return false   
+
+		#
+			# params
+			#   string sourceKey
+			#   { errorData
+			#     @ row
+			#     @ column
+			#     @ description
+			#   boolean json
+			#
+		m getIttfDocumentErrorLines
+            param sourceKey
+			param errorData
+			param json
+			var source = this.getIttfDocumentContent(sourceKey)
+			return
+				_ utilsErrors.getErrorLines
+					@ errorData
+					@ source
+					@ json
+
+		m setContextsFromMTreeBuildUpScriptAst			
+			param contexts
+			set this.contextsFromMTreeBuildUpScriptAst = contexts
+			# loog 'loader.loadHistory.contextsFromMTreeBuildUpScriptAst', this.contextsFromMTreeBuildUpScriptAst
+
+		m getMTreeBrickFunctionScopes
+			param brickKey
+			var mTreeBricks = this.contextsFromMTreeBuildUpScriptAst.mTreeBricks
+			# loog 'loadHistory.mTreeBricks', mTreeBricks
+			# loog 'loadHistory.mTreeBricks[brickKey]', mTreeBricks[brickKey]
+			if !mTreeBricks[brickKey]
+				# the mTreeBricks ha no script statement and the `functions` scopes object
+				# has not been set by the JsWizziRunner
+				# return an empty object
+				return
+					{
+						{ functions
+			else
+				# log 'loadHistory.mTreeBricks[brickKey].functions', mTreeBricks[brickKey].functions
+				return mTreeBricks[brickKey] $$ .functions

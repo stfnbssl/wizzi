@@ -17,8 +17,8 @@ module
                 $$ @ 'global_1.js.ittf'
                 $$ @ 'vars_1.js.ittf'
                 $$ @ 'jsonbuild_1.json.ittf'
-                $$ @ 'functions/basic.html.ittf'
-                @ 'functions/sample.docx.ittf'
+                @ 'functions/basic.html.ittf'
+                $$ @ 'functions/sample.docx.ittf'
 
         var productionManager 
             _ mocks.getProductionManager
@@ -35,5 +35,6 @@ module
                     f_cb_test( mTree )
                         # loog 'mTree', mTree
                         _ printEvaluatedNodes(mTree, 'After evaluate')
+                        log 'mTree.toIttf()', mTree.toIttf()
 
 

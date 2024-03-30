@@ -6,7 +6,7 @@
 	var async = require('async')
     var errors = require('../errors')
 	var verify = require('@wizzi/utils').verify
-    var utilnode = require('../util/node')
+    var utilnode = require('../utils/node')
 
 	#
 		# Ittf commands

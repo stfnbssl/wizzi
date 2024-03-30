@@ -1,7 +1,7 @@
 ﻿base_test( util.types )
 
 	$append imports
-		var types = require('../../../lib/util/types')
+		var types = require('../../../lib/utils/types')
 
 	$*
 	it should objectify

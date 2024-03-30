@@ -5,7 +5,7 @@
     var path = require('path')
 	var verify = require('@wizzi/utils').verify
     var errors = require('../errors')
-	var node = require('../util/node')
+	var node = require('../utils/node')
 	var MTreeBrickProvider = require('./mTreeBrickProvider')
     var frontMatter = require('./frontMatter')
     var includer = require('./includer')

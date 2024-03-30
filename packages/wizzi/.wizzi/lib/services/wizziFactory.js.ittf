@@ -15,6 +15,7 @@
 	var GenContext = require('../artifact/genContext')
 	var verify = require('@wizzi/utils').verify
 	var file = require('@wizzi/utils').file
+	var packi = require('@wizzi/utils').packi
 	var JsonComponents = require('@wizzi/repo').JsonComponents
     const packiUtils = require('./packiUtils')
 	var StringWriter = require('../util/stringWriter')
@@ -23,6 +24,7 @@
 	var log = require('../util/log')(module)
 	var PluginsManager = require('./pluginsManager')
 	var StorePool = require('./storePool')
+	var buildCheatsheet = require('./cheatsheet').buildCheatsheet
 	var bootModelUri = "../wizzi/models/bootstrap/wfschema-boot-model"
 	var bootModelDefUri = "../wizzi/models/bootstrap/wfschema-boot-modelDef"
 	var BootWizziSchema = null
@@ -64,6 +66,7 @@
 			set this.artifactGenerators = {}
             set this.wizzifiers = {}
 			set this.schemaDefinitions = {}
+			set this.cheatsheets = {}
 			set this.globalContext = {}
             set this.metasManager = null
             set this.verbose = false
@@ -78,6 +81,7 @@
         $include wizziFactory/folder-generation
 		$include wizziFactory/schema-definition
         $include wizziFactory/wizzification
+		$include wizziFactory/cheatsheet
 		$include wizziFactory/compare
 		$include wizziFactory/modelDoms-generation
 		$include wizziFactory/wizzi-job-execution

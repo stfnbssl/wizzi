@@ -2,10 +2,11 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\errors\legacyErrors.js.ittf
-    utc time: Thu, 14 Mar 2024 20:24:16 GMT
+    utc time: Sat, 30 Mar 2024 12:44:01 GMT
 */
 'use strict';
 var util = require('util');
+var verify = require('../helpers/verify');
 
 var md = module.exports = {};
 
@@ -97,7 +98,7 @@ md.getErrorLines = function(errorData, source, json) {
     var end = Math.min(statements.length, (errorData.row + 4));
     var ret = [];
     for (var i = start; i < end; i++) {
-        ret.push(formatLineNumber(i + 1) + ' ' + statements[i]);
+        ret.push(formatLineNumber(i + 1) + ' ' + verify.replaceAll(statements[i],'\t','    '));
         if (i == errorData.row - 1) {
             var col = errorData.pos || errorData.col;
             ret.push(spaces(col + 4) + '^ ' + (errorData.description + '  <--- --- --- --- --- ERROR' || ''));

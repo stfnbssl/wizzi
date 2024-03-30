@@ -7,7 +7,7 @@
     var async = require('async')
     var errors = require('../errors')
     var includer = require('./includer')
-    var utilnode = require("../util/node")
+    var utilnode = require("../utils/node")
     
 	set module.exports =
         function 
@@ -117,8 +117,9 @@
                                             @ mixerNode
                                             @ err
                                             {
-                                                @ mixerUri mixeruri
-                                                @ mixerRelPath mixerNode.name
+                                                { mtree
+                                                    @ mixerUri mixeruri
+                                                    @ mixerRelPath mixerNode.name
 
 							_ mTreeBrickProvider.enterFragmentCall
 								@ mixeruri
@@ -283,4 +284,4 @@
 					return ret
 		return null
 
-	$include local_error
+    local_error( wizzi-mtree@${wzCtx.version}.loader.mixer )

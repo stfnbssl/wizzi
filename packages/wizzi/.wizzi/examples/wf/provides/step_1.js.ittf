@@ -21,7 +21,6 @@ module
                 @ './wizzi.plugin.ittf/index'
             @ pluginsBaseFolder pluginsBaseFolderV08
 
-
         _ createWizziFactory
             {
             f_cb_test(wf)

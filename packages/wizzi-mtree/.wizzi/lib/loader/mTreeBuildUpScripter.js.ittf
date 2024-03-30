@@ -56,10 +56,10 @@
 					@ node.hasMacro
 					@ ctx
             _ jsScriptCoder.w
-				@ vparent + ".v = " + vparent + ".v ? " + vparent + ".v : ''" + ' //' + node.id
+				@ vparent + ".v = " + vparent + ".v ? " + vparent + ".v : ''" + nodeMapComment(node)
                 @ node
             _ jsScriptCoder.w
-				@ vparent + '.v += ($.textSep + ' + value + ');' + ' //' + node.id
+				@ vparent + '.v += ($.textSep + ' + value + ');' + nodeMapComment(node)
                 @ node
         
 		elif tag == '$if'
@@ -114,15 +114,15 @@
             var value = namevalue[1]
             
 			_ jsScriptCoder.w
-				@ 'var ' + name + ', ' + value + ';' + ' //' + node.id
+				@ 'var ' + name + ', ' + value + ';' + nodeMapComment(node)
                 @ node
             
 			_ jsScriptCoder.for
-				@ name + ' in ' + items[2] + ' //' + node.id
+				@ name + ' in ' + items[2] + nodeMapComment(node)
 				@ node
             
 			_ jsScriptCoder.w
-				@ value + ' = ' + items[2] + '[' + name + '];' + ' //' + node.id
+				@ value + ' = ' + items[2] + '[' + name + '];' + nodeMapComment(node)
                 @ node
             
 			set closeBlock = '}'
@@ -138,11 +138,11 @@
 			# TODO if items[1] !== 'in' -> malformed
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + ' //' + node.id
+				@ 'var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + nodeMapComment(node)
                 @ node
 			
             _ jsScriptCoder.w
-				@ 'var ' + items[0] + '_count = ' + items[2] + '.length;' + ' //' + node.id
+				@ 'var ' + items[0] + '_count = ' + items[2] + '.length;' + nodeMapComment(node)
                 @ node
 
 			_ jsScriptCoder.for
@@ -150,11 +150,11 @@
 				@ node
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + ' //' + node.id
+				@ 'var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + nodeMapComment(node)
                 @ node
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + '_index = i' + nnode + ';' + ' //' + node.id
+				@ 'var ' + items[0] + '_index = i' + nnode + ';' + nodeMapComment(node)
                 @ node
             
 			set closeBlock = '}'
@@ -167,11 +167,11 @@
             var items = node.value.split(' ')
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + ' //' + node.id
+				@ 'var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + nodeMapComment(node)
                 @ node
 
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + '_count = ' + items[2] + '.length;' + ' //' + node.id
+				@ 'var ' + items[0] + '_count = ' + items[2] + '.length;' + nodeMapComment(node)
                 @ node
 
 			_ jsScriptCoder.for
@@ -179,11 +179,11 @@
 				@ node
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + ' //' + node.id
+				@ 'var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + nodeMapComment(node)
                 @ node
             
 			_ jsScriptCoder.w
-				@ 'var ' + items[0] + '_index = i' + nnode + ';' + ' //' + node.id
+				@ 'var ' + items[0] + '_index = i' + nnode + ';' + nodeMapComment(node)
                 @ node
            
 			set closeBlock = '}'
@@ -201,7 +201,7 @@
 				if item.name === '$param'
 					set params += ',' + item.value
 			_ jsScriptCoder.w
-                @ 'function ' + node.value + '(' + params + ') {'
+                @ 'function ' + node.value + '(' + params + ') {' + nodeMapComment(node)
                 @ node
 			_ jsScriptCoder.indent
 			foreach item in node.children
@@ -224,7 +224,7 @@
 				if item.name === '$@'
 					set args += ',' + item.value
 			_ jsScriptCoder.w
-                @ node.value + '(' + args + ');'
+                @ node.value + '(' + args + ');' + nodeMapComment(node)
                 @ node
 			set ctx.brickKey = null
             _ setJsWizziContext
@@ -246,7 +246,7 @@
                     @ node
 				_ isCompilePassedParameters
 					@ jsScriptCoder
-					@ node.model.calcParamValues(node.model.$args)
+					@ node.model.parseFragmentParamsValues(node.model.$args)
             _ setJsWizziContext(ctx, null, jsScriptCoder)
             _ jsScriptCoder.w
 				@ 'var $' + nnode + ' = { ' + 
@@ -254,10 +254,11 @@
 					\b 'n: ' + codifyValue(node.model.brickKey, tag, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + 
 					\b (node.source ? 'source: ' + escapename(node.source) + ', ' : '') +
 					\b 'v: ' + codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + 
+                    \b 'i: ' + node.id + ', ' +
 					\b 'r: ' + node.row + ', ' +
 					\b 'c: ' + node.col + ', ' + 
 					\b 's: "' + node.model.brickKey + '", ' + 
-					\b 'u: "' + node.sourceKey + '", ' + ' };' + ' //' + node.id
+					\b 'u: "' + node.sourceKey + '", ' + ' };' + nodeMapComment(node)
                 @ node
 
             var vparent = ('$' + nparent)
@@ -336,12 +337,12 @@
 					_ jsScriptCoder.w
 						@ '// firstOfMixed ' + node.model.$args + '/' + node.model.$params
                         @ node
-					# loog '=========', node.model.calcParamValues(node.model.$args)
+					# loog '=========', node.model.parseFragmentParamsValues(node.model.$args)
 					_ isCompilePassedParameters
 						@ jsScriptCoder
-						@ node.model.calcParamValues(node.model.$args)
+						@ node.model.parseFragmentParamsValues(node.model.$args)
                 _ jsScriptCoder.w
-					@ node.name + ' ' + (node.value || '') + ' //' + node.id
+					@ node.name + ' ' + (node.value || '') + nodeMapComment(node)
                     @ node
         
 		foreach item in node.children
@@ -360,10 +361,11 @@
             @ 'var $' + nnode + ' = { ' + 
                 \b 'n: "' + node.name + '", ' + 
                 \b 'v: "' + node.value + '", ' + 
+                \b 'i: ' + node.id + ', ' +
                 \b 'r: ' + node.row + ', ' +
                 \b 'c: ' + node.col + ', ' + 
                 \b 's: "' + node.model.brickKey + '", ' + 
-                \b 'u: "' + node.sourceKey + '", ' + ' };' + ' //' + node.id
+                \b 'u: "' + node.sourceKey + '", ' + ' };' + nodeMapComment(node)
             @ node
 
         var vparent = ('$' + nparent)
@@ -387,6 +389,10 @@
 				_ jsScriptCoder.w
 					@ p.name + ' = ' + p.value + ';'
                     @ p
+
+	function nodeMapComment
+        param node
+        return ' //node:' + node.id
 
 	function escape
         param value
@@ -418,7 +424,7 @@
 					@ "\n"
 					@ "\\n"
         else
-            return value  
+            return value
 
 	function remacro
 		param value

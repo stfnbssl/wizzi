@@ -157,4 +157,3 @@
 				+ can be referenced with the same rules that apply to nodejs packages
 				+ in 'node_modules' folders. They are searched up on the folder tree, until the  
 				+ relative path of the mixin or include call is matched or the path resolution fails.
-		

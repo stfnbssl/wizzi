@@ -88,3 +88,22 @@
     
 	m get_currentMTreeBrickKey
 		return this.currentMTreeBrickKey
+
+	m enterFunctionEvalContext
+		param functionName
+		var previousFunctionName
+			_ this.brickEvalContext.enterFunction
+				@ functionName
+		return 
+			{
+				@ brickKey this.currentMTreeBrickKey
+				@ functionName previousFunctionName
+
+	m exitFunctionEvalContext
+		param brickKey
+		param functionName
+		# set the previous functionName on brickKey
+		checked_call_return( brickEvalContext
+			 _ this.evalHelper.getMTreeBrickEvalContext(brickKey)
+		_ brickEvalContext.enterFunction
+			@ functionName

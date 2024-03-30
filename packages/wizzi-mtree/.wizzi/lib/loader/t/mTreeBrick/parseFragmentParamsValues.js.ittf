@@ -1,0 +1,236 @@
+﻿$group
+
+	#
+		# Rules
+		# `$params` node command format
+		#   > $params param1 [,param2 [,param-n]]
+		#   param   : [&]name[:type][|[&]default]
+		#   &name   : the paramater is an object passed by reference, the name can be used in IttfMacro expressions
+		#   name    : the paramater is a value, the name can be used in IttfMacro expressions
+		#   type    : the parameter type
+		#             one-of : string(default), integer, float, boolean, date, object (implicit
+		#                      when '&' declared), macro (implicit, detected from IttfMacro delimiters
+		#                      contained in the default value)
+		#   &default : the default is an object in the global context, default is its name
+        #   default  : typed-value | @@null | @@empty | @@undefined
+		#             // warning! `title|null` becomes title = "null" (the quoted string null)
+		#             // if you want title to be null then : `title|@@null`
+		#   string  : quotes are optional, example: `title|"my way"` and `title|my way` are the same
+		#   boolean : true | false
+		#   date    : yyyy/mm/dd
+		#   macro   : an IttfMacro can be passed as a parameter to a mixin, when the parameter
+		#             is referenced we have a double macro substitution 
+		#             TODO verify, explain how this works, macro or macros can be partial 
+		#                  insides of the default value?
+
+	m parseFragmentParamsValues
+        param mixerArgs
+
+		# string mixerArgs
+		#    optional
+
+        var mTreeBrickRoot = this.nodes[0]
+		var mixedParams = this.$params
+        var 
+            decl _mixedParamArray
+                [ 
+            decl _mixerArgsArray
+                [ 
+        if verify.isNotEmpty(mixedParams)
+            set _mixedParamArray = mixedParams.trim().split(',')
+        if verify.isNotEmpty(mixerArgs)
+            set _mixerArgsArray = mixerArgs.trim().split(',')
+        
+		var result
+            [ 
+        
+		for var i = 0; i < _mixedParamArray.length; i++
+            var 
+                decl name
+                decl type = 'string'
+                decl defaultValue = null
+                decl value = null
+                decl hasparamvalue = false
+                decl hasdefaultvalue = false
+                decl defaultName = null
+            
+			# a param may have the format
+			# 1) name
+			# 2) name|default
+			# 3) name:type|default
+			#    valid types: string(default), integer, float, boolean, date
+
+			if _mixedParamArray[i].trim().length == 0
+				return
+					_ local_error
+						@ 'FragmentParamsError'
+						@ 'parseFragmentParamsValues'
+						@ 'Error evaluating: $params ' + mixedParams +
+							\b ' , Parameter [' + i + '] cannot be empty. Expected name[:type[|default]]'
+						@ mTreeBrickRoot
+			
+			#
+			# Extract param default value
+
+			var mixedParam_parts
+                _ _mixedParamArray[i].trim()
+                    ._ split(/[|]/)
+            
+			if mixedParam_parts.length > 2
+				return
+					_ local_error
+						@ 'FragmentParamsError'
+						@ 'parseFragmentParamsValues'
+						@ 'Error evaluating: $params ' + mixedParams +
+							\b ' , Parameter [' + i + '] / `' + _mixedParamArray[i] + '` is malformed. Expected name[:type[|default]]'
+						@ mTreeBrickRoot
+            
+			if mixedParam_parts.length == 2
+                set defaultValue = mixedParam_parts[1].trim()
+                set hasdefaultvalue = true
+            
+			#
+			# Extract param name:type
+
+			set mixedParam_parts
+                _ mixedParam_parts[0].trim()
+                    ._ split(/[:]/)
+            
+			if mixedParam_parts.length > 2
+				return
+					_ local_error
+						@ 'FragmentParamsError'
+						@ 'parseFragmentParamsValues'
+						@ 'Error evaluating: $params ' + mixedParams +
+							\b ' , Parameter [' + i + '] / `' + _mixedParamArray[i] + '` is malformed. Expected name[:type[|default]]'
+						@ mTreeBrickRoot
+            
+			# name
+			set name = mixedParam_parts[0]
+
+			# type
+			if mixedParam_parts.length == 2
+                set type = mixedParam_parts[1]
+				if ['string','integer','float','boolean','date'].indexOf(type) < 0
+					return 
+						_ local_error
+							@ 'FragmentParamsError'
+							@ 'parseFragmentParamsValues'
+							@ 'Error evaluating: $params ' + mixedParams +
+								\b ', on param: [' + (i+1) + '] / `' + name + '` : invalid type `' + type + '`'
+							@ mTreeBrickRoot
+            
+			# by ref paramtype
+			if name.substr(0, 1) === '&'
+                set name = name.substr(1)
+                set type = 'object'
+            
+			if _mixerArgsArray.length > i
+                set value = _mixerArgsArray[i].trim()
+                if type === 'object'
+                    if value.substr(0, 1) !== '&'
+						return
+							_ local_error
+								@ 'FragmentParamsError'
+								@ 'parseFragmentParamsValues'
+								@ 'Error evaluating: $params ' + mixedParams +
+									\b ', argument [' + i + '] must be an object reference. Found ' + value
+								@ mTreeBrickRoot
+                    else
+                        set value = value.substr(1)
+                else 
+					set value = verify.convert(value, type, true)
+					if value && value.__is_error
+						return
+							_ local_error
+								@ 'FragmentParamsError'
+								@ 'parseFragmentParamsValues'
+								@ 'Error evaluating: $params ' + mixedParams +
+									\b ', converting parameter: [' + i + '] / `' + name + '` to type `' + type + '`'
+								@ mTreeBrickRoot
+								@ value
+
+                set hasparamvalue = true
+            elif hasdefaultvalue
+                if defaultValue.substr(0, 1) === '&'
+                    set defaultName = defaultValue.substr(1)
+                else
+                    set value = verify.convert(defaultValue, type, true)
+                    if value && value.__is_error
+                        return
+                            _ local_error
+                                @ 'FragmentParamsError'
+                                @ 'parseFragmentParamsValues'
+                                @ 'Error evaluating: $params ' + mixedParams +
+                                    \b ', converting parameter: [' + i + '] / `' + name + '` to type `' + type + '`'
+                                @ mTreeBrickRoot
+                                @ value
+            else
+				return
+					_ local_error
+						@ 'FragmentParamsError'
+						@ 'parseFragmentParamsValues'
+						@ 'Error evaluating: $params ' + mixedParams +
+							\b ', missing value for not optional argument [' + i + '] = `' + name + '`'
+						@ mTreeBrickRoot
+
+			var isIttfMacro
+                $* 25/6/19
+                iif type === 'object'
+                    then false
+                    else 
+                *$
+                _ verify.isIttfMacro(value)
+
+            # loog 'wizzi-mtree.parseFragmentParamsValues.isIttfMacro', isIttfMacro, value
+            
+			_ result.push
+                { 
+                    @ name
+                        iif name.substr(0, 1) === '&'
+                            then 
+                                _ name.substr(1)
+                            else name
+                    @ value value
+                    @ type type
+                    @ isIttfMacro isIttfMacro
+                    @ isByRef type === 'object'
+                    @ defaultName defaultName
+                    @ defaultIsByRef defaultName != null
+        
+		return result
+
+$*
+			
+			var mixedParam_parts
+                _ _mixedParamArray[i].trim()
+                    ._ split(/[|]/)
+            
+			
+			if mixedParam_parts.length > 2
+				return
+					_ local_error
+						@ 'FragmentParamsError'
+						@ 'parseFragmentParamsValues'
+						@ 'Error evaluating: $params ' + mixedParams +
+							\b ' , Parameter ' + i + ' / `' + _mixedParamArray[i] + '` is malformed. Expected name[:type[|default]]'
+						@ mTreeBrickRoot
+            
+			set name = mixedParam_parts[0]
+
+			if mixedParam_parts.length == 2
+                set defaultValue = mixedParam_parts[1].trim()
+                set hasdefaultvalue = true
+
+			if mixedParam_parts.length == 2
+                set type = mixedParam_parts[1]
+				if ['string','integer','float','boolean','date'].indexOf(type) < 0
+					return 
+						_ local_error
+							@ 'FragmentParamsError'
+							@ 'parseFragmentParamsValues'
+							@ 'Error evaluating: $params ' + mixedParams +
+								\b ', on param: ' + (i+1) + ' / `' + name + '` : invalid type `' + type + '`'
+							@ mTreeBrickRoot
+
+*$

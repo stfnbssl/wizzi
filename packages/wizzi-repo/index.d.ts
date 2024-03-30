@@ -1,11 +1,14 @@
 import { fSystem } from 'wizzi-utils';
-type cb<T> = (err: any, result: T) => void;
+type cb<T> = (err: any, result: T|never) => void;
 
 /**
  * The json store types
- * JsonFs: implements an in-memory set of documents organized in a tree of folders
+ * JsonFs: implements an in-memory set of documents organized in a tree of folders.
+ *         Is the internal content manager of a json store system.
  * JsonFsDocumentManager: wraps JsonFs and exposes filesystem-like methods
- * JsonFsImpl: wraps JsonFsDocumentManager and implements the VFile interface
+ *                        Is an internal interface.
+ * JsonFsImpl: wraps JsonFsDocumentManager and implements the VFile interface.
+ *             Is the pubblic interface of the json store system.
  */
 
 /**
@@ -175,16 +178,25 @@ export function jsonfile(options: { jsonFsData?: JsonFsData, jsonFs?: JsonFs }, 
  * @param storeKind            One of 'filesystem', 'mongodb', 'json'
  * @param storeUri             When storeKind == 'mongodb', the mongodb uri
  * @param storeBaseFolder      When storeKind == 'mongodb', the mongodb filesystem base folder (alternative to storeUri)
- * @param storeJsonFsData      When storeKind == 'json', a JsonFsData object to initialise the JSON file system
+ * @param storeJsonFsData      When storeKind == 'json', a JsonFsData object to initialise the JSON file system (alternative to jsonFs) 
+ * @param storeJsonFs          When storeKind == 'json', a JsonFs object to initialise the JSON file system (alternative to jsonFsData) 
  */
 interface CreateStoreFactoryOptions {
     storeKind: string;
     storeUri?: string;
     storeBaseFolder?: string;
     storeJsonFsData?: JsonFsData;
+    storeJsonFs?: JsonFs;
 }
 
-interface StoreInitOptions {
+/**
+ * @type StoreInitOptions
+ * @member storeUri          When storeKind == 'mongodb', the mongodb uri
+ * @member storeBaseFolder   When storeKind == 'mongodb', the mongodb filesystem base folder (alternative to storeUri)
+ * @member jsonFsData        When storeKind == "json", JsonFsData instance (alternative to jsonFs) 
+ * @member jsonFs            When storeKind == "json", JsonFs instance (alternative to jsonFsData)
+*/
+type StoreInitOptions = {
     storeUri?: string;
     storeBaseFolder?: string;
     jsonFsData? : JsonFsData,
@@ -200,9 +212,6 @@ interface Store {
     getModelContent(filePath: string, callback: cb<string>): void;
 }
 
-type createStoreFn = (callback: cb<Store>) => void;
+export type createStoreFn = (callback: cb<Store>) => void;
 
 export function createStoreFactory(options: CreateStoreFactoryOptions, callback: cb<createStoreFn>): void;
-
-
-

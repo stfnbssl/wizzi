@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -10,7 +10,7 @@ var util = require('util');
 var path = require('path');
 var verify = require('@wizzi/utils').verify;
 var errors = require('../errors');
-var node = require('../util/node');
+var node = require('../utils/node');
 var MTreeBrickProvider = require('./mTreeBrickProvider');
 var frontMatter = require('./frontMatter');
 var includer = require('./includer');

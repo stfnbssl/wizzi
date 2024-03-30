@@ -2,6 +2,7 @@
 	kind jsfile
 
 	import util
+	var verify = require('../helpers/verify')
 	+
 	var md = module.exports = {}
 	+
@@ -83,7 +84,7 @@
 				[ 
         
 			for var i = start; i < end; i++
-				_ ret.push(formatLineNumber(i + 1) + ' ' + statements[i])
+				_ ret.push(formatLineNumber(i + 1) + ' ' + verify.replaceAll(statements[i],'\t','    '))
 				if (i == errorData.row - 1)
 					var col = errorData.pos || errorData.col
 					_ ret.push(spaces(col + 4) + '^ ' + (errorData.description + '  <--- --- --- --- --- ERROR' || ''))

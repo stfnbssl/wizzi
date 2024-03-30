@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\errors\step_1.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:16 GMT
+    utc time: Sat, 30 Mar 2024 14:06:31 GMT
 */
 'use strict';
 //
@@ -43,7 +43,7 @@ function getFSDocumentStore(callback) {
 }
 var Errors_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    var ittfUri = path.join(__dirname, 'ittf', 'missingvar_1.js.ittf');
+    var ittfUri = path.join(__dirname, 'ittf', 'fragment_not_found_1.js.ittf');
     var productionManager = mocks.getProductionManager();
     getFSDocumentStore(function(err, fsStore) {
         if (err) {
@@ -60,7 +60,20 @@ var Errors_Step_1 = function(step_callback) {
             throw new Error(err.message);
         }
         loader.loadMTree(ittfUri, {
-            mTreeBuildUpContext: {
+            mTreeBuildUpContext: getItemsContext(), 
+            __productionManager: productionManager, 
+            __ittfDocumentStore: fsStore
+         }, function(err, mTree) {
+            if (err) {
+                console.log("[31m%s[0m", 'error', err);
+            }
+            if (mTree) {
+                printValue('mTree', mTree.toIttf());
+            }
+        })
+    })
+    function getItemsContext() {
+        return {
                 items: [
                     {
                         name: 'stefi', 
@@ -75,13 +88,8 @@ var Errors_Step_1 = function(step_callback) {
                         value: 98
                      }
                 ]
-             }, 
-            __productionManager: productionManager, 
-            __ittfDocumentStore: fsStore
-         }, function(err, mTree) {
-            printObject('error', err);
-        })
-    })
+             };
+    }
 };
 Errors_Step_1.__name = 'Errors_Step_1';
 function heading1(text) {

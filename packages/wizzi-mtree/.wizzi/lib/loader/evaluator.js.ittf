@@ -38,11 +38,11 @@
             var isCompile = loadContext.options.isCompile
 
             var productionContext = loadContext.productionContext
-            var scriptCoder
+            var jsWizziScriptCoder
                 new JsWizziScriptCoder()
 
 			var jsWizziContext
-                new JsWizziContext(composedMTree, productionContext, scriptCoder)
+                new JsWizziContext(composedMTree, productionContext, jsWizziScriptCoder)
 			_ jsWizziContext.setGlobalValues
                 @ loadContext.mTreeBuildUpContext
             
@@ -55,46 +55,46 @@
             
 			# loog 'isCompile', isCompile
 			
-			_ scriptCoder.w
+			_ jsWizziScriptCoder.w
 				@ '// ' + ctx.startTime + '  by ' + __filename
 			
 			if isCompile
-				_ scriptCoder.w
+				_ jsWizziScriptCoder.w
 					@ 'module.exports = function($, $ctx) {'
-				_ scriptCoder.indent
+				_ jsWizziScriptCoder.indent
 				foreach k in Object.keys(jsWizziContext.getIsCompileGlobals())
-					_ scriptCoder.w
+					_ jsWizziScriptCoder.w
 						@ 'var ' + k + ' = $ctx.' + k + ';'
 
-			_ scriptCoder.w
+			_ jsWizziScriptCoder.w
 				@ '$.n(); // set the context state to NodeContext'
-			_ scriptCoder.w
-				@ 'var $0 = {}; // the root node of the MTree buildup'
+			_ jsWizziScriptCoder.w
+				@ 'var $0 = {}; // the root node of the mTree buildUp'
             
 			foreach item in composedMTree.nodes
-                _ mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx)
+                _ mTreeBuildUpScripter.codify(item, 0, jsWizziScriptCoder, ctx)
             
 			if isCompile
-				_ scriptCoder.w
+				_ jsWizziScriptCoder.w
 					@ 'return $0;'
-				_ scriptCoder.deindent
-				_ scriptCoder.w
+				_ jsWizziScriptCoder.deindent
+				_ jsWizziScriptCoder.w
 					@ '}'
 			
 			_ productionContext.addMTreeBuildUpScript
                 @ composedMTree.uri
-                @ scriptCoder
+                @ jsWizziScriptCoder
 
 			if isCompile
 
-                # loog 'scriptCoder.toCode()', scriptCoder.toCode()
+                # loog 'jsWizziScriptCoder.toCode()', jsWizziScriptCoder.toCode()
                 
                 if requireFromString === null
                     set requireFromString = require('./requireFromString')
                 
                 var md
                     _ requireFromString
-                        _ scriptCoder.toCode
+                        _ jsWizziScriptCoder.toCode
                 
                 var $0
                     _ md
@@ -110,12 +110,12 @@
 			else
 
 				_ jsWizziRunner.run
-					_ scriptCoder.toCode()
+					_ jsWizziScriptCoder.toCode()
 					@ jsWizziContext
 					{
 					f_cb_no_throw( result )
                         if err
-                            # set err.scriptCode = scriptCoder.toCode()
+                            # set err.scriptCode = jsWizziScriptCoder.toCode()
 							return
 								_ callback
                                     @ err
@@ -157,4 +157,4 @@
             
 		_ callback(null, composedMTree)
 
-    $include local_error
+    local_error( wizzi-mtree@${wzCtx.version}.loader.evaluator )

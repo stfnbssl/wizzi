@@ -2,50 +2,13 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\errors.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var util = require('util');
 var chalk = require('chalk');
+var nodeUtils = require('./utils/node');
 var md = module.exports = {};
-function NodeError(message, node) {
-    this.name = 'NodeError';
-    this.message = message;
-    this.node = node;
-    this.__is_error = true;
-    var msg = [
-        message
-    ];
-    if (node) {
-        if (node.wzSourceLineInfo) {
-            var info = node.wzSourceLineInfo;
-            var filePath = 'TODO';
-            if (node.wzSourceFilepath) {
-                filePath = node.wzSourceFilepath(info.sourceKey);
-            }
-            msg.push(' at row: ' + info.row);
-            msg.push(', col: ' + info.col);
-            msg.push(', source: ' + info.sourceKey);
-            msg.push(', in file: ' + filePath);
-        }
-        else if (node.row) {
-            msg.push(' at row: ' + node.row);
-            msg.push(', col: ' + node.col);
-            msg.push(', source: ' + node.sourceKey);
-            msg.push(', in file: ' + (node.model ? node.model.uri : 'unavailable'));
-        }
-    }
-    this.message = msg.join('');
-    // 5/8/17 set this.stack = (new Error()).stack
-}
-NodeError.prototype.toString = function() {
-    return this.message;
-}
-;
-NodeError.prototype = Object.create(Error.prototype);
-NodeError.prototype.constructor = NodeError;
-md.NodeError = NodeError;
-
 function IttfNotFoundError(resourceType, name, sourceUri) {
     this.name = 'IttfNotFoundError';
     this.resourceType = resourceType;
@@ -108,44 +71,76 @@ RepoIOError.prototype.constructor = RepoIOError;
 md.RepoIOError = RepoIOError;
 
 class WizziError extends Error {
-    constructor(message, node, mTreeBrick, other) {
+    constructor(message, errorName, errorNames, other) {
         super(message);
-        // legacy error test
-        this.name = "WizziError";
+        this.name = this.errorName = errorName;
+        this.errorNames = errorNames;
+        // legacy error test, some code could still use it
         this.__is_error = true;
         this.data = {
             ...other||{}
          };
-        if (node) {
-            this.data.node = {
-                name: node.name, 
-                row: node.row, 
-                col: node.col, 
-                sourceKey: node.sourceKey
-             };
-            if (node.wzSourceLineInfo) {
-                var info = node.wzSourceLineInfo;
-                this.node.filePath = node.wzRoot().wzSourceFilepath(info.sourceKey);
+        // _ Error.captureStackTrace(this, this.constructor)
+        
+        if (this.data.mtree) {
+            var d = this.data.mtree;
+            var loadHistory = d.loadHistory ? d.loadHistory : d.mTreeBrick ? d.mTreeBrick.loadHistory : d.mTreeBrickNode ? d.mTreeBrickNode.model.loadHistory : null;
+            
+            // loog 'WizziError.mTreeNode', mTreeBrickNode
+            if (d.mTreeBrickErrorNodeId && loadHistory) {
+                var mTreeBrickNode = loadHistory.findNodeById(d.mTreeBrickErrorNodeId);
+                this.addHint('ittfErrorLines', md.nodeErrorLines(mTreeBrickNode.mTreeNode, {
+                    errorName: this.data.inner.errorName, 
+                    description: this.message
+                 }, true))
+            }
+            else if (d.mTreeBrickNode || d.mTreeBrickLine) {
+                var node = d.mTreeBrickNode || d.mTreeBrickLine;
+                var mTreeBrick = d.mTreeBrick || node.model;
+                this.addHint('ittfErrorLines', mTreeBrick.loadHistory.getIttfDocumentErrorLines(node.sourceKey, {
+                    row: node.row, 
+                    col: node.col, 
+                    pos: node.col + node.name.length, 
+                    errorName: errorName, 
+                    description: message
+                 }, true))
             }
         }
-        Error.captureStackTrace(this, this.constructor);
-        if (mTreeBrick) {
-            this.data.mTreeBrick = {
-                uri: mTreeBrick.uri
-             };
-            this.errorLines = mTreeBrick.loadHistory.getIttfDocumentErrorLines(node.sourceKey, {
-                row: node.row, 
-                col: node.col, 
-                pos: node.col + node.name.length + 1, 
-                description: message
-             }, true)
-            ;
+        
+        this.setDeepestHint();
+    }
+    addHint(name, value) {
+        this.data.hint = this.data.hint || {};
+        this.data.hint[name] = value;
+    }
+    setDeepestHint() {
+        var errorName = this.errorName;
+        var message = this.message;
+        var hint = this.data.hint;
+        var inner = this.data.inner;
+        while (inner != null) {
+            hint = inner.data ? (inner.data.hint ? inner.data.hint: hint) : hint;
+            errorName = inner.errorName || errorName;
+            message = inner.message;
+            inner = inner.data ? inner.data.inner : null;
+            console.log(inner != null, __filename);
+        }
+        if (hint) {
+            hint.errorName = errorName;
+            hint.message = message;
+        }
+        this.hint = hint;
+        if (this.data && this.data.inner) {
+            this.inner = this.data.inner;
+            if (this.data.inner && this.data.inner.data) {
+                this.inner2 = this.data.inner.data.inner;
+            }
         }
     }
     toString() {
         var msg = [];
         msg.push(chalk.red('Error: ' + this.message));
-        msg.push(chalk.red('  name: ' + this.data.errorName));
+        msg.push(chalk.red('  name: ' + this.errorName));
         if (this.data.node) {
             msg.push(chalk.yellow('  row: ' + this.data.node.row + ', col: ' + this.data.node.col));
         }
@@ -165,7 +160,7 @@ class WizziError extends Error {
                 msg.push(chalk.yellow('  ' + line));
             }
         }
-        if (this.data.errorName === 'JsWizziError') {
+        if (this.errorName === 'JsWizziError') {
             msg.push(chalk.yellow('  onStatement: ' + this.data.onStatement));
         }
         if (this.data.inner) {
@@ -222,3 +217,55 @@ md.getSrcPathInfoFromNode = function(node) {
     ;
 }
 ;
+md.nodeErrorLines = function(node, errorData, json) {
+    console.log('nodeErrorLines.errorData', errorData, __filename);
+    var parent = node.parent;
+    var child = node.children[0];
+    var ret = [];
+    if (errorData.errorName == 'FragmentParamsError') {
+        var brick = node.model;
+        var rootNode = brick.nodes[0];
+        ret.push(formatLineNumber(rootNode.row) + spaces(rootNode.col) + rootNode.name + ' ' + (rootNode.value || ''))
+        ret.push(formatLineNumber(rootNode.row+1) + spaces(rootNode.col+4) + '$params ' + brick.$params)
+        ret.push(spaces(rootNode.col+16) + '^ ' + errorData.description)
+    }
+    else {
+        var prev = nodeUtils.previousSibling(node);
+        var next = nodeUtils.nextSibling(node);
+        if (prev) {
+            ret.push(formatLineNumber(prev.row) + spaces(prev.col) + prev.name + ' ' + (prev.value || ''))
+        }
+        else {
+            ret.push(formatLineNumber(parent.row) + spaces(parent.col) + parent.name + ' ' + (parent.value || ''))
+            if (parent.model.$params) {
+                ret.push(formatLineNumber(parent.row+1) + spaces(parent.col+4) + '$params ' + parent.model.$params)
+            }
+        }
+        ret.push(formatLineNumber(node.row) + spaces(node.col) + node.name + ' ' + (node.value || ''))
+        ret.push(spaces(node.col + 4) + '^ ' + errorData.description)
+        if (next) {
+            ret.push(formatLineNumber(next.row) + spaces(next.col) + next.name + ' ' + (next.value || ''))
+        }
+        else if (child) {
+            ret.push(formatLineNumber(child.row) + spaces(child.col) + child.name + ' ' + (child.value || ''))
+        }
+    }
+    return json ? ret : ret.join('\n');
+}
+;
+function formatLineNumber(num) {
+    if (num > 999) {
+        return num;
+    }
+    if (num > 99) {
+        return ('0' + num);
+    }
+    if (num > 9) {
+        return ('00' + num);
+    }
+    return ('000' + num);
+}
+function spaces(num) {
+    return Array(num + 1).join(" ")
+    ;
+}

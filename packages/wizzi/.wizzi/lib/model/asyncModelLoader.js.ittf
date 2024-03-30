@@ -35,7 +35,7 @@
                 @ module
     +
 	function logme
-        if false
+        if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
     +
 	wz-function loadMany

@@ -7,7 +7,7 @@
 		#  string ittfDocumentUri
 		#  { mTreeBuildUpContext
 		#  callback
-	
+		#
 	m loadMTree
 		string ittfDocumentUri
 		{ mTreeBuildUpContext
@@ -26,15 +26,47 @@
                     @ message 'See inner error'
                     { parameter
                         @ ittfDocumentUri ittfDocumentUri
-
-
+	+
+	m loadMTreeFromText
+		string ittfContent
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeFromText', ittfContent, mTreeBuildUpContext, callback
+		_ this.createSingleTextSourceFactory
+			@ ittfContent
+			@ 'ittf'
+			{
+			f_cb( result )
+				_ result.wizziFactory.loadMTree
+					@ result.ittfDocumentUri
+					@ mTreeBuildUpContext
+					@ callback
+	+
+	m loadMTreeFromPacki
+        string ittfDocumentUri
+		{ packiFiles
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+		+
+		_ this.createJsonFactoryAndJsonFs
+			@ packiFiles
+			{
+			f_cb( result )
+				_ result.wf.loadMTree
+					@ packi.ensurePackiFilePrefix(ittfDocumentUri)
+					@ mTreeBuildUpContext
+					@ callback
+	+
 	#
 		# Async load the front matter of an ITTF Document
 		#
 		# params
 		#  string ittfDocumentUri
 		#  callback
-
+		#
 	m loadMTreeFrontMatter
 		string ittfDocumentUri
 		callback
@@ -51,7 +83,7 @@
 		# params
 		#  string ittfDocumentUri
 		#  callback
-
+		#
 	m loadMTreeRaw
 		string ittfDocumentUri
 		callback
@@ -69,7 +101,7 @@
 		# params
 		#  string ittfDocumentUri
 		#  callback
-
+		#
 	m loadMTreeBuildUpScript
 		string ittfDocumentUri
 		{ mTreeBuildUpContext
@@ -98,3 +130,19 @@
 					@ mTreeBuildUpContext
 					@ callback
 
+	m loadMTreeBuildUpScriptFromPacki
+        string ittfDocumentUri
+		{ packiFiles
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeBuildUpScriptFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+		+
+		_ this.createJsonFactoryAndJsonFs
+			@ packiFiles
+			{
+			f_cb( result )
+				_ result.wf.loadMTreeBuildUpScript
+					@ packi.ensurePackiFilePrefix(ittfDocumentUri)
+					@ mTreeBuildUpContext
+					@ callback

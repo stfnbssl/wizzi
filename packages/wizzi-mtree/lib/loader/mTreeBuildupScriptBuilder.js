@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScriptBuilder.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var JsWizziContext = require('../jswizzi/jsWizziContext');
@@ -38,7 +38,7 @@ module.exports = function(composedMTree, loadContext, callback) {
         }
     }
     scriptCoder.w('$.n(); // set the context state to NodeContext')
-    scriptCoder.w('var $0 = {}; // the root node of the MTree buildup')
+    scriptCoder.w('var $0 = {}; // the root node of the mTree buildUp')
     var i, i_items=composedMTree.nodes, i_len=composedMTree.nodes.length, item;
     for (i=0; i<i_len; i++) {
         item = composedMTree.nodes[i];

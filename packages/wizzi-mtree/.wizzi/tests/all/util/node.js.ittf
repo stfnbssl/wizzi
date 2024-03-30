@@ -2,7 +2,7 @@
 
 	$append imports
 		var ittfGraph = require('@wizzi/utils').IttfDocumentGraph
-		var node = require('../../../lib/util/node')
+		var node = require('../../../lib/utils/node')
 
 	$include nodeUpdates
 	$include nodeFinds

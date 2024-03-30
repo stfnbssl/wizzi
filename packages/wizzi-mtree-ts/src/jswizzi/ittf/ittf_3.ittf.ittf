@@ -1,0 +1,15 @@
+root
+    node value
+    $
+        function Sum(a, b) {
+            return a + b;
+        }
+
+    node ${Sum(2, 3)}
+
+    $function alpha
+        $param x
+        node ${x} 
+
+    $_ alpha
+        $@ "baby"

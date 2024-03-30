@@ -18,6 +18,7 @@
 			return
 				_ local_error
 					@ ctx
+					@ 'JsWizziError'
 					@ 'The value ' + node.name.base + ' must be an object. It is undefined'
 					@ node.name.base
 					@ node
@@ -36,6 +37,7 @@
 			return
 				_ local_error
 					@ ctx
+					@ 'JsWizziError'
 					@ 'Missing function.'
 					@ node.name.base
 					@ node
@@ -49,6 +51,7 @@
 				return
 					_ local_error
 						@ ctx
+						@ 'JsWizziError'
 						@ (ex ? ex.message : 'Error calling function')
 						@ node.callee.property
 						@ node

@@ -8,6 +8,7 @@
         promise "^7.1.1"
         
         $append devDependencies
+            @wizzi/factory "^0.8.24" 
             @wizzi/repo "^0.8.16" 
             object-inspect "^1.6.0"
 

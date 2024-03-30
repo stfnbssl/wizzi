@@ -6,5 +6,5 @@
 
 	initStore()
 
-	$include mtreeBrick/calcParamValues
+	$include mtreeBrick/parseFragmentParamsValues
 	$include mtreeBrick/toIttf

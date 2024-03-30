@@ -1,0 +1,17 @@
+﻿{
+	name "school"
+	[ tables
+		{
+			name "teacher"
+			[ fields
+				{
+					name "id" 
+				{
+					name "name" 
+		{
+			name "courses"
+			[ fields
+				{
+					name "id" 
+				{
+					name "name" 

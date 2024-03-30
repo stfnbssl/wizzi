@@ -12,7 +12,7 @@ module
 
     common\example\wizzi( &opt )
 
-        $append wf_plugins
+        $append plugins
             [ items
                 @ './wizzi.plugin.html/index'
                 @ './wizzi.plugin.js/index'

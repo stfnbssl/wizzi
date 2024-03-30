@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Sun, 17 Mar 2024 16:14:48 GMT
+    utc time: Fri, 29 Mar 2024 17:03:14 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -21,6 +21,7 @@ var ProductionManager = null;
 var GenContext = require('../artifact/genContext');
 var verify = require('@wizzi/utils').verify;
 var file = require('@wizzi/utils').file;
+var packi = require('@wizzi/utils').packi;
 var JsonComponents = require('@wizzi/repo').JsonComponents;
 const packiUtils = require('./packiUtils');
 var StringWriter = require('../util/stringWriter');
@@ -29,6 +30,7 @@ var errors = require('../errors');
 var log = require('../util/log')(module);
 var PluginsManager = require('./pluginsManager');
 var StorePool = require('./storePool');
+var buildCheatsheet = require('./cheatsheet').buildCheatsheet;
 var bootModelUri = "../wizzi/models/bootstrap/wfschema-boot-model";
 var bootModelDefUri = "../wizzi/models/bootstrap/wfschema-boot-modelDef";
 var BootWizziSchema = null;
@@ -47,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.21';
+        this.__version = '0.8.25';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -67,6 +69,7 @@ class WizziFactory {
         this.artifactGenerators = {};
         this.wizzifiers = {};
         this.schemaDefinitions = {};
+        this.cheatsheets = {};
         this.globalContext = {};
         this.metasManager = null;
         this.verbose = false;
@@ -307,6 +310,7 @@ class WizziFactory {
          string ittfDocumentUri
          { mTreeBuildUpContext
          callback
+        
     */
     loadMTree(ittfDocumentUri, mTreeBuildUpContext, callback) {
         if (typeof(callback) !== 'function') {
@@ -339,12 +343,72 @@ class WizziFactory {
                  }, ex));
         } 
     }
+    
+    loadMTreeFromText(ittfContent, mTreeBuildUpContext, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'loadMTreeFromText', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(ittfContent) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeFromText', { parameter: 'ittfContent', message: 'The ittfContent parameter must be a string. Received: ' + ittfContent }
+            ));
+        }
+        if (verify.isObject(mTreeBuildUpContext) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeFromText', { parameter: 'mTreeBuildUpContext', message: 'The mTreeBuildUpContext parameter must be an object. Received: ' + mTreeBuildUpContext }
+            ));
+        }
+        
+        // loog 'wizzi.wizziFactory.loadMTreeFromText', ittfContent, mTreeBuildUpContext, callback
+        this.createSingleTextSourceFactory(ittfContent, 'ittf', {}, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            result.wizziFactory.loadMTree(result.ittfDocumentUri, mTreeBuildUpContext, callback)
+        })
+    }
+    
+    loadMTreeFromPacki(ittfDocumentUri, packiFiles, mTreeBuildUpContext, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'loadMTreeFromPacki', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(ittfDocumentUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeFromPacki', { parameter: 'ittfDocumentUri', message: 'The ittfDocumentUri parameter must be a string. Received: ' + ittfDocumentUri }
+            ));
+        }
+        if (verify.isObject(packiFiles) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeFromPacki', { parameter: 'packiFiles', message: 'The packiFiles parameter must be an object. Received: ' + packiFiles }
+            ));
+        }
+        if (verify.isObject(mTreeBuildUpContext) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeFromPacki', { parameter: 'mTreeBuildUpContext', message: 'The mTreeBuildUpContext parameter must be an object. Received: ' + mTreeBuildUpContext }
+            ));
+        }
+        
+        // loog 'wizzi.wizziFactory.loadMTreeFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+        
+        this.createJsonFactoryAndJsonFs(packiFiles, {}, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            result.wf.loadMTree(packi.ensurePackiFilePrefix(ittfDocumentUri), mTreeBuildUpContext, callback)
+        })
+    }
+    
     /**
          Async load the front matter of an ITTF Document
         
          params
          string ittfDocumentUri
          callback
+        
     */
     loadMTreeFrontMatter(ittfDocumentUri, callback) {
         if (typeof(callback) !== 'function') {
@@ -366,6 +430,7 @@ class WizziFactory {
          params
          string ittfDocumentUri
          callback
+        
     */
     loadMTreeRaw(ittfDocumentUri, callback) {
         if (typeof(callback) !== 'function') {
@@ -387,6 +452,7 @@ class WizziFactory {
          params
          string ittfDocumentUri
          callback
+        
     */
     loadMTreeBuildUpScript(ittfDocumentUri, mTreeBuildUpContext, callback) {
         if (typeof(callback) !== 'function') {
@@ -432,6 +498,37 @@ class WizziFactory {
                 return callback(err);
             }
             result.wizziFactory.loadMTreeBuildUpScript(result.ittfDocumentUri, mTreeBuildUpContext, callback)
+        })
+    }
+    loadMTreeBuildUpScriptFromPacki(ittfDocumentUri, packiFiles, mTreeBuildUpContext, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'loadMTreeBuildUpScriptFromPacki', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(ittfDocumentUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeBuildUpScriptFromPacki', { parameter: 'ittfDocumentUri', message: 'The ittfDocumentUri parameter must be a string. Received: ' + ittfDocumentUri }
+            ));
+        }
+        if (verify.isObject(packiFiles) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeBuildUpScriptFromPacki', { parameter: 'packiFiles', message: 'The packiFiles parameter must be an object. Received: ' + packiFiles }
+            ));
+        }
+        if (verify.isObject(mTreeBuildUpContext) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadMTreeBuildUpScriptFromPacki', { parameter: 'mTreeBuildUpContext', message: 'The mTreeBuildUpContext parameter must be an object. Received: ' + mTreeBuildUpContext }
+            ));
+        }
+        
+        // loog 'wizzi.wizziFactory.loadMTreeBuildUpScriptFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+        
+        this.createJsonFactoryAndJsonFs(packiFiles, {}, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            result.wf.loadMTreeBuildUpScript(packi.ensurePackiFilePrefix(ittfDocumentUri), mTreeBuildUpContext, callback)
         })
     }
     /**
@@ -1285,6 +1382,58 @@ class WizziFactory {
             result.wizziFactory.loadModelAndGenerateArtifact(result.ittfDocumentUri, requestContext, artifactName, callback)
         })
     }
+    loadModelAndGenerateArtifactFromPacki(ittfDocumentUri, packiFiles, requestContext, artifactName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(ittfDocumentUri) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'ittfDocumentUri', message: 'The ittfDocumentUri parameter must be a string. Received: ' + ittfDocumentUri }
+            ));
+        }
+        if (verify.isObject(packiFiles) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'packiFiles', message: 'The packiFiles parameter must be an object. Received: ' + packiFiles }
+            ));
+        }
+        if (verify.isObject(requestContext) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'requestContext', message: 'The requestContext parameter must be an object. Received: ' + requestContext }
+            ));
+        }
+        if (verify.isNullOrUndefined(requestContext.modelRequestContext) === false) {
+            if (verify.isObject(requestContext.modelRequestContext) === false) {
+                return callback(error(
+                    'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'requestContext.modelRequestContext', message: 'The requestContext.modelRequestContext parameter must be an object. Received: ' + requestContext.modelRequestContext }
+                ));
+            }
+        }
+        if (verify.isNullOrUndefined(requestContext.artifactRequestContext) === false) {
+            if (verify.isObject(requestContext.artifactRequestContext) === false) {
+                return callback(error(
+                    'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'requestContext.artifactRequestContext', message: 'The requestContext.artifactRequestContext parameter must be an object. Received: ' + requestContext.artifactRequestContext }
+                ));
+            }
+        }
+        if (verify.isNotEmpty(artifactName) === false) {
+            return callback(error(
+                'InvalidArgument', 'loadModelAndGenerateArtifactFromPacki', { parameter: 'artifactName', message: 'The artifactName parameter must be a string. Received: ' + artifactName }
+            ));
+        }
+        
+        // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromPacki', ittfDocumentUri, packiFiles, requestContext, artifactName, callback
+        
+        var ss = artifactName.split('/');
+        var schema = ss[0];
+        this.createJsonFactoryAndJsonFs(packiFiles, {}, function(err, result) {
+            if (err) {
+                return callback(err);
+            }
+            result.wf.loadModelAndGenerateArtifact(packi.ensurePackiFilePrefix(ittfDocumentUri), requestContext, artifactName, callback)
+        })
+    }
     /**
          Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
          params
@@ -1833,6 +1982,73 @@ class WizziFactory {
                      }
                  }, ex));
         } 
+    }
+    /**
+         Get the list of schemas with a cheatsheet
+         returns
+         [
+         {
+         string name
+         schema name
+    */
+    getCheatsheetList() {
+        return this.pluginsManager.getCheatsheetList();
+    }
+    /**
+         Check if a wizzi schema has a cheatsheet
+         params
+         string schemaName
+         returns
+         true|false
+    */
+    hasCheatsheet(schemaName) {
+        if (verify.isNotEmpty(schemaName) === false) {
+            return error(
+                'InvalidArgument', 'hasCheatsheet', { parameter: 'schemaName', message: 'The schemaName parameter must be a string. Received: ' + schemaName }
+            );
+        }
+        return this.pluginsManager.hasCheatsheetFolder(schemaName);
+    }
+    /**
+         Get the cheatsheet of a wizzi schema
+         params
+         string schemaName
+         returns
+         { cheatsheet
+    */
+    getCheatsheet(schemaName, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'getCheatsheet', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isNotEmpty(schemaName) === false) {
+            return callback(error(
+                'InvalidArgument', 'getCheatsheet', { parameter: 'schemaName', message: 'The schemaName parameter must be a string. Received: ' + schemaName }
+            ));
+        }
+        
+        var cheatsheet = this.cheatsheets[schemaName] || null;
+        if (cheatsheet) {
+            return callback(null, cheatsheet);
+        }
+        if (!this.hasCheatsheet(schemaName)) {
+            return callback(error("InvalidOperation", "getCheatsheet", "No cheatsheet available for schema " + schemaName + ". Call `wizziFactoryInstance.hasCheatsheet` first"));
+        }
+        var that = this;
+        this.pluginsManager.getCheatsheetFolder(schemaName, function(err, packiCheatsheetFolder) {
+            if (err) {
+                return callback(err);
+            }
+            console.log('wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder), __filename);
+            buildCheatsheet(that, schemaName, packiCheatsheetFolder, function(err, cheatsheet) {
+                if (err) {
+                    return callback(err);
+                }
+                that.cheatsheets[schemaName] = cheatsheet;
+                return callback(null, cheatsheet);
+            })
+        })
     }
     /**
          Wizzify source code, generate from wizzified and
@@ -2771,9 +2987,17 @@ class WizziFactory {
     /**
          This allows model loadings and generations from text strings
          params
+         string ittfContent
+         string schema
          { options
          { globalContext
          optional
+         returns
+         {
+         { wizziFactory
+         :ref WizziFactory
+         string ittfDocumentUri
+        
     */
     createSingleTextSourceFactory(ittfContent, schema, options, callback) {
         if (verify.isNotEmpty(ittfContent) === false) {
@@ -2831,17 +3055,18 @@ class WizziFactory {
     }
     /**
          Creates a json factory and its json file system from a packiFiles object
+         params
+         { packiFiles
+         { options
+         { globalContext
+         optional
          returns
          {
          { wf
          :ref WizziFactory
          { jsonFs
          :ref @wizzi/repo/JsonFs
-         params
-         { packiFiles
-         { options
-         { globalContext
-         optional
+        
     */
     createJsonFactoryAndJsonFs(packiFiles, options, callback) {
         
@@ -2930,6 +3155,10 @@ class WizziFactory {
                 __is_test: this.__is_test, 
                 testOptions: this.testOptions
              };
+    }
+    getProvidedCheatsheetFolders() {
+        var info = this.getInfo();
+        return info.pluginsManager.providedCheatsheetFolders;
     }
     mapIttfDocumentPathToSchema(ittfDocumentPath) {
         return this.pluginsManager.mapIttfDocumentPathToSchema(ittfDocumentPath);
@@ -3051,7 +3280,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.21.wizziFactory.' + method,
+        method: 'wizzi@0.8.25.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

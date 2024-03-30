@@ -3,7 +3,7 @@
     
 	var util = require('util')
     var errors = require('../errors')
-    var utilnode = require('../util/node')
+    var utilnode = require('../utils/node')
 
 	#
 		# Ittf commands
@@ -195,4 +195,4 @@
         foreach child in item.children
 			_ assignId(child, ctx)
 
-	$include local_error
+    local_error( wizzi-mtree@${wzCtx.version}.loader.appender )

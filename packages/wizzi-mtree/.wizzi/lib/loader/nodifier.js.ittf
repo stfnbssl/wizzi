@@ -175,12 +175,17 @@
         *$
 		return
             new errors.WizziError
-                @ message
-                @ line
+                @ errorName
+                [
+					@ errorName
                 @ mTreeBrick
                 {
-                    @ errorName name
-                    @ method method
+					{ source
+						@ method 'wizzi-mtree@${wzCtx.version}.loader.nodifier.' + method
+					{ mtree
+						@ mTreeBrickLine line
+						@ mTreeBrick mTreeBrick
+                    
 			$* 6/6/19
             _ error
 				@ name

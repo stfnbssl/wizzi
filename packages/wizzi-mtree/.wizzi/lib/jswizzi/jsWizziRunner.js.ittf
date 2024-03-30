@@ -76,6 +76,7 @@
 				return
 					_ local_error
 						@ ctx
+						@ 'InternalError'
 						@ 'Missing runner for type: ' + type
 						@ 'runner'
     
@@ -89,10 +90,23 @@
     
 	var runnerCall
         function 
-            param ast
+            param functionName
+			param ast
             param ctx
             param data
-            return runner(ast, ctx, 'Call', data)
+            # 
+			# `ctx` (JsWizziContext) knows the current mTreeBrickEvalContext
+			# so you do not need to pass a brickKey parameter
+			# The `savedContext` object returned by ctx contains:
+			# the `brickKey` of the current mTreeBrickEvalContext
+			# the current `functionName`, or undefined if the call is from outside of a function body
+			var savedContext = ctx.enterFunctionEvalContext(functionName)
+			var retval = runner(ast, ctx, 'Call', data)
+			# reset the previous current function on `brickKey` mTreeBrickEvalContext
+			_ ctx.exitFunctionEvalContext
+				@ savedContext.brickKey
+				@ savedContext.functionName
+			return retval
     
 	runner( Program
         var state
@@ -121,7 +135,8 @@
 			return
 				_ local_error
 					@ ctx
-					@ 'ReferenceError|Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>'
+					@ 'ReferenceError'
+					@ 'Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>'
 					{
 						@ node node
 						@ errorLines 
@@ -170,58 +185,62 @@
 
 	function local_error
 		param ctx
+		param errorName
         param message
         param node
 		param parentnode
 		param method
-		param ex
+		param inner
         param other
 
-        # loog 'jsWizziRunner.local_error.message', message
-        # loog 'jsWizziRunner.local_error.node.name', node && node.name
-        # loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
-        # loog 'jsWizziRunner.local_error.method', method
-        # loog 'jsWizziRunner.local_error.ex.message', ex && ex.message
-        # loog 'jsWizziRunner.local_error.parentnode.other', other
-        # loog 'jsWizziRunner.local_error.ctx.source', ctx.source
+        log 'jsWizziRunner.local_error.message', message
+		log 'jsWizziRunner.local_error.node', node
+        log 'jsWizziRunner.local_error.node.name', node && node.name
+        log 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
+        log 'jsWizziRunner.local_error.method', method
+        log 'jsWizziRunner.local_error.inner.message', inner && inner.message
+        log 'jsWizziRunner.local_error.parentnode.other', other
+        log 'jsWizziRunner.local_error.ctx.source', ctx.source
 
         $*
-        if ex && ex.name === "JsWizziSynthaxError"
-            return ex
-        # loog 'jsWizziRunner.local_error.ex', ex
+        if inner && inner.name === "JsWizziSynthaxError"
+            return inner
+        # loog 'jsWizziRunner.local_error.inner', inner
         *$
 
         # loog 'jsWizziRunner.local_error.ctx', ctx
-        # loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
+        # loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', inner && inner.name,  ctx.isForInterpolation, node, parentnode
 
 		set message = message || ''
-		var errorCode = 'JsWizziError', ss = message.split('|')
-		if ss.length == 2
-			set errorCode = ss[0]
-			set message = ss[1]
+		var errorName = errorName || 'JsWizziError'
 
 		# loog 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
 
-        var node, errorLines
+        var node, errorLines, mTreeBrickErrorNodeId
 		if node
 			if node.errorLines
 				set errorLines = node.errorLines
                 set node = node.node
 			else
+				var parsed
                 if parentnode
-                    set errorLines
+					set parsed
                         _ errors.esprimaNodeErrorLines
                             @ message
                             @ parentnode
                             @ ctx.source
                             @ true
+                    set errorLines = parsed.lines
                 else
-                    set errorLines
+                    set parsed
                         _ errors.esprimaNodeErrorLines
                             @ message
                             @ node
                             @ ctx.source
                             @ true
+					set errorLines = parsed.lines
+				# loog 'parsed', parsed
+				set mTreeBrickErrorNodeId = parsed.parsedErrorLine.nodeId
 
         var nodeStm
 		try
@@ -241,57 +260,35 @@
 
 		var currentModelInfo = ctx.get_currentMTreeBrickInfo()
 
-		return
-            $* 6/6/19
-			_ error
-				@ errorCode
-				@ method
-				{
-					@ message message
-					{ parameter
-						@ errorLines errorLines
-						@ nodeStatement nodeStm
-						@ nodeInspected nodeInsp
-						@ parentNodeStatement parentnodeStm
-						@ parentNodeInspected parentnodeInsp
-						@ currentModelUri currentModelInfo.currentModel_uri
-						@ currentModelMixerUri currentModelInfo.currentModel_mixerUri
-				@ ex
-            *$
-			_ local_error_new
-				@ errorCode
-				@ method
-    			@ message
-                @ null
-                @ ex
-                {
-                    @ errorLines errorLines
-                    @ nodeStatement nodeStm
-                    $$ @ nodeInspected nodeInsp
-                    @ parentNodeStatement parentnodeStm
-                    $$ @ parentNodeInspected parentnodeInsp
-                    @ uri currentModelInfo.currentModel_uri
-                    @ mixerUri currentModelInfo.currentModel_mixerUri
-                    @ ...other||{}
+        # loog 'other', other
 
-	function local_error_new
-		param name
-		param method
-		param message
-		param node
-		param inner
-        param other
-		
+		var errorNames
+			[
+				@ errorName
+		if inner && inner.data && inner.data.errorName
+			_ errorNames.push(inner.data.errorName)
+
 		return
-            new mainErrors.WizziError
+		    new mainErrors.WizziError
                 @ message
-                @ node
-                @ node ? node.mTreeBrick || node.model : null
+				@ errorName
+				@ errorNames
                 {
-                    @ errorName name
-                    @ method 'wizzi-mtree@${wzCtx.version}.jsWizzi.jsWizziRunner.' + method
-                    @ ...other||{}
+					{ source
+                    	@ method 'wizzi-mtree@${wzCtx.version}.jsWizzi.jsWizziRunner.' + method
+					{ jswizzi
+						@ node node
+						@ nodeStatement nodeStm
+						@ parentNodeStatement parentnodeStm
+					{ mtree
+                    	@ ittfDocumentUri currentModelInfo.currentModel_uri
+                    	@ mixerIttfDocumentUri currentModelInfo.currentModel_mixerUri
+						@ loadHistory ctx.loadHistory
+						@ mTreeBrickErrorNodeId mTreeBrickErrorNodeId
+					{ hint
+						@ mTreeBuildUpScriptErrorLines errorLines
                     @ inner inner
+					@ ...other||{}
 
 	function getTypeDescription
 		param obj
@@ -299,114 +296,180 @@
 			return 'null'
 		return typeof(obj)
 
-	set module.exports =
-        { 
-            @ getParsed
-                function 
-                    param source
-					param callback
+	function getParsed
+		param source
+		param callback
 
-					# FIXME caching provokes errors, now disbled
-					#       should be:  CACHE_MAX_LEN = 100
-					var CACHE_MAX_LEN = 0
-					
-					if source.length < CACHE_MAX_LEN
-						set parsed = parsedCache[source]
-						if parsed
-							if callback
-								r_cb( parsed )
-							else
-								return parsed
-                    var parsed
-					try 
-						set parsed
-							_ esprima.parse
-								@ source
+		# FIXME caching provokes errors, now disbled
+		#       should be:  CACHE_MAX_LEN = 100
+		var CACHE_MAX_LEN = 0
+		
+		if source.length < CACHE_MAX_LEN
+			set parsed = parsedCache[source]
+			if parsed
+				if callback
+					r_cb( parsed )
+				else
+					return parsed
+		var parsed
+		try 
+			set parsed
+				_ esprima.parse
+					@ source
+					{ 
+						@ attachComment true
+						@ loc true
+						@ sourceType 'module'
+		catch ex
+			if callback
+				return
+					_ callback
+						new errors.JsWizziSynthaxError(ex, source)
+			else
+				return
+					new errors.JsWizziSynthaxError(ex, source)
+		if source.length < CACHE_MAX_LEN
+			set parsedCache[source] = parsed
+		if callback
+			r_cb( parsed )
+		else
+			return parsed
+			
+	function getMTreeBricksAndFunctionContextsFromAst
+		param ast
+		const contexts
+			{
+				@ currentBrickKey 'f0'
+				{ mTreeBricks
+					{ f0
+						[ stackPath
+						[ functions
+		set contexts.currentBrick = contexts.mTreeBricks[contexts.currentBrickKey];
+		_ doAst(ast, contexts)
+		# loog 'contexts', JSON.stringify(contexts, null, 2)
+		_ Object.keys(contexts.mTreeBricks).forEach
+			=> 
+				param brickKey
+				_ Object.keys(contexts.mTreeBricks[brickKey].functions).forEach
+					=> 
+						param functionName
+						set contexts.mTreeBricks[brickKey].functions[functionName]
+							@expr contexts.mTreeBricks[brickKey].functions[functionName].split(',')
+		# loog 'contexts', JSON.stringify(contexts, null, 2)
+		return contexts
+
+	function doAst
+		param ast
+		param contexts
+    	# log ast.type
+		_ Object.keys(ast).forEach
+			=> 
+				param propName
+				if propName == 'body'
+					_ console.log
+						@expr ast.type
+						@ propName
+						iif ast.id
+							then ast.id.name
+							else ''
+					if ast.id
+						_ contexts.currentBrick.stackPath.push(ast.id.name)
+						set contexts.currentBrick.functions[ast.id.name] = contexts.currentBrick.stackPath.join(',')
+					else
+						if ast.type == 'Program'
+							_ contexts.currentBrick.stackPath.push(ast.type)
+					if verify.isArray(ast[propName])
+						const body = ast[propName]
+						_ body.forEach
+							=> 
+								param item
+								_ doAst(item, contexts)
+					else
+						if verify.isObject(ast[propName])
+							_ doAst(ast[propName], contexts)
+					if ast.id || ast.type == 'Program'
+						_ contexts.currentBrick.stackPath.pop()
+				else
+					if ast.type == "ExpressionStatement" && ast.expression.type == "CallExpression" && 
+						\b ast.expression.callee.type == "MemberExpression" && ast.expression.callee.object.type == "Identifier" && 
+						\b ast.expression.callee.object.name == "$" && ast.expression.callee.property.type == "Identifier" && 
+						\b ast.expression.callee.property.name == "s" && ast.expression.arguments.length > 0
+						const brickKey = ast.expression.arguments[0].value
+						# log "select", brickKey
+						if !contexts.mTreeBricks[brickKey]
+							set contexts.mTreeBricks[brickKey] =
 								{ 
-									@ attachComment true
-									@ loc true
-									@ sourceType 'module'
-					catch ex
-						if callback
-							return
-								_ callback
-									new errors.JsWizziSynthaxError(ex, source)
-						else
-							return
-								new errors.JsWizziSynthaxError(ex, source)
-					if source.length < CACHE_MAX_LEN
-						set parsedCache[source] = parsed
-					if callback
-						r_cb( parsed )
-					else
-						return parsed
-			@ run
-				function run
-                    param source
-                    param ctx
-                    param options
-                    param callback
+									@ stackPath []
+									{ functions
+						set contexts.currentBrickKey = brickKey
+						set contexts.currentBrick = contexts.mTreeBricks[brickKey]
 
-					# ctx : instance-of wizzi-mtree.jswizzi.jsWizziContext
+	function run
+		param source
+		param jsWizziContext
+		param options
+		param callback
 
-                    # loog 'jsWizziRunner.run.source', source.substr(0, 400)
+		# jsWizziContext : instance-of wizzi-mtree.jswizzi.jsWizziContext
 
-					_ ctx.pushSource(source)
+		# loog 'jsWizziRunner.run.source', source.substr(0, 400), options.isForInterpolation
 
-					if verify.isNotEmpty(source) === false
-						var err
-							_ error
-								@ 'InvalidArgument'
-								@ 'run'
-								{
-									@ parameter 'source'
-									@ message 'The source parameter must be a string. Received: ' + source
+		_ jsWizziContext.pushSource(source)
 
-						if callback
-							return
-								_ callback(err)
-						else
-							return err
-					
-					if verify.isObject(ctx) === false
-						var err
-							_ error
-								@ 'InvalidArgument'
-								@ 'run'
-								{
-									@ parameter 'ctx'
-									@ message 'The ctx parameter must be an object. Received: ' + ctx
+		if verify.isNotEmpty(source) === false
+			var err
+				_ error
+					@ 'InvalidArgument'
+					@ 'run'
+					{
+						@ parameter 'source'
+						@ message 'The source parameter must be a string. Received: ' + source
 
-						if callback
-							return
-								_ callback(err)
-						else
-							return err
+			if callback
+				return
+					_ callback(err)
+			else
+				return err
+		
+		if verify.isObject(jsWizziContext) === false
+			var err
+				_ error
+					@ 'InvalidArgument'
+					@ 'run'
+					{
+						@ parameter 'jsWizziContext'
+						@ message 'The jsWizziContext parameter must be an object. Received: ' + jsWizziContext
 
-					set options = (options || defaultOptions)
-                    
-					if callback
-						_ this.getParsed
-							@ source
-							f_cb(parsed)
-								return
-									_ execute_run_cb
-										@ parsed
-										@ ctx
-										@ options
-										@ callback
-					else
-                        checked_call_return( parsed
-						    _ this.getParsed(source)
-						return
-							_ execute_run_cb
-								@ parsed
-								@ ctx
-								@ options
+			if callback
+				return
+					_ callback(err)
+			else
+				return err
+
+		set options = (options || defaultOptions)
+		
+		if callback
+			_ this.getParsed
+				@ source
+				f_cb(parsed)
+					return
+						_ execute_run_cb
+							@ parsed
+							@ jsWizziContext
+							@ options
+							@ callback
+		else
+			checked_call_return( parsed
+				_ this.getParsed(source)
+			return
+				_ execute_run_cb
+					@ parsed
+					@ jsWizziContext
+					@ options
 
 	function execute_run_cb
 		param parsed
-		param ctx
+		param jsWizziContext
 		param options
 		param callback
 
@@ -414,16 +477,26 @@
             _ options.dumpfile
                 _ JSON.stringify(parsed, null, 2)
 
+		if !!options.isForInterpolation == false
+			# these will be set on the 
+			# mTreeBrickData objects of the @wizzi/mtree.loader.loadHistory
+			# and used when creating mTreeBricks ContextData instances
+			var contextsFromAst
+				_ getMTreeBricksAndFunctionContextsFromAst				
+					@ parsed
+			_ jsWizziContext.setContextsFromMTreeBuildUpScriptAst
+				@ contextsFromAst
+
 		try
-            var result = runner(parsed, ctx)
+            var result = runner(parsed, jsWizziContext)
         catch ex
-            _ ctx.popSource
+            _ jsWizziContext.popSource
             if callback 
                 return callback(ex)
             else
                 return ex
 
-		_ ctx.popSource
+		_ jsWizziContext.popSource
 
         if result && result.__is_error
 			# loog 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
@@ -437,4 +510,7 @@
         else 
             return result
 
-
+	set module.exports
+        { 
+            @ getParsed getParsed
+			@ run run

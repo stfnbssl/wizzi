@@ -22,7 +22,8 @@
     var JsWizziEvalHelper = require('./jsWizziEvalHelper')
 	var ContextData = require('./contextData')
 
-    var _$1 = '$'
+    $*
+	var _$1 = '$'
     var _$2 = '$' + '{$1}'
     var _$3 = '$' + '{$2}'
     var _$4 = '$' + '{$3}'
@@ -36,6 +37,7 @@
             @ '$2'  _$2
             @ '$3'  _$3
             @ '$4'  _$4
+	*$
     
 	var knownCallables
         { 
@@ -47,6 +49,7 @@
 			@ 'Date' Date
 			@ 'Number' Number
 			@ 'Map' Map
+			@ 'Set' Set
             @ 'Math' Math
 			@ 'RegExp' RegExp
 			@ 'JSON' JSON
@@ -122,7 +125,7 @@
 				_ this.globalContext.$freeze()
 			+
 			# set global defaults and allowed functions
-			_ this.globalContext.setValues(defaultValues)
+			$$ VIA _ this.globalContext.setValues(defaultValues)
 			_ this.globalContext.setValues(knownCallables)
 			_ this.globalContext.setValues(builtinFunctions)
 			+
@@ -137,14 +140,21 @@
 				set this.startTimer = window.performance.now()
 			+
 
+		# Called by JsWizziRunner.run after parsing the mTreeBuildUpScript
+		m setContextsFromMTreeBuildUpScriptAst
+			param contextsFromAst
+			_ this.loadHistory.setContextsFromMTreeBuildUpScriptAst
+				@ contextsFromAst
+
 		# Called by JsWizziRunner.FunctionDeclarationCall
 		m push
             if this.callContext
                 _ this.callContextStack.push(this.callContext)
             set this.callContext = new ContextData(ittfStates.callContext)
 			if this.isForInterpolation == false
-				$$ stop _ this.nodeContext.push()
-				$$ stop _ this.brickEvalContext.push()
+				$if true $$ 25/3/24
+					_ this.nodeContext.push()
+					_ this.brickEvalContext.push()
 			return this
 		m pop
             if this.callContextStack.length > 0
@@ -152,8 +162,9 @@
             else
                 set this.callContext = null
 			if this.isForInterpolation == false
-				$$ stop _ this.nodeContext.pop()
-				$$ stop _ this.brickEvalContext.pop()
+				$if true $$ 25/3/24
+					_ this.nodeContext.pop()
+					_ this.brickEvalContext.pop()
 			return this
 		m clear
 			_ this.globalContext.clear
@@ -163,7 +174,7 @@
 					_ this.brickEvalContext.clear
 				_ this.globalContext.declare('$', this.evalHelper)
 				_ this.globalContext.$freeze()
-			_ this.globalContext.setValues(defaultValues)
+			$$ VIA _ this.globalContext.setValues(defaultValues)
 			_ this.globalContext.setValues(knownCallables)
 
 		m pushSource
@@ -190,10 +201,10 @@
 						@ currentModel_mixerUri 'unavailable'
 			else
 				var mTreeBrickData = this.loadHistory.getMTreeBrickData(this.currentMTreeBrickKey)
-				var mixerUri = 'root model'
+				var mixerUri = null
 				if mTreeBrickData.mTreeBrick.$mixerBrickKey
-					var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
-					var mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
+					set mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
+					set mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
 				return
 					{
 						@ currentModel_uri mTreeBrickData.ittfDocumentUri
@@ -208,7 +219,7 @@
 					@ 'dateUtil' true
 					@ 'verify' true
 			foreach k in Object.keys(this.getGlobalValues())
-				if !(defaultValues[k] || knownCallables[k] || builtinFunctions[k]) && k !== '$' && k !== 'NaN'
+				if !($*defaultValues[k] ||*$ knownCallables[k] || builtinFunctions[k]) && k !== '$' && k !== 'NaN'
 					set ret[k] = true
 			return ret
 

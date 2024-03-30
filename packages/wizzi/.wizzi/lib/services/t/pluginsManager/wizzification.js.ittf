@@ -24,7 +24,7 @@
 		# retrieve a wizzifier searching the factoryPlugins
 		# registered to this plugins manager
 		# params
-		#  string wizzifierName
+		#  string fileExtension
 		# returns
 		#  | api-ref wizzi-plugin.wizzifier
 		#  | wzError NotFound
@@ -44,7 +44,7 @@
 
 		# all factoryPlugins are searched, last matching encountered wins.
 		foreach item in this.factoryPlugins
-			# loog 'searching artifact ', wizzifierName, ' in module', item.getName()
+			# loog 'searching wizzifier ', wizzifierName, ' in module', item.getName()
             if item.getWizzifier
                 checked_call_r_set( found )
                     _ item.getWizzifier(wizzifierName)

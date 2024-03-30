@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\evaluator.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var jsWizziRunner = require('../jswizzi/jsWizziRunner');
@@ -36,8 +36,8 @@ module.exports = function(composedMTree, loadContext, callback) {
     loadContext.options = loadContext.options || {};
     var isCompile = loadContext.options.isCompile;
     var productionContext = loadContext.productionContext;
-    var scriptCoder = new JsWizziScriptCoder();
-    var jsWizziContext = new JsWizziContext(composedMTree, productionContext, scriptCoder);
+    var jsWizziScriptCoder = new JsWizziScriptCoder();
+    var jsWizziContext = new JsWizziContext(composedMTree, productionContext, jsWizziScriptCoder);
     jsWizziContext.setGlobalValues(loadContext.mTreeBuildUpContext)
     var ctx = {
         brickKey: null, 
@@ -46,43 +46,43 @@ module.exports = function(composedMTree, loadContext, callback) {
         isCompile: isCompile
      };
     // loog 'isCompile', isCompile
-    scriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
+    jsWizziScriptCoder.w('// ' + ctx.startTime + '  by ' + __filename)
     if (isCompile) {
-        scriptCoder.w('module.exports = function($, $ctx) {')
-        scriptCoder.indent();
+        jsWizziScriptCoder.w('module.exports = function($, $ctx) {')
+        jsWizziScriptCoder.indent();
         var i, i_items=Object.keys(jsWizziContext.getIsCompileGlobals()), i_len=Object.keys(jsWizziContext.getIsCompileGlobals()).length, k;
         for (i=0; i<i_len; i++) {
             k = Object.keys(jsWizziContext.getIsCompileGlobals())[i];
-            scriptCoder.w('var ' + k + ' = $ctx.' + k + ';')
+            jsWizziScriptCoder.w('var ' + k + ' = $ctx.' + k + ';')
         }
     }
-    scriptCoder.w('$.n(); // set the context state to NodeContext')
-    scriptCoder.w('var $0 = {}; // the root node of the MTree buildup')
+    jsWizziScriptCoder.w('$.n(); // set the context state to NodeContext')
+    jsWizziScriptCoder.w('var $0 = {}; // the root node of the mTree buildUp')
     var i, i_items=composedMTree.nodes, i_len=composedMTree.nodes.length, item;
     for (i=0; i<i_len; i++) {
         item = composedMTree.nodes[i];
-        mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx);
+        mTreeBuildUpScripter.codify(item, 0, jsWizziScriptCoder, ctx);
     }
     if (isCompile) {
-        scriptCoder.w('return $0;')
-        scriptCoder.deindent();
-        scriptCoder.w('}')
+        jsWizziScriptCoder.w('return $0;')
+        jsWizziScriptCoder.deindent();
+        jsWizziScriptCoder.w('}')
     }
-    productionContext.addMTreeBuildUpScript(composedMTree.uri, scriptCoder)
+    productionContext.addMTreeBuildUpScript(composedMTree.uri, jsWizziScriptCoder)
     
-    // loog 'scriptCoder.toCode()', scriptCoder.toCode()
+    // loog 'jsWizziScriptCoder.toCode()', jsWizziScriptCoder.toCode()
     if (isCompile) {
         if (requireFromString === null) {
             requireFromString = require('./requireFromString');
         }
-        var md = requireFromString(scriptCoder.toCode());
+        var md = requireFromString(jsWizziScriptCoder.toCode());
         var $0 = md(jsWizziContext.getValue('$'), jsWizziContext.getGlobalValues());
         finalize(composedMTree, $0, ctx, callback)
     }
     else {
-        jsWizziRunner.run(scriptCoder.toCode(), jsWizziContext, {}, function(err, result) {
+        jsWizziRunner.run(jsWizziScriptCoder.toCode(), jsWizziContext, {}, function(err, result) {
             
-            // set err.scriptCode = scriptCoder.toCode()
+            // set err.scriptCode = jsWizziScriptCoder.toCode()
             if (err) {
                 return callback(err);
             }
@@ -109,10 +109,20 @@ function finalize(composedMTree, $0, ctx, callback) {
      };
     callback(null, composedMTree);
 }
-function local_error(name, method, message, node, inner, other) {
-    return new errors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
-            errorName: name, 
-            method: method, 
+function local_error(errorName, method, message, node, inner, other) {
+    console.log('local_error', errorName, node, __filename);
+    var mtree = Object.assign({}, other.mtree || {}, {
+        mTreeBrickNode: node, 
+        mTreeBrick: node ? (node.mTreeBrick || node.model) : null
+     });
+    delete other.mtree
+    return new errors.WizziError(message, errorName, [
+            errorName
+        ], {
+            source: {
+                method: 'wizzi-mtree@0.8.16.loader.evaluator.' + method
+             }, 
+            mtree: mtree, 
             inner: inner, 
             ...other||{}
          });

@@ -145,6 +145,7 @@
                                 @ isDefault art.isDefault
                     set this.schemaArtifactsMap[schema.name] = schemaArtifacts
                     set this.schemaDefaulArtifactMap[schema.name] = schema.name + '/' + schema.defaultArtifact
+					set this.schemaRootTagMap[schema.name] = schema.rootTag || schema.name
                     foreach ext in schema.fileExtensions
                         if this.extensionSchemaMap[ext]
                             return
@@ -209,6 +210,26 @@
                         {
                             @ name item
 
+		+
+        # cheatsheet folders are implemented in plugins from version 0.9
+        if factoryPlugin.provides.cheatsheetFolders
+            foreach item in factoryPlugin.provides.cheatsheetFolders
+                set found
+                    _ _.find
+                        @ this.providedCheatsheetFolders
+                        {
+                            @ name item
+                if found
+                    return
+                        _ error
+                            @ 'DuplicatedPluginResource'
+                            @ 'addPluginProvides'
+                            @ 'Cheatsheet folder ' + item + ' already provided'
+                else
+                    _ this.providedCheatsheetFolders.push
+                        {
+                            @ name item
+
 	m availableSchemas
 		var ret = []
 		foreach item in this.providedSchemas
@@ -233,4 +254,9 @@
 			_ ret.push(item.name)
 		return ret
 
+	m availableCheatsheetFolders
+		var ret = []
+		foreach item in this.providedCheatsheetFolders
+			_ ret.push(item.name)
+		return ret
 

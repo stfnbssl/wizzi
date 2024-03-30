@@ -126,25 +126,26 @@
 		if this.loadingCallArguments
 			if this.globalContext.isDeclared(name)
 				return this.globalContext.getValue(name)
-			if this.callContext && this.callContext.isDeclared(name)
+			elif this.callContext && this.callContext.isDeclared(name)
 				return this.callContext.getValue(name)
-			if this.isForInterpolation == false
+			elif this.isForInterpolation == false
 				if this.nodeContext.isDeclared(name)
 					return this.nodeContext.getValue(name)
 				if this.brickEvalContext && this.brickEvalContext.isDeclared(name)
 					return this.brickEvalContext.getValue(name)
-			return undefined
+			else
+				return undefined
 		
 		elif this.ittf_state === ittfStates.globalContext
 			if this.brickEvalContext && this.brickEvalContext.isDeclared(name)
 				return this.brickEvalContext.getValue(name)
-			if this.globalContext.isDeclared(name)
+			elif this.globalContext.isDeclared(name)
 				return this.globalContext.getValue(name)
 		
 		elif this.ittf_state === ittfStates.nodeContext
 			if this.nodeContext.isDeclared(name)
 				return this.nodeContext.getValue(name)
-			if this.globalContext.isDeclared(name)
+			elif this.globalContext.isDeclared(name)
 				return this.globalContext.getValue(name)
 		
 		else
@@ -152,6 +153,8 @@
 				return this.brickEvalContext.getValue(name)
 			elif this.globalContext.isDeclared(name)
 				return this.globalContext.getValue(name)
+			elif this.nodeContext.isDeclared(name)
+				return this.nodeContext.getValue(name)
 		
 		if this.callContext && this.callContext.isDeclared(name)
 			return this.callContext.getValue(name)

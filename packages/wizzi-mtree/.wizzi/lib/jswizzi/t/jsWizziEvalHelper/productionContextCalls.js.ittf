@@ -1,27 +1,40 @@
 $group
+
+    #
+        # Method for `multi ittf document context management`
+        # script method: `$.setCtx(<namePath>, <value>)`
+        # Set a value in the production context of a Wizzi Job
     m setCtx
-        param kind     $$ string,
+        $$ VIA param kind     $$ string,
         param namePath $$ string,
         param value    $$
         return
             _ this.productionContext.setEvaluationContextValue
-                @ kind
+                $$ VIA @ kind
                 @ namePath
                 @ value
     
+    #
+        # Method for `multi ittf document context management`
+        # script method: `$.removeCtx(<namePath>)`
+        # Remove a value in the production context of a Wizzi Job
     m removeCtx
-        param kind $$ string, 
+        $$ VIA param kind $$ string, 
         param namePath $$ string, 
         throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet')
         return
             _ this.productionContext.removeEvaluationContextValue
-                @ kind
+                $$ VIA @ kind
                 @ namePath
     
+    #
+        # Method for `multi ittf document context management`
+        # script method: `$.removeCtx(<namePath>)`
+        # Get a value from the production context of a Wizzi Job
     m getCtx
-        param kind     $$ string, 
+        $$ VIA param kind     $$ string, 
         param namePath $$ string, 
         return
             _ this.productionContext.getEvaluationContextValue
-                @ kind
+                $$ VIA @ kind
                 @ namePath

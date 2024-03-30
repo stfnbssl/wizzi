@@ -50,7 +50,7 @@
 			_ scriptCoder.w
 				@ '$.n(); // set the context state to NodeContext'
 			_ scriptCoder.w
-				@ 'var $0 = {}; // the root node of the MTree buildup'
+				@ 'var $0 = {}; // the root node of the mTree buildUp'
             
 			foreach item in composedMTree.nodes
                 _ mTreeBuildUpScripter.codify(item, 0, scriptCoder, ctx)

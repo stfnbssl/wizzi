@@ -4,13 +4,30 @@
 	import util
 	var errors = require('./errors')
 	var f_verify = require('./functions/verify')
+	var IsV09 = true
 
+	#
+		# params
+		#   number ittfState
+		#     | nodeContext 0
+		#     | brickEvalContext 1
+		#     | globalContext 2
+		#     | callContext 3
+		#     | brickFunctionEvalContext 4
+		#  string brickKey
+
+	#
+		# When ittfState == 1 (brickEvalContext) the `ContextData` instance
+		# must manage the contexts of `functions` declared in the scripts of the mTreeBrick.
+		# The JsWizziRunner traversing the AST of the mTreeBuildUpScript 
+		# detects the scope chains of every function declared in the mTreeBrick.
+	
 	class ContextData
 
 		ctor
-			param kind
+			param ittfState
 			param brickKey
-			set this.kind = kind
+			set this.ittfState = ittfState
 			set this.brickKey = brickKey
 			_ this.clear
 		
@@ -30,152 +47,327 @@
                 [ 
             set this.builtInFunctions
                 { 
-            set this.builtInObjects
-                { 
+			if true $$ IsV09
+				# v0.9 28/3/24
+				set this.functionContexts = {}
+				set this.functionScopeChains = {}
+				set this.currentFunctionScopeChain = null
+				set this.currentFunctionName = null
 
 		m $freeze
 			set this.$freezed = true
+
+		#
+			# v0.9 28/3/24
+		m setV09
+			param value
+			set IsV09 = value
+
+		#
+			# v0.9 28/3/24
+		m getContextOf
+			param functionName
+			# loog 'getContextOf', functionName
+			if !functionName
+				return this
+			else
+				return this.functionContexts[functionName]
+		#
+			# v0.9 28/3/24
+			# the mTreeBuildUpScript is parsed and analized by the JsWizziRunner
+		m setFunctionScopesFromAst
+			param functionScopesFromAst
+			for var functionName in functionScopesFromAst.functions
+				# loog "setFunctionScopesFromAst", functionName, functionScopesFromAst.functions[functionName] 
+				set this.functionContexts[functionName] = new ContextData(4, functionName)
+				set this.functionScopeChains[functionName] = functionScopesFromAst.functions[functionName]
+		
+		#
+			# v0.9 28/3/24
+		m enterFunction
+			param functionName
+			var retval = this.currentFunctionName
+			set this.currentFunctionName = functionName
+			if functionName
+				set this.currentFunctionScopeChain = this.functionScopeChains[functionName]
+			else
+				set this.currentFunctionScopeChain = null
+			return retval
+
+		#
+			# v0.9 28/3/24
+		m getParentScopeFunction
+			param functionName
+			if this.currentFunctionScopeChain == null
+				throw new Error("Invalid operation, ContextData.getParentFunctionScope called with no current function")
+			var index = this.currentFunctionScopeChain.indexOf(functionName)
+			var retval = index > 0 ? this.currentFunctionScopeChain[index-1] : null
+			# loog 'ContextData.getParentScopeFunction', functionName, index, retval
+			return retval
 
 		m declare
 			param name
 			param init
 			if name == '$' && this.$freezed
 				throw new errors.InvalidVariableNameError('The variable "$" cannot be declared on the global context after it has been freezed.')
-			set this.declares[name] = true
-			$* VIA 22/10/18 see this issue http://localhost:3014/ittf/repo/stefi/studio/wizzi/issues/jswizzimissingvalues/index.html.ittf
-			if typeof (init) !== 'undefined'
-				set this.values[name] = init
-			*$
-			set this.values[name] = init
 			
-			# TODO debug only
-			if f_verify.isObject(init) == false
-				# loog 'ContextData declare', name, init, 'kind', this.kind, this.brickKey
+			if IsV09
+				var ctx = this.getContextOf(this.currentFunctionName)
+				set ctx.declares[name] = true
+				set ctx.values[name] = init
+			else
+				set this.declares[name] = true
+				$* VIA 22/10/18 see this issue http://localhost:3014/ittf/repo/stefi/studio/wizzi/issues/jswizzimissingvalues/index.html.ittf
+				if typeof (init) !== 'undefined'
+					set this.values[name] = init
+				*$
+				set this.values[name] = init
+			
+			# loog 'ContextData.declare', name, init, 'kind', this.ittfState, 'brickKey', this.brickKey, 'function', this.currentFunctionName
 		
 		m undeclare
 			param name
-			if this.declares[name] == true
-				delete this.declares[name]
-			if this.values[name] == true
-				delete this.values[name]
-
+			# loog 'ContextData.undeclare', name, 'kind', this.ittfState, 'brickKey', this.brickKey, 'function', this.currentFunctionName
+			if IsV09
+				var ctx = this.getContextOf(this.currentFunctionName)
+				if ctx.declares[name] == true
+					delete ctx.declares[name]
+				if ctx.values[name] == true
+					delete ctx.values[name]
+			else
+				if this.declares[name] == true
+					delete this.declares[name]
+				if this.values[name] == true
+					delete this.values[name]
+			
 		m isDeclared
 			param name
 			# loog 'wizzi-mtree.contextData.isDeclared', name, this.declares[name]
-			if this.declares[name] == true
-				return true
-			elif this.declaresStack.length > 0
-				backeach item in this.declaresStack 
-					# loog 'wizzi-mtree.contextData.isDeclared for', name, this.declaresStack.length, item[name]
-					if item[name] == true
+			if IsV09
+				if !this.currentFunctionName
+					return this.declares[name]
+				# this is a function context, search contexts in scope
+				var ctx = this.getContextOf(this.currentFunctionName)
+				if ctx.declares[name] == true
+					return true
+				var parentScopeFunction = this.getParentScopeFunction(this.currentFunctionName)
+				while parentScopeFunction
+					set ctx = this.getContextOf(parentScopeFunction)
+					if ctx.declares[name] == true
 						return true
-				return false
+					set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
+				return this.declares[name]
 			else
-				return false
+				if this.declares[name] == true
+					return true
+				elif this.declaresStack.length > 0
+					backeach item in this.declaresStack 
+						# loog 'wizzi-mtree.contextData.isDeclared for', name, this.declaresStack.length, item[name]
+						if item[name] == true
+							return true
+					return false
+				else
+					return false
 
 		m setValue
 			param name
 			param value
 			if name == '$' && this.$freezed
 				throw new errors.InvalidVariableNameError('The variable "$" cannot be set on the global context after it has been freezed.')
-			_ this.declare(name, value)
+			
+			if IsV09
+				_ this.getContextOf(this.currentFunctionName).declare(name, value)
+			else
+				_ this.declare(name, value)
 
-			# TODO debug only
-			if f_verify.isObject(value) == false
-				# loog 'ContextData setValue', name, value, 'kind', this.kind, this.brickKey
+			# loog 'ContextData.setValue', name, value, 'kind', this.ittfState, 'brickKey', this.brickKey, 'function', this.currentFunctionName
 
 		m setValues
 			param values
 			set values = (values || {})
-			for var k in values
-				_ this.declare
-					@ k
-					@ values[k]
+			if IsV09
+				var ctx = this.getContextOf(this.currentFunctionName)
+				for var k in values
+					_ ctx.declare
+						@ k
+						@ values[k]
+			else
+				for var k in values
+					_ this.declare
+						@ k
+						@ values[k]
 		
 		# Set value only if name is declared
 		m put
 			param name
 			param value
-			if this.declares[name] === true
-				set this.values[name] = value
-				return true
+			if IsV09
+				var ctx = this.getContextOf(this.currentFunctionName)
+				if ctx.declares[name] === true
+					set this.values[name] = value
+					return true
+				else
+					# TODO if this.currentFunctionName != null, we need to search in scope?
+					var parentScopeFunction = this.getParentScopeFunction(this.currentFunctionName)
+					while parentScopeFunction
+						set ctx = this.getContextOf(parentScopeFunction)
+						if ctx.declares[name] == true
+							set ctx.values[name] = value
+							return true
+						set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
+					return false
 			else
-				return false
+				if this.declares[name] === true
+					set this.values[name] = value
+					return true
+				else
+					return false
 
 		m getValue
 			param name
-			if this.declares[name] == true
-				# loog 'wizzi-mtree.contextData.getValue found for', name, this.values[name], this.declaresStack.length
-				return this.values[name]
-			elif this.declaresStack.length > 0
-				backeach item in this.declaresStack 
-					if item[name] == true
-						# loog 'wizzi-mtree.contextData.getValue found for', name, this.declaresStack.length
-						return this.valuesStack[i][name]
+			if IsV09
+				if !this.currentFunctionName
+					if this.declares[name] == true
+						return this.values[name]
+					return undefined
+				# this is a function context, search contexts in scope
+				# current function context
+				var ctx = this.getContextOf(this.currentFunctionName)
+				if ctx.declares[name] == true
+					return ctx.values[name]
+				# parents function contexts
+				var parentScopeFunction = this.getParentScopeFunction(this.currentFunctionName)
+				while parentScopeFunction
+					set ctx = this.getContextOf(parentScopeFunction)
+					if ctx.declares[name] == true
+						return ctx.values[name]
+					set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
+				# at last the main context (this)
+				if this.declares[name] == true
+					return this.values[name]
+				else
+					return undefined
 			else
-				# loog 'wizzi-mtree.contextData.getValue not found for', name, this.kind, this.brickKey
-				return undefined
+				if this.declares[name] == true
+					# loog 'wizzi-mtree.contextData.getValue found for', name, this.values[name], this.declaresStack.length
+					return this.values[name]
+				elif this.declaresStack.length > 0
+					backeach item in this.declaresStack 
+						if item[name] == true
+							# loog 'wizzi-mtree.contextData.getValue found for', name, this.declaresStack.length
+							return this.valuesStack[i][name]
+				else
+					# loog 'wizzi-mtree.contextData.getValue not found for', name, this.ittfState, this.brickKey
+					return undefined
 		
 		m getValues
-			# TODO what if the stack has items ???
-			return this.values
+			var ret = {}
+			if IsV09
+				if this.currentFunctionName
+					throw new Error("Invalid operation, ContextData.getValues called on a function context")
+				else
+					set ret = this.values
+			else
+				# TODO what if the stack has items ???
+				set ret = this.values
+			return ret
 
 		m getSettableValues
-			# TODO what if the stack has items ???
 			var ret = {}
-			for var k in this.values
-				if k != '$'
-					set ret[k] = this.values[k]
+			if IsV09
+				if this.currentFunctionName
+					throw new Error("Invalid operation, ContextData.getSettableValues called on a function context")
+				else
+					for var k in this.values
+						if k != '$'
+							set ret[k] = this.values[k]
+			else
+				# TODO what if the stack has items ???
+				for var k in this.values
+					if k != '$'
+						set ret[k] = this.values[k]
 			return ret
 
 		m declareFunction
 			param name
 			param fn
-			set this.functions[name] = fn
+			if IsV09
+				set this.getContextOf(this.currentFunctionName).functions[name] = fn
+			else
+				set this.functions[name] = fn
 		
 		m getFunction
 			param name
-			if this.functions[name]
-				return this.functions[name]
-			elif this.functionsStack.length > 0
-				backeach item in this.functionsStack 
-					if item[name]
-						return item[name]
+			if IsV09
+				if !this.currentFunctionName
+					if this.functions[name]
+						return this.functions[name]
+					return undefined
+				# this is a function context, search contexts in scope
+				# current function context
+				var ctx = this.getContextOf(this.currentFunctionName)
+				if ctx.functions[name]
+					return ctx.functions[name]
+				# parents function contexts
+				var parentScopeFunction = this.getParentScopeFunction(this.currentFunctionName)
+				while parentScopeFunction
+					set ctx = this.getContextOf(parentScopeFunction)
+					if ctx.functions[name]
+						return ctx.functions[name]
+					set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
+				# at last the main context (this)
+				if this.functions[name]
+					return this.functions[name]
+				else
+					return undefined
 			else
-				# undefined
-				return this.functions[name]
+				if this.functions[name]
+					return this.functions[name]
+				elif this.functionsStack.length > 0
+					backeach item in this.functionsStack 
+						if item[name]
+							return item[name]
+				else
+					# undefined
+					return this.functions[name]
 
 		m setBuiltInFunction
 			param name
 			param value
+			if this.currentFunctionName
+				throw new Error("Invalid operation, ContextData.setBuiltInFunction called on a function context")
 			set this.builtInFunctions[name] = value
 
 		m getBuiltInFunction
 			param name
+			if this.currentFunctionName
+				throw new Error("Invalid operation, ContextData.getBuiltInFunction called on a function context")
 			return this.builtInFunctions[name]
 
 		m push
-            _ this.functionsStack.push(this.functions)
-            _ this.valuesStack.push(this.values)
-            _ this.declaresStack.push(this.declares)
-			set this.functions = {}
-			set this.values = {}
-			set this.declares = {}
+			if !IsV09
+				_ this.functionsStack.push(this.functions)
+				_ this.valuesStack.push(this.values)
+				_ this.declaresStack.push(this.declares)
+				set this.functions = {}
+				set this.values = {}
+				set this.declares = {}
 
 		m pop
-			if this.functionsStack.length > 0
-				set this.functions = this.functionsStack.pop()
-				set this.values = this.valuesStack.pop()
-				set this.declares = this.declaresStack.pop()
+			if !IsV09
+				if this.functionsStack.length > 0
+					set this.functions = this.functionsStack.pop()
+					set this.values = this.valuesStack.pop()
+					set this.declares = this.declaresStack.pop()
 
 		m dumpValues
-			info 'Dump context value for debug', this.kind
+			info 'Dump context value for debug', this.ittfState
 			for var k in this.declares
 				if f_verify.isObject(this.values[k]) == false
 					log k, this.values[k]
 
 		m getDeclareddumpValues
-			info 'Dump context value for debug', this.kind
+			info 'Dump context value for debug', this.ittfState
 			for var k in this.declares
 				if f_verify.isObject(this.values[k]) == false
 					log k, this.values[k]

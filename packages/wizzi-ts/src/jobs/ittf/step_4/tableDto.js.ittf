@@ -1,0 +1,6 @@
+﻿module
+	kind es6
+	
+	class ${tableDef.name}
+		$foreach f in tableDef.fields
+			p ${f.name}

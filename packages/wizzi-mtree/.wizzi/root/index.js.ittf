@@ -2,6 +2,12 @@
     kind jsfile
 
 	var loader = require('./lib/loader') 
+	var mocks = require('./lib/mocks') 
+    var JsWizziRunner = require('./lib/jswizzi/jsWizziRunner')
+    var JsWizziContext = require('./lib/jswizzi/jsWizziContext')
+	var JsWizziScriptCoder = require('./lib/jswizzi/jsWizziScriptCoder')
+	var mTreeLoadHistory = require('./lib/loader/loadHistory')
+	var mTreeBuildUpScripter = require('./lib/loader/mTreeBuildUpScripter')
 	+
 	var md = module.exports = {}
 	set md.version = "${wzCtx.version}"
@@ -87,3 +93,24 @@
 								@ ittfDocumentUri
 								@ loadContext
 								@ callback
+	set md.mTreeLoadHistory = mTreeLoadHistory
+	set md.mTreeBuildUpScripter = mTreeBuildUpScripter
+	set md.jsWizzi
+		{
+			@ JsWizziRunner JsWizziRunner
+			@ JsWizziContext JsWizziContext
+			@ JsWizziScriptCoder JsWizziScriptCoder
+	set md.mtreeUtils
+		{
+			@ node require('./lib/utils/node')
+
+	set md.mtreeTests
+		{
+			@ mTreeBrickProvider require('./lib/loader/mTreeBrickProvider')
+			@ liner require('./lib/loader/liner')
+			@ nodifier require('./lib/loader/nodifier')
+			@ includer require('./lib/loader/includer')
+			@ mixer require('./lib/loader/mixer')
+			@ appender require('./lib/loader/appender')
+			@ evaluator require('./lib/loader/evaluator')
+	set md.mocks = mocks

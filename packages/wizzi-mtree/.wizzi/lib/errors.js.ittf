@@ -3,12 +3,14 @@
 
     var util = require('util')
     var chalk = require('chalk')
+    var nodeUtils = require('./utils/node')
 
     var md
         set module.exports =
             { 
 
-	error( Node, message, node )
+	$* TODO VIA
+    error( Node, message, node )
         var msg
             [ 
                 @ message
@@ -28,6 +30,7 @@
                 _ msg.push(', source: ' + node.sourceKey)
                 _ msg.push(', in file: ' + (node.model ? node.model.uri : 'unavailable'))
         set this.message = msg.join('')
+    *$
 
 	error( IttfNotFound, resourceType, name, sourceUri )
 		set this.message = resourceType + ': ' + name + 
@@ -54,18 +57,19 @@
         super Error
         ctor
             param message
-            param node
-            param mTreeBrick
+            param errorName
+            param errorNames
             param other
             base message
-            # legacy error test
-            
-            set this.name = "WizziError"
+            set this.name = this.errorName = errorName
+            set this.errorNames = errorNames
+            # legacy error test, some code could still use it
             set this.__is_error = true
             set this.data
                 {
                     @ ...other||{}
             
+            $* TODO
             if node
                 set this.data.node
                     {
@@ -75,14 +79,16 @@
                         @ sourceKey node.sourceKey
                 if node.wzSourceLineInfo
 					var info = node.wzSourceLineInfo
-                    set this.node.filePath = node.wzRoot().wzSourceFilepath(info.sourceKey)
+                    set this.data.node.filePath = node.wzRoot().wzSourceFilepath(info.sourceKey)
+            *$
 
-            _ Error.captureStackTrace(this, this.constructor)
+            # _ Error.captureStackTrace(this, this.constructor)
             
+            $*
             if mTreeBrick 
                 set this.data.mTreeBrick
                     {
-                        @ uri mTreeBrick.uri
+                        @ ittfDocumentUri mTreeBrick.uri
                 set this.errorLines
                     _ mTreeBrick.loadHistory.getIttfDocumentErrorLines
                         @ node.sourceKey
@@ -92,11 +98,76 @@
                             @ pos node.col + node.name.length + 1
                             @ description message
                         @ true
+            *$
+
+            +
+            if this.data.mtree
+                var d = this.data.mtree
+                var loadHistory = d.loadHistory ? d.loadHistory :
+                    \b d.mTreeBrick ? d.mTreeBrick.loadHistory :
+                    \b d.mTreeBrickNode ? d.mTreeBrickNode.model.loadHistory : 
+                    \b null
+                if d.mTreeBrickErrorNodeId && loadHistory
+                    var mTreeBrickNode
+                        _ loadHistory.findNodeById
+                            @ d.mTreeBrickErrorNodeId
+                    # loog 'WizziError.mTreeNode', mTreeBrickNode
+                    _ this.addHint
+                        @ 'ittfErrorLines'
+                        _ md.nodeErrorLines
+                            @ mTreeBrickNode.mTreeNode
+                            {
+                                @ errorName this.data.inner.errorName
+                                @ description this.message
+                            @ true
+                elif d.mTreeBrickNode || d.mTreeBrickLine
+                    var node = d.mTreeBrickNode || d.mTreeBrickLine
+                    var mTreeBrick = d.mTreeBrick || node.model
+                    _ this.addHint
+                        @ 'ittfErrorLines'
+                        _ mTreeBrick.loadHistory.getIttfDocumentErrorLines
+                            @ node.sourceKey
+                            {
+                                @ row node.row
+                                @ col node.col
+                                @ pos node.col + node.name.length
+                                @ errorName errorName
+                                @ description message
+                            @ true
+
+            +
+            _ this.setDeepestHint
+
+        m addHint
+            param name
+            param value
+            set this.data.hint = this.data.hint || {}
+            set this.data.hint[name] = value
+
+        m setDeepestHint
+            var errorName = this.errorName
+            var message = this.message
+            var hint = this.data.hint
+            var inner = this.data.inner
+            while inner != null
+                set hint = inner.data ? (inner.data.hint ? inner.data.hint: hint) : hint
+                set errorName = inner.errorName || errorName
+                set message = inner.message
+                set inner = inner.data ? inner.data.inner : null
+                log inner != null
+            if hint
+                set hint.errorName = errorName
+                set hint.message = message
+            set this.hint = hint
+            if this.data && this.data.inner
+                set this.inner = this.data.inner
+                if this.data.inner && this.data.inner.data
+                    set this.inner2 = this.data.inner.data.inner
 
         m toString
             var msg = []
             _ msg.push(chalk.red('Error: ' + this.message))
-            _ msg.push(chalk.red('  name: ' + this.data.errorName))
+            _ msg.push(chalk.red('  name: ' + this.errorName))
             if this.data.node
                 _ msg.push(chalk.yellow('  row: ' + this.data.node.row + ', col: ' + this.data.node.col))
             if this.data.mTreeBrick
@@ -108,11 +179,12 @@
             if this.errorLines
                 foreach line in this.errorLines
                     _ msg.push(chalk.yellow('  ' + line))
-            if this.data.errorName === 'JsWizziError'
+            if this.errorName === 'JsWizziError'
                 _ msg.push(chalk.yellow('  onStatement: ' + this.data.onStatement))
             if this.data.inner
                 _ msg.push(chalk.magenta('  Inner error: ' + this.data.inner.name + ': ' + this.data.inner.message))
             return msg.join('\n')
+	
     set md.WizziError = WizziError
     
     class InternalError
@@ -166,9 +238,61 @@
 					else 
 						_ msg.join('')
 
+	set md.nodeErrorLines
+        function 
+            param node
+            param errorData
+            param json
+            log 'nodeErrorLines.errorData', errorData
+            var parent = node.parent
+            var child = node.children[0]
+            var ret
+				[ 
+            if errorData.errorName == 'FragmentParamsError'
+                var brick = node.model
+                var rootNode = brick.nodes[0]
+                _ ret.push
+                    @ formatLineNumber(rootNode.row) + spaces(rootNode.col) + rootNode.name + ' ' + (rootNode.value || '')
+                _ ret.push
+                    @ formatLineNumber(rootNode.row+1) + spaces(rootNode.col+4) + '$params ' + brick.$params 
+                _ ret.push
+                    @ spaces(rootNode.col+16) + '^ ' + errorData.description
+            else
+                var prev = nodeUtils.previousSibling(node)
+                var next = nodeUtils.nextSibling(node)
+                if prev
+                    _ ret.push
+                        @ formatLineNumber(prev.row) + spaces(prev.col) + prev.name + ' ' + (prev.value || '')
+                else if parent
+                    _ ret.push
+                        @ formatLineNumber(parent.row) + spaces(parent.col) + parent.name + ' ' + (parent.value || '')
+                    if parent.model.$params
+                        _ ret.push
+                            @ formatLineNumber(parent.row+1) + spaces(parent.col+4) + '$params ' + parent.model.$params 
+                _ ret.push
+                    @ formatLineNumber(node.row) + spaces(node.col) + node.name + ' ' + (node.value || '')
+                _ ret.push
+                    @ spaces(node.col + 4) + '^ ' + errorData.description
+                if next
+                    _ ret.push
+                        @ formatLineNumber(next.row) + spaces(next.col) + next.name + ' ' + (next.value || '')
+                elif child
+                    _ ret.push
+                        @ formatLineNumber(child.row) + spaces(child.col) + child.name + ' ' + (child.value || '')
+			return json ? ret : ret.join('\n')
 
+	function formatLineNumber
+        param num
+        if num > 999
+            return num
+        if num > 99
+            return ('0' + num)
+        if num > 9
+            return ('00' + num)
+        return ('000' + num)    
 
-
-
-
-
+    function spaces
+        param num
+        return 
+            _ Array(num + 1)
+                ._ join(" ")

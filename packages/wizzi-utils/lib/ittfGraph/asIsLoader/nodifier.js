@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfGraph\asIsLoader\nodifier.js.ittf
-    utc time: Thu, 14 Mar 2024 20:24:16 GMT
+    utc time: Sat, 30 Mar 2024 12:44:01 GMT
 */
 'use strict';
 var util = require('util');
@@ -82,10 +82,19 @@ module.exports = function(lines, mTreeBrick) {
         }
         else if (line.indent > current.indent) {
             if (nameFirstChar == '$' && line.name === '$params') {
+                
+                // loog 'wizzi-mtree.nodifier.current.name', current.name, current.value, line.value
                 if (current.indent > 0) {
-                    return local_error('InvalidIttfError', 'default', 'The $params node must be a child of the root node.', line, mTreeBrick);
+                    if (current.name !== '$fragment') {
+                        return local_error('InvalidIttfError', 'default', 'The $params node must be a child of the root node.', line, mTreeBrick);
+                    }
+                    else {
+                        current.$params = line.value;
+                    }
                 }
-                current.model.$params = line.value;
+                else {
+                    current.model.$params = line.value;
+                }
                 continue;
             }
             line.parent = current;

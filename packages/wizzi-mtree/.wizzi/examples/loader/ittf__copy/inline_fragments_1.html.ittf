@@ -5,7 +5,7 @@ html
         var gData = {
             name: 'dudu'
         }
-    
+
     $$ param by value
     $fragment hello_1
         $params name

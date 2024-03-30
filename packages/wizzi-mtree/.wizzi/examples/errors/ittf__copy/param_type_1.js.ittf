@@ -1,0 +1,6 @@
+﻿root
+	$params a:boolean|hello
+	$$ $params a:crappy|hello
+	node-1
+	node-2 ${a}	
+	node-3

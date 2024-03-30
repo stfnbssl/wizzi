@@ -28,7 +28,7 @@
 		#    load				// apply liner + nodifier to a Ittf source text 
 		#    setKeys
 		#    clone
-		#    calcParamValues
+		#    parseFragmentParamsValues
 		#    toIttf
 		#    toText
 		#    dump
@@ -37,7 +37,7 @@
 	var util = require('util')
 	var verify = require('@wizzi/utils').verify
     var errors = require('../errors')
-    var types = require('../util/types')
+    var types = require('../utils/types')
     var liner = require('./liner')
     var nodifier = require('./nodifier')
 
@@ -69,7 +69,26 @@
             param brickKey
             set this.sourceKey = sourceKey
             set this.brickKey = brickKey
-    
+
+		m findNodeById
+			param nodeId
+			foreach node in this.nodes
+				var found = this._findNodeById(nodeId, node)
+				if found
+					return found
+			return null
+
+		m _findNodeById
+			param nodeId
+			param node
+			if node.id == nodeId
+				return node
+			foreach child in node.children
+				var found = this._findNodeById(nodeId, child)
+				if found
+					return found
+			return null
+
 		m clone
             var clonedModel
                 new MTreeBrick
@@ -142,7 +161,7 @@
 			set clnode.children = self._cloneNodes(node.children, clnode, clonedModel)
             return clnode
     
-		$include mtreeBrick/calcParamValues
+		$include mtreeBrick/parseFragmentParamsValues
     
 		m dump
             param evaluated
@@ -178,7 +197,7 @@
 						param item
 						_ _toIttfNodeDeep(item, 0, buffer)
             return buffer.join('\n')
-    
+
 		m toText
 			param node
             var buffer
@@ -191,7 +210,31 @@
 					foreach child in root.children
 						_ _toTextNodeDeep(child, 0, buffer)
             return buffer.join('\n')
+	
+	function _toIttfNodeDeep
+		param node
+		param indent
+		param buffer
+		if node.name
+			_ buffer.push
+				@ spaces(indent * 4) + node.name + ' ' + (node.value || '')
+		else
+			_ buffer.push
+				@ spaces(indent * 4) + node.n + ' ' + (node.v || '')
+		set indent++
+		foreach child in node.children
+			_ _toIttfNodeDeep(child, indent, buffer)
 
+	function _toTextNodeDeep
+        param node
+        param indent
+        param buffer
+        _ buffer.push
+			@ spaces(indent * 4) + node.n + ' ' + node.v || ''
+        set indent++
+        foreach child in node.children
+			_ _toTextNodeDeep(child, indent, buffer)
+    
 	function _dumpNodeDeep
         param node
         param indent
@@ -225,30 +268,7 @@
                 param n
                 _ _dumpNodeDeep(n, indent, buffer, ctx)
 
-	function _toIttfNodeDeep
-		param node
-		param indent
-		param buffer
-		if node.name
-			_ buffer.push
-				@ spaces(indent * 4) + node.name + ' ' + (node.value || '')
-		else
-			_ buffer.push
-				@ spaces(indent * 4) + node.n + ' ' + (node.v || '')
-		set indent++
-		foreach child in node.children
-			_ _toIttfNodeDeep(child, indent, buffer)
 
-	function _toTextNodeDeep
-        param node
-        param indent
-        param buffer
-        _ buffer.push
-			@ spaces(indent * 4) + node.n + ' ' + node.v || ''
-        set indent++
-        foreach child in node.children
-			_ _toTextNodeDeep(child, indent, buffer)
-    
 	function spaces
         param num
         return 
@@ -256,13 +276,32 @@
                 ._ join(" ")
 
 	function local_error
-		param name
+		param errorName
 		param method
 		param message
 		param node
 		param inner
+
+		$*
 		if node
 			var nodeError = new errors.NodeError(message, node)
 			set message = nodeError.message
-		r_wz_err( name, method, inner )
+		r_wz_err( errorName, method, inner )
 			@ message
+		*$
+		var errorNames = [errorName]
+		if inner && inner.data && inner.data.errorNames
+			set errorNames = errorNames.concat(inner.data.errorNames)
+		elif inner && inner.errorName
+			set errorNames = errorNames.concat([inner.errorName])
+		return
+		    new errors.WizziError
+                @ message
+				@ errorName
+				@ errorNames
+                {
+					{ source
+                    	@ method 'wizzi-mtree@${wzCtx.version}.loader.MTreeBrick.' + method
+					{ mtree
+                    	@ mTreeBrickNode node
+                    @ inner inner || null

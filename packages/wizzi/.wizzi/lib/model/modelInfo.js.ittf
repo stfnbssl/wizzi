@@ -32,13 +32,13 @@
 							# string name
 							# string itemName
 							# [	pathTemplateValues
-								# { pathTemplateValues
+								# { pathTemplateValue
 									# string token
 									# string attribute
 									# function function
 	+
 	function logme
-        if false
+        if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
     +
 	var modelInfoCount = 0

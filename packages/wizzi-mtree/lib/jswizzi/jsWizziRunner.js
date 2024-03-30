@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -63,15 +63,25 @@ var runner = function(ast, ctx, action, data) {
         return trunner(ast, ctx, data);
     }
     else {
-        return local_error(ctx, 'Missing runner for type: ' + type, 'runner');
+        return local_error(ctx, 'InternalError', 'Missing runner for type: ' + type, 'runner');
     }
 };
 var runnerSet = function(ast, ctx, data) {
     // loog 'jsWizziRunner.runnerSet', ast, data
     return runner(ast, ctx, 'Set', data);
 };
-var runnerCall = function(ast, ctx, data) {
-    return runner(ast, ctx, 'Call', data);
+var runnerCall = function(functionName, ast, ctx, data) {
+    //
+    // `ctx` (JsWizziContext) knows the current mTreeBrickEvalContext
+    // so you do not need to pass a brickKey parameter
+    // The `savedContext` object returned by ctx contains:
+    // the `brickKey` of the current mTreeBrickEvalContext
+    // the current `functionName`, or undefined if the call is from outside of a function body
+    var savedContext = ctx.enterFunctionEvalContext(functionName);
+    var retval = runner(ast, ctx, 'Call', data);
+    // reset the previous current function on `brickKey` mTreeBrickEvalContext
+    ctx.exitFunctionEvalContext(savedContext.brickKey, savedContext.functionName)
+    return retval;
 };
 runner.Program = function(node, ctx) {
     log('Program.node', node);
@@ -107,7 +117,7 @@ runner.Identifier = function(node, ctx) {
     }
     // loog 'jsWizziRunner. Identifier. ReferenceError. node.loc', node.loc, ctx.isForInterpolation, ctx.source
     else {
-        return local_error(ctx, 'ReferenceError|Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>', {
+        return local_error(ctx, 'ReferenceError', 'Identifier < ' + node.name + ' > not defined, on node < ' + ctx.runningNodeId + ', Available context keys: ' + Object.keys(ctx.getValues()) + '>', {
                 node: node, 
                 errorLines: errors.esprimaNodeErrorLines('unknown identifier', node, ctx.source, true)
              }, node, 'Identifier');
@@ -470,7 +480,7 @@ runner.ForInStatement = function(node, ctx) {
         return obj;
     }
     if (_.isObject(obj) == false) {
-        return local_error(ctx, 'The value must be an object. It is "' + getTypeDescription(obj) + '".', node.right, node, 'ForInStatement');
+        return local_error(ctx, 'JsWizziError', 'The value must be an object. It is "' + getTypeDescription(obj) + '".', node.right, node, 'ForInStatement');
     }
     var notUsed = ctx.set_MTreeBrickEvalContext(savedCurrentBrickKey);
     
@@ -566,7 +576,7 @@ runner.UnaryExpression = function(node, ctx) {
             return typeof exp;
         }
         else {
-            return local_error(ctx, 'Unmanaged unary operator ' + node.operator + ' (prefix: true)', node.operator, node, 'UnaryExpression');
+            return local_error(ctx, 'JsWizziError', 'Unmanaged unary operator ' + node.operator + ' (prefix: true)', node.operator, node, 'UnaryExpression');
         }
     }
     else {
@@ -574,7 +584,7 @@ runner.UnaryExpression = function(node, ctx) {
             return !exp;
         }
         else {
-            return local_error(ctx, 'Unmanaged unary operator ' + node.operator + ' (prefix: false)', node.operator, node, 'UnaryExpression');
+            return local_error(ctx, 'JsWizziError', 'Unmanaged unary operator ' + node.operator + ' (prefix: false)', node.operator, node, 'UnaryExpression');
         }
     }
 }
@@ -662,7 +672,7 @@ runner.BinaryExpression = function(node, ctx) {
         return l instanceof r;
     }
     else {
-        return local_error(ctx, 'Unmanaged binary operator ' + node.operator, node.operator, node, 'BinaryExpression');
+        return local_error(ctx, 'JsWizziError', 'Unmanaged binary operator ' + node.operator, node.operator, node, 'BinaryExpression');
     }
 }
 ;
@@ -684,7 +694,7 @@ runner.UpdateExpression = function(node, ctx) {
         v = exp - 1;
     }
     else {
-        return local_error(ctx, 'Unmanaged update expression ' + node.operator, node.operator, node, 'UpdateExpression');
+        return local_error(ctx, 'JsWizziError', 'Unmanaged update expression ' + node.operator, node.operator, node, 'UpdateExpression');
     }
     ctx.put(node.argument.name, v)
     return node.prefix ? v : exp;
@@ -723,7 +733,7 @@ runner.LogicalExpression = function(node, ctx) {
         return l || r;
     }
     else {
-        return local_error(ctx, 'Unmanaged logical expression ' + node.operator, node.operator, node, 'LogicalExpression');
+        return local_error(ctx, 'JsWizziError', 'Unmanaged logical expression ' + node.operator, node.operator, node, 'LogicalExpression');
     }
 }
 ;
@@ -786,7 +796,7 @@ runner.CallExpression = function(node, ctx) {
             return obj;
         }
         if (obj == null || typeof(obj) == 'undefined') {
-            return local_error(ctx, 'The value of callee must be an object. It is "' + getTypeDescription(obj) + '" : ' + obj + '.', node.callee.object, node, 'CallExpression');
+            return local_error(ctx, 'JsWizziError', 'The value of callee must be an object. It is "' + getTypeDescription(obj) + '" : ' + obj + '.', node.callee.object, node, 'CallExpression');
         }
         if (node.callee.computed) {
             property = runner(node.callee.property, ctx)
@@ -801,7 +811,7 @@ runner.CallExpression = function(node, ctx) {
             property = node.callee.property.name;
         }
         if (!obj[property]) {
-            return local_error(ctx, 'Missing object property.', node.callee.property, node, 'CallExpression');
+            return local_error(ctx, 'JsWizziError', 'Missing object property.', node.callee.property, node, 'CallExpression');
         }
         if (verify.isFunction(obj[property])) {
             try {
@@ -810,21 +820,19 @@ runner.CallExpression = function(node, ctx) {
                 // loog 'wizzi-mtree.jswizzi.jsWizziRunner.CallExpression. Error calling ' + property + ', on statement: ' + escodegen.generate(node)
                 if (value && value.__is_error) {
                     var currentModelInfo = ctx.get_currentMTreeBrickInfo();
-                    return local_error(ctx, value.message, property, node, 'CallExpression', value, {
+                    return local_error(ctx, 'JsWizziError', value.message, property, node, 'CallExpression', value, {
                             callingProperty: property, 
-                            onStatement: escodegen.generate(node), 
-                            uri: currentModelInfo.currentModel_uri, 
-                            mixerUri: currentModelInfo.currentModel_mixerUri
+                            onStatement: escodegen.generate(node)
                          });
                 }
                 return value;
             } 
             catch (ex) {
-                return local_error(ctx, 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.property, node, 'CallExpression', ex);
+                return local_error(ctx, 'JsWizziError', 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.property, node, 'CallExpression', ex);
             } 
         }
         else {
-            return local_error(ctx, 'property: "' + property + '" is not a function', node.callee.property, node, 'CallExpression');
+            return local_error(ctx, 'JsWizziError', 'Property: "' + property + '" is not a function', node.callee.property, node, 'CallExpression');
         }
     }
     
@@ -854,11 +862,11 @@ runner.CallExpression = function(node, ctx) {
                     return f.apply(null, args);
                 } 
                 catch (ex) {
-                    return local_error(ctx, 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.name, node, 'CallExpression', ex);
+                    return local_error(ctx, 'JsWizziError', 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.name, node, 'CallExpression', ex);
                 } 
             }
             else {
-                return local_error(ctx, ('Function undeclared ' + node.callee.name), node.callee, node, 'CallExpression', new Error());
+                return local_error(ctx, 'JsWizziError', 'Function undeclared ' + node.callee.name, node.callee, node, 'CallExpression', new Error());
             }
         }
         ctx.beginLoadingCallArguments();
@@ -883,11 +891,11 @@ runner.CallExpression = function(node, ctx) {
         ctx.endLoadingCallArguments();
         var result;
         try {
-            result = runnerCall(f, ctx, args);
+            result = runnerCall(node.callee.name, f, ctx, args);
             // _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' end')
         } 
         catch (ex) {
-            return local_error(ctx, 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.name, node, 'CallExpression', ex);
+            return local_error(ctx, 'JsWizziError', 'Exception calling function: ' + (ex ? ex.message : 'exception message unavailable'), node.callee.name, node, 'CallExpression', ex);
         } 
         return result;
     }
@@ -896,7 +904,7 @@ runner.CallExpression = function(node, ctx) {
     if (node.callee.type === 'FunctionExpression') {
         var f = node.callee;
         if (f.params.length !== node.arguments.length) {
-            return local_error(ctx, 'A jsWizziFunction call must have the same number of arguments of the callee. Found: ' + f.params.length + ' and ' + node.arguments.length, null, node, 'CallExpression');
+            return local_error(ctx, 'JsWizziError', 'A jsWizziFunction call must have the same number of arguments of the callee. Found: ' + f.params.length + ' and ' + node.arguments.length, null, node, 'CallExpression');
         }
         ctx.beginLoadingCallArguments();
         var i, i_items=node.arguments, i_len=node.arguments.length, item;
@@ -913,9 +921,9 @@ runner.CallExpression = function(node, ctx) {
         }
         ctx.endLoadingCallArguments();
         f.type = 'FunctionDeclaration';
-        return runnerCall(f, ctx, args);
+        return runnerCall("FunctionExpression", f, ctx, args);
     }
-    return local_error(ctx, 'Not implemented. CallExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'CallExpression');
+    return local_error(ctx, 'JsWizziError', 'Not implemented. CallExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'CallExpression');
 }
 ;
 runner.MemberExpression = function(node, ctx) {
@@ -932,7 +940,7 @@ runner.MemberExpression = function(node, ctx) {
         console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.obj', obj, typeof obj);
         console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.node.object', node.object);
         console.log("[31m%s[0m", 'jsWizziRunner.MemberExpression.callContext.values', ctx.callContext && ctx.callContext.values);
-        return local_error(ctx, 'The value must be an object. It is undefined', node.object, node, 'MemberExpression');
+        return local_error(ctx, 'JsWizziError', 'The value must be an object. It is undefined', node.object, node, 'MemberExpression');
     }
     if (node.computed) {
         var property = runner(node.property, ctx);
@@ -959,7 +967,7 @@ runner.MemberExpression_Set = function(node, ctx, data) {
         return obj;
     }
     if (obj == null || typeof(obj) == 'undefined') {
-        return local_error(ctx, 'The value must be an object. It is undefined', node.object, node, 'MemberExpression_Set');
+        return local_error(ctx, 'JsWizziError', 'The value must be an object. It is undefined', node.object, node, 'MemberExpression_Set');
     }
     if (node.computed) {
         var property = runner(node.property, ctx);
@@ -1029,7 +1037,7 @@ runner.AssignmentExpression = function(node, ctx) {
         v = l |= r;
     }
     else {
-        return local_error(ctx, 'Unmanaged expression operator ' + node.operator, node.operator, node, 'AssignmentExpression');
+        return local_error(ctx, 'JsWizziError', 'Unmanaged expression operator ' + node.operator, node.operator, node, 'AssignmentExpression');
     }
     // loog 'jsWizziRunner.AssignmentExpression.node.left', node.left
     var notUsed = runnerSet(node.left, ctx, v);
@@ -1187,10 +1195,10 @@ runner.NewExpression = function(node, ctx) {
             return new RegExp(args[0], args[1]);
         }
         else {
-            return local_error(ctx, ('Builtin object (or number of arguments) not managed ' + node.callee.name + ', num arguments ' + l), node.callee, node, 'NewExpression');
+            return local_error(ctx, 'JsWizziError', 'Builtin object (or number of arguments) not managed ' + node.callee.name + ', num arguments ' + l, node.callee, node, 'NewExpression');
         }
     }
-    return local_error(ctx, 'Not implemented. NewExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'NewExpression');
+    return local_error(ctx, 'JsWizziError', 'Not implemented. NewExpression.node.callee.type: "' + node.callee.type + '"', null, node, 'NewExpression');
 }
 ;
 runner.FunctionCall = function(node, ctx) {
@@ -1213,7 +1221,7 @@ runner.FunctionCall = function(node, ctx) {
         objbase = ctx.values;
     }
     if (objbase == null || typeof(objbase) == 'undefined') {
-        return local_error(ctx, 'The value ' + node.name.base + ' must be an object. It is undefined', node.name.base, node, 'FunctionCall');
+        return local_error(ctx, 'JsWizziError', 'The value ' + node.name.base + ' must be an object. It is undefined', node.name.base, node, 'FunctionCall');
     }
     var args = [];
     if (Object.prototype.toString.call(node.arguments) == '[object Array]') {
@@ -1234,7 +1242,7 @@ runner.FunctionCall = function(node, ctx) {
     }
     var f = objbase[node.name.name];
     if (!f) {
-        return local_error(ctx, 'Missing function.', node.name.base, node, 'FunctionCall');
+        return local_error(ctx, 'JsWizziError', 'Missing function.', node.name.base, node, 'FunctionCall');
     }
     if (verify.isFunction(f)) {
         try {
@@ -1243,7 +1251,7 @@ runner.FunctionCall = function(node, ctx) {
             return v;
         } 
         catch (ex) {
-            return local_error(ctx, (ex ? ex.message : 'Error calling function'), node.callee.property, node, 'CallExpression', ex);
+            return local_error(ctx, 'JsWizziError', (ex ? ex.message : 'Error calling function'), node.callee.property, node, 'CallExpression', ex);
         } 
     }
 }
@@ -1282,38 +1290,40 @@ runner.FunctionDeclaration_Call = function(node, ctx, data) {
     return state.value;
 }
 ;
-function local_error(ctx, message, node, parentnode, method, ex, other) {
-    // loog 'jsWizziRunner.local_error.message', message
-    // loog 'jsWizziRunner.local_error.node.name', node && node.name
-    // loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
-    // loog 'jsWizziRunner.local_error.method', method
-    // loog 'jsWizziRunner.local_error.ex.message', ex && ex.message
-    // loog 'jsWizziRunner.local_error.parentnode.other', other
-    // loog 'jsWizziRunner.local_error.ctx.source', ctx.source
+function local_error(ctx, errorName, message, node, parentnode, method, inner, other) {
+    console.log('jsWizziRunner.local_error.message', message, __filename);
+    console.log('jsWizziRunner.local_error.node', node, __filename);
+    console.log('jsWizziRunner.local_error.node.name', node && node.name, __filename);
+    console.log('jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name, __filename);
+    console.log('jsWizziRunner.local_error.method', method, __filename);
+    console.log('jsWizziRunner.local_error.inner.message', inner && inner.message, __filename);
+    console.log('jsWizziRunner.local_error.parentnode.other', other, __filename);
+    console.log('jsWizziRunner.local_error.ctx.source', ctx.source, __filename);
     // loog 'jsWizziRunner.local_error.ctx', ctx
-    // loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', ex && ex.name,  ctx.isForInterpolation, node, parentnode
+    // loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', inner && inner.name,  ctx.isForInterpolation, node, parentnode
     message = message || '';
-    var errorCode = 'JsWizziError', ss = message.split('|');
-    if (ss.length == 2) {
-        errorCode = ss[0];
-        message = ss[1];
-    }
+    var errorName = errorName || 'JsWizziError';
     // loog 'jsWizziRunner. local_error.', node.loc, ctx.isForInterpolation, ctx.source
-    var node, errorLines;
+    var node, errorLines, mTreeBrickErrorNodeId;
     if (node) {
         if (node.errorLines) {
             errorLines = node.errorLines;
             node = node.node;
         }
+        // loog 'parsed', parsed
         else {
+            var parsed;
             if (parentnode) {
-                errorLines = errors.esprimaNodeErrorLines(message, parentnode, ctx.source, true)
+                parsed = errors.esprimaNodeErrorLines(message, parentnode, ctx.source, true)
                 ;
+                errorLines = parsed.lines;
             }
             else {
-                errorLines = errors.esprimaNodeErrorLines(message, node, ctx.source, true)
+                parsed = errors.esprimaNodeErrorLines(message, node, ctx.source, true)
                 ;
+                errorLines = parsed.lines;
             }
+            mTreeBrickErrorNodeId = parsed.parsedErrorLine.nodeId;
         }
     }
     var nodeStm;
@@ -1331,21 +1341,33 @@ function local_error(ctx, message, node, parentnode, method, ex, other) {
         parentnodeStm = 'escodegen failed: ' + escodegenErr.message;
     } 
     var currentModelInfo = ctx.get_currentMTreeBrickInfo();
-    return local_error_new(errorCode, method, message, null, ex, {
-            errorLines: errorLines, 
-            nodeStatement: nodeStm, 
-            parentNodeStatement: parentnodeStm, 
-            uri: currentModelInfo.currentModel_uri, 
-            mixerUri: currentModelInfo.currentModel_mixerUri, 
+    // loog 'other', other
+    var errorNames = [
+        errorName
+    ];
+    if (inner && inner.data && inner.data.errorName) {
+        errorNames.push(inner.data.errorName);
+    }
+    return new mainErrors.WizziError(message, errorName, errorNames, {
+            source: {
+                method: 'wizzi-mtree@0.8.16.jsWizzi.jsWizziRunner.' + method
+             }, 
+            jswizzi: {
+                node: node, 
+                nodeStatement: nodeStm, 
+                parentNodeStatement: parentnodeStm
+             }, 
+            mtree: {
+                ittfDocumentUri: currentModelInfo.currentModel_uri, 
+                mixerIttfDocumentUri: currentModelInfo.currentModel_mixerUri, 
+                loadHistory: ctx.loadHistory, 
+                mTreeBrickErrorNodeId: mTreeBrickErrorNodeId
+             }, 
+            hint: {
+                mTreeBuildUpScriptErrorLines: errorLines
+             }, 
+            inner: inner, 
             ...other||{}
-         });
-}
-function local_error_new(name, method, message, node, inner, other) {
-    return new mainErrors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
-            errorName: name, 
-            method: 'wizzi-mtree@0.8.13.jsWizzi.jsWizziRunner.' + method, 
-            ...other||{}, 
-            inner: inner
          });
 }
 function getTypeDescription(obj) {
@@ -1354,105 +1376,191 @@ function getTypeDescription(obj) {
     }
     return typeof(obj);
 }
-module.exports = {
-    getParsed: function(source, callback) {
-        // FIXME caching provokes errors, now disbled
-        // should be:  CACHE_MAX_LEN = 100
-        var CACHE_MAX_LEN = 0;
-        if (source.length < CACHE_MAX_LEN) {
-            parsed = parsedCache[source];
-            if (parsed) {
-                if (callback) {
-                    return callback(null, parsed);
-                }
-                else {
-                    return parsed;
-                }
-            }
-        }
-        var parsed;
-        try {
-            parsed = esprima.parse(source, {
-                attachComment: true, 
-                loc: true, 
-                sourceType: 'module'
-             })
-            ;
-        } 
-        catch (ex) {
+function getParsed(source, callback) {
+    // FIXME caching provokes errors, now disbled
+    // should be:  CACHE_MAX_LEN = 100
+    var CACHE_MAX_LEN = 0;
+    if (source.length < CACHE_MAX_LEN) {
+        parsed = parsedCache[source];
+        if (parsed) {
             if (callback) {
-                return callback(new errors.JsWizziSynthaxError(ex, source));
+                return callback(null, parsed);
             }
             else {
-                return new errors.JsWizziSynthaxError(ex, source);
-            }
-        } 
-        if (source.length < CACHE_MAX_LEN) {
-            parsedCache[source] = parsed;
-        }
-        if (callback) {
-            return callback(null, parsed);
-        }
-        else {
-            return parsed;
-        }
-    }, 
-    run: function run(source, ctx, options, callback) {
-        // ctx : instance-of wizzi-mtree.jswizzi.jsWizziContext
-        // loog 'jsWizziRunner.run.source', source.substr(0, 400)
-        ctx.pushSource(source);
-        if (verify.isNotEmpty(source) === false) {
-            var err = error('InvalidArgument', 'run', {
-                parameter: 'source', 
-                message: 'The source parameter must be a string. Received: ' + source
-             });
-            if (callback) {
-                return callback(err);
-            }
-            else {
-                return err;
-            }
-        }
-        if (verify.isObject(ctx) === false) {
-            var err = error('InvalidArgument', 'run', {
-                parameter: 'ctx', 
-                message: 'The ctx parameter must be an object. Received: ' + ctx
-             });
-            if (callback) {
-                return callback(err);
-            }
-            else {
-                return err;
-            }
-        }
-        options = (options || defaultOptions);
-        if (callback) {
-            this.getParsed(source, function(err, parsed) {
-                if (err) {
-                    console.log("[31m%s[0m", err);
-                    return callback(err);
-                }
-                return execute_run_cb(parsed, ctx, options, callback);
-            })
-        }
-        else {
-            var parsed = this.getParsed(source);
-            if (parsed && parsed.__is_error) {
                 return parsed;
             }
-            return execute_run_cb(parsed, ctx, options);
         }
     }
- };
-function execute_run_cb(parsed, ctx, options, callback) {
+    var parsed;
+    try {
+        parsed = esprima.parse(source, {
+            attachComment: true, 
+            loc: true, 
+            sourceType: 'module'
+         })
+        ;
+    } 
+    catch (ex) {
+        if (callback) {
+            return callback(new errors.JsWizziSynthaxError(ex, source));
+        }
+        else {
+            return new errors.JsWizziSynthaxError(ex, source);
+        }
+    } 
+    if (source.length < CACHE_MAX_LEN) {
+        parsedCache[source] = parsed;
+    }
+    if (callback) {
+        return callback(null, parsed);
+    }
+    else {
+        return parsed;
+    }
+}
+function getMTreeBricksAndFunctionContextsFromAst(ast) {
+    const contexts = {
+        currentBrickKey: 'f0', 
+        mTreeBricks: {
+            f0: {
+                stackPath: [
+                    
+                ], 
+                functions: [
+                    
+                ]
+             }
+         }
+     };
+    contexts.currentBrick = contexts.mTreeBricks[contexts.currentBrickKey];
+    doAst(ast, contexts);
+    // loog 'contexts', JSON.stringify(contexts, null, 2)
+    Object.keys(contexts.mTreeBricks).forEach(brickKey => 
+    
+        Object.keys(contexts.mTreeBricks[brickKey].functions).forEach(functionName => 
+        
+            contexts.mTreeBricks[brickKey].functions[functionName] = contexts.mTreeBricks[brickKey].functions[functionName].split(',')
+        )
+    )
+    // loog 'contexts', JSON.stringify(contexts, null, 2)
+    return contexts;
+}
+function doAst(ast, contexts) {
+    // log ast.type
+    Object.keys(ast).forEach((propName) => {
+    
+        if (propName == 'body') {
+            console.log(ast.type, propName, ast.id ? ast.id.name : '')
+            if (ast.id) {
+                contexts.currentBrick.stackPath.push(ast.id.name);
+                contexts.currentBrick.functions[ast.id.name] = contexts.currentBrick.stackPath.join(',');
+            }
+            else {
+                if (ast.type == 'Program') {
+                    contexts.currentBrick.stackPath.push(ast.type);
+                }
+            }
+            if (verify.isArray(ast[propName])) {
+                const body = ast[propName];
+                body.forEach(item => 
+                
+                    doAst(item, contexts)
+                )
+            }
+            else {
+                if (verify.isObject(ast[propName])) {
+                    doAst(ast[propName], contexts);
+                }
+            }
+            if (ast.id || ast.type == 'Program') {
+                contexts.currentBrick.stackPath.pop();
+            }
+        }
+        else {
+            
+            // log "select", brickKey
+            if (ast.type == "ExpressionStatement" && ast.expression.type == "CallExpression" && ast.expression.callee.type == "MemberExpression" && ast.expression.callee.object.type == "Identifier" && ast.expression.callee.object.name == "$" && ast.expression.callee.property.type == "Identifier" && ast.expression.callee.property.name == "s" && ast.expression.arguments.length > 0) {
+                const brickKey = ast.expression.arguments[0].value;
+                if (!contexts.mTreeBricks[brickKey]) {
+                    contexts.mTreeBricks[brickKey] = {
+                        stackPath: [], 
+                        functions: {
+                            
+                         }
+                     };
+                }
+                contexts.currentBrickKey = brickKey;
+                contexts.currentBrick = contexts.mTreeBricks[brickKey];
+            }
+        }
+    }
+    )
+}
+function run(source, jsWizziContext, options, callback) {
+    // jsWizziContext : instance-of wizzi-mtree.jswizzi.jsWizziContext
+    // loog 'jsWizziRunner.run.source', source.substr(0, 400), options.isForInterpolation
+    jsWizziContext.pushSource(source);
+    if (verify.isNotEmpty(source) === false) {
+        var err = error('InvalidArgument', 'run', {
+            parameter: 'source', 
+            message: 'The source parameter must be a string. Received: ' + source
+         });
+        if (callback) {
+            return callback(err);
+        }
+        else {
+            return err;
+        }
+    }
+    if (verify.isObject(jsWizziContext) === false) {
+        var err = error('InvalidArgument', 'run', {
+            parameter: 'jsWizziContext', 
+            message: 'The jsWizziContext parameter must be an object. Received: ' + jsWizziContext
+         });
+        if (callback) {
+            return callback(err);
+        }
+        else {
+            return err;
+        }
+    }
+    options = (options || defaultOptions);
+    if (callback) {
+        this.getParsed(source, function(err, parsed) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+                return callback(err);
+            }
+            return execute_run_cb(parsed, jsWizziContext, options, callback);
+        })
+    }
+    else {
+        var parsed = this.getParsed(source);
+        if (parsed && parsed.__is_error) {
+            return parsed;
+        }
+        return execute_run_cb(parsed, jsWizziContext, options);
+    }
+}
+function execute_run_cb(parsed, jsWizziContext, options, callback) {
     if (options.dumpfile) {
         options.dumpfile(JSON.stringify(parsed, null, 2))
     }
+    
+    // these will be set on the
+    
+    // mTreeBrickData objects of the @wizzi/mtree.loader.loadHistory
+    
+    // and used when creating mTreeBricks ContextData instances
+    if (!!options.isForInterpolation == false) {
+        var contextsFromAst = getMTreeBricksAndFunctionContextsFromAst(parsed);
+        jsWizziContext.setContextsFromMTreeBuildUpScriptAst(contextsFromAst)
+    }
     try {
-        var result = runner(parsed, ctx);
+        var result = runner(parsed, jsWizziContext);
     } 
     catch (ex) {
-        ctx.popSource();
+        jsWizziContext.popSource();
         if (callback) {
             return callback(ex);
         }
@@ -1460,7 +1568,7 @@ function execute_run_cb(parsed, ctx, options, callback) {
             return ex;
         }
     } 
-    ctx.popSource();
+    jsWizziContext.popSource();
     
     // loog 'wizzi-mtree.jswizzi.jsWizziRunner. Result has errors: ', result
     if (result && result.__is_error) {
@@ -1479,6 +1587,10 @@ function execute_run_cb(parsed, ctx, options, callback) {
         return result;
     }
 }
+module.exports = {
+    getParsed: getParsed, 
+    run: run
+ };
 /**
   params
     string code
@@ -1497,7 +1609,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.13.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.8.16.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

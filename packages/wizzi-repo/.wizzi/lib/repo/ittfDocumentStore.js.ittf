@@ -34,8 +34,11 @@
 			#       # when storeKind === 'mongodb'
 			#     string storeBaseFolder
 			#       # when storeKind === 'mongodb'
-			#     string storeJsonFsData
-			#       # when storeKind === 'json'
+			#     |
+			#       string storeJsonFsData
+			#         # when storeKind === 'json'
+			#       string storeJsonFs
+			#         # when storeKind === 'json'
 		m init
 			{ storeInfo
 				string storeKind

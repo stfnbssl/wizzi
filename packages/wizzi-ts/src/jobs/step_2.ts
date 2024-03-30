@@ -4,8 +4,6 @@ import {createFsWizziFactory} from '../factory'
 
 var jobPath = path.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'step_2.wfjob.ittf');
 
-var friendsArray = ['arthur', 'mary'];
-
 export function job_2() {
     createFsWizziFactory(
         {},

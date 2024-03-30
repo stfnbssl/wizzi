@@ -3,9 +3,17 @@
 	#
 		# This allows model loadings and generations from text strings
 		# params
+        #   string ittfContent
+        #   string schema
 		#   { options
 		#     { globalContext
 		#       optional
+        # returns
+        #   {
+        #     { wizziFactory
+        #       :ref WizziFactory
+        #     string ittfDocumentUri
+        #
 	m createSingleTextSourceFactory
 		string ittfContent
 		string schema
@@ -46,17 +54,18 @@
 
 	#
 		# Creates a json factory and its json file system from a packiFiles object
+		# params
+		#   { packiFiles
+        #   { options
+        #     { globalContext
+        #       optional
         # returns
         #   {
         #     { wf
         #       :ref WizziFactory
         #     { jsonFs
         #       :ref @wizzi/repo/JsonFs
-		# params
-		#   { packiFiles
-        #   { options
-        #     { globalContext
-        #       optional
+        #
     m createJsonFactoryAndJsonFs
         param packiFiles
         param options

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
@@ -12,7 +12,7 @@ var assert = require('assert');
 var async = require('async');
 var errors = require('../errors');
 var includer = require('./includer');
-var utilnode = require("../util/node");
+var utilnode = require("../utils/node");
 module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
     if (typeof(callback) !== 'function') {
         throw new Error(
@@ -106,8 +106,10 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
              }, function(err, mixedNodifiedMTree) {
                 if (err) {
                     return callback(local_error('IttfMixError', 'mixer', 'Fragment to mix not found', mixerNode, err, {
-                            mixerUri: mixeruri, 
-                            mixerRelPath: mixerNode.name
+                            mtree: {
+                                mixerUri: mixeruri, 
+                                mixerRelPath: mixerNode.name
+                             }
                          }));
                 }
                 mTreeBrickProvider.enterFragmentCall(mixeruri, mixedNodifiedMTree.uri)
@@ -289,10 +291,20 @@ function getFirstSemanticNode(nodes) {
     }
     return null;
 }
-function local_error(name, method, message, node, inner, other) {
-    return new errors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
-            errorName: name, 
-            method: method, 
+function local_error(errorName, method, message, node, inner, other) {
+    console.log('local_error', errorName, node, __filename);
+    var mtree = Object.assign({}, other.mtree || {}, {
+        mTreeBrickNode: node, 
+        mTreeBrick: node ? (node.mTreeBrick || node.model) : null
+     });
+    delete other.mtree
+    return new errors.WizziError(message, errorName, [
+            errorName
+        ], {
+            source: {
+                method: 'wizzi-mtree@0.8.16.loader.mixer.' + method
+             }, 
+            mtree: mtree, 
             inner: inner, 
             ...other||{}
          });
@@ -315,7 +327,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.13.loader.mixer.' + method,
+        method: 'wizzi-mtree@0.8.16.loader.mixer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

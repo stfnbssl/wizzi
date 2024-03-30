@@ -2,14 +2,20 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\root\index.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:16 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 var verify = require('wizzi-utils').verify;
 var loader = require('./lib/loader');
+var mocks = require('./lib/mocks');
+var JsWizziRunner = require('./lib/jswizzi/jsWizziRunner');
+var JsWizziContext = require('./lib/jswizzi/jsWizziContext');
+var JsWizziScriptCoder = require('./lib/jswizzi/jsWizziScriptCoder');
+var mTreeLoadHistory = require('./lib/loader/loadHistory');
+var mTreeBuildUpScripter = require('./lib/loader/mTreeBuildUpScripter');
 
 var md = module.exports = {};
-md.version = "0.8.13";
+md.version = "0.8.16";
 /**
     
      params
@@ -120,6 +126,26 @@ md.createLoadMTree = function createLoadMTree(createStore, options) {
         };
 }
 ;
+md.mTreeLoadHistory = mTreeLoadHistory;
+md.mTreeBuildUpScripter = mTreeBuildUpScripter;
+md.jsWizzi = {
+    JsWizziRunner: JsWizziRunner, 
+    JsWizziContext: JsWizziContext, 
+    JsWizziScriptCoder: JsWizziScriptCoder
+ };
+md.mtreeUtils = {
+    node: require('./lib/utils/node')
+ };
+md.mtreeTests = {
+    mTreeBrickProvider: require('./lib/loader/mTreeBrickProvider'), 
+    liner: require('./lib/loader/liner'), 
+    nodifier: require('./lib/loader/nodifier'), 
+    includer: require('./lib/loader/includer'), 
+    mixer: require('./lib/loader/mixer'), 
+    appender: require('./lib/loader/appender'), 
+    evaluator: require('./lib/loader/evaluator')
+ };
+md.mocks = mocks;
 /**
   params
     string code

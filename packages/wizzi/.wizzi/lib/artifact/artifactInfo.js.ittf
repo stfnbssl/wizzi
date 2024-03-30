@@ -10,6 +10,7 @@
     var ModelInfo = require("../model/modelInfo").ModelInfo
     +
 	#
+        # ArtifactInfo will become ProductionStep
 		# ArtifactInfo is a wrapper around an 'artifact' element
 		# of a 'wfjob' wizzi model.
 		# The 'artifact' element has been preprocessed 
@@ -46,7 +47,7 @@
 		# 	  }
 	+
 	function logme
-        if false
+        if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
     +
 	wz-class ArtifactInfo
@@ -64,13 +65,13 @@
                     _ this.contextInfos.push
                         new ModelInfo(item)
                 set this.modelInfo = null
-            set this.collection = artifactConfig.collection
+            set this.collection = artifactConfig.collection $$ ??? not used
             set this.isWfJob = artifactConfig.isWfJob
 			set this.isWfModelType = artifactConfig.isWfModelType
-            set this.transformers = artifactConfig.transformers
+            set this.transformers = artifactConfig.transformers $$ ??? not used
             set this.gen = artifactConfig.gen
             set this.dest = artifactConfig.dest
-            set this.wfjob = artifactConfig.wfjob
+            set this.wfjob = artifactConfig.wfjob $$ ??? not used
             set this.genContexts = []
     
 		m initialize

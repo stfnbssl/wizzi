@@ -1,5 +1,6 @@
 import { packi } from '@wizzi/utils';
 import { JsonFsData, JsonFs } from '@wizzi/repo';
+import { IttfDocumentData, mTreeBrickData, mTree } from '@wizzi/mtree';
 type cb<T> = (err: any, result: T|never) => void;
 
 type Readonly<P, T> = {
@@ -14,114 +15,15 @@ export const costants: {
 };
 
 /**
- * Parsed line of an ittf document.
- */
-declare interface MTreeBrickLine {
-    indent: number;
-    name: string;
-    value: string; // always trimmed
-    row: number;
-    col: number;
-    sourceKey: string;
-    tagSuffix?: string; // undefined; || '(',
-    hasMacro: boolean;
-}
-
-/**
- * Nodified parsed line of an ittf document.
- */
-declare interface MTreeBrickNode extends MTreeBrickLine {
-    parent: MTreeBrickNode;     // parent mTreeBrick
-    model: MTreeBrick;          // the mTreeBrick to which the node belongs
-    children: MTreeBrickNode[]; // the children mTreeBricks
-    id: number;                 // unique id
-}
-
-/**
- * The parsed tree of an ittf document.
- */
-declare interface MTreeBrick {
-    uri: string;                       // The location of the source IttfDocument.
-    schema: string;                     // The source IttfDocument schema.
-    loadHistory: WizziModelLoadHistory; // The loadHistory object
-    lines: MTreeBrickLine[];           // parsed lines of source text
-    nodes: MTreeBrickNode[];           // nodified lines of source text
-    sourceKey: string;                 // key of the source info of the IttfDocument
-    brickKey: string;                  // key of the cloned mTreeBrick
-    // these are set by the mixer, on the cloned object
-    mixed: boolean;                    // true if has been mixed
-    $mixerBrickKey: string;            // the brickKey of the mTreeBrick of the calling node (mixer)
-    $args: string;                     // the node-value of the mixer node
-    $argArray: string[]                // the $arg array of the mixer node
-    // these are set by the nodifier on the original mtree, then cloned
-    $params: string;                   // the node-value of the $params node, if declared
-}
-
-/**
- * An history object containing the text source of an ittf document.
- */
-declare interface IttfDocumentData {
-    ittfDocumentUri: string;
-    sourceKey: string;
-    content: string;
-}
-
-/**
- * An history object containing the parsed tree of an ittf document.
- */
-declare interface MTreeBrickData {
-    ittfDocumentUri: string;
-    schema: string;
-    sourceKey: string;
-    brickKey: string;
-    mTreeBrick: MTreeBrick;
-}
-
-/**
- * The container of all the parsed ittf documents that compose an MTree.
+ * The container of all the parsed ittf documents that compose an mTree.
  */
 declare interface WizziModelLoadHistory {
     ittfDocumentDatas: Readonly<string, IttfDocumentData>;
-    mTreeBrickDatas: Readonly<string, MTreeBrickData>;
+    mTreeBrickDatas: Readonly<string, mTreeBrickData>;
     getIttfDocumentContent(sourceKey: string): string;
     getSourceKey(ittfDocumentUri: string): string;
 }
 
-/**
- * The node of the builded final tree. See the [[MTree]] interface.
- */
-declare interface MTreeNode {
-    // The value of the source ittf node name
-    n: string;
-    // The value of the source ittf node value
-    v: string;
-    // The source ittf node row position
-    r: number;
-    // The source ittf node name column position
-    c: number;
-    /* The key of the ittfDocumentData of the ittf source document
-        to which this node belongs. The ittfDocumentData object
-        can be retrieved, with this key, from the wizzi-mtree.mTree.loadHistory object, 
-        available as a property of the wizzi-mtree.mTree.*/
-    s: string;
-    /* The key of the mTreeBrick to which this node belongs.
-        The mTreeBrick object can be retrieved, with this key, from the 
-        wizzi-mtree.mTree.loadHistory object, available as a property 
-        of the wizzi-mtree.mTree.*/
-    u: string;
-    // Children nodes
-    children: MTreeNode[];
-}
-
-/**
- * The builded final tree, after composition and template processing.
- */
-declare interface MTree {
-    uri: string;
-    $schema: string;
-    loadHistory: WizziModelLoadHistory;
-    nodes: MTreeNode[];
-}
 
 /**
  * Source map of an element of a Wizzi Model.
@@ -276,104 +178,176 @@ export function jsonFactory(options: JSONFactoryOptions, callback: cb<WizziFacto
  * WIZZI FACTORY PRODUCTION MANAGER
  */
 
-type ArtifactOptions = {
-    // TODO basedir should not to be here
-    basedir: string;
-    isDebug?: boolean,
-    CRLF?: string,
-    indentSpaces?: number,
-    dotgExtensionPrefix?: boolean,
-    dumps?: object,
-}
-
-interface CodeLine {
+export interface CodeLine {
     containsFilePath?: boolean,
     text: string[],
     indentValue: number,
-    options: ArtifactOptions,
+    options: ProductionOptions,
 }
 
-interface CodeBlock {
+export interface CodeBlock {
     lines: CodeLine[];
-    options: ArtifactOptions,
+    options: ProductionOptions,
     indentValue: number,
     currentline?: CodeLine,
 }
 
-interface GenContext {
+export interface GenContext {
     block: CodeBlock;
     values: object;
     isEmpty: boolean;
     artifactGenerationErrors: object[],
     wizziFactory: WizziFactory,
+    getContent() :string
 }
 
-interface ModelInfo {
+
+/**
+ * @type CollectionPathTemplateValues
+ * @description Template for building the file path of an artifact generated from an item of a collection instance
+ *              described by a ModelCollectionInfo.
+ */
+export type CollectionPathTemplateValues = {
+    attribute?: string,
+    token?: string,
+}
+/**
+ * @type ModelCollectionInfo
+ * @description A ModelCollectionInfo describes a collection exposed by an array property of a Model.
+ *              For each item of the collection an artifact should be generated.
+ * @property name                     Property name of the collection in an instance of an object described by a ModelInfo.
+ * @property itemName                 Name of the exported collection item instance.
+ * @property collPathTemplateValues   Template for building the file path for persisting the generated artifacts.
+ */
+
+export type ModelCollectionInfo = {
+    name: string;
+    itemName: string;
+    pathTemplateValues: CollectionPathTemplateValues[]
+}
+
+/**
+ * @type ModelSource
+*/
+type ModelSource = {
+    fullpath: string;
+    relpath: string;
+    content: string;
+}
+
+/**
+ * @type ModelInfo
+ * @description 
+ * @property schema
+ * @property format
+ * @property isCompile
+ * @property contexts
+ * @property transformers
+ * @property coll
+ * @property exportName
+ * @property generatorRequireContextOnly   There is no source document for the artifact to be generated. 
+ *                                      The ArtifactGenerator simply requires a context object.
+ *                                      So collect the loaded contexts in an array and pass them back.
+*/
+type ModelInfo = {
     id: string;
-    config: object;
+    config: ModelLoadConfig;
     schema: string;
-    format?: string;
-    isCompile: boolean;
-    contexts?: object[];
+    format?: ModelLoadFormat;
+    isCompile?: boolean;
+    contexts?: ModelInfo[];
     transformers?: string[];
-    coll?: object;
+    coll?: ModelCollectionInfo;
     exportName?: string;
     generatorRequireContextOnly: boolean;
+    exists(): boolean;
+    isFile(): boolean;
+    isDirectory(): boolean;
+    getSource(): ModelSource;
+    getSources(): ModelSource[];
 }
 
-type ArtifactDestFolder = {
-    baseFolder: string;
-    folder: string;
-    extension: string;
-}
 
-type ArtifactDestPath = {
+/**
+ * @type ProductionStepDestPath
+ * @description Object for building the destination path of the artifacts of a production step.
+ * @property fullpath       The full destination path of the artifact production. 
+ *                          The ProductionStep must be a single artifact production step.
+ * @property folder         The destination folder path of the artifact productions of the step. Can be relative. 
+ * @property baseFolder     Base folder when folder is relative.
+ * @property path           The destination relative path of the artifact productions. 
+ *                          When set, overrides the default relative destination path that is taken from the source path.
+ * @property extension      The extension of the file of the persisted artifact. In the form `<ext>` without the dot
+  */
+export type ProductionStepDestPath = {
+    fullpath?: string;
+    baseFolder?: string;
+    folder?: string;
     path?: string;
     extension: string;
 }
 
-interface ArtifactConfig {
+/**
+ * @type ProductionStepConfig
+ * @description A ProductionStepConfig is a transport object used to build a ProductionStep instance.
+ *              It can be built from an `artifact` element of a `wfjob` Wizzi Schema or programmatically.
+ * @property name        The display name of the production step
+ * @property options 
+ * @property model   
+ * @property contexts    Array of ModelLoadConfig instances that describe models to be used as context object.
+ */
+export interface ProductionStepConfig {
     // from wfjob.artifact.wzName
-    name: string;
-    options: ArtifactOptions;
-    model: {
-        cwd: string,     // from wfjob.line.cwdFolder
-        src: string,     // from wfjob.artifact.src
-        ignore?: string,  // from wfjob.artifact.ignore
-        schema: string,  // from wfjob.artifact.schema
-        contexts?: object[],
-        transformers?: string[], // from wfjob.artifact.transformers
-    },
-    contexts?: object[],
+    name?: string;
+    options?: ProductionOptions;
+    model: ModelLoadConfig;
+    contexts?: ModelLoadConfig[],
     isWfJob?: boolean, // from wfjob.artifact.isWfJob
+    isWfModelDoms?: boolean, // from wfjob.artifact.isWfModelDoms
+    isWfMeta?: boolean, // from wfjob.artifact.isWfMeta
     gen: {
         generator: string, // from wfjob.artifact.generator
     },
-    dest: ArtifactDestPath | ArtifactDestFolder
+    dest?: ProductionStepDestPath
 }
 
-interface ArtifactInfo {
+/**
+ * @type ProductionStep
+ * @description A ProductionStep describes a step in the execution of a Wizzi Job.
+ *              It is the main production unit of the Wizzi Factory.
+ *              It is instantiated from an instance of a ProductionStepConfig. 
+ * @param modelInfo         An instance of a ModelInfo created from a ProductionStepConfig.model.
+ * @param dest              A ProductionStepDestPath instance for artifact persistence.
+ * @param isWfArtifact      The production step is an Artifact Generation Production
+ * @param isWfJob           The production step is a child Wizzi Job Production
+ * @param isWfModelDoms     The production step is a Wizzi ModelDoms Production
+ * @param isWfMeta          The production step is a Wizzi Meta Production         
+ * @param genContexts       Contains the generation contexts accumulated during the production.
+ *                          At Production end a GenContext instance contains the text of the generated artifact.
+ */
+export type ProductionStep = {
     name: string;
-    options: ArtifactOptions;
+    options: ProductionOptions;
     modelInfo: ModelInfo;
     contextInfos: object[],
     transformers: string[],
     gen: {
         generator: string,
     },
-    dest: ArtifactDestPath | ArtifactDestFolder,
+    dest: ProductionStepDestPath,
     isWfJob?: boolean, // from wfjob.artifact.isWfJob
-    isWfModelType?: boolean, // from wfjob.artifact.isWfJob
+    isWfModelDoms?: boolean, // from wfjob.artifact.isWfModelDoms
+    isWfMeta?: boolean, // from wfjob.artifact.isWfMeta
     genContexts: GenContext[],
 }
 
-interface PManJobRequest {
+export interface PManJobRequest {
     wfjob: {
         ittfDocumentUri: string,
     }
 }
 
-interface PManPersistResult {
+export interface PManPersistResult {
     oper: string;
     item: {
         filepath: string,
@@ -381,17 +355,23 @@ interface PManPersistResult {
     status: string;
 }
 
-interface ProductionContext {
-    evaluationContext: {[key: string]: any}
+type EvaluationContextValue = string | number | {}; 
+
+export interface ProductionContext {
+    evaluationContext: {[key: string]: any};
+    hasNewRunningContextValues(): boolean;
+    acceptNewRunningContextValues(): void;
+    setEvaluationContextValue(namePath: string, value: EvaluationContextValue) : void;
+    getEvaluationContextValue(namePath: string): EvaluationContextValue;
 }
 
-interface ProductionManager {
+export interface ProductionManager {
     productionContext: ProductionContext;
     wizziFactory: WizziFactory;
-    addArtifactRequest(request: ArtifactConfig): void;
+    addArtifactRequest(request: ProductionStepConfig): void;
     addJobRequest(jobRequest: PManJobRequest): void;
-    run(callback: cb<ArtifactInfo[]>): void;
-    persistToFile(callback: cb<PManPersistResult[][]>): void;
+    run(callback: cb<ProductionStep[]>): void;
+    persistToFile(callback: cb<PManPersistResult[]>): void;
     terminate(): void;
 }
 
@@ -402,23 +382,37 @@ export function createProductionManager(options?: ProductionOptions, globalConte
  */
 
 /**
-* The configuration of the loading of a complex Wizzi Model.
+ * @type ModelLoadFormat
+ * @description The format of a not Ittf context object that the Wizzi Factory can load.
 */
-type ModelLoadConfig = {
+export type ModelLoadFormat = "xml" | "json" | "yaml";
+
+/**
+ * @type ModelLoadConfig
+ * @description The configuration of a complex loading of a Wizzi Model Instance.
+ * @property src          The path of the source document. Can be an absolute or relative path. 
+ *                        When relative the `cwd` parameter must set the base path.
+ * @property cwd          The base path of the source document if `src` is a relative path.
+ * @property schema       The Wizzi Schema when the model source is a Ittf document.
+ * @property format       The format of the source document when it is not a Ittf document. 
+ * @property exportName   The name of the loaded instance when used as a context object in a production.
+ * @property transformers An array of names of Model Transformations that must be applied to the loaded instance.
+*/
+export type ModelLoadConfig = {
     src: string;
-    cwd: string;
+    cwd?: string;
     schema: string;
-    format?: string;
+    format?: ModelLoadFormat;
     exportName?: string;
-    contexts: ModelLoadConfig[];
-    transformers: string[];
+    contexts?: ModelLoadConfig[];
+    transformers?: string[];
+    coll?: ModelCollectionInfo;
 }
 
 /**
 * @type ModelFormatOptions
 * @description               The required result format of a loaded Wizzi Model.
-* @property ittfSources      If true returns not the Wizzi Model but its ittf source documents.
-
+* @property ittfSources      If true returns not the Wizzi Model but its source Ittf documents.
 */
 type ModelFormatOptions = {
     ittfSources: boolean;
@@ -480,20 +474,19 @@ type DumpsOptions = {
 }
 
 /**
-* Job production options.
-*/
-/**
  * @type ProductionOptions
  * @description Wizzi Job production options
- * @property indentSpaces      Optional. Default: 4. The number of spaces of one indentation in a generated artifact
- * @property basedir           Optional. Not implemented yet
- * @property verbose           Optional. Not implemented yet
- * @property dumps             Optional. Job dump options
+ * @property indentSpaces         Optional. Default: 4. The number of spaces of one indentation in a generated artifact
+ * @property basedir              Optional. Not implemented yet
+ * @property verbose              Optional. Not implemented yet
+ * @property dotgExtensionPrefix  If true the generated file hello.js becomes hello.g.js. Default is false
+ * @property dumps                Optional. Job dump options
 */
 type ProductionOptions = {
     indentSpaces?: number;
     basedir?: string;
     verbose?: number;
+    dotgExtensionPrefix?: boolean,
     dumps?: DumpsOptions;
 }
 
@@ -601,18 +594,18 @@ declare interface WizziFactory {
      * @method loadMTree
      * @description Executes a IttfDocument loading into an mTree.
      * @param ittfDocumentUri      The path to the primary ittf source document.
-     * @param mTreeBuildUpContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
-     * @param callback             Receives the builded [[MTree]].
+     * @param mTreeBuildUpContext  A context object for the [[mTree]] build up, [[WizziModel]] or POJO.
+     * @param callback             Receives the builded [[mTree]].
      */
     loadMTree(
-        ittfDocumentUri: string, mTreeBuildUpContext: object, callback: cb<MTree>
+        ittfDocumentUri: string, mTreeBuildUpContext: object, callback: cb<mTree>
     ): void;
     /**
      * @method loadMTreeBuildUpScript
      * @description Executes a partial mTree loading and returns the mTree buildUp script for test.
      * @param ittfDocumentUri      The path to the primary ittf source document.
-     * @param mTreeBuildUpContext  A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
-     * @param callback             Receives the builded [[MTree]].
+     * @param mTreeBuildUpContext  A context object for the [[mTree]] build up, [[WizziModel]] or POJO.
+     * @param callback             Receives the builded [[mTree]].
      */
     loadMTreeBuildUpScript(
         ittfDocumentUri: string, mTreeBuildUpContext: object, callback: cb<string>
@@ -622,7 +615,7 @@ declare interface WizziFactory {
     * @description Executes a Wizzi Model loading and returns a Wizzi Model Instance.
     * @param schemaName
     * @param ittfDocumentUri      The path to the primary ittf source document.
-    * @param loadContext          A context object for the [[MTree]] build up, [[WizziModel]] or POJO.
+    * @param loadContext          A context object for the [[mTree]] build up, [[WizziModel]] or POJO.
     * @param callback             Receives the builded [[WizziModelInstance]].
     */
     loadModel(
@@ -844,14 +837,14 @@ interface LightOptions {
 }
 
 /**
-* Options for ligth MTree loading
+* Options for ligth mTree loading
 */
 interface LightMTreeOptions extends LightOptions {
     raw?: boolean;
 }
 
 /**
-* Options for ligth MTree loading from text
+* Options for ligth mTree loading from text
 */
 interface LightMTreeFromTextOptions extends LightOptions {
     schema: string;
@@ -859,14 +852,14 @@ interface LightMTreeFromTextOptions extends LightOptions {
 }
 
 /**
-* Options for ligth MTree loading
+* Options for ligth mTree loading
 */
 interface LightModelOptions extends LightOptions {
     ittfSources?: boolean;
 }
 
 /**
-* Options for ligth MTree loading from text
+* Options for ligth mTree loading from text
 */
 interface LightModelFromTextOptions extends LightOptions {
     schema: string;
@@ -929,17 +922,17 @@ interface LightModelDomsOptions {
 }
 
 /**
-* [[MTree]] build up
+* [[mTree]] build up
 */
-export function mtree(ittfDocumentPath: string, callback: cb<MTree>): void;
-export function mtree(ittfDocumentPath: string, mTreeBuildUpContext: object, callback: cb<MTree>): void;
+export function mtree(ittfDocumentPath: string, callback: cb<mTree>): void;
+export function mtree(ittfDocumentPath: string, mTreeBuildUpContext: object, callback: cb<mTree>): void;
 export function mtree(
-    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightMTreeOptions, callback: cb<MTree>
+    ittfDocumentPath: string, mTreeBuildUpContext: object, options: LightMTreeOptions, callback: cb<mTree>
 ): void;
-export function mtreeFromText(ittfContent: string, callback: cb<MTree>): void;
-export function mtreeFromText(ittfContent: string, mTreeBuildUpContext: object, callback: cb<MTree>): void;
+export function mtreeFromText(ittfContent: string, callback: cb<mTree>): void;
+export function mtreeFromText(ittfContent: string, mTreeBuildUpContext: object, callback: cb<mTree>): void;
 export function mtreeFromText(
-    ittfContent: string, mTreeBuildUpContext: object, options: LightMTreeFromTextOptions, callback: cb<MTree>
+    ittfContent: string, mTreeBuildUpContext: object, options: LightMTreeFromTextOptions, callback: cb<mTree>
 ): void;
 
 /**

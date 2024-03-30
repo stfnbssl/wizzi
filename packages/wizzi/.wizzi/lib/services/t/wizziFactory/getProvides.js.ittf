@@ -1,5 +1,9 @@
 ﻿$group
 
+    m getProvidedCheatsheetFolders
+        var info = this.getInfo()
+        return info.pluginsManager.providedCheatsheetFolders
+
     m mapIttfDocumentPathToSchema
         param ittfDocumentPath
         return this.pluginsManager.mapIttfDocumentPathToSchema(ittfDocumentPath)

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScripter.js.ittf
-    utc time: Thu, 14 Mar 2024 21:16:15 GMT
+    utc time: Sat, 30 Mar 2024 14:06:30 GMT
 */
 'use strict';
 /**
@@ -34,8 +34,8 @@ function codify(node, nparent, jsScriptCoder, ctx) {
         setJsWizziContext(ctx, null, jsScriptCoder);
         var vparent = ('$' + nparent);
         var value = codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx);
-        jsScriptCoder.w(vparent + ".v = " + vparent + ".v ? " + vparent + ".v : ''" + ' //' + node.id, node)
-        jsScriptCoder.w(vparent + '.v += ($.textSep + ' + value + ');' + ' //' + node.id, node)
+        jsScriptCoder.w(vparent + ".v = " + vparent + ".v ? " + vparent + ".v : ''" + nodeMapComment(node), node)
+        jsScriptCoder.w(vparent + '.v += ($.textSep + ' + value + ');' + nodeMapComment(node), node)
     }
     else if (tag == '$if') {
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
@@ -68,9 +68,9 @@ function codify(node, nparent, jsScriptCoder, ctx) {
         var namevalue = items[0].split(',');
         var name = namevalue[0];
         var value = namevalue[1];
-        jsScriptCoder.w('var ' + name + ', ' + value + ';' + ' //' + node.id, node)
-        jsScriptCoder.for(name + ' in ' + items[2] + ' //' + node.id, node)
-        jsScriptCoder.w(value + ' = ' + items[2] + '[' + name + '];' + ' //' + node.id, node)
+        jsScriptCoder.w('var ' + name + ', ' + value + ';' + nodeMapComment(node), node)
+        jsScriptCoder.for(name + ' in ' + items[2] + nodeMapComment(node), node)
+        jsScriptCoder.w(value + ' = ' + items[2] + '[' + name + '];' + nodeMapComment(node), node)
         closeBlock = '}';
     }
     
@@ -82,21 +82,21 @@ function codify(node, nparent, jsScriptCoder, ctx) {
     else if (tag == '$foreach') {
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
         var items = node.value.split(' ');
-        jsScriptCoder.w('var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + ' //' + node.id, node)
-        jsScriptCoder.w('var ' + items[0] + '_count = ' + items[2] + '.length;' + ' //' + node.id, node)
+        jsScriptCoder.w('var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + nodeMapComment(node), node)
+        jsScriptCoder.w('var ' + items[0] + '_count = ' + items[2] + '.length;' + nodeMapComment(node), node)
         jsScriptCoder.for('var i' + nnode + '=0; i' + nnode + '<' + items[0] + '_count' + nnode + '; i' + nnode + '++', node)
-        jsScriptCoder.w('var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + ' //' + node.id, node)
-        jsScriptCoder.w('var ' + items[0] + '_index = i' + nnode + ';' + ' //' + node.id, node)
+        jsScriptCoder.w('var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + nodeMapComment(node), node)
+        jsScriptCoder.w('var ' + items[0] + '_index = i' + nnode + ';' + nodeMapComment(node), node)
         closeBlock = '}';
     }
     else if (tag == '$backeach') {
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
         var items = node.value.split(' ');
-        jsScriptCoder.w('var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + ' //' + node.id, node)
-        jsScriptCoder.w('var ' + items[0] + '_count = ' + items[2] + '.length;' + ' //' + node.id, node)
+        jsScriptCoder.w('var ' + items[0] + '_count' + nnode + ' = ' + items[2] + '.length;' + nodeMapComment(node), node)
+        jsScriptCoder.w('var ' + items[0] + '_count = ' + items[2] + '.length;' + nodeMapComment(node), node)
         jsScriptCoder.for('var i' + nnode + '=' + items[0] + '_count' + nnode + '-1; i' + nnode + '>-1; i' + nnode + '--', node)
-        jsScriptCoder.w('var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + ' //' + node.id, node)
-        jsScriptCoder.w('var ' + items[0] + '_index = i' + nnode + ';' + ' //' + node.id, node)
+        jsScriptCoder.w('var ' + items[0] + ' = ' + items[2] + '[i' + nnode + '];' + nodeMapComment(node), node)
+        jsScriptCoder.w('var ' + items[0] + '_index = i' + nnode + ';' + nodeMapComment(node), node)
         closeBlock = '}';
     }
     else if (tag == '$virtual') {
@@ -112,7 +112,7 @@ function codify(node, nparent, jsScriptCoder, ctx) {
                 params += ',' + item.value;
             }
         }
-        jsScriptCoder.w('function ' + node.value + '(' + params + ') {', node)
+        jsScriptCoder.w('function ' + node.value + '(' + params + ') {' + nodeMapComment(node), node)
         jsScriptCoder.indent();
         var i, i_items=node.children, i_len=node.children.length, item;
         for (i=0; i<i_len; i++) {
@@ -138,7 +138,7 @@ function codify(node, nparent, jsScriptCoder, ctx) {
                 args += ',' + item.value;
             }
         }
-        jsScriptCoder.w(node.value + '(' + args + ');', node)
+        jsScriptCoder.w(node.value + '(' + args + ');' + nodeMapComment(node), node)
         ctx.brickKey = null;
         setJsWizziContext(ctx, node.model.brickKey, jsScriptCoder)
         return ;
@@ -156,10 +156,10 @@ function codify(node, nparent, jsScriptCoder, ctx) {
     else {
         if (ctx.isCompile && node.__firstOfMixedNodes) {
             jsScriptCoder.w('// firstOfMixed ' + node.model.$args + '/' + node.model.$params, node)
-            isCompilePassedParameters(jsScriptCoder, node.model.calcParamValues(node.model.$args))
+            isCompilePassedParameters(jsScriptCoder, node.model.parseFragmentParamsValues(node.model.$args))
         }
         setJsWizziContext(ctx, null, jsScriptCoder);
-        jsScriptCoder.w('var $' + nnode + ' = { ' + 'n: ' + codifyValue(node.model.brickKey, tag, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + (node.source ? 'source: ' + escapename(node.source) + ', ' : '') + 'v: ' + codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + 'r: ' + node.row + ', ' + 'c: ' + node.col + ', ' + 's: "' + node.model.brickKey + '", ' + 'u: "' + node.sourceKey + '", ' + ' };' + ' //' + node.id, node)
+        jsScriptCoder.w('var $' + nnode + ' = { ' + 'n: ' + codifyValue(node.model.brickKey, tag, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + (node.source ? 'source: ' + escapename(node.source) + ', ' : '') + 'v: ' + codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx) + ', ' + 'i: ' + node.id + ', ' + 'r: ' + node.row + ', ' + 'c: ' + node.col + ', ' + 's: "' + node.model.brickKey + '", ' + 'u: "' + node.sourceKey + '", ' + ' };' + nodeMapComment(node), node)
         var vparent = ('$' + nparent);
         jsScriptCoder.w('$.a(' + vparent + ', $' + nnode + ', ' + (jsScriptCoder.length + 1) + ');', node)
         nparent = nnode;
@@ -228,12 +228,12 @@ function codeBlock(node, jsScriptCoder, ctx) {
     else {
         if (node.name && (node.name.trim().length > 0)) {
             
-            // loog '=========', node.model.calcParamValues(node.model.$args)
+            // loog '=========', node.model.parseFragmentParamsValues(node.model.$args)
             if (ctx.isCompile && node.__firstOfMixedNodes) {
                 jsScriptCoder.w('// firstOfMixed ' + node.model.$args + '/' + node.model.$params, node)
-                isCompilePassedParameters(jsScriptCoder, node.model.calcParamValues(node.model.$args))
+                isCompilePassedParameters(jsScriptCoder, node.model.parseFragmentParamsValues(node.model.$args))
             }
-            jsScriptCoder.w(node.name + ' ' + (node.value || '') + ' //' + node.id, node)
+            jsScriptCoder.w(node.name + ' ' + (node.value || '') + nodeMapComment(node), node)
         }
     }
     var i, i_items=node.children, i_len=node.children.length, item;
@@ -245,7 +245,7 @@ function codeBlock(node, jsScriptCoder, ctx) {
 function rawBlock(node, nparent, jsScriptCoder, ctx) {
     // no interpolation
     var nnode = ++ctx.counter;
-    jsScriptCoder.w('var $' + nnode + ' = { ' + 'n: "' + node.name + '", ' + 'v: "' + node.value + '", ' + 'r: ' + node.row + ', ' + 'c: ' + node.col + ', ' + 's: "' + node.model.brickKey + '", ' + 'u: "' + node.sourceKey + '", ' + ' };' + ' //' + node.id, node)
+    jsScriptCoder.w('var $' + nnode + ' = { ' + 'n: "' + node.name + '", ' + 'v: "' + node.value + '", ' + 'i: ' + node.id + ', ' + 'r: ' + node.row + ', ' + 'c: ' + node.col + ', ' + 's: "' + node.model.brickKey + '", ' + 'u: "' + node.sourceKey + '", ' + ' };' + nodeMapComment(node), node)
     var vparent = ('$' + nparent);
     jsScriptCoder.w('$.a(' + vparent + ', $' + nnode + ', ' + (jsScriptCoder.length + 1) + ');', node)
     nparent = nnode;
@@ -266,6 +266,9 @@ function isCompilePassedParameters(jsScriptCoder, parameters) {
             jsScriptCoder.w(p.name + ' = ' + p.value + ';', p)
         }
     }
+}
+function nodeMapComment(node) {
+    return ' //node:' + node.id;
 }
 function escape(value) {
     if (typeof (value) === 'undefined') {

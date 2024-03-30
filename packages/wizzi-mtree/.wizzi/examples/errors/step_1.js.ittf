@@ -14,7 +14,9 @@
             _ path.join
                 @ __dirname
                 @ 'ittf'
-                @ 'missingvar_1.js.ittf'
+                $$ @ 'missingvar_1.js.ittf'
+                $$ @ 'param_type_1.js.ittf'
+                @ 'fragment_not_found_1.js.ittf'
 
         var productionManager 
             _ mocks.getProductionManager
@@ -25,20 +27,26 @@
                     @ ittfUri
                     {
                         @ mTreeBuildUpContext
-                            {
-                                @ items
-                                    [
-                                        {
-                                            @ name 'stefi'
-                                            @ value 60
-                                        {
-                                            @ name 'annie'
-                                            @ value 59
-                                        {
-                                            @ name 'afro'
-                                            @ value 98
-
+                            _ getItemsContext
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore
                     f_cb_no_err( mTree )
-                        _ printObject('error', err)
+                        if err
+                            error 'error', err
+                        if mTree
+                            _ printValue('mTree', mTree.toIttf())
+
+        function getItemsContext
+            return                
+                {
+                    @ items
+                        [
+                            {
+                                @ name 'stefi'
+                                @ value 60
+                            {
+                                @ name 'annie'
+                                @ value 59
+                            {
+                                @ name 'afro'
+                                @ value 98

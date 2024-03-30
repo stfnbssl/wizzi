@@ -14,4 +14,10 @@
 				@ providedModelTransformers this.providedModelTransformers
 				@ providedArtifactGenerators this.providedArtifactGenerators
                 @ providedWizzifiers this.providedWizzifiers
+				@ providedCheatsheetFolders this.providedCheatsheetFolders
+				@ extensionSchemaMap this.extensionSchemaMap
+				@ schemaRootTagMap this.schemaRootTagMap
+				@ artifactContentTypeMap this.artifactContentTypeMap
+				@ schemaArtifactsMap this.schemaArtifactsMap
+				@ schemaDefaulArtifactMap this.schemaDefaulArtifactMap
 				@ factoryPlugins factoryPluginsInfo

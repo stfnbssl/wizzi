@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\mm\step_3.js.ittf
-    utc time: Sun, 17 Mar 2024 16:14:49 GMT
+    utc time: Fri, 29 Mar 2024 17:03:15 GMT
 */
 'use strict';
 /**
@@ -40,7 +40,14 @@ const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract;
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({
         plugins: {
-            
+            items: [
+                './wizzi.plugin.html/index', 
+                './wizzi.plugin.js/index', 
+                './wizzi.plugin.css/index', 
+                './wizzi.plugin.ittf/index', 
+                './wizzi.plugin.json/index'
+            ], 
+            pluginsBaseFolder: pluginsBaseFolderV08
          }, 
         globalContext: globalContext || {}, 
         verbose: true
@@ -193,14 +200,7 @@ function createMetasManager(globalContext, callback) {
             
          }, 
         wfPlugins: {
-            items: [
-                './wizzi.plugin.html/index', 
-                './wizzi.plugin.js/index', 
-                './wizzi.plugin.css/index', 
-                './wizzi.plugin.ittf/index', 
-                './wizzi.plugin.json/index'
-            ], 
-            pluginsBaseFolder: pluginsBaseFolderV08
+            
          }, 
         globalContext: globalContext || {}
      }, callback)

@@ -36,6 +36,7 @@ docx first
                     $_ itemText
                         $@ nodeChild
                         $@ style
+
         $if node.name == 'h2'
             $if node.value && node.value.length > 0
                 + ${node.value}

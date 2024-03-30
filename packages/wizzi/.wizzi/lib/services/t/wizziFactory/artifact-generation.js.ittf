@@ -200,3 +200,29 @@ $group
 					@ requestContext
 					@ artifactName
 					@ callback
+
+	m loadModelAndGenerateArtifactFromPacki
+        string ittfDocumentUri
+		{ packiFiles
+		{ requestContext
+			{ modelRequestContext
+				optional
+			{ artifactRequestContext
+				optional
+		string artifactName
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadModelAndGenerateArtifactFromPacki', ittfDocumentUri, packiFiles, requestContext, artifactName, callback
+		+
+		var ss = artifactName.split('/')
+		var schema = ss[0]
+
+		_ this.createJsonFactoryAndJsonFs
+			@ packiFiles
+			{
+			f_cb( result )
+				_ result.wf.loadModelAndGenerateArtifact
+					@ packi.ensurePackiFilePrefix(ittfDocumentUri)
+					@ requestContext
+					@ artifactName
+					@ callback

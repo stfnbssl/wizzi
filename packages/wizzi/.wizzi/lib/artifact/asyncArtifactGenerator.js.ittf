@@ -12,10 +12,11 @@
 
     
 	function logme
-        if false
+        if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
 	+
 	#
+        # artifactInfo will become productionStep
 		# Generation functions are called by the wizzi.production.Runner.
 		# A generation produces an array of wizzi.artifact.genContext(s), 
 		# text buffers containing the generated artifact.

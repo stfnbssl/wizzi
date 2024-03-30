@@ -30,6 +30,7 @@
 			set this.providedModelTransformers = []
 			set this.providedArtifactGenerators = []
             set this.providedWizzifiers = []
+			set this.providedCheatsheetFolders = []
             set this.extensionSchemaMap = {}
             set this.schemaDefaulArtifactMap = {}
             set this.schemaArtifactsMap = {}
@@ -43,6 +44,7 @@
 		$include pluginsManager/artifact-generator
         $include pluginsManager/wizzification
 		$include pluginsManager/schema-definition
+		$include pluginsManager/cheatsheet
 		$include pluginsManager/getInfo
         $include pluginsManager/getProvides
 

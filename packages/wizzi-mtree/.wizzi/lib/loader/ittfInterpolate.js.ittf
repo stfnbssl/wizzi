@@ -165,7 +165,11 @@
 				else 'var _____result = ' + keyOrCode + ';'
 		# loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode.previous._____result: ', keyOrCode, jsWizziContext.isDeclared('_____result')
 		checked_call_return( notUsed, wizzi-mtree@${versions['wizzi-mtree@next']}.loader.ittfInterpolate.evalKeyOrCode, stm )
-			_ jsWizziRunner.run(stm, jsWizziContext)
+			_ jsWizziRunner.run
+				@ stm
+				@ jsWizziContext
+				{
+					@ isForInterpolation true
 		var result = jsWizziContext.getValue('_____result')
 		# loog 'wizzi-mtree.loader.ittfInterpolate.evalKeyOrCode: ', keyOrCode, result
 		_ jsWizziContext.setValue('_____result', undefined)
