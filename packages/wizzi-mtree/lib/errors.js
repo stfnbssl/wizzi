@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\errors.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
 var util = require('util');
@@ -89,10 +89,13 @@ class WizziError extends Error {
             // loog 'WizziError.mTreeNode', mTreeBrickNode
             if (d.mTreeBrickErrorNodeId && loadHistory) {
                 var mTreeBrickNode = loadHistory.findNodeById(d.mTreeBrickErrorNodeId);
-                this.addHint('ittfErrorLines', md.nodeErrorLines(mTreeBrickNode.mTreeNode, {
-                    errorName: this.data.inner.errorName, 
-                    description: this.message
-                 }, true))
+                if (mTreeBrickNode) {
+                    // TODO : this.data.inner.errorName??? do explain
+                    this.addHint('ittfErrorLines', md.nodeErrorLines(mTreeBrickNode.mTreeNode, {
+                        errorName: this.data.inner ? this.data.inner.errorName : '', 
+                        description: this.message
+                     }, true))
+                }
             }
             else if (d.mTreeBrickNode || d.mTreeBrickLine) {
                 var node = d.mTreeBrickNode || d.mTreeBrickLine;
@@ -123,7 +126,7 @@ class WizziError extends Error {
             errorName = inner.errorName || errorName;
             message = inner.message;
             inner = inner.data ? inner.data.inner : null;
-            console.log(inner != null, __filename);
+            // log inner != null
         }
         if (hint) {
             hint.errorName = errorName;

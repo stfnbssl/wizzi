@@ -36,15 +36,31 @@ $group
 		if !this.hasCheatsheet(schemaName)
 			return
 				_ callback
+					@ null
+					{
+						@ name schemaName
+						[ elements
+							{
+								@ name 'Unavailable'
+								[ items
+									{
+										@ schema schemaName
+										@ render 'artifact'
+										[ fragments
+										@ ittf 'Unavailable'
+										@ ittfWrapper 'Unavailable'
+					$*
 					_ error
 						@ "InvalidOperation"
 						@ "getCheatsheet"
 						@ "No cheatsheet available for schema " + schemaName + ". Call `wizziFactoryInstance.hasCheatsheet` first"
+					*$
+
 		var that = this
 		_ this.pluginsManager.getCheatsheetFolder
 			@ schemaName
 			f_cb( packiCheatsheetFolder )
-				log 'wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder)
+				# loog 'wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder)
 				_ buildCheatsheet
 					@ that
 					@ schemaName

@@ -7,5 +7,7 @@
 		if err
             error 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 			error 'err', err
+			if err.hint
+				error 'err.hint', err.hint
 			throw new Error(err.message)
 		$hook

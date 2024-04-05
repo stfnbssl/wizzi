@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\index.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var path = require('path');
 var verify = require('@wizzi/utils').verify;
@@ -43,6 +43,9 @@ md.loadMTree = function loadMTree(primaryIttfDocumentUri, loadContext, callback)
     }
     // loog 'wizzi-mtree.index.primaryIttfDocumentUri', primaryIttfDocumentUri
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         
         // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
         if (err) {
@@ -200,6 +203,9 @@ md.loadMTreeRaw = function loadMTreeRaw(primaryIttfDocumentUri, loadContext, cal
     }
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
         if (err) {
+            console.log("[31m%s[0m", err);
+        }
+        if (err) {
             err.primaryIttfDocumentUri = primaryIttfDocumentUri;
             return callback(err);
         }
@@ -221,6 +227,9 @@ md.loadMTreeBuildUpScript = function loadMTree(primaryIttfDocumentUri, loadConte
         return callback(loadContext);
     }
     MTreeBrickProvider.createFromUri(primaryIttfDocumentUri, loadContext, function(err, createdProvider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         
         // VIA 22/10/18 set err.MTreeLoaderIndexStack = (new Error()).stack
         if (err) {

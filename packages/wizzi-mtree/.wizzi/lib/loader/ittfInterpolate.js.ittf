@@ -44,6 +44,8 @@
 			decl replacer = null
 			decl keyOrCode
 
+		# loog 'interpolate.isCompile', isCompile
+
 		if isCompile
 			_ result.push("'")
 
@@ -142,6 +144,8 @@
 					_ result.push(ch)
 					set state = state_text
 
+			# loog 'interpolate.result', result.join('')
+
 		# check for unclosed macros
 		if state == state_key
 			# 16/11/17 _ result.push('${' + verify.replaceAll(key.join(''), "'", "\\'"))
@@ -152,6 +156,7 @@
 		if isCompile
 			_ result.push("'")
 
+		# loog 'interpolate.result.final', result.join('')
 		return result.join('')
 
 	function evalKeyOrCode

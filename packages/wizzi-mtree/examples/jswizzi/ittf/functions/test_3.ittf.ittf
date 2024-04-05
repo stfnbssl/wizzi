@@ -1,0 +1,17 @@
+ittf
+    $
+        var t = 0;
+        function go(count) {
+            _.log('count', count, 'typeof(x)', typeof(x));
+            var x = 0;
+            if (count > 4) {
+                t = count;
+                return
+            }
+            go(count + 1);
+            _.log('x', x);
+        }
+        go(0);
+        _.log('t', t);
+
+    node ${t}

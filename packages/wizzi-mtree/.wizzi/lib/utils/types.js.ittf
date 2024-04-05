@@ -4,8 +4,6 @@
     var errors = require('../errors')
 	var verify = require('@wizzi/utils').verify
     
-	$* TODO VIA
-
     wz-function objectify
         param value
         param type
@@ -128,5 +126,3 @@
 				@ __is_error true
 				@ message message $$ nodeError.message
 				@ source 'wizzi-mtree@${wzCtx.version}.utils.types.' + method
-
-    *$

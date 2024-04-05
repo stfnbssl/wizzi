@@ -8,8 +8,9 @@ const path_1 = __importDefault(require("path"));
 const utils_1 = require("@wizzi/utils");
 const repo_1 = require("@wizzi/repo");
 const mtree_1 = require("@wizzi/mtree");
-var sourceIttf = path_1.default.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_2.ittf.ittf');
-var destScript = path_1.default.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_2.script.js');
+var nittf = 4;
+var sourceIttf = path_1.default.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_' + nittf + '.ittf.ittf');
+var destScript = path_1.default.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_' + nittf + '.script.js');
 function load_jswizzi_1() {
     const file = utils_1.fSystem.vfile();
     getFileSystemCreateStoreFn((err, createStore) => {

@@ -205,6 +205,8 @@
 			if line
 				_ pushLine
             
+			# loog 'lines -------------->\n', lines
+			
 			return lines
             
 			function processMacro
@@ -329,12 +331,12 @@
 							if v_start < 0
 								set v_start = i
 							set v_end = i
-					# log "v_start, v_end", v_start, v_end
+					# loog "v_start, v_end", v_start, v_end
 					if valueAcc.length > v_start + 1 && valueAcc[v_start] === '\\' && valueAcc[v_start+1] === 'b'
 						set v_start += 2
 					if v_end > v_start + 1 && valueAcc[v_end] === 'b' && valueAcc[v_end-1] === '\\'
 						set v_end -= 2
-					# log "v_start, v_end", v_start, v_end
+					# loog "v_start, v_end", v_start, v_end
 					set line.value = valueAcc.slice(v_start, v_end + 1).join('')
                 
 				set line.hasMacro = lineHasMacro

@@ -1,0 +1,7 @@
+ittf
+    $
+        function sum(a, b) {
+            return a + b;
+        }
+        var t = sum(2,3); 
+        _.log('t', t);

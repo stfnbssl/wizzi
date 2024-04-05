@@ -149,6 +149,7 @@
             
 		foreach item in $0.children
 			set item.parent = null
+			# loog 'finalize', item.children[1]
 			_ composedMTree.nodes.push(item)
             
 		set composedMTree.data =

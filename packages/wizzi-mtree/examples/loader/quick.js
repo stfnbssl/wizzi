@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\quick.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:31 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 //
 // Example skeleton specific for the '@wizzi/mtree' kernel package
 //
 /**
-     Examples: Evaluator_Quick
+     Examples: Loader_Quick
     
 */
 var path = require('path');
@@ -41,9 +41,9 @@ function getFSDocumentStore(callback) {
         return storeFactory(callback);
     })
 }
-var Evaluator_Quick = function(step_callback) {
+var Loader_Quick = function(step_callback) {
     heading1('EXAMPLE')
-    var ittfUri = path.join(__dirname, 'ittf', 'quick.html.ittf');
+    var ittfUri = path.join(__dirname, 'ittf', 'quick.js.ittf');
     var productionManager = mocks.getProductionManager();
     getFSDocumentStore(function(err, fsStore) {
         if (err) {
@@ -61,20 +61,7 @@ var Evaluator_Quick = function(step_callback) {
         }
         loader.loadMTree(ittfUri, {
             mTreeBuildUpContext: {
-                items: [
-                    {
-                        name: 'stefi', 
-                        value: 60
-                     }, 
-                    {
-                        name: 'annie', 
-                        value: 59
-                     }, 
-                    {
-                        name: 'afro', 
-                        value: 98
-                     }
-                ]
+                
              }, 
             __productionManager: productionManager, 
             __ittfDocumentStore: fsStore
@@ -82,25 +69,31 @@ var Evaluator_Quick = function(step_callback) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
+                if (err.hint) {
+                    console.log("[31m%s[0m", 'err.hint', err.hint);
+                }
                 throw new Error(err.message);
             }
-            // loog 'mTree', mTree
-            printEvaluatedNodes(mTree, 'After evaluate');
+            console.log('err', err, __filename);
+            console.log('mTree\n', mTree, __filename);
+            console.log('mTree.nodes[0]\n', mTree.nodes[0], __filename);
+            console.log('mTree.nodes[0].children[1]\n', mTree.nodes[0].children[1], __filename);
+            console.log('mTree.toIttf()\n', mTree.toIttf(), __filename);
         })
     })
 };
-Evaluator_Quick.__name = 'Evaluator_Quick';
+Loader_Quick.__name = 'Loader_Quick';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - Evaluator_Quick - ' + text);
+    console.log('** level 0 - step 1 - Loader_Quick - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- Evaluator_Quick - ' + text);
+    console.log('   ','-- Loader_Quick - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -290,7 +283,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = Evaluator_Quick;
+module.exports = Loader_Quick;
 if (typeof require != 'undefined' && require.main === module) {
-    Evaluator_Quick();
+    Loader_Quick();
 }

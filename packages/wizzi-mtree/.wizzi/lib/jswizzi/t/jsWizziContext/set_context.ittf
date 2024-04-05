@@ -91,8 +91,13 @@
 
 	m enterFunctionEvalContext
 		param functionName
+		# Called by Runner: runnerCall
+		$if false
+			error '--> JsWizziContext: enterFunctionEvalContext', functionName, 'brickKey', this.currentMTreeBrickKey
+		var evalContext = this.isForInterpolation ? this.loadHistory.contextData : this.brickEvalContext
+			# if isForInterpolation then use instance of FakeLoadHistoryForInterpolation
 		var previousFunctionName
-			_ this.brickEvalContext.enterFunction
+			_ evalContext.enterFunction
 				@ functionName
 		return 
 			{
@@ -100,10 +105,20 @@
 				@ functionName previousFunctionName
 
 	m exitFunctionEvalContext
-		param brickKey
 		param functionName
+		param brickKey
+		param restoreFunctionName
+		# Called by Runner: runnerCall
+		$if false
+			error '<-- JsWizziContext: exitFunctionEvalContext', functionName, brickKey, restoreFunctionName
 		# set the previous functionName on brickKey
-		checked_call_return( brickEvalContext
-			 _ this.evalHelper.getMTreeBrickEvalContext(brickKey)
-		_ brickEvalContext.enterFunction
-			@ functionName
+		if this.isForInterpolation
+			_ this.loadHistory.contextData.exitFunction
+				@ functionName
+				@ restoreFunctionName
+		else
+			checked_call_return( brickEvalContext
+				_ this.evalHelper.getMTreeBrickEvalContext(brickKey)
+			_ brickEvalContext.exitFunction
+				@ functionName
+				@ restoreFunctionName

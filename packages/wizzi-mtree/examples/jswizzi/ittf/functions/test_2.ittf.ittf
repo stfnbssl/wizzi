@@ -1,0 +1,18 @@
+ittf
+    $
+        var t = 0;
+        function go() {
+            var x = 0;
+            x++;
+            function sum(a, b) {
+                return a + b;
+            }
+            x = x + sum(2,3); 
+            t = t + x;
+            _.log('x', x);
+        }
+        go();
+        _.log('t', t);
+
+
+    node ${t}

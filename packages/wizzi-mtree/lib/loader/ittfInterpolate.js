@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\ittfInterpolate.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -38,6 +38,7 @@ function interpolate(template, jsWizziContext, options) {
         state = state_text,
         replacer = null,
         keyOrCode;
+    // loog 'interpolate.isCompile', isCompile
     if (isCompile) {
         result.push("'");
     }
@@ -157,6 +158,7 @@ function interpolate(template, jsWizziContext, options) {
                 state = state_text;
             }
         }
+        // loog 'interpolate.result', result.join('')
     }
     // check for unclosed macros
     
@@ -170,6 +172,7 @@ function interpolate(template, jsWizziContext, options) {
     if (isCompile) {
         result.push("'");
     }
+    // loog 'interpolate.result.final', result.join('')
     return result.join('');
 }
 function evalKeyOrCode(keyOrCode, jsWizziContext) {

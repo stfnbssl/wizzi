@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\index.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 
@@ -40,6 +40,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -108,6 +111,9 @@ describe("index", function() {
             __productionManager: mocks.ProductionManager, 
             __ittfDocumentStore: store
          }, function(err, result) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             // loog 'should get an RepoIOError error.err', err
             expect(err.name).to.be.a('string');
             expect(err.name).to.be('RepoIOError');

@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\utils\node.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var assert = require('assert');
 var verify = require('@wizzi/utils').verify;
@@ -413,7 +413,7 @@ md.previousSibling = function(node) {
         return null;
     }
     for (var i=0; i<node.parent.children.length; i++) {
-        console.log('md.previousSibling', i, node.parent.children[i] == node, __filename);
+        // loog 'md.previousSibling', i, node.parent.children[i] == node
         if (node.parent.children[i] == node) {
             return node.parent.children[i-1] || null;
         }
@@ -425,7 +425,7 @@ md.nextSibling = function(node) {
         return null;
     }
     for (var i=0; i<node.parent.children.length; i++) {
-        console.log('md.nextSibling', i, node.parent.children[i] == node, __filename);
+        // loog 'md.nextSibling', i, node.parent.children[i] == node
         if (node.parent.children[i] == node) {
             return node.parent.children[i+1] || null;
         }

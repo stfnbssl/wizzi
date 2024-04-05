@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Fri, 29 Mar 2024 17:03:14 GMT
+    utc time: Wed, 03 Apr 2024 05:10:50 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 
 var util = require('util');
 var path = require('path');
@@ -49,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.25';
+        this.__version = '0.8.31';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -2033,14 +2033,32 @@ class WizziFactory {
             return callback(null, cheatsheet);
         }
         if (!this.hasCheatsheet(schemaName)) {
-            return callback(error("InvalidOperation", "getCheatsheet", "No cheatsheet available for schema " + schemaName + ". Call `wizziFactoryInstance.hasCheatsheet` first"));
+            return callback(null, {
+                    name: schemaName, 
+                    elements: [
+                        {
+                            name: 'Unavailable', 
+                            items: [
+                                {
+                                    schema: schemaName, 
+                                    render: 'artifact', 
+                                    fragments: [
+                                        
+                                    ], 
+                                    ittf: 'Unavailable', 
+                                    ittfWrapper: 'Unavailable'
+                                 }
+                            ]
+                         }
+                    ]
+                 });
         }
         var that = this;
         this.pluginsManager.getCheatsheetFolder(schemaName, function(err, packiCheatsheetFolder) {
             if (err) {
                 return callback(err);
             }
-            console.log('wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder), __filename);
+            // loog 'wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder)
             buildCheatsheet(that, schemaName, packiCheatsheetFolder, function(err, cheatsheet) {
                 if (err) {
                     return callback(err);
@@ -3280,7 +3298,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.25.wizziFactory.' + method,
+        method: 'wizzi@0.8.31.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

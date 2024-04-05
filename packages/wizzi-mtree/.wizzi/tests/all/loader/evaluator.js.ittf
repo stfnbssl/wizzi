@@ -6,11 +6,10 @@
 		var mixer = require('../../../lib/loader/mixer')
 		var appender = require('../../../lib/loader/appender')
 		var evaluator = require('../../../lib/loader/evaluator')
-
-	var
-		decl store
-		decl evaluatedModel
-		decl node
+        var
+            decl store
+            decl evaluatedModel
+            decl node
 
 	before-async
 
@@ -30,55 +29,73 @@
 				@ 'data'
 				@ 'evaluator_1.tests.ittf'
 
-		var loadContext
-            {
-				@ mTreeBuildUpContext
-					{
-				@ productionContext mocks.ProductionContext
-				@ __ittfDocumentStore store
-            
-		_ MTreeBrickProvider.createFromUri
+		_ evaluate
 			@ content_filepath
-			@ loadContext
-			f_cb_no_err( provider )
-				var mTree = provider.getPrimaryMTreeBrick()
-                _ mixer
-                    @ mTree
-                    @ provider
-                    f_cb_test( mixedModel )
-						_ appender
-							@ mixedModel
-							f_cb_test( appendedModel )
-								_ evaluator
-									@ appendedModel
-									@ loadContext
-									f_cb_test( result )
-										set evaluatedModel = result
-										$*
-										_  console.log
-											@ 'err'
-											@ err
-											@ 'evaluator.evaluatedModel'
-											_ util.inspect
-												@ evaluatedModel
-												{ 
-													@ depth null
-										*$
-										_ done()
-		
-	it nodes[0]
-		tobe_object( evaluatedModel )
-		tobe_array( evaluatedModel.nodes, 1 )
-		tobe_object( evaluatedModel.nodes[0] )
-		set node = evaluatedModel.nodes[0]
-		tobe_number( node.r, 1 )
-		tobe_number( node.c, 1 )
-		tobe_string( node.n, 'test' )
+			f_cb_throw( evaluatedModel )
+										
+                tobe_object( evaluatedModel )
+                tobe_array( evaluatedModel.nodes, 1 )
+                tobe_object( evaluatedModel.nodes[0] )
+                set node = evaluatedModel.nodes[0]
+                tobe_number( node.r, 1 )
+                tobe_number( node.c, 1 )
+                tobe_string( node.n, 'test' )
 
-	it nodes [0][0]
-		tobe_array( evaluatedModel.nodes[0].children, 1 )
-		set node = evaluatedModel.nodes[0].children[0]
-		tobe_number( node.r, 2 )
-		tobe_number( node.c, 5 )
-		tobe_string( node.n, 'team' )
-		tobe_string( node.v, 'INTER' )
+                tobe_array( evaluatedModel.nodes[0].children, 1 )
+                set node = evaluatedModel.nodes[0].children[0]
+                tobe_number( node.r, 2 )
+                tobe_number( node.c, 5 )
+                tobe_string( node.n, 'team' )
+                tobe_string( node.v, 'INTER' )
+
+                _ done()
+
+	it-async should throw an error evaluating
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'evaluator_error_1.tests.ittf'
+
+		_ evaluate
+			@ content_filepath
+			f_cb_no_err( evaluatedModel )
+                # loog 'should throw an error evaluating', '\n' + err.toString()
+                tobe_error( err, JsWizziError, ReferenceError )                    
+                _ done()
+
+	it-async should throw an error evaluating
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'evaluator_error_2.tests.ittf'
+
+		_ evaluate
+			@ content_filepath
+			f_cb_no_err( evaluatedModel )
+                if err
+                    # loog 'should throw an error evaluating', '\n' + err.toString()
+                tobe_error( err, JsWizziError )                    
+                _ done()
+
+	it-async should throw an error evaluating
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'evaluator_error_3.tests.ittf'
+
+		_ evaluate
+			@ content_filepath
+			f_cb_no_err( evaluatedModel )
+                if err
+                    # loog 'should throw an error evaluating', '\n', err, '\n' + err.toString()
+                tobe_error( err, JsWizziError )                    
+                _ done()

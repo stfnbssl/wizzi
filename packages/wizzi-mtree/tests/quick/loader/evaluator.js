@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\quick\loader\evaluator.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Mon, 01 Apr 2024 12:48:03 GMT
 */
 'use strict';
 
@@ -44,6 +44,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -67,6 +70,9 @@ describe("evaluator", function() {
         store.init({
             storeKind: 'filesystem'
          }, function(err, notUsed) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             done();
         })
     });
@@ -114,36 +120,44 @@ describe("evaluator", function() {
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_1.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             // loog 'should throw an error evaluating', '\n' + err.toString()
             expect(err.__is_error).to.be(true);
-            expect(err.data).to.be.an('object');
-            expect(err.data.errorName).to.be('IttfEvaluationError');
+            expect(err.errorName).to.be('JsWizziError');
+            expect(err.data.inner).to.be.an('object');
+            expect(err.data.inner.errorName).to.be('ReferenceError');
             done();
         })
     });
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_2.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             
             // loog 'should throw an error evaluating', '\n' + err.toString()
             if (err) {
             }
             expect(err.__is_error).to.be(true);
-            expect(err.data).to.be.an('object');
-            expect(err.data.errorName).to.be('JsWizziError');
+            expect(err.errorName).to.be('JsWizziError');
             done();
         })
     });
     it("should throw an error evaluating", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'evaluator_error_3.tests.ittf');
         evaluate(content_filepath, function(err, evaluatedModel) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             
             // loog 'should throw an error evaluating', '\n', err, '\n' + err.toString()
             if (err) {
             }
             expect(err.__is_error).to.be(true);
-            expect(err.data).to.be.an('object');
-            expect(err.data.errorName).to.be('JsWizziError');
+            expect(err.errorName).to.be('JsWizziError');
             done();
         })
     });

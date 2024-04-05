@@ -8,8 +8,7 @@
 					@ node.argument
 					@ ctx
 			if exp && exp.__is_error
-				# loog 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
-                if exp.data && exp.data.errorName === 'ReferenceError'
+                if exp.errorName === 'ReferenceError'
 					set exp = undefined
 				else
 					return exp
@@ -118,6 +117,7 @@
 					@ 'BinaryExpression'
     
 	runner( UpdateExpression
+		# loog 'Runner.UpdateExpression', node.argument.name
         var 
             decl v
             decl exp
@@ -138,7 +138,6 @@
 					@ node.operator
 					@ node
 					@ 'UpdateExpression'
-        
 		_ ctx.put
             @ node.argument.name
             @ v
@@ -367,6 +366,7 @@
 			_ ctx.endLoadingCallArguments();
 			var result
             try
+				# loog 'Runner: Expression invoke runnerCall `', node.callee.name, '`'
                 set result = runnerCall(node.callee.name, f, ctx, args)
 			    # _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' end')
             catch ex
@@ -406,6 +406,7 @@
 				_ args.push(value)
 			_ ctx.endLoadingCallArguments();
 			set f.type = 'FunctionDeclaration'
+			# loog 'Runner: Expression invoke runnerCall `', 'FunctionExpression', '`'
 			return runnerCall("FunctionExpression", f, ctx, args)
 
 		return

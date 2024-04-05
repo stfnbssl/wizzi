@@ -45,7 +45,8 @@
             var statement = node.body[i]
 			checked_run_set( state, BlockStatement
 				_ runner(statement, ctx)
-            if state.result || state.break || state.continue
+			if state.result || state.break || state.continue
+				# loog 'Runner: BlockStatement', 'result', state.result, node.body.length, i, statement.type, state.value
                 return state
         return 
             { 
@@ -118,6 +119,7 @@
             { 
     
 	runner( ReturnStatement
+		# loog 'Runner: ReturnStatement, node.argument:', node.argument
 		if node.argument
 			checked_run( value, ReturnStatement
 				_ runner

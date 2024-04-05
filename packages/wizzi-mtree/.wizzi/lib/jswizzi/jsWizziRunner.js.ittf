@@ -64,7 +64,7 @@
                         set ast.type
             
 			if verbose
-                info 'ast.type: ' + type
+            	info 'ast.type: ' + type, ast.name, ast.value, ast.callee && ast.callee.name
             
 			if ast.trailingComments && ast.trailingComments.length == 1
                 _ ctx.setRunningNodeId
@@ -94,6 +94,24 @@
 			param ast
             param ctx
             param data
+			# loog 'Runner: runnerCall', functionName
+			if functionName == 'FunctionExpression'
+				return 
+					_ local_error
+						@ ctx
+						@ 'NotSupportedError'
+						@ 'JsWizzi does not support function expressions'
+						{
+							@ node ast
+							@ errorLines 
+								_ errors.esprimaNodeErrorLines
+									@ 'not supported'
+									@ ast
+									@ ctx.source
+									@ true
+						@ ast
+						@ 'FunctionExpression'
+
             # 
 			# `ctx` (JsWizziContext) knows the current mTreeBrickEvalContext
 			# so you do not need to pass a brickKey parameter
@@ -102,8 +120,9 @@
 			# the current `functionName`, or undefined if the call is from outside of a function body
 			var savedContext = ctx.enterFunctionEvalContext(functionName)
 			var retval = runner(ast, ctx, 'Call', data)
-			# reset the previous current function on `brickKey` mTreeBrickEvalContext
+			# exit function and restore the previous current function on `brickKey` mTreeBrickEvalContext
 			_ ctx.exitFunctionEvalContext
+				@ functionName
 				@ savedContext.brickKey
 				@ savedContext.functionName
 			return retval
@@ -149,7 +168,8 @@
 					@ 'Identifier'
     
 	runner( Identifier_Set, data
-        _ ctx.put
+        # loog 'Runner.Identifier_Set', node.name
+		_ ctx.put
             @ node.name
             @ data
 
@@ -164,6 +184,7 @@
             { 
     
 	runner( VariableDeclarator
+		# loog 'Runner.VariableDeclarator', node.id.name
         if !node.init
             _ ctx.declare
                 @ node.id.name
@@ -193,14 +214,14 @@
 		param inner
         param other
 
-        log 'jsWizziRunner.local_error.message', message
-		log 'jsWizziRunner.local_error.node', node
-        log 'jsWizziRunner.local_error.node.name', node && node.name
-        log 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
-        log 'jsWizziRunner.local_error.method', method
-        log 'jsWizziRunner.local_error.inner.message', inner && inner.message
-        log 'jsWizziRunner.local_error.parentnode.other', other
-        log 'jsWizziRunner.local_error.ctx.source', ctx.source
+        # loog 'jsWizziRunner.local_error.message', message
+		# loog 'jsWizziRunner.local_error.node', node
+        # loog 'jsWizziRunner.local_error.node.name', node && node.name
+        # loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
+        # loog 'jsWizziRunner.local_error.method', method
+        # loog 'jsWizziRunner.local_error.inner.message', inner && inner.message
+        # loog 'jsWizziRunner.local_error.parentnode.other', other
+        # loog 'jsWizziRunner.local_error.ctx.source', ctx.source
 
         $*
         if inner && inner.name === "JsWizziSynthaxError"
@@ -361,17 +382,19 @@
 	function doAst
 		param ast
 		param contexts
-    	# log ast.type
+    	# loog ast.type
 		_ Object.keys(ast).forEach
 			=> 
 				param propName
 				if propName == 'body'
+					$*
 					_ console.log
 						@expr ast.type
 						@ propName
 						iif ast.id
 							then ast.id.name
 							else ''
+					*$
 					if ast.id
 						_ contexts.currentBrick.stackPath.push(ast.id.name)
 						set contexts.currentBrick.functions[ast.id.name] = contexts.currentBrick.stackPath.join(',')

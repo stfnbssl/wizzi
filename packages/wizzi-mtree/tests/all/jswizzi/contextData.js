@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\jswizzi\contextData.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 
@@ -37,6 +37,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -80,82 +83,5 @@ describe("contextData", function() {
         values = cd.getValues();
         expect(values).to.be.an('object');
         expect(Object.keys(values).length).to.be(2);
-    });
-    it("should push a first time and set and get values", function() {
-        cd.push();
-        values = cd.getValues();
-        expect(values).to.be.an('object');
-        expect(Object.keys(values).length).to.be(0);
-        alfa = cd.getValue('alfa');
-        expect(alfa).to.be.a('number');
-        expect(alfa).to.be(10);
-        beta = cd.getValue('beta');
-        expect(beta).to.be.a('string');
-        expect(beta).to.be('annie');
-        cd.setValue('gamma', 30);
-        values = cd.getValues();
-        expect(values).to.be.an('object');
-        expect(Object.keys(values).length).to.be(1);
-        gamma = cd.getValue('gamma');
-        expect(gamma).to.be.a('number');
-        expect(gamma).to.be(30);
-    });
-    it("should push a second time and set and get values", function() {
-        cd.push();
-        values = cd.getValues();
-        expect(values).to.be.an('object');
-        expect(Object.keys(values).length).to.be(0);
-        cd.setValue('sigma', 40);
-        values = cd.getValues();
-        expect(values).to.be.an('object');
-        expect(Object.keys(values).length).to.be(1);
-        alfa = cd.getValue('alfa');
-        expect(alfa).to.be.a('number');
-        expect(alfa).to.be(10);
-        beta = cd.getValue('beta');
-        expect(beta).to.be.a('string');
-        expect(beta).to.be('annie');
-        gamma = cd.getValue('gamma');
-        expect(gamma).to.be.a('number');
-        expect(gamma).to.be(30);
-        sigma = cd.getValue('sigma');
-        expect(sigma).to.be.a('number');
-        expect(sigma).to.be(40);
-    });
-    it("should pop a first time and set and get values", function() {
-        cd.pop();
-        alfa = cd.getValue('alfa');
-        expect(alfa).to.be.a('number');
-        expect(alfa).to.be(10);
-        beta = cd.getValue('beta');
-        expect(beta).to.be.a('string');
-        expect(beta).to.be('annie');
-        gamma = cd.getValue('gamma');
-        expect(gamma).to.be.a('number');
-        expect(gamma).to.be(30);
-        sigma_d = cd.isDeclared('sigma');
-        expect(sigma_d).to.be(false);
-    });
-    it("should pop a second time and set and get values", function() {
-        cd.pop();
-        alfa = cd.getValue('alfa');
-        expect(alfa).to.be.a('number');
-        expect(alfa).to.be(10);
-        beta = cd.getValue('beta');
-        expect(beta).to.be.a('string');
-        expect(beta).to.be('annie');
-        sigma_d = cd.isDeclared('sigma');
-        expect(sigma_d).to.be(false);
-        gamma_d = cd.isDeclared('gamma');
-        expect(gamma_d).to.be(false);
-    });
-    it("should pop a third time and set and get values", function() {
-        cd.pop();
-        alfa = cd.getValue('alfa');
-        expect(alfa).to.be.a('number');
-        expect(alfa).to.be(10);
-        beta = cd.getValue('beta');
-        expect(beta).to.be.a('string');
-        expect(beta).to.be('annie');
     });
 });

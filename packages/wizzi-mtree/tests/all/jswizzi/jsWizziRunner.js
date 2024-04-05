@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\jswizzi\jsWizziRunner.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 
@@ -38,6 +38,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -480,9 +483,9 @@ describe("jsWizziRunner", function() {
     }
     function runExpression(code) {
         // without ctor arguments means: isForInterpolation
-        var jsWizziContext = new JsWizziContext();
+        var jsWizziContext = new JsWizziContext(JsWizziContext.createMockComposedMTree());
         // run the expression embedded in a var declaration 'result'
-        var scriptCode = code.indexOf('return ') > -1 ? 'var result = function dummy() { ' + code + ' }();' : 'var result = ' + code + ';';
+        var scriptCode = code.indexOf('return ') > -1 ? 'function dummy() { ' + code + ' } var result = dummy();' : 'var result = ' + code + ';';
         // loog 'runExpression.scriptCode', scriptCode
         var hr = jsWizziRunner.run(scriptCode, jsWizziContext, {
             verbose: false

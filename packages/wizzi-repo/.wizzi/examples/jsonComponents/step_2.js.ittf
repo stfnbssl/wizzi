@@ -21,7 +21,7 @@
                 @ __dirname
                 @ 'packi'
             f_cb_test( packiFiles )
-                log 'packiFiles', packiFiles
+                # loog 'packiFiles', packiFiles
                 _ repoIndex.JsonComponents.packiFilesToUtilVFileJson
                     @ packiFiles
                     f_cb_test( jsonVFile )

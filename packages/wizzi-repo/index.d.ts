@@ -1,4 +1,4 @@
-import { fSystem } from 'wizzi-utils';
+import { fSystem } from '@wizzi/utils';
 type cb<T> = (err: any, result: T|never) => void;
 
 /**
@@ -173,6 +173,8 @@ export namespace JsonComponents {
 
 export function jsonfile(options: { jsonFsData?: JsonFsData, jsonFs?: JsonFs }, callback: cb<fSystem.VFile>): void;
 
+export type StoreKind = 'filesystem' | 'mongodb' | 'json';
+
 /**
  * The interface implemented by Wizzi Store Systems
  * @param storeKind            One of 'filesystem', 'mongodb', 'json'
@@ -182,7 +184,7 @@ export function jsonfile(options: { jsonFsData?: JsonFsData, jsonFs?: JsonFs }, 
  * @param storeJsonFs          When storeKind == 'json', a JsonFs object to initialise the JSON file system (alternative to jsonFsData) 
  */
 interface CreateStoreFactoryOptions {
-    storeKind: string;
+    storeKind: StoreKind;
     storeUri?: string;
     storeBaseFolder?: string;
     storeJsonFsData?: JsonFsData;

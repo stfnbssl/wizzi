@@ -808,6 +808,21 @@ declare interface WizziFactory {
      * @param callback               Receives error | producedPackiFiles
     */
     executeMetaProduction(metaExecutionOptions: MetaExecutionOptions, callback: cb<packi.PackiFiles>): void;
+    /**
+     * @method getCheatsheetList
+     * @description Get a list of available documentation cheatsheets.
+    */
+    getCheatsheetList() : string[];
+    /**
+     * @method hasCheatsheet
+     * @description Check if a documentation cheatsheets exists for a given Wizzi Schema.
+    */
+    hasCheatsheet(schemaName: string): boolean;
+    /**
+     * @method getCheatsheet
+     * @description Retrieves a documentation cheatsheets for a given Wizzi Schema.
+    */
+    getCheatsheet(schemaName: string, callback: cb<{}>): void;
 }
 
 export type JsonWizziFactoryAndJsonFs = {

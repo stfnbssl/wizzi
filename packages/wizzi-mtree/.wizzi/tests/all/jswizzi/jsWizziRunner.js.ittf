@@ -76,16 +76,14 @@
 
 	function runExpression
 		param code
-
-        
-
 		# without ctor arguments means: isForInterpolation
 		var jsWizziContext
-			new JsWizziContext()
+			new JsWizziContext
+				_ JsWizziContext.createMockComposedMTree
 		# run the expression embedded in a var declaration 'result'
 		var scriptCode
             iif code.indexOf('return ') > -1
-                then 'var result = function dummy() { ' + code + ' }();'
+                then 'function dummy() { ' + code + ' } var result = dummy();'
                 else 'var result = ' + code + ';'
         # loog 'runExpression.scriptCode', scriptCode
         var hr

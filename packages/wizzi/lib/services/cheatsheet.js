@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\cheatsheet.js.ittf
-    utc time: Fri, 29 Mar 2024 17:03:14 GMT
+    utc time: Wed, 03 Apr 2024 05:10:50 GMT
 */
 'use strict';
 
@@ -12,6 +12,28 @@ const verify = require('@wizzi/utils').verify;
 const pretty = require('@wizzi/utils').pretty;
 
 const md = module.exports = {};
+
+//
+// cheatsheet json structure
+// {
+// string name
+// [ elements
+// {
+// string name
+// [ items
+// {
+// string schema
+// string render
+// one-of 'artifact', 'script', 'ittf', 'ittf-show-blanks'
+// [ fragments
+// {
+// string name
+// string ittf
+// string ittf
+// string ittfWrapper
+// string expected
+// optional
+//
 
 md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
     
@@ -92,9 +114,9 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                                             itemResult[item.n] = mTree.toIttf(item.children[0]);
                                             itemResult[item.n + 'Wrapped'] = itemResult[item.n];
                                         }
+                                        // loog '++++++++++++++++++++ Wrap it', 'isError', isError
                                         // wrap it
                                         else {
-                                            console.log('++++++++++++++++++++ Wrap it', 'isError', isError, __filename);
                                             var ittfNode = wrapperForSchema(wizziFactory, result.schema);
                                             var l, l_items=item.children, l_len=item.children.length, node;
                                             for (l=0; l<l_len; l++) {
@@ -136,6 +158,9 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                 }
             }
             prettifyItems(_all_items, function(err, notUsed) {
+                if (err) {
+                    console.log("[31m%s[0m", err);
+                }
                 var item_count = 0;
                 (function next() {
                 
@@ -143,12 +168,16 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                     if (!item) {
                         return callback(null, result);
                     }
+                    console.log("Processing item", item.title, __filename);
                     if (item.render === 'script') {
                         var packiForGen = getPackiForGen(item);
                         jsonFactory.loadMTreeBuildUpScriptFromPacki(packiForGen.ittfDocumentUri, packiForGen.packiFiles, {}, function(err, result) {
                             if (err) {
+                                console.log("[31m%s[0m", err);
+                            }
+                            if (err) {
                                 try {
-                                    item.generated = verify.htmlEscape(stringify(err, null, 2))
+                                    item.generated = prettifyError(err)
                                     ;
                                 } 
                                 catch (ex) {
@@ -177,8 +206,11 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                         var packiForGen = getPackiForGen(item);
                         jsonFactory.loadMTreeFromPacki(packiForGen.ittfDocumentUri, packiForGen.packiFiles, {}, function(err, mTree) {
                             if (err) {
+                                console.log("[31m%s[0m", err);
+                            }
+                            if (err) {
                                 try {
-                                    item.generated = verify.htmlEscape(stringify(err, null, 2))
+                                    item.generated = prettifyError(err)
                                     ;
                                 } 
                                 catch (ex) {
@@ -203,9 +235,9 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                             }
                         })
                     }
+                    // loog 'cheatsheet.generating', mainIttf
                     else {
                         const mainIttf = 'index.' + item.schema + '.ittf';
-                        console.log('cheatsheet.generating', mainIttf, __filename);
                         var packiForGen = getPackiForGen(item);
                         jsonFactory.loadModelAndGenerateArtifactFromPacki(packiForGen.ittfDocumentUri, packiForGen.packiFiles, {
                             artifactContext: {
@@ -214,7 +246,10 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                              }
                          }, jsonFactory.mapSchemaToDefaultArtifact(item.schema), function(err, artifactContent) {
                             if (err) {
-                                item.generated = verify.htmlEscape(stringify(err, null, 2))
+                                console.log("[31m%s[0m", err);
+                            }
+                            if (err) {
+                                item.generated = prettifyError(err)
                                 ;
                                 return next();
                             }
@@ -234,6 +269,23 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
 }
 ;
 
+function prettifyError(err) {
+    var hint = err.hint;
+    if (!hint && err.data && err.data.inner) {
+        hint = err.data.inner.hint;
+    }
+    if (hint) {
+        return verify.htmlEscape(stringify({
+                errorName: err.errorName, 
+                message: err.message, 
+                hint: hint
+             }, null, 2));
+    }
+    else {
+        return verify.htmlEscape(stringify(err, null, 2));
+    }
+}
+
 function prettifyItems(_all_items, callback) {
     var item_count = 0;
     (function nextItem() {
@@ -243,6 +295,9 @@ function prettifyItems(_all_items, callback) {
             return callback(null);
         }
         pretty.prettifyIttfHtmlFromString(item.ittf, function(err, ittfpretty) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             if (err) {
                 item.ittfPretty = JSON.stringify(err, null, 4);
             }
@@ -261,6 +316,9 @@ function prettifyItems(_all_items, callback) {
                     return ;
                 }
                 pretty.prettifyIttfHtmlFromString(fragment.ittf, function(err, ittfpretty) {
+                    if (err) {
+                        console.log("[31m%s[0m", err);
+                    }
                     if (err) {
                         fragment.ittfPretty = JSON.stringify(err, null, 4);
                     }
@@ -294,7 +352,7 @@ function getPackiForGen(item) {
             contents: f.ittf
          };
     }
-    console.log('getPackiForGen.retval', retval, __filename);
+    // loog 'getPackiForGen.retval', retval
     return retval;
 }
 

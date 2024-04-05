@@ -1,0 +1,63 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'jsWizzi_Step_1',
+            title: 'jsWizzi - step - 1 - global variables',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        if false
+            _ sampleExecution
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'functions'
+                $$ @ 'test_1.ittf.ittf'
+                $$ @ 'test_2.ittf.ittf'
+                $$ @ 'test_3.ittf.ittf'
+                @ 'test_4.ittf.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTree
+                    @ ittfUri
+                    {
+                        @ mTreeBuildUpContext
+                            {
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                    f_cb_test( mTree )
+                        # loog 'mTree', mTree
+                        _ printEvaluatedNodes(mTree, 'After evaluate')
+                        log 'mTree.toIttf()', mTree.toIttf()
+
+        function sampleExecution
+            log '-- Enter sampleExecution'
+            var x = 0
+            log '-- Set x = 0'
+            function a
+                set x++
+                log '-- Increment x in a = ', x
+                var ax = 0
+                log '-- Set ax = 0'
+                function b
+                    var bx = 0
+                    log '-- Set bx = 0'
+                    set x++
+                    log '-- Increment x in b = ', x
+                _ b
+                log '-- Test x', x
+                if x < 5
+                    _ a
+            _ a
+
+

@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mixer.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var path = require('path');
 var assert = require('assert');
@@ -104,6 +104,9 @@ module.exports = function(mTreePiece, mTreeBrickProvider, callback) {
                 includerBrickKey: mixerNode.model.brickKey, 
                 includerMTreeBrick: mTreePiece
              }, function(err, mixedNodifiedMTree) {
+                if (err) {
+                    console.log("[31m%s[0m", err);
+                }
                 if (err) {
                     return callback(local_error('IttfMixError', 'mixer', 'Fragment to mix not found', mixerNode, err, {
                             mtree: {
@@ -302,7 +305,7 @@ function local_error(errorName, method, message, node, inner, other) {
             errorName
         ], {
             source: {
-                method: 'wizzi-mtree@0.8.16.loader.mixer.' + method
+                method: 'wizzi-mtree@0.8.19.loader.mixer.' + method
              }, 
             mtree: mtree, 
             inner: inner, 
@@ -327,7 +330,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.16.loader.mixer.' + method,
+        method: 'wizzi-mtree@0.8.19.loader.mixer.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

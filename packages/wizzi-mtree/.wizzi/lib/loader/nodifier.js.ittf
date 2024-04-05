@@ -157,10 +157,12 @@
                 set current = line
                 set current.children = []
             
+			# loog 'nodes -------------->\n', nodes[0].children[0]
+			
 			return nodes
 
 	function local_error
-		param name
+		param errorName
 		param method
 		param message
 		param line

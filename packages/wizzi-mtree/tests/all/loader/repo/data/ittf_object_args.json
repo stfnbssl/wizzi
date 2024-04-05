@@ -22,7 +22,7 @@
         "brickKey": "f1",
         "mTreeBrick": "[Circular ~]",
         "evalContext": {
-          "kind": 1,
+          "ittfState": 1,
           "brickKey": "f1",
           "$freezed": false,
           "functions": {},
@@ -51,7 +51,10 @@
           "valuesStack": [],
           "declaresStack": [],
           "builtInFunctions": {},
-          "builtInObjects": {}
+          "functionContexts": {},
+          "functionScopeChains": {},
+          "currentFunctionScopeChain": null,
+          "currentFunctionName": null
         }
       },
       "f2": {
@@ -146,7 +149,7 @@
           "$mixerBrickKey": "f1"
         },
         "evalContext": {
-          "kind": 1,
+          "ittfState": 1,
           "brickKey": "f2",
           "$freezed": false,
           "functions": {},
@@ -168,14 +171,36 @@
           "valuesStack": [],
           "declaresStack": [],
           "builtInFunctions": {},
-          "builtInObjects": {}
+          "functionContexts": {},
+          "functionScopeChains": {},
+          "currentFunctionScopeChain": null,
+          "currentFunctionName": null
         }
       }
     },
     "sourceCount": 2,
     "modelCount": 2,
     "nodeCount": 13,
-    "callChain": []
+    "callChain": [],
+    "contextsFromMTreeBuildUpScriptAst": {
+      "currentBrickKey": "f1",
+      "mTreeBricks": {
+        "f0": {
+          "stackPath": [
+            "Program"
+          ],
+          "functions": []
+        },
+        "f1": {
+          "stackPath": [],
+          "functions": {}
+        }
+      },
+      "currentBrick": {
+        "stackPath": [],
+        "functions": {}
+      }
+    }
   },
   "frontMatter": {},
   "documentFragments": [],
@@ -183,6 +208,7 @@
     {
       "n": "alpha",
       "v": "",
+      "i": 5,
       "r": 1,
       "c": 1,
       "s": "f1",
@@ -192,6 +218,7 @@
         {
           "n": "beta",
           "v": "",
+          "i": 6,
           "r": 2,
           "c": 5,
           "s": "f1",
@@ -201,6 +228,7 @@
             {
               "n": "gamma",
               "v": "",
+              "i": 12,
               "r": 1,
               "c": 1,
               "s": "f2",
@@ -210,6 +238,7 @@
                 {
                   "n": "var",
                   "v": "tau_stefi = 60",
+                  "i": 13,
                   "r": 3,
                   "c": 5,
                   "s": "f2",
@@ -222,6 +251,7 @@
             {
               "n": "gamma",
               "v": "",
+              "i": 12,
               "r": 1,
               "c": 1,
               "s": "f2",
@@ -231,6 +261,7 @@
                 {
                   "n": "var",
                   "v": "tau_annie = 59",
+                  "i": 13,
                   "r": 3,
                   "c": 5,
                   "s": "f2",
@@ -243,6 +274,7 @@
             {
               "n": "gamma",
               "v": "",
+              "i": 12,
               "r": 1,
               "c": 1,
               "s": "f2",
@@ -252,6 +284,7 @@
                 {
                   "n": "var",
                   "v": "tau_afro = 98",
+                  "i": 13,
                   "r": 3,
                   "c": 5,
                   "s": "f2",
@@ -271,6 +304,6 @@
   "$schema": "tests",
   "mixed": true,
   "data": {
-    "createdAt": "14/3/2024:21:33:7"
+    "createdAt": "5/4/2024:18:50:26"
   }
 }

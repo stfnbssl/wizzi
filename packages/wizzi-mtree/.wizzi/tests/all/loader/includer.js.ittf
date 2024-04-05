@@ -78,6 +78,6 @@
 					@ provider
 					f_cb_no_err( includedModel )
                         # loog 'should throw an error for fragment to include not found', '\n' + err.toString()
-                        tobe_error( err, IttfIncludeError )                    
-                        _ done
-
+						# loog '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^'
+                        tobe_error( err, IttfIncludeError )
+						_ done

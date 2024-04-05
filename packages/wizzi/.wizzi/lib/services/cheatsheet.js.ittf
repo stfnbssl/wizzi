@@ -8,6 +8,28 @@ module wizzi@${wzCtx.version}.cheatsheet
     +
     const md = module.exports = {}
     +
+    #
+    # cheatsheet json structure
+    # {
+    #   string name
+    #   [ elements
+    #     {
+    #       string name
+    #       [ items
+    #         {
+    #            string schema
+    #            string render
+    #              one-of 'artifact', 'script', 'ittf', 'ittf-show-blanks'
+    #            [ fragments
+    #              {
+    #                string name
+    #                string ittf
+    #            string ittf
+    #            string ittfWrapper
+    #            string expected
+    #              optional
+    #
+    +
     set md.buildCheatsheet
         function
             param wizziFactory
@@ -71,7 +93,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                             set itemResult[item.n] = mTree.toIttf(item.children[0])
                                                             set itemResult[item.n + 'Wrapped'] = itemResult[item.n]
                                                         else
-                                                            log '++++++++++++++++++++ Wrap it', 'isError', isError
+                                                            # loog '++++++++++++++++++++ Wrap it', 'isError', isError
                                                             # wrap it
                                                             var ittfNode
                                                                 _ wrapperForSchema
@@ -89,7 +111,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                             # do not wrap them
                                                             set itemResult[item.n] = mTree.toIttf(item.children)
                                                             set itemResult[item.n + 'Wrapped'] = itemResult[item.n]
-                                                            log '++++++++++++++++++++ isError do not wrap them', item.n, itemResult[item.n]
+                                                            # loog '++++++++++++++++++++ isError do not wrap them', item.n, itemResult[item.n]
                                                         else
                                                         *$
                                                         # wrap them
@@ -126,6 +148,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                                         var item = _all_items[item_count++]
                                         if !item
                                             r_cb(result)
+                                        log "Processing item", item.title
                                         if item.render === 'script'
                                             var packiForGen
                                                 _ getPackiForGen                                            
@@ -140,11 +163,8 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                     if err
                                                         try
                                                             set item.generated
-                                                                _ verify.htmlEscape
-                                                                    _ stringify
-                                                                        @ err
-                                                                        @ null
-                                                                        @ 2
+                                                                _ prettifyError
+                                                                    @ err
                                                         catch ex 
                                                             set item.generated = err.message || 'No result. Something went wrong!'
                                                         return
@@ -176,11 +196,8 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                     if err
                                                         try
                                                             set item.generated
-                                                                _ verify.htmlEscape
-                                                                    _ stringify
-                                                                        @ err
-                                                                        @ null
-                                                                        @ 2
+                                                                _ prettifyError
+                                                                    @ err
                                                         catch ex 
                                                             set item.generated = err.message || 'No result. Something went wrong!'
                                                         return
@@ -200,7 +217,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                             _ next
                                         else
                                             const mainIttf = 'index.' + item.schema + '.ittf'
-                                            log 'cheatsheet.generating', mainIttf
+                                            # loog 'cheatsheet.generating', mainIttf
                                             var packiForGen
                                                 _ getPackiForGen                                            
                                                     @ item
@@ -218,11 +235,8 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                 f_cb_no_throw( artifactContent )
                                                     if err
                                                         set item.generated
-                                                            _ verify.htmlEscape
-                                                                _ stringify
-                                                                    @ err
-                                                                    @ null
-                                                                    @ 2
+                                                            _ prettifyError
+                                                                @ err
                                                         return
                                                             _ next
                                                     else
@@ -230,6 +244,30 @@ module wizzi@${wzCtx.version}.cheatsheet
                                                         set item.generated = artifactText ? artifactText.trim() : 'No result. Something went wrong!'
                                                         return
                                                             _ next
+    +
+    function prettifyError
+        param err
+        var hint = err.hint
+        if !hint && err.data && err.data.inner
+            set hint = err.data.inner.hint
+        if hint
+            return
+                _ verify.htmlEscape
+                    _ stringify
+                        {
+                            @ errorName err.errorName
+                            @ message err.message
+                            @ hint hint
+                        @ null
+                        @ 2
+        else
+            return
+                _ verify.htmlEscape
+                    _ stringify
+                        @ err
+                        @ null
+                        @ 2
+
     +
     function prettifyItems
         param _all_items
@@ -280,7 +318,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                 {
                     @ type "CODE"
                     @ contents f.ittf
-        log 'getPackiForGen.retval', retval
+        # loog 'getPackiForGen.retval', retval
         return retval
     +
     function wrapperForSchema

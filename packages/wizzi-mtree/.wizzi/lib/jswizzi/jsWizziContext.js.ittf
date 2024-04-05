@@ -83,6 +83,29 @@
             @ globalContext 2
 			@ callContext 3
 
+	#
+		# This is a fake to allow a script for interpolation 
+		# to have a function. The scope and recursion management of the function is a fake too, obviously.
+		# Waiting for damage, in very rare circumstances.
+		# TODO implementing function expressions should resolve the problem
+	class FakeLoadHistoryForInterpolation
+		ctor
+			set this.contextData = new ContextData(ittfStates.brickEvalContext)
+		m setContextsFromMTreeBuildUpScriptAst
+			param contexts
+			set this.contexts = contexts
+			_ this.contextData.setFunctionScopesFromAst
+				_ this.getMTreeBrickFunctionScopes('f0')
+		m getMTreeBrickFunctionScopes
+			param brickKey
+			var mTreeBricks = this.contexts.mTreeBricks
+			if !mTreeBricks[brickKey]
+				return
+					{
+						{ functions
+			else
+				return mTreeBricks[brickKey]
+	
 	class JsWizziContext
 
 		ctor
@@ -90,7 +113,7 @@
 			param productionContext
             param scriptCoder
 			set this.isForInterpolation = false
-			if composedMTree
+			if composedMTree && productionContext
 				# The JsWizziContext is used for the
 				# buildup of an MTree.
 				# Create the JsWizziEvalHelper
@@ -102,6 +125,7 @@
 			else
 				# The JsWizziContext is used for interpolations.
 				set this.isForInterpolation = true
+				set this.loadHistory = new FakeLoadHistoryForInterpolation()
 			+
 			set this.globalContext = new ContextData(ittfStates.globalContext)
             set this.callContextStack = []
@@ -145,25 +169,28 @@
 			param contextsFromAst
 			_ this.loadHistory.setContextsFromMTreeBuildUpScriptAst
 				@ contextsFromAst
-
-		# Called by JsWizziRunner.FunctionDeclarationCall
 		m push
+			# Called by JsWizziRunner.FunctionDeclarationCall
+			# loog 'JsWizziContext: push'
             if this.callContext
                 _ this.callContextStack.push(this.callContext)
             set this.callContext = new ContextData(ittfStates.callContext)
-			if this.isForInterpolation == false
-				$if true $$ 25/3/24
-					_ this.nodeContext.push()
+			$if false
+				if this.isForInterpolation == false
+					$$ _ this.nodeContext.push()
 					_ this.brickEvalContext.push()
 			return this
+		
 		m pop
+			# Called by JsWizziRunner.FunctionDeclarationCall
+			# loog 'JsWizziContext: pop'
             if this.callContextStack.length > 0
 			    set this.callContext = this.callContextStack.pop()
             else
                 set this.callContext = null
-			if this.isForInterpolation == false
-				$if true $$ 25/3/24
-					_ this.nodeContext.pop()
+			$if false
+				if this.isForInterpolation == false
+					$$ _ this.nodeContext.pop()
 					_ this.brickEvalContext.pop()
 			return this
 		m clear
@@ -247,6 +274,12 @@
                         @ line
             else
                 return null
-
+	+
+	set JsWizziContext.createMockComposedMTree
+		function
+			return
+				{
+					@ loadHistory new FakeLoadHistoryForInterpolation()
+	+
 	set module.exports = JsWizziContext
 

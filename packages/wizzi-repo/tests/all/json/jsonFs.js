@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\tests\all\json\jsonFs.js.ittf
-    utc time: Tue, 26 Mar 2024 16:43:38 GMT
+    utc time: Wed, 03 Apr 2024 03:26:47 GMT
 */
 'use strict';
 
@@ -155,7 +155,7 @@ describe("json.jsonFs", function() {
                     console.log("[31m%s[0m", err);
                     throw new Error(err.message);
                 }
-                console.log('*********************** deletedItem.r', err, r, __filename);
+                // loog '*********************** deletedItem.r', err, r
                 expect(r.deletedCount).to.be.a('number');
                 expect(r.deletedCount).to.be(1);
                 expect(r.code).to.be.a('string');

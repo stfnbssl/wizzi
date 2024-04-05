@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\ittfScanner\textDocumentScanner.js.ittf
-    utc time: Sat, 30 Mar 2024 12:44:01 GMT
+    utc time: Mon, 01 Apr 2024 15:00:42 GMT
 */
 'use strict';
-var verify = require('wizzi-helpers').verify;
+var verify = require('@wizzi/helpers').verify;
 var path = require('path');
 var encdec = require('../crypto/index');
 var vfile = require('../fSystem/vfile');

@@ -5,8 +5,9 @@ import {createStoreFactory} from '@wizzi/repo';
 import mtree, {createLoadMTree, mocks} from '@wizzi/mtree';
 import {jsWizzi} from '@wizzi/mtree'
 
-var sourceIttf = path.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_2.ittf.ittf');
-var destScript = path.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_2.script.js');
+var nittf = 4;
+var sourceIttf = path.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_' + nittf + '.ittf.ittf');
+var destScript = path.join(__dirname, '..', '..', 'src', 'jswizzi', 'ittf', 'ittf_' + nittf + '.script.js');
 
 export function load_jswizzi_1() {
     const file = fSystem.vfile();

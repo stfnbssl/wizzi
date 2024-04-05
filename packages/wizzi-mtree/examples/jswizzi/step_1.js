@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\jswizzi\step_1.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:31 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 //
@@ -43,7 +43,7 @@ function getFSDocumentStore(callback) {
 }
 var jsWizzi_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    var ittfUri = path.join(__dirname, 'ittf', 'functions/basic.html.ittf');
+    var ittfUri = path.join(__dirname, 'ittf', 'functions/error_loop.ittf.ittf');
     var productionManager = mocks.getProductionManager();
     getFSDocumentStore(function(err, fsStore) {
         if (err) {
@@ -67,6 +67,9 @@ var jsWizzi_Step_1 = function(step_callback) {
             if (err) {
                 console.log("[31m%s[0m", 'Test error >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
                 console.log("[31m%s[0m", 'err', err);
+                if (err.hint) {
+                    console.log("[31m%s[0m", 'err.hint', err.hint);
+                }
                 throw new Error(err.message);
             }
             // loog 'mTree', mTree

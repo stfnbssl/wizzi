@@ -3,8 +3,8 @@
 
     $
         var opt = {
-            name: 'Evaluator_Quick',
-            title: 'Evaluator - quick',
+            name: 'Loader_Quick',
+            title: 'Loader - quick',
             folderLevel: 2
         }
 
@@ -14,7 +14,7 @@
             _ path.join
                 @ __dirname
                 @ 'ittf'
-                @ 'quick.html.ittf'
+                @ 'quick.js.ittf'
 
         var productionManager 
             _ mocks.getProductionManager
@@ -24,22 +24,12 @@
                 _ loader.loadMTree
                     @ ittfUri
                     {
-                        @ mTreeBuildUpContext
-                            {
-                                @ items
-                                    [
-                                        {
-                                            @ name 'stefi'
-                                            @ value 60
-                                        {
-                                            @ name 'annie'
-                                            @ value 59
-                                        {
-                                            @ name 'afro'
-                                            @ value 98
-
+                        { mTreeBuildUpContext
                         @ __productionManager productionManager
                         @ __ittfDocumentStore fsStore
                     f_cb_test( mTree )
-                        # loog 'mTree', mTree
-                        _ printEvaluatedNodes(mTree, 'After evaluate')
+                        log 'err', err
+                        log 'mTree\n', mTree                       
+                        log 'mTree.nodes[0]\n', mTree.nodes[0]                       
+                        log 'mTree.nodes[0].children[1]\n', mTree.nodes[0].children[1]
+                        log 'mTree.toIttf()\n', mTree.toIttf()

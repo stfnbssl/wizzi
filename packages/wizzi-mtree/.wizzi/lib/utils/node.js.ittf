@@ -339,7 +339,7 @@
             if !node.parent
                 return null
             for var i=0; i<node.parent.children.length; i++
-                log 'md.previousSibling', i, node.parent.children[i] == node
+                # loog 'md.previousSibling', i, node.parent.children[i] == node
                 if node.parent.children[i] == node
                     return node.parent.children[i-1] || null
 
@@ -349,7 +349,7 @@
             if !node.parent
                 return null
             for var i=0; i<node.parent.children.length; i++
-                log 'md.nextSibling', i, node.parent.children[i] == node
+                # loog 'md.nextSibling', i, node.parent.children[i] == node
                 if node.parent.children[i] == node
                     return node.parent.children[i+1] || null
     

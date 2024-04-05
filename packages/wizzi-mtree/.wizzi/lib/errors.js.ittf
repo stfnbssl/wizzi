@@ -112,14 +112,16 @@
                         _ loadHistory.findNodeById
                             @ d.mTreeBrickErrorNodeId
                     # loog 'WizziError.mTreeNode', mTreeBrickNode
-                    _ this.addHint
-                        @ 'ittfErrorLines'
-                        _ md.nodeErrorLines
-                            @ mTreeBrickNode.mTreeNode
-                            {
-                                @ errorName this.data.inner.errorName
-                                @ description this.message
-                            @ true
+                    if mTreeBrickNode
+                        _ this.addHint
+                            @ 'ittfErrorLines'
+                            # TODO : this.data.inner.errorName??? do explain
+                            _ md.nodeErrorLines
+                                @ mTreeBrickNode.mTreeNode
+                                {
+                                    @ errorName this.data.inner ? this.data.inner.errorName : ''
+                                    @ description this.message
+                                @ true
                 elif d.mTreeBrickNode || d.mTreeBrickLine
                     var node = d.mTreeBrickNode || d.mTreeBrickLine
                     var mTreeBrick = d.mTreeBrick || node.model
@@ -154,7 +156,7 @@
                 set errorName = inner.errorName || errorName
                 set message = inner.message
                 set inner = inner.data ? inner.data.inner : null
-                log inner != null
+                # log inner != null
             if hint
                 set hint.errorName = errorName
                 set hint.message = message

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\mTreeBrickProvider.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 
@@ -39,6 +39,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -65,6 +68,9 @@ describe("mTreeBrickProvider", function() {
         store.init({
             storeKind: 'filesystem'
          }, function(err, notUsed) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             done();
         })
     });
@@ -74,6 +80,9 @@ describe("mTreeBrickProvider", function() {
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
          }, function(err, content) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             expect(err.name).to.be('InvalidRequestError');
             expect(err.code).to.be('UriError');
             done();
@@ -85,6 +94,9 @@ describe("mTreeBrickProvider", function() {
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
          }, function(err, content) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             expect(err.name).to.be('InvalidRequestError');
             expect(err.code).to.be('UriError');
             done();
@@ -96,6 +108,9 @@ describe("mTreeBrickProvider", function() {
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
          }, function(err, content) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             expect(err.name).to.be('InvalidRequestError');
             done();
         })
@@ -106,6 +121,9 @@ describe("mTreeBrickProvider", function() {
             mTreeBuildUpContext: {}, 
             __ittfDocumentStore: store
          }, function(err, content) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             expect(err.name).to.be('RepoIOError');
             done();
         })

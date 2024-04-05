@@ -6,9 +6,11 @@
 	m endLoadingCallArguments
 		set this.loadingCallArguments = false
 
-    m declare
+    
+	m declare
         param name
         param value
+		# Runner: VariableDeclarator
 		if value && value.__is_function
 			_ this.declareFunction
 				@ name
@@ -24,7 +26,8 @@
     m declareCallParam
         param name
         param value
-		# loog 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
+		# called by Runner: FunctionDeclaration_Call
+		log 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
 		_ this.callContext.declare(name, value)
 
     m undeclare
@@ -77,6 +80,7 @@
     m setValue
         param name
         param value
+		# it seems is called during interpolation only
 		if value && value.__is_function
 			_ this.declareFunction
 				@ name
@@ -92,6 +96,7 @@
     m setValues
         param values
         set values = (values || {})
+		throw new Error('Here it is')
 		for var k in values
 			_ this.setValue
 				@ k
@@ -100,6 +105,7 @@
     m put
         param name
         param value
+		# Runner: Identifier_Set, UpdateExpression
 		_ assert
 			@ this.ittf_state != ittfStates.nodeContext
 			@ 'put is an invalid operation for NodeContext state'

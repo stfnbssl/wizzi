@@ -66,6 +66,7 @@
             { 
 
     runner( FunctionDeclaration_Call, data
+		# loog 'Runner: FunctionDeclaration_Call, Enter', 
         # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.params', node.params
         # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.body', node.body
         
@@ -84,5 +85,6 @@
                 @ node.body
                 @ ctx
         _ ctx.set_MTreeBrickEvalContext(save_brick_key, 0)
+		# loog 'Runner: FunctionDeclaration_Call, Exit', 
 		_ ctx.pop()
         return state.value

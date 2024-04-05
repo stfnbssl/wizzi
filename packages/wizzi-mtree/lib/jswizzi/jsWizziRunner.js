@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var escodegen = require('escodegen');
 var esprima = require('esprima');
@@ -53,7 +53,7 @@ var runner = function(ast, ctx, action, data) {
     var type = action ? ast.type + '_' + action : ast.type;
     ;
     if (verbose) {
-        console.log('ast.type: ' + type);
+        console.log('ast.type: ' + type, ast.name, ast.value, ast.callee && ast.callee.name);
     }
     if (ast.trailingComments && ast.trailingComments.length == 1) {
         ctx.setRunningNodeId(ast.trailingComments[0].value)
@@ -71,6 +71,13 @@ var runnerSet = function(ast, ctx, data) {
     return runner(ast, ctx, 'Set', data);
 };
 var runnerCall = function(functionName, ast, ctx, data) {
+    // loog 'Runner: runnerCall', functionName
+    if (functionName == 'FunctionExpression') {
+        return local_error(ctx, 'NotSupportedError', 'JsWizzi does not support function expressions', {
+                node: ast, 
+                errorLines: errors.esprimaNodeErrorLines('not supported', ast, ctx.source, true)
+             }, ast, 'FunctionExpression');
+    }
     //
     // `ctx` (JsWizziContext) knows the current mTreeBrickEvalContext
     // so you do not need to pass a brickKey parameter
@@ -79,8 +86,8 @@ var runnerCall = function(functionName, ast, ctx, data) {
     // the current `functionName`, or undefined if the call is from outside of a function body
     var savedContext = ctx.enterFunctionEvalContext(functionName);
     var retval = runner(ast, ctx, 'Call', data);
-    // reset the previous current function on `brickKey` mTreeBrickEvalContext
-    ctx.exitFunctionEvalContext(savedContext.brickKey, savedContext.functionName)
+    // exit function and restore the previous current function on `brickKey` mTreeBrickEvalContext
+    ctx.exitFunctionEvalContext(functionName, savedContext.brickKey, savedContext.functionName)
     return retval;
 };
 runner.Program = function(node, ctx) {
@@ -127,6 +134,7 @@ runner.Identifier = function(node, ctx) {
 runner.Identifier_Set = function(node, ctx, data) {
     log('Identifier_Set.node', node);
     var parentNode = null;
+    // loog 'Runner.Identifier_Set', node.name
     ctx.put(node.name, data)
 }
 ;
@@ -155,6 +163,7 @@ runner.VariableDeclaration = function(node, ctx) {
 runner.VariableDeclarator = function(node, ctx) {
     log('VariableDeclarator.node', node);
     var parentNode = null;
+    // loog 'Runner.VariableDeclarator', node.id.name
     if (!node.init) {
         ctx.declare(node.id.name)
     }
@@ -252,6 +261,8 @@ runner.BlockStatement = function(node, ctx) {
         if (state && state.__is_error) {
             return state;
         }
+        
+        // loog 'Runner: BlockStatement', 'result', state.result, node.body.length, i, statement.type, state.value
         if (state.result || state.break || state.continue) {
             return state;
         }
@@ -373,6 +384,7 @@ runner.DoWhileStatement = function(node, ctx) {
 runner.ReturnStatement = function(node, ctx) {
     log('ReturnStatement.node', node);
     var parentNode = null;
+    // loog 'Runner: ReturnStatement, node.argument:', node.argument
     if (node.argument) {
         var value = runner(node.argument, ctx);
         
@@ -539,10 +551,8 @@ runner.UnaryExpression = function(node, ctx) {
     if (node.operator === 'typeof') {
         exp = runner(node.argument, ctx)
         ;
-        
-        // loog 'wizzi-mtree-jsWizziRunner.__is_error CallExpression argument', exp
         if (exp && exp.__is_error) {
-            if (exp.data && exp.data.errorName === 'ReferenceError') {
+            if (exp.errorName === 'ReferenceError') {
                 exp = undefined;
             }
             else {
@@ -679,6 +689,7 @@ runner.BinaryExpression = function(node, ctx) {
 runner.UpdateExpression = function(node, ctx) {
     log('UpdateExpression.node', node);
     var parentNode = null;
+    // loog 'Runner.UpdateExpression', node.argument.name
     var v,
         exp;
     var exp = runner(node.argument, ctx);
@@ -891,6 +902,7 @@ runner.CallExpression = function(node, ctx) {
         ctx.endLoadingCallArguments();
         var result;
         try {
+            // loog 'Runner: Expression invoke runnerCall `', node.callee.name, '`'
             result = runnerCall(node.callee.name, f, ctx, args);
             // _ ctx.elapsedTime('wizzi-mtree.jsWizziRunner.Call function ' + node.callee.name + ' end')
         } 
@@ -901,6 +913,8 @@ runner.CallExpression = function(node, ctx) {
     }
     
     // loog 'FunctionExpression', node.callee, true
+    
+    // loog 'Runner: Expression invoke runnerCall `', 'FunctionExpression', '`'
     if (node.callee.type === 'FunctionExpression') {
         var f = node.callee;
         if (f.params.length !== node.arguments.length) {
@@ -1266,6 +1280,7 @@ runner.FunctionDeclaration = function(node, ctx) {
 runner.FunctionDeclaration_Call = function(node, ctx, data) {
     log('FunctionDeclaration_Call.node', node);
     var parentNode = null;
+    // loog 'Runner: FunctionDeclaration_Call, Enter',
     // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.params', node.params
     // loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.body', node.body
     var save_brick_key = ctx.get_currentMTreeBrickKey();
@@ -1286,19 +1301,20 @@ runner.FunctionDeclaration_Call = function(node, ctx, data) {
         return state;
     }
     ctx.set_MTreeBrickEvalContext(save_brick_key, 0);
+    // loog 'Runner: FunctionDeclaration_Call, Exit',
     ctx.pop();
     return state.value;
 }
 ;
 function local_error(ctx, errorName, message, node, parentnode, method, inner, other) {
-    console.log('jsWizziRunner.local_error.message', message, __filename);
-    console.log('jsWizziRunner.local_error.node', node, __filename);
-    console.log('jsWizziRunner.local_error.node.name', node && node.name, __filename);
-    console.log('jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name, __filename);
-    console.log('jsWizziRunner.local_error.method', method, __filename);
-    console.log('jsWizziRunner.local_error.inner.message', inner && inner.message, __filename);
-    console.log('jsWizziRunner.local_error.parentnode.other', other, __filename);
-    console.log('jsWizziRunner.local_error.ctx.source', ctx.source, __filename);
+    // loog 'jsWizziRunner.local_error.message', message
+    // loog 'jsWizziRunner.local_error.node', node
+    // loog 'jsWizziRunner.local_error.node.name', node && node.name
+    // loog 'jsWizziRunner.local_error.parentnode.name', parentnode && parentnode.name
+    // loog 'jsWizziRunner.local_error.method', method
+    // loog 'jsWizziRunner.local_error.inner.message', inner && inner.message
+    // loog 'jsWizziRunner.local_error.parentnode.other', other
+    // loog 'jsWizziRunner.local_error.ctx.source', ctx.source
     // loog 'jsWizziRunner.local_error.ctx', ctx
     // loog 'jsWizziRunner.local_error.isForInterpolation.node,parentnode', inner && inner.name,  ctx.isForInterpolation, node, parentnode
     message = message || '';
@@ -1350,7 +1366,7 @@ function local_error(ctx, errorName, message, node, parentnode, method, inner, o
     }
     return new mainErrors.WizziError(message, errorName, errorNames, {
             source: {
-                method: 'wizzi-mtree@0.8.16.jsWizzi.jsWizziRunner.' + method
+                method: 'wizzi-mtree@0.8.19.jsWizzi.jsWizziRunner.' + method
              }, 
             jswizzi: {
                 node: node, 
@@ -1446,11 +1462,10 @@ function getMTreeBricksAndFunctionContextsFromAst(ast) {
     return contexts;
 }
 function doAst(ast, contexts) {
-    // log ast.type
+    // loog ast.type
     Object.keys(ast).forEach((propName) => {
     
         if (propName == 'body') {
-            console.log(ast.type, propName, ast.id ? ast.id.name : '')
             if (ast.id) {
                 contexts.currentBrick.stackPath.push(ast.id.name);
                 contexts.currentBrick.functions[ast.id.name] = contexts.currentBrick.stackPath.join(',');
@@ -1609,7 +1624,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.16.jsWizzi.jsWizziRunner.' + method,
+        method: 'wizzi-mtree@0.8.19.jsWizzi.jsWizziRunner.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

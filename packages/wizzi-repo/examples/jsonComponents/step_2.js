@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\jsonComponents\step_2.js.ittf
-    utc time: Tue, 26 Mar 2024 16:43:37 GMT
+    utc time: Wed, 03 Apr 2024 03:26:47 GMT
 */
 'use strict';
 //
@@ -41,7 +41,7 @@ var JsonComponents_Step_2 = function(step_callback) {
             console.log("[31m%s[0m", err);
             throw new Error(err.message);
         }
-        console.log('packiFiles', packiFiles, __filename);
+        // loog 'packiFiles', packiFiles
         repoIndex.JsonComponents.packiFilesToUtilVFileJson(packiFiles, function(err, jsonVFile) {
             if (err) {
                 console.log("[31m%s[0m", err);

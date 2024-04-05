@@ -6,5 +6,7 @@
     function
 		param err
 		param ${result}
+		if err
+			error err
 		$hook
 

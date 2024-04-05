@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\liner.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
 var util = require('util');
@@ -223,6 +223,7 @@ module.exports = function(textContent, ittfDocumentData) {
     if (line) {
         pushLine();
     }
+    // loog 'lines -------------->\n', lines
     return lines;
     function processMacro(cp) {
         
@@ -368,9 +369,9 @@ module.exports = function(textContent, ittfDocumentData) {
         
         // calc trimmed start, end, len of value
         
-        // log "v_start, v_end", v_start, v_end
+        // loog "v_start, v_end", v_start, v_end
         
-        // log "v_start, v_end", v_start, v_end
+        // loog "v_start, v_end", v_start, v_end
         if (waitValue == true) {
             var v_start = -1,
                 v_end,

@@ -1,16 +1,16 @@
-// 14/3/2024:21:33:7  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
+// 5/4/2024:18:50:26  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
 $.n(); // set the context state to NodeContext
-var $0 = {}; // the root node of the MTree buildup
-var $1 = { n: "alfa", v: "", r: 1, c: 1, s: "f1", u: "f1",  }; //8
+var $0 = {}; // the root node of the mTree buildUp
+var $1 = { n: "alfa", v: "", i: 8, r: 1, c: 1, s: "f1", u: "f1",  }; //node:8
 $.a($0, $1, 5);
 $.s("f1");
-function buildup_beta($parent,name) {
+function buildup_beta($parent,name) { //node:9
     $.n();
-    var $3 = { n: "beta", v: $.ip("f1", "${name}", "string", 9, false), r: 4, c: 9, s: "f1", u: "f1",  }; //11
+    var $3 = { n: "beta", v: $.ip("f1", "${name}", "string", 9, false), i: 11, r: 4, c: 9, s: "f1", u: "f1",  }; //node:11
     $.a($parent, $3, 10);
 }
 $.s("f1");
 var y = 'stefi';
 $.s("f1");
-buildup_beta($1,y);
+buildup_beta($1,y); //node:13
 $.s("f1");

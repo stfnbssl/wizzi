@@ -32,7 +32,7 @@
 	m getCheatsheetFolder
 		string schemaName
 		callback
-		log 'PluginsManager.getCheatsheetFolder.schemaName: ' + schemaName
+		# loog 'PluginsManager.getCheatsheetFolder.schemaName: ' + schemaName
 		+
 			
 		var
@@ -65,7 +65,7 @@
 				_ item.getCheatsheetFolder
 					@ schemaName
 					f_cb( packiCheatsheetFolder )
-						log 'found', !!packiCheatsheetFolder
+						# loog 'found', !!packiCheatsheetFolder
 						if packiCheatsheetFolder
 							set result = packiCheatsheetFolder
 							set foundInPlugin = item.getFilename()

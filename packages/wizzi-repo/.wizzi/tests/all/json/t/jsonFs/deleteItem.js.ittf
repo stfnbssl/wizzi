@@ -7,7 +7,7 @@
 			_ jsonFs.deleteItem
 				@ hellotxt_item._id
 				f_cb_test( r )
-                    log '*********************** deletedItem.r', err, r
+                    # loog '*********************** deletedItem.r', err, r
 					tobe_number( r.deletedCount, 1 )
 					tobe_string( r.code, FSITEM_DELETED )
 					_ done

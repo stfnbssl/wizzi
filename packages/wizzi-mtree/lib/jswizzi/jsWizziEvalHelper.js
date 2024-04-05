@@ -2,10 +2,10 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:30 GMT
+    utc time: Fri, 05 Apr 2024 17:58:02 GMT
 */
 'use strict';
-var verify = require('wizzi-utils').verify;
+var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var path = require('path');
 var assert = require('assert');
@@ -131,14 +131,16 @@ class JsWizziEvalHelper {
             }
             var ret = interpolate(templatedValue, this.jsWizziContext, {delimiter: '${}'});
             if (ret && ret.__is_error) {
-                console.log('wizzi-mtree.JsWizziEvalHelper.interpolation.error\n', line, '\n', ret, __filename);
+                console.log("[31m%s[0m", 'wizzi-mtree.JsWizziEvalHelper.interpolation.error\n', line, '\n', ret);
                 ret.sourceKey = brickKey;
                 ret.line = line;
                 ret.templatedValue = templatedValue;
                 return ret;
             }
+            // loog 'ip', templatedValue, ret
             // Stop 7/7/17 if hasMacro
             ret = remacro(ret);
+            // loog 'ip after remacro', templatedValue, ret
             if (saveCurrentBrickKey === null) {
                 this.jsWizziContext.set_NodeContext(brickKey);
             }
@@ -156,13 +158,14 @@ class JsWizziEvalHelper {
             // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', saveCurrentBrickKey, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext
             // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2})
             // loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message
-            console.log('@@@@@@@@@@@@@@@@@@ ######################## @@@@@@@@@@@@@@@@@@@', __filename);
             return local_error('IttfEvaluationError', 'ip', 'Interpolation failed, ' + ex.message, this.jsWizziContext.getNodeFromScriptMap(line), ex, {
                     line: line, 
                     type: type, 
                     brickKey: brickKey
                  });
         } 
+        // Attention!!! types.objectify is different from verify.convert
+        // let types.objectify do the job
         var retObject = types.objectify(ret, type, {
             row: line
          });
@@ -365,12 +368,17 @@ function remacro(value) {
     // Alt+146 = Æ
     return verify.replaceAll(value, "Æ" + "{", "${");
 }
-function local_error(name, method, message, node, inner, other) {
-    return new errors.WizziError(message, node, node ? node.mTreeBrick || node.model : null, {
-            errorName: name, 
-            method: method, 
-            inner: inner, 
-            ...other||{}
+function local_error(errorName, method, message, node, inner, other) {
+    return new errors.WizziError(message, errorName, [
+            errorName
+        ], {
+            source: {
+                method: 'wizzi-mtree@0.8.19.lib.jswizzi.jsWizziEvalHelper.' + method
+             }, 
+            mtree: {
+                mTreeBrickNode: node
+             }, 
+            inner: inner || null
          });
 }
 module.exports = JsWizziEvalHelper;
@@ -392,7 +400,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.16.jswizzi.jsWizziEvalHelper.' + method,
+        method: 'wizzi-mtree@0.8.19.jswizzi.jsWizziEvalHelper.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

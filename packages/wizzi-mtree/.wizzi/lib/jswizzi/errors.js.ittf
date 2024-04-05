@@ -54,7 +54,7 @@
 			param source
 			param json
 
-			log 'jswizzi.errors.getErrorLines.loc', 'calling getErrorLines', errorData
+			# loog 'jswizzi.errors.getErrorLines.loc', 'calling getErrorLines', errorData
 
 			var statements = source.split('\n')
 
@@ -66,14 +66,14 @@
 			var ret
 				[ 
         
-			var parsedErrorLine
+			var parsedErrorLine = {}
 			for var i = start; i < end; i++
 				_ ret.push(formatLineNumber(i + 1) + ' ' + statements[i])
 				if (i == errorData.row - 1)
 					var col = errorData.pos || errorData.col
 					_ ret.push(spaces(col + 4) + '^ ' + (errorData.description + '  <--- --- --- --- --- ERROR' || ''))
 					set parsedErrorLine = parseScriptLine(statements[i])
-					log 'jswizzi.errors.getErrorLines.statements[i])', statements[i]
+					# loog 'jswizzi.errors.getErrorLines.statements[i])', statements[i]
 			return json ? { lines: ret, parsedErrorLine: parsedErrorLine } : ret.join('\n')
 
 	set md.esprimaNodeErrorLines
@@ -84,7 +84,7 @@
 			param json
             if node && node.loc
                 # loog 'jswizzi.errors.esprimaNodeErrorLines.source', source
-                log 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc, 'calling getErrorLines'
+                # loog 'jswizzi.errors.esprimaNodeErrorLines.node.loc', node.loc, 'calling getErrorLines'
                 return
                     $$ _ wizziUtils.errors.getErrorLines
 					_ md.getErrorLines
@@ -124,7 +124,7 @@
 	function parseScriptLine
         param line
 		var ndx = line.indexOf('//node:')
-		log 'parseScriptLine', line, ndx, line[ndx+7], line[ndx+8]
+		# loog 'parseScriptLine', line, ndx, line[ndx+7], line[ndx+8]
 		var state = 1  
 		var ret
 			{
@@ -135,7 +135,7 @@
 				if ch >= '0' && ch <= '9'
 					set ret.nodeId = ret.nodeId + ch
 				else
-					log 'parseInt(ret.nodeId)', parseInt(ret.nodeId)
+					# loog 'parseInt(ret.nodeId)', parseInt(ret.nodeId)
 					set ret.nodeId = parseInt(ret.nodeId)
 					set state = 2
 		if state == 1

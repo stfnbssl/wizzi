@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\tests\all\loader\function.js.ittf
-    utc time: Sat, 30 Mar 2024 14:06:32 GMT
+    utc time: Fri, 05 Apr 2024 17:58:03 GMT
 */
 'use strict';
 
@@ -38,6 +38,9 @@ function evaluate(uri, callback) {
         __ittfDocumentStore: store
      };
     MTreeBrickProvider.createFromUri(uri, loadContext, function(err, provider) {
+        if (err) {
+            console.log("[31m%s[0m", err);
+        }
         var mTree = provider.getPrimaryMTreeBrick();
         mixer(mTree, provider, function(err, mixedModel) {
             if (err) {
@@ -64,12 +67,18 @@ describe("function", function() {
         store.init({
             storeKind: 'filesystem'
          }, function(err, notUsed) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             done();
         })
     });
     it("should load and evaluate an ittf (function_1) with a $function called by a $_ command", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_1.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             evaluatedModel = result;
             expect(evaluatedModel).to.be.an('object');
             expect(evaluatedModel.nodes).to.be.an('array');
@@ -108,6 +117,9 @@ describe("function", function() {
     it("should load and evaluate an ittf (function_2) results: with a complex $function called by a $_ command", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_2.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             evaluatedModel = result;
             expect(evaluatedModel).to.be.an('object');
             expect(evaluatedModel.nodes).to.be.an('array');
@@ -159,6 +171,9 @@ describe("function", function() {
     it("should load and evaluate an ittf (function_3) with a recursive $function", function(done) {
         var content_filepath = path.join(__dirname, 'repo', 'data', 'function_3.tests.ittf');
         mTreeLoader(store, content_filepath, function(err, result) {
+            if (err) {
+                console.log("[31m%s[0m", err);
+            }
             // loog '================', err, result
             evaluatedModel = result;
             expect(evaluatedModel).to.be.an('object');
