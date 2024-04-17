@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\tests\helpers\verify.js.ittf
-    utc time: Mon, 01 Apr 2024 15:00:43 GMT
+    utc time: Wed, 17 Apr 2024 11:10:30 GMT
 */
 'use strict';
 
@@ -107,5 +107,9 @@ describe("verify", function() {
         var result = verify.replaceExtension('aaa.bbb.ccc', 'ddd');
         expect(result).to.be.a('string');
         expect(result).to.be('aaa.bbb.ddd');
+    });
+    it("should verify is an object not built in", function() {
+        var result = verify.isObjectNotBuiltIn(new String());
+        expect(result).to.be(false);
     });
 });

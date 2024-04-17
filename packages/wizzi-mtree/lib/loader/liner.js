@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\liner.js.ittf
-    utc time: Fri, 05 Apr 2024 17:58:02 GMT
+    utc time: Fri, 12 Apr 2024 14:00:18 GMT
 */
 'use strict';
 var util = require('util');
@@ -38,6 +38,9 @@ var util = require('util');
      }
 */
 /**
+     tagSuffix - open paren `(` is marker for `mix call`
+     if an hyphen or doublehyphen is encountered in `name` a tagSuffix is not detected.
+     TODO Any invalid char for a relative file path in `name` should deactivate tagSuffix.
      Ittf commands for comments
      $ and $ ... singleline comment
      $ and * ... * and $ multiline comment

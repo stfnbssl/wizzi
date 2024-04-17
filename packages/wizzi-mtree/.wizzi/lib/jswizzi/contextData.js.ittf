@@ -132,8 +132,6 @@
 				@ 'ContextData: Method `exitFunction` must be called on ittfStates 1 or 2 only'
 			+
 			var ctx = this.getContextOf(functionName)
-			if functionName == "buildNode" && ctx.functionsStack.length == 1
-				# throw new("Here it is")
 			$if false
 				info 'ContextData.exitFunction `', functionName, '`', 
 					\b 'stack length before exit: ', ctx.functionsStack.length

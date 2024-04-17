@@ -32,5 +32,17 @@
         else
             return value  
 
-
-
+	set md.preserveSpaces
+        function
+            param text
+            if verify.isEmpty(text)
+                return text
+            if text[0] == ' '
+                if text[text.length-1] == ' '
+                    return '\\b' + text + '\\b'
+                else
+                    return '\\b' + text
+            elif text[text.length-1] == ' '
+                return text + '\\b'
+            else
+                return text

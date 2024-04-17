@@ -1,16 +1,16 @@
 $group
     $
         var versions = {};
-        versions['@wizzi/helpers'] = '0.8.1';
-        versions['@wizzi/helpers@next'] = '0.8.2';
-        versions['@wizzi/utils'] = '0.8.17';
-        versions['@wizzi/utils@next'] = '0.8.18';
-        versions['@wizzi/mtree'] = '0.8.18';
-        versions['@wizzi/mtree@next'] = '0.8.19';
-        versions['@wizzi/repo'] = '0.8.19';
-        versions['@wizzi/repo@next'] = '0.8.20';
-        versions['@wizzi/factory'] = '0.8.30';
-        versions['@wizzi/factory@next'] = '0.8.31';
+        versions['@wizzi/helpers'] = '0.8.2';
+        versions['@wizzi/helpers@next'] = '0.8.3';
+        versions['@wizzi/utils'] = '0.8.20';
+        versions['@wizzi/utils@next'] = '0.8.21';
+        versions['@wizzi/mtree'] = '0.8.21';
+        versions['@wizzi/mtree@next'] = '0.8.22';
+        versions['@wizzi/repo'] = '0.8.20';
+        versions['@wizzi/repo@next'] = '0.8.21';
+        versions['@wizzi/factory'] = '0.8.33';
+        versions['@wizzi/factory@next'] = '0.8.34';
         
         versions['isomorphic-git'] = '1.19.2';
         versions['wizzi-js'] = '0.7.13';

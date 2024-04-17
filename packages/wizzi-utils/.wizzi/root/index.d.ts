@@ -415,6 +415,58 @@ export namespace packi {
 }
 
 /**
+ * The Helpers Feature
+ */
+export namespace helpers {
+    export namespace fail {
+        export function fatal(e: any, errCode?: number): void;
+        export function warn(e: any, errCode?: number): void;
+    }
+    export namespace node {
+        type Node = {
+            name: string;
+            value: string;
+            children: Node[];
+        }
+        type Lines = {
+            text: string;
+            lines: string[];
+        }
+        type LinesOptions = {
+            singleLine: boolean;
+        }
+        export function nodeToTextLine(node: Node): string;
+        export function inlinedTextToTextLines(text: string, options?: LinesOptions): Lines;
+        export function replace(item: Node, replacers: Node[]): void;
+        export function remove(item: Node): void;
+    }
+    export namespace lineParser {
+        type ParsedLine = {
+            name(): string;
+            value(): string;
+            hasValue(): boolean;
+        }
+        export function parseNameValueRaw(text: string): ParsedLine;
+    }
+    type RequireOptions = {
+        appendPaths?: string[];
+        prependPaths?: string[];
+    }
+    export function requireFromString(code: string, filename: string, options?: RequireOptions): any;
+    export namespace regexpExt {
+        export function getAllRegExp(regexp: RegExp): RegExp;
+        export function namedRegExp(regexp: RegExp): RegExp;
+    }
+    export namespace textIndentParser {
+        interface IndentedLine {
+            indent: number;
+            content: string;
+        }
+        export function parse(textContent: string): IndentedLine[];
+    }
+}
+
+/**
  * The Errors Feature
  */
  export namespace errors {

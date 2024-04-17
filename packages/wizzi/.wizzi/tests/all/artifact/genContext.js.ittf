@@ -26,7 +26,7 @@
 								@ indent 0
 						@ model null
 						@ srcPath null
-						@ pman null
+						@ pman mocks.getProductionManager()
 
 			_ ctx.write('alfa')
 			_ ctx.w(' beta')
@@ -53,7 +53,7 @@
 								@ indent 0
 						@ model null
 						@ srcPath null
-						@ pman null
+						@ pman mocks.getProductionManager()
 
 			_ ctx.write('alfa')
 			_ ctx.w(' beta')
@@ -86,7 +86,7 @@
 								@ indent 0
 						@ model null
 						@ srcPath null
-						@ pman null
+						@ pman mocks.getProductionManager()
 
 			_ ctx.write('alfa')
 			_ ctx.w(' beta')
@@ -125,7 +125,7 @@
 								@ indent 0
 						@ model null
 						@ srcPath null
-						@ pman null
+						@ pman mocks.getProductionManager()
 
 			_ ctx.writeFile
 				_ path.join
@@ -137,7 +137,7 @@
 			_ ctx.toStream(sw)
 			var result = sw.toString()
 
-			tobe_string( result, first one\n\tsecond one\n )
+			tobe_string( result, first one\r\n\tsecond one )
 
 		it should append a file to genContext
 
@@ -154,7 +154,7 @@
 								@ indent 0
 						@ model null
 						@ srcPath null
-						@ pman null
+						@ pman mocks.getProductionManager()
 
 			_ ctx.writeFile
 				_ path.join
@@ -166,7 +166,7 @@
 			_ ctx.toStream(sw)
 			var result = sw.toString()
 
-			tobe_string( result, first one\n\tsecond one\n )
+			tobe_string( result, first one\r\n\tsecond one )
 
 
 

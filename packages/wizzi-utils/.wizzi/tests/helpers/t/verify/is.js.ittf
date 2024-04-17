@@ -1,0 +1,5 @@
+$group
+
+	it should verify is an object not built in
+        var result = verify.isObjectNotBuiltIn(new String())
+        tobe_false(result)

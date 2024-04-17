@@ -1,17 +1,23 @@
 # @wizzi/helpers
 
-Helpers library for the wizzi factory
+Helpers library for the wizzi factory, required by the @wizzi/util package
+
+
+
 
 ## Work still in progress
 
 Availability of features will be announced
+
 on [Twitter](https://twitter.com/wizziteam) and [Facebook](https://www.facebook.com/wizzifactory)
+
 
 ## Wizzi internal package
 This package is required by the @wizzi/util package only.
+
 ## Features
 ### verify - helper object
-#### var verify = require('wizzi-utils').verify
+#### var verify = require('@wizzi/utils').verify
 ### verify - type checks
 #### verify.isDefined(item)
 #### verify.isNullOrUndefined(item)
@@ -30,12 +36,12 @@ This package is required by the @wizzi/util package only.
 #### verify.isAbsolutePath(item)
 #### verify.isIttfMacro(item)
 ### verify.convert(value, type[, unquote])
-* `value` `String` If `@@null` return null; if `@@undefined` return undefined. 
-* `type` `String` One-of string, integer, float, boolean, date 
-* `options` `Object` 
+    * `value` `String` If `@@null` return null; if `@@undefined` return undefined. 
+    * `type` `String` One-of string, integer, float, boolean, date 
+    * `options` `Object` 
 ### verify.canConvertTo(value, type)
-* `value` `String` 
-* `type` `String` One-of string, integer, float, boolean, date 
+    * `value` `String` 
+    * `type` `String` One-of string, integer, float, boolean, date 
 ### verify - validations
 #### verify.isEmail(value)
 #### verify.isEmails(value)
@@ -59,18 +65,22 @@ This package is required by the @wizzi/util package only.
 ### verify - errors
 #### verify.error([inner,] [obj,] message, [arg-1[, arg-2[, arg-...]]])
 #### verify.fatal(err[, code])
+
+
 ## Wizzi
 
 One machinery, many productions.
 
 
+
+
 <p><a href="https://stfnbssl.github.io/wizzi">Project page</a></p>
 
 ## Built With
-* [Nodejs](https://nodejs.org)
-
-* [Wizzi](https://github.com/stfnbssl/wizzi)
-
+    * [Nodejs](https://nodejs.org)
+    
+    * [Wizzi](https://github.com/stfnbssl/wizzi)
+    
 
 ## License
 

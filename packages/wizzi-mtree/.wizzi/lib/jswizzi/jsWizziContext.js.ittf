@@ -230,7 +230,7 @@
 				var mTreeBrickData = this.loadHistory.getMTreeBrickData(this.currentMTreeBrickKey)
 				var mixerUri = null
 				if mTreeBrickData.mTreeBrick.$mixerBrickKey
-					set mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
+					var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
 					set mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
 				return
 					{

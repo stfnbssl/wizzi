@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\artifact\genContext.js.ittf
-    utc time: Wed, 03 Apr 2024 05:10:52 GMT
+    utc time: Wed, 17 Apr 2024 04:36:27 GMT
 */
 'use strict';
 
@@ -26,7 +26,7 @@ describe("genContext", function() {
              }, 
             model: null, 
             srcPath: null, 
-            pman: null
+            pman: mocks.getProductionManager()
          });
         ctx.write('alfa');
         ctx.w(' beta');
@@ -49,7 +49,7 @@ describe("genContext", function() {
              }, 
             model: null, 
             srcPath: null, 
-            pman: null
+            pman: mocks.getProductionManager()
          });
         ctx.write('alfa');
         ctx.w(' beta');
@@ -78,7 +78,7 @@ describe("genContext", function() {
              }, 
             model: null, 
             srcPath: null, 
-            pman: null
+            pman: mocks.getProductionManager()
          });
         ctx.write('alfa');
         ctx.w(' beta');
@@ -108,14 +108,14 @@ describe("genContext", function() {
              }, 
             model: null, 
             srcPath: null, 
-            pman: null
+            pman: mocks.getProductionManager()
          });
         ctx.writeFile(path.join(__dirname, 'ittf', 'gc_one.ittf'))
         var sw = new StringWriter();
         ctx.toStream(sw);
         var result = sw.toString();
         expect(result).to.be.a('string');
-        expect(result).to.be('first one\n\tsecond one\n');
+        expect(result).to.be('first one\r\n\tsecond one');
     });
     it("should append a file to genContext", function() {
         var ctx = new genContext({
@@ -128,13 +128,13 @@ describe("genContext", function() {
              }, 
             model: null, 
             srcPath: null, 
-            pman: null
+            pman: mocks.getProductionManager()
          });
         ctx.writeFile(path.join(__dirname, 'ittf', 'gc_one.ittf'))
         var sw = new StringWriter();
         ctx.toStream(sw);
         var result = sw.toString();
         expect(result).to.be.a('string');
-        expect(result).to.be('first one\n\tsecond one\n');
+        expect(result).to.be('first one\r\n\tsecond one');
     });
 });

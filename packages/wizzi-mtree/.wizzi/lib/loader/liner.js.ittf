@@ -32,6 +32,9 @@
 		#      hasMacro: Boolean
 		#  }
 	#
+		# tagSuffix - open paren `(` is marker for `mix call`
+		#   if an hyphen or doublehyphen is encountered in `name` a tagSuffix is not detected.
+		#   TODO Any invalid char for a relative file path in `name` should deactivate tagSuffix.
 		# Ittf commands for comments
 		#  $ and $ ... singleline comment
 		#  $ and * ... * and $ multiline comment

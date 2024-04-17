@@ -63,6 +63,19 @@
             if test === null || typeof(test) === 'undefined'
                 return false
             return {}.toString.call(test) === '[object Object]'
+
+	set md.isObjectNotBuiltIn
+        function 
+            param test
+            if test === null || typeof(test) === 'undefined'
+                return false
+			if (test instanceof Boolean) ||
+				\b (test instanceof Date) ||
+				\b (test instanceof Number) ||
+				\b (test instanceof RegExp) ||
+				\b (test instanceof String)			
+				return false
+            return {}.toString.call(test) === '[object Object]'
     
 	set md.isArray
         function 

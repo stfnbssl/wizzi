@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/helpers",
     "sideEffects": false,
-    "version": "0.8.1",
+    "version": "0.8.2",
     "description": "Helpers library for the wizzi factory, required by the @wizzi/util package",
     "author": {
         "name": "Stefano Bassoli",

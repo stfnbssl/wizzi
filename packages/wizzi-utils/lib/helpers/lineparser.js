@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\lineParser.js.ittf
-    utc time: Mon, 01 Apr 2024 15:00:42 GMT
+    utc time: Wed, 17 Apr 2024 11:10:29 GMT
 */
 'use strict';
 var verify = require('./verify');
@@ -44,7 +44,7 @@ md.codifyInterpolation = function(template, lDel, rDel) {
      name() = "trip"
      value() = "to the london bridge"
 */
-md.parseNameValueRaw = function(text, node) {
+md.parseNameValueRaw = function(text) {
     var name = '',
         value = '';
     if (verify.isNotEmpty(text)) {
@@ -107,3 +107,23 @@ function escapename(value) {
         return value;
     }
 }
+md.preserveSpaces = function(text) {
+    if (verify.isEmpty(text)) {
+        return text;
+    }
+    if (text[0] == ' ') {
+        if (text[text.length-1] == ' ') {
+            return '\\b' + text + '\\b';
+        }
+        else {
+            return '\\b' + text;
+        }
+    }
+    else if (text[text.length-1] == ' ') {
+        return text + '\\b';
+    }
+    else {
+        return text;
+    }
+}
+;

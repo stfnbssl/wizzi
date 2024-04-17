@@ -14,6 +14,8 @@
 				{ options
 				{ pman
 					{ wizziFactory
+            { parent
+                optional
             #
 				if !verify.isObject(genconfig)
 					throw 
@@ -22,7 +24,9 @@
 					throw 
 						new Error('wizzi.artifact.GenContext: genconfig.options argument must be an Object')
 			# loog 'wizzi.artifact.genContext.pman.globalContext', genconfig.pman.globalContext()
-			var globalContext
+			set this.genconfig = genconfig
+            set this.parent = parent
+            var globalContext
 				_ Object.assign
 					{
 					@ genconfig.options.data || {}
@@ -38,6 +42,8 @@
 			set this.artifactGenerationErrors = []
             set this.forceInline = false
             set this.forceInlineExtra = false
+            set this.escapes = {}
+            set this.hasEscapes = false
     
 		m forceIndent
             param value
@@ -78,9 +84,13 @@
                                 @ this.values
                         else text
                 if this.forceInline || this.forceInlineExtra
-                    _ this.block.write(iptext + ' ')
+                    _ this.block.write
+                        _ this.doEscape
+                            @ iptext + ' '
                 else
-                    _ this.block.w(iptext)
+                    _ this.block.w
+                        _ this.doEscape
+                            @ iptext
             else
                 if this.forceInline || this.forceInlineExtra
                     _ this.block.write(' ')
@@ -95,12 +105,13 @@
             if !verify.isString(text)
                 return 
             _ this.block.write
-                iif text.indexOf('{') > -1
-                    then 
-                        _ interpolate
-                            @ text
-                            @ this.values
-                    else text
+                _ this.doEscape
+                    iif text.indexOf('{') > -1
+                        then 
+                            _ interpolate
+                                @ text
+                                @ this.values
+                        else text
 			set this.isEmpty = false
     
 		m writeAligned
@@ -112,18 +123,20 @@
 			foreach line in text.split('\n')
 				if i < i_len - 1 || line.length > 0
 					_ this.block.w
-						iif line.indexOf('{') > -1
-							then 
-								_ interpolate
-									@ line
-									@ this.values
-							else line
+                        _ this.doEscape                    
+                            iif line.indexOf('{') > -1
+                                then 
+                                    _ interpolate
+                                        @ line
+                                        @ this.values
+                                else line
 			set this.isEmpty = false
 
 		m wSameLine
             param text
             _ this.block.wSameLine
-                @ text
+                _ this.doEscape            
+                    @ text
 		
         m setLastNotEmptyLine
             _ this.block.setLastNotEmptyLine
@@ -195,7 +208,10 @@
 			# loog 'wizzi.artifact.genContext.artifactGenerationError.message', message
 			var error
 				new errors.ArtifactGenerationError(message, location, node)
-			_ this.artifactGenerationErrors.push(error)
+            if this.parent
+                _ this.parent.artifactGenerationErrors.push(error)
+            else
+			    _ this.artifactGenerationErrors.push(error)
 			return error
     
 		m terminate
@@ -211,7 +227,34 @@
                 @ blockData.lines
                 @ options
     
-		m toStringFromJSON
+		m addEscape
+            param ch
+            set this.escapes[ch] = ch
+            set this.hasEscapes = true
+
+		m removeEscape
+            param ch
+            delete this.escapes[ch]
+            set this.hasEscapes = Object.keys(this.escapes).length > 0
+
+        m doEscape
+            param text
+            if verify.isEmpty(text)
+                return text
+            if !this.hasEscapes
+                return text
+            var ret = []
+            for var i=0; i<text.length; i++
+                _ ret.push
+                    _ this.doEscapeChar
+                        @ text[i]
+            return ret.join('')
+        
+        m doEscapeChar
+            param ch
+            return this.escapes[ch] ? '\\' + ch : ch
+
+        m toStringFromJSON
             param block
             param options
             if !block || !block.lines
@@ -224,5 +267,8 @@
                 @ block.lines
                 @ options
             return gw.getContent()
+
+        m createChildGenContext
+            return new GenContext(this.genconfig, this)
 
     set module.exports = GenContext

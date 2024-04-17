@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Wed, 03 Apr 2024 05:10:50 GMT
+    utc time: Wed, 17 Apr 2024 04:36:25 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -49,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.31';
+        this.__version = '0.8.34';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -3298,7 +3298,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.31.wizziFactory.' + method,
+        method: 'wizzi@0.8.34.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

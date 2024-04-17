@@ -96,7 +96,6 @@
     m setValues
         param values
         set values = (values || {})
-		throw new Error('Here it is')
 		for var k in values
 			_ this.setValue
 				@ k
