@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScripter.js.ittf
-    utc time: Fri, 12 Apr 2024 14:00:18 GMT
+    utc time: Thu, 18 Apr 2024 15:03:00 GMT
 */
 'use strict';
 /**

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\utils\types.js.ittf
-    utc time: Fri, 12 Apr 2024 14:00:18 GMT
+    utc time: Thu, 18 Apr 2024 15:03:00 GMT
 */
 'use strict';
 var errors = require('../errors');
@@ -104,7 +104,7 @@ function error(message, node, method) {
     return {
             __is_error: true, 
             message: message, 
-            source: 'wizzi-mtree@0.8.21.utils.types.' + method
+            source: 'wizzi-mtree@0.8.22.utils.types.' + method
          };
 }
 
