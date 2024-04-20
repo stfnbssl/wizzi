@@ -30,7 +30,7 @@ $group
 			set request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext)
 			set request.globalContext = Object.assign({}, request.globalContext)
 			+
-			info 'wizzi.generateWizziModelTypes'
+			info 'wizzi.generateWizziModelDoms'
 			info '- storeKind', storeKind
 			info '- configOptions', request.configOptions
 			info '- wfschema.name', request.wfschema.name
@@ -73,6 +73,8 @@ $group
 						@ request.wfschema.outputPackageFolder
 						@ request.wfschema.name
 						@ request.wfschema.mTreeBuildUpContext
+						{
+							@ legacyVersion request.configOptions.legacyVersion
 						f_cb( result )
 							info chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + request.wfschema.name)
                             r_cb( request.wfschema.name )

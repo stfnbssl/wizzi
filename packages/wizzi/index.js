@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Thu, 18 Apr 2024 15:05:46 GMT
+    utc time: Fri, 19 Apr 2024 18:47:11 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -21,7 +21,7 @@ var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
-md.version = "0.8.34";
+md.version = "0.8.35";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -573,7 +573,7 @@ md.generateWizziModelTypes = function(request, callback) {
     request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext);
     request.globalContext = Object.assign({}, request.globalContext);
     
-    console.log('wizzi.generateWizziModelTypes');
+    console.log('wizzi.generateWizziModelDoms');
     console.log('- storeKind', storeKind);
     console.log('- configOptions', request.configOptions);
     console.log('- wfschema.name', request.wfschema.name);
@@ -620,7 +620,9 @@ md.generateWizziModelTypes = function(request, callback) {
         // Now we can generate the wizzi model types
         // They will be written in the folder passed as second parameter.
         console.log(chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name));
-        wizziFactory.generateModelDoms(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildUpContext, function(err, result) {
+        wizziFactory.generateModelDoms(request.wfschema.ittfDocumentUri, request.wfschema.outputPackageFolder, request.wfschema.name, request.wfschema.mTreeBuildUpContext, {
+            legacyVersion: request.configOptions.legacyVersion
+         }, function(err, result) {
             if (err) {
                 return callback(err);
             }
@@ -744,6 +746,9 @@ md.createJsonFactoryLight = function(options, callback) {
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.loadMTree = function(ittfDocumentPath, context, options, callback) {
@@ -904,6 +909,9 @@ md.mtreeFromText = md.loadMTreeFromText;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.loadMTreeDebug = function(ittfDocumentPath, context, options, callback) {
@@ -1073,6 +1081,9 @@ md.mtreeDebugFromText = md.loadMTreeDebugFromText;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.loadModel = function(ittfDocumentPath, context, options, callback) {
@@ -1143,6 +1154,9 @@ md.model = md.loadModel;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.transformModel = function(ittfDocumentPath, context, options, callback) {
@@ -1307,6 +1321,9 @@ md.modelFromText = md.loadModelFromText;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.generateArtifact = function(ittfDocumentPath, context, options, callback) {
@@ -1468,6 +1485,9 @@ md.genFromText = md.generateArtifactFromText;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.generateWizziSchema = function(ittfDocumentPath, context, options, callback) {
@@ -1494,7 +1514,9 @@ md.generateWizziSchema = function(ittfDocumentPath, context, options, callback) 
         if (err) {
             return callback(err);
         }
-        wf.generateModelDoms(ittfDocumentPath, options.outputPackagePath, name, context, callback)
+        wf.generateModelDoms(ittfDocumentPath, options.outputPackagePath, name, context, {
+            legacyVersion: options.legacyVersion
+         }, callback)
     })
 }
 ;
@@ -1538,6 +1560,9 @@ md.schema = md.generateWizziSchema;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.executeWizziJob2 = function(ittfDocumentPath, context, options, callback) {
@@ -1615,6 +1640,9 @@ md.job = md.executeWizziJob2;
 // default 4
 // { jobContext?
 // optional, used by md.job()
+// string legacyVersion
+// optional, used by md.generateWizziSchema()
+// default null
 // callback
 //
 md.generateFolderArtifacts = function(ittfDocumentPath, context, options, callback) {

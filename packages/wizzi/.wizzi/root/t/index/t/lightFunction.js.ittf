@@ -32,6 +32,9 @@
 	#     default 4
 	#   { jobContext?
 	#     optional, used by md.job()
+	#   string legacyVersion
+	#     optional, used by md.generateWizziSchema()
+	#     default null
 	# callback
 	#
 

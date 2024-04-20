@@ -4,6 +4,7 @@ $group
         param outputPackagePath
         param wfschemaName
         param mTreeBuildUpContext
+        param options
         param callback
         _ createWizziFactory
             {
@@ -13,4 +14,5 @@ $group
                     @ outputPackagePath
                     @ wfschemaName
                     @ mTreeBuildUpContext
+                    @ options
                     @ callback

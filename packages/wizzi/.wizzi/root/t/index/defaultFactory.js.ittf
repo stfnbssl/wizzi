@@ -251,6 +251,8 @@
 			@ options.outputPackagePath
 			@ name
 			@ context
+			{
+				@ legacyVersion options.legacyVersion
 			@ callback
 
 	#

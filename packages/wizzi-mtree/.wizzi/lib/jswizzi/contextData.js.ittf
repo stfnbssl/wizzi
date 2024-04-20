@@ -108,7 +108,7 @@
 				throw new Error(functionName)
 			+
 			$if false
-				info 'ContextData.enterFunction `', functionName, '`', 
+				# loog 'ContextData.enterFunction `', functionName, '`', 
 					\b 'scope chain', this.functionScopeChains[functionName],
 					\b 'previous `', retval, '`',
 					\b 'stack length before enter: ', ctx.functionsStack.length
@@ -133,7 +133,7 @@
 			+
 			var ctx = this.getContextOf(functionName)
 			$if false
-				info 'ContextData.exitFunction `', functionName, '`', 
+				# loog 'ContextData.exitFunction `', functionName, '`', 
 					\b 'stack length before exit: ', ctx.functionsStack.length
 			+
 			if false && functionName == 'buildNode'
@@ -174,26 +174,26 @@
 			# v0.9 28/3/24
 		m getContextOfDeclared
 			param name
-			info 'ContextData.getContextOfDeclared', name, 
+			# loog 'ContextData.getContextOfDeclared', name, 
 				\b 'ittfState', this.ittfState, 
 				\b 'brickKey', this.brickKey,
 				\b 'currentFunctionName', this.currentFunctionName,
 			if !this.currentFunctionName
-				info 'ContextData.getContextOfDeclared', name, 1, this.isDeclaredInScope(name)
+				# loog 'ContextData.getContextOfDeclared', name, 1, this.isDeclaredInScope(name)
 				return this.isDeclaredInScope(name) ? this : null
 			else
 				var ctx = this.getContextOf(this.currentFunctionName)
 				if ctx.isDeclaredInScope(name)
-					info 'ContextData.getContextOfDeclared', name, 2, this.currentFunctionName
+					# loog 'ContextData.getContextOfDeclared', name, 2, this.currentFunctionName
 					return ctx
 				var parentScopeFunction = this.getParentScopeFunction(this.currentFunctionName)
 				while parentScopeFunction
 					set ctx = this.getContextOf(parentScopeFunction)
 					if ctx.isDeclaredInScope(name)
-						info 'ContextData.getContextOfDeclared', name, 3, this.parentScopeFunction
+						# loog 'ContextData.getContextOfDeclared', name, 3, this.parentScopeFunction
 						return ctx
 					set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
-			info 'ContextData.getContextOfDeclared', name, 4, this.isDeclaredInScope(name)
+			# loog 'ContextData.getContextOfDeclared', name, 4, this.isDeclaredInScope(name)
 			return this.isDeclaredInScope(name) ? this : null
 
 		m declare
@@ -208,7 +208,7 @@
 				set ctx.values[name] = init
 				$if false
 					if this.ittfState == 1
-						info 'ContextData.declare', name, init,
+						# loog 'ContextData.declare', name, init,
 							\b 'ctx.values', ctx.values, 
 							\b 'ctx.valuesStack.length', ctx.valuesStack.length,
 							\b 'this.currentFunctionName', this.currentFunctionName,
@@ -319,11 +319,11 @@
 			param value
 			# Runner: Identifier_Set, UpdateExpression
 			if IsV09
-				info 'ContextData.put', name, value, 'currentFunctionName', this.currentFunctionName
+				# loog 'ContextData.put', name, value, 'currentFunctionName', this.currentFunctionName
 				var ctx = this.getContextOfDeclared(name)
 				if ctx
 					set ctx.values[name] = value
-					info 'ContextData.put', name, value, 
+					# loog 'ContextData.put', name, value, 
 						\b 'ctx.values', ctx.values, 
 						\b 'ctx.valuesStack.length', ctx.valuesStack.length,
 						\b 'this.currentFunctionName', this.currentFunctionName,
@@ -342,14 +342,14 @@
 			param name
 			if name[0] != '$' && name[0] != '_'
 				$if false
-					info 'ContextData.getValue', name, 
+					# loog 'ContextData.getValue', name, 
 						\b 'ittfState', this.ittfState, 
 						\b 'brickKey', this.brickKey
 			if IsV09
 				if !this.currentFunctionName
 					$if false
 						if name[0] != '$' && name[0] != '_'
-							info 'ContextData.getValue 1', name, this.getValueInScope(name)
+							# loog 'ContextData.getValue 1', name, this.getValueInScope(name)
 					return this.getValueInScope(name)
 					$*
 					if this.declares[name] == true
@@ -362,7 +362,7 @@
 						# current function context
 					var v = ctx.getValueInScope(name)
 					if v != undefined
-						info 'ContextData.getValue 2', name, v
+						# loog 'ContextData.getValue 2', name, v
 						return v
 					$*
 					if ctx.declares[name] == true
@@ -375,7 +375,7 @@
 						var v = ctx.getValueInScope(name)
 						if v != undefined
 							$if false
-								info 'ContextData.getValue 3', name, v
+								# loog 'ContextData.getValue 3', name, v
 							return v
 						$*
 						if ctx.declares[name] == true
@@ -384,7 +384,7 @@
 						set parentScopeFunction = this.getParentScopeFunction(parentScopeFunction)
 				$if false
 					if name[0] != '$' && name[0] != '_'
-						info 'ContextData.getValue 4', name, this.getValueInScope(name)
+						# loog 'ContextData.getValue 4', name, this.getValueInScope(name)
 				return this.getValueInScope(name)
 			else
 				if this.declares[name] == true
@@ -461,7 +461,7 @@
 		m getFunction
 			param name
 			$if false
-				info 'ContextData.getFunction', name, 
+				# loog 'ContextData.getFunction', name, 
 					\b 'ittfState', this.ittfState, 
 					\b 'brickKey', this.brickKey
 			if IsV09

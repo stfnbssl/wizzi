@@ -33,6 +33,7 @@ $group
             _ this.generateModelDomsArtifacts
                 @ wfschemaIttfDocumentUri
                 @ mTreeBuildUpContext
+				@ options
                 f_cb( generatedArtifacts )
                     _ file.write
                         @ paths.model
@@ -74,7 +75,7 @@ $group
                         @ wfschemaIttfDocumentUri wfschemaIttfDocumentUri
         #
             # generate the wizzi model type artifacts
-            # from an IttfDocument of schema "wfschema"
+            # from an IttfDocument of schema "/wzschema"
 	m generateModelDomsArtifacts
 		param wfschemaIttfDocumentUri
 		param mTreeBuildUpContext
@@ -86,10 +87,13 @@ $group
 				@ mTreeBuildUpContext mTreeBuildUpContext
 		+
 		var that = this
+		var schemaSchemaName = "wzschema"
+		if options.legacyVersion == '0.8'
+			set schemaSchemaName = "wfschema"
 		+
 		_ log.info('starting async load of wizzi model from wfschemaIttfDocumentUri: ' + wfschemaIttfDocumentUri)
 		_ this.loadModel
-			@ 'wfschema'
+			@ schemaSchemaName
 			@ wfschemaIttfDocumentUri
             @ loadContext
             f_cb( schemaWizziModel )
@@ -107,39 +111,39 @@ $group
 					_ bootWizziModel.loadFromWizziModel(schemaWizziModel)
 				else
                 	set bootWizziModel = schemaWizziModel
-				_ log.info('starting the artifact generator wfschema/model' + 
+				_ log.info('starting the artifact generator ' + schemaSchemaName + '/model' + 
 					\b ', legacy version: ' + options.legacyVersion)
 				_ that.generateArtifact
 					@ bootWizziModel
 					@ bootModelDefUri
-					@ 'wfschema/model'
+					@ schemaSchemaName + '/model'
 					@ loadContext
 					f_cb( wizziModelArtifact )
-						_ log.info('starting the artifact generator wfschema/factory')
+						_ log.info('starting the artifact generator ' + schemaSchemaName + '/factory')
 						_ that.generateArtifact
 							@ bootWizziModel
 							@ bootModelDefUri
-							@ 'wfschema/factory'
+							@ schemaSchemaName + '/factory'
 							@ loadContext
 							f_cb( wizziFactoryArtifact )
-								_ log.info('starting the artifact generator wfschema/test')
+								_ log.info('starting the artifact generator ' + schemaSchemaName + '/test')
 								_ that.generateArtifact
 									@ bootWizziModel
 									@ bootModelDefUri
-									@ 'wfschema/test'
+									@ schemaSchemaName + '/test'
 									@ loadContext
 									f_cb( wizziTestArtifact )
 										_ that.transformModel
 											@ bootWizziModel
-											@ 'wfschema/json_docs'
+											@ schemaSchemaName + '/json_docs'
 											@ loadContext
 											f_cb( wizziDocsObject )
 												var jsondocsJson = stringify(wizziDocsObject, null, 2)
-												_ log.info('starting the artifact generator wfschema/html_docs')
+												_ log.info('starting the artifact generator ' + schemaSchemaName + '/html_docs')
 												_ that.generateArtifact
 													@ wizziDocsObject
 													@ bootModelDefUri
-													@ 'wfschema/html_docs'
+													@ schemaSchemaName + '/html_docs'
 													@ loadContext
 													f_cb( wizziHtmlDocsArtifact )
 														_ callback

@@ -22,7 +22,7 @@ $group
 			optional
 		param testOnlyMockBaseDir
 		+
-		log 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
+		# loog 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
 		var loadModel = this.modelLoaders[schemaName] || null
 		if loadModel == null
 			checked_call_r( factory )

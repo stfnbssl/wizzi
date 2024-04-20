@@ -2,14 +2,14 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\errors.js.ittf
-    utc time: Thu, 18 Apr 2024 15:03:00 GMT
+    utc time: Fri, 19 Apr 2024 18:46:37 GMT
 */
 'use strict';
 var util = require('util');
 var wizziUtils = require('@wizzi/utils');
 var f_verify = require('./functions/verify');
 
-var pkgVersioned = ' (@wizzi/mtree.0.8.22)';
+var pkgVersioned = ' (@wizzi/mtree.0.8.23)';
 
 var md = module.exports = {};
 

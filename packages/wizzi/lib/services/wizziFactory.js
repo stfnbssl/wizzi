@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Thu, 18 Apr 2024 15:05:46 GMT
+    utc time: Fri, 19 Apr 2024 18:47:10 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -49,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.34';
+        this.__version = '0.8.35';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -562,7 +562,7 @@ class WizziFactory {
             }
         }
         
-        console.log('wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir, __filename);
+        // loog 'wizzi.services.wizziFactory.getLoadModel: globalContext, testOnlyMockBaseDir', globalContext, testOnlyMockBaseDir
         var loadModel = this.modelLoaders[schemaName] || null;
         
         // loog 'wizzi.wizziFactory.getLoadModel.schemaName,factory', schemaName, factory
@@ -2243,7 +2243,7 @@ class WizziFactory {
          };
         
         try {
-            this.generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, function(err, generatedArtifacts) {
+            this.generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, options, function(err, generatedArtifacts) {
                 if (err) {
                     return callback(err);
                 }
@@ -2275,7 +2275,7 @@ class WizziFactory {
         } 
         /**
              generate the wizzi model type artifacts
-             from an IttfDocument of schema "wfschema"
+             from an IttfDocument of schema "/wzschema"
         */
     }
     generateModelDomsArtifacts(wfschemaIttfDocumentUri, mTreeBuildUpContext, options, callback) {
@@ -2285,9 +2285,13 @@ class WizziFactory {
          };
         
         var that = this;
+        var schemaSchemaName = "wzschema";
+        if (options.legacyVersion == '0.8') {
+            schemaSchemaName = "wfschema";
+        }
         
         log.info('starting async load of wizzi model from wfschemaIttfDocumentUri: ' + wfschemaIttfDocumentUri);
-        this.loadModel('wfschema', wfschemaIttfDocumentUri, loadContext, function(err, schemaWizziModel) {
+        this.loadModel(schemaSchemaName, wfschemaIttfDocumentUri, loadContext, function(err, schemaWizziModel) {
             if (err) {
                 return callback(err);
             }
@@ -2302,28 +2306,28 @@ class WizziFactory {
             else {
                 bootWizziModel = schemaWizziModel;
             }
-            log.info('starting the artifact generator wfschema/model' + ', legacy version: ' + options.legacyVersion);
-            that.generateArtifact(bootWizziModel, bootModelDefUri, 'wfschema/model', loadContext, function(err, wizziModelArtifact) {
+            log.info('starting the artifact generator ' + schemaSchemaName + '/model' + ', legacy version: ' + options.legacyVersion);
+            that.generateArtifact(bootWizziModel, bootModelDefUri, schemaSchemaName + '/model', loadContext, function(err, wizziModelArtifact) {
                 if (err) {
                     return callback(err);
                 }
-                log.info('starting the artifact generator wfschema/factory');
-                that.generateArtifact(bootWizziModel, bootModelDefUri, 'wfschema/factory', loadContext, function(err, wizziFactoryArtifact) {
+                log.info('starting the artifact generator ' + schemaSchemaName + '/factory');
+                that.generateArtifact(bootWizziModel, bootModelDefUri, schemaSchemaName + '/factory', loadContext, function(err, wizziFactoryArtifact) {
                     if (err) {
                         return callback(err);
                     }
-                    log.info('starting the artifact generator wfschema/test');
-                    that.generateArtifact(bootWizziModel, bootModelDefUri, 'wfschema/test', loadContext, function(err, wizziTestArtifact) {
+                    log.info('starting the artifact generator ' + schemaSchemaName + '/test');
+                    that.generateArtifact(bootWizziModel, bootModelDefUri, schemaSchemaName + '/test', loadContext, function(err, wizziTestArtifact) {
                         if (err) {
                             return callback(err);
                         }
-                        that.transformModel(bootWizziModel, 'wfschema/json_docs', loadContext, function(err, wizziDocsObject) {
+                        that.transformModel(bootWizziModel, schemaSchemaName + '/json_docs', loadContext, function(err, wizziDocsObject) {
                             if (err) {
                                 return callback(err);
                             }
                             var jsondocsJson = stringify(wizziDocsObject, null, 2);
-                            log.info('starting the artifact generator wfschema/html_docs');
-                            that.generateArtifact(wizziDocsObject, bootModelDefUri, 'wfschema/html_docs', loadContext, function(err, wizziHtmlDocsArtifact) {
+                            log.info('starting the artifact generator ' + schemaSchemaName + '/html_docs');
+                            that.generateArtifact(wizziDocsObject, bootModelDefUri, schemaSchemaName + '/html_docs', loadContext, function(err, wizziHtmlDocsArtifact) {
                                 if (err) {
                                     return callback(err);
                                 }
@@ -3298,7 +3302,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.34.wizziFactory.' + method,
+        method: 'wizzi@0.8.35.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

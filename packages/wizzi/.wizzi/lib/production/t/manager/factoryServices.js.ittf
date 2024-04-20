@@ -2,7 +2,7 @@
 
 	m getLoadModel
 		string schemaName
-		log 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
+		# loog 'wizzi.productionManager.getLoadModel.globalContextObject', this.globalContextObject
 		return 
 			_ this.wizziFactory.getLoadModel
 				@ schemaName

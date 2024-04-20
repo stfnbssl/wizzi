@@ -2,13 +2,13 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\io\errors.js.ittf
-    utc time: Thu, 18 Apr 2024 15:05:46 GMT
+    utc time: Fri, 19 Apr 2024 18:47:10 GMT
 */
 'use strict';
 var util = require('util');
 
 var md = module.exports = {};
-var pkgVersioned = ' (@wizzi/factory.0.8.34)';
+var pkgVersioned = ' (@wizzi/factory.0.8.35)';
 
 function NotImplementedError(message) {
     this.name = 'NotImplementedError';
