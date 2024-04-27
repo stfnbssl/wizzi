@@ -5,7 +5,7 @@
 	import del
 	+
 	var expect = require('expect.js')
-	var genContext = require('../../../lib/artifact/genContext')
+	var genContext = require('../../../lib/production/artifact/genContext')
 	var StringWriter = require('../../../lib/util/stringWriter')
 	var mocks = require('../../mocks/misc')
     +

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\model\asyncModelLoader.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:13 GMT
+    utc time: Sat, 27 Apr 2024 13:09:51 GMT
 */
 'use strict';
 
@@ -16,8 +16,8 @@ var _ = require('lodash');
 var file = require('@wizzi/utils').file;
 var verify = require('@wizzi/utils').verify;
 
-var modelInfo = require('../../lib/model/modelInfo').ModelInfo;
-var asyncModelLoader = require('../../lib/model/asyncModelLoader');
+var modelInfo = require('../../lib/production/model/modelInfo').ModelInfo;
+var asyncModelLoader = require('../../lib/production/model/asyncModelLoader');
 var mocks = require('../mocks/misc');
 
 describe("asyncModelLoader", function() {

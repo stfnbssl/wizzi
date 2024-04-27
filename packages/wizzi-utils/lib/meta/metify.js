@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\meta\metify.js.ittf
-    utc time: Wed, 17 Apr 2024 11:10:29 GMT
+    utc time: Fri, 26 Apr 2024 13:06:48 GMT
 */
 'use strict';
 var path = require('path');
@@ -31,12 +31,13 @@ md.metify = function(folderPath, rootFolder, metaProductionName, options, callba
         ];
         elabFsNode(packiFiles, result.ittfFsNode, {
             folderTemplateFile: sbFolderTemplateFile, 
-            wzCtxModelFile: sbWzCtxModelFile
+            wzCtxModelFile: sbWzCtxModelFile, 
+            sourceBasename: path.basename(folderPath)
          }, {
             metaProductionName: metaProductionName, 
             ft_basePath: '', 
             id_basePath: '', 
-            idf_basePath: '', 
+            idf_basePath: '__dot__wizzi/', 
             level: 0, 
             depth: options.depth, 
             compressFolders: options.compressFolders || []
@@ -78,7 +79,7 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     state.spaces = new Array(state.level == 0 ? 9 : 5).join(' ');
     ;
     if (!fsNode.isTFolder) {
-        if (!isCompressed) {
+        if (!isCompressed && sb.sourceBasename != fsNode.basename) {
             sb.folderTemplateFile.push(state.spaces + '$include ' + fsNode.basename)
         }
     }
@@ -93,7 +94,7 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     // prepare for children
     
     // loog 'state.ft_basePath', state.ft_basePath
-    if (!isCompressed) {
+    if (!isCompressed && sb.sourceBasename != fsNode.basename) {
         state.ft_basePath = state.ft_basePath + '/t/';
         state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/';
         state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/';
@@ -101,7 +102,7 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     if (fsNode.isTFolder) {
         elabTFolder(fsNode, sb, state)
     }
-    if (!isCompressed) {
+    if (!isCompressed && sb.sourceBasename != fsNode.basename) {
         sb.folderTemplateFile = [
             '$group'
         ];
@@ -127,7 +128,7 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     //
     
     // loog 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
-    if (!fsNode.isTFolder && !isCompressed) {
+    if (!fsNode.isTFolder && !isCompressed && sb.sourceBasename != fsNode.basename) {
         packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'] = {
             type: "CODE", 
             contents: sb.folderTemplateFile.join('\n')

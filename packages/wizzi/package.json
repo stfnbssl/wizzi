@@ -1,7 +1,7 @@
 {
     "name": "@wizzi/factory",
     "sideEffects": false,
-    "version": "0.8.35",
+    "version": "0.8.36",
     "description": "The Wizzi Factory.",
     "author": {
         "name": "Stefano Bassoli",

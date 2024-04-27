@@ -27,9 +27,9 @@
 										@ artifacts
 											[
 												{
-													@ wzName 'wfjobMock2'
+													@ wzName 'wzjobMock2'
 													@ src 'mock2.wfjob.ittf'
-													@ isWfJob true
+													@ isWzJob true
 													@ modelRefs
 														[
 													@ transformers

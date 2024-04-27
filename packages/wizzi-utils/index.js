@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\root\index.js.ittf
-    utc time: Wed, 17 Apr 2024 11:10:29 GMT
+    utc time: Fri, 26 Apr 2024 13:06:49 GMT
 */
 'use strict';
 // TODO lots of clean up
@@ -22,7 +22,7 @@ var errors = require('./lib/errors/index');
 var mocks = require('./lib/mocks/index');
 //
 var md = module.exports = {};
-md.version = "0.8.21";
+md.version = "0.8.20";
 // features
 md.ittfGraph = ittfGraph;
 md.ittfScanner = ittfScanner;

@@ -7,12 +7,12 @@ $group
 		#   { jobRequest type 1
 		#     string name
 		#     string path
-		#       # path to the 'wfjob' ittf document that the wizzi.production.programManager will load.
+		#       # path to the `wzjob` ittf document that the wizzi.production.programManager will load.
 		#     { productionOptions
 		#     { globalContext
 		#   { jobRequest type 2
-		#     { wfjobModel
-		#       # 'wfjob' wizzi model, built programmatically or previously loaded
+		#     { wzjobModel
+		#       # `wzjob` wizzi model, built programmatically or previously loaded
 		#     { productionOptions
 		#     { globalContext
 		#
@@ -30,7 +30,7 @@ $group
 				@ callback
 		else
 			# jobRequest type 2
-			_ this._executeJob_by_wfjobModel
+			_ this._executeJob_by_wzjobModel
 				@ jobRequest
 				@ callback
 
@@ -83,7 +83,7 @@ $group
                                         { parameter
                                             @ wzjobIttfDocumentUri jobRequest.path
 
-	m _executeJob_by_wfjobModel
+	m _executeJob_by_wzjobModel
 		param jobRequest
 		param callback
-		throw new Error('wizzi.wizziFactory._executeJob_by_wfjobModel not implemented.')
+		throw new Error('wizzi.wizziFactory._executeJob_by_wzjobModel not implemented.')

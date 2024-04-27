@@ -9,25 +9,23 @@
 
     var g_generationsCheckCounter = 0
     var g_generationsCheck = {}
-
     
 	function logme
         if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
 	+
 	#
-        # artifactInfo will become productionStep
-		# Generation functions are called by the wizzi.production.Runner.
-		# A generation produces an array of wizzi.artifact.genContext(s), 
+		# Artifact generation functions are called by the `wizzi/lib/production/Runner`.
+		# A generation produces an array of wizzi/lib/production/artifact/genContext(s), 
 		# text buffers containing the generated artifact.
-		# genContexts are accumulated into the artifactInfo.genContexts collection.
+		# genContexts are accumulated into the productionStep.genContexts collection.
 	+
 	wz-var AsyncArtifactGenerator
         { 
 			#
 				# params
-				#   { artifactInfo
-				#     api-ref wizzi.artifact.artifactInfo
+				#   { productionStep
+				#     api-ref wizzi.lib.production.step.productionStep
 				#   { generator
 				#     api-ref wizzi-plugin.artifactGenerator
 				#   [ modelInfos
@@ -40,7 +38,7 @@
 
             @ generate
                 function 
-                    { artifactInfo
+                    { productionStep
 						{ productionManager
 							{ wizziFactory
 						{ options
@@ -57,7 +55,7 @@
 								_ error
 									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
 									@ 'generate'
-									@ artifactInfo
+									@ productionStep
 
 					var genItems
                         [ 
@@ -70,8 +68,8 @@
                                     @ model null
                                     @ srcPath modelInfo.src()
                                     @ srcFullPath modelInfo.srcFullPath()
-                                    @ options artifactInfo.options
-                                    @ pman artifactInfo.productionManager
+                                    @ options productionStep.options
+                                    @ pman productionStep.productionManager
                         _ genItems.push
                             { 
                                 @ generator generator
@@ -83,7 +81,7 @@
                         @ AsyncArtifactGenerator._gen_item
 						f_cb( genContexts )
 							foreach item in genContexts
-								_ artifactInfo.addGenContext(item)
+								_ productionStep.addGenContext(item)
 							_ callback
 								@ null
 								{
@@ -93,7 +91,7 @@
             
 			@ generateModelCollection
                 function 
-                    { artifactInfo
+                    { productionStep
 						{ productionManager
 							{ wizziFactory
 						{ options
@@ -109,7 +107,7 @@
 								_ error
 									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
 									@ 'generateModelCollection'
-									@ artifactInfo
+									@ productionStep
                     
 					var genItems
                         [ 
@@ -126,8 +124,8 @@
                                         @ model mainSourceModel.___collItem
                                         @ srcPath modelInfo.src()
                                         @ srcFullPath modelInfo.srcFullPath()
-                                        @ options artifactInfo.options
-                                        @ pman artifactInfo.productionManager
+                                        @ options productionStep.options
+                                        @ pman productionStep.productionManager
                             _ genItems.push
                                 { 
                                     @ generator generator
@@ -138,7 +136,7 @@
                         @ AsyncArtifactGenerator._gen_item
 						f_cb( genContexts )
                             foreach item in genContexts
-								_ artifactInfo.addGenContext(item)
+								_ productionStep.addGenContext(item)
 							_ callback
 								@ null
 								{
@@ -148,7 +146,7 @@
             
 			@ generateCodeWrite
                 function 
-                    { artifactInfo
+                    { productionStep
 						{ productionManager
 							{ wizziFactory
 						{ options
@@ -163,7 +161,7 @@
 								_ error
 									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
 									@ 'generateCodeWrite'
-									@ artifactInfo
+									@ productionStep
                     
 					var mainSourceModel
                         { 
@@ -175,12 +173,12 @@
                                 @ model null
                                 @ srcPath null
                                 @ srcFullPath null
-                                @ options artifactInfo.options
-                                @ pman artifactInfo.productionManager
+                                @ options productionStep.options
+                                @ pman productionStep.productionManager
                     
 					new generator.gen(mainSourceModel, genContext)
                     
-					_ artifactInfo.addGenContext(genContext)
+					_ productionStep.addGenContext(genContext)
 					
 					_ callback
 						@ null
@@ -201,7 +199,7 @@
                     var generatingPath = genInfo.genContext.srcPath
                     function checkCallback
                         throw
-                            new error
+                            new Error
                                 @ generatingPath + ' generation did not termitate'
                     var gNum = ++g_generationsCheckCounter
                     set g_generationsCheck['timer' + gNum]

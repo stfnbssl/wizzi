@@ -5,6 +5,7 @@
 		[
 			$foreach item in Object.values($.getCtx('horse'))
 				@ '${item}'
+	
 	class Animal
 		m sayHello
 			info this.cry, ', I am ', this.name

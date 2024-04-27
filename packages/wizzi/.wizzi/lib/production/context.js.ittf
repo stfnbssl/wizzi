@@ -122,9 +122,9 @@
                     @ wizziModel model
         
         m addArtifactCollection
-            param artifactInfo
+            param productionStep
             param frontMatters
-            # loog 'wizzi.ProductionContext.addArtifactCollection.artifactName', artifactInfo.name
+            # loog 'wizzi.ProductionContext.addArtifactCollection.artifactName', productionStep.name
             # loog 'wizzi.ProductionContext.addArtifactCollection.frontMatters', frontMatters
             var coll = this.artifactCollections[frontMatters.collection]
             if !coll

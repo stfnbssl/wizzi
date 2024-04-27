@@ -4,23 +4,22 @@
 	#
 		# Objects
 		#   - Model
-		#     Is the core object of the model driven wizzi factory.
+		#     Is the core object of the model driven wizzi factory transformations.
 		#     A model is a single object (wizzi model or POJO) acting as a context object in
 		#     mTree loadings, model transformations and artifact generations.
-		#     Models (single or group of similars) are described by wizzi.model.modelInfo api.
+		#     Models to be loaded for a production are managed by the class `wizzi/lib/production/model/ModelInfo`;
+		#     see the type `ModelInfo` in `wizzi/index.d.ts`.
 		#   - Templated model
-		#     A templated model is a model that contains itself template commands and require
+		#     A templated model is a model that contains template commands that reference
 		#     one or more context objects. The process is recursive and has no limit except
 		#     a guard to avoid infinite loops during recursive evaluation of contexts.
 		#   - Context models
 		#     Context models are an array of models acting as a context object for a templated
-		#     model.
-		#     Context models, being models themselves, are also described by wizzi.model.modelInfo api.
+		#     model. Context models, being models themselves, are also managed by `wizzi/lib/production/model/ModelInfo`.
 		#   - Model collection
 		#     A model collection is an array property of a model, where each item of
 		#     the array is used as a model acting as a context object.
 		#     The properties of the item can be used to build the destination path of the generated artifact.
-		#     Model collections are described in the wizzi.model.ModelCollectionInfo api.
 
 	# TODO Implement transformModel context objects.
     
@@ -30,7 +29,7 @@
     var _ = require('lodash')
 	var verify = require('@wizzi/utils').verify
     var log
-        _ require('../util/log')
+        _ require('../../util/log')
             ( 
                 @ module
     +
@@ -431,6 +430,6 @@
 			{
 				@ __is_error true
 				@ message message
-				@ source "wizzi/lib/model/asyncModelLoader/" + method
+				@ source "wizzi/lib/production/model/asyncModelLoader/" + method
 		_ logme(err)
 		return err

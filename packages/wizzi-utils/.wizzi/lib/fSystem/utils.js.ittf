@@ -40,11 +40,11 @@ module wizzi-utils.fs.utils
 						@ extension ss[ss.length-1]
 						@ relFolder relFolder
 						@ fullPath filePath
-						@ destBasename name + '.' + mime
+						@ destBasename name + '.' + schema
 						@ destRelPath
 							iif relFolder.length > 0
-								then relFolder + '/' + name + '.' + mime
-								else name + '.' + mime
+								then relFolder + '/' + name + '.' + schema
+								else name + '.' + schema
 			else
 				return 
 					{

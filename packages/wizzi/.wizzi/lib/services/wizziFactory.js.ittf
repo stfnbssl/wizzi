@@ -12,7 +12,7 @@
 	var acl = require('../acl')
 	var productionOptions = require('../production/options')
 	var ProductionManager = null
-	var GenContext = require('../artifact/genContext')
+	var GenContext = require('../production/artifact/genContext')
 	var verify = require('@wizzi/utils').verify
 	var file = require('@wizzi/utils').file
 	var packi = require('@wizzi/utils').packi

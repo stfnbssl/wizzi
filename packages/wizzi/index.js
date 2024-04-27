@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:11 GMT
+    utc time: Sat, 27 Apr 2024 13:09:49 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -21,11 +21,11 @@ var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
-md.version = "0.8.35";
+md.version = "0.8.36";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
-md.genContext = require('./lib/artifact/genContext');
+md.genContext = require('./lib/production/artifact/genContext');
 md.acl = acl;
 md.productionOptions = require('./lib/production/options');
 md.Filesystem = Filesystem;
@@ -350,7 +350,7 @@ md.loadWizzifile = function(options, callback) {
      string name
      # label for messages
      string ittfDocumentUri
-     # 'wfjob' model primary ittf document
+     # `wzjob` model primary ittf document
      { productionOptions
      integer indentSpaces
      default 4

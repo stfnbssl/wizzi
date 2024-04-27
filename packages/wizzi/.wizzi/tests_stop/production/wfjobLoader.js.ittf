@@ -1,7 +1,7 @@
-﻿base_test(wfjobLoader)
+﻿base_test(wzjobLoader)
 
 	$append imports
-		var WfjobLoader = require('../../lib/production/wfjobLoader').WfjobLoader
+		var WzjobLoader = require('../../lib/production/wzjob/wzjobLoader').WzjobLoader
 		var mocks = require('../mocks/misc')
 
 	var _wizziFactory = null
@@ -23,10 +23,10 @@
 				_ done
 
 	it-async shoul load a wfjob
-		var wfjobLoader 
-			new WfjobLoader
+		var wzjobLoader 
+			new WzjobLoader
 				@ _productionManager
-		_ wfjobLoader.load
+		_ wzjobLoader.load
 			{
 				@ model
 					{
@@ -36,12 +36,12 @@
 								@ 'ittf'
 						@ src 'mock1.wfjob.ittf'
 			f_cb_test( result )
-				# loog 'shoul load a wfjob: seenWfjobRequests', result.seenWfjobRequests
-				# loog 'shoul load a wfjob: pendingWfjobRequests', result.pendingWfjobRequests
-				# loog 'shoul load a wfjob: artifactInfoConfigs', result.artifactInfoConfigs
-				tobe_array( result.pendingWfjobRequests, 1)
-				tobe_array( result.seenWfjobRequests, 1)
-				tobe_array( result.artifactInfoConfigs, 1)
-				tobe_string( result.artifactInfoConfigs[0].name, artifactMock1 )
-				tobe_string( result.artifactInfoConfigs[0].model.src, mock1.tests.ittf )
+				# loog 'shoul load a wfjob: seenWzjobRequests', result.seenWzjobRequests
+				# loog 'shoul load a wfjob: pendingWzjobRequests', result.pendingWzjobRequests
+				# loog 'shoul load a wfjob: productionStepConfigs', result.productionStepConfigs
+				tobe_array( result.pendingWzjobRequests, 1)
+				tobe_array( result.seenWzjobRequests, 1)
+				tobe_array( result.productionStepConfigs, 1)
+				tobe_string( result.productionStepConfigs[0].name, artifactMock1 )
+				tobe_string( result.productionStepConfigs[0].model.src, mock1.tests.ittf )
 				_ done

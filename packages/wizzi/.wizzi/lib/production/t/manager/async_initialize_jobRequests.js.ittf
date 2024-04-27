@@ -6,7 +6,7 @@
 	#
 		# called by the productionManager.initialize method
 		# . loads a requested wfjob model and
-		# . add its artifactInfos objects to the productionManager artifactInfos collection and
+		# . add its productionSteps objects to the productionManager productionSteps collection and
 		# . initializes them
 	var AsyncInitializeJobRequests
 		{
@@ -27,21 +27,21 @@
 					
 					# loog 'wizzi.production.asyncInitializeJobRequests.productionName', pman.productionName
 
-					# The wfjobLoader instance is created here and used 
+					# The wzjobLoader instance is created here and used 
 					# in any case of recursive request of `wfjob` executions.
-					var wfjobLoader = new WfjobLoader(pman)
-					var wfjobLoadRequest
+					var wzjobLoader = new WzjobLoader(pman)
+					var wzjobLoadRequest
 						{
 							@ model
 								{
 									@ src wfjobIttfDocumentUri
-							@ wfjobLoader wfjobLoader
+							@ wzjobLoader wzjobLoader
 
-					_ AsyncRecurseWfjobLoad
-						@ wfjobLoadRequest
+					_ AsyncRecurseWzjobLoad
+						@ wzjobLoadRequest
 						f_cb( result )
 							
-							# loog 'AsyncRecurseWfjobLoad.globalModelInfoConfigs', result.globalModelInfoConfigs.length, 'artifactInfoConfigs', result.artifactInfoConfigs.length
+							# loog 'AsyncRecurseWzjobLoad.globalModelInfoConfigs', result.globalModelInfoConfigs.length, 'productionStepConfigs', result.productionStepConfigs.length
 
                             foreach globalModelInfoConfig in result.globalModelInfoConfigs
                                 # loog 'wizzi.production.asyncInitializeJobRequests.globalModelInfoConfig', util.inspect(globalModelInfoConfig, { depth: 2 })
@@ -50,11 +50,11 @@
 									info 'ProductionManager.initialize.globalModelInfoConfig', globalModelInfoConfig.toString()
                                 _ pman.addGlobalModelRequest(globalModelInfoConfig)
 
-                            foreach artifactInfoConfig in result.artifactInfoConfigs
-								# loog 'wizzi.production.asyncInitializeJobRequests.artifactInfoConfig', util.inspect(artifactInfoConfig, { depth: 2 })
-								set artifactInfoConfig.wfjob = wfjobIttfDocumentUri
+                            foreach productionStepConfig in result.productionStepConfigs
+								# loog 'wizzi.production.asyncInitializeJobRequests.productionStepConfig', util.inspect(productionStepConfig, { depth: 2 })
+								set productionStepConfig.wfjob = wfjobIttfDocumentUri
 								if pman.options.trace
-									info 'ProductionManager.initialize.artifactInfoConfig', artifactInfoConfig.toString()
-								_ pman.addArtifactRequest(artifactInfoConfig)
+									info 'ProductionManager.initialize.productionStepConfig', productionStepConfig.toString()
+								_ pman.addArtifactRequest(productionStepConfig)
 
 							_ callback(null)

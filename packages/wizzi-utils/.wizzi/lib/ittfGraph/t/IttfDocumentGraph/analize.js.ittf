@@ -48,13 +48,9 @@
 									_ item.analize
 										@ ctx
 										f_cb()
-											return
-												_ doLoop
-													@ ndx + 1
+											return process.nextTick(()=>{doLoop(ndx + 1)})
 								else
-									return
-										_ doLoop
-											@ ndx + 1
+									return process.nextTick(()=>{doLoop(ndx + 1)})
 
 	m analizeRoot
 		param ctx

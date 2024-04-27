@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\artifact\genContext.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:13 GMT
+    utc time: Sat, 27 Apr 2024 13:09:51 GMT
 */
 'use strict';
 
@@ -10,7 +10,7 @@ var path = require('path');
 var del = require('del');
 
 var expect = require('expect.js');
-var genContext = require('../../../lib/artifact/genContext');
+var genContext = require('../../../lib/production/artifact/genContext');
 var StringWriter = require('../../../lib/util/stringWriter');
 var mocks = require('../../mocks/misc');
 

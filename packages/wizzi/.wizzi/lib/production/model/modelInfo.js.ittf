@@ -5,22 +5,25 @@
 	var assert = require("assert")
     var path = require("path")
 	var async = require("async")
-	var errors = require('../errors')
+	var errors = require('../../errors')
 	var verify = require('@wizzi/utils').verify
     var ittfs = require('@wizzi/repo').Filesystem
     +
 	#
 		# Is the ModelInfo instance that 
-		# - receive the 'wfjob' data to build a model
+		# - receive the `wzjob` data to build a model
 		# - calls the wizzi factory to retrieve model loaders.
 		#
 		# TODO generatorRequireContextOnly ... explain ...
 		#
 		# params
 			# { config
-				# # built from a `wfjob` `artifact` element
+				# built from a `wzjob` schema `artifact` element
 				# string cwd
 				# string src
+					# when contains the string `/*` in `ctor` is replaced with src.substr(0, src.indexOf('/*'))
+				# [string srcPattern]
+					# is extracted in `ctor` when `src` contains the string `/*`: src.substr(src.indexOf('/*'))
 				# string ignore
 				# string schema
 				# string format

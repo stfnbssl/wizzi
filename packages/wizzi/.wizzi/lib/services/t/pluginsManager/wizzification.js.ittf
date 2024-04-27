@@ -18,7 +18,8 @@
 		#   true|false
 	m canWizzify
 		string fileExtension
-		return this.availableWizzifiers().indexOf(fileExtension) > -1
+		var schemaName = this.mapExtensionToSchema(fileExtension)
+		return this.canWizzifySchema(schemaName)
 
 	# 
 		# retrieve a wizzifier searching the factoryPlugins

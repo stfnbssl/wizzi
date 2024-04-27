@@ -1,8 +1,8 @@
-﻿base_test(asyncRecurseWfjobLoad)
+﻿base_test(asyncRecurseWzjobLoad)
 
 	$append imports
-		var WfjobLoader = require('../../lib/production/wfjobLoader').WfjobLoader
-		var AsyncRecurseWfjobLoad = require('../../lib/production/wfjobLoader').AsyncRecurseWfjobLoad
+		var WzjobLoader = require('../../lib/production/wzjob/wzjobLoader').WzjobLoader
+		var AsyncRecurseWzjobLoad = require('../../lib/production/wzjob/wzjobLoader').AsyncRecurseWzjobLoad
 		var mocks = require('../mocks/misc')
 
 	var _wizziFactory = null
@@ -23,9 +23,9 @@
 							@ dumps {}
 				_ done
 
-	it-async shoul load a wfjob (AsyncRecurseWfjobLoad)
-		var wfjobLoader 
-			new WfjobLoader
+	it-async shoul load a wfjob (AsyncRecurseWzjobLoad)
+		var wzjobLoader 
+			new WzjobLoader
 				@ _productionManager
 		var jobRequest
 			{
@@ -36,16 +36,16 @@
 								@ __dirname
 								@ 'ittf'
 						@ src 'mock1.wfjob.ittf'
-				@ wfjobLoader wfjobLoader
-		_ AsyncRecurseWfjobLoad
+				@ wzjobLoader wzjobLoader
+		_ AsyncRecurseWzjobLoad
 			@ jobRequest
 			f_cb_test( result )
-				# loog 'shoul load a wfjob (AsyncRecurseWfjobLoad) : seenWfjobRequests, pendingWfjobRequests, artifactInfoConfigs', result.seenWfjobRequests, result.pendingWfjobRequests, result.artifactInfoConfigs
-				tobe_array( result.pendingWfjobRequests, 0)
-				tobe_array( result.seenWfjobRequests, 2)
-				tobe_array( result.artifactInfoConfigs, 2)
-				tobe_string( result.artifactInfoConfigs[0].name, artifactMock1 )
-				tobe_string( result.artifactInfoConfigs[0].model.src, mock1.tests.ittf )
-				tobe_string( result.artifactInfoConfigs[1].name, artifactMock2 )
-				tobe_string( result.artifactInfoConfigs[1].model.src, mock2.tests.ittf )
+				# loog 'shoul load a wfjob (AsyncRecurseWzjobLoad) : seenWzjobRequests, pendingWzjobRequests, productionStepConfigs', result.seenWzjobRequests, result.pendingWzjobRequests, result.productionStepConfigs
+				tobe_array( result.pendingWzjobRequests, 0)
+				tobe_array( result.seenWzjobRequests, 2)
+				tobe_array( result.productionStepConfigs, 2)
+				tobe_string( result.productionStepConfigs[0].name, artifactMock1 )
+				tobe_string( result.productionStepConfigs[0].model.src, mock1.tests.ittf )
+				tobe_string( result.productionStepConfigs[1].name, artifactMock2 )
+				tobe_string( result.productionStepConfigs[1].model.src, mock2.tests.ittf )
 				_ done

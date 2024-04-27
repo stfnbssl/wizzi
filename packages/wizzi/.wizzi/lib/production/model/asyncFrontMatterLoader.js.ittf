@@ -30,14 +30,14 @@
 	#
 		# Load a single front matter using ModelInfo data
 		# params
-		#   { masterModelInfo
+		#   { modelInfo
 		#     func srcFullPath
 	wz-function _load_item
-        param masterModelInfo
+        param modelInfo
         param callback
-		# loog '+ asyncFrontMatterLoader._load_item, masterModelInfo', masterModelInfo.srcFullPath()
-        var srcFullPath = masterModelInfo.srcFullPath()
-        _ masterModelInfo.getLoadFrontMatter
+		# loog '+ asyncFrontMatterLoader._load_item, modelInfo', modelInfo.srcFullPath()
+        var srcFullPath = modelInfo.srcFullPath()
+        _ modelInfo.getLoadFrontMatter
             f_cb( frontMatterLoader )
                 _ frontMatterLoader
                     @ srcFullPath
@@ -46,7 +46,7 @@
                             @ null
                             {
                                 @ kind 'frontMatter'
-                                @ sourceRelPath masterModelInfo.srcRelPath()
+                                @ sourceRelPath modelInfo.srcRelPath()
                                 @ sourceUri srcFullPath
-                                @ sourceSchema masterModelInfo.schema
+                                @ sourceSchema modelInfo.schema
                                 @ ...mTree.frontMatter

@@ -78,34 +78,35 @@ declare interface WizziModel extends WizziModelElement { }
  */
 
 /**
- * Supported repository kinds for ittf document sources and artifacts persistence.
+ * @type StoreKind
+ * @description Supported store repository kinds for ittf document sources and artifacts persistence.
  */
-type StoreKind = "filesystem" | "mongodb" | "json" | "browserfs";
+type StoreKind = "filesystem" | "mongodb" | "json";
 
 
 /**
- * Repository config options. 
- * A Wizzi Factory instance may have one single repository.
+ * @type RepositoryOptions
+ * @description Store repository config options. A Wizzi Factory instance may have one single store repository.
  */
 type RepositoryOptions = {
-    storeKind: string;
+    storeKind: StoreKind;
     storeUri?: string;
     storeBaseFolder?: string;
     storeJsonFs?: JsonFs;
 }
 
 /**
- * JSON repository config options. 
- * A Wizzi Factory instance may have one single repository.
+ * @description JSON store repository config options. 
  */
  type JSONRepositoryOptions = {
-    storeKind: string;
+    storeKind: "json";
     storeJsonFs?: JsonFs;
 }
 
 /**
- * Required plugins.
- * The pluginsBaseFolder option is for local plugins.
+ * @description Wizzi plugins that will be loaded by the created Wizzi Factory instance. 
+ * @member items             List of npm names of Wizzi Plugins or relative paths of local filesystem Wizzi Plugins.
+ * @member pluginsBaseFolder Base folder of local filesystem Wizzi Plugins.
  */
 type PluginsOptions = {
     items: string[];
@@ -113,8 +114,8 @@ type PluginsOptions = {
 }
 
 /**
- * No filesystem meta plugins, implemented with json objects,
- * that can be built in memory or retrieved from a database.
+ * @description No filesystem Wizzi Meta Peta plugins, implemented with json objects,
+ *              that can be built in memory or retrieved from a database.
  */
 type InMemoryMetaPluginOptions = {
     name: string;
@@ -123,8 +124,10 @@ type InMemoryMetaPluginOptions = {
 }
 
 /**
- * Required plugins.
- * The metaPluginsBaseFolder option is for local plugins.
+ * @description Wizzi Meta Plugins that will be loaded by the created Wizzi Factory instance. 
+ * @member items                 List of npm names of Wizzi Meta Plugins or relative paths of local filesystem Wizzi Meta Plugins.
+ * @member metaPluginsBaseFolder Base folder of local filesystem Wizzi Meta Plugins.
+ * @member inMemoryItems         In memory Wizzi Meta Plugins.
  */
 type MetaPluginsOptions = {
     items: string[];
@@ -146,7 +149,8 @@ type FactoryTestOptions = {
 }
 
 /**
- * The wizzi factory configuration object
+ * @type FactoryOptions
+ * @description The Wizzi Factory instance configuration object
  */
 type FactoryOptions = {
     repo: RepositoryOptions;
@@ -157,7 +161,7 @@ type FactoryOptions = {
 }
 
 /**
- * The JSON wizzi factory configuration object
+ * The JSON Wizzi Factory instance configuration object
  */
  type JSONFactoryOptions = {
     jsonFs: JsonFs;
@@ -168,10 +172,16 @@ type FactoryOptions = {
 }
 
 /**
- * Creates a wizzi factory.
+ * @description Creates a Wizzi Factory instance.
  */
 export function createFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+/**
+ * @description Creates a Filesystem Wizzi Factory instance, a factory with a `filesystem` store repository.
+ */
 export function fsFactory(options: FactoryOptions, callback: cb<WizziFactory>): void;
+/**
+ * @description Creates a JSON Wizzi Factory instance, factory with a `json` store repository.
+ */
 export function jsonFactory(options: JSONFactoryOptions, callback: cb<WizziFactory>): void;
 
 /**
@@ -260,6 +270,10 @@ type ModelInfo = {
     coll?: ModelCollectionInfo;
     exportName?: string;
     generatorRequireContextOnly: boolean;
+    /** 
+     * @description set/get the ProductionManager that gives access to WizziFactory and ProductionContext instances.
+    */
+    productionManager(value: ProductionManager): ProductionManager | undefined;
     exists(): boolean;
     isFile(): boolean;
     isDirectory(): boolean;
@@ -389,12 +403,15 @@ export type ModelLoadFormat = "xml" | "json" | "yaml";
 
 /**
  * @type ModelLoadConfig
- * @description The configuration of a complex loading of a Wizzi Model Instance.
- * @property src          The path of the source document. Can be an absolute or relative path. 
+ * @description The configuration of a multi-part loading of Wizzi Model Instances.
+ * @property src          The path of the source documents. Can be an absolute or relative path. 
  *                        When relative the `cwd` parameter must set the base path.
- * @property cwd          The base path of the source document if `src` is a relative path.
+ * 				          When contains the string `/*`is replaced with src.substr(0, src.indexOf('/*')),
+ *                        it means that contains a glob pattern and a `srcPattern` property 
+ *                        is extracted with src.substr(src.indexOf('/*')).
+ * @property cwd          The base path of the source documents, if `src` is a relative path.
  * @property schema       The Wizzi Schema when the model source is a Ittf document.
- * @property format       The format of the source document when it is not a Ittf document. 
+ * @property format       The format of the source document when the model source is not a Ittf document. 
  * @property exportName   The name of the loaded instance when used as a context object in a production.
  * @property transformers An array of names of Model Transformations that must be applied to the loaded instance.
 */
@@ -522,16 +539,18 @@ type JsonFactoryOptions = {
 
 /**
  * @type FolderGenerationOptions
- * @destFolder  Destination folder for the generated artifacts
- * @copyNonIttf Yes if non ittf files must be copiedo in the destination folder
- * @copyInclude TODO
- * @copyExclude TODO
+ * @property destFolder           Destination folder for the generated artifacts
+ * @property copyNonIttf          Yes if non ittf files must be copiedo in the destination folder
+ * @property copyInclude          TODO
+ * @property copyExclude          TODO
+ * @property useMultiPartContext  Delegate execution to ProductionManager/ProductionContext and manage a multi-production evaluation context.
 */
 type FolderGenerationOptions = {
     destFolder: string;
     copyNonIttf?: boolean;
     copyInclude?: [string];
     copyExclude?: [string];
+    useMultiPartContext?: boolean;
 }
 
 /**

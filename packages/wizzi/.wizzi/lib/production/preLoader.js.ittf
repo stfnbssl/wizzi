@@ -39,8 +39,8 @@ module
 
 		m runArtifactCollection
             param callback
-            # loadInfo alias of ArtifactInfo
-            # loog 'wizzi.production.preLoader.runArtifact.start.artifactInfo.name', this.loadInfo.name
+            # loadInfo alias of ProductionStep
+            # loog 'wizzi.production.preLoader.runArtifact.start.productionStep.name', this.loadInfo.name
             _ AsyncRunner.runFrontMatter
                 @ this.loadInfo
                 a_cb( result )

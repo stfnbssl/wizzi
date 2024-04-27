@@ -61,32 +61,44 @@ $group
                                 if !artifactName || artifactName.length < 3
                                     r_cb_error( 999, generateFolderArtifacts
                                         @ "Default artifact not found for schema: " + item.schema
-                                _ this.loadModelAndGenerateArtifact
-                                    @ item.fullPath
-                                    {
-                                        @ modelRequestContext modelRequestContext
-                                        @ artifactRequestContext requestContext.artifactRequestContext
-                                    @ artifactName
-                                    a_cb(artifactText)
-                                        $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
-                                        _ this.fileService.write
-                                            _ path.join
-                                                @ options.destFolder
-                                                _ interpolate_filename
-                                                    @ item.destRelPath
-                                                    @ fileCtx
-                                            @ artifactText
-                                            f_cb()
-                                                # loog 'generateFolderArtifacts.written', item.destRelPath
-                                                # _ process.nextTick
-                                                _ setTimeout
-                                                    => 
-                                                        _ callback
-                                                            @ null
-                                                            _ path.join
-                                                                @ options.destFolder
-                                                                @ item.destRelPath
-                                                    @ 0
+                                if options.useMultiPartContext
+                                    _ callback
+                                        @ null
+                                        {
+                                            @ isProduction true
+                                            @ productionAction "loadModelAndGenerateArtifact"
+                                            @ ittfDocumentUri item.fullPath
+                                            @ artifactName artifactName
+                                        _ path.join
+                                            @ options.destFolder
+                                            @ item.destRelPath
+                                else
+                                    _ this.loadModelAndGenerateArtifact
+                                        @ item.fullPath
+                                        {
+                                            @ modelRequestContext modelRequestContext
+                                            @ artifactRequestContext requestContext.artifactRequestContext
+                                        @ artifactName
+                                        a_cb(artifactText)
+                                            $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
+                                            _ this.fileService.write
+                                                _ path.join
+                                                    @ options.destFolder
+                                                    _ interpolate_filename
+                                                        @ item.destRelPath
+                                                        @ fileCtx
+                                                @ artifactText
+                                                f_cb()
+                                                    # loog 'generateFolderArtifacts.written', item.destRelPath
+                                                    # _ process.nextTick
+                                                    _ setTimeout
+                                                        => 
+                                                            _ callback
+                                                                @ null
+                                                                _ path.join
+                                                                    @ options.destFolder
+                                                                    @ item.destRelPath
+                                                        @ 0
                             else
                                 # loog 'generateFolderArtifacts.copying', item.fullPath
                                 _ this.fileService.copyFile
@@ -107,8 +119,34 @@ $group
                                                         @ item.destRelPath
                                             @ 0
 
-                        f_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
-                            r_cb( result )
+                        a_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
+                            if options.useMultiPartContext
+                                var productions = []
+                                foreach item in result
+                                    if item.isProduction
+                                        _ productions.push 
+                                            @ item
+                                log 'wizzi.wizzifactory.generateFolderArtifacts.productions', productions
+                                checked_call( pman
+                                    _ this.createProductionManager
+                                        { $$ productionOptions
+                                        { $$ globalContext
+                                +
+                                checked_call( notUsed
+                                    _ pman.generateProductions
+                                        @ productions
+                                        {
+                                            @ modelRequestContext modelRequestContext
+                                            @ artifactRequestContext requestContext.artifactRequestContext
+                                        a_cb( resultPman )
+                                            return
+                                                _ callback
+                                                    @ null
+                                                    {
+                                                        @ result result
+                                                        @ resultPman resultPman
+                            else
+                                r_cb( result )
         catch ex
             r_cb_wz_err( WizziFactoryError, generateFolderArtifacts, ex )
                 {

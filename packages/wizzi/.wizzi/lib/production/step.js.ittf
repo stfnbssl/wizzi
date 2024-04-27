@@ -7,17 +7,16 @@
 	var _ = require('lodash')
 	var verify = require('@wizzi/utils').verify
     var interpolate = require('../util/interpolate')
-    var ModelInfo = require("../model/modelInfo").ModelInfo
+    var ModelInfo = require("./model/modelInfo").ModelInfo
     +
 	#
-        # ArtifactInfo will become ProductionStep
-		# ArtifactInfo is a wrapper around an 'artifact' element
-		# of a 'wfjob' wizzi model.
+		# A ProductionStep instance is built from an 'artifact' element
+		# of a `wzjob` wizzi model.
 		# The 'artifact' element has been preprocessed 
-		# by the lib/production/wfjob module 
-        # giving the artifactConfig parameter.
+		# by the wizzi/lib/production/wfjob module 
+        # giving the productionStepConfig parameter.
 		# param 
-		#    { artifactConfig
+		#    { productionStepConfig
 		# 		name:String,
 		# 		options:Object {
 		# 			basedir:String // Uri
@@ -25,10 +24,10 @@
 		# 		},
 		# 		model:Object {  // ModelInfo config object
 		#           see lib/production/wfjob.js for creation
-		#           see lib/model/modelInfo.js for use
+		#           see lib/production/model/modelInfo.js for use
 		# 		},
         # 		collection:String,
-		# 		isWfJob:Boolean,
+		# 		isWzJob:Boolean,
 		# 		isWfSchema:Boolean,
 		# 		transformers:Array {
 		# 			name:String
@@ -50,28 +49,28 @@
         if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
     +
-	wz-class ArtifactInfo
+	wz-class ProductionStep
         ctor 
-            param artifactConfig
+            param productionStepConfig
 
-            set this.name = artifactConfig.name
-            set this.options = artifactConfig.options
-            if verify.isObject(artifactConfig.model)
-                set this.modelInfo = new ModelInfo(artifactConfig.model)
+            set this.name = productionStepConfig.name
+            set this.options = productionStepConfig.options
+            if verify.isObject(productionStepConfig.model)
+                set this.modelInfo = new ModelInfo(productionStepConfig.model)
                 set this.contextInfos = null
             else 
                 set this.contextInfos = []
-                foreach item in artifactConfig.contexts
+                foreach item in productionStepConfig.contexts
                     _ this.contextInfos.push
                         new ModelInfo(item)
                 set this.modelInfo = null
-            set this.collection = artifactConfig.collection $$ ??? not used
-            set this.isWfJob = artifactConfig.isWfJob
-			set this.isWfModelType = artifactConfig.isWfModelType
-            set this.transformers = artifactConfig.transformers $$ ??? not used
-            set this.gen = artifactConfig.gen
-            set this.dest = artifactConfig.dest
-            set this.wfjob = artifactConfig.wfjob $$ ??? not used
+            set this.collection = productionStepConfig.collection $$ ??? not used
+            set this.isWzJob = productionStepConfig.isWzJob
+			set this.isWfModelType = productionStepConfig.isWfModelType
+            set this.transformers = productionStepConfig.transformers $$ ??? not used
+            set this.gen = productionStepConfig.gen
+            set this.dest = productionStepConfig.dest
+            set this.wfjob = productionStepConfig.wfjob $$ ??? not used
             set this.genContexts = []
     
 		m initialize
@@ -99,7 +98,7 @@
             return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWfModelType
 
 		m isWizziFactoryJob
-            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWfJob
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzJob
     
 		m isWizziModelArtifact
             return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && 
@@ -160,7 +159,7 @@
                             { 
                                 @ delimiter '{}'
                     
-					_ logme('ArtifactInfo.getItemsToPersistToFile.ipcontext', ipcontext, 'filepath', filepath)
+					_ logme('ProductionStep.getItemsToPersistToFile.ipcontext', ipcontext, 'filepath', filepath)
                     
 					if check[filepath]
                         return
@@ -172,7 +171,7 @@
 					set check[filepath] = true
                     var persisteable
                         { 
-                            @ artifactInfo this
+                            @ productionStep this
                             @ genContext genContext
                             @ filepath filepath
                     _ items.push(persisteable)
@@ -182,7 +181,7 @@
 						_ this.getDestinationUri(srcPath)
                     var persisteable
                         { 
-                            @ artifactInfo this
+                            @ productionStep this
                             @ genContext genContext
                             @ filepath destUri
                     _ items.push(persisteable)
@@ -238,7 +237,7 @@
             
 			var msg
                 [ 
-                    @ 'ArtifactInfo.getDestinationUri'
+                    @ 'ProductionStep.getDestinationUri'
                     @ 'config.dest'
             
 			if verify.isNotEmpty(dest.fullpath)
@@ -300,7 +299,7 @@
 				{
 					@ __is_error true
 					@ message message
-					@ source "wizzi/lib/production/artifactInfo.js/" + method
+					@ source "wizzi/lib/production/step.js/" + method
 					@ modelInfo this.modelInfo
 			_ logme(err)
 			return err
@@ -324,7 +323,7 @@
             return 
                 [ 
 					@ '\n'
-					@ 'ArtifactInfo '
+					@ 'ProductionStep '
 					@ 'name: ' + this.name
                     @ 'model.src: ' + this._relPath()
                     @ ', gen.generator:'
@@ -345,7 +344,7 @@
 				foreach item in this.genContexts
 					_ item.terminate()
     
-		m isArtifactConfig
+		m isProductionConfig
 			static
             param test
             if !test
@@ -360,7 +359,7 @@
                 return false
             return true
 		
-		m isArtifactInstance
+		m isProductionInstance
 			static
             param test
             throw 

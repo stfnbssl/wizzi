@@ -251,8 +251,8 @@ $group
 		callback
 
 		if ModelInfo == null
-			set ModelInfo = require("../model/modelInfo").ModelInfo
-			set AsyncModelLoader = require('../model/asyncModelLoader')
+			set ModelInfo = require("../production/model/modelInfo").ModelInfo
+			set AsyncModelLoader = require('../production/model/asyncModelLoader')
 		var mi = new ModelInfo(modelConfig)
 		_ mi.productionManager
 			_ this.createProductionManager

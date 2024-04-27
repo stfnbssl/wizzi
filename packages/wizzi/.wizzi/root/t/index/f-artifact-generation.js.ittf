@@ -17,8 +17,8 @@ $group
 		#        The emitContext
 		#          . collects the generated elements of an artifact generation
 		#          . may be used as a service container during generation.
-		#        For now the wizzi/artifact/genContext is used as emitContext.
-		#            TODO revise and rename the wizzi/artifact/genContext module
+		#        For now the wizzi/production/artifact/genContext is used as emitContext.
+		#            TODO revise and rename the wizzi/production/artifact/genContext module
 		#        The emitContext parameter may be used to pass context data to the artifact generator;
 		#            It may contain a "__data" property that will be set on the genContext "data" property.
 		# @param {Function} callback

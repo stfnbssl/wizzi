@@ -1,8 +1,8 @@
 ﻿base_test(asyncModelLoader)
 
 	$append imports
-		var modelInfo = require('../../lib/model/modelInfo').ModelInfo
-		var asyncModelLoader = require('../../lib/model/asyncModelLoader')
+		var modelInfo = require('../../lib/production/model/modelInfo').ModelInfo
+		var asyncModelLoader = require('../../lib/production/model/asyncModelLoader')
 		var mocks = require('../mocks/misc')
 
 	var modelPaths = {}

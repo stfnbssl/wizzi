@@ -20,7 +20,7 @@
 	set md.file = require('@wizzi/utils').file
 	set md.verify = verify
 	set md.config = require('@wizzi/utils').config
-	set md.genContext = require('./lib/artifact/genContext')
+	set md.genContext = require('./lib/production/artifact/genContext')
 	set md.acl = acl
 	set md.productionOptions = require('./lib/production/options')
 	set md.Filesystem = Filesystem

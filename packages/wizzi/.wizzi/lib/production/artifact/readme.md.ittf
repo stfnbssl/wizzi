@@ -19,7 +19,7 @@
 		\b 'wizzi-plugin.artifactGenerator.gen' method 
 		\b in the 'values' object property of the 'ctx' (api-ref: wizzi.artifact.genContext)
 		\b parameter. The name of each context model, defined in the 'export-name' attribute
-		\b of the 'modelRef' element of the 'wfjob' model, is a property name of the 'values'
+		\b of the 'modelRef' element of the `wzjob` model, is a property name of the 'values'
 		\b object.
 	
 	h3 Generation module

@@ -8,20 +8,20 @@
         _ require('../util/log')
             ( 
                 @ module
-    var GenContext = require('../artifact/genContext')
-    var AsyncFrontMatterLoader = require('../model/asyncFrontMatterLoader')
-    var AsyncModelLoader = require('../model/asyncModelLoader')
-    var AsyncArtifactGenerator = require('../artifact/asyncArtifactGenerator').AsyncArtifactGenerator
+    var GenContext = require('./artifact/genContext')
+    var AsyncFrontMatterLoader = require('./model/asyncFrontMatterLoader')
+    var AsyncModelLoader = require('./model/asyncModelLoader')
+    var AsyncArtifactGenerator = require('./artifact/asyncArtifactGenerator').AsyncArtifactGenerator
 	var AsyncWizziModelTypesRunner = require('./asyncWizziModelTypesRunner')
     +
 	#
 		# Async artifact generation runner.
-		# A runner instance runs a single artifactInfo.
-		# Input: an ArtifactInfo (constructor injected).
-		# Output: the ArtifactInfo enriched with (one or many) genContext(s),
+		# A runner instance runs a single productionStep.
+		# Input: an ProductionStep (constructor injected).
+		# Output: the ProductionStep enriched with (one or many) genContext(s),
 		#   ready to be persisted (callback ok result).
 		# A Runner can run 
-		#   a WfJob (a wizzi job)
+		#   a WzJob (a wizzi job)
 		#   a WfSchema (a wizzi model types generation)
 		# 	a ModelArtifact
 		#	a ModelCollectionArtifact
@@ -35,66 +35,66 @@
 	+
 	wz-class Runner
         ctor
-            param artifactInfo
-            set this.artifactInfo = artifactInfo
-            _ log.setLevel((artifactInfo.options.verbose || 0))
+            param productionStep
+            set this.productionStep = productionStep
+            _ log.setLevel((productionStep.options.verbose || 0))
     
 		m run
             param callback
             
-			if this.artifactInfo.modelInfo
+			if this.productionStep.modelInfo
 				_ this._runOnModelInfo
-                    @ this.artifactInfo.modelInfo
+                    @ this.productionStep.modelInfo
                     @ callback
             
 			else 
 			    _ this._runOnContextInfos
-                    @ this.artifactInfo.contextInfos
+                    @ this.productionStep.contextInfos
                     @ callback
     
 		m _runOnContextInfos
             param contextInfos
             param callback
             
-            if this.artifactInfo.isCodeWriteArtifact()
+            if this.productionStep.isCodeWriteArtifact()
                 _ this.runCodeWriteArtifact
-                    @ this.artifactInfo.modelInfo
-                    @ this.artifactInfo.gen
+                    @ this.productionStep.modelInfo
+                    @ this.productionStep.gen
 					@ callback
             else
 				r_cb_error( 999, _runOnContextInfos
-					@ 'Artifact is in an invalid state: ' + util.inspect(this.artifactInfo, {depth: 2})
+					@ 'Artifact is in an invalid state: ' + util.inspect(this.productionStep, {depth: 2})
     
 		m _runOnModelInfo
             param modelInfo
             param callback
             
-            var gen = this.artifactInfo.gen
+            var gen = this.productionStep.gen
             
-			if this.artifactInfo.isWizziModelTypesArtifact()
+			if this.productionStep.isWizziModelTypesArtifact()
                 _ this.runWizziModelTypesArtifact
                     @ modelInfo
 					@ callback
             
-			elif this.artifactInfo.isWizziModelArtifact()
+			elif this.productionStep.isWizziModelArtifact()
                 _ this.runWizziModelArtifact
                     @ modelInfo
                     @ gen
                     @ callback
             
-			elif this.artifactInfo.isModelCollectionArtifact()
+			elif this.productionStep.isModelCollectionArtifact()
                 _ this.runModelCollectionArtifact
                     @ modelInfo
                     @ gen
                     @ callback
             
-			elif this.artifactInfo.isFinalArtifact()
+			elif this.productionStep.isFinalArtifact()
                 _ this.runFinalArtifact
                     @ modelInfo
                     @ callback
             else 
 				r_cb_error( 999, _runOnModelInfo
-					@ 'Artifact is in an invalid state: ' + util.inspect(this.artifactInfo, {depth: 2})
+					@ 'Artifact is in an invalid state: ' + util.inspect(this.productionStep, {depth: 2})
     
 		m runWizziModelTypesArtifact
             param modelInfo
@@ -102,8 +102,8 @@
 
 			var that = this
             
-			_ log.warn('runWizziModelTypesArtifact ' + this.artifactInfo.name)
-			var outputPackageFolder = this.artifactInfo.getDestinationUri()
+			_ log.warn('runWizziModelTypesArtifact ' + this.productionStep.name)
+			var outputPackageFolder = this.productionStep.getDestinationUri()
 			# loog 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
             
 			_ modelInfo.getModelInfos
@@ -133,7 +133,7 @@
 						@ wmtRequest
 						f_cb( result )
 							# TODO how to expose results ?
-							_ callback(null, that.artifactInfo)
+							_ callback(null, that.productionStep)
 
 		m runWizziModelArtifact
             param modelInfo
@@ -157,12 +157,12 @@
 								f_cb( mainSourceModels )
 									# loog '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
 									_ AsyncArtifactGenerator.generate
-										@ that.artifactInfo
+										@ that.productionStep
 										@ generator
 										@ modelInfos
 										@ mainSourceModels
 										f_cb( notUsed )
-											_ callback(null, that.artifactInfo)
+											_ callback(null, that.productionStep)
     
 		m runModelCollectionArtifact
             param modelInfo
@@ -189,7 +189,7 @@
 										@ 'runModelCollectionArtifact got mainSourceModelsOfModelCollection'
 										@ mainSourceModelsOfModelCollection
 									_ AsyncArtifactGenerator.generateModelCollection
-										@ that.artifactInfo
+										@ that.productionStep
 										@ generator
 										@ modelInfos
 										@ mainSourceModelsOfModelCollection
@@ -197,7 +197,7 @@
 											_ logme
 												@ 'runModelCollectionArtifact result'
 												@ result
-											_ callback(null, that.artifactInfo)
+											_ callback(null, that.productionStep)
     
 		m runCodeWriteArtifact
             param contextInfos
@@ -213,11 +213,11 @@
 						@ contextInfos
 						f_cb( mainSourceModels )
 							_ AsyncArtifactGenerator.generateCodeWrite
-								@ that.artifactInfo
+								@ that.productionStep
 								@ generator
 								@ mainSourceModels
 								f_cb( notUsed )
-									_ callback(null, that.artifactInfo)
+									_ callback(null, that.productionStep)
     
 		# TODO execute copy without loading content in genContext
 		m runFinalArtifact
@@ -239,16 +239,16 @@
 												@ model null
 												@ srcPath fileInfo.relpath
 												@ srcFullPath fileInfo.fullpath
-												@ options that.artifactInfo.options
+												@ options that.productionStep.options
 												@ pman modelInfo.productionManager()
 									_ genContext.writeFile
 										@ fileInfo.fullpath
-									_ that.artifactInfo.addGenContext(genContext)
+									_ that.productionStep.addGenContext(genContext)
 
 								return
 									_ callback
 										@ null
-										@ that.artifactInfo
+										@ that.productionStep
             
 					else 
                 
@@ -258,25 +258,25 @@
 									@ model null
 									@ srcPath modelInfo.src()
 									@ srcFullPath modelInfo.srcFullPath()
-									@ options that.artifactInfo.options
+									@ options that.productionStep.options
 									@ pman modelInfo.productionManager()
                 
 						_ modelInfo.getSource
 							f_cb( content )
 				
 								_ genContext.write(content)
-								_ that.artifactInfo.addGenContext(genContext)
+								_ that.productionStep.addGenContext(genContext)
 						
 								return
 									_ callback
 										@ null
-										@ that.artifactInfo
+										@ that.productionStep
 
 		m runFrontMatter
             param callback
             
-			if this.artifactInfo.modelInfo
-                _ this.artifactInfo.modelInfo.getModelInfos
+			if this.productionStep.modelInfo
+                _ this.productionStep.modelInfo.getModelInfos
                     {
                         @ final false
                     a_cb( modelInfos )
@@ -288,18 +288,18 @@
                                     _ callback
                                         @ null
                                         {
-                                            @ collection this.artifactInfo.collection
+                                            @ collection this.productionStep.collection
                                             @ items frontMatters
 			else 
-                # loog 'runFrontMatter.contextInfos', this.artifactInfo.contextInfos.length
+                # loog 'runFrontMatter.contextInfos', this.productionStep.contextInfos.length
                 _ AsyncFrontMatterLoader.loadMany
-                    @ this.artifactInfo.contextInfos
+                    @ this.productionStep.contextInfos
                     a_cb( frontMatters )
                         return
                             _ callback
                                 @ null
                                 {
-                                    @ collection this.artifactInfo.collection
+                                    @ collection this.productionStep.collection
                                     @ items frontMatters
 
 	f_error( wizzi.production.runner )

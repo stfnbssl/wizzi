@@ -18,7 +18,7 @@ $group
 		#			string name
 		#             # label for messages
 		#			string ittfDocumentUri
-		#             # 'wfjob' model primary ittf document
+		#             # `wzjob` model primary ittf document
 		#			{ productionOptions
 		#				integer indentSpaces
 		#					default 4

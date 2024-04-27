@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\all\artifact\artifactInfo.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:13 GMT
+    utc time: Sat, 27 Apr 2024 13:09:51 GMT
 */
 'use strict';
 
@@ -16,11 +16,11 @@ var _ = require('lodash');
 var file = require('@wizzi/utils').file;
 var verify = require('@wizzi/utils').verify;
 
-var ArtifactInfo = require('../../../lib/artifact/ArtifactInfo').ArtifactInfo;
-var asyncArtifactGenerator = require('../../../lib/artifact/asyncArtifactGenerator');
+var ProductionStep = require('../../../lib/production/artifact/ProductionStep').ProductionStep;
+var asyncArtifactGenerator = require('../../../lib/production/artifact/asyncArtifactGenerator');
 var mocks = require('../../mocks/misc');
 
-describe("artifactInfo", function() {
+describe("productionStep", function() {
     var modelPaths = {};
     var moodel_path_1 = path.join(__dirname, 'ittf', 'simple.tests.ittf');
     var moodel_path_2 = path.join(__dirname, 'ittf', 'complex.tests.ittf');
@@ -28,7 +28,7 @@ describe("artifactInfo", function() {
     modelPaths[moodel_path_2]  = true;
     var ai;
     it("shoul create an artifact info", function(done) {
-        ai = new ArtifactInfo({
+        ai = new ProductionStep({
             name: 'test_1', 
             options: {
                 basedir: __dirname, 
@@ -36,7 +36,7 @@ describe("artifactInfo", function() {
              }, 
             model: mocks.getModelInfo('mock1'), 
             contexts: null, 
-            isWfJob: false, 
+            isWzJob: false, 
             transformers: [], 
             gen: {
                 generator: 'js/module'

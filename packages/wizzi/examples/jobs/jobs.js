@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:12 GMT
+    utc time: Sat, 27 Apr 2024 13:09:50 GMT
 */
 'use strict';
 var path = require('path');
@@ -160,11 +160,11 @@ var DEFAULT_MIME = {
     vtt: 'vtt', 
     vue: 'vue'
  };
-executeLoadFolderModels('job_globalModels', 'wfjob', {}, function(err, notUsed) {
+executeLoadFolderModels('job_globalModels', `wzjob`, {}, function(err, notUsed) {
     if (err) {
         return callback(err);
     }
-    executeFolderJobs('job_globalModels', 'wfjob', {}, function(err, notUsed) {
+    executeFolderJobs('job_globalModels', `wzjob`, {}, function(err, notUsed) {
         if (err) {
             return callback(err);
         }

@@ -1,8 +1,8 @@
-﻿base_test(artifactInfo)
+﻿base_test(productionStep)
 
 	$append imports
-		var ArtifactInfo = require('../../../lib/artifact/ArtifactInfo').ArtifactInfo
-		var asyncArtifactGenerator = require('../../../lib/artifact/asyncArtifactGenerator')
+		var ProductionStep = require('../../../lib/production/artifact/ProductionStep').ProductionStep
+		var asyncArtifactGenerator = require('../../../lib/production/artifact/asyncArtifactGenerator')
 		var mocks = require('../../mocks/misc')
 
 	var modelPaths = {}
@@ -23,7 +23,7 @@
 
 	it-async shoul create an artifact info
 		set ai
-			new ArtifactInfo
+			new ProductionStep
 				{
 					@ name 'test_1'
 					@ options
@@ -32,7 +32,7 @@
 							@ dotgExtensionPrefix false
 					@ model mocks.getModelInfo('mock1')
 					@ contexts null
-					@ isWfJob false
+					@ isWzJob false
 					@ transformers []
 					@ gen
 						{

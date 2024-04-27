@@ -17,12 +17,12 @@ common/example/withMonoRepoWizziFactory()
 
     _ executeLoadFolderModels
         @ 'job_globalModels'
-        @ 'wfjob'
+        @ `wzjob`
         {
         f_cb()
             _ executeFolderJobs
                 @ 'job_globalModels'
-                @ 'wfjob'
+                @ `wzjob`
                 {
                 f_cb()
 

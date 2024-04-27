@@ -41,11 +41,12 @@ module
                         {
                             @ folderTemplateFile sbFolderTemplateFile
                             @ wzCtxModelFile sbWzCtxModelFile
+                            @ sourceBasename path.basename(folderPath)
                         {
                             @ metaProductionName metaProductionName
                             @ ft_basePath ''
                             @ id_basePath ''
-                            @ idf_basePath ''
+                            @ idf_basePath '__dot__wizzi/'
                             @ level 0
                             @ depth options.depth
                             @ compressFolders options.compressFolders || []
@@ -101,7 +102,7 @@ module
                     else 5
                 ._ join(' ')
         if !fsNode.isTFolder
-            if !isCompressed
+            if !isCompressed && sb.sourceBasename != fsNode.basename
                 _ sb.folderTemplateFile.push
                     @ state.spaces + '$include ' + fsNode.basename
         
@@ -110,7 +111,7 @@ module
         var save_state_ft_basePath = state.ft_basePath
         var save_state_id_basePath = state.id_basePath
         var save_state_idf_basePath = state.idf_basePath
-        if !isCompressed
+        if !isCompressed && sb.sourceBasename != fsNode.basename
             #
             # prepare for children
             set state.ft_basePath = state.ft_basePath + '/t/' 
@@ -122,7 +123,7 @@ module
                 @ fsNode
                 @ sb
                 @ state
-        if !isCompressed
+        if !isCompressed && sb.sourceBasename != fsNode.basename
             set sb.folderTemplateFile 
                 [ 
                     @ '$group'
@@ -148,7 +149,7 @@ module
                 @ sb
                 @ state
         #
-        if !fsNode.isTFolder && !isCompressed
+        if !fsNode.isTFolder && !isCompressed && sb.sourceBasename != fsNode.basename
             # loog 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
             set packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf']
                 {

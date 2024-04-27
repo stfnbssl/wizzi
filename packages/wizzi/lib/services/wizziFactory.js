@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Fri, 19 Apr 2024 18:47:10 GMT
+    utc time: Sat, 27 Apr 2024 13:09:48 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -18,7 +18,7 @@ var mtree = require('@wizzi/mtree');
 var acl = require('../acl');
 var productionOptions = require('../production/options');
 var ProductionManager = null;
-var GenContext = require('../artifact/genContext');
+var GenContext = require('../production/artifact/genContext');
 var verify = require('@wizzi/utils').verify;
 var file = require('@wizzi/utils').file;
 var packi = require('@wizzi/utils').packi;
@@ -49,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.35';
+        this.__version = '0.8.36';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -856,8 +856,8 @@ class WizziFactory {
             }
         }
         if (ModelInfo == null) {
-            ModelInfo = require("../model/modelInfo").ModelInfo;
-            AsyncModelLoader = require('../model/asyncModelLoader');
+            ModelInfo = require("../production/model/modelInfo").ModelInfo;
+            AsyncModelLoader = require('../production/model/asyncModelLoader');
         }
         var mi = new ModelInfo(modelConfig);
         mi.productionManager(this.createProductionManager(null, globalContext))
@@ -1514,28 +1514,38 @@ class WizziFactory {
                         if (!artifactName || artifactName.length < 3) {
                             return callback(error('999', 'generateFolderArtifacts', "Default artifact not found for schema: " + item.schema));
                         }
-                        this.loadModelAndGenerateArtifact(item.fullPath, {
-                            modelRequestContext: modelRequestContext, 
-                            artifactRequestContext: requestContext.artifactRequestContext
-                         }, artifactName, (err, artifactText) => {
-                        
-                            if (err) {
-                                console.log("[31m%s[0m", err);
-                                return callback(err);
-                            }
-                            this.fileService.write(path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), artifactText, function(err, notUsed) {
+                        if (options.useMultiPartContext) {
+                            callback(null, {
+                                isProduction: true, 
+                                productionAction: "loadModelAndGenerateArtifact", 
+                                ittfDocumentUri: item.fullPath, 
+                                artifactName: artifactName
+                             }, path.join(options.destFolder, item.destRelPath))
+                        }
+                        else {
+                            this.loadModelAndGenerateArtifact(item.fullPath, {
+                                modelRequestContext: modelRequestContext, 
+                                artifactRequestContext: requestContext.artifactRequestContext
+                             }, artifactName, (err, artifactText) => {
+                            
                                 if (err) {
+                                    console.log("[31m%s[0m", err);
                                     return callback(err);
                                 }
-                                // loog 'generateFolderArtifacts.written', item.destRelPath
-                                // _ process.nextTick
-                                setTimeout(() => 
-                                
-                                    callback(null, path.join(options.destFolder, item.destRelPath))
-                                , 0)
-                            })
+                                this.fileService.write(path.join(options.destFolder, interpolate_filename(item.destRelPath, fileCtx)), artifactText, function(err, notUsed) {
+                                    if (err) {
+                                        return callback(err);
+                                    }
+                                    // loog 'generateFolderArtifacts.written', item.destRelPath
+                                    // _ process.nextTick
+                                    setTimeout(() => 
+                                    
+                                        callback(null, path.join(options.destFolder, item.destRelPath))
+                                    , 0)
+                                })
+                            }
+                            )
                         }
-                        )
                     }
                     // loog 'generateFolderArtifacts.copying', item.fullPath
                     else {
@@ -1551,14 +1561,54 @@ class WizziFactory {
                         })
                     }
                 }
-                , function(err, result) {
+                , (err, result) => {
+                
                     if (err) {
                         console.log("[31m%s[0m", 'Error in method wizzi.wizzifactory.generateFolderArtifacts');
                         console.log("[31m%s[0m", 'err', err);
                         return callback(err);
                     }
-                    return callback(null, result);
-                })
+                    if (options.useMultiPartContext) {
+                        var productions = [];
+                        var i, i_items=result, i_len=result.length, item;
+                        for (i=0; i<i_len; i++) {
+                            item = result[i];
+                            if (item.isProduction) {
+                                productions.push(item)
+                            }
+                        }
+                        console.log('wizzi.wizzifactory.generateFolderArtifacts.productions', productions, __filename);
+                        var pman = this.createProductionManager({}, {});
+                        if (pman && pman.__is_error) {
+                            console.log("[31m%s[0m", '__is_error ', pman);
+                            return callback(pman);
+                        }
+                        
+                        var notUsed = pman.generateProductions(productions, {
+                            modelRequestContext: modelRequestContext, 
+                            artifactRequestContext: requestContext.artifactRequestContext
+                         }, (err, resultPman) => {
+                        
+                            if (err) {
+                                console.log("[31m%s[0m", err);
+                                return callback(err);
+                            }
+                            return callback(null, {
+                                    result: result, 
+                                    resultPman: resultPman
+                                 });
+                        }
+                        );
+                        if (notUsed && notUsed.__is_error) {
+                            console.log("[31m%s[0m", '__is_error ', notUsed);
+                            return callback(notUsed);
+                        }
+                    }
+                    else {
+                        return callback(null, result);
+                    }
+                }
+                )
             }
             )
         } 
@@ -2352,12 +2402,12 @@ class WizziFactory {
          { jobRequest type 1
          string name
          string path
-         # path to the 'wfjob' ittf document that the wizzi.production.programManager will load.
+         # path to the `wzjob` ittf document that the wizzi.production.programManager will load.
          { productionOptions
          { globalContext
          { jobRequest type 2
-         { wfjobModel
-         # 'wfjob' wizzi model, built programmatically or previously loaded
+         { wzjobModel
+         # `wzjob` wizzi model, built programmatically or previously loaded
          { productionOptions
          { globalContext
         
@@ -2388,7 +2438,7 @@ class WizziFactory {
         }
         // jobRequest type 2
         else {
-            this._executeJob_by_wfjobModel(jobRequest, callback)
+            this._executeJob_by_wzjobModel(jobRequest, callback)
         }
     }
     _executeJob_by_path(jobRequest, callback) {
@@ -2456,8 +2506,8 @@ class WizziFactory {
             })
         })
     }
-    _executeJob_by_wfjobModel(jobRequest, callback) {
-        throw new Error('wizzi.wizziFactory._executeJob_by_wfjobModel not implemented.');
+    _executeJob_by_wzjobModel(jobRequest, callback) {
+        throw new Error('wizzi.wizziFactory._executeJob_by_wzjobModel not implemented.');
     }
     /**
          Execute a meta generation
@@ -3302,7 +3352,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.35.wizziFactory.' + method,
+        method: 'wizzi@0.8.36.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

@@ -56,10 +56,10 @@
 	
 	h3 Wizzi job execution
 	
-	p A wizzi job is described by a wizzi model of schema 'wfjob', that can contain
-		\b artifact production requests and optional references to other 'wfjob' models.
-		\b The 'executeJob' method of the wizzi.wizziFactory triggers the loading of a 'wfjob' model,
-		\b the resolution of the references to other 'wfjob' models and
+	p A wizzi job is described by a wizzi model of schema `wzjob`, that can contain
+		\b artifact production requests and optional references to other `wzjob` models.
+		\b The 'executeJob' method of the wizzi.wizziFactory triggers the loading of a `wzjob` model,
+		\b the resolution of the references to other `wzjob` models and
 		\b the execution of the requested artifact productions. 
 
 	h3 Production manager creation

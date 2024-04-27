@@ -2,7 +2,7 @@
 
 	$append imports
 		var wizziFactory = require('../../lib/services/wizziFactory')
-		var modelInfo = require('../../lib/model/modelInfo').ModelInfo
+		var modelInfo = require('../../lib/production/model/modelInfo').ModelInfo
 		var mocks = require('../mocks/misc')
 
 	var mi = null
