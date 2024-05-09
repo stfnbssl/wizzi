@@ -90,9 +90,9 @@
 						@ options
 						a_cb( result )
                             # test
-                            # log 'extensionSchemaMap', result.extensionSchemaMap
-                            # log 'schemaDefaulArtifactMap', result.schemaDefaulArtifactMap
-                            # log 'schemaArtifactsMap', result.schemaArtifactsMap
+                            # loog 'extensionSchemaMap', result.extensionSchemaMap
+                            # loog 'schemaDefaulArtifactMap', result.schemaDefaulArtifactMap
+                            # loog 'schemaArtifactsMap', result.schemaArtifactsMap
                             r_cb(result)
 			@ PluginsManager PluginsManager
 			@ resolveModule resolveModule

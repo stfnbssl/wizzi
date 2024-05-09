@@ -134,5 +134,9 @@
 				{ 
 					@ result true
 
+	runner( ThrowStatement
+		error 'ThrowStatement', node.argument.arguments
+		throw new Error(node.argument.arguments);
+
     
 

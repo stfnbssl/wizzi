@@ -71,7 +71,7 @@ module
                             if err
                                 error err
                                 return
-                            log 'parameters', Object.keys(parameters)
+                            info 'parameters', Object.keys(parameters)
                             _ file.write
                                 _ path.join
                                     @ __dirname

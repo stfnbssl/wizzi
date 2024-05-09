@@ -304,23 +304,23 @@ export type ProductionStepDestPath = {
 /**
  * @type ProductionStepConfig
  * @description A ProductionStepConfig is a transport object used to build a ProductionStep instance.
- *              It can be built from an `artifact` element of a `wfjob` Wizzi Schema or programmatically.
+ *              It can be built from an `artifact` element of a `wzjob` Wizzi Schema or programmatically.
  * @property name        The display name of the production step
  * @property options 
  * @property model   
  * @property contexts    Array of ModelLoadConfig instances that describe models to be used as context object.
  */
 export interface ProductionStepConfig {
-    // from wfjob.artifact.wzName
+    // from wzjob.artifact.wzName
     name?: string;
     options?: ProductionOptions;
     model: ModelLoadConfig;
     contexts?: ModelLoadConfig[],
-    isWfJob?: boolean, // from wfjob.artifact.isWfJob
-    isWfModelDoms?: boolean, // from wfjob.artifact.isWfModelDoms
-    isWfMeta?: boolean, // from wfjob.artifact.isWfMeta
+    isWfJob?: boolean, // from wzjob.artifact.isWfJob
+    isWfModelDoms?: boolean, // from wzjob.artifact.isWfModelDoms
+    isWfMeta?: boolean, // from wzjob.artifact.isWfMeta
     gen: {
-        generator: string, // from wfjob.artifact.generator
+        generator: string, // from wzjob.artifact.generator
     },
     dest?: ProductionStepDestPath
 }
@@ -349,9 +349,9 @@ export type ProductionStep = {
         generator: string,
     },
     dest: ProductionStepDestPath,
-    isWfJob?: boolean, // from wfjob.artifact.isWfJob
-    isWfModelDoms?: boolean, // from wfjob.artifact.isWfModelDoms
-    isWfMeta?: boolean, // from wfjob.artifact.isWfMeta
+    isWfJob?: boolean, // from wzjob.artifact.isWfJob
+    isWfModelDoms?: boolean, // from wzjob.artifact.isWfModelDoms
+    isWfMeta?: boolean, // from wzjob.artifact.isWfMeta
     genContexts: GenContext[],
 }
 
@@ -369,7 +369,7 @@ export interface PManPersistResult {
     status: string;
 }
 
-type EvaluationContextValue = string | number | {}; 
+type EvaluationContextValue = string | number | {};
 
 export interface ProductionContext {
     evaluationContext: {[key: string]: any};
@@ -379,11 +379,24 @@ export interface ProductionContext {
     getEvaluationContextValue(namePath: string): EvaluationContextValue;
 }
 
+export type ProductionActionType = "loadModelAndGenerateArtifact";
+
+export type ProductionAction = {
+    productionActionType: ProductionActionType;
+    ittfDocumentUri: string;
+    artifactName?: string;
+    destPath?: string;
+    modelRequestContext?: {[key: string]: any};
+    artifactRequestContext?: {[key: string]: any};
+}
+
 export interface ProductionManager {
     productionContext: ProductionContext;
     wizziFactory: WizziFactory;
-    addArtifactRequest(request: ProductionStepConfig): void;
-    addJobRequest(jobRequest: PManJobRequest): void;
+    addProductionStepRequest(request: ProductionStepConfig): void;
+    addWzjobRequest(jobRequest: PManJobRequest): void;
+    addProductionAction(actions: ProductionAction) : void;
+    executeProductionActions(actions: ProductionAction[]) : void;
     run(callback: cb<ProductionStep[]>): void;
     persistToFile(callback: cb<PManPersistResult[]>): void;
     terminate(): void;
@@ -512,7 +525,7 @@ type ProductionOptions = {
  * @description Wizzi Job request options
  * @property name               The name of the Wizzi Job, for trace purposes.
  * @property path               The path to the ITTF Document of the Wizzi Job definition.
- * @property wfjobModel         Wizzi model, built programmatically or previously loaded.
+ * @property wzjobModel         Wizzi model, built programmatically or previously loaded.
  *                              Is alternative to the `path` property. 
  * @property globalContext      A global context object for all the productions of the Wizzi Job.
  * @property productionOptions  A ProductionOptions object.
@@ -520,7 +533,7 @@ type ProductionOptions = {
 type JobRequest = {
     name: string;
     path?: string;
-    wfjobModel?: WizziModel;
+    wzjobModel?: WizziModel;
     globalContext?: object;
     productionOptions: ProductionOptions;
 }
@@ -559,9 +572,10 @@ type FolderGenerationOptions = {
  * @wizziProductionFolder The folder for the result of the production
 */
 type MetaProductionPaths = {
-    tempProductionFolder: string;
-    wizziProductionFolder: string;
+    metaProductionTempFolder: string;
+    metaProductionWizziFolder: string;
 }
+
 /**
  * @type MetaProductionData
  * @name The name of the meta production
@@ -721,17 +735,17 @@ declare interface WizziFactory {
     /**
      * @method generateModelDoms
      * @description Generates a Wizzi Model Dom
-     * @param wfschemaIttfDocumentUri     The path to the source Wizzi Schema definition
+     * @param wzschemaIttfDocumentUri     The path to the source Wizzi Schema definition
      * @param outputPackagePath           The path to the folder where to write the generated modules
-     * @param wfschemaName                The name of the Wizzi Schema
+     * @param wzschemaName                The name of the Wizzi Schema
      * @param mTreeBuildUpContext         Context object for the Wizzi Model Load of the source Wizzi Schema definition
      * @param callback                    Receives the paths of the generated modules.
     */
     generateModelDoms(
-        wfschemaIttfDocumentUri: string, outputPackagePath: string, wfschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
+        wzschemaIttfDocumentUri: string, outputPackagePath: string, wzschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
     ): void;
     generateWizziModelTypes(
-        modelTypesRequest: string, outputPackagePath: string, wfschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
+        modelTypesRequest: string, outputPackagePath: string, wzschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
     ): void;
     /**
      * @param wizzifierName    The wizzi schema of the source code to be wizzified
@@ -948,7 +962,7 @@ interface LightModelDomsConfigOptions {
 interface LightModelDomsOptions {
     storeKind?: string
     configOptions: LightModelDomsConfigOptions;
-    wfschema: LightModelDomsSchemaOptions;
+    wzschema: LightModelDomsSchemaOptions;
     name: string;
     ittfDocumentUri: string;
     outputPackageFolder: string;
@@ -1008,7 +1022,7 @@ export function job(
 * Print wizzi job error
 */
 export function printWizziJobError(
-    wfjobName: string, err: any
+    wzjobName: string, err: any
 ): void;
 
 /**
@@ -1022,11 +1036,14 @@ export function generateWizziModelDoms(
     options: LightModelDomsOptions, callback: cb<string>
 ): void;
 
-
 /**
 * Debug service for meta productions
 */
-export function FactoryServiceContext() : void;
+export class FactoryServiceContext {
+    constructor();
+    addDebugObject(kind: string, key: string, value:any) : void;
+    dumpDebugObjects(options: {[key: string]: any}): void;
+}
 
 /**
  * Wizzi runner server

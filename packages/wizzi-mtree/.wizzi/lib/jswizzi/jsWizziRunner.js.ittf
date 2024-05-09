@@ -261,7 +261,10 @@
                             @ true
 					set errorLines = parsed.lines
 				# loog 'parsed', parsed
-				set mTreeBrickErrorNodeId = parsed.parsedErrorLine.nodeId
+				if parsed.parsedErrorLine
+					set mTreeBrickErrorNodeId = parsed.parsedErrorLine.nodeId
+				else
+					set mTreeBrickErrorNodeId = 'Unavailable'
 
         var nodeStm
 		try

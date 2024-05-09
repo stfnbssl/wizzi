@@ -37,7 +37,7 @@ module
                         if err
                             error err
                             return
-                        log 'metaProvides', metaProvides
+                        info 'metaProvides', metaProvides
                         _ wf_and_jsonFs.wf.getMetaProductions
                             =>
                                 param err
@@ -45,7 +45,7 @@ module
                                 if err
                                     error err
                                     return
-                                log 'metaProductions', metaProductions
+                                info 'metaProductions', metaProductions
 
     function getMetaContext
         return

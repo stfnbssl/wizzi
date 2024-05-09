@@ -71,7 +71,7 @@ module
                             if err
                                 error err
                                 return
-                            log 'metaParameters', Object.keys(metaParameters)
+                            info 'metaParameters', Object.keys(metaParameters)
                             _ writePackifiles
                                 _ path.join
                                     @ __dirname

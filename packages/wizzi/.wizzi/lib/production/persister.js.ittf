@@ -25,10 +25,10 @@
             param callback
 			
 			var that = this
-			if this.productionStep.isWizziModelTypesArtifact()
+			if this.productionStep.isWizziModelDomArtifact()
 				# TODO 
-				# Write here model type artifacts ?
-				# The wizzi model artifacts could be generated in memory and retrieved
+				# Write here model DOM artifacts ?
+				# The wizzi model DOM artifacts could be generated in memory and retrieved
 				# by the this.productionStep.getItemsToPersistToFile() method
 				# TODO Add more info to result info ?
 				return
@@ -36,10 +36,10 @@
 						@ null
 						[
 							{
-								@ oper 'generate-schema'
+								@ oper 'generate-model-DOM'
 								@ status 'success'
 								{ item
-									@ filepath 'Unavailable'
+									@ filePath 'Unavailable'
 			else
 				_ this.productionStep.getItemsToPersistToFile
 					f_cb( items )
@@ -56,7 +56,7 @@
 					foreach item in items
 						_ ret.push
 							{ 
-								@ filepath item.filepath
+								@ filePath item.filePath
 								@ content item.genContext.getContent()
             return ret
     
@@ -65,26 +65,26 @@
 		var fileService = productionStep.getFileService()
         return 
             function 
-                param genInfo
+                param persisteable
                 param callback
 
 				_ logme
                     @ 'AsyncArtifactFilePersister.persist'
-                    @ genInfo.filepath
-                    _ genInfo.genContext.getContent()
+                    @ persisteable.filePath
+                    _ persisteable.genContext.getContent()
                     
                 _ fileService.openWrite
-                    @ genInfo.filepath
+                    @ persisteable.filePath
                     a_cb( stream )
-                        _ genInfo.genContext.toStream(stream)
+                        _ persisteable.genContext.toStream(stream)
                         _ stream.end
                             a_cb()
-                                _ log.success('Written to file: ' + genInfo.filepath)
+                                _ log.success('Written to file: ' + persisteable.filePath)
                                 _ callback
                                     @ null
                                     {
                                         @ oper 'persist-to-file'
                                         @ item
                                             {
-                                                @ filepath genInfo.filepath
+                                                @ filePath persisteable.filePath
                                         @ status 'success'

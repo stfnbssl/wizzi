@@ -11,7 +11,7 @@ $group
                 param value
                 if packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)
                     const filePath = packiUtils.ensurePackiFilePrefix(value)
-                    log mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    # loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
                     _ jsonDocuments.push
                         {
                             @ path filePath
@@ -20,7 +20,7 @@ $group
         _ JsonComponents.createJsonFs
             @ jsonDocuments
             a_cb( jsonFs )
-                log mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created'
+                # loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created'
                 _ wizziFactory.createFactory
                     {
                         @ plugins wfPluginsOptions
@@ -28,7 +28,7 @@ $group
                             @ storeKind 'json'
                             @ storeJsonFs jsonFs
                     a_cb( wf )
-                        log mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created'
+                        # loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created'
                         _ callback
                             @ null
                             {

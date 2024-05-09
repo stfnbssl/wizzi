@@ -24,6 +24,7 @@
 	var log = require('../util/log')(module)
 	var PluginsManager = require('./pluginsManager')
 	var StorePool = require('./storePool')
+	var interpolateFilename = require('../util/interpolateFilename')	
 	var buildCheatsheet = require('./cheatsheet').buildCheatsheet
 	var bootModelUri = "../wizzi/models/bootstrap/wfschema-boot-model"
 	var bootModelDefUri = "../wizzi/models/bootstrap/wfschema-boot-modelDef"
@@ -84,6 +85,7 @@
 		$include wizziFactory/cheatsheet
 		$include wizziFactory/compare
 		$include wizziFactory/modelDoms-generation
+		$include wizziFactory/productionStep-execution
 		$include wizziFactory/wizzi-job-execution
         $include wizziFactory/meta-generation
         $include wizziFactory/meta-execution
@@ -117,27 +119,6 @@
 	function getDefaultArtifact
 		param schema
 		return DEFAULT_ARTIFACTS[schema]
-
-    function interpolate_filename
-        param text
-        param ctx
-        var result = []
-        var pos = text.indexOf('__')
-        while pos > -1
-            var first = text.substr(0, pos)
-            var remain = text.substring(pos + 2)
-            set pos = remain.indexOf('__')
-            if pos > -1
-                _ result.push(first)
-            if ctx[remain.substr(0, pos)]
-                _ result.push(ctx[remain.substr(0, pos)])
-            else
-                _ result.push(remain.substr(0, pos))
-            set remain = remain.substring(pos + 2)
-            set text = remain
-            set pos = text.indexOf('__')
-        _ result.push(text)
-        return result.join('')   
 
 	set module.exports
 		{

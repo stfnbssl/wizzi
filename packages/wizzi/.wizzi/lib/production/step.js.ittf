@@ -7,6 +7,7 @@
 	var _ = require('lodash')
 	var verify = require('@wizzi/utils').verify
     var interpolate = require('../util/interpolate')
+    var interpolateFilename = require('../util/interpolateFilename')
     var ModelInfo = require("./model/modelInfo").ModelInfo
     +
 	#
@@ -37,12 +38,14 @@
 		# 			generator:String // generator name
 		# 		},
 		# 		dest:Object {
-		# 			fullpath:String    // Uri
+		# 			fullPath:String    // Uri
 		# 			folder:String      // a basepath Uri, may be relative
 		# 			baseFolder:String  // a basepath Uri (required when folder is relative)
 		# 			path:String        // relative path
 		# 			extension:String
 		# 		}
+        #       ittfDocuments {
+        #       }
 		# 	  }
 	+
 	function logme
@@ -58,7 +61,7 @@
             if verify.isObject(productionStepConfig.model)
                 set this.modelInfo = new ModelInfo(productionStepConfig.model)
                 set this.contextInfos = null
-            else 
+            elif verify.isArray(productionStepConfig.contexts) 
                 set this.contextInfos = []
                 foreach item in productionStepConfig.contexts
                     _ this.contextInfos.push
@@ -71,6 +74,10 @@
             set this.gen = productionStepConfig.gen
             set this.dest = productionStepConfig.dest
             set this.wfjob = productionStepConfig.wfjob $$ ??? not used
+            set this.ittfDocumentProduction = productionStepConfig.ittfDocumentProduction 
+            if this.ittfDocumentProduction
+                # loog 'ProductionStep.productionStepConfig.ittfDocumentProduction.fileCtx', this.ittfDocumentProduction.fileCtx
+                set this.fileCtx = this.ittfDocumentProduction.fileCtx 
             set this.genContexts = []
     
 		m initialize
@@ -80,6 +87,8 @@
             if this.modelInfo
                 _ this.modelInfo.productionManager
                     @ productionManager
+            elif this.ittfDocumentProduction
+				set this.ittfDocumentProduction.productionManager = productionManager
             else
 				foreach item in this.contextInfos 
                     _ item.productionManager
@@ -94,7 +103,7 @@
             param genContext
             _ this.genContexts.push(genContext)
 
-		m isWizziModelTypesArtifact
+		m isWizziModelDomArtifact
             return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWfModelType
 
 		m isWizziFactoryJob
@@ -113,6 +122,9 @@
 		m isCodeWriteArtifact
             return this.modelInfo == null && verify.isObject(this.gen) && verify.isNotEmpty(this.gen.generator)
     
+		m isIttfDocumentProduction
+            return this.modelInfo == null && verify.isObject(this.ittfDocumentProduction)
+
 		m isFinalArtifact
             return this.modelInfo != null && 
 				\b (verify.isObject(this.gen) === false || verify.isEmpty(this.gen.generator))
@@ -152,38 +164,53 @@
 					checked_call( destUri )
 						_ this.getDestinationUri(srcPath)
                     
-					var filepath
+					var filePath
                         _ interpolate
                             @ destUri
                             @ ipcontext
                             { 
                                 @ delimiter '{}'
+
+                    if this.fileCtx
+                        # loog 'filePath.before', filePath
+                        set filePath
+                            _ interpolateFilename
+                                @ filePath
+                                @ this.fileCtx
+                        # loog 'filePath.after', filePath
                     
-					_ logme('ProductionStep.getItemsToPersistToFile.ipcontext', ipcontext, 'filepath', filepath)
+					_ logme('ProductionStep.getItemsToPersistToFile.ipcontext', ipcontext, 'filePath', filePath)
                     
-					if check[filepath]
+					if check[filePath]
                         return
 							_ callback
 								_ this.error
-									@ "Duplicated destination filepath: " + filepath
+									@ "Duplicated destination filePath: " + filePath
 									@ "getItemsToPersistToFile"
                     
-					set check[filepath] = true
+					set check[filePath] = true
                     var persisteable
                         { 
                             @ productionStep this
                             @ genContext genContext
-                            @ filepath filepath
+                            @ filePath filePath
                     _ items.push(persisteable)
                 
 				else 
-					checked_call( destUri )
+					checked_call( filePath )
 						_ this.getDestinationUri(srcPath)
+                    if this.fileCtx
+                        log 'filePath.before', filePath
+                        set filePath
+                            _ interpolateFilename
+                                @ filePath
+                                @ this.fileCtx
+                        log 'filePath.after', filePath
                     var persisteable
                         { 
                             @ productionStep this
                             @ genContext genContext
-                            @ filepath destUri
+                            @ filePath filePath
                     _ items.push(persisteable)
             _ callback(null, items)
     
@@ -240,8 +267,8 @@
                     @ 'ProductionStep.getDestinationUri'
                     @ 'config.dest'
             
-			if verify.isNotEmpty(dest.fullpath)
-                return dest.fullpath
+			if verify.isNotEmpty(dest.fullPath)
+                return dest.fullPath
             
 			if verify.isEmpty(dest.folder)
                 return
@@ -349,6 +376,8 @@
             param test
             if !test
                 return false
+            if verify.isObject(test.ittfDocumentProduction)
+                return true
             if !verify.isObject(test.options)
                 return false
             if !verify.isObject(test.model) && !verify.isObject(test.contexts)

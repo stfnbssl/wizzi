@@ -61,8 +61,8 @@
 			f_cb_test( sources )
 				tobe_array( sources, 2)
 				var s1 = sources[0]
-				tobe_string_value( s1.fullpath, s1Path )
-				tobe_string( s1.relpath, mock2.tests.ittf )
+				tobe_string_value( s1.fullPath, s1Path )
+				tobe_string( s1.relPath, mock2.tests.ittf )
 				tobe_string( s1.content, tests mock2 )
 				_ done
 
@@ -80,7 +80,7 @@
 			f_cb_test( files )
 				tobe_array( files, 2)
 				var f1 = files[0]
-				tobe_string_value( f1.fullpath, s1Path )
+				tobe_string_value( f1.fullPath, s1Path )
 				_ done
     
 	it-async should check if the source exists

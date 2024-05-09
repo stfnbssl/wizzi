@@ -74,7 +74,7 @@ module
                                     @ useDemoJs true
                                     @ useDemoHtml true
                             f_cb_test(metaParameters)
-                                log 'metaParameters', Object.keys(metaParameters)
+                                info 'metaParameters', Object.keys(metaParameters)
                                 _ writePackifiles
                                     _ path.join
                                         @ __dirname
@@ -91,7 +91,7 @@ module
                                             @ useDemoHtml true
                                             { demoHtml
                                     f_cb_test(wizziPackiFiles)
-                                        log 'wizziPackiFiles', Object.keys(wizziPackiFiles)
+                                        info 'wizziPackiFiles', Object.keys(wizziPackiFiles)
                                         _ writePackifiles
                                             _ path.join
                                                 @ __dirname

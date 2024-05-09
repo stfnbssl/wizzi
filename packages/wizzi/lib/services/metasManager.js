@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:48 GMT
+    utc time: Thu, 09 May 2024 12:34:31 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -38,7 +38,7 @@ const {
 class MetasManager {
     constructor() {
         this.__type = 'MetasManager';
-        this.__version = '0.8.36';
+        this.__version = '0.8.37';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -624,7 +624,7 @@ class MetasManager {
                 'InvalidArgument', 'getMetaProduction', { parameter: 'productionName', message: 'The productionName parameter must be a string. Received: ' + productionName }
             ));
         }
-        console.log(mdDisplayName + '.getMetaProduction', productionName, __filename);
+        // loog mdDisplayName + '.getMetaProduction', productionName
         var found = null,
             foundInPlugin = null,
             pluginVersion = null,
@@ -660,7 +660,7 @@ class MetasManager {
                 error('InvalidArgument', 'getProvidedMetas', 'The callback parameter must be a function. Received: ' + callback)
             );
         };
-        console.log(mdDisplayName + '.getProvidedMetas', __filename);
+        // loog mdDisplayName + '.getProvidedMetas'
         var provides = {
             nodeModulePlugins: [
                 
@@ -675,7 +675,7 @@ class MetasManager {
                 
             ]
          };
-        console.log('===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length, __filename);
+        // loog '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
         const search = (ndx) => {
         
             if (ndx >= this.metaPlugins.length) {
@@ -687,7 +687,7 @@ class MetasManager {
                 version: metaPlugin.version, 
                 categories: metaPlugin.provides.categories
              })
-            // log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
+            // loog mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
             var i, i_items=metaPlugin.provides.metaProductions, i_len=metaPlugin.provides.metaProductions.length, mp;
             for (i=0; i<i_len; i++) {
                 mp = metaPlugin.provides.metaProductions[i];
@@ -729,9 +729,10 @@ class MetasManager {
         const jsonDocuments = [];
         Object.keys(packiFiles).map((value) => {
         
+            
+            // loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
             if (packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)) {
                 const filePath = packiUtils.ensurePackiFilePrefix(value);
-                console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
                 jsonDocuments.push({
                     path: filePath, 
                     content: packiFiles[value].contents
@@ -745,7 +746,7 @@ class MetasManager {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
-            console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created', __filename);
+            // loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs jsonFs created'
             wizziFactory.createFactory({
                 plugins: wfPluginsOptions, 
                 repo: {
@@ -758,7 +759,7 @@ class MetasManager {
                     console.log("[31m%s[0m", err);
                     return callback(err);
                 }
-                console.log(mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created', __filename);
+                // loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs json wizzi factory created'
                 callback(null, {
                     wf: wf, 
                     jsonFs: jsonFs
@@ -797,7 +798,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.36.metasManager.' + method,
+        method: 'wizzi@0.8.37.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

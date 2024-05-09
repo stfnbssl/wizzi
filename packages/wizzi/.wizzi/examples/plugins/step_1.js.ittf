@@ -46,6 +46,6 @@ module
                         if err
                             error err
                             return
-                        log 'metaProduction', metaProduction
+                        info 'metaProduction', metaProduction
 
 

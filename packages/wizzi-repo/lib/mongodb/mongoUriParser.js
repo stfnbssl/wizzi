@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\mongodb\mongoUriParser.js.ittf
-    utc time: Thu, 18 Apr 2024 15:04:04 GMT
+    utc time: Thu, 09 May 2024 12:33:38 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;

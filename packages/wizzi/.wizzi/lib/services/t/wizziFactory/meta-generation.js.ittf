@@ -87,6 +87,7 @@ $group
                                             @ generateFragments true
                                             @ copyInclude options.copyInclude || ['*']
                                             @ copyExclude options.copyExclude || []
+                                            @ useMultiPartContext true
                                         a_cb_no_err( result )
                                             if err
                                                 error err

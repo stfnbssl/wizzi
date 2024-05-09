@@ -20,7 +20,7 @@ $group
         string artifactName
 		callback
         + 
-        log 'wizziFactory.wizzifyWithCompare', wizzifierName, artifactName
+        # loog 'wizziFactory.wizzifyWithCompare', wizzifierName, artifactName
 		+
 		var wizzifier = this.getWizzifier(wizzifierName)
         if wizzifier.__is_error
@@ -38,16 +38,16 @@ $group
                     @ onSyntax
                         =>
                             param syntax
-                            log 'wizzifyWithCompare', 'input syntax:\n', JSON.stringify(syntax, null, 2)
+                            # loog 'wizzifyWithCompare', 'input syntax:\n', JSON.stringify(syntax, null, 2)
                             set sourceSyntax = syntax
                 a_cb( wizzified )
-                    log 'wizzifyWithCompare', 'wizzified input:\n', wizzified
+                    # loog 'wizzifyWithCompare', 'wizzified input:\n', wizzified
                     _ this.loadModelAndGenerateArtifactFromText
                         @ wizzified
                         {
 		                @ artifactName
                         a_cb( generatedFromWizzified )
-                            log 'wizzifyWithCompare', 'generatedFromWizzified:\n', generatedFromWizzified
+                            # loog 'wizzifyWithCompare', 'generatedFromWizzified:\n', generatedFromWizzified
                             _ wizzifier.getWizziIttf
                                 @ generatedFromWizzified
                                 {
@@ -55,13 +55,13 @@ $group
                                     @ onSyntax
                                         =>
                                             param syntax
-                                            log 'wizzifyWithCompare', 'output syntax:\n', JSON.stringify(syntax, null, 2)
+                                            # loog 'wizzifyWithCompare', 'output syntax:\n', JSON.stringify(syntax, null, 2)
                                             set wizzifiedGeneratedSyntax = syntax
                                 a_cb( wizzified2 )
                                     $$ set wizzifiedGeneratedSyntax.dummy = 'hello'
-                                    log 'wizzifyWithCompare', 'wizzified output:\n', wizzified2
-                                    log 'wizzifyWithCompare', 'sourceSyntax:\n', sourceSyntax
-                                    log 'wizzifyWithCompare', 'wizzifiedGeneratedSyntax:\n', wizzifiedGeneratedSyntax
+                                    # loog 'wizzifyWithCompare', 'wizzified output:\n', wizzified2
+                                    # loog 'wizzifyWithCompare', 'sourceSyntax:\n', sourceSyntax
+                                    # loog 'wizzifyWithCompare', 'wizzifiedGeneratedSyntax:\n', wizzifiedGeneratedSyntax
                                     
                                     let rawDiff 
                                         _ jsonDiff.diff
@@ -69,13 +69,13 @@ $group
                                             @ wizzifiedGeneratedSyntax
                                             { 
                                                 @ full false 
-                                    log 'rawDiff', rawDiff
+                                    # loog 'rawDiff', rawDiff
                                     let prettyDiff
                                         _ verify.replaceAll
                                             _ JSON.stringify(rawDiff)
                                             @ /,\[" "]/g
                                             @ ''
-                                    log 'prettyDiff', prettyDiff                                    
+                                    # loog 'prettyDiff', prettyDiff                                    
                                     if rawDiff
                                         _ callback
                                             @ null

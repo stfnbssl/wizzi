@@ -39,6 +39,7 @@
             set this.values = globalContext
 			set this.writeFilePath = null
 			set this.isEmpty = true
+            set this.lineLength = 0
 			set this.artifactGenerationErrors = []
             set this.forceInline = false
             set this.forceInlineExtra = false
@@ -97,6 +98,7 @@
                 else
                     _ this.block.w('')
 			set this.isEmpty = false
+            set this.lineLength = 0
     
 		m write
             param text
@@ -113,6 +115,7 @@
                                 @ this.values
                         else text
 			set this.isEmpty = false
+            set this.lineLength += text.length
     
 		m writeAligned
             param text
@@ -131,15 +134,21 @@
                                         @ this.values
                                 else line
 			set this.isEmpty = false
+            set this.lineLength = 0
 
 		m wSameLine
             param text
             _ this.block.wSameLine
                 _ this.doEscape            
                     @ text
+            set this.isEmpty = false
+            set this.lineLength += text.length
 		
         m setLastNotEmptyLine
             _ this.block.setLastNotEmptyLine
+
+        m isLineEmpty
+            return this.lineLength == 0
 
         m inlineOn
             param extra
@@ -152,7 +161,8 @@
             set this.forceInline = false
             if extra 
                 set this.forceInlineExtra = false
-            _ this.w()
+            if this.isLineEmpty() == false
+                _ this.w()
 
         m appendFile
             param filePath

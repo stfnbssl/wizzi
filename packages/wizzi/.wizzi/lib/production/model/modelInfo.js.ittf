@@ -44,6 +44,11 @@
         if ${wzConfigIsVerbose ? 'true': 'false'}
             _ console.log.apply(console, arguments)
     +
+	function getRelPath
+		param fullPath
+		param basedir
+		return fullPath.substr(basedir.length + 1)	
+	+
 	var modelInfoCount = 0
     +
 	wz-class ModelInfo
@@ -224,7 +229,7 @@
 									var fileInfo = files[i]
 									var mi = that.clone()
 									_ mi.src
-										@ fileInfo.relpath
+										@ fileInfo.relPath
 									_ mi.productionManager
 										@ that.productionManagerInstance
 									_ ret.push(mi)
@@ -262,7 +267,3 @@
 		$include modelInfo/sources
 		$include modelInfo/loading
     
-	function relPath
-        param fullpath
-        param basedir
-        return fullpath.substr(basedir.length + 1)

@@ -21,7 +21,7 @@ $group
                    const useProductionVar = 'use' + prod.name[0].toUpperCase() + prod.name.substring(1)
                    if !options.metaCtx[useProductionVar]
                        r_cb${'('} {} )
-                   log 'getMetaContextDefsStarter.useProduction', useProductionVar, options.metaCtx[useProductionVar]
+                   # loog 'getMetaContextDefsStarter.useProduction', useProductionVar, options.metaCtx[useProductionVar]
                _ this.getMetaContextDefs
                    @ prod.name
                    a_cb${'('} metaContextDefs )

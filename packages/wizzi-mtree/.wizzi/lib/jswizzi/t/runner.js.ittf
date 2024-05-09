@@ -9,26 +9,4 @@
 				param ${arg1}
 			_ log('${name}.node', node)
             var parentNode = null
-            $$ try
 			$hook
-            $*
-            catch ex
-                # loog 'runner.fragment.' + '${name}' + ' Error catch:', ex.message 
-                return
-                    _ local_error
-                        @ ctx
-                        @ 'JsWizziError|${name} < ' + node.name + ' >, ' + ex.message
-                        {
-                            @ node node
-                            @ errorLines 
-                                _ errors.esprimaNodeErrorLines
-                                    @ '???'
-                                    @ node
-                                    @ ctx.__source
-                                    @ true
-                        @ parentNode || node
-                        @ '${name}'
-                        @ ex
-                        {
-                            @ scriptCode ctx.__source
-            *$

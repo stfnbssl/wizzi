@@ -55,6 +55,11 @@
             _ this.w('while (' + text + ') {' + nodeMapComment(node))
             _ this.indent()
 
+		m throw
+            param text
+			param node
+            _ this.w('throw new Error(' + text + ')')
+
 		m end
             if this.line.length > 0
                 _ this.w()

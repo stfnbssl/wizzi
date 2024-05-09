@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\mTreeBuildUpScripter.js.ittf
-    utc time: Fri, 19 Apr 2024 18:46:37 GMT
+    utc time: Thu, 09 May 2024 12:32:30 GMT
 */
 'use strict';
 /**
@@ -152,6 +152,9 @@ function codify(node, nparent, jsScriptCoder, ctx) {
             item = node.children[i];
             rawBlock(item, nparent, jsScriptCoder, ctx);
         }
+    }
+    else if (tag == '$throw') {
+        jsScriptCoder.throw(codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx))
     }
     else {
         if (ctx.isCompile && node.__firstOfMixedNodes) {

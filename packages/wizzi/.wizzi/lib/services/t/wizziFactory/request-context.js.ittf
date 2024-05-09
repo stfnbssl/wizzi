@@ -25,6 +25,9 @@
 		+
 		# loog 'wizzi.wizziFactory.createLoadContext.mTreeBuildUpContext', mTreeBuildUpContext
 		+
+		if !productionManager && loadContext.contextProductionManager
+			set productionManager = loadContext.contextProductionManager
+		+
 		return
 			{
 				@ __productionManager (productionManager ? productionManager : this.createProductionManager())

@@ -34,8 +34,8 @@ $group
                 {
                     @ dot '.'
 
-		log 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,fileCtx', ittfFolderUri, fileCtx
-        log 'wizzi.wizzifactory.generateFolderArtifacts.object.keys(modelRequestContext)', Object.keys(modelRequestContext)
+		# loog 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,fileCtx', ittfFolderUri, fileCtx
+        # loog 'wizzi.wizzifactory.generateFolderArtifacts.object.keys(modelRequestContext)', Object.keys(modelRequestContext)
         try
             _ repo.folderFilesInfoByPath
                 @ ittfFolderUri
@@ -69,9 +69,13 @@ $group
                                             @ productionAction "loadModelAndGenerateArtifact"
                                             @ ittfDocumentUri item.fullPath
                                             @ artifactName artifactName
-                                        _ path.join
-                                            @ options.destFolder
-                                            @ item.destRelPath
+                                            { gen
+                                                @ generator artifactName
+                                            { dest
+                                                @ fullPath
+                                                    _ path.join
+                                                        @ options.destFolder
+                                                        @ item.destRelPath
                                 else
                                     _ this.loadModelAndGenerateArtifact
                                         @ item.fullPath
@@ -84,7 +88,7 @@ $group
                                             _ this.fileService.write
                                                 _ path.join
                                                     @ options.destFolder
-                                                    _ interpolate_filename
+                                                    _ interpolateFilename
                                                         @ item.destRelPath
                                                         @ fileCtx
                                                 @ artifactText
@@ -105,7 +109,7 @@ $group
                                     @ item.fullPath
                                     _ path.join
                                         @ options.destFolder
-                                        _ interpolate_filename
+                                        _ interpolateFilename
                                             @ item.destRelPath
                                             @ fileCtx
                                     f_cb()
@@ -121,30 +125,21 @@ $group
 
                         a_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
                             if options.useMultiPartContext
-                                var productions = []
+                                var productionStepConfigs = []
                                 foreach item in result
                                     if item.isProduction
-                                        _ productions.push 
+                                        set item.modelRequestContext = modelRequestContext
+                                        set item.artifactRequestContext = requestContext.artifactRequestContext
+                                        set item.fileCtx = fileCtx
+                                        _ productionStepConfigs.push 
                                             @ item
-                                log 'wizzi.wizzifactory.generateFolderArtifacts.productions', productions
-                                checked_call( pman
-                                    _ this.createProductionManager
-                                        { $$ productionOptions
-                                        { $$ globalContext
-                                +
-                                checked_call( notUsed
-                                    _ pman.generateProductions
-                                        @ productions
-                                        {
-                                            @ modelRequestContext modelRequestContext
-                                            @ artifactRequestContext requestContext.artifactRequestContext
-                                        a_cb( resultPman )
-                                            return
-                                                _ callback
-                                                    @ null
-                                                    {
-                                                        @ result result
-                                                        @ resultPman resultPman
+                                # loog 'wizzi.wizzifactory.generateFolderArtifacts.productionStepConfigs', productionStepConfigs.length
+                                _ this.executeProductionSteps
+                                    {
+                                        @ name 'folder: ' + ittfFolderUri
+                                    @ productionStepConfigs
+                                    a_cb( result )
+                                        r_cb( result )
                             else
                                 r_cb( result )
         catch ex

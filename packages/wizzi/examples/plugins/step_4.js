@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\plugins\step_4.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:50 GMT
+    utc time: Thu, 09 May 2024 12:34:33 GMT
 */
 'use strict';
 /**
@@ -212,8 +212,8 @@ var mm_step_4 = function(step_callback) {
             throw new Error(err.message);
         }
         var hasCS = wf.hasCheatsheet('ittf');
-        console.log('Wizzi factory has cheatsheet for schema `ittf`', hasCS, __filename);
-        console.log('Wizzi factory info\n', JSON.stringify(wf.getInfo().pluginsManager, null, 4), __filename);
+        console.log('Wizzi factory has cheatsheet for schema `ittf`', hasCS);
+        console.log('Wizzi factory info\n', JSON.stringify(wf.getInfo().pluginsManager, null, 4));
         if (hasCS) {
             wf.getCheatsheet('ittf', function(err, CS) {
                 if (err) {
@@ -221,8 +221,8 @@ var mm_step_4 = function(step_callback) {
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                console.log('err', err, __filename);
-                console.log('cheatsheet', CS, __filename);
+                console.log("[31m%s[0m", 'err', err);
+                console.log('cheatsheet', CS);
             })
         }
     })

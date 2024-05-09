@@ -1,9 +1,9 @@
 ## Production
 ### The wizzi.production.productionManager
-Manages a production of software artifacts. It is instantiated by a wizzi.wizziFactory instance which sets up the production environment (plugins, global context, store system). Clients use its 'addJobRequest' and 'addArtifactRequest' methods to add artifact requests and then use the 'run' and 'persistToFile' methods to execute the generations and save to file the generated artifacts.
+Manages a production of software artifacts. It is instantiated by a wizzi.wizziFactory instance which sets up the production environment (plugins, global context, store system). Clients use its 'addWzjobRequest' and 'addProductionStepRequest' methods to add artifact requests and then use the 'run' and 'persistToFile' methods to execute the generations and save to file the generated artifacts.
 
 ### The wizzi.production.wzjob.wzjobLoader
-Async loads a `wzjob` wizzi model and accumulates wfjobArtifactModel elements. If the model contains `wzjob` requests also check that they have not already been processed and add them to pendingWzjobRequests. If the model contains wfjobArtifactModel elements check that they have not already been added and add them to the productionStepConfigs collection.
+Async loads a `wzjob` wizzi model and accumulates productionStep elements. If the model contains `wzjob` requests also check that they have not already been processed and add them to pendingWzjobRequests. If the model contains productionStep elements check that they have not already been added and add them to the productionStepConfigs collection.
 
 ### The wizzi.production.runner
 Executes the productions described by a `wizzi/production/ProductionStep` instance. It is instantiated by the `wizzi/production/ProductionManager`, selects the production step type, and asynchronously run the production using the proper executor.
@@ -26,5 +26,5 @@ using the property globalContext of the options parameter of* The wizzi.executeI
     * The wizzi.createFactory method 
 Creating a wizziFactory instance always is preliminar to executing an mTree load, a Wizzi Model load or an Artifact Generation.
 
-The wizzi.executeInstanceJob creates its wizziFactory instance from the options that receives.
+The wizzi.executeInstanceJob method creates its own wizziFactory instance from the options that receives.
 

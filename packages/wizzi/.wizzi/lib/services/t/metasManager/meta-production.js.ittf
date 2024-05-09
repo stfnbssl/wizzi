@@ -8,7 +8,7 @@
 		string productionName
         callback
 
-		log mdDisplayName + '.getMetaProduction', productionName
+		# loog mdDisplayName + '.getMetaProduction', productionName
 		var
 			decl found = null
 			decl foundInPlugin = null

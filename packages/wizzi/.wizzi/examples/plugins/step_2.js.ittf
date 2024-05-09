@@ -46,4 +46,4 @@ module
                         if err
                             error err
                             return
-                        log 'metaProductionstarter', metaProductionstarter
+                        info 'metaProductionstarter', metaProductionstarter

@@ -43,7 +43,7 @@ module
                         if err
                             error err
                             return
-                        log 'wizziPackiFiles', wizziPackiFiles
+                        info 'wizziPackiFiles', wizziPackiFiles
                         _ writePackifiles
                             _ path.join
                                 @ __dirname

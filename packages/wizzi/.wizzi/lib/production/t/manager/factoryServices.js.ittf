@@ -36,7 +36,7 @@
 
 		# called by WzjobLoader
 		
-		log 'wizzi.production.productionManager.loadWzjob.ittfDocumentUri', ittfDocumentUri
+		# loog 'wizzi.production.productionManager.loadWzjob.ittfDocumentUri', ittfDocumentUri
 		if !this.wzjobLoadModel
 			checked_call_set( this.wzjobLoadModel )
 				_ this.getLoadModel
@@ -46,9 +46,9 @@
 			_ this.wizziFactory.createLoadContext
 				@ context
 				@ this
-		log 'wizzi.production.productionManager.loadWzjob.context', context
-		log 'wizzi.production.productionManager.loadWzjob.ctx,ctx.mTreeBuildUpContext', Object.keys(ctx), ctx.mTreeBuildUpContext, this.wizziFactory.globalContext
-		log 'wizzi.production.productionManager.loadWzjob.ctx.__productionManager.globalContext()', ctx.__productionManager.globalContext()
+		# loog 'wizzi.production.productionManager.loadWzjob.context', context
+		# loog 'wizzi.production.productionManager.loadWzjob.ctx,ctx.mTreeBuildUpContext', Object.keys(ctx), ctx.mTreeBuildUpContext, this.wizziFactory.globalContext
+		# loog 'wizzi.production.productionManager.loadWzjob.ctx.__productionManager.globalContext()', ctx.__productionManager.globalContext()
 		_ this.wzjobLoadModel
 			@ ittfDocumentUri
 			_ this.wizziFactory.createLoadContext

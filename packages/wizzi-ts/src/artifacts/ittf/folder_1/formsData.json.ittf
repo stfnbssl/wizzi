@@ -1,4 +1,8 @@
 ﻿{
+	$
+		$.setCtx('package.dependencies._conform_to_react', {name: '@conform-to/react', version: '^1.0.4' });
+		$.setCtx('package.dependencies._conform_to_zod', {name: '@conform-to/zod', version: '^1.0.4' });
+
 	[ forms
 		{
 			name "form1"

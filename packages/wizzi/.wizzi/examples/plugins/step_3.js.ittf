@@ -45,6 +45,6 @@ module
                         if err
                             error err
                             return
-                        log 'metaProvides', metaProvides
+                        info 'metaProvides', metaProvides
 
 

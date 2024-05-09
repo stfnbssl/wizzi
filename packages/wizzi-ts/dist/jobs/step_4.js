@@ -17,7 +17,7 @@ function job_4() {
         pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.plugins/packages",
     }, ((err, wf) => {
         const pman = wf.createProductionManager({}, {});
-        pman.addArtifactRequest({
+        pman.addProductionStepRequest({
             name: "Examples - step - 4",
             model: { cwd: stepIttfPath, src: "tableDto.js.ittf", schema: "js", contexts: [{
                         cwd: stepIttfPath, src: "schemaData.json.ittf", schema: "json", coll: {

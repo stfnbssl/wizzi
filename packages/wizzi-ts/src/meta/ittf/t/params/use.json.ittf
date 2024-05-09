@@ -1,0 +1,7 @@
+$group
+    $params name, use:boolean|true
+    $
+        var Name = _.capitalize(name);
+    use${Name} ${use}
+    { ${name}
+        $hook

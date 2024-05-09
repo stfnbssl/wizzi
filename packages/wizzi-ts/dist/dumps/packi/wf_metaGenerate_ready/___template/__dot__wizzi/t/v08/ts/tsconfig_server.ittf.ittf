@@ -1,0 +1,2 @@
+${'$'}group 
+   $include tsCommons/config/tsconfig_server.json

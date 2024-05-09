@@ -1,0 +1,6 @@
+${'$'}group 
+   useTypescript true
+   { typescript
+       $$ for webpack client
+       useBabelLoader true
+       useTsxFiles false

@@ -1,0 +1,2 @@
+module 
+   $include tsRemixApp/root/.eslintrc.cjs

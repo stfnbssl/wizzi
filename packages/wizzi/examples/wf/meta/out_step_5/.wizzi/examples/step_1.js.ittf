@@ -27,4 +27,4 @@ module
                             @ result
                             @ null
                             @ 2
-                    log 'result', dump
+                    info 'result', dump

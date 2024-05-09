@@ -1,7 +1,7 @@
 ﻿$group
 
 	#
-		# WizziModelTypesArtifact
+		# WizziModelDomArtifact
 	function wfjob_mock3
 		var ret 
 			{

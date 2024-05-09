@@ -27,7 +27,7 @@
         param name
         param value
 		# called by Runner: FunctionDeclaration_Call
-		log 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
+		# loog 'wizzi-mtree.jsWizziContext.declareCallParam', name, value
 		_ this.callContext.declare(name, value)
 
     m undeclare

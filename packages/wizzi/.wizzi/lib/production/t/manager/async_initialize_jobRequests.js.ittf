@@ -22,8 +22,8 @@
 					
 					# loog 'AsyncInitializeJobRequests.pman.globalContext()', pman.globalContext()
 					
-					var wfjobIttfDocumentUri = jobRequest.wfjob.ittfDocumentUri
-					set pman.productionName += '_' + path.basename(wfjobIttfDocumentUri)
+					var wzjobIttfDocumentUri = jobRequest.wfjob.ittfDocumentUri
+					set pman.productionName += '_' + path.basename(wzjobIttfDocumentUri)
 					
 					# loog 'wizzi.production.asyncInitializeJobRequests.productionName', pman.productionName
 
@@ -34,7 +34,7 @@
 						{
 							@ model
 								{
-									@ src wfjobIttfDocumentUri
+									@ src wzjobIttfDocumentUri
 							@ wzjobLoader wzjobLoader
 
 					_ AsyncRecurseWzjobLoad
@@ -45,16 +45,16 @@
 
                             foreach globalModelInfoConfig in result.globalModelInfoConfigs
                                 # loog 'wizzi.production.asyncInitializeJobRequests.globalModelInfoConfig', util.inspect(globalModelInfoConfig, { depth: 2 })
-                                set globalModelInfoConfig.wfjob = wfjobIttfDocumentUri
+                                set globalModelInfoConfig.wfjob = wzjobIttfDocumentUri
 								if pman.options.trace
 									info 'ProductionManager.initialize.globalModelInfoConfig', globalModelInfoConfig.toString()
                                 _ pman.addGlobalModelRequest(globalModelInfoConfig)
 
                             foreach productionStepConfig in result.productionStepConfigs
 								# loog 'wizzi.production.asyncInitializeJobRequests.productionStepConfig', util.inspect(productionStepConfig, { depth: 2 })
-								set productionStepConfig.wfjob = wfjobIttfDocumentUri
+								set productionStepConfig.wfjob = wzjobIttfDocumentUri
 								if pman.options.trace
 									info 'ProductionManager.initialize.productionStepConfig', productionStepConfig.toString()
-								_ pman.addArtifactRequest(productionStepConfig)
+								_ pman.addProductionStepRequest(productionStepConfig)
 
 							_ callback(null)

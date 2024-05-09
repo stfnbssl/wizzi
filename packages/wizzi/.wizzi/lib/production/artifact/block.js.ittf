@@ -108,8 +108,14 @@
             param stream
             param ctx
             foreach item in this.lines
+                if i > 0
+                    _ stream.write
+                        @ this.options.CRLF
                 _ item.toStream(stream, ctx)
             if this.currentline != null
+                if this.lines.length > 0
+                    _ stream.write
+                        @ this.options.CRLF
                 _ this.currentline.toStream(stream, ctx)
     
 		m terminate

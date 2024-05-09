@@ -239,6 +239,9 @@
             foreach item in node.children
 				_ rawBlock(item, nparent, jsScriptCoder, ctx)
         
+        elif tag == '$throw'
+            _ jsScriptCoder.throw
+                _ codifyValue(node.model.brickKey, node.value, 'string', jsScriptCoder.length + 1, node.hasMacro, ctx)
         else 
 			if ctx.isCompile && node.__firstOfMixedNodes
 				_ jsScriptCoder.w

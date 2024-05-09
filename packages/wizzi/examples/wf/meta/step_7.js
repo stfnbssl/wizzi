@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\step_7.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:50 GMT
+    utc time: Thu, 09 May 2024 12:34:33 GMT
 */
 'use strict';
 /**
@@ -242,7 +242,7 @@ var wf_meta_step_7 = function(step_callback) {
                     console.log("[31m%s[0m", err);
                     return ;
                 }
-                console.log('categoriesAndMetaProductions', Object.keys(categoriesAndMetaProductions), __filename);
+                console.log('categoriesAndMetaProductions', Object.keys(categoriesAndMetaProductions));
                 file.write(path.join(__dirname, 'output', 'categoriesAndMetaProductions.json'), stringify(categoriesAndMetaProductions, null, 4))
                 wf_and_jsonFs.wf.getProvidedMetas((err, providedMetas) => {
                 
@@ -250,7 +250,7 @@ var wf_meta_step_7 = function(step_callback) {
                         console.log("[31m%s[0m", err);
                         return ;
                     }
-                    // log 'providedMetas', Object.keys(providedMetas)
+                    // info 'providedMetas', Object.keys(providedMetas)
                     file.write(path.join(__dirname, 'output', 'providedMetas.json'), stringify(providedMetas, null, 4))
                 }
                 )

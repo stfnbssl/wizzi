@@ -9,12 +9,20 @@ $group
 		return this.pluginsManager.canWizzifySchema(schemaName)
 
 	# 
-		# Check if a wizzi schema has a wizzifier
+		# Check if a file extension has a wizzifier
 		# returns
 		#   true|false
 	m canWizzify
 		string extension
 		return this.pluginsManager.canWizzify(extension)
+
+	# 
+		# Check if a file extension has a wizzifier and is a binary file
+		# returns
+		#   true|false
+	m wizzifierIsForBinaryFile
+		string extension
+		return this.pluginsManager.wizzifierIsForBinaryFile(extension)
 	#
 		# Retrieve a wizzifier
 		# Wizzifiers are searched in the PluginsManager
@@ -79,7 +87,12 @@ $group
     m getWizziIttfFromText
 		string tobeWizzifiedText
 		string wizzifierName
-		callback
+		param options
+		param callback
+		+
+		if typeof(callback) === 'undefined'
+			set callback = options
+			set options = {}
 		+
 		check_wz_callback( getWizziIttfFromText )
 		+
@@ -95,6 +108,7 @@ $group
                 @ tobeWizzifiedText
                 {
                     @ wf this
+					@ sourceFilepath options.sourceFilepath
                 function
                     param err
                     param result

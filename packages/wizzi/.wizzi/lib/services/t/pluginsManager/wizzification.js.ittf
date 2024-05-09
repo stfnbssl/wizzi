@@ -19,8 +19,24 @@
 	m canWizzify
 		string fileExtension
 		var schemaName = this.mapExtensionToSchema(fileExtension)
-		return this.canWizzifySchema(schemaName)
-
+		if verify.isNotEmpty(schemaName)
+			return this.canWizzifySchema(schemaName)
+		else
+			return false
+	# 
+		# Check if a file extension has a wizzifier and is a binary file
+		# returns
+		#   true|false
+	m wizzifierIsForBinaryFile
+		string extension
+		if this.canWizzify(extension)
+			var wizzifier
+				_ this.getWizzifier
+					@ extension
+			return wizzifier.isForBinaryFile && wizzifier.isForBinaryFile()
+		else
+			return false
+		return this.pluginsManager.wizzifierIsForBinaryFile(extension)
 	# 
 		# retrieve a wizzifier searching the factoryPlugins
 		# registered to this plugins manager

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\cheatsheet.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:48 GMT
+    utc time: Thu, 09 May 2024 12:34:31 GMT
 */
 'use strict';
 
@@ -162,13 +162,13 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                     console.log("[31m%s[0m", err);
                 }
                 var item_count = 0;
+                // loog "Processing item", item.title
                 (function next() {
                 
                     var item = _all_items[item_count++];
                     if (!item) {
                         return callback(null, result);
                     }
-                    console.log("Processing item", item.title, __filename);
                     if (item.render === 'script') {
                         var packiForGen = getPackiForGen(item);
                         jsonFactory.loadMTreeBuildUpScriptFromPacki(packiForGen.ittfDocumentUri, packiForGen.packiFiles, {}, function(err, result) {

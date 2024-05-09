@@ -24,10 +24,6 @@
 
 	m validateMetaPlugin
 		{ metaPlugin
-		$*
-        for var k in metaPlugin
-			log mdDisplayName + '.validatemetaPlugin.key', k
-        *$
 		+
 		var methodNames
 			[

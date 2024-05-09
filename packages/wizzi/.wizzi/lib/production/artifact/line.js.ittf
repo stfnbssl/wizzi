@@ -80,7 +80,7 @@
                             @ this.options.CRLF
             else 
                 _ stream.write
-					@ spaces(this.indentValue * this.options.indentSpaces) + this.text.join('') + this.options.CRLF
+					@ spaces(this.indentValue * this.options.indentSpaces) + this.text.join('')
     
 		m _fileToStream
             param seen_tokens

@@ -14,4 +14,4 @@ $group
                            @ metaCtxs
                            @ null
                            @ 2
-                   log 'metaCtxs', dump
+                   info 'metaCtxs', dump

@@ -1,0 +1,8 @@
+template root
+    $
+        var pkgPath = ''
+        var metaVer = '0_0_1'
+    $include ./commonsGit/index
+    $include ./commonsWizzi/index
+    $include ./tsCommons/index
+    $include ./tsRemixApp/index

@@ -45,8 +45,8 @@ The generation of the javascript modules for loading and implement a wizzi model
 A wizzi model of type 'wfschema' describes a wizzi model and its constraints. The method 'generateModelDoms' of the wizzi.wizziFactory uses a 'wfschema' model to generate the javascript artifacts that implement a wizzi model.
 
 ### Wizzi job execution
-A wizzi job is described by a wizzi model of schema `wzjob`, that can contain artifact production requests and optional references to other `wzjob` models. The 'executeJob' method of the wizzi.wizziFactory triggers the loading of a `wzjob` model, the resolution of the references to other `wzjob` models and the execution of the requested artifact productions.
+A wizzi job is described by a wizzi model of schema `wzjob`, that can contain step production configs and references to other `wzjob` models. The 'executeJob' method of the wizzi.wizziFactory triggers the loading of a `wzjob` model, the resolution of the references to other `wzjob` models and the execution of the requested step productions.
 
 ### Production manager creation
-An instance of a wizzi.production.productionManager class allow a more fine grained control on artifact productions. To a wizzi.production.productionManager instance we can add wizzi job requests ( 'addJobRequest' method ) and single artifact requests ( 'addArtifactRequest' method ), then we can execute the run method and obtain wizzi.artifact.genContexts filled with the artifact ready to be persisted, and, at the end, we can execute the 'persistToFile' method.
+An instance of a `wizzi/production/ProductionManager class allow a more fine grained control on productions. To a `wizzi/production/ProductionManager instance we can add wizzi job requests ('addWzjobRequest' method) and single step requests ('addProductionStepRequest' method), then we can execute the run method and obtain `wizzi/production/artifact/genContext` instances filled with the artifacts ready to be persisted, and, at the end, we can execute the 'persistToFile' method.
 

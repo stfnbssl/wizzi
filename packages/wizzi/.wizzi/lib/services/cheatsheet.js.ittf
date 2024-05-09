@@ -148,7 +148,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                                         var item = _all_items[item_count++]
                                         if !item
                                             r_cb(result)
-                                        log "Processing item", item.title
+                                        # loog "Processing item", item.title
                                         if item.render === 'script'
                                             var packiForGen
                                                 _ getPackiForGen                                            

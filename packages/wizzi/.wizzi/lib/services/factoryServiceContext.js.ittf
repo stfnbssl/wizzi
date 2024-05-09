@@ -15,11 +15,11 @@ module wizzi@${wzCtx.version}.factoryServiceContext
             param kind
             param key
             param value
-            log 'wizzi.factoryServiceContext.addDebugObject.kind+key', kind, key
+            # loog 'wizzi.factoryServiceContext.addDebugObject.kind+key', kind, key
             var xvalue = value
             if kind == 'packi'
                 set xvalue = clonePackifiles(value)
-                log 'wizzi.factoryServiceContext.addDebugObject cloned packi', key
+                # loog 'wizzi.factoryServiceContext.addDebugObject cloned packi', key
             set this.debugObjects[kind+"|"+key]
                 {
                     @ kind kind
@@ -52,7 +52,7 @@ module wizzi@${wzCtx.version}.factoryServiceContext
                                 @ options.destFolder
                                 @ this.debugObjects[k].key
                             @ this.debugObjects[k].value
-                        log 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
+                        # loog 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
             else
 				_ consol.error
 					_ error
@@ -71,7 +71,7 @@ module wizzi@${wzCtx.version}.factoryServiceContext
                                 @ options.destFolder
                                 @ this.debugObjects[k].key
                             @ this.debugObjects[k].value
-                        log 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
+                        # loog 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
             else
 				_ consol.error
 					_ error

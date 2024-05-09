@@ -28,21 +28,21 @@
 			set this.productionStepConfigs = []
 		
 		m load
-			param wfjobRequest
+			param wzjobRequest
 			param callback
 
-			_ this.seenWzjobRequests.push(wfjobRequest)
+			_ this.seenWzjobRequests.push(wzjobRequest)
 
 			var ittfDocumentUri
-                iif verify.isAbsolutePath(wfjobRequest.model.src)
+                iif verify.isAbsolutePath(wzjobRequest.model.src)
                     then 
-                        set wfjobRequest.model.src
+                        set wzjobRequest.model.src
                     else 
                         _ path.join
-                            @ wfjobRequest.model.cwd
-                            @ wfjobRequest.model.src
+                            @ wzjobRequest.model.cwd
+                            @ wzjobRequest.model.src
 
-			# wfjobRequest.context has not been implemented yet
+			# wzjobRequest.context has not been implemented yet
 			# and probably it will never be.
 			# Its properties should be produced by previous 
 			# executions in the wfjob load recursive process.
@@ -51,7 +51,7 @@
 			var that = this
 			_ this.productionManager.loadWzjob
 				@ ittfDocumentUri
-				@ wfjobRequest.context || {}
+				@ wzjobRequest.context || {}
 				f_cb( wzjobModel )
 					_ that.processWzjobModel(wzjobModel)
 					return

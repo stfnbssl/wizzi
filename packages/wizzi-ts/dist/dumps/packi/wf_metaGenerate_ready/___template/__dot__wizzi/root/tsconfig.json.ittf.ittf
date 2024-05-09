@@ -1,0 +1,2 @@
+{ 
+   $include tsRemixApp/root/tsconfig.json

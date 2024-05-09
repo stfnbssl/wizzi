@@ -14,4 +14,4 @@ module
                             @ metaProduction
                             @ null
                             @ 2
-                    log 'metaProduction', dump
+                    info 'metaProduction', dump

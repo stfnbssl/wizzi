@@ -16,7 +16,7 @@ export function job_3() {
             pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.plugins/packages", 
         }, ((err, wf: wizzi.WizziFactory)=> {
             const pman: wizzi.ProductionManager = wf.createProductionManager({}, {});
-            pman.addArtifactRequest({
+            pman.addProductionStepRequest({
                 name: "Examples - step - 3a",
                 model: {cwd: stepIttfPath, src: "first.html.ittf", schema: "html", contexts : [], transformers: []},
                 gen: { generator: "html/document"},
@@ -24,7 +24,7 @@ export function job_3() {
                 dest: { folder: stepResultsPath, path: path.join(stepResultsPath, 'first.html'), extension: ".html"},
                 contexts: []
             });
-            pman.addArtifactRequest({
+            pman.addProductionStepRequest({
                 name: "Examples - step - 3b",
                 model: {
                     cwd: stepIttfPath, 

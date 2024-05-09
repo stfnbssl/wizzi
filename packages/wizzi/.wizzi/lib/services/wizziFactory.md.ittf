@@ -57,17 +57,17 @@
 	h3 Wizzi job execution
 	
 	p A wizzi job is described by a wizzi model of schema `wzjob`, that can contain
-		\b artifact production requests and optional references to other `wzjob` models.
+		\b step production configs and references to other `wzjob` models.
 		\b The 'executeJob' method of the wizzi.wizziFactory triggers the loading of a `wzjob` model,
 		\b the resolution of the references to other `wzjob` models and
-		\b the execution of the requested artifact productions. 
+		\b the execution of the requested step productions. 
 
 	h3 Production manager creation
 	
-	p An instance of a wizzi.production.productionManager class allow a more fine grained control
-		\b on artifact productions. To a wizzi.production.productionManager instance
-		\b we can add wizzi job requests ( 'addJobRequest' method ) and single artifact 
-		\b requests ( 'addArtifactRequest' method ), then we can execute the
-		\b run method and obtain wizzi.artifact.genContexts filled with the artifact ready
-		\b to be persisted, and, at the end, we can execute the 'persistToFile' method. 
+	p An instance of a `wizzi/production/ProductionManager class allow a more fine grained control
+		\b on productions. To a `wizzi/production/ProductionManager instance
+		\b we can add wizzi job requests ('addWzjobRequest' method) and single step
+		\b requests ('addProductionStepRequest' method), then we can execute the
+		\b run method and obtain `wizzi/production/artifact/genContext` instances filled with the artifacts ready
+		\b to be persisted, and, at the end, we can execute the 'persistToFile' method.
 

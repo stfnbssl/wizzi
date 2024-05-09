@@ -22,11 +22,11 @@ module
             {
             f_cb_test(wf)
                 var hasCS = wf.hasCheatsheet('ittf')
-                log 'Wizzi factory has cheatsheet for schema `ittf`', hasCS
-                log 'Wizzi factory info\n', JSON.stringify(wf.getInfo().pluginsManager, null, 4)
+                info 'Wizzi factory has cheatsheet for schema `ittf`', hasCS
+                info 'Wizzi factory info\n', JSON.stringify(wf.getInfo().pluginsManager, null, 4)
                 if hasCS
                     _ wf.getCheatsheet
                         @ 'ittf'
                         f_cb_test(CS)
-                            log 'err', err
-                            log 'cheatsheet', CS
+                            error 'err', err
+                            info 'cheatsheet', CS

@@ -14,4 +14,4 @@ $group
                            @ metaCategories
                            @ null
                            @ 2
-                   log 'metaCategories', dump
+                   info 'metaCategories', dump

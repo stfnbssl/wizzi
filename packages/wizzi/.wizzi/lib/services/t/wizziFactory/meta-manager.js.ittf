@@ -39,7 +39,7 @@ $group
     m getMetaParameters
         param options
         callback
-        log 'wizziFactory.getMetaParameters.options', options
+        # loog 'wizziFactory.getMetaParameters.options', options
         _ this.getMetasManager
             {
             a_cb( mm )

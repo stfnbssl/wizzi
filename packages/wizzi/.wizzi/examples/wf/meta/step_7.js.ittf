@@ -69,7 +69,7 @@ module
                             if err
                                 error err
                                 return
-                            log 'categoriesAndMetaProductions', Object.keys(categoriesAndMetaProductions)
+                            info 'categoriesAndMetaProductions', Object.keys(categoriesAndMetaProductions)
                             _ file.write
                                 _ path.join
                                     @ __dirname
@@ -86,7 +86,7 @@ module
                                     if err
                                         error err
                                         return
-                                    # log 'providedMetas', Object.keys(providedMetas)
+                                    # info 'providedMetas', Object.keys(providedMetas)
                                     _ file.write
                                         _ path.join
                                             @ __dirname

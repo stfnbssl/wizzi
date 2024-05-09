@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\json\job\step_1.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:50 GMT
+    utc time: Thu, 09 May 2024 12:34:33 GMT
 */
 'use strict';
 /**
@@ -227,14 +227,14 @@ var json_job_step_1 = function(step_callback) {
     ].join('\n');
     
     var jsIttfUri    = packiFilePrefix + ".wizzi/src/index.js.ittf";
-    var wfjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf";
+    var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf";
     var documents = [
         {
             path: jsIttfUri, 
             content: jsContent
          }, 
         {
-            path: wfjobIttfUri, 
+            path: wzjobIttfUri, 
             content: wfjobContent
          }
     ];
@@ -266,7 +266,7 @@ var json_job_step_1 = function(step_callback) {
             }
             wf.executeJob({
                 name: 'ExampleJob', 
-                path: wfjobIttfUri, 
+                path: wzjobIttfUri, 
                 productionOptions: {
                     
                  }, 

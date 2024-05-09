@@ -15,3 +15,4 @@ module
 	set md.Coder = require('./coder')
     set md.regexpExt = require('./regexpExt')
 	set md.textIndentParser = require('./textIndentParser')
+	set md.ittfMacro = require('./ittfMacro')

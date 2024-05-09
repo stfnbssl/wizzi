@@ -49,14 +49,14 @@
 										param fileInfo
 										param callback
 										_ fileService.read
-											@ fileInfo.fullpath
+											@ fileInfo.fullPath
 											f_cb( content )
 												return
 													_ callback
 														@ null
 														{ 
-															@ fullpath fileInfo.fullpath
-															@ relpath fileInfo.relpath
+															@ fullPath fileInfo.fullPath
+															@ relPath fileInfo.relPath
 															@ content content
 									f_cb( fileContents )
 										return
@@ -108,19 +108,19 @@
 										if fileInfo.indexOf('__copy/') >= 0 || fileInfo.indexOf('/t/') >= 0
 											continue 
                 
-									var fullpath = fileInfo
-									var relpath
+									var fullPath = fileInfo
+									var relPath
 										iif that.config.cwd
 											then
-												_ relPath
-													@ fullpath
+												_ getRelPath
+													@ fullPath
 													@ that.config.cwd
 											else
 												set null
 									_ ret.push
 										{ 
-											@ fullpath fullpath
-											@ relpath relpath
+											@ fullPath fullPath
+											@ relPath relPath
 								return
 									_ callback
 										@ null

@@ -45,14 +45,14 @@ module
                     @ '\n'
         +
         var jsIttfUri    = packiFilePrefix + ".wizzi/src/index.js.ittf"
-        var wfjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf"
+        var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf"
         var documents
             [
                 {
                     @ path jsIttfUri
                     @ content jsContent
                 {
-                    @ path wfjobIttfUri
+                    @ path wzjobIttfUri
                     @ content wfjobContent
 
         +
@@ -74,7 +74,7 @@ module
                         _ wf.executeJob
                             {
                                 @ name 'ExampleJob'
-                                @ path wfjobIttfUri
+                                @ path wzjobIttfUri
                                 { productionOptions
                                 @ globalContext options.globalContext
                             =>

@@ -11,26 +11,26 @@ $group
 		# 		string ittfDocumentUri
 		# 		string outputPackageFolder
 
-	set md.generateWizziModelTypes
+	set md.generateWizziModelDom
         function 
 			param request
             param callback
 			+
-			check_cb( callback, generateWizziModelTypes )
-			check_cb_object( request, generateWizziModelTypes )
-			check_cb_object( request.configOptions, generateWizziModelTypes )
-			check_cb_object( request.wfschema, generateWizziModelTypes )
+			check_cb( callback, generateWizziModelDom )
+			check_cb_object( request, generateWizziModelDom )
+			check_cb_object( request.configOptions, generateWizziModelDom )
+			check_cb_object( request.wfschema, generateWizziModelDom )
 			# TODO implement jsWizzi : _.toIdentifier(varName)
-			# TODO check_cb_not_empty( request.wfschema.name, generateWizziModelTypes )
-			# TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelTypes )
-			# TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelTypes )
+			# TODO check_cb_not_empty( request.wfschema.name, generateWizziModelDom )
+			# TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelDom )
+			# TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelDom )
 			+
 			var storeKind = request.storeKind || 'filesystem'
 			+
 			set request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext)
 			set request.globalContext = Object.assign({}, request.globalContext)
 			+
-			info 'wizzi.generateWizziModelDoms'
+			info 'wizzi.generateWizziModelDom'
 			info '- storeKind', storeKind
 			info '- configOptions', request.configOptions
 			info '- wfschema.name', request.wfschema.name

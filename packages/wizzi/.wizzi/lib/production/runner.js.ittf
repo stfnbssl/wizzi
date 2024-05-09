@@ -12,17 +12,17 @@
     var AsyncFrontMatterLoader = require('./model/asyncFrontMatterLoader')
     var AsyncModelLoader = require('./model/asyncModelLoader')
     var AsyncArtifactGenerator = require('./artifact/asyncArtifactGenerator').AsyncArtifactGenerator
-	var AsyncWizziModelTypesRunner = require('./asyncWizziModelTypesRunner')
+	var AsyncWizziModelDomRunner = require('./modelDom/asyncWizziModelDomRunner')
     +
 	#
-		# Async artifact generation runner.
+		# Async production step runner.
 		# A runner instance runs a single productionStep.
-		# Input: an ProductionStep (constructor injected).
+		# Input: a ProductionStep (constructor injected).
 		# Output: the ProductionStep enriched with (one or many) genContext(s),
 		#   ready to be persisted (callback ok result).
 		# A Runner can run 
 		#   a WzJob (a wizzi job)
-		#   a WfSchema (a wizzi model types generation)
+		#   a WfSchema (a wizzi model dom generation)
 		# 	a ModelArtifact
 		#	a ModelCollectionArtifact
 		#	a CodeWriteArtifact
@@ -46,7 +46,10 @@
 				_ this._runOnModelInfo
                     @ this.productionStep.modelInfo
                     @ callback
-            
+			elif this.productionStep.ittfDocumentProduction
+			    _ this._runOnIttfDocumentProduction
+                    @ this.productionStep.ittfDocumentProduction
+                    @ callback
 			else 
 			    _ this._runOnContextInfos
                     @ this.productionStep.contextInfos
@@ -71,8 +74,8 @@
             
             var gen = this.productionStep.gen
             
-			if this.productionStep.isWizziModelTypesArtifact()
-                _ this.runWizziModelTypesArtifact
+			if this.productionStep.isWizziModelDomArtifact()
+                _ this.runWizziModelDomArtifact
                     @ modelInfo
 					@ callback
             
@@ -94,32 +97,42 @@
                     @ callback
             else 
 				r_cb_error( 999, _runOnModelInfo
-					@ 'Artifact is in an invalid state: ' + util.inspect(this.productionStep, {depth: 2})
+					@ 'The production step is in an invalid state: ' + util.inspect(this.productionStep, {depth: 2})
     
-		m runWizziModelTypesArtifact
+		m _runOnIttfDocumentProduction
+            param ittfDocumentProduction
+            param callback
+
+			if ittfDocumentProduction.ProductionActionType = "loadModelAndGenerateArtifact"
+				_ this.runLoadModelAndGenerateArtifact
+					@ ittfDocumentProduction
+					@ callback
+            else 
+				r_cb_error( 999, _runOnModelInfo
+					@ 'The production step is in an invalid state: ' + util.inspect(this.productionStep, {depth: 2})
+
+		m runWizziModelDomArtifact
             param modelInfo
             param callback
 
-			var that = this
-            
-			_ log.warn('runWizziModelTypesArtifact ' + this.productionStep.name)
+			_ log.warn('runWizziModelDomArtifact ' + this.productionStep.name)
 			var outputPackageFolder = this.productionStep.getDestinationUri()
-			# loog 'wizzi.production.runner.runWizziModelTypesArtifact.outputPackageFolder', outputPackageFolder
+			# loog 'wizzi.production.runner.runWizziModelDomArtifact.outputPackageFolder', outputPackageFolder
             
 			_ modelInfo.getModelInfos
 				{
 					@ final false
-				f_cb( modelInfos )
+				a_cb( modelInfos )
 					
 					if modelInfos.length != 1
-						r_cb_error( 999, runWizziModelTypesArtifact )
+						r_cb_error( 999, runWizziModelDomArtifact )
 							@ 'Expected exactly one wizzi.model.modelInfo. Received: ' + modelInfos.length
 					
 					var wfschemaIttfDocumentUri = modelInfos[0].srcFullPath()
 					
 					var basenameParts = path.basename(wfschemaIttfDocumentUri).split('.')
 					if basenameParts.length != 3
-						r_cb_error( 999, runWizziModelTypesArtifact )
+						r_cb_error( 999, runWizziModelDomArtifact )
 							@ "The name of the source 'wfschema' ittf document must be in the format '<schema-name>.wfschema.ittf'. Received: " + path.basename(wfschemaIttfDocumentUri)
 					var schemaName = basenameParts[0]
 					
@@ -129,51 +142,48 @@
 							@ schemaName schemaName
 							@ wfschemaIttfDocumentUri wfschemaIttfDocumentUri
 							@ outputPackageFolder outputPackageFolder
-					_ AsyncWizziModelTypesRunner.run
+					_ AsyncWizziModelDomRunner.run
 						@ wmtRequest
-						f_cb( result )
+						a_cb( result )
 							# TODO how to expose results ?
-							_ callback(null, that.productionStep)
+							_ callback(null, this.productionStep)
 
 		m runWizziModelArtifact
             param modelInfo
             param gen
             param callback
 
-			var that = this
-            
 			_ modelInfo.getModelInfos
 				{
 					@ final false
-				f_cb( modelInfos )
+				a_cb( modelInfos )
 					
 					# loog '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
 					_ modelInfo.getArtifactGenerator
 						@ gen.generator
-						f_cb( generator )
+						a_cb( generator )
 							# loog '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
 							_ AsyncModelLoader.loadMany
 								@ modelInfos
-								f_cb( mainSourceModels )
+								a_cb( mainSourceModels )
 									# loog '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
 									_ AsyncArtifactGenerator.generate
-										@ that.productionStep
+										@ this.productionStep
 										@ generator
 										@ modelInfos
 										@ mainSourceModels
-										f_cb( notUsed )
-											_ callback(null, that.productionStep)
+										a_cb( notUsed )
+											_ callback(null, this.productionStep)
     
 		m runModelCollectionArtifact
             param modelInfo
             param gen
             param callback
 
-			var that = this
 			_ modelInfo.getModelInfos
 				{
 					@ final false
-				f_cb( modelInfos )
+				a_cb( modelInfos )
 					foreach mi in modelInfos
 						_ logme
 							@ "runModelCollectionArtifact.modelInfo to load"
@@ -181,74 +191,103 @@
 						
 					_ modelInfo.getArtifactGenerator
 						@ gen.generator
-						f_cb( generator )
+						a_cb( generator )
 							_ AsyncModelLoader.loadMany
 								@ modelInfos
-								f_cb( mainSourceModelsOfModelCollection )
+								a_cb( mainSourceModelsOfModelCollection )
 									_ logme
 										@ 'runModelCollectionArtifact got mainSourceModelsOfModelCollection'
 										@ mainSourceModelsOfModelCollection
 									_ AsyncArtifactGenerator.generateModelCollection
-										@ that.productionStep
+										@ this.productionStep
 										@ generator
 										@ modelInfos
 										@ mainSourceModelsOfModelCollection
-										f_cb( result )
+										a_cb( result )
 											_ logme
 												@ 'runModelCollectionArtifact result'
 												@ result
-											_ callback(null, that.productionStep)
+											_ callback(null, this.productionStep)
     
+		m runLoadModelAndGenerateArtifact
+            param ittfDocumentProduction
+            param callback
+			set this.productionStep.gen = ittfDocumentProduction.gen
+			set this.productionStep.dest = ittfDocumentProduction.dest
+			# loog 'runLoadModelAndGenerateArtifact.ittfDocumentProduction.gen', ittfDocumentProduction.gen
+			# loog 'runLoadModelAndGenerateArtifact.ittfDocumentProduction.dest', ittfDocumentProduction.dest
+			var pman = ittfDocumentProduction.productionManager
+			var wf = pman.wizziFactory
+			_ wf.loadModelAndGenerateArtifact
+				@ ittfDocumentProduction.ittfDocumentUri
+				{
+					@ modelRequestContext ittfDocumentProduction.modelRequestContext
+					@ artifactRequestContext ittfDocumentProduction.artifactRequestContext
+					@ productionManager pman
+				@ ittfDocumentProduction.artifactName
+				a_cb(artifactText)
+					var genContext
+						new GenContext
+							{ 
+								@ model null
+								@ srcPath ittfDocumentProduction.ittfDocumentUri
+								@ srcFullPath ittfDocumentProduction.ittfDocumentUri
+								@ options this.productionStep.options
+								@ pman ittfDocumentProduction.productionManager
+					_ genContext.write
+						@ artifactText
+					_ this.productionStep.addGenContext(genContext)
+					# loog 'Runner.ProductionContext.runningContextValues', JSON.stringify(pman.productionContext.runningContextValues)
+					r_cb(this.productionStep)
+		
 		m runCodeWriteArtifact
             param contextInfos
             param gen
             param callback
             
-			var that = this
 			_ modelInfo.getArtifactGenerator
 				@ gen.generator
-				f_cb( generator )
+				a_cb( generator )
 					
 					_ AsyncModelLoader.loadMany
 						@ contextInfos
-						f_cb( mainSourceModels )
+						a_cb( mainSourceModels )
 							_ AsyncArtifactGenerator.generateCodeWrite
-								@ that.productionStep
+								@ this.productionStep
 								@ generator
 								@ mainSourceModels
-								f_cb( notUsed )
-									_ callback(null, that.productionStep)
+								a_cb( notUsed )
+									_ callback(null, this.productionStep)
     
 		# TODO execute copy without loading content in genContext
 		m runFinalArtifact
             param modelInfo
             param callback
             
-			var that = this
 			_ modelInfo.isDirectory
-				f_cb( isDirectory )
+				a_cb( isDirectory )
 					if isDirectory
 						_ modelInfo.getFiles
 							{ 
 								@ final true
-							f_cb( files )
+							a_cb( files )
 								foreach fileInfo in files
 									var genContext
 										new GenContext
 											{ 
 												@ model null
-												@ srcPath fileInfo.relpath
-												@ srcFullPath fileInfo.fullpath
-												@ options that.productionStep.options
+												@ srcPath fileInfo.relPath
+												@ srcFullPath fileInfo.fullPath
+												@ options this.productionStep.options
 												@ pman modelInfo.productionManager()
 									_ genContext.writeFile
-										@ fileInfo.fullpath
-									_ that.productionStep.addGenContext(genContext)
+										@ fileInfo.fullPath
+									_ this.productionStep.addGenContext(genContext)
 
 								return
 									_ callback
 										@ null
-										@ that.productionStep
+										@ this.productionStep
             
 					else 
                 
@@ -258,19 +297,18 @@
 									@ model null
 									@ srcPath modelInfo.src()
 									@ srcFullPath modelInfo.srcFullPath()
-									@ options that.productionStep.options
+									@ options this.productionStep.options
 									@ pman modelInfo.productionManager()
                 
 						_ modelInfo.getSource
-							f_cb( content )
+							a_cb( content )
 				
 								_ genContext.write(content)
-								_ that.productionStep.addGenContext(genContext)
-						
+								_ this.productionStep.addGenContext(genContext)
 								return
 									_ callback
 										@ null
-										@ that.productionStep
+										@ this.productionStep
 
 		m runFrontMatter
             param callback

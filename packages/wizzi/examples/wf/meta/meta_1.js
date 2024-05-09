@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\meta_1.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:50 GMT
+    utc time: Thu, 09 May 2024 12:34:33 GMT
 */
 'use strict';
 /**
@@ -286,7 +286,7 @@ var wf_meta_meta_1 = function(step_callback) {
                     console.log("[31m%s[0m", 'err', err);
                     throw new Error(err.message);
                 }
-                console.log('metaParameters', Object.keys(metaParameters), __filename);
+                console.log('metaParameters', Object.keys(metaParameters));
                 writePackifiles(path.join(__dirname, 'output', 'in-memory-demo', 'metaParameters'), metaParameters)
                 wf_and_jsonFs.wf.executeMetaProduction({
                     metaCtx: {
@@ -305,7 +305,7 @@ var wf_meta_meta_1 = function(step_callback) {
                         console.log("[31m%s[0m", 'err', err);
                         throw new Error(err.message);
                     }
-                    console.log('wizziPackiFiles', Object.keys(wizziPackiFiles), __filename);
+                    console.log('wizziPackiFiles', Object.keys(wizziPackiFiles));
                     writePackifiles(path.join(__dirname, 'output', 'in-memory-demo', 'metaExecution'), wizziPackiFiles)
                 })
             })

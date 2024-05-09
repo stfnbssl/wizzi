@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziEvalHelper.js.ittf
-    utc time: Fri, 19 Apr 2024 18:46:37 GMT
+    utc time: Thu, 09 May 2024 12:32:30 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -339,26 +339,26 @@ class JsWizziEvalHelper {
         return interpolateArgsContext;
     }
     /**
-         Method for `multi ittf document context management`
+         Method for `multi-part production context management`
          script method: `$.setCtx(<namePath>, <value>)`
-         Set a value in the production context of a Wizzi Job
+         Set a value in the production context of a multi-part production (es. Wizzi Job)
     */
     setCtx(namePath, value) {
         return this.productionContext.setEvaluationContextValue(namePath, value);
     }
     /**
-         Method for `multi ittf document context management`
+         Method for `multi-part production context management`
          script method: `$.removeCtx(<namePath>)`
-         Remove a value in the production context of a Wizzi Job
+         Remove a value in the production context of a multi-part production (es. Wizzi Job)
     */
     removeCtx(namePath) {
         throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet');
         return this.productionContext.removeEvaluationContextValue(namePath);
     }
     /**
-         Method for `multi ittf document context management`
-         script method: `$.removeCtx(<namePath>)`
-         Get a value from the production context of a Wizzi Job
+         Method for `multi-part production context management`
+         script method: `$.getCtx(<namePath>)`
+         Get a value from the production context of a multi-part production (es. Wizzi Job)
     */
     getCtx(namePath) {
         return this.productionContext.getEvaluationContextValue(namePath);
@@ -373,7 +373,7 @@ function local_error(errorName, method, message, node, inner, other) {
             errorName
         ], {
             source: {
-                method: 'wizzi-mtree@0.8.23.lib.jswizzi.jsWizziEvalHelper.' + method
+                method: 'wizzi-mtree@0.8.25.lib.jswizzi.jsWizziEvalHelper.' + method
              }, 
             mtree: {
                 mTreeBrickNode: node
@@ -400,7 +400,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.23.jswizzi.jsWizziEvalHelper.' + method,
+        method: 'wizzi-mtree@0.8.25.jswizzi.jsWizziEvalHelper.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

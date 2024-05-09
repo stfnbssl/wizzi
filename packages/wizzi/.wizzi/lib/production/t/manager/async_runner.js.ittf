@@ -1,7 +1,7 @@
 ﻿$group
 
-	# async run an artifact production 
-		# from an productionStep object
+	# async run a production step
+		# from a productionStep object
 	var AsyncRunner
 		{
 			@ run

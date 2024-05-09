@@ -16,15 +16,15 @@
 		# executed by the `wizzi/production/ProductionManager`.
 		#
 	wz-function AsyncRecurseWzjobLoad
-		{ wfjobRequest
+		{ wzjobRequest
 			{ wzjobLoader
 		callback
 		info '='
-		info '= ========= wizzi.AsyncRecurseWzjobLoad. Start. wfjobRequest.model : ', wfjobRequest.model
+		info '= ========= wizzi.AsyncRecurseWzjobLoad. Start. wzjobRequest.model : ', wzjobRequest.model
 		info '='
-		var wzjobLoader = wfjobRequest.wzjobLoader
+		var wzjobLoader = wzjobRequest.wzjobLoader
 		_ wzjobLoader.load
-			@ wfjobRequest
+			@ wzjobRequest
 			f_cb( result )
 				
 				info '='

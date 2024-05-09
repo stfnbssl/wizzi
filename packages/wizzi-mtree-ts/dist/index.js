@@ -6,6 +6,7 @@ const step_1_1 = require("./jswizzi/step_1");
 const step_2_1 = require("./jswizzi/step_2");
 const step_3_1 = require("./jswizzi/step_3");
 const step_1_2 = require("./mtree/step_1");
+const step_2_2 = require("./mtree/step_2");
 //add the following line
 const program = new Command();
 console.log(figlet.textSync("@wizzi/mtree examples"));
@@ -14,6 +15,7 @@ program
     .option("--parse1", "Execute a parsing with JsWizziRunner")
     .option("--load1", "Execute loading an Ittf document")
     .option("--load2", "Execute load_mtree_1")
+    .option("--script", "Execute load_mtree_script")
     .option("--load3", "Execute load_jswizzi_2")
     .parse(process.argv);
 const options = program.opts();
@@ -29,6 +31,9 @@ else if (options.load2) {
 }
 else if (options.load3) {
     (0, step_3_1.load_jswizzi_2)();
+}
+else if (options.script) {
+    (0, step_2_2.load_mtree_script)();
 }
 else {
     program.help();

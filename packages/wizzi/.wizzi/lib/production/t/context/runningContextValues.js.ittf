@@ -44,7 +44,7 @@ $group
             set i++
         # loog 'obj 5', JSON.stringify(obj)
         # loog ss[i], obj[ss[i]], value 
-        # loog 'this.runningContextValues', JSON.stringify(this.runningContextValues)
+        # loog 'ProductionContext.runningContextValues', JSON.stringify(this.runningContextValues)
         # loog '3, ss[i], obj[ss[i]], value', ss[i], obj[ss[i]], value
         if !checkEquals(obj[ss[i]], value)
             set obj[ss[i]] = value
@@ -52,7 +52,7 @@ $group
             _ this.onRunningContextValueChange
                 @ namePath
                 @ value
-        # loog 'this.runningContextValues', JSON.stringify(this.runningContextValues)
+        # loog 'ProductionContext.runningContextValues', JSON.stringify(this.runningContextValues)
             
     +
     m removeEvaluationContextValue

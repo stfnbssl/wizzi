@@ -127,7 +127,7 @@
 			$*
             if typeof (pluginRequest) === "string"
                 set pluginRequest = itemsOptions[i] = {packagePath: pluginRequest}
-				log '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ !!!!!!'
+				# loog '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ !!!!!!'
 			*$
             $$ loog 'loadPlugins.pluginRequest', pluginRequest
 			if pluginRequest.hasOwnProperty("packagePath")

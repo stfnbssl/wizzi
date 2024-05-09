@@ -130,6 +130,8 @@ $group
 				optional
 			{ artifactRequestContext
 				optional
+			{ productionManager
+				optional
 		$$ string artifactName
 		param artifactName
 		callback
@@ -158,6 +160,7 @@ $group
                 @ ittfDocumentUri
                 {
                     @ mTreeBuildUpContext requestContext.modelRequestContext
+					@ contextProductionManager requestContext.productionManager
                 f_cb( artifactModel )
                     # loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact', 'model loaded', artifactModel
                     # the loaded wizzi model becomes the artifactModel of the artifact generation

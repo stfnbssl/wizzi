@@ -97,7 +97,7 @@ module
                 set line = lines[i]
                 set line[options.name] = '+'
                 set line[options.value] = line.value
-                log 'line.value', line.value
+                # loog 'line.value', line.value
                 if line.indent <= 0
                     set line.parent = ret || null
                     if ret

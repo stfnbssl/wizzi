@@ -70,7 +70,7 @@ module
                                     if err
                                         error err
                                         return
-                                    log 'wizziPackiFiles', Object.keys(wizziPackiFiles)
+                                    info 'wizziPackiFiles', Object.keys(wizziPackiFiles)
                                     _ writePackifiles
                                         _ path.join
                                             @ appsFolder

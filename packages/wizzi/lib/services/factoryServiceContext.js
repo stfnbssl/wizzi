@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\factoryServiceContext.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:48 GMT
+    utc time: Thu, 09 May 2024 12:34:31 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -11,15 +11,16 @@ const file = require('@wizzi/utils').file;
 class FactoryServiceContext {
     constructor() {
         this.__type = 'FactoryServiceContext';
-        this.__version = '0.8.36';
+        this.__version = '0.8.37';
         this.debugObjects = {};
     }
     addDebugObject(kind, key, value) {
-        console.log('wizzi.factoryServiceContext.addDebugObject.kind+key', kind, key, __filename);
+        // loog 'wizzi.factoryServiceContext.addDebugObject.kind+key', kind, key
         var xvalue = value;
+        
+        // loog 'wizzi.factoryServiceContext.addDebugObject cloned packi', key
         if (kind == 'packi') {
             xvalue = clonePackifiles(value);
-            console.log('wizzi.factoryServiceContext.addDebugObject cloned packi', key, __filename);
         }
         this.debugObjects[kind+"|"+key] = {
             kind: kind, 
@@ -47,9 +48,10 @@ class FactoryServiceContext {
     _dumpDebugFiles(options) {
         if (options.destFolder) {
             for (var k in this.debugObjects) {
+                
+                // loog 'wizzi@0.8.37.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
                 if (this.debugObjects[k].kind == 'file') {
                     file.write(path.join(options.destFolder, this.debugObjects[k].key), this.debugObjects[k].value)
-                    console.log('wizzi@0.8.36.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file', __filename);
                 }
             }
         }
@@ -61,9 +63,10 @@ class FactoryServiceContext {
     _dumpDebugPackiFiles(options) {
         if (options.destFolder) {
             for (var k in this.debugObjects) {
+                
+                // loog 'wizzi@0.8.37.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
                 if (this.debugObjects[k].kind == 'packi') {
                     writePackifiles(path.join(options.destFolder, this.debugObjects[k].key), this.debugObjects[k].value)
-                    console.log('wizzi@0.8.36.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles', __filename);
                 }
             }
         }
@@ -107,7 +110,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.36.factoryServiceContext.' + method,
+        method: 'wizzi@0.8.37.factoryServiceContext.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

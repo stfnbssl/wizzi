@@ -1,7 +1,7 @@
 ﻿base_test(productionStep)
 
 	$append imports
-		var ProductionStep = require('../../../lib/production/artifact/ProductionStep').ProductionStep
+		var ProductionStep = require('../../../lib/production/step').ProductionStep
 		var asyncArtifactGenerator = require('../../../lib/production/artifact/asyncArtifactGenerator')
 		var mocks = require('../../mocks/misc')
 
@@ -39,7 +39,7 @@
 							@ generator 'js/module'
 					@ dest
 						{
-							@ fullpath null
+							@ fullPath null
 							@ folder null
 							@ baseFolder null
 							@ path null

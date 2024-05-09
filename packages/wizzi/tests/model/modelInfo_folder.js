@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\model\modelInfo_folder.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:51 GMT
+    utc time: Thu, 09 May 2024 12:34:33 GMT
 */
 'use strict';
 
@@ -72,10 +72,10 @@ describe("modelInfo", function() {
             expect(sources).to.be.an('array');
             expect(sources.length).to.be(2);
             var s1 = sources[0];
-            expect(s1.fullpath).to.be.a('string');
-            expect(s1.fullpath).to.be(s1Path);
-            expect(s1.relpath).to.be.a('string');
-            expect(s1.relpath).to.be('mock2.tests.ittf');
+            expect(s1.fullPath).to.be.a('string');
+            expect(s1.fullPath).to.be(s1Path);
+            expect(s1.relPath).to.be.a('string');
+            expect(s1.relPath).to.be('mock2.tests.ittf');
             expect(s1.content).to.be.a('string');
             expect(s1.content).to.be('tests mock2');
             done();
@@ -94,8 +94,8 @@ describe("modelInfo", function() {
             expect(files).to.be.an('array');
             expect(files.length).to.be(2);
             var f1 = files[0];
-            expect(f1.fullpath).to.be.a('string');
-            expect(f1.fullpath).to.be(s1Path);
+            expect(f1.fullPath).to.be.a('string');
+            expect(f1.fullPath).to.be(s1Path);
             done();
         })
     });

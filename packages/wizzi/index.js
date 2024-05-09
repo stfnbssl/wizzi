@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Sat, 27 Apr 2024 13:09:49 GMT
+    utc time: Thu, 09 May 2024 12:34:31 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -21,7 +21,7 @@ var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
 
 var md = module.exports = {};
-md.version = "0.8.36";
+md.version = "0.8.37";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -483,7 +483,7 @@ function executeWizziJob_step2(jobRequest, callback) {
                 return callback(pman);
             }
             
-            var notUsed = pman.addJobRequest({
+            var notUsed = pman.addWzjobRequest({
                 wfjob: {
                     ittfDocumentUri: jobPath
                  }
@@ -549,31 +549,31 @@ md.printWizziJobError = function(jobName, err) {
      string ittfDocumentUri
      string outputPackageFolder
 */
-md.generateWizziModelTypes = function(request, callback) {
+md.generateWizziModelDom = function(request, callback) {
     
     if (verify.isFunction(callback) == false) {
-        throw new Error(error(101, 'generateWizziModelTypes', "Parameter 'callback' must be a function. Received: " + util.inspect(callback, { depth: null })));
+        throw new Error(error(101, 'generateWizziModelDom', "Parameter 'callback' must be a function. Received: " + util.inspect(callback, { depth: null })));
     }
     if (verify.isObject(request) == false) {
-        return callback(error(101, 'generateWizziModelTypes', "Parameter 'request' must be an object. Received: " + util.inspect(request, { depth: null })));
+        return callback(error(101, 'generateWizziModelDom', "Parameter 'request' must be an object. Received: " + util.inspect(request, { depth: null })));
     }
     if (verify.isObject(request.configOptions) == false) {
-        return callback(error(101, 'generateWizziModelTypes', "Parameter 'request.configOptions' must be an object. Received: " + util.inspect(request.configOptions, { depth: null })));
+        return callback(error(101, 'generateWizziModelDom', "Parameter 'request.configOptions' must be an object. Received: " + util.inspect(request.configOptions, { depth: null })));
     }
     if (verify.isObject(request.wfschema) == false) {
-        return callback(error(101, 'generateWizziModelTypes', "Parameter 'request.wfschema' must be an object. Received: " + util.inspect(request.wfschema, { depth: null })));
+        return callback(error(101, 'generateWizziModelDom', "Parameter 'request.wfschema' must be an object. Received: " + util.inspect(request.wfschema, { depth: null })));
     }
     // TODO implement jsWizzi : _.toIdentifier(varName)
-    // TODO check_cb_not_empty( request.wfschema.name, generateWizziModelTypes )
-    // TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelTypes )
-    // TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelTypes )
+    // TODO check_cb_not_empty( request.wfschema.name, generateWizziModelDom )
+    // TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelDom )
+    // TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelDom )
     
     var storeKind = request.storeKind || 'filesystem';
     
     request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext);
     request.globalContext = Object.assign({}, request.globalContext);
     
-    console.log('wizzi.generateWizziModelDoms');
+    console.log('wizzi.generateWizziModelDom');
     console.log('- storeKind', storeKind);
     console.log('- configOptions', request.configOptions);
     console.log('- wfschema.name', request.wfschema.name);

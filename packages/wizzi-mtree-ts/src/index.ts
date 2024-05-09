@@ -6,6 +6,7 @@ import {parse_1} from './jswizzi/step_1'
 import {load_jswizzi_1} from './jswizzi/step_2'
 import {load_jswizzi_2} from './jswizzi/step_3'
 import {load_mtree_1} from './mtree/step_1'
+import {load_mtree_script} from './mtree/step_2'
 
 //add the following line
 const program = new Command();
@@ -17,6 +18,7 @@ program
   .option("--parse1", "Execute a parsing with JsWizziRunner")
   .option("--load1", "Execute loading an Ittf document")
   .option("--load2", "Execute load_mtree_1")
+  .option("--script", "Execute load_mtree_script")
   .option("--load3", "Execute load_jswizzi_2")
   .parse(process.argv);
 
@@ -28,6 +30,7 @@ if (options.parse1) { parse_1(); }
 else if (options.load1) { load_jswizzi_1(); }   
 else if (options.load2) { load_mtree_1(); }   
 else if (options.load3) { load_jswizzi_2(); }   
+else if (options.script) { load_mtree_script(); }   
 else {
     program.help();
 }

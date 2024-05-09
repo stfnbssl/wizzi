@@ -3,7 +3,7 @@
     m getProvidedMetas
         callback
 
-		log mdDisplayName + '.getProvidedMetas'
+		# loog mdDisplayName + '.getProvidedMetas'
 		var
 			decl provides
                 {
@@ -12,7 +12,7 @@
                     [ metaProductions
                     [ metaProductionSelectors
 			
-        log '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
+        # loog '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
         const search
             =>
                 param ndx
@@ -24,7 +24,7 @@
                         @ name metaPlugin.name
                         @ version metaPlugin.version
                         @ categories metaPlugin.provides.categories
-                # log mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
+                # loog mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
                 foreach mp in metaPlugin.provides.metaProductions
                     set mp.plugin = metaPlugin.name
                     _ provides.metaProductions.push

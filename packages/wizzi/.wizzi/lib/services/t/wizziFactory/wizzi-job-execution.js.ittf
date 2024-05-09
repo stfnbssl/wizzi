@@ -55,7 +55,7 @@ $group
 									@ jobRequest.globalContext
 							+
 							checked_call( notUsed
-								_ pman.addJobRequest
+								_ pman.addWzjobRequest
 									{ 
 										{ wfjob
 											@ ittfDocumentUri jobRequest.path
