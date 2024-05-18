@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\meta\metify.js.ittf
-    utc time: Thu, 09 May 2024 12:31:22 GMT
+    utc time: Wed, 15 May 2024 03:17:23 GMT
 */
 'use strict';
 var path = require('path');
@@ -120,6 +120,23 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     if (fsNode.isTFolder) {
         elabTFolder(fsNode, sb, state)
     }
+    if (fsNode.documents.length > 5) {
+        sb.folderTemplateFile.push('');
+        sb.folderTemplateFile.push('$' + '*');
+        sb.folderTemplateFile.push(state.spaces + '$')
+        sb.folderTemplateFile.push(state.spaces + '    var items = [')
+        var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
+        for (i=0; i<i_len; i++) {
+            d = fsNode.documents[i];
+            sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
+        }
+        sb.folderTemplateFile.push(state.spaces + '    ]')
+        sb.folderTemplateFile.push('');
+        sb.folderTemplateFile.push(state.spaces + '$foreach item in items')
+        sb.folderTemplateFile.push(state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf', state.spaces + "        " + fsNode.documents[0].ittfDocumentGraph, state.spaces + "            $" + "{'$'}include " + state.metaProductionName + '/' + state.id_basePath + '$' + '{item}')
+        sb.folderTemplateFile.push('*' + '$');
+        sb.folderTemplateFile.push('');
+    }
     var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
     for (i=0; i<i_len; i++) {
         d = fsNode.documents[i];
@@ -147,7 +164,7 @@ function elabTFolder(fsNode, sb, state) {
     var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
     for (i=0; i<i_len; i++) {
         d = fsNode.documents[i];
-        sb.folderTemplateFile.push(state.spaces + '        ' + basenameIttfStripped(d) + ',')
+        sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
     }
     sb.folderTemplateFile.push(state.spaces + '    ]')
     sb.folderTemplateFile.push('');
@@ -193,7 +210,7 @@ function elabDocumentNode(fsNode, sb, state) {
     state.documentIndent = save_state_documentIndent;
 }
 function documentLine(fsNode, indent) {
-    return new Array(indent).join(' ') + documentLineName(fsNode) + documentLineValue(fsNode);
+    return new Array(indent+1).join(' ') + documentLineName(fsNode) + documentLineValue(fsNode);
 }
 function fsNodeIdName(fsNode) {
     if (fsNode.isTFolder) {

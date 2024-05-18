@@ -1,236 +1,54 @@
 /*
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
-    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\artifact\step_1.js.ittf
-    utc time: Wed, 15 May 2024 16:05:48 GMT
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\helpers\ittfMacro.js.ittf
+    utc time: Wed, 15 May 2024 03:17:24 GMT
 */
 'use strict';
 /**
-     Example: artifact_step_1
+     Example: textIndentParser_Step_1
     
 */
 var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var stringify = require('json-stringify-safe');
-var wizziUtils = require('@wizzi/utils');
 // local disk filesystem
-var file = wizziUtils.file;
 // virtual filesystem
-var vfile = require('@wizzi/utils').vfile;
 // defaults to local disk filesystem
+var wizziUtils = require('../../index');
+var vfile = require('../../lib/fSystem/vfile');
+var uriParser = require('../../lib/fSystem/uriParser');
+var fsUtils = require('../../lib/fSystem/utils');
+var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph');
+var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode');
+var ittfScanner = require('../../lib/ittfScanner/index');
+var meta = require('../../lib/meta/index');
+var packi = require('../../lib/packi/index');
+var fs = require('../../lib/fSystem/index');
+var ittfGraph = require('../../lib/ittfGraph/index');
+var file = wizziUtils.file;
 var fsfile = vfile();
-// utilities
 var verify = wizziUtils.verify;
 var mocks = wizziUtils.mocks;
-var async = require('async');
-var wizziUtils = require('@wizzi/utils');
-var pluginsBaseFolder = null;
-var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages';
-var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages';
-var wizziIndex = require('../../index');
-pluginsBaseFolder = path.resolve(__dirname, '..', '..', '..', '..')
-;
-var pluginsManager = require('../../lib/services/pluginsManager');
-var metasManager = require('../../lib/services/metasManager');
-var inmemoryMetaPlugin = require('../../lib/services/inmemoryMetaPlugin');
-var packiUtils = require('../../lib/services/packiUtils');
-const packiFilePrefix = wizziIndex.costants.packiFilePrefix;
-const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract;
-function createWizziFactory(globalContext, callback) {
-    wizziIndex.fsFactory({
-        plugins: {
-            
-         }, 
-        globalContext: globalContext || {}, 
-        verbose: true
-     }, callback)
-}
-function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlugins, callback) {
-    
-    const jsonDocuments = [];
-    // log 'createJsonWizziFactoryAndJsonFs'
-    Object.keys(packiFiles).map((value) => {
-    
-        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
-            const filePath = ensurePackiFilePrefix(value);
-            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
-            jsonDocuments.push({
-                path: filePath, 
-                content: packiFiles[value].contents
-             })
-        }
-    }
-    )
-    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
-        if (err) {
-            return callback(err);
-        }
-        wizziIndex.jsonFactory({
-            jsonFs: jsonFs, 
-            plugins: plugins, 
-            metaPlugins: metaPlugins, 
-            verbose: true
-         }, (err, wf) => {
-        
-            if (err) {
-                return callback(err);
-            }
-            callback(null, {
-                wf: wf, 
-                jsonFs: jsonFs
-             })
-        }
-        )
-    }
-    )
-}
-function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
-    const jsonDocuments = [];
-    console.log('createJsonWizziFactoryAndJsonFs', __filename);
-    Object.keys(packiFiles).map((value) => {
-    
-        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
-            const filePath = ensurePackiFilePrefix(value);
-            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
-            jsonDocuments.push({
-                path: filePath, 
-                content: packiFiles[value].contents
-             })
-        }
-    }
-    )
-    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
-        if (err) {
-            return callback(err);
-        }
-        wizziIndex.jsonFactory({
-            jsonFs: jsonFs, 
-            plugins: {
-                
-             }, 
-            metaPlugins: {
-                
-             }, 
-            verbose: true
-         }, (err, wf) => {
-        
-            if (err) {
-                return callback(err);
-            }
-            callback(null, {
-                wf: wf, 
-                jsonFs: jsonFs
-             })
-        }
-        )
-    }
-    )
-}
-
-function createJsonFs(packiFiles, callback) {
-    const jsonDocuments = [];
-    Object.keys(packiFiles).map((value) => {
-    
-        if (packiFiles[value].type === 'CODE') {
-            const filePath = ensurePackiFilePrefix(value);
-            jsonDocuments.push({
-                path: filePath, 
-                content: packiFiles[value].contents
-             })
-        }
-    }
-    )
-    wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, result) => {
-    
-        if (err) {
-            return callback(err);
-        }
-        callback(null, result);
-    }
-    )
-}
-function ensurePackiFilePrefix(filePath) {
-    return filePath.startsWith(packiFilePrefix) ? filePath : packiFilePrefix + filePath;
-}
-function createPackifilesFromFs(folderPath, callback) {
-    const file = vfile();
-    file.getFiles(folderPath, {
-        deep: true, 
-        documentContent: true
-     }, (err, files) => {
-    
-        if (err) {
-            console.log("[31m%s[0m", err);
-            return callback(err);
-        }
-        const packiFiles = {};
-        var i, i_items=files, i_len=files.length, file;
-        for (i=0; i<i_len; i++) {
-            file = files[i];
-            packiFiles[file.relPath] = {
-                type: 'CODE', 
-                contents: file.content
-             };
-        }
-        return callback(null, packiFiles);
-    }
-    )
-}
-function writePackifiles(folderPath, packiFiles) {
-    for (var k in packiFiles) {
-        file.write(path.join(folderPath, k), packiFiles[k].contents)
-    }
-}
-function writeStringified(filePath, object) {
-    file.write(filePath, stringify(object, null, 2))
-}
-function createMetasManager(globalContext, callback) {
-    wizziIndex.metasManager({
-        metaPlugins: {
-            
-         }, 
-        wfPlugins: {
-            
-         }, 
-        globalContext: globalContext || {}
-     }, callback)
-}
-var artifact_step_1 = function(step_callback) {
+var textIndentParser_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    var genContext = wizziIndex.genContext;
-    var ctx = new genContext(get_genconfig());
-    ctx.write('Hello ')
-    ctx.w('stefi')
-    ctx.w();
-    ctx.w('a line after')
-    ctx.w();
-    ctx.w('a second line after')
-    ctx.w();
-    ctx.setLastNotEmptyLine();
-    ctx.write(' + me')
-    ctx.w();
-    ctx.w('now i set inlineOn')
-    ctx.inlineOn();
-    ctx.w('- and this ctx.w() go in the same line')
-    ctx.inlineOff();
-    ctx.w('- after inlineOff ctx.w() go in a new line')
-    printValue(ctx.getContent(), 'content')
+    var ittfMacro = require('../../lib/helpers/ittfMacro');
+    var r1 = ittfMacro.escape('http://${HOSTNAME}.vm.${FLY_APP_NAME}.internal:20202');
+    console.log('r1', r1, __filename);
 };
-artifact_step_1.__name = 'artifact_step_1';
+textIndentParser_Step_1.__name = 'textIndentParser_Step_1';
 function heading1(text) {
     console.log('');
     console.log('*'.repeat(120));
-    console.log('** level 0 - step 1 - artifact_step_1 - ' + text);
+    console.log('** level 0 - step 1 - textIndentParser_Step_1 - ' + text);
     console.log('*'.repeat(120));
     console.log('');
 }
 function heading2(text) {
     console.log('');
     console.log('   ', '-'.repeat(100));
-    console.log('   ','-- artifact_step_1 - ' + text);
+    console.log('   ','-- textIndentParser_Step_1 - ' + text);
     console.log('   ', '-'.repeat(100));
     console.log('');
 }
@@ -420,24 +238,7 @@ function formatNum(num, len) {
     var x = num.toString();
     return new Array(1 + len-x.length).join(' ') + x;
 }
-module.exports = artifact_step_1;
+module.exports = textIndentParser_Step_1;
 if (typeof require != 'undefined' && require.main === module) {
-    artifact_step_1();
-}
-function get_genconfig() {
-    return {
-            options: {
-                data: {
-                    
-                 }
-             }, 
-            pman: {
-                wizziFactory: {}, 
-                globalContext: function() {
-                    return {};
-                }
-             }, 
-            model: {}, 
-            srcPath: "c://dummy"
-         };
+    textIndentParser_Step_1();
 }

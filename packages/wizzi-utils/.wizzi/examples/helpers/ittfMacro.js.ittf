@@ -1,0 +1,19 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'textIndentParser_Step_1',
+            title: 'textIndentParser - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var ittfMacro = require('../../lib/helpers/ittfMacro')
+        var r1
+            _ ittfMacro.escape
+                @ 'http://${'$'}{HOSTNAME}.vm.${'$'}{FLY_APP_NAME}.internal:20202'
+        log 'r1', r1

@@ -15,7 +15,7 @@ module
                     _ sb.push(part.v)
                 else
                     _ sb.push("$" + "{'$'}{" + part.v + "}")
-            return sb.toString('')
+            return sb.join('')
 
     set md.analize
         function
@@ -97,7 +97,7 @@ module
                             _ expr.push(ch)
                         else
                             set keyOrCode = expr.join('')
-                            if keyOrCode.replace(/\s/g,'').length == 0
+                            if keyOrCode.replace(/\s/g).length == 0
                                 # case empty ${} - is ok do not replace
                                 _ literal.push('${}')
                             else

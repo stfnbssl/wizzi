@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\ittfMacro.js.ittf
-    utc time: Thu, 09 May 2024 12:31:22 GMT
+    utc time: Wed, 15 May 2024 03:17:23 GMT
 */
 'use strict';
 var verify = require('./verify');
@@ -20,7 +20,7 @@ md.escape = function(value) {
             sb.push("$" + "{'$'}{" + part.v + "}");
         }
     }
-    return sb.toString('');
+    return sb.join('');
 }
 ;
 md.analize = function(template) {
@@ -103,7 +103,7 @@ md.analize = function(template) {
                     keyOrCode = expr.join('');
                     
                     // case empty ${} - is ok do not replace
-                    if (keyOrCode.replace(/\s/g,'').length == 0) {
+                    if (keyOrCode.replace(/\s/g).length == 0) {
                         literal.push('${}');
                     }
                     else {

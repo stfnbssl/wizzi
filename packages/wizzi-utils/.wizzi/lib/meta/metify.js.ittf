@@ -137,11 +137,35 @@ module
                     @ f
                     @ sb
                     @ state
+        
         if fsNode.isTFolder
             _ elabTFolder
                 @ fsNode
                 @ sb
                 @ state
+        
+        if fsNode.documents.length > 5
+            _ sb.folderTemplateFile.push('')
+            _ sb.folderTemplateFile.push('$' + '*')
+            _ sb.folderTemplateFile.push
+                @ state.spaces + '$'
+            _ sb.folderTemplateFile.push
+                @ state.spaces + '    var items = ['
+            foreach d in fsNode.documents
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '        "' + basenameIttfStripped(d) + '",'
+            _ sb.folderTemplateFile.push
+                @ state.spaces + '    ]'
+            _ sb.folderTemplateFile.push('')
+            _ sb.folderTemplateFile.push
+                @ state.spaces + '$foreach item in items'
+            _ sb.folderTemplateFile.push
+                @ state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf'
+                @ state.spaces + "        " + fsNode.documents[0].ittfDocumentGraph
+                @ state.spaces + "            $" + "{'$'}include " + state.metaProductionName + '/' + state.id_basePath + '$' + '{item}'
+            _ sb.folderTemplateFile.push('*' + '$')
+            _ sb.folderTemplateFile.push('')
+
         foreach d in fsNode.documents
             _ elabDocument
                 @ packiFiles
@@ -172,7 +196,7 @@ module
             @ state.spaces + '    var items = ['
         foreach d in fsNode.documents
             _ sb.folderTemplateFile.push
-                @ state.spaces + '        ' + basenameIttfStripped(d) + ','
+                @ state.spaces + '        "' + basenameIttfStripped(d) + '",'
         _ sb.folderTemplateFile.push
             @ state.spaces + '    ]'
         _ sb.folderTemplateFile.push('')
@@ -245,7 +269,7 @@ module
     function documentLine
         param fsNode
         param indent
-        return new Array(indent).join(' ') + 
+        return new Array(indent+1).join(' ') + 
             \b documentLineName(fsNode) + documentLineValue(fsNode)
 
     function fsNodeIdName

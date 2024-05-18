@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\util\interpolateFilename.js.ittf
-    utc time: Thu, 09 May 2024 12:34:31 GMT
+    utc time: Wed, 15 May 2024 16:05:46 GMT
 */
 'use strict';
 function interpolate_filename(text, ctx) {
@@ -15,11 +15,16 @@ function interpolate_filename(text, ctx) {
         if (pos > -1) {
             result.push(first);
         }
+        // nothing to interpolate
+        else {
+            return text;
+        }
         if (ctx[remain.substr(0, pos)]) {
             result.push(ctx[remain.substr(0, pos)]);
         }
+        // restore; TODO test this
         else {
-            result.push(remain.substr(0, pos));
+            result.push('__' + remain.substr(0, pos) + '__');
         }
         remain = remain.substring(pos + 2);
         text = remain;

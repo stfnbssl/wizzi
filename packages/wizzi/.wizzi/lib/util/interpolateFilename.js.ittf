@@ -12,10 +12,14 @@ module
             set pos = remain.indexOf('__')
             if pos > -1
                 _ result.push(first)
+            else
+                # nothing to interpolate
+                return text
             if ctx[remain.substr(0, pos)]
                 _ result.push(ctx[remain.substr(0, pos)])
             else
-                _ result.push(remain.substr(0, pos))
+                # restore; TODO test this
+                _ result.push('__' + remain.substr(0, pos) + '__')
             set remain = remain.substring(pos + 2)
             set text = remain
             set pos = text.indexOf('__')
