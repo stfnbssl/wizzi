@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\examples\meta\metify.js.ittf
-    utc time: Wed, 15 May 2024 03:17:24 GMT
+    utc time: Fri, 31 May 2024 13:30:16 GMT
 */
 'use strict';
 /**
@@ -37,12 +37,13 @@ const destFolder = path.join(__dirname, 'outputs', 'metify');
 const metaProductionName = 'baxDemo';
 meta.metify(folderPath, rootFolder, metaProductionName, {
     destFolder: destFolder, 
-    depth: 2
+    depth: 99
  }, function(err, result) {
     if (err) {
         console.log("[31m%s[0m", err);
         throw new Error(err.message);
     }
+    console.log('Done! dest folder:', destFolder, 'metaProductionName', metaProductionName, __filename);
 })
 var meta_metify = function(step_callback) {
     heading1('EXAMPLE')

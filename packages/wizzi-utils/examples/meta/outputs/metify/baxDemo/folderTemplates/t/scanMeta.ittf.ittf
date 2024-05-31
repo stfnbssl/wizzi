@@ -1,4 +1,0 @@
-$group
-    $file scanMeta/index.html.ittf.ittf
-       html
-           ${'$'}include baxDemo/scanMeta/index.html

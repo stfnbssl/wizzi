@@ -1,0 +1,23 @@
+$group
+    $include folder-beta_t_subt
+
+    $
+        var items = [
+            "frag_1.html",
+        ]
+
+    $foreach item in items
+        $file __dot__wizzi/folder-beta/t/${item}.ittf.ittf
+            ${'$'}{'$'}group
+                ${'$'}include baxDemo/folder-beta/tfolder/${item}
+
+
+    $
+        var items = [
+            "beta_1.html",
+        ]
+
+    $foreach item in items
+        $file __dot__wizzi/folder-beta/${item}.ittf.ittf
+            html
+                ${'$'}include baxDemo/folder-beta/${item}

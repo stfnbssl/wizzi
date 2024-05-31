@@ -37,6 +37,7 @@ module
                 @ metaProductionName
                 {
                     @ destFolder destFolder
-                    @ depth 2
+                    @ depth 99
                 f_cb_test( result )
+                    log 'Done! dest folder:', destFolder, 'metaProductionName', metaProductionName
 

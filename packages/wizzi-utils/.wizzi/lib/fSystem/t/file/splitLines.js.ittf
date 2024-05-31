@@ -3,6 +3,8 @@
 	set md.splitLines
 		function 
 			param contents
+			if !contents
+				return []
 			var 
 				decl i
 				decl l = contents.length

@@ -1,0 +1,11 @@
+$group
+
+    $
+        var items = [
+            "subt_1.html",
+        ]
+
+    $foreach item in items
+        $file __dot__wizzi/folder-beta/t/subt/${item}.ittf.ittf
+            ${'$'}{'$'}group
+                ${'$'}include baxDemo/folder-beta/tfolder/subt/${item}

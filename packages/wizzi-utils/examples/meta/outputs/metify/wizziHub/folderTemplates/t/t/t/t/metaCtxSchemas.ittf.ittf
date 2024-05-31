@@ -1,4 +1,0 @@
-$group
-    $file wizziHub/meta/metaProduction/metaCtxSchemas/index.json.ittf.ittf
-       {
-           ${'$'}include wizziHub/wizziHub/meta/metaProduction/metaCtxSchemas/index.json

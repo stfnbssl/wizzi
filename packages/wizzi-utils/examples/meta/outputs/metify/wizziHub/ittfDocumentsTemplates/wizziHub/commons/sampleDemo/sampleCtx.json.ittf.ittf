@@ -1,4 +1,0 @@
-$group
-   name "Stefano"
-   surname "Bassoli"
-   personal.data${'('} 66, stfn.bssl@gmail.com )

@@ -1,4 +1,0 @@
-$group
-    $file wizziHub/meta/metaProduction/folderTemplates/index.ittf.ittf.ittf
-       ${'$'}group
-           ${'$'}include wizziHub/wizziHub/meta/metaProduction/folderTemplates/index.ittf

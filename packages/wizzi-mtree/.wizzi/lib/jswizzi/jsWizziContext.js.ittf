@@ -38,6 +38,10 @@
             @ '$3'  _$3
             @ '$4'  _$4
 	*$
+
+    var defaultValues
+        { 
+			@ 'TODO' false
     
 	var knownCallables
         { 
@@ -149,7 +153,7 @@
 				_ this.globalContext.$freeze()
 			+
 			# set global defaults and allowed functions
-			$$ VIA _ this.globalContext.setValues(defaultValues)
+			_ this.globalContext.setValues(defaultValues)
 			_ this.globalContext.setValues(knownCallables)
 			_ this.globalContext.setValues(builtinFunctions)
 			+
@@ -201,7 +205,7 @@
 					_ this.brickEvalContext.clear
 				_ this.globalContext.declare('$', this.evalHelper)
 				_ this.globalContext.$freeze()
-			$$ VIA _ this.globalContext.setValues(defaultValues)
+			_ this.globalContext.setValues(defaultValues)
 			_ this.globalContext.setValues(knownCallables)
 
 		m pushSource
@@ -246,7 +250,7 @@
 					@ 'dateUtil' true
 					@ 'verify' true
 			foreach k in Object.keys(this.getGlobalValues())
-				if !($*defaultValues[k] ||*$ knownCallables[k] || builtinFunctions[k]) && k !== '$' && k !== 'NaN'
+				if !(defaultValues[k] || knownCallables[k] || builtinFunctions[k]) && k !== '$' && k !== 'NaN'
 					set ret[k] = true
 			return ret
 

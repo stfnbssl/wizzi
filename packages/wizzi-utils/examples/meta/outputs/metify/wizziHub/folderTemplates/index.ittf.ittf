@@ -1,4 +1,0 @@
-$group
-    $if metaCtx.useWizziHub
-        $include wzCtxModel
-        $include wizziHub

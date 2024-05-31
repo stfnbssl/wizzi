@@ -1,4 +1,0 @@
-$group
-   ${'$'}params age, email
-   age ${'$'}{age}
-   email "${'$'}{email}"

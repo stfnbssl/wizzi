@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\meta\metify.js.ittf
-    utc time: Wed, 15 May 2024 03:17:23 GMT
+    utc time: Fri, 31 May 2024 13:30:15 GMT
 */
 'use strict';
 var path = require('path');
@@ -11,6 +11,25 @@ var vfile = require('../fSystem/vfile');
 var ittfScanner = require('../ittfScanner/index');
 var packi = require('../packi/index');
 var md = module.exports = {};
+// { state
+// number level
+// number depth
+// [ compressFolders
+// string spaces
+// string ft_basePath
+// folderTemplates base bath
+// string id_basePath
+// ittfDocumentTemplates base bath
+// string idf_basePath
+// '__dot__wizzi/' destination base path
+// string metaProductionName
+// string parentBasename
+// is a virtual parent, tfolder(s) are skipped
+// boolean parentIsTFolder
+// { sb
+// [ sbFolderTemplateFile
+// [ sbWzCtxModelFile
+// string sourceBasename
 md.metify = function(folderPath, rootFolder, metaProductionName, options, callback) {
     const destFolder = options.destFolder;
     ittfScanner.scanFolder(folderPath, {
@@ -40,7 +59,9 @@ md.metify = function(folderPath, rootFolder, metaProductionName, options, callba
             idf_basePath: '__dot__wizzi/', 
             level: 0, 
             depth: options.depth, 
-            compressFolders: options.compressFolders || []
+            compressFolders: options.compressFolders || [], 
+            parentBasename: "", 
+            parentIsTFolder: false
          })
         packiFiles[metaProductionName+'/folderTemplates/index.ittf.ittf'] = {
             type: "CODE", 
@@ -74,17 +95,26 @@ function elabFsNode(packiFiles, fsNode, sb, state) {
     }
 }
 function elabFolder(packiFiles, fsNode, sb, state) {
+    // loog 'elabFolder', fsNode.basename, 'parentBasename', state.parentBasename
     const isCompressed = state.compressFolders.indexOf(fsNode.basename) > -1;
     // loog 'isCompressed', fsNode.basename, isCompressed
     state.spaces = new Array(state.level == 0 ? 9 : 5).join(' ');
     ;
     if (!fsNode.isTFolder) {
+        
+        // active sb.folderTemplateFile is parent of fsNode
         if (!isCompressed && sb.sourceBasename != fsNode.basename) {
-            sb.folderTemplateFile.push(state.spaces + '$include ' + fsNode.basename)
+            sb.folderTemplateFile.push(state.spaces + '$include ' + buildFolderIncludePath(fsNode, state))
         }
+    }
+    // no include, because no packiFile is added (see at method bottom)
+    // loog '--> elabFolder.isTFolder', "parent." + state.parentBasename
+    else {
+        sb.folderTemplateFile.push(state.spaces + "$" + "$ elabFolder.parent." + state.parentBasename)
     }
     var save_level = state.level;
     var save_sb_folderTemplateFile = sb.folderTemplateFile;
+    var save_state_parentBasename = state.parentBasename;
     var save_state_ft_basePath = state.ft_basePath;
     var save_state_id_basePath = state.id_basePath;
     var save_state_idf_basePath = state.idf_basePath;
@@ -95,12 +125,11 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     
     // loog 'state.ft_basePath', state.ft_basePath
     if (!isCompressed && sb.sourceBasename != fsNode.basename) {
-        state.ft_basePath = state.ft_basePath + '/t/';
+        if (!fsNode.isTFolder) {
+            state.ft_basePath = state.ft_basePath + '/t/';
+        }
         state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/';
         state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/';
-    }
-    if (fsNode.isTFolder) {
-        elabTFolder(fsNode, sb, state)
     }
     if (!isCompressed && sb.sourceBasename != fsNode.basename) {
         sb.folderTemplateFile = [
@@ -110,31 +139,75 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     }
     // loog ''
     // loog 'level', fsNode.basename, state.level, state.depth
+    // loog '?1', state.depth, state.level
+    // loog '?2', !state.depth, state.level < state.depth
     if (!state.depth || state.level < state.depth) {
+        if (!fsNode.isTFolder) {
+            if (state.level > 0) {
+                var save_parentBasename = state.parentBasename;
+                state.parentBasename = fsNode.basename;
+            }
+        }
+        else {
+            var save_parentIsTFolder = state.parentIsTFolder;
+            state.parentIsTFolder = true;
+        }
         var i, i_items=fsNode.folders, i_len=fsNode.folders.length, f;
         for (i=0; i<i_len; i++) {
             f = fsNode.folders[i];
+            
+            // loog '--:', f.basename
+            if (fsNode.isTFolder) {
+            }
             elabFolder(packiFiles, f, sb, state)
         }
+        if (!fsNode.isTFolder) {
+            if (state.level > 0) {
+                state.parentBasename = save_parentBasename;
+            }
+        }
+        else {
+            state.parentIsTFolder = save_parentIsTFolder;
+        }
     }
-    if (fsNode.isTFolder) {
-        elabTFolder(fsNode, sb, state)
-    }
-    if (fsNode.documents.length > 5) {
-        sb.folderTemplateFile.push('');
-        sb.folderTemplateFile.push('$' + '*');
-        sb.folderTemplateFile.push(state.spaces + '$')
-        sb.folderTemplateFile.push(state.spaces + '    var items = [')
+    if (fsNode.documents.length > 0) {
+        var itemGroups = {};
         var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
         for (i=0; i<i_len; i++) {
             d = fsNode.documents[i];
-            sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
+            var g = itemGroups[d.ittfDocumentGraph.name];
+            if (!g) {
+                g = itemGroups[d.ittfDocumentGraph.name] = [];
+            }
+            g.push(d)
         }
-        sb.folderTemplateFile.push(state.spaces + '    ]')
         sb.folderTemplateFile.push('');
-        sb.folderTemplateFile.push(state.spaces + '$foreach item in items')
-        sb.folderTemplateFile.push(state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf', state.spaces + "        " + fsNode.documents[0].ittfDocumentGraph, state.spaces + "            $" + "{'$'}include " + state.metaProductionName + '/' + state.id_basePath + '$' + '{item}')
-        sb.folderTemplateFile.push('*' + '$');
+        for (var k in itemGroups) {
+            var g = itemGroups[k];
+            sb.folderTemplateFile.push(state.spaces + '$')
+            sb.folderTemplateFile.push(state.spaces + '    var items = [')
+            var i, i_items=g, i_len=g.length, d;
+            for (i=0; i<i_len; i++) {
+                d = g[i];
+                
+                // loog 'elabFolder.t.document', basenameIttfStripped(d)
+                if (fsNode.isTFolder) {
+                    sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
+                }
+                else {
+                    sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
+                }
+            }
+            sb.folderTemplateFile.push(state.spaces + '    ]')
+            sb.folderTemplateFile.push('');
+            sb.folderTemplateFile.push(state.spaces + '$foreach item in items')
+            sb.folderTemplateFile.push(state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf')
+            // loog 'group', fsNode.basename, fsNode.isTFolder, state.parentIsTFolder, k
+            sb.folderTemplateFile.push(state.spaces + "        " + (k == '$group' ? "$" + "{'$'}{'$'}group" : k))
+            sb.folderTemplateFile.push(state.spaces + "            $" + "{'$'}include " + state.metaProductionName + '/' + state.id_basePath + '$' + '{item}')
+        }
+    }
+    if (fsNode.documents.length > 0) {
         sb.folderTemplateFile.push('');
     }
     var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
@@ -145,38 +218,30 @@ function elabFolder(packiFiles, fsNode, sb, state) {
     //
     
     // loog 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
+    
+    // loog '-->', state, buildFolderTemplatesPath(fsNode, state)
     if (!fsNode.isTFolder && !isCompressed && sb.sourceBasename != fsNode.basename) {
-        packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'] = {
+        if (fsNode.basename == 'meta') {
+        }
+        packiFiles[buildFolderTemplatesPath(fsNode, state)] = {
             type: "CODE", 
             contents: sb.folderTemplateFile.join('\n')
          };
     }
-    sb.folderTemplateFile = save_sb_folderTemplateFile;
+    if (!fsNode.isTFolder) {
+        sb.folderTemplateFile = save_sb_folderTemplateFile;
+    }
     state.ft_basePath = save_state_ft_basePath;
     state.id_basePath = save_state_id_basePath;
     state.idf_basePath = save_state_idf_basePath;
     state.level = save_level;
-}
-function elabTFolder(fsNode, sb, state) {
-    sb.folderTemplateFile.push('');
-    sb.folderTemplateFile.push(state.spaces + '$')
-    sb.folderTemplateFile.push(state.spaces + '    var items = [')
-    var i, i_items=fsNode.documents, i_len=fsNode.documents.length, d;
-    for (i=0; i<i_len; i++) {
-        d = fsNode.documents[i];
-        sb.folderTemplateFile.push(state.spaces + '        "' + basenameIttfStripped(d) + '",')
-    }
-    sb.folderTemplateFile.push(state.spaces + '    ]')
-    sb.folderTemplateFile.push('');
-    sb.folderTemplateFile.push(state.spaces + '$foreach item in items')
-    sb.folderTemplateFile.push(state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf', state.spaces + "        $" + "{'$'}{'$'}group", state.spaces + "            $" + "{'$'}include " + state.id_basePath + '$' + '{item}')
-    sb.folderTemplateFile.push('');
+    state.parentBasename = save_state_parentBasename;
 }
 function elabDocument(packiFiles, fsNode, sb, state) {
     // loog '+++++ elabDocument', fsNode.basename, state.level
     var spacesNum = state.level == 0 ? 8 : 4;
     var spacesText = new Array(state.level == 0 ? 9 : 5).join(' ');
-    if (!fsNode.parent.isTFolder) {
+    if (false) {
         sb.folderTemplateFile.push(spacesText + "$file " + state.idf_basePath + fsNode.basename + '.ittf')
         sb.folderTemplateFile.push(documentLine(fsNode.ittfDocumentGraph, spacesNum + 4))
         sb.folderTemplateFile.push(documentLine({
@@ -193,7 +258,8 @@ function elabDocument(packiFiles, fsNode, sb, state) {
         child = fsNode.ittfDocumentGraph.children[i];
         elabDocumentNode(child, sb, state)
     }
-    packiFiles[state.metaProductionName+'/ittfDocumentsTemplates/' + state.id_basePath + fsNode.basename + '.ittf'] = {
+    // loog 'elabDocument', fsNode.basename, state.parentBasename, state.parentIsTFolder
+    packiFiles[buildIttfDocumentTemplatesPath(fsNode, state)] = {
         type: "CODE", 
         contents: sb.documentFile.join('\n')
      };
@@ -232,13 +298,14 @@ function basenameIttfStripped(fsNode) {
     }
 }
 function documentLineName(fsNode) {
+    // loog 'documentLineName', fsNode.name, fsNode.isCommand
     if (fsNode.isMixer) {
         return fsNode.fragmentName + '$' + "{'('}";
     }
     else if (fsNode.isIncluder) {
         return '$' + "{'$'}include";
     }
-    else if (fsNode.isCommand) {
+    else if (fsNode.isCommandCheck()) {
         return '$' + "{'$'}" + (fsNode.name && fsNode.name.substring(1));
     }
     else {
@@ -262,6 +329,7 @@ function buildLineValue(fsNode) {
             sb.push(sp + item.v);
             sp = '';
         }
+        // item.t == 1
         else {
             sb.push(sp + '$' + "{'$'}" + '{');
             sp = '';
@@ -270,4 +338,13 @@ function buildLineValue(fsNode) {
         }
     }
     return sb.join('');
+}
+function buildFolderIncludePath(fsNode, state) {
+    return state.parentBasename ? state.parentBasename + '_' + (state.parentIsTFolder ? 't_' : '') + fsNode.basename : fsNode.basename;
+}
+function buildFolderTemplatesPath(fsNode, state) {
+    return state.metaProductionName + '/folderTemplates/' + state.ft_basePath + (state.parentBasename ? state.parentBasename + '_' + (state.parentIsTFolder ? 't_' : '') + fsNode.basename : fsNode.basename) + '.ittf.ittf';
+}
+function buildIttfDocumentTemplatesPath(fsNode, state) {
+    return state.metaProductionName + '/ittfDocumentTemplates/' + state.id_basePath + fsNode.basename + '.ittf';
 }

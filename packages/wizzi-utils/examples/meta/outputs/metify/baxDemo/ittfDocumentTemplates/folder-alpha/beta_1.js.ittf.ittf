@@ -1,0 +1,3 @@
+$group
+    kind es6
+    function Hello
