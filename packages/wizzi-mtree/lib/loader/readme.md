@@ -179,4 +179,3 @@ Folders named 't' have special rules for the path resolution`of mixed and includ
 `relative path of the mixin or include call is matched or the path resolution fails.`
 </tr>
 </table>
-

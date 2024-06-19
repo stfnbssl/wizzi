@@ -5,5 +5,7 @@ module
 
     set md.packiFilePrefix = 'json:/'
     set md.packiFilePrefixExtract = 'json:/'
+    set md.packiConfigPath = '.packi/config.json.ittf'
     set md.metaProductionTempFolder = '___temp'
     set md.metaProductionWizziFolder = '.wizzi'
+    

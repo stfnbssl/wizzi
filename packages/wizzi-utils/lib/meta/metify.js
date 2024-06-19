@@ -2,9 +2,11 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\meta\metify.js.ittf
-    utc time: Fri, 31 May 2024 13:30:15 GMT
+    utc time: Wed, 12 Jun 2024 06:21:06 GMT
 */
 'use strict';
+// TODO *$ -> *$ + {'$'}
+// TODO missing $include xx_yy when $include xx_t_yy
 var path = require('path');
 var verify = require('../helpers/verify');
 var vfile = require('../fSystem/vfile');
@@ -329,12 +331,16 @@ function buildLineValue(fsNode) {
             sb.push(sp + item.v);
             sp = '';
         }
-        // item.t == 1
-        else {
+        else if (item.t == 1) {
             sb.push(sp + '$' + "{'$'}" + '{');
             sp = '';
             sb.push(verify.htmlEscape(item.v));
             sb.push('}');
+        }
+        // item.t == 2
+        else {
+            sb.push(sp + '$' + "{'\\\\b'}");
+            sp = '';
         }
     }
     return sb.join('');

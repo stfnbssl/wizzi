@@ -35,8 +35,8 @@ var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
 var inmemoryMetaPlugin = require('../../../lib/services/inmemoryMetaPlugin');
 var packiUtils = require('../../../lib/services/packiUtils');
-const packiFilePrefix = wizziIndex.costants.packiFilePrefix;
-const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract;
+const packiFilePrefix = wizziIndex.constantss.packiFilePrefix;
+const packiFilePrefixExtract = wizziIndex.constants.packiFilePrefixExtract;
 const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages";
 function createWizziFactory(globalContext, callback) {
     wizziIndex.fsFactory({

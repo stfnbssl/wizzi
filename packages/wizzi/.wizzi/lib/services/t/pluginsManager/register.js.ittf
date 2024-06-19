@@ -143,9 +143,11 @@
                                 @ name schema.name + '/' + art.name
                                 @ outmime art.outmime
                                 @ isDefault art.isDefault
+								@ contentType art.contentType
                     set this.schemaArtifactsMap[schema.name] = schemaArtifacts
                     set this.schemaDefaulArtifactMap[schema.name] = schema.name + '/' + schema.defaultArtifact
 					set this.schemaRootTagMap[schema.name] = schema.rootTag || schema.name
+					set this.artifactContentTypeMap[schema.name + '/' + art.name] = art.contentType
                     foreach ext in schema.fileExtensions
                         if this.extensionSchemaMap[ext]
                             return

@@ -9,7 +9,7 @@
 const file = require('@wizzi/utils').file;
 const vfile = require('@wizzi/utils').vfile;
 const verify = require('@wizzi/utils').verify;
-const costants = require('../costants');
+const constants = require('../constants');
 
 const mdDisplayName = "wizzi.services.packiUtils";
 
@@ -18,7 +18,7 @@ const {
     packiFilePrefixExtract, 
     metaProductionTempFolder, 
     metaProductionWizziFolder
- } = costants;
+ } = constants;
 
 const md = module.exports = {};
 

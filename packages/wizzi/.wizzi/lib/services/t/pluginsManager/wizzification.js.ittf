@@ -33,10 +33,9 @@
 			var wizzifier
 				_ this.getWizzifier
 					@ extension
-			return wizzifier.isForBinaryFile && wizzifier.isForBinaryFile()
+			return wizzifier.isForBinaryFile
 		else
 			return false
-		return this.pluginsManager.wizzifierIsForBinaryFile(extension)
 	# 
 		# retrieve a wizzifier searching the factoryPlugins
 		# registered to this plugins manager

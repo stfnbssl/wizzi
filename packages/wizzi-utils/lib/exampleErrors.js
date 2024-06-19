@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\exampleErrors.js.ittf
-    utc time: Fri, 31 May 2024 13:30:15 GMT
+    utc time: Wed, 12 Jun 2024 06:21:06 GMT
 */
 'use strict';
 var util = require('util');
@@ -224,4 +224,3 @@ FileError.prototype.toString = function() {
 FileError.prototype = Object.create(Error.prototype);
 FileError.prototype.constructor = FileError;
 md.FileError = FileError;
-

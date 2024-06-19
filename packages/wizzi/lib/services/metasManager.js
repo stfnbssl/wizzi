@@ -17,7 +17,7 @@ var JsonComponents = require('@wizzi/repo').JsonComponents;
 const wizziFactory = require('./wizziFactory');
 const inmemoryMetaPlugin = require('./inmemoryMetaPlugin');
 const errors = require('../errors');
-const costants = require('../costants');
+const constants = require('../constants');
 const packiUtils = require('./packiUtils');
 const validation = require('./validation');
 const existsSync = fs.existsSync || path.existsSync;
@@ -33,7 +33,7 @@ const {
     packiFilePrefixExtract, 
     metaProductionTempFolder, 
     metaProductionWizziFolder
- } = costants;
+ } = constants;
 
 class MetasManager {
     constructor() {

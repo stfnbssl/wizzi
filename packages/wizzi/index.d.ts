@@ -7,7 +7,7 @@ type Readonly<P, T> = {
     readonly [P in keyof T]: T[P];
 }
 
-export const costants: {
+export const constants: {
     packiFilePrefix: string,
     packiFilePrefixExtract: string,
     metaProductionTempFolder: string,

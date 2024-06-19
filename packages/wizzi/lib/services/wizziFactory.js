@@ -25,7 +25,7 @@ var packi = require('@wizzi/utils').packi;
 var JsonComponents = require('@wizzi/repo').JsonComponents;
 const packiUtils = require('./packiUtils');
 var StringWriter = require('../util/stringWriter');
-var costants = require('../costants');
+var constants = require('../constants');
 var errors = require('../errors');
 var log = require('../util/log')(module);
 var PluginsManager = require('./pluginsManager');
@@ -43,7 +43,7 @@ const {
     packiFilePrefixExtract, 
     metaProductionTempFolder, 
     metaProductionWizziFolder
- } = costants;
+ } = constants;
 
 var myname = 'wizzi.services.wizzifactory';
 

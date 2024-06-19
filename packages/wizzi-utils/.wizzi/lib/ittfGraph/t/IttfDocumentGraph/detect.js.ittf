@@ -74,6 +74,9 @@
 		#       string v 
 		#         # text or expr
 		#
+		# state 1 '$'
+		# state 2 '${'
+		# state 3 '\'
 		
 		var
 			decl v = this.value.trim()
@@ -95,6 +98,9 @@
 					_ text.push('$')
 					_ text.push(ch)
 					set state = 0
+				elif state == 3
+					_ text.push('\\')
+					set state = 1
 				else $$ 2
 					_ expr.push(ch)
 			elif ch == '{'
@@ -102,6 +108,9 @@
 					_ text.push(ch)
 				elif state == 1
 					set state = 2
+				elif state == 3
+					_ text.push('\\')
+					_ text.push(ch)
 				else $$ 2
 					_ expr.push(ch)
 			elif ch == '}' && state == 2
@@ -117,6 +126,8 @@
 						@ v expr.join('') 
 				set expr = []
 				set state = 0
+			elif ch == '\\' && (i == 0 || i == len-2) 
+				set state = 3
 			elif state == 0
 				_ text.push(ch)
 			elif state == 1
@@ -125,6 +136,21 @@
 				set state = 0
 			elif state == 2
 				_ expr.push(ch)
+			elif state == 3
+				if ch == 'b'
+					if text.length > 0
+						_ parts.push
+							{
+								@ t 0
+								@ v text.join('') 
+					set text = []
+					_ parts.push
+						{
+							@ t 2
+				else
+					_ text.push('\\')
+					_ text.push(ch)
+				set state = 0
 		
 		if text.length > 0
 			_ parts.push

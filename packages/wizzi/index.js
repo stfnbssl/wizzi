@@ -31,7 +31,7 @@ md.productionOptions = require('./lib/production/options');
 md.Filesystem = Filesystem;
 md.JsonComponents = require('@wizzi/repo').JsonComponents;
 md.FactoryServiceContext = require('./lib/services/factoryServiceContext');
-md.costants = require('./lib/costants');
+md.constants = require('./lib/constants');
 md.errors = require('./lib/errors');
 
 /**

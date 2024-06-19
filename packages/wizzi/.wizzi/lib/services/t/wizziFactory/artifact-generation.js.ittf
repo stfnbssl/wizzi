@@ -139,7 +139,7 @@ $group
 		# loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 
 			\b 'artifactRequestContext', requestContext.artifactRequestContext
 		+
-		if verify.isEmpty(artifactName)
+		if artifactName == null || verify.isEmpty(artifactName)
 			set artifactName 
 				_ this.mapIttfDocumentPathToDefaultArtifact
 					@ ittfDocumentUri

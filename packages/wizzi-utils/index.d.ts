@@ -131,6 +131,7 @@ type Readonly<P, T> = {
         fullPath: string;
         destBasename: string;
         destRelPath: string;
+        seedName: string;
     }
     export function fileInfoByPath(filePath: string, baseFolder?: string): FileInfo; 
  }

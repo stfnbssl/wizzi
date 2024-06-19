@@ -14,7 +14,8 @@
             _ path.join
                 @ __dirname
                 @ 'ittf'
-                @ 'throw.html.ittf'
+                $$ @ 'throw.html.ittf'
+                @ 'mixer_1.js.ittf'
 
         var productionManager 
             _ mocks.getProductionManager

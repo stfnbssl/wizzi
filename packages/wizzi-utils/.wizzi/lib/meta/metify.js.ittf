@@ -1,6 +1,9 @@
 module
 	kind es6
 
+    # TODO *$ -> *$ + {'$'}
+    # TODO missing $include xx_yy when $include xx_t_yy
+
     var path = require('path')
 	var verify = require('../helpers/verify')
 	var vfile = require('../fSystem/vfile')
@@ -361,12 +364,15 @@ module
             if item.t == 0
                 _ sb.push(sp + item.v)
                 set sp = ''
-            else
-                # item.t == 1
+            elif item.t == 1
                 _ sb.push(sp + '$' + "{'$'}" + '{')
                 set sp = ''
                 _ sb.push(verify.htmlEscape(item.v))
                 _ sb.push('}')  
+            else
+                # item.t == 2
+                _ sb.push(sp + '$' + "{'\\\\b'}")
+                set sp = ''
         return 
             _ sb.join
                 @ ''

@@ -45,6 +45,7 @@ module wizzi-utils.fs.utils
 							iif relFolder.length > 0
 								then relFolder + '/' + name + '.' + schema
 								else name + '.' + schema
+						@ seedname ss.slice(0, -2).join('.')
 			else
 				return 
 					{
@@ -62,6 +63,7 @@ module wizzi-utils.fs.utils
 							iif relFolder.length > 0
 								then relFolder + '/' + basename
 								else basename
+						@ seedname basename
 
     function normalize
         param filepath

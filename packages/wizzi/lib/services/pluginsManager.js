@@ -433,8 +433,10 @@ var PluginsManager = (function () {
                         schemaArtifacts.push({
                             name: schema.name + '/' + art.name, 
                             outmime: art.outmime, 
-                            isDefault: art.isDefault
+                            isDefault: art.isDefault,
+                            contentType: art.contentType
                          })
+                         this.artifactContentTypeMap[schema.name + '/' + art.name] = art.contentType;
                     }
                     this.schemaArtifactsMap[schema.name] = schemaArtifacts;
                     this.schemaDefaulArtifactMap[schema.name] = schema.name + '/' + schema.defaultArtifact;

@@ -43,21 +43,21 @@ $group
 		# params
 		#   string tobeWizzifiedUri
 		#     # The file path to the source to be wizzified
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     string ittfText
 
 	m getWizziIttf
 		string tobeWizzifiedUri
-		string wizzifierName
+		string schemaOrExtension
 		callback
 		+
 		check_wz_callback( getWizziIttf )
 		+
-		var wizzifier = this.getWizzifier(wizzifierName)
+		var wizzifier = this.getWizzifier(schemaOrExtension)
         if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
+			set wizzifier.schemaOrExtension = schemaOrExtension
             return callback(wizzifier)
 		+
         try
@@ -67,11 +67,11 @@ $group
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName
+                        @ schemaOrExtension schemaOrExtension
                         @ tobeWizzifiedUri tobeWizzifiedUri
         _ this.getWizziIttfFromText
             @ tobeWizzifiedText
-            @ wizzifierName
+            @ schemaOrExtension
             @ callback
 
 	#
@@ -80,13 +80,13 @@ $group
 		# params
 		#   string tobeWizzifiedText
 		#     # The source code to be wizzified
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     string ittfText
     m getWizziIttfFromText
 		string tobeWizzifiedText
-		string wizzifierName
+		string schemaOrExtension
 		param options
 		param callback
 		+
@@ -96,9 +96,9 @@ $group
 		+
 		check_wz_callback( getWizziIttfFromText )
 		+
-		var wizzifier = this.getWizzifier(wizzifierName)
+		var wizzifier = this.getWizzifier(schemaOrExtension)
         if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
+			set wizzifier.schemaOrExtension = schemaOrExtension
             return callback(wizzifier)
 		+
         try
@@ -118,14 +118,14 @@ $group
                             {
                                 @ message 'See inner error'
                                 { parameter
-                                    @ wizzifierName wizzifierName
+                                    @ schemaOrExtension schemaOrExtension
                     _ callback(null, result)
         catch ex
             r_cb_wz_err( WizziFactoryError, getWizziIttfFromText, ex )
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName
+                        @ schemaOrExtension schemaOrExtension
 
 	#
 		# Async wizzify source code and return the wizzified tree
@@ -133,14 +133,14 @@ $group
 		# params
 		#   string tobeWizzifiedUri
 		#     # The source code to be wizzified
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     object ittfTree
 
 	m getWizziTree
 		string tobeWizzifiedUri
-		string wizzifierName
+		string schemaOrExtension
 		callback
 		+
 		check_wz_callback( getWizziTree )
@@ -152,11 +152,11 @@ $group
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName
+                        @ schemaOrExtension schemaOrExtension
                         @ tobeWizzifiedUri tobeWizzifiedUri
         _ this.getWizziTreeFromText
             @ tobeWizzifiedText
-            @ wizzifierName
+            @ schemaOrExtension
             @ callback
 
 	#
@@ -165,20 +165,20 @@ $group
 		# params
 		#   string tobeWizzifiedText
 		#     # The source code to be wizzified
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     string ittfText
     m getWizziTreeFromText
 		string tobeWizzifiedText
-		string wizzifierName
+		string schemaOrExtension
 		callback
 		+
 		check_wz_callback( getWizziTreeFromText )
 		+
-		var wizzifier = this.getWizzifier(wizzifierName)
+		var wizzifier = this.getWizzifier(schemaOrExtension)
         if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
+			set wizzifier.schemaOrExtension = schemaOrExtension
             return callback(wizzifier)
 		+
         try
@@ -197,14 +197,14 @@ $group
                             {
                                 @ message 'See inner error'
                                 { parameter
-                                    @ wizzifierName wizzifierName
+                                    @ schemaOrExtension schemaOrExtension
                     _ callback(null, result)
         catch ex
             r_cb_wz_err( WizziFactoryError, getWizziTreeFromText, ex )
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName
+                        @ schemaOrExtension schemaOrExtension
 
 	#
 		# Async get code AST from source code
@@ -212,14 +212,14 @@ $group
 		# params
 		#   string tobeWizzifiedUri
 		#     # The source code to get the AST
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     object AST
 
 	m getCodeAST
 		string tobeWizzifiedUri
-		string wizzifierName
+		string schemaOrExtension
 		callback
 		+
 		check_wz_callback( getCodeAST )
@@ -231,11 +231,11 @@ $group
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName
+                        @ schemaOrExtension schemaOrExtension
                         @ tobeWizzifiedUri tobeWizzifiedUri
         _ this.getCodeASTFromText
             @ tobeWizzifiedText
-            @ wizzifierName
+            @ schemaOrExtension
             @ callback
 
 	#
@@ -244,20 +244,20 @@ $group
 		# params
 		#   string tobeWizzifiedText
 		#     # The source code to be wizzified
-		#   string wizzifierName
+		#   string schemaOrExtension
 		#     # The name for retrieving the wizzifier
 		#   callback
 		#     string ittfText
     m getCodeASTFromText
 		string tobeWizzifiedText
-		string wizzifierName
+		string schemaOrExtension
 		callback
 		+
 		check_wz_callback( getCodeAST )
 		+
-		var wizzifier = this.getWizzifier(wizzifierName)
+		var wizzifier = this.getWizzifier(schemaOrExtension)
         if wizzifier.__is_error
-			set wizzifier.wizzifierName = wizzifierName
+			set wizzifier.schemaOrExtension = schemaOrExtension
             return callback(wizzifier)
 		+
         try
@@ -276,11 +276,11 @@ $group
                             {
                                 @ message 'See inner error'
                                 { parameter
-                                    @ wizzifierName wizzifierName
+                                    @ schemaOrExtension schemaOrExtension
                     _ callback(null, result)
         catch ex
             r_cb_wz_err( WizziFactoryError, getCodeAST, ex )
                 {
                     @ message 'See inner error'
                     { parameter
-                        @ wizzifierName wizzifierName                        
+                        @ schemaOrExtension schemaOrExtension

@@ -7,7 +7,7 @@ type Readonly<P, T> = {
     readonly [P in keyof T]: T[P];
 }
 
-export const costants: {
+export const constants: {
     packiFilePrefix: string,
     packiFilePrefixExtract: string,
     metaProductionTempFolder: string,
@@ -652,7 +652,7 @@ declare interface WizziFactory {
     * @param callback             Receives the builded [[WizziModelInstance]].
     */
     loadModel(
-        schemaName: string, ittfDocumentUri: string, loadContext: ModelLoadContext, callback: cb<WizziModel>
+        schemaName: string | null, ittfDocumentUri: string, loadContext: ModelLoadContext, callback: cb<WizziModel>
     ): void;
     /**
     * @method loadModelFromConfig
@@ -708,7 +708,7 @@ declare interface WizziFactory {
      * @param callback               Receives the text of the [[GeneratedArtifact]].
     */
     loadModelAndGenerateArtifact(
-        ittfDocumentUri: string, generationContext: GenerationContext, artifactName: string, callback?: cb<string>
+        ittfDocumentUri: string, generationContext: GenerationContext, artifactName: string | null, callback?: cb<string>
     ): void;
     /**
      * @method loadAndTransformModel
@@ -719,7 +719,7 @@ declare interface WizziFactory {
      * @param callback               Receives the Wizzi Model Instance or POJO of the [[TransformedModel]].
     */
     loadAndTransformModel(
-        ittfDocumentUri: string, context: TransformationContext, transformName: string, callback?: cb<object>
+        ittfDocumentUri: string, context: TransformationContext, transformName: string | null, callback?: cb<object>
     ): void;
     /**
      * @method generateFolderArtifacts
@@ -748,38 +748,48 @@ declare interface WizziFactory {
         modelTypesRequest: string, outputPackagePath: string, wzschemaName: string, mTreeBuildUpContext: object, callback: cb<object>
     ): void;
     /**
-     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param schemaOrExtension    The wizzi schema of the source code to be wizzified
     */
-    canWizzify(wizzifierName: string): boolean;
+    canWizzify(schemaOrExtension: string): boolean;
     /**
      * @method getWizziIttf
      * @description Wizzifies a source code from file
      * @param tobeWizzifiedUri The path to the source code to be wizzified
-     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param schemaOrExtension    The wizzi schema of the source code to be wizzified
      * @param callback         Receives error | Ittf document
     */
     getWizziIttf(
-        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
+        tobeWizzifiedUri: string, schemaOrExtension: string, callback: cb<any>
     ): void;
     /**
      * @method getWizziIttfFromText
      * @description Wizzifies a source code from text
      * @param tobeWizzifiedText The source code to be wizzified
-     * @param wizzifierName    The wizzi schema of the source code to be wizzified
+     * @param schemaOrExtension    The wizzi schema of the source code to be wizzified
      * @param callback         Receives error | Ittf document
     */
     getWizziIttfFromText(
-        tobeWizzifiedText: string, wizzifierName: string, callback: cb<any>
+        tobeWizzifiedText: string, schemaOrExtension: string, callback: cb<any>
     ): void;
     /**
      * @method getCodeAST
      * @description Retrieves the code AST of a source file to be wizzified
-     * @param tobeWizzifiedUri The path to the source code to be wizzified
-     * @param wizzifierName    The wizzi schema of the source code to be wizzified
-     * @param callback         Receives error | Ittf document
+     * @param tobeWizzifiedUri  The path to the source code to be wizzified
+     * @param schemaOrExtension The wizzi schema of the source code to be wizzified
+     * @param callback           Receives error | AST object
     */
     getCodeAST(
-        tobeWizzifiedUri: string, wizzifierName: string, callback: cb<any>
+        tobeWizzifiedUri: string, schemaOrExtension: string, callback: cb<any>
+    ): void;
+    /**
+     * @method getCodeASTFromText
+     * @description Retrieves the code AST of a source file to be wizzified
+     * @param tobeWizzifiedText    The source code to be wizzified
+     * @param schemaOrExtension    The wizzi schema of the source code to be wizzified
+     * @param callback           Receives error | AST object
+    */
+    getCodeASTFromText(
+        tobeWizzifiedText: string, schemaOrExtension: string, callback: cb<any>
     ): void;
     /**
      * @method executeJob

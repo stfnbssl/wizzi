@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\jsWizziRunner.js.ittf
-    utc time: Wed, 22 May 2024 19:30:52 GMT
+    utc time: Fri, 14 Jun 2024 14:30:07 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -1464,9 +1464,7 @@ function getMTreeBricksAndFunctionContextsFromAst(ast) {
     doAst(ast, contexts);
     // loog 'contexts', JSON.stringify(contexts, null, 2)
     Object.keys(contexts.mTreeBricks).forEach(brickKey => 
-    
         Object.keys(contexts.mTreeBricks[brickKey].functions).forEach(functionName => 
-        
             contexts.mTreeBricks[brickKey].functions[functionName] = contexts.mTreeBricks[brickKey].functions[functionName].split(',')
         )
     )
@@ -1476,7 +1474,6 @@ function getMTreeBricksAndFunctionContextsFromAst(ast) {
 function doAst(ast, contexts) {
     // loog ast.type
     Object.keys(ast).forEach((propName) => {
-    
         if (propName == 'body') {
             if (ast.id) {
                 contexts.currentBrick.stackPath.push(ast.id.name);
@@ -1490,7 +1487,6 @@ function doAst(ast, contexts) {
             if (verify.isArray(ast[propName])) {
                 const body = ast[propName];
                 body.forEach(item => 
-                
                     doAst(item, contexts)
                 )
             }

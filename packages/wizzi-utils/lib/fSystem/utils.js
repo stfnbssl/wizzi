@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\fSystem\utils.js.ittf
-    utc time: Fri, 31 May 2024 13:30:15 GMT
+    utc time: Wed, 12 Jun 2024 06:21:06 GMT
 */
 'use strict';
 var path = require('path');
@@ -31,7 +31,8 @@ md.fileInfoByPath = function(filePath, baseFolder) {
                 relFolder: relFolder, 
                 fullPath: filePath, 
                 destBasename: name + '.' + schema, 
-                destRelPath: relFolder.length > 0 ? relFolder + '/' + name + '.' + schema : name + '.' + schema
+                destRelPath: relFolder.length > 0 ? relFolder + '/' + name + '.' + schema : name + '.' + schema, 
+                seedname: ss.slice(0, -2).join('.')
              };
     }
     else {
@@ -44,7 +45,8 @@ md.fileInfoByPath = function(filePath, baseFolder) {
                 relFolder: relFolder, 
                 fullPath: filePath, 
                 destBasename: basename, 
-                destRelPath: relFolder.length > 0 ? relFolder + '/' + basename : basename
+                destRelPath: relFolder.length > 0 ? relFolder + '/' + basename : basename, 
+                seedname: basename
              };
     }
 }

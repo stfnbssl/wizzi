@@ -13,7 +13,7 @@ module wizzi@${wzCtx.version}.metasManager
     const wizziFactory = require('./wizziFactory')
     const inmemoryMetaPlugin = require('./inmemoryMetaPlugin')
 	const errors = require('../errors')
-    const costants = require('../costants')
+    const constants = require('../constants')
     const packiUtils = require('./packiUtils')
     const validation = require('./validation')
     const existsSync = fs.existsSync || path.existsSync
@@ -30,7 +30,7 @@ module wizzi@${wzCtx.version}.metasManager
             @ packiFilePrefixExtract
             @ metaProductionTempFolder
             @ metaProductionWizziFolder
-        = costants
+        = constants
     +
 	class MetasManager
 		

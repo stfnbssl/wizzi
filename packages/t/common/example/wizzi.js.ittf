@@ -57,8 +57,8 @@ $group
         var inmemoryMetaPlugin = require('../../../lib/services/inmemoryMetaPlugin')
         var packiUtils = require('../../../lib/services/packiUtils')
 
-    const packiFilePrefix = wizziIndex.costants.packiFilePrefix
-    const packiFilePrefixExtract = wizziIndex.costants.packiFilePrefixExtract
+    const packiFilePrefix = wizziIndex.constants.packiFilePrefix
+    const packiFilePrefixExtract = wizziIndex.constants.packiFilePrefixExtract
 
 	$hook imports
 

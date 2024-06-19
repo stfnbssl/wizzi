@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\examples\loader\step_3.js.ittf
-    utc time: Wed, 22 May 2024 19:30:53 GMT
+    utc time: Fri, 14 Jun 2024 14:30:07 GMT
 */
 'use strict';
 //
@@ -43,7 +43,7 @@ function getFSDocumentStore(callback) {
 }
 var Evaluator_Step_1 = function(step_callback) {
     heading1('EXAMPLE')
-    var ittfUri = path.join(__dirname, 'ittf', 'throw.html.ittf');
+    var ittfUri = path.join(__dirname, 'ittf', 'mixer_1.js.ittf');
     var productionManager = mocks.getProductionManager();
     getFSDocumentStore(function(err, fsStore) {
         if (err) {
