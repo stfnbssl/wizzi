@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiUtils.js.ittf
-    utc time: Wed, 15 May 2024 16:05:46 GMT
+    utc time: Wed, 03 Jul 2024 03:19:11 GMT
 */
 'use strict';
 
@@ -33,7 +33,6 @@ md.createPackifilesFromFs = function(folderPath, callback) {
         deep: true, 
         documentContent: true
      }, (err, files) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return callback(err);
@@ -59,13 +58,11 @@ md.jsonFsToPackiFiles = function(jsonFs, filterFolder, callback) {
     jsonFs.toFiles({
         removeRoot: packiFilePrefixExtract
      }, (err, files) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return callback(err);
         }
         files.forEach((file) => {
-        
             if (verify.isEmpty(filterFolder) || file.relPath.startsWith(filterFolder + '/')) {
                 const k = verify.isEmpty(filterFolder) ? file.relPath : file.relPath.substring(filterFolder.length + 1);
                 packiFiles[k] = {

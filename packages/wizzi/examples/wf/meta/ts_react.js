@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\meta\ts_react.js.ittf
-    utc time: Wed, 15 May 2024 16:05:48 GMT
+    utc time: Wed, 03 Jul 2024 03:19:13 GMT
 */
 'use strict';
 /**
@@ -35,7 +35,7 @@ var pluginsManager = require('../../../lib/services/pluginsManager');
 var metasManager = require('../../../lib/services/metasManager');
 var inmemoryMetaPlugin = require('../../../lib/services/inmemoryMetaPlugin');
 var packiUtils = require('../../../lib/services/packiUtils');
-const packiFilePrefix = wizziIndex.constantss.packiFilePrefix;
+const packiFilePrefix = wizziIndex.constants.packiFilePrefix;
 const packiFilePrefixExtract = wizziIndex.constants.packiFilePrefixExtract;
 const appsFolder = "C:/My/wizzi/stfnbssl/wizzi.apps/packages";
 function createWizziFactory(globalContext, callback) {
@@ -59,7 +59,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
     const jsonDocuments = [];
     // log 'createJsonWizziFactoryAndJsonFs'
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
             const filePath = ensurePackiFilePrefix(value);
             console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
@@ -71,7 +70,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
         if (err) {
             return callback(err);
         }
@@ -81,7 +79,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
             metaPlugins: metaPlugins, 
             verbose: true
          }, (err, wf) => {
-        
             if (err) {
                 return callback(err);
             }
@@ -98,7 +95,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     const jsonDocuments = [];
     console.log('createJsonWizziFactoryAndJsonFs', __filename);
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
             const filePath = ensurePackiFilePrefix(value);
             console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
@@ -110,7 +106,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
         if (err) {
             return callback(err);
         }
@@ -143,7 +138,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
              }, 
             verbose: true
          }, (err, wf) => {
-        
             if (err) {
                 return callback(err);
             }
@@ -160,7 +154,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
 function createJsonFs(packiFiles, callback) {
     const jsonDocuments = [];
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE') {
             const filePath = ensurePackiFilePrefix(value);
             jsonDocuments.push({
@@ -171,7 +164,6 @@ function createJsonFs(packiFiles, callback) {
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, result) => {
-    
         if (err) {
             return callback(err);
         }
@@ -188,7 +180,6 @@ function createPackifilesFromFs(folderPath, callback) {
         deep: true, 
         documentContent: true
      }, (err, files) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return callback(err);
@@ -251,7 +242,6 @@ var wf_meta_step_5 = function(step_callback) {
                         
                      }
                  }, (err, wizziPackiFiles) => {
-                
                     if (err) {
                         console.log("[31m%s[0m", err);
                         return ;

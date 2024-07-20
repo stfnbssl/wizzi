@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\examples\json\store\step_1.js.ittf
-    utc time: Thu, 09 May 2024 12:33:38 GMT
+    utc time: Wed, 03 Jul 2024 03:18:30 GMT
 */
 'use strict';
 //
@@ -75,7 +75,6 @@ var Json_Store_Step_1 = function(step_callback) {
             repoIndex.folderFilesInfoByPath('json:/folder1', vfile, {
                 deep: true
              }, (err, items) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);

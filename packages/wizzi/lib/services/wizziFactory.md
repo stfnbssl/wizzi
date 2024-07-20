@@ -49,4 +49,3 @@ A wizzi job is described by a wizzi model of schema `wzjob`, that can contain st
 
 ### Production manager creation
 An instance of a `wizzi/production/ProductionManager class allow a more fine grained control on productions. To a `wizzi/production/ProductionManager instance we can add wizzi job requests ('addWzjobRequest' method) and single step requests ('addProductionStepRequest' method), then we can execute the run method and obtain `wizzi/production/artifact/genContext` instances filled with the artifacts ready to be persisted, and, at the end, we can execute the 'persistToFile' method.
-

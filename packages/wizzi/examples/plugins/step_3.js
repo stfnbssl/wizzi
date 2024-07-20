@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\plugins\step_3.js.ittf
-    utc time: Wed, 15 May 2024 16:05:48 GMT
+    utc time: Wed, 03 Jul 2024 03:19:13 GMT
 */
 'use strict';
 /**
@@ -58,7 +58,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
     const jsonDocuments = [];
     // log 'createJsonWizziFactoryAndJsonFs'
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
             const filePath = ensurePackiFilePrefix(value);
             console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
@@ -70,7 +69,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
         if (err) {
             return callback(err);
         }
@@ -80,7 +78,6 @@ function createJsonWizziFactoryAndJsonFsWithOptions(packiFiles, plugins, metaPlu
             metaPlugins: metaPlugins, 
             verbose: true
          }, (err, wf) => {
-        
             if (err) {
                 return callback(err);
             }
@@ -97,7 +94,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     const jsonDocuments = [];
     console.log('createJsonWizziFactoryAndJsonFs', __filename);
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
             const filePath = ensurePackiFilePrefix(value);
             console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
@@ -109,7 +105,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-    
         if (err) {
             return callback(err);
         }
@@ -123,7 +118,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
              }, 
             verbose: true
          }, (err, wf) => {
-        
             if (err) {
                 return callback(err);
             }
@@ -140,7 +134,6 @@ function createJsonWizziFactoryAndJsonFs(packiFiles, callback) {
 function createJsonFs(packiFiles, callback) {
     const jsonDocuments = [];
     Object.keys(packiFiles).map((value) => {
-    
         if (packiFiles[value].type === 'CODE') {
             const filePath = ensurePackiFilePrefix(value);
             jsonDocuments.push({
@@ -151,7 +144,6 @@ function createJsonFs(packiFiles, callback) {
     }
     )
     wizziIndex.JsonComponents.createJsonFs(jsonDocuments, (err, result) => {
-    
         if (err) {
             return callback(err);
         }
@@ -168,7 +160,6 @@ function createPackifilesFromFs(folderPath, callback) {
         deep: true, 
         documentContent: true
      }, (err, files) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return callback(err);
@@ -215,13 +206,11 @@ var mm_step_3 = function(step_callback) {
     const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf";
     
     createMetasManager({}, (err, mm) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return ;
         }
         mm.getProvidedMetas((err, metaProvides) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return ;

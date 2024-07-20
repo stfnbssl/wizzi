@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\repo\errors.js.ittf
-    utc time: Thu, 09 May 2024 12:33:38 GMT
+    utc time: Wed, 03 Jul 2024 03:18:29 GMT
 */
 'use strict';
 var globalErrors = require('../errors');
@@ -22,4 +22,3 @@ RepoIOError.prototype.toString = function() {
 RepoIOError.prototype = Object.create(Error.prototype);
 RepoIOError.prototype.constructor = RepoIOError;
 md.RepoIOError = RepoIOError;
-

@@ -37,4 +37,3 @@ A code write artifact do not require a Wizzi Model as a main source model. The a
 
 ### Native artifact
 A native artifact is a source already coded in the synthax of a target language. It is not processed by the Wizzi factory. It can be copied as is in the destination folder or can be transpiled before copying.
-

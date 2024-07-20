@@ -27,4 +27,3 @@ using the property globalContext of the options parameter of* The wizzi.executeI
 Creating a wizziFactory instance always is preliminar to executing an mTree load, a Wizzi Model load or an Artifact Generation.
 
 The wizzi.executeInstanceJob method creates its own wizziFactory instance from the options that receives.
-

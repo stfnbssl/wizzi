@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Wed, 15 May 2024 16:05:46 GMT
+    utc time: Wed, 03 Jul 2024 03:19:11 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -1312,7 +1312,7 @@ class WizziFactory {
         
         // loog 'wizzi.wizziFactory.loadModelAndGenerateArtifact.requestContext.modelRequestContext', requestContext.modelRequestContext, 'artifactRequestContext', requestContext.artifactRequestContext
         
-        if (verify.isEmpty(artifactName)) {
+        if (artifactName == null || verify.isEmpty(artifactName)) {
             artifactName = this.mapIttfDocumentPathToDefaultArtifact(ittfDocumentUri)
             ;
         }
@@ -1507,13 +1507,11 @@ class WizziFactory {
         // loog 'wizzi.wizzifactory.generateFolderArtifacts.object.keys(modelRequestContext)', Object.keys(modelRequestContext)
         try {
             repo.folderFilesInfoByPath(ittfFolderUri, this.fileService, options, (err, items) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 async.mapSeries(items, (item, callback) => {
-                
                     var okGenerate = item.isIttfDocument && (options.generateFragments || (!!item.isFragment == false));
                     
                     // loog 'wizzi.wizzifactory.generateFolderArtifacts.generating.item.fullPath', item.fullPath
@@ -1546,7 +1544,6 @@ class WizziFactory {
                                 modelRequestContext: modelRequestContext, 
                                 artifactRequestContext: requestContext.artifactRequestContext
                              }, artifactName, (err, artifactText) => {
-                            
                                 if (err) {
                                     console.log("[31m%s[0m", err);
                                     return callback(err);
@@ -1558,7 +1555,6 @@ class WizziFactory {
                                     // loog 'generateFolderArtifacts.written', item.destRelPath
                                     // _ process.nextTick
                                     setTimeout(() => 
-                                    
                                         callback(null, path.join(options.destFolder, item.destRelPath))
                                     , 0)
                                 })
@@ -1574,14 +1570,12 @@ class WizziFactory {
                             }
                             // _ process.nextTick
                             setTimeout(() => 
-                            
                                 callback(null, path.join(options.destFolder, item.destRelPath))
                             , 0)
                         })
                     }
                 }
                 , (err, result) => {
-                
                     if (err) {
                         console.log("[31m%s[0m", 'Error in method wizzi.wizzifactory.generateFolderArtifacts');
                         console.log("[31m%s[0m", 'err', err);
@@ -1604,7 +1598,6 @@ class WizziFactory {
                         this.executeProductionSteps({
                             name: 'folder: ' + ittfFolderUri
                          }, productionStepConfigs, (err, result) => {
-                        
                             if (err) {
                                 console.log("[31m%s[0m", err);
                                 return callback(err);
@@ -1719,12 +1712,12 @@ class WizziFactory {
          params
          string tobeWizzifiedUri
          # The file path to the source to be wizzified
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          string ittfText
     */
-    getWizziIttf(tobeWizzifiedUri, wizzifierName, callback) {
+    getWizziIttf(tobeWizzifiedUri, schemaOrExtension, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback)
@@ -1735,9 +1728,9 @@ class WizziFactory {
                 'InvalidArgument', 'getWizziIttf', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
             ));
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return callback(error(
-                'InvalidArgument', 'getWizziIttf', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getWizziIttf', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             ));
         }
         
@@ -1745,9 +1738,9 @@ class WizziFactory {
             throw new Error(error('InvalidArgument', 'getWizziIttf', 'The callback parameter must be a function. Received: ' + callback));
         }
         
-        var wizzifier = this.getWizzifier(wizzifierName);
+        var wizzifier = this.getWizzifier(schemaOrExtension);
         if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
+            wizzifier.schemaOrExtension = schemaOrExtension;
             return callback(wizzifier);
         }
         
@@ -1758,12 +1751,12 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getWizziIttf', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName, 
+                        schemaOrExtension: schemaOrExtension, 
                         tobeWizzifiedUri: tobeWizzifiedUri
                      }
                  }, ex));
         } 
-        this.getWizziIttfFromText(tobeWizzifiedText, wizzifierName, callback)
+        this.getWizziIttfFromText(tobeWizzifiedText, schemaOrExtension, callback)
     }
     /**
          Async wizzify source code
@@ -1771,20 +1764,20 @@ class WizziFactory {
          params
          string tobeWizzifiedText
          # The source code to be wizzified
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          string ittfText
     */
-    getWizziIttfFromText(tobeWizzifiedText, wizzifierName, options, callback) {
+    getWizziIttfFromText(tobeWizzifiedText, schemaOrExtension, options, callback) {
         if (verify.isNotEmpty(tobeWizzifiedText) === false) {
             return error(
                 'InvalidArgument', 'getWizziIttfFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
             );
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return error(
-                'InvalidArgument', 'getWizziIttfFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getWizziIttfFromText', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             );
         }
         
@@ -1797,9 +1790,9 @@ class WizziFactory {
             throw new Error(error('InvalidArgument', 'getWizziIttfFromText', 'The callback parameter must be a function. Received: ' + callback));
         }
         
-        var wizzifier = this.getWizzifier(wizzifierName);
+        var wizzifier = this.getWizzifier(schemaOrExtension);
         if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
+            wizzifier.schemaOrExtension = schemaOrExtension;
             return callback(wizzifier);
         }
         
@@ -1816,7 +1809,7 @@ class WizziFactory {
                     return callback(error('WizziFactoryError', 'getWizziIttfFromText', {
                             message: 'See inner error', 
                             parameter: {
-                                wizzifierName: wizzifierName
+                                schemaOrExtension: schemaOrExtension
                              }
                          }, err));
                 }
@@ -1827,7 +1820,7 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getWizziIttfFromText', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName
+                        schemaOrExtension: schemaOrExtension
                      }
                  }, ex));
         } 
@@ -1838,12 +1831,12 @@ class WizziFactory {
          params
          string tobeWizzifiedUri
          # The source code to be wizzified
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          object ittfTree
     */
-    getWizziTree(tobeWizzifiedUri, wizzifierName, callback) {
+    getWizziTree(tobeWizzifiedUri, schemaOrExtension, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getWizziTree', 'The callback parameter must be a function. Received: ' + callback)
@@ -1854,9 +1847,9 @@ class WizziFactory {
                 'InvalidArgument', 'getWizziTree', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
             ));
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return callback(error(
-                'InvalidArgument', 'getWizziTree', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getWizziTree', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             ));
         }
         
@@ -1871,12 +1864,12 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getWizziTree', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName, 
+                        schemaOrExtension: schemaOrExtension, 
                         tobeWizzifiedUri: tobeWizzifiedUri
                      }
                  }, ex));
         } 
-        this.getWizziTreeFromText(tobeWizzifiedText, wizzifierName, callback)
+        this.getWizziTreeFromText(tobeWizzifiedText, schemaOrExtension, callback)
     }
     /**
          Async wizzify source code and return the wizzified tree
@@ -1884,12 +1877,12 @@ class WizziFactory {
          params
          string tobeWizzifiedText
          # The source code to be wizzified
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          string ittfText
     */
-    getWizziTreeFromText(tobeWizzifiedText, wizzifierName, callback) {
+    getWizziTreeFromText(tobeWizzifiedText, schemaOrExtension, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getWizziTreeFromText', 'The callback parameter must be a function. Received: ' + callback)
@@ -1900,9 +1893,9 @@ class WizziFactory {
                 'InvalidArgument', 'getWizziTreeFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
             ));
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return callback(error(
-                'InvalidArgument', 'getWizziTreeFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getWizziTreeFromText', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             ));
         }
         
@@ -1910,9 +1903,9 @@ class WizziFactory {
             throw new Error(error('InvalidArgument', 'getWizziTreeFromText', 'The callback parameter must be a function. Received: ' + callback));
         }
         
-        var wizzifier = this.getWizzifier(wizzifierName);
+        var wizzifier = this.getWizzifier(schemaOrExtension);
         if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
+            wizzifier.schemaOrExtension = schemaOrExtension;
             return callback(wizzifier);
         }
         
@@ -1928,7 +1921,7 @@ class WizziFactory {
                     return callback(error('WizziFactoryError', 'getWizziTreeFromText', {
                             message: 'See inner error', 
                             parameter: {
-                                wizzifierName: wizzifierName
+                                schemaOrExtension: schemaOrExtension
                              }
                          }, err));
                 }
@@ -1939,7 +1932,7 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getWizziTreeFromText', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName
+                        schemaOrExtension: schemaOrExtension
                      }
                  }, ex));
         } 
@@ -1950,12 +1943,12 @@ class WizziFactory {
          params
          string tobeWizzifiedUri
          # The source code to get the AST
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          object AST
     */
-    getCodeAST(tobeWizzifiedUri, wizzifierName, callback) {
+    getCodeAST(tobeWizzifiedUri, schemaOrExtension, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback)
@@ -1966,9 +1959,9 @@ class WizziFactory {
                 'InvalidArgument', 'getCodeAST', { parameter: 'tobeWizzifiedUri', message: 'The tobeWizzifiedUri parameter must be a string. Received: ' + tobeWizzifiedUri }
             ));
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return callback(error(
-                'InvalidArgument', 'getCodeAST', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getCodeAST', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             ));
         }
         
@@ -1983,12 +1976,12 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getCodeAST', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName, 
+                        schemaOrExtension: schemaOrExtension, 
                         tobeWizzifiedUri: tobeWizzifiedUri
                      }
                  }, ex));
         } 
-        this.getCodeASTFromText(tobeWizzifiedText, wizzifierName, callback)
+        this.getCodeASTFromText(tobeWizzifiedText, schemaOrExtension, callback)
     }
     /**
          Async wizzify source code
@@ -1996,12 +1989,12 @@ class WizziFactory {
          params
          string tobeWizzifiedText
          # The source code to be wizzified
-         string wizzifierName
+         string schemaOrExtension
          # The name for retrieving the wizzifier
          callback
          string ittfText
     */
-    getCodeASTFromText(tobeWizzifiedText, wizzifierName, callback) {
+    getCodeASTFromText(tobeWizzifiedText, schemaOrExtension, callback) {
         if (typeof(callback) !== 'function') {
             throw new Error(
                 error('InvalidArgument', 'getCodeASTFromText', 'The callback parameter must be a function. Received: ' + callback)
@@ -2012,9 +2005,9 @@ class WizziFactory {
                 'InvalidArgument', 'getCodeASTFromText', { parameter: 'tobeWizzifiedText', message: 'The tobeWizzifiedText parameter must be a string. Received: ' + tobeWizzifiedText }
             ));
         }
-        if (verify.isNotEmpty(wizzifierName) === false) {
+        if (verify.isNotEmpty(schemaOrExtension) === false) {
             return callback(error(
-                'InvalidArgument', 'getCodeASTFromText', { parameter: 'wizzifierName', message: 'The wizzifierName parameter must be a string. Received: ' + wizzifierName }
+                'InvalidArgument', 'getCodeASTFromText', { parameter: 'schemaOrExtension', message: 'The schemaOrExtension parameter must be a string. Received: ' + schemaOrExtension }
             ));
         }
         
@@ -2022,9 +2015,9 @@ class WizziFactory {
             throw new Error(error('InvalidArgument', 'getCodeAST', 'The callback parameter must be a function. Received: ' + callback));
         }
         
-        var wizzifier = this.getWizzifier(wizzifierName);
+        var wizzifier = this.getWizzifier(schemaOrExtension);
         if (wizzifier.__is_error) {
-            wizzifier.wizzifierName = wizzifierName;
+            wizzifier.schemaOrExtension = schemaOrExtension;
             return callback(wizzifier);
         }
         
@@ -2040,7 +2033,7 @@ class WizziFactory {
                     return callback(error('WizziFactoryError', 'getCodeAST', {
                             message: 'See inner error', 
                             parameter: {
-                                wizzifierName: wizzifierName
+                                schemaOrExtension: schemaOrExtension
                              }
                          }, err));
                 }
@@ -2051,7 +2044,7 @@ class WizziFactory {
             return callback(error('WizziFactoryError', 'getCodeAST', {
                     message: 'See inner error', 
                     parameter: {
-                        wizzifierName: wizzifierName
+                        schemaOrExtension: schemaOrExtension
                      }
                  }, ex));
         } 
@@ -2192,19 +2185,16 @@ class WizziFactory {
             wizzifier.getWizziIttf(tobeWizzifiedText, {
                 wf: this, 
                 onSyntax: syntax => 
-                
                     // loog 'wizzifyWithCompare', 'input syntax:\n', JSON.stringify(syntax, null, 2)
                     sourceSyntax = syntax
                 
              }, (err, wizzified) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
                 }
                 // loog 'wizzifyWithCompare', 'wizzified input:\n', wizzified
                 this.loadModelAndGenerateArtifactFromText(wizzified, {}, artifactName, (err, generatedFromWizzified) => {
-                
                     if (err) {
                         console.log("[31m%s[0m", err);
                         return callback(err);
@@ -2213,12 +2203,10 @@ class WizziFactory {
                     wizzifier.getWizziIttf(generatedFromWizzified, {
                         wf: this, 
                         onSyntax: syntax => 
-                        
                             // loog 'wizzifyWithCompare', 'output syntax:\n', JSON.stringify(syntax, null, 2)
                             wizzifiedGeneratedSyntax = syntax
                         
                      }, (err, wizzified2) => {
-                    
                         if (err) {
                             console.log("[31m%s[0m", err);
                             return callback(err);
@@ -2688,14 +2676,12 @@ class WizziFactory {
         this.loadModel('ittf', ittfMetaFilePath, {
             mTreeBuildUpContext: context.modelRequestContext
          }, (err, metaFileModel) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             var f_count = 0;
             (function next() {
-            
                 var child = metaFileModel.children[f_count++];
                 
                 /**
@@ -2705,7 +2691,6 @@ class WizziFactory {
                 */
                 if (!child) {
                     return that.getPackiFilesFromJsonFactory('', (err, readyPackiFiles) => {
-                        
                             if (err) {
                                 console.log("[31m%s[0m", err);
                                 return callback(err);
@@ -2724,7 +2709,6 @@ class WizziFactory {
                                 copyExclude: options.copyExclude || [], 
                                 useMultiPartContext: true
                              }, (err, result) => {
-                            
                                 if (err) {
                                     console.log("[31m%s[0m", err);
                                     return callback(err);
@@ -2738,7 +2722,6 @@ class WizziFactory {
                 if (child.name == '$file') {
                     try {
                         processIttfFile(child, tempFolder, (err, notUsed) => {
-                        
                             if (err) {
                                 console.log("[31m%s[0m", err);
                                 return callback(err);
@@ -2759,7 +2742,6 @@ class WizziFactory {
                 else if (child.name == '$plain') {
                     try {
                         processPlainFile(child, tempFolder, (err, notUsed) => {
-                        
                             if (err) {
                                 console.log("[31m%s[0m", err);
                                 return callback(err);
@@ -2805,7 +2787,6 @@ class WizziFactory {
             var outputPath = path.join(tempFolder, node.value);
             if (node.children.length == 1 && node.children[0].name == '$from') {
                 fileService.read(packiFilePrefix + node.children[0].value, (err, content) => {
-                
                     if (err) {
                         console.log("[31m%s[0m", err);
                         return callback(err);
@@ -2875,7 +2856,6 @@ class WizziFactory {
         const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf";
         
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
@@ -2883,7 +2863,6 @@ class WizziFactory {
             mm.getMetaProductionStarter({
                 metaCtx: options.metaCtx
              }, (err, metaPackiFiles) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -2904,7 +2883,6 @@ class WizziFactory {
                 this.createJsonFactoryAndJsonFs(metaPackiFiles, {
                     globalContext: options.globalContext || {}
                  }, (err, wf_and_jsonFs) => {
-                
                     if (err) {
                         console.log("[31m%s[0m", err);
                         return callback(err);
@@ -2921,13 +2899,11 @@ class WizziFactory {
                         tempFolder: packiFilePrefix + tempFolder, 
                         destFolder: packiFilePrefix + destFolder
                      }, (err, generatedFilePaths) => {
-                    
                         if (err) {
                             console.log("[31m%s[0m", err);
                             return callback(err);
                         }
                         packiUtils.jsonFsToPackiFiles(wf_and_jsonFs.jsonFs, destFolder, (err, wizziPackiFiles) => {
-                        
                             if (err) {
                                 console.log("[31m%s[0m", err);
                                 return callback(err);
@@ -3009,7 +2985,6 @@ class WizziFactory {
             globalContext: globalContext || {}, 
             verbose: this.verbose
          }, (err, metasManager) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
@@ -3026,13 +3001,11 @@ class WizziFactory {
             );
         };
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             mm.getProvidedMetas((err, providedMetas) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3061,13 +3034,11 @@ class WizziFactory {
         };
         // loog 'wizziFactory.getMetaParameters.options', options
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             mm.getMetaParametersStarter(options || {}, (err, metaParameters) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3085,13 +3056,11 @@ class WizziFactory {
             );
         };
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             mm.getMetaProductionStarter(options | {}, (err, metaProductions) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3109,13 +3078,11 @@ class WizziFactory {
             );
         };
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             mm.getCategoryAndMetaProductionStarter(options | {}, (err, categoriesAndMetaProductions) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3133,13 +3100,11 @@ class WizziFactory {
             );
         };
         this.getMetasManager({}, (err, mm) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             mm.getProvidedMetas((err, providedMetas) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3192,7 +3157,6 @@ class WizziFactory {
         ];
         try {
             JsonComponents.createJsonFsData(documents, (err, jsonFsData) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -3238,7 +3202,6 @@ class WizziFactory {
         
         const jsonDocuments = [];
         Object.keys(packiFiles).map((key) => {
-        
             if (packiFiles[key].type === 'CODE' && verify.isNotEmpty(packiFiles[key].contents)) {
                 const filePath = packiUtils.ensurePackiFilePrefix(key);
                 jsonDocuments.push({
@@ -3249,14 +3212,12 @@ class WizziFactory {
         }
         )
         JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             options.jsonFs = jsonFs;
             this.createJsonFactory(options, (err, wf) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\cheatsheet.js.ittf
-    utc time: Wed, 15 May 2024 16:05:46 GMT
+    utc time: Wed, 03 Jul 2024 03:19:11 GMT
 */
 'use strict';
 
@@ -38,14 +38,12 @@ const md = module.exports = {};
 md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
     
     wizziFactory.createJsonFactoryAndJsonFs(packiFiles, {}, (err, jsonFactoryAndJsonFs) => {
-    
         if (err) {
             console.log("[31m%s[0m", err);
             return callback(err);
         }
         var jsonFactory = jsonFactoryAndJsonFs.wf;
         jsonFactory.loadMTree(packi.ensurePackiFilePrefix('index.ittf.ittf'), {}, (err, mTree) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
@@ -164,7 +162,6 @@ md.buildCheatsheet = function(wizziFactory, name, packiFiles, callback) {
                 var item_count = 0;
                 // loog "Processing item", item.title
                 (function next() {
-                
                     var item = _all_items[item_count++];
                     if (!item) {
                         return callback(null, result);
@@ -289,7 +286,6 @@ function prettifyError(err) {
 function prettifyItems(_all_items, callback) {
     var item_count = 0;
     (function nextItem() {
-    
         var item = _all_items[item_count++];
         if (!item) {
             return callback(null);
@@ -306,11 +302,9 @@ function prettifyItems(_all_items, callback) {
             }
             var fragment_count = 0;
             (function nextFragment() {
-            
                 var fragment = item.fragments[fragment_count++];
                 if (!fragment) {
                     process.nextTick(() => 
-                    
                         nextItem()
                     )
                     return ;

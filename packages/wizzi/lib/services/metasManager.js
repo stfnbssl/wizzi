@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Wed, 15 May 2024 16:05:46 GMT
+    utc time: Wed, 03 Jul 2024 03:19:11 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -124,13 +124,11 @@ class MetasManager {
             console.log("[33m%s[0m", timeNow, "Starting ", this.__type, 'version', this.__version);
         }
         this.loadPlugins(this.metaPluginsOptions, (err, plugins) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
             }
             const register = (i) => {
-            
                 if (i >= plugins.length) {
                     return callback(null, this);
                 }
@@ -259,7 +257,6 @@ class MetasManager {
                     } 
                 }
                 (function(next) {
-                
                     if (err) {
                         var mp = verify.endsWith(modulePath, '.js') ? modulePath : modulePath + '.js';
                         resolvePackage(pluginsBaseFolder, mp, next);
@@ -373,7 +370,6 @@ class MetasManager {
             ));
         }
         metaPluginModule.createMetaPlugin({}, (err, metaPlugin) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
@@ -501,13 +497,11 @@ class MetasManager {
         };
         var result = {};
         const search = (i) => {
-        
             if (i >= this.metaPlugins.length) {
                 return callback(null, result);
             }
             var metaPlugin = this.metaPlugins[i];
             metaPlugin.getMetaContextDefsStarter(options, (err, metaContextDefs) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -547,7 +541,6 @@ class MetasManager {
         };
         var result = {};
         const search = (i) => {
-        
             if (i >= this.metaPlugins.length) {
                 return callback(null, result);
             }
@@ -555,7 +548,6 @@ class MetasManager {
             metaPlugin.getMetaProductionStarter({
                 metaCtx: options.metaCtx || {}
              }, (err, metaProduction) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -593,7 +585,6 @@ class MetasManager {
         };
         var result = [];
         const search = (i) => {
-        
             if (i >= this.metaPlugins.length) {
                 return callback(null, result);
             }
@@ -630,7 +621,6 @@ class MetasManager {
             pluginVersion = null,
             result = null;
         const search = (i) => {
-        
             if (i >= this.metaPlugins.length) {
                 const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ');
                 log.error('getMetaProduction. ' + message);
@@ -639,7 +629,6 @@ class MetasManager {
             var metaPlugin = this.metaPlugins[i];
             // loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
             metaPlugin.getMetaProduction(productionName, (err, metaProduction) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);
@@ -677,7 +666,6 @@ class MetasManager {
          };
         // loog '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
         const search = (ndx) => {
-        
             if (ndx >= this.metaPlugins.length) {
                 return callback(null, provides);
             }
@@ -728,7 +716,6 @@ class MetasManager {
     createJsonWizziFactoryAndJsonFs(wfPluginsOptions, packiFiles, callback) {
         const jsonDocuments = [];
         Object.keys(packiFiles).map((value) => {
-        
             
             // loog mdDisplayName + '.createJsonWizziFactoryAndJsonFs.filePath', filePath
             if (packiFiles[value].type === 'CODE' && verify.isNotEmpty(packiFiles[value].contents)) {
@@ -741,7 +728,6 @@ class MetasManager {
         }
         )
         JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
-        
             if (err) {
                 console.log("[31m%s[0m", err);
                 return callback(err);
@@ -754,7 +740,6 @@ class MetasManager {
                     storeJsonFs: jsonFs
                  }
              }, (err, wf) => {
-            
                 if (err) {
                     console.log("[31m%s[0m", err);
                     return callback(err);

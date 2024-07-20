@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-repo\.wizzi\lib\json\index.js.ittf
-    utc time: Thu, 09 May 2024 12:33:38 GMT
+    utc time: Wed, 03 Jul 2024 03:18:29 GMT
 */
 'use strict';
 var async = require('async');
@@ -54,7 +54,6 @@ md.createJsonFsByJsonFsData = function(jsonFsData, callback) {
 md.createJsonFsData = function(documents, callback) {
     const doc = this.createDocumentManager();
     async.map(documents, (document, callback) => 
-    
         doc.writeFile(document.path, document.content, callback)
     , function(err, notUsed) {
         if (err) {
@@ -67,7 +66,6 @@ md.createJsonFsData = function(documents, callback) {
 md.addToJsonFsData = function(jsonFsData, documents, callback) {
     const doc = this.createDocumentManager(jsonFsData);
     async.map(documents, (document, callback) => 
-    
         doc.writeFile(document.path, document.content, callback)
     , function(err, notUsed) {
         if (err) {
@@ -80,7 +78,6 @@ md.addToJsonFsData = function(jsonFsData, documents, callback) {
 md.packiFilesToJsonDocuments = function(files) {
     const jsonDocuments = [];
     Object.keys(files).map((value) => {
-    
         if (files[value].type === 'CODE' && files[value].contents && files[value].contents.length > 0) {
             const filePath = packi.ensurePackiFilePrefix(value);
             jsonDocuments.push({

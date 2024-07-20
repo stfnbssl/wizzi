@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
-    utc time: Wed, 15 May 2024 16:05:48 GMT
+    utc time: Wed, 03 Jul 2024 03:19:13 GMT
 */
 'use strict';
 var path = require('path');
@@ -97,7 +97,6 @@ function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wf
 }
 function getFiles(srcpath, schema) {
     return fs.readdirSync(srcpath).filter((file) => {
-        
             return fs.lstatSync(path.join(srcpath, file)).isFile() && verify.endsWith(file, (schema === 'ittf' ? '.ittf' : '.' + schema + '.ittf'));
         }
         )

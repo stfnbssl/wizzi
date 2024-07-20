@@ -7,4 +7,3 @@ Describes a set of models
 calls the method `getFiles` the files contained in these folders
 are skipped unless the value of the parameter `options.final` is true.
 </p>
-
