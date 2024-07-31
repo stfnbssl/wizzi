@@ -257,6 +257,13 @@ $group
                 @ globalContext globalContext || {}
             @ callback
 
+    function createPackiManager
+        param callback
+
+        _ wizziIndex.packiManager
+            {
+            @ callback
+
     $hook functions
 
 	var ${opt.name}

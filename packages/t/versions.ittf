@@ -5,12 +5,12 @@ $group
         versions['@wizzi/helpers@next'] = '0.8.3';
         versions['@wizzi/utils'] = '0.8.24';
         versions['@wizzi/utils@next'] = '0.8.25';
-        versions['@wizzi/mtree'] = '0.8.26';
-        versions['@wizzi/mtree@next'] = '0.8.27';
+        versions['@wizzi/mtree'] = '0.8.28';
+        versions['@wizzi/mtree@next'] = '0.8.29';
         versions['@wizzi/repo'] = '0.8.24';
         versions['@wizzi/repo@next'] = '0.8.25';
-        versions['@wizzi/factory'] = '0.8.38';
-        versions['@wizzi/factory@next'] = '0.8.39';
+        versions['@wizzi/factory'] = '0.8.40';
+        versions['@wizzi/factory@next'] = '0.8.41';
         
         versions['isomorphic-git'] = '1.19.2';
         versions['wizzi-js'] = '0.7.13';

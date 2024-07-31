@@ -13,6 +13,7 @@
 	var Filesystem = require('./lib/io/filesystem')
 	var wizziFactory = require('./lib/services/wizziFactory')
     var metasManager = require('./lib/services/metasManager')
+	var packiManager = require('./lib/services/packiManager')
 	
 	+
 	var md = module.exports = {}
@@ -153,6 +154,14 @@
 			{ options
 			callback
 			_ metasManager.createManager
+				@ options
+				@ callback
+	+
+	set md.packiManager
+		function
+			{ options
+			callback
+			_ packiManager.createManager
 				@ options
 				@ callback
     +

@@ -12,6 +12,8 @@ $group
         #        # Context data for the artifact generation
         #   { options
         #     boolean copyNonIttf
+        #     boolean generateFragments
+        #     boolean useMultiPartContext
         #   function callback
         # returns
         #   [
@@ -103,7 +105,7 @@ $group
                                                                     @ options.destFolder
                                                                     @ item.destRelPath
                                                         @ 0
-                            else
+                            elif options.copyNonIttf && item.isIttfDocument == false
                                 # loog 'generateFolderArtifacts.copying', item.fullPath
                                 _ this.fileService.copyFile
                                     @ item.fullPath
@@ -122,6 +124,9 @@ $group
                                                         @ options.destFolder
                                                         @ item.destRelPath
                                             @ 0
+                            else
+                                _ callback
+                                    @ null
 
                         a_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
                             if options.useMultiPartContext

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiUtils.js.ittf
-    utc time: Wed, 03 Jul 2024 03:19:11 GMT
+    utc time: Wed, 31 Jul 2024 14:38:14 GMT
 */
 'use strict';
 
@@ -10,6 +10,8 @@ const file = require('@wizzi/utils').file;
 const vfile = require('@wizzi/utils').vfile;
 const verify = require('@wizzi/utils').verify;
 const constants = require('../constants');
+const JsonComponents = require('@wizzi/repo').JsonComponents;
+let wizziFactory = null;
 
 const mdDisplayName = "wizzi.services.packiUtils";
 
@@ -53,6 +55,10 @@ md.createPackifilesFromFs = function(folderPath, callback) {
 ;
 
 md.jsonFsToPackiFiles = function(jsonFs, filterFolder, callback) {
+    if (!callback) {
+        callback = filterFolder;
+        filterFolder = '';
+    }
     filterFolder = filterFolder || '';
     const packiFiles = {};
     jsonFs.toFiles({
@@ -123,6 +129,88 @@ md.createMetaPackifilesFromWizziHub = function(metaProductions) {
                 var newk = 'plainDocuments/' + mp.productionName + '/' + k;
                 result[newk] = mp.plainDocuments[k];
             }
+        }
+    }
+    return result;
+}
+;
+md.createJsonWizziFactoryAndJsonFs = function(packiFiles, plugins, metaPlugins, callback) {
+    const jsonDocuments = [];
+    Object.keys(packiFiles).map((value) => {
+        if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
+            const filePath = md.ensurePackiFilePrefix(value);
+            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
+            jsonDocuments.push({
+                path: filePath, 
+                content: packiFiles[value].contents
+             })
+        }
+    }
+    )
+    JsonComponents.createJsonFs(jsonDocuments, (err, jsonFs) => {
+        if (err) {
+            return callback(err);
+        }
+        if (!wizziFactory) {
+            wizziFactory = require('./wizziFactory');
+        }
+        console.log('wizziFactory', wizziFactory, __filename);
+        wizziFactory.createFactory({
+            repo: {
+                storeKind: 'json', 
+                storeJsonFs: jsonFs
+             }, 
+            plugins: plugins, 
+            metaPlugins: metaPlugins || {}, 
+            verbose: false
+         }, (err, wf) => {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                wf: wf, 
+                jsonFs: jsonFs
+             })
+        }
+        )
+    }
+    )
+}
+;
+md.mountToPackiFolder = function(packiFiles, packiFilesTobeMounted, folderName) {
+    for (var k in packiFilesTobeMounted) {
+        let basename = k;
+        let prefix = '';
+        if (k.startsWith(packiFilePrefix)) {
+            basename = k.substring(packiFilePrefix.length);
+            prefix = packiFilePrefix;
+        }
+        packiFiles[prefix + folderName + '/' + basename] = packiFilesTobeMounted[k];
+    }
+    return packiFiles;
+}
+;
+md.unmountPackiFolder = function(packiFiles, folderName) {
+    const result = {};
+    for (var k in packiFiles) {
+        let basename = k;
+        let prefix = '';
+        if (k.startsWith(packiFilePrefix)) {
+            basename = k.substring(packiFilePrefix.length);
+            prefix = packiFilePrefix;
+        }
+        if (basename.startsWith(folderName)) {
+            result[prefix + basename.substring(folderName.length+1)] = packiFiles[k];
+        }
+    }
+    return result;
+}
+;
+md.getAddedFiles = function(packiFiles, packiFilesAfter) {
+    const result = {};
+    for (var k in packiFilesAfter) {
+        if (!packiFiles[k]) {
+            result[k] = packiFilesAfter[k];
         }
     }
     return result;

@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\factoryServiceContext.js.ittf
-    utc time: Wed, 03 Jul 2024 03:19:11 GMT
+    utc time: Wed, 31 Jul 2024 14:38:14 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -11,7 +11,7 @@ const file = require('@wizzi/utils').file;
 class FactoryServiceContext {
     constructor() {
         this.__type = 'FactoryServiceContext';
-        this.__version = '0.8.38';
+        this.__version = '0.8.41';
         this.debugObjects = {};
     }
     addDebugObject(kind, key, value) {
@@ -49,7 +49,7 @@ class FactoryServiceContext {
         if (options.destFolder) {
             for (var k in this.debugObjects) {
                 
-                // loog 'wizzi@0.8.38.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
+                // loog 'wizzi@0.8.41.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
                 if (this.debugObjects[k].kind == 'file') {
                     file.write(path.join(options.destFolder, this.debugObjects[k].key), this.debugObjects[k].value)
                 }
@@ -64,7 +64,7 @@ class FactoryServiceContext {
         if (options.destFolder) {
             for (var k in this.debugObjects) {
                 
-                // loog 'wizzi@0.8.38.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
+                // loog 'wizzi@0.8.41.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
                 if (this.debugObjects[k].kind == 'packi') {
                     writePackifiles(path.join(options.destFolder, this.debugObjects[k].key), this.debugObjects[k].value)
                 }
@@ -110,7 +110,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.38.factoryServiceContext.' + method,
+        method: 'wizzi@0.8.41.factoryServiceContext.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

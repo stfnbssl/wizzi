@@ -1,0 +1,47 @@
+$group
+
+	#
+		# Prettify the ittf code of a PackiFiles object
+		#
+		# params
+		#   { files
+        #     :ref PackiFiles
+		#   callback
+		#     { prettifiedFiles
+        #       :ref PackiFiles
+
+	m prettify
+		param files
+		callback
+        + 
+        var prettifiedFiles = {}
+		var items = Object.keys(files)
+        var item_count = 0
+        iife nextItem
+            var item = items[item_count++]
+            if !item
+				return
+					_ callback
+						@ null
+						@ prettifiedFiles
+            if files[item].type == "CODE"
+				_ pretty.prettifyIttfHtmlFromString
+					@ files[item].contents
+					f_cb_no_throw( ittfpretty )
+						if err
+							set prettifiedFiles[item]
+								{
+									@ type "CODE"
+									@ contents JSON.stringify(err, null, 4)
+						else
+							set prettifiedFiles[item]
+								{
+									@ type "CODE"
+									@ contents ittfpretty
+						return
+							_ process.nextTick
+								=>
+									_ nextItem
+			else
+				return
+					_ nextItem

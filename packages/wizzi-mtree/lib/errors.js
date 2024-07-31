@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\errors.js.ittf
-    utc time: Wed, 03 Jul 2024 03:16:57 GMT
+    utc time: Tue, 30 Jul 2024 07:41:30 GMT
 */
 'use strict';
 var util = require('util');
@@ -144,14 +144,21 @@ class WizziError extends Error {
         var msg = [];
         msg.push(chalk.red('Error: ' + this.message));
         msg.push(chalk.red('  name: ' + this.errorName));
-        if (this.data.node) {
-            msg.push(chalk.yellow('  row: ' + this.data.node.row + ', col: ' + this.data.node.col));
+        var node = this.data.node || (this.data.jswizzi ? this.data.jswizzi.node : null);
+        if (node) {
+            msg.push(chalk.yellow('  row: ' + node.row + ', col: ' + node.col));
         }
         if (this.data.mTreeBrick) {
             msg.push(chalk.yellow('  uri: ' + this.data.mTreeBrick.uri));
         }
         else if (this.data.uri) {
             msg.push(chalk.yellow('  uri: ' + this.data.uri));
+        }
+        else if (this.data.mtree) {
+            msg.push(chalk.yellow('  uri: ' + this.data.mtree.ittfDocumentUri));
+            if (this.data.mtree.mixerIttfDocumentUri) {
+                msg.push(chalk.yellow('  mixer uri: ' + this.data.mtree.mixerIttfDocumentUri));
+            }
         }
         else {
             msg.push(chalk.yellow('  uri: unknown'));
@@ -160,6 +167,13 @@ class WizziError extends Error {
             var i, i_items=this.errorLines, i_len=this.errorLines.length, line;
             for (i=0; i<i_len; i++) {
                 line = this.errorLines[i];
+                msg.push(chalk.yellow('  ' + line));
+            }
+        }
+        if (this.data.hint && this.data.hint.mTreeBuildUpScriptErrorLines && this.data.hint.mTreeBuildUpScriptErrorLines.lines) {
+            var i, i_items=this.data.hint.mTreeBuildUpScriptErrorLines.lines, i_len=this.data.hint.mTreeBuildUpScriptErrorLines.lines.length, line;
+            for (i=0; i<i_len; i++) {
+                line = this.data.hint.mTreeBuildUpScriptErrorLines.lines[i];
                 msg.push(chalk.yellow('  ' + line));
             }
         }

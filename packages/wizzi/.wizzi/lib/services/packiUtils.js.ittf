@@ -5,6 +5,8 @@ module wizzi@${wzCtx.version}.packiUtils
     const vfile = require('@wizzi/utils').vfile
 	const verify = require('@wizzi/utils').verify
     const constants = require('../constants')
+    const JsonComponents = require('@wizzi/repo').JsonComponents
+    let wizziFactory = null
     +
     const mdDisplayName = "wizzi.services.packiUtils"
     +
@@ -50,6 +52,9 @@ module wizzi@${wzCtx.version}.packiUtils
             param jsonFs
             param filterFolder
             param callback
+            if !callback
+                set callback = filterFolder
+                set filterFolder = ''
             set filterFolder = filterFolder || ''
             const packiFiles
                 {
@@ -115,4 +120,88 @@ module wizzi@${wzCtx.version}.packiUtils
                         set result[newk] = mp.plainDocuments[k]
             return result
 
-            
+    set md.createJsonWizziFactoryAndJsonFs
+        function 
+            param packiFiles
+            param plugins
+            param metaPlugins
+            param callback
+            const jsonDocuments
+                [
+            _ Object.keys(packiFiles).map
+                =>
+                    param value
+                    if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
+                        const filePath = md.ensurePackiFilePrefix(value)
+                        log 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                        _ jsonDocuments.push
+                            {
+                                @ path filePath
+                                @ content packiFiles[value].contents
+            _ JsonComponents.createJsonFs
+                @ jsonDocuments
+                =>
+                    param err
+                    param jsonFs
+                    if err
+                        return callback(err)
+                    if !wizziFactory
+                        set wizziFactory = require('./wizziFactory')
+                    log 'wizziFactory', wizziFactory
+                    _ wizziFactory.createFactory
+                        {
+                            { repo
+                                @ storeKind 'json'
+                                @ storeJsonFs jsonFs
+                            @ plugins plugins
+                            @ metaPlugins metaPlugins || {}
+                            @ verbose false
+                        =>
+                            param err
+                            param wf
+                            if err
+                                return callback(err)
+                            _ callback
+                                @ null
+                                {
+                                    @ wf wf
+                                    @ jsonFs jsonFs
+
+    set md.mountToPackiFolder
+        function 
+            param packiFiles
+            param packiFilesTobeMounted
+            param folderName
+            for var k in packiFilesTobeMounted
+                let basename = k
+                let prefix = ''
+                if k.startsWith(packiFilePrefix)
+                    set basename = k.substring(packiFilePrefix.length)
+                    set prefix = packiFilePrefix
+                set packiFiles[prefix + folderName + '/' + basename] = packiFilesTobeMounted[k]
+            return packiFiles
+
+    set md.unmountPackiFolder
+        function 
+            param packiFiles
+            param folderName
+            const result = {}
+            for var k in packiFiles
+                let basename = k
+                let prefix = ''
+                if k.startsWith(packiFilePrefix)
+                    set basename = k.substring(packiFilePrefix.length)
+                    set prefix = packiFilePrefix
+                if basename.startsWith(folderName)
+                    set result[prefix + basename.substring(folderName.length+1)] = packiFiles[k]
+            return result
+
+    set md.getAddedFiles
+        function 
+            param packiFiles
+            param packiFilesAfter
+            const result = {}
+            for var k in packiFilesAfter
+                if !packiFiles[k]
+                    set result[k] = packiFilesAfter[k]
+            return result

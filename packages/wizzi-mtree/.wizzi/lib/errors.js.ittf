@@ -170,16 +170,24 @@
             var msg = []
             _ msg.push(chalk.red('Error: ' + this.message))
             _ msg.push(chalk.red('  name: ' + this.errorName))
-            if this.data.node
-                _ msg.push(chalk.yellow('  row: ' + this.data.node.row + ', col: ' + this.data.node.col))
+            var node = this.data.node || (this.data.jswizzi ? this.data.jswizzi.node : null)
+            if node
+                _ msg.push(chalk.yellow('  row: ' + node.row + ', col: ' + node.col))
             if this.data.mTreeBrick
                 _ msg.push(chalk.yellow('  uri: ' + this.data.mTreeBrick.uri))
             elif this.data.uri
                 _ msg.push(chalk.yellow('  uri: ' + this.data.uri))
+            elif this.data.mtree
+                _ msg.push(chalk.yellow('  uri: ' + this.data.mtree.ittfDocumentUri))
+                if this.data.mtree.mixerIttfDocumentUri
+                    _ msg.push(chalk.yellow('  mixer uri: ' + this.data.mtree.mixerIttfDocumentUri))
             else
                 _ msg.push(chalk.yellow('  uri: unknown'))
             if this.errorLines
                 foreach line in this.errorLines
+                    _ msg.push(chalk.yellow('  ' + line))
+            if this.data.hint && this.data.hint.mTreeBuildUpScriptErrorLines && this.data.hint.mTreeBuildUpScriptErrorLines.lines
+                foreach line in this.data.hint.mTreeBuildUpScriptErrorLines.lines
                     _ msg.push(chalk.yellow('  ' + line))
             if this.errorName === 'JsWizziError'
                 _ msg.push(chalk.yellow('  onStatement: ' + this.data.onStatement))

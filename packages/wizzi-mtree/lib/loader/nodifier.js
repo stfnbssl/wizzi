@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\nodifier.js.ittf
-    utc time: Wed, 03 Jul 2024 03:16:57 GMT
+    utc time: Tue, 30 Jul 2024 07:41:30 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -161,7 +161,7 @@ function local_error(errorName, method, message, line, mTreeBrick) {
             errorName
         ], mTreeBrick, {
             source: {
-                method: 'wizzi-mtree@0.8.26.loader.nodifier.' + method
+                method: 'wizzi-mtree@0.8.28.loader.nodifier.' + method
              }, 
             mtree: {
                 mTreeBrickLine: line, 
@@ -187,7 +187,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.26.loader.nodifier.' + method,
+        method: 'wizzi-mtree@0.8.28.loader.nodifier.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

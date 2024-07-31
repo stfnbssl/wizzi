@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Wed, 03 Jul 2024 03:19:11 GMT
+    utc time: Wed, 31 Jul 2024 14:38:14 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -50,7 +50,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.38';
+        this.__version = '0.8.41';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -1459,6 +1459,8 @@ class WizziFactory {
          # Context data for the artifact generation
          { options
          boolean copyNonIttf
+         boolean generateFragments
+         boolean useMultiPartContext
          function callback
          returns
          [
@@ -1562,8 +1564,9 @@ class WizziFactory {
                             )
                         }
                     }
+                    
                     // loog 'generateFolderArtifacts.copying', item.fullPath
-                    else {
+                    else if (options.copyNonIttf && item.isIttfDocument == false) {
                         this.fileService.copyFile(item.fullPath, path.join(options.destFolder, interpolateFilename(item.destRelPath, fileCtx)), function(err, notUsed) {
                             if (err) {
                                 return callback(err);
@@ -1573,6 +1576,9 @@ class WizziFactory {
                                 callback(null, path.join(options.destFolder, item.destRelPath))
                             , 0)
                         })
+                    }
+                    else {
+                        callback(null)
                     }
                 }
                 , (err, result) => {
@@ -3384,7 +3390,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.38.wizziFactory.' + method,
+        method: 'wizzi@0.8.41.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

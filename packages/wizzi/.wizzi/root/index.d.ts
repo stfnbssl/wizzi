@@ -1074,3 +1074,31 @@ export namespace file {
     export function read(filePath: string): string;
     export function readJSON(filePath: string): object;
 }
+
+/**
+ * Packi manager
+ */
+declare interface PackiManager {
+    /**
+     * @method prettify
+     * @description Prettify the ittf documents of a PackiFiles object
+     * @param files        The path to the primary ittf source document.
+     * @param callback     Receives the prettified documents [[PackiFiles]].
+     */
+    prettify(
+        files: packi.PackiFiles, callback: cb<packi.PackiFiles>
+    ): void;
+    generate(
+        files: packi.PackiFiles, plugins: PluginsOptions, metaPlugins: MetaPluginsOptions | null, callback: cb<packi.PackiFiles>
+    ): void;
+}
+/**
+ * @type PackiManagerOptions
+ * @description A PackiManager instance configuration object
+ */
+export type PackiManagerOptions = {}
+
+/**
+ * @description Creates a Packi manager instance.
+ */
+export function createPackiManager(options: PackiManagerOptions, callback: cb<PackiManager>): void;

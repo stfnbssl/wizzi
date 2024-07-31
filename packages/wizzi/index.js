@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Wed, 03 Jul 2024 03:19:12 GMT
+    utc time: Wed, 31 Jul 2024 14:38:14 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -19,9 +19,10 @@ var ProductionManager = require('./lib/production/manager');
 var Filesystem = require('./lib/io/filesystem');
 var wizziFactory = require('./lib/services/wizziFactory');
 var metasManager = require('./lib/services/metasManager');
+var packiManager = require('./lib/services/packiManager');
 
 var md = module.exports = {};
-md.version = "0.8.38";
+md.version = "0.8.41";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -215,6 +216,21 @@ md.metasManager = function(options, callback) {
         ));
     }
     metasManager.createManager(options, callback)
+}
+;
+
+md.packiManager = function(options, callback) {
+    if (typeof(callback) !== 'function') {
+        throw new Error(
+            error('InvalidArgument', '', 'The callback parameter must be a function. Received: ' + callback)
+        );
+    };
+    if (verify.isObject(options) === false) {
+        return callback(error(
+            'InvalidArgument', '', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+        ));
+    }
+    packiManager.createManager(options, callback)
 }
 ;
 

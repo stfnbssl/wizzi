@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\wizzify\step_3.js.ittf
-    utc time: Wed, 03 Jul 2024 03:19:13 GMT
+    utc time: Wed, 31 Jul 2024 14:38:16 GMT
 */
 'use strict';
 /**
@@ -197,6 +197,9 @@ function createMetasManager(globalContext, callback) {
          }, 
         globalContext: globalContext || {}
      }, callback)
+}
+function createPackiManager(callback) {
+    wizziIndex.packiManager({}, callback)
 }
 var wf_wizzify_step_3 = function(step_callback) {
     heading1('EXAMPLE')

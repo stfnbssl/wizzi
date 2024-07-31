@@ -116,6 +116,7 @@
 					f_cb_no_throw( result )
                         if err
                             # set err.scriptCode = jsWizziScriptCoder.toCode()
+							log 'jsWizziRunner.run.err', err
 							return
 								_ callback
                                     @ err
