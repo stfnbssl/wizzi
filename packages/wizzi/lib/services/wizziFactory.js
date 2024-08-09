@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Wed, 31 Jul 2024 14:38:14 GMT
+    utc time: Fri, 09 Aug 2024 15:27:07 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -50,7 +50,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.41';
+        this.__version = '0.8.42';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -3277,6 +3277,31 @@ class WizziFactory {
             callback(error('InvalidOperation', 'getPackiFilesFromJsonFactory', 'This instance is not a json factory', this.storePool.kind))
         }
     }
+    /**
+         Creates a fs factory
+         with same factory plugins as this, and no meta plugins.
+         params
+         { options
+         bool reuse
+         { globalContext
+         optional
+    */
+    createFsFactory(options, callback) {
+        
+        if (options && options.reuse && this.storeKind == 'filesystem') {
+            return callback(null, this);
+        }
+        
+        var wf = new WizziFactory(this.user, this.role);
+        
+        wf.initialize({
+            repo: {
+                storeKind: 'filesystem'
+             }, 
+            plugins: this.pluginsOptions, 
+            globalContext: options.globalContext || {}
+         }, callback)
+    }
     getInfo() {
         return {
                 user: this.user, 
@@ -3390,7 +3415,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.41.wizziFactory.' + method,
+        method: 'wizzi@0.8.42.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

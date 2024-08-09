@@ -11,6 +11,10 @@
 				function 
 					param str
 					return inflect.pluralize(str)
+			@ singularize
+				function 
+					param str
+					return inflect.singularize(str)
 			@ capitalize
 				function 
 					param str
@@ -25,10 +29,36 @@
 					param str
 					return inflect.camelize(str, false)
 		
+			@ dasherize
+				function 
+					param str
+					return inflect.dasherize(str, false)
+
 			@ dashToCamelCase
 				function 
 					param str
 					return verify.dashToCamelCase(str)
+
+			@ underscore
+				function 
+					param str
+					return inflect.underscore(str, false)
+
+			@ titleize
+				function 
+					param str
+					return inflect.titleize(str, false)
+
+			@ tableize					
+				function 
+					param str
+					return inflect.tableize(str, false)
+
+			@ ordinalize					
+				function 
+					param str
+					return inflect.ordinalize(str, false)
+
 			@ escape
 				function
 					param value

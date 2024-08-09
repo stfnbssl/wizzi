@@ -866,6 +866,46 @@ declare interface WizziFactory {
      * @description Retrieves a documentation cheatsheets for a given Wizzi Schema.
     */
     getCheatsheet(schemaName: string, callback: cb<{}>): void;
+    /**
+     * @method mapIttfDocumentPathToSchema
+     * @description Map an ittfDocumentPath to its WizziSchema. A WizziSchema may have more than one extension (For example `ts` has `ts` and `tsx`).
+    */
+    mapIttfDocumentPathToSchema(ittfDocumentPath: string): string;
+    /**
+     * @method mapExtensionToSchema
+     * @description Map a file extension to its WizziSchema. A WizziSchema may have more than one extension (For example `ts` has `ts` and `tsx`).
+    */
+    mapExtensionToSchema(extension: string): string;
+    /**
+     * @method mapIttfDocumentPathToDefaultArtifact
+     * @description Map an ittfDocumentPath to its default artifact generator.
+    */
+    mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath: string): string;
+    /**
+     * @method mapIttfDocumentPathToPluginDependencies
+     * @description Map an ittfDocumentPath to the WizziPlugin dependencies of its WizziSchema.
+    */
+    mapIttfDocumentPathToPluginDependencies(ittfDocumentPath: string): string[];
+    /**
+     * @method mapSchemaToDefaultArtifact
+     * @description Map a WizziSchema to its default artifact generator.
+    */
+    mapSchemaToDefaultArtifact(schema: string): string;
+    /**
+     * @method getSchemaArtifacts
+     * @description Get the artifact generators of a WizziSchema.
+    */
+    getSchemaArtifacts(schema: string): string[];
+    /**
+     * @method mapArtifactToContentType
+     * @description Map an artifact generator to its contentType.
+    */
+    mapArtifactToContentType(artifactName: string): string;
+    /**
+     * @method mapSchemaToRootTag
+     * @description Map a WizziSchema to its root tag.
+    */
+    mapSchemaToRootTag(schema: string): string;
 }
 
 export type JsonWizziFactoryAndJsonFs = {

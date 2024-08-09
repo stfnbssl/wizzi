@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\jswizzi\functions\underscore.js.ittf
-    utc time: Tue, 30 Jul 2024 07:41:30 GMT
+    utc time: Tue, 06 Aug 2024 19:41:07 GMT
 */
 'use strict';
 var util = require('util');
@@ -12,6 +12,9 @@ module.exports = {
     pluralize: function(str) {
         return inflect.pluralize(str);
     }, 
+    singularize: function(str) {
+        return inflect.singularize(str);
+    }, 
     capitalize: function(str) {
         return str.replace(/(?:^|\s)\S/g, function(a) {
                 return a.toUpperCase();
@@ -20,8 +23,23 @@ module.exports = {
     camelize: function(str) {
         return inflect.camelize(str, false);
     }, 
+    dasherize: function(str) {
+        return inflect.dasherize(str, false);
+    }, 
     dashToCamelCase: function(str) {
         return verify.dashToCamelCase(str);
+    }, 
+    underscore: function(str) {
+        return inflect.underscore(str, false);
+    }, 
+    titleize: function(str) {
+        return inflect.titleize(str, false);
+    }, 
+    tableize: function(str) {
+        return inflect.tableize(str, false);
+    }, 
+    ordinalize: function(str) {
+        return inflect.ordinalize(str, false);
     }, 
     escape: function(value) {
         if (verify.isNotEmpty(value)) {

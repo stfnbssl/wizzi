@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiManager.js.ittf
-    utc time: Wed, 31 Jul 2024 14:38:14 GMT
+    utc time: Fri, 09 Aug 2024 15:27:07 GMT
 */
 'use strict';
 var verify = require('@wizzi/utils').verify;
@@ -15,7 +15,7 @@ const {
 class PackiManager {
     constructor() {
         this.__type = 'PackiManager';
-        this.__version = '0.8.41';
+        this.__version = '0.8.42';
     }
     /**
          Prettify the ittf code of a PackiFiles object
@@ -219,7 +219,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.41.packiManager.' + method,
+        method: 'wizzi@0.8.42.packiManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

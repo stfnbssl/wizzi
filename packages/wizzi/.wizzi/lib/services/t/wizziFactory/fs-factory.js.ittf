@@ -1,0 +1,32 @@
+﻿$group
+
+	#
+		# Creates a fs factory 
+        #   with same factory plugins as this, and no meta plugins.
+		# params
+		#   { options
+        #     bool reuse
+        #     { globalContext
+		#       optional
+    m createFsFactory
+		param options
+		param callback
+        +
+        if options && options.reuse && this.storeKind == 'filesystem' 
+            return
+                _ callback
+                    @ null
+                    @ this
+        +
+		var wf
+			new WizziFactory
+				@ this.user
+				@ this.role
+		+
+        _ wf.initialize
+			{
+				{ repo
+					@ storeKind 'filesystem'
+				@ plugins this.pluginsOptions
+				@ globalContext options.globalContext || {}
+			@ callback
