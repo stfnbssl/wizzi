@@ -19,7 +19,7 @@
 		if this.relPath.indexOf('/util/') > -1 || this.relPath.indexOf('/utils/') > -1
 			set this.isUtil = true
 		
-		if this.containsDocument('generate.wfjob.ittf') &&
+		if this.containsDocument('generate.wzjob.ittf') &&
 			\b this.containsFolder('ittf')
 			if this.isTest || this.isExample
 				set this.isJobFolder = true

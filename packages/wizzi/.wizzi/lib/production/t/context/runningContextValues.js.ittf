@@ -2,7 +2,7 @@ $group
     m onRunningContextValueChange
         param namePath
         param value
-        # loog 'onRunningContextValueChange', namePath, value
+        info 'onRunningContextValueChange', namePath, value
         _ this.newRunningContextValues.push
             {
                 @ namePath namePath

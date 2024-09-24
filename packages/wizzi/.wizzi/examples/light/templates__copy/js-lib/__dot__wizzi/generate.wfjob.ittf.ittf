@@ -1,4 +1,4 @@
-wfjob ${pkg.name}/job
+wzjob ${pkg.name}/job
 
     $
         var call = '()';
@@ -11,16 +11,16 @@ wfjob ${pkg.name}/job
 	line ittf-root
 		cwd-folder ${'$'}{ittf_root_folder}
 
-		wfjob/any_js${call}
-        wfjob/any_json${call}
-        wfjob/any_md${call}
-        wfjob/.gitignore${call}
+		wzjob/any_js${call}
+        wzjob/any_json${call}
+        wzjob/any_md${call}
+        wzjob/.gitignore${call}
 
 	line ittf-src
 		cwd-folder ${'$'}{ittf_src_folder}
 		dest-folder ${'$'}{dest_folder}/src
 
-		wfjob/any_js${call}
+		wzjob/any_js${call}
 
 	production
 		dest-folder ${'$'}{dest_folder}

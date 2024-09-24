@@ -79,8 +79,8 @@ $group
                             @ plugins x_pluginsItems
                             @ pluginsBaseFolder x_pluginsBaseFolder
                         { job
-                            @ name configInstance.wfjobName
-                            @ ittfDocumentUri configInstance.wfjobPath
+                            @ name configInstance.wzjobName
+                            @ ittfDocumentUri configInstance.wzjobPath
                             @ productionOptions
                                 _ wizzi.productionOptions
                                     { 
@@ -96,14 +96,14 @@ $group
                         param err
                         if err
                             return
-                                _ wizzi.printWizziJobError(configInstance.wfjobName, err)
+                                _ wizzi.printWizziJobError(configInstance.wzjobName, err)
                         if configInstance.schemas && configInstance.schemas.length > 0
                             _ generateSchemas
                                 @ configInstance.schemas
                                 _ path.dirname
-                                    @ configInstance.wfjobPath
+                                    @ configInstance.wzjobPath
                                 @ configInstance.destPath
-                                @ configInstance.packageName || configInstance.wfjobName
+                                @ configInstance.packageName || configInstance.wzjobName
                                 { 
                                     @ items x_pluginsItems
                                     @ baseFolder x_pluginsBaseFolder

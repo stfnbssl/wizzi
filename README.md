@@ -149,7 +149,7 @@ wizzi.schema(
 </table>
 
 ### Wizzi job execution
-Executes the artifact generations described by a `wfjob` model.
+Executes the artifact generations described by a `wzjob` model.
 ```javascript
 var wizzi = require('wizzi');
 wizzi.job(
@@ -164,11 +164,11 @@ wizzi.job(
 <table>
 <tr>
 <td>surcePath</td>
-<td>The path to the `wfjob` document that describes the artifact generations to be executed.</td>
+<td>The path to the `wzjob` document that describes the artifact generations to be executed.</td>
 </tr>
 <tr>
 <td>context</td>
-<td>An object which properties will be context values in the mTree build up of the `wfjob` document.</td>
+<td>An object which properties will be context values in the mTree build up of the `wzjob` document.</td>
 </tr>
 <tr>
 <td>options</td>

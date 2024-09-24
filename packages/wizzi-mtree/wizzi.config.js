@@ -1,7 +1,19 @@
 const path = require('path');
 module.exports = {
-    wfjobName: "wizzi-mtree-job", 
-    wfjobPath: path.join(__dirname, '.wizzi', 'generate.wfjob.ittf'), 
+    wzjobName: "wizzi-mtree-job", 
+    wzjobPath: path.join(__dirname, '.wizzi', 'generate.wzjob.ittf'), 
+    plugins: [
+        "@wizzi/plugin.css", 
+        "@wizzi/plugin.html", 
+        "@wizzi/plugin.ittf", 
+        "@wizzi/plugin.js", 
+        "@wizzi/plugin.json", 
+        "@wizzi/plugin.md", 
+        "@wizzi/plugin.text", 
+        "@wizzi/plugin.wzjob", 
+        "@wizzi/plugin.wzschema", 
+    ], 
+    /*
     plugins: [
         "./wizzi.plugin.js/index.js", 
         "./wizzi.plugin.json/index.js", 
@@ -10,6 +22,7 @@ module.exports = {
         "./wizzi.plugin.wzjob/index.js", 
     ], 
     pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.lastsafe.plugins/packages", 
+    */
     globalContext: {
         isPackageDeploy: true,
         isDevelopment: true

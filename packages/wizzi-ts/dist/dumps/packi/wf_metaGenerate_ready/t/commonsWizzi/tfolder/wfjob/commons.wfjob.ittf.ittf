@@ -1,7 +1,7 @@
 $group
 
     $*
-        Common "artifact" elements for "wfjob" ittf documents.
+        Common "artifact" elements for "wzjob" ittf documents.
         The "ctx" context object (if present) is set by wizzi-cli/cmds/create.
     *$
 
@@ -467,4 +467,4 @@ $group
 
     ${'$'}else
         
-        ${'$'}throw wfjob name not managed: ${'$'}{name}
+        ${'$'}throw wzjob name not managed: ${'$'}{name}

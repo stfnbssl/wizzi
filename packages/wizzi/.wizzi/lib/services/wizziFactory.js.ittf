@@ -90,6 +90,7 @@
         $include wizziFactory/meta-generation
         $include wizziFactory/meta-execution
         $include wizziFactory/meta-manager
+		$include wizziFactory/ittf-model-to-folder
 		$include wizziFactory/json-factory
 		$include wizziFactory/fs-factory
 		$include wizziFactory/getInfo

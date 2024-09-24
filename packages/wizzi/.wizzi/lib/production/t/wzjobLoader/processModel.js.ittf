@@ -21,7 +21,7 @@
 			# . Wzjob reference
 			#
 			# Production structure
-			# { wfjob
+			# { wzjob
 			#   [ productions
 			#     { production
 			#       string destFolder 
@@ -117,7 +117,8 @@
 											[
 										@ transformers this._getTransformerList(wzjobArtifactElement.transformers)
 								@ isWzJob wzjobArtifactElement.isWzJob
-								@ isWfModelType wzjobArtifactElement.isWfModelType
+								@ isWzModelType wzjobArtifactElement.isWzModelType
+								@ isWzModelToFolder wzjobArtifactElement.isWzModelToFolder
 								@ gen
 									{
 										@ generator wzjobArtifactElement.generator
@@ -242,7 +243,7 @@
 				return 
 					_ errorMsg
 						@ 'PathError'
-						@ "The src attribute of the model element: " + src + ' is a relative path. A models-base-folder attribute is required on the wfjob element.'
+						@ "The src attribute of the model element: " + src + ' is a relative path. A models-base-folder attribute is required on the wzjob element.'
 						@ node
 
 	m _getTransformerList

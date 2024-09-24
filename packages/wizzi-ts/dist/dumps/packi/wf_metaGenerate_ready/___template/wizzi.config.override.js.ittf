@@ -5,8 +5,8 @@ module
    const path = require('path')
    set module.exports
        { 
-           @ wfjobName "${metaCtx.name}-override/job"
-           @ wfjobPath path.join(__dirname, '.wizzi-override', 'generate.wfjob.ittf')
+           @ wzjobName "${metaCtx.name}-override/job"
+           @ wzjobPath path.join(__dirname, '.wizzi-override', 'generate.wzjob.ittf')
            @ destPath __dirname
            $if development
                [ plugins

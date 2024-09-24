@@ -12,7 +12,7 @@
 			set this.stores = []
 		#  { repoOptions
 		#    string storeKind
-		#      oneOf 'filesystem', 'mongodb', 'browserfs', 'json'
+		#      oneOf 'filesystem', 'mongodb', 'json'
 		#    string storeUri
 		#      # when storeKind == mongodb
 		#    string storeBaseFolder

@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiManager.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:07 GMT
+    utc time: Wed, 04 Sep 2024 02:22:35 GMT
 */
-'use strict';
 var verify = require('@wizzi/utils').verify;
 const pretty = require('@wizzi/utils').pretty;
 const constants = require('../constants');
@@ -15,7 +14,7 @@ const {
 class PackiManager {
     constructor() {
         this.__type = 'PackiManager';
-        this.__version = '0.8.42';
+        this.__version = '0.8.43';
     }
     /**
          Prettify the ittf code of a PackiFiles object
@@ -82,7 +81,7 @@ class PackiManager {
         }
         options = options || {};
         
-        var wzJobDocumentUri = this.detectWfjob(packiFiles);
+        var wzJobDocumentUri = this.detectWzJob(packiFiles);
         if (wzJobDocumentUri) {
             this.generateByWzJob(packiFiles, wzJobDocumentUri, plugins, options, callback)
         }
@@ -118,7 +117,7 @@ class PackiManager {
                         return callback(err);
                     }
                     const generatedPackiFiles = packiUtils.getAddedFiles(packiFiles, packiFilesAfterJobExecution);
-                    console.log('wizzi.packiManager.generateByWzJob.generatedPackiFiles', generatedPackiFiles, __filename);
+                    // loog 'wizzi.packiManager.generateByWzJob.generatedPackiFiles', generatedPackiFiles
                     return callback(null, generatedPackiFiles);
                 }
                 )
@@ -156,14 +155,14 @@ class PackiManager {
                     console.log("[31m%s[0m", err);
                     return callback(err);
                 }
-                console.log('generatedFilePaths', generatedFilePaths, __filename);
+                // loog 'generatedFilePaths', generatedFilePaths
                 packiUtils.jsonFsToPackiFiles(jsonFs, (err, folderGeneratedPackiFiles) => {
                     if (err) {
                         console.log("[31m%s[0m", err);
                         return callback(err);
                     }
                     const generatedPackiFiles = packiUtils.unmountPackiFolder(folderGeneratedPackiFiles, genFolderDest);
-                    console.log('wizzi.packiManager.generateByFolder.generatedPackiFiles', generatedPackiFiles, __filename);
+                    // loog 'wizzi.packiManager.generateByFolder.generatedPackiFiles', generatedPackiFiles
                     return callback(null, generatedPackiFiles);
                 }
                 )
@@ -172,13 +171,13 @@ class PackiManager {
         }
         )
     }
-    detectWfjob(packiFiles) {
+    detectWzJob(packiFiles) {
         var items = Object.keys(packiFiles);
         var i, i_items=items, i_len=items.length, item;
         for (i=0; i<i_len; i++) {
             item = items[i];
-            console.log('detectWfjob', item, item.endsWith('.wfjob.ittf'), __filename);
-            if (item.endsWith('.wfjob.ittf')) {
+            // loog 'detectWzJob', item, item.endsWith('.wzjob.ittf')
+            if (item.endsWith('.wzjob.ittf')) {
                 return item;
             }
         }
@@ -219,7 +218,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.42.packiManager.' + method,
+        method: 'wizzi@0.8.43.packiManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

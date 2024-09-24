@@ -125,7 +125,7 @@ $group
 				checked_call( notUsed
 					_ pman.addWzjobRequest
 						{ 
-							@ wfjob
+							@ wzjob
 								{ 
 									@ ittfDocumentUri jobPath
 				+

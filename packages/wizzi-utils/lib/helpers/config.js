@@ -2,7 +2,7 @@
     artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
     package: wizzi-js@
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-utils\.wizzi\lib\helpers\config.js.ittf
-    utc time: Wed, 03 Jul 2024 03:15:56 GMT
+    utc time: Fri, 16 Aug 2024 08:42:14 GMT
 */
 'use strict';
 /**
@@ -18,7 +18,7 @@
 var path = require('path');
 var md = module.exports = {};
 md.wfBaseFolder = 'c:/my/wizzi/v3';
-md.wfJobsFolder = path.join(md.wfBaseFolder, 'wfjobs')
+md.wfJobsFolder = path.join(md.wfBaseFolder, 'wzjobs')
 ;
 md.get = function(key, defaultValue) {
     if (typeof(md[key]) === 'undefined' && typeof(defaultValue) !== 'undefined') {
@@ -35,6 +35,6 @@ md.set = function(key, value) {
 }
 ;
 function onChange() {
-    md.wfJobsFolder = path.join(md.wfBaseFolder, 'wfjobs')
+    md.wfJobsFolder = path.join(md.wfBaseFolder, 'wzjobs')
     ;
 }

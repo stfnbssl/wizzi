@@ -16,11 +16,12 @@
 					_ persister.toFile
 						f_cb( operResult )
 							
-							foreach oper in operResult
-								_ log.info
-									@ oper.oper + ', ' + 
-										\b oper.status + ', ' + 
-										\b oper.item.filepath
+							$if false
+								foreach oper in operResult
+									_ log.info
+										@ oper.oper + ', ' + 
+											\b oper.status + ', ' + 
+											\b oper.item.filepath
 							
 							# loog 'Ended async persist to file artifact: ', productionStep.name
 							_ callback(null, operResult)

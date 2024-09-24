@@ -4,7 +4,7 @@ module
     set module.exports
         { 
             @ wzjobName "${pkg.name}/job"
-            @ wzjobPath path.join(__dirname, '.wizzi', 'generate.wfjob.ittf')
+            @ wzjobPath path.join(__dirname, '.wizzi', 'generate.wzjob.ittf')
             @ destPath path.join(__dirname, 'dist')
             [ plugins
                 @ 'wizzi-core'

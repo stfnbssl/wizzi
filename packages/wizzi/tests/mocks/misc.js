@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\mocks\misc.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:11 GMT
+    utc time: Wed, 04 Sep 2024 02:22:38 GMT
 */
-'use strict';
 var wizziFactory = require('../../lib/services/wizziFactory');
 var ProductionManager = require('../../lib/production/manager');
 var acl = require('../../lib/acl');

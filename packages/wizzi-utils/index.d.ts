@@ -298,7 +298,7 @@ export namespace ittfScanner {
          */
         isSchema?: boolean;   
         /**
-         * Wizzi Schema of document == 'wfjob'
+         * Wizzi Schema of document == 'wzjob'
          */
         isJob?: boolean; 
         /**

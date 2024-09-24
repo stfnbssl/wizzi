@@ -5,8 +5,8 @@ module
    const path = require('path')
    set module.exports
        { 
-           @ wfjobName "${metaCtx.name}/job"
-           @ wfjobPath path.join(__dirname, '.wizzi', 'generate.wfjob.ittf')
+           @ wzjobName "${metaCtx.name}/job"
+           @ wzjobPath path.join(__dirname, '.wizzi', 'generate.wzjob.ittf')
            @ destPath __dirname
            $if development
                [ plugins

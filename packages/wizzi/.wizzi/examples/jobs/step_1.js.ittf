@@ -25,7 +25,7 @@ module
                 @ 'ittf'
                 $$ @ 'job1'
                 @ 'job_globalModels'
-                @ 'index.wfjob.ittf'
+                @ 'index.wzjob.ittf'
                 
 
         _ createWizziFactory

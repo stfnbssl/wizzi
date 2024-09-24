@@ -38,7 +38,7 @@ $group
                 r_resolve.js,
                 repeater_increment.js,
                 repeater.js,
-                wfjobs,
+                wzjobs,
             ]
 
         $foreach item in items
@@ -46,9 +46,9 @@ $group
                 ${'$'}{'$'}group
                     ${'$'}include tfolder/${item}
 
-        $file generate.wfjob.ittf.ittf
-           wfjob wizzi.meta.demo/job
-               ${'$'}include wizziMeta/generate.wfjob
+        $file generate.wzjob.ittf.ittf
+           wzjob wizzi.meta.demo/job
+               ${'$'}include wizziMeta/generate.wzjob
         $file versions.ittf.ittf
            ${'$'}group
                ${'$'}include wizziMeta/versions

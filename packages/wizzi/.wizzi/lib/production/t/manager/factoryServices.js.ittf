@@ -40,7 +40,7 @@
 		if !this.wzjobLoadModel
 			checked_call_set( this.wzjobLoadModel )
 				_ this.getLoadModel
-					@ 'wfjob'
+					@ 'wzjob'
 		
 		var ctx
 			_ this.wizziFactory.createLoadContext

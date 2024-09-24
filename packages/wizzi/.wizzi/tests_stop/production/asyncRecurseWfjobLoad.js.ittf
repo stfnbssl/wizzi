@@ -23,7 +23,7 @@
 							@ dumps {}
 				_ done
 
-	it-async shoul load a wfjob (AsyncRecurseWzjobLoad)
+	it-async shoul load a wzjob (AsyncRecurseWzjobLoad)
 		var wzjobLoader 
 			new WzjobLoader
 				@ _productionManager
@@ -35,12 +35,12 @@
 							_ path.join
 								@ __dirname
 								@ 'ittf'
-						@ src 'mock1.wfjob.ittf'
+						@ src 'mock1.wzjob.ittf'
 				@ wzjobLoader wzjobLoader
 		_ AsyncRecurseWzjobLoad
 			@ jobRequest
 			f_cb_test( result )
-				# loog 'shoul load a wfjob (AsyncRecurseWzjobLoad) : seenWzjobRequests, pendingWzjobRequests, productionStepConfigs', result.seenWzjobRequests, result.pendingWzjobRequests, result.productionStepConfigs
+				# loog 'shoul load a wzjob (AsyncRecurseWzjobLoad) : seenWzjobRequests, pendingWzjobRequests, productionStepConfigs', result.seenWzjobRequests, result.pendingWzjobRequests, result.productionStepConfigs
 				tobe_array( result.pendingWzjobRequests, 0)
 				tobe_array( result.seenWzjobRequests, 2)
 				tobe_array( result.productionStepConfigs, 2)

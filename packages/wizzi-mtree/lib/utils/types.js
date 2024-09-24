@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\utils\types.js.ittf
-    utc time: Tue, 06 Aug 2024 19:41:07 GMT
+    utc time: Sat, 21 Sep 2024 13:05:08 GMT
 */
-'use strict';
 var errors = require('../errors');
 var verify = require('@wizzi/utils').verify;
 function objectify(value, type, node, unquote) {
@@ -104,7 +103,7 @@ function error(message, node, method) {
     return {
             __is_error: true, 
             message: message, 
-            source: 'wizzi-mtree@0.8.29.utils.types.' + method
+            source: 'wizzi-mtree@0.8.31.utils.types.' + method
          };
 }
 

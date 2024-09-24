@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\wf\job\step_2.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:10 GMT
+    utc time: Wed, 04 Sep 2024 02:22:37 GMT
 */
-'use strict';
 /**
      Example: job_step_2
     
@@ -202,7 +201,7 @@ function createPackiManager(callback) {
 }
 var job_step_2 = function(step_callback) {
     heading1('EXAMPLE')
-    var jobPath = path.join(__dirname, 'ittf', 'step_2.wfjob.ittf');
+    var jobPath = path.join(__dirname, 'ittf', 'step_2.wzjob.ittf');
     var friendsArray = [
         'arthur', 
         'mary'

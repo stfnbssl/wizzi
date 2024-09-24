@@ -1,0 +1,102 @@
+$group
+    
+	set md.pluralize
+		function 
+            param str
+            return inflect.pluralize(str)
+			
+	set md.singularize
+		function 
+            param str
+            return inflect.singularize(str)
+
+	set md.capitalize
+		function 
+            param str
+            return 
+                _ str.replace
+                    @ /(?:^|\s)\S/g
+                    function 
+                        param a
+                        return a.toUpperCase()
+			
+	set md.camelize
+		function 
+            param str
+			return inflect.camelize(str, false)
+		
+	set md.dasherize
+		function 
+            param str
+			return inflect.dasherize(str, false)
+
+	set md.underscore
+		function 
+            param str
+			return inflect.underscore(str, false)
+	
+	set md.titleize
+		function 
+            param str
+			return inflect.titleize(str, false)
+
+	set md.tableize
+		function 
+            param str
+			return inflect.tableize(str, false)
+
+	set md.ordinalize
+		function 
+            param str
+			return inflect.ordinalize(str, false)
+
+	set md.escape
+        function 
+            param value
+            if md.isNotEmpty(value)
+                return 
+                    _ md.replaceAll
+                        _ md.replaceAll
+                            _ md.replaceAll(value, "\\", "\\\\")
+                            @ '"'
+                            @ '\\"'
+                        @ "'"
+                        @ "\\'"
+            else
+                return value  
+	
+    set md.sort
+		function 
+            param items
+            param prop
+            return
+                _ items.sort
+                    function 
+                        param a
+                        param b
+                        var xA = prop ? a[prop].toUpperCase() : a.toUpperCase()
+                        var xB = prop ? b[prop].toUpperCase() : b.toUpperCase()
+                        if xA < xB
+                            return -1
+                        if xA > xB
+                            return 1
+                        return 0
+                    
+	set md.filter
+		function 
+            param items
+            param prop
+            param value
+            return
+                _ items.filter
+                    function
+                        param a
+                        return a[prop] === value
+	set md.unique
+		function 
+            param items
+            var result = []
+            foreach item in items
+                if result.indexOf(item) < 0
+                    _ result.push(item)
+            return result

@@ -1,6 +1,6 @@
 ﻿
-This is built by ../production/wfjob.js
-from a WizziModelInstance instance of schema wfjob
+This is built by ../production/wzjob.js
+from a WizziModelInstance instance of schema wzjob
 
 artifactInfoConfig = {
 	options: { // optional, override production options

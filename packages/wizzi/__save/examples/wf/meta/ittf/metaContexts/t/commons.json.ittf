@@ -1,0 +1,16 @@
+$group
+    name "${metaCtx.pkgName}"
+    $$ pluginBasename "${verify.isUndefined(pluginBasename) ? metaCtx.pkgName : pluginBasename}"
+    npnName "${pluginBasename == null ? metaCtx.pkgName : "@wizzi/plugin." + pluginBasename}"
+    description "${metaCtx.pkgName}"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+

@@ -114,7 +114,7 @@
 				@ mtreeBuilUpContext
 
 	function executeWizziJob
-		param wfjobDocumentUri
+		param wzjobDocumentUri
 		param options
 		set options = options || {}
 		set options.plugins = options.plugins || []
@@ -145,8 +145,8 @@
                     @ pluginsBaseFolder pluginsBaseFolder
 					@ plugins jobPlugins
 				{ job
-					@ name 'example ' + wfjobDocumentUri
-					@ ittfDocumentUri wfjobDocumentUri
+					@ name 'example ' + wzjobDocumentUri
+					@ ittfDocumentUri wzjobDocumentUri
 					@ productionOptions
 						_ wizzi.productionOptions
 							{ 
@@ -157,7 +157,7 @@
 			function 
 				param err
 				if err
-					_ wizzi.printWizziJobError(wfjobDocumentUri, err)
+					_ wizzi.printWizziJobError(wzjobDocumentUri, err)
 
 	set module.exports = executeExample
 

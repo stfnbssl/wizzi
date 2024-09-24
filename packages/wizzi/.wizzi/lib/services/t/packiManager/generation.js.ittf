@@ -12,7 +12,7 @@ $group
         set options = options || {} 
         +
         var wzJobDocumentUri
-            _ this.detectWfjob
+            _ this.detectWzJob
                 @ packiFiles
         if wzJobDocumentUri
             _ this.generateByWzJob
@@ -62,7 +62,7 @@ $group
                                     _ packiUtils.getAddedFiles
                                         @ packiFiles
                                         @ packiFilesAfterJobExecution
-                                log 'wizzi.packiManager.generateByWzJob.generatedPackiFiles', generatedPackiFiles
+                                # loog 'wizzi.packiManager.generateByWzJob.generatedPackiFiles', generatedPackiFiles
                                 r_cb(generatedPackiFiles)
 
 	m generateByFolder
@@ -95,7 +95,7 @@ $group
                         @ copyInclude ['*']
                         @ copyExclude []
                     a_cb(generatedFilePaths)
-                        log 'generatedFilePaths', generatedFilePaths
+                        # loog 'generatedFilePaths', generatedFilePaths
                         _ packiUtils.jsonFsToPackiFiles
                             @ jsonFs
                             a_cb(folderGeneratedPackiFiles)
@@ -104,14 +104,14 @@ $group
                                     _ packiUtils.unmountPackiFolder
                                         @ folderGeneratedPackiFiles
                                         @ genFolderDest
-                                log 'wizzi.packiManager.generateByFolder.generatedPackiFiles', generatedPackiFiles
+                                # loog 'wizzi.packiManager.generateByFolder.generatedPackiFiles', generatedPackiFiles
                                 r_cb(generatedPackiFiles)
 
-    m detectWfjob
+    m detectWzJob
         param packiFiles
         var items = Object.keys(packiFiles)
         foreach item in items
-            log 'detectWfjob', item, item.endsWith('.wfjob.ittf')
-            if item.endsWith('.wfjob.ittf')
+            # loog 'detectWzJob', item, item.endsWith('.wzjob.ittf')
+            if item.endsWith('.wzjob.ittf')
                 return item
         return null

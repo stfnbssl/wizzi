@@ -22,7 +22,7 @@
 	set md.wfJobsFolder
 		_ path.join
 			@ md.wfBaseFolder
-			@ 'wfjobs'
+			@ 'wzjobs'
 
 	set md.get
         function 
@@ -44,4 +44,4 @@
 		set md.wfJobsFolder
 			_ path.join
 				@ md.wfBaseFolder
-				@ 'wfjobs'
+				@ 'wzjobs'

@@ -22,7 +22,7 @@ module
 			_ path.join
                 @ __dirname
                 @ 'ittf'
-                @ 'step_1.wfjob.ittf'
+                @ 'step_1.wzjob.ittf'
 
         var friendsArray
             [ 

@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\json\job\step_1.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:10 GMT
+    utc time: Wed, 04 Sep 2024 02:22:37 GMT
 */
-'use strict';
 /**
      Example: json_job_step_1
     
@@ -203,8 +202,8 @@ var json_job_step_1 = function(step_callback) {
         '    info "Hello"'
     ].join('\n');
     
-    var wfjobContent = [
-        'wfjob', 
+    var wzjobContent = [
+        'wzjob', 
         '    $', 
         '        var ittf_src_folder = path.join(__dirname, "src");', 
         '        var dest_folder = path.join(__dirname, "..", "src");', 
@@ -221,7 +220,7 @@ var json_job_step_1 = function(step_callback) {
     ].join('\n');
     
     var jsIttfUri    = packiFilePrefix + ".wizzi/src/index.js.ittf";
-    var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf";
+    var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wzjob.ittf";
     var documents = [
         {
             path: jsIttfUri, 
@@ -229,7 +228,7 @@ var json_job_step_1 = function(step_callback) {
          }, 
         {
             path: wzjobIttfUri, 
-            content: wfjobContent
+            content: wzjobContent
          }
     ];
     

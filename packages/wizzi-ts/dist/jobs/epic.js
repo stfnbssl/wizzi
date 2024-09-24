@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.job_epic = void 0;
 const path_1 = __importDefault(require("path"));
 const factory_1 = require("../factory");
-var jobPath = path_1.default.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'epic.wfjob.ittf');
+var jobPath = path_1.default.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'epic.wzjob.ittf');
 function job_epic() {
     (0, factory_1.createFsWizziFactory)({}, {
         items: [
             "./wizzi.plugin.ts/index.js",
             "./wizzi.plugin.json/index.js",
-            "./wizzi.plugin.wfjob/index.js",
+            "./wizzi.plugin.wzjob/index.js",
         ],
         pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.plugins/packages",
     }, ((err, wf) => {

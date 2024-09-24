@@ -25,9 +25,9 @@ module
                 ._ join
                     @ '\n'
         +
-        var wfjobContent
+        var wzjobContent
             [
-                @ 'wfjob'
+                @ 'wzjob'
                 @ '    $'
                 @ '        var ittf_src_folder = path.join(__dirname, "src");'
                 @ '        var dest_folder = path.join(__dirname, "..", "src");'
@@ -45,7 +45,7 @@ module
                     @ '\n'
         +
         var jsIttfUri    = packiFilePrefix + ".wizzi/src/index.js.ittf"
-        var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wfjob.ittf"
+        var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wzjob.ittf"
         var documents
             [
                 {
@@ -53,7 +53,7 @@ module
                     @ content jsContent
                 {
                     @ path wzjobIttfUri
-                    @ content wfjobContent
+                    @ content wzjobContent
 
         +
         _ wizziIndex.JsonComponents.createJsonFs

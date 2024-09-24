@@ -1,0 +1,10 @@
+wfschema rdbms
+	
+	e rdbms
+		r table/s
+
+	e table
+		r column/s
+
+	e column
+		a type

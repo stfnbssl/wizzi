@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\packiUtils.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:07 GMT
+    utc time: Wed, 04 Sep 2024 02:22:35 GMT
 */
-'use strict';
 
 const file = require('@wizzi/utils').file;
 const vfile = require('@wizzi/utils').vfile;
@@ -137,9 +136,10 @@ md.createMetaPackifilesFromWizziHub = function(metaProductions) {
 md.createJsonWizziFactoryAndJsonFs = function(packiFiles, plugins, metaPlugins, callback) {
     const jsonDocuments = [];
     Object.keys(packiFiles).map((value) => {
+        
+        // loog 'createJsonWizziFactoryAndJsonFs.filePath', filePath
         if (packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0) {
             const filePath = md.ensurePackiFilePrefix(value);
-            console.log('createJsonWizziFactoryAndJsonFs.filePath', filePath, __filename);
             jsonDocuments.push({
                 path: filePath, 
                 content: packiFiles[value].contents
@@ -154,7 +154,7 @@ md.createJsonWizziFactoryAndJsonFs = function(packiFiles, plugins, metaPlugins, 
         if (!wizziFactory) {
             wizziFactory = require('./wizziFactory');
         }
-        console.log('wizziFactory', wizziFactory, __filename);
+        // loog 'wizziFactory', wizziFactory
         wizziFactory.createFactory({
             repo: {
                 storeKind: 'json', 

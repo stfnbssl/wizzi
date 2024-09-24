@@ -1,0 +1,13 @@
+﻿ittf
+
+	$file index.json.ittf.ittf
+		{
+			root "first"
+
+	$file folder_1/index.json.ittf.ittf
+		{
+			root "second"			
+
+	$file folder_2/index.json.ittf.ittf
+		{
+			root "third"

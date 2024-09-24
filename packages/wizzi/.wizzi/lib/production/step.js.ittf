@@ -14,7 +14,7 @@
 		# A ProductionStep instance is built from an 'artifact' element
 		# of a `wzjob` wizzi model.
 		# The 'artifact' element has been preprocessed 
-		# by the wizzi/lib/production/wfjob module 
+		# by the wizzi/lib/production/wzjob module 
         # giving the productionStepConfig parameter.
 		# param 
 		#    { productionStepConfig
@@ -24,12 +24,13 @@
 		# 			dotgExtensionPrefix:Boolean
 		# 		},
 		# 		model:Object {  // ModelInfo config object
-		#           see lib/production/wfjob.js for creation
+		#           see lib/production/wzjob.js for creation
 		#           see lib/production/model/modelInfo.js for use
 		# 		},
         # 		collection:String,
 		# 		isWzJob:Boolean,
-		# 		isWfSchema:Boolean,
+		# 		isWzSchema:Boolean,
+        #       isWzModelToFolder:Boolean,
 		# 		transformers:Array {
 		# 			name:String
 		# 			dumpFile:String    // Uri
@@ -69,11 +70,12 @@
                 set this.modelInfo = null
             set this.collection = productionStepConfig.collection $$ ??? not used
             set this.isWzJob = productionStepConfig.isWzJob
-			set this.isWfModelType = productionStepConfig.isWfModelType
+			set this.isWzModelType = productionStepConfig.isWzModelType
+            set this.isWzModelToFolder = productionStepConfig.isWzModelToFolder
             set this.transformers = productionStepConfig.transformers $$ ??? not used
             set this.gen = productionStepConfig.gen
             set this.dest = productionStepConfig.dest
-            set this.wfjob = productionStepConfig.wfjob $$ ??? not used
+            set this.wzjob = productionStepConfig.wzjob $$ ??? not used
             set this.ittfDocumentProduction = productionStepConfig.ittfDocumentProduction 
             if this.ittfDocumentProduction
                 # loog 'ProductionStep.productionStepConfig.ittfDocumentProduction.fileCtx', this.ittfDocumentProduction.fileCtx
@@ -104,13 +106,19 @@
             _ this.genContexts.push(genContext)
 
 		m isWizziModelDomArtifact
-            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWfModelType
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzModelType
 
 		m isWizziFactoryJob
             return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzJob
     
+		m isWizziModelToFolderArtifact
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzModelToFolder
+
 		m isWizziModelArtifact
             return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && 
+                \b !!this.isWzModelToFolder == false &&
+                \b !!this.isWzModelType == false &&
+                \b !!this.isWzJob == false &&
 				\b verify.isObject(this.gen) && 
 				\b verify.isNotEmpty(this.gen.generator)
 
@@ -129,16 +137,25 @@
             return this.modelInfo != null && 
 				\b (verify.isObject(this.gen) === false || verify.isEmpty(this.gen.generator))
     
-		m getFileService
+		m getWizziFactory
 			_ assert.ok
 				_ verify.isObject
 					@ this.productionManager
 				@ 'productionManager not set.'
 			_ assert.ok
 				_ verify.isObject
-					@ this.productionManager.wizziFactory.fileService
+					@ this.productionManager.wizziFactory
+				@ 'wizziFactory must be set on productionManager'
+			return this.productionManager.wizziFactory
+
+		m getFileService
+            var wizziFactory
+                _ this.getWizziFactory
+			_ assert.ok
+				_ verify.isObject
+					@ wizziFactory.fileService
 				@ 'fileService must be set on wizziFactory'
-			return this.productionManager.wizziFactory.fileService
+			return wizziFactory.fileService
 
 		m getItemsToPersistToFile
 			param callback
@@ -161,9 +178,9 @@
 					checked_call( ipcontext )
 						_ this.getInterpolatePathNameContext(collectionItem)
 					
-					checked_call( destUri )
+                    checked_call( destUri )
 						_ this.getDestinationUri(srcPath)
-                    
+
 					var filePath
                         _ interpolate
                             @ destUri
@@ -199,13 +216,14 @@
 				else 
 					checked_call( filePath )
 						_ this.getDestinationUri(srcPath)
+                    # loog 'getItemsToPersistToFile, srcPath, filePath', srcPath, filePath
                     if this.fileCtx
-                        log 'filePath.before', filePath
+                        # loog 'filePath.before', filePath
                         set filePath
                             _ interpolateFilename
                                 @ filePath
                                 @ this.fileCtx
-                        log 'filePath.after', filePath
+                        # loog 'filePath.after', filePath
                     var persisteable
                         { 
                             @ productionStep this
@@ -261,6 +279,8 @@
             param srcPath
             
 			var dest = this.dest
+
+            # loog 'getDestinationUri, srcPath, dest', srcPath, dest
             
 			var msg
                 [ 
@@ -289,8 +309,9 @@
 								@ 'A not empty srcPath is required'
 								@ 'getDestinationUri'
 					set destpath = path.join(dest.folder, srcPath)
-					if this.isFinalArtifact() === false
-                        if dest.extension === '@@null'
+					if this.isFinalArtifact() == false &&
+                        \b this.isWizziModelToFolderArtifact() == false
+                        if dest.extension == '@@null'
                             set destpath = verify.stripIttfExtension(destpath)
                             set destpath = verify.replaceExtension(destpath, '')
                             if verify.endsWith(destpath, '.')
@@ -307,6 +328,7 @@
 				set destpath = verify.replaceAll(destpath, '__copy', '')
             
 			if verify.isAbsolutePath(destpath)
+                $$ this.isWizziModelToFolderArtifact() should have an absolute dest.folder
                 return destpath
             
 			if verify.isEmpty(dest.baseFolder)

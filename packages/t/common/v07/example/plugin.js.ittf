@@ -115,7 +115,7 @@
 				@ mtreeBuilUpContext
 
 	function executeWizziJob
-		param wfjobDocumentUri
+		param wzjobDocumentUri
 		param options
 		set options = options || {}
 		set options.plugins = options.plugins || []
@@ -140,8 +140,8 @@
 					@ wfBaseFolder 'c:/my/wizzi/v5'
 					@ plugins jobPlugins
 				{ job
-					@ name 'example ' + wfjobDocumentUri
-					@ ittfDocumentUri wfjobDocumentUri
+					@ name 'example ' + wzjobDocumentUri
+					@ ittfDocumentUri wzjobDocumentUri
 					@ productionOptions
 						_ wizzi.productionOptions
 							{ 

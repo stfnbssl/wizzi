@@ -60,12 +60,12 @@
 		tobe_object( artifactGenerator )
 		tobe_function( artifactGenerator.gen )
 
-	it should load a wfjob
+	it should load a wzjob
 		_ pman.loadWzjob
 			_ path.join
 				@ __dirname
 				@ 'ittf'
-				@ 'mock1.wfjob.ittf'
+				@ 'mock1.wzjob.ittf'
 			{
 			f_cb_test( wzjobModel )
 				tobe_object( wzjobModel )

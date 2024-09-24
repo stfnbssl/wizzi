@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:08 GMT
+    utc time: Wed, 04 Sep 2024 02:22:35 GMT
 */
-'use strict';
 var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var path = require('path');
@@ -22,7 +21,7 @@ var metasManager = require('./lib/services/metasManager');
 var packiManager = require('./lib/services/packiManager');
 
 var md = module.exports = {};
-md.version = "0.8.42";
+md.version = "0.8.43";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;
@@ -500,7 +499,7 @@ function executeWizziJob_step2(jobRequest, callback) {
             }
             
             var notUsed = pman.addWzjobRequest({
-                wfjob: {
+                wzjob: {
                     ittfDocumentUri: jobPath
                  }
              });

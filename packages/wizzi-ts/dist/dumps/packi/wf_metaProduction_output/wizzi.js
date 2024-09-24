@@ -66,8 +66,8 @@ function generate(configPath) {
             pluginsBaseFolder: x_pluginsBaseFolder
          }, 
         job: {
-            name: configInstance.wfjobName, 
-            ittfDocumentUri: configInstance.wfjobPath, 
+            name: configInstance.wzjobName, 
+            ittfDocumentUri: configInstance.wzjobPath, 
             productionOptions: wizzi.productionOptions({
                 indentSpaces: 4, 
                 basedir: __dirname, 
@@ -83,10 +83,10 @@ function generate(configPath) {
          }
      }, function(err) {
         if (err) {
-            return wizzi.printWizziJobError(configInstance.wfjobName, err);
+            return wizzi.printWizziJobError(configInstance.wzjobName, err);
         }
         if (configInstance.schemas && configInstance.schemas.length > 0) {
-            generateSchemas(configInstance.schemas, path.dirname(configInstance.wfjobPath), configInstance.destPath, configInstance.packageName || configInstance.wfjobName, {
+            generateSchemas(configInstance.schemas, path.dirname(configInstance.wzjobPath), configInstance.destPath, configInstance.packageName || configInstance.wzjobName, {
                 items: x_pluginsItems, 
                 baseFolder: x_pluginsBaseFolder
              })

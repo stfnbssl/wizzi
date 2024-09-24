@@ -26,7 +26,7 @@
 	# var Logger = require('../services/logger')
 	#
 		# The wizzi.productionManager is the orchestrator of multi-part productions.
-		# It executes `wfjob` wizzi models or production steps built programmaticaly.
+		# It executes `wzjob` wizzi models or production steps built programmaticaly.
 	#
 		#
 		# The 'meat' of a production is the execution of a `wizzi/production/ProductionStep` instance
@@ -151,7 +151,7 @@
 		m addWzJob
 			{ wzJobConfig
 				{ options
-					{ wfjob
+					{ wzjob
 						string ittfDocumentUri
 			set wzJobConfig.__pman = this
 			set wzJobConfig.options
@@ -167,11 +167,11 @@
 			# Called by wizzi.executeWizziJob or wizziFactory.executeJob
 			# params
 			#   { jobRequest
-			#     { wfjob
+			#     { wzjob
 			#       string ittfDocumentUri
 		m addWzjobRequest
 			{ jobRequest
-				{ wfjob
+				{ wzjob
 					string ittfDocumentUri
 				{ options
 					optional

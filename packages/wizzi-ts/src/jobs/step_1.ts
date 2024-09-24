@@ -2,7 +2,7 @@ import path from 'path'
 import wizzi from '@wizzi/factory'
 import {createFsWizziFactory} from '../factory'
 
-var jobPath = path.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'step_1.wfjob.ittf');
+var jobPath = path.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'step_1.wzjob.ittf');
 
 export function job_1() {
     createFsWizziFactory(
@@ -10,7 +10,7 @@ export function job_1() {
         {
             items:[
                 "./wizzi.plugin.js/index.js", 
-                "./wizzi.plugin.wfjob/index.js", 
+                "./wizzi.plugin.wzjob/index.js", 
             ],
             pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.plugins/packages", 
         }, ((err, wf: wizzi.WizziFactory)=>{

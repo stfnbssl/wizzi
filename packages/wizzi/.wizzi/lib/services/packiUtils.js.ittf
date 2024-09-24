@@ -133,7 +133,7 @@ module wizzi@${wzCtx.version}.packiUtils
                     param value
                     if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
                         const filePath = md.ensurePackiFilePrefix(value)
-                        log 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                        # loog 'createJsonWizziFactoryAndJsonFs.filePath', filePath
                         _ jsonDocuments.push
                             {
                                 @ path filePath
@@ -147,7 +147,7 @@ module wizzi@${wzCtx.version}.packiUtils
                         return callback(err)
                     if !wizziFactory
                         set wizziFactory = require('./wizziFactory')
-                    log 'wizziFactory', wizziFactory
+                    # loog 'wizziFactory', wizziFactory
                     _ wizziFactory.createFactory
                         {
                             { repo

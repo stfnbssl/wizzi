@@ -1,0 +1,10 @@
+{
+
+    [ r_protocols_dataTypes
+        $foreach pr in data.protocols
+            $foreach dt in pr.dataTypes
+                {
+                    protocol "${pr}"
+                    dataType "${dt}"
+
+

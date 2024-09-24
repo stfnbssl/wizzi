@@ -25,14 +25,18 @@
         *$
 
 		var mtree
-			_ Object.assign
-				{
-				@ other.mtree || {}
-				{
-					@ mTreeBrickNode node
-					@ mTreeBrick node ? (node.mTreeBrick || node.model) : null
+			iif other
+				then
+					_ Object.assign
+						{
+						@ other.mtree || {}
+						{
+							@ mTreeBrickNode node
+							@ mTreeBrick node ? (node.mTreeBrick || node.model) : null
+				else {}
 
-		delete other.mtree
+		if other
+			delete other.mtree
 
 		return
             new errors.WizziError

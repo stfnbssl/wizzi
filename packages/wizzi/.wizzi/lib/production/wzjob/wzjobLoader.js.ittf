@@ -45,8 +45,8 @@
 			# wzjobRequest.context has not been implemented yet
 			# and probably it will never be.
 			# Its properties should be produced by previous 
-			# executions in the wfjob load recursive process.
-			# To pass a context to the wfjob mTree loader
+			# executions in the wzjob load recursive process.
+			# To pass a context to the wzjob mTree loader
 			# we use the globalContext of the wizziFactory.
 			var that = this
 			_ this.productionManager.loadWzjob

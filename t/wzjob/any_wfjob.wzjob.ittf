@@ -1,0 +1,7 @@
+﻿$group
+
+	artifact any_wzjob
+		src ./**/*.wzjob.ittf
+		schema wzjob
+		is-wz-job true
+		$hook

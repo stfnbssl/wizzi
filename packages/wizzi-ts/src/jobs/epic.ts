@@ -2,7 +2,7 @@ import path from 'path'
 import wizzi from '@wizzi/factory'
 import {createFsWizziFactory} from '../factory'
 
-var jobPath = path.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'epic.wfjob.ittf');
+var jobPath = path.join(__dirname, '..', '..', 'src', 'jobs', 'ittf', 'epic.wzjob.ittf');
 
 export function job_epic() {
     createFsWizziFactory(
@@ -11,7 +11,7 @@ export function job_epic() {
             items:[
                 "./wizzi.plugin.ts/index.js", 
                 "./wizzi.plugin.json/index.js", 
-                "./wizzi.plugin.wfjob/index.js", 
+                "./wizzi.plugin.wzjob/index.js", 
             ],
             pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.plugins/packages", 
         }, ((err, wf: wizzi.WizziFactory)=>{

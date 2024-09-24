@@ -316,9 +316,10 @@ export interface ProductionStepConfig {
     options?: ProductionOptions;
     model: ModelLoadConfig;
     contexts?: ModelLoadConfig[],
-    isWfJob?: boolean, // from wzjob.artifact.isWfJob
-    isWfModelDoms?: boolean, // from wzjob.artifact.isWfModelDoms
-    isWfMeta?: boolean, // from wzjob.artifact.isWfMeta
+    isWzJob?: boolean, // from wzjob.artifact.isWzJob
+    isWzModelDoms?: boolean, // from wzjob.artifact.isWzModelDoms
+    isWzModelToFolder?: boolean, // from wzjob.artifact.isWzModelToFolder
+    isWzMeta?: boolean, // from wzjob.artifact.isWzMeta
     gen: {
         generator: string, // from wzjob.artifact.generator
     },
@@ -332,10 +333,11 @@ export interface ProductionStepConfig {
  *              It is instantiated from an instance of a ProductionStepConfig. 
  * @param modelInfo         An instance of a ModelInfo created from a ProductionStepConfig.model.
  * @param dest              A ProductionStepDestPath instance for artifact persistence.
- * @param isWfArtifact      The production step is an Artifact Generation Production
- * @param isWfJob           The production step is a child Wizzi Job Production
- * @param isWfModelDoms     The production step is a Wizzi ModelDoms Production
- * @param isWfMeta          The production step is a Wizzi Meta Production         
+ * @param isWzArtifact      The production step is an Artifact Generation Production
+ * @param isWzJob           The production step is a child Wizzi Job Production
+ * @param isWzModelDoms     The production step is a Wizzi ModelDoms Production
+ * @param isWzModelToFolder     The production step is a Wizzi ModelDoms Production
+ * @param isWzMeta          The production step is a Wizzi Meta Production         
  * @param genContexts       Contains the generation contexts accumulated during the production.
  *                          At Production end a GenContext instance contains the text of the generated artifact.
  */
@@ -349,14 +351,15 @@ export type ProductionStep = {
         generator: string,
     },
     dest: ProductionStepDestPath,
-    isWfJob?: boolean, // from wzjob.artifact.isWfJob
-    isWfModelDoms?: boolean, // from wzjob.artifact.isWfModelDoms
-    isWfMeta?: boolean, // from wzjob.artifact.isWfMeta
+    isWzJob?: boolean, // from wzjob.artifact.isWzJob
+    isWzModelDoms?: boolean, // from wzjob.artifact.isWzModelDoms
+    isWzModelToFolder?: boolean, // from wzjob.artifact.isWzModelToFolder
+    isWzMeta?: boolean, // from wzjob.artifact.isWzMeta
     genContexts: GenContext[],
 }
 
 export interface PManJobRequest {
-    wfjob: {
+    wzjob: {
         ittfDocumentUri: string,
     }
 }

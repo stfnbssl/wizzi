@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:07 GMT
+    utc time: Wed, 04 Sep 2024 02:22:35 GMT
 */
-'use strict';
 var verify = require('@wizzi/utils').verify;
 
 var util = require('util');
@@ -50,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.42';
+        this.__version = '0.8.43';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -80,7 +79,7 @@ class WizziFactory {
          { options
          { repo
          string storeKind
-         oneOf 'filesystem', 'mongodb', 'browserfs', 'json'
+         oneOf 'filesystem', 'mongodb', 'json'
          string storeUri
          # when storeKind == mongodb
          string storeBaseFolder
@@ -2516,7 +2515,7 @@ class WizziFactory {
             ));
         }
         
-        // loog 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest
+        console.log("[33m%s[0m", 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest);
         
         
         // jobRequest type 1
@@ -2538,8 +2537,9 @@ class WizziFactory {
                 if (err) {
                     return callback(err);
                 }
+                // loog 'exists', exists
                 if (!exists) {
-                    return callback(error('NotFound', '_executeJob_by_path', 'Cannot find wfjob ittf document: ' + jobRequest.path));
+                    return callback(error('NotFound', '_executeJob_by_path', 'Cannot find wzjob ittf document: ' + jobRequest.path));
                 }
                 else {
                     console.log('wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext);
@@ -2550,7 +2550,7 @@ class WizziFactory {
                     }
                     
                     var notUsed = pman.addWzjobRequest({
-                        wfjob: {
+                        wzjob: {
                             ittfDocumentUri: jobRequest.path
                          }
                      });
@@ -3122,6 +3122,156 @@ class WizziFactory {
         )
     }
     /**
+         Writes the content of a Wizzi Model of schema `ittf`
+         into a PackiFiles object, processing the $file and $plain Ittf Commands.
+         The current instance should be a json factory
+         params
+         { ittfModel
+         { options
+         string baseDestFolder
+         returns
+         | packifiles
+         | wzError
+    */
+    ittfModelToFolder(ittfModel, options, callback) {
+        if (typeof(callback) !== 'function') {
+            throw new Error(
+                error('InvalidArgument', 'ittfModelToFolder', 'The callback parameter must be a function. Received: ' + callback)
+            );
+        };
+        if (verify.isObject(ittfModel) === false) {
+            return callback(error(
+                'InvalidArgument', 'ittfModelToFolder', { parameter: 'ittfModel', message: 'The ittfModel parameter must be an object. Received: ' + ittfModel }
+            ));
+        }
+        if (verify.isObject(options) === false) {
+            return callback(error(
+                'InvalidArgument', 'ittfModelToFolder', { parameter: 'options', message: 'The options parameter must be an object. Received: ' + options }
+            ));
+        }
+        
+        if (this.storeKind != 'json') {
+            var packiFiles = {};
+            return this.createJsonFactoryAndJsonFs(packiFiles, {}, (err, wfJsonFs) => {
+                    if (err) {
+                        console.log("[31m%s[0m", err);
+                        return callback(err);
+                    }
+                    wfJsonFs.wf.ittfModelToFolder(ittfModel, options, callback)
+                }
+                );
+        }
+        
+        const baseDestFolder = packiFilePrefix + (options.baseDestFolder || "");
+        // loog 'baseDestFolder', baseDestFolder, options.baseDestFolder
+        const fileService = this.fileService;
+        var f_count = 0;
+        var that = this;
+        (function next() {
+            var child = ittfModel.children[f_count++];
+            
+            /**
+                * The baseDestFolder is ready
+            */
+            if (!child) {
+                return that.getPackiFilesFromJsonFactory('', (err, readyPackiFiles) => {
+                        if (err) {
+                            console.log("[31m%s[0m", err);
+                            return callback(err);
+                        }
+                        return callback(null, readyPackiFiles);
+                    }
+                    );
+            }
+            if (child.name == '$file') {
+                try {
+                    processIttfFile(child, baseDestFolder, (err, notUsed) => {
+                        if (err) {
+                            console.log("[31m%s[0m", err);
+                            return callback(err);
+                        }
+                        next();
+                    }
+                    )
+                } 
+                catch (ex) {
+                    return callback(error('WizziFactoryError', 'ittfModelToFolder', {
+                            message: 'Processing $file. See inner error', 
+                            parameter: {
+                                outputFileName: child.value
+                             }
+                         }, ex));
+                } 
+            }
+            else if (child.name == '$plain') {
+                try {
+                    processPlainFile(child, baseDestFolder, (err, notUsed) => {
+                        if (err) {
+                            console.log("[31m%s[0m", err);
+                            return callback(err);
+                        }
+                        next();
+                    }
+                    )
+                } 
+                catch (ex) {
+                    return callback(error('WizziFactoryError', 'ittfModelToFolder', {
+                            message: 'Processing $plain. See inner error', 
+                            parameter: {
+                                outputFileName: child.value
+                             }
+                         }, ex));
+                } 
+            }
+            else {
+                next();
+            }
+        })();
+        function processIttfFile(node, baseDestFolder, callback) {
+            var outputPath = path.join(baseDestFolder, node.value);
+            var sb = [];
+            var i, i_items=node.children, i_len=node.children.length, child;
+            for (i=0; i<i_len; i++) {
+                child = node.children[i];
+                processIttfContent(sb, child, 0)
+            }
+            fileService.write(outputPath, sb.join('\n'), callback)
+        }
+        function processIttfContent(sb, node, indent) {
+            sb.push(new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value))
+            var i, i_items=node.children, i_len=node.children.length, child;
+            for (i=0; i<i_len; i++) {
+                child = node.children[i];
+                processIttfContent(sb, child, indent + 4)
+            }
+        }
+        function processPlainFile(node, baseDestFolder, callback) {
+            var outputPath = path.join(baseDestFolder, node.value);
+            if (node.children.length == 1 && node.children[0].name == '$from') {
+                fileService.read(packiFilePrefix + node.children[0].value, (err, content) => {
+                    if (err) {
+                        console.log("[31m%s[0m", err);
+                        return callback(err);
+                    }
+                    fileService.write(outputPath, content, callback)
+                }
+                )
+            }
+            else {
+                return callback(error('WizziFactoryError', 'ittfModelToFolder', {
+                        message: 'Missing $from node processing $plain file.', 
+                        parameter: {
+                            outputFileName: node.value
+                         }
+                     }));
+            }
+        }
+        function decode(text) {
+            text = verify.replaceAll(text, "$", "$");
+            return verify.replaceAll(text, "£'('£", "(");
+        }
+    }
+    /**
          This allows model loadings and generations from text strings
          params
          string ittfContent
@@ -3415,7 +3565,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.42.wizziFactory.' + method,
+        method: 'wizzi@0.8.43.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

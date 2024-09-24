@@ -4,6 +4,7 @@
 	var util = require('util')
 	var path = require('path')
 	var chalk = require('chalk')
+	var inflect = require('i')(true)
 	var sprintf = require('extsprintf').sprintf
 	var errors = require('../errors')
 	var regexpExt = require('./regexpExt')
@@ -22,6 +23,7 @@
 	$include verify/texts
 	$include verify/paths
 	$include verify/parseNameValue
+	$include verify/inflect
 
 	set md.isArtifact
         function 

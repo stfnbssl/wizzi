@@ -1,0 +1,65 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'light_modelContexts_step_1',
+            title: 'Ittf docomuent with context models - load and generate',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+		_ createWizziFactory	
+			{
+			a_cb_test( wf )		
+				# Load a complex wizzi model passing a model description to the loader
+				# of a new wizzi plugin.
+				_ wf.loadModelFromConfig
+					{
+						@ src
+							_ path.join
+								@ __dirname
+								@ 'ittf'
+								@ 'forms.html.ittf'
+						$$ cwd
+						@ schema 'html'
+						$$ format
+						[ contexts
+							{
+								@ src
+									_ path.join
+										@ __dirname
+										@ 'ittf'
+										@ 'formsData.json.ittf'
+								@ schema 'json'
+								@ exportName 'data'
+						[ transformers
+					{
+					a_cb_test(wizziModel)
+						_ printValue
+							@ 'wizziModel elements'
+							_ stringify
+								@ wizziModel.elements
+								@ null
+								@ 2
+						_ wf.generateArtifact
+							@ wizziModel
+							@ 'unavailable'
+							@ 'html/document'
+							{
+							a_cb_test(artifactText)
+								_ printValue
+									@ 'artifact'
+									@ artifactText

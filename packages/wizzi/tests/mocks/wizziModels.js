@@ -1,20 +1,19 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\tests\mocks\wizziModels.js.ittf
-    utc time: Fri, 09 Aug 2024 15:27:11 GMT
+    utc time: Wed, 04 Sep 2024 02:22:38 GMT
 */
-'use strict';
 var path = require('path');
 var md = module.exports = {};
 md.getModels = function(schema, mockBaseDir) {
     // loog 'wizzi.tests.wizziModels.getModels: schema, mockBaseDir', schema, mockBaseDir
     var ret = {};
-    if (schema === 'wfjob') {
-        var wfjob_mock1_path = path.join(mockBaseDir, 'ittf', 'mock1.wfjob.ittf');
-        ret[wfjob_mock1_path] = wfjob_mock1();
-        var wfjob_mock2_path = path.join(mockBaseDir, 'ittf', 'mock2.wfjob.ittf');
-        ret[wfjob_mock2_path] = wfjob_mock2();
+    if (schema === 'wzjob') {
+        var wzjob_mock1_path = path.join(mockBaseDir, 'ittf', 'mock1.wzjob.ittf');
+        ret[wzjob_mock1_path] = wzjob_mock1();
+        var wzjob_mock2_path = path.join(mockBaseDir, 'ittf', 'mock2.wzjob.ittf');
+        ret[wzjob_mock2_path] = wzjob_mock2();
     }
     if (schema === 'tests') {
         var tests_mock1_path = path.join(mockBaseDir, 'ittf', 'mock1.tests.ittf');
@@ -25,7 +24,7 @@ md.getModels = function(schema, mockBaseDir) {
     return ret;
 }
 ;
-function wfjob_mock1() {
+function wzjob_mock1() {
     var ret = {
         destBaseFolder: path.join(__dirname, 'result'), 
         models: [], 
@@ -39,7 +38,7 @@ function wfjob_mock1() {
                         artifacts: [
                             {
                                 wzName: 'wzjobMock2', 
-                                src: 'mock2.wfjob.ittf', 
+                                src: 'mock2.wzjob.ittf', 
                                 isWzJob: true, 
                                 modelRefs: [], 
                                 transformers: []
@@ -61,7 +60,7 @@ function wfjob_mock1() {
      };
     return ret;
 }
-function wfjob_mock2() {
+function wzjob_mock2() {
     var ret = {
         destBaseFolder: path.join(__dirname, 'result2'), 
         models: [], 

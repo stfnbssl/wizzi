@@ -1,0 +1,48 @@
+﻿$group
+
+	function wzjob_mock1
+		var ret 
+			{
+				@ destBaseFolder
+					_ path.join
+						@  __dirname
+						@ 'result'
+				@ models
+					[
+				@ productions
+					[
+						{
+							@ lines
+								[
+									{
+										@ wzName 'lib'
+										@ cwdFolder
+											_ path.resolve
+												@ __dirname
+												@ '../production/ittf'
+										@ destFolder
+											_ path.join
+												@  __dirname
+												@ 'result'
+										@ artifacts
+											[
+												{
+													@ wzName 'wzjobMock2'
+													@ src 'mock2.wzjob.ittf'
+													@ isWzJob true
+													@ modelRefs
+														[
+													@ transformers
+														[
+												{
+													@ wzName 'artifactMock1'
+													@ src 'mock1.tests.ittf'
+													@ generator
+														{
+															@ gen 'tests/gen1'
+													@ modelRefs
+														[
+													@ transformers
+														[
+		return ret
+

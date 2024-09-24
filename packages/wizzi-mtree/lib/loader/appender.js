@@ -1,10 +1,9 @@
 /*
-    artifact generator: C:\My\wizzi\stfnbssl\wizzi.lastsafe.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
-    package: wizzi-js@
+    artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\.wizzi\lib\loader\appender.js.ittf
-    utc time: Tue, 06 Aug 2024 19:41:07 GMT
+    utc time: Sat, 21 Sep 2024 13:05:08 GMT
 */
-'use strict';
 var verify = require('@wizzi/utils').verify;
 var util = require('util');
 var errors = require('../errors');
@@ -171,16 +170,18 @@ function assignId(item, ctx) {
 }
 function local_error(errorName, method, message, node, inner, other) {
     console.log('local_error', errorName, node, __filename);
-    var mtree = Object.assign({}, other.mtree || {}, {
-        mTreeBrickNode: node, 
-        mTreeBrick: node ? (node.mTreeBrick || node.model) : null
-     });
-    delete other.mtree
+    var mtree = other ? Object.assign({}, other.mtree || {}, {
+            mTreeBrickNode: node, 
+            mTreeBrick: node ? (node.mTreeBrick || node.model) : null
+         }) : {};
+    if (other) {
+        delete other.mtree
+    }
     return new errors.WizziError(message, errorName, [
             errorName
         ], {
             source: {
-                method: 'wizzi-mtree@0.8.29.loader.appender.' + method
+                method: 'wizzi-mtree@0.8.31.loader.appender.' + method
              }, 
             mtree: mtree, 
             inner: inner, 
@@ -205,7 +206,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi-mtree@0.8.29.loader.appender.' + method,
+        method: 'wizzi-mtree@0.8.31.loader.appender.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');
