@@ -1,0 +1,55 @@
+﻿module 
+	$params name
+    kind jsfile
+	+
+	import path
+	import util
+	+
+	var del = require('del')
+    var expect = require('expect.js')
+	+
+	var _ = require('lodash')
+	var file = require('@wizzi/utils').file
+	var verify = require('@wizzi/utils').verify
+    var createStoreFactory = require('@wizzi/repo').createStoreFactory
+    function getFSDocumentStore
+        param callback
+        _ createStoreFactory
+            {
+                @ kind 'filesystem'
+            f_cb( storeFacory )
+                return
+                    _ storeFacory
+                        @ callback
+	+
+	$hook imports
+	+
+    function evaluate
+        param uri
+        param callback
+		var loadContext
+            {
+				@ mTreeBuildUpContext
+					{
+				@ productionContext mocks.ProductionContext
+				@ __ittfDocumentStore store
+            
+		_ MTreeBrickProvider.createFromUri
+			@ uri
+			@ loadContext
+			f_cb_no_err( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+                _ mixer
+                    @ mTree
+                    @ provider
+                    f_cb_test( mixedModel )
+						_ appender
+							@ mixedModel
+							f_cb_test( appendedModel )
+								_ evaluator
+									@ appendedModel
+									@ loadContext
+                                    @ callback
+    +
+	describe ${name}
+		$hook

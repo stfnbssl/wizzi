@@ -1,0 +1,48 @@
+﻿$group
+
+	# 
+		# retrieve an artifact generator searching the factoryPlugins
+		# registered to this plugins manager
+		# params
+		#  string artifactName
+		# returns
+		#  | api-ref wizzi-plugin.modelTransformer
+		#  | wzError NotFound
+		
+	m getArtifactGenerator
+		string artifactName
+		# loog 'PluginsManager.getArtifactGenerator.artifactName: ' + artifactName
+			
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion
+			decl result = null
+
+		# all factoryPlugins are searched, last matching encountered wins.
+		foreach item in this.factoryPlugins
+			# loog 'searching artifact ', artifactName, ' in module', item.getName()
+			checked_call_r_set( found )
+				_ item.getArtifactGenerator(artifactName)
+			# loog 'found', found, found && verify.isFunction(found.gen)
+			if found && verify.isFunction(found.gen)
+				set result = found
+				set foundInPlugin = item.getFilename()
+                if verify.isFunction(item.getVersion)
+                    set pluginVersion = item.getVersion()
+
+		if !result
+			var msg = 'getArtifactGenerator. Cannot find artifact generator: ' + artifactName + '\n' +
+				\b 'availables generators: ' + this.availableArtifactGenerators().join(', ')
+			_ log.error
+				@ msg
+			r_wz_err( NotFound, getArtifactGenerator )
+				@ msg
+		else
+			_ log.success
+                @ 'getArtifactGenerator. Found artifact generator: ' + artifactName
+                    \b + ' in plugin: ' + foundInPlugin 
+                    \b + ', version:' + (pluginVersion || 'unknown')
+
+		return result
+

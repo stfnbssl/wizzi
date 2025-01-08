@@ -1,0 +1,37 @@
+﻿$group
+
+    m getProvidedCheatsheetFolders
+        var info = this.getInfo()
+        return info.pluginsManager.providedCheatsheetFolders
+
+    m mapIttfDocumentPathToSchema
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToSchema(ittfDocumentPath)
+
+    m mapIttfDocumentPathToDefaultArtifact
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToDefaultArtifact(ittfDocumentPath)
+
+    m mapIttfDocumentPathToPluginDependencies
+        param ittfDocumentPath
+        return this.pluginsManager.mapIttfDocumentPathToPluginDependencies(ittfDocumentPath)
+
+    m mapExtensionToSchema
+        param extension
+        return this.pluginsManager.mapExtensionToSchema(extension)
+
+    m mapSchemaToDefaultArtifact
+        param schema
+        return this.pluginsManager.mapSchemaToDefaultArtifact(schema)
+
+    m getSchemaArtifacts
+        param schema
+        return this.pluginsManager.getSchemaArtifacts(schema)
+
+    m mapArtifactToContentType
+        param artifactName
+        return this.pluginsManager.mapArtifactToContentType(artifactName)
+
+    m mapSchemaToRootTag
+        param schema
+        return this.pluginsManager.mapSchemaToRootTag(schema)

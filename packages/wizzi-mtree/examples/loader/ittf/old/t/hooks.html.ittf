@@ -1,0 +1,14 @@
+$group
+    $params &data
+
+    $if data.num == 1
+        h1 num 1
+        $hook
+
+    $elif data.num == 2
+        h1 num 2
+        $hook   
+
+    $elif data.num == 3
+        h1 num 3
+        $hook   

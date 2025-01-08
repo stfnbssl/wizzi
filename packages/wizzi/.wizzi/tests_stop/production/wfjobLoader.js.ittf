@@ -1,0 +1,47 @@
+﻿base_test(wzjobLoader)
+
+	$append imports
+		var WzjobLoader = require('../../lib/production/wzjob/wzjobLoader').WzjobLoader
+		var mocks = require('../mocks/misc')
+
+	var _wizziFactory = null
+	var _productionManager = null
+
+	before-async
+		_ mocks.getWizziFactory
+			{
+				@ storeKind 'filesystem'
+				@ testOnlyMockBaseDir __dirname
+			f_cb_test( wf )
+				set _wizziFactory = wf
+				set _productionManager
+					_ wf.createProductionManager
+						{
+							@ indentSpaces 4
+							@ basedir __dirname
+							@ dumps {}
+				_ done
+
+	it-async shoul load a wzjob
+		var wzjobLoader 
+			new WzjobLoader
+				@ _productionManager
+		_ wzjobLoader.load
+			{
+				@ model
+					{
+						@ cwd
+							_ path.join
+								@ __dirname
+								@ 'ittf'
+						@ src 'mock1.wzjob.ittf'
+			f_cb_test( result )
+				# loog 'shoul load a wzjob: seenWzjobRequests', result.seenWzjobRequests
+				# loog 'shoul load a wzjob: pendingWzjobRequests', result.pendingWzjobRequests
+				# loog 'shoul load a wzjob: productionStepConfigs', result.productionStepConfigs
+				tobe_array( result.pendingWzjobRequests, 1)
+				tobe_array( result.seenWzjobRequests, 1)
+				tobe_array( result.productionStepConfigs, 1)
+				tobe_string( result.productionStepConfigs[0].name, artifactMock1 )
+				tobe_string( result.productionStepConfigs[0].model.src, mock1.tests.ittf )
+				_ done

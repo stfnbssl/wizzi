@@ -1,0 +1,103 @@
+{
+    $
+        var metaBasename = "ts.react";
+
+    name "wizzi.meta.${metaBasename}"
+    npnName "@wizzi/meta.${metaBasename}"
+    description "Wizzi meta plugin for creating wizzi ${metaBasename} packages"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "ittf"
+
+    metaNamespace "${metaBasename}"
+
+    usePackageVersion true
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziMeta
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "Wizzi ${metaBasename} meta plugin"
+        kind "WizziMeta"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Productions
+        {
+            name "${metaBasename}CLI"
+            isPackageMain true
+        {
+            name "${metaBasename}Commons"
+        {
+            name "${metaBasename}Utils"
+    [ Productions
+        {
+            name "tsReact"
+        {
+            name "tsReactApp"
+            isPackageMain true
+        {
+            name "tsReactAssets"
+        {
+            name "tsReactBasicWebpack"
+            isPackageMain true
+        {
+            name "tsReactBasicVite"
+            isPackageMain true
+        {
+            name "tsReactComponents"
+        {
+            name "tsReactEditor"
+        {
+            name "tsReactFeatures"
+        {
+            name "tsReactNextjsApp"
+            isPackageMain true
+        {
+            name "tsReactPageForms"
+        {
+            name "tsReactRedux"
+        {
+            name "tsReactStoryboard"
+        {
+            name "tsReactThemes"
+        {
+            name "tsReactTypings"
+        {
+            name "tsReactUtils"
+        {
+            name "tsReactWebpackGetStartedApp"
+            isPackageMain true
+        {
+            name "tsReactWebpackWidgetsApp"
+            isPackageMain true
+        {
+            name "tsReactWidgets"
+

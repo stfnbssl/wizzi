@@ -1,0 +1,216 @@
+﻿$group
+	
+	m loadFromNode
+		param node
+		param $params
+		set this.name = (node.name || node.n) + (node.tagSuffix || '')
+		set this.value = node.value || node.v || ''
+		set this.row = node.row || node.r || ''
+		set this.col = node.col || node.c || ''
+		if node.id
+			set this.id = node.id
+		# loog 'loadFromNode', node.name, $params
+		if $params && $params.length > 0
+			_ this.add('$params', $params, this)
+		_ this.__importChilds(node.children)
+	
+	m __importChilds
+		param children
+		var added
+		if children && children.length
+			foreach node in children
+				set added 
+					_ this.add
+						@ (node.name || node.n) + (node.tagSuffix || '')
+						@ node.value || node.v || ''
+				set added.row = node.row || node.r || ''
+				set added.col = node.col || node.c || ''
+				if node.id
+					set added.id = node.id
+				set added.commentState = node.commentState
+				if node.$params && node.$params.length > 0
+					_ added.add
+						@ '$params'
+						@ node.$params
+						@ node
+				_ added.__importChilds
+					@ node.children
+
+	m __getVFile
+		param options
+		param callback
+		if options.file
+			set this.file = options.file
+			return
+				_ callback
+					@ null
+					@ options.file
+		else
+			# load the default vfile (filesystem or browser)
+			var that = this
+			return
+				_ vfile
+					f_cb( file )
+						set that.file = file
+						return
+							_ callback
+								@ null
+								@ file
+
+    # params
+    #   mTreeOrFilepathOrContent
+    #     filepath | ittfContent | mTree
+    #   { options 
+    #     boolean fromString
+    #     boolean clean
+    m __loadMTree
+		param mTreeOrFilepathOrContent
+		param options
+		param callback
+
+		var that = this
+		_ this.__getVFile
+			@ options
+			f_cb( file )
+                # loog '__loadMTree, this.file', that.file
+				set options.file = file
+                if options.createEmpty
+                    return
+                        _ callback
+                            @ null
+                            @ that
+				if verify.isObject(mTreeOrFilepathOrContent)
+					# loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is an object'
+					if verify.isArray(mTreeOrFilepathOrContent.nodes) && mTreeOrFilepathOrContent.nodes.length == 1
+						_ that.loadFromNode(mTreeOrFilepathOrContent.nodes[0], mTreeOrFilepathOrContent.$params)
+					elif (mTreeOrFilepathOrContent.name || mTreeOrFilepathOrContent.n) && mTreeOrFilepathOrContent.children
+						_ that.loadFromNode(mTreeOrFilepathOrContent, mTreeOrFilepathOrContent.$params)
+					else
+						return
+							_ callback
+								{
+									@ __is_error true
+									@ method 'wizzi-utils.ittfDocumentGraph.__loadMTree' 
+									@ message 'Invalid object parameter: mTreeOrFilepathOrContent. The object is not an mTree object.'
+					return
+						_ callback
+							@ null
+							@ that
+
+				elif verify.isNotEmpty(mTreeOrFilepathOrContent)
+					# loog 'ittfDocumentGraph.__loadMTree. mTreeOrFilepathOrContent is a string'
+					set that.model
+						{
+							@ uri (options.fromString ? 'string://' : mTreeOrFilepathOrContent)
+							@ dirname (options.fromString ? '' : path.dirname(mTreeOrFilepathOrContent))
+			
+					if options.fromString
+						# loog 'ittfDocumentGraph.__loadMTree. Loading from text string'
+						_ asIsLoader.createFromString
+							@ mTreeOrFilepathOrContent
+							@ options
+							f_cb( asisMTree )
+								set that.content = asisMTree.content
+								# loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+								_ that.loadFromNode
+									@ asisMTree.nodes[0]
+									@ asisMTree.$params
+								return
+									_ callback
+										@ null
+										@ that
+					else
+						# loog 'ittfDocumentGraph.__loadMTree. Loading from file'
+						# load from file using the vfile class
+						_ file.isFile
+							@ mTreeOrFilepathOrContent
+							f_cb( isFile )
+								if isFile == false
+									return
+										_ callback
+											{
+												@ __is_error true
+												@ method 'wizzi-utils.ittfDocumentGraph.__loadMTree' 
+												@ message 'Document not found: ' + mTreeOrFilepathOrContent
+								else
+									_ asIsLoader
+										@ mTreeOrFilepathOrContent
+										@ options
+										f_cb( asisMTree )
+											set that.content = asisMTree.content
+											# loog 'ittfDocumentGraph.asis.loader.asisMTree.nodes.length', asisMTree.nodes.length, !asisMTree.nodes[0]
+											_ that.loadFromNode
+												@ asisMTree.nodes[0]
+												@ asisMTree.$params
+											set that.model.basename = path.basename(mTreeOrFilepathOrContent)
+											var ss = that.model.basename.split('.')
+											set that.model.isIttf = ss[ss.length-1] === 'ittf'
+											if that.model.isIttf
+												set that.model.schema = ss[ss.length-2].toLowerCase()
+												set that.model.seedName = ss.slice(0,-2).join('.')
+												if that.model.schema !== 'json'
+													set that.model.jsonTwinUri
+														_ path.join
+															@ that.model.dirname
+															@ that.model.seedName + '.json.ittf'
+											# loog 'ittfDocumentGraph.loadFrom.ittf.model', that.model
+											return
+												_ callback
+													@ null
+													@ that
+				else
+					return
+						_ callback
+							{
+		  						@ __is_error true
+		  						@ method 'wizzi-utils.ittfDocumentGraph.__loadMTree' 
+		  						@ message 'Invalid parameter: mTreeOrFilepathOrContent'
+		  						@ paramValue mTreeOrFilepathOrContent                                
+
+    # params
+    #   mTreeOrFilepathOrContent
+    #     filepath | ittfContent | mTree
+    #   { options 
+    #     boolean createEmpty
+    #     boolean fromString
+    #     boolean clean
+    #     string name
+    #     string value
+    #     object parent
+    m createFrom
+		static
+		param mTreeOrFilepathOrContent
+		param options
+		param callback
+		
+		if typeof(callback) === 'undefined' && verify.isFunction(options)
+			set callback = options
+			set options = {}
+		else
+			set options = options || {}
+
+		function clean
+			param node
+			delete node.parent
+			delete node.model
+			if node.children
+				foreach item in node.children
+					_ clean(item)
+			return node
+
+		var ittfDocuGraph
+            new IttfDocumentGraph
+                @ options.name
+                @ options.value
+                @ options.parent
+
+		_ ittfDocuGraph.__loadMTree
+			@ mTreeOrFilepathOrContent
+			@ options
+			f_cb( ittfDocuGraph )
+				# loog 'wizzi-utils.ittfDocumentGraph.createFrom. Received ittfDocuGraph', ittfDocuGraph.name, ittfDocuGraph.value
+				if options.clean
+					_ clean(ittfDocuGraph)
+				_ callback
+					@ null
+					@ ittfDocuGraph

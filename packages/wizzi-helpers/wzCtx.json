@@ -1,0 +1,8 @@
+{
+    "name": "@wizzi/helpers",
+    "gitname": "wizzi-helpers",
+    "version": "0.8.2",
+    "description": "Helpers library for the wizzi factory, required by the @wizzi/util package",
+    "license": "MIT",
+    "schemas": []
+}

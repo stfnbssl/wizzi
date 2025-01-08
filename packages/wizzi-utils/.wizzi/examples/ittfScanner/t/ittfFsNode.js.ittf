@@ -1,0 +1,230 @@
+﻿$group
+
+	function ittfFsNode_step_1
+        param callback
+		
+		info 'wizzi-utils.examples.ittfFsNode_step_1 START'
+		
+		var folderPath
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ 'first'
+
+		var options
+			{
+				@ name 'first'
+				@ gitPath 'c:/blabla'
+
+        _ ittfFsNode_step_1_exec
+            @ folderPath
+            @ options
+            @ callback
+
+	function ittfFsNode_step_1_outside
+        param callback
+		
+		info 'wizzi-utils.examples.ittfFsNode_step_1_outside START'
+		
+		var folderPath
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+                @ 'outside'
+				@ 'first'
+
+		var options
+			{
+				@ name 'first'
+				@ gitPath 'c:/blabla'
+
+        _ ittfFsNode_step_1_exec
+            @ folderPath
+            @ options
+            @ callback
+
+	function ittfFsNode_step_1_exec
+        param folderPath
+        param options
+        param callback
+		
+		var removeRoot = path.dirname(folderPath)
+		info 'folderPath', folderPath
+        info 'removeRoot', removeRoot
+		
+		# var baseFolder = path.basename(folderPath)
+        var baseFolder = path.dirname(folderPath)
+
+		_ vfile
+			f_cb_test( file )
+		
+				_ file.getGlobbedFilesEx
+					_ path.join
+						@ folderPath
+						@ '**/*.ittf'
+					{
+						@ removeRoot removeRoot
+						@ dot true
+						@ ignore
+							_ path.join
+								@ folderPath
+								@ '**/node_modules/**/*.*'
+					f_cb_test( ittfs )
+						
+						# loog 'ittfs\n', JSON.stringify(ittfs, null, 2)
+
+                        _ ittfGraph.createIttfDocumentGraphFrom
+                            @ null
+                            {
+                                @ name 'wzpackage'
+                                @ value options.name
+                                @ createEmpty true
+                            f_cb_test( ittfDocumentGraph )
+                                var root
+                                    new IttfFsNode
+                                        @ baseFolder
+                                        @ null
+                                        {
+                                            @ isDirectory true
+                                            @ file file
+                                
+                                _ root.setSourcePaths
+                                    {
+                                        @ ittfBasePath removeRoot
+                                        @ jsCodeBasePath options.gitPath
+                    
+                                # create the IttfFsNode tree structure of the scanned folder
+                                foreach ittf in ittfs
+                        
+                                    _ root.addDocument
+                                        @ ( ittf[0] === '/' ? ittf.substr(1) : ittf )
+                                        {
+                                            @ basePath removeRoot
+                                            @ gitPath options.gitPath
+                    
+                                # analize all IttfFsNode(s) starting from root
+                                # this also searches mixed or included ittf fragments that are 
+                                # outside (up) of folderPath
+                                _ root.analize
+                                    f_cb_test()
+                                        _ file.write
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'outputs'
+                                                @ 'ittfFsNode_step_1_after_analize.json'
+                                            _ stringify
+                                                @ root
+                                                @ null
+                                                @ 2
+                                        # export folder infos to an mTree conformant to the
+                                        # 'wzpackage' schema.
+                                        _ root.toIttf(ittfDocumentGraph)
+                    
+                                        # loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                                        _ ittfDocumentGraph.writeFile
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'outputs'
+                                                @ 'ittfFsNode_step_1.wzpackage.ittf'
+                                            f_cb_test( result )
+                                                _ callback
+                                                    @ null
+                                                    {
+                                                        @ root root
+                                                        @ ittfDocumentGraph ittfDocumentGraph
+                                                        @ message 'Written outputs/ittfFsNode_step_1.wzpackage.ittf'
+
+	function ittfFsNode_step_2
+        param callback
+		
+		info 'wizzi-utils.examples.ittfFsNode_step_2 START'
+
+		var folderPath
+			_ path.join
+				@ __dirname
+				@ 'ittf'
+				@ 'first'
+
+		_ vfile
+			f_cb_test( file )
+                var root
+                    new IttfFsNode
+                        @ folderPath
+                        @ null
+                        {
+                            @ isDirectory true
+                            @ file file
+                # loog 'root', root
+                var d1Path
+                    _ path.join
+                        @ folderPath
+                        @ 'root.sample.ittf'
+                var added
+                    _ root.addDocument(d1Path)
+                # loog 'root', root
+                var d2Path
+                    _ path.join
+                        @ folderPath
+                        @ 't'
+                        @ 'frag-1.sample.ittf'
+                set added
+                    _ root.addDocument(d2Path)
+                # loog 'root', root
+                _ file.write
+                    _ path.join
+                        @ __dirname
+                        @ 'outputs'
+                        @ 'ittfFsNode_step_2_after_add.json'
+                    _ stringify
+                        @ root
+                        @ null
+                        @ 2
+                _ root.setInfo
+                    f_cb_test()
+                        # loog 'root', root
+                        info 'root.info.schemas', root.info.schemas
+                        info 'root.info.lib', root.info.lib
+                        # tobe_string(root.info.schemas['md'].name, md)
+                        # tobe_array(root.info.lib.documents, 1)
+                        _ file.write
+                            _ path.join
+                                @ __dirname
+                                @ 'outputs'
+                                @ 'ittfFsNode_step_2_after_setInfo.json'
+                            _ stringify
+                                @ root
+                                @ null
+                                @ 2
+                        _ callback
+                            @ null
+                            {
+                                @ root root
+                                @ ittfDocumentGraph null
+
+    function ittfFsNode_step_3
+        param root
+        param callback
+        
+        info 'wizzi-utils.examples.ittfFsNode_step_3 START'
+        
+        _ ittfGraph.createIttfDocumentGraphFrom
+            @ null
+            {
+                @ name 'wzpackage'
+                @ createEmpty true
+            f_cb_test( ittfDocumentGraph )
+                _ root.analize
+                    f_cb_test()
+                        _ root.toIttf(ittfDocumentGraph)
+                        _ file.writeFile
+                            _ path.join
+                                @ __dirname
+                                @ 'outputs'
+                                @ 'ittfFsNode_step_3.json'
+                            _ stringify
+                                @ root
+                                @ null
+                                @ 2
+                        _ callback 
+                            @ null
+                            @ 'Written outputs/ittfFsNode_step_3.json'

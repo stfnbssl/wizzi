@@ -1,0 +1,20 @@
+{
+    name "ts.remix.starter"
+    version "0.0.1"
+    description "Typescript Remix starter App"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    
+    { App
+        name "ts.remix.starter"
+        title "Typescript Remix starter App"
+        { Constants
+        [ Components
+    
+    { Styles
+    
+    { Build
+        [ features
+        [ examples
+

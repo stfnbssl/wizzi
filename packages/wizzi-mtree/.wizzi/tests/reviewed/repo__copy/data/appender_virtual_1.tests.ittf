@@ -1,0 +1,4 @@
+﻿root
+	mixin_2_appender_virtual()
+		$override alpha
+			leaf x.x.x

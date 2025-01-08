@@ -1,0 +1,126 @@
+﻿module
+	kind jsfile
+
+	import util
+	var fail = require('@wizzi/utils').fail
+	var utilsErrors = require('@wizzi/utils').errors
+    var pkgVersioned = ' (${wzCtx.name}.${wzCtx.version})'
+
+	+
+	var md = module.exports = {}
+	+
+	error( NotImplemented, message )
+		# loog 'message', message
+		set this.message
+        set this.message += pkgVersioned
+	+
+	error( InvalidRequest, message, code )
+		# loog 'message', message
+		set this.message = message
+        set this.message += pkgVersioned
+		set this.code = code
+
+	set md.NodeError = utilsErrors.NodeError
+   
+	error( NotFound, resourceType, name, message )
+		set this.message = resourceType + ': ' + name + 
+			\ ' not found, message ' + message
+        set this.message += pkgVersioned
+
+	error( IttfNotFound, resourceType, name, sourceUri )
+		set this.message = resourceType + ': ' + name + 
+			\ ' not found, processing document ' + md.getSrcPathInfo(sourceUri)
+        set this.message += pkgVersioned
+
+    error( IttfLoad, message, srcPath, node, ex )
+        if !(ex)
+            set ex = node
+            set node = null
+        set this.message = 'Error: ' + message + '\nLoading ittf document ' + md.getSrcPathInfo(srcPath)
+        if node
+            set this.message += ('\n' + new NodeError('', node).message)
+        set this.message += pkgVersioned
+
+    error( WizziModelLoad, message, srcPath, ex )
+        set this.message = 'Error: ' + message + '\nLoading ittf document ' + md.getSrcPathInfo(srcPath)
+        set this.message += pkgVersioned
+        set this.inner = ex
+
+    error( ModelTransformation, message, generation, srcPath, ex )
+        set this.message = 'Error: ' + message + '\nDuring generation:' + generation + ', processing document ' + md.getSrcPathInfo(srcPath)
+        set this.message += pkgVersioned
+        set this.inner = ex
+
+	error( ArtifactGeneration, message, generation, srcPath, ex )
+        set this.message = 'Error: ' + message + 
+			\ '\nDuring generation:' + generation + 
+			\ ', processing document ' + md.getSrcPathInfo(srcPath)
+        set this.message += pkgVersioned
+        set this.inner = ex
+		# loog 'wizzi.artifact.errors.artifactGenerationError.message', this.message
+    
+	error( WizziInvalidRequest, message, srcPath, ex )
+        set this.message = message
+        set this.message += pkgVersioned
+        set this.inner = ex
+
+	error( RunnerServer, message )
+		set this.message = message
+        set this.message += pkgVersioned
+    
+	set md.artifactGenerationError
+        function 
+            param message
+            param generation
+            param node
+            var error
+                new md.ArtifactGenerationError(message, generation, node)
+            return error
+            $* 21/1/21
+            _ fail.warn(error)
+            throw error
+            *$
+
+	error( File, message, ex )
+		set this.message = message
+        set this.message += pkgVersioned
+		set this.inner = ex
+
+	set md.getSrcPathInfo
+		function
+			param srcPath
+			if typeof (srcPath) === 'string'
+				return srcPath
+			if (srcPath && (typeof (srcPath) === 'object'))
+				var msg = md.getSrcPathInfoFromNode(srcPath)
+				return 
+					iif msg
+						then msg
+						else 
+							_ srcPath.toString()
+			return 'unavailable'
+    
+	set md.getSrcPathInfoFromNode
+		function
+			param node
+			var msg
+				[ 
+			if node
+				if node.wzSourceLineInfo
+					var info = node.wzSourceLineInfo
+					var filePath = 'TODO'
+					if node.wzSourceFilepath
+						set filePath = node.wzSourceFilepath(info.sourceKey)
+					_ msg.push((' at row: ' + info.row))
+					_ msg.push((', col: ' + info.col))
+					_ msg.push((', source: ' + info.sourceKey))
+					_ msg.push((', in file: ' + filePath))
+			return 
+				iif msg.length == 0
+					then null
+					else 
+						_ msg.join('')
+
+
+    
+

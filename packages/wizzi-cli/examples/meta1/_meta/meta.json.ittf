@@ -1,0 +1,49 @@
+{
+    name "meta1"
+    npnName "meta1"
+    description "meta1"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsBabel
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWebpack
+    params/use( commonsWizzi
+        useJsCommons false
+    params/use( jsReactWebpackGetStartedApp
+        params/use( webpackHtml, true
+        params/use( webpackCss
+            params/use( miniCssExtract, false
+        params/use( webpackSass, false
+        params/use( webpackImages
+        params/use( webpackFonts
+        params/use( webpackJson
+        params/use( webpackYaml
+

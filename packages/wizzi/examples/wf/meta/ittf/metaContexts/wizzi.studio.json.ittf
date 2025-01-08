@@ -1,0 +1,272 @@
+{
+
+    $
+        var pluginBasename = null;
+        var isLocal = true; // it is enough to set this to false and generate for deployong to heroku
+        var isProduction = false;
+        var cloudDomain = "www.wizzihub.com";
+        var port = 5100;
+        var useSslCert = false;
+        var useSsl = isLocal ? false : true;
+        var http = useSsl ? 'https' : 'http';
+        var domain = isLocal ? "localhost" : cloudDomain;
+
+    $include commons
+    $include v08
+
+    { App
+        name "Wizzi.Studio"
+        kind "Server"
+
+    isLocal ${isLocal ? "true" : "false"}
+    
+    isProduction ${isProduction ? "true" : "false"}
+    { production
+
+    useSsl ${useSsl ? "true" : "false"}
+    useSslCert ${useSslCert ? "true" : "false"}
+    domain "${domain}"
+    port "${port}"
+    siteUrl "${http}://${domain}"
+    $if domain == "localhost"
+        baseUrl "${http}://${domain}:${port}"
+        useCors true
+        { cors
+            [ clientOrigins
+                "${http}://${domain}:${port}"
+                "${http}://${domain}:5173"
+    $else
+        baseUrl "${http}://${domain}"
+        useCors true
+        { cors
+            [ clientOrigins
+                "${http}://${domain}"
+    siteUrlLocal "${http}://localhost"
+    baseUrlLocal "${http}://localhost:${port}"
+    apiVersion "v1"
+
+    useCommonsWizzi true
+    { commonsWizzi
+        useJsCommons true
+    
+    useCommonsPackage true
+    { commonsPackage
+    
+    useCommonsEnv true
+    { commonsEnv
+    
+    useCommonsServerCertificate true
+    { commonsServerCertificate
+
+    useCommonsBabel false
+    { commonsBabel
+
+    useCommonsBabelrc false
+    { commonsBabelrc
+    
+    useCommonsDeploy true
+    { commonsDeploy
+    
+    useCommonsEslint false
+    { commonsEslint
+    
+    useCommonsGit true
+    { commonsGit
+    
+    useCommonsPostcss false
+    { commonsPostcss
+    
+    useCommonsPrettier false
+    { commonsPrettier
+    
+    useCommonsTailwind false
+    { commonsTailwind
+    
+    useCommonsWebpack false
+    { commonsWebpack
+    
+    useJsCommons false
+    { jsCommons
+
+    useTsCommons true
+    { tsCommons
+    
+    useTsExpress true
+    { tsExpress
+        useReactPages true
+        { reactPages
+    
+    useTsExpressApp true
+    { tsExpressApp
+
+    useTsExpressData true   
+    { tsExpressData
+    
+    useTsExpressFeatureAccount false
+    { tsExpressFeatureAccount
+    
+    useTsExpressFeatureAuth true
+    { tsExpressFeatureAuth
+        params/use( localUserFromConfig )
+        
+    useTsExpressFeatureBlog false
+    { tsExpressFeatureBlog
+        
+    useTsExpressFeatureConfig true
+    { tsExpressFeatureConfig
+        params/use( studioUserInfo )
+        [ values
+            {
+                name "jobsBasePath"
+                type "string"
+                value "C:/My/wizzi/stfnbssl/wizzi.apps/packages/wizzi.studio/data/jobs"
+        
+    useTsExpressFeatureCdn true
+    { tsExpressFeatureCdn
+
+    useTsExpressFeatureFilesystem false
+    { tsExpressFeatureFilesystem
+        
+    useTsExpressFeatureGithub false
+    { tsExpressFeatureGithub
+        
+    useTsExpressFeaturePacki true
+    { tsExpressFeaturePacki
+        params/use( studioFolderEdit )
+        params/use( packiProductions )
+
+    useTsExpressFeatureProject false
+    { tsExpressFeatureProject
+        
+    useTsExpressFeatureRepo false
+    { tsExpressFeatureRepo
+        
+    useTsExpressFeatureUser false
+    { tsExpressFeatureUser
+        
+    useTsExpressFeatureWizzi true
+    { tsExpressFeatureWizzi
+        [ plugins
+            "./wizzi.plugin.css/index.js"
+            "./wizzi.plugin.graphql/index.js"
+            "./wizzi.plugin.html/index.js"
+            "./wizzi.plugin.ittf/index.js"
+            "./wizzi.plugin.js/index.js"
+            "./wizzi.plugin.json/index.js"
+            "./wizzi.plugin.svg/index.js"
+            "./wizzi.plugin.text/index.js"
+            "./wizzi.plugin.ts/index.js"
+            "./wizzi.plugin.xml/index.js"
+        pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
+        params/use( wizziDocs )
+        params/use( wizziFs )
+        params/use( wizziGist )
+        params/use( wizziMeta )
+            [ metaPlugins
+                "./wizzi.meta.cloud/index"
+                "./wizzi.meta.commons/index"
+                "./wizzi.meta.docs/index"
+                "./wizzi.meta.js/index"
+                "./wizzi.meta.ts/index"
+                "./wizzi.meta.ts.express/index"
+                "./wizzi.meta.ts.db/index"
+                "./wizzi.meta.web/index"
+                "./wizzi.meta.wizzi/index"
+            metaPluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.metas/packages"
+        params/use( wizziPackage )
+        
+    useTsExpressFeatureWizziDocs true
+    { tsExpressFeatureWizziDocs
+        
+  
+    useTsExpressIttf true
+    { tsExpressIttf
+        params/use( wizziDocs )
+
+    useTsExpressStyles true   
+    { tsExpressStyles
+
+    useTsExpressTests true   
+    { tsExpressTests
+
+    useTsExpressUtils true
+    { tsExpressUtils
+        params/use( scripts )
+        params/use( wizziFs )    
+
+    useTsExpressWizziSite true
+    { tsExpressWizziSite
+        params/use( demoHome )
+        params/use( demoWizzi )
+        params/use( wizziDocs )
+        params/use( packiProductions )
+
+    useTsDbMongoDb true
+    { tsDbMongoDb
+
+    useTsDbRedis false
+    { tsDbRedis
+
+    useTsDbPostgres false
+    { tsDbPostgres
+
+    useTsDbSequelize false
+    { tsDbSequelize
+
+    useWebAppCrud false
+    { webAppCrud
+
+    useWebHtml true
+    { webHtml
+
+    useWebCss true
+    { webCss
+
+    useWebJs true
+    { webJs
+        params/use( jsApi )
+        params/use( jsControls )
+        params/use( jsDb )
+        params/use( jsEditors )
+        params/use( jsMvc )
+        params/use( jsStyles )
+        params/use( jsUtils )
+
+    useWebJsWz false
+    { webJsWz
+
+    useWebSiteDemo true
+    { webSiteDemo    
+
+    useWebSiteWebapi false
+    { webSiteWebapi
+
+    useWebSvg false
+    { webSvg
+
+    useWebStudioMeta true
+    { webStudioMeta
+
+    useWebWizziDocs false
+    { webWizziDocs
+
+    useCloudAzure false
+    { cloudAzure
+
+    useCloudHeroku false
+    { cloudHeroku
+
+    useDocsHtml false
+    { docsHtml
+
+    useDocsMarkdown true
+    { docsMarkdown
+    
+    useDocsPdf false
+    { docsPdf        
+    
+    useDocsPpt false
+    { docsPpt
+    
+    useDocsWord false
+    { docsWord

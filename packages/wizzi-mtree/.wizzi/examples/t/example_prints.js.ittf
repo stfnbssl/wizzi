@@ -1,0 +1,134 @@
+﻿$group
+	$params name, level|0, step|1
+
+	function heading1
+		param text
+		info ''
+		info '*'.repeat(120)
+		info '** level ${level} - step ${step} - ${name} - ' + text
+		info '*'.repeat(120)
+		info ''
+	
+	function heading2
+		param text
+		info ''
+		info '   ', '-'.repeat(100)
+		info '   ','-- ${name} - ' + text
+		info '   ', '-'.repeat(100)
+		info ''
+
+	function printArray
+		param name
+		param arr
+		param fields
+		param format
+		if format === 'dashes'
+			info '   ', '-'.repeat(100)
+		info '   ', '* array ' + name + ' : '
+		foreach item in arr
+			info '    {', i
+			var keys = fields || Object.keys(item)
+			foreach k in keys
+				_ printValue
+					@ k
+					@ item[k]
+
+	function printValue
+		param k
+		param v
+		param format
+		param p1
+		if format === 'dashes' || format === 'meter'
+			info '   ', '-'.repeat(100)
+		if format === 'json'
+			set v
+				_ stringify
+					@ v
+					@ null
+					@ 4
+		if verify.isNotEmpty(v)
+			var lines
+				_ verify.splitLines
+					@ v
+					{
+						@ numbered true
+			if lines.length === 1
+				info '   ', k, ':', lines[0].text
+			else
+				for var i=0; i<lines.length; i++
+					if i === 0
+						info '   ', k, ':', lines[0].numFmt, lines[0].text
+					else
+						info '   ', spaces(k.length+1), ' ', lines[i].numFmt, lines[i].text
+		elif verify.isObject(v)
+			info '   ', k, ':', inspect(v)
+		else
+			info '   ', k, ':', v
+		if format === 'meter'
+			_ meterLine(p1, '     ' + new Array(1 + k.length).join(' '))
+
+	function printObject
+		param k
+		param v
+		param format
+		param p1
+		if format === 'dashes' || format === 'meter'
+			info '   ', '-'.repeat(100)
+		info '   ', k, '{'
+		
+		_ __printObject(v, 2, 6)
+		
+		if format === 'meter'
+			_ meterLine(p1, '     ' + new Array(1 + k.length).join(' '))
+
+	function __printObject
+		param v
+		param level
+		param limit
+		if level < limit
+			var indent = new Array(1 + level * 4).join(' ')
+			var prop
+			for var k in v
+				set prop = v[k]
+				if verify.isObject(prop)
+					log indent, k, '{'
+					_ __printObject(prop, level+1, limit)
+				elif verify.isFunction(prop)
+					log indent, k, 'function'
+				elif verify.isArray(prop)
+					log indent, k, '['
+					var indent2 = new Array(1 + (level+1) * 4).join(' ')
+					foreach item in prop
+						if verify.isObject(item)
+							_ __printObject(item, level+1, limit)
+						elif verify.isFunction(item)
+							log indent2, 'function'
+						else
+							log indent2, item
+				else
+					log indent, k, prop
+
+	function spaces
+		param len
+		return new Array(len).join(' ')
+
+	function meterLine
+		param len
+		param indent
+		var sb = []
+		var numW = len < 10 ? 1 : ( len < 100 ? 2 : 3 )
+		var x
+		for var i=0; i<numW; i++
+			for var j=0; j<len; j++
+				set x = formatNum(j, numW)
+				_ sb.push(x.substr(i,1))
+			log indent, sb.join('')
+			set sb = []
+
+	function formatNum
+		param num
+		param len
+		var x = num.toString()
+		return new Array(1 + len-x.length).join(' ') + x
+				
+

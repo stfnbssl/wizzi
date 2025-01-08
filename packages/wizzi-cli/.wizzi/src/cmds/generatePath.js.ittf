@@ -1,0 +1,191 @@
+﻿module
+	kind es6
+
+	const path = require('path')
+    const wizziUtils = require('@wizzi/utils')
+	const file = wizziUtils.file
+    const verify = wizziUtils.verify
+	const wizzi = require('@wizzi/factory')
+    const config = require('../utils/config')
+    const factory = require('../factory')
+    const commons = require('./commons')
+    +
+    const kCommandName = "main"
+    +
+	set module.exports
+		=>
+			param args
+
+            +
+            const checker = new commons.commandChecker(kCommandName)
+            +
+			const currentDir = process.cwd()
+			+
+			let sourcePath = args.source || args.s
+			let destPath = args.dest || args.d
+            +
+            let configInstance = null
+            +
+            _ checker.checkFile
+                @ sourcePath
+                @ 'sourcePath'
+            
+            _ checker.checkFile
+                @ destPath
+                @ 'destPath'
+                {
+                    @ parentFolderMustExist true
+
+            if args.config || args.c
+                _ checker.checkFile
+					_ path.join
+						@ currentDir
+						@ (args.config || args.c) + '.config.js'
+                    @ "configPath"
+                if checker.isValid()
+                    set configInstance = require(checker.configPath)
+                else
+                    return
+                        _ checker.checkOut()
+                +
+                _ checker.checkNotEmpty
+                    @ configInstance.pluginsBaseFolder
+                    @ 'pluginsBaseFolder'
+                    {
+                        @ message "in config file " + checker.configPath
+                _ checker.checkArrayNotEmpty
+                    @ configInstance.plugins
+                    @ 'pluginsItems'
+                    {
+                        @ message "in config file " + checker.configPath
+
+            if !checker.isValid()
+                return
+                    _ checker.checkOut
+
+            if checker.sourcePath_is_folder && !checker.destPath_is_folder && !checker.destPath_parent_only_exists
+                _ checker.optionError
+                    @ 'Source path is a folder, destination path cannot be a filename: ' + checker.destPath
+                return
+                    _ checker.checkOut
+            
+            if !checker.sourcePath_is_folder && checker.destPath_is_folder 
+                # At this point this cannot be invalid
+                _ checker.checkFile
+                    _ path.join
+                        @ destPath
+                        @ path.basename(sourcePath).substr(0, path.basename(sourcePath).length - 5)
+                    @ 'destPath'
+                    {
+                        @ parentFolderMustExist true
+
+            if verify.isArray(args.ctx) || verify.isNotEmpty(args.ctx)
+                if !checker.isValid()
+                    return
+            else
+                if !checker.checkOut()
+                    return
+            +
+            const contextFiles = []
+            +
+            # TODO create context
+            if verify.isArray(args.ctx)
+                foreach item in args.ctx
+                    _ contextFiles.push
+                        @ item
+            elif verify.isNotEmpty(args.ctx)
+                _ contextFiles.push
+                    @ args.ctx
+
+            _ loadContexts
+                @ contextFiles
+                {
+                    @ items checker.pluginsItems || factory.getDefaultPlugins()
+                    @ pluginsBaseFolder checker.pluginsBaseFolder || factory.getDefaultPluginsBaseFolder()
+                @ checker
+                a_cb_throw( context )
+                    if context.__is_checkerError
+                        return
+                            _ checker.checkOut
+                    +
+                    _ checker.checkOut()
+                    +
+                    _ factory.createWizziFactory
+                        { $$ globalContext
+                        {
+                            @ items checker.pluginsItems || factory.getDefaultPlugins()
+                            @ pluginsBaseFolder checker.pluginsBaseFolder || factory.getDefaultPluginsBaseFolder()
+                        a_cb_throw( wf )
+                            if checker.sourcePath_is_folder
+                                _ wf.generateFolderArtifacts
+                                    @ checker.sourcePath
+                                    {
+                                        @ modelRequestContext context || {}
+                                        { artifactRequestContext
+                                    {
+                                        @ destFolder checker.destPath
+                                    a_cb_throw( result )
+                                        success ''
+                                        success ''
+                                        success 'Folder artifacts generation done, see', checker.destPath + ' file'
+                                        success ''
+                                        success ''
+                            else
+                                _ wf.loadModelAndGenerateArtifact
+                                    @ checker.sourcePath
+                                    {
+                                        @ modelRequestContext context || {}
+                                        { artifactRequestContext
+                                    @ null $$ artifactName
+                                    a_cb_throw(result)
+                                        log 'result', result
+                                        _ file.write
+                                            @ checker.destPath
+                                            @ result
+                                        success ''
+                                        success ''
+                                        success 'Single artifact generation done, see', checker.destPath + ' file'
+                                        success ''
+                                        success ''
+
+    function loadContexts
+        param contextFiles
+        param plugins
+        param checker
+        param callback
+        +
+        foreach contextFile in contextFiles
+            _ checker.checkFile
+                @ contextFile
+                @ contextFile
+        if !checker.isValid()
+            return
+                _ callback
+                    @ null
+                    {
+                        @ __is_checkerError true
+        +
+        const progressiveContext = {}
+        function doLoadContext
+            param ndx
+            const contextFile = contextFiles[ndx]
+            if !contextFile
+                log 'progressiveContext', progressiveContext
+                r_cb( progressiveContext )
+            _ factory.createContextFromFile
+                @ checker[contextFile]
+                @ progressiveContext
+                @ plugins
+                a_cb( context )
+                    const fileBasename = path.basename(contextFile)
+                    const contextName = fileBasename.split('.')[0]
+                    set progressiveContext[contextName] = context
+                    _ checker.checkNotNullOrUndefined
+                        @ context
+                        @ contextName
+                        {
+                            @ message "loaded context from " + contextFile
+                    _ doLoadContext
+                        @ ndx + 1
+        _ doLoadContext
+            @ 0

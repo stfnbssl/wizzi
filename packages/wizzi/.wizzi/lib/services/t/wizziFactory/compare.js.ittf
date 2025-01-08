@@ -1,0 +1,95 @@
+$group
+
+	#
+		# Wizzify source code, generate from wizzified and 
+        # JSON compare original and resulting synthax trees
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The file path to the source to be wizzified
+		#   string wizzifierName
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     { 
+        #       wizziIttf 
+        #       jsonDiffs 
+
+	m wizzifyWithCompare
+		string tobeWizzifiedText
+		string wizzifierName
+        string artifactName
+		callback
+        + 
+        # loog 'wizziFactory.wizzifyWithCompare', wizzifierName, artifactName
+		+
+		var wizzifier = this.getWizzifier(wizzifierName)
+        if wizzifier.__is_error
+			set wizzifier.wizzifierName = wizzifierName
+            return callback(wizzifier)
+		+
+        var sourceSyntax
+        var wizzifiedGeneratedSyntax
+        +
+        try
+            _ wizzifier.getWizziIttf
+                @ tobeWizzifiedText
+                {
+                    @ wf this
+                    @ onSyntax
+                        =>
+                            param syntax
+                            # loog 'wizzifyWithCompare', 'input syntax:\n', JSON.stringify(syntax, null, 2)
+                            set sourceSyntax = syntax
+                a_cb( wizzified )
+                    # loog 'wizzifyWithCompare', 'wizzified input:\n', wizzified
+                    _ this.loadModelAndGenerateArtifactFromText
+                        @ wizzified
+                        {
+		                @ artifactName
+                        a_cb( generatedFromWizzified )
+                            # loog 'wizzifyWithCompare', 'generatedFromWizzified:\n', generatedFromWizzified
+                            _ wizzifier.getWizziIttf
+                                @ generatedFromWizzified
+                                {
+                                    @ wf this
+                                    @ onSyntax
+                                        =>
+                                            param syntax
+                                            # loog 'wizzifyWithCompare', 'output syntax:\n', JSON.stringify(syntax, null, 2)
+                                            set wizzifiedGeneratedSyntax = syntax
+                                a_cb( wizzified2 )
+                                    $$ set wizzifiedGeneratedSyntax.dummy = 'hello'
+                                    # loog 'wizzifyWithCompare', 'wizzified output:\n', wizzified2
+                                    # loog 'wizzifyWithCompare', 'sourceSyntax:\n', sourceSyntax
+                                    # loog 'wizzifyWithCompare', 'wizzifiedGeneratedSyntax:\n', wizzifiedGeneratedSyntax
+                                    
+                                    let rawDiff 
+                                        _ jsonDiff.diff
+                                            @ sourceSyntax
+                                            @ wizzifiedGeneratedSyntax
+                                            { 
+                                                @ full false 
+                                    # loog 'rawDiff', rawDiff
+                                    let prettyDiff
+                                        _ verify.replaceAll
+                                            _ JSON.stringify(rawDiff)
+                                            @ /,\[" "]/g
+                                            @ ''
+                                    # loog 'prettyDiff', prettyDiff                                    
+                                    if rawDiff
+                                        _ callback
+                                            @ null
+                                            {
+                                                @ equals false
+                                                @ diffs rawDiff
+                                    else
+                                        _ callback
+                                            @ null
+                                            {
+                                                @ equals true
+        catch ex
+            r_cb_wz_err( WizziFactoryError, wizzifyWithCompare, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wizzifierName wizzifierName

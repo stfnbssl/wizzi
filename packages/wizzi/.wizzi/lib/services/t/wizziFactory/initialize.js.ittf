@@ -1,0 +1,114 @@
+﻿$group
+
+	#
+		# params
+		#   { options
+		#     { repo
+		#       string storeKind
+		#         oneOf 'filesystem', 'mongodb', 'json'
+		#       string storeUri
+		#         # when storeKind == mongodb
+		#       string storeBaseFolder
+		#         # when storeKind == mongodb
+		#       { storeJsonFs
+		#         # when storeKind == json
+		#       { storeJsonFsData
+		#         # when storeKind == json
+		#     { plugins
+		#         [ items
+		#           string pluginName
+		#         string pluginsBaseFolder
+		#     { metaPlugins
+		#         [ items
+		#           string pluginName
+		#         string metaPluginsBaseFolder
+		#     { globalContext
+		#     { test
+		#         string testOnlyMockBaseDir
+		#       { dumps
+		#         string dumpsBaseFolder
+		# 	      { mTreeBuildUpJsWizziScript
+		#           boolean dump
+		#           string dumpsBaseFolder
+
+	m initialize
+		{ options
+			{ repo
+			{ plugins
+				optional
+			{ globalContext
+				optional
+			{ test
+				optional
+		callback
+
+		if options.test
+			set this.__is_test = true
+			set this.testOptions
+				{
+					@ dumps options.test.dumps
+			set this.testOnlyMockBaseDir = options.test.testOnlyMockBaseDir
+
+		if options.globalContext
+			set this.globalContext
+				_ Object.assign
+					{
+					@ this.globalContext
+					@ options.globalContext
+
+		# loog 'wizzi.wizziFactory.initialize.globalContext', this.globalContext
+		
+		var repoOptions = options.repo
+		
+		# can be used for creating on the fly a json factory
+		# for loading models from text strings
+		set this.pluginsOptions = options.plugins
+		
+		if verify.isObject(this.pluginsOptions) == false
+			set this.pluginsOptions = {}
+
+		set this.metaPluginsOptions = options.metaPlugins
+
+        set this.storeKind = repoOptions.storeKind || 'filesystem'
+
+		if options.verbose
+            set this.verbose = true
+            var date = new Date()
+            var timeNow = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
+            warn timeNow, "Starting ", this.__type, 'version', this.__version
+
+        var that = this
+		_ this.storePool.initialize
+			@ repoOptions
+			f_cb( pool )
+				set that.fileService = pool.fileService
+				set that.createStore = pool.createStore
+				checked_call_set( that.__loadMTree )
+					_ mtree.createLoadMTree
+						@ that.createStore
+				checked_call_set( that.__loadMTreeFrontMatter )
+					_ mtree.createLoadMTree
+						@ that.createStore
+						{
+							@ frontMatter true
+				checked_call_set( that.__loadMTreeRaw )
+					_ mtree.createLoadMTree
+						@ that.createStore
+						{
+							@ raw true
+				checked_call_set( that.__loadMTreeBuildUpScript )
+					_ mtree.createLoadMTree
+						@ that.createStore
+						{
+							@ mTreeBuildUpScript true
+				_ that.createStore
+					f_cb( store )
+						set that.store = store
+                        set that.pluginsOptions.verbose = options.verbose
+						_ PluginsManager.createManager
+							@ that.pluginsOptions
+							f_cb( pluginsManager )
+								set that.pluginsManager = pluginsManager
+								# loog 'pluginsManager', pluginsManager
+								return
+									_ callback(null, that)

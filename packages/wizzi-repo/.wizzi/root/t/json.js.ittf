@@ -1,0 +1,46 @@
+﻿$group
+
+	+
+	set md.JsonComponents = require('./lib/json/index') 
+	+
+	#
+		# Create a json directory tree from a filesystem folder
+	set md.jsonDirectoryTreeFromFilesystem = JsonFsImpl.directoryTree
+	+
+	set md.packiFilesToUtilVFileJson = md.JsonComponents.packiFilesToUtilVFileJson
+	+
+	#
+		# json virtual file service
+		# params
+		#   { options
+		#     { jsonFsData
+	set md.jsonfile
+		function jsonfile
+			{ options
+				{ jsonFsData
+					optional
+				{ jsonFs
+					optional
+			callback
+			if options.jsonFs
+				var fsimpl
+					new JsonFsImpl
+						{
+				_ fsimpl.open
+					{
+						@ jsonFs options.jsonFs
+					f_cb( notUsed )
+						_ vfile
+							@ fsimpl
+							f_cb( _jsonfile )
+								r_cb( _jsonfile )
+			else
+				var fsimpl
+					new JsonFsImpl
+						@ options.jsonFsData
+				_ fsimpl.open
+					f_cb( notUsed )
+						_ vfile
+							@ fsimpl
+							f_cb( _jsonfile )
+								r_cb( _jsonfile )

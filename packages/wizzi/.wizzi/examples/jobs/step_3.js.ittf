@@ -1,0 +1,77 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 2,
+            name: 'jobs_2',
+            title: 'Jobs execution',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+        $append imports
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+                @ './wizzi.plugin.wzjob/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ execute
+            $$ @ "job_1"
+            @ "job_model_to_folder"
+            f_cb()
+
+        function execute    
+            param jobName
+            param callback
+
+            var jobPath
+                _ path.join 
+                    @ __dirname
+                    @ 'ittf'
+                    @ jobName
+
+            # Execute a wizzi job
+            _ createWizziFactory
+                {
+                f_cb_test(wf)
+
+                    _ wf.executeJob
+                        {
+                            @ name 'Job1 example'
+                            @ path jobPath
+                            @ productionOptions
+                                _ wizziIndex.productionOptions
+                                    {
+                                        @ indentSpaces 4
+                                        @ basedir __dirname
+                                        @ verbose 2
+                            { modelContext
+                                @ friends friendsArray
+                                { options
+                                    @ destFolder 'output'
+                            { jobContext
+                                { options
+                                    @ destFolder 'output'
+                            { globalContext
+                                { options
+                                    @ destFolder 'output'
+                        f_cb_no_err(result)
+                            error "error", err, result
+                            _ printObject
+                                @ 'result'
+                                @ result                
+
+

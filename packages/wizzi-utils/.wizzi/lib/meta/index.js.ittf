@@ -1,0 +1,11 @@
+﻿module
+	kind jsfile
+
+	var verify = require('../helpers/verify')
+	var metify = require('./metify')
+	var utils = require('./utils')
+	+
+	var md = module.exports = {}
+	+
+	set md.metify = metify.metify
+	set md.wizzifyIttfNodeName = utils.wizzifyIttfNodeName

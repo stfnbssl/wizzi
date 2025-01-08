@@ -1,0 +1,85 @@
+﻿$group
+
+	# 
+		# Register a metaPlugin to this plugins manager
+	m registerMetaPlugin
+		{ metaPluginModule
+			func createMetaPlugin
+		callback
+		_ metaPluginModule.createMetaPlugin
+			{
+			a_cb( metaPlugin )
+				var vld = this.validateMetaPlugin(metaPlugin)
+				if vld.__is_error
+					return
+						_ callback
+							@ vld
+				set metaPlugin.packageName = metaPluginModule.packageName
+				set metaPlugin.packagePath = metaPluginModule.packagePath
+				_ this.metaPlugins.push(metaPlugin)
+				checked_call( providesAdded )
+					_ this.addPluginProvides(metaPlugin)
+				return
+					_ callback(null)
+
+	m validateMetaPlugin
+		{ metaPlugin
+		+
+		var methodNames
+			[
+				@ 'getName'
+				@ 'getFilename'
+				@ 'getProvides'
+				@ 'getMetaProductionStarter'
+				@ 'getMetaProduction'
+		foreach methodName in methodNames
+			if verify.isFunction(metaPlugin[methodName]) == false
+				return 
+					_ error
+						@ 'InvalidMetaPlugin'
+						@ 'validateMetaPlugin'
+						@ 'Missing method: ' + methodName
+		var providesProperties
+			[
+				@ 'metaProductions'
+		var provides = metaPlugin.getProvides()
+		foreach propName in providesProperties
+			if verify.isArray(provides[propName]) == false
+				return 
+					_ error
+						@ 'InvalidMetaPlugin'
+						@ 'validateMetaPlugin'
+						@ 'Missing property: ' + propName + ' in provides object'
+		$$ loog mdDisplayName + '.validateMetaPlugin', metaPlugin.getName(), true
+		return
+			{
+				@ __is_error false
+
+	m addPluginProvides
+		{ metaPlugin
+			{ provides
+				[ metaProductions
+
+		var found
+		foreach item in metaPlugin.provides.metaProductions
+			set found
+				_ _.find
+					@ this.providedProductions
+					{
+						@ name item
+			if found
+				return
+					_ error
+						@ 'DuplicatedPluginResource'
+						@ 'addPluginProvides'
+						@ 'Production ' + item + ' already provided'
+			else
+				_ this.providedProductions.push
+					{
+						@ name item
+
+	m availableProductions
+		var ret = []
+		foreach item in this.providedProductions
+			_ ret.push(item.name)
+		return ret

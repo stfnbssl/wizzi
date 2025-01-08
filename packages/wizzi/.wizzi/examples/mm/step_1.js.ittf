@@ -1,0 +1,83 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'mm_step_1',
+            title: 'Meta manager - create meta manager',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+
+        _ wizziIndex.metasManager
+            {
+                @ verbose true
+                { metaPlugins
+                    [ items
+                        @ "./wizzi.meta.js.react/index"
+                    @ metaPluginsBaseFolder metaPluginsBaseFolder
+                    [ inMemoryItems
+                        {
+                            @ name 'firstInMemory'
+                            [ pluginMetaProductions
+                                { 
+                                    @ name "demoJs"
+                                    @ title "demoJs wizzi meta production"
+                                    [ categories
+                                        { 
+                                            @ name "demo"
+                                        { 
+                                            @ name "wizzi-starter"                        
+                            { metaPackiFiles
+                                { ['demoJs/folderTemplates/index.ittf.ittf']
+                                    @ type 'CODE'
+                                    @ contents
+                                        [
+                                            @ '$group'
+                                            @ '    $file __dot__wizzi/index.html.ittf.ittf'
+                                            @ '        html'
+                                            @ '            body'
+                                            @ '                h1 Hello world'
+                                            ._ join
+                                                @ '\n'
+                { wfPlugins
+                    [ items
+                        @ './wizzi.plugin.ittf/index'
+                        @ './wizzi.plugin.json/index'
+                    @ pluginsBaseFolder pluginsBaseFolderV08
+                @ globalContext {}
+            f_cb_test( result )
+                if false
+                    _ printObject
+                        @ 'metasManager'
+                        @ result
+                const options
+                    {
+                        { metaCtx
+                            @ useDemoJs true
+                            @ useJsReactUtils true
+
+                _ result.getCategoryAndMetaProductionStarter
+                    @ options
+                    f_cb(result)
+                        _ printObject
+                            @ 'getCategoryAndMetaProductionStarter'
+                            @ result
+                _ result.getMetaParametersStarter
+                    @ options
+                    f_cb(result)
+                        _ printObject
+                            @ 'getMetaParametersStarter'
+                            @ result
+                _ result.getMetaProductionStarter
+                    @ options
+                    f_cb(result)
+                        _ printObject
+                            @ 'getMetaProductionStarter'
+                            @ result
+
+                            
+

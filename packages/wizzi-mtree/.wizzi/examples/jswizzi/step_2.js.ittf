@@ -1,0 +1,96 @@
+module
+	kind jsfile
+
+    var JsWizziContext = require("../../lib/jswizzi/jsWizziContext")
+    var ContextData = require("../../lib/jswizzi/contextData")
+
+    $*
+    var jsWizziContext
+        new JsWizziContext
+            { $$ composedMTree
+            { $$ productionContext
+            { $$ scriptCoder
+    *$
+
+    var contextData
+        new ContextData
+            @ 1
+            @ "f1"
+
+    _ contextData.setV09
+        @ true
+
+    _ contextData.setFunctionScopesFromAst
+        {
+            { functions
+                [ Sum
+                    @ "Sum"
+                [ alpha
+                    @ "alpha"
+                [ beta
+                    @ "alpha"
+                    @ "beta"
+
+    _ contextData.setValue
+        @ 'main'
+        @ 110
+
+    _ contextData.enterFunction
+        @ 'alpha'
+
+    _ contextData.setValue
+        @ 'alpha_1'
+        @ 54
+
+    _ console.log
+        @ 'get main value:'
+        _ contextData.getValue
+            @ 'main'
+
+    _ console.log
+        @ 'get alpha_1 value:'
+        _ contextData.getValue
+            @ 'alpha_1'
+
+    _ contextData.enterFunction
+        @ 'beta'
+
+    _ contextData.setValue
+        @ 'beta_1'
+        @ 598
+
+    _ console.log
+        @ 'get main value from beta:'
+        _ contextData.getValue
+            @ 'main'
+    
+    _ console.log
+        @ 'get alpha_1 value from beta:'
+        _ contextData.getValue
+            @ 'alpha_1'
+
+    _ console.log
+        @ 'get beta_1 value from beta:'
+        _ contextData.getValue
+            @ 'beta_1'
+
+    _ contextData.enterFunction
+        @ 'alpha'
+
+    _ console.log
+        @ 'get beta_1 value from alpha:'
+        _ contextData.getValue
+            @ 'beta_1'
+
+    _ contextData.enterFunction
+        @ null
+
+    _ console.log
+        @ 'get main value from main:'
+        _ contextData.getValue
+            @ 'main'
+
+    _ console.log
+        @ 'get alpha_1 value from mai:'
+        _ contextData.getValue
+            @ 'alpha_1'

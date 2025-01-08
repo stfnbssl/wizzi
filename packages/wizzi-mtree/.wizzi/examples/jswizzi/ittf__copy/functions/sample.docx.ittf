@@ -1,0 +1,45 @@
+docx
+
+    $
+        var tree = {
+            name: 'alpha',
+            value: 1,
+            children: [
+            {
+                name: 'beta',
+                value: 11,
+                children: []
+            },
+            {
+                name: 'gamma',
+                value: 12,
+                children: []
+            }]
+        }
+
+    $*
+    $function viewNode
+        $param node
+        tr
+            td ${node.name}
+            td item: ${node.value}
+        $foreach child in node.children
+            $_ viewNode
+                $@ child
+
+    $_ viewNode
+        $@ tree
+    *$
+
+
+    $function itemText
+		$param node
+        $$ ${node.name} ${node.value ? node.value : ''}
+        div
+            $foreach nodeChild in node.children
+                $_ itemText
+                    $@ nodeChild
+
+    top
+        $_ itemText
+            $@ tree

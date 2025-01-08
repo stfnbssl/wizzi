@@ -1,0 +1,5 @@
+$group
+    h1 Hello tfolder frag-1
+    ${'$'}
+        var a = [0];
+    ${'$'}foreach item in a

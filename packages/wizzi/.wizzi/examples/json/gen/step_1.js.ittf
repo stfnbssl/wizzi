@@ -1,0 +1,94 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'json_gen_step_1',
+            title: 'Json - generation - folder',
+            folderLevel: 3
+        }
+
+    common/example/wizzi(&opt)
+
+        $append plugins
+
+        +
+        var packiFilePrefix = 'c:/basefolder/'
+        +
+        var jsContent
+            [
+                @ 'module'
+                @ '    kind es6'
+                @ '    info "Hello"'
+                ._ join
+                    @ '\n'
+        +
+        var htmlContent
+            [
+                @ 'html'
+                @ '    body'
+                @ '        div Hello'
+                ._ join
+                    @ '\n'
+        +
+        var jsIttfUri    = packiFilePrefix + "src/index.js.ittf"
+        var htmlIttfUri = packiFilePrefix + "src/index.html.ittf"
+        +
+        var documents
+            [
+                {
+                    @ path jsIttfUri
+                    @ content jsContent
+                {
+                    @ path htmlIttfUri
+                    @ content htmlContent
+        +
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ documents
+            f_cb_test( jsonFs )
+                var options
+                    {
+                        @ jsonFs jsonFs
+                        { plugins
+                            [ items
+                                @ 'wizzi-js'
+                                @ 'wizzi-web'
+                                @ 'wizzi-core'
+                        { globalContext
+                _ wizziIndex.jsonFactory
+                    @ options
+                    f_cb_test(wf)
+                        _ wf.generateFolderArtifacts
+                            @ packiFilePrefix + 'src'
+		                    { 
+                                { modelRequestContext
+                                { artifactRequestContext
+		                    {
+                                @ destFolder packiFilePrefix + 'out'
+                            f_cb_test(result)
+                                _ printObject
+                                    @ 'generateFolderArtifacts.result'
+                                    @ result
+                                _ wf.fileService.getFiles
+                                    @ packiFilePrefix + 'out'
+                                    {
+                                        @ deep true
+                                        @ documentContent true
+                                    f_cb_test(files)
+                                        _ printObject
+                                            @ 'files.result'
+                                            @ files
+                                        const packiFiles = {}
+                                        foreach file in files
+                                            set packiFiles[file.relPath]
+                                                {
+                                                    @ type 'CODE'
+                                                    @ contents file.content
+                                        _ printObject
+                                            @ 'files.packiFiles'
+                                            @ packiFiles
+
+
+                                    

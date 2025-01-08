@@ -1,0 +1,286 @@
+$group
+
+	# 
+		# Check if a wizzi schema has a wizzifier
+		# returns
+		#   true|false
+	m canWizzifySchema
+		string schemaName
+		return this.pluginsManager.canWizzifySchema(schemaName)
+
+	# 
+		# Check if a file extension has a wizzifier
+		# returns
+		#   true|false
+	m canWizzify
+		string extension
+		return this.pluginsManager.canWizzify(extension)
+
+	# 
+		# Check if a file extension has a wizzifier and is a binary file
+		# returns
+		#   true|false
+	m wizzifierIsForBinaryFile
+		string extension
+		return this.pluginsManager.wizzifierIsForBinaryFile(extension)
+	#
+		# Retrieve a wizzifier
+		# Wizzifiers are searched in the PluginsManager
+		# They are cached
+	m getWizzifier
+		string extension
+		+
+		var wizzifier = this.wizzifiers[extension] || null
+		if wizzifier == null
+			checked_call_r_set( wizzifier )
+				_ this.pluginsManager.getWizzifier(extension)
+			set this.wizzifiers[extension] = wizzifier
+		return wizzifier
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The file path to the source to be wizzified
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+
+	m getWizziIttf
+		string tobeWizzifiedUri
+		string schemaOrExtension
+		callback
+		+
+		check_wz_callback( getWizziIttf )
+		+
+		var wizzifier = this.getWizzifier(schemaOrExtension)
+        if wizzifier.__is_error
+			set wizzifier.schemaOrExtension = schemaOrExtension
+            return callback(wizzifier)
+		+
+        try
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziIttf, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension
+                        @ tobeWizzifiedUri tobeWizzifiedUri
+        _ this.getWizziIttfFromText
+            @ tobeWizzifiedText
+            @ schemaOrExtension
+            @ callback
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedText
+		#     # The source code to be wizzified
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+    m getWizziIttfFromText
+		string tobeWizzifiedText
+		string schemaOrExtension
+		param options
+		param callback
+		+
+		if typeof(callback) === 'undefined'
+			set callback = options
+			set options = {}
+		+
+		check_wz_callback( getWizziIttfFromText )
+		+
+		var wizzifier = this.getWizzifier(schemaOrExtension)
+        if wizzifier.__is_error
+			set wizzifier.schemaOrExtension = schemaOrExtension
+            return callback(wizzifier)
+		+
+        try
+            # the instance of the WizziFactory passed to the getWizziIttf function
+            # could be used for wizzifying included wizzi schemas
+            _ wizzifier.getWizziIttf
+                @ tobeWizzifiedText
+                {
+                    @ wf this
+					@ sourceFilepath options.sourceFilepath
+                function
+                    param err
+                    param result
+                    if err
+                        # loog 'wizzi.wizziFactory.getWizziIttf', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, getWizziIttfFromText, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ schemaOrExtension schemaOrExtension
+                    _ callback(null, result)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziIttfFromText, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension
+
+	#
+		# Async wizzify source code and return the wizzified tree
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The source code to be wizzified
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     object ittfTree
+
+	m getWizziTree
+		string tobeWizzifiedUri
+		string schemaOrExtension
+		callback
+		+
+		check_wz_callback( getWizziTree )
+		+
+        try
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziTree, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension
+                        @ tobeWizzifiedUri tobeWizzifiedUri
+        _ this.getWizziTreeFromText
+            @ tobeWizzifiedText
+            @ schemaOrExtension
+            @ callback
+
+	#
+		# Async wizzify source code and return the wizzified tree
+		#
+		# params
+		#   string tobeWizzifiedText
+		#     # The source code to be wizzified
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+    m getWizziTreeFromText
+		string tobeWizzifiedText
+		string schemaOrExtension
+		callback
+		+
+		check_wz_callback( getWizziTreeFromText )
+		+
+		var wizzifier = this.getWizzifier(schemaOrExtension)
+        if wizzifier.__is_error
+			set wizzifier.schemaOrExtension = schemaOrExtension
+            return callback(wizzifier)
+		+
+        try
+            # the instance of the WizziFactory passed to the getWizziTree function
+            # could be used for wizzifying included wizzi schemas
+            _ wizzifier.getWizziTree
+                @ tobeWizzifiedText
+                {
+                    @ wf this
+                function
+                    param err
+                    param result
+                    if err
+                        # loog 'wizzi.wizziFactory.getWizziTreeFromText', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, getWizziTreeFromText, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ schemaOrExtension schemaOrExtension
+                    _ callback(null, result)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getWizziTreeFromText, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension
+
+	#
+		# Async get code AST from source code
+		#
+		# params
+		#   string tobeWizzifiedUri
+		#     # The source code to get the AST
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     object AST
+
+	m getCodeAST
+		string tobeWizzifiedUri
+		string schemaOrExtension
+		callback
+		+
+		check_wz_callback( getCodeAST )
+		+
+        try
+            var tobeWizzifiedText = this.fileService.read(tobeWizzifiedUri)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getCodeAST, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension
+                        @ tobeWizzifiedUri tobeWizzifiedUri
+        _ this.getCodeASTFromText
+            @ tobeWizzifiedText
+            @ schemaOrExtension
+            @ callback
+
+	#
+		# Async wizzify source code
+		#
+		# params
+		#   string tobeWizzifiedText
+		#     # The source code to be wizzified
+		#   string schemaOrExtension
+		#     # The name for retrieving the wizzifier
+		#   callback
+		#     string ittfText
+    m getCodeASTFromText
+		string tobeWizzifiedText
+		string schemaOrExtension
+		callback
+		+
+		check_wz_callback( getCodeAST )
+		+
+		var wizzifier = this.getWizzifier(schemaOrExtension)
+        if wizzifier.__is_error
+			set wizzifier.schemaOrExtension = schemaOrExtension
+            return callback(wizzifier)
+		+
+        try
+            # the instance of the WizziFactory passed to the getCodeAST function
+            # (at the moment?) is not used; it is simply for coherence with other wizzifier calls.
+            _ wizzifier.getCodeAST
+                @ tobeWizzifiedText
+                {
+                    @ wf this
+                function
+                    param err
+                    param result
+                    if err
+                        # loog 'wizzi.wizziFactory.getCodeAST', typeof(err), err, err.length, err.length && err.length > 0 && err[0]
+                        r_cb_wz_err( WizziFactoryError, getCodeAST, err )
+                            {
+                                @ message 'See inner error'
+                                { parameter
+                                    @ schemaOrExtension schemaOrExtension
+                    _ callback(null, result)
+        catch ex
+            r_cb_wz_err( WizziFactoryError, getCodeAST, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ schemaOrExtension schemaOrExtension

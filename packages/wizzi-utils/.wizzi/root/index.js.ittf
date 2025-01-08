@@ -1,0 +1,75 @@
+﻿module 
+    kind jsfile
+
+    # TODO lots of clean up
+    # eliminate ittfDocumentGraph, asIsLoader, ittfWriter already in ittfGraph
+    # eliminate file, vfile already in fSystem
+
+    # features
+    $if wzCtx_useScanner    
+        var ittfGraph = require('./lib/ittfGraph/index')
+        var ittfScanner = require('./lib/ittfScanner/index')
+    var pretty = require('./lib/pretty/index')
+    var fSystem = require('./lib/fSystem/index')
+    var helpers = require('./lib/helpers/index')
+    var lorem = require('./lib/lorem/index')
+    var packi = require('./lib/packi/index')
+    var meta = require('./lib/meta/index')
+    $if wzCtx_useCrypto
+        var crypto = require('./lib/crypto/index')
+    var errors = require('./lib/errors/index')
+    var mocks = require('./lib/mocks/index')
+
+    # 
+	var md
+        set module.exports
+            { 
+    set md.version = "${wzCtx.version}"
+
+    # features
+    $if wzCtx_useScanner    
+        set md.ittfGraph = ittfGraph
+        set md.ittfScanner = ittfScanner
+    set md.pretty = pretty
+    set md.fSystem = fSystem  
+    $if wzCtx_useCrypto
+        set md.crypto = crypto  
+    set md.lorem = lorem  
+    set md.packi = packi  
+    set md.meta = meta  
+    set md.helpers = helpers  
+    set md.errors = errors  
+    set md.mocks = mocks  
+
+	# legacy
+    $if wzCtx_useScanner    
+	    set md.ittfFinder = ittfGraph.ittfFinder
+        set md.ittfWriter = ittfGraph.ittfWriter
+        set md.asIsLoader = ittfGraph.asIsLoader
+        set md.IttfDocumentGraph = ittfGraph.IttfDocumentGraph
+    set md.fail = helpers.fail
+	set md.option = helpers.option
+	set md.config = helpers.config
+	set md.verify = helpers.verify
+	set md.node = helpers.node
+	set md.lineParser = helpers.lineParser
+	set md.requireFromString = helpers.requireFromString
+	set md.Coder = helpers.coder
+    $if wzCtx_useCrypto
+	    set md.encdec = crypto
+    set md.file = fSystem.file
+    set md.vfile = fSystem.vfile
+	set md.uriParser = fSystem.uriParser
+    set md.jsonUriParser
+        function
+            param uri
+            # Dummy implementation after giving up the idea of a multi-filesystem wizzi production
+            # 12/9/2022
+            return
+                {
+                    @ internalPath uri
+    set md.fileInfoByPath = fSystem.fileInfoByPath
+
+    # errors - legacy
+    set md.nodeErrors = require('./lib/errors/legacyErrors')
+    set md.exampleErrors = require('./lib/exampleErrors')

@@ -1,0 +1,23 @@
+root
+    node value1
+    $
+        function Sum(a, b) {
+            return a + b;
+        }
+
+    node Sum ${Sum(2, 3)}
+
+    $function alpha
+        $param x
+        node alpha ${x} 
+        frag_1()
+
+        $function beta
+            $param x
+            node beta ${x} 
+
+        $_ beta
+            $@ "holly"
+    
+    $_ alpha
+        $@ "baby"

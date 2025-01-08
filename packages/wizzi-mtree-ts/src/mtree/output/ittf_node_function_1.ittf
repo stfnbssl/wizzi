@@ -1,0 +1,37 @@
+ittf 
+    node_in_f_main_2 
+        param alpha: 10
+        calledBy: main
+        description from caller: A parameter of value 10 is passed to f_main_2
+        node_in_f_main_1 
+            param alpha: 10
+            calledBy: f_main_2
+            description from caller: The parameter received is used to call f_main_1
+    before $include nf_1
+    node_in_frag_nf_1_beta 
+        param alpha: 50
+        calledBy: FRAG_MAIN
+        description from caller: A parameter of value 10 is passed to frag_nf_1_beta
+        node_in_frag_nf_1_alpha 
+            param alpha: 50
+            calledBy: frag_nf_1_beta
+            description from caller: The parameter received is used to call frag_nf_1_alpha
+    after $include nf_1
+    node_in_frag_nf_2_beta 
+        param alpha: 50
+        calledBy: frag_main
+        description from caller: A parameter of value 10 is passed to frag_nf_2_beta
+        node_in_frag_nf_2_alpha 
+            param alpha: 50
+            calledBy: frag_nf_2_beta
+            description from caller: The parameter received is used to call frag_nf_2_alpha
+    before nf_1()
+    node_in_frag_nf_1_beta 
+        param alpha: 50
+        calledBy: FRAG_MAIN
+        description from caller: A parameter of value 10 is passed to frag_nf_1_beta
+        node_in_frag_nf_1_alpha 
+            param alpha: 50
+            calledBy: frag_nf_1_beta
+            description from caller: The parameter received is used to call frag_nf_1_alpha
+    after nf_1()

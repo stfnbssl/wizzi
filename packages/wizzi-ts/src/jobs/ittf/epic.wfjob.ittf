@@ -1,0 +1,34 @@
+﻿wzjob epic
+
+	# Test lab for `epic` stack
+
+	$
+		console.log('Destination folder name: ' + options.destFolder)
+		var ittf_root_folder = path.join(__dirname, 'ittf', 'epic', 'root');
+		var ittf_lib_folder  = path.join(__dirname, 'ittf', 'epic', 'lib');
+		var dest_folder      = path.join(__dirname, options.destFolder);
+
+	line root
+		cwd-folder ${ittf_root_folder}
+
+		# Generates json documents
+		artifact epic_root_json
+			src ./**/*.json.ittf
+			schema json
+			generator json/document
+			extension json
+
+	line lib
+		cwd-folder ${ittf_lib_folder}
+
+		# Generates typescript modules
+		artifact epic_lib_ts
+			src ./**/*.ts.ittf
+			schema ts
+			generator ts/module
+			extension ts
+
+	production
+		dest-folder ${dest_folder}
+		line-ref root
+		line-ref lib

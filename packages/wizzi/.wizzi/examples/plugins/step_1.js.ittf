@@ -1,0 +1,51 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'mm_step_1',
+            title: 'Meta plugin - get meta production',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        $append meta_plugins            
+            [ items
+                @ './wizzi.meta.commons/index'
+                @ './wizzi.meta.js/index'
+            @ metaPluginsBaseFolder metaPluginsBaseFolder
+
+        +
+        const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
+        +
+        _ createMetasManager
+            {
+            =>
+                param err
+                param mm
+                if err
+                    error err
+                    return
+                _ mm.getMetaProduction
+                    @ "eslint"
+                    =>
+                        param err
+                        param metaProduction
+                        if err
+                            error err
+                            return
+                        info 'metaProduction', metaProduction
+
+

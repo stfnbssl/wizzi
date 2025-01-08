@@ -1,0 +1,25 @@
+module
+	kind es6
+
+    const path = require('path')
+    var metify = require('../../src/cmds/metify')
+
+    var baseFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.ts.nextjs/.wizzi/wizzifieds'
+    
+    var sourceFolder 
+        _ path.join
+            @ baseFolder
+            @ 'blog-starter'
+    
+    var destFolder
+        _ path.join
+            @ baseFolder
+            @ '.meta'
+            @ 'blog-starter'
+
+    _ metify
+        {
+            @ s sourceFolder
+            @ d destFolder
+            @ c true
+            @ p "tsNextjsBlog"

@@ -1,0 +1,217 @@
+﻿module 
+    kind jsfile
+    
+	var path = require('path')
+    var util = require('util')
+    var async = require('async')
+	var verify = require('@wizzi/utils').verify
+    var GenContext = require('./genContext')
+
+    var g_generationsCheckCounter = 0
+    var g_generationsCheck = {}
+    
+	function logme
+        if ${wzConfigIsVerbose ? 'true': 'false'}
+            _ console.log.apply(console, arguments)
+	+
+	#
+		# Artifact generation functions are called by the `wizzi/lib/production/Runner`.
+		# A generation produces an array of wizzi/lib/production/artifact/genContext(s), 
+		# text buffers containing the generated artifact.
+		# genContexts are accumulated into the productionStep.genContexts collection.
+	+
+	wz-var AsyncArtifactGenerator
+        { 
+			#
+				# params
+				#   { productionStep
+				#     api-ref wizzi.lib.production.step.productionStep
+				#   { generator
+				#     api-ref wizzi-plugin.artifactGenerator
+				#   [ modelInfos
+				#     { modelInfo 
+				#       api-ref wizzi.model.modelInfo
+				#   [ mainSourceModels
+				#     { mainSourceModel
+				#       # wizzi model or POJO
+				#       # 1 context model for each modelInfo
+
+            @ generate
+                function 
+                    { productionStep
+						{ productionManager
+							{ wizziFactory
+						{ options
+                    { generator
+						func gen
+                    [ modelInfos
+                    [ mainSourceModels
+                    callback
+                    
+					# loog 'wizzi.production.AsyncArtifactGenerator.generate, modelInfos', modelInfos, 'mainSourceModels', mainSourceModels
+					if verify.isObject(generator) == false || verify.isFunction(generator.gen) == false
+						return
+							_ callback
+								_ error
+									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
+									@ 'generate'
+									@ productionStep
+
+					var genItems
+                        [ 
+					for var i = 0; i < modelInfos.length; i++
+                        var modelInfo = modelInfos[i]
+                        var mainSourceModel = mainSourceModels[i]
+                        var genContext
+                            new GenContext
+                                { 
+                                    @ model null
+                                    @ srcPath modelInfo.src()
+                                    @ srcFullPath modelInfo.srcFullPath()
+                                    @ options productionStep.options
+                                    @ pman productionStep.productionManager
+                        _ genItems.push
+                            { 
+                                @ generator generator
+                                @ mainSourceModel mainSourceModel
+                                @ genContext genContext
+                    
+					_ async.map
+                        @ genItems
+                        @ AsyncArtifactGenerator._gen_item
+						f_cb( genContexts )
+							foreach item in genContexts
+								_ productionStep.addGenContext(item)
+							_ callback
+								@ null
+								{
+									@ oper 'AsyncArtifactGenerator.generate'
+									@ status 'success'
+									@ item 'genContexts.count: ' + genContexts.length
+            
+			@ generateModelCollection
+                function 
+                    { productionStep
+						{ productionManager
+							{ wizziFactory
+						{ options
+                    { generator
+						func gen
+                    [ modelInfos
+                    [ mainSourceModelsOfModelCollection
+                    callback
+
+					if verify.isObject(generator) == false || verify.isFunction(generator.gen) == false
+						return
+							_ callback
+								_ error
+									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
+									@ 'generateModelCollection'
+									@ productionStep
+                    
+					var genItems
+                        [ 
+                    for var i = 0; i < modelInfos.length; i++
+                        var modelInfo = modelInfos[i]
+                        var mainSourceModels = mainSourceModelsOfModelCollection[i]
+                        for var j = 0; j < mainSourceModels.length; j++
+                            var mainSourceModel = mainSourceModels[j]
+                            _ logme('AsyncArtifactGenerator.generateModelCollection', 'item', j, mainSourceModel)
+                            # api-ref wizzi.model.modelCollectionConfig
+							var genContext
+                                new GenContext
+                                    { 
+                                        @ model mainSourceModel.___collItem
+                                        @ srcPath modelInfo.src()
+                                        @ srcFullPath modelInfo.srcFullPath()
+                                        @ options productionStep.options
+                                        @ pman productionStep.productionManager
+                            _ genItems.push
+                                { 
+                                    @ generator generator
+                                    @ mainSourceModel mainSourceModel
+                                    @ genContext genContext
+                    _ async.map
+                        @ genItems
+                        @ AsyncArtifactGenerator._gen_item
+						f_cb( genContexts )
+                            foreach item in genContexts
+								_ productionStep.addGenContext(item)
+							_ callback
+								@ null
+								{
+									@ oper 'AsyncArtifactGenerator.generate'
+									@ status 'success'
+									@ item 'genContexts.count: ' + genContexts.length
+            
+			@ generateCodeWrite
+                function 
+                    { productionStep
+						{ productionManager
+							{ wizziFactory
+						{ options
+                    { generator
+						func gen
+                    [ contextModels
+                    callback
+                    
+					if verify.isObject(generator) == false || verify.isFunction(generator.gen) == false
+						return
+							_ callback
+								_ error
+									@ 'The parameter "generator" must be an object and must contain the "gen" function.'
+									@ 'generateCodeWrite'
+									@ productionStep
+                    
+					var mainSourceModel
+                        { 
+                    foreach item in contextModels
+						set mainSourceModel[item.___exportName] = item
+                    var genContext
+                        new GenContext
+                            { 
+                                @ model null
+                                @ srcPath null
+                                @ srcFullPath null
+                                @ options productionStep.options
+                                @ pman productionStep.productionManager
+                    
+					new generator.gen(mainSourceModel, genContext)
+                    
+					_ productionStep.addGenContext(genContext)
+					
+					_ callback
+						@ null
+						{
+							@ oper 'AsyncArtifactGenerator.generateCodeWrite'
+							@ status 'success'
+			
+            @ _gen_item
+                function 
+                    param genInfo
+                    param callback
+                    
+					_ logme
+                        @ 'AsyncArtifactGenerator._gen_item'
+                        @ 'genInfo.mainSourceModel'
+                        @ genInfo.mainSourceModel
+                    
+                    var generatingPath = genInfo.genContext.srcPath
+                    function checkCallback
+                        throw
+                            new Error
+                                @ generatingPath + ' generation did not termitate'
+                    var gNum = ++g_generationsCheckCounter
+                    set g_generationsCheck['timer' + gNum]
+                        _ setTimeout(checkCallback, 4000)
+
+                    new genInfo.generator.gen
+                        @ genInfo.mainSourceModel
+                        @ genInfo.genContext
+                        $$ 20/3/21 @ callback
+                        $$ try to catch missing callbacks
+                        f_cb(result)
+                            # var timer = g_generationsCheck['timer' + gNum]
+                            _ clearTimeout
+                                @ g_generationsCheck['timer' + gNum]
+                            r_cb(result)

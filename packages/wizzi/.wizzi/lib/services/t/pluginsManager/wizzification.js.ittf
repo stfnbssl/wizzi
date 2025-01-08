@@ -1,0 +1,90 @@
+﻿$group
+
+	# 
+		# Check if a wizzi schema has a wizzifier
+		# params
+		#  string schemaName
+		# returns
+		#   true|false
+	m canWizzifySchema
+		string schemaName
+		return this.availableWizzifiers().indexOf(schemaName) > -1
+
+	# 
+		# Check if a file estension has a wizzifier
+		# params
+		#  string fileExtension
+		# returns
+		#   true|false
+	m canWizzify
+		string fileExtension
+		var schemaName = this.mapExtensionToSchema(fileExtension)
+		if verify.isNotEmpty(schemaName)
+			return this.canWizzifySchema(schemaName)
+		else
+			return false
+	# 
+		# Check if a file extension has a wizzifier and is a binary file
+		# returns
+		#   true|false
+	m wizzifierIsForBinaryFile
+		string extension
+		if this.canWizzify(extension)
+			var wizzifier
+				_ this.getWizzifier
+					@ extension
+			return wizzifier.isForBinaryFile
+		else
+			return false
+	# 
+		# retrieve a wizzifier searching the factoryPlugins
+		# registered to this plugins manager
+		# params
+		#  string fileExtension
+		# returns
+		#  | api-ref wizzi-plugin.wizzifier
+		#  | wzError NotFound
+		
+	m getWizzifier
+		string fileExtension
+		# loog 'PluginsManager.getWizzifier.fileExtension: ' + fileExtension
+		+
+		var wizzifierName = this.mapExtensionToSchema(fileExtension)
+		+
+			
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion
+			decl result = null
+
+		# all factoryPlugins are searched, last matching encountered wins.
+		foreach item in this.factoryPlugins
+			# loog 'searching wizzifier ', wizzifierName, ' in module', item.getName()
+            if item.getWizzifier
+                checked_call_r_set( found )
+                    _ item.getWizzifier(wizzifierName)
+            else
+                set found = false
+			# loog 'found', found, found && verify.isFunction(found.getWizziIttf)
+			if found && verify.isFunction(found.getWizziIttf)
+				set result = found
+				set foundInPlugin = item.getFilename()
+                if verify.isFunction(item.getVersion)
+                    set pluginVersion = item.getVersion()
+
+		if !result
+			var msg = 'getWizzifier. Cannot find wizzifier: ' + wizzifierName + '\n' +
+				\b 'availables wizzifiers: ' + this.availableWizzifiers().join(', ')
+			_ log.error
+				@ msg
+			r_wz_err( NotFound, getWizzifier )
+				@ msg
+		else
+			_ log.success
+                @ 'getWizzifier. Found wizzifier: ' + wizzifierName
+                    \b + ' in plugin: ' + foundInPlugin 
+                    \b + ', version:' + (pluginVersion || 'unknown')
+
+		return result
+

@@ -1,0 +1,52 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            name: 'Errors_Step_1',
+            title: 'Errors - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                $$ @ 'missingvar_1.js.ittf'
+                $$ @ 'param_type_1.js.ittf'
+                @ 'fragment_not_found_1.js.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTree
+                    @ ittfUri
+                    {
+                        @ mTreeBuildUpContext
+                            _ getItemsContext
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                    f_cb_no_err( mTree )
+                        if err
+                            error 'error', err
+                        if mTree
+                            _ printValue('mTree', mTree.toIttf())
+
+        function getItemsContext
+            return                
+                {
+                    @ items
+                        [
+                            {
+                                @ name 'stefi'
+                                @ value 60
+                            {
+                                @ name 'annie'
+                                @ value 59
+                            {
+                                @ name 'afro'
+                                @ value 98

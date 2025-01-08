@@ -1,0 +1,100 @@
+﻿base_test( jsWizziRunner )
+
+	$append imports
+		var JsWizziContext = require('../../../lib/jswizzi/jsWizziContext')
+		var jsWizziRunner = require('../../../lib/jswizzi/jsWizziRunner')
+
+	$include declares
+	$include mathExpressions
+	$include stringExpressions
+	$include logicalExpressions
+	$include unaryExpressions
+	$include memberAccesses
+	$include conditionals
+	$include iterations
+	$include builtinFunctions
+    $include builtinFunctions_underscore
+    $include builtinFunctions_verify
+    $include builtinFunctions_dateUtil
+
+	it should run declares
+		_ runGroup(declares)
+	
+	it should run string expressions
+		_ runGroup(stringExpressions)
+	
+	it should run math expressions
+		foreach expr in mathExpressions
+			tobe_number( runExpression(expr.code), expr.expected )
+	
+	it should run logical expressions
+		_ runGroup(logicalExpressions)
+
+	it should run unary expressions
+		_ runGroup(unaryExpressions)
+
+	it should run member accesses
+		_ runGroup(memberAccesses)
+
+	it should run conditional statements
+		_ runGroup(conditionals)
+
+	it should run iteration statements
+		_ runGroup(iterations)
+
+	it should run builtinFunctions expressions
+		_ runGroup(builtinFunctions)
+
+	it should run builtinFunctions_underscore expressions
+		_ runGroup(builtinFunctions_underscore)
+
+	it should run builtinFunctions_verify expressions
+		_ runGroup(builtinFunctions_verify)
+
+	it should run builtinFunctions_dateUtil expressions
+		_ runGroup(builtinFunctions_dateUtil)
+
+	function runGroup
+		param items
+		foreach expr in items
+			if typeof(expr.expected_equal) !== 'undefined'
+				tobe_eql( runExpression(expr.code), expr.expected_equal )
+			elif typeof(expr.expected_number) !== 'undefined'
+				tobe_number( runExpression(expr.code), expr.expected_number )
+			else
+				# loog 'expr.code, expr.expected', expr.code, expr.expected
+                if verify.isBoolean(expr.expected) && expr.expected
+				    tobe_true( runExpression(expr.code) )
+                elif verify.isBoolean(expr.expected) && !expr.expected
+				    tobe_false( runExpression(expr.code) )
+                elif verify.isNumber(expr.expected)
+				    tobe_number( runExpression(expr.code), expr.expected )
+                elif verify.isArray(expr.expected)
+				    tobe_eql( runExpression(expr.code), expr.expected )
+                else
+                    tobe_string_value( runExpression(expr.code), expr.expected )
+
+	function runExpression
+		param code
+		# without ctor arguments means: isForInterpolation
+		var jsWizziContext
+			new JsWizziContext
+				_ JsWizziContext.createMockComposedMTree
+		# run the expression embedded in a var declaration 'result'
+		var scriptCode
+            iif code.indexOf('return ') > -1
+                then 'function dummy() { ' + code + ' } var result = dummy();'
+                else 'var result = ' + code + ';'
+        # loog 'runExpression.scriptCode', scriptCode
+        var hr
+			_ jsWizziRunner.run
+                @ scriptCode
+				@ jsWizziContext
+				{
+					@ verbose false
+		# loog 'runExpression.hr', hr
+        if hr instanceof Error 
+			throw hr
+        # loog 'runExpression.result', jsWizziContext.getValue('result')
+		# return the 'result' var from the context
+		return jsWizziContext.getValue('result')

@@ -1,0 +1,106 @@
+module wizzi@${wzCtx.version}.inmemoryMetaPlugin
+	kind jsfile
+	+
+	var stringify = require('json-stringify-safe')
+    var path = require('path')
+    var async = require('async')
+    var packi = require('@wizzi/utils').packi
+    var JsonComponents = require('@wizzi/repo').JsonComponents
+    var errors = require('./errors')
+
+    +
+    class FactoryMeta
+        ctor
+            param options
+            set this.name = options.name
+            set this.version = "${wzCtx.version}"
+            set this.provides
+                {
+                    @ categories options.pluginCategories
+                    @ metaProductions options.pluginMetaProductions
+            set this.pluginCategories = options.pluginCategories
+            set this.pluginMetaProductions = options.pluginMetaProductions
+            set this.metaContextDefs = {}
+            set this.metaProductions = {}
+        m initialize
+            param options
+            param callback
+            const that = this
+            _ JsonComponents.packiFilesToUtilVFileJson
+                @ options.metaPackiFiles
+                f_cb(jsonFile)
+                    set that.jsonFile = jsonFile
+                    r_cb()
+        m getName
+            return this.name
+        m getFilename
+            return __filename
+        m getProvides
+            return this.provides;
+        $include inmemoryMetaPlugin/meta-category-starter
+        $include inmemoryMetaPlugin/meta-production
+        $include inmemoryMetaPlugin/meta-production-starter
+        $include inmemoryMetaPlugin/meta-ctx
+        $include inmemoryMetaPlugin/meta-ctx-starter
+        m createMetaPlugin
+            param options
+            param callback
+            r_cb(this)
+
+        m createPackifilesFromFs
+            param folderPath
+            param callback
+            _ this.jsonFile.getFiles
+                @ folderPath
+                {
+                    @ deep true
+                    @ documentContent true
+                a_cb( files )
+                    const packiFiles = {}
+                    foreach file in files
+                        set packiFiles[file.relPath]
+                            {
+                                @ type 'CODE'
+                                @ contents file.content
+                    r_cb( packiFiles )
+    +
+    function error
+        param errorName
+        param method
+        param message
+        param innerError
+        return
+            new errors.WizziMetaError
+                @ message
+                @ null
+                {
+                    @ errorName errorName
+                    @ method md.name + '.' + method
+                    @ sourcePath __filename
+                    @ inner innerError
+    +
+    set module.exports
+        {
+            @ version '${wzCtx.version}'
+            $$ provides must be set inside the FactoryMeta instance from options
+            $$ TODO the MetaManager must be aware of this
+            $*
+            @ provides
+                {
+                    @ categories pluginCategories
+                    @ metaProductions pluginMetaProductions
+            *$
+            @ createMetaPlugin
+                function
+                    param options
+                    param callback
+                    var meta
+                        new FactoryMeta
+                            @ options
+                    _ meta.initialize
+                        @ options
+                        a_cb( notUsed )
+                            return
+                                _ callback
+                                    @ null
+                                    @ meta

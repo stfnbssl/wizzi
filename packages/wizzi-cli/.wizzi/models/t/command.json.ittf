@@ -1,0 +1,10 @@
+$group
+    $params name, cmd, desc|@@null
+    {
+        name "${name}"
+        cmd "${cmd}"
+        $if desc != null
+            desc "${desc}"
+        $hook
+        [ lines
+            $hook lines

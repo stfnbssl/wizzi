@@ -1,0 +1,60 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 3,
+            name: 'wf_meta_step_3',
+            title: 'Meta generation - select meta productions',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+
+        $append json_wf_plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        $append json_wf_meta_plugins            
+            [ items
+                @ './wizzi.meta.commons/index'
+                @ './wizzi.meta.js/index'
+            @ metaPluginsBaseFolder metaPluginsBaseFolder
+
+        _ createJsonWizziFactoryAndJsonFs
+            {
+            f_cb_test(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.executeMetaProduction
+                    {
+                        @ metaCtx getMetaContext()
+                        { paths
+                            @ metaProductionTempFolder '___template'
+                            @ metaProductionWizziFolder '.wizzi'
+                        { globalContext
+                    =>
+                        param err
+                        param wizziPackiFiles
+                        if err
+                            error err
+                            return
+                        info 'wizziPackiFiles', wizziPackiFiles
+                        _ writePackifiles
+                            _ path.join
+                                @ __dirname
+                                @ 'out_step_4'
+                            @ wizziPackiFiles
+
+
+    function getMetaContext
+        return
+            {
+                @ ver "0_0_1"
+                @ name "step_4"
+                @ useBabel true
+                @ usePackage true

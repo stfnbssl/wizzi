@@ -1,0 +1,38 @@
+﻿base_test( contextData )
+
+	$append imports
+		var contextData = require('../../../lib/jswizzi/contextData')
+
+	var cd
+	var values
+	var alfa, beta, gamma, sigma
+	var alfa_d, beta_d, gamma_d, sigma_d
+
+	before
+			
+		set cd = new contextData('evalContext', 'f1')
+        
+	it should set and get values
+			
+		_ cd.setValue('alfa', 10)
+		_ cd.setValue('beta', 'annie')
+			
+		set alfa_d = cd.isDeclared('alfa')
+		tobe_true( alfa_d )
+		set alfa = cd.getValue('alfa')
+		tobe_number( alfa, 10 )
+			
+		set beta_d = cd.isDeclared('beta')
+		tobe_true( beta_d )
+		set beta = cd.getValue('beta')
+		tobe_string( beta, annie )
+
+		var asterix_d = cd.isDeclared('asterix')
+		tobe_false( asterix_d )
+
+		set values = cd.getValues()
+		tobe_object_len( values, 2 )
+
+
+
+

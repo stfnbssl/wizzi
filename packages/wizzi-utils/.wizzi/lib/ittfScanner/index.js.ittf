@@ -1,0 +1,54 @@
+﻿module 
+    kind jsfile
+
+	var IttfFsNode = require('./ittfFsNode')
+    var folderScanner = require('./folderScanner')
+	var folderBrowse = require('./folderBrowse')
+	var ittfDocumentScanner = require('./ittfDocumentScanner')
+	var textDocumentScanner = require('./textDocumentScanner')
+
+	var md
+        set module.exports
+            { 
+
+	set md.IttfFsNode = IttfFsNode
+
+	set md.scanFolder
+        function 
+            param folderPath
+			param options
+			param callback
+            _ folderScanner.scan
+                @ folderPath
+                @ options
+                @ callback
+	
+	set md.browseFolder
+        function 
+            param folderPath
+            param options
+			param callback
+            _ folderBrowse.scan
+                @ folderPath
+                @ options
+                @ callback
+
+	set md.scanIttfDocument
+        function 
+            param documentPath
+			param options
+			param callback
+            _ ittfDocumentScanner.scan
+                @ documentPath
+                @ options
+                @ callback
+
+	set md.scanTextDocument
+        function 
+            param documentPath
+			param options
+			param callback
+            _ ittfDocumentScanner.scan
+                @ documentPath
+                @ options
+                @ callback

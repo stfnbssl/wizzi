@@ -1,0 +1,33 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'JsonComponents_Step_2',
+            title: 'JsonComponents - step - 2 - packiFilesToUtilVFileJson',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+            
+        _ heading1('start')
+
+        _ fSystem.fsFolderToPackiFiles
+            _ path.join
+                @ __dirname
+                @ 'packi'
+            f_cb_test( packiFiles )
+                # loog 'packiFiles', packiFiles
+                _ repoIndex.JsonComponents.packiFilesToUtilVFileJson
+                    @ packiFiles
+                    f_cb_test( jsonVFile )
+                        _ jsonVFile.read
+                            @ 'json:/alpha.js.ittf'
+                            f_cb_test( content )
+                                _ printValue
+                                    @ 'alpha.js.ittf'
+                                    @ content

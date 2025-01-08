@@ -1,0 +1,116 @@
+﻿module wizzi.mtree
+    kind jsfile
+
+	var loader = require('./lib/loader') 
+	var mocks = require('./lib/mocks') 
+    var JsWizziRunner = require('./lib/jswizzi/jsWizziRunner')
+    var JsWizziContext = require('./lib/jswizzi/jsWizziContext')
+	var JsWizziScriptCoder = require('./lib/jswizzi/jsWizziScriptCoder')
+	var mTreeLoadHistory = require('./lib/loader/loadHistory')
+	var mTreeBuildUpScripter = require('./lib/loader/mTreeBuildUpScripter')
+	+
+	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
+	#
+		#
+		# params
+		#   function createStore
+		#     api-ref wizzi-repo.createStore
+		#   { options
+		#     boolean useCache
+		#     boolean frontMatter
+        #     boolean raw
+		#     boolean mTreeBuildUpScript
+		#
+	set md.createLoadMTree
+		function createLoadMTree
+			func createStore
+			{ options
+				optional
+			set options = options || {}
+			var useCache = options.useCache || false
+			var frontMatter = options.frontMatter || false
+            var raw = options.raw || false
+			var mTreeBuildUpScript = options.mTreeBuildUpScript || false
+			var ittfDocumentStore
+			return
+				function loadMTree
+					string ittfDocumentUri
+					{ loadContext
+						{ __productionManager
+							{ productionContext
+								{ aclstat
+						{ mTreeBuildUpContext
+							optional
+					callback
+
+					# loog 'wizzi-mtree.loadMTree.loadContext', loadContext
+
+					if !useCache || !ittfDocumentStore
+						_ createStore
+							f_cb( store )
+								set ittfDocumentStore = store
+								set loadContext.__ittfDocumentStore = store
+								if frontMatter
+									_ loader.loadMTreeFrontMatter
+										@ ittfDocumentUri
+										@ loadContext
+										@ callback
+								elif raw
+									_ loader.loadMTreeRaw
+										@ ittfDocumentUri
+										@ loadContext
+										@ callback
+								elif mTreeBuildUpScript
+									_ loader.loadMTreeBuildUpScript
+										@ ittfDocumentUri
+										@ loadContext
+										@ callback
+								else
+									_ loader.loadMTree
+										@ ittfDocumentUri
+										@ loadContext
+										@ callback
+					else
+						set loadContext.__ittfDocumentStore = ittfDocumentStore
+                        if frontMatter
+                            _ loader.loadMTreeFrontMatter
+                                @ ittfDocumentUri
+                                @ loadContext
+                                @ callback
+						elif raw
+							_ loader.loadMTreeRaw
+								@ ittfDocumentUri
+								@ loadContext
+								@ callback
+						elif mTreeBuildUpScript
+							_ loader.loadMTreeBuildUpScript
+								@ ittfDocumentUri
+								@ loadContext
+								@ callback
+						else
+							_ loader.loadMTree
+								@ ittfDocumentUri
+								@ loadContext
+								@ callback
+	set md.mTreeLoadHistory = mTreeLoadHistory
+	set md.mTreeBuildUpScripter = mTreeBuildUpScripter
+	set md.jsWizzi
+		{
+			@ JsWizziRunner JsWizziRunner
+			@ JsWizziContext JsWizziContext
+			@ JsWizziScriptCoder JsWizziScriptCoder
+	set md.mtreeUtils
+		{
+			@ node require('./lib/utils/node')
+
+	set md.mtreeTests
+		{
+			@ mTreeBrickProvider require('./lib/loader/mTreeBrickProvider')
+			@ liner require('./lib/loader/liner')
+			@ nodifier require('./lib/loader/nodifier')
+			@ includer require('./lib/loader/includer')
+			@ mixer require('./lib/loader/mixer')
+			@ appender require('./lib/loader/appender')
+			@ evaluator require('./lib/loader/evaluator')
+	set md.mocks = mocks

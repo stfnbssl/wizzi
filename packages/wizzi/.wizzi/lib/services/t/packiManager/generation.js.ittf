@@ -1,0 +1,117 @@
+$group
+
+	m generate
+		param packiFiles
+        param plugins
+        param options
+		callback
+        +
+        if !callback
+            set callback = options
+            set options = {} 
+        set options = options || {} 
+        +
+        var wzJobDocumentUri
+            _ this.detectWzJob
+                @ packiFiles
+        if wzJobDocumentUri
+            _ this.generateByWzJob
+                @ packiFiles
+                @ wzJobDocumentUri
+                @ plugins
+                @ options
+                @ callback
+        else
+            _ this.generateByFolder
+                @ packiFiles
+                @ plugins
+                @ options
+                @ callback
+
+	m generateByWzJob
+		param packiFiles
+        param wzJobDocumentUri
+        param plugins
+        param options
+		param callback
+        _ packiUtils.createJsonWizziFactoryAndJsonFs
+            @ packiFiles
+            @ plugins
+            @ null
+            a_cb(wf_and_jsonFs)
+                var wf = wf_and_jsonFs.wf
+                var jsonFs = wf_and_jsonFs.jsonFs
+                _ wf.executeJob
+                    {
+                        @ name 'fromPackiFilesJob'
+                        @ path packiFilePrefix + wzJobDocumentUri
+                        @ productionOptions
+                            _ Object.assign
+                                {
+                                {
+                                    @ indentSpaces 4
+                                    @ basedir __dirname
+                                    @ verbose 2
+                                @ options.productionOptions || {}
+                        @ globalContext options.globalContext || {}
+                    a_cb(result)
+                        _ packiUtils.jsonFsToPackiFiles
+                            @ jsonFs
+                            a_cb(packiFilesAfterJobExecution)
+                                const generatedPackiFiles
+                                    _ packiUtils.getAddedFiles
+                                        @ packiFiles
+                                        @ packiFilesAfterJobExecution
+                                # loog 'wizzi.packiManager.generateByWzJob.generatedPackiFiles', generatedPackiFiles
+                                r_cb(generatedPackiFiles)
+
+	m generateByFolder
+		param packiFiles
+        param plugins
+        param options
+		callback
+        var genFolderSource = 'source'
+        var genFolderDest = 'result'
+        const factoryPackiFiles
+            _ packiUtils.mountToPackiFolder
+                {
+                @ packiFiles
+                @ genFolderSource
+        _ packiUtils.createJsonWizziFactoryAndJsonFs
+            @ factoryPackiFiles
+            @ plugins
+            @ null
+            a_cb(wf_and_jsonFs)
+                var wf = wf_and_jsonFs.wf
+                var jsonFs = wf_and_jsonFs.jsonFs
+                _ wf.generateFolderArtifacts
+                    @ packiFilePrefix + genFolderSource
+                    { 
+                        @ modelRequestContext options.modelRequestContext || {}
+                        @ artifactRequestContext options.artifactRequestContext || {}
+                    { 
+                        @ deep true
+                        @ destFolder packiFilePrefix + genFolderDest
+                        @ copyInclude ['*']
+                        @ copyExclude []
+                    a_cb(generatedFilePaths)
+                        # loog 'generatedFilePaths', generatedFilePaths
+                        _ packiUtils.jsonFsToPackiFiles
+                            @ jsonFs
+                            a_cb(folderGeneratedPackiFiles)
+                                $$ log 'generatedPackiFiles', generatedPackiFiles
+                                const generatedPackiFiles
+                                    _ packiUtils.unmountPackiFolder
+                                        @ folderGeneratedPackiFiles
+                                        @ genFolderDest
+                                # loog 'wizzi.packiManager.generateByFolder.generatedPackiFiles', generatedPackiFiles
+                                r_cb(generatedPackiFiles)
+
+    m detectWzJob
+        param packiFiles
+        var items = Object.keys(packiFiles)
+        foreach item in items
+            # loog 'detectWzJob', item, item.endsWith('.wzjob.ittf')
+            if item.endsWith('.wzjob.ittf')
+                return item
+        return null

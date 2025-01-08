@@ -1,0 +1,32 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'mm_step_4',
+            title: 'Meta plugin - get provides',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.css/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+        +
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                var hasCS = wf.hasCheatsheet('ittf')
+                info 'Wizzi factory has cheatsheet for schema `ittf`', hasCS
+                info 'Wizzi factory info\n', JSON.stringify(wf.getInfo().pluginsManager, null, 4)
+                if hasCS
+                    _ wf.getCheatsheet
+                        @ 'ittf'
+                        f_cb_test(CS)
+                            error 'err', err
+                            info 'cheatsheet', CS

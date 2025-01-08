@@ -1,0 +1,101 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 3,
+            name: 'wf_meta_meta_1',
+            title: 'Meta generation - inmemory meta plugin',
+            folderLevel: 3
+        }
+
+    common/example/wizzi( &opt )
+        $append imports
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        +
+        const metaDemoIttfFolder = "C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.demo/ittf"
+        +
+        _ wizziUtils.fSystem.fsFolderToPackiFiles
+            @ metaDemoIttfFolder
+            f_cb_test( metaDemoPackiFiles )
+                +
+                _ createJsonWizziFactoryAndJsonFsWithOptions
+                    { $$ packiFiles, not used for meta generation
+                    { $$ plugins
+                        [ items
+                            @ './wizzi.plugin.html/index'
+                            @ './wizzi.plugin.js/index'
+                            @ './wizzi.plugin.css/index'
+                            @ './wizzi.plugin.ittf/index'
+                            @ './wizzi.plugin.json/index'
+                        @ pluginsBaseFolder pluginsBaseFolderV08
+                    { $$ meta plugins
+                        [ items
+                            @ './wizzi.meta.js.vanilla/index'
+                        @ metaPluginsBaseFolder metaPluginsBaseFolder
+                        [ inMemoryItems
+                            {
+                                @ name 'in-memory-demo'
+                                @ metaPackiFiles metaDemoPackiFiles
+                                [ pluginCategories
+                                    { 
+                                        @ name "demo"
+                                        [ productions
+                                            { 
+                                                @ name "demoJs"
+                                    { 
+                                        @ name "wizzi-starter"
+                                        [ productions
+                                            { 
+                                                @ name "demoJs"
+                                [ pluginMetaProductions
+                                    { 
+                                        @ name "demoJs"
+                                        @ title "demoJs wizzi meta production"
+                                        [ categories
+                                            { 
+                                                @ name "demo"
+                                            { 
+                                                @ name "wizzi-starter"
+                    f_cb_test(wf_and_jsonFs)
+                        _ wf_and_jsonFs.wf.getMetaParameters
+                            {
+                                { metaCtx
+                                    @ useDemoJs true
+                                    @ useDemoHtml true
+                            f_cb_test(metaParameters)
+                                info 'metaParameters', Object.keys(metaParameters)
+                                _ writePackifiles
+                                    _ path.join
+                                        @ __dirname
+                                        @ 'output'
+                                        @ 'in-memory-demo'
+                                        @ 'metaParameters'
+                                    @ metaParameters
+                                _ wf_and_jsonFs.wf.executeMetaProduction
+                                    {
+                                        { metaCtx
+                                            @ useDemoJs true
+                                            { demoJs
+                                                @ yourName "Stefano"
+                                            @ useDemoHtml true
+                                            { demoHtml
+                                    f_cb_test(wizziPackiFiles)
+                                        info 'wizziPackiFiles', Object.keys(wizziPackiFiles)
+                                        _ writePackifiles
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'output'
+                                                @ 'in-memory-demo'
+                                                @ 'metaExecution'
+                                            @ wizziPackiFiles

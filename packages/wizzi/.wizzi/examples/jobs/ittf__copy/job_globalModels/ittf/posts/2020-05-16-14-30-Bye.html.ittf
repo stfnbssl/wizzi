@@ -1,0 +1,6 @@
+html
+    $---
+        title "Bye"
+        category "Sad"
+    body
+        h1 Bye

@@ -1,0 +1,132 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfScanner_Step_1',
+            title: 'ittfScanner - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            var secondFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'second'
+            
+            $include ittfFsNode
+            $include folderBrowse
+           
+
+        _ step_1
+        # _ ittfFsNode_step_1
+        _ ittfFsNode_step_1_outside
+            f_cb_test( result1 )
+                # loog 'ittfFsNode_step_1.result', result1
+                #
+                    _ ittfFsNode_step_2
+                        f_cb_test( result2 )
+                            _ ittfFsNode_step_3
+                                @ result.root
+                                f_cb_test( result3 )
+                                    info 'ittfFsNode_step_3.result', result3
+        _ folderBrowse_step_1
+
+        function step_1
+            
+            _ ittfScanner.scanFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'first'
+                {
+                    @ name 'first'
+                    @ gitPath 'c:/blabla'
+                f_cb_test( ittfDocumentGraph )
+                    _ ittfDocumentGraph.writeFile
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'first.wzCtx.ittf'
+                        f_cb_test( result )
+                            info 'err, result', err, result
+                            _ step_2
+
+        function step_2
+
+            var ittfDocumentGraph 
+            _ ittfScanner.scanFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'first'
+                    @ 'deep'
+                {
+                    @ name 'second'
+                    @ gitPath 'c:/blabla'
+                f_cb_test( ittfDocumentGraph )
+                    _ ittfDocumentGraph.writeFile
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'second.wzCtx.ittf'
+                        f_cb_test( result )
+                            info 'err, result', err, result
+                            _ step_4
+
+        function step_4
+
+            _ ittfScanner.scanIttfDocument
+                _ path.join
+                    @ secondFolder
+                    @ 'deep/scripts'
+                    @ 'script_1.js.ittf'
+                {
+                    @ rootFolder
+                        _ path.join
+                            @ secondFolder
+                            @  'deep'
+                f_cb_test( result )
+                    info 'step_4 err', err
+                    var msg
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2
+                    # loog 'step_4 result', msg
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'ittfDocumentScanner.json'
+                        @ msg
+                    _ step_5
+
+        function step_5
+
+            _ ittfScanner.scanTextDocument
+                _ path.join
+                    @ secondFolder
+                    @ "red/deep/configs"
+                    @ 'config.yml.ittf'
+                {
+                    @ baseFolder
+                        _ path.join
+                            @ secondFolder
+                            @  'red'
+
+                f_cb_test( result )
+                    info 'step_4 err', err
+
+                    var msg
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2
+            
+                    info 'step_5 result', msg

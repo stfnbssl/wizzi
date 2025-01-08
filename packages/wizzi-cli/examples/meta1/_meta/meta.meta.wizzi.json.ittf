@@ -1,0 +1,37 @@
+{
+    $
+        var md = {
+            name: "wizzi",
+            title: "Wizzi",
+            prefix: "wizzi"
+        }
+
+    base-meta( &md )
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+            type "string"
+        *$
+
+    [ globals
+        $*
+        {
+            name "___"
+            value "___"
+            type "string"
+        *$
+
+    [ Productions
+        {
+            name "${md.prefix}Jobs"
+        {
+            name "${md.prefix}Factory"
+        {
+            name "${md.prefix}Plugin"
+            isPackageMain true
+        {
+            name "${md.prefix}Meta"
+            isPackageMain true

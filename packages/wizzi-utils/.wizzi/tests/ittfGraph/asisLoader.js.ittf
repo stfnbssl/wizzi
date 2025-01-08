@@ -1,0 +1,20 @@
+﻿base_test( asIsLoader, true )
+
+	$append imports
+		var asIsLoader = require('../../lib/ittfGraph/asIsLoader')
+
+	it-async should load an ITTF Document as is
+
+		_ vfile
+            f_cb_test( vfileImpl )
+                _ asIsLoader
+                    _ path.join
+                        @ __dirname
+                        @ 'ittf'
+                        @ 'basic.tests.ittf'
+                    {
+                        @ clean_remove true
+                        @ file vfileImpl
+                    f_cb_test( result )
+                        tobe_object( result )
+                        _ done

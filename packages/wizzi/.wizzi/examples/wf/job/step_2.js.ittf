@@ -1,0 +1,64 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'job_step_2',
+            title: 'Wizzi job - execute',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.wzjob/index'
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        var jobPath
+			_ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'step_2.wzjob.ittf'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+
+                _ wf.executeJob
+                    {
+                        @ name 'Job1 example'
+                        @ path jobPath
+                        @ productionOptions
+                            _ wizziIndex.productionOptions
+                                {
+                                    @ indentSpaces 4
+                                    @ basedir __dirname
+                                    @ verbose 2
+                        { modelContext
+                            @ friends friendsArray
+                            { options
+                                @ destFolder 'output'
+                        { jobContext
+                            { options
+                                @ destFolder 'output'
+                        { globalContext
+                            { options
+                                @ destFolder 'output'
+                    f_cb_no_err(result)
+                        _ printObject
+                            @ 'result'
+                            @ result                
+

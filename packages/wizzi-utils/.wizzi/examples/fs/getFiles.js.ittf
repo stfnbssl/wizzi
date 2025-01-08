@@ -1,0 +1,50 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'getFiles_Step_1',
+            title: 'getFiles - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append imports
+            var file = vfile()
+
+        _ file.getFiles
+            _ path.join
+                @ __dirname 
+                @ 'ittf'
+                @ 'samples'
+            { 
+                @ deep false
+                @ extension null
+                @ documentContent false
+            f_cb_test( files )
+                info 'utils.getFiles.files', files
+                _ file.getFiles
+                    _ path.join
+                        @ __dirname 
+                        @ 'ittf'
+                        @ 'samples'
+                    { 
+                        @ deep false
+                        @ extension null
+                        @ documentContent true
+                    f_cb_test( files )
+                        info 'utils.getFilesWithContent.files', files
+                        _ file.getFiles
+                            _ path.join
+                                @ __dirname 
+                                @ 'ittf'
+                                @ 'samples'
+                            { 
+                                @ deep true
+                                @ extension null
+                                @ documentContent true
+                            f_cb_test( files )
+                                info 'utils.getFilesWithContentDeep.files', files

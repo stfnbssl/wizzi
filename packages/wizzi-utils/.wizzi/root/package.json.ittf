@@ -1,0 +1,17 @@
+{
+
+    $include versions
+
+    common/kernel_utils_package(false)
+        
+        extsprintf "^1.2.0"
+        fs-extra "latest"
+        glob "^7.1.2"
+        graceful-fs "^4.1.11"
+        $if wzCtx_useCrypto
+            hashids "latest"
+        i "^0.3.7"
+        promise "^7.1.1"
+        randomstring "latest"
+
+        $append devDependencies

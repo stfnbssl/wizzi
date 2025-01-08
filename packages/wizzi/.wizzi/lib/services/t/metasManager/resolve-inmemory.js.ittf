@@ -1,0 +1,11 @@
+﻿$group
+
+	function resolveInMemory
+        param inMemoryMetaPluginOptions
+		param callback
+		+
+		_ inmemoryMetaPlugin.createMetaPlugin
+			@ inMemoryMetaPluginOptions
+			f_cb( moduleObject )
+				r_cb( moduleObject )
+

@@ -1,0 +1,13 @@
+{
+    $*
+        The development of a standalone version of Wizzi for browsers
+        has been discontinued.
+        No recovery plan.
+    *$
+    $include versions
+    
+    name '@wizzi/util-browser'
+    version '${versions['wizzi-utils@next']}'
+	description 'Wizzi standalone for browser'
+    license 'MIT'
+    [ schemas

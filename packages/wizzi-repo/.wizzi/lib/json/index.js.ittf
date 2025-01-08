@@ -1,0 +1,150 @@
+﻿module
+	kind es6
+
+	var async = require('async')
+	var packi = require('@wizzi/utils').packi
+	var fSystem = require('@wizzi/utils').fSystem
+	
+	var md = {}
+	set module.exports = md
+
+	var Collection = require('../utils/collection')
+
+	set md.directoryTree = require('./directoryTree')
+	set md.JsonFs = require('./fs/jsonFs')
+	set md.JsonFsImpl = require('./jsonFsimpl')
+	set md.DocumentManager = require('./fs/documentmanager')
+
+	#
+		# params
+		#  { jsonFsData
+		#    [ items
+		#    [ documents
+		#    jsonFsData is simply a transport (DTO)
+		#    to get the updated jsonFsData you
+		#    must call the toJson method of the DocumentManager instance
+	set md.createDocumentManager
+		function
+			param jsonFsDataOrJsonFs
+			if jsonFsDataOrJsonFs && jsonFsDataOrJsonFs.classType === 'wizzi-repo.json.JsonFs'
+				return new md.DocumentManager(jsonFsDataOrJsonFs)
+			else
+				var jsonFsData = jsonFsDataOrJsonFs || {}
+				set jsonFsData.items = jsonFsData.items || []
+				set jsonFsData.documents = jsonFsData.documents || []
+				return
+					new md.DocumentManager
+						new md.JsonFs(jsonFsData)
+
+	set md.createJsonFs
+		function
+			param documents
+			param callback
+			_ md.createJsonFsData
+				@ documents
+				f_cb( jsonFsData )
+					var jsonFs = new md.JsonFs(jsonFsData)
+					r_cb( jsonFs )
+
+	set md.createJsonFsByJsonFsData
+		function
+			param jsonFsData
+			param callback
+			var jsonFs = new md.JsonFs(jsonFsData)
+			r_cb( jsonFs )
+
+	set md.createJsonFsData
+		function
+			param documents
+			param callback
+			const doc = this.createDocumentManager()
+			_ async.map
+				@ documents
+				=>
+					param document
+					param callback
+					_ doc.writeFile
+						@ document.path
+						@ document.content
+						@ callback
+				f_cb()
+					_ doc.toJson
+						@ callback
+
+	set md.addToJsonFsData
+		function
+			param jsonFsData
+			param documents
+			param callback
+			const doc = this.createDocumentManager(jsonFsData)
+			_ async.map
+				@ documents
+				=>
+					param document
+					param callback
+					_ doc.writeFile
+						@ document.path
+						@ document.content
+						@ callback
+				f_cb()
+					_ doc.toJson
+						@ callback
+
+
+	set md.packiFilesToJsonDocuments
+		function 
+			param files
+			$$	:ref packiTypes.PackiFiles
+			$*
+			:return
+				:[
+					:ref JsonDocumentDto
+			*$
+			const jsonDocuments
+				$*
+				:[
+					:ref JsonDocumentDto
+				*$
+				[
+			_ Object.keys(files).map
+				=>
+					param value
+					if files[value].type === 'CODE' && files[value].contents && files[value].contents.length > 0
+						const filePath = packi.ensurePackiFilePrefix(value)
+						_ jsonDocuments.push
+							{
+								@ path filePath
+								@ content files[value].contents
+			return jsonDocuments
+
+	set md.packiFilesToJsonFs
+		function 
+			param files
+			$$	:ref packiTypes.PackiFiles
+			param callback
+			_ md.createJsonFs
+				_ md.packiFilesToJsonDocuments
+					@ files
+				f_cb(jsonFs)
+					r_cb(jsonFs)
+
+
+	set md.packiFilesToUtilVFileJson
+		function 
+			param files
+			$$	:ref packiTypes.PackiFiles
+			param callback
+			_ md.packiFilesToJsonFs
+				@ files
+				f_cb(jsonFs)
+					var fsimpl
+						new md.JsonFsImpl
+							{
+					_ fsimpl.open
+						{
+							@ jsonFs jsonFs
+						f_cb( notUsed )
+							_ fSystem.vfile
+								@ fsimpl
+								f_cb( _jsonfile )
+									r_cb( _jsonfile )

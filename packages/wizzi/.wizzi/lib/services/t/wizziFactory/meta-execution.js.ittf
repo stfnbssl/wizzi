@@ -1,0 +1,192 @@
+$group
+
+	#
+		# Execute a meta production
+        # . retrieve the MetasManager instantiated by this WizziFactory
+        # . call the getMetaProductionStarter method of the MetasManager to scan the metaPlugins and retrieve 
+        #   a packiFiles object with every meta ittf document of the used MetaProductions
+        # . build and add to the received packiFiles object an index meta ittf document 
+        #   containing the $include of the 'folderTemplates/<ProductionName>/index.ittf.ittf' document 
+        #   of every used MetaProduction.
+        # . create a new json WizziFactory based on the received packiFiles object
+        # . call the WizziFactory.metaGenerate method on the new json WizziFactory. 
+        # . returns a packiFiles object with the full content of the json WizziFactory 
+        #   file system: meta ittf documents, tempProductionFolder and wizziProductionFolder.
+        # . the wizziProductionFolder contains the resulting WizziProduction that will be persisted by the calling agent.
+		# return
+		#   | packifiles
+		#   | wzError
+		# params
+		#   { options
+		#     { metaCtx
+        #     { globalContext
+		#     { paths
+        #        string tempProductionFolder
+        #          optional
+        #        string wizziProductionFolder
+        #          optional
+        #     [ productions
+        #       optional
+        #       {
+        #         string name
+        #         { folderTemplates 
+        #           :ref PackiFiles
+        #         { ittfDocumentTemplates 
+        #           :ref PackiFiles
+        #         { plainDocuments 
+        #           :ref PackiFiles
+        #           :optional
+	m executeMetaProduction
+        param options
+		callback
+        +
+        const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
+        +
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaProductionStarter
+                    {
+                        @ metaCtx options.metaCtx
+                    a_cb( metaPackiFiles )
+                        $$ loog myname + '.executeMetaGeneration.metaPackiFiles', Object.keys(metaPackiFiles)
+                        if options.metaCtx.__wz_fsc
+                            _ options.metaCtx.__wz_fsc.addDebugObject
+                                @ 'packi'
+                                @ 'wf_metaProduction_input'
+                                @ metaPackiFiles
+                        $* VIA old method
+                        checked_call( testMergeOptionsProductions, Error merging meta plugins and options productions
+                            _ this.mergeOptionsProductions
+                                @ metaPackiFiles
+                                @ options
+                        *$ 
+                        set metaPackiFiles[folderTemplatesIndexPath]
+                            {
+                                @ type "CODE"
+                                @ contents
+                                    _ this.prepareFilesAndGetFolderTemplatesIndex
+                                        @ metaPackiFiles
+                                        {
+                                            @ pkgPath null
+                                            @ metaVer null
+                        if options.metaCtx.__wz_fsc
+                            _ options.metaCtx.__wz_fsc.addDebugObject
+                                @ 'packi'
+                                @ 'wf_metaProduction_input_prepared'
+                                @ metaPackiFiles
+                        $$ loog myname + '.getMetasManager,metaPackiFiles["plainDocuments/tsReactTypings/prettier.d.ts"]', metaPackiFiles['plainDocuments/tsReactTypings/prettier.d.ts']
+                        _ this.createJsonFactoryAndJsonFs
+                            @ metaPackiFiles
+                            {
+                                @ globalContext options.globalContext || {}
+                            a_cb(wf_and_jsonFs)
+                                error 'options.paths && options.paths.metaProductionTempFolder', options.paths && options.paths.metaProductionTempFolder
+                                error 'metaProductionTempFolder', metaProductionTempFolder
+                                const tempFolder = (options.paths && options.paths.metaProductionTempFolder) || metaProductionTempFolder
+                                const destFolder = (options.paths && options.paths.metaProductionWizziFolder) || metaProductionWizziFolder
+                                _ wf_and_jsonFs.wf.metaGenerate
+                                    @ packiFilePrefix + folderTemplatesIndexPath
+                                    {
+                                        @ modelRequestContext
+                                            {
+                                                @ metaCtx options.metaCtx
+                                    {
+                                        @ tempFolder packiFilePrefix + tempFolder
+                                        @ destFolder packiFilePrefix + destFolder
+                                    a_cb(generatedFilePaths)
+                                        _ packiUtils.jsonFsToPackiFiles
+                                            @ wf_and_jsonFs.jsonFs
+                                            @ destFolder
+                                            a_cb(wizziPackiFiles)
+                                                if options.metaCtx.__wz_fsc
+                                                    _ options.metaCtx.__wz_fsc.addDebugObject
+                                                        @ 'packi'
+                                                        @ 'wf_metaProduction_output'
+                                                        @ wizziPackiFiles
+                                                r_cb( wizziPackiFiles )
+
+	$* VIA old method
+    #
+		# Merge meta plugins productions with options.productions
+		# params
+		#   { metaPackiFiles
+        #   { options
+		#     [ productions
+        #       optional
+        #       {
+        #         string name
+        #         { folderTemplates 
+        #           :ref PackiFiles
+        #         { ittfDocumentTemplates 
+        #           :ref PackiFiles
+        #         { plainDocuments 
+        #           :ref PackiFiles
+        #           :optional
+		# return
+		# | void (options.productions are added to metaPackiFiles)
+
+    m mergeOptionsProductions
+        param metaPackiFiles
+        param options
+        if options.productions
+            const optionsPackiFiles
+                _ packiUtils.createMetaPackifilesFromWizziHub
+                    @ options.productions
+            for var k in optionsPackiFiles
+                if metaPackiFiles[k]
+                    return
+                        {
+                            @ __is_error true
+                            @ message 'The file ' + k + ' already exists in meta plugins packiFiles'
+                set metaPackiFiles[k] = optionsPackiFiles[k]
+        return
+            {
+                @ ok true
+    *$
+
+	#
+		# Prepare the file structure to allow includes 
+        # of ittfDocumentTemplates files by folderTemplates files
+        # and create the folderTemplates index file
+        # for a given set of meta packiFiles.
+        # ittfDocumentTemplates folders become subfolders of the top tFolder of the metaPackiFiles.
+        # The object metaPackiFiles is modified in place.
+		# return
+		# | string fileContent
+		# params
+		#   { metaPackiFiles
+        #   { options
+		#     string pkgPath
+        #       optional
+        #     string metaVer
+		#       optional
+    m prepareFilesAndGetFolderTemplatesIndex
+        param metaPackiFiles
+        param options
+        const pkgPath = options.pkgPath || ''
+        const metaVer = options.metaVer || '0_0_1'
+        const folderTemplatesIndex
+            [
+                @ "template root"
+                @ "    $"
+                @ "        var pkgPath = '" + pkgPath + "'"
+                @ "        var metaVer = '" + metaVer + "'"
+        for var k in metaPackiFiles
+            if k.startsWith("folderTemplates/")
+                if k.indexOf("/t/") < 0
+                    _ folderTemplatesIndex.push
+                        @ "    $include ./" + k.substring(16, k.length - 10)
+                const newk = k.substring(0, 15) + '/t/' + k.substring(16)
+                set metaPackiFiles[newk] = metaPackiFiles[k]
+                delete metaPackiFiles[k]
+            elif k.startsWith("ittfDocumentTemplates/")
+                const newk = 't/' + k.substring(22) 
+                set metaPackiFiles[newk] = metaPackiFiles[k]
+                delete metaPackiFiles[k]
+            elif k.startsWith("plainDocuments/")
+                const newk = k.substring(16)
+                $$ loog 'k, newk', k, newk
+
+        $$ loog 'folderTemplatesIndex.contents', folderTemplatesIndex.join('\n')
+        return folderTemplatesIndex.join('\n')

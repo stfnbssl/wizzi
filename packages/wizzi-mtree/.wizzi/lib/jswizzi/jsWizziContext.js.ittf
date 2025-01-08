@@ -1,0 +1,289 @@
+﻿module wizzi-mtree@${wzCtx.version}.jswizzi.jsWizziContext
+	kind jsfile
+
+    #
+        # Used both for mTree buildup and interpolation
+        # mTree builup
+        # . composedMTree
+        #   - loadHistory
+        # . productionContext
+        # . scriptCoder
+        #   - toCode()
+        #     (script code)
+        #   - map
+        #     (line to node map)
+
+	import assert
+    import util
+    var f_dateUtil = require('./functions/dateUtil')
+    var f_verify = require('./functions/verify')
+    var f_underscore = require('./functions/underscore')
+	var errors = require('./errors')
+    var JsWizziEvalHelper = require('./jsWizziEvalHelper')
+	var ContextData = require('./contextData')
+
+    $*
+	var _$1 = '$'
+    var _$2 = '$' + '{$1}'
+    var _$3 = '$' + '{$2}'
+    var _$4 = '$' + '{$3}'
+    var defaultValues
+        { 
+			@ '__dollar'        '$'
+            @ '__dollardollar'  '$' + '$'
+            @ '__dollaraster'   '$' + '*'
+            @ '__asterdollar'   '*' + '$'
+            @ '$1'  _$1
+            @ '$2'  _$2
+            @ '$3'  _$3
+            @ '$4'  _$4
+	*$
+
+    var defaultValues
+        { 
+			@ 'TODO' false
+    
+	var knownCallables
+        { 
+            @ 'console' console
+            @ '_' f_underscore
+            @ 'Object' Object
+			@ 'Array' Array
+			@ 'String' String
+			@ 'Date' Date
+			@ 'Number' Number
+			@ 'Map' Map
+			@ 'Set' Set
+            @ 'Math' Math
+			@ 'RegExp' RegExp
+			@ 'JSON' JSON
+            @ 'path' require('path')
+			@ 'util' util
+            @ 'dateUtil' f_dateUtil
+            @ 'verify' f_verify
+			@ 'Infinity' Infinity
+			@ 'NaN' NaN
+    
+	var builtinFunctions
+        { 
+			@ 'Array' Array
+			@ 'String' String
+			@ 'Date' Date
+			@ 'Number' Number
+			@ 'RegExp' RegExp
+			@ 'isFinite' isFinite
+			@ 'isNaN' isNaN
+			@ 'parseFloat' parseFloat
+			@ 'parseInt' parseInt
+			@ 'decodeURI' decodeURI
+			@ 'decodeURIComponent' decodeURIComponent
+			@ 'encodeURI' encodeURI
+			@ 'encodeURIComponent' encodeURIComponent
+			
+	var ittfStates
+        { 
+            @ nodeContext 0
+            @ brickEvalContext 1
+            @ globalContext 2
+			@ callContext 3
+
+	#
+		# This is a fake to allow a script for interpolation 
+		# to have a function. The scope and recursion management of the function is a fake too, obviously.
+		# Waiting for damage, in very rare circumstances.
+		# TODO implementing function expressions should resolve the problem
+	class FakeLoadHistoryForInterpolation
+		ctor
+			set this.contextData = new ContextData(ittfStates.brickEvalContext)
+		m setContextsFromMTreeBuildUpScriptAst
+			param contexts
+			set this.contexts = contexts
+			_ this.contextData.setFunctionScopesFromAst
+				_ this.getMTreeBrickFunctionScopes('f0')
+		m getMTreeBrickFunctionScopes
+			param brickKey
+			var mTreeBricks = this.contexts.mTreeBricks
+			if !mTreeBricks[brickKey]
+				return
+					{
+						{ functions
+			else
+				return mTreeBricks[brickKey]
+	
+	class JsWizziContext
+
+		ctor
+			param composedMTree
+			param productionContext
+            param scriptCoder
+			set this.isForInterpolation = false
+			if composedMTree && productionContext
+				# The JsWizziContext is used for the
+				# buildup of an MTree.
+				# Create the JsWizziEvalHelper
+				set this.composedMTree = composedMTree
+				set this.loadHistory = composedMTree.loadHistory
+				set this.productionContext = productionContext
+                set this.scriptCoder = scriptCoder
+				set this.evalHelper = new JsWizziEvalHelper(this, composedMTree, productionContext)
+			else
+				# The JsWizziContext is used for interpolations.
+				set this.isForInterpolation = true
+				set this.loadHistory = new FakeLoadHistoryForInterpolation()
+			+
+			set this.globalContext = new ContextData(ittfStates.globalContext)
+            set this.callContextStack = []
+			set this.callContext = null
+			if this.isForInterpolation == false
+				set this.nodeContext = new ContextData(ittfStates.nodeContext)
+			set this.loadingCallArguments = false
+			+
+			set this.exprPending = null
+			+
+			# The first getValue will be for the '$' variable
+			set this.ittf_state = ittfStates.globalContext
+	        set this.currentMTreeBrickKey = null
+			# brickEvalContext is retrieved from JsWizziEvalHelper
+			# each ittf source document has its brickEvalContext
+			set this.brickEvalContext = null
+			+
+			if this.isForInterpolation == false
+				_ this.globalContext.declare('$', this.evalHelper)
+				# freeze to avoid override of $ variable.
+				_ this.globalContext.$freeze()
+			+
+			# set global defaults and allowed functions
+			_ this.globalContext.setValues(defaultValues)
+			_ this.globalContext.setValues(knownCallables)
+			_ this.globalContext.setValues(builtinFunctions)
+			+
+			set this.runningNodeId = null
+			+
+            set this.sourceStack = []
+            set this.source = null
+            +
+			if typeof window === 'undefined'
+				set this.startTimer = process.hrtime()
+			else
+				set this.startTimer = window.performance.now()
+			+
+
+		# Called by JsWizziRunner.run after parsing the mTreeBuildUpScript
+		m setContextsFromMTreeBuildUpScriptAst
+			param contextsFromAst
+			_ this.loadHistory.setContextsFromMTreeBuildUpScriptAst
+				@ contextsFromAst
+		m push
+			# Called by JsWizziRunner.FunctionDeclarationCall
+			# loog 'JsWizziContext: push'
+            if this.callContext
+                _ this.callContextStack.push(this.callContext)
+            set this.callContext = new ContextData(ittfStates.callContext)
+			$if false
+				if this.isForInterpolation == false
+					$$ _ this.nodeContext.push()
+					_ this.brickEvalContext.push()
+			return this
+		
+		m pop
+			# Called by JsWizziRunner.FunctionDeclarationCall
+			# loog 'JsWizziContext: pop'
+            if this.callContextStack.length > 0
+			    set this.callContext = this.callContextStack.pop()
+            else
+                set this.callContext = null
+			$if false
+				if this.isForInterpolation == false
+					$$ _ this.nodeContext.pop()
+					_ this.brickEvalContext.pop()
+			return this
+		m clear
+			_ this.globalContext.clear
+			if this.isForInterpolation == false
+				_ this.nodeContext.clear
+				if this.brickEvalContext
+					_ this.brickEvalContext.clear
+				_ this.globalContext.declare('$', this.evalHelper)
+				_ this.globalContext.$freeze()
+			_ this.globalContext.setValues(defaultValues)
+			_ this.globalContext.setValues(knownCallables)
+
+		m pushSource
+            param source
+            if this.source
+                _ this.sourceStack.push(this.source)
+            set this.source = source
+
+        m popSource
+            if this.sourceStack.length > 0
+			    set this.source = this.sourceStack.pop()
+            else
+                set this.source = null
+        
+        m setRunningNodeId
+			param id
+			set this.runningNodeId = id
+
+		m get_currentMTreeBrickInfo
+			if this.currentMTreeBrickKey == null
+				return
+					{
+						@ currentModel_uri 'unavailable'
+						@ currentModel_mixerUri 'unavailable'
+			else
+				var mTreeBrickData = this.loadHistory.getMTreeBrickData(this.currentMTreeBrickKey)
+				var mixerUri = null
+				if mTreeBrickData.mTreeBrick.$mixerBrickKey
+					var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
+					set mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
+				return
+					{
+						@ currentModel_uri mTreeBrickData.ittfDocumentUri
+						@ currentModel_mixerUri mixerUri
+
+		m getIsCompileGlobals
+			var ret
+				{
+					@ '_' true
+					@ 'path' true
+					@ 'util' true
+					@ 'dateUtil' true
+					@ 'verify' true
+			foreach k in Object.keys(this.getGlobalValues())
+				if !(defaultValues[k] || knownCallables[k] || builtinFunctions[k]) && k !== '$' && k !== 'NaN'
+					set ret[k] = true
+			return ret
+
+		m elapsedTime
+			param note
+			var precision = 3
+			# divide by a million to get nano to milli
+			if typeof window === 'undefined'
+				var elapsed = process.hrtime(this.startTimer)[1] / 1000000; 
+				log process.hrtime(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note
+				set this.startTimer = process.hrtime()
+			else
+				var elapsed = window.performance.now(this.startTimer)[1] / 1000000; 
+				log window.performance.now(this.startTimer)[0] + " s, " + elapsed.toFixed(precision) + " ms - " + note
+				set this.startTimer = window.performance.now()
+
+		$include jsWizziContext/getset_value
+		$include jsWizziContext/set_context
+
+		m getNodeFromScriptMap
+            param line
+            if this.scriptCoder
+                return
+                    _ this.scriptCoder.getNodeFromScriptMap
+                        @ line
+            else
+                return null
+	+
+	set JsWizziContext.createMockComposedMTree
+		function
+			return
+				{
+					@ loadHistory new FakeLoadHistoryForInterpolation()
+	+
+	set module.exports = JsWizziContext
+

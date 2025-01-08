@@ -1,0 +1,152 @@
+﻿base_test( function )
+	
+	$append imports
+		var mocks = require('../../mocks/misc')
+		var mTreeLoader = require('../../mocks/mTreeLoader')
+
+	var
+		decl store
+		decl evaluatedModel
+		decl node
+
+	before-async
+
+		set store = new mocks.IttfDocumentStore()
+		_ store.init
+			{
+				@ storeKind 'filesystem'
+			f_cb_no_err( notUsed )
+				_ done
+
+	it-async should load and evaluate an ittf (function_1) with a $function called by a $_ command
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'function_1.tests.ittf'
+
+		_ mTreeLoader
+			@ store
+			@ content_filepath
+			f_cb_no_err( result )
+				set evaluatedModel = result
+				tobe_object( evaluatedModel )
+				tobe_array( evaluatedModel.nodes, 1 )
+				_ done()
+		
+	it-async (function_1) results: nodes[0]
+		tobe_object( evaluatedModel )
+		tobe_array( evaluatedModel.nodes, 1 )
+		tobe_object( evaluatedModel.nodes[0] )
+		set node = evaluatedModel.nodes[0]
+		tobe_number( node.r, 1 )
+		tobe_number( node.c, 1 )
+		tobe_string( node.n, 'alfa' )
+		_ done()
+
+	it-async (function_1) results: nodes [0][0]
+		tobe_array( evaluatedModel.nodes[0].children, 1 )
+		set node = evaluatedModel.nodes[0].children[0]
+		tobe_number( node.r, 4 )
+		tobe_number( node.c, 9 )
+		tobe_string( node.n, 'beta' )
+		tobe_string( node.v, 'stefi' )
+		_ done()
+
+	it-async should load and evaluate an ittf (function_2) results: with a complex $function called by a $_ command
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'function_2.tests.ittf'
+
+		_ mTreeLoader
+			@ store
+			@ content_filepath
+			f_cb_no_err( result )
+				set evaluatedModel = result
+				tobe_object( evaluatedModel )
+				tobe_array( evaluatedModel.nodes, 1 )
+				_ done()
+		
+	it-async complex function (function_2) results: nodes[0]
+		tobe_object( evaluatedModel )
+		tobe_array( evaluatedModel.nodes, 1 )
+		tobe_object( evaluatedModel.nodes[0] )
+		set node = evaluatedModel.nodes[0]
+		tobe_number( node.r, 1 )
+		tobe_number( node.c, 1 )
+		tobe_string( node.n, 'alfa' )
+		_ done()
+
+	it-async complex function nodes (function_2) results: [0][0]
+		# loog 'evaluatedModel.nodes[0].children', evaluatedModel.nodes[0].children
+		tobe_array( evaluatedModel.nodes[0].children, 2 )
+		set node = evaluatedModel.nodes[0].children[0]
+		tobe_number( node.r, 2 )
+		tobe_number( node.c, 5 )
+		tobe_string( node.n, 'beta' )
+		set node = evaluatedModel.nodes[0].children[1]
+		tobe_number( node.r, 7 )
+		tobe_number( node.c, 5 )
+		tobe_string( node.n, 'gamma' )
+		set node = evaluatedModel.nodes[0].children[1].children[0]
+		tobe_number( node.r, 5 )
+		tobe_number( node.c, 9 )
+		tobe_string( node.n, 'sigma' )
+		_ done()
+
+	it-async should load and evaluate an ittf (function_3) with a recursive $function
+			
+		var content_filepath
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'function_3.tests.ittf'
+
+		_ mTreeLoader
+			@ store
+			@ content_filepath
+			f_cb_no_err( result )
+				# loog '================', err, result
+				set evaluatedModel = result
+				tobe_object( evaluatedModel )
+				tobe_array( evaluatedModel.nodes, 1 )
+				_ done()
+
+	it-async recursive (function_3) results: nodes[0]
+		set node = evaluatedModel.nodes[0]
+		tobe_object( node )
+		tobe_array( node.children, 1 )
+		tobe_object( node.children[0] )
+		var n1 = node.children[0]
+
+		tobe_number( n1.r, 22 )
+		tobe_number( n1.c, 9 )
+		tobe_string( n1.n, 'giove' )
+		tobe_string( n1.v, 'alfa x' )
+		_ done()
+
+
+	it-async recursive (function_3) results: nodes[0][0][0]
+		set node = evaluatedModel.nodes[0].children[0].children[0]
+		tobe_object( node )
+		tobe_array( node.children, 1 )
+		tobe_object( node.children[0] )
+			
+		tobe_number( node.r, 22 )
+		tobe_number( node.c, 9 )
+		tobe_string( node.n, 'giove' )
+		tobe_string( node.v, 'beta y' )
+
+		var n1 = node.children[0]
+		tobe_number( n1.r, 22 )
+		tobe_number( n1.c, 9 )
+		tobe_string( n1.n, 'giove' )
+		tobe_string( n1.v, 'sigma t' )
+		_ done()

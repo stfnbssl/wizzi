@@ -1,0 +1,148 @@
+﻿$group
+
+	#
+		# Async load a wizzi magical tree
+		#
+		# params
+		#  string ittfDocumentUri
+		#  { mTreeBuildUpContext
+		#  callback
+		#
+	m loadMTree
+		string ittfDocumentUri
+		{ mTreeBuildUpContext
+		callback
+		+
+        try
+            _ this.__loadMTree
+                @ ittfDocumentUri
+                _ this.createLoadContext
+                    {
+                        @ mTreeBuildUpContext mTreeBuildUpContext
+                @ callback
+        catch ex
+            r_cb_wz_err( WizziFactoryError, loadMTree, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfDocumentUri ittfDocumentUri
+	+
+	m loadMTreeFromText
+		string ittfContent
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeFromText', ittfContent, mTreeBuildUpContext, callback
+		_ this.createSingleTextSourceFactory
+			@ ittfContent
+			@ 'ittf'
+			{
+			f_cb( result )
+				_ result.wizziFactory.loadMTree
+					@ result.ittfDocumentUri
+					@ mTreeBuildUpContext
+					@ callback
+	+
+	m loadMTreeFromPacki
+        string ittfDocumentUri
+		{ packiFiles
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+		+
+		_ this.createJsonFactoryAndJsonFs
+			@ packiFiles
+			{
+			f_cb( result )
+				_ result.wf.loadMTree
+					@ packi.ensurePackiFilePrefix(ittfDocumentUri)
+					@ mTreeBuildUpContext
+					@ callback
+	+
+	#
+		# Async load the front matter of an ITTF Document
+		#
+		# params
+		#  string ittfDocumentUri
+		#  callback
+		#
+	m loadMTreeFrontMatter
+		string ittfDocumentUri
+		callback
+		+
+		_ this.__loadMTreeFrontMatter
+			@ ittfDocumentUri
+			_ this.createLoadContext
+				{
+			@ callback
+
+	#
+		# Async load a raw ITTF Document
+		#
+		# params
+		#  string ittfDocumentUri
+		#  callback
+		#
+	m loadMTreeRaw
+		string ittfDocumentUri
+		callback
+		+
+		_ this.__loadMTreeRaw
+			@ ittfDocumentUri
+			_ this.createLoadContext
+				{
+			@ callback
+
+
+	#
+		# Async load the mTree debug info of an ITTF Document
+		#
+		# params
+		#  string ittfDocumentUri
+		#  callback
+		#
+	m loadMTreeBuildUpScript
+		string ittfDocumentUri
+		{ mTreeBuildUpContext
+		callback
+		+
+		_ this.__loadMTreeBuildUpScript
+			@ ittfDocumentUri
+			_ this.createLoadContext
+				{
+					@ mTreeBuildUpContext mTreeBuildUpContext
+			@ callback
+
+	m loadMTreeBuildUpScriptFromText
+		string ittfContent
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeBuildUpScriptFromText', ittfContent, mTreeBuildUpContext, callback
+		_ this.createSingleTextSourceFactory
+			@ ittfContent
+			@ 'ittf'
+			{
+			f_cb( result )
+				_ result.wizziFactory.loadMTreeBuildUpScript
+					@ result.ittfDocumentUri
+					@ mTreeBuildUpContext
+					@ callback
+
+	m loadMTreeBuildUpScriptFromPacki
+        string ittfDocumentUri
+		{ packiFiles
+		{ mTreeBuildUpContext
+		callback
+		+
+		# loog 'wizzi.wizziFactory.loadMTreeBuildUpScriptFromPacki', ittfDocumentUri, packiFiles, mTreeBuildUpContext
+		+
+		_ this.createJsonFactoryAndJsonFs
+			@ packiFiles
+			{
+			f_cb( result )
+				_ result.wf.loadMTreeBuildUpScript
+					@ packi.ensurePackiFilePrefix(ittfDocumentUri)
+					@ mTreeBuildUpContext
+					@ callback

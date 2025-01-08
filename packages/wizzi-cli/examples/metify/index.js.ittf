@@ -1,0 +1,22 @@
+module
+	kind es6
+
+    const path = require('path')
+    var metify = require('../../src/cmds/metify')
+
+    var sourceFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.documents/.wizzi-override/ittf/documentsPdf/ittfDocumentTemplates/.wizzi'
+    var destFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.documents/.wizzi-override/ittf/documentsPdf/ittfDocumentTemplates/.wizzi/metified'
+    _ metify
+        {
+            @ s sourceFolder
+            @ d
+                _ path.join
+                    @ __dirname
+                    @ 'output'
+                    @ 'express_wizzi.ittf.ittf'
+
+    _ metify
+        {
+            @ s sourceFolder
+            @ d destFolder
+            @ c true

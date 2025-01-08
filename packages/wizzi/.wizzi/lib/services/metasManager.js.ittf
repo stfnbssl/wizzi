@@ -1,0 +1,74 @@
+module wizzi@${wzCtx.version}.metasManager
+	kind es6
+
+	const path = require('path')
+	const fs = require('fs')
+	const _ = require('lodash')
+	const log = require('../util/log')(module)
+	$$ const verify = require('@wizzi/utils').verify
+	const file = require('@wizzi/utils').file
+    const vfile = require('@wizzi/utils').vfile
+	const fail = require('@wizzi/utils').fail
+    var JsonComponents = require('@wizzi/repo').JsonComponents
+    const wizziFactory = require('./wizziFactory')
+    const inmemoryMetaPlugin = require('./inmemoryMetaPlugin')
+	const errors = require('../errors')
+    const constants = require('../constants')
+    const packiUtils = require('./packiUtils')
+    const validation = require('./validation')
+    const existsSync = fs.existsSync || path.existsSync
+    const realpathSync = fs.realpathSync
+    const exists = fs.exists || path.exists
+    const realpath = fs.realpath
+    const stringify = require('json-stringify-safe')
+    +
+    const mdDisplayName = "wizzi.metasManager"
+    +
+    const 
+        {
+            @ packiFilePrefix
+            @ packiFilePrefixExtract
+            @ metaProductionTempFolder
+            @ metaProductionWizziFolder
+        = constants
+    +
+	class MetasManager
+		
+		ctor
+			set this.__type = 'MetasManager'
+            set this.__version = '${wzCtx.version}'
+			set this.packagePathCache = {}
+			set this.metaPlugins = []
+            set this.providedProductions = []
+            set this.globalContext = {}
+
+        $include metasManager/initialize
+        $include metasManager/register
+        $include metasManager/meta-parameters-starter
+        $include metasManager/meta-production-starter
+        $include metasManager/meta-production
+        $include metasManager/getProvides
+        $include metasManager/createJsonWizziFactoryAndJsonFs
+
+	set module.exports
+		{
+			@ createManager
+				function
+					param options
+					param callback
+					$$ VIA loog 'wizzi.metasManager.createManager.options', options
+					var mm
+						new MetasManager
+					_ mm.initialize
+						@ options
+						@ callback
+
+    function dumpStringified
+        param message
+        param value
+        const dump
+            _ stringify
+                @ value
+                @ null
+                @ 2
+        log message, dump

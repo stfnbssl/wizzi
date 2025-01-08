@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/lib/artifacts/tfolder/xml-dump-el-close.js

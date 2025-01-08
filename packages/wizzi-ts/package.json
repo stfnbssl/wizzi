@@ -1,0 +1,26 @@
+{
+  "name": "wizzi-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0",
+    "js-yaml": "^4.1.0",
+    "json-diff": "^1.0.6",
+    "rimraf": "^5.0.5",
+    "stringify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/json-diff": "^1.0.3",
+    "@types/node": "^20.11.22",
+    "typescript": "^5.3.3"
+  }
+}

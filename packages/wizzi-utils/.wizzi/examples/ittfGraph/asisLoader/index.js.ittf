@@ -1,0 +1,96 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'asIsLoader_Step_1',
+            title: 'asIsLoader - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        _ fs.vfile
+            f_cb_test( file )
+                info 'example.asIsLoader file', file
+                _ step_1
+                    @ file
+            
+        function step_1
+            param file
+            _ ittfGraph.createAsIsLoaderFromString
+                [
+                    @ 'module'
+                    @ '    kind react'
+                    @ '    react Hello'
+                    @ '        state'
+                    @ '            @ name "stefi"'
+                    ._ join
+                        @ '\n'
+                {
+                    @ clean true
+                f_cb_test( tree )
+                    info 'step_1.tree', tree
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'result'
+                            @ 'basic.sample.clean.json'
+                        _ stringify
+                            @ tree
+                            @ null
+                            @ 2
+                    _ step_2
+                        @ file
+
+        function step_2
+            param file
+            _ ittfGraph.createAsIsLoaderFromString
+                [
+                    @ 'module'
+                    @ '    kind react'
+                    @ '    react Hello'
+                    @ '        state'
+                    @ '            @ name "stefi"'
+                    ._ join
+                        @ '\n'
+                {
+                    @ clean_remove true
+                f_cb_test( tree )
+                    info 'step_2.tree', tree
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'result'
+                            @ 'basic.sample.clean_remove.json'
+                        _ stringify
+                            @ tree
+                            @ null
+                            @ 2
+                    _ step_3
+                        @ file
+
+        function step_3
+            param file
+            _ ittfGraph.asIsLoader
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    $$ @ 'root.sample.ittf'
+                    @ 'basic.tests.ittf'
+                {
+                    @ clean_remove true
+                    @ file file
+                f_cb_test( tree )
+                    info 'step_3.tree', tree
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'result'
+                            @ 'basic.sample.clean_remove.json'
+                        _ stringify
+                            @ tree
+                            @ null
+                            @ 2

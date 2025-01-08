@@ -1,0 +1,94 @@
+{
+    $
+        var md = {
+            name: "ai",
+            Name: "ai",
+            description: "Artificial intelligence (AI) lab"
+        }
+
+    name "wizzi.plugin.${md.name}"
+    npnName "@wizzi/plugin.${md.name}"
+    description "Wizzi plugin for ${md.name} documents"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "docx"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "pdf"
+            "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsGit
+    $$ VIA params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziPlugin
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "${md.Name} plugin"
+        kind "WizziPlugin"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Schemas
+        {
+            name "${md.name}"
+            plugin_type "syntax_structure"
+            hasNamespaces false
+            hasTextContents false
+            multiLineCommentBegin false
+            multiLineCommentEnd false
+            hasWizzifier false
+            hasCheatsheetFolder false
+            isForBinaryFile false
+            [ includes
+            [ transformers
+            [ artifacts
+                {
+                    name "document"
+                    outmime "${md.name}"
+                    contentType "text/html"
+                    isDefault true
+                {
+                    name "crewai"
+                    outmime "${md.name}"
+                    contentType "text/python"
+                    isDefault false
+            [ fileExtensions
+                "${md.name}"
+

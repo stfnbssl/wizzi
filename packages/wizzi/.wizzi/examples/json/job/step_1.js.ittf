@@ -1,0 +1,115 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'json_job_step_1',
+            title: 'Json - job - execute',
+            folderLevel: 3
+        }
+
+    common/example/wizzi(&opt)
+
+        $append plugins
+
+        +
+        var packiFilePrefix = 'c:/basefolder/'
+        +
+        var jsContent
+            [
+                @ 'module'
+                @ '    kind es6'
+                @ '    info "Hello"'
+                ._ join
+                    @ '\n'
+        +
+        var wzjobContent
+            [
+                @ 'wzjob'
+                @ '    $'
+                @ '        var ittf_src_folder = path.join(__dirname, "src");'
+                @ '        var dest_folder = path.join(__dirname, "..", "src");'
+                @ '    line src'
+                @ '        cwd-folder $' + '{ittf_src_folder}'
+                @ '        artifact js modules'
+                @ '            src ./**/*.js.ittf'
+                @ '            schema js'
+                @ '            generator js/module'
+                @ '            extension js'
+                @ '    production'
+                @ '        dest-folder $' + '{dest_folder}'
+                @ '        line-ref src'
+                ._ join
+                    @ '\n'
+        +
+        var jsIttfUri    = packiFilePrefix + ".wizzi/src/index.js.ittf"
+        var wzjobIttfUri = packiFilePrefix + ".wizzi/generate.wzjob.ittf"
+        var documents
+            [
+                {
+                    @ path jsIttfUri
+                    @ content jsContent
+                {
+                    @ path wzjobIttfUri
+                    @ content wzjobContent
+
+        +
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ documents
+            f_cb_test( jsonFs )
+                var options
+                    {
+                        @ jsonFs jsonFs
+                        { plugins
+                            [ items
+                                @ 'wizzi-js'
+                                @ 'wizzi-web'
+                                @ 'wizzi-core'
+                        { globalContext
+                _ wizziIndex.jsonFactory
+                    @ options
+                    f_cb_test(wf)
+                        _ wf.executeJob
+                            {
+                                @ name 'ExampleJob'
+                                @ path wzjobIttfUri
+                                { productionOptions
+                                @ globalContext options.globalContext
+                            =>
+                                param err
+                                param result
+                                if err
+                                    throw (err)
+                                _ printObject
+                                    @ 'job.result'
+                                    @ result
+                                _ printObject
+                                    @ 'job.jsonFs'
+                                    @ jsonFs
+                                # loog 'job.result', Object.keys(result)
+                                # loog 'job.jsonFs', Object.keys(jsonFs)
+                                var files = {}
+                                _ jsonFs.toFiles
+                                    {
+                                        @ removeRoot packiFilePrefix
+                                    =>
+                                        param err
+                                        param result
+                                        if err
+                                            throw (err)
+                                        _ result.forEach
+                                            =>
+                                                param value
+                                                if value.relPath.endsWith('.ittf') == false
+                                                    set files[value.relPath] =
+                                                        {
+                                                            @ type 'CODE'
+                                                            @ contents value.content
+                                                            @ generated true
+                                _ printObject
+                                    @ 'generated.files'
+                                    @ files
+
+

@@ -1,0 +1,82 @@
+$group
+
+	#
+		# PARAMS
+		# { request
+		# 	string storeKind
+		# 		default filesystem
+		# 	{ configOptions
+		# 	{ wfschema
+		# 		string name
+		# 		string ittfDocumentUri
+		# 		string outputPackageFolder
+
+	set md.generateWizziModelDom
+        function 
+			param request
+            param callback
+			+
+			check_cb( callback, generateWizziModelDom )
+			check_cb_object( request, generateWizziModelDom )
+			check_cb_object( request.configOptions, generateWizziModelDom )
+			check_cb_object( request.wfschema, generateWizziModelDom )
+			# TODO implement jsWizzi : _.toIdentifier(varName)
+			# TODO check_cb_not_empty( request.wfschema.name, generateWizziModelDom )
+			# TODO check_cb_not_empty( request.wfschema.ittfDocumentUri, generateWizziModelDom )
+			# TODO check_cb_not_empty( request.wfschema.outputPackageFolder, generateWizziModelDom )
+			+
+			var storeKind = request.storeKind || 'filesystem'
+			+
+			set request.wfschema.mTreeBuildUpContext = Object.assign({}, request.wfschema.mTreeBuildUpContext)
+			set request.globalContext = Object.assign({}, request.globalContext)
+			+
+			info 'wizzi.generateWizziModelDom'
+			info '- storeKind', storeKind
+			info '- configOptions', request.configOptions
+			info '- wfschema.name', request.wfschema.name
+			info '- wfschema.ittfDocumentUri', request.wfschema.ittfDocumentUri
+			info '- wfschema.outputPackageFolder', request.wfschema.outputPackageFolder
+			+
+			var repoUri = request.configOptions.repoUri
+			var repoBaseFolder = request.configOptions.repoBaseFolder
+			+
+			var plugins 
+				[
+			if request.configOptions.plugins
+				foreach item in request.configOptions.plugins
+					if plugins.indexOf(item) < 0
+						_ plugins.push(item)
+            else
+                _ plugins.push('wizzi-core')
+			info '- plugins', plugins
+			for var k in request.wfschema.mTreeBuildUpContext
+				info '- wfschemaContext property', k
+			for var k in request.globalContext
+				info '- globalContext property', k
+			+
+			_ wizziFactory.createFactory
+				{
+					@ repo
+						{
+							@ storeKind storeKind
+					@ plugins
+						{
+							@ items plugins
+							@ pluginsBaseFolder request.configOptions.pluginsBaseFolder || process.cwd()
+					@ globalContext request.globalContext
+				f_cb( wizziFactory )
+					# Now we can generate the wizzi model types
+					# They will be written in the folder passed as second parameter.
+					info chalk.yellow('STARTING WIZZI MODEL TYPES GENERATION FOR SCHEMA ' + request.wfschema.name)
+					_ wizziFactory.generateModelDoms
+						@ request.wfschema.ittfDocumentUri
+						@ request.wfschema.outputPackageFolder
+						@ request.wfschema.name
+						@ request.wfschema.mTreeBuildUpContext
+						{
+							@ legacyVersion request.configOptions.legacyVersion
+						f_cb( result )
+							info chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + request.wfschema.name)
+                            r_cb( request.wfschema.name )
+
+	

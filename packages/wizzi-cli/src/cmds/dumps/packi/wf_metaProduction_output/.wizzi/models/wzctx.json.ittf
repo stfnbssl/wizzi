@@ -1,0 +1,45 @@
+{
+    name "wizzi.plugin.ai"
+    npmName ""
+    pluginBasename ""
+    version "0.0.1"
+    description "Wizzi plugin for ai documents"
+    main "index.js"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { github
+        userid "stfnbssl"
+    { license
+        type "MIT"
+        url "TODO"
+        copy "copy 2023"
+    { Build
+        isWizziPlugin true
+        useWizziV08 true
+        { wizziV08
+        { utils
+            useStringifySafe true
+            useObjectInspect true
+    [ Schemas
+        {
+            name "ai"
+            title "ai wizzi schema"
+            builtin false
+            [ modelTransformers
+            [ artifactGenerators
+                {
+                    name "document"
+                    outmime "ai"
+                    contentType "text/html"
+                    isDefault true
+                {
+                    name "crewai"
+                    outmime "ai"
+                    contentType "text/python"
+                    isDefault false
+            defaultArtifact "document"
+            [ wizzifiers
+            [ fileExtensions
+                "ai"
+            [ includes

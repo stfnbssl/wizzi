@@ -1,0 +1,55 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'glob_Step_1',
+            title: 'glob - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append imports
+            var fs = require('../../lib/fSystem/index')
+            var glob = fs.glob
+            var file = fs.vfile()
+
+        _ file.write
+            _ path.join
+                @ __dirname 
+                @ 'ittf'
+                @ 'globs2'
+                @ 'globbed_1.ittf'
+            @ 'globbed 1'
+        _ file.write
+            _ path.join
+                @ __dirname 
+                @ 'ittf'
+                @ 'globs2'
+                @ 'globbed_2.ittf'
+            @ 'globbed 2'
+            
+        _ glob
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'globs2'
+                @ '**/*.ittf'
+            @ file
+            f_cb_test( result )
+                info 'result', result
+
+        var result
+            _ glob
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'globs2'
+                    @ '**/*.ittf'
+                @ file
+                {
+                    @ sync true
+        info 'result', result

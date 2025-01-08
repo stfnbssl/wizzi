@@ -1,0 +1,11 @@
+﻿$group
+	br
+    br
+    h2 Wizzi
+	br
+	p One machinery, many productions.
+	br
+    br
+	p
+		a Project page
+			href https://stfnbssl.github.io/wizzi

@@ -1,0 +1,29 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'encdec_Step_1',
+            title: 'encdec - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var text = 'alba chiara'
+
+        var hash = encdec.encrypt(text)
+        info 'encdec ', text, '=', encdec.decrypt(hash), hash
+
+        set hash = encdec.encrypt(text)
+        info 'encdec ', text, '=', encdec.decrypt(hash), hash
+
+        set hash = encdec.encryptSimple(text)
+        info 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
+
+        set hash = encdec.encryptSimple(text)
+        info 'encdecSimple ', text, '=', encdec.decryptSimple(hash), hash
+
+

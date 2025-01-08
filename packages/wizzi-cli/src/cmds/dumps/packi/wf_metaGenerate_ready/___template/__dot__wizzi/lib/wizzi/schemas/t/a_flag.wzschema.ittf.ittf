@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/lib/wizzi/schemas/tfolderwz/a_flag.wzschema

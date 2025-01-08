@@ -1,0 +1,3 @@
+﻿tau ${id}
+    $params id, name
+    boss ${name}

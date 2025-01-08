@@ -1,0 +1,280 @@
+﻿module wizzi.productionManager
+	kind jsfile
+
+	var path = require('path')
+	var util = require('util')
+	var assert = require('assert')
+	var async = require('async')
+	var verify = require('@wizzi/utils').verify
+	var file = require('@wizzi/utils').file
+	var fail = require('@wizzi/utils').fail
+	var GenContext = require('./artifact/genContext')
+	var StringWriter = require('../util/stringWriter')
+	var log = require('../util/log')(module)
+	var options = require('./options')
+	var ProductionContext = require("./context").ProductionContext
+	var GlobalModelInfo = require('../globalModel/globalModelInfo').GlobalModelInfo
+    var ProductionStep = require('./step').ProductionStep
+	var Runner = require('./runner').Runner
+    var PreLoader = require('./preLoader').PreLoader
+	var WzjobLoader = require('./wzjob/wzjobLoader').WzjobLoader
+	var AsyncRecurseWzjobLoad = require('./wzjob/wzjobLoader').AsyncRecurseWzjobLoad
+	var ArtifactPersister = require('./persister').ArtifactPersister
+
+	var thisWizziPackage = require('../../index')
+	# var legacy = require('../../legacy')
+	# var Logger = require('../services/logger')
+	#
+		# The wizzi.productionManager is the orchestrator of multi-part productions.
+		# It executes `wzjob` wizzi models or production steps built programmaticaly.
+	#
+		#
+		# The 'meat' of a production is the execution of a `wizzi/production/ProductionStep` instance
+		# performed by an instance of a `wizzi/production/Runner`.
+		# `wizzi/production/ProductionStep`(s) are declared to the `wizzi/production/ProductionManager`
+		# in these ways:
+		# . adding a request for loading a `wzjob` wizzi model. 
+		# . adding a `wizzi/production/ProductionStep` created programmaticaly.
+		# When the 'run' method is called the production manager:
+		# 1. loads the requested wzjobModels.
+		#    A wzjobModel can contain ProductionStepConfigs(s) and others `wzjob` requests.
+		#    Every `wzjob` request is loaded until we have ProductionStepConfig(s) only.
+		# 2  ProductionStepConfig(s) are transformed in instances of `wizzi/production/ProductionStep(s)
+		# 3  A `wizzi/production/Runner` is instantiated and asynchronously executed for every
+		#    `wizzi/production/ProductionStep`.
+		#
+		# addProductionStepRequest(productionStepConfig|productionStep)
+		# addWzjobRequest(wzJobConfig)
+		# getLoadModel(schemaName)
+		# getWizziSchemaObject(schemaName)
+		# getModelTransformer(transName)
+		# getArtifactGenerator(artifactName)
+		# run:AsyncMethod
+		# persistToFile:AsyncMethod
+		#
+		#
+
+	class ProductionManager
+		#
+			# CTOR_PARAMS
+			# { wizziFactory
+			# { options
+			#   boolean verbose
+			#   boolean trace
+			#   string basedir // uri
+			#   { dumps
+			#     string dumpsBaseFolder
+			# 	  { mTreeBuildUpScript
+			#       boolean dump
+			#       string dumpsBaseFolder
+		ctor
+			{ wizziFactory
+			{ options
+			_ assert.strictEqual(wizziFactory.__type, 'WizziFactory', 'param wizziFactory must be of type WizziFactory')
+			set this.wizziFactory = wizziFactory
+			set this.options = options
+			set this.globalModelInfos = []
+            set this.productionSteps = []
+			set this.productionStepsFromWzJob = []
+			set this.jobRequests = []
+			set this.productionContext = new ProductionContext(options)
+			set this.wzjobLoadModel = null
+			
+			_ log.setLevel(options.verbose || 0)
+			
+			set this.___state
+				{
+					@ models 
+						{
+					@ pman this
+					@ pcx this.productionContext
+
+			# set this.logger = new Logger()
+			set this.productionName = 'production'
+
+		#
+			# Add a global model config from a configuration object
+			# declared in a "model" element of a "wzjob" wizzi model.
+			# It may also be built programmatically.
+			#
+			# params
+			#   { globalModelInfoConfig
+		m addGlobalModelRequest
+			{ globalModelInfoConfig
+			if GlobalModelInfo.isGlobalModelConfig(globalModelInfoConfig)
+				var globalModelInfo = new GlobalModelInfo(globalModelInfoConfig)
+				_ globalModelInfo.initialize(this)
+				_ this.globalModelInfos.push(globalModelInfo)
+			else
+				throw new Error("wizzi.production.productionManager.addGlobalModelRequest. The 'globalModelInfoConfig' parameter is not a valid global model config: " + util.inspect(globalModelInfoConfig))
+		#
+			# Add a production step config/instance to be run by a Runner instance.
+			# The productionStepConfig parameter can be
+			# . A production step config declared in a "artifact" element of a "wzjob" wizzi model.
+			# . A production step config instance created programmatically.
+			# . A productionStep instance.
+		m addProductionStepRequest
+			{ productionStepConfig
+			if ProductionStep.isProductionConfig(productionStepConfig)
+				var productionStep = new ProductionStep(productionStepConfig)
+				_ productionStep.initialize(this)
+				_ this.productionSteps.push(productionStep)
+			elif ProductionStep.isProductionInstance(productionStepConfig)
+				_ productionStep.initialize(this)
+				_ this.productionSteps.push(productionStepConfig)
+			else
+				throw new Error('ProductionManager.addProductionStepRequest. The parameter `productionStepConfig` is not a production step config: ' + util.inspect(productionStepConfig))
+
+		$*
+		#
+			# Add a production step from a production step configuration object
+			# declared in an "artifact" element of a "wzjob" wizzi model.
+			# It may also be built programmatically.
+			#
+			# params
+			#   { productionStepConfig
+		m addProductionStepRequest_stop_via
+			{ productionStepConfig
+			if ProductionStep.isProductionConfig(productionStepConfig)
+				var productionStep = new ProductionStep(productionStepConfig)
+				_ productionStep.initialize(this)
+				_ this.productionSteps.push(productionStep)
+			else
+				throw new Error("wizzi.production.productionManager.addProductionStepRequest. The 'productionStepConfig' parameter is not a valid production step config: " + util.inspect(productionStepConfig))
+		*$
+
+		$*
+		#
+			# Add a WzJob request
+			# 23/8/2018, the wzJobConfig.options parameter was optional, it seems it is not
+			# called by wizzi.executeJob
+		m addWzJob
+			{ wzJobConfig
+				{ options
+					{ wzjob
+						string ittfDocumentUri
+			set wzJobConfig.__pman = this
+			set wzJobConfig.options
+				_ Object.assign
+					{
+					@ this.options
+					@ wzJobConfig.options || {}
+			_ this.jobRequests.push(wzJobConfig)
+		*$
+
+		#
+			# Add a `wzjob` request
+			# Called by wizzi.executeWizziJob or wizziFactory.executeJob
+			# params
+			#   { jobRequest
+			#     { wzjob
+			#       string ittfDocumentUri
+		m addWzjobRequest
+			{ jobRequest
+				{ wzjob
+					string ittfDocumentUri
+				{ options
+					optional
+			# loog 'wizzi.productionManager.addWzjobRequest.jobRequest', jobRequest
+			set jobRequest.__pman = this
+			set jobRequest.options
+				_ Object.assign
+					{
+					@ this.options
+					@ jobRequest.options || {}
+			_ this.jobRequests.push(jobRequest)
+
+		m initialize
+			callback
+			
+			_ async.mapSeries
+				@ this.jobRequests
+				@ AsyncInitializeJobRequests.run
+				a_cb( notUsed )
+                    _ this.preLoad
+                        @ callback
+
+		m preLoad
+			callback
+			
+            _ async.mapSeries
+				@ this.globalModelInfos
+				@ AsyncGlobalModelPreLoader.run
+				a_cb( notUsed )
+                    _ async.mapSeries
+                        @ this.productionSteps
+                        @ AsyncArtifactCollectionPreLoader.run
+                        a_cb( notUsed )
+                            _ callback(null)
+
+		m run
+			callback
+			var self = this
+			_ this.initialize
+				f_cb()
+					# run production step requests
+					# loog 'wizzi.productionManager.self.productionSteps.length', self.productionSteps.length
+					var checkLoop = 0
+					function doRun
+						_ async.mapSeries
+							@ self.productionSteps
+							@ AsyncRunner.run
+							function
+								param err
+								param result
+								if err
+									return callback(err);
+								set self.productionSteps = result
+								_ process.nextTick
+									=> 
+										if self.productionContext.hasNewRunningContextValues() && checkLoop < 20
+											set checkLoop++
+											info 'Running context values have been changed. Rerunning production steps. Times', checkLoop
+											_ self.productionContext.acceptNewRunningContextValues
+											_ doRun
+										else
+											_ callback(null, result)
+					_ doRun
+
+		m terminate
+			if this.wizziFactory
+				_ this.wizziFactory.terminate
+
+		m persistToFile
+			callback
+
+			# loog 'ProductionManager.persistToFile.this.productionSteps.length', this.productionSteps.length
+			
+			var self = this
+			_ async.mapSeries
+				@ this.productionSteps
+				@ AsyncPersisterToFile.run
+				function
+					param err
+					param result
+					# loog 'persistToFile err, result', err, result
+					if err
+						return callback(err)
+					# loog 'ProductionManager.persistToFile.persisted artifacts', util.inspect(result, { depth: 1 })
+					foreach ps in self.productionSteps
+						_ ps.terminate()
+					_ callback(null, result)
+
+		m relPath
+			param filepath
+			return filepath.substr(this.options.basedir.length + 1)
+
+		$include manager/factoryServices
+		$include manager/state
+		$include manager/generations
+
+	manager/async_initialize_jobRequests()
+	$include manager/async_globalModelPreloader
+    $include manager/async_artifactCollectionPreloader
+    $include manager/async_runner
+	$include manager/async_persister
+
+	$$ generated by default
+    $$ f_error( wizzi.production.productionManager )
+
+	set module.exports = ProductionManager

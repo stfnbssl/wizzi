@@ -1,0 +1,22 @@
+wzjob first
+
+    $
+        var jobCtx = {
+            ittf_src_folder: path.join(__dirname, 'src'),
+            dest_folder: path.join(__dirname, '..'),
+        }
+
+	line ittf-src
+        cwd-folder ${jobCtx.ittf_src_folder}
+        dest-folder ${jobCtx.dest_folder}/src
+
+        artifact any_html
+            src ./**/*.html.ittf
+            schema html
+            generator html/document
+            extension html
+
+	production
+		dest-folder ${jobCtx.dest_folder}
+		line-ref ittf-src
+

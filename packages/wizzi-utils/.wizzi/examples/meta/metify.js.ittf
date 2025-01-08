@@ -1,0 +1,43 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'meta_metify',
+            title: 'meta - metify',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            const folderPath
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scanMeta'
+            const rootFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scanMeta'
+            const destFolder
+                _ path.join
+                    @ __dirname
+                    @ 'outputs'
+                    @ 'metify'
+
+            const metaProductionName = 'baxDemo'
+
+            _ meta.metify
+                @ folderPath
+                @ rootFolder
+                @ metaProductionName
+                {
+                    @ destFolder destFolder
+                    @ depth 99
+                f_cb_test( result )
+                    log 'Done! dest folder:', destFolder, 'metaProductionName', metaProductionName
+

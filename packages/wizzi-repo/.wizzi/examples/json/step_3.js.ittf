@@ -1,0 +1,39 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 3,
+            name: 'Json_Step_3',
+            title: 'Json - step - 3 - Document operations',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+
+            function dump
+                param jsonFs
+                _ printValue
+                    @ 'jsonFs.items'
+                    @ jsonFs.items
+
+                _ printValue
+                    @ 'jsonFs.documents'
+                    @ jsonFs.documents    
+
+
+        _ heading1('start')
+
+        var jsonFs = new json.JsonFs()
+        var doc = new json.DocumentManager(jsonFs)
+
+        $include folder_data
+
+        $include document_operations
+
+        function terminate
+            _ dump
+                @ jsonFs

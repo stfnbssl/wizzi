@@ -1,0 +1,37 @@
+module 
+    kind jsfile
+
+    var file = require('./file')
+    var vfile = require('./vfile')
+    var uriParser = require('./uriParser')
+    var glob = require('./glob/index')
+    var fsUtils = require('./utils')
+
+	var md
+        set module.exports
+            { 
+
+    set md.file = file
+    set md.vfile = vfile
+    set md.uriParser = uriParser
+    set md.glob = glob
+    set md.fileInfoByPath = fsUtils.fileInfoByPath    
+
+	set md.fsFolderToPackiFiles
+		function 
+			param folderPath
+			param callback
+			const fsFile = vfile()
+			_ fsFile.getFiles
+				@ folderPath
+				{
+					@ deep true
+					@ documentContent true
+				f_cb( files )
+					const packiFiles = {}
+					foreach file in files
+						set packiFiles[file.relPath]
+							{
+								@ type 'CODE'
+								@ contents file.content
+					r_cb( packiFiles )    

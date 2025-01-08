@@ -1,0 +1,43 @@
+﻿module
+	kind jsfile
+
+	import path
+	var uriParser = require('../../lib/fSystem/uriParser')
+
+	_ parse
+		@ '\\tmp\\stefi\\wizzi\\index.js.ittf'
+	_ parse
+		@ '/tmp/stefi/wizzi/index.js.ittf'
+
+	_ parse
+		@ 'c:\\stefi\\wizzi\\index.js.ittf'
+	_ parse
+		@ 'db:\\stefi\\wizzi\\index.js.ittf'
+	_ parse
+		@ 'ls:\\stefi\\wizzi\\index.js.ittf'
+
+	_ parse
+		@ 'c:/stefi/wizzi/index.js.ittf'
+	_ parse
+		@ 'db:/stefi/wizzi/index.js.ittf'
+	_ parse
+		@ 'ls:/stefi/wizzi/index.js.ittf'
+
+	_ parse
+		@ 'c://stefi/wizzi/index.js.ittf'
+	_ parse
+		@ 'db://stefi/wizzi/index.js.ittf'
+	_ parse
+		@ 'ls://stefi/wizzi/index.js.ittf'
+	# TODO error not managed:
+    _ parse
+		@ './storybook'
+    _ parse
+        @ '/home/runner/work/wizzi-app/wizzi-app/Application/src/views/error.html.ittf'
+
+	function parse
+		param uri
+		var parsed
+			_ uriParser
+				@ uri
+		info uri, '\n', path.dirname(uri), '\n', JSON.stringify(parsed, null, 2)

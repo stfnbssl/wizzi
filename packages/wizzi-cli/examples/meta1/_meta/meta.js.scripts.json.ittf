@@ -1,0 +1,61 @@
+{
+    name "wizzi.scripts"
+    npnName "@wizzi/scripts"
+    description "Scripts manager for the Wizzi factory"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "docx"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "pandoc"
+            "pdf"
+            "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCLI
+    params/use( jsCommons
+    params/use( wizziFactory
+        [ plugins
+            "ittf"
+            "js"
+            "ts"
+            "json"
+        pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"        
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$

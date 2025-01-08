@@ -1,0 +1,37 @@
+﻿module
+	kind jsfile
+
+	import path
+	import util
+	import async
+	import chalk
+	var verify = require('@wizzi/utils').verify
+	var log = require('../../util/log')(module)
+
+	# 
+		#
+	var AsyncWizziModelDomRunner
+		{
+			@ run
+				function
+					param wmtRequest
+					param callback
+					
+					var modelInfo = wmtRequest.modelInfo
+					var productionManager
+						_ modelInfo.productionManager()
+					var wizziFactory = productionManager.wizziFactory
+
+					$$ loog"AsyncWizziModelDomRunner.run: I should run " + wmtRequest.wfschemaIttfDocumentUri
+					_ wizziFactory.generateModelDoms
+						@ wmtRequest.wfschemaIttfDocumentUri
+						@ wmtRequest.outputPackageFolder
+						@ wmtRequest.schemaName
+						{
+						f_cb( result )
+							info chalk.green('WIZZI MODEL TYPES GENERATED FOR SCHEMA ' + wmtRequest.schemaName)
+							_ callback
+								@ null
+								@ result
+
+	set module.exports = AsyncWizziModelDomRunner

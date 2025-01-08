@@ -1,0 +1,172 @@
+﻿module wizzi
+    kind jsfile
+	import util
+	import path
+	import chalk
+	import async
+    var stringify = require('json-stringify-safe')
+	+
+	var verify = require('@wizzi/utils').verify
+	var log = require('./lib/util/log')(module)
+	var acl = require('./lib/acl')
+	var ProductionManager = require('./lib/production/manager')
+	var Filesystem = require('./lib/io/filesystem')
+	var wizziFactory = require('./lib/services/wizziFactory')
+    var metasManager = require('./lib/services/metasManager')
+	var packiManager = require('./lib/services/packiManager')
+	
+	+
+	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
+	set md.file = require('@wizzi/utils').file
+	set md.verify = verify
+	set md.config = require('@wizzi/utils').config
+	set md.genContext = require('./lib/production/artifact/genContext')
+	set md.acl = acl
+	set md.productionOptions = require('./lib/production/options')
+	set md.Filesystem = Filesystem
+	set md.JsonComponents = require('@wizzi/repo').JsonComponents
+	set md.FactoryServiceContext = require('./lib/services/factoryServiceContext')
+    set md.constants = require('./lib/constants')
+	set md.errors = require('./lib/errors')
+	+
+	#
+		# params
+		#   { options
+		#     { repo
+		#       string storeKind
+		#         oneOf filesystem, mongodb, localstorage
+		#     { plugins
+		#       [ items
+		#         string pluginName
+		#       string 
+		#     { globalContext
+		#     { dumps
+		#       string dumpsBaseFolder
+		# 	    { mTreeBuildUpScript
+		#         boolean dump
+		#         string dumpsBaseFolder
+	set md.createFactory
+		function createFactory
+			{ options
+			callback
+			+
+			# check_cb( callback, createFactory )
+			# check_cb_object( options, createFactory )
+			+
+			_ wizziFactory.createFactory
+				@ options
+				@ callback
+	+
+	#
+		# params
+		#   string userid
+		#   string role
+		#   { options
+		#     { repo
+		#       string storeKind
+		#         oneOf filesystem, mongodb, localstorage
+		#     { plugins
+		#       [ items
+		#         string pluginName
+		#       string 
+		#     { globalContext
+		#     { dumps
+		#       string dumpsBaseFolder
+		# 	    { mTreeBuildUpScript
+		#         boolean dump
+		#         string dumpsBaseFolder
+	set md.createAclFactory
+		function createAclFactory
+			string userid
+			string role
+			{ options
+			callback
+			+
+			# check_cb( callback, createFactory )
+			# check_cb_object( options, createFactory )
+			+
+			_ wizziFactory.createFactory
+				@ userid
+				@ role
+				@ options
+				@ callback
+	+
+	set md.fsFactory
+		function
+			param options
+			param callback
+			+
+			if typeof(callback) === 'undefined'
+				set callback = options
+				set options = {}
+			+
+			check_cb( callback, createFactory )
+			check_cb_object( options, createFactory )
+			+
+			set options.repo
+				{
+					@ storeKind 'filesystem'
+			_ md.createFactory
+				@ options
+				@ callback
+	set md.fsFactory = md.fsFactory
+	+
+	set md.dbFactory
+		function
+			string storeUri
+			string storeBaseFolder
+			{ options
+			callback
+			+
+			# loog 'wizzi.index.dbFactory.storeUri,storeBaseFolder', storeUri, storeBaseFolder
+			+
+			set options.repo
+				{
+					@ storeKind 'mongodb'
+					@ storeUri storeUri
+					@ storeBaseFolder storeBaseFolder
+			_ md.createFactory
+				@ options
+				@ callback
+	set md.mongoFactory = md.dbFactory
+	+
+	set md.jsonFactory
+		function
+			{ options
+				{ jsonFs
+			callback
+			+
+			# loog 'wizzi.index.jsonFactory.jsonFs', options.jsonFs
+			+
+			set options.repo
+				{
+					@ storeKind 'json'
+					@ storeJsonFs options.jsonFs
+			_ md.createFactory
+				@ options
+				@ callback
+	set md.jsonFactory = md.jsonFactory
+	+
+	+
+	set md.metasManager
+		function
+			{ options
+			callback
+			_ metasManager.createManager
+				@ options
+				@ callback
+	+
+	set md.packiManager
+		function
+			{ options
+			callback
+			_ packiManager.createManager
+				@ options
+				@ callback
+    +
+	$include index/start_runnerServer
+	$include index/wizzi_job
+	$include index/wizzi_modelTypes
+	+
+	$include index/defaultFactory

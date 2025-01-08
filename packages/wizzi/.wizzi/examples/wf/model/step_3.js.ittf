@@ -1,0 +1,75 @@
+module
+	kind react
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_model_step_3',
+            title: 'JSON Wizzi factory - load and generate',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append json_wf_plugins
+            [ items
+                @ 'wizzi-js'
+                @ './wizzi-web/index'
+                @ './wizzi-core/index'
+            @ pluginsBaseFolder pluginsBaseFolder
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ createJsonWizziFactoryAndJsonFs
+            _ getPackiFiles
+            f_cb_test(wf_and_jsonFs)
+                _ wf_and_jsonFs.wf.loadModelAndGenerateArtifact
+                    @ packiFilePrefix + 'index.html.ittf'
+                    {
+                        { modelRequestContext
+                            @ friends friendsArray
+                    @ 'html/document'
+                    f_cb_test(artifactText)
+                        _ printValue
+                            @ 'artifact'
+                            @ artifactText
+                        _ printValue
+                            @ 'jsonFs'
+                            _ stringify
+                                @ wf_and_jsonFs.jsonFs
+                                @ null
+                                @ 2
+
+
+
+    function getPackiFiles
+        return
+            {
+                { ['t/lia.html.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ '$group'
+                            @ '    $params text, href'
+                            @ '    li'
+                            @ '        a ${'$'}{text}'
+                            @ '            href ${'$'}{href}'
+                            ._ join
+                                @ '\n'                                
+                { ['index.html.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ 'html'
+                            @ '    body'
+                            @ '        ul'
+                            @ '            lia${'('} stefi, www.stefi.com'
+                            @ '            lia${'('} annie, www.annie.com'
+                            @ '            ${'$'}foreach f in friends'
+                            @ '                lia${'('} ${'$'}{f}, www.${'$'}{f}.com'
+                            ._ join
+                                @ '\n'

@@ -1,0 +1,12 @@
+module 
+    kind jsfile
+
+    var wizziModelDomErrors = require('./wizziModelDomErrors')
+    var legacyErrors = require('./legacyErrors')
+    var md
+        set module.exports
+            { 
+    set md.WizziModelDOMNodeError = wizziModelDomErrors.WizziModelDOMNodeError
+    set md.NodeError = legacyErrors.NodeError
+    set md.getErrorLinesFromMTreeNode = legacyErrors.getErrorLinesFromMTreeNode
+    set md.getErrorLines = legacyErrors.getErrorLines

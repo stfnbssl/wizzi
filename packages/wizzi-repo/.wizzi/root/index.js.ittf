@@ -1,0 +1,144 @@
+﻿module wizzi-repo.index
+    kind jsfile
+	+
+	var chalk = require('chalk')
+	var vfile = require('@wizzi/utils').vfile
+    var fileInfoByPath = require('@wizzi/utils').fileInfoByPath
+	+
+	var md = module.exports = {}
+	set md.version = "${wzCtx.version}"
+	+
+	$if wzConfig_useMongo
+		var MongoDocument = require('./lib/mongodb/fs/document')
+		var MongoFsImpl = require('./lib/mongodb/mongoFsImpl')
+	$else
+		var MongoDocument = {}
+		var MongoFsImpl = {}
+	var JsonFsImpl = require('./lib/json/jsonFsimpl')
+	var IttfDocumentStore = require('./lib/repo/ittfDocumentStore') 
+	set md.ObjectId = require('./lib/utils/objectId') 
+	+
+	set md.MongoFsImpl = MongoFsImpl
+    +
+    #
+        # Filesystem virtual file service
+        # noparams
+    set md.fsfile
+        function fsfile
+            callback
+            # vfile default
+            var fsfile = vfile()
+            return
+                _ callback
+                    @ null
+                    @ fsfile
+	+
+	$include mongoDb
+	+
+	$include json
+	+
+	#
+		# params
+		#   { options
+		#     string storeKind
+		#       oneOf filesystem, mongodb, json
+		#     string storeUri
+		#       when storeKind == mongodb
+		#     string storeBaseFolder
+		#       when storeKind == mongodb
+	set md.createStoreFactory
+		function createStoreFactory
+			{ options
+				string storeKind
+					optional
+			callback
+			+
+			# loog 'wizzi-repo.index.createStoreFactory.options', options
+			+
+			var storeKind = options.storeKind || 'filesystem'
+			if checkStoreKind(storeKind) == false
+				return
+					_ callback
+						_ error
+							@ 'InvalidArgument'
+							@ 'createStoreFactory'
+							{
+								@ parameter 'storeKind'
+								@ message 'invalid storeKind: ' + storeKind + '. Received: ' + storeKind
+			+
+			if storeKind == 'mongodb'
+				if verify.isNotEmpty(options.storeUri) === false
+					r_cb_wz_err( InvalidArgument, createStoreFactory )
+						@ 'The parameter `options.storeUri` is required and must be a string. Received: ' + options.storeUri
+				if verify.isNotEmpty(options.storeBaseFolder) === false
+					r_cb_wz_err( InvalidArgument, createStoreFactory )
+						@ 'The parameter `options.storeBaseFolder` is required and must be a string. Received: ' + options.storeUri
+			elif storeKind == 'json'
+				if verify.isObject(options.storeJsonFsData) === false && verify.isObject(options.storeJsonFs) === false
+					r_cb_wz_err( InvalidArgument, createStoreFactory )
+						@ 'The parameter `options.storeJsonFsData` or `options.storeJsonFs`is required and must be an object.'
+			return
+				_ callback
+					@ null
+					_ getCreateStore
+						@ storeKind
+						@ options
+
+	function getCreateStore
+		string storeKind
+		{ options
+		return
+			function createStore
+				param callback
+				var store
+					new IttfDocumentStore()
+				_ store.init
+					{
+						@ storeKind storeKind
+						@ storeUri options.storeUri
+						@ storeBaseFolder options.storeBaseFolder
+						@ storeJsonFsData options.storeJsonFsData
+						@ storeJsonFs options.storeJsonFs
+					f_cb( notUsed )
+						return
+							_ callback
+								@ null
+								@ store
+
+	function checkStoreKind
+		param kind
+		return ['filesystem', 'mongodb', 'json'].indexOf(kind) > -1
+
+	# TODO fileService.getFilesAsync
+	set md.folderFilesInfoByPath
+		function
+			param folderPath
+			param fileService
+            param options
+            param callback
+            $$ loog 'wizzi-repo.folderFilesInfoByPath', folderPath
+            set options = options || { deep: true }
+            _ fileService.getFilesAsync
+                @ folderPath
+                @ options
+                f_cb( files )
+                    $$ loog 'wizzi-repo.folderFilesInfoByPath.result.getFilesAsync.files', files
+                    var result = []
+                    foreach f in files
+                        _ result.push
+                            _ fileInfoByPath
+                                @ f.fullPath
+                                @ folderPath
+                    r_cb( result )
+
+	set md.ittfDocumentInfoByPath
+		function
+			param filePath
+			var result = fileInfoByPath(filePath)
+			if result.isIttfDocument
+				return result
+			else
+				return 
+					{
+						@ is_error true
+						@ message 'The file is not an ittfdocument: ' + result.fullPath

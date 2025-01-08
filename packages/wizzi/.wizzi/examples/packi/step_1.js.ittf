@@ -1,0 +1,65 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'packi_step_1',
+            title: 'Packi - generate folder',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+
+        const plugins
+            {
+                [ items
+                    @ './wizzi.plugin.html/index'
+                    @ './wizzi.plugin.js/index'
+                    @ './wizzi.plugin.css/index'
+                    @ './wizzi.plugin.ittf/index'
+                    @ './wizzi.plugin.json/index'
+                @ pluginsBaseFolder pluginsBaseFolderV08
+
+        +
+        _ createPackiManager
+            =>
+                param err
+                param packiManager
+                if err
+                    error err
+                    return
+                
+                var genFolderPathFs
+                    _ path.join 
+                        @ __dirname
+                        @ 'ittf'
+                        @ 'folder1'
+
+                var friendsArray
+                    [ 
+                        @ 'arthur'
+                        @ 'mary'
+
+                _ createPackifilesFromFs
+                    @ genFolderPathFs
+                    a_cb( folder1PackiFiles )
+                        log '${opt.name}.folder1PackiFiles', folder1PackiFiles
+                        _ packiManager.generate
+                            @ folder1PackiFiles
+                            @ plugins
+                            {
+                                @ modelRequestContext
+                                    {
+                                        @ metaCtx
+                                            {
+                                                @ name "Hello"
+                                        @ friends friendsArray
+                            =>
+                                param err
+                                param result
+                                if err
+                                    error err
+                                    return
+                                info 'packiManager.generate.result', result

@@ -1,0 +1,25 @@
+﻿common/test/base_test( lorem, true )
+
+    $append imports
+        var lorem = require('../../lib/lorem/index')
+
+    + 
+    it should produce a lorem
+
+        var text1
+            _ lorem
+                {
+                    @ count 100
+        # loog 'lorem.100', text1
+
+        tobe_string_type(text1)
+        
+        var text2
+            _ lorem
+                {
+                    @ count 10
+                    @ units 'paragraphs'
+                    @ htmlTag 'p'
+        # loog 'lorem.10.paragraphs.p\n', text
+
+        tobe_string_type(text2, md)

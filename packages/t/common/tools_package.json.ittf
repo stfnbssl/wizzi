@@ -1,0 +1,58 @@
+{
+	$params pkgName, version, description, license|MIT
+
+    $include versions
+	
+	name  "${pkgName}"
+	
+    version "${version}"
+
+	description "${description}"
+    
+	author
+		{
+			name "Stefano Bassoli"
+			email "sbassoli.dev@gmail.com"
+	
+	private false
+	
+	licenses
+		[
+			$if license == 'MIT'
+			{
+				type "MIT"
+				url "https://github.com/wizzifactory/wizzi/tree/master/license.txt"
+	
+	repository
+		{
+			type "git"
+			url "https://github.com/wizzifactory/wizzi/tree/master/packages/${pkgName}"
+
+	engines
+		{
+			node ">=0.10.28"
+			npm ">=1.4.28"
+	
+	scripts
+		{
+			test "mocha tests/**/*.js --full-trace"
+            $hook scripts
+	
+	dependencies
+		{
+			async "^3.2.0"
+			chalk "^4.1.0"
+			iconv-lite "^0.6.2"
+			json-stringify-safe "^5.0.1"
+			lodash "^4.17.4"
+			$hook
+            wizzi "${versions['wizzi']}"
+            wizzi-utils "${versions['wizzi-utils']}"
+            wizzi-js "${versions['wizzi-js']}"
+	
+	peerDependencies
+		{
+			$hook peerDependencies
+	devDependencies
+		{
+			$hook devDependencies

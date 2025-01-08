@@ -1,0 +1,11 @@
+ittf
+    $
+        /*
+        (function doIt() {
+            return 5 * 3; 
+        })()
+        */
+        function dummy() { return 5 * 3; }
+        var result = dummy();
+
+    node ${result}

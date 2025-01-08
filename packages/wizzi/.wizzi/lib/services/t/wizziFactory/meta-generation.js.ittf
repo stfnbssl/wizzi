@@ -1,0 +1,193 @@
+$group
+
+	#
+		# Execute a meta generation
+        # The current instance should be a json factory
+		# return
+		# | packifiles
+		# | wzError
+		# params
+        #   string ittfMetaFilePath
+        #   { context
+        #     { modelRequestContext
+        #       { metaCtx
+		#   { options
+		#     string tempFolder
+        #     string destFolder
+        #     string copyInclude
+        #       optional
+        #       default ['*']
+        #     string copyExclude
+        #       optional
+        #       default []
+        # returns
+        #   [
+        #     string generatedFilePath
+	m metaGenerate
+		string ittfMetaFilePath
+		{ context
+		{ options
+		callback
+        +
+        var tempFolder = options.tempFolder
+        check_wz_not_empty( tempFolder, metaGenerate.options )
+        var destFolder = options.destFolder
+        check_wz_not_empty( destFolder, metaGenerate.options )
+        +
+        $$ loog myname, 'metaGenerate', 'tempFolder', tempFolder, 'destFolder', destFolder
+        +
+        if ittfMetaFilePath.toLowerCase().endsWith('.ittf.ittf') == false
+            return
+                _ callback
+                    _ error
+                        @ 'InvalidArgument'
+                        @ 'metaGenerate'
+                        {
+                            @ parameter 'ittfMetaFilePath'
+                            @ message "'ittfMetaFilePath' must have a Wizzi Schema of type 'ittf'. Received: " + ittfMetaFilePath
+        +
+        const fileService = this.fileService
+        const that = this
+        +
+        $$ loog 'metaGenerate.context',  context
+        +
+        _ this.loadModel
+            @ 'ittf'
+            @ ittfMetaFilePath
+            {
+                @ mTreeBuildUpContext context.modelRequestContext
+            a_cb( metaFileModel )
+                $$ loog "Object.keys(metaFileModel)", Object.keys(metaFileModel)
+                $$ loog "metaFileModel.children.length", metaFileModel.children.length
+                var f_count = 0
+                iife next
+                    var child = metaFileModel.children[f_count++]
+                    if !child
+                        #
+                            # The tempFolder is ready
+                            # Go with the final generation into destFolder
+                            # The current instance should be a json factory
+                        return
+                            _ that.getPackiFilesFromJsonFactory
+                                @ ''
+                                a_cb(readyPackiFiles)
+                                    if context.modelRequestContext.metaCtx.__wz_fsc
+                                        _ context.modelRequestContext.metaCtx.__wz_fsc.addDebugObject
+                                            @ 'packi'
+                                            @ 'wf_metaGenerate_ready'
+                                            @ readyPackiFiles
+                                    _ that.generateFolderArtifacts
+                                        @ tempFolder
+                                        { 
+                                            @ modelRequestContext context.modelRequestContext
+                                            @ artifactRequestContext context.artifactRequestContext || context.modelRequestContext
+                                        { 
+                                            @ deep true
+                                            @ destFolder destFolder
+                                            @ generateFragments true
+                                            @ copyInclude options.copyInclude || ['*']
+                                            @ copyExclude options.copyExclude || []
+                                            @ useMultiPartContext true
+                                        a_cb_no_err( result )
+                                            if err
+                                                error err
+                                                return 
+                                                    _ callback(err)
+                                            r_cb( result )
+                                        $$ @ callback
+
+                    $$ loog "Object.keys(child)", Object.keys(child)
+                    $$ loog 'child', child.name, child.value
+                    if child.name == '$file'
+                        try
+                            _ processIttfFile
+                                @ child
+                                @ tempFolder
+                                a_cb()
+                                    _ next
+                        catch ex
+                            r_cb_wz_err( WizziFactoryError, metaGenerate, ex )
+                                {
+                                    @ message 'Processing $file. See inner error'
+                                    { parameter
+                                        @ outputFileName child.value
+                    elif child.name == '$plain'
+                        try
+                            _ processPlainFile
+                                @ child
+                                @ tempFolder
+                                a_cb()
+                                    _ next
+                        catch ex
+                            r_cb_wz_err( WizziFactoryError, metaGenerate, ex )
+                                {
+                                    @ message 'Processing $plain. See inner error'
+                                    { parameter
+                                        @ outputFileName child.value
+                    else
+                        _ next
+
+        function processIttfFile
+            param node
+            param tempFolder
+            param callback
+            var outputPath
+                _ path.join
+                    @ tempFolder
+                    @ node.value
+            var sb = []
+            foreach child in node.children
+                _ processIttfContent
+                    @ sb
+                    @ child
+                    @ 0
+            $$ loog 'meta.processIttfFile', outputPath, sb.join('\n')
+            _ fileService.write
+                @ outputPath
+                _ sb.join
+                    @ '\n'
+                @ callback
+
+        function processIttfContent
+            param sb
+            param node
+            param indent
+            $$ loognew Array(indent).join(' ') + node.name + ' ' + node.value
+            _ sb.push
+                @ new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value)
+            foreach child in node.children
+                _ processIttfContent
+                    @ sb
+                    @ child
+                    @ indent + 4
+
+        function processPlainFile
+            param node
+            param tempFolder
+            param callback
+            var outputPath
+                _ path.join
+                    @ tempFolder
+                    @ node.value
+            $$ loog 'meta.processPlainFile', outputPath
+            if node.children.length == 1 && node.children[0].name == '$from'
+                _ fileService.read
+                    @ packiFilePrefix + node.children[0].value 
+                    a_cb( content )
+                        $$ loog 'processPlainFile.content', content
+                        _ fileService.write
+                            @ outputPath
+                            $$ @ 'Content of ' + node.value + ' from ' + node.children[0].value 
+                            @ content
+                            @ callback
+            else
+                r_cb_wz_err( WizziFactoryError, metaGenerate )
+                    {
+                        @ message 'Missing $from node processing $plain file.'
+                        { parameter
+                            @ outputFileName node.value
+
+        function decode
+            param text
+            set text = verify.replaceAll(text, "${'$'}", "$")
+            return verify.replaceAll(text, "£'('£", "(")

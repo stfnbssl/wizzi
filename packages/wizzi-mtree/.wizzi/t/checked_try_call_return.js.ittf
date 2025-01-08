@@ -1,0 +1,16 @@
+﻿$group
+	$params varName, errItem|@@null
+
+	var ${varName}
+    try
+        set ${varName}
+		    $hook
+    catch ex
+        set ex.__is_error = true
+        $if errItem != null
+            set ex.__errItem = ${errItem}
+        return ex
+	if ${varName} && ${varName}.__is_error
+        $if errItem != null
+            set ${varName}.__errItem = ${errItem}
+		return ${varName}

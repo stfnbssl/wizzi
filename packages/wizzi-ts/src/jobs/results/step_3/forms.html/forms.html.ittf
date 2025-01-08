@@ -1,0 +1,21 @@
+<!--
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.plugins\packages\wizzi.plugin.html\lib\artifacts\html\document\gen\main.js
+    package: @wizzi/plugin.html@0.8.10
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-ts\src\jobs\ittf\step_3\forms.html.ittf
+    utc time: Tue, 30 Apr 2024 07:50:28 GMT
+-->
+<!doctype html>
+<html>
+<body>
+    <h2>form1</h2>
+    <form>
+        <label for="control1">First control</label>
+        <input type="text" />
+        <br />
+        <label for="control2">Second control</label>
+        <input type="text" />
+        <br />
+    </form>
+</body>
+
+</html>

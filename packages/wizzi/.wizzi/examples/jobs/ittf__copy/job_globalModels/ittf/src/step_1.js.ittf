@@ -1,0 +1,13 @@
+﻿module
+	kind jsfile
+
+	class Speaker
+        m sayHello
+            $foreach item in members
+                info "Hello", "${item.name}"
+        m sayPostTitles
+            $foreach item in collection.posts
+                info "Title", "${item.title}"
+                info "Category", "${item.category}"
+
+

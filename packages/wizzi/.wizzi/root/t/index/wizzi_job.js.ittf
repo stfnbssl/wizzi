@@ -1,0 +1,182 @@
+$group
+
+	#
+		# params
+		#	{ request
+		#		string storeKind
+		#         default filesystem
+		#		{ config
+		#			string wfBaseFolder
+		#			string storeUri
+		#             # when storeKind == 'mongodb'
+		#			string storeBaseFolder
+		#             # when storeKind == 'mongodb'
+		#           string pluginsBaseFolder
+		#			[ plugins
+		#				string name
+		#		{ job
+		#			string name
+		#             # label for messages
+		#			string ittfDocumentUri
+		#             # `wzjob` model primary ittf document
+		#			{ productionOptions
+		#				integer indentSpaces
+		#					default 4
+		#				string basedir
+		#                 TODO explain where used
+		#				integer verbose
+		#					default 2
+		#				{ dumps
+		#					# dumps to files of transient objects for debug purposes
+		#					string dumpsBaseFolder
+		#					{ mTreeBuildUpJsWizziScript
+		#						boolean dump
+		#						string dumpsBaseFolder
+		#					{ mixedMTree
+		#						boolean dump
+		#						string dumpsBaseFolder
+		#					{ evaluatedMTree
+		#						boolean dump
+		#						string dumpsBaseFolder
+		#			{ globalContext
+		#				# Every wizzi factory loading, transformation and generation
+		#				# executed by this job
+		#				# will have the properties of this object injected in its context
+		#				# at the global level.
+    set md.executeWizziJob
+        function
+			{ request
+				{ config
+					[ plugins
+				{ job
+			callback
+			+
+			# check_cb( callback, executeWizziJob )
+			# check_cb_object( request, executeWizziJob )
+			# check_cb_object( request.config, executeWizziJob )
+			# check_cb_object( request.job, executeWizziJob )
+			+
+			var storeKind = request.storeKind || 'filesystem'
+			var jobName = request.job.name
+			+
+			info '='
+			info '======== v0.7.6.wizzi.executeWizziJob ===== Start job: ' + jobName + ' ============='
+			info '- Executor module path ', __filename
+			info '- Job source path ', request.job.ittfDocumentUri
+			info '- storeKind', storeKind
+			if request.config.wfBaseFolder
+				info '- wfBaseFolder', request.config.wfBaseFolder
+			if request.config.storeUri
+				info '- storeUri', request.config.storeUri
+			if request.config.storeBaseFolder
+				info '- storeBaseFolder', request.config.storeBaseFolder
+			+
+			var requestConfig = Object.assign({}, request.config)
+			+
+			var wfBaseFolder = requestConfig.wfBaseFolder
+			if wfBaseFolder && wfBaseFolder.length > 0
+				# FIXME property wfBaseFolder in module wizzi/config
+				#       should be part of the wizzi.wizziFactory instance.
+				#       Find where it is referenced.
+				_ md.config.set('wfBaseFolder', wfBaseFolder)
+			+
+			info '- plugins'
+			var plugins 
+				[
+			foreach item in requestConfig.plugins
+				if plugins.indexOf(item) < 0
+					_ plugins.push(item)
+					info '  ', item
+			info '- pluginsBaseFolder', requestConfig.pluginsBaseFolder || process.cwd()
+			+
+			_ wizziFactory.createFactory
+				{
+					@ repo
+						{
+							@ storeKind storeKind
+							@ storeUri requestConfig.storeUri
+							@ storeBaseFolder requestConfig.storeBaseFolder
+					@ plugins
+						{
+							@ items plugins
+							@ pluginsBaseFolder requestConfig.pluginsBaseFolder || process.cwd()
+					@ globalContext request.job.globalContext || {}
+				_ executeWizziJob_step2
+					@ request.job
+					@ callback
+
+    function executeWizziJob_step2
+		param jobRequest
+		param callback
+		return
+			f_cb( wizziFactoryInstance )
+				var jobName = jobRequest.name
+				var jobPath = jobRequest.ittfDocumentUri
+				+
+				info '='
+				info '======== v0.7.6.wizzi.executeWizziJob_step2 ===== job: ' + jobName + ' ============='
+				info '='
+				+
+				checked_call( pman
+					_ wizziFactoryInstance.createProductionManager
+						@ jobRequest.productionOptions
+						@ jobRequest.globalContext
+				+
+				checked_call( notUsed
+					_ pman.addWzjobRequest
+						{ 
+							@ wzjob
+								{ 
+									@ ittfDocumentUri jobPath
+				+
+				_ pman.run
+					function 
+						param err
+						param result
+						if err
+							error 'executeWizziJob_step2.error', err
+							set err.wizziJob = jobName
+							set err.wizziJobStep = 'Running job'
+							set err.wizziJobIttfSourceUri = jobPath
+							return
+								_ callback
+									@ err
+						success '='
+						success '======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '. Run completed'
+						success '='
+						_ pman.persistToFile
+							function 
+								param err
+								param result
+								if err
+									set err.wizziJob = jobName
+									set err.wizziJobStep = 'Persisting to file'
+									set err.wizziJobIttfSourceUri = jobPath
+									return
+										_ callback
+											@ err
+								success '='
+								success '======== v0.7.6.wizzi.executeWizziJob. Job: ' + jobName + '.  PersistToFile completed'
+								success '='
+								_ pman.terminate
+								if callback
+									_ callback(null, result)
+
+
+    set md.printWizziJobError
+        function
+			param jobName
+			param err
+			set err.WizziIndexStack = (new Error()).stack
+			error "\n"
+			error "====================================================================================================\n"
+			error "FATAL ERROR : v0.7.6.executing wizzi instance job: " + jobName
+			error "\n"
+			error "Error message:\n"
+			error err.message + "\n"
+			error "Error details:\n"
+			error err + "\n"
+			error "FATAL ERROR - END\n"
+			error "====================================================================================================\n"
+			error "\n"
+			_ process.exit(999)

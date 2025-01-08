@@ -1,0 +1,198 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 2,
+            name: 'wf_meta_step_2',
+            title: 'Meta generation - load mini example',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+
+        $append json_wf_plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        +
+        const folderTemplatesIndexPath = "folderTemplates/index.ittf.ittf"
+        +
+        _ createPackifilesFromFs
+            @ "C:/My/wizzi/stfnbssl/wizzi.cli/packages/wizzi.meta.package/.wizzi-override/ittf"
+            $*
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'meta_2'
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+            *$
+            a_cb( metaPackiFiles )
+                _ printValue
+                    @ 'metaPackiFiles 1'
+                    _ stringify
+                        @ Object.keys(metaPackiFiles)
+                        @ null
+                        @ 2
+                
+                $if true
+                    const folderTemplatesIndex
+                        [
+                            @ "template root"
+                            @ "    $"
+                            @ "        var pkgPath = ''"
+                            @ "        var metaVer = '0_0_1'"
+                    
+                    for var k in metaPackiFiles
+                        if k.startsWith("folderTemplates/")
+                            _ folderTemplatesIndex.push
+                                @ "    $include ./" + k.substring(16, k.length - 10)
+                            const newk = k.substring(0, 15) + '/t/' + k.substring(16)
+                            set metaPackiFiles[newk] = metaPackiFiles[k]
+                            delete metaPackiFiles[k]
+                        if k.startsWith("ittfDocumentTemplates/")
+                            const newk = 't/' + k.substring(22) 
+                            set metaPackiFiles[newk] = metaPackiFiles[k]
+                            delete metaPackiFiles[k]
+                    set metaPackiFiles[folderTemplatesIndexPath]
+                        {
+                            @ type "CODE"
+                            @ contents folderTemplatesIndex.join('\n')
+                    _ printValue
+                        @ 'metaPackiFiles 2'
+                        _ stringify
+                            @ Object.keys(metaPackiFiles)
+                            @ null
+                            @ 2
+                    _ printValue
+                        @ 'folderTemplates/index'
+                        _ stringify
+                            @ metaPackiFiles[folderTemplatesIndexPath]
+                            @ null
+                            @ 2
+                    _ writePackifiles
+                        _ path.join
+                            @ __dirname
+                            @ 'out_meta_2_start'
+                        @ metaPackiFiles
+                    $if true
+                        _ createJsonWizziFactoryAndJsonFs
+                            @ metaPackiFiles
+                            f_cb_test(wf_and_jsonFs)
+                                _ wf_and_jsonFs.wf.metaGenerate
+                                    @ packiFilePrefix + folderTemplatesIndexPath
+                                    {
+                                        @ modelRequestContext getMetaContext()
+                                    {
+                                        @ tempFolder packiFilePrefix + '___template'
+                                        @ destFolder packiFilePrefix + '___wizzi'
+                                    f_cb_test(jsonFs)
+                                        $if false
+                                            _ printValue
+                                                @ 'jsonFs'
+                                                _ stringify
+                                                    @ wf_and_jsonFs.jsonFs
+                                                    @ null
+                                                    @ 2
+                                        $if true
+                                            _ jsonFsToPackiFiles
+                                                @ wf_and_jsonFs.jsonFs
+                                                @ '___template'
+                                                f_cb_test(templatePackiFiles)
+                                                    _ writePackifiles
+                                                        _ path.join
+                                                            @ __dirname
+                                                            @ 'out_meta_2'
+                                                        @ templatePackiFiles
+                                                    _ printValue
+                                                        @ 'templatePackiFiles'
+                                                        _ stringify
+                                                            @ templatePackiFiles
+                                                            @ null
+                                                            @ 2
+                                                    _ jsonFsToPackiFiles
+                                                        @ wf_and_jsonFs.jsonFs
+                                                        @ '___wizzi'
+                                                        f_cb_test(wizziPackiFiles)
+                                                            _ writePackifiles
+                                                                _ path.join
+                                                                    @ __dirname
+                                                                    @ 'out_meta_2'
+                                                                @ wizziPackiFiles
+                                                            _ printValue
+                                                                @ 'wizziPackiFiles'
+                                                                _ stringify
+                                                                    @ wizziPackiFiles
+                                                                    @ null
+                                                                    @ 2
+
+
+    function getMetaContext
+        return
+            {
+                { metaCtx
+                    @ ver "0_0_1"
+                    @ name "meta_2"
+                    @ useBabel true
+                    @ useBabelrc true
+                    @ useDeploy true
+                    @ useEnv true
+                    @ useEslint true
+                    @ useGit true
+                    @ usePackage true
+                    @ usePostcss true
+                    @ usePrettier true
+                    @ useTailwind true
+                    @ useWebpack true
+                    @ version "0.0.1"
+                    { author
+                        @ name "Stefano Bassoli"
+                        @ email "stfn.bssl@gmail.com"
+                    { license
+                        @ name "MIT"
+                        @ copy "copy 2023"
+                    { github
+                        @ userid "stfnbssl"
+                    { Build
+
+    function jsonFsToPackiFiles
+        param jsonFs $$ :ref JsonFs
+        param folder
+        param callback $$ return : ref packiTypes.PackiFiles
+        const packiFiles
+            {
+        _ jsonFs.toFiles
+            {
+                @ removeRoot packiFilePrefixExtract
+            =>
+                param err
+                param files $$ :ref fSystem.FileDef[]
+                if err
+                    _ callback(err)
+                _ printValue
+                    @ 'jsonFs.toFiles'
+                    _ stringify
+                        @ files
+                        @ null
+                        @ 2
+                _ files.forEach
+                    =>
+                        param file
+                        if file.relPath.startsWith(folder + '/')
+                            set packiFiles[file.relPath] =
+                                {
+                                    @ type 'CODE'
+                                    @ contents file.content
+                                    @ generated true
+                _ callback(null, packiFiles)
+
+
+

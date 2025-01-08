@@ -1,0 +1,50 @@
+wzpackage first
+	# `fs-base-uri` is the dirname of `package-base-uri`
+	# `rel-dirname(s)` and `rel-uri(s)` of `f` and `d` nodes are relative to `fs-base-uri`
+	fs-base-uri C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf
+	package-base-uri C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/ittf
+	git-base-uri c:/blabla
+	fs-info
+	f ittf
+		id root-parent-folder
+		rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan
+		rel-uri
+		f first
+			id f_1
+			is-package-root
+			rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf
+			rel-uri first
+			f child
+				id f_2
+				rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/first
+				rel-uri first/child
+				d child.tests.ittf
+					id d_1
+					ittf <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">tests</span><span class="pp-pln"> root</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">    </span><span class="pp-mix frag-to-link-a" data-frag-id="d_2">frag-1(</span><span class="pp-mix">)</span></div>
+						fragment frag-1
+							d-id d_2
+							rel-uri first/t/frag-1.tests.ittf
+					rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/first/child
+					rel-uri first/child/child.tests.ittf
+					schema tests
+			f t
+				id f_3
+				is-t-folder
+				rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/first
+				rel-uri first/t
+				d frag-1.tests.ittf
+					id d_2
+					is-fragment
+					ittf <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">└group</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">    </span><span class="pp-tag">alfa</span><span class="pp-pln"> frag-1</span></div>
+					rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/first/t
+					rel-uri first/t/frag-1.tests.ittf
+					schema tests
+			d root.tests.ittf
+				id d_3
+				ittf <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">tests</span><span class="pp-pln"> root</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">    </span><span class="pp-mix frag-to-link-a" data-frag-id="d_2">frag-1(</span><span class="pp-mix">)</span></div>
+					fragment frag-1
+						d-id d_2
+						rel-uri first/t/frag-1.tests.ittf
+				rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/tests/ittfScan/ittf/first
+				rel-uri first/root.tests.ittf
+				schema tests

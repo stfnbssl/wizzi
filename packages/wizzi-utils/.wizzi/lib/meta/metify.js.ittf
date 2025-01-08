@@ -1,0 +1,396 @@
+module
+	kind es6
+
+    # TODO *$ -> *$ + {'$'}
+    # TODO missing $include xx_yy when $include xx_t_yy
+
+    var path = require('path')
+	var verify = require('../helpers/verify')
+	var vfile = require('../fSystem/vfile')
+    var ittfScanner = require('../ittfScanner/index')
+    var packi = require('../packi/index')
+
+	var md = module.exports = {}
+
+    # { state
+    #   number level
+    #   number depth 
+    #   [ compressFolders
+    #   string spaces
+    #   string ft_basePath
+    #          folderTemplates base bath
+    #   string id_basePath
+    #          ittfDocumentTemplates base bath
+    #   string idf_basePath
+    #          '__dot__wizzi/' destination base path
+    #   string metaProductionName
+    #   string parentBasename
+    #          is a virtual parent, tfolder(s) are skipped
+    #   boolean parentIsTFolder
+        
+
+    # { sb
+    #   [ sbFolderTemplateFile
+    #   [ sbWzCtxModelFile
+    #   string sourceBasename
+
+    set md.metify
+        function
+            param folderPath
+            param rootFolder
+            param metaProductionName
+            param options
+            param callback
+
+            const destFolder = options.destFolder
+
+            _ ittfScanner.scanFolder
+                @ folderPath
+                {
+                    @ rootFolder rootFolder
+                    @ getAll true
+                f_cb( result )
+
+                    var packiFiles = {}
+                    var sbFolderTemplateFile 
+                        [ 
+                            @ '$group'
+                            @ '    $if metaCtx.use' + verify.capitalize(metaProductionName)
+                            @ '        $include wzCtxModel'
+                    var sbWzCtxModelFile 
+                        [ 
+                            @ '$group'
+                    _ elabFsNode
+                        @ packiFiles
+                        @ result.ittfFsNode
+                        {
+                            @ folderTemplateFile sbFolderTemplateFile
+                            @ wzCtxModelFile sbWzCtxModelFile
+                            @ sourceBasename path.basename(folderPath)
+                        {
+                            @ metaProductionName metaProductionName
+                            @ ft_basePath ''
+                            @ id_basePath ''
+                            @ idf_basePath '__dot__wizzi/'
+                            @ level 0
+                            @ depth options.depth
+                            @ compressFolders options.compressFolders || []
+                            @ parentBasename ""
+                            @ parentIsTFolder false
+
+                    set packiFiles[metaProductionName+'/folderTemplates/index.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sbFolderTemplateFile.join('\n')
+                    set packiFiles[metaProductionName+'/folderTemplates/t/wzCtxModel.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sbWzCtxModelFile.join('\n')
+
+                    if verify.isNotEmpty(destFolder)
+                        _ packi.packiFilesToFs
+                            @ destFolder
+                            @ packiFiles
+                            {
+                            @ callback
+                    else
+                        r_cb()
+
+    function elabFsNode 
+        param packiFiles
+        param fsNode                   
+        param sb
+        param state
+        foreach f in fsNode.folders
+            if !state.depth || state.level < state.depth
+                _ elabFolder
+                    @ packiFiles
+                    @ f
+                    @ sb
+                    @ state
+        foreach f in fsNode.documents
+            _ elabDocument
+                @ packiFiles
+                @ f
+                @ sb
+                @ state
+    
+    function elabFolder 
+        param packiFiles
+        param fsNode                   
+        param sb
+        param state
+        # loog 'elabFolder', fsNode.basename, 'parentBasename', state.parentBasename
+        const isCompressed = state.compressFolders.indexOf(fsNode.basename) > -1
+        # loog 'isCompressed', fsNode.basename, isCompressed
+        set state.spaces
+            new Array
+                iif state.level == 0
+                    then 9
+                    else 5
+                ._ join(' ')
+        
+        if !fsNode.isTFolder
+            if !isCompressed && sb.sourceBasename != fsNode.basename
+                # active sb.folderTemplateFile is parent of fsNode
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '$include ' + buildFolderIncludePath(fsNode, state)
+                    $$ '$include ' + (state.parentBasename ? state.parentBasename + '_' + fsNode.basename : fsNode.basename)
+        else
+            # no include, because no packiFile is added (see at method bottom) 
+            # loog '--> elabFolder.isTFolder', "parent." + state.parentBasename
+            _ sb.folderTemplateFile.push
+                @ state.spaces + "$" + "$ elabFolder.parent." + state.parentBasename
+        
+        var save_level = state.level
+        var save_sb_folderTemplateFile = sb.folderTemplateFile
+        var save_state_parentBasename = state.parentBasename
+        var save_state_ft_basePath = state.ft_basePath
+        var save_state_id_basePath = state.id_basePath
+        var save_state_idf_basePath = state.idf_basePath
+        if !isCompressed && sb.sourceBasename != fsNode.basename
+            #
+            # prepare for children
+            if !fsNode.isTFolder
+                set state.ft_basePath = state.ft_basePath + '/t/' 
+            set state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/'
+            set state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/'
+            # loog 'state.ft_basePath', state.ft_basePath
+        
+        if !isCompressed && sb.sourceBasename != fsNode.basename
+            set sb.folderTemplateFile 
+                [ 
+                    @ '$group'
+            set state.level = state.level + 1
+        # loog ''
+        # loog 'level', fsNode.basename, state.level, state.depth
+        # loog '?1', state.depth, state.level
+        # loog '?2', !state.depth, state.level < state.depth
+        if !state.depth || state.level < state.depth
+            if !fsNode.isTFolder
+                if state.level > 0
+                    var save_parentBasename = state.parentBasename
+                    set state.parentBasename = fsNode.basename
+            else
+                var save_parentIsTFolder = state.parentIsTFolder
+                set state.parentIsTFolder = true
+            foreach f in fsNode.folders
+                if fsNode.isTFolder
+                    # loog '--:', f.basename
+                _ elabFolder
+                    @ packiFiles
+                    @ f
+                    @ sb
+                    @ state
+            if !fsNode.isTFolder
+                if state.level > 0
+                    set state.parentBasename = save_parentBasename
+            else
+                set state.parentIsTFolder = save_parentIsTFolder
+        
+        if fsNode.documents.length > 0
+            var itemGroups = {}
+            foreach d in fsNode.documents
+                var g = itemGroups[d.ittfDocumentGraph.name]
+                if !g
+                    set g = itemGroups[d.ittfDocumentGraph.name] = []
+                _ g.push
+                    @ d
+            _ sb.folderTemplateFile.push('')
+            $$ _ sb.folderTemplateFile.push('$' + '*')
+            for var k in itemGroups
+                var g = itemGroups[k]
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '$'
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '    var items = ['
+                foreach d in g
+                    if fsNode.isTFolder
+                        # loog 'elabFolder.t.document', basenameIttfStripped(d)
+                        _ sb.folderTemplateFile.push
+                            @ state.spaces + '        "' + basenameIttfStripped(d) + '",'
+                    else
+                        _ sb.folderTemplateFile.push
+                            @ state.spaces + '        "' + basenameIttfStripped(d) + '",'
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '    ]'
+                _ sb.folderTemplateFile.push('')
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + '$foreach item in items'
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + "    $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf'
+                # loog 'group', fsNode.basename, fsNode.isTFolder, state.parentIsTFolder, k
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + "        " + (k == '$group' ? "$" + "{'$'}{'$'}group" : k)
+                _ sb.folderTemplateFile.push
+                    @ state.spaces + "            $" + "{'$'}include " + state.metaProductionName + '/' + state.id_basePath + '$' + '{item}'
+            $$ _ sb.folderTemplateFile.push('*' + '$')
+        if fsNode.documents.length > 0
+            _ sb.folderTemplateFile.push('')
+
+        foreach d in fsNode.documents
+            _ elabDocument
+                @ packiFiles
+                @ d
+                @ sb
+                @ state
+
+        #
+        if !fsNode.isTFolder && !isCompressed && sb.sourceBasename != fsNode.basename
+            # loog 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
+            if fsNode.basename == 'meta'
+            # loog '-->', state, buildFolderTemplatesPath(fsNode, state)
+            set packiFiles[buildFolderTemplatesPath(fsNode, state)]
+                {
+                    @ type "CODE"
+                    @ contents sb.folderTemplateFile.join('\n')
+        if !fsNode.isTFolder
+            set sb.folderTemplateFile = save_sb_folderTemplateFile
+        set state.ft_basePath = save_state_ft_basePath
+        set state.id_basePath = save_state_id_basePath
+        set state.idf_basePath = save_state_idf_basePath
+        set state.level = save_level
+        set state.parentBasename = save_state_parentBasename 
+
+    function elabDocument 
+        param packiFiles
+        param fsNode
+        param sb
+        param state
+        # loog '+++++ elabDocument', fsNode.basename, state.level
+        var spacesNum = state.level == 0 ? 8 : 4
+        var spacesText
+            new Array
+                iif state.level == 0
+                    then 9
+                    else 5
+                ._ join
+                    @ ' '
+        if false $$ !fsNode.parent.isTFolder
+            _ sb.folderTemplateFile.push
+                @ spacesText + "$file " + state.idf_basePath + fsNode.basename + '.ittf'
+            _ sb.folderTemplateFile.push
+                _ documentLine
+                    @ fsNode.ittfDocumentGraph
+                    @ spacesNum + 4
+            _ sb.folderTemplateFile.push
+                _ documentLine
+                    {
+                        @ name "${'$'}{'$'}include"
+                        @ value state.metaProductionName + '/' + state.id_basePath + basenameIttfStripped(fsNode)
+                    @ spacesNum + 8
+        set sb.documentFile 
+            [
+                @ '$group'
+        set state.documentIndent = 4
+        foreach child in fsNode.ittfDocumentGraph.children
+            _ elabDocumentNode
+                @ child
+                @ sb
+                @ state
+        # loog 'elabDocument', fsNode.basename, state.parentBasename, state.parentIsTFolder
+        set packiFiles[buildIttfDocumentTemplatesPath(fsNode, state)]
+            {
+                @ type "CODE"
+                @ contents sb.documentFile.join('\n')
+
+    function elabDocumentNode
+        param fsNode
+        param sb
+        param state
+        _ sb.documentFile.push
+            _ documentLine
+                @ fsNode
+                @ state.documentIndent
+        var save_state_documentIndent = state.documentIndent
+        set state.documentIndent = state.documentIndent + 4
+        foreach child in fsNode.children
+            _ elabDocumentNode
+                @ child
+                @ sb
+                @ state
+        set state.documentIndent = save_state_documentIndent
+
+    function documentLine
+        param fsNode
+        param indent
+        return new Array(indent+1).join(' ') + 
+            \b documentLineName(fsNode) + documentLineValue(fsNode)
+
+    function fsNodeIdName
+        param fsNode
+        if fsNode.isTFolder
+            return 'tfolder'
+        else
+            return fsNode.basename
+
+    function fsNodeIdfName
+        param fsNode
+        return fsNode.basename
+
+    function basenameIttfStripped
+        param fsNode
+        if fsNode.basename && fsNode.basename.endsWith('.ittf')
+            return fsNode.basename.substr(0, fsNode.basename.length - 5)
+        else
+            return fsNode.basename
+
+    function documentLineName
+        param fsNode
+        # loog 'documentLineName', fsNode.name, fsNode.isCommand
+        if fsNode.isMixer
+            return fsNode.fragmentName + '$' + "{'('}"
+        elif fsNode.isIncluder
+            return '$' + "{'$'}include"
+        elif fsNode.isCommandCheck()
+            return '$' + "{'$'}" + (fsNode.name && fsNode.name.substring(1))
+        else
+            return fsNode.name
+
+    function documentLineValue
+        param fsNode
+        return
+            _ buildLineValue
+                @ fsNode
+
+    function buildLineValue
+        param fsNode
+        if !fsNode.getValueParsed
+            return verify.isEmpty(fsNode.value) ? '' : ' ' + fsNode.value
+        var sb = []
+        var items = fsNode.getValueParsed()
+        var sp = ' '
+        foreach item in items
+            if item.t == 0
+                _ sb.push(sp + item.v)
+                set sp = ''
+            elif item.t == 1
+                _ sb.push(sp + '$' + "{'$'}" + '{')
+                set sp = ''
+                _ sb.push(verify.htmlEscape(item.v))
+                _ sb.push('}')  
+            else
+                # item.t == 2
+                _ sb.push(sp + '$' + "{'\\\\b'}")
+                set sp = ''
+        return 
+            _ sb.join
+                @ ''
+
+    function buildFolderIncludePath
+        param fsNode
+        param state
+        return state.parentBasename ? state.parentBasename + '_' + (state.parentIsTFolder ? 't_' : '') + fsNode.basename : fsNode.basename
+
+    function buildFolderTemplatesPath
+        param fsNode
+        param state
+        return state.metaProductionName + '/folderTemplates/' + state.ft_basePath
+            \b + (state.parentBasename ? state.parentBasename + '_' + (state.parentIsTFolder ? 't_' : '') + fsNode.basename : fsNode.basename)
+            \b + '.ittf.ittf'
+
+    function buildIttfDocumentTemplatesPath
+        param fsNode
+        param state
+        return state.metaProductionName + '/ittfDocumentTemplates/' + state.id_basePath 
+            \b + fsNode.basename + '.ittf'

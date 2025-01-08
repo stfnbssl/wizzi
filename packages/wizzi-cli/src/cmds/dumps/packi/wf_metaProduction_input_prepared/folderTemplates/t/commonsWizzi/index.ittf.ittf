@@ -1,0 +1,15 @@
+$group
+    
+    $if metaCtx.useCommonsWizzi
+
+        $include __wizzi
+        $include __wizzi.config
+        $include __wizzi.config.override
+        $include __wizzi.config.lastsafe
+        $include tfolder
+
+        $if metaCtx.commonsWizzi.useWzJob
+            $include wzjob
+
+        $if metaCtx.commonsWizzi.useWzCtx
+            $include models

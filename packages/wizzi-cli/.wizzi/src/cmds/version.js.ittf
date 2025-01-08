@@ -1,0 +1,9 @@
+﻿module
+	kind es6
+	const wizzi = require('@wizzi/factory')
+
+	set module.exports
+		=>
+			param args
+			log "Wizzi CLI version:", "${wzCtx.version}"
+			log "Wizzi factory version:", wizzi.version

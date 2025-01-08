@@ -1,0 +1,7 @@
+$group
+    $params name, value
+    {
+        name "${name}"
+        value "${value}"
+        [ hints
+            $hook

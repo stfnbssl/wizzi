@@ -1,0 +1,103 @@
+module wizzi@${wzCtx.version}.factoryServiceContext
+	kind es6
+
+    const path = require('path')
+    const file = require('@wizzi/utils').file
+
+	class FactoryServiceContext
+		
+		ctor
+			set this.__type = 'FactoryServiceContext'
+            set this.__version = '${wzCtx.version}'
+			set this.debugObjects = {}
+
+        m addDebugObject
+            param kind
+            param key
+            param value
+            # loog 'wizzi.factoryServiceContext.addDebugObject.kind+key', kind, key
+            var xvalue = value
+            if kind == 'packi'
+                set xvalue = clonePackifiles(value)
+                # loog 'wizzi.factoryServiceContext.addDebugObject cloned packi', key
+            set this.debugObjects[kind+"|"+key]
+                {
+                    @ kind kind
+                    @ key key
+                    @ value xvalue
+
+        m dumpDebugObjects
+            { options
+            if options.kind == 'file'
+                _ this._dumpDebugFiles
+                    @ options
+            elif options.kind == 'packi'
+                _ this._dumpDebugPackiFiles
+                    @ options
+            else
+				_ consol.error
+					_ error
+						@ 'InvalidParameter'
+						@ 'dumpDebugObjects'
+						@ 'Missing option: kind'
+                throw new Error("InvalidParameter")
+
+        m _dumpDebugFiles
+            param options
+            if options.destFolder
+                for var k in this.debugObjects
+                    if this.debugObjects[k].kind == 'file'
+                        _ file.write
+                            _ path.join
+                                @ options.destFolder
+                                @ this.debugObjects[k].key
+                            @ this.debugObjects[k].value
+                        # loog 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'file'
+            else
+				_ consol.error
+					_ error
+						@ 'InvalidParameter'
+						@ '_dumpDebugPackiFiles'
+						@ 'Missing option: destFolder'
+                throw new Error("InvalidParameter")
+
+        m _dumpDebugPackiFiles
+            param options
+            if options.destFolder
+                for var k in this.debugObjects
+                    if this.debugObjects[k].kind == 'packi'
+                        _ writePackifiles
+                            _ path.join
+                                @ options.destFolder
+                                @ this.debugObjects[k].key
+                            @ this.debugObjects[k].value
+                        # loog 'wizzi@${wzCtx.version}.factoryServiceContext.dumpDebugObjects', 'dumped', this.debugObjects[k].key, 'packiFiles'
+            else
+				_ consol.error
+					_ error
+						@ 'InvalidParameter'
+						@ '_dumpDebugPackiFiles'
+						@ 'Missing option: destFolder'
+                throw new Error("InvalidParameter")
+
+    function clonePackifiles
+        param packiFiles
+        var ret = {}
+        for var k in packiFiles
+            set ret[k]
+                {
+                    @ type packiFiles[k].type
+                    @ contents packiFiles[k].contents
+        return ret
+    
+    function writePackifiles
+        param folderPath
+        param packiFiles
+        for var k in packiFiles
+            _ file.write
+                _ path.join
+                    @ folderPath
+                    @ k
+                @ packiFiles[k].contents
+
+    set module.exports = FactoryServiceContext

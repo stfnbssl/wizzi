@@ -1,0 +1,46 @@
+{
+    [ protocols
+        {
+            name "s7"
+            [ dataTypes
+                "BIT" 
+                "BYTE" 
+                "WORD" 
+                "DWORD" 
+                "INT" 
+                "DINT" 
+                "LINT" 
+                "REAL" 
+                "LREAL" 
+                "CHAR" 
+                "STRING" 
+                "DATE_TIME" 
+                "DATE_TIME_L" 
+                "DATE_TIME_UTC" 
+                "DATE_TIME_UTC_L" 
+        {
+            name "modbustcp"
+            [ dataTypes
+                "BOOL" 
+                "INT16" 
+                "UINT16" 
+                "INT32" 
+                "UINT32" 
+                "FLOAT" 
+                "DOUBLE" 
+        {
+            name "opcua"
+            [ dataTypes
+                "BOOL" 
+                "SBYTE" 
+                "BYTE" 
+                "INT16" 
+                "UINT16" 
+                "INT32" 
+                "UINT32" 
+                "INT64" 
+                "UINT64" 
+                "FLOAT" 
+                "DOUBLE" 
+                "STRING" 
+                "DATETIME" 

@@ -1,0 +1,6 @@
+$group
+    $if metaCtx.useBaxDemo
+        $include wzCtxModel
+        $include folder-alpha
+        $include folder-beta
+        $$ elabFolder.parent.

@@ -1,0 +1,5 @@
+﻿before-async
+
+	set jsonFs = new JsonFs()
+	set doc = new Document(jsonFs)
+	_ done()

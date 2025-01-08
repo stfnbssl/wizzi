@@ -1,0 +1,56 @@
+﻿$group
+
+    m getProvidedMetas
+        callback
+
+		# loog mdDisplayName + '.getProvidedMetas'
+		var
+			decl provides
+                {
+                    [ nodeModulePlugins
+                    [ metaCategories
+                    [ metaProductions
+                    [ metaProductionSelectors
+			
+        # loog '===================== >>>>>>>>>>>>>>>>>> this.metaPlugins.length', this.metaPlugins.length
+        const search
+            =>
+                param ndx
+                if ndx >= this.metaPlugins.length
+                    r_cb( provides )
+                var metaPlugin = this.metaPlugins[ndx]
+                _ provides.nodeModulePlugins.push
+                    {
+                        @ name metaPlugin.name
+                        @ version metaPlugin.version
+                        @ categories metaPlugin.provides.categories
+                # loog mdDisplayName + '.metaPlugin.provides', metaPlugin.provides
+                foreach mp in metaPlugin.provides.metaProductions
+                    set mp.plugin = metaPlugin.name
+                    _ provides.metaProductions.push
+                        @ mp
+                    _ provides.metaProductionSelectors.push
+                        @ 'use' + mp.name[0].toUpperCase() + mp.name.substring(1)
+                    foreach c1 in mp.categories
+                        var seen = false
+                        foreach c2 in provides.metaCategories
+                            if c1.name == c2.name
+                                _ c2.productions.push
+                                    {
+                                        @ name mp.name
+                                        @ plugin mp.plugin
+                                set seen = true
+                        if seen == false
+                            set c1.productions 
+                                [
+                                    {
+                                        @ name mp.name
+                                        @ plugin mp.plugin
+                            _ provides.metaCategories.push
+                                @ c1
+                _ search(++ndx)
+        _ search(0)
+
+
+
+

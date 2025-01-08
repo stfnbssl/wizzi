@@ -1,0 +1,79 @@
+﻿$group
+
+	# 
+		# Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+        # and build a packiFiles object with every meta ittf document of the used MetaProductions.
+        # Uses the metaPlugin method getMetaProductionStarter to retrieve the meta ittf documents.
+        # The retrieved packiFiles filepaths are built this way:
+        # - folderTemplates/<ProductionName><metaFilePath> 
+        # - ittfDocumentTemplates/<ProductionName><metaFilePath>
+        # - plainDocuments/<ProductionName><metaFilePath>
+        # For each metaProduction used the returned packiFiles object must contain a meta ittf document 
+        # with filePath 'folderTemplates/<ProductionName>/index.ittf.ittf'
+		# return
+		# | packifiles
+		# | wzError
+		# params
+		#   { options
+		#     { metaCtx
+	m getMetaProductionStarter
+        param options
+        callback
+
+		$$ loog mdDisplayName + '.getMetaProductionStarter'
+		var
+			decl result = {}
+			
+        const search
+            =>
+                param i
+                if i >= this.metaPlugins.length
+                    r_cb( result )
+                var metaPlugin = this.metaPlugins[i]
+                $$ loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+                _ metaPlugin.getMetaProductionStarter
+                    {
+                        @ metaCtx options.metaCtx || {}
+                    a_cb( metaProduction )
+                        for var k in metaProduction
+                            set result[k] = metaProduction[k]
+                        return search(++i)
+        _ search(0)
+
+	# 
+		# Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+        # and retrieve their pluginCategories and pluginMetaProductions objects
+		# params
+		#   { options
+		#     { metaCtx
+		# return
+		# { 
+		#   [ metaProductions
+        #       string name
+        #       [ categories
+        #   [ categories
+        #       string name
+        #       [ productions
+	m getCategoryAndMetaProductionStarter
+        param options
+        callback
+
+		$$ loog mdDisplayName + '.getCategoryAndMetaProductionStarter'
+		var
+			decl result = []
+			
+        const search
+            =>
+                param i
+                if i >= this.metaPlugins.length
+                    r_cb( result )
+                var metaPlugin = this.metaPlugins[i]
+                _ result.push
+                    {
+                        @ plugin metaPlugin.name
+                        @ version metaPlugin.version
+                        @ metaProductions metaPlugin.provides.pluginMetaProductions
+                        @ categories metaPlugin.provides.pluginCategories
+                return search(++i)
+        _ search(0)        
+

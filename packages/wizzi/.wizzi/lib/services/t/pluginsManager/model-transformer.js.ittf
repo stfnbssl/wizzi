@@ -1,0 +1,47 @@
+﻿$group
+
+	# 
+		# Retrieve a model transformer searching the factoryPlugins
+		# registered to this plugins manager
+		# params
+		#  string transformerName
+		# returns
+		#  | api-ref wizzi-plugin.modelTransformer
+		#  | wzError NotFound
+
+	m getModelTransformer
+		string transformerName
+		# loog 'wizzi.pluginsManager.getModelTransformer.transformerName: ' + transformerName
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion = null
+			decl result = null
+		
+		# all factoryPlugins are searched, last matching encountered wins.
+		
+		foreach item in this.factoryPlugins
+			# loog 'searching transformer ', transformerName, ' in plugin', item.getName()
+			checked_call_r_set( found )
+				_ item.getModelTransformer(transformerName)
+			# loog 'found', found, found && verify.isFunction(found.trans)
+			if found && verify.isFunction(found.trans)
+				set result = found
+				set foundInPlugin = item.getFilename()
+                if verify.isFunction(item.getVersion)
+                    set pluginVersion = item.getVersion()
+
+		if !result
+			var msg = 'getModelTransformer. Cannot find model transformer: ' + transformerName + '\n' +
+				\b 'availables transformers: ' + this.availableModelTransformers().join(', ')
+			_ log.error
+				@ msg
+			r_wz_err( NotFound, getModelTransformer )
+				@ msg
+		else
+			_ log.success
+                @ 'getModelTransformer. Found transformer: ' + transformerName
+                    \b + ' in plugin: ' + foundInPlugin 
+                    \b + ', version:' + (pluginVersion || 'unknown')
+
+		return result

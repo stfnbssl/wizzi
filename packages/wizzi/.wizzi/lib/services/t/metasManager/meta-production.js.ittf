@@ -1,0 +1,37 @@
+﻿$group
+
+	# 
+		# Retrieve a meta production searching the metaPlugins
+		# registered to this metasManager
+		
+	m getMetaProduction
+		string productionName
+        callback
+
+		# loog mdDisplayName + '.getMetaProduction', productionName
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion = null
+			decl result = null
+			
+        const search
+            =>
+                param i
+                if i >= this.metaPlugins.length
+                    const message = 'Cannot find meta production: ' + productionName + '\navailables meta productions: ' + this.availableMetaProductions().join(', ')
+                    _ log.error('getMetaProduction. ' + message)
+                    return
+                        _ callback
+                            @ message
+                var metaPlugin = this.metaPlugins[i]
+                # loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+                _ metaPlugin.getMetaProduction
+                    @ productionName
+                    a_cb( metaProduction )
+                        if metaProduction
+                            r_cb( metaProduction )
+                        return search(++i)
+        _ search(0)
+
+

@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+packages/wizzi.cli/wizzi.config.env.js
+packages/wizzi.cli/.wizzi/root/wizzi.config.env.js.ittf 

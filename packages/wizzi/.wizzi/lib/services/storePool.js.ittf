@@ -1,0 +1,153 @@
+﻿module wizzi@${wzCtx.version}.storePool
+	kind jsfile
+
+	var repo = require('@wizzi/repo')
+	
+
+	class StorePool
+		
+		ctor
+			{ wizziFactory
+			set this.wizziFactory = wizziFactory
+			set this.stores = []
+		#  { repoOptions
+		#    string storeKind
+		#      oneOf 'filesystem', 'mongodb', 'json'
+		#    string storeUri
+		#      # when storeKind == mongodb
+		#    string storeBaseFolder
+		#      # when storeKind == mongodb
+		#    { storeJsonFs
+		#      # when storeKind == json
+		#    { storeJsonFsData
+		#      # when storeKind == json
+		m initialize
+			{ repoOptions
+			callback
+			+
+			set this.repoOptions = repoOptions
+			set this.storeKind = repoOptions.storeKind || 'filesystem'
+			+
+			if this.storeKind === 'json' && !repoOptions.storeJsonFs && repoOptions.storeJsonFsData
+				_ this._initializeJsonFs
+					a_cb()
+						_ this.initialize_next_1
+							@ callback
+			else
+				_ this.initialize_next_1
+					@ callback
+			+
+		m _initializeJsonFs
+			callback
+			var JsonComponents = repo.JsonComponents
+			_ JsonComponents.createJsonFsByJsonFsData
+				@ this.repoOptions.storeJsonFsData
+				a_cb( jsonFs )
+					set this.repoOptions.storeJsonFs = jsonFs
+					r_cb()
+
+		m initialize_next_1
+			callback
+			_ this._initializeFileService
+				a_cb( notUsed )
+					_ this._initializeStoreService
+						a_cb( notUsed )
+							r_cb()
+								{
+									@ fileService this.fileService
+									@ createStore this.getCreateStore_hof()
+
+		m _initializeFileService
+			callback
+			var repoOptions = this.repoOptions
+			var that = this
+			if this.storeKind === 'filesystem'
+				_ repo.fsfile
+					f_cb( file )
+						set that.fileService = file
+						r_cb( null )
+			elif this.storeKind === 'mongodb'
+				_ repo.dbfile
+					{
+						@ mongoUri repoOptions.storeUri
+						@ mongoBaseFolder repoOptions.storeBaseFolder
+					f_cb( file )
+						set that.fileService = file
+						r_cb( null )
+			elif this.storeKind === 'json'
+				# loog 'repoOptions', repoOptions
+				_ repo.jsonfile
+					{
+						@ jsonFs this.repoOptions.storeJsonFs
+					f_cb( file )
+						set that.fileService = file
+						r_cb( null )
+			elif this.storeKind === 'browser'
+				# loog 'repoOptions', repoOptions
+				_ repo.browserfile
+					f_cb( file )
+						set that.fileService = file
+						r_cb( null )
+			else
+				r_cb_wz_err( NotImplemented, _initializeFileService )
+					@ 'Store kind not implemented yet : ' + this.storeKind
+		
+		m _initializeStoreService
+			param callback
+			var repoOptions = this.repoOptions
+			+
+			var that = this;
+			+
+			_ repo.createStoreFactory
+				@ repoOptions
+				f_cb( storeFactory )
+					set that.storeFactory = storeFactory
+					r_cb( null )
+
+		m add
+			{ store
+			_ this.stores.push(store)
+		
+		m getKind
+			return this.storeKind
+
+		m getJsonFs
+			return this.repoOptions.storeJsonFs
+		
+		m get
+			callback
+			if this.stores.length > 0
+				return
+					_ callback
+						@ null
+						@ this.stores[0]
+			else
+				var that = this
+				_ this.storeFactory
+					f_cb( store )
+						_ that.add(store)
+						return
+							_ callback
+								@ null
+								@ store
+		
+		m getCreateStore_hof
+			var pool = this
+			return
+				function createStore
+					param callback
+					_ pool.get
+						f_cb( store )
+							return
+								_ callback
+									@ null
+									@ store
+		
+		m close
+			if this.fileService && this.fileService.close
+				_ this.fileService.close
+			foreach store in this.stores
+				if store.close
+					_ store.close
+
+	set module.exports = StorePool

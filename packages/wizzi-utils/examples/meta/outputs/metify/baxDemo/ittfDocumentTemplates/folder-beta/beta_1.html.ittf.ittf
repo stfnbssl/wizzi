@@ -1,0 +1,7 @@
+$group
+    body
+        h1 Hello folder-beta
+        h2 beta_1
+        p ${'\\b'} aaa ${'\\b'}
+        p ${'\\b'} bbb
+        p ccc ${'\\b'}

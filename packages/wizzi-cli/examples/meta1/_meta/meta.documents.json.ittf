@@ -1,0 +1,56 @@
+{
+    name "meta.documents"
+    npnName "meta.documents"
+    description "meta.documents"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "docx"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "pdf"
+            "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+        useJsCommons false
+    params/use( documentsApp
+    params/use( documentsJson
+    params/use( documentsPpt
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "bebaImageFolder"
+            value "C:/Users/Stefano Bassoli/Pictures/beba"
+        {
+            name "dot"
+            value "."
+        {
+            name "comma"
+            value ","

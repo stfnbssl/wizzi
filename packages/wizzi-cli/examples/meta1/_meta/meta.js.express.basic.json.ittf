@@ -1,0 +1,48 @@
+{
+
+    $
+        var md = {
+            name: "js.express.basic",
+            title: "Javascript express basic app"
+        }
+
+    name "${md.name}"
+    npmName "${md.npmName}"
+    description "${md.title}"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "html"
+            "ittf"
+            "js"
+            "json"
+            "md"
+            "plain"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    [ BuildVars
+    [ globals
+    
+    { App
+        name "${md.name}"
+        kind "Server"
+
+    params/use( jsExpressBasicApp
+    params/use( jsCommons
+

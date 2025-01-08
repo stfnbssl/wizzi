@@ -1,0 +1,50 @@
+$group
+
+	#
+		# Executes a set of production steps
+		# 
+		# params
+		#   { productionStepsRequest
+		#     { productionOptions
+		#     { globalContext
+		#   [ productionSteps
+		#
+	m executeProductionSteps
+		param productionStepsRequest
+		[ productionStepConfigs
+		callback
+		+
+		# loog 'wizzi.wizziFactory.executeProductionSteps', productionStepConfigs.length
+		+
+		checked_call( pman
+			_ this.createProductionManager
+				@ productionStepsRequest.productionOptions
+				@ productionStepsRequest.globalContext
+		+
+		foreach ps in productionStepConfigs
+			# loog 'ps.fileCtx', ps.fileCtx
+			checked_call( notUsed
+				_ pman.addProductionStepRequest
+					{ 
+						@ ittfDocumentProduction ps
+		+
+		try
+			_ pman.run
+				f_cb( result )
+					_ log.success('wizzi.wizziFactory.executeProductionSteps.' + productionStepsRequest.name + ' run completed')
+					_ pman.persistToFile
+						f_cb( persistResult )
+							_ log.success('wizzi.wizziFactory.executeProductionSteps.' + productionStepsRequest.name + ' persistToFile completed')
+							var result
+								{
+									@ persistResult persistResult
+									@ productionContext pman.productionContext
+							_ pman.terminate
+							return
+								_ callback(null, result)
+		catch ex
+			r_cb_wz_err( WizziFactoryError, executeProductionSteps, ex )
+				{
+					@ message 'See inner error'
+					{ parameter
+						@ productionStepsName productionStepsRequest.name

@@ -1,0 +1,7 @@
+module
+    kind jsfile
+    const minimist = require('minimist')
+    const args = minimist(process.argv.slice(2))
+    log "args", args
+    var gen = require('../../src/cmds/meta');
+    _ gen(args)

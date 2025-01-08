@@ -1,0 +1,68 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'Json_Step_1',
+            title: 'Json - step - 1 - JsonFs',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+            
+            function dump
+                param jsonFs
+                _ printValue
+                    @ 'jsonFs.items'
+                    @ jsonFs.items
+
+                _ printValue
+                    @ 'jsonFs.documents'
+                    @ jsonFs.documents    
+
+        _ heading1('start')
+
+        
+        var jsonFs = new json.JsonFs()
+        _ dump
+            @ jsonFs
+
+        _ jsonFs.insertItem
+            {
+                @ dirname 'json:/zero'
+                @ basename 'alpha.js.ittf'
+                @ kind 1
+            f_cb_test( result )
+                info 'insert.alpha.js.ittf.result', result
+                var insertedId = result.insertedId
+                _ dump
+                    @ jsonFs
+                
+                set result.item.basename = 'beta.js.ittf'
+                _ jsonFs.updateItem
+                    @ result.item
+                    f_cb_test( result )
+                        info 'update.beta.js.ittf.result', result
+                        _ dump
+                            @ jsonFs
+                        _ jsonFs.writeDocument
+                            @ result.item._id
+                            @ 'My content'
+                            f_cb_test( result )
+                                # loog 'write.beta.js.ittf.result', result
+                                _ dump
+                                    @ jsonFs
+                                _ jsonFs.readDocument
+                                    @ result.item._id
+                                    f_cb_test( result )
+                                        # loog 'read.beta.js.ittf.result', result
+                                        _ jsonFs.deleteItem
+                                            @ insertedId
+                                            f_cb_test( result )
+                                                # loog 'delete.beta.js.ittf.result', result
+                                                _ dump
+                                                    @ jsonFs

@@ -1,0 +1,60 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'artifact_step_1',
+            title: 'gencontext object',
+            folderLevel: 2
+        }
+
+    common\example\wizzi(&opt)
+
+        var genContext = wizziIndex.genContext
+        var ctx
+            new genContext
+                _ get_genconfig
+        _ ctx.write
+            @ 'Hello '
+        _ ctx.w
+            @ 'stefi'
+        _ ctx.w
+        _ ctx.w
+            @ 'a line after'
+        _ ctx.w
+        _ ctx.w
+            @ 'a second line after'
+        _ ctx.w
+        _ ctx.setLastNotEmptyLine
+        _ ctx.write
+            @ ' + me'
+        _ ctx.w
+
+
+        _ ctx.w
+            @ 'now i set inlineOn'
+        _ ctx.inlineOn
+        _ ctx.w
+            @ '- and this ctx.w() go in the same line'
+        _ ctx.inlineOff
+        _ ctx.w
+            @ '- after inlineOff ctx.w() go in a new line'
+
+        _ printValue
+            @ ctx.getContent()
+            @ 'content'
+
+    function get_genconfig
+        return
+            {
+                { options
+                    { data 
+                { pman
+                    @ wizziFactory {}
+                    @ globalContext
+                        function
+                            return {}
+                @ model {}
+                @ srcPath "c://dummy"

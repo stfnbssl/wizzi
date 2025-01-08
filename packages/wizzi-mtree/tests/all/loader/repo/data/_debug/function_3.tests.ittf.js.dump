@@ -1,0 +1,41 @@
+// 18/12/2024:13:43:24  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
+$.n(); // set the context state to NodeContext
+var $0 = {}; // the root node of the mTree buildUp
+var $1 = { n: "plutone", v: "", i: 28, r: 1, c: 1, s: "f1", u: "f1",  }; //node:28
+$.a($0, $1, 5);
+$.s("f1");
+var item_data = { //node:30
+name: 'alfa', //node:31
+value: 'x', //node:32
+children: [{ //node:33
+name: 'beta', //node:34
+value: 'y', //node:35
+children: [{ //node:36
+name: 'sigma', //node:37
+value: 't', //node:38
+children: [] //node:39
+}]  //node:40
+},{  //node:41
+name: 'gamma', //node:42
+value: 'z', //node:43
+children: [] //node:44
+}]  //node:45
+};  //node:46
+function buildup_item($parent,item) { //node:47
+    $.n();
+    var $4 = { n: "giove", v: $.ip("f1", "${item.name} ${item.value}", "string", 26, false), i: 49, r: 22, c: 9, s: "f1", u: "f1",  }; //node:49
+    $.a($parent, $4, 27);
+    $.s("f1");
+    var c_count5 = item.children.length; //node:50
+    var c_count = item.children.length; //node:50
+    for (var i5=0; i5<c_count5; i5++) { //node:50
+        var c = item.children[i5]; //node:50
+        var c_index = i5; //node:50
+        $.s("f1");
+        buildup_item($4,c); //node:51
+        $.s("f1");
+    }
+}
+$.s("f1");
+buildup_item($1,item_data); //node:53
+$.s("f1");

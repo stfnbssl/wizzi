@@ -1,0 +1,406 @@
+﻿module 
+    kind jsfile
+    var assert = require('assert')
+    var path = require('path')
+    var util = require('util')
+	var verify = require('@wizzi/utils').verify
+    var log
+        _ require('../util/log')
+            ( 
+                @ module
+    var GenContext = require('./artifact/genContext')
+    var AsyncFrontMatterLoader = require('./model/asyncFrontMatterLoader')
+    var AsyncModelLoader = require('./model/asyncModelLoader')
+    var AsyncArtifactGenerator = require('./artifact/asyncArtifactGenerator').AsyncArtifactGenerator
+	var AsyncWizziModelDomRunner = require('./modelDom/asyncWizziModelDomRunner')
+    +
+	#
+		# Async production step runner.
+		# A runner instance runs a single productionStep.
+		# Input: a ProductionStep (constructor injected).
+		# Output: the ProductionStep enriched with (one or many) genContext(s),
+		#   ready to be persisted (callback ok result).
+		# A Runner can run 
+		#   a WzJob (a wizzi job)
+		#   a WfSchema (a wizzi model dom generation)
+		# 	a ModelArtifact
+		#	a ModelCollectionArtifact
+		#	a CodeWriteArtifact
+		#	a FinalArtifact (a simple copy from source to destination)
+		#   a FolderModel (an Ittf Document that generates a Folder Structure of Ittf Documents)
+	+
+	function logme
+        if false
+            _ console.log.apply(console, arguments)
+    
+	+
+	wz-class Runner
+        ctor
+            param productionStep
+            set this.productionStep = productionStep
+            _ log.setLevel((productionStep.options.verbose || 0))
+    
+		m run
+            param callback
+            
+			if this.productionStep.isIttfDocumentProduction()
+			    _ this._runOnIttfDocumentProduction
+                    @ this.productionStep.ittfDocumentProduction
+                    @ callback
+			elif this.productionStep.modelInfo
+				_ this._runOnModelInfo
+                    @ this.productionStep.modelInfo
+                    @ callback
+			else 
+			    _ this._runOnContextInfos
+                    @ this.productionStep.contextInfos
+                    @ callback
+    
+		m _runOnContextInfos
+            param contextInfos
+            param callback
+            
+            if this.productionStep.isCodeWriteArtifact()
+                _ this.runCodeWriteArtifact
+                    @ this.productionStep.modelInfo
+                    @ this.productionStep.gen
+					@ callback
+            else
+				r_cb_error( 999, _runOnContextInfos
+					@ 'Artifact is in an invalid state: ' + util.inspect(this.productionStep.getState(), {depth: 2})
+    
+		m _runOnModelInfo
+            param modelInfo
+            param callback
+            
+            var gen = this.productionStep.gen
+            
+			if this.productionStep.isWizziModelDomArtifact()
+                _ this.runWizziModelDomArtifact
+                    @ modelInfo
+					@ callback
+            
+			elif this.productionStep.isWizziModelArtifact()
+                _ this.runWizziModelArtifact
+                    @ modelInfo
+                    @ gen
+                    @ callback
+            
+			elif this.productionStep.isWizziModelToFolderArtifact()
+                _ this.runWizziModelToFolderArtifact
+                    @ modelInfo
+                    @ gen
+                    @ callback
+
+			elif this.productionStep.isModelCollectionArtifact()
+                _ this.runModelCollectionArtifact
+                    @ modelInfo
+                    @ gen
+                    @ callback
+            
+			elif this.productionStep.isFinalArtifact()
+                _ this.runFinalArtifact
+                    @ modelInfo
+                    @ callback
+            else 
+				r_cb_error( 999, _runOnModelInfo
+					@ 'The production step is in an invalid state: ' + util.inspect(this.productionStep.getState(), {depth: 2})
+    
+		m _runOnIttfDocumentProduction
+            param ittfDocumentProduction
+            param callback
+
+			if ittfDocumentProduction.productionActionType == "loadModelAndGenerateArtifact"
+				_ this.runLoadModelAndGenerateArtifact
+					@ ittfDocumentProduction
+					@ callback
+            else 
+				r_cb_error( 999, _runOnIttfDocumentProduction
+					@ 'Invalid `ittfDocumentProduction.productionActionType`. The production step is in an invalid state: ' + util.inspect(this.productionStep.getState(), {depth: 2})
+
+		m runWizziModelDomArtifact
+            param modelInfo
+            param callback
+
+			_ log.warn('runWizziModelDomArtifact ' + this.productionStep.name)
+			var outputPackageFolder = this.productionStep.getDestinationUri()
+			# loog 'wizzi.production.runner.runWizziModelDomArtifact.outputPackageFolder', outputPackageFolder
+            
+			_ modelInfo.getModelInfos
+				{
+					@ final false
+				a_cb( modelInfos )
+					
+					if modelInfos.length != 1
+						r_cb_error( 999, runWizziModelDomArtifact )
+							@ 'Expected exactly one wizzi.model.modelInfo. Received: ' + modelInfos.length
+					
+					var wfschemaIttfDocumentUri = modelInfos[0].srcFullPath()
+					
+					var basenameParts = path.basename(wfschemaIttfDocumentUri).split('.')
+					if basenameParts.length != 3
+						r_cb_error( 999, runWizziModelDomArtifact )
+							@ "The name of the source 'wfschema' ittf document must be in the format '<schema-name>.wfschema.ittf'. Received: " + path.basename(wfschemaIttfDocumentUri)
+					var schemaName = basenameParts[0]
+					
+					var wmtRequest
+						{
+							@ modelInfo modelInfos[0]
+							@ schemaName schemaName
+							@ wfschemaIttfDocumentUri wfschemaIttfDocumentUri
+							@ outputPackageFolder outputPackageFolder
+					_ AsyncWizziModelDomRunner.run
+						@ wmtRequest
+						a_cb( result )
+							# TODO how to expose results ?
+							_ callback(null, this.productionStep)
+
+		m runWizziModelArtifact
+            param modelInfo
+            param gen
+            param callback
+
+			_ modelInfo.getModelInfos
+				{
+					@ final false
+				a_cb( modelInfos )
+					
+					# loog '+ wizzi.production.runner.runWizziModelArtifact, modelInfos, gen', modelInfos, gen
+					_ modelInfo.getArtifactGenerator
+						@ gen.generator
+						a_cb( generator )
+							# loog '+ wizzi.production.runner.runWizziModelArtifact, generator', generator
+							_ AsyncModelLoader.loadMany
+								@ modelInfos
+								a_cb( mainSourceModels )
+									# loog '+ wizzi.production.runner.runWizziModelArtifact, mainSourceModels', mainSourceModels
+									_ AsyncArtifactGenerator.generate
+										@ this.productionStep
+										@ generator
+										@ modelInfos
+										@ mainSourceModels
+										a_cb( notUsed )
+											_ callback(null, this.productionStep)
+    
+		m runWizziModelToFolderArtifact
+            param modelInfo
+            param gen
+            param callback
+
+			_ modelInfo.getModelInfos
+				{
+					@ final false
+				a_cb( modelInfos )
+					var doRun
+						=>
+							param ndx
+							var modelInfo = modelInfos[ndx]
+							if !modelInfo
+								r_cb(this.productionStep)
+							_ modelInfo.getArtifactGenerator
+								@ gen.generator
+								a_cb( generator )
+									_ AsyncModelLoader.loadMany
+										@ modelInfos
+										a_cb( mainSourceModelsOfModelCollection )
+											var doRunSourceModels
+												=>
+													param ndxSourceModels
+													var sourceModel = mainSourceModelsOfModelCollection[ndxSourceModels]
+													if !sourceModel
+														return
+															_ doRun
+																@ ndx + 1
+													var wf = this.productionStep.getWizziFactory()
+													_ wf.ittfModelToFolder
+														@ sourceModel
+														{
+															@ baseDestFolder ""
+														a_cb( folderPackiFiles
+															# loog 'WizziModelToFolderArtifact folderPackiFiles', folderPackiFiles
+															for var k in folderPackiFiles
+																var genContext
+																	new GenContext
+																		{ 
+																			@ model null
+																			@ srcPath k
+																			@ srcFullPath null
+																			@ options this.productionStep.options
+																			@ pman modelInfo.productionManager()
+																_ genContext.write
+																	@ folderPackiFiles[k].contents
+																_ this.productionStep.addGenContext(genContext)
+															return
+																_ doRunSourceModels
+																	@ ndxSourceModels + 1
+											_ doRunSourceModels
+												@ 0
+					_ doRun
+						@ 0
+		
+		m runModelCollectionArtifact
+            param modelInfo
+            param gen
+            param callback
+
+			_ modelInfo.getModelInfos
+				{
+					@ final false
+				a_cb( modelInfos )
+					foreach mi in modelInfos
+						_ logme
+							@ "runModelCollectionArtifact.modelInfo to load"
+							@ mi
+						
+					_ modelInfo.getArtifactGenerator
+						@ gen.generator
+						a_cb( generator )
+							_ AsyncModelLoader.loadMany
+								@ modelInfos
+								a_cb( mainSourceModelsOfModelCollection )
+									_ logme
+										@ 'runModelCollectionArtifact got mainSourceModelsOfModelCollection'
+										@ mainSourceModelsOfModelCollection
+									_ AsyncArtifactGenerator.generateModelCollection
+										@ this.productionStep
+										@ generator
+										@ modelInfos
+										@ mainSourceModelsOfModelCollection
+										a_cb( result )
+											_ logme
+												@ 'runModelCollectionArtifact result'
+												@ result
+											_ callback(null, this.productionStep)
+    
+		m runLoadModelAndGenerateArtifact
+            param ittfDocumentProduction
+            param callback
+			set this.productionStep.gen = ittfDocumentProduction.gen
+			set this.productionStep.dest = ittfDocumentProduction.dest
+			# loog 'runLoadModelAndGenerateArtifact.ittfDocumentProduction.gen', ittfDocumentProduction.gen
+			# loog 'runLoadModelAndGenerateArtifact.ittfDocumentProduction.dest', ittfDocumentProduction.dest
+			var pman = ittfDocumentProduction.productionManager
+			var wf = pman.wizziFactory
+			_ wf.loadModelAndGenerateArtifact
+				@ ittfDocumentProduction.ittfDocumentUri
+				{
+					@ modelRequestContext ittfDocumentProduction.modelRequestContext
+					@ artifactRequestContext ittfDocumentProduction.artifactRequestContext
+					@ productionManager pman
+				@ ittfDocumentProduction.artifactName
+				a_cb(artifactText)
+					var genContext
+						new GenContext
+							{ 
+								@ model null
+								@ srcPath ittfDocumentProduction.ittfDocumentUri
+								@ srcFullPath ittfDocumentProduction.ittfDocumentUri
+								@ options this.productionStep.options
+								@ pman ittfDocumentProduction.productionManager
+					_ genContext.write
+						@ artifactText
+					_ this.productionStep.addGenContext(genContext)
+					# loog 'Runner.ProductionContext.runningContextValues', JSON.stringify(pman.productionContext.runningContextValues)
+					r_cb(this.productionStep)
+		
+		m runCodeWriteArtifact
+            param contextInfos
+            param gen
+            param callback
+            
+			_ modelInfo.getArtifactGenerator
+				@ gen.generator
+				a_cb( generator )
+					
+					_ AsyncModelLoader.loadMany
+						@ contextInfos
+						a_cb( mainSourceModels )
+							_ AsyncArtifactGenerator.generateCodeWrite
+								@ this.productionStep
+								@ generator
+								@ mainSourceModels
+								a_cb( notUsed )
+									_ callback(null, this.productionStep)
+    
+		# TODO execute copy without loading content in genContext
+		m runFinalArtifact
+            param modelInfo
+            param callback
+            
+			_ modelInfo.isDirectory
+				a_cb( isDirectory )
+					if isDirectory
+						_ modelInfo.getFiles
+							{ 
+								@ final true
+							a_cb( files )
+								foreach fileInfo in files
+									var genContext
+										new GenContext
+											{ 
+												@ model null
+												@ srcPath fileInfo.relPath
+												@ srcFullPath fileInfo.fullPath
+												@ options this.productionStep.options
+												@ pman modelInfo.productionManager()
+									_ genContext.writeFile
+										@ fileInfo.fullPath
+									_ this.productionStep.addGenContext(genContext)
+
+								return
+									_ callback
+										@ null
+										@ this.productionStep
+            
+					else 
+                
+						var genContext
+							new GenContext
+								{ 
+									@ model null
+									@ srcPath modelInfo.src()
+									@ srcFullPath modelInfo.srcFullPath()
+									@ options this.productionStep.options
+									@ pman modelInfo.productionManager()
+                
+						_ modelInfo.getSource
+							a_cb( content )
+				
+								_ genContext.write(content)
+								_ this.productionStep.addGenContext(genContext)
+								return
+									_ callback
+										@ null
+										@ this.productionStep
+
+		m runFrontMatter
+            param callback
+            
+			if this.productionStep.modelInfo
+                _ this.productionStep.modelInfo.getModelInfos
+                    {
+                        @ final false
+                    a_cb( modelInfos )
+                        # loog 'runFrontMatter.modelInfos', modelInfos.length
+                        _ AsyncFrontMatterLoader.loadMany
+                            @ modelInfos
+                            a_cb( frontMatters )
+                                return
+                                    _ callback
+                                        @ null
+                                        {
+                                            @ collection this.productionStep.collection
+                                            @ items frontMatters
+			else 
+                # loog 'runFrontMatter.contextInfos', this.productionStep.contextInfos.length
+                _ AsyncFrontMatterLoader.loadMany
+                    @ this.productionStep.contextInfos
+                    a_cb( frontMatters )
+                        return
+                            _ callback
+                                @ null
+                                {
+                                    @ collection this.productionStep.collection
+                                    @ items frontMatters
+
+	f_error( wizzi.production.runner )

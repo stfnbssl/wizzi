@@ -1,0 +1,10 @@
+$group
+
+    set md.validateMetaPlugin
+        function
+            param options
+            const vld
+                _ startValidation
+            # .... vld.error({})
+            return
+                _ vld.getValid

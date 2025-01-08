@@ -1,0 +1,312 @@
+﻿module
+	kind es6
+
+	const path = require('path')
+	const fs = require('fs')
+	const wizziUtils = require('@wizzi/utils')
+    const verify = wizziUtils.verify
+	const file = wizziUtils.file
+    const vfile = wizziUtils.vfile
+    const help = require('./help')
+    const commons = require('./commons')
+    const factory = require('../factory')
+    const github = require('../features/github')
+    var _wf = null
+    +
+    const kCommandName = "fy"
+    +
+	set module.exports
+		=>
+			param args
+            param accessToken
+
+            # loog 'fy.accessToken', accessToken, args.git
+
+            +
+            const checker = new commons.commandChecker(kCommandName)
+            +
+
+			if args.git
+                _ wizzifyGitRepo
+                    @ args
+                    @ accessToken
+                    a_cb_throw( result )
+                        info 'Done. Wizzify github repo.'
+                return
+
+            let currentDir = process.cwd()
+
+			let sourcePath = args.source || args.s
+			let destPath = args.dest || args.d
+            let excludes = []
+            # loog 'args.exclude || args.e', args.exclude || args.e
+            if verify.isArray(args.exclude || args.e)
+                set excludes = args.exclude || args.e
+            elif verify.isString(args.exclude || args.e)
+                set excludes = [args.exclude || args.e]
+
+			# loog 'fy.sourcePath.destPath', sourcePath, destPath
+
+            _ checker.checkFile
+                @ sourcePath
+                @ 'sourcePath'
+
+            _ checker.checkFile
+                @ destPath
+                @ 'destPath'
+                {
+                    @ parentFolderMustExist true
+
+            if !checker.checkOut()
+                return
+
+            # loog 'source is folder', checker.sourcePath_is_folder
+            # loog 'dest is folder', checker.destPath_is_folder
+
+            if checker.sourcePath_is_folder && !checker.destPath_is_folder && !checker.destPath_parent_only_exists
+                _ checker.optionError
+                    @ 'Source path is a folder, destination path cannot be a filename: ' + checker.destPath
+                return
+                    _ checker.checkOut
+            
+            if !checker.sourcePath_is_folder && checker.destPath_is_folder 
+                # At this point this cannot be invalid
+                _ checker.checkFile
+                    _ path.join
+                        @ destPath
+                        @ path.basename(sourcePath) + '.ittf'
+                    @ 'destPath'
+                    {
+                        @ parentFolderMustExist true
+
+            if checker.sourcePath_is_folder
+                # loog 'ok. source && dest are folders', args
+                var excludesDef = []
+                foreach item in excludes
+                    _ excludesDef.push
+                        _ path.join
+                            @ checker.sourcePath
+                            @ item
+                _ wizzifyFolder
+                    @ checker.sourcePath
+                    @ checker.destPath
+                    @ args.f || args.from || null
+                    @ args.t || args.to || null
+                    @ excludesDef
+                    a_cb_throw( result )
+                        success ''
+                        success ''
+                        success 'Wizzification done, see', checker.destPath + ' folder'
+                        success ''
+                        success ''
+            else
+                # loog 'ok. source && dest are files'
+                $* TODO VIA
+                var extension = path.extname(sourcePath)
+                var schema
+                set extension = extension.substr(1)
+                if extension.toLowerCase() === 'vue'
+                    set source = '<vue>' + source + '</vue>'
+                    set schema = 'html'
+                    set isVue = true
+                elif extension.toLowerCase() === 'tsx'
+                    set schema = 'ts'
+                elif extension.toLowerCase() === 'jsx'
+                    set schema = 'js'
+                    set extension = 'js'
+                else
+                    set schema = extension
+                *$
+                _ wizzifyFile
+                    @ checker.sourcePath
+                    @ checker.destPath
+                    a_cb_throw()
+                        success ''
+                        success ''
+                        success 'Wizzification done, see', checker.destPath + ' file'
+                        success ''
+                        success ''
+
+    function wizzifyGitRepo
+        param args
+        param accessToken
+        param callback
+
+        const owner = args.o || args.owner
+        const name = args.n || args.name
+        const branch = args.b || args.branch || "master"
+        const kind = args.k || args.kind || "all"
+        const destFolder
+            _ path.join
+                @ process.cwd()
+                @ args.d || args.dest || 'git_output'
+                @ owner
+                @ name
+        
+        # loog 'wizzifyGitRepo', 'owner', owner, 'name', name, 'branch', branch, 'kind', kind, 'destFolder', destFolder
+        
+        _ github.api.repo.cloneBranch
+            {
+                @ owner
+                @ name
+                @ token accessToken
+            @ branch
+            @ kind
+            a_then( result )
+                # loog 'wizzifyGitRepo.result', Object.keys(result.files)
+                if result.files
+                    for var k in result.files
+                        _ file.write
+                            _ path.join
+                                @ destFolder
+                                @ k
+                            @ result.files[k].contents
+                        # loog 'Written', k
+                const destIttfFolder
+                    _ path.join
+                        @ destFolder
+                        @ ".wizzi"
+                _ wizzifyFolder
+                    @ destFolder
+                    @ destIttfFolder
+                    @ null
+                    @ null
+                    [
+                    a_cb()
+                        r_cb()
+
+    function wizzifyFolder
+        param sourceFolder
+        param destFolder
+        param from
+        param to
+        param excludes
+        param callback
+        # loog 'wizzifyFolder.sourceFolder', sourceFolder
+        # loog 'wizzifyFolder.destFolder', destFolder
+        _ getWizziFactory
+            a_cb( wf )
+                _ vfile().getFiles
+                    @ sourceFolder
+                    { 
+                        @ deep true
+                        @ documentContent false
+                    a_cb( files )
+                        # loog 'wizzifyFolder.sourceFiles', files.length
+                        function run
+                            param ndx
+                            if from != null && ndx < from
+                                return run(ndx+1) 
+                            if to != null && ndx > to
+                                return run(ndx+1) 
+                            if !files[ndx]
+                                r_cb()
+                            try
+                                var sourcePath = files[ndx].fullPath
+                                foreach exclude in excludes
+                                    if sourcePath.startsWith(exclude)
+                                        # loog 'exclude sourcePath', sourcePath
+                                        return
+                                            _ run(ndx+1)
+                                var wizzifyExtension 
+                                    _ getWizzifyExtension
+                                        @ sourcePath
+                                if verify.isEmpty(wizzifyExtension) || !wf.canWizzify(wizzifyExtension)
+                                    # loog ndx+1, '/', files.length, sourcePath,'has no wizzifier'
+                                    return
+                                        _ file.copyFile
+                                            @ sourcePath
+                                            _ path.join
+                                                @ destFolder
+                                                @ files[ndx].relPath
+                                            a_cb_no_throw( result )
+                                                if err
+                                                    error 'copying file', sourcePath
+                                                    error err
+                                                    return run(ndx+1) 
+                                                # loog ndx+1, '/', files.length, sourcePath, 'copied'
+                                                return run(ndx+1) 
+                                # loog "from, to, ndx", from, to, ndx+1, '/', files.length 
+                                var sourceTextOrBuffer
+                                if wf.wizzifierIsForBinaryFile(wizzifyExtension)
+                                    set sourceTextOrBuffer
+                                        _ fs.readFileSync
+                                            @ sourcePath
+                                            @ "base64"
+                                else
+                                    set sourceTextOrBuffer
+                                        _ file.read
+                                            @ sourcePath
+                                var destPath 
+                                    _ path.join
+                                        @ destFolder
+                                        @ files[ndx].relPath + '.ittf'
+                                _ wf.getWizziIttfFromText
+                                    @ sourceTextOrBuffer
+                                    @ wizzifyExtension
+                                    {
+                                        @ sourceFilepath sourcePath
+                                    a_cb_no_throw( result )
+                                        if err
+                                            error 'on file', sourcePath
+                                            error err
+                                            return
+                                                _ process.nextTick
+                                                    =>
+                                                        _ run(ndx+1)
+                                        _ file.write(destPath, result)
+                                        info 'Done. Wizzify file', destPath
+                                        return
+                                            _ process.nextTick
+                                                =>
+                                                    _ run(ndx+1)
+                            catch ex
+                                error 'in file', sourcePath, 'message', ex.message
+                                _ process.nextTick
+                                    =>
+                                        _ run(ndx+1)
+                        _ run(0)
+
+    function wizzifyFile
+        param sourcePath
+        param destPath
+        param callback
+        _ getWizziFactory
+            a_cb( wf )
+                try
+                    _ wf.getWizziIttfFromText
+                        @ file.read(sourcePath)
+                        @ getWizzifyExtension(sourcePath)
+                        a_cb( result )
+                            _ file.write(destPath, result)
+                            info 'Done. Wizzify file', destPath
+                            r_cb()
+                catch ex
+                    error 'in file', sourcePath, 'message', ex.message
+                    r_cb()
+
+    function getWizzifyExtension
+        param sourcePath
+        var ext = path.extname(sourcePath).substr(1)
+        if ext == 'tsx'
+            return 'ts'
+        elif ext == 'jsx'
+            return 'js'
+        elif ext == 'mdx'
+            return 'md'
+        else
+            return ext
+
+    function getWizziFactory
+        param callback
+        if _wf != null
+            r_cb( _wf )
+        const globalContext = {}
+        _ factory.createWizziFactory
+            @ globalContext
+            {
+                @ items factory.getDefaultPlugins()
+                @ pluginsBaseFolder factory.getDefaultPluginsBaseFolder()
+            a_cb( wf )
+                set _wf = wf
+                r_cb( _wf )

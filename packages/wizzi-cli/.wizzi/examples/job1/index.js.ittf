@@ -1,0 +1,12 @@
+module
+	kind es6
+
+    const path = require('path')
+    var job = require('../../src/cmds/job')
+
+    _ job
+        {
+            @ c "wzjobs/first"
+            [ _
+                @ "job"
+                @ "wzjobs/first"

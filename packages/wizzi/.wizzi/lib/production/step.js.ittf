@@ -1,0 +1,433 @@
+﻿module 
+    kind jsfile
+	+
+    var assert = require('assert')
+    var path = require('path')
+    var util = require('util')
+	var _ = require('lodash')
+	var verify = require('@wizzi/utils').verify
+    var interpolate = require('../util/interpolate')
+    var interpolateFilename = require('../util/interpolateFilename')
+    var ModelInfo = require("./model/modelInfo").ModelInfo
+    +
+	#
+		# A ProductionStep instance is built from an 'artifact' element
+		# of a `wzjob` wizzi model.
+		# The 'artifact' element has been preprocessed 
+		# by the wizzi/lib/production/wzjob module 
+        # giving the productionStepConfig parameter.
+		# param 
+		#    { productionStepConfig
+		# 		name:String,
+		# 		options:Object {
+		# 			basedir:String // Uri
+		# 			dotgExtensionPrefix:Boolean
+		# 		},
+		# 		model:Object {  // ModelInfo config object
+		#           see lib/production/wzjob.js for creation
+		#           see lib/production/model/modelInfo.js for use
+		# 		},
+        # 		collection:String,
+		# 		isWzJob:Boolean,
+		# 		isWzSchema:Boolean,
+        #       isWzModelToFolder:Boolean,
+		# 		transformers:Array {
+		# 			name:String
+		# 			dumpFile:String    // Uri
+		# 		},
+		# 		gen:Object {
+		# 			generator:String // generator name
+		# 		},
+		# 		dest:Object {
+		# 			fullPath:String    // Uri
+		# 			folder:String      // a basepath Uri, may be relative
+		# 			baseFolder:String  // a basepath Uri (required when folder is relative)
+		# 			path:String        // relative path
+		# 			extension:String
+		# 		}
+        #       ittfDocuments {
+        #       }
+		# 	  }
+	+
+	function logme
+        if ${wzConfigIsVerbose ? 'true': 'false'}
+            _ console.log.apply(console, arguments)
+    +
+	wz-class ProductionStep
+        ctor 
+            param productionStepConfig
+
+            set this.name = productionStepConfig.name
+            set this.options = productionStepConfig.options
+            if verify.isObject(productionStepConfig.model)
+                set this.modelInfo = new ModelInfo(productionStepConfig.model)
+                set this.contextInfos = null
+            elif verify.isArray(productionStepConfig.contexts) 
+                set this.contextInfos = []
+                foreach item in productionStepConfig.contexts
+                    _ this.contextInfos.push
+                        new ModelInfo(item)
+                set this.modelInfo = null
+            set this.collection = productionStepConfig.collection $$ ??? not used
+            set this.isWzJob = productionStepConfig.isWzJob
+			set this.isWzModelType = productionStepConfig.isWzModelType
+            set this.isWzModelToFolder = productionStepConfig.isWzModelToFolder
+            set this.transformers = productionStepConfig.transformers $$ ??? not used
+            set this.gen = productionStepConfig.gen
+            set this.dest = productionStepConfig.dest
+            set this.wzjob = productionStepConfig.wzjob $$ ??? not used
+            set this.ittfDocumentProduction = productionStepConfig.ittfDocumentProduction 
+            if this.ittfDocumentProduction
+                # loog 'ProductionStep.productionStepConfig.ittfDocumentProduction.fileCtx', this.ittfDocumentProduction.fileCtx
+                set this.fileCtx = this.ittfDocumentProduction.fileCtx 
+            set this.genContexts = []
+    
+		m initialize
+            param productionManager
+
+            set this.productionManager = productionManager
+            if this.modelInfo
+                _ this.modelInfo.productionManager
+                    @ productionManager
+            elif this.ittfDocumentProduction
+				set this.ittfDocumentProduction.productionManager = productionManager
+            else
+				foreach item in this.contextInfos 
+                    _ item.productionManager
+                        @ productionManager
+            set this.options
+				_ _.merge
+					{
+					@ productionManager.options || {}
+					@ this.options || {}
+    
+		m addGenContext
+            param genContext
+            _ this.genContexts.push(genContext)
+
+		m isWizziModelDomArtifact
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzModelType
+
+		m isWizziFactoryJob
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzJob
+    
+		m isWizziModelToFolderArtifact
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && this.isWzModelToFolder
+
+		m isWizziModelArtifact
+            return this.modelInfo != null && this.modelInfo.getModelCollectionInfo() == null && 
+                \b !!this.isWzModelToFolder == false &&
+                \b !!this.isWzModelType == false &&
+                \b !!this.isWzJob == false &&
+				\b verify.isObject(this.gen) && 
+				\b verify.isNotEmpty(this.gen.generator)
+
+		m isModelCollectionArtifact
+            return this.modelInfo != null && 
+				\b verify.isObject(this.modelInfo.getModelCollectionInfo()) &&
+				\b verify.isObject(this.gen)
+
+		m isCodeWriteArtifact
+            return this.modelInfo == null && verify.isObject(this.gen) && verify.isNotEmpty(this.gen.generator)
+    
+		m isIttfDocumentProduction
+            return this.modelInfo == null && verify.isObject(this.ittfDocumentProduction)
+
+		m isFinalArtifact
+            return this.modelInfo != null && 
+				\b (verify.isObject(this.gen) === false || verify.isEmpty(this.gen.generator))
+    
+		m getWizziFactory
+			_ assert.ok
+				_ verify.isObject
+					@ this.productionManager
+				@ 'productionManager not set.'
+			_ assert.ok
+				_ verify.isObject
+					@ this.productionManager.wizziFactory
+				@ 'wizziFactory must be set on productionManager'
+			return this.productionManager.wizziFactory
+
+		m getFileService
+            var wizziFactory
+                _ this.getWizziFactory
+			_ assert.ok
+				_ verify.isObject
+					@ wizziFactory.fileService
+				@ 'fileService must be set on wizziFactory'
+			return wizziFactory.fileService
+
+		m getItemsToPersistToFile
+			param callback
+
+            var check
+                { 
+            var items
+                [ 
+            
+			foreach genContext in this.genContexts
+                var srcPath = genContext.srcPath
+                
+				if this.isModelCollectionArtifact()
+                    var collectionItem = genContext.model
+                    _ assert.strictEqual
+                        _ verify.isObject(collectionItem)
+                        @ true
+                        @ 'genContext.model must contain an object.'
+
+					checked_call( ipcontext )
+						_ this.getInterpolatePathNameContext(collectionItem)
+					
+                    checked_call( destUri )
+						_ this.getDestinationUri(srcPath)
+
+					var filePath
+                        _ interpolate
+                            @ destUri
+                            @ ipcontext
+                            { 
+                                @ delimiter '{}'
+
+                    if this.fileCtx
+                        # loog 'filePath.before', filePath
+                        set filePath
+                            _ interpolateFilename
+                                @ filePath
+                                @ this.fileCtx
+                        # loog 'filePath.after', filePath
+                    
+					_ logme('ProductionStep.getItemsToPersistToFile.ipcontext', ipcontext, 'filePath', filePath)
+                    
+					if check[filePath]
+                        return
+							_ callback
+								_ this.error
+									@ "Duplicated destination filePath: " + filePath
+									@ "getItemsToPersistToFile"
+                    
+					set check[filePath] = true
+                    var persisteable
+                        { 
+                            @ productionStep this
+                            @ genContext genContext
+                            @ filePath filePath
+                    _ items.push(persisteable)
+                
+				else 
+					checked_call( filePath )
+						_ this.getDestinationUri(srcPath)
+                    # loog 'getItemsToPersistToFile, srcPath, filePath', srcPath, filePath
+                    if this.fileCtx
+                        # loog 'filePath.before', filePath
+                        set filePath
+                            _ interpolateFilename
+                                @ filePath
+                                @ this.fileCtx
+                        # loog 'filePath.after', filePath
+                    var persisteable
+                        { 
+                            @ productionStep this
+                            @ genContext genContext
+                            @ filePath filePath
+                    _ items.push(persisteable)
+            _ callback(null, items)
+    
+		m getInterpolatePathNameContext
+            param collectionItem
+            
+			if this.isModelCollectionArtifact()
+                var result
+                    { 
+                var info = this.modelInfo.getModelCollectionInfo()
+                
+				foreach templValue in info.pathTemplateValues
+                
+				    if templValue.function
+                        set result[templValue.token] = collectionItem[templValue.function]()
+                        if verify.isEmpty(result[templValue.token])
+                            return
+								_ this.error
+									@ 'the path template value function must return a not empty string for token: "' + templValue.token + '"'
+									@ 'getInterpolatePathNameContext'
+                
+				    elif templValue.attribute
+                        set result[templValue.token] = collectionItem[templValue.attribute]
+                        _ logme
+                            @ 'result[templValue.token]'
+                            @ result[templValue.token]
+                            _ verify.isEmpty
+                                @ result[templValue.token]
+                        if verify.isEmpty(result[templValue.token])
+                            return
+								_ this.error
+									@ 'the path template value attribute "' + templValue.attribute + '" must return a not empty string for token: "' + templValue.token + '"'
+									@ 'getInterpolatePathNameContext'
+                
+				    else 
+                        return
+							_ this.error
+								@ 'path template value must contain an attribute or a function value for token: "' + templValue.token + '"'
+								@ 'getInterpolatePathNameContext'
+                return result
+            else 
+                return
+					_ this.error
+						@ "Method called on an artifact that is not a wizzi collection artifact."
+						@ 'getInterpolatePathNameContext'
+    
+		m getDestinationUri
+            param srcPath
+            
+			var dest = this.dest
+
+            # loog 'getDestinationUri, srcPath, dest', srcPath, dest
+            
+			var msg
+                [ 
+                    @ 'ProductionStep.getDestinationUri'
+                    @ 'config.dest'
+            
+			if verify.isNotEmpty(dest.fullPath)
+                return dest.fullPath
+            
+			if verify.isEmpty(dest.folder)
+                return
+					_ this.error
+						@ 'A not empty dest.folder is required'
+						@ 'getDestinationUri'
+            
+			var destpath
+            if dest.path && verify.isAbsolutePath(dest.path)
+                set destpath = path.join(dest.path, srcPath)
+            else
+				if dest.path
+					set destpath = path.join(dest.folder, dest.path)
+				else
+					if verify.isEmpty(srcPath)
+						return
+							_ this.error
+								@ 'A not empty srcPath is required'
+								@ 'getDestinationUri'
+					set destpath = path.join(dest.folder, srcPath)
+					if this.isFinalArtifact() == false &&
+                        \b this.isWizziModelToFolderArtifact() == false
+                        if dest.extension == '@@null'
+                            set destpath = verify.stripIttfExtension(destpath)
+                            set destpath = verify.replaceExtension(destpath, '')
+                            if verify.endsWith(destpath, '.')
+                                set destpath = destpath.substr(0, destpath.length - 1)
+                        else
+                            var ext = (dest.extension || 'js')
+                            set ext = verify.startsWith(ext, '.') ? ext.substr(1) : ext
+                            if this.options.dotgExtensionPrefix
+                                set ext = 'g.' + ext
+                            set destpath = verify.stripIttfExtension(destpath)
+                            set destpath = verify.replaceExtension(destpath, ext)
+                
+			if this.isFinalArtifact() === true
+				set destpath = verify.replaceAll(destpath, '__copy', '')
+            
+			if verify.isAbsolutePath(destpath)
+                $$ this.isWizziModelToFolderArtifact() should have an absolute dest.folder
+                return destpath
+            
+			if verify.isEmpty(dest.baseFolder)
+                return
+					_ this.error
+						@ 'When dest.folder is a relative path, a not empty dest.baseFolder value is required. Received destpath : ' + destpath
+						@ 'getDestinationUri'
+            return 
+                _ path.join
+                    @ dest.baseFolder
+                    @ destpath
+    
+		m error
+            param message
+            param method
+			var err
+				{
+					@ __is_error true
+					@ message message
+					@ source "wizzi/lib/production/step.js/" + method
+					@ modelInfo this.modelInfo
+			_ logme(err)
+			return err
+    
+		m dump
+            throw 
+                new Error('Not implemented')
+    
+		m _relPath
+            if this.modelInfo
+                return 
+					iif this.options.basedir
+						then
+							_ this.modelInfo.srcFullPath()
+								._ substr(this.options.basedir.length + 1)
+						else this.modelInfo.srcFullPath()
+            else 
+                return 'null'
+    
+		m toString
+            return 
+                [ 
+					@ '\n'
+					@ 'ProductionStep '
+					@ 'name: ' + this.name
+                    @ 'model.src: ' + this._relPath()
+                    @ ', gen.generator:'
+                    iif this.gen
+                        then 
+                            set this.gen.generator
+                        else 'none'
+					@ '\n'
+                    ._ join(' ')
+    
+		m terminate
+            if this.modelInfo
+                _ this.modelInfo.terminate()
+            if this.contextInfos
+                foreach item in this.contextInfos
+					_ item.terminate()
+            if this.genContexts
+				foreach item in this.genContexts
+					_ item.terminate()
+    
+		m isProductionConfig
+			static
+            param test
+            if !test
+                return false
+            if verify.isObject(test.ittfDocumentProduction)
+                return true
+            if !verify.isObject(test.options)
+                return false
+            if !verify.isObject(test.model) && !verify.isObject(test.contexts)
+                return false
+            if !verify.isObject(test.dest)
+                return false
+            if !verify.isObject(test.gen)
+                return false
+            return true
+		
+		m isProductionInstance
+			static
+            param test
+            throw 
+                new Error('Not implemented')
+
+        m getState
+            var retval
+                {
+                    @ name this.name
+                    @ model_src
+                        _ this._relPath
+                    @ dest this.dest
+            set retval.hasModelInfo = this.modelInfo != null
+            set retval.hasCollectionInfo = this.modelInfo != null && this.modelInfo.getModelCollectionInfo() != null
+            set retval.isWzModelToFolder = this.isWzModelToFolder
+            set retval.isWzModelType = this.isWzModelType
+            set retval.isWzJob = this.isWzJob
+            set retval.gen = this.gen
+            set retval.ittfDocumentProduction = this.ittfDocumentProduction
+            return retval

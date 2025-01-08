@@ -1,0 +1,49 @@
+$group
+
+    function data_get_documents_folder1
+        var documents = []
+        _ documents.push
+            {
+                @ path 'json:/root/folder1/index.html.ittf'
+                @ content
+                    [
+                        @ 'html'
+                        @ '    body'
+                        @ '        ul'
+                        @ '            lia( stefi )'
+                        @ '            lia_img( annie, photo.jpg )'
+                        ._ join('\n')
+
+        _ documents.push
+            {
+                @ path 'json:/root/folder1/t/lia.html.ittf'
+                @ content
+                    [
+                        @ 'li'
+                        @ '    a'
+                        @ '        href'
+                        ._ join('\n')
+
+        _ documents.push
+            {
+                @ path 'json:/root/folder1/t/lia_img.html.ittf'
+                @ content
+                    [
+                        @ 'li'
+                        @ '    a'
+                        @ '        href'
+                        @ '        img'
+                        ._ join('\n')
+        return documents
+
+    function data_get_documents_folder2
+        var documents = []
+        _ documents.push
+            {
+                @ path 'json:/root/folder2/index.html.ittf'
+                @ content
+                    [
+                        @ 'module'
+                        @ '    kind react'
+                        ._ join('\n')
+        return documents

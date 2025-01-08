@@ -1,0 +1,29 @@
+module
+    kind jsfile
+
+    function interpolate_filename
+        param text
+        param ctx
+        var result = []
+        var pos = text.indexOf('__')
+        while pos > -1
+            var first = text.substr(0, pos)
+            var remain = text.substring(pos + 2)
+            set pos = remain.indexOf('__')
+            if pos > -1
+                _ result.push(first)
+            else
+                # nothing to interpolate
+                return text
+            if ctx[remain.substr(0, pos)]
+                _ result.push(ctx[remain.substr(0, pos)])
+            else
+                # restore; TODO test this
+                _ result.push('__' + remain.substr(0, pos) + '__')
+            set remain = remain.substring(pos + 2)
+            set text = remain
+            set pos = text.indexOf('__')
+        _ result.push(text)
+        return result.join('')   
+
+    set module.exports = interpolate_filename        

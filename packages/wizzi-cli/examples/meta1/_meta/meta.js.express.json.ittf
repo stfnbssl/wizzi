@@ -1,0 +1,125 @@
+{
+
+    $
+        var md = {
+            name: "js.express",
+            title: "Javascript express app"
+        }
+
+    name "${md.name}"
+    npmName "${md.npmName}"
+    description "${md.title}"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+    { github
+        userid "stfnbssl"
+    
+    useESM false
+    { ESM
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "html"
+            "ittf"
+            "js"
+            "json"
+            "md"
+            "plain"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    [ BuildVars
+
+    [ globals
+    
+    { express
+        params/use( ittfStaticFiles
+    
+    { App
+        name "${md.name}"
+        kind "Server"
+        title "${md.title}"
+        isLocal true
+        isProduction false
+        port "3016"
+        useSsl false
+        siteUrl "http://localhost"
+        baseUrl "http://localhost"
+        siteUrlLocal "http://localhost"
+        baseUrlLocal "http://localhost"
+        apiVersion "1"
+
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( commonsGit
+    params/use( commonsEnv
+    params/use( jsCommons
+    params/use( jsExpress
+    params/use( jsExpressApp
+    params/use( jsExpressFeatureConfig
+    params/use( jsExpressFeatureWizzi
+        [ plugins
+            "./wizzi.plugin.css/index.js"
+            "./wizzi.plugin.html/index.js"
+            "./wizzi.plugin.ittf/index.js"
+            "./wizzi.plugin.js/index.js"
+            "./wizzi.plugin.json/index.js"
+            "./wizzi.plugin.md/index.js"
+            "./wizzi.plugin.svg/index.js"
+            "./wizzi.plugin.text/index.js"
+            "./wizzi.plugin.toml/index.js"
+            "./wizzi.plugin.ts/index.js"
+            "./wizzi.plugin.xml/index.js"
+            "./wizzi.plugin.yaml/index.js"
+        pluginsBaseFolder 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages'
+    params/use( jsExpressStyles
+    params/use( jsExpressUtils
+    params/use( jsExpressWizziSite
+        params/use( demoHome
+        params/use( demoWizzi
+        params/use( demoWebpack
+    params/use( demos
+    params/use( webpackApp
+        [ items
+            {
+                name "hello"
+                writeToDisk true
+                [ components
+            {
+                name "helloreact"
+                writeToDisk true
+                [ components
+                    {
+                            name "NewsFeedApplication"
+    params/use( jsReact
+    params/use( jsDbMongoDb
+        params/use( connectWithRetry
+            maxRetries 2
+            retriesSeconds 5
+        params/use( featureTables
+            [ tables
+                {
+                    name "todo"
+                    created_at true
+                    updated_at true
+                    update_delete_by_id true
+                    [ fields
+                        { 
+                            name "action"
+                            type "string"
+                            isKey true
+                            isListFilter true
+                        { 
+                            name "done"
+                            type "boolean"

@@ -1,0 +1,70 @@
+$group
+
+	# 
+		# Get the list of schemas with a cheatsheet
+		# returns
+		#   [
+		#      {
+		#         string name
+		#           schema name
+	m getCheatsheetList
+		return this.pluginsManager.getCheatsheetList()
+
+	# 
+		# Check if a wizzi schema has a cheatsheet
+		# params
+		#   string schemaName
+		# returns
+		#   true|false
+	m hasCheatsheet
+		string schemaName
+		return this.pluginsManager.hasCheatsheetFolder(schemaName)
+
+	# 
+		# Get the cheatsheet of a wizzi schema
+		# params
+		#   string schemaName
+		# returns
+		#   { cheatsheet
+	m getCheatsheet
+		string schemaName
+		callback
+		+
+		var cheatsheet = this.cheatsheets[schemaName] || null
+		if cheatsheet
+			r_cb(cheatsheet)
+		if !this.hasCheatsheet(schemaName)
+			return
+				_ callback
+					@ null
+					{
+						@ name schemaName
+						[ elements
+							{
+								@ name 'Unavailable'
+								[ items
+									{
+										@ schema schemaName
+										@ render 'artifact'
+										[ fragments
+										@ ittf 'Unavailable'
+										@ ittfWrapper 'Unavailable'
+					$*
+					_ error
+						@ "InvalidOperation"
+						@ "getCheatsheet"
+						@ "No cheatsheet available for schema " + schemaName + ". Call `wizziFactoryInstance.hasCheatsheet` first"
+					*$
+
+		var that = this
+		_ this.pluginsManager.getCheatsheetFolder
+			@ schemaName
+			f_cb( packiCheatsheetFolder )
+				# loog 'wizziFactory.getCheatsheet.packiCheatsheetFolder', Object.keys(packiCheatsheetFolder)
+				_ buildCheatsheet
+					@ that
+					@ schemaName
+					@ packiCheatsheetFolder
+					f_cb( cheatsheet )
+						set that.cheatsheets[schemaName] = cheatsheet
+						r_cb(cheatsheet)

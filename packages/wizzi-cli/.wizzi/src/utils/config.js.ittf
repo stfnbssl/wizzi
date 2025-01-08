@@ -1,0 +1,36 @@
+module
+	kind es6
+
+    const path = require('path')
+	const util = require('util')
+	const fs = require('fs')
+
+	set module.exports
+        {
+            @ getPath
+                =>
+                    param name
+                    param kind
+
+                    var configFilename
+                    if kind == 'meta'
+                        set configFilename = name ? 'wizzi.meta.config.' + name + '.js' : 'wizzi.meta.config.js'
+                    else
+                        set configFilename = name ? 'wizzi.config.' + name + '.js' : 'wizzi.config.js'
+                    let currentDir = process.cwd()
+                    let currentPath = null
+                    let configPath = null
+                    
+                    # loog 'searching ', configFilename
+                    while configPath == null && currentDir.length > 3
+                        set currentPath = path.join(currentDir, configFilename)
+                        try
+                            log 'wizzi-cli.generate.searching', currentPath
+                            const stat = fs.lstatSync(currentPath)
+                            if stat.isFile()
+                                set configPath = currentPath
+                        catch ex
+                        set currentDir = path.dirname(currentDir)
+                    
+                    info 'Found config path', configPath
+                    return configPath

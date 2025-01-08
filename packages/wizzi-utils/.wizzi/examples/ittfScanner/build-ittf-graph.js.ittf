@@ -1,0 +1,123 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfScanner_build_ittfGraph',
+            title: 'ittfScanner - build - ittfGraph',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+
+        const folderPath
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'scan-ittf'
+
+		var removeRoot = path.dirname(folderPath)
+        var baseFolder = path.dirname(folderPath)
+		info 'folderPath', folderPath
+        info 'removeRoot', removeRoot
+        info 'baseFolder', baseFolder
+
+		var options
+			{
+				@ name 'scan-ittf'
+				@ gitPath 'c:/blabla'
+
+		_ vfile
+			f_cb_test( file )
+		
+				_ file.getGlobbedFilesEx
+					_ path.join
+						@ folderPath
+						@ '**/*.ittf'
+					{
+						@ removeRoot removeRoot
+						@ dot true
+						@ ignore
+							_ path.join
+								@ folderPath
+								@ '**/node_modules/**/*.*'
+					f_cb_test( ittfs )
+						
+						log 'ittfs\n', JSON.stringify(ittfs, null, 2)
+
+                        _ ittfGraph.createIttfDocumentGraphFrom
+                            @ null
+                            {
+                                @ name 'wzpackage'
+                                @ value options.name
+                                @ createEmpty true
+                            f_cb_test( ittfDocumentGraph )
+                                var root
+                                    new IttfFsNode
+                                        @ baseFolder
+                                        @ null
+                                        {
+                                            @ isDirectory true
+                                            @ file file
+                                
+                                _ root.setSourcePaths
+                                    {
+                                        @ ittfBasePath removeRoot
+                                        @ jsCodeBasePath options.gitPath
+                    
+                                # create the IttfFsNode tree structure of the scanned folder
+                                foreach ittf in ittfs
+                        
+                                    _ root.addDocument
+                                        @ ( ittf[0] === '/' ? ittf.substr(1) : ittf )
+                                        {
+                                            @ basePath removeRoot
+                                            @ gitPath options.gitPath
+                    
+                                # analize all IttfFsNode(s) starting from root
+                                # this also searches mixed or included ittf fragments that are 
+                                # outside (up) of folderPath
+                                _ root.analize
+                                    f_cb_test()
+                                        _ file.write
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'outputs'
+                                                @ 'build-ittf-graph'
+                                                @ 'ittfFsNode_after_analize.json'
+                                            _ stringify
+                                                @ root
+                                                @ null
+                                                @ 2
+                                        # export folder infos to an mTree conformant to the 'wzpackage' schema.
+                                        _ root.toIttf(ittfDocumentGraph)
+                    
+                                        # loog 'IttfFsNode.ittfDocumentGraph\n', ittfDocumentGraph.toString()
+                                        _ ittfDocumentGraph.writeFile
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'outputs'
+                                                @ 'build-ittf-graph'
+                                                @ 'ittfFsNode_wzpackage.json.ittf'
+                                            f_cb_test( result )
+                                                log 'calling root.setInfo'
+                                                _ root.setInfo
+                                                    f_cb_test( result )
+                                                        info 'root.info.schemas', root.info.schemas
+                                                        info 'root.info.lib', root.info.lib
+                                                        _ file.write
+                                                            _ path.join
+                                                                @ __dirname
+                                                                @ 'outputs'
+                                                                @ 'build-ittf-graph'
+                                                                @ 'ittfFsNode_after_setInfo.json'
+                                                            _ stringify
+                                                                @ root
+                                                                @ null
+                                                                @ 2
+                                                        log 'done'
+

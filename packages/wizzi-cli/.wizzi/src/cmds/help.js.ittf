@@ -1,0 +1,130 @@
+﻿module
+	kind es6
+
+	const menus
+		{
+			$foreach cmd in wzCtx.Commands
+				@ ${cmd.name}
+					[
+						$if cmd.desc
+							@ "${cmd.desc}"
+							@ ""
+						@ "${cmd.cmd}"
+						@ ""
+						$if _.isArray(cmd.options) && cmd.options.length > 0
+							@ "options:"
+							$foreach opt in cmd.options
+								@ " ${opt.name} : ${opt.value}"
+								$foreach hint in opt.hints
+									@ "  |- ${hint}"
+						$if cmd.lines.length > 0
+							@ ""
+							$foreach line in cmd.lines
+								@ "${line}"
+						@ ""
+						@ ""
+						._ join('\n')
+			$*
+			@ main
+				[
+                    @ ""
+                    @ ""
+					@ "wz [noarguments | configname] | [command <options>]"
+					@ ""
+					@ "noarguments ......... execute generation using wizzi.config.js"
+                    @ "configname .......... execute generation using wizzi.config.<configname>.js"
+					@ "    . The wizzi.config.<configname>.js file is searched in the current and up folders"
+					@ ""
+					@ "commands:"
+					$$ @ "  create .............. setup wizzi for the current project"
+					@ "  job ................. execute a wizzi job"
+					@ "  fy .................. wizzify a file or folder"
+					@ "  meta ................ execute meta generation"
+					@ "  metify .............. execute the 'metafication' of a wizzi production"
+					@ "  version ............. show package version"
+					@ "  help ................ show help menu for a command"
+					@ "see help for commands:"
+					@ "wz help --[command]"
+					._ join('\n')
+			
+            *$
+			$*
+			@ create
+				[
+                    @ ""
+                    @ ""
+					@ "wz create <options>"
+					@ ""
+					@ "[--kind | -k] <kindname> ... the project kind <kindname>"
+                    @ ""
+                    @ "valid kindnames:"
+                    @ "  webpack"
+                    @ "  express"
+                    @ "  plugin"
+					._ join('\n')
+			*$
+			$*
+			@ job
+				[
+                    @ ""
+                    @ ""
+					@ "wz job <jobname> <options>"
+					@ ""
+					@ "jobname .... the name of the job definition file: <jobname>.wzjob.ittf"
+					@ "options:"
+                    @ "  [--config | -c] <configname> ...... the name of the job configuration file: <configname>.config.js"
+					@ "    . The <configname>.config.js file is searched in the current and up folders"
+					._ join('\n')
+
+			@ fy
+				[
+                    @ ""
+                    @ ""
+					@ "wz fy <options>"
+					@ ""
+					@ "options:"
+					@ "  [--source | -s] <file | folder> .... the source file or folder"
+					@ "  [--dest | -d] <file | folder> ...... the destination file or folder"
+					._ join('\n')
+
+			@ meta
+				[
+                    @ ""
+                    @ ""
+					@ "wz meta <metaname>"
+					@ ""
+					@ "options:"
+					@ "  metaname .... the name of the meta definition file: wizzi.meta.config.<metaname>.js"
+					._ join('\n')
+
+			@ metify
+				[
+                    @ ""
+                    @ ""
+					@ "wz metify <options>"
+					@ ""
+					@ "options:"
+					@ "[--source | -s] <file | folder> .... the source file or folder"
+					@ "[--dest | -d] <file | folder> ...... the destination file or folder"
+                    @ "[--complex | -c] ...... "
+                    @ "[--production | -p] ...... "
+					._ join('\n')
+			*$
+
+	set module.exports
+		=>
+			param args
+			log 'help.args', args
+			log 'args._[0]', args._[0]
+			log 'args._[1]', args._[1]
+			log "args['help']", args['help']
+			const subCmd
+				iif args._[0] === 'help'
+					then args._[1]
+					else args._[0]
+			log 'help.subCmd', subCmd
+			warn ''
+			warn '---------------------------'
+			warn 'Command:', subCmd || 'wz'
+			warn '---------------------------'
+			success menus[subCmd] || menus.main

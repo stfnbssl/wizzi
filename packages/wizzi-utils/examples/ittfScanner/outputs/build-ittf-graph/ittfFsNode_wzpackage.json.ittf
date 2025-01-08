@@ -1,0 +1,37 @@
+wzpackage scan-ittf
+	# `fs-base-uri` is the dirname of `package-base-uri`
+	# `rel-dirname(s)` and `rel-uri(s)` of `f` and `d` nodes are relative to `fs-base-uri`
+	fs-base-uri C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf
+	package-base-uri C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/ittf
+	git-base-uri c:/blabla
+	fs-info
+	f ittf
+		id root-parent-folder
+		rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner
+		rel-uri
+		f scan-ittf
+			id f_1
+			is-package-root
+			rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf
+			rel-uri scan-ittf
+			f t
+				id f_2
+				is-t-folder
+				rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf
+				rel-uri scan-ittf/t
+				d header.html.ittf
+					id d_1
+					is-fragment
+					ittf <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-kwd">└group</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">    </span><span class="pp-kwd">└params</span><span class="pp-pln"> title</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">section</span><span class="pp-pln"> header</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">        </span><span class="pp-tag">h1</span><span class="pp-kwd"> └{</span><span class="pp-expr">title</span><span class="pp-kwd">}</span></div>
+					rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t
+					rel-uri scan-ittf/t/header.html.ittf
+					schema html
+			d index.html.ittf
+				id d_2
+				ittf <div class="L1"><span class="pp-ln">   1 </span><span class="pp-pln"></span><span class="pp-tag">html</span></div><div class="L2"><span class="pp-ln">   2 </span><span class="pp-pln">    </span><span class="pp-tag">head</span></div><div class="L3"><span class="pp-ln">   3 </span><span class="pp-pln">    </span><span class="pp-tag">body</span></div><div class="L4"><span class="pp-ln">   4 </span><span class="pp-pln">        </span><span class="pp-mix frag-to-link-a" data-frag-id="d_1">header(</span><span class="pp-arg"> Great scan </span><span class="pp-mix">)</span></div>
+					fragment header
+						d-id d_1
+						rel-uri scan-ittf/t/header.html.ittf
+				rel-dirname C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf
+				rel-uri scan-ittf/index.html.ittf
+				schema html

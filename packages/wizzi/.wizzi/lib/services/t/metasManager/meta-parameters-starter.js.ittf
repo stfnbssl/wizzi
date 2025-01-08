@@ -1,0 +1,43 @@
+﻿$group
+
+	# 
+		# Search every metaPlugin registered to this MetasManager (to this WizziFactory)
+        # and build a packiFiles object with every meta parameters collection of the used MetaProduction.
+        # Uses the metaPlugin method getMetaContextDefsStarter to retrieve the meta parameters.
+        # The retrieved packiFiles filepaths are built this way:
+        # - metaCtxSchema/parameters/<ProductionName>/...
+        # - wzCtxSchema/parameters/<ProductionName>/...
+        # Each meta production must have an index.json.ittf file.
+		# return
+		# { 
+        #   { [Meta-production-name]
+        #      
+		# | wzError
+		# params
+		#   { options
+		#     { metaCtx
+        #       optional
+        #       use<Meta-production-name>
+        #         to filter metaproductions
+	m getMetaParametersStarter
+        param options
+        callback
+
+		$$ loog mdDisplayName + '.getMetaParametersStarter'
+		var
+			decl result = {}
+			
+        const search
+            =>
+                param i
+                if i >= this.metaPlugins.length
+                    r_cb( result )
+                var metaPlugin = this.metaPlugins[i]
+                $$ loog mdDisplayName + 'Object.keys(metaPlugin)', Object.keys(metaPlugin)
+                _ metaPlugin.getMetaContextDefsStarter
+                    @ options
+                    a_cb( metaContextDefs )
+                        for var k in metaContextDefs
+                            set result[k] = metaContextDefs[k]
+                        return search(++i)
+        _ search(0)

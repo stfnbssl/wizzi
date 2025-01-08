@@ -1,0 +1,147 @@
+module 
+    kind jsfile
+    
+	var verify = require('./verify')
+
+	var md = module.exports = {}
+
+    set md.escape
+        function
+            param value
+            var parts = md.analize(value)
+            var sb = []
+            foreach part in parts
+                if part.t == 0
+                    _ sb.push(part.v)
+                else
+                    _ sb.push("$" + "{'$'}{" + part.v + "}")
+            return sb.join('')
+
+    set md.analize
+        function
+            param template
+
+            var state_literal = 0
+            var state_tag = 1
+            var state_expr = 2
+
+            if typeof template === 'undefined' || template === null
+                return []
+
+            var
+                decl l = template.length
+                decl resultParts = []
+                decl literal = []
+                decl ch
+                decl chNext 
+                decl expr = []
+                decl inside_tags = 0
+                decl state = state_literal
+                decl keyOrCode
+
+            for var i=0; i<l; i++
+
+                set ch = template[i]
+                set chNext = template[i+1]
+
+                $$ loog "state, ch", state, ch
+                
+                if ch == '\\'
+                    # loog 'wizzi-mtree.loader.ittfInterpolate', template[i+1], template[i+2], template[i+3]
+                
+                if state == state_literal &&
+                    \b ch == '\\' && 
+                    \b i+3 < l && 
+                    \b template[i+1] == '$' &&
+                    \b template[i+2] == '\\' &&
+                    \b template[i+3] == '{'
+                    _ literal.push('${')
+                    set i = i +3
+                    continue
+                
+                if ch == '$'
+                    if state == state_literal
+                        if chNext == '{'
+                            set state = state_tag
+                        else
+                            _ literal.push(ch)
+                    elif state == state_expr
+                        _ expr.push(ch)
+                    else	
+                        # state == state_tag
+                        # case double $$, is text
+                        _ literal.push('$$')
+                        set state = state_literal
+                
+                elif ch == '{'
+                    if state == state_literal
+                        _ literal.push(ch)
+                    elif state == state_expr
+                        # case '{' inside $ { }
+                        set inside_tags++
+                        _ expr.push(ch)
+                    else
+                        # state == state_tag
+                        # case ${
+                        set state = state_expr
+                        set expr = []
+                        set inside_tags = 0
+                
+                elif ch == '}'
+                    if state == state_literal
+                        _ literal.push(ch)
+                    elif state == state_expr
+                        if inside_tags > 0
+                            # case '{}' inside $ { }
+                            set inside_tags--
+                            _ expr.push(ch)
+                        else
+                            set keyOrCode = expr.join('')
+                            if keyOrCode.replace(/\s/g).length == 0
+                                # case empty ${} - is ok do not replace
+                                _ literal.push('${}')
+                            else
+                                if literal.length > 0
+                                    _ resultParts.push
+                                        {
+                                            @ t 0
+                                            @ v literal.join('')
+                                    set literal.length = 0
+                                _ resultParts.push
+                                    {
+                                        @ t 1
+                                        @ v keyOrCode
+                                set expr.length = 0
+                            set state = state_literal
+                    else
+                        # state == state_tag
+                        # case strange sequence '$}' but ok
+                        _ literal.push('$}')
+                        set state = state_literal
+                
+                else
+                    if state == state_literal
+                        _ literal.push(ch)
+                    elif state == state_expr
+                        _ expr.push(ch)
+                    else
+                        # state == state_tag
+                        # case sequence '\$\*' is text
+                        _ literal.push('$')
+                        _ literal.push(ch)
+                        set state = state_literal
+
+            # check for unclosed macros
+            if state == state_expr
+                _ literal.push('${' + expr.join(''))
+            elif state == state_tag
+                _ literal.push('$')
+
+            if literal.length > 0
+                _ resultParts.push
+                    {
+                        @ t 0
+                        @ v literal.join('')
+                set literal.length = 0
+
+            return resultParts

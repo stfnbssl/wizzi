@@ -1,0 +1,22 @@
+{
+  "name": "wizzi-repo-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0",
+    "rimraf": "^5.0.5",
+    "stringify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.22",
+    "typescript": "^5.3.3"
+  }
+}

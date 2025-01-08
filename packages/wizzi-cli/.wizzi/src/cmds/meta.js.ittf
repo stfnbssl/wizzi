@@ -1,0 +1,179 @@
+﻿module
+	kind es6
+    +
+	const path = require('path')
+	const wizzi = require('@wizzi/factory')
+	const wizziUtils = require('@wizzi/utils')
+	const file = wizziUtils.file
+    const verify = wizziUtils.verify
+    const config = require('../utils/config')
+    const help = require('./help')
+    const commons = require('./commons')
+    const factory = require('../factory')
+    +
+    const kCommandName = "meta"
+    +
+	set module.exports
+		=>
+			param args
+
+            const name = args._[1]
+            const configPath = args.c || args.config
+
+            +
+            const checker = new commons.commandChecker(kCommandName)
+            +
+            if verify.isEmpty(name)
+                _ checker.checkNotEmpty
+                    @ configPath
+                    @ 'configPath'
+                    {
+                        @ message 'Meta name is also missing'
+                _ checker.checkFile
+                    @ checker.configPath
+                    @ 'configPath'
+            else
+                # do this to inform checker of the parameter
+                _ checker.checkNotEmpty
+                    @ name
+                    @ 'metaName'
+            if checker.metaName
+                _ checker.checkNotEmpty
+                    @ config.getPath(name, 'meta')
+                    @ 'configPath'
+                    {
+                        @ message 'The config file for the meta production named "' + name + '" has not be found'
+            if !checker.isValid()
+                return
+                    _ checker.checkOut
+			+
+            const configInstance = require(checker.configPath)
+            +
+			# loog 'wizzi.cli.meta.metaConfigInstance', configInstance
+			_ checker.checkNotEmpty
+				@ configInstance.pluginsBaseFolder
+				@ 'pluginsBaseFolder'
+				{
+					@ message "in config file " + checker.configPath
+			_ checker.checkArrayNotEmpty
+				@ configInstance.plugins
+				@ 'pluginsItems'
+				{
+					@ message "in config file " + checker.configPath
+			_ checker.checkNotEmpty
+				@ configInstance.metaPluginsBaseFolder
+				@ 'metaPluginsBaseFolder'
+				{
+					@ message "in config file " + checker.configPath
+			_ checker.checkArrayNotEmpty
+				@ configInstance.metaPlugins
+				@ 'metaPluginsItems'
+				{
+					@ message "in config file " + checker.configPath
+            _ checker.checkFile
+                @ configInstance.metaCtxPath
+                {
+                    @ message 'Meta context path'
+
+            if !checker.checkOut()
+                return
+
+            _ generateMeta
+                @ configInstance.metaCtxPath
+                @ configInstance.destPath
+                {
+                    @ items checker.pluginsItems
+                    @ pluginsBaseFolder checker.pluginsBaseFolder
+                {
+                    @ items checker.metaPluginsItems
+                    @ metaPluginsBaseFolder checker.metaPluginsBaseFolder
+                @ configInstance.globalContext
+                =>
+                    param err
+                    param result
+					if err
+						error ""
+						error ""
+						error err
+						error ""
+						error ""
+					else
+						success "" 
+						success "" 
+						success 'Meta production execution done'
+						success "" 
+						success "" 
+    
+    function generateMeta
+        param metaCtxPath
+        param destPath
+        param pluginsInfo
+        param metaPluginsInfo
+        param globalContext
+        param callback
+        _ loadMetaContext
+            @ metaCtxPath
+            @ pluginsInfo
+            a_cb(metaCtx)
+                success JSON.stringify(metaCtx, null, 4)
+                _ factory.createJsonWizziFactoryAndJsonFs
+                    {
+                    @ pluginsInfo
+                    @ metaPluginsInfo
+                    a_cb(wf_and_jsonFs)
+                        set metaCtx.__wz_fsc = new wizzi.FactoryServiceContext()
+                        _ wf_and_jsonFs.wf.executeMetaProduction
+                            {
+                                @ metaCtx metaCtx
+                                { paths
+                                    @ metaProductionTempFolder '___template'
+                                    @ metaProductionWizziFolder '.wizzi'
+                                @ globalContext globalContext
+                            =>
+                                param err
+                                param wizziPackiFiles
+                                if err
+                                    error err
+                                    throw err
+                                    return
+                                # loog 'wizzi.cli.meta.result.wizziPackiFiles.keys', Object.keys(wizziPackiFiles)
+                                _ metaCtx.__wz_fsc.dumpDebugObjects
+                                    {
+                                        @ kind 'packi'
+                                        @ destFolder
+                                            _ path.join
+                                                @ __dirname
+                                                @ 'dumps'
+                                                @ 'packi'
+                                _ writePackifiles
+                                    @ destPath
+                                    @ wizziPackiFiles
+
+    function loadMetaContext
+        param metaCtxPath
+        param pluginsInfo
+        param callback
+        _ factory.createWizziFactory
+            {
+            @ pluginsInfo
+            a_cb(wf)
+                _ wf.loadModel
+                    @ 'json'
+                    @ metaCtxPath
+                    {
+                        { mTreeBuildupContext
+                            { metaCtx
+                    a_cb(wizziModel)
+                        r_cb( wizziModel )
+
+    function writePackifiles
+        param folderPath
+        param packiFiles
+        for var k in packiFiles
+            _ file.write
+                _ path.join
+                    @ folderPath
+                    @ k
+                @ packiFiles[k].contents
+
+

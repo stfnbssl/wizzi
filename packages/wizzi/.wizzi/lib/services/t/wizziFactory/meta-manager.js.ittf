@@ -1,0 +1,82 @@
+$group
+
+	m getMetasManager
+        param globalContext
+		callback
+        +
+        if this.metasManager
+            r_cb( this.metasManager )
+
+        var metasManager = require('./metasManager')
+        
+        _ metasManager.createManager
+            {
+                @ metaPlugins this.metaPluginsOptions
+                @ globalContext globalContext || {}
+                @ verbose this.verbose
+            a_cb( metasManager )
+                set this.metasManager = metasManager
+                r_cb( this.metasManager )
+
+    m getProvidedMetas
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getProvidedMetas
+                    a_cb( providedMetas )
+                        r_cb( providedMetas )
+
+	#
+		# Retrieve the parameters for a given set of meta productions
+		# return
+		# | func wizzi-plugin.modelFactory.loadModel
+		# | wzError NotFound
+		# params
+        #   { options
+        #     { metaCtx
+        #       bool use<MetaProductionName>
+    m getMetaParameters
+        param options
+        callback
+        # loog 'wizziFactory.getMetaParameters.options', options
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaParametersStarter
+                    @ options || {}
+                    a_cb( metaParameters )
+                        r_cb( metaParameters )
+
+    m getMetaProductions
+        param options
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getMetaProductionStarter
+                    @ options | {}
+                    a_cb( metaProductions )
+                        r_cb( metaProductions )
+
+    m getCategoriesAndMetaProductions
+        param options
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getCategoryAndMetaProductionStarter
+                    @ options | {}
+                    a_cb( categoriesAndMetaProductions )
+                        r_cb( categoriesAndMetaProductions )
+
+    m getProvidedMetas
+        callback
+        _ this.getMetasManager
+            {
+            a_cb( mm )
+                _ mm.getProvidedMetas
+                    a_cb( providedMetas )
+                        r_cb( providedMetas )
+
+

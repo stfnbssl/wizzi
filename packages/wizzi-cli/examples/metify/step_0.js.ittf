@@ -1,0 +1,8 @@
+module
+    kind jsfile
+    const minimist = require('minimist')
+    var metify = require('../../src/cmds/metify');
+    +
+    const args = minimist(process.argv.slice(2))
+    log 'args', args
+    _ metify(args)

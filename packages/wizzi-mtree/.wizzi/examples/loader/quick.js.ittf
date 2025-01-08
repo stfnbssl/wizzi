@@ -1,0 +1,35 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Loader_Quick',
+            title: 'Loader - quick',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var ittfUri
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'quick.js.ittf'
+
+        var productionManager 
+            _ mocks.getProductionManager
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                _ loader.loadMTree
+                    @ ittfUri
+                    {
+                        { mTreeBuildUpContext
+                        @ __productionManager productionManager
+                        @ __ittfDocumentStore fsStore
+                    f_cb_test( mTree )
+                        log 'err', err
+                        log 'mTree\n', mTree                       
+                        log 'mTree.nodes[0]\n', mTree.nodes[0]                       
+                        log 'mTree.nodes[0].children[1]\n', mTree.nodes[0].children[1]
+                        log 'mTree.toIttf()\n', mTree.toIttf()

@@ -1,0 +1,65 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_gen_step_1',
+            title: 'Wizzi factory, load and generate',
+            folderLevel: 3
+        }
+
+    import util
+    import path
+	import fs
+	var stringify = require('json-stringify-safe')
+	var wizziUtils = require('@wizzi/utils')
+    +
+    # local disk filesystem
+    var file = wizziUtils.file
+	+
+    # virtual filesystem
+    var vfile = require('@wizzi/utils').vfile
+	# defaults to local disk filesystem
+	var fsfile = vfile()
+    +
+    # utilities
+    var verify = wizziUtils.verify
+    var mocks = wizziUtils.mocks    
+    +
+    # wizzi Package
+    var wizziIndex = require('../../../index')
+    +
+
+    common\example\wizzi( &opt )
+
+        _ wizziIndex.createFactory
+            {
+                { repo
+                    @ storeKind 'filesystem'
+                { plugins
+                    @ pluginsBaseFolder pluginsBaseFolderV08
+                    [ items
+                        @ "./wizzi.plugin.ittf/index.js", 
+                { globalContext
+            f_cb_test( wf ) 
+                var test1Path
+                    _ path.join
+                        @ __dirname
+                        @ 'ittf'
+                        @ 'test1.ittf.ittf'
+                _ wf.loadModelAndGenerateArtifact
+                    @ test1Path
+                    {
+                        { modelRequestContext
+                            @ metaCtx
+                                {
+                                    @ name "Hello"
+                    @ 'ittf/document'
+                    f_cb_test(artifactText)
+                        _ printValue
+                            @ 'Generated Artifact: ittf/test1'
+                            @ artifactText
+
+    common/example/t/example_prints( ${opt.name}, ${opt.level}, ${opt.step} )                                               

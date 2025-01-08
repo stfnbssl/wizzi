@@ -1,0 +1,82 @@
+{
+    name "wizzi.plugin.pandoc"
+    npnName "@wizzi/plugin.pandoc"
+    description "Wizzi plugin for pandoc documents"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "docx"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "pdf"
+            "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziPlugin
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "Pandoc plugin"
+        kind "WizziPlugin"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Schemas
+        {
+            name "pandoc"
+            plugin_type "syntax_structure"
+            hasWizzifier false
+            { wizzifier
+            [ includes
+            [ transformers
+            [ artifacts
+                {
+                    name "document"
+                    outmime "json"
+                    isDefault true
+                    contentType "application/json"
+            [ fileExtensions
+                $*
+                "docx"
+                "html"
+                "md"
+                "pdf"
+                "pptx"
+                *$

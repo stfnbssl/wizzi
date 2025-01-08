@@ -1,0 +1,87 @@
+module wizzi-utils.fs.utils
+	kind jsfile
+
+    var path = require('path')
+    var verify = require('../helpers/verify')
+
+	var md
+        set module.exports
+            { 
+
+	set md.fileInfoByPath
+		function
+			param filePath
+			param baseFolder
+			if typeof baseFolder === 'undefined'
+				set baseFolder = path.dirname(filePath)
+			set filePath = normalize(filePath)
+			var basename = path.basename(filePath)
+			var dirname = path.dirname(filePath)
+			var relFolder
+				iif path.dirname(filePath).length > baseFolder.length 
+					then path.dirname(filePath).substr(baseFolder.length + 1) 
+					else ''
+			var fileUri
+				_ filePath.substr
+			var ss = basename.split('.')
+			if ss[ss.length-1] === 'ittf'
+				var name = ss.slice(0, ss.length-2).join('.')
+				var schema = ss[ss.length-2]
+				$$ var mime = DEFAULT_MIME[schema] || schema
+				return
+					{
+						@ name name
+						@ basename basename
+						@ isIttfDocument true
+						@ isFragment filePath.indexOf('/t/') > -1
+						@ schema schema
+						$$ 1/3/24, FIXME No, mime Via, plugins only can do this
+						$$ @ mime mime
+						@ extension ss[ss.length-1]
+						@ relFolder relFolder
+						@ fullPath filePath
+						@ destBasename name + '.' + schema
+						@ destRelPath
+							iif relFolder.length > 0
+								then relFolder + '/' + name + '.' + schema
+								else name + '.' + schema
+						@ seedname ss.slice(0, -2).join('.')
+			else
+				return 
+					{
+						@ name ss.slice(0, ss.length-1).join('.')
+						@ basename basename
+						@ isIttfDocument false
+						@ schema null
+						$$ 1/3/24, mime Via, plugins only can do this
+						$$ @ mime ss[ss.length-1]
+						@ extension ss[ss.length-1]
+						@ relFolder relFolder
+						@ fullPath filePath
+						@ destBasename basename
+						@ destRelPath
+							iif relFolder.length > 0
+								then relFolder + '/' + basename
+								else basename
+						@ seedname basename
+
+    function normalize
+        param filepath
+        return verify.replaceAll(filepath, '\\', '/')
+
+	$$ FIXME No, mime Via, plugins only can do this
+	$* VIA
+	var DEFAULT_MIME
+		{
+			@ css 'css'
+			@ graphql 'graphql'
+			@ html 'html'
+			@ js 'js'
+			@ json 'json'
+			@ scss 'scss'
+			@ text 'text'
+			@ ts 'ts'
+			@ xml 'xml'
+			@ vtt 'vtt'
+			@ vue 'vue'
+	*$

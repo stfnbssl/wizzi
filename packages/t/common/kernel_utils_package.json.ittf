@@ -1,0 +1,66 @@
+$group
+    $params isWizziHelpers:boolean|false
+
+    $include versions
+	
+	name  "${wzCtx.name}"
+
+    sideEffects false
+	
+    version "${wzCtx.version}"
+	
+	description "${wzCtx.description}"
+    
+	author
+		{
+			name "Stefano Bassoli"
+			email "stfn.bssl@gmail.com"
+	
+	private false
+	
+	licenses
+		[
+			$if wzCtx.license == 'MIT'
+                {
+                    type "MIT"
+                    url "https://github.com/stfnbssl/wizzi/tree/master/packages/${wzCtx.gitname}/license.txt"
+                    directory "packages/${wzCtx.gitname}"
+
+    bugs
+        {
+            url "https://github.com/stfnbssl/wizzi/issues"
+  
+    $$ homepage "https://wizzihub.com/docs/packages/${wzCtx.gitname}.html",
+	
+	repository
+		{
+			type "git"
+			url "https://github.com/stfnbssl/wizzi"
+            directory "packages/${wzCtx.gitname}"
+
+	engines
+		{
+			node ">=0.10.28"
+			npm ">=1.4.28"
+	
+	scripts
+		{
+			test "mocha tests/**/*.js --full-trace"
+            $hook scripts
+	
+	dependencies
+		{
+			async "^2.1.5"
+			chalk "^1.1.3"
+			iconv-lite "^0.4.15"
+			json-stringify-safe "^5.0.1"
+			lodash "^4.17.4"
+            $if isWizziHelpers == false
+                @wizzi/helpers "${versions['@wizzi/helpers']}"
+			$hook
+	
+	devDependencies
+		{
+            del "^4.1.1"
+            expect.js "^0.3.1"
+			$hook devDependencies

@@ -1,0 +1,151 @@
+﻿module 
+    kind jsfile
+
+    var path = require('path')
+    var util = require('util')
+    var async = require('async')
+    # TODO VIA var file = require('@wizzi/utils').file
+    var log
+        _ require('../util/log')
+            ( 
+                @ module
+    +
+	function logme
+        if false
+            _ console.log.apply(console, arguments)
+    +
+	wz-class ArtifactPersister
+        ctor 
+            param productionStep
+            set this.productionStep = productionStep
+            _ log.setLevel
+                @ productionStep.productionManager.options.verbose
+    
+		m toFile
+            param callback
+			
+			var that = this
+			if this.productionStep.isWizziModelDomArtifact()
+				# TODO 
+				# Write here model DOM artifacts ?
+				# The wizzi model DOM artifacts could be generated in memory and retrieved
+				# by the this.productionStep.getItemsToPersistToFile() method
+				# TODO Add more info to result info ?
+				return
+					_ callback
+						@ null
+						[
+							{
+								@ oper 'generate-model-DOM'
+								@ status 'success'
+								{ item
+									@ filePath 'Unavailable'
+			else
+				_ this.productionStep.getItemsToPersistToFile
+					f_cb( items )
+                        $* old
+						_ async.mapSeries
+							@ items
+							@ asyncArtifactFilePersister_hof(that.productionStep)
+							@ callback
+                        *$
+                        var results = []
+                        var fileService = that.productionStep.getFileService()
+                        function doit
+                            param ndx
+                            var item = items[ndx]
+                            if !item
+                                r_cb(results)
+                            _ executePersist
+                                @ fileService
+                                @ item
+                                f_cb( result )
+                                    _ results.push
+                                        @ result
+                                    _ process.nextTick
+                                        =>
+                                            _ doit
+                                                @ ndx + 1
+                        _ doit
+                            @ 0
+    
+		m toTest
+            var ret
+                [ 
+			_ this.productionStep.getItemsToPersistToFile
+				f_cb( items )
+					foreach item in items
+						_ ret.push
+							{ 
+								@ filePath item.filePath
+								@ content item.genContext.getContent()
+            return ret
+    
+    function asyncArtifactFilePersister_hof
+		param productionStep
+		var fileService = productionStep.getFileService()
+        return 
+            function 
+                param persisteable
+                param callback
+                _ executePersist
+                    @ fileService
+                    @ persisteable
+                    @ callback
+
+	function executePersist
+        param fileService
+        param persisteable
+        param callback
+        +
+        _ logme
+            @ 'AsyncArtifactFilePersister.persist'
+            @ persisteable.filePath
+            _ persisteable.genContext.getContent()
+        +   
+        _ fileService.openWrite
+            @ persisteable.filePath
+            a_cb( stream )
+                _ persisteable.genContext.toStream(stream)
+                _ stream.end
+                    a_cb()
+                        _ log.success('Written to file: ' + persisteable.filePath)
+                        _ callback
+                            @ null
+                            {
+                                @ oper 'persist-to-file'
+                                @ item
+                                    {
+                                        @ filePath persisteable.filePath
+                                @ status 'success'
+
+    $* old
+    function asyncArtifactFilePersister_hof
+		param productionStep
+		var fileService = productionStep.getFileService()
+        return 
+            function 
+                param persisteable
+                param callback
+
+				_ logme
+                    @ 'AsyncArtifactFilePersister.persist'
+                    @ persisteable.filePath
+                    _ persisteable.genContext.getContent()
+                    
+                _ fileService.openWrite
+                    @ persisteable.filePath
+                    a_cb( stream )
+                        _ persisteable.genContext.toStream(stream)
+                        _ stream.end
+                            a_cb()
+                                _ log.success('Written to file: ' + persisteable.filePath)
+                                _ callback
+                                    @ null
+                                    {
+                                        @ oper 'persist-to-file'
+                                        @ item
+                                            {
+                                                @ filePath persisteable.filePath
+                                        @ status 'success'
+    *$

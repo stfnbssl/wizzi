@@ -1,0 +1,144 @@
+﻿$group
+
+	#
+		# This allows model loadings and generations from text strings
+		# params
+        #   string ittfContent
+        #   string schema
+		#   { options
+		#     { globalContext
+		#       optional
+        # returns
+        #   {
+        #     { wizziFactory
+        #       :ref WizziFactory
+        #     string ittfDocumentUri
+        #
+	m createSingleTextSourceFactory
+		string ittfContent
+		string schema
+		param options
+		param callback
+
+		if typeof callback === 'undefined'
+			set callback = options
+			set options = {}
+
+        check_wz_callback( WizziFactory.createSingleTextSourceFactory )
+
+		var tempIttfDocumentUri = "c:/basefolder/temp." + schema + '.ittf'
+		var documents
+			[
+				{
+					@ path tempIttfDocumentUri
+					@ content ittfContent
+		try
+            _ JsonComponents.createJsonFsData
+                @ documents
+                a_cb( jsonFsData )
+                    set options.jsonFsData = jsonFsData
+                    _ this.createJsonFactory
+                        @ options
+                        f_cb( wf )
+                            return
+                                _ callback
+                                    @ null
+                                    {
+                                        @ wizziFactory wf
+                                        @ ittfDocumentUri tempIttfDocumentUri
+        catch ex
+            r_cb_wz_err( WizziFactoryError, createSingleTextSourceFactory, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+
+	#
+		# Creates a json factory and its json file system from a packiFiles object
+		# params
+		#   { packiFiles
+        #   { options
+        #     { globalContext
+        #       optional
+        # returns
+        #   {
+        #     { wf
+        #       :ref WizziFactory
+        #     { jsonFs
+        #       :ref @wizzi/repo/JsonFs
+        #
+    m createJsonFactoryAndJsonFs
+        param packiFiles
+        param options
+        param callback
+        +
+        const jsonDocuments
+            $$ :ref @wizzi/repo/JsonDocumentDto
+            [
+        _ Object.keys(packiFiles).map
+            =>
+                param key
+                if packiFiles[key].type === 'CODE' && verify.isNotEmpty(packiFiles[key].contents)
+                    const filePath = packiUtils.ensurePackiFilePrefix(key)
+                    $$ loog 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[key].contents
+        _ JsonComponents.createJsonFs
+            @ jsonDocuments
+            a_cb( jsonFs )
+                set options.jsonFs = jsonFs
+                _ this.createJsonFactory
+                    @ options
+                    a_cb( wf )
+                        _ callback
+                            @ null
+                            {
+                                @ wf wf
+                                @ jsonFs jsonFs
+	
+	#
+		# Creates an internal JSON factory 
+        #   with same factory plugins as this, and no meta plugins.
+		# params
+		#   { options
+        #     one-of 
+		#       { jsonFs
+        #         :ref @wizzi/repo/JsonFs
+		#       { jsonFsData
+        #         :ref @wizzi/repo/JsonFsData
+        #     { globalContext
+		#       optional
+    m createJsonFactory
+		param options
+		param callback
+        +
+		var wf
+			new WizziFactory
+				@ this.user
+				@ this.role
+		+
+        _ wf.initialize
+			{
+				{ repo
+					@ storeKind 'json'
+					@ storeJsonFs options.jsonFs
+                    @ storeJsonFsData options.jsonFsData
+				@ plugins this.pluginsOptions
+				@ globalContext options.globalContext || {}
+			@ callback
+
+    m getPackiFilesFromJsonFactory
+        param destFolder
+        callback
+        if this.storePool.getKind() == 'json'
+            _ packiUtils.jsonFsToPackiFiles
+                _ this.storePool.getJsonFs
+                @ destFolder
+                @ callback
+        else
+            _ callback
+                _ error
+                    @ 'InvalidOperation'
+                    @ 'getPackiFilesFromJsonFactory'
+                    @ 'This instance is not a json factory', this.storePool.kind

@@ -1,0 +1,82 @@
+﻿$group
+
+	# 
+		# Get the list of schemas with a cheatsheet
+		# returns
+		#   [
+		#     {
+		#        string name
+		#          schema name
+	m getCheatsheetList
+		return this.providedCheatsheetFolders
+
+	# 
+		# Check if a wizzi schema has a cheatsheet
+		# params
+		#  string schemaName
+		# returns
+		#   true|false
+	m hasCheatsheetFolder
+		string schemaName
+		return this.availableCheatsheetFolders().indexOf(schemaName) > -1
+
+	# 
+		# retrieve a cheatsheet folder searching the factoryPlugins
+		# registered to this plugins manager
+		# params
+		#  string schemaName
+		# returns
+		#  | api-ref wizzi.PackiFiles
+		#  | wzError NotFound
+		
+	m getCheatsheetFolder
+		string schemaName
+		callback
+		# loog 'PluginsManager.getCheatsheetFolder.schemaName: ' + schemaName
+		+
+			
+		var
+			decl found = null
+			decl foundInPlugin = null
+            decl pluginVersion
+			decl result = null
+
+		# all factoryPlugins are searched, last matching encountered wins.
+		var that = this
+		function doSearch
+			param ndx
+			var item = that.factoryPlugins[ndx]
+			if !item
+				if !result
+					var msg = 'getCheatsheet. Cannot find cheatsheet: ' + schemaName + '\n' +
+						\b 'availables cheatsheet folders: ' + that.availableCheatsheetFolders().join(', ')
+					_ log.error
+						@ msg
+					r_cb_wz_err( NotFound, getCheatsheetFolder )
+						@ msg
+				else
+					_ log.success
+						@ 'getCheatsheet. Found cheatsheet: ' + schemaName
+							\b + ' in plugin: ' + foundInPlugin 
+							\b + ', version:' + (pluginVersion || 'unknown')
+					r_cb(result)
+			# loog 'searching cheatsheets folder for schema', schemaName, ' in module', item.getName()
+			if item.getCheatsheetFolder
+				_ item.getCheatsheetFolder
+					@ schemaName
+					f_cb( packiCheatsheetFolder )
+						# loog 'found', !!packiCheatsheetFolder
+						if packiCheatsheetFolder
+							set result = packiCheatsheetFolder
+							set foundInPlugin = item.getFilename()
+							if verify.isFunction(item.getVersion)
+								set pluginVersion = item.getVersion()
+						_ doSearch
+							@ ndx + 1
+			else
+				_ doSearch
+					@ ndx + 1
+		_ doSearch
+			@ 0
+		
+

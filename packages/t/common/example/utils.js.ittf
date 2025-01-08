@@ -1,0 +1,76 @@
+$group
+	$params &opt
+
+    $$
+    $$ Example skeleton specific for the 'wizzi-utils' kernel package
+    $$
+
+	#
+		# Example: ${opt.name}
+		#
+	
+    $include example_utils_includes
+    
+    $if opt.folderLevel == 1
+        var wizziUtils = require('../index')
+        var vfile = require('../lib/fs/vfile')
+        var uriParser = require('../lib/fs/uriParser')
+        var fsUtils = require('../lib/fs/utils')
+        var IttfDocumentGraph = require('../lib/ittfGraph/ittfDocumentGraph')
+        var IttfFsNode = require('../lib/ittfScanner/ittfFsNode')
+        var ittfScanner = require('../lib/ittfScanner/index')
+        var meta = require('../lib/meta/index')
+        var packi = require('../lib/packi/index')
+        var fs = require('../lib/fs/index')
+        var ittfGraph = require('../lib/ittfGraph/index')
+
+    $elif opt.folderLevel == 2
+        var wizziUtils = require('../../index')
+        var vfile = require('../../lib/fSystem/vfile')    
+        var uriParser = require('../../lib/fSystem/uriParser')
+        var fsUtils = require('../../lib/fSystem/utils')
+        var IttfDocumentGraph = require('../../lib/ittfGraph/ittfDocumentGraph')
+        var IttfFsNode = require('../../lib/ittfScanner/ittfFsNode')
+        var ittfScanner = require('../../lib/ittfScanner/index')
+        var meta = require('../../lib/meta/index')
+        var packi = require('../../lib/packi/index')
+        var fs = require('../../lib/fSystem/index')
+        var ittfGraph = require('../../lib/ittfGraph/index')
+
+    $elif opt.folderLevel == 3
+        var wizziUtils = require('../../index')
+        var vfile = require('../../../lib/fSystem/vfile')    
+        var uriParser = require('../../../lib/fSystem/uriParser')
+        var fsUtils = require('../../../lib/fSystem/utils')
+        var IttfDocumentGraph = require('../../../lib/ittfGraph/ittfDocumentGraph')
+        var IttfFsNode = require('../../../lib/ittfScanner/ittfFsNode')
+        var ittfScanner = require('../../../lib/ittfScanner/index')
+        var meta = require('../../../lib/meta/index')
+        var packi = require('../../../lib/packi/index')
+        var fs = require('../../../lib/fSystem/index')
+        var ittfGraph = require('../../../lib/ittfGraph/index')
+
+    var file = wizziUtils.file
+	var fsfile = vfile()
+    var verify = wizziUtils.verify
+    var mocks = wizziUtils.mocks        
+
+	$hook imports
+
+    $hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'
+    
+	example_prints( ${opt.name}, ${opt.level}, ${opt.step} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

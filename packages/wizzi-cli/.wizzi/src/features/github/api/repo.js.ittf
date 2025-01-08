@@ -1,0 +1,194 @@
+module
+    kind es6
+    const fetch = require('node-fetch')
+    const path = require('path')
+    const git = require('isomorphic-git')
+    const memfs = require('memfs')
+    const http = require('isomorphic-git/http/node')
+    const
+        {
+            @ createFsFromVolume
+            @ Volume
+        = memfs
+    const fSystem = require('@wizzi/utils').fSystem
+    +
+    const volume = new Volume()
+    const fs = createFsFromVolume(volume)
+    set fs.kind = 'filesystem'
+    const wizzifs
+        _ fSystem.vfile
+            @ fs
+    +
+    var md = module.exports = {}
+    set md.getRepository
+        async-function
+            param owner
+            param repo
+            param accessToken
+            r_promise()
+                _ fetch
+                    `lit
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        +
+                    _ getOptions(accessToken)
+                    ._ then
+                        =>
+                            param response
+                            if !response.ok
+                                throw new Error(response.status.toString())
+                            return response.json()
+                    ._ then
+                        async=>
+                            param responseData
+                            $*
+                            set responseData._revisions =
+                                await
+                                    _ getRevisions(owner, repo, accessToken)
+                            set responseData._commits =
+                                await
+                                    _ getCommits(owner, repo, accessToken)
+                            *$
+                            set responseData._contents =
+                                await
+                                    _ md.getContents(owner, repo, accessToken)
+                            _ resolve
+                                @ responseData
+                    ._ catch
+                        =>
+                            param err
+                            _ reject
+                                @ err
+    +
+    set md.getContents    
+        async-function
+            param owner
+            param repo
+            param accessToken
+            log 'getContents.enter', owner, repo, accessToken
+            r_promise()
+                _ fetch
+                    `lit
+                        + https://api.github.com/repos/
+                        @ owner
+                        + /
+                        @ repo
+                        + /contents
+                    _ getOptions(accessToken)
+                    ._ then
+                        =>
+                            param response
+                            if !response.ok
+                                throw new Error(response.status.toString())
+                            _ response.json()
+                    ._ then
+                        =>
+                            param responseData
+                            log 'getContents', responseData
+                            return
+                                _ resolve
+                                    @ responseData
+                    ._ catch
+                        =>
+                            param err
+                            _ reject
+                                @ err
+    +
+    set md.cloneBranch
+        async-function
+            param repo
+            param branch
+            param kind
+            _ volume.reset()
+            const dir = '/' + repo.name
+            r_promise()
+                _ fs.mkdir
+                    @ dir
+                    async=>
+                        param err
+                        if err
+                            return reject(err)
+                        try
+                            await
+                                _ git.clone
+                                    {
+                                        @ fs
+                                        @ http
+                                        @ dir
+                                        @ url
+                                            `lit
+                                                + https://github.com/
+                                                @ repo.owner
+                                                + /
+                                                @ repo.name
+                                                +
+                                        @ ref
+                                            `lit
+                                                +
+                                                @ branch
+                                                +
+                                        @ singleBranch true
+                                        @ depth 10
+                                        @ onAuth
+                                            =>
+                                                param url
+                                                return
+                                                    {
+                                                        @ password repo.token
+                                                        # oauth2format 'github'
+                            let files
+                                _ wizzifs.getFiles
+                                    @ dir
+                                    {
+                                        @ deep true
+                                        @ documentContent true
+                            const packies
+                                {
+                            _ files.forEach
+                                =>
+                                    param file
+                                    if file.relPath.startsWith('.git/') == false
+                                        if kind === 'all' || kind === 'ittf' && file.relPath.endsWith('.ittf') == true
+                                            set packies[file.relPath] =
+                                                {
+                                                    @ type "CODE"
+                                                    @ contents file.content
+                            const log
+                                await
+                                    _ git.log
+                                        {
+                                            @ fs
+                                            @ dir
+                            return
+                                _ resolve
+                                    {
+                                        @ owner repo.owner
+                                        @ name repo.name
+                                        @ description ''
+                                        @ branch
+                                        @ files packies
+                                        @ commitHistory log
+                        catch ex
+                            return
+                                _ reject
+                                    @ ex
+    +
+    function getOptions
+        param accessToken
+        return
+            {
+                @ method 'GET'
+                @ headers headers(accessToken)
+
+    +
+    function headers
+        param accessToken
+        const ret
+            {
+                @ 'Accept' 'application/vnd.github.v3+json'
+                @ 'Content-Type' 'application/json'
+        if accessToken
+            set ret['Authorization'] = 'token ' + accessToken
+        return ret

@@ -1,0 +1,131 @@
+module
+	kind es6
+    +
+    const wizzi = require('@wizzi/factory')
+    const wizziUtils = require('@wizzi/utils')
+    const vfile = wizziUtils.vfile
+    const packi = wizziUtils.packi
+    const fSystem = wizziUtils.fSystem
+    +
+    const packiFilePrefix = 'json:/'    
+    +
+    function ensurePackiFilePrefix
+        param filePath
+        return
+            iif filePath.startsWith(packiFilePrefix)
+                then filePath
+                else packiFilePrefix + filePath
+    +
+    const md = module.exports = {}
+    +
+	set md.createWizziFactory
+        function
+            param globalContext
+            param extraPlugin
+            param callback
+            warn 'extraPlugin', extraPlugin
+            _ wizzi.fsFactory
+                {
+                    @ plugins extraPlugin
+                    @ globalContext globalContext || {}
+                @ callback
+
+    set md.createJsonWizziFactoryAndJsonFs 
+        function
+            param packiFiles
+            param extraPlugin
+            param extraMetaPlugins
+            param callback
+            const jsonDocuments
+                $$ :ref JsonDocumentDto
+                [
+            log 'createJsonWizziFactoryAndJsonFs'
+            _ Object.keys(packiFiles).map
+                =>
+                    param value
+                    if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
+                        const filePath = ensurePackiFilePrefix(value)
+                        $$ loog 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                        _ jsonDocuments.push
+                            {
+                                @ path filePath
+                                @ content packiFiles[value].contents
+            _ wizzi.JsonComponents.createJsonFs
+                @ jsonDocuments
+                =>
+                    param err
+                    param jsonFs
+                    if err
+                        return callback(err)
+                    _ wizzi.jsonFactory
+                        {
+                            @ jsonFs jsonFs
+                            @ plugins extraPlugin
+                            @ metaPlugins extraMetaPlugins
+                        a_cb( wf )
+                            _ callback
+                                @ null
+                                {
+                                    @ wf wf
+                                    @ jsonFs jsonFs
+
+    set md.getDefaultPlugins
+        function
+            return
+                [
+                    $foreach item in wzCtx.Build.wizziFactory.plugins
+                        @ "./wizzi.plugin.${item}/index.js"
+    
+    set md.getDefaultPluginsBaseFolder
+        function
+            return "${wzCtx.Build.wizziFactory.pluginsBaseFolder}"
+    +
+	set md.createContextFromFile
+        function
+            param filePath
+            param previousContext
+            param extraPlugin
+            param callback
+            const fInfo
+                _ fSystem.fileInfoByPath
+                    @ filePath
+            if fInfo.isIttfDocument
+                if fInfo.schema == 'json'
+                    _ md.createWizziFactory
+                        {
+                        @ extraPlugin
+                        a_cb( wf )
+                            _ wf.loadModelAndGenerateArtifact
+                                @ filePath
+                                {
+                                    { modelRequestContext
+                                        @ mTreeBuildupContext previousContext || {}
+                                    { artifactRequestContext
+                                @ null $$ artifactName
+                                a_cb_throw(result)
+                                    log 'result', result
+                                    _ callback
+                                        @ null
+                                        _ JSON.parse
+                                            @ result
+                else
+                    _ callback
+                        {
+                            @ __is_error true
+                            @ message 'Wizzi schema of context file ' + filePath + ' not managed'
+            else
+                if fInfo.mime == 'json'
+                    _ vfile
+                        a_cb( vfileImpl )
+                            _ vfileImpl.read
+                                @ filePath
+                                a_cb( result )
+                                    _ callback
+                                        @ null
+                                        _ JSON.parse
+                                            @ result
+                else
+                    _ callback
+                        {
+                            @ __is_error true
+                            @ message 'Mime type of context file ' + filePath + ' not managed'

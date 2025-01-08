@@ -1,0 +1,113 @@
+$group
+    #
+        # Build, if not existent, and retrieve a WizziMetaProduction by its production name.
+        # Returns
+            # { metaProduction
+                # string productionName
+                # string metaNamespace
+                # { folderTemplates
+                # { ittfDocumentTemplates
+                # { plainDocuments
+                # { metaCtxSchema
+                # { wzCtxSchema
+    m getMetaProduction
+        param productionName
+        param callback
+        +
+        var metaProduction = this.metaProductions[productionName] || null
+        +
+        if metaProduction != null
+            r_cb( metaProduction )
+        +
+        set metaProduction = {}
+        return
+            _ this.getFolderTemplates
+                @ productionName
+                @ metaProduction
+                a_cb()
+                    set metaProduction.productionName = productionName
+                    set metaProduction.metaNamespace = "${wzCtx.metaNamespace}"
+                    set this.metaProductions[productionName] = metaProduction
+                    r_cb( metaProduction )
+    #
+        # If the ittf/<productionName>/folderTemplates folder exists
+        # enrich the metaProduction object with the folderTemplates property
+        # that contains a packiFile object with the content of the ittf/<productionName>/folderTemplates folder.
+        # Returns a chained call to the getIttfDocumentTemplates method.
+    m getFolderTemplates
+        param productionName
+        param metaProduction
+        param callback
+        var folderPath = packi.filePrefix + productionName + '/folderTemplates'
+        _ this.jsonFile.isDirectory
+            @ folderPath
+            a_cb( result )
+                # loog 'getFolderTemplates', productionName, folderPath, result
+                if result
+                    _ this.createPackifilesFromFs
+                        @ folderPath
+                        a_cb( result )
+                            set metaProduction.folderTemplates = result
+                            return
+                                _ this.getIttfDocumentTemplates
+                                    @ productionName
+                                    @ metaProduction
+                                    @ callback
+                else
+                    return
+                        _ this.getIttfDocumentTemplates
+                            @ productionName
+                            @ metaProduction
+                            @ callback
+    #
+        # If the ittf/<productionName>/ittfDocumentTemplates folder exists
+        # enrich the metaProduction object with the ittfDocumentTemplates property
+        # that contains a packiFile object with the content of the ittf/<productionName>/ittfDocumentTemplates folder.
+        # Returns a chained call to the getPlainDocuments method.
+    m getIttfDocumentTemplates
+        param productionName
+        param metaProduction
+        param callback
+        var folderPath = packi.filePrefix + productionName + '/ittfDocumentTemplates'
+        _ this.jsonFile.isDirectory
+            @ folderPath
+            a_cb( result )
+                # loog 'getIttfDocumentTemplates', productionName, folderPath, result
+                if result
+                    _ this.createPackifilesFromFs
+                        @ folderPath
+                        a_cb( result )
+                            set metaProduction.ittfDocumentTemplates = result
+                            return
+                                _ this.getPlainDocuments
+                                    @ productionName
+                                    @ metaProduction
+                                    @ callback
+                else
+                    return
+                        _ this.getPlainDocuments
+                            @ productionName
+                            @ metaProduction
+                            @ callback
+    #
+        # If the ittf/<productionName>/plainDocuments folder exists
+        # enrich the metaProduction object with the plainDocuments property
+        # that contains a packiFile object with the content of the ittf/<productionName>/plainDocuments folder.
+        # Returns a chained call to the getMetaCtxSchema method.
+    m getPlainDocuments
+        param productionName
+        param metaProduction
+        param callback
+        var folderPath = packi.filePrefix + productionName + '/plainDocuments'
+        _ this.jsonFile.isDirectory
+            @ folderPath
+            a_cb( result )
+                # loog 'getPlainDocuments', productionName, folderPath, result
+                if result
+                    _ this.createPackifilesFromFs
+                        @ folderPath
+                        a_cb( result )
+                            set metaProduction.plainDocuments = result
+                            r_cb()
+                else
+                    r_cb()

@@ -1,0 +1,38 @@
+module
+	
+	var Context = require('../../lib/jswizzi/jsWizziContext')
+    var ip = require('../../lib/loader/ittfInterpolate')
+
+	var ctx = new Context()
+    _ ctx.setValue('name', 'stefi') 
+
+    $*
+    $$var result_escaped_delimiters = ip("\${name}", ctx)
+    $$log 'result_escaped_delimiters', result_escaped_delimiters
+
+
+    var result_unclosed = ip("before ${ after", ctx)
+    log 'result_unclosed', result_unclosed
+    
+    var result_empty = ip("before ${} after", ctx)
+    log 'result_empty', result_empty
+
+    var result_paired_graph_enclosed = ip("$" + "{ var x = 0; for ( var i=0; i<10; i++) { x++; }; return x; } }", ctx)
+    log 'result_paired_graph_enclosed', result_paired_graph_enclosed
+
+    $$ var testVar = "dark-light-icon${'$'}{ \'(\' }&md"
+    
+    $$ var testVar1 = "${'$'}{'$'}{metaCtx.description}"
+    
+    *$
+
+    var testVar1 = "$" + "{'$'}{'$'}{'$'}{metaCtx.description}"
+    var result1 = ip(testVar1, ctx)
+    log 'result1', result1
+    
+    $*
+    var result2 = ip(result1, ctx)
+    log 'result2', result2
+    *$
+
+

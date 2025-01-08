@@ -1,0 +1,90 @@
+$group
+
+	#
+		# Execute a wizzi job
+		# 
+		# params
+		#   { jobRequest type 1
+		#     string name
+		#     string path
+		#       # path to the `wzjob` ittf document that the wizzi.production.programManager will load.
+		#     { productionOptions
+		#     { globalContext
+		#   { jobRequest type 2
+		#     { wzjobModel
+		#       # `wzjob` wizzi model, built programmatically or previously loaded
+		#     { productionOptions
+		#     { globalContext
+		#
+	m executeJob
+		{ jobRequest
+			{ productionOptions
+		callback
+		+
+		warn 'wizzi.wizziFactory.executeJob.jobRequest', jobRequest
+		+
+		if verify.isNotEmpty(jobRequest.path)
+			# jobRequest type 1
+			_ this._executeJob_by_path
+				@ jobRequest
+				@ callback
+		else
+			# jobRequest type 2
+			_ this._executeJob_by_wzjobModel
+				@ jobRequest
+				@ callback
+
+	m _executeJob_by_path
+		param jobRequest
+		param callback
+
+		var that = this
+		_ this.storePool.get
+			f_cb( store )
+				_ store.documentExists
+					@ jobRequest.path
+					f_cb( exists )
+						# loog 'exists', exists
+						if !exists
+							r_cb_error( NotFound, _executeJob_by_path )
+								@ 'Cannot find wzjob ittf document: ' + jobRequest.path
+						else
+							info 'wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext
+							checked_call( pman
+								_ that.createProductionManager
+									@ jobRequest.productionOptions
+									@ jobRequest.globalContext
+							+
+							checked_call( notUsed
+								_ pman.addWzjobRequest
+									{ 
+										{ wzjob
+											@ ittfDocumentUri jobRequest.path
+							+
+							info 'wizzi.wizziFactory._executeJob_by_path,pman.globalContext()', pman.globalContext()
+							+
+                            try
+                                _ pman.run
+                                    f_cb( result )
+                                        _ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' run completed')
+                                        _ pman.persistToFile
+                                            f_cb( persistResult )
+                                                _ log.success('wizzi.wizziFactory.executeJob.' + jobRequest.name + ' persistToFile completed')
+                                                var result
+                                                    {
+                                                        @ persistResult persistResult
+                                                        @ productionContext pman.productionContext
+                                                _ pman.terminate
+                                                return
+                                                    _ callback(null, result)
+                            catch ex
+                                r_cb_wz_err( WizziFactoryError, _executeJob_by_path, ex )
+                                    {
+                                        @ message 'See inner error'
+                                        { parameter
+                                            @ wzjobIttfDocumentUri jobRequest.path
+
+	m _executeJob_by_wzjobModel
+		param jobRequest
+		param callback
+		throw new Error('wizzi.wizziFactory._executeJob_by_wzjobModel not implemented.')

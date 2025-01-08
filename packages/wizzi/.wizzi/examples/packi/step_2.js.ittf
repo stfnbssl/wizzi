@@ -1,0 +1,41 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'packi_step_2',
+            title: 'Packi - prettify',
+            folderLevel: 2
+        }
+
+    common\example\wizzi( &opt )
+
+        +
+        _ createPackiManager
+            =>
+                param err
+                param packiManager
+                if err
+                    error err
+                    return
+                
+                var genFolderPathFs
+                    _ path.join 
+                        @ __dirname
+                        @ 'ittf'
+                        @ 'folder1'
+
+                _ createPackifilesFromFs
+                    @ genFolderPathFs
+                    a_cb( folder1PackiFiles )
+                        _ packiManager.prettify
+                            @ folder1PackiFiles
+                            =>
+                                param err
+                                param result
+                                if err
+                                    error err
+                                    return
+                                info 'packiManager.prettify.result', result

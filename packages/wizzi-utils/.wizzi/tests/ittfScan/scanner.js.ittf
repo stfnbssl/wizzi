@@ -1,0 +1,32 @@
+﻿module 
+    kind jsfile
+	+
+	import path
+	import util
+	+
+    var expect = require('expect.js')
+	var ittfScanner = require('../../lib/ittfScanner/index')
+	var root
+	+
+	describe the folderScanner module
+		+ 
+		it-async should scan a folder
+
+            _ ittfScanner.scanFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'first'
+                {
+                    @ name 'first'
+                    @ gitPath 'c:/blabla'
+                f_cb(ittfDocumentGraph)
+                    tobe_object(ittfDocumentGraph)
+                    _ ittfDocumentGraph.writeFile
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'first.wfpackage.ittf'
+                        f_cb_test( result )
+                            info 'err, result', err, result
+                            _ done

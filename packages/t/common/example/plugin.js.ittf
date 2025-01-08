@@ -1,0 +1,165 @@
+﻿module
+	kind jsfile
+
+	var path = require('path')
+	var fs = require('fs')
+	var wizzi = null
+	var wizziUtils = require('@wizzi/utils')
+	var verify = wizziUtils.verify
+	var file = wizziUtils.file
+	var mocks = wizziUtils.mocks
+	var mtree = require('@wizzi/mtree')
+	var errors = wizziUtils.exampleErrors
+	var stringify = require('json-stringify-safe')
+	$hook imports
+
+	function executeExample
+		$hook
+
+	function getFiles
+		param srcpath
+		param schema
+		return
+			_ fs.readdirSync
+				@ srcpath
+				._ filter
+					=>
+						param file
+						return 
+							&&
+								_ fs.lstatSync(path.join(srcpath, file)).isFile()
+								_ verify.endsWith
+									@ file
+									iif schema === 'ittf'
+										then '.ittf'
+										else '.' + schema + '.ittf'
+
+	function getFilesData
+		param srcpath
+		param schema
+		var files
+			_ fs.readdirSync
+				@ srcpath
+				._ filter
+					=>
+						param file
+						return 
+							&&
+								_ fs.lstatSync(path.join(srcpath, file)).isFile()
+								_ verify.endsWith(file, '.' + schema + '.ittf')
+		var ret = []
+		foreach file in files
+			_ ret.push
+				{
+					@ path file
+					@ name file.substring(0, file.length - ('.' + schema + '.ittf').length)
+					@ fullPath
+						_ path.join
+							@ srcpath
+							@ file
+		return ret
+
+    function createWizziFactory
+        param globalContext
+        param callback
+
+        if wizzi == null
+            # The wizzi package will be a previous version from wizzi-mono/node_modules
+            $virtual requireWizzi
+                set wizzi = require('wizzi')
+        info '"wizzi" package version', wizzi.version
+        
+        _ wizzi.fsFactory
+            {
+                { plugins
+                    $hook plugins
+                @ globalContext globalContext || {}
+            @ callback
+
+	function getWizziObject
+        param callback
+        if typeof(callback) === 'undefined'
+            return 
+                {
+                    @ loadMTree 
+                        _ mtree.createLoadMTree
+                            @ mocks.repo.getCreateFilesystemStore()
+                            {
+                                @ useCache false
+                    @ file wizziUtils.file
+                    @ verify wizziUtils.verify
+                    @ errors errors
+        else
+            _ createWizziFactory
+                {
+                a_cb(wf) 
+                    return 
+                        _ callback
+                            @ null
+                            {
+                                @ loadMTree 
+                                    _ mtree.createLoadMTree
+                                        @ mocks.repo.getCreateFilesystemStore()
+                                        {
+                                            @ useCache false
+                                @ file wizziUtils.file
+                                @ verify wizziUtils.verify
+                                @ errors errors
+                                @ wizziFactory wf
+
+	function getLoadModelContext
+		param mtreeBuilUpContext
+		return 
+			_ mocks.getLoadModelContext
+				@ mtreeBuilUpContext
+
+	function executeWizziJob
+		param wzjobDocumentUri
+		param options
+		set options = options || {}
+		set options.plugins = options.plugins || []
+		set options.globalContext = options.globalContext || {}
+        var pluginsBaseFolder = null
+        var wfBaseFolder = null
+        var jobPlugins = []
+        if options.plugins
+            set wfBaseFolder = options.wfBaseFolder
+            set pluginsBaseFolder = options.pluginsBaseFolder
+            set jobPlugins = options.plugins
+        else
+            set jobPlugins
+                [
+                    @ 'wizzi-core'
+                    @ 'wizzi-js'
+                    @ 'wizzi-web'
+
+		if wizzi == null
+			set wizzi = require('wizzi')
+		_ wizzi.executeWizziJob
+			{ 
+				@ user 'stefi'
+				@ role 'admin'
+				@ storeKind 'filesystem'
+				{ config
+					@ wfBaseFolder wfBaseFolder
+                    @ pluginsBaseFolder pluginsBaseFolder
+					@ plugins jobPlugins
+				{ job
+					@ name 'example ' + wzjobDocumentUri
+					@ ittfDocumentUri wzjobDocumentUri
+					@ productionOptions
+						_ wizzi.productionOptions
+							{ 
+								@ indentSpaces 4
+								@ basedir __dirname
+								@ verbose 2
+					@ globalContext options.globalContext
+			function 
+				param err
+				if err
+					_ wizzi.printWizziJobError(wzjobDocumentUri, err)
+
+	set module.exports = executeExample
+
+	if require.main === module
+		_ executeExample()

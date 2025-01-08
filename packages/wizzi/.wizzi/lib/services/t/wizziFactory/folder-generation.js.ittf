@@ -1,0 +1,155 @@
+$group
+
+    #
+        # Executes loadModelAndGenerateArtifact for each ITTF Document of a folder
+        # params
+        #   string ittfFolderUri
+        #     # the uri of the ITTF Documents folder
+        #    { requestContext
+        #      { modelRequestContext
+        #        # Context data for the wizzi model loading
+        #      { artifactRequestContext
+        #        # Context data for the artifact generation
+        #   { options
+        #     boolean copyNonIttf
+        #     boolean generateFragments
+        #     boolean useMultiPartContext
+        #   function callback
+        # returns
+        #   [
+        #     string generatedFilePath
+	m generateFolderArtifacts
+		string ittfFolderUri
+		{ requestContext
+			{ modelRequestContext
+				optional
+			{ artifactRequestContext
+				optional
+		{ options
+		callback
+
+        var modelRequestContext = requestContext.modelRequestContext || {}
+        var fileCtx
+            _ Object.assign
+                {
+                @ modelRequestContext.fileCtx || {}
+                {
+                    @ dot '.'
+
+		# loog 'wizzi.WizziFactory.generateFolderArtifacts.ittfFolderUri,fileCtx', ittfFolderUri, fileCtx
+        # loog 'wizzi.wizzifactory.generateFolderArtifacts.object.keys(modelRequestContext)', Object.keys(modelRequestContext)
+        try
+            _ repo.folderFilesInfoByPath
+                @ ittfFolderUri
+                @ this.fileService
+                @ options
+                a_cb( items )
+                    $$ loog'generateFolderArtifacts\n', stringify(items, null, 2)
+                    _ async.mapSeries
+                        @ items
+                        =>
+                            param item
+                            param callback
+                            var okGenerate = item.isIttfDocument && (options.generateFragments || (!!item.isFragment == false))
+                            if okGenerate
+                                # loog 'wizzi.wizzifactory.generateFolderArtifacts.generating.item.fullPath', item.fullPath
+                                if item.fullPath == "json:/___template/__dot__wizzi/ittf/wizziMeta/folderTemplates/index.ittf.ittf.ittf"
+                                    if modelRequestContext.metaCtx && modelRequestContext.metaCtx.__wz_fsc 
+                                        _ modelRequestContext.metaCtx.__wz_fsc.addDebugObject
+                                            @ 'file'
+                                            @ ''
+                                $$ var artifactName = getDefaultArtifact(item.schema)
+                                var artifactName = this.mapSchemaToDefaultArtifact(item.schema)
+                                if !artifactName || artifactName.length < 3
+                                    r_cb_error( 999, generateFolderArtifacts
+                                        @ "Default artifact not found for schema: " + item.schema
+                                if options.useMultiPartContext
+                                    _ callback
+                                        @ null
+                                        {
+                                            @ isProduction true
+                                            @ productionActionType "loadModelAndGenerateArtifact"
+                                            @ ittfDocumentUri item.fullPath
+                                            @ artifactName artifactName
+                                            { gen
+                                                @ generator artifactName
+                                            { dest
+                                                @ fullPath
+                                                    _ path.join
+                                                        @ options.destFolder
+                                                        @ item.destRelPath
+                                else
+                                    _ this.loadModelAndGenerateArtifact
+                                        @ item.fullPath
+                                        {
+                                            @ modelRequestContext modelRequestContext
+                                            @ artifactRequestContext requestContext.artifactRequestContext
+                                        @ artifactName
+                                        a_cb(artifactText)
+                                            $$ loog'generateFolderArtifacts.generated', item.destRelPath, typeof artifactText, artifactText
+                                            _ this.fileService.write
+                                                _ path.join
+                                                    @ options.destFolder
+                                                    _ interpolateFilename
+                                                        @ item.destRelPath
+                                                        @ fileCtx
+                                                @ artifactText
+                                                f_cb()
+                                                    # loog 'generateFolderArtifacts.written', item.destRelPath
+                                                    # _ process.nextTick
+                                                    _ setTimeout
+                                                        => 
+                                                            _ callback
+                                                                @ null
+                                                                _ path.join
+                                                                    @ options.destFolder
+                                                                    @ item.destRelPath
+                                                        @ 0
+                            elif options.copyNonIttf && item.isIttfDocument == false
+                                # loog 'generateFolderArtifacts.copying', item.fullPath
+                                _ this.fileService.copyFile
+                                    @ item.fullPath
+                                    _ path.join
+                                        @ options.destFolder
+                                        _ interpolateFilename
+                                            @ item.destRelPath
+                                            @ fileCtx
+                                    f_cb()
+                                        # _ process.nextTick
+                                        _ setTimeout
+                                            => 
+                                                _ callback
+                                                    @ null
+                                                    _ path.join
+                                                        @ options.destFolder
+                                                        @ item.destRelPath
+                                            @ 0
+                            else
+                                _ callback
+                                    @ null
+
+                        a_cb_log_err(result, wizzi.wizzifactory.generateFolderArtifacts)
+                            if options.useMultiPartContext
+                                var productionStepConfigs = []
+                                foreach item in result
+                                    if item.isProduction
+                                        set item.modelRequestContext = modelRequestContext
+                                        set item.artifactRequestContext = requestContext.artifactRequestContext
+                                        set item.fileCtx = fileCtx
+                                        _ productionStepConfigs.push 
+                                            @ item
+                                # loog 'wizzi.wizzifactory.generateFolderArtifacts.productionStepConfigs', productionStepConfigs.length
+                                _ this.executeProductionSteps
+                                    {
+                                        @ name 'folder: ' + ittfFolderUri
+                                    @ productionStepConfigs
+                                    a_cb( result )
+                                        r_cb( result )
+                            else
+                                r_cb( result )
+        catch ex
+            r_cb_wz_err( WizziFactoryError, generateFolderArtifacts, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ ittfFolderUri ittfFolderUri

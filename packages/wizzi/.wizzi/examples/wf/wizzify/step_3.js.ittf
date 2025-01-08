@@ -1,0 +1,120 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_wizzify_step_3',
+            title: 'Wizzi factory - get wizziTree of source data',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.ts/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.svg/index'
+                @ './wizzi.plugin.graphql/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        var htmlSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.html'
+        
+        var cssSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.css'
+
+        var svgSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.svg'
+
+        var jsSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.js'
+
+        var graphqlSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.graphql'
+
+        var tsSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.ts'
+
+        var jsonSourcePath
+			_ path.join
+                @ __dirname
+                @ 'data'
+                @ 'first.json'
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                # Load the model and transform.
+                _ wf.getWizziTree
+                    @ htmlSourcePath
+                    @ 'html'
+                    f_cb_test(ittfDocument)
+                        _ printValue
+                            @ 'html Ittf document'
+                            @ ittfDocument
+                        _ wf.getWizziTree
+                            @ cssSourcePath
+                            @ 'css'
+                            f_cb_test(ittfDocument)
+                                _ printValue
+                                    @ 'css Ittf document'
+                                    @ ittfDocument                            
+                                _ wf.getWizziTree
+                                    @ svgSourcePath
+                                    @ 'svg'
+                                    f_cb_test(ittfDocument)
+                                        _ printValue
+                                            @ 'svg Ittf document'
+                                            @ ittfDocument
+                                        _ wf.getWizziTree
+                                            @ jsSourcePath
+                                            @ 'js'
+                                            f_cb_test(ittfDocument)
+                                                _ printValue
+                                                    @ 'js Ittf document'
+                                                    @ ittfDocument
+                                                _ wf.getWizziTree
+                                                    @ graphqlSourcePath
+                                                    @ 'graphql'
+                                                    f_cb_test(ittfDocument)
+                                                        _ printValue
+                                                            @ 'graphql Ittf document'
+                                                            @ ittfDocument
+                                                        _ wf.getWizziTree
+                                                            @ tsSourcePath
+                                                            @ 'ts'
+                                                            f_cb_test(ittfDocument)
+                                                                _ printValue
+                                                                    @ 'ts Ittf document'
+                                                                    @ ittfDocument
+                                                                _ wf.getWizziTree
+                                                                    @ jsonSourcePath
+                                                                    @ 'json'
+                                                                    f_cb_test(ittfDocument)
+                                                                        _ printValue
+                                                                            @ 'json Ittf document'
+                                                                            @ ittfDocument                                                                    

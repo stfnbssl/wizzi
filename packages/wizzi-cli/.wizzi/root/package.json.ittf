@@ -1,0 +1,56 @@
+﻿{
+    $include versions
+	name "@wizzi/cli"
+    version '${wzCtx.version}'
+	author
+		{
+			name "Stefano Bassoli"
+			email "stfn.bssl@gmail.com"
+	private false
+	licenses
+		[
+			{
+				type "MIT"
+				url "https://github.com/stfnbssl/wizzi.cli/tree/master/packages/wizzi.cli/license.txt"
+	main "bin/wz.js"
+	{ engines
+		node ">=8"
+	preferGlobal true
+    { scripts
+		wizzify "node index fy -s ittf\wizzificables -d ittf\wizzified"
+		$* move to wizzi.cli.tests
+		artifact:basic "node index -s ittf\artifacts\basic\index.html.ittf -d ittf\artifacts\basic -c ittf\artifacts\basic\index"
+		artifact:withContext "node index -s ittf\artifacts\withContext -d ittf\artifacts\withContext -c ittf\artifacts\withContext\index --ctx ittf\artifacts\withContext\wzCtx.json.ittf"
+		folder:basic "node index -s ittf\folders\basic -d ittf\folders\basic_generated -c ittf\folders\basic\index"
+		folder:withContext "node index -s ittf\folders\withContext -d ittf\folders\withContext_generated -c ittf\folders\withContext\index --ctx ittf\folders\withContext\wzCtx.json.ittf"
+		job:basic "node index job -c ittf\jobs\basic.job"
+		wizzify:default "node index fy -s ittf\wizzificables -d ittf\wizzified"
+		wizzify:logbot "node index fy -s C:\My\wizzi\stfnbssl\lavori\logbot\materiale-stefano-fede -d C:\My\wizzi\stfnbssl\lavori\logbot\ittf"
+		wizzify:epic "node index fy -s C:\\My\\wizzi\\stfnbssl\\wizzifiables\\epic-stack -d C:\\My\\wizzi\\stfnbssl\\wizzifiables\\epic-stack-wizzi"
+		folder:logbot "node index -s C:\My\wizzi\stfnbssl\lavori\logbot\ittf -d C:\My\wizzi\stfnbssl\lavori\logbot\yaml-from-ittf"
+		metify:starters "node index metify -s ittf\metificables\wizziStarters -d ittf\metas\def"
+		metify:2 "node index metify -s C:\\My\\wizzi\\stfnbssl\\wizzifiables\\epic-stack-wizzi -d C:\\My\\wizzi\\stfnbssl\\wizzifiables\\epic-stack-meta" 
+		metify:3 "node index metify -n tsRemixApp -s C:\My\wizzi\stfnbssl\wizzifiables\remix-start-wizzi -d C:\My\wizzi\stfnbssl\wizzi.metas\packages\wizzi.meta.ts.remix\ittf\_"
+		*$
+	{ bin
+		wz "bin/wz.js"
+	{ dependencies
+        @babel/core "^7.0.0"
+        chalk "^2.4.1"
+        commander "^7.0.0"
+        inquirer "^7.3.3"
+        isomorphic-git "latest"
+		minimist "^1.2.0"
+        memfs "latest"
+        node-fetch "^2.0.0"
+		@wizzi/factory "${versions['@wizzi/factory']}"
+		@wizzi/utils "${versions['@wizzi/utils']}"
+		@wizzi/plugin.css "${versions['@wizzi/plugin.css']}"
+		@wizzi/plugin.html "${versions['@wizzi/plugin.html']}"
+		@wizzi/plugin.ittf "${versions['@wizzi/plugin.ittf']}"
+		@wizzi/plugin.js "${versions['@wizzi/plugin.js']}"
+		@wizzi/plugin.json "${versions['@wizzi/plugin.json']}"
+		@wizzi/plugin.md "${versions['@wizzi/plugin.md']}"
+		@wizzi/plugin.text "${versions['@wizzi/plugin.text']}"
+		@wizzi/plugin.wzjob "${versions['@wizzi/plugin.wzjob']}"
+		@wizzi/plugin.wzschema "${versions['@wizzi/plugin.wzschema']}"

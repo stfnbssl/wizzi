@@ -1,0 +1,9 @@
+$group
+    $params v1
+
+    var v1 = '${v1}'
+
+    $
+        var v1plus = v1 + 'plus'
+
+    var v1plus = '${v1plus}'

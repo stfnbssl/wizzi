@@ -1,0 +1,31 @@
+﻿$group
+
+	var builtinFunctions
+		[
+			{
+				@ code 'return isFinite(99)'
+				@ expected true
+			{
+				@ code 'return isNaN("alpha")'
+				@ expected true
+			{
+				@ code 'return isNaN(99)'
+				@ expected false
+			{
+				@ code 'return parseFloat("18.02")'
+				@ expected 18.02
+			{
+				@ code 'return parseInt("18.02")'
+				@ expected 18
+			{
+				@ code 'return encodeURI("aaa")'
+				@ expected "aaa"
+			{
+				@ code 'return decodeURI("aaa")'
+				@ expected "aaa"
+			{
+				@ code 'return encodeURIComponent("aaa")'
+				@ expected "aaa"
+			{
+				@ code 'return decodeURIComponent("aaa")'
+				@ expected "aaa"

@@ -1,0 +1,19 @@
+// 18/12/2024:13:43:24  by C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-mtree\lib\loader\evaluator.js
+$.n(); // set the context state to NodeContext
+var $0 = {}; // the root node of the mTree buildUp
+var $1 = { n: "alpha", v: "", i: 5, r: 1, c: 1, s: "f1", u: "f1",  }; //node:5
+$.a($0, $1, 5);
+var $2 = { n: "beta", v: "", i: 6, r: 2, c: 5, s: "f1", u: "f1",  }; //node:6
+$.a($1, $2, 7);
+$.s("f1");
+var item_count3 = items.length; //node:7
+var item_count = items.length; //node:7
+for (var i3=0; i3<item_count3; i3++) { //node:7
+    var item = items[i3]; //node:7
+    var item_index = i3; //node:7
+    $.n();
+    var $4 = { n: "gamma", v: "", i: 12, r: 1, c: 1, s: "f2", u: "f2",  }; //node:12
+    $.a($2, $4, 16);
+    var $5 = { n: "var", v: $.ip("f2", "tau_${item.name} = ${item.value}", "string", 17, false), i: 13, r: 3, c: 5, s: "f2", u: "f2",  }; //node:13
+    $.a($4, $5, 18);
+}

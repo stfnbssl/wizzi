@@ -1,0 +1,57 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_provides_step_1',
+            title: 'Wizzi factory - test provides',
+            folderLevel: 3
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.ts/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        _ createWizziFactory
+            {
+            f_cb_test(wf)
+                _ console.log
+                    @ "wf.mapIttfDocumentPathToSchema(hello.html.ittf)"
+                    _ wf.mapIttfDocumentPathToSchema
+                        @ "hello.html.ittf"
+                _ console.log
+                    @ "wf.mapIttfDocumentPathToSchema(aaa/hello.html.ittf)"
+                    _ wf.mapIttfDocumentPathToSchema
+                        @ "aaa/hello.html.ittf"
+                _ console.log
+                    @ "wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.html.ittf)"
+                    _ wf.mapIttfDocumentPathToDefaultArtifact
+                        @ "aaa/hello.html.ittf"
+                _ console.log
+                    @ "wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.ittf.ittf)"
+                    _ wf.mapIttfDocumentPathToDefaultArtifact
+                        @ "aaa/hello.ittf.ittf"
+                _ console.log
+                    @ "wf.mapIttfDocumentPathToDefaultArtifact(aaa/hello.ts.ittf)"
+                    _ wf.mapIttfDocumentPathToDefaultArtifact
+                        @ "aaa/hello.ts.ittf"
+                _ console.log
+                    @ "wf.mapSchemaToDefaultArtifact(js)"
+                    _ wf.mapSchemaToDefaultArtifact
+                        @ "js"
+
+                _ console.log
+                    @ "wf.getSchemaArtifacts(ittf)"
+                    _ wf.getSchemaArtifacts
+                        @ "ittf"
+
+

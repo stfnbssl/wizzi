@@ -1,0 +1,283 @@
+$group
+	$params &opt
+
+    $$
+    $$ Example skeleton specific for the 'wizzi' kernel package
+    $$
+
+	#
+		# Example: ${opt.name}
+		#
+	
+    $include example_includes
+    var async = require('async')
+    var wizziUtils = require('@wizzi/utils')
+    var pluginsBaseFolder = null
+    var pluginsBaseFolderV08 = 'C:/My/wizzi/stfnbssl/wizzi.plugins/packages'
+    var metaPluginsBaseFolder = 'C:/My/wizzi/stfnbssl/wizzi.metas/packages'
+    
+    $if opt.folderLevel == 1
+        var wizziIndex = require('../index')
+        set pluginsBaseFolder
+            _ path.resolve
+                @ __dirname
+                @ '..'
+                @ '..'
+                @ '..'
+        var pluginsManager = require('../lib/services/pluginsManager')
+        var metasManager = require('../lib/services/metasManager')
+        var inmemoryMetaPlugin = require('../lib/services/inmemoryMetaPlugin')
+        var packiUtils = require('../lib/services/packiUtils')
+
+    $elif opt.folderLevel == 2
+        var wizziIndex = require('../../index')
+        set pluginsBaseFolder
+            _ path.resolve
+                @ __dirname
+                @ '..'
+                @ '..'
+                @ '..'
+                @ '..'
+        var pluginsManager = require('../../lib/services/pluginsManager')
+        var metasManager = require('../../lib/services/metasManager')
+        var inmemoryMetaPlugin = require('../../lib/services/inmemoryMetaPlugin')
+        var packiUtils = require('../../lib/services/packiUtils')
+
+    $elif opt.folderLevel == 3
+        var wizziIndex = require('../../../index')
+        set pluginsBaseFolder
+            _ path.resolve
+                @ __dirname
+                @ '..'
+                @ '..'
+                @ '..'
+                @ '..'
+        var pluginsManager = require('../../../lib/services/pluginsManager')
+        var metasManager = require('../../../lib/services/metasManager')
+        var inmemoryMetaPlugin = require('../../../lib/services/inmemoryMetaPlugin')
+        var packiUtils = require('../../../lib/services/packiUtils')
+
+    const packiFilePrefix = wizziIndex.constants.packiFilePrefix
+    const packiFilePrefixExtract = wizziIndex.constants.packiFilePrefixExtract
+
+	$hook imports
+
+    function createWizziFactory
+        param globalContext
+        param callback
+
+        _ wizziIndex.fsFactory
+            {
+                { plugins
+                    $hook plugins
+                @ globalContext globalContext || {}
+                @ verbose true
+            @ callback
+
+    function createJsonWizziFactoryAndJsonFsWithOptions
+        param packiFiles
+        param plugins
+        param metaPlugins
+        param callback
+        +
+        const jsonDocuments
+            [
+        # log 'createJsonWizziFactoryAndJsonFs'
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
+                    const filePath = ensurePackiFilePrefix(value)
+                    log 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ jsonDocuments
+            =>
+                param err
+                param jsonFs
+                if err
+                    return callback(err)
+                $if false
+                    _ printValue
+                        @ 'createJsonWizziFactoryAndJsonFs.jsonFs'
+                        _ stringify
+                            @ jsonFs
+                            @ null
+                            @ 2
+                _ wizziIndex.jsonFactory
+                    {
+                        @ jsonFs jsonFs
+                        @ plugins plugins
+                        @ metaPlugins metaPlugins
+                        @ verbose true
+                    =>
+                        param err
+                        param wf
+                        if err
+                            return callback(err)
+                        _ callback
+                            @ null
+                            {
+                                @ wf wf
+                                @ jsonFs jsonFs
+
+    function createJsonWizziFactoryAndJsonFs
+        param packiFiles
+        param callback
+        $$ return JsonWizziFactory
+        const jsonDocuments
+            $$ :ref JsonDocumentDto
+            [
+        log 'createJsonWizziFactoryAndJsonFs'
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE' && packiFiles[value].contents && packiFiles[value].contents.length > 0
+                    const filePath = ensurePackiFilePrefix(value)
+                    log 'createJsonWizziFactoryAndJsonFs.filePath', filePath
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ jsonDocuments
+            =>
+                param err
+                param jsonFs
+                if err
+                    return callback(err)
+                $if false
+                    _ printValue
+                        @ 'createJsonWizziFactoryAndJsonFs.jsonFs'
+                        _ stringify
+                            @ jsonFs
+                            @ null
+                            @ 2
+                _ wizziIndex.jsonFactory
+                    {
+                        @ jsonFs jsonFs
+                        { plugins
+                            $hook json_wf_plugins
+                        { metaPlugins
+                            $hook json_wf_meta_plugins
+                        @ verbose true
+                    =>
+                        param err
+                        param wf
+                        if err
+                            return callback(err)
+                        _ callback
+                            @ null
+                            {
+                                @ wf wf
+                                @ jsonFs jsonFs
+    +
+    function createJsonFs
+        param packiFiles
+        param callback
+        $$ :return :ref JsonFs
+        const jsonDocuments
+            [
+        _ Object.keys(packiFiles).map
+            =>
+                param value
+                if packiFiles[value].type === 'CODE'
+                    const filePath = ensurePackiFilePrefix(value)
+                    _ jsonDocuments.push
+                        {
+                            @ path filePath
+                            @ content packiFiles[value].contents
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ jsonDocuments
+            =>
+                param err
+                param result
+                if err
+                    return callback(err)
+                _ callback(null, result)
+
+    function ensurePackiFilePrefix
+        param filePath
+        return
+            iif filePath.startsWith(packiFilePrefix)
+                then filePath
+                else packiFilePrefix + filePath
+
+    function createPackifilesFromFs
+        param folderPath
+        param callback
+        const file = vfile()
+        _ file.getFiles
+            @ folderPath
+            {
+                @ deep true
+                @ documentContent true
+            a_cb(files)
+                const packiFiles = {}
+                foreach file in files
+                    set packiFiles[file.relPath]
+                        {
+                            @ type 'CODE'
+                            @ contents file.content
+                r_cb(packiFiles)
+
+    function writePackifiles
+        param folderPath
+        param packiFiles
+        for var k in packiFiles
+            _ file.write
+                _ path.join
+                    @ folderPath
+                    @ k
+                @ packiFiles[k].contents
+
+    function writeStringified
+        param filePath
+        param object
+        _ file.write
+            @ filePath
+            _ stringify
+                @ object
+                @ null
+                @ 2
+
+    function createMetasManager
+        param globalContext
+        param callback
+
+        _ wizziIndex.metasManager
+            {
+                { metaPlugins
+                    $hook meta_plugins
+                { wfPlugins
+                    $hook wf_plugins
+                @ globalContext globalContext || {}
+            @ callback
+
+    function createPackiManager
+        param callback
+
+        _ wizziIndex.packiManager
+            {
+            @ callback
+
+    $hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'
+    
+	example_prints( ${opt.name}, ${opt.level}, ${opt.step} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

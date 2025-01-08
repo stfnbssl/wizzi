@@ -1,0 +1,62 @@
+﻿$group
+
+	var builtinFunctions_underscore
+		[
+			{
+				@ code 'var x = "lady"; return _.pluralize(x)'
+				@ expected 'ladies'
+			{
+				@ code 'var x = "lady"; return _.capitalize(x)'
+				@ expected 'Lady'
+			{
+				@ code 'var x = "LadyMary"; return _.camelize(x)'
+				@ expected 'ladyMary'
+			{
+				@ code 'var x = "lady-mary"; return _.dashToCamelCase(x)'
+				@ expected 'ladyMary'
+			{
+				@ code 'var x = "\\\\ \\\""; return _.escape(x)'
+				@ expected '\\\\ \\"'
+			{
+				@ code 'var x = "alphabeta"; return _.replace(x, "beta","gamma")'
+				@ expected 'alphagamma'
+			{
+				@ code 'var x = ""; return _.isEmpty(x);'
+				@ expected true
+			{
+				@ code 'var x = "a"; return _.isNotEmpty(x);'
+				@ expected true
+			{
+				@ code 'var x = {}; return _.isObject(x);'
+				@ expected true
+			{
+				@ code 'var x = []; return _.isArray(x);'
+				@ expected true
+			{
+				@ code 'var x = "a"; return _.isString(x);'
+				@ expected true
+			{
+				@ code 'var x = 4; return _.isNumber(x);'
+				@ expected true
+			{
+				@ code 'var x = new Date(); return _.isDate(x);'
+				@ expected true
+			{
+				@ code 'var x = typeof(nemo); return x;'
+				@ expected 'undefined'
+			{
+				@ code 'var x = ["d", "a", "c", "b"]; return _.sort(x);'
+				@ expected ['a', 'b', 'c', 'd']
+			{
+				@ code 'var x = [{p1: "d"}, {p1: "a"}, {p1: "c"}, {p1: "b"}]; return _.sort(x, "p1");'
+				@ expected [{p1: "a"}, {p1: "b"}, {p1: "c"}, {p1: "d"}]
+			{
+				@ code 'var x = [{p1: "d"}, {p1: "a"}, {p1: "c"}, {p1: "b"}]; return _.filter(x, "p1", "c");'
+				@ expected [{p1: "c"}]
+			{
+				@ code 'var x = ["b", "a", "a", "b"]; return _.unique(_.sort(x));'
+				@ expected ['a', 'b']
+
+
+
+

@@ -1,0 +1,94 @@
+$group
+	$params &opt
+
+    #
+    # Example skeleton specific for the '@wizzi/mtree' kernel package
+    #
+
+	#
+		# Examples: ${opt.name}
+		#
+	
+    var path = require('path')
+	var fs = require('fs')
+	var stringify = require('json-stringify-safe')
+	var wizziUtils = require('@wizzi/utils')
+    var file = wizziUtils.file
+    var verify = wizziUtils.verify
+    var mocks = wizziUtils.mocks
+    var createStoreFactory = require('@wizzi/repo').createStoreFactory
+    
+    $if opt.folderLevel == 1
+        var liner = require('../lib/loader/liner')
+        var nodifier = require('../lib/loader/nodifier')
+        var includer = require('../lib/loader/includer')
+        var mixer = require('../lib/loader/mixer')
+        var appender = require('../lib/loader/appender')
+        var evaluator = require('../lib/loader/evaluator')
+        var loader = require('../lib/loader')
+        var MTreeBrick = require('../lib/loader/mTreeBrick').MTreeBrick
+        var LoadHistory = require('../lib/loader/loadHistory').LoadHistory
+		var MTreeBrickProvider = require('../lib/loader/mTreeBrickProvider')
+    $elif opt.folderLevel == 2
+        var liner = require('../../lib/loader/liner')
+        var nodifier = require('../../lib/loader/nodifier')
+        var includer = require('../../lib/loader/includer')
+        var mixer = require('../../lib/loader/mixer')
+        var appender = require('../../lib/loader/appender')
+        var evaluator = require('../../lib/loader/evaluator')
+        var loader = require('../../lib/loader')
+        var MTreeBrick = require('../../lib/loader/mTreeBrick').MTreeBrick
+        var LoadHistory = require('../../lib/loader/loadHistory').LoadHistory
+        var MTreeBrickProvider = require('../../lib/loader/mTreeBrickProvider')
+    $elif opt.folderLevel == 3
+		var liner = require('../../../lib/loader/liner')
+        var nodifier = require('../../../lib/loader/nodifier')
+        var includer = require('../../../lib/loader/includer')
+        var mixer = require('../../../lib/loader/mixer')
+        var appender = require('../../../lib/loader/appender')
+        var evaluator = require('../../../lib/loader/evaluator')
+        var loader = require('../../../lib/loader')
+        var MTreeBrick = require('../../../lib/loader/mTreeBrick').MTreeBrick
+        var LoadHistory = require('../../../lib/loader/loadHistory').LoadHistory
+        var MTreeBrickProvider = require('../../../lib/loader/mTreeBrickProvider')
+    $elif opt.folderLevel == 4
+		var liner = require('../../../../lib/loader/liner')
+        var nodifier = require('../../../lib/loader/nodifier')
+        var includer = require('../../../../lib/loader/includer')
+        var mixer = require('../../../../lib/loader/mixer')
+        var appender = require('../../../../lib/loader/appender')
+        var evaluator = require('../../../../lib/loader/evaluator')
+        var loader = require('../../../../lib/loader')
+        var MTreeBrick = require('../../../../lib/loader/mTreeBrick').MTreeBrick
+		var LoadHistory = require('../../../../lib/loader/loadHistory').LoadHistory
+        var MTreeBrickProvider = require('../../../../lib/loader/mTreeBrickProvider')
+
+	$hook imports
+
+    function getFSDocumentStore
+        param callback
+        _ createStoreFactory
+            {
+                @ kind 'filesystem'
+            f_cb( storeFactory )
+                return
+                    _ storeFactory
+                        @ callback
+	
+	$hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'	
+    
+	example_prints( ${opt.name} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

@@ -1,0 +1,15 @@
+module
+    kind jsfile
+
+    $
+        var baseSource = "C:/My/wizzi/stfnbssl/3dparty/docs";
+        var baseDest = "C:/My/wizzi/stfnbssl/wizzi.cli/packages/wizzi.cli/examples/wizzifieds";
+
+    var fy = require('../../src/cmds/fy');
+    
+    $if false
+
+    _ fy
+        {
+            @ s "${baseSource}/pages"
+            @ d "${baseDest}/pages"

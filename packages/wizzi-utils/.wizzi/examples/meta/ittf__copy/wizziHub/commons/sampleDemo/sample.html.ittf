@@ -1,0 +1,7 @@
+html
+    head
+    body
+        h1 Hello ${sampleCtx.name}
+        p Il tuo cognome è ${sampleCtx.surname},
+            \b hai ${sampleCtx.age} anni e 
+            \b la tua email è ${sampleCtx.email}

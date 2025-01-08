@@ -1,0 +1,37 @@
+module
+    kind jsfile
+
+    $
+        var isAllExamples = false;
+        var baseSource = isAllExamples ? 
+            "C:/My/wizzi/stfnbssl/3dparty/next.js" :
+            "C:/My/wizzi/stfnbssl/3dparty/next.js/examples_bax";
+        var baseDest = "C:/My/wizzi/stfnbssl/wizzi.metas/packages/wizzi.meta.ts.nextjs/.wizzi/wizzifieds";
+
+    var fy = require('../../src/cmds/fy');
+    
+    $if isAllExamples
+        _ fy
+            {
+                @ s "${baseSource}/examples_bax"
+                @ d "${baseDest}/examples"                                
+                @ f 0
+                @ t 400
+    $else
+        $if false
+
+            _ fy
+                {
+                    @ s "${baseSource}/hello-world"
+                    @ d "${baseDest}/hello-world"      
+            _ fy
+                {
+                    @ s "${baseSource}/blog-with-comment"
+                    @ d "${baseDest}/blog-with-comment" 
+                    @ f 0
+                    @ t 100
+
+        _ fy
+            {
+                @ s "${baseSource}/blog-starter"
+                @ d "${baseDest}/blog-starter"

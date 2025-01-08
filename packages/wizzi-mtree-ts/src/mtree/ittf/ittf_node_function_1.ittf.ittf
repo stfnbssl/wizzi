@@ -1,0 +1,72 @@
+ittf
+
+    $function f_main_1
+        $param alpha
+        $param calledBy
+        $param description
+        node_in_f_main_1 
+            param alpha: ${JSON.stringify(alpha)}
+            calledBy: ${calledBy}
+            description from caller: ${description}
+
+    $function f_main_2
+        $param beta
+        $param calledBy
+        $param description
+        node_in_f_main_2 
+            param alpha: ${JSON.stringify(beta)}
+            calledBy: ${calledBy}      
+            description from caller: ${description}
+
+            $_ f_main_1
+                $@ beta
+                $@ 'f_main_2'
+                $@ 'The parameter received is used to call f_main_1'
+
+    $_ f_main_2
+        $@ 10
+        $@ 'main'
+        $@ 'A parameter of value 10 is passed to f_main_2'
+
+    before $include nf_1
+    
+    $include nf_1
+    
+    after $include nf_1
+
+    $function frag_nf_2_alpha
+        $param alpha
+        $param calledBy
+        $param description
+        node_in_frag_nf_2_alpha
+            param alpha: ${JSON.stringify(alpha)}
+            calledBy: ${calledBy}
+            description from caller: ${description}
+
+    $function frag_nf_2_beta
+        $param beta
+        $param calledBy
+        $param description
+        node_in_frag_nf_2_beta
+            param alpha: ${JSON.stringify(beta)}
+            calledBy: ${calledBy}      
+            description from caller: ${description}
+
+            $_ frag_nf_2_alpha
+                $@ beta
+                $@ 'frag_nf_2_beta'
+                $@ 'The parameter received is used to call frag_nf_2_alpha'
+
+    $_ frag_nf_2_beta
+        $@ 50
+        $@ 'frag_main'
+        $@ 'A parameter of value 10 is passed to frag_nf_2_beta'
+
+
+    before nf_1()
+    
+    nf_1()
+    
+    after nf_1()
+
+

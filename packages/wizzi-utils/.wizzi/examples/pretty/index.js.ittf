@@ -1,0 +1,59 @@
+﻿module
+	kind jsfile  
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'pretty_Step_1',
+            title: 'pretty - step - 1',
+            folderLevel: 2
+        }
+    
+    common\example\utils(&opt)
+
+        var rootIndex = require('../../index')
+        var ittfGraph = require('../../lib/ittfGraph/index')
+        var pretty = require('../../lib/pretty/index')
+
+        _ step_1
+        
+        function step_1
+            _ ittfGraph.createIttfDocumentGraphFrom
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'basic.sample.ittf'
+                {
+                f_cb_test( result )
+                    _ pretty.prettifyIttfHtml
+                        @ result
+                        {
+                        f_cb_test( ittfHtmlPretty )
+                            _ file.write
+                                _ path.join
+                                    @ __dirname
+                                    @ 'outputs'
+                                    @ 'basic.sample.pretty.html'
+                                @ ittfHtmlPretty.prettyLines.join('\n')
+                            _ step_2
+
+        function step_2
+            _ pretty.prettifyIttfHtml
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'basic.sample.ittf'
+                {
+                f_cb_test( ittfHtmlPretty )
+                    info 'step_2', ittfHtmlPretty
+                    _ step_3
+
+        function step_3
+            _ pretty.prettifyIttfHtmlFromString
+                [
+                    @ 'module'
+                    @ '\t$include item'
+                    ._ join('\n')
+                f_cb_test( pretty )
+                    info 'step_3', pretty

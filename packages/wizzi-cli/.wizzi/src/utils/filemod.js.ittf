@@ -1,0 +1,28 @@
+module
+	kind es6
+
+    const path = require('path')
+	const util = require('util')
+	const fs = require('fs')
+    const saveFile = fs.writeFileSync
+
+	set module.exports
+        {
+            @ deleteTypeModuleFromPackageJson
+                function
+                    param pkgJsonPath
+                    let json
+                    try
+                        set json = require(pkgJsonPath)
+                    catch ex
+                        error 'filemod.deleteTypeModuleFromPackageJson', ex
+                        return
+                    if !json.hasOwnProperty('type')
+                        return
+                    delete json.type
+                    _ saveFile
+                        @ pkgJsonPath
+                        _ JSON.stringify
+                            @ json
+                            @ null
+                            @ 2

@@ -1,0 +1,68 @@
+{
+    name "wizzi.meta.lab"
+    npnName "@wizzi/meta.lab"
+    description "Lab wizzi meta plugin"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+        url "TODO"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "docx"
+            "graphql"
+            "html"
+            "ittf"
+            "js"
+            "ts"
+            "json"
+            "md"
+            "pandoc"
+            "pdf"
+            "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            "xml"
+            "yaml"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziMeta
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "Lab meta plugin"
+        kind "WizziMeta"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Productions
+        {
+            name "labHtml"
+        {
+            name "labJs"
+        {
+            name "labCss"

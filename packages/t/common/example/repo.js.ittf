@@ -1,0 +1,63 @@
+$group
+	$params &opt
+
+    #
+    # Example skeleton specific for the '@wizzi/repo' kernel package
+    #
+
+	#
+		# Examples: ${opt.name}
+		#
+	
+    $include example_includes
+    
+    var fSystem = require('@wizzi/utils').fSystem
+    var vfile = require('@wizzi/utils').vfile
+	
+
+    $if opt.folderLevel == 1
+        var repoIndex = require('../index')
+        var json = require('../lib/json/index')
+        var JsonFsImpl = require('../lib/json/jsonFsimpl')
+        $if wzConfig_useMongo
+            var MongoFsImpl = require('../lib/mongodb/mongoFsimpl')
+            var FsMongo = require('../lib/mongodb/fs/fsmongo')
+        var Document = require('../lib/mongodb/fs/document')
+    $elif opt.folderLevel == 2
+        var repoIndex = require('../../index')
+        var json = require('../../lib/json/index')
+        var JsonFsImpl = require('../../lib/json/jsonFsimpl')
+        $if wzConfig_useMongo
+            var MongoFsImpl = require('../../lib/mongodb/mongoFsimpl')
+            var FsMongo = require('../../lib/mongodb/fs/fsmongo')
+        var Document = require('../../lib/mongodb/fs/document')
+    $elif opt.folderLevel == 3
+        var repoIndex = require('../../../index')
+        var json = require('../../../lib/json/index')
+        var JsonFsImpl = require('../../../lib/json/jsonFsimpl')
+        $if wzConfig_useMongo
+            var MongoFsImpl = require('../../../lib/mongodb/mongoFsimpl')
+            var FsMongo = require('../../../lib/mongodb/fs/fsmongo')
+        var Document = require('../../../lib/mongodb/fs/document')
+
+    var createStoreFactory = repoIndex.createStoreFactory
+
+	$hook imports
+
+    $hook functions
+
+	var ${opt.name}
+		function
+			param step_callback
+			_ heading1
+				@ 'EXAMPLE'
+			$hook
+
+    set ${opt.name}.__name = '${opt.name}'
+    
+	example_prints( ${opt.name}, ${opt.level}, ${opt.step} )
+
+	set module.exports = ${opt.name}
+
+	if typeof require != 'undefined' && require.main === module
+		_ ${opt.name}

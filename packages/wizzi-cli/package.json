@@ -1,0 +1,47 @@
+{
+    "name": "@wizzi/cli",
+    "version": "",
+    "author": {
+        "name": "Stefano Bassoli",
+        "email": "stfn.bssl@gmail.com"
+    },
+    "private": false,
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/stfnbssl/wizzi.cli/tree/master/packages/wizzi.cli/license.txt"
+        }
+    ],
+    "main": "bin/wz.js",
+    "engines": {
+        "node": ">=8"
+    },
+    "preferGlobal": true,
+    "scripts": {
+        "wizzify": "node index fy -s ittf\\wizzificables -d ittf\\wizzified"
+    },
+    "bin": {
+        "wz": "bin/wz.js"
+    },
+    "dependencies": {
+        "@babel/core": "^7.0.0",
+        "chalk": "^2.4.1",
+        "commander": "^7.0.0",
+        "inquirer": "^7.3.3",
+        "isomorphic-git": "latest",
+        "minimist": "^1.2.0",
+        "memfs": "latest",
+        "node-fetch": "^2.0.0",
+        "@wizzi/factory": "0.8.44",
+        "@wizzi/utils": "0.8.25",
+        "@wizzi/plugin.css": "",
+        "@wizzi/plugin.html": "",
+        "@wizzi/plugin.ittf": "",
+        "@wizzi/plugin.js": "",
+        "@wizzi/plugin.json": "",
+        "@wizzi/plugin.md": "",
+        "@wizzi/plugin.text": "",
+        "@wizzi/plugin.wzjob": "",
+        "@wizzi/plugin.wzschema": ""
+    }
+}

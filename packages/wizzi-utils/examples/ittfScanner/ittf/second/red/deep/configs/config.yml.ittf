@@ -1,0 +1,4 @@
+module:
+	- jsfile
+		. one
+		. two

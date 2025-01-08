@@ -1,0 +1,35 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'verify_Step_1',
+            title: 'verify - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var nv
+            $* TODO
+                _ verify.parseNameValue
+                    @ "['@id'] this.id"
+                    @ null
+                    {
+                        @ objectProperty true
+            
+        
+            info 'verify.parseNameValue', nv
+            
+        
+            set nv
+                _ verify.parseNameValue("['@id'] this.id")
+
+            info 'verify.parseNameValue', nv
+            *$
+
+        _ verify.logError('verify.logerror-> ', 'a', 'b', 'c')
+        _ verify.logWarning('verify.logerror-> ', 'a', 'b', 'c')
+        _ verify.logInfo('verify.logerror-> ', 'a', 'b', 'c')

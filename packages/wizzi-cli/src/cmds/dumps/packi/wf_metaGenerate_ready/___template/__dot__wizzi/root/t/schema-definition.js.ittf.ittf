@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/root/tfolder/schema-definition.js

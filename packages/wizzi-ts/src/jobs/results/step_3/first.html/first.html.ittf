@@ -1,0 +1,13 @@
+<!--
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.plugins\packages\wizzi.plugin.html\lib\artifacts\html\document\gen\main.js
+    package: @wizzi/plugin.html@0.8.10
+    primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi-ts\src\jobs\ittf\step_3\first.html.ittf
+    utc time: Tue, 30 Apr 2024 07:50:28 GMT
+-->
+<!doctype html>
+<html>
+<body>
+    <h1>Hello</h1>
+</body>
+
+</html>

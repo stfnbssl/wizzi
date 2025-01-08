@@ -1,0 +1,92 @@
+{
+
+    $
+        var pluginBasename = null;
+        // var step = 'webpack_getStarted';
+        var step = 'webpack_widgets';
+
+    $include commons
+    $include v08
+
+    $if step == 'webpack_widgets'
+        params/use( commonsBabel
+        params/use( commonsGit
+        params/use( commonsPackage
+        params/use( commonsWebpack
+        params/use( commonsWizzi
+            useJsCommons false
+        params/use( tsReact
+        params/use( tsReactWebpackWidgetsApp
+            params/use( webpackHtml, true
+            params/use( webpackCss
+                params/use( miniCssExtract, false
+            params/use( webpackSass, false
+            params/use( webpackImages
+            params/use( webpackFonts
+            params/use( webpackJson
+            params/use( webpackYaml
+        params/use( tsReactComponents
+            params/use( shell
+        params/use( tsReactFeatures
+            params/use( preferences
+        params/use( tsReactThemes
+            params/use( expo
+        params/use( tsReactWidgets
+            params/use( aphrodite
+            params/use( muiBase
+            params/use( muiJoy
+            params/use( muiSystem
+            params/use( styled
+        params/use( tsReactUtils
+
+    $if step == 'webpack_getStarted'
+        params/use( commonsBabel
+        params/use( commonsGit
+        params/use( commonsPackage
+        params/use( commonsWebpack
+        params/use( commonsWizzi
+            useJsCommons false
+        params/use( tsReactWebpackGetStartedApp
+            params/use( webpackHtml, true
+            params/use( webpackCss
+                params/use( miniCssExtract, false
+            params/use( webpackSass, false
+            params/use( webpackImages
+            params/use( webpackFonts
+            params/use( webpackJson
+            params/use( webpackYaml
+            $*
+            [ webpackEntries
+                {
+                    name 'print'
+                    path './src/print.js'
+                    importName 'printMe'
+                    importPath './print'
+            *$
+            params/use( webpackPrintMe, false
+        params/use( tsReactUtils
+
+    $if false
+        params/use( commonsBabel
+        params/use( commonsEnv
+            params/use( deployClient
+        params/use( commonsEslint
+        params/use( commonsGit
+        params/use( commonsPackage
+        params/use( commonsPostcss
+        params/use( commonsPrettier
+        params/use( commonsWebpack
+        params/use( commonsWizzi 
+            useJsCommons false
+        params/use( tsReact
+        params/use( tsReactApp
+            params/use( pageForms
+        params/use( tsReactPageForms
+        params/use( tsReactUtils
+        params/use( tsReactTypings
+        params/use( tsReactWidgets
+            params/use( aphrodite
+            params/use( muiBase
+            params/use( muiJoy
+            params/use( muiSystem
+            params/use( styled

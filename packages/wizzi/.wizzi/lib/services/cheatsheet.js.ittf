@@ -1,0 +1,371 @@
+module wizzi@${wzCtx.version}.cheatsheet
+	kind es6
+    +
+    const stringify = require('json-stringify-safe');
+    const packi = require('@wizzi/utils').packi
+    const verify = require('@wizzi/utils').verify
+    const pretty = require('@wizzi/utils').pretty
+    +
+    const md = module.exports = {}
+    +
+    #
+    # cheatsheet json structure
+    # {
+    #   string name
+    #   [ elements
+    #     {
+    #       string name
+    #       [ items
+    #         {
+    #            string schema
+    #            string render
+    #              one-of 'artifact', 'script', 'ittf', 'ittf-show-blanks'
+    #            [ fragments
+    #              {
+    #                string name
+    #                string ittf
+    #            string ittf
+    #            string ittfWrapper
+    #            string expected
+    #              optional
+    #
+    +
+    set md.buildCheatsheet
+        function
+            param wizziFactory
+            param name
+            param packiFiles
+            param callback
+            +
+            _ wizziFactory.createJsonFactoryAndJsonFs
+                @ packiFiles
+                { $$ options globalContext, ...
+                a_cb( jsonFactoryAndJsonFs ) 
+                    var jsonFactory = jsonFactoryAndJsonFs.wf
+                    _ jsonFactory.loadMTree
+                        _ packi.ensurePackiFilePrefix
+                            @ 'index.ittf.ittf'
+                        { $$ mTreeBuildUpContext
+                        a_cb( mTree ) 
+                            # items are ittf fragments that will be ittf/prettified and generated
+                            var _all_items = []
+                            # the resulting cheatsheet context object that will be returned when built
+                            var result
+                                {
+                                    @ name name
+                                    [ elements
+                            foreach itemTop in mTree.nodes[0].children
+                                if itemTop.n !== 'element'
+                                    # set properties of result
+                                    set result[itemTop.n] = itemTop.v
+                            foreach itemTop in mTree.nodes[0].children
+                                if itemTop.n === 'element'
+                                    var elementResult
+                                        {
+                                            @ name itemTop.v
+                                            [ items
+                                    foreach itemEl in itemTop.children
+                                        if itemEl.n === 'item'
+                                            # ittf fragment
+                                            var itemResult
+                                                {
+                                                    @ schema result.schema
+                                                    @ render 'artifact'
+                                                    [ fragments
+                                            var isError = false
+                                            foreach item in itemEl.children
+                                                if (item.n === 'is-error' || item.n === 'isError') && item.v == 'true'
+                                                    set isError = true
+                                                elif item.n === 'fragment' 
+                                                    if item.v && item.v.length > 0 && item.children.length == 1
+                                                        _ itemResult.fragments.push
+                                                            {
+                                                                @ name item.v
+                                                                @ ittf mTree.toIttf(item.children[0])
+                                                elif item.n === 'ittf'
+                                                    if item.children.length == 1
+                                                        if ((result.schema === 'json' || result.schema === 'yaml') && (item.children[0].n === '{' || 
+                                                            \b item.children[0].n === '[')) || 
+                                                            \b item.children[0].n === wizziFactory.mapSchemaToRootTag(result.schema) || 
+                                                            \b wizziFactory.mapSchemaToRootTag(result.schema) === '@@any' ||
+                                                            \b isError
+                                                            # is already ok, has the correct root
+                                                            set itemResult[item.n] = mTree.toIttf(item.children[0])
+                                                            set itemResult[item.n + 'Wrapped'] = itemResult[item.n]
+                                                        else
+                                                            # loog '++++++++++++++++++++ Wrap it', 'isError', isError
+                                                            # wrap it
+                                                            var ittfNode
+                                                                _ wrapperForSchema
+                                                                    @ wizziFactory
+                                                                    @ result.schema
+                                                            foreach node in item.children
+                                                                _ ittfNode.children.push
+                                                                    @ node
+                                                            set itemResult[item.n] = mTree.toIttf(item.children[0])
+                                                            set itemResult[item.n + 'Wrapped'] = mTree.toIttf(ittfNode)
+                                                    else
+                                                        $* TODO: not working because ittfHtmlPrettifier do not accept a malformed tree
+                                                            TODO: do make ittfHtmlPrettifier accept a malformed tree
+                                                        if isError
+                                                            # do not wrap them
+                                                            set itemResult[item.n] = mTree.toIttf(item.children)
+                                                            set itemResult[item.n + 'Wrapped'] = itemResult[item.n]
+                                                            # loog '++++++++++++++++++++ isError do not wrap them', item.n, itemResult[item.n]
+                                                        else
+                                                        *$
+                                                        # wrap them
+                                                        var ittfNode
+                                                            _ wrapperForSchema
+                                                                @ wizziFactory
+                                                                @ result.schema
+                                                        foreach node in item.children
+                                                            _ ittfNode.children.push
+                                                                @ node
+                                                        set itemResult[item.n] = mTree.toIttf(item.children[0])
+                                                        set itemResult[item.n + 'Wrapped'] = mTree.toIttf(ittfNode)
+                                                elif item.n === 'expected'
+                                                    set itemResult[item.n]
+                                                        _ buildExpected
+                                                            @ item
+                                                            ._ trim
+                                                else
+                                                    set itemResult[item.n] = item.v
+                                            _ elementResult.items.push
+                                                @ itemResult
+                                            _ _all_items.push
+                                                @ itemResult
+                                        else
+                                            set elementResult[itemEl.n] = itemEl.v
+                                    _ result.elements.push
+                                        @ elementResult
+
+                            _ prettifyItems
+                                @ _all_items
+                                f_cb_no_throw()
+                                    var item_count = 0
+                                    iife next
+                                        var item = _all_items[item_count++]
+                                        if !item
+                                            r_cb(result)
+                                        # loog "Processing item", item.title
+                                        if item.render === 'script'
+                                            var packiForGen
+                                                _ getPackiForGen                                            
+                                                    @ item
+                                            $$ _ jsonFactory.loadMTreeBuildUpScriptFromText
+                                            _ jsonFactory.loadMTreeBuildUpScriptFromPacki
+                                                $$ @ item.ittfWrapped
+                                                @ packiForGen.ittfDocumentUri
+                                                @ packiForGen.packiFiles
+                                                {
+                                                f_cb_no_throw( result )
+                                                    if err
+                                                        try
+                                                            set item.generated
+                                                                _ prettifyError
+                                                                    @ err
+                                                        catch ex 
+                                                            set item.generated = err.message || 'No result. Something went wrong!'
+                                                        return
+                                                            _ next
+                                                    else
+                                                        if result.__is_error
+                                                            try
+                                                                set item.generated = verify.htmlEscape(JSON.stringify(result, null, 2))
+                                                            catch ex 
+                                                                set item.generated = ex.message || 'No result. Something went wrong!'
+                                                        else
+                                                            set item.generated = verify.htmlEscape(result.mTreeBuildUpScript)
+                                                        set item.generated = item.generated && item.generated.trim
+                                                            \b ? item.generated.trim() 
+                                                            \b : 'No result. Something went wrong!'
+                                                        return
+                                                            _ next
+                                        elif item.render === 'ittf' || item.render === 'ittf-show-blanks'
+                                            var packiForGen
+                                                _ getPackiForGen                                            
+                                                    @ item
+                                            $$ _ jsonFactory.loadMTreeFromText
+                                            _ jsonFactory.loadMTreeFromPacki
+                                                $$ @ item.ittfWrapped
+                                                @ packiForGen.ittfDocumentUri
+                                                @ packiForGen.packiFiles
+                                                {
+                                                f_cb_no_throw( mTree )
+                                                    if err
+                                                        try
+                                                            set item.generated
+                                                                _ prettifyError
+                                                                    @ err
+                                                        catch ex 
+                                                            set item.generated = err.message || 'No result. Something went wrong!'
+                                                        return
+                                                            _ next
+                                                    else
+                                                        if mTree.__is_error
+                                                            try
+                                                                set item.generated = verify.htmlEscape(JSON.stringify(result, null, 2))
+                                                            catch ex 
+                                                                set item.generated = ex.message || 'No result. Something went wrong!'
+                                                        else
+                                                            set item.generated = verify.htmlEscape(mTree.toIttf())
+                                                        set item.generated = item.generated && item.generated.trim
+                                                            \b ? (item.render === 'ittf-show-blanks' ? verify.replaceAll(item.generated, ' ', '.') : item.generated.trim())
+                                                            \b : 'No result. Something went wrong!'
+                                                        return
+                                                            _ next
+                                        else
+                                            const mainIttf = 'index.' + item.schema + '.ittf'
+                                            # loog 'cheatsheet.generating', mainIttf
+                                            var packiForGen
+                                                _ getPackiForGen                                            
+                                                    @ item
+                                            $$ _ jsonFactory.loadModelAndGenerateArtifactFromText
+                                            _ jsonFactory.loadModelAndGenerateArtifactFromPacki
+                                                $$ @ item.ittfWrapped
+                                                @ packiForGen.ittfDocumentUri
+                                                @ packiForGen.packiFiles
+                                                {
+                                                    { artifactContext
+                                                        @ noUseStrict true
+                                                        @ noGeneratorComments true
+                                                _ jsonFactory.mapSchemaToDefaultArtifact
+                                                    @ item.schema
+                                                f_cb_no_throw( artifactContent )
+                                                    if err
+                                                        set item.generated
+                                                            _ prettifyError
+                                                                @ err
+                                                        return
+                                                            _ next
+                                                    else
+                                                        const artifactText = verify.htmlEscape(artifactContent)
+                                                        set item.generated = artifactText ? artifactText.trim() : 'No result. Something went wrong!'
+                                                        return
+                                                            _ next
+    +
+    function prettifyError
+        param err
+        var hint = err.hint
+        if !hint && err.data && err.data.inner
+            set hint = err.data.inner.hint
+        if hint
+            return
+                _ verify.htmlEscape
+                    _ stringify
+                        {
+                            @ errorName err.errorName
+                            @ message err.message
+                            @ hint hint
+                        @ null
+                        @ 2
+        else
+            return
+                _ verify.htmlEscape
+                    _ stringify
+                        @ err
+                        @ null
+                        @ 2
+
+    +
+    function prettifyItems
+        param _all_items
+        param callback
+        var item_count = 0
+        iife nextItem
+            var item = _all_items[item_count++]
+            if !item
+                r_cb()
+            _ pretty.prettifyIttfHtmlFromString
+                @ item.ittf
+                f_cb_no_throw( ittfpretty )
+                    if err
+                        set item.ittfPretty = JSON.stringify(err, null, 4)
+                    else
+                        set item.ittfPretty = ittfpretty
+                    var fragment_count = 0
+                    iife nextFragment
+                        var fragment = item.fragments[fragment_count++]
+                        if !fragment
+                            _ process.nextTick
+                                =>
+                                    _ nextItem
+                            return
+                        _ pretty.prettifyIttfHtmlFromString
+                            @ fragment.ittf
+                            f_cb_no_throw( ittfpretty )
+                                if err
+                                    set fragment.ittfPretty = JSON.stringify(err, null, 4)
+                                else
+                                    set fragment.ittfPretty = ittfpretty
+                                return
+                                    _ nextFragment
+    +
+    function getPackiForGen
+        param item
+        var ittfDocumentUri = 'index.' + item.schema + '.ittf'
+        var retval
+            {
+                @ ittfDocumentUri ittfDocumentUri
+                { packiFiles
+        set retval.packiFiles[ittfDocumentUri]
+            {
+                @ type "CODE"
+                @ contents item.ittfWrapped
+        foreach f in item.fragments
+            set retval.packiFiles['t/' + f.name + '.' + item.schema + '.ittf']
+                {
+                    @ type "CODE"
+                    @ contents f.ittf
+        # loog 'getPackiForGen.retval', retval
+        return retval
+    +
+    function wrapperForSchema
+        param wizziFactory
+        param schema
+        var rootTag = wizziFactory.mapSchemaToRootTag(schema) || schema
+        #
+            # `js` and `jsx` should remain the only exception, that requires an attribute
+            # do not implement `wrapperForSchema` in plugins
+        if schema === 'js' || schema === 'jsx'
+            return
+                {
+                    @ n 'module'
+                    [ children
+                        {
+                            @ n 'kind'
+                            @ v 'react'
+                            [ children
+        else
+            return
+                {
+                    @ n rootTag
+                    [ children
+    +
+    function buildExpected
+        param ittf
+        param sb
+        param indent
+        if typeof sb === 'undefined'
+            set sb = []
+            foreach item in ittf.children
+                _ buildExpected
+                    @ item
+                    @ sb
+                    @ 0
+            return
+                _ verify.htmlEscape
+                    _ sb.join('')
+        else
+            _ sb.push
+                @ new Array(indent).join(' ')
+            _ sb.push
+                @ ittf.v + '\n'
+            foreach item in ittf.children
+                _ buildExpected
+                    @ item
+                    @ sb
+                    @ (indent || 0) + 4
+            # to avoid ts error
+            return ''

@@ -1,0 +1,2 @@
+module 
+   $include wizziPlugin/lib/artifacts/utils/lineParser.js

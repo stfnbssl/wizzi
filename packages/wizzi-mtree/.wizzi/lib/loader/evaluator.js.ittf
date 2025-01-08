@@ -1,0 +1,162 @@
+﻿module wizzi-mtree@${wzCtx.version}.loader.evaluator
+    kind es6
+    
+    var jsWizziRunner = require('../jswizzi/jsWizziRunner')
+    var JsWizziContext = require('../jswizzi/jsWizziContext')
+    var dateUtil = require('../jswizzi/functions/dateUtil')
+	var JsWizziScriptCoder = require('../jswizzi/jsWizziScriptCoder')
+    var mTreeBuildUpScripter = require('./mTreeBuildUpScripter')
+	var requireFromString = null
+    
+	#
+		# The final step of an mTree loading. 
+		# Executes the expression evaluations and the
+		# template commands of the composedMTree and builds the final mTree: 
+		# . creates the mTreeBuildUpScript from the composedMTree,
+		# . creates the jsWizziContext and loads the loadContext.mTreeBuildUpContext
+		#   in the global context,
+		# . runs the script with the jsWizziRunner,
+		# . returns the builded mTree.
+		#
+		# params
+		#   { composedMTree
+		#   { loadContext
+		#     { mTreeBuildUpContext
+		#     { productionContext
+		#       { runnerServer
+        #     { options
+        #       boolean isCompile
+		#   callback
+		#
+	set module.exports =
+        function 
+            param composedMTree
+            param loadContext
+			param callback
+            
+			set loadContext.options = loadContext.options || {}
+            var isCompile = loadContext.options.isCompile
+
+            var productionContext = loadContext.productionContext
+            var jsWizziScriptCoder
+                new JsWizziScriptCoder()
+
+			var jsWizziContext
+                new JsWizziContext(composedMTree, productionContext, jsWizziScriptCoder)
+			_ jsWizziContext.setGlobalValues
+                @ loadContext.mTreeBuildUpContext
+            
+			var ctx
+                { 
+                    @ brickKey null
+                    @ counter 0
+                    @ startTime dateUtil.now_GMYHMS()
+					@ isCompile isCompile
+            
+			# loog 'isCompile', isCompile
+			
+			_ jsWizziScriptCoder.w
+				@ '// ' + ctx.startTime + '  by ' + __filename
+			
+			if isCompile
+				_ jsWizziScriptCoder.w
+					@ 'module.exports = function($, $ctx) {'
+				_ jsWizziScriptCoder.indent
+				foreach k in Object.keys(jsWizziContext.getIsCompileGlobals())
+					_ jsWizziScriptCoder.w
+						@ 'var ' + k + ' = $ctx.' + k + ';'
+
+			_ jsWizziScriptCoder.w
+				@ '$.n(); // set the context state to NodeContext'
+			_ jsWizziScriptCoder.w
+				@ 'var $0 = {}; // the root node of the mTree buildUp'
+            
+			foreach item in composedMTree.nodes
+                _ mTreeBuildUpScripter.codify(item, 0, jsWizziScriptCoder, ctx)
+            
+			if isCompile
+				_ jsWizziScriptCoder.w
+					@ 'return $0;'
+				_ jsWizziScriptCoder.deindent
+				_ jsWizziScriptCoder.w
+					@ '}'
+			
+			_ productionContext.addMTreeBuildUpScript
+                @ composedMTree.uri
+                @ jsWizziScriptCoder
+
+			if isCompile
+
+                # loog 'jsWizziScriptCoder.toCode()', jsWizziScriptCoder.toCode()
+                
+                if requireFromString === null
+                    set requireFromString = require('./requireFromString')
+                
+                var md
+                    _ requireFromString
+                        _ jsWizziScriptCoder.toCode
+                
+                var $0
+                    _ md
+                        _ jsWizziContext.getValue('$')
+                        _ jsWizziContext.getGlobalValues
+                
+                _ finalize
+                    @ composedMTree
+                    @ $0
+                    @ ctx
+                    @ callback
+
+			else
+
+				_ jsWizziRunner.run
+					_ jsWizziScriptCoder.toCode()
+					@ jsWizziContext
+					{
+					f_cb_no_throw( result )
+                        if err
+                            # set err.scriptCode = jsWizziScriptCoder.toCode()
+							log 'jsWizziRunner.run.err', err
+							return
+								_ callback
+                                    @ err
+            
+						_ jsWizziContext.set_NodeContext()
+
+						var $0 = jsWizziContext.getValue('$0')
+            
+						if typeof($0) === 'undefined' || $0 == null || $0.children === 'undefined'
+							return
+								_ callback
+                                    _ local_error
+                                        @ 'IttfEvaluationError'
+                                        @ 'evaluator'
+                                        @ 'No node returned after IttfEvaluation'
+                                        @ composedMTree.nodes[0]
+                                        @ null
+						_ finalize
+							@ composedMTree
+							@ $0
+							@ ctx
+							@ callback
+            
+	function finalize
+		param composedMTree
+		param $0
+		param ctx
+		param callback
+
+		set composedMTree.nodes = []
+            
+		foreach item in $0.children
+			set item.parent = null
+			# loog 'finalize', item.children[1]
+			_ composedMTree.nodes.push(item)
+            
+		set composedMTree.data =
+			{ 
+				@ createdAt ctx.startTime
+            
+		_ callback(null, composedMTree)
+
+    local_error( wizzi-mtree@${wzCtx.version}.loader.evaluator )

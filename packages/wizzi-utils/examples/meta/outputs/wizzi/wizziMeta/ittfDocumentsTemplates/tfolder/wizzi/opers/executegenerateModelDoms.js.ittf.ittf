@@ -1,0 +1,25 @@
+$group
+   function executegenerateModelDoms
+       param wfschemaIttfDocumentUri
+       param outputPackagePath
+       param wfschemaName
+       param mTreeBuildUpContext
+       param options
+       param plugins
+       param callback
+       +
+       if !callback
+           set callback = plugins
+           set plugins = null
+       +
+       _ createWizziFactory
+           {
+           @ plugins
+           a_cb${'('} wf )
+               _ wf.generateModelDoms
+                   @ wfschemaIttfDocumentUri
+                   @ outputPackagePath
+                   @ wfschemaName
+                   @ mTreeBuildUpContext
+                   @ options
+                   @ callback

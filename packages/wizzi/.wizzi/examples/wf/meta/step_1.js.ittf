@@ -1,0 +1,202 @@
+module
+	kind es6
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_meta_step_1',
+            title: 'Meta generation - load mini example',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+
+        $append json_wf_plugins
+            [ items
+                @ './wizzi.plugin.html/index'
+                @ './wizzi.plugin.js/index'
+                @ './wizzi.plugin.css/index'
+                @ './wizzi.plugin.ittf/index'
+                @ './wizzi.plugin.json/index'
+            @ pluginsBaseFolder pluginsBaseFolderV08
+
+        _ createPackifilesFromFs
+            _ path.join
+                @ __dirname
+                @ 'ittf'
+                @ 'meta_1'
+            a_cb( metaPackiFiles )
+                _ printValue
+                    @ 'metaPackiFiles'
+                    _ stringify
+                        @ metaPackiFiles
+                        @ null
+                        @ 2
+                _ createJsonWizziFactoryAndJsonFs
+                    @ metaPackiFiles
+                    f_cb_test(wf_and_jsonFs)
+                        _ wf_and_jsonFs.wf.metaGenerate
+                            @ packiFilePrefix + 'index.ittf.ittf'
+                            {
+                                @ modelRequestContext getMetaContext()
+                            {
+                                @ tempFolder packiFilePrefix + 'template'
+                                @ destFolder packiFilePrefix + '.wizzi'
+                            f_cb_test(jsonFs)
+                                $if false
+                                    _ printValue
+                                        @ 'jsonFs'
+                                        _ stringify
+                                            @ wf_and_jsonFs.jsonFs
+                                            @ null
+                                            @ 2
+                                $if true
+                                    _ jsonFsToPackiFiles
+                                        @ wf_and_jsonFs.jsonFs
+                                        @ 'template'
+                                        f_cb_test(templatePackiFiles)
+                                            _ writePackifiles
+                                                _ path.join
+                                                    @ __dirname
+                                                    @ 'out'
+                                                @ templatePackiFiles
+                                            _ printValue
+                                                @ 'templatePackiFiles'
+                                                _ stringify
+                                                    @ templatePackiFiles
+                                                    @ null
+                                                    @ 2
+                                            _ jsonFsToPackiFiles
+                                                @ wf_and_jsonFs.jsonFs
+                                                @ '.wizzi'
+                                                f_cb_test(wizziPackiFiles)
+                                                    _ writePackifiles
+                                                        _ path.join
+                                                            @ __dirname
+                                                            @ 'out'
+                                                        @ wizziPackiFiles
+                                                    _ printValue
+                                                        @ 'wizziPackiFiles'
+                                                        _ stringify
+                                                            @ wizziPackiFiles
+                                                            @ null
+                                                            @ 2
+
+
+        
+        $if false
+            _ createJsonWizziFactoryAndJsonFs
+                _ getMetaIttfFile
+                f_cb_test(wf_and_jsonFs)
+                    _ wf_and_jsonFs.wf.metaGenerate
+                        @ packiFilePrefix + 'index.ittf.ittf'
+                        {
+                            @ modelRequestContext getMetaContext()
+                        {
+                            @ tempFolder packiFilePrefix + 'template'
+                            @ destFolder packiFilePrefix + '.wizzi'
+                        f_cb_test(jsonFs)
+                            $if false
+                                _ printValue
+                                    @ 'jsonFs'
+                                    _ stringify
+                                        @ wf_and_jsonFs.jsonFs
+                                        @ null
+                                        @ 2
+                            _ jsonFsToPackiFiles
+                                @ wf_and_jsonFs.jsonFs
+                                @ 'template'
+                                f_cb_test(templatePackiFiles)
+                                    _ printValue
+                                        @ 'templatePackiFiles'
+                                        _ stringify
+                                            @ templatePackiFiles
+                                            @ null
+                                            @ 2
+                                    _ jsonFsToPackiFiles
+                                        @ wf_and_jsonFs.jsonFs
+                                        @ '.wizzi'
+                                        f_cb_test(wizziPackiFiles)
+                                            _ printValue
+                                                @ 'wizziPackiFiles'
+                                                _ stringify
+                                                    @ wizziPackiFiles
+                                                    @ null
+                                                    @ 2
+
+
+    function jsonFsToPackiFiles
+        param jsonFs $$ :ref JsonFs
+        param folder
+        param callback $$ return : ref packiTypes.PackiFiles
+        const packiFiles
+            {
+        _ jsonFs.toFiles
+            {
+                @ removeRoot packiFilePrefixExtract
+            =>
+                param err
+                param files $$ :ref fSystem.FileDef[]
+                if err
+                    _ callback(err)
+                _ printValue
+                    @ 'jsonFs.toFiles'
+                    _ stringify
+                        @ files
+                        @ null
+                        @ 2
+                _ files.forEach
+                    =>
+                        param file
+                        if file.relPath.startsWith(folder + '/')
+                            set packiFiles[file.relPath] =
+                                {
+                                    @ type 'CODE'
+                                    @ contents file.content
+                                    @ generated true
+                _ callback(null, packiFiles)
+
+    function getMetaContext
+        return
+            {
+                { metaCtx
+                    [ friends
+                        @ 'arthur'
+                        @ 'mary'
+
+
+    function getMetaIttfFile
+        return
+            {
+                { ['t/src/index.ittf.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ '$group'
+                            @ '    $file t/lia.html.ittf.ittf'
+                            @ '        $' + '{$2}group'
+                            @ '            $' + '{$2}params text, href'
+                            @ '            li'
+                            @ '                a $' + '{$2}{text}'
+                            @ '                    href $' + '{$2}{href}'
+                            @ '    $file index.html.ittf.ittf'
+                            @ '        html'
+                            @ '            ul'
+                            @ '                lia.html$' + '{$p2} stefi, www.stefi.com'
+                            @ '                lia.html$' + '{$p2} annie, www.annie.com'
+                            @ '                $' + '{$2}foreach f in friends'
+                            @ '                    lia.html$' + '{$p2} $' + '{$2}{f}, www.$' + '{$2}{f}.com'
+                            ._ join
+                                @ '\n'                                
+                { ['index.ittf.ittf']
+                    @ type 'CODE'
+                    @ contents
+                        [
+                            @ 'template basic'
+                            @ '    ${'$'}'
+                            @ '        var $2 = "$' + '{\'$\'}";'
+                            @ '        var $p2 = "$' + '{\'(\'}"'
+                            @ '    ${'$'}include ./src/index'
+                            ._ join
+                                @ '\n'

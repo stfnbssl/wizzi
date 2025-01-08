@@ -1,0 +1,5 @@
+﻿module
+    kind jsfile
+    
+    fragment_1( sayHello )
+    fragment_2( sayHello, , , bello )

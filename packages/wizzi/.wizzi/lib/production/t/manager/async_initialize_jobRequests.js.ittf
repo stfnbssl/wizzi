@@ -1,0 +1,60 @@
+﻿$group
+
+	# async run a wizzi job request
+		# from jobRequest
+
+	#
+		# called by the productionManager.initialize method
+		# . loads a requested wzjob model and
+		# . add its productionSteps objects to the productionManager productionSteps collection and
+		# . initializes them
+	var AsyncInitializeJobRequests
+		{
+			@ run
+				function
+					{ jobRequest
+						{ __pman
+						{ wzjob
+							string ittfDocumentUri
+					callback
+
+					var pman = jobRequest.__pman
+					
+					# loog 'AsyncInitializeJobRequests.pman.globalContext()', pman.globalContext()
+					
+					var wzjobIttfDocumentUri = jobRequest.wzjob.ittfDocumentUri
+					set pman.productionName += '_' + path.basename(wzjobIttfDocumentUri)
+					
+					# loog 'wizzi.production.asyncInitializeJobRequests.productionName', pman.productionName
+
+					# The wzjobLoader instance is created here and used 
+					# in any case of recursive request of `wzjob` executions.
+					var wzjobLoader = new WzjobLoader(pman)
+					var wzjobLoadRequest
+						{
+							@ model
+								{
+									@ src wzjobIttfDocumentUri
+							@ wzjobLoader wzjobLoader
+
+					_ AsyncRecurseWzjobLoad
+						@ wzjobLoadRequest
+						f_cb( result )
+							
+							# loog 'AsyncRecurseWzjobLoad.globalModelInfoConfigs', result.globalModelInfoConfigs.length, 'productionStepConfigs', result.productionStepConfigs.length
+
+                            foreach globalModelInfoConfig in result.globalModelInfoConfigs
+                                # loog 'wizzi.production.asyncInitializeJobRequests.globalModelInfoConfig', util.inspect(globalModelInfoConfig, { depth: 2 })
+                                set globalModelInfoConfig.wzjob = wzjobIttfDocumentUri
+								if pman.options.trace
+									info 'ProductionManager.initialize.globalModelInfoConfig', globalModelInfoConfig.toString()
+                                _ pman.addGlobalModelRequest(globalModelInfoConfig)
+
+                            foreach productionStepConfig in result.productionStepConfigs
+								# loog 'wizzi.production.asyncInitializeJobRequests.productionStepConfig', util.inspect(productionStepConfig, { depth: 2 })
+								set productionStepConfig.wzjob = wzjobIttfDocumentUri
+								if pman.options.trace
+									info 'ProductionManager.initialize.productionStepConfig', productionStepConfig.toString()
+								_ pman.addProductionStepRequest(productionStepConfig)
+
+							_ callback(null)

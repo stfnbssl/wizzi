@@ -1,0 +1,24 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'Liner_Step_1',
+            title: 'Liner - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        var lines
+            _ liner
+                _ file.read
+                    _ path.join
+                        @ __dirname
+                        @ 'ittf'
+                        @ 'liner_1.ittf'
+                {
+                    @ sourceKey 'f1'
+
+        _ printLines(lines)
+

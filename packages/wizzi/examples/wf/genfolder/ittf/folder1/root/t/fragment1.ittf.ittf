@@ -1,0 +1,3 @@
+$group
+    # from t/fragment1
+    name "${'$'}{'$'}{metaCtx.name}"

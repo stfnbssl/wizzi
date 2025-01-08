@@ -1,0 +1,21 @@
+$group
+
+        $
+            var items = [
+                "alpha_1.html",
+                "alpha_2.html",
+            ]
+
+        $foreach item in items
+            $file __dot__wizzi/folder-alpha/${item}.ittf.ittf
+                html
+                    ${'$'}include baxDemo/folder-alpha/${item}
+        $
+            var items = [
+                "beta_1.js",
+            ]
+
+        $foreach item in items
+            $file __dot__wizzi/folder-alpha/${item}.ittf.ittf
+                module
+                    ${'$'}include baxDemo/folder-alpha/${item}

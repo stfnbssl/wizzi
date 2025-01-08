@@ -1,0 +1,2 @@
+﻿test
+	team ${ true ? 10 ? 5 }

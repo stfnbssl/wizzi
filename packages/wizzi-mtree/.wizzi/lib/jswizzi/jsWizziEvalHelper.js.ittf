@@ -1,0 +1,256 @@
+﻿module wizzi-mtree@${wzCtx.version}.jswizzi.jsWizziEvalHelper
+    kind es6
+
+	var util = require('util')
+    var path = require('path')
+    var assert = require('assert')
+	var verify = require('@wizzi/utils').verify
+    var errors = require('../errors')
+	var ContextData = require('./contextData')
+    var interpolate = require('../loader/ittfInterpolate')
+    var types = require('../utils/types')
+	var JsWizziContext = null
+    
+	var work
+        { 
+    set work.lineSep = "__LS__"
+    set work.textSep = "__TS__"
+    
+	#
+		# This helper instance is stored in the global context 
+		# of the JsWizziContext and is in the global scope of the
+		# JsWizziRunner when it runs the mTreeBuildUpScript.
+		# In the script the symbol `$` represent the running instance of JsWizziEvalHelper.
+		#
+		# The mTreeBuildUpScript may call the methods of 
+		# this instance for
+		# . Setting the evalContext: global, mTreeBuildUp (nodes) or mTreeBrick (scripts).
+		# . Adding nodes to the mTree that is been building.
+		# . Executing interpolation of expressions.
+		# . Calling api functions (declared in the wizzifile.js) on the runner server 
+		# . Retrieving wizzi models (loaded in wizzifile.js) from the runner server 
+		# . Setting and getting values from the production context. 
+		#   --> This is a powerful feature for managing a context spanning 
+		#       multiple ittf documents in package productions.
+		# 
+		# The evalContext(s) of mTreeBrick(s) are stored in 
+		# the mTreeBrickDatas map of the wizzi.loader.loadHistory.
+		# There are retrieved by the getMTreeBrickEvalContext method
+		# every time the active mTreeBrick context changes.
+	
+	class JsWizziEvalHelper
+		ctor
+			{ jsWizziContext
+			{ primaryModel
+				{ loadHistory
+			{ productionContext
+			
+			set this.jsWizziContext = jsWizziContext
+			set this.primaryModel = primaryModel
+			set this.loadHistory = primaryModel.loadHistory
+			set this.productionContext = productionContext
+			set this.textSep = work.textSep
+			if productionContext.runnerServer
+				set this.callApi = productionContext.runnerServer.callApi
+				set this.getModel = productionContext.runnerServer.getModel
+		#
+			# mTree buildup method
+			# script method: `$.s(<brickKey>)`
+			# Set the JsWizziContext state to MTreeBrickEvalContext of `brickKey`
+		m s
+			param brickKey
+			# loog 'JsWizziEvalHelper called $.s(' + brickKey +')'
+			checked_call_return( notUsed
+				_ this.jsWizziContext.set_MTreeBrickEvalContext(brickKey)
+    
+		#
+			# mTree buildup method
+			# script method: `$.n()`
+			# Set the JsWizziContext state to NodeContext
+		m n
+			# loog 'JsWizziEvalHelper called $.n()'
+			_ this.jsWizziContext.set_NodeContext()
+    
+		#
+			# mTree buildup method
+			# script method: `$.g()`
+			# Set the JsWizziContext state to GlobalContext
+		m g
+			param brickKey
+			# loog 'JsWizziEvalHelper called $.g("brickKey")'
+			_ this.jsWizziContext.set_GlobalContext(brickKey)
+    
+		#
+			# mTree buildup method
+			# script method: `$.a(<parent>, <node>, <line-number>)`
+			# Append a child node to a parent node
+		m a
+			param parent
+			param node
+			param line
+			# loog 'JsWizziEvalHelper called $.a(' + node.n + ',' + node.v + ')'
+			_ assert(parent, "wizzi-mtree.JsWizziEvalHelper error. Parent undefined in add. At line " + line)
+			set node.parent = parent
+			if typeof (parent.children) === 'undefined'
+				set parent.children = []
+			set node.children = []
+			_ parent.children.push(node)
+    
+		#
+			# Interpolate a templated node value
+			# script method: `$.ip(<brickKey>, <templatedValue>, <type>, <line-number>, <hasMacro>)`
+		m ip
+			param brickKey
+			param templatedValue
+			param type
+			param line
+			param hasMacro
+			var ret
+			try
+                var saveCurrentBrickKey = this.jsWizziContext.get_currentMTreeBrickKey()
+
+				checked_call_return( notUsed
+					_ this.jsWizziContext.set_MTreeBrickEvalContext(brickKey, line)
+				
+                var ret = interpolate(templatedValue, this.jsWizziContext, {delimiter: '${}'})
+                if ret && ret.__is_error
+					error 'wizzi-mtree.JsWizziEvalHelper.interpolation.error\n', line, '\n', ret
+                    set ret.sourceKey = brickKey
+                    set ret.line = line
+                    set ret.templatedValue = templatedValue
+                    return ret
+
+				# loog 'ip', templatedValue, ret
+				
+				# Stop 7/7/17 if hasMacro
+				set ret = remacro(ret)
+
+				# loog 'ip after remacro', templatedValue, ret
+				
+				if saveCurrentBrickKey === null
+					_ this.jsWizziContext.set_NodeContext(brickKey)
+				else 
+					checked_call_return( notUsed
+						_ this.jsWizziContext.set_MTreeBrickEvalContext(saveCurrentBrickKey)
+			
+			catch ex
+				var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey)
+				var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
+				var mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.saved ip.currentMTreeBrickKey', saveCurrentBrickKey, 'mTreeBrickData.evalContext', mTreeBrickData.evalContext
+				# loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.values.' + util.inspect(this.jsWizziContext.getValues(), {depth: 2})
+                # loog 'wizzi-mtree.JsWizziEvalHelper.ip.catch.ex.message', ex.message
+				return 
+                    _ local_error
+                        @ 'IttfEvaluationError'
+                        @ 'ip'
+                        @ 'Interpolation failed, ' + ex.message
+                        _ this.jsWizziContext.getNodeFromScriptMap
+                            @ line
+                        @ ex
+                        {
+                            @ line line
+                            @ type type
+                            @ brickKey brickKey
+			
+			# Attention!!! types.objectify is different from verify.convert
+			# let types.objectify do the job
+			var retObject
+				_ types.objectify
+					@ ret
+					@ type
+					{ 
+						@ row line
+				$*
+				_ verify.convert
+					@ ret
+					@ type
+					@ true
+				*$
+			
+			if retObject && retObject.__is_error
+				var mTreeBrickData = this.loadHistory.getMTreeBrickData(brickKey)
+				var mixerMTreeBrickData = this.loadHistory.getMTreeBrickData(mTreeBrickData.mTreeBrick.$mixerBrickKey)
+				var mixerUri = mixerMTreeBrickData ? mixerMTreeBrickData.ittfDocumentUri : 'root model';
+				return
+                    _ local_error
+                        @ 'IttfEvaluationError'
+                        @ 'ip'
+                        @ 'Interpolation failed, ' + retObject.message
+                        _ this.jsWizziContext.getNodeFromScriptMap
+                            @ line
+                        @ retObject
+                        {
+                            @ line line
+                            @ type type
+                            @ brickKey brickKey
+                            $$ @ uri mTreeBrickData.ittfDocumentUri
+                            $$ @ mixerUri mixerUri
+
+			else
+				return retObject
+    
+		m api
+			if this.callApi
+				return 
+					_ this.callApi.apply
+						@ this.productionContext.runnerServer
+						@ arguments
+			else 
+				return
+                    _ local_error
+                        @ 'IttfEvaluationError'
+                        @ 'api'
+                        @ 'A RunnerServer has not been started. You must create a wizzifile.js.'
+    
+		m model
+			if this.getModel
+				return 
+					_ this.getModel.apply
+						@ this.productionContext.runnerServer
+						@ arguments
+			else 
+				return
+                    _ local_error
+                        @ 'IttfEvaluationError'
+                        @ 'model'
+                        @ 'A RunnerServer has not been started. You must create a wizzifile.js.'
+    
+		$include jsWizziEvalHelper/getMTreeBrickEvalContext
+		$include jsWizziEvalHelper/productionContextCalls
+
+	function remacro
+		param value
+		# Alt+146 = Æ
+        return verify.replaceAll(value, "Æ" + "{", "${");
+
+	function local_error
+		param errorName
+		param method
+		param message
+		param node
+		param inner
+        param other
+
+		var mtree
+			{
+				@ mTreeBrickNode node
+		if other.mtree
+			set mtree
+				{
+					... mtree
+					... other.mtree 
+		return
+		    new errors.WizziError
+                @ message
+				@ errorName
+				[
+					@ errorName
+                {
+					{ source
+                    	@ method 'wizzi-mtree@${wzCtx.version}.lib.jswizzi.jsWizziEvalHelper.' + method
+					{ mtree
+                    	@ mTreeBrickNode node
+                    @ inner inner || null
+
+	set module.exports = JsWizziEvalHelper

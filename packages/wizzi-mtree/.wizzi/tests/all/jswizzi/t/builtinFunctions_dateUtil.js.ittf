@@ -1,0 +1,11 @@
+﻿$group
+
+	var builtinFunctions_dateUtil
+		[
+			{
+				@ code 'var x = new Date(1957, 2, 10); return dateUtil.GMY(x)'
+				@ expected '10/3/1957'
+			{
+				@ code 'var x = new Date(1957, 2, 10, 1, 30); return dateUtil.GMYHM(x)'
+				@ expected '10/3/1957:1:30'
+

@@ -1,0 +1,1349 @@
+{
+  "wzPackageIttfDocumentGraph": {
+    "__type": "IttfDocumentGraph",
+    "name": "wzpackage",
+    "value": "",
+    "parent": null,
+    "children": [
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "#",
+        "value": "`fs-base-uri` is the dirname of `package-base-uri`",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "#",
+        "value": "`rel-dirname(s)` and `rel-uri(s)` of `f` and `d` nodes are relative to `fs-base-uri`",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "fs-base-uri",
+        "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "package-base-uri",
+        "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/ittf",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "git-base-uri",
+        "value": "",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "fs-info",
+        "value": "",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [],
+        "commentState": 0
+      },
+      {
+        "__type": "IttfDocumentGraph",
+        "name": "f",
+        "value": "ittf",
+        "parent": "[Circular ~.wzPackageIttfDocumentGraph]",
+        "children": [
+          {
+            "__type": "IttfDocumentGraph",
+            "name": "id",
+            "value": "root-parent-folder",
+            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6]",
+            "children": [],
+            "commentState": 0
+          },
+          {
+            "__type": "IttfDocumentGraph",
+            "name": "rel-dirname",
+            "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner",
+            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6]",
+            "children": [],
+            "commentState": 0
+          },
+          {
+            "__type": "IttfDocumentGraph",
+            "name": "rel-uri",
+            "value": "",
+            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6]",
+            "children": [],
+            "commentState": 0
+          },
+          {
+            "__type": "IttfDocumentGraph",
+            "name": "f",
+            "value": "scan-ittf",
+            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6]",
+            "children": [
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "id",
+                "value": "f_1",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "is-package-root",
+                "value": "",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "rel-dirname",
+                "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "rel-uri",
+                "value": "scan-ittf",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "f",
+                "value": "folder-alpha",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "id",
+                    "value": "f_2",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-dirname",
+                    "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-uri",
+                    "value": "scan-ittf/folder-alpha",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "d",
+                    "value": "alpha_1.html.ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4]",
+                    "children": [
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "id",
+                        "value": "d_1",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "ittf",
+                        "value": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-tag\">html</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">body</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h1</span><span class=\"pp-pln\"> Hello folder-alpha</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h2</span><span class=\"pp-pln\"> alpha_1</span></div>",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-dirname",
+                        "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-uri",
+                        "value": "scan-ittf/folder-alpha/alpha_1.html.ittf",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "schema",
+                        "value": "html",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.4.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      }
+                    ],
+                    "commentState": 0
+                  }
+                ],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "f",
+                "value": "folder-beta",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "id",
+                    "value": "f_3",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-dirname",
+                    "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-uri",
+                    "value": "scan-ittf/folder-beta",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "d",
+                    "value": "beta_1.html.ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5]",
+                    "children": [
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "id",
+                        "value": "d_2",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "ittf",
+                        "value": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-tag\">html</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">body</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h1</span><span class=\"pp-pln\"> Hello folder-beta</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h2</span><span class=\"pp-pln\"> beta_1</span></div>",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-dirname",
+                        "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-uri",
+                        "value": "scan-ittf/folder-beta/beta_1.html.ittf",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "schema",
+                        "value": "html",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.5.children.3]",
+                        "children": [],
+                        "commentState": 0
+                      }
+                    ],
+                    "commentState": 0
+                  }
+                ],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "f",
+                "value": "t",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "id",
+                    "value": "f_4",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "is-t-folder",
+                    "value": "",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-dirname",
+                    "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-uri",
+                    "value": "scan-ittf/t",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "d",
+                    "value": "header.html.ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6]",
+                    "children": [
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "id",
+                        "value": "d_3",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "is-fragment",
+                        "value": "",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "ittf",
+                        "value": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-kwd\">└group</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-kwd\">└params</span><span class=\"pp-pln\"> title</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">section</span><span class=\"pp-pln\"> header</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-tag\">h1</span><span class=\"pp-kwd\"> └{</span><span class=\"pp-expr\">title</span><span class=\"pp-kwd\">}</span></div>",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-dirname",
+                        "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "rel-uri",
+                        "value": "scan-ittf/t/header.html.ittf",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      },
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "schema",
+                        "value": "html",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.6.children.4]",
+                        "children": [],
+                        "commentState": 0
+                      }
+                    ],
+                    "commentState": 0
+                  }
+                ],
+                "commentState": 0
+              },
+              {
+                "__type": "IttfDocumentGraph",
+                "name": "d",
+                "value": "index.html.ittf",
+                "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3]",
+                "children": [
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "id",
+                    "value": "d_4",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "ittf",
+                    "value": "<div class=\"L1\"><span class=\"pp-ln\">   1 </span><span class=\"pp-pln\"></span><span class=\"pp-tag\">html</span></div><div class=\"L2\"><span class=\"pp-ln\">   2 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">head</span></div><div class=\"L3\"><span class=\"pp-ln\">   3 </span><span class=\"pp-pln\">    </span><span class=\"pp-tag\">body</span></div><div class=\"L4\"><span class=\"pp-ln\">   4 </span><span class=\"pp-pln\">        </span><span class=\"pp-mix frag-to-link-a\" data-frag-id=\"d_3\">header(</span><span class=\"pp-arg\"> Great scan </span><span class=\"pp-mix\">)</span></div>",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7]",
+                    "children": [
+                      {
+                        "__type": "IttfDocumentGraph",
+                        "name": "fragment",
+                        "value": "header",
+                        "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7.children.1]",
+                        "children": [
+                          {
+                            "__type": "IttfDocumentGraph",
+                            "name": "d-id",
+                            "value": "d_3",
+                            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7.children.1.children.0]",
+                            "children": [],
+                            "commentState": 0
+                          },
+                          {
+                            "__type": "IttfDocumentGraph",
+                            "name": "rel-uri",
+                            "value": "scan-ittf/t/header.html.ittf",
+                            "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7.children.1.children.0]",
+                            "children": [],
+                            "commentState": 0
+                          }
+                        ],
+                        "commentState": 0
+                      }
+                    ],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-dirname",
+                    "value": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "rel-uri",
+                    "value": "scan-ittf/index.html.ittf",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7]",
+                    "children": [],
+                    "commentState": 0
+                  },
+                  {
+                    "__type": "IttfDocumentGraph",
+                    "name": "schema",
+                    "value": "html",
+                    "parent": "[Circular ~.wzPackageIttfDocumentGraph.children.6.children.3.children.7]",
+                    "children": [],
+                    "commentState": 0
+                  }
+                ],
+                "commentState": 0
+              }
+            ],
+            "commentState": 0
+          }
+        ],
+        "commentState": 0
+      }
+    ],
+    "fragments": {},
+    "ittfReferences": {},
+    "errorFragments": [],
+    "file": {
+      "fsimpl": {
+        "kind": "filesystem"
+      },
+      "storeKind": "filesystem"
+    }
+  },
+  "ittfFsNode": {
+    "parent": null,
+    "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+    "path": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+    "isRoot": true,
+    "relPath": "",
+    "isDirectory": true,
+    "file": {
+      "fsimpl": {
+        "kind": "filesystem"
+      },
+      "storeKind": "filesystem"
+    },
+    "isFragment": false,
+    "isExternal": false,
+    "parts": [
+      "C:",
+      "My",
+      "wizzi",
+      "stfnbssl",
+      "wizzi",
+      "packages",
+      "wizzi-utils",
+      "examples",
+      "ittfScanner",
+      "ittf"
+    ],
+    "segments": [
+      "C:",
+      "My",
+      "wizzi",
+      "stfnbssl",
+      "wizzi",
+      "packages",
+      "wizzi-utils",
+      "examples",
+      "ittfScanner"
+    ],
+    "basename": "ittf",
+    "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner",
+    "isTFolder": false,
+    "isInsideTFolder": false,
+    "folders": [
+      {
+        "parent": "[Circular ~.ittfFsNode]",
+        "path": "scan-ittf",
+        "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+        "relPath": "scan-ittf",
+        "isDirectory": true,
+        "file": {
+          "fsimpl": {
+            "kind": "filesystem"
+          },
+          "storeKind": "filesystem"
+        },
+        "isFragment": false,
+        "isExternal": false,
+        "parts": [
+          "C:",
+          "My",
+          "wizzi",
+          "stfnbssl",
+          "wizzi",
+          "packages",
+          "wizzi-utils",
+          "examples",
+          "ittfScanner",
+          "ittf",
+          "scan-ittf"
+        ],
+        "segments": [
+          "C:",
+          "My",
+          "wizzi",
+          "stfnbssl",
+          "wizzi",
+          "packages",
+          "wizzi-utils",
+          "examples",
+          "ittfScanner",
+          "ittf"
+        ],
+        "basename": "scan-ittf",
+        "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+        "isTFolder": false,
+        "isInsideTFolder": false,
+        "folders": [
+          {
+            "parent": "[Circular ~.ittfFsNode.folders.0]",
+            "path": "folder-alpha",
+            "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha",
+            "relPath": "scan-ittf/folder-alpha",
+            "isDirectory": true,
+            "file": {
+              "fsimpl": {
+                "kind": "filesystem"
+              },
+              "storeKind": "filesystem"
+            },
+            "isFragment": false,
+            "isExternal": false,
+            "parts": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf",
+              "folder-alpha"
+            ],
+            "segments": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf"
+            ],
+            "basename": "folder-alpha",
+            "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+            "isTFolder": false,
+            "isInsideTFolder": false,
+            "folders": [],
+            "documents": [
+              {
+                "parent": "[Circular ~.ittfFsNode.folders.0.folders.0]",
+                "path": "alpha_1.html.ittf",
+                "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha/alpha_1.html.ittf",
+                "relPath": "scan-ittf/folder-alpha/alpha_1.html.ittf",
+                "isDirectory": false,
+                "file": {
+                  "fsimpl": {
+                    "kind": "filesystem"
+                  },
+                  "storeKind": "filesystem"
+                },
+                "isFragment": false,
+                "isExternal": false,
+                "parts": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "folder-alpha",
+                  "alpha_1.html.ittf"
+                ],
+                "segments": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "folder-alpha"
+                ],
+                "basename": "alpha_1.html.ittf",
+                "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha",
+                "schema": "html",
+                "folders": [],
+                "documents": [],
+                "info": {
+                  "schemas": {},
+                  "lib": {
+                    "documents": []
+                  },
+                  "test": {
+                    "documents": []
+                  },
+                  "example": {
+                    "documents": []
+                  },
+                  "util": {
+                    "documents": []
+                  }
+                },
+                "analized": true,
+                "id": "d_1",
+                "ittfDocumentGraph": {
+                  "__type": "IttfDocumentGraph",
+                  "name": "html",
+                  "value": "",
+                  "parent": null,
+                  "children": [
+                    {
+                      "__type": "IttfDocumentGraph",
+                      "name": "body",
+                      "value": "",
+                      "parent": "[Circular ~.ittfFsNode.folders.0.folders.0.documents.0.ittfDocumentGraph]",
+                      "children": [
+                        {
+                          "__type": "IttfDocumentGraph",
+                          "name": "h1",
+                          "value": "Hello folder-alpha",
+                          "parent": "[Circular ~.ittfFsNode.folders.0.folders.0.documents.0.ittfDocumentGraph.children.0]",
+                          "children": [],
+                          "commentState": 0,
+                          "row": 3,
+                          "col": 9,
+                          "id": 3
+                        },
+                        {
+                          "__type": "IttfDocumentGraph",
+                          "name": "h2",
+                          "value": "alpha_1",
+                          "parent": "[Circular ~.ittfFsNode.folders.0.folders.0.documents.0.ittfDocumentGraph.children.0]",
+                          "children": [],
+                          "commentState": 0,
+                          "row": 4,
+                          "col": 9,
+                          "id": 4
+                        }
+                      ],
+                      "commentState": 0,
+                      "row": 2,
+                      "col": 5,
+                      "id": 2
+                    }
+                  ],
+                  "fragments": {},
+                  "ittfReferences": {},
+                  "errorFragments": [],
+                  "file": {
+                    "fsimpl": {
+                      "kind": "filesystem"
+                    },
+                    "storeKind": "filesystem"
+                  },
+                  "model": {
+                    "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha/alpha_1.html.ittf",
+                    "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-alpha",
+                    "basename": "alpha_1.html.ittf",
+                    "isIttf": true,
+                    "schema": "html",
+                    "seedName": "alpha_1",
+                    "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\examples\\ittfScanner\\ittf\\scan-ittf\\folder-alpha\\alpha_1.json.ittf"
+                  },
+                  "content": "html\r\n    body\r\n        h1 Hello folder-alpha\r\n        h2 alpha_1",
+                  "row": 1,
+                  "col": 1,
+                  "id": 1
+                },
+                "fragments": {}
+              }
+            ],
+            "info": {
+              "schemas": {},
+              "lib": {
+                "documents": []
+              },
+              "test": {
+                "documents": []
+              },
+              "example": {
+                "documents": []
+              },
+              "util": {
+                "documents": []
+              }
+            },
+            "analized": true,
+            "id": "f_2"
+          },
+          {
+            "parent": "[Circular ~.ittfFsNode.folders.0]",
+            "path": "folder-beta",
+            "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta",
+            "relPath": "scan-ittf/folder-beta",
+            "isDirectory": true,
+            "file": {
+              "fsimpl": {
+                "kind": "filesystem"
+              },
+              "storeKind": "filesystem"
+            },
+            "isFragment": false,
+            "isExternal": false,
+            "parts": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf",
+              "folder-beta"
+            ],
+            "segments": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf"
+            ],
+            "basename": "folder-beta",
+            "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+            "isTFolder": false,
+            "isInsideTFolder": false,
+            "folders": [],
+            "documents": [
+              {
+                "parent": "[Circular ~.ittfFsNode.folders.0.folders.1]",
+                "path": "beta_1.html.ittf",
+                "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta/beta_1.html.ittf",
+                "relPath": "scan-ittf/folder-beta/beta_1.html.ittf",
+                "isDirectory": false,
+                "file": {
+                  "fsimpl": {
+                    "kind": "filesystem"
+                  },
+                  "storeKind": "filesystem"
+                },
+                "isFragment": false,
+                "isExternal": false,
+                "parts": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "folder-beta",
+                  "beta_1.html.ittf"
+                ],
+                "segments": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "folder-beta"
+                ],
+                "basename": "beta_1.html.ittf",
+                "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta",
+                "schema": "html",
+                "folders": [],
+                "documents": [],
+                "info": {
+                  "schemas": {},
+                  "lib": {
+                    "documents": []
+                  },
+                  "test": {
+                    "documents": []
+                  },
+                  "example": {
+                    "documents": []
+                  },
+                  "util": {
+                    "documents": []
+                  }
+                },
+                "analized": true,
+                "id": "d_2",
+                "ittfDocumentGraph": {
+                  "__type": "IttfDocumentGraph",
+                  "name": "html",
+                  "value": "",
+                  "parent": null,
+                  "children": [
+                    {
+                      "__type": "IttfDocumentGraph",
+                      "name": "body",
+                      "value": "",
+                      "parent": "[Circular ~.ittfFsNode.folders.0.folders.1.documents.0.ittfDocumentGraph]",
+                      "children": [
+                        {
+                          "__type": "IttfDocumentGraph",
+                          "name": "h1",
+                          "value": "Hello folder-beta",
+                          "parent": "[Circular ~.ittfFsNode.folders.0.folders.1.documents.0.ittfDocumentGraph.children.0]",
+                          "children": [],
+                          "commentState": 0,
+                          "row": 3,
+                          "col": 9,
+                          "id": 3
+                        },
+                        {
+                          "__type": "IttfDocumentGraph",
+                          "name": "h2",
+                          "value": "beta_1",
+                          "parent": "[Circular ~.ittfFsNode.folders.0.folders.1.documents.0.ittfDocumentGraph.children.0]",
+                          "children": [],
+                          "commentState": 0,
+                          "row": 4,
+                          "col": 9,
+                          "id": 4
+                        }
+                      ],
+                      "commentState": 0,
+                      "row": 2,
+                      "col": 5,
+                      "id": 2
+                    }
+                  ],
+                  "fragments": {},
+                  "ittfReferences": {},
+                  "errorFragments": [],
+                  "file": {
+                    "fsimpl": {
+                      "kind": "filesystem"
+                    },
+                    "storeKind": "filesystem"
+                  },
+                  "model": {
+                    "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta/beta_1.html.ittf",
+                    "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/folder-beta",
+                    "basename": "beta_1.html.ittf",
+                    "isIttf": true,
+                    "schema": "html",
+                    "seedName": "beta_1",
+                    "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\examples\\ittfScanner\\ittf\\scan-ittf\\folder-beta\\beta_1.json.ittf"
+                  },
+                  "content": "html\r\n    body\r\n        h1 Hello folder-beta\r\n        h2 beta_1",
+                  "row": 1,
+                  "col": 1,
+                  "id": 1
+                },
+                "fragments": {}
+              }
+            ],
+            "info": {
+              "schemas": {},
+              "lib": {
+                "documents": []
+              },
+              "test": {
+                "documents": []
+              },
+              "example": {
+                "documents": []
+              },
+              "util": {
+                "documents": []
+              }
+            },
+            "analized": true,
+            "id": "f_3"
+          },
+          {
+            "parent": "[Circular ~.ittfFsNode.folders.0]",
+            "path": "t",
+            "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t",
+            "relPath": "scan-ittf/t",
+            "isDirectory": true,
+            "file": {
+              "fsimpl": {
+                "kind": "filesystem"
+              },
+              "storeKind": "filesystem"
+            },
+            "isFragment": false,
+            "isExternal": false,
+            "parts": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf",
+              "t"
+            ],
+            "segments": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf"
+            ],
+            "basename": "t",
+            "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+            "isTFolder": true,
+            "isInsideTFolder": false,
+            "folders": [],
+            "documents": [
+              {
+                "parent": "[Circular ~.ittfFsNode.folders.0.folders.2]",
+                "path": "header.html.ittf",
+                "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t/header.html.ittf",
+                "relPath": "scan-ittf/t/header.html.ittf",
+                "isDirectory": false,
+                "file": {
+                  "fsimpl": {
+                    "kind": "filesystem"
+                  },
+                  "storeKind": "filesystem"
+                },
+                "isFragment": true,
+                "isExternal": false,
+                "parts": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "t",
+                  "header.html.ittf"
+                ],
+                "segments": [
+                  "C:",
+                  "My",
+                  "wizzi",
+                  "stfnbssl",
+                  "wizzi",
+                  "packages",
+                  "wizzi-utils",
+                  "examples",
+                  "ittfScanner",
+                  "ittf",
+                  "scan-ittf",
+                  "t"
+                ],
+                "basename": "header.html.ittf",
+                "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t",
+                "schema": "html",
+                "folders": [],
+                "documents": [],
+                "info": {
+                  "schemas": {},
+                  "lib": {
+                    "documents": []
+                  },
+                  "test": {
+                    "documents": []
+                  },
+                  "example": {
+                    "documents": []
+                  },
+                  "util": {
+                    "documents": []
+                  }
+                },
+                "analized": true,
+                "id": "d_3",
+                "ittfDocumentGraph": {
+                  "__type": "IttfDocumentGraph",
+                  "name": "$group",
+                  "value": "",
+                  "parent": null,
+                  "children": [
+                    {
+                      "__type": "IttfDocumentGraph",
+                      "name": "$params",
+                      "value": "title",
+                      "parent": "[Circular ~.ittfFsNode.folders.0.folders.2.documents.0.ittfDocumentGraph]",
+                      "children": [],
+                      "commentState": 0,
+                      "isCommand": true
+                    },
+                    {
+                      "__type": "IttfDocumentGraph",
+                      "name": "section",
+                      "value": "header",
+                      "parent": "[Circular ~.ittfFsNode.folders.0.folders.2.documents.0.ittfDocumentGraph]",
+                      "children": [
+                        {
+                          "__type": "IttfDocumentGraph",
+                          "name": "h1",
+                          "value": "${title}",
+                          "parent": "[Circular ~.ittfFsNode.folders.0.folders.2.documents.0.ittfDocumentGraph.children.1]",
+                          "children": [],
+                          "commentState": 0,
+                          "row": 5,
+                          "col": 9,
+                          "id": 4
+                        }
+                      ],
+                      "commentState": 0,
+                      "row": 4,
+                      "col": 5,
+                      "id": 3
+                    }
+                  ],
+                  "fragments": {},
+                  "ittfReferences": {},
+                  "errorFragments": [],
+                  "file": {
+                    "fsimpl": {
+                      "kind": "filesystem"
+                    },
+                    "storeKind": "filesystem"
+                  },
+                  "model": {
+                    "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t/header.html.ittf",
+                    "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t",
+                    "basename": "header.html.ittf",
+                    "isIttf": true,
+                    "schema": "html",
+                    "seedName": "header",
+                    "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\examples\\ittfScanner\\ittf\\scan-ittf\\t\\header.json.ittf"
+                  },
+                  "content": "$group\r\n    $params title\r\n\r\n    section header\r\n        h1 ${title}",
+                  "row": 1,
+                  "col": 1,
+                  "id": 1,
+                  "isCommand": true
+                },
+                "fragments": {}
+              }
+            ],
+            "info": {
+              "schemas": {},
+              "lib": {
+                "documents": []
+              },
+              "test": {
+                "documents": []
+              },
+              "example": {
+                "documents": []
+              },
+              "util": {
+                "documents": []
+              }
+            },
+            "analized": true,
+            "id": "f_4"
+          }
+        ],
+        "documents": [
+          {
+            "parent": "[Circular ~.ittfFsNode.folders.0]",
+            "path": "index.html.ittf",
+            "fullPath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/index.html.ittf",
+            "relPath": "scan-ittf/index.html.ittf",
+            "isDirectory": false,
+            "file": {
+              "fsimpl": {
+                "kind": "filesystem"
+              },
+              "storeKind": "filesystem"
+            },
+            "isFragment": false,
+            "isExternal": false,
+            "parts": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf",
+              "index.html.ittf"
+            ],
+            "segments": [
+              "C:",
+              "My",
+              "wizzi",
+              "stfnbssl",
+              "wizzi",
+              "packages",
+              "wizzi-utils",
+              "examples",
+              "ittfScanner",
+              "ittf",
+              "scan-ittf"
+            ],
+            "basename": "index.html.ittf",
+            "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+            "schema": "html",
+            "folders": [],
+            "documents": [],
+            "info": {
+              "schemas": {},
+              "lib": {
+                "documents": []
+              },
+              "test": {
+                "documents": []
+              },
+              "example": {
+                "documents": []
+              },
+              "util": {
+                "documents": []
+              }
+            },
+            "analized": true,
+            "id": "d_4",
+            "ittfDocumentGraph": {
+              "__type": "IttfDocumentGraph",
+              "name": "html",
+              "value": "",
+              "parent": null,
+              "children": [
+                {
+                  "__type": "IttfDocumentGraph",
+                  "name": "head",
+                  "value": "",
+                  "parent": "[Circular ~.ittfFsNode.folders.0.documents.0.ittfDocumentGraph]",
+                  "children": [],
+                  "commentState": 0,
+                  "row": 2,
+                  "col": 5,
+                  "id": 2
+                },
+                {
+                  "__type": "IttfDocumentGraph",
+                  "name": "body",
+                  "value": "",
+                  "parent": "[Circular ~.ittfFsNode.folders.0.documents.0.ittfDocumentGraph]",
+                  "children": [
+                    {
+                      "__type": "IttfDocumentGraph",
+                      "name": "header(",
+                      "value": "Great scan )",
+                      "parent": "[Circular ~.ittfFsNode.folders.0.documents.0.ittfDocumentGraph.children.1]",
+                      "children": [],
+                      "commentState": 0,
+                      "row": 4,
+                      "col": 9,
+                      "id": 4,
+                      "isMixer": true,
+                      "fragmentName": "header"
+                    }
+                  ],
+                  "commentState": 0,
+                  "row": 3,
+                  "col": 5,
+                  "id": 3
+                }
+              ],
+              "fragments": {
+                "header": {
+                  "oper": "mix",
+                  "baseUri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                  "name": "header",
+                  "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t/header.html.ittf",
+                  "id": "d_3"
+                }
+              },
+              "ittfReferences": {},
+              "errorFragments": [],
+              "file": {
+                "fsimpl": {
+                  "kind": "filesystem"
+                },
+                "storeKind": "filesystem"
+              },
+              "model": {
+                "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/index.html.ittf",
+                "dirname": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                "basename": "index.html.ittf",
+                "isIttf": true,
+                "schema": "html",
+                "seedName": "index",
+                "jsonTwinUri": "C:\\My\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-utils\\examples\\ittfScanner\\ittf\\scan-ittf\\index.json.ittf"
+              },
+              "content": "html\r\n    head\r\n    body\r\n        header( Great scan )\r\n",
+              "row": 1,
+              "col": 1,
+              "id": 1
+            },
+            "fragments": {
+              "header": {
+                "oper": "mix",
+                "baseUri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf",
+                "name": "header",
+                "uri": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf/scan-ittf/t/header.html.ittf",
+                "id": "d_3"
+              }
+            }
+          }
+        ],
+        "info": {
+          "schemas": {},
+          "lib": {
+            "documents": []
+          },
+          "test": {
+            "documents": []
+          },
+          "example": {
+            "documents": []
+          },
+          "util": {
+            "documents": []
+          }
+        },
+        "analized": true,
+        "id": "f_1"
+      }
+    ],
+    "documents": [],
+    "info": {
+      "schemas": {},
+      "lib": {
+        "documents": []
+      },
+      "test": {
+        "documents": []
+      },
+      "example": {
+        "documents": []
+      },
+      "util": {
+        "documents": []
+      }
+    },
+    "ittfBasePath": "C:/My/wizzi/stfnbssl/wizzi/packages/wizzi-utils/examples/ittfScanner/ittf",
+    "jsCodeBasePath": null,
+    "externalFragments": [],
+    "externalIttfFsNodes": [],
+    "analized": true,
+    "id": "root-parent-folder",
+    "f_idcount": 4,
+    "d_idcount": 4
+  }
+}

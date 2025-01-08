@@ -1,0 +1,6 @@
+html
+
+    $if false
+        h1 hello
+    $else
+        $throw not found ${'me'}

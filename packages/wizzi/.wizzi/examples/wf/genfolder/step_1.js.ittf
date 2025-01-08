@@ -1,0 +1,63 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'wf_genfolder_step_1',
+            title: 'Generate all the ittf documents in a folder',
+            folderLevel: 3
+        }
+
+    common\example\wizzi( &opt )
+
+        var genFolderPath
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1'
+
+        var genFolderDest
+            _ path.join 
+                @ __dirname
+                @ 'ittf'
+                @ 'folder1_out'
+
+        var friendsArray
+            [ 
+                @ 'arthur'
+                @ 'mary'
+
+        _ wizziIndex.createFactory
+            {
+                { repo
+                    @ storeKind 'filesystem'
+                { plugins
+                    @ pluginsBaseFolder pluginsBaseFolderV08
+                    [ items
+                        @ "./wizzi.plugin.ittf/index.js" 
+                        @ "./wizzi.plugin.html/index.js" 
+                        @ "./wizzi.plugin.js/index.js" 
+                { globalContext
+            f_cb_test( wf ) 
+                _ wf.generateFolderArtifacts
+                    @ genFolderPath
+                    { 
+                        @ modelRequestContext 
+                            {
+                                @ metaCtx
+                                    {
+                                        @ name "Hello"
+                                @ friends friendsArray
+                        @ artifactRequestContext {}
+                    { 
+                        @ deep true
+                        @ destFolder genFolderDest
+                        @ copyInclude ['*']
+                        @ copyExclude []
+                    f_cb_test(genFolderResult)
+                        _ printValue
+                            @ 'genFolderResult'
+                            @ genFolderResult
+

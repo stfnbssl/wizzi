@@ -1,0 +1,83 @@
+﻿base_test( includer )
+	
+	$append imports
+		var mocks = require('../../mocks/misc')
+		var MTreeBrickProvider = require('../../../lib/loader/mTreeBrickProvider')
+		var includer = require('../../../lib/loader/includer')
+
+	var
+		decl store
+		decl node
+    
+	before-async
+
+        _ getFSDocumentStore
+            f_cb_throw( fsStore )
+                set store = fsStore
+                _ done
+
+	it-async should include a fragment
+            
+		var uri
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'includer_1.tests.ittf'
+            
+		_ MTreeBrickProvider.createFromUri
+			@ uri
+            {
+				@ mTreeBuildUpContext
+					{
+				@ productionContext mocks.ProductionContext
+				@ __ittfDocumentStore store
+			f_cb_throw( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+				_ includer
+					@ mTree
+					@ provider
+					f_cb_throw( includedModel )
+
+						set node = includedModel.nodes[0]
+                        # loog 'includedModel.nodes[0]', node
+						tobe_number( node.row, 1 )
+						tobe_number( node.col, 1 )
+						tobe_string( node.name, sigma )
+						tobe_undefined( node.value )
+
+						set node = includedModel.nodes[0].children[0]
+                        # loog 'includedModel.nodes[0].children[0]', node
+						tobe_number( node.row, 1 )
+						tobe_number( node.col, 1 )
+						tobe_string( node.name, tau )
+						tobe_string( node.value, 1 )
+
+						_ done()
+
+	it-async should throw an error for fragment to include not found
+            
+		var uri
+			_ path.join
+				@ __dirname
+				@ 'repo'
+				@ 'data'
+				@ 'includer_error_1.tests.ittf'
+            
+		_ MTreeBrickProvider.createFromUri
+			@ uri
+            {
+				@ mTreeBuildUpContext
+					{
+				@ productionContext mocks.ProductionContext
+				@ __ittfDocumentStore store
+			f_cb_throw( provider )
+				var mTree = provider.getPrimaryMTreeBrick()
+				_ includer
+					@ mTree
+					@ provider
+					f_cb_no_err( includedModel )
+                        # loog 'should throw an error for fragment to include not found', '\n' + err.toString()
+                        tobe_error( err, IttfIncludeError )                    
+                        _ done
+

@@ -1,0 +1,6 @@
+html
+    body
+        h1 Hello 
+        $if $.getCtx('package.dependencies')
+            $foreach item in Object.values($.getCtx('package.dependencies'))
+                p ${item.name} "${item.version}"

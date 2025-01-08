@@ -1,0 +1,40 @@
+$group
+
+    #
+        # Method for `multi-part production context management`
+        # script method: `$.setCtx(<namePath>, <value>)`
+        # Set a value in the production context of a multi-part production (es. Wizzi Job)
+    m setCtx
+        $$ VIA param kind     $$ string,
+        param namePath $$ string,
+        param value    $$
+        return
+            _ this.productionContext.setEvaluationContextValue
+                $$ VIA @ kind
+                @ namePath
+                @ value
+    
+    #
+        # Method for `multi-part production context management`
+        # script method: `$.removeCtx(<namePath>)`
+        # Remove a value in the production context of a multi-part production (es. Wizzi Job)
+    m removeCtx
+        $$ VIA param kind $$ string, 
+        param namePath $$ string, 
+        throw new Error('ProductionContext.removeEvaluationContextValue not implemented yet')
+        return
+            _ this.productionContext.removeEvaluationContextValue
+                $$ VIA @ kind
+                @ namePath
+    
+    #
+        # Method for `multi-part production context management`
+        # script method: `$.getCtx(<namePath>)`
+        # Get a value from the production context of a multi-part production (es. Wizzi Job)
+    m getCtx
+        $$ VIA param kind     $$ string, 
+        param namePath $$ string, 
+        return
+            _ this.productionContext.getEvaluationContextValue
+                $$ VIA @ kind
+                @ namePath

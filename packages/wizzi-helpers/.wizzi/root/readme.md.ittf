@@ -1,0 +1,66 @@
+﻿md
+
+    common/kernel()
+
+        h2 Wizzi internal package
+        p This package is required by the @wizzi/util package only.
+        
+        h2 Features
+
+        h3 verify - helper object
+        h4 var verify = require('@wizzi/utils').verify
+
+        h3 verify - type checks
+        h4 verify.isDefined(item)
+        h4 verify.isNullOrUndefined(item)
+        h4 verify.isObject(item)
+        h4 verify.isArray(item)
+        h4 verify.isFunction(item)
+        h4 verify.isNumber(item)
+        h4 verify.isBoolean(item)
+        h4 verify.isDate(item)
+        h4 verify.isString(item)
+        h4 verify.isEmpty(item)
+        h4 verify.isNotEmpty(item)
+        h4 verify.isPrimitive(item)
+        h4 verify.isRegExp(item)
+        h4 verify.isError(item)
+        h4 verify.isAbsolutePath(item)
+        h4 verify.isIttfMacro(item)
+
+        h3 verify.convert(value, type[, unquote])
+        ul
+            li `value` `String` If `@@null` return null; if `@@undefined` return undefined.
+            li `type` `String` One-of string, integer, float, boolean, date
+            li `options` `Object`
+
+        h3 verify.canConvertTo(value, type)
+        ul
+            li `value` `String` 
+            li `type` `String` One-of string, integer, float, boolean, date
+
+        h3 verify - validations
+        
+        h4 verify.isEmail(value)
+        h4 verify.isEmails(value)
+        h4 verify.isMinLength(value, length)
+        h4 verify.isMaxLength(value, length)
+        h4 verify.isExactLength(value, length)
+        h4 verify.isGreaterThan(value, test)
+        h4 verify.isLessThan(value, test)
+        h4 verify.isGreaterEqualThan(value, test)
+        h4 verify.isLessEqualThan(value, test)
+        h4 verify.isAlpha(value)
+        h4 verify.isAlphaNumeric(value)
+        h4 verify.isIp(value)
+        h4 verify.isBase64(value)
+        h4 verify.isUrl(value)
+        h4 verify.isCreditCard(value)
+        h4 verify.isGreaterThanDate(value, date)
+        h4 verify.isLessThanDate(value, date)
+        h4 verify.isGreaterEqualDate(value, date)
+        h4 verify.isLessEqualDate(value, date)
+
+        h3 verify - errors
+        h4 verify.error([inner,] [obj,] message, [arg-1[, arg-2[, arg-...]]])
+        h4 verify.fatal(err[, code])

@@ -1,0 +1,21 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'Utils_Step_1',
+            title: 'Utils - step - 1 - file info',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        var infos
+            _ repoIndex.ittfDocumentInfoByPath
+                _ path.join
+                    @ __dirname
+                    @ 'temp.js.ittf'
+        _ printObject
+            @ infos

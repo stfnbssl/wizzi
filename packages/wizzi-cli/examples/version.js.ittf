@@ -1,0 +1,6 @@
+module
+    kind jsfile
+
+    let arg = process.argv[2]
+    var gen = require('../src/cmds/version');
+    _ gen(arg)

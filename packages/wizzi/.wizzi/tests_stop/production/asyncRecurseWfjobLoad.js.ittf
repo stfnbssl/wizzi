@@ -1,0 +1,51 @@
+﻿base_test(asyncRecurseWzjobLoad)
+
+	$append imports
+		var WzjobLoader = require('../../lib/production/wzjob/wzjobLoader').WzjobLoader
+		var AsyncRecurseWzjobLoad = require('../../lib/production/wzjob/wzjobLoader').AsyncRecurseWzjobLoad
+		var mocks = require('../mocks/misc')
+
+	var _wizziFactory = null
+	var _productionManager = null
+
+	before-async
+		_ mocks.getWizziFactory
+			{
+				@ storeKind 'filesystem'
+				@ testOnlyMockBaseDir __dirname
+			f_cb_test( wf )
+				set _wizziFactory = wf
+				set _productionManager
+					_ wf.createProductionManager
+						{
+							@ indentSpaces 4
+							@ basedir __dirname
+							@ dumps {}
+				_ done
+
+	it-async shoul load a wzjob (AsyncRecurseWzjobLoad)
+		var wzjobLoader 
+			new WzjobLoader
+				@ _productionManager
+		var jobRequest
+			{
+				@ model
+					{
+						@ cwd
+							_ path.join
+								@ __dirname
+								@ 'ittf'
+						@ src 'mock1.wzjob.ittf'
+				@ wzjobLoader wzjobLoader
+		_ AsyncRecurseWzjobLoad
+			@ jobRequest
+			f_cb_test( result )
+				# loog 'shoul load a wzjob (AsyncRecurseWzjobLoad) : seenWzjobRequests, pendingWzjobRequests, productionStepConfigs', result.seenWzjobRequests, result.pendingWzjobRequests, result.productionStepConfigs
+				tobe_array( result.pendingWzjobRequests, 0)
+				tobe_array( result.seenWzjobRequests, 2)
+				tobe_array( result.productionStepConfigs, 2)
+				tobe_string( result.productionStepConfigs[0].name, artifactMock1 )
+				tobe_string( result.productionStepConfigs[0].model.src, mock1.tests.ittf )
+				tobe_string( result.productionStepConfigs[1].name, artifactMock2 )
+				tobe_string( result.productionStepConfigs[1].model.src, mock2.tests.ittf )
+				_ done

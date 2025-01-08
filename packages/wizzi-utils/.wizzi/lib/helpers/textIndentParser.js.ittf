@@ -1,0 +1,144 @@
+module 
+    kind jsfile
+    
+	var verify = require('./verify')
+
+	var md
+        set module.exports =
+            { 
+
+	var CP
+		{
+			@ TAB 9
+			@ LF 10
+			@ CR 13
+			@ SPACE 32
+
+    set md.parse
+        function
+            param textContent
+            var 
+                decl lines
+                    [ 
+                decl leadingWhiteSpaces = 0
+                decl line = null
+                decl linepos = 1
+				decl chunk = textContent.toString('utf-8')
+                decl ch
+				decl cp
+                decl i
+                decl l = chunk.length
+				decl acc = []
+
+			for i = 0; i < l; i++
+				set ch = chunk[i]
+
+				if i < l - 1
+					set cp = (chunk.charAt(i) + chunk.charAt(i + 1)).codePointAt(0)
+				elif i < l
+					set cp = chunk.charAt(i).codePointAt(0)
+				else 
+					throw new Error('@wizzi/utils.textIndentParser.parse index of chunk out of range: ' + chunk)
+
+                if cp == CP.LF
+                    _ pushLine
+                    set leadingWhiteSpaces = 0
+
+                elif cp == CP.CR
+
+                elif [CP.SPACE, CP.TAB].indexOf(cp) !== -1
+                    if line
+                        _ acc.push
+                            @ String.fromCodePoint(cp)
+                    else 
+                        set leadingWhiteSpaces += (cp == CP.SPACE ? 1 : 4)
+                
+                else
+                    _ acc.push
+                        @ String.fromCodePoint(cp)
+                    if !line
+                        set line =
+                            { 
+                                @ indent leadingWhiteSpaces / 4
+
+            if line != null
+                _ pushLine
+
+            # loog 'lines\n', JSON.stringify(lines)
+
+            return lines
+
+			function pushLine
+                if line == null
+                    _ lines.push
+                        {
+                            @ indent -1
+                            @ value null
+                else
+                    set line.value = acc.join('')
+                    _ lines.push(line)
+                    set line = null
+                    set acc.length = 0
+
+    set md.nodifyParsedLines
+        function
+            param lines
+            param ret
+            param options
+            var 
+                decl nodes = ret ? ret.children : []
+                decl root = null
+                decl current = null
+                decl line
+                decl i
+                decl l = lines.length
+            
+            for var i = 0; i < l; i++
+                set line = lines[i]
+                set line[options.name] = '+'
+                set line[options.value] = line.value
+                # loog 'line.value', line.value
+                if line.indent <= 0
+                    set line.parent = ret || null
+                    if ret
+                        # loog line.value, 'added to', ret[options.name], ret.name
+                    _ nodes.push(line)
+                elif !current
+                elif line.indent == current.indent
+                    set line.parent = current.parent
+                    # loog line.value, 'added to', current.parent[options.name], current.parent.name
+                    _ current.parent.children.push(line)
+                elif line.indent > current.indent
+                    set line.parent = current
+                    # loog line.value, 'added to', current[options.name], current.name
+                    _ current.children.push(line)
+                elif line.indent < current.indent
+                    var parent = current.parent
+                    while parent != null && line.indent < parent.indent
+                        set parent = parent.parent
+                    set line.parent = parent.parent
+                    if parent.parent
+                        # loog line.value, 'added to', parent.parent[options.name], parent.parent.name
+                        _ parent.parent.children.push(line)
+                    else
+                        if ret
+                            # loog line.value, 'added to', ret[options.name], ret.name
+                        _ nodes.push(line)
+                set current = line
+                set current.children = []
+
+            return nodes
+
+    set md.nodify
+        function
+            param textContent
+            param ret
+            param options
+            var lines
+                _ md.parse
+                    @ textContent
+            return 
+                _ md.nodifyParsedLines
+                    @ lines
+                    @ ret
+                    @ options || { name: 'name', value: 'value' }

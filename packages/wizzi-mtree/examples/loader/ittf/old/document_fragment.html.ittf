@@ -1,0 +1,19 @@
+html
+    head
+    body
+
+        $fragment say_hello
+            $params name
+            h2 Hello ${name}
+
+        $fragment greetings_table
+            table
+                tr
+                    td hello
+                tr
+                    td bye
+
+        h1 Greetings
+        $include greetings_table
+        say_hello( stefi )
+

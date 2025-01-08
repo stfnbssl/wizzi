@@ -1,0 +1,19 @@
+{
+
+    common/kernel_package()
+        $include versions
+
+        extsprintf "^1.2.0"
+        json-diff "latest"
+        @wizzi/mtree "${versions['@wizzi/mtree']}"
+        @wizzi/repo "${versions['@wizzi/repo']}"
+        @wizzi/utils "${versions['@wizzi/utils']}"
+        
+        $append devDependencies
+
+        $append scripts
+            examples:css "node examples/css"
+            examples:graphql "node examples/graphql"
+            examples:html "node examples/html"
+            examples:js "node examples/js"
+            examples:plugin "node examples/plugins/sample && node examples/plugins/sample/dist/examples"

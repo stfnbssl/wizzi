@@ -1,0 +1,18 @@
+﻿common/test/base_test( crypto, true )
+
+    $append imports
+        var crypto = require('../../lib/crypto/index')
+
+    + 
+    it should verify an  encrypt and decrypt
+
+        var text = 'alba chiara'
+
+        var hash1 = crypto.encrypt(text)
+        var decrypt1 = crypto.decrypt(hash1)
+
+        var hash2Simple = crypto.encryptSimple(text)
+        var decrypt2Simple = crypto.decryptSimple(hash2Simple)
+
+        tobe_eql(text, decrypt1)
+        tobe_eql(text, decrypt2Simple)     

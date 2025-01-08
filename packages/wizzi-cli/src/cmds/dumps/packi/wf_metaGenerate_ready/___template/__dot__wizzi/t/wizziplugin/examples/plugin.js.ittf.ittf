@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/tfolder/examples/plugin.js

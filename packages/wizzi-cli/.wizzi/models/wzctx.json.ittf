@@ -1,0 +1,116 @@
+{
+    $$ $include v08/env/vars
+    $include versions
+    name "wizzi.cli"
+    version '${versions['@wizzi/cli@next']}'
+    description "Wizzi Command Line Interface"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    
+    { App
+        name "Wizzi CLI"
+        kind "NodeCLI"
+    
+    { Build
+        isCLI true
+        [ features
+        useWizziFactory true
+        { wizziFactory
+            [ plugins
+                "bin"
+                "css"
+                "docx"
+                "graphql"
+                "html"
+                "ittf"
+                "js"
+                "json"
+                "md"
+                "pandoc"
+                "pdf"
+                "ppt"
+                "prisma"
+                "text"
+                "toml"
+                "ts"
+                "svg"
+                "wzjob"
+                "wzschema"
+                "xml"
+                "yaml"
+            pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
+
+    [ Commands
+        command(main, 
+            \b wz [noarguments | configname | --source <file|folder> --dest <file|folder> -ctx <file>[-ctx <file>]...] --config <file>| [command <options>],
+            \b Execute a wizzi package production (default) or a single artifact or single folder production or a specified command
+            options()
+                option( noarguments, execute a wizzi production using the 'wizzi.config.js' default config file
+                option( configname, execute a wizzi production using the 'wizzi.config.<configname>.js' config file
+                    hint( The config file is searched in the current and upwards in parent folders
+                option( [--source | -s] <file | folder>, execute the wizzi production of a single file or folder using optionaly one or more context data files (json or yaml)
+                option( [--dest | -d] <file | folder>, the destination file or folder of the production. A source folder requires a destination folder.
+                option( [--config | -c] <file>, the path to the optional generation configuration file: <file>.config.js
+                    hint( Basic plugins are included in the Wizzi CLI.
+                    hint( You can add extra plugins using a config file of the same format as for the 'wz' command.
+
+            $append lines
+                "commands:"
+                $*
+                "  create .............. setup wizzi for the current project"
+                *$
+                "  job ................. execute a wizzi job"
+                "  fy .................. wizzify a file or folder"
+                "  meta ................ execute a wizzi meta production"
+                "  metify .............. execute the 'metafication' of a wizzi production"
+                "  version ............. show package version"
+                "  help ................ show help menu for a command"
+                "   |- Try: wz help [command] to see each command options"
+        $*
+        command("create", 
+            \b wz create <options>,
+            \b Creates a starter wizzi package
+            options()
+                option( [--kind | -k] <kindname>, the project kind <kindname>
+                    hint( valid kindnames:
+                    hint( webpack
+                    hint( express
+                    hint( plugin
+        *$
+        command(job, 
+            \b wz job --config <file>,
+            \b Execute the wizzi job defined in a configuration file
+            options()
+                option( [--config | -c] <configname>, the name of the job configuration file: <configname>.config.js
+                    hint( The config file is searched in the current folder
+
+        command(fy, 
+            \b wz fy --source <file|folder> --dest <file|folder> --config <file>,
+            \b Execute the 'wizzifycation' of a file or folder
+            options()
+                option( [--source | -s] <file | folder>, the source file or folder
+                option( [--dest | -d] <file | folder>, the destination file or folder
+                option( [--config | -c] <file>, a config file for extra plugins
+                    hint( A wizzi plugin can optionaly contain a wizzifier for its language schema.
+                    hint( Basic wizzifiers are included in the Wizzi CLI.
+                    hint( You can add extra plugins using a config file of the same format as for the 'wz' command.
+
+        command(meta, 
+            \b wz meta [<metaname> | --config <filepath>,
+            \b Execute a wizzi meta production
+            options()
+                option( metaname, the name of the meta production config file: wizzi.meta.config.<metaname>.js
+                    hint( The config file is searched in the current (cwd) and upwards in parent folders            
+                option( config, the path of the meta production config file: <filepath>.config.js
+                    hint( The config file, when <filepath> is relative, is searched based on the current (cwd) folder
+
+        $ var compressOption = "subfolder[;subfolder[;...]]>"
+        command(metify, 
+            \b wz metify --source <folder> --dest <folder> [--name <name>] [--compress <${compressOption}>],
+            \b Execute the 'metafication' of a wizzi folder, so that you can parametrize the whole package structure
+            options()
+                option( [--source | -s], the source file or folder
+                option( [--dest | -d], the destination file or folder
+                option( [--name | -n], the name to assign to the created meta production, defaults to source folder basename
+                option( [--compress | -c], semicolon separated list of folders that you prefer 'metamanaged' by their parents

@@ -1,0 +1,44 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            name: 'jsWizzi_Test_2',
+            title: 'jsWizzi - test - 2 - functions in interpolation',
+            folderLevel: 2
+        }
+
+    common\example\mtree(&opt)
+
+        $append imports
+            var JsWizziContext = require('../../lib/jswizzi/jsWizziContext')
+            var jsWizziRunner = require('../../lib/jswizzi/jsWizziRunner')
+
+        var x
+            _ runExpression
+                @ "return 2 + 2"
+        log 'result', x
+        
+        function runExpression
+            param code
+            # without ctor arguments means: isForInterpolation
+            var jsWizziContext
+                new JsWizziContext
+            # run the expression embedded in a var declaration 'result'
+            var scriptCode
+                iif code.indexOf('return ') > -1
+                    then 'function dummy() { ' + code + ' } var result = dummy();'
+                    else 'var result = ' + code + ';'
+            # loog 'runExpression.scriptCode', scriptCode
+            var hr
+                _ jsWizziRunner.run
+                    @ scriptCode
+                    @ jsWizziContext
+                    {
+                        @ verbose false
+            # loog 'runExpression.hr', hr
+            if hr instanceof Error 
+                throw hr
+            # loog 'runExpression.result', jsWizziContext.getValue('result')
+            # return the 'result' var from the context
+            return jsWizziContext.getValue('result')

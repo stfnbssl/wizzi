@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/examples/tfolder/loadModel_with_config.js

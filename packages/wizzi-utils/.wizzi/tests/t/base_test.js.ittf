@@ -1,0 +1,19 @@
+﻿module 
+	$params name
+    kind jsfile
+	+
+	import path
+	import util
+	+
+	var del = require('del')
+    var expect = require('expect.js')
+	+
+	var _ = require('lodash')
+	var file = require('../../lib/fSystem/file')
+    var vfile = require('../../lib/fSystem/vfile')
+	var verify = require('../../lib/helpers/verify')
+	+
+	$hook imports
+	+
+	describe ${name}
+		$hook

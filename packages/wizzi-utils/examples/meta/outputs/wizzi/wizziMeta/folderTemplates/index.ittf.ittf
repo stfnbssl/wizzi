@@ -1,0 +1,54 @@
+$group
+    $if metaCtx.useWizziMeta
+        $include wzCtxModel
+        $include examples
+        $include models
+        $include root
+
+        $
+            var items = [
+                a_cb_async_promise.js,
+                a_cb_no_throw.js,
+                a_cb_promise.js,
+                a_cb_throw.js,
+                a_cb.js,
+                a_reject.js,
+                a_then_async_catch_fail.js,
+                a_then_async_catch_reject.js,
+                a_then_async.js,
+                a_then_catch_fail.js,
+                a_then_catch_reject.js,
+                a_then.js,
+                authHandler.js,
+                catch_error_page.js,
+                catch_fail_html.js,
+                catch_fail.js,
+                catch_reject.js,
+                catch.js,
+                checked_call_return_set.js,
+                checked_call_return.js,
+                checked_call.js,
+                error.js,
+                r_cb_err.js,
+                r_cb.js,
+                r_promise_async.js,
+                r_promise_try_catch.js,
+                r_promise.js,
+                r_reject.js,
+                r_resolve.js,
+                repeater_increment.js,
+                repeater.js,
+                wzjobs,
+            ]
+
+        $foreach item in items
+            $file t/${item}.ittf.ittf
+                ${'$'}{'$'}group
+                    ${'$'}include tfolder/${item}
+
+        $file generate.wzjob.ittf.ittf
+           wzjob wizzi.meta.demo/job
+               ${'$'}include wizziMeta/generate.wzjob
+        $file versions.ittf.ittf
+           ${'$'}group
+               ${'$'}include wizziMeta/versions

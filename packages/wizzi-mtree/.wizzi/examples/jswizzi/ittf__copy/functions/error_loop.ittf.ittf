@@ -1,0 +1,39 @@
+ittf
+    $
+        function wrapper(seed, parent, childCount, deep) {
+            var prefix = 'pre-' + seed + '-';
+            var suffix = '-post-' + seed;
+            function buildNode(parent, childCount, deep) {
+                _.log('Enter buildNode', 'deep', deep, 'typeof(i)', typeof(i));
+                if (typeof(i) == 'undefined') {
+                    // _.log ('deep', deep, 'i', 'undefined');
+                } else {
+                    // _.log ('deep', deep, 'i', i);
+                }
+                parent.childs = [];
+                if (deep > 2) { 
+                    _.log('Exit buildNode return', 'deep', deep);
+                    return 1; 
+                }
+                _.log ('deep after test', deep)
+                parent.childs = [];
+                for (var i = 0; i < childCount; i++) {
+                    var child = { id: prefix + parent.id + '-' + i + suffix};
+                    _.log ('before recursive call', 'deep', deep, 'i', i)
+                    buildNode (child, childCount, deep + 1);
+                    _.log ('after buildNode call', 'deep', deep, 'i', i)
+                    parent.childs.push (child);
+                }
+                _.log('Exit buildNode', 'deep', deep);
+            }
+            buildNode (parent, childCount, deep);
+        }
+        var tree = { id: 0 };
+        wrapper ('ass', tree, 2, 0);
+        _.log('Resulting tree', _.inspect(tree));
+    
+    node
+    node Let us inspect the 'tree' variable we built.
+    node
+    node ${ _.inspect(tree)}
+

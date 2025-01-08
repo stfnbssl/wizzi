@@ -1,0 +1,25 @@
+wzjob job_model_to_folder
+
+	# Generates a folder of ittf documents
+	# from a single ITTF Document of schema `ittf`
+
+	# options context object must be set by the executor
+
+	$
+		console.log('Destination folder name: ' + options.destFolder);
+		var ittf_lib_folder  = path.join(__dirname, 'ittf', 'lib');
+		var dest_folder      = path.join(__dirname, options.destFolder);
+
+	line lib
+		cwd-folder ${ittf_lib_folder}
+
+		# Generates a folder of ittf documents
+		artifact step_1_model-to-folder
+			src step_1.ittf.ittf
+			schema ittf
+			generator ittf/document
+			is-wz-model-to-folder
+
+	production
+		dest-folder ${dest_folder}
+		line-ref lib

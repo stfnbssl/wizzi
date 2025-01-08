@@ -1,0 +1,2 @@
+${'$'}group 
+   $include wizziPlugin/lib/artifacts/tfolder/_md_gen_items.js

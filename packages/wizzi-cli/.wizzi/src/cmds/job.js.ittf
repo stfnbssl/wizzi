@@ -1,0 +1,88 @@
+﻿module
+	kind es6
+
+	const path = require('path')
+	const wizzi = require('@wizzi/factory')
+    const config = require('../utils/config')
+	const commons = require('./commons')
+    +
+    const kCommandName = "job"
+    +
+	set module.exports
+		=>
+			param args
+            +
+            const checker = new commons.commandChecker(kCommandName)
+            +
+			const currentDir = process.cwd()
+			+
+			_ checker.checkNotEmpty
+				@ args.c || args.config
+				@ 'configRelPath'
+			if checker.isValid()
+				_ checker.checkFile
+					_ path.join
+						@ currentDir
+						@ checker.configRelPath + '.config.js'
+					@ 'configPath'
+			let configInstance
+			if checker.isValid()
+				set configInstance = require(checker.configPath)
+			else
+				return
+					_ checker.checkOut()
+			_ checker.checkNotEmpty
+				@ configInstance.wzjobName
+				@ 'wzjobName'
+			_ checker.checkFile
+				@ configInstance.wzjobPath
+				@ 'wzjobPath'
+			_ checker.checkNotEmpty
+				@ configInstance.pluginsBaseFolder
+				@ 'pluginsBaseFolder'
+				{
+					@ message "in config file " + checker.configPath
+			_ checker.checkArrayNotEmpty
+				@ configInstance.plugins
+				@ 'pluginsItems'
+				{
+					@ message "in config file " + checker.configPath
+			+
+			if !checker.checkOut()
+				return
+			+
+            _ wizzi.executeWizziJob
+				{ 
+					@ storeKind 'filesystem'
+					{ config
+						@ wfBaseFolder __dirname
+						@ plugins checker.pluginsItems
+                        @ pluginsBaseFolder checker.pluginsBaseFolder
+					{ job
+						@ name checker.wzjobName
+						@ ittfDocumentUri checker.wzjobPath
+						@ productionOptions
+							_ wizzi.productionOptions
+								{ 
+									@ indentSpaces 4
+									@ basedir __dirname
+									@ verbose 2
+									{ dumps
+										@ dumpsBaseFolder path.join(__dirname, '_dumps')
+										{ mTreeBuildupJsWizziScript
+											@ dump false
+						@ globalContext configInstance.globalContext || {}
+				function 
+					param err
+					if err
+						error ""
+						error ""
+						_ wizzi.printWizziJobError(configInstance.wzjobName, err)
+						error ""
+						error ""
+					else
+						success "" 
+						success "" 
+						success 'Job execution done'
+						success "" 
+						success "" 

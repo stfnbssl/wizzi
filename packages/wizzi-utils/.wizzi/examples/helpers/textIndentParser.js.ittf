@@ -1,0 +1,42 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'textIndentParser_Step_1',
+            title: 'textIndentParser - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var tip = require('../../lib/helpers/textIndentParser')
+        var obj = require('../../lib/helpers/object')
+        var text
+            [
+                @ "hello"
+                @ "    world"
+                @ "        boys"
+                @ "    and"
+                @ "        girls"
+                ._ join('\n')
+
+        var lines
+            _ tip.parse
+                @ text
+        log 'lines', lines
+        var nodes
+            _ tip.nodify
+                @ lines
+        log 'nodes 1', nodes
+        var ret
+            {
+                [ children
+        var nodes2
+            _ tip.nodify
+                @ text
+                @ ret
+        log 'nodes 2', JSON.stringify(obj.decycle(ret), null, 2)
+

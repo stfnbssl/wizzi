@@ -1,0 +1,22 @@
+﻿base_test( json.jsonFs )
+	+
+	$append imports
+		var 
+			decl JsonFs = require('../../../lib/json/fs/jsonFs')
+	
+	var jsonFs
+		new JsonFs
+
+	var hellotxt_item = null
+
+	$include jsonFs/createItem
+	$include jsonFs/updateItem
+	$include jsonFs/writeDocument
+	$include jsonFs/deleteItem
+
+	$*
+	$include jsonFs/updateItem
+	$include jsonFs/getItem
+	$include jsonFs/read
+	$include jsonFs/write
+	*$

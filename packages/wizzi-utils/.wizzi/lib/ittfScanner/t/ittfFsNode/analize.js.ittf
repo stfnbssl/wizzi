@@ -1,0 +1,152 @@
+﻿$group
+	
+	m analize
+		callback
+
+		# loog 'wizzi-utils.ittfFsNode.analize.relPath', this.isDirectory, this.basename
+		
+		var r = this.root()
+		
+		if r === this
+			_ this.setIds
+
+		if this.relPath.indexOf('/tests/') > -1
+			set this.isTest = true
+		
+		if this.relPath.indexOf('/examples/') > -1
+			set this.isExample = true
+		
+		if this.relPath.indexOf('/util/') > -1 || this.relPath.indexOf('/utils/') > -1
+			set this.isUtil = true
+		
+		if this.containsDocument('generate.wzjob.ittf') &&
+			\b this.containsFolder('ittf')
+			if this.isTest || this.isExample
+				set this.isJobFolder = true
+			else
+				set this.isPackageRoot = true
+
+		set this.analized = true
+        var that = this
+
+		if this.isDirectory
+
+			async_foreach( doLoopFolders, ndx )		
+				var folder = that.folders[ndx]
+				if !folder
+					async_foreach( doLoopDocuments, ndxDoc )
+						var document = that.documents[ndxDoc]
+						if !document
+							r_cb()
+						_ document.analize
+							f_cb()
+								_ doLoopDocuments
+									@ ndxDoc + 1
+				_ folder.analize
+					f_cb()
+						_ doLoopFolders
+							@ ndx + 1
+
+		else
+			
+			# loog 'ittfFsNode.analize this.parts.join("/")', this.parts.join('/')
+            var that = this
+            _ IttfDocumentGraph.createFrom
+                @ this.parts.join('/')
+				{
+					@ file r.file
+				f_cb( ittfDocumentGraph )
+					
+					# loog 'wizzi-utils.ittfFsNode.analize.created ittfDocumentGraph'
+					
+					var ctx
+						{
+							@ fragments {}
+							@ externalFragments {}
+							@ ittfReferences {}
+							@ ittfFsNode that
+							@ ittfBasePath r.ittfBasePath
+			
+					_ ittfDocumentGraph.analize
+						@ ctx
+						f_cb()
+
+							# loog 'wizzi-utils.ittfFsNode.analize.ctx.fragments from ittfDocumentGraph', ctx.fragments
+                            set that.ittfDocumentGraph = ittfDocumentGraph
+							set that.fragments = ctx.fragments
+
+							# TODO review this
+                            var max_repeat = 3
+
+							function repeat
+								param count
+						
+								# loog 'wizzi-utils.ittfFsNode.analize.repeat count', count
+						
+								if Object.keys(ctx.externalFragments).length < 1 || count > max_repeat
+									return
+										_ callback
+											@ null
+					
+								_ async.map
+									_ Object.keys(ctx.externalFragments)
+									function
+										param k
+										param callback
+										# loog 'wizzi-utils.ittfFsNode.analize.repeat externalFragment', ctx.externalFragments[k].uri
+										var dnode
+											_ r.addExternalDocument(ctx.externalFragments[k].uri)
+										# loog 'external dnode', dnode
+										_ dnode.setIds
+										_ dnode.analize
+											f_cb()
+												set ctx.fragments = {}
+												set ctx.externalFragments = {}
+												_ ittfDocumentGraph.analize
+													@ ctx
+                                                    f_cb()
+                                                        set that.fragments = ctx.fragments
+                                                        # loog 'wizzi-utils.ittfFsNode.analize.externalFragments', ctx.externalFragments
+                                                        return
+                                                            _ callback
+                                                                @ null
+									f_cb( result )
+										_ repeat(count + 1)
+							_ repeat(1)
+
+	m containsDocument
+		param testBaseName
+		foreach d in this.documents
+			if d.basename === testBaseName
+				return true
+	
+	m containsFolder
+		param testBaseName
+		foreach f in this.folders
+			if f.basename === testBaseName
+				return true
+	
+	m searchDocument
+		param dFullPath
+		var searchPath = unixifyPath(dFullPath)
+		var r = this.root()
+		return r.__searchDocument(searchPath)
+	
+	m __searchDocument
+		param dFullPath
+		# loog '__searchDocument, this.fullPath, dFullPath', this.fullPath, dFullPath
+		if this.fullPath === dFullPath
+            # loog '__searchDocument, found'
+			return this
+		else if this.isDirectory
+			var ret = null
+			foreach d in this.documents
+				set ret = d.__searchDocument(dFullPath)
+				if ret != null
+					return ret
+			foreach f in this.folders
+				set ret = f.__searchDocument(dFullPath)
+				if ret != null
+					return ret
+		return null
+

@@ -1,0 +1,156 @@
+$group
+
+	#
+		# From an IttfDocument of schema "wfschema"
+		# async generate: 
+		#   - a WizziModelType
+		#   - a WizziModelFactory
+		#   - a WizziModelType test module
+		#   - a WizziModelType json documentation
+		#   - a WizziModelType html documentation
+	m generateModelDoms
+		string wfschemaIttfDocumentUri
+		string outputPackagePath
+		string wfschemaName
+		{ mTreeBuildUpContext
+		{ options
+		callback
+		+
+		set options = options || {}
+		+
+		var wizziSchemaLabFolder = path.join(outputPackagePath, 'lib', 'wizzi', 'schemas', 'lab')
+		var wizziModelFolder = path.join(outputPackagePath, 'lib', 'wizzi', 'models')
+		+
+		var paths
+			{
+				@ model path.join(wizziModelFolder, wfschemaName + '-model.g.js')
+				@ factory path.join(wizziModelFolder, wfschemaName + '-factory.g.js')
+				@ lab path.join(wizziSchemaLabFolder, wfschemaName + '-test.g.js')
+				@ jsondocs path.join(wizziModelFolder, wfschemaName + '-schema.g.json')
+				@ htmldocs path.join(wizziModelFolder, wfschemaName + '-schema.g.html')
+		+
+		try
+            _ this.generateModelDomsArtifacts
+                @ wfschemaIttfDocumentUri
+                @ mTreeBuildUpContext
+				@ options
+                f_cb( generatedArtifacts )
+                    _ file.write
+                        @ paths.model
+                        @ generatedArtifacts.model
+                    _ log.success('Generated WizziModel: ' + paths.model)
+
+                    _ file.write
+                        @ paths.factory
+                        @ generatedArtifacts.factory
+                    _ log.success('Generated WizziModelFactory: ' + paths.factory)
+
+                    _ file.write
+                        @ paths.lab
+                        @ generatedArtifacts.lab
+                    _ log.success('Generated WizziModel test: ' + paths.lab)
+
+                    _ file.write
+                        @ paths.jsondocs
+                        @ generatedArtifacts.jsondocs
+                    _ log.success('Generated WizziModel json docs: ' + paths.jsondocs)
+
+                    _ file.write
+                        @ paths.htmldocs
+                        @ generatedArtifacts.htmldocs
+                    _ log.success('Generated WizziModel html docs: ' + paths.htmldocs)
+
+                    _ callback
+                        @ null
+                        {
+                            @ modelPath paths.model
+                            @ factoryPath paths.factory
+                            @ jsondocsPath paths.jsondocs
+                            @ htmldocsPath paths.htmldocs
+        catch ex
+            r_cb_wz_err( WizziFactoryError, generateModelDoms, ex )
+                {
+                    @ message 'See inner error'
+                    { parameter
+                        @ wfschemaIttfDocumentUri wfschemaIttfDocumentUri
+        #
+            # generate the wizzi model type artifacts
+            # from an IttfDocument of schema "/wzschema"
+	m generateModelDomsArtifacts
+		param wfschemaIttfDocumentUri
+		param mTreeBuildUpContext
+		param options
+		param callback
+		+
+		var loadContext
+			{
+				@ mTreeBuildUpContext mTreeBuildUpContext
+		+
+		var that = this
+		var schemaSchemaName = "wzschema"
+		if options.legacyVersion == '0.8'
+			set schemaSchemaName = "wfschema"
+		+
+		_ log.info('starting async load of wizzi model from wfschemaIttfDocumentUri: ' + wfschemaIttfDocumentUri)
+		_ this.loadModel
+			@ schemaSchemaName
+			@ wfschemaIttfDocumentUri
+            @ loadContext
+            f_cb( schemaWizziModel )
+                $*
+				# With version < 0.8
+                #   load the schemaWizziModel instance into the bootstrap wizzimodel.
+				#   This is required until the generation of the wizzi model of type 'wfschema'
+				#   is not completely automated.
+				*$
+				let bootWizziModel = null
+				if options.legacyVersion == '0.8'
+					if BootWizziSchema == null
+						set BootWizziSchema = require(bootModelUri).WizziSchema
+					set bootWizziModel = new BootWizziSchema(schemaWizziModel.wzName)
+					_ bootWizziModel.loadFromWizziModel(schemaWizziModel)
+				else
+                	set bootWizziModel = schemaWizziModel
+				_ log.info('starting the artifact generator ' + schemaSchemaName + '/model' + 
+					\b ', legacy version: ' + options.legacyVersion)
+				_ that.generateArtifact
+					@ bootWizziModel
+					@ bootModelDefUri
+					@ schemaSchemaName + '/model'
+					@ loadContext
+					f_cb( wizziModelArtifact )
+						_ log.info('starting the artifact generator ' + schemaSchemaName + '/factory')
+						_ that.generateArtifact
+							@ bootWizziModel
+							@ bootModelDefUri
+							@ schemaSchemaName + '/factory'
+							@ loadContext
+							f_cb( wizziFactoryArtifact )
+								_ log.info('starting the artifact generator ' + schemaSchemaName + '/test')
+								_ that.generateArtifact
+									@ bootWizziModel
+									@ bootModelDefUri
+									@ schemaSchemaName + '/test'
+									@ loadContext
+									f_cb( wizziTestArtifact )
+										_ that.transformModel
+											@ bootWizziModel
+											@ schemaSchemaName + '/json_docs'
+											@ loadContext
+											f_cb( wizziDocsObject )
+												var jsondocsJson = stringify(wizziDocsObject, null, 2)
+												_ log.info('starting the artifact generator ' + schemaSchemaName + '/html_docs')
+												_ that.generateArtifact
+													@ wizziDocsObject
+													@ bootModelDefUri
+													@ schemaSchemaName + '/html_docs'
+													@ loadContext
+													f_cb( wizziHtmlDocsArtifact )
+														_ callback
+															@ null
+															{
+																@ model wizziModelArtifact
+																@ factory wizziFactoryArtifact
+																@ test wizziTestArtifact
+																@ jsondocs jsondocsJson
+																@ htmldocs wizziHtmlDocsArtifact

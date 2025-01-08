@@ -1,0 +1,4 @@
+root
+	node-1
+	$include not-existent-fragment
+	node-3

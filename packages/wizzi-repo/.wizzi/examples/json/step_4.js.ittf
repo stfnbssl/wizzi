@@ -1,0 +1,73 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 4,
+            name: 'Json_Step_4',
+            title: 'Json - step - 4 - Document operations',
+            folderLevel: 2
+        }
+
+    common\example\repo(&opt)
+
+        $append functions
+
+            function dump
+                param obj
+                param title
+                _ printValue
+                    @ title
+                    _ stringify
+                        @ obj
+                        @ null
+                        @ 2
+
+        _ heading1('start')
+
+        # create an array of document data for test
+        var documents = data_get_documents_folder1()
+
+        _ json.createJsonFsData
+            @ documents
+            f_cb_throw( jsonFsData)
+                _ heading2('created JsonFilesystem')
+                _ dump
+                    @ jsonFsData
+                    @ "jsonFsData added folder1"
+                _ addDocuments
+                    @ jsonFsData
+
+        function addDocuments
+            param jsonFsData
+            _ heading2('write documents to JsonFilesystem')
+
+            var documents = data_get_documents_folder2()
+            _ json.addToJsonFsData
+                @ jsonFsData
+                @ documents
+                f_cb_throw( jsonFsData)
+                    _ dump
+                        @ jsonFsData
+                        @ "jsonFsData added folder2"
+                    _ extractDocuments
+                        @ jsonFsData
+
+        function extractDocuments
+            param jsonFsData
+            _ heading2('read documents from JsonFilesystem')
+            var doc
+                _ json.createDocumentManager
+                    @ jsonFsData
+            _ doc.getFiles
+                @ 'json:'
+                {
+                    @ deep true
+                    @ documentContent true
+                f_cb_throw( files )
+                    _ dump
+                        @ files
+                        @ "Total documents"
+
+        $include ./data

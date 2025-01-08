@@ -1,0 +1,141 @@
+﻿module wizzi-mtree.jswizzi.jsWizziScriptCoder
+    kind jsfile
+    
+	#
+		# Helper class for building JsWizzi scripts
+		#
+	class JsWizziScriptCoder
+        
+		ctor
+            set this.stm = []
+            set this.indentValue = 0
+            set this.length = 0
+            set this.line = ''
+            set this.map = []
+		
+		m for
+			param text
+			param node
+			if this.line.length > 0
+				_ this.w()
+            set this.map[this.length] = node
+			_ this.w('for (' + text + ') {' + nodeMapComment(node))
+			_ this.indent()
+    
+		m if
+            param text
+			param node
+            if this.line.length > 0
+                _ this.w()
+            set this.map[this.length] = node
+            _ this.w('if (' + text + ') {' + nodeMapComment(node))
+            _ this.indent()
+
+		m elif
+            param text
+			param node
+            if this.line.length > 0
+                _ this.w()
+            set this.map[this.length] = node
+            _ this.w('else if (' + text + ') {' + nodeMapComment(node))
+            _ this.indent()
+
+		m else
+            if this.line.length > 0
+                _ this.w()
+            _ this.w('else {')
+            _ this.indent()
+
+		m while
+            param text
+			param node
+            if this.line.length > 0
+                _ this.w()
+            set this.map[this.length] = node
+            _ this.w('while (' + text + ') {' + nodeMapComment(node))
+            _ this.indent()
+
+		m throw
+            param text
+			param node
+            _ this.w('throw new Error(' + text + ')')
+
+		m end
+            if this.line.length > 0
+                _ this.w()
+            _ this.deindent()
+            _ this.w('}')
+
+		m w
+            param text
+            param node
+            var ind = spaces(this.indentValue * 4)
+            _ this.stm.push(ind + this.line + (text || ''))
+            if node
+                set this.map[this.length] = node
+            set this.line = ''
+            set this.length++
+    
+		m write
+            param text
+            set this.line += (text || '')
+
+		m indent
+            set this.indentValue++
+    
+		m deindent
+            set this.indentValue = Math.max(0, (this.indentValue - 1))
+    
+		m toCode
+            if this.line.length > 0
+                _ this.w()
+            return this.stm.join('\n')
+    
+		m getErrorLines
+            param esprimaException
+            var start = Math.max(0, (esprimaException.lineNumber - 4))
+            var end
+                _ Math.min
+                    @ this.stm.length
+                    @ (esprimaException.lineNumber + 4)
+            var ret
+                [ 
+            for var i = start; i < end; i++
+                _ ret.push(formatLineNumber(i + 1) + ' ' + this.stm[i])
+                if (i == esprimaException.lineNumber - 1)
+                    var col = Math.max(0, esprimaException.column)
+                    _ ret.push(spaces(col + 4) + '* ' + esprimaException.description)
+            return ret
+
+		m getNodeFromScriptMap
+            param line
+            if this.map[line]
+                return this.map[line]
+            elif this.map[line-1]
+                return this.map[line-1]
+            elif this.map[line+1]
+                return this.map[line+1]
+            else
+                return null
+    
+	function nodeMapComment
+        param node
+        return ' //node:' + node.id
+	
+    function spaces
+        param num
+        if num < 1
+            return ''
+        return Array(num + 1).join(" ")
+    
+	function formatLineNumber
+        param num
+        if num > 999
+            return num
+        if num > 99
+            return ('0' + num)
+        if num > 9
+            return ('00' + num)
+        return ('000' + num)
+
+	set module.exports = JsWizziScriptCoder

@@ -1,0 +1,8 @@
+﻿root
+	fragment_1(X10, Bepi taxon)
+		
+        $append alpha
+			leaf 1.2.2
+		
+        $append beta
+			leaf 1.3.2            

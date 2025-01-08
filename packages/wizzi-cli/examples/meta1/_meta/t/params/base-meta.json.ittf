@@ -1,0 +1,43 @@
+$group
+    $params &md
+
+    name "wizzi.meta.${md.name}"
+    npmName "@wizzi/meta.${md.name}"
+    description "Wizzi meta plugin for creating wizzi ${md.title.toLowerCase()} packages"
+    version "0.0.1"
+    usePackageVersion true
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+
+    { github
+        userid "stfnbssl"
+
+    metaNamespace "${md.name}"
+
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "html"
+            "ittf"
+            "js"
+            "json"
+            "md"
+            "text"
+            "wzjob"
+
+    { App
+        name "Wizzi ${md.title.toLowerCase()} meta plugin"
+        kind "WizziMeta"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziMeta
+    params/use( wizziFactory
+        [ plugins

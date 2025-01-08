@@ -1,0 +1,35 @@
+﻿$group
+
+	# async run a production step
+		# from a productionStep object
+	var AsyncRunner
+		{
+			@ run
+				function
+					param productionStep
+					param callback
+					# _ log.info('Started async run artifact: ' + productionStep.name)
+					var runner = new Runner(productionStep)
+					_ runner.run
+						f_cb_no_err( operResult )
+							if err
+								set err.productionStep = productionStep.toString()
+								# set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
+								r_cb_err()
+							# _ log.info('Ended async run artifact: ' + productionStep.name)
+							_ callback(null, operResult)
+
+			@ runFrontMatter
+				function
+					param productionStep
+					param callback
+					# _ log.info('Started async runFrontMatter artifact: ' + productionStep.name)
+					var runner = new Runner(productionStep)
+					_ runner.runFrontMatter
+						f_cb_no_err( operResult )
+							if err
+								set err.productionStep = productionStep.toString()
+								# set err.ProfuctionManagerAsyncRunnerStack = (new Error()).stack
+								r_cb_err()
+							# _ log.info('Ended async runFrontMatter artifact: ' + productionStep.name)
+							_ callback(null, operResult)                            

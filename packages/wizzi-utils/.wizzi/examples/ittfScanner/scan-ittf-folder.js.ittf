@@ -1,0 +1,44 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfScanner_scan_ittf_folder',
+            title: 'ittfScanner - scan - ittf folder',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            const folderPath
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scan-ittf'
+            const rootFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+
+
+            _ ittfScanner.scanFolder
+                @ folderPath
+                {
+                    @ rootFolder rootFolder
+                    @ getAll true
+                f_cb_test( result )
+                    if err
+                        error err
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'outputs'
+                            @ 'scan-ittf-folder'
+                            @ 'scan-ittf-folder-result-graph.json'
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2

@@ -1,0 +1,162 @@
+﻿module wizzi-repo.json.JsonFs
+	kind jsfile
+
+	import assert
+	import path
+	import util
+	var verify = require('@wizzi/utils').verify
+	var Collection = require('../../utils/collection')
+
+	#
+		# class JsonFs 
+        # implements an in-memory json Filesystem (a set of documents organized in a tree of folders)
+		#
+		# Filesystem item
+		# { fsitem
+		#   ObjectId _id
+		#   string basename
+		#   ObjectId parentId
+		#   string dirname
+		#   string path
+		#   integer kind
+		#     one-of 0 (directory), 1 (file)
+		#
+		# Document
+		# { document
+		#   ObjectId _id
+		#   string content
+		#   ISODate lastModified
+        #
+		# ctor params
+		#  { jsonFsData
+		#    [ items
+		#    [ documents
+
+	class JsonFs
+		ctor
+			param jsonFsData
+			set this.classType = 'wizzi-repo.json.JsonFs'
+			if verify.isObject(jsonFsData)
+				if verify.isArray(jsonFsData.items) === false
+					throw
+						new Error
+							_ error
+								@ 'InvalidArgument'
+								@ 'ctor'
+								{
+									@ parameter 'jsonFsData.items'
+									@ message 'The jsonFsData.items parameter must be an array. Received: ' + jsonFsData.items
+				if verify.isArray(jsonFsData.documents) === false
+					throw
+						new Error
+							_ error
+								@ 'InvalidArgument'
+								@ 'ctor'
+								{
+									@ parameter 'jsonFsData.documents'
+									@ message 'The jsonFsData.documents parameter must be an array. Received: ' + jsonFsData.documents
+				set this.items = new Collection(jsonFsData.items)
+				set this.documents = new Collection(jsonFsData.documents)
+			else
+				set this.items = new Collection([])
+				set this.documents = new Collection([])
+
+		$include jsonFs/getItem
+		$include jsonFs/insertItem
+		$include jsonFs/updateItem
+		$include jsonFs/deleteItem
+		$include jsonFs/read
+		$include jsonFs/write
+
+		m toJson
+			callback
+			var that = this
+			_ that.items.toArray
+				f_cb( items )
+					_ that.documents.toArray
+						f_cb( documents )
+							_ callback
+								@ null
+								{
+									@ items items
+									@ documents documents
+		
+		m toFiles
+			{ options
+				string removeRoot
+					optional
+			callback
+			_ this.items.toArray
+				a_cb( items )
+					_ this.documents.toArray
+						a_cb( documents )
+							var ret = []
+							foreach d in documents
+								foreach item in items
+									if item._id === d._id
+										_ ret.push
+											{
+												@ fullPath item.path
+												@ relPath options.removeRoot ? item.path.substr(options.removeRoot.length) : ''
+												@ content d.content
+							_ callback
+								@ null
+								@ ret
+
+		m close
+			# nothing to do
+
+	#
+		# Creates a JsonFs instance
+		# params
+		#  { jsonFsData
+		#    [ items
+		#    [ documents
+        #  callback
+	set JsonFs.create
+		function
+			param jsonFsData
+			param callback
+			+
+			if verify.isUndefined(callback)
+				set callback = jsonFsData
+				set jsonFsData = null
+			+
+			if jsonFsData == null
+				set jsonFsData
+					{
+						@ items []
+						@ documents []
+			else
+				if verify.isObject(jsonFsData) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter jsonFsData must be an object')
+				if verify.isArray(jsonFsData.items) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter jsonFsData must contain an items property')
+				if verify.isArray(jsonFsData.documents) == false
+					return
+						_ callback
+							_ errorMsg('create', 'parameter jsonFsData must contain a documents property')
+			+
+			return
+				_ callback
+					@ null
+					new JsonFs(jsonFsData)
+
+	function errorMsg
+		param method
+		param message
+		return
+			{
+				@ __is_error true
+				@ method 'Json.JsonDb.' + method
+				@ message message
+
+	function normalize
+		param path
+		return path.trim().replace(/\\/g,'/') $$ VIA 4/5/2023 .toLowerCase()
+					
+	set module.exports = JsonFs

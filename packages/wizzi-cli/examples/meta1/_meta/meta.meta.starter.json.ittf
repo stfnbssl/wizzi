@@ -1,0 +1,63 @@
+{
+    $
+        var metaBasename = "starter";
+
+    name "wizzi.meta.${metaBasename}"
+    npnName "@wizzi/meta.${metaBasename}"
+    description "Wizzi meta plugin for creating wizzi ${metaBasename} packages"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+    { github
+        userid "stfnbssl"
+
+    metaNamespace "${metaBasename}"
+
+    usePackageVersion true
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "ittf"
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziMeta
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "Wizzi ${metaBasename} meta plugin"
+        kind "WizziMeta"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Productions
+        {
+            name "${metaBasename}Html"
+            isPackageMain true
+        {
+            name "${metaBasename}Js"
+            isPackageMain true
+        {
+            name "${metaBasename}Ts"
+            isPackageMain true
+        {
+            name "${metaBasename}Wizzi"
+            isPackageMain true

@@ -1,0 +1,271 @@
+﻿$group
+	
+	# called on the root node
+	# for example by ittfHtmlPrettifier
+	# params
+	# { ctx
+	#    { fragments
+	#    { ittfReferences
+	#    { ittfFsNode
+	#    string ittfBasePath
+
+	m analize
+		param ctx
+		param callback
+
+		if typeof callback === 'undefined'
+            set callback = ctx
+            set ctx = {}
+
+        if typeof ctx === 'undefined'
+			set ctx = {}
+
+		var that = this
+		_ this.analizeRoot
+			@ ctx
+			f_cb()
+				_ that.analizeFragment
+					@ ctx
+					f_cb()
+						# loog 'name', that.name
+						if that.isCodeDeclareCheck()
+							set that.isCodeDeclare = true
+							r_cb()
+						elif that.isMultilineDeclareCheck()
+							set that.isMultilineDeclare = true
+							r_cb()
+						else
+							if that.isMetaCommandCheck()
+								set that.isMetaCommand = true
+							elif that.isCommandCheck()
+								set that.isCommand = true
+							async_foreach( doLoop, ndx )
+								var item = that.children[ndx]
+								if !item
+									r_cb()
+								# loog 'return analizeFragment, item.name, item.commentState', item.name, item.commentState
+								if item.commentState == 0
+									_ item.analize
+										@ ctx
+										f_cb()
+											return process.nextTick(()=>{doLoop(ndx + 1)})
+								else
+									return process.nextTick(()=>{doLoop(ndx + 1)})
+
+	m analizeRoot
+		param ctx
+		param callback
+
+		var r = this.root()
+
+		if this == r && ctx.rootFolder && r.model && r.model.jsonTwinUri && r.model.jsonTwinUri.length > 0
+			_ r.file.isFile
+				@ r.model.jsonTwinUri
+				f_cb( isFile )
+					if isFile
+						var fragment
+							{
+								@ oper 'ittfReference'
+								@ baseUri verify.unixifyPath(r.model.dirname)
+								@ name path.basename(r.model.jsonTwinUri)
+								@ uri r.model.jsonTwinUri
+								@ id 'unknown'
+								@ relUri
+									_ verify.unixifyPath
+										_ path.relative
+											@ ctx.rootFolder
+											@ r.model.jsonTwinUri
+						set r.ittfReferences[fragment.name] = fragment
+					return
+						_ callback
+		else
+			return
+				_ callback
+
+	m analizeFragment
+		param ctx
+		param callback
+		
+		if this.isMixinCall() == false &&
+			\b this.isIncludeCall() == false &&
+			\b this.isReferenceToIttf() == false
+			return
+				_ callback
+
+		if this.isReferenceToIttf() &&
+			\b !(ctx && ctx.rootFolder)
+			return
+				_ callback
+
+		# loog '******* analizeFragment', this.name, this.value
+
+		var r = this.root()
+
+		if typeof r.model === 'undefined'
+			return
+				_ callback
+					new Error('wizzi-utils.ittfDocumentGraph.analize require a `model` object in the root node. For example when created calling ittfDocumentGraph.createFrom(documentUri)')
+			
+		if r.model.uri.indexOf('__copy') > -1
+			# TODO why false ???
+			return
+				_ callback
+					@ null
+					@ false
+
+		if this.isMixinCall()
+			set this.isMixer = true
+			set this.fragmentName
+				iif verify.endsWith(this.name, '(')
+					then this.name.substr(0, this.name.length -1)
+					else this.name
+		elif this.isIncludeCall()
+			set this.isIncluder = true
+			set this.fragmentName = this.getValueStripComments()
+		else
+			set this.fragmentName = this.getValueStripComments()
+
+		var fragment
+			{
+				@ oper this.isMixinCall() ? 'mix' : this.isIncludeCall() ? 'include' : 'ittfReference'
+				@ baseUri verify.unixifyPath(path.dirname(r.model.uri))
+				@ name this.fragmentName
+				@ uri 'unknown'
+				@ id 'unknown'
+
+		$$ loog 1,'wizzi-utils.ittfDocumentGraph.analizeFragment.__getFragmentPath'
+        var that = this
+		_ this.__getFragmentPath
+			@ ctx
+			f_cb( fragmentPath )
+			
+				$$ loog 11,'wizzi-utils.ittfDocumentGraph.analizeFragment.fragmentPath', fragmentPath
+
+                if fragmentPath.__is_error
+				
+					set fragment.__is_error = true
+					set fragment.message = 'NotFound in repository'
+
+					_ r.errorFragments.push(fragment)
+				
+					$$ loog 12, 'wizzi-utils.ittfDocumentGraph.analizeFragment.error', fragmentPath, fragment
+                    # throw new Error(fragmentPath)
+					
+					return
+						_ callback
+
+				else
+
+					set fragment.uri = verify.unixifyPath(fragmentPath)
+				
+					if ctx && ctx.ittfBasePath && ctx.ittfFsNode
+					
+				
+						$$ loog 13, 'wizzi-utils.ittfDocumentGraph.analizeFragment search fragment in IttfFsNode', fragmentPath
+                        var fragmentDocument = ctx.ittfFsNode.searchDocument(fragmentPath)
+                        					
+						if !fragmentDocument
+						
+							$$ loog 14, 'wizzi-utils.ittfDocumentGraph.analize.fragmentNotFound in ittfFsNode', unixify(fragmentPath)
+							set fragment.__is_error = true
+							set fragment.message = 'NotFound in ittfFsNode documents.'
+							_ r.errorFragments.push(fragment)
+							if ctx.externalFragments
+								set ctx.externalFragments[that.fragmentName] = fragment
+
+						else
+						
+							$$ loog 15, 'wizzi-utils.ittfDocumentGraph.analize.fragmentDocument.id', fragmentDocument.id
+                            set fragment.id = fragmentDocument.id
+							if that.isReferenceToIttf()
+								if ctx.ittfReferences
+									set ctx.ittfReferences[that.fragmentName] = fragment
+							else
+								if ctx.fragments
+									set ctx.fragments[that.fragmentName] = fragment
+
+					if ctx && ctx.rootFolder
+						set fragment.relUri
+							_ verify.unixifyPath
+								_ path.relative
+									@ ctx.rootFolder
+									@ fragmentPath
+
+					if that.isReferenceToIttf()
+						# do not override
+						if !r.ittfReferences[that.fragmentName]
+							set r.ittfReferences[that.fragmentName] = fragment
+					else
+						# do not override
+						if !r.fragments[that.fragmentName]
+							set r.fragments[that.fragmentName] = fragment
+
+					return
+						_ callback
+
+	m __getFragmentPath
+		param ctx
+		param callback
+
+		var
+			decl r = this.root()
+			decl fragmentPath
+
+		if this.isReferenceToIttf() && ctx && verify.isNotEmpty(ctx.rootFolder)
+
+			$$ loog 2, "ittfDocumentGraph.__getFragmentPath.this.fragmentName, ctx.rootFolder", this.fragmentName, ctx.rootFolder
+
+			if this.fragmentName[0] === '/'
+				set fragmentPath
+					_ path.join
+						@ ctx.rootFolder
+						@ this.fragmentName
+			else
+				set fragmentPath
+					_ path.resolve
+						@ r.model.dirname
+						@ this.fragmentName
+			
+			$$ loog 3, '__getFragmentPath.fragmentPath', fragmentPath
+			
+			_ r.file.isFile
+				@ fragmentPath
+				f_cb( isFile )
+					if isFile
+						return
+							_ callback
+								@ null
+								@ fragmentPath
+					else
+						return
+							_ callback
+								@ null
+								{
+									@ __is_error true
+									@ uri fragmentPath
+		else
+			
+			var ittfFinder 
+				new IttfFinder
+					@ r.file
+			
+			var that = this
+			_ ittfFinder.resolvePath
+				{
+					@ callerFullPath r.model.uri
+					@ fragmentName this.fragmentName
+				f_cb_no_err( result )
+                    $$ loog 4, 'ittfFinder.resolvePath, err, this.fragmentName, result', err, r.model.uri, that.fragmentName, result
+					if err
+						return
+							_ callback
+								@ null
+								{
+									@ __is_error true
+									@ fragment that.fragmentName
+									@ message err.message
+					else
+						return
+							_ callback
+								@ null
+								@ result

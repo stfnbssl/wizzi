@@ -1,0 +1,52 @@
+﻿$group
+	$params methodBasePath|@@empty
+
+	function local_error
+		param errorName
+		param method
+		param message
+		param node
+		param inner
+        param other
+
+		log 'local_error', errorName, node
+		
+        $* 6/6/19
+        if node
+			# loog 'local_error.node', node
+			var nodeError = new errors.NodeError(message, node)
+			set message = nodeError.message
+		return
+			_ error
+				@ errorName
+				@ method
+				@ message
+				@ inner
+        *$
+
+		var mtree
+			iif other
+				then
+					_ Object.assign
+						{
+						@ other.mtree || {}
+						{
+							@ mTreeBrickNode node
+							@ mTreeBrick node ? (node.mTreeBrick || node.model) : null
+				else {}
+
+		if other
+			delete other.mtree
+
+		return
+            new errors.WizziError
+                @ message
+                @ errorName
+				[
+					@ errorName
+                {
+					{ source
+						@ method '${methodBasePath == null ? '' : methodBasePath + '.'}' + method
+					@ mtree mtree
+                    @ inner inner
+                    @ ...other||{}

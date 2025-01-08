@@ -1,0 +1,51 @@
+module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'json_factory_step_1',
+            title: 'Json - factory - create',
+            folderLevel: 3
+        }
+
+    common/example/wizzi(&opt)
+
+        $append plugins
+
+        var schema = 'js'
+        var ittfContent
+            [
+                @ 'module'
+                @ '    kind es6'
+                @ '    info "Hello"'
+                ._ join
+                    @ '\n'
+        +
+        var tempIttfUri = "c:/basefolder/temp." + schema + '.ittf'
+        var documents
+            [
+                {
+                    @ path tempIttfUri
+                    @ content ittfContent
+        +
+        _ wizziIndex.JsonComponents.createJsonFs
+            @ documents
+            f_cb_test( jsonFs )
+                var options
+                    {
+                        @ jsonFs jsonFs
+                        { plugins
+                            [ items
+                                @ 'wizzi-js'
+                                @ 'wizzi-web'
+                                @ 'wizzi-core'
+                        { globalContext
+                _ wizziIndex.jsonFactory
+                    @ options
+                    f_cb_test(wf)
+                        _ printObject
+                            @ 'wf'
+                            @ wf
+

@@ -1,0 +1,36 @@
+$group
+    $
+        var versions = {};
+        // C:\My\wizzi\stfnbssl\wizzi\packages\t\versions.ittf
+        versions['@wizzi/helpers'] = '0.8.2';
+        versions['@wizzi/helpers@next'] = '0.8.3';
+        versions['@wizzi/utils'] = '0.8.25';
+        versions['@wizzi/utils@next'] = '0.8.26';
+        versions['@wizzi/mtree'] = '0.8.32';
+        versions['@wizzi/mtree@next'] = '0.8.33';
+        versions['@wizzi/repo'] = '0.8.24';
+        versions['@wizzi/repo@next'] = '0.8.25';
+        versions['@wizzi/factory'] = '0.8.44';
+        versions['@wizzi/factory@next'] = '0.8.45';
+        
+        versions['isomorphic-git'] = '1.19.2';
+        versions['wizzi-js'] = '0.7.13';
+        versions['wizzi-js@next'] = '0.8.1';
+        versions['wizzi-web'] = '0.7.16';
+        versions['wizzi-web@next'] = '0.8.1';
+        versions['wizzi-core'] = '0.7.8';
+        versions['wizzi-core@next'] = '0.8.1';
+        versions['wizzi-meta'] = '0.6.6';
+        versions['wizzi-meta@next'] = '0.8.1';
+        versions['wizzi-tools'] = '0.7.7';
+        versions['wizzi-tools@next'] = '0.8.1';
+        versions['wizzi-cli'] = '0.0.29';
+        versions['wizzi-cli@next'] = '0.0.30';
+        versions['wizzi-demo'] = '0.4.5';
+        versions['wizzi-demo@next'] = '0.8.1';
+        versions['wizzi-lab'] = '0.0.0';
+        versions['wizzi-lab@next'] = '0.0.0';
+        versions['wizzi-git'] = '0.7.1';
+        versions['wizzi-git@next'] = '0.8.1';
+        versions['wizzifactory.github.io'] = '0.7.1';
+        versions['wizzifactory.github.io@next'] = '0.8.1';

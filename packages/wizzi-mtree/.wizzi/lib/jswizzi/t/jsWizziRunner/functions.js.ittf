@@ -1,0 +1,90 @@
+﻿$group
+
+	runner( FunctionCall
+		var 
+			decl objbase
+			decl value
+		
+        # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, node.name', node.name
+        # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall, ctx.values', ctx.values
+        if node.name.base
+			checked_run_set( objbase, FunctionCall node.name.base
+                _ runner
+                    @ node.name.base
+                    @ ctx
+        else 
+            set objbase = ctx.values
+		if objbase == null || typeof(objbase) == 'undefined'
+			return
+				_ local_error
+					@ ctx
+					@ 'JsWizziError'
+					@ 'The value ' + node.name.base + ' must be an object. It is undefined'
+					@ node.name.base
+					@ node
+					@ 'FunctionCall'
+		var args
+            [ 
+        if Object.prototype.toString.call(node.arguments) == '[object Array]'
+            foreach item in node.arguments
+				# loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.item', item
+				checked_run_set( value, FunctionCall item
+					_ runner(item, ctx)
+				# loog 'wizzi-mtree.jswizzi.runner.functions.FunctionCall.value', value
+                _ args.push(value)
+		var f = objbase[node.name.name]
+		if !f
+			return
+				_ local_error
+					@ ctx
+					@ 'JsWizziError'
+					@ 'Missing function.'
+					@ node.name.base
+					@ node
+					@ 'FunctionCall'
+		if verify.isFunction(f)
+			try
+				var v = objbase[node.name.name].apply(objbase, args)
+                # loog 'jsWizziRunner.FunctionCall.name.result', node.name.name, v
+				return v
+			catch ex
+				return
+					_ local_error
+						@ ctx
+						@ 'JsWizziError'
+						@ (ex ? ex.message : 'Error calling function')
+						@ node.callee.property
+						@ node
+						@ 'CallExpression'
+						@ ex
+    
+	runner( FunctionDeclaration
+        _ ctx.declareFunction
+            @ node.id.name
+            @ node
+        return 
+            { 
+
+    runner( FunctionDeclaration_Call, data
+		# loog 'Runner: FunctionDeclaration_Call, Enter', 
+        # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.params', node.params
+        # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, node.body', node.body
+        
+		var save_brick_key = ctx.get_currentMTreeBrickKey()
+	    var ctx = ctx.push()
+        for var i = 0; i < node.params.length; i++
+			# loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.param', node.params[i].name
+            if data.length > i
+				# loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call.value', data[i]
+                _ ctx.declareCallParam
+                    @ node.params[i].name
+                    @ data[i]
+        # loog 'wizzi-mtree.jswizzi.runner.functions.FunctionDeclaration_Call, ctx.callContext.values', ctx.callContext.values
+        checked_run( state, FunctionCall node.body
+            _ runner
+                @ node.body
+                @ ctx
+        _ ctx.set_MTreeBrickEvalContext(save_brick_key, 0)
+		# loog 'Runner: FunctionDeclaration_Call, Exit', 
+		_ ctx.pop()
+        return state.value

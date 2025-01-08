@@ -1,0 +1,41 @@
+﻿$group
+	
+	function recurserTFolder
+		string basePath
+		string relPath
+
+		# loog 'recurserTFolder enter', basePath, relPath
+		return
+			new Promise
+				function
+					param resolve
+					var ittfDocumentUri = path.join(basePath, 't', relPath)
+					_ that.tryExists
+						@ ittfDocumentUri
+						@ that.schema
+						f_cb( result )
+							if result.found
+								# return callback(null, result)
+								# loog 'recurserTFolder resolve found', result
+								return
+									_ resolve(result)
+							else 
+								set basePath = path.dirname(basePath)
+								if basePath.length > 3
+									# loog 'recurserTFolder try parent', basePath
+									return
+										_ recurserTFolder
+											@ basePath
+											@ relPath
+											._ then
+												function
+													param result
+													# loog 'recurserTFolder transmit resolve result', basePath, result
+													_ resolve(result)
+									# return that.resolvePathInTFolders(basePath, relPath, callback)
+								else 
+									# loog 'recurserTFolder resolve not found', basePath
+									return
+										_ resolve
+											{ 
+												@ found false

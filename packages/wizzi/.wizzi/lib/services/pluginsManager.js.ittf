@@ -1,0 +1,99 @@
+﻿module wizzi@${wzCtx.version}.pluginsManager
+	kind jsfile
+
+	var path = require('path')
+	var fs = require('fs')
+	var _ = require('lodash')
+	var log = require('../util/log')(module)
+	var verify = require('@wizzi/utils').verify
+	var file = require('@wizzi/utils').file
+	var fail = require('@wizzi/utils').fail
+	var errors = require('../errors')
+    var existsSync = fs.existsSync || path.existsSync
+    var realpathSync = fs.realpathSync
+    var exists = fs.exists || path.exists
+    var realpath = fs.realpath
+
+	# TODO
+	# Implement available wizzi factories
+	var availableFactories = []
+
+	class PluginsManager
+		
+		ctor
+			set this.__type = 'PluginsManager'
+            set this.__version = '${wzCtx.version}'
+			set this.packagePathCache = {}
+			set this.factoryPlugins = []
+			set this.providedSchemas = []
+            set this.providedSchemasExt = []
+			set this.providedModelTransformers = []
+			set this.providedArtifactGenerators = []
+            set this.providedWizzifiers = []
+			set this.providedCheatsheetFolders = []
+            set this.extensionSchemaMap = {}
+            set this.schemaDefaulArtifactMap = {}
+            set this.schemaArtifactsMap = {}
+            set this.schemaRootTagMap = {}
+            set this.artifactContentTypeMap = {}
+
+		$include pluginsManager/initialize
+		$include pluginsManager/register
+		$include pluginsManager/model-factory
+		$include pluginsManager/model-transformer
+		$include pluginsManager/artifact-generator
+        $include pluginsManager/wizzification
+		$include pluginsManager/schema-definition
+		$include pluginsManager/cheatsheet
+		$include pluginsManager/getInfo
+        $include pluginsManager/getProvides
+
+	# For test - begin
+	var packagePathCache = {}
+	$include pluginsManager/resolve-module
+	$include pluginsManager/resolve-package
+	# For test - end
+
+    function schemaFromFilePath
+        param filePath
+        const pf = parseFilePath(filePath)
+        if pf.isIttfDocument
+            return pf.schema
+        return undefined
+    
+    function parseFilePath
+        param filePath
+        const nameParts = path.basename(filePath).split('.')
+        if nameParts[nameParts.length - 1] === 'ittf'
+            return
+                {
+                    @ isIttfDocument true 
+                    @ schema nameParts[nameParts.length - 2] 
+                    @ seedname nameParts.slice(0, -2).join('.')
+        else
+            return
+                {
+                    @ isIttfDocument false 
+                    @ schema nameParts[nameParts.length - 1] 
+                    @ seedname nameParts.slice(0, -1).join('.')
+	
+    set module.exports
+		{
+			@ createManager
+				function createManager
+					{ options
+					callback
+					
+					var pm
+						new PluginsManager
+					_ pm.initialize
+						@ options
+						a_cb( result )
+                            # test
+                            # loog 'extensionSchemaMap', result.extensionSchemaMap
+                            # loog 'schemaDefaulArtifactMap', result.schemaDefaulArtifactMap
+                            # loog 'schemaArtifactsMap', result.schemaArtifactsMap
+                            r_cb(result)
+			@ PluginsManager PluginsManager
+			@ resolveModule resolveModule
+			@ resolvePackage resolvePackage

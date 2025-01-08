@@ -1,0 +1,34 @@
+/*
+    artifact generator: C:\My\wizzi\stfnbssl\wizzi.plugins\packages\wizzi.plugin.js\lib\artifacts\js\module\gen\main.js
+    package: @wizzi/plugin.js@0.8.9
+    primary source IttfDocument: json:/___template/wizzi.config.lastsafe.js.ittf
+    utc time: Tue, 30 Apr 2024 18:28:17 GMT
+*/
+'use strict';
+const path = require('path');
+module.exports = {
+    wzjobName: "ts.remix.starter-override/job", 
+    wzjobPath: path.join(__dirname, '.wizzi-override', 'generate.wzjob.ittf'), 
+    destPath: __dirname, 
+    plugins: [
+        "./wizzi.plugin.css/index.js", 
+        "./wizzi.plugin.html/index.js", 
+        "./wizzi.plugin.ittf/index.js", 
+        "./wizzi.plugin.js/index.js", 
+        "./wizzi.plugin.json/index.js", 
+        "./wizzi.plugin.md/index.js", 
+        "./wizzi.plugin.text/index.js", 
+        "./wizzi.plugin.wzjob/index.js", 
+        "./wizzi.plugin.wfschema/index.js"
+    ], 
+    pluginsBaseFolder: "C:/My/wizzi/stfnbssl/wizzi.lastsafe.plugins/packages", 
+    schemas: [
+        
+    ], 
+    globalContext: {
+        wzConfigIsDevelopment: true, 
+        wzConfigIsPackageDeploy: false, 
+        wzConfigIsDocumentation: true
+     }
+ };
+

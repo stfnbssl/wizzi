@@ -1,0 +1,57 @@
+﻿module
+	kind jsfile
+
+    $
+        var opt = {
+            level: 0,
+            step: 2,
+            name: 'fromText_step_2',
+            title: 'Ittf docomuent as a text string - step 2 - load and generate',
+            folderLevel: 2
+        }
+
+    common\example\wizzi(&opt)
+
+        $append plugins
+            [ items
+                @ 'wizzi-js'
+                @ 'wizzi-web'
+                @ 'wizzi-core'
+
+        var jsIttf
+            [
+                @ 'module'
+                @ '\tkind react'
+                @ '\treact MyComponent'
+                ._ join('\n')
+
+        _ wizziIndex.genFromText
+            @ jsIttf
+            {
+            {
+                @ artifactName 'js/module'
+            f_cb(artifactText)
+                # loog 'genFromText', '\n', artifactText
+                _ wizziIndex.genFromText
+                    [
+                        @ 'module'
+                        @ '    kind react'
+                        @ '    react Hello'
+                        @ '        state'
+                        @ '            @ name "stefi"'
+                        @ '        $foreach item in items'
+                        @ '            m ${'$'}{item}'
+                        ._ join
+                            @ '\n'
+                    {
+                        [ items
+                            @ 'alfa'
+                            @ 'beta'
+                    {
+                        @ artifactName 'js/module'
+                    =>
+                        param err
+                        param result
+                        if err
+                            error 'err', err
+                        info 'result', result

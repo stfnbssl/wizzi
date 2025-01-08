@@ -1,0 +1,88 @@
+﻿md
+    common/kernel( wizzi.cli, The wizzi factory command line interface. )
+        code sh
+            + npm install -g wizzi-cli
+
+        h1 wizzi-cli
+        p The Wizzi command line interface (CLI) performs basic functionality, 
+            \b such as executing a Wizzi Production, 
+            \b creating a Wizzi Package based on a templated Meta Production,
+            \b wizzifying an existent artifact or a folder of artifacts,
+            \b meta wizzifying an existent wizzi package
+
+        p The Wizzi CLI is packaged as an executable that can be used globally. 
+            \b Is available via [npm](https://www.npmjs.com/) and should be installed globally 
+            \b by running
+        code sh
+            + npm install -g wizzi-cli
+
+        p Run `wz help` for full help.
+
+        h2 CLI Commands
+        $foreach cmd in wzCtx.Commands
+            h2 "${cmd.name}"
+            $if cmd.desc
+                p
+                    i ${cmd.desc}
+            code sh
+                + ${cmd.cmd}
+            $if _.isArray(cmd.options) && cmd.options.length > 0
+                table
+                    thead
+                        th Argument
+                        th Description                                                                                                                                                                                                                         |
+                    tbody
+                        $foreach opt in cmd.options
+                            tr
+                                td ${opt.name}
+                                td ${opt.value}
+                                    br
+                                    $foreach hint in opt.hints
+                                        + |- ${hint}
+            $foreach line in cmd.lines
+                p ${line}
+
+
+
+        $*
+        h3 `generate`
+        p Executes a Wizzi Production described in a wizzi.config[.configname].js file.
+        p The config file is searched in the current folder and its parents.
+        code sh
+            + wz [configname]
+        
+        $*
+        h3 `create`
+        p Executes a Wizzi Meta Production creating a new Wizzi Package for a type of Wizzi production.
+        code sh
+            + wizzi create
+        p An 'inquirer' dialog asks for the production type and other available options.
+        ul Examples of available Meta Production
+            li pure js
+            li webpack
+            li webpack + react
+            li webpack + react + material-ui
+            li gatsby
+            li express
+            li wizzi plugin
+            li ...
+        *$
+        $*
+        h3 `fy`
+        p Executes the 'wizzifying' of a file or folder (for example creates a .js.ittf
+            \b document from a .js file). 
+        code sh
+            + wz fy --source <filepath|folderpath> --dest <filepath|folderpath>
+
+        table
+            thead
+                th Argument
+                th Description                                                                                                                                                                                                                             |
+            tbody
+                tr
+                    td --source|-s <filepath|folderpath>
+                    td The source file or folder path
+                tr
+                    td --dest|-d <filepath|folderpath>
+                    td The destination file or folder path
+        *$

@@ -1,0 +1,29 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'lorem_Step_1',
+            title: 'lorem - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var text
+            _ lorem
+                {
+                    @ count 100
+        
+        info 'lorem.100', text
+
+        set text
+            _ lorem
+                {
+                    @ count 10
+                    @ units 'paragraphs'
+                    @ htmlTag 'p'
+
+        info 'lorem.10.paragraphs.p\n', text

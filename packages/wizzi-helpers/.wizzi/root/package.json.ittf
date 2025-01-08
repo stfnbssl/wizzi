@@ -1,0 +1,7 @@
+{
+
+    common/kernel_utils_package(true)
+
+        extsprintf "^1.2.0"
+
+        $append devDependencies

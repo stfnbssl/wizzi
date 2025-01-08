@@ -1,0 +1,288 @@
+module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfScanner_metify',
+            title: 'ittfScanner - metify',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        $append functions
+            const folderPath
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scanMeta'
+            const rootFolder
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'scanMeta'
+            const destFolder
+                _ path.join
+                    @ __dirname
+                    @ 'outputs'
+                    @ 'metify'
+
+            const metaProductionName = 'baxDemo'
+
+            _ ittfScanner.scanFolder
+                @ folderPath
+                {
+                    @ rootFolder rootFolder
+                    @ getAll true
+                f_cb_test( result )
+
+                    var packiFiles = {}
+                    var sbFolderTemplateFile 
+                        [ 
+                            @ '$group'
+                            @ '    $if metaCtx.use' + verify.capitalize(metaProductionName)
+                            @ '        $include wzCtxModel'
+                    var sbWzCtxModelFile 
+                        [ 
+                            @ '$group'
+                    _ elabFsNode
+                        @ packiFiles
+                        @ result.ittfFsNode
+                        {
+                            @ folderTemplateFile sbFolderTemplateFile
+                            @ wzCtxModelFile sbWzCtxModelFile
+                        {
+                            @ metaProductionName metaProductionName
+                            @ ft_basePath ''
+                            @ id_basePath ''
+                            @ idf_basePath ''
+
+                    set packiFiles[metaProductionName+'/folderTemplates/index.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sbFolderTemplateFile.join('\n')
+                    set packiFiles[metaProductionName+'/folderTemplates/t/wzCtxModel.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sbWzCtxModelFile.join('\n')
+
+                    _ wizziUtils.packi.packiFilesToFs
+                        @ destFolder
+                        @ packiFiles
+                        {
+                        f_cb_test()
+
+            function elabFsNode 
+                param packiFiles
+                param fsNode                   
+                param sb
+                param state
+                foreach f in fsNode.folders
+                    _ elabFolder
+                        @ packiFiles
+                        @ f
+                        @ sb
+                        @ state
+                foreach f in fsNode.documents
+                    _ elabDocument
+                        @ packiFiles
+                        @ f
+                        @ sb
+                        @ state
+            
+            function elabFolder 
+                param packiFiles
+                param fsNode                   
+                param sb
+                param state
+                if fsNode.parent.isRoot
+                    if !fsNode.isTFolder
+                        _ sb.folderTemplateFile.push
+                            @ '        $include ' + fsNode.basename
+                else
+                    if !fsNode.isTFolder
+                        _ sb.folderTemplateFile.push
+                            @ '    $include ' + fsNode.basename
+                var save_sb_folderTemplateFile = sb.folderTemplateFile
+                var save_state_ft_basePath = state.ft_basePath
+                var save_state_id_basePath = state.id_basePath
+                var save_state_idf_basePath = state.idf_basePath
+                #
+                # prepare for children
+                set state.ft_basePath = state.ft_basePath + '/t/' 
+                set state.id_basePath = state.id_basePath + fsNodeIdName(fsNode) + '/'
+                set state.idf_basePath = state.idf_basePath + fsNodeIdfName(fsNode) + '/'
+                log 'state.ft_basePath', state.ft_basePath
+                if fsNode.isTFolder
+                    _ elabTFolder
+                        @ fsNode
+                        @ sb
+                        @ state
+                set sb.folderTemplateFile 
+                    [ 
+                        @ '$group'
+                foreach f in fsNode.folders
+                    _ elabFolder
+                        @ packiFiles
+                        @ f
+                        @ sb
+                        @ state
+                if fsNode.isTFolder
+                    _ elabTFolder
+                        @ fsNode
+                        @ sb
+                        @ state
+                else
+                    foreach d in fsNode.documents
+                        _ elabDocument
+                            @ packiFiles
+                            @ d
+                            @ sb
+                            @ state
+                #
+                if !fsNode.isTFolder
+                    log 'path', state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf'
+                    set packiFiles[state.metaProductionName+'/folderTemplates/' + state.ft_basePath + fsNode.basename + '.ittf.ittf']
+                        {
+                            @ type "CODE"
+                            @ contents sb.folderTemplateFile.join('\n')
+                set sb.folderTemplateFile = save_sb_folderTemplateFile
+                set state.ft_basePath = save_state_ft_basePath
+                set state.id_basePath = save_state_id_basePath
+                set state.idf_basePath = save_state_idf_basePath
+
+            function elabTFolder 
+                param fsNode
+                param sb 
+                param state
+                _ sb.folderTemplateFile.push('')
+                _ sb.folderTemplateFile.push
+                    @ '    $'
+                _ sb.folderTemplateFile.push
+                    @ '        var items = ['
+                foreach d in fsNode.documents
+                    _ sb.folderTemplateFile.push
+                        @ '            ' + basenameIttfStripped(d) + ','
+                _ sb.folderTemplateFile.push
+                    @ '        ]'
+                _ sb.folderTemplateFile.push('')
+                _ sb.folderTemplateFile.push
+                    @ '    $foreach item in items'
+                foreach d in fsNode.documents
+                    _ sb.folderTemplateFile.push
+                        @ "        $file " + state.idf_basePath + '$' + '{item}' + '.ittf.ittf'
+                        @ "            $" + "{'$'}{'$'}group"
+                        @ "                $" + "{'$'}include " + state.id_basePath + '$' + '{item}'
+                _ sb.folderTemplateFile.push('')
+            
+            function elabDocument 
+                param packiFiles
+                param fsNode
+                param sb
+                param state
+                _ sb.folderTemplateFile.push
+                    @ "    $file " + state.idf_basePath + fsNode.basename + '.ittf'
+                _ sb.folderTemplateFile.push
+                    _ documentLine
+                        @ fsNode.ittfDocumentGraph
+                        @ 8
+                _ sb.folderTemplateFile.push
+                    _ documentLine
+                        {
+                            @ name "${'$'}{'$'}include"
+                            @ value state.metaProductionName + '/' + state.id_basePath + basenameIttfStripped(fsNode)
+                        @ 12
+                set sb.documentFile 
+                    [
+                        @ '$group'
+                set state.documentIndent = 4
+                foreach child in fsNode.ittfDocumentGraph.children
+                    _ elabDocumentNode
+                        @ child
+                        @ sb
+                        @ state
+                set packiFiles[state.metaProductionName+'/ittfDocumentsTemplates/' + state.id_basePath + fsNode.basename + '.ittf']
+                    {
+                        @ type "CODE"
+                        @ contents sb.documentFile.join('\n')
+
+            function elabDocumentNode
+                param fsNode
+                param sb
+                param state
+                _ sb.documentFile.push
+                    _ documentLine
+                        @ fsNode
+                        @ state.documentIndent
+                var save_state_documentIndent = state.documentIndent
+                set state.documentIndent = state.documentIndent + 4
+                foreach child in fsNode.children
+                    _ elabDocumentNode
+                        @ child
+                        @ sb
+                        @ state
+                set state.documentIndent = save_state_documentIndent
+
+            function documentLine
+                param fsNode
+                param indent
+                return new Array(indent).join(' ') + 
+                    \b documentLineName(fsNode) + documentLineValue(fsNode)
+
+            function fsNodeIdName
+                param fsNode
+                if fsNode.isTFolder
+                    return 'tfolder'
+                else
+                    return fsNode.basename
+
+            function fsNodeIdfName
+                param fsNode
+                return fsNode.basename
+
+            function basenameIttfStripped
+                param fsNode
+                if fsNode.basename && fsNode.basename.endsWith('.ittf')
+                    return fsNode.basename.substr(0, fsNode.basename.length - 5)
+                else
+                    return fsNode.basename
+
+            function documentLineName
+                param fsNode
+                if fsNode.isMixer
+                    return fsNode.fragmentName + '$' + "{'('}"
+                elif fsNode.isIncluder
+                    return '$' + "{'$'}include"
+                elif fsNode.isCommand
+                    return '$' + "{'$'}" + (fsNode.name && fsNode.name.substring(1))
+                else
+                    return fsNode.name
+
+            function documentLineValue
+                param fsNode
+                return
+                    _ buildLineValue
+                        @ fsNode
+
+            function buildLineValue
+                param fsNode
+                if !fsNode.getValueParsed
+                    return verify.isEmpty(fsNode.value) ? '' : ' ' + fsNode.value
+                var sb = []
+                var items = fsNode.getValueParsed()
+                var sp = ' '
+                foreach item in items
+                    if item.t == 0
+                        _ sb.push(sp + item.v)
+                        set sp = ''
+                    else
+                        _ sb.push(sp + '$' + "{'$'}")
+                        _ sb.push(sp + '{')
+                        set sp = ''
+                        _ sb.push(verify.htmlEscape(item.v))
+                        _ sb.push('}')  
+                return 
+                    _ sb.join
+                        @ ''

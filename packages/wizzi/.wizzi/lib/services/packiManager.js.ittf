@@ -1,0 +1,31 @@
+module wizzi@${wzCtx.version}.packiManager
+	kind es6
+
+	const pretty = require('@wizzi/utils').pretty
+	const constants = require('../constants')
+    const packiUtils = require('./packiUtils')
+
+    const 
+        {
+            @ packiFilePrefix
+        = constants
+
+	class PackiManager
+		
+		ctor
+			set this.__type = 'PackiManager'
+            set this.__version = '${wzCtx.version}'
+
+        $include packiManager/prettier
+        $include packiManager/generation
+
+    set module.exports
+		{
+			@ createManager
+				function createManager
+					{ options
+					callback
+					
+					var pm
+						new PackiManager
+                    r_cb(pm)

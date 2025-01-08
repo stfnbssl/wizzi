@@ -1,0 +1,107 @@
+﻿module
+	kind jsfile    
+
+    $
+        var opt = {
+            level: 0,
+            step: 1,
+            name: 'ittfGraph_Step_1',
+            title: 'ittfGraph - step - 1',
+            folderLevel: 2
+        }
+
+    common\example\utils(&opt)
+
+        var IttfFinder = require('../../lib/ittfGraph/ittfFinder')
+        var ittfGraph = require('../../lib/ittfGraph/index')
+
+        info 'wizzi-utils.examples.ittfGraph'
+        
+        _ step_1
+
+        function step_1
+            _ ittfGraph.createIttfDocumentGraphFrom
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'basic.sample.ittf'
+                {
+                f_cb_test( result )
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'ittf'
+                            @ 'basic.sample.json'
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2
+                    _ step_2
+
+        function step_2
+            
+            _ ittfGraph.createIttfDocumentGraphFrom
+                [
+                    @ 'module'
+                    @ '    kind react'
+                    @ '    react Hello'
+                    @ '        state'
+                    @ '            @ name "stefi"'
+                    ._ join
+                        @ '\n'
+                {
+                    @ fromString true
+                    @ clean true
+                f_cb_test( result )
+                    info 'result.findByRow(3). should be react node.', result.findByRow(3)
+                    _ file.write
+                        _ path.join
+                            @ __dirname
+                            @ 'ittf'
+                            @ 'basic.sample.fromstring.json'
+                        _ stringify
+                            @ result
+                            @ null
+                            @ 2
+                    _ step_3
+
+        function step_3
+            
+            _ ittfGraph.createIttfDocumentGraphFrom
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'complex.sample.ittf'
+                {
+                f_cb_test( result )
+                    _ result.analize
+                        {
+                        f_cb_test()
+                            var msg
+                                _ stringify
+                                    @ result
+                                    @ null
+                                    @ 2
+                            info 'step_3, result', msg
+                            _ step_4
+
+        function step_4
+            
+            _ ittfGraph.createIttfDocumentGraphFrom
+                _ path.join
+                    @ __dirname
+                    @ 'ittf'
+                    @ 'complex.sample.ittf'
+                {
+                f_cb_test( result )
+                    _ result.analize
+                        {
+                        f_cb_test()
+                            var msg
+                                _ stringify
+                                    @ result
+                                    @ null
+                                    @ 2
+                            info 'step_4, result', msg
+
+        $include ittfFinder

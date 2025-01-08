@@ -1,0 +1,61 @@
+﻿$group
+
+	#
+		# A `wzjob` model may contain the request for the execution
+		# of another `wzjob`. The accumulation of all the requested `productionStep`(s)
+		# is a recursive action.
+		#
+		# The same `wizzi/production/wzjob/WzjobLoader` instance is passed through 
+		# the recursive loadings. 
+		# It loads the `wzjob` requests and checks that wzjobs and 
+		# productionSteps are processed once.
+		# (see methods _areWzjobRequestsEqual and _areProductionStepConfigsEqual for equality criteria)
+		# 
+		# At the end of the recursion the WzjobLoader instance contains
+		# the `wizzi/production/ProductionStep` instances that have to be
+		# executed by the `wizzi/production/ProductionManager`.
+		#
+	wz-function AsyncRecurseWzjobLoad
+		{ wzjobRequest
+			{ wzjobLoader
+		callback
+		info '='
+		info '= ========= wizzi.AsyncRecurseWzjobLoad. Start. wzjobRequest.model : ', wzjobRequest.model
+		info '='
+		var wzjobLoader = wzjobRequest.wzjobLoader
+		_ wzjobLoader.load
+			@ wzjobRequest
+			f_cb( result )
+				
+				info '='
+				info '= ========= wizzi.AsyncRecurseWzjobLoad. Results. ',
+					\b 'seenWzjobRequests: ', result.seenWzjobRequests.length,
+					\b ', globalModelInfoConfigs: ', result.globalModelInfoConfigs.length,
+                    \b ', productionStepConfigs: ', result.productionStepConfigs.length,
+					\b ', pendingWzjobRequests: ', result.pendingWzjobRequests 
+				info '='
+				
+				if result.pendingWzjobRequests.length > 0
+					
+					var jobRequests = result.pendingWzjobRequests
+					set result.pendingWzjobRequests = []
+					
+					# set the same wzjobLoader for any jobRequest
+					foreach item in jobRequests
+						set item.wzjobLoader = wzjobLoader
+					
+					# recurse
+					_ async.map
+						@ jobRequests
+						@ AsyncRecurseWzjobLoad
+						f_cb( result )
+							return 
+								_ callback
+									@ null
+									@ wzjobLoader
+				else
+					return 
+						_ callback
+							@ null
+							@ wzjobLoader
+						 

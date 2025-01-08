@@ -1,0 +1,309 @@
+{
+  "uri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\ittf_object_args.tests.ittf",
+  "loadHistory": {
+    "__type": "LoadHistory",
+    "ittfDocumentDatas": {
+      "f1": {
+        "ittfDocumentUri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\ittf_object_args.tests.ittf",
+        "sourceKey": "f1",
+        "content": "alpha\r\n\tbeta\r\n\t\t$foreach item in items\r\n\t\t\tittf_object_args_item( &item )\r\n\t\t\t\r\n"
+      },
+      "f2": {
+        "ittfDocumentUri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\t\\ittf_object_args_item.tests.ittf",
+        "sourceKey": "f2",
+        "content": "gamma\r\n\t$params &item\r\n\tvar tau_${item.name} = ${item.value}\r\n"
+      }
+    },
+    "mTreeBrickDatas": {
+      "f1": {
+        "ittfDocumentUri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\ittf_object_args.tests.ittf",
+        "schema": "tests",
+        "sourceKey": "f1",
+        "brickKey": "f1",
+        "mTreeBrick": "[Circular ~]",
+        "evalContext": {
+          "ittfState": 1,
+          "brickKey": "f1",
+          "$freezed": false,
+          "functions": {},
+          "values": {
+            "__dirname": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data",
+            "__filename": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\ittf_object_args.tests.ittf",
+            "item_count3": 3,
+            "item_count": 3,
+            "i3": 3,
+            "item": {
+              "name": "afro",
+              "value": 98
+            },
+            "item_index": 2
+          },
+          "declares": {
+            "__dirname": true,
+            "__filename": true,
+            "item_count3": true,
+            "item_count": true,
+            "i3": true,
+            "item": true,
+            "item_index": true
+          },
+          "functionsStack": [],
+          "valuesStack": [],
+          "declaresStack": [],
+          "builtInFunctions": {},
+          "functionContexts": {},
+          "functionScopeChains": {},
+          "currentFunctionScopeChain": null,
+          "currentFunctionName": null
+        }
+      },
+      "f2": {
+        "ittfDocumentUri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\t\\ittf_object_args_item.tests.ittf",
+        "schema": "tests",
+        "sourceKey": "f2",
+        "brickKey": "f2",
+        "mTreeBrick": {
+          "uri": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\t\\ittf_object_args_item.tests.ittf",
+          "loadHistory": "[Circular ~.loadHistory]",
+          "frontMatter": {},
+          "documentFragments": [],
+          "$params": "&item",
+          "nodes": [
+            {
+              "id": 12,
+              "parsedId": 9,
+              "name": "gamma",
+              "row": 1,
+              "col": 1,
+              "sourceKey": "f2",
+              "hasMacro": false,
+              "parent": {
+                "id": 7,
+                "parsedId": 3,
+                "name": "$foreach",
+                "value": "item in items",
+                "row": 3,
+                "col": 10,
+                "sourceKey": "f1",
+                "hasMacro": false,
+                "parent": {
+                  "id": 6,
+                  "parsedId": 2,
+                  "name": "beta",
+                  "row": 2,
+                  "col": 5,
+                  "sourceKey": "f1",
+                  "hasMacro": false,
+                  "parent": {
+                    "id": 5,
+                    "parsedId": 1,
+                    "name": "alpha",
+                    "row": 1,
+                    "col": 1,
+                    "sourceKey": "f1",
+                    "hasMacro": false,
+                    "parent": null,
+                    "model": "[Circular ~]",
+                    "children": [
+                      "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick.nodes.0.parent.parent]"
+                    ],
+                    "_id": 1
+                  },
+                  "model": "[Circular ~]",
+                  "children": [
+                    "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick.nodes.0.parent]"
+                  ],
+                  "_id": 2
+                },
+                "model": "[Circular ~]",
+                "children": [
+                  "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick.nodes.0]"
+                ],
+                "_id": 3
+              },
+              "model": "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick]",
+              "children": [
+                {
+                  "id": 13,
+                  "parsedId": 11,
+                  "name": "var",
+                  "value": "tau_${item.name} = ${item.value}",
+                  "row": 3,
+                  "col": 5,
+                  "sourceKey": "f2",
+                  "hasMacro": false,
+                  "parent": "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick.nodes.0]",
+                  "model": "[Circular ~.loadHistory.mTreeBrickDatas.f2.mTreeBrick]",
+                  "children": [],
+                  "_id": 5
+                }
+              ],
+              "__firstOfMixedNodes": true,
+              "_id": 4
+            }
+          ],
+          "sourceKey": "f2",
+          "brickKey": "f2",
+          "$schema": "tests",
+          "$args": "&item ",
+          "$mixerBrickKey": "f1"
+        },
+        "evalContext": {
+          "ittfState": 1,
+          "brickKey": "f2",
+          "$freezed": false,
+          "functions": {},
+          "values": {
+            "__dirname": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\t",
+            "__filename": "c:\\my\\wizzi\\stfnbssl\\wizzi\\packages\\wizzi-mtree\\tests\\all\\loader\\repo\\data\\t\\ittf_object_args_item.tests.ittf",
+            "item": {
+              "name": "afro",
+              "value": 98
+            }
+          },
+          "declares": {
+            "__dirname": true,
+            "__filename": true,
+            "item": true,
+            "_____result": true
+          },
+          "functionsStack": [],
+          "valuesStack": [],
+          "declaresStack": [],
+          "builtInFunctions": {},
+          "functionContexts": {},
+          "functionScopeChains": {},
+          "currentFunctionScopeChain": null,
+          "currentFunctionName": null
+        }
+      }
+    },
+    "sourceCount": 2,
+    "modelCount": 2,
+    "nodeCount": 13,
+    "callChain": [],
+    "contextsFromMTreeBuildUpScriptAst": {
+      "currentBrickKey": "f1",
+      "mTreeBricks": {
+        "f0": {
+          "stackPath": [
+            "Program"
+          ],
+          "functions": []
+        },
+        "f1": {
+          "stackPath": [],
+          "functions": {}
+        }
+      },
+      "currentBrick": {
+        "stackPath": [],
+        "functions": {}
+      }
+    }
+  },
+  "frontMatter": {},
+  "documentFragments": [],
+  "nodes": [
+    {
+      "n": "alpha",
+      "v": "",
+      "i": 5,
+      "r": 1,
+      "c": 1,
+      "s": "f1",
+      "u": "f1",
+      "parent": null,
+      "children": [
+        {
+          "n": "beta",
+          "v": "",
+          "i": 6,
+          "r": 2,
+          "c": 5,
+          "s": "f1",
+          "u": "f1",
+          "parent": "[Circular ~.nodes.0]",
+          "children": [
+            {
+              "n": "gamma",
+              "v": "",
+              "i": 12,
+              "r": 1,
+              "c": 1,
+              "s": "f2",
+              "u": "f2",
+              "parent": "[Circular ~.nodes.0.children.0]",
+              "children": [
+                {
+                  "n": "var",
+                  "v": "tau_stefi = 60",
+                  "i": 13,
+                  "r": 3,
+                  "c": 5,
+                  "s": "f2",
+                  "u": "f2",
+                  "parent": "[Circular ~.nodes.0.children.0.children.0]",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "n": "gamma",
+              "v": "",
+              "i": 12,
+              "r": 1,
+              "c": 1,
+              "s": "f2",
+              "u": "f2",
+              "parent": "[Circular ~.nodes.0.children.0]",
+              "children": [
+                {
+                  "n": "var",
+                  "v": "tau_annie = 59",
+                  "i": 13,
+                  "r": 3,
+                  "c": 5,
+                  "s": "f2",
+                  "u": "f2",
+                  "parent": "[Circular ~.nodes.0.children.0.children.1]",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "n": "gamma",
+              "v": "",
+              "i": 12,
+              "r": 1,
+              "c": 1,
+              "s": "f2",
+              "u": "f2",
+              "parent": "[Circular ~.nodes.0.children.0]",
+              "children": [
+                {
+                  "n": "var",
+                  "v": "tau_afro = 98",
+                  "i": 13,
+                  "r": 3,
+                  "c": 5,
+                  "s": "f2",
+                  "u": "f2",
+                  "parent": "[Circular ~.nodes.0.children.0.children.2]",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceKey": "f1",
+  "brickKey": "f1",
+  "$schema": "tests",
+  "mixed": true,
+  "data": {
+    "createdAt": "18/12/2024:13:43:24"
+  }
+}

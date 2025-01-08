@@ -1,0 +1,64 @@
+{
+    $
+        var metaBasename = "ts.nextjs";
+
+    name "wizzi.meta.${metaBasename}"
+    npnName "@wizzi/meta.${metaBasename}"
+    description "Wizzi meta plugin for creating wizzi typescript nextjs packages"
+    version "0.0.1"
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        copy "copy 2023"
+
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            "html"
+            "ittf"
+            "js"
+            "json"
+            "md"
+            "text"
+            "wzjob"
+
+    metaNamespace "${metaBasename}"
+
+    usePackageVersion true
+
+    params/use( commonsGit
+    params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziMeta
+    params/use( wizziFactory
+        [ plugins
+
+    [ globals
+        {
+            name "___"
+            value "___"
+
+    { App
+        name "Wizzi ${metaBasename} meta plugin"
+        kind "WizziMeta"
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+        *$
+
+    [ Productions
+        {
+            name "tsNextjsBasicApp"
+            isPackageMain true
+        {
+            name "tsNextjsBlog"
