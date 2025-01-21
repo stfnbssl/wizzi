@@ -59,23 +59,16 @@ $group
                 if configInstance.plugins && configInstance.plugins.length > 0
                     set x_pluginsItems = configInstance.plugins
                 else
-                    $if metaCtx.useWizziV08
-                        # TODO
-                        _ x_pluginsItems.push('@wizzi/plugin.js')
-                    $else
-                        _ x_pluginsItems.push('wizzi-core')
-                        _ x_pluginsItems.push('wizzi-js')
-                        _ x_pluginsItems.push('wizzi-web')
+                    # TODO
+                    _ x_pluginsItems.push('@wizzi/plugin.js')
                     _ chalk.red
                         @ 'wizzi-cli.generate - plugins not found in wizzi.config'
-                    _ chalk.red
-                        @ 'wizzi-cli.generate - using default plugins: "wizzi-core", "wizzi-js", "wizzi-web"'
 
                 _ wizzi.executeWizziJob
                     { 
                         @ storeKind 'filesystem'
                         { config
-                            @ wfBaseFolder __dirname
+                            @ wzBaseFolder __dirname
                             @ plugins x_pluginsItems
                             @ pluginsBaseFolder x_pluginsBaseFolder
                         { job
@@ -110,7 +103,7 @@ $group
 
             function generateSchemas
                 param schemasToGen
-                param wfJobFolder
+                param wzJobFolder
                 param destPath
                 param packageName
                 param plugins
@@ -129,9 +122,9 @@ $group
                         _ wizzi.generateWizziModelTypes
                             { 
                                 @ configOptions options
-                                { wfschema
+                                { wzschema
                                     @ name schemaName
-                                    @ ittfDocumentUri path.join(wfJobFolder, 'lib', 'wizzi', 'schemas', schemaName + '.wzschema.ittf')
+                                    @ ittfDocumentUri path.join(wzJobFolder, 'lib', 'wizzi', 'schemas', schemaName + '.wzschema.ittf')
                                     @ outputPackageFolder destPath
                             function 
                                 param err

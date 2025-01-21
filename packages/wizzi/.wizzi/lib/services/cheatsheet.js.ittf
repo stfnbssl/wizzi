@@ -359,7 +359,7 @@ module wizzi@${wzCtx.version}.cheatsheet
                     _ sb.join('')
         else
             _ sb.push
-                @ new Array(indent).join(' ')
+                @ new Array(indent+1).join(' ')
             _ sb.push
                 @ ittf.v + '\n'
             foreach item in ittf.children

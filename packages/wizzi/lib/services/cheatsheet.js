@@ -2,7 +2,7 @@
     artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
     package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\cheatsheet.js.ittf
-    utc time: Thu, 02 Jan 2025 12:51:28 GMT
+    utc time: Tue, 21 Jan 2025 14:15:35 GMT
 */
 
 const stringify = require('json-stringify-safe');
@@ -391,7 +391,7 @@ function buildExpected(ittf, sb, indent) {
     }
     // to avoid ts error
     else {
-        sb.push(new Array(indent).join(' '))
+        sb.push(new Array(indent+1).join(' '))
         sb.push(ittf.v + '\n')
         var i, i_items=ittf.children, i_len=ittf.children.length, item;
         for (i=0; i<i_len; i++) {

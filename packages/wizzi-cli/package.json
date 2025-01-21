@@ -32,16 +32,16 @@
         "minimist": "^1.2.0",
         "memfs": "latest",
         "node-fetch": "^2.0.0",
-        "@wizzi/factory": "0.8.44",
+        "@wizzi/factory": "0.8.45",
         "@wizzi/utils": "0.8.25",
-        "@wizzi/plugin.css": "",
-        "@wizzi/plugin.html": "",
-        "@wizzi/plugin.ittf": "",
-        "@wizzi/plugin.js": "",
-        "@wizzi/plugin.json": "",
-        "@wizzi/plugin.md": "",
-        "@wizzi/plugin.text": "",
-        "@wizzi/plugin.wzjob": "",
-        "@wizzi/plugin.wzschema": ""
+        "@wizzi/plugin.css": "0.8.7",
+        "@wizzi/plugin.html": "0.8.9",
+        "@wizzi/plugin.ittf": "0.8.13",
+        "@wizzi/plugin.js": "0.8.9",
+        "@wizzi/plugin.json": "0.8.8",
+        "@wizzi/plugin.md": "0.8.8",
+        "@wizzi/plugin.text": "0.8.5",
+        "@wizzi/plugin.wzjob": "0.8.4",
+        "@wizzi/plugin.wzschema": "0.8.3"
     }
 }

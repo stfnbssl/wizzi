@@ -1,2 +1,2 @@
 { 
-   $include wizziPlugin/root/package.json
+   $include commonsPackage/root/package.json

@@ -1,0 +1,1 @@
+New-Item -ItemType HardLink -Path C:\My\wizzi\stfnbssl\wizzi\packages\t\plugin_versions.ittf -Target  C:\My\wizzi\stfnbssl\wizzi.plugins\packages\t\versions.ittf

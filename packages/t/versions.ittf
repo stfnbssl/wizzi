@@ -10,9 +10,12 @@ $group
         versions['@wizzi/mtree@next'] = '0.8.33';
         versions['@wizzi/repo'] = '0.8.24';
         versions['@wizzi/repo@next'] = '0.8.25';
-        versions['@wizzi/factory'] = '0.8.44';
-        versions['@wizzi/factory@next'] = '0.8.45';
+        versions['@wizzi/factory'] = '0.8.45';
+        versions['@wizzi/factory@next'] = '0.8.46';
+        versions['wizzi-cli'] = '0.0.29';
+        versions['wizzi-cli@next'] = '0.0.30';
         
+        // OLD
         versions['isomorphic-git'] = '1.19.2';
         versions['wizzi-js'] = '0.7.13';
         versions['wizzi-js@next'] = '0.8.1';
@@ -24,8 +27,6 @@ $group
         versions['wizzi-meta@next'] = '0.8.1';
         versions['wizzi-tools'] = '0.7.7';
         versions['wizzi-tools@next'] = '0.8.1';
-        versions['wizzi-cli'] = '0.0.29';
-        versions['wizzi-cli@next'] = '0.0.30';
         versions['wizzi-demo'] = '0.4.5';
         versions['wizzi-demo@next'] = '0.8.1';
         versions['wizzi-lab'] = '0.0.0';

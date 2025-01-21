@@ -88,7 +88,6 @@ $group
                     @ sb
                     @ child
                     @ 0
-            $$ loog 'meta.processIttfFile', outputPath, sb.join('\n')
             _ fileService.write
                 @ outputPath
                 _ sb.join
@@ -99,9 +98,8 @@ $group
             param sb
             param node
             param indent
-            $$ loognew Array(indent).join(' ') + node.name + ' ' + node.value
             _ sb.push
-                @ new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value)
+                @ new Array(indent+1).join(' ') + decode(node.name) + ' ' + decode(node.value)
             foreach child in node.children
                 _ processIttfContent
                     @ sb
@@ -116,7 +114,6 @@ $group
                 _ path.join
                     @ baseDestFolder
                     @ node.value
-            $$ loog 'meta.processPlainFile', outputPath
             if node.children.length == 1 && node.children[0].name == '$from'
                 _ fileService.read
                     @ packiFilePrefix + node.children[0].value 

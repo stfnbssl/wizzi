@@ -2,7 +2,7 @@
     artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
     package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\wizziFactory.js.ittf
-    utc time: Thu, 02 Jan 2025 12:51:28 GMT
+    utc time: Tue, 21 Jan 2025 14:15:35 GMT
 */
 var verify = require('@wizzi/utils').verify;
 
@@ -49,7 +49,7 @@ var myname = 'wizzi.services.wizzifactory';
 class WizziFactory {
     constructor(user, role) {
         this.__type = 'WizziFactory';
-        this.__version = '0.8.45';
+        this.__version = '0.8.46';
         this.user = user;
         this.role = role;
         this.storeKind = null;
@@ -1524,7 +1524,7 @@ class WizziFactory {
                         }
                         var artifactName = this.mapSchemaToDefaultArtifact(item.schema);
                         if (!artifactName || artifactName.length < 3) {
-                            return callback(error('999', 'generateFolderArtifacts', "Default artifact not found for schema: " + item.schema));
+                            return callback(this.error("Default artifact not found for schema: " + item.schema));
                         }
                         if (options.useMultiPartContext) {
                             callback(null, {
@@ -2539,7 +2539,7 @@ class WizziFactory {
                 }
                 // loog 'exists', exists
                 if (!exists) {
-                    return callback(error('NotFound', '_executeJob_by_path', 'Cannot find wzjob ittf document: ' + jobRequest.path));
+                    return callback(this.error('Cannot find wzjob ittf document: ' + jobRequest.path));
                 }
                 else {
                     console.log('wizzi.wizziFactory._executeJob_by_path,jobRequest.globalContext', jobRequest.globalContext);
@@ -2678,7 +2678,6 @@ class WizziFactory {
         const fileService = this.fileService;
         const that = this;
         
-        
         this.loadModel('ittf', ittfMetaFilePath, {
             mTreeBuildUpContext: context.modelRequestContext
          }, (err, metaFileModel) => {
@@ -2782,7 +2781,7 @@ class WizziFactory {
             fileService.write(outputPath, sb.join('\n'), callback)
         }
         function processIttfContent(sb, node, indent) {
-            sb.push(new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value))
+            sb.push(new Array(indent+1).join(' ') + decode(node.name) + ' ' + decode(node.value))
             var i, i_items=node.children, i_len=node.children.length, child;
             for (i=0; i<i_len; i++) {
                 child = node.children[i];
@@ -3238,7 +3237,7 @@ class WizziFactory {
             fileService.write(outputPath, sb.join('\n'), callback)
         }
         function processIttfContent(sb, node, indent) {
-            sb.push(new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value))
+            sb.push(new Array(indent+1).join(' ') + decode(node.name) + ' ' + decode(node.value))
             var i, i_items=node.children, i_len=node.children.length, child;
             for (i=0; i<i_len; i++) {
                 child = node.children[i];
@@ -3565,7 +3564,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.45.wizziFactory.' + method,
+        method: 'wizzi@0.8.46.wizziFactory.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

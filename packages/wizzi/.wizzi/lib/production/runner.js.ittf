@@ -116,7 +116,8 @@
 					@ callback
             else 
 				r_cb_error( 999, _runOnIttfDocumentProduction
-					@ 'Invalid `ittfDocumentProduction.productionActionType`. The production step is in an invalid state: ' + util.inspect(this.productionStep.getState(), {depth: 2})
+					@ 'Invalid `ittfDocumentProduction.productionActionType`. 
+						\b The production step is in an invalid state: ' + util.inspect(this.productionStep.getState(), {depth: 2})
 
 		m runWizziModelDomArtifact
             param modelInfo

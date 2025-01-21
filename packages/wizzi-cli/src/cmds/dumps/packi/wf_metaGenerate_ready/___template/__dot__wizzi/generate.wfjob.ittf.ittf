@@ -1,4 +1,4 @@
-wzjob wizzi.plugin.ai/job
+wzjob wizzi.plugin.app/job
    --- 
    ${'$'} 
        var jobCtx = {

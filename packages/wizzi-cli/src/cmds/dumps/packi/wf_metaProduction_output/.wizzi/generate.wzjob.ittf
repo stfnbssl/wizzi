@@ -1,0 +1,53 @@
+wzjob lb-audit/job
+    $
+        var jobCtx = {
+            ittf_root_folder: path.join(__dirname, 'root'),
+            ittf_models_folder: path.join(__dirname, 'models'),
+            ittf_meta_folder: path.join(__dirname, 'meta'),
+            ittf_docs_folder: path.join(__dirname, 'docs'),
+            dest_folder: path.join(__dirname, '..'),
+            job_model: 'wzCtx'
+        }
+    
+    model ${jobCtx.job_model}
+        schema json
+        src ${jobCtx.ittf_models_folder}/wzctx.json.ittf
+    
+    line ittf-models
+        cwd-folder ${jobCtx.ittf_models_folder}
+        wzjobs(any_json, &jobCtx)
+    
+    line ittf-root
+        cwd-folder ${jobCtx.ittf_root_folder}
+        dest-folder ${jobCtx.dest_folder}
+        wzjobs(any_js, &jobCtx)
+        wzjobs(any_ts, &jobCtx)
+        wzjobs(any_tsx, &jobCtx)
+        wzjobs(any_json, &jobCtx)
+        wzjobs(any_xml, &jobCtx)
+        wzjobs(any_html, &jobCtx)
+        wzjobs(any_css, &jobCtx)
+        wzjobs(any_md, &jobCtx)
+        wzjobs(any_text_no_extension, &jobCtx)
+        wzjobs(.gitignore, &jobCtx)
+    
+    line ittf-meta
+        cwd-folder ${jobCtx.ittf_meta_folder}
+        dest-folder ${jobCtx.dest_folder}
+        wzjobs(any_ittf_meta, &jobCtx)
+            $if TODO
+                model-ref xxx
+                    export-name xxx
+    line ittf-docs
+        cwd-folder ${jobCtx.ittf_docs_folder}
+        dest-folder ${jobCtx.dest_folder}/docs
+        wzjobs(any_html, &jobCtx)
+        wzjobs(any_pdf, &jobCtx)
+        wzjobs(any_docx, &jobCtx)
+        
+    production
+        dest-folder ${jobCtx.dest_folder}
+        line-ref ittf-root
+        line-ref ittf-models
+        line-ref ittf-meta
+        line-ref ittf-docs

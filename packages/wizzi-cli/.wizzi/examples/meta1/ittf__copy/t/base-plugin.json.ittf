@@ -1,0 +1,65 @@
+$group
+    $params &md
+
+    name "wizzi.plugin.${md.name}"
+    $if md.npnName
+        npmame "${md.npnName}"
+    $else
+        npmName "@wizzi/plugin.${md.name}"
+    $if md.description
+        description "${md.description}"
+    $else
+        description "Wizzi plugin for ${md.title}"
+    $if md.version
+        version "${md.version}"
+    $else
+        version "0.0.1"
+    usePackageVersion true        
+    { author
+        name "Stefano Bassoli"
+        email "stfn.bssl@gmail.com"
+    { license
+        type "MIT"
+        url "https://github.com/stfnbssl/wizzi.plugins/tree/main/packages/wizzi.plugin.${md.name}/license.text"
+        copy "copy 2024"
+    { github
+        userid "stfnbssl"
+    
+    useWizziV08 true
+    { wizziV08
+        [ plugins
+            "css"
+            $$ "docx"
+            $$ "graphql"
+            "html"
+            "ittf"
+            "js"
+            $$ "ts"
+            "json"
+            "md"
+            $$ "pandoc"            
+            $$ "pdf"
+            $$ "ppt"
+            "text"
+            "svg"
+            "wzjob"
+            "wzschema"
+            $$ "xml"
+            $$ "yaml"
+
+    { App
+        name "${md.title} plugin"
+        kind "WizziPlugin"
+
+    { Package
+        name "wizzi.plugin.${md.title}"
+        description "${md.title} plugin"
+        kind "WizziPlugin"
+
+    params/use( commonsGit
+    $$ VIA params/use( commonsPackage
+    params/use( commonsWizzi
+    params/use( jsCommons
+    params/use( wizziPlugin
+    params/use( wizziFactory
+        [ plugins

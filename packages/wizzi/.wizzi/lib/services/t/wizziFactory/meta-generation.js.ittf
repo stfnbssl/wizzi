@@ -49,16 +49,12 @@ $group
         const fileService = this.fileService
         const that = this
         +
-        $$ loog 'metaGenerate.context',  context
-        +
         _ this.loadModel
             @ 'ittf'
             @ ittfMetaFilePath
             {
                 @ mTreeBuildUpContext context.modelRequestContext
             a_cb( metaFileModel )
-                $$ loog "Object.keys(metaFileModel)", Object.keys(metaFileModel)
-                $$ loog "metaFileModel.children.length", metaFileModel.children.length
                 var f_count = 0
                 iife next
                     var child = metaFileModel.children[f_count++]
@@ -94,10 +90,6 @@ $group
                                                 return 
                                                     _ callback(err)
                                             r_cb( result )
-                                        $$ @ callback
-
-                    $$ loog "Object.keys(child)", Object.keys(child)
-                    $$ loog 'child', child.name, child.value
                     if child.name == '$file'
                         try
                             _ processIttfFile
@@ -141,7 +133,6 @@ $group
                     @ sb
                     @ child
                     @ 0
-            $$ loog 'meta.processIttfFile', outputPath, sb.join('\n')
             _ fileService.write
                 @ outputPath
                 _ sb.join
@@ -152,9 +143,8 @@ $group
             param sb
             param node
             param indent
-            $$ loognew Array(indent).join(' ') + node.name + ' ' + node.value
             _ sb.push
-                @ new Array(indent).join(' ') + decode(node.name) + ' ' + decode(node.value)
+                @ new Array(indent+1).join(' ') + decode(node.name) + ' ' + decode(node.value)
             foreach child in node.children
                 _ processIttfContent
                     @ sb
@@ -169,7 +159,6 @@ $group
                 _ path.join
                     @ tempFolder
                     @ node.value
-            $$ loog 'meta.processPlainFile', outputPath
             if node.children.length == 1 && node.children[0].name == '$from'
                 _ fileService.read
                     @ packiFilePrefix + node.children[0].value 

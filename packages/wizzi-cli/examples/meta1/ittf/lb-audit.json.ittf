@@ -1,0 +1,19 @@
+{
+    
+    $
+        var md = {
+            name: "lb-audit",
+            title: "Logbot audit",
+            useWzJob: true,
+            useWzCtx: true,
+            useMeta: true,
+            useDocs: true,
+        }
+
+    base-package( &md )
+
+    { App
+        name "${md.name}"
+        title "${md.title}"
+
+    params/use( commonsPackage

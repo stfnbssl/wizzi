@@ -4,10 +4,10 @@ $group
         ${'$'}{'$'}group
                 ${'$'}include commonsWizzi/tfolder/versions
 
-    $file __dot__wizzi/t/wfjobs.ittf.ittf
+    $file __dot__wizzi/t/wzjobs.ittf.ittf
         ${'$'}{'$'}group
             ${'$'}{'$'}params name, &jobCtx, ext|@@null
-                ${'$'}include commonsWizzi/tfolder/wfjobs
+                ${'$'}include commonsWizzi/tfolder/wzjobs
 
     $file __dot__wizzi/t/set-ctx-functions.ittf.ittf
         ${'$'}{'$'}group

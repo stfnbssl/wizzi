@@ -1,0 +1,73 @@
+{
+    $include versions
+    $include plugin_versions
+    $
+        var md = {
+            name: "app",
+            description: "App lab"
+        }
+    
+    base-plugin( &md )
+
+    [ globals
+        $*
+        {
+            name "___"
+            value "___"
+            type "string"
+        *$
+
+    [ BuildVars
+        $*
+        {
+            name "___"
+            value "___"
+            type "string"
+        *$
+
+    [ Schemas
+        {
+            name "${md.name}"
+            plugin_type "data"
+            hasNamespaces false
+            hasTextContents false
+            multiLineCommentBegin false
+            multiLineCommentEnd false
+            hasWizzifier false
+            hasCheatsheetFolder false
+            isForBinaryFile false
+            [ includes
+                $if TODO
+                    {
+                        Name "Js"
+                        name "js"
+                        version "${versions['@wizzi/plugin.js']}"
+                        artifactName "js/module"
+                        [ options
+                        [ items
+                            {
+                                name "js"
+                                parent "item"
+                                tag "::js"
+                                root "module"
+                {
+                    Name "Json"
+                    name "json"
+                    version "${versions['@wizzi/plugin.json']}"
+                    artifactName "json/document"
+                    [ options
+                    [ items
+                        {
+                            name "json"
+                            parent "item"
+                            tag "::json"
+                            root "{"
+            [ transformers
+            [ artifacts
+                {
+                    name "document"
+                    outmime "${md.name}"
+                    contentType "text/html"
+                    isDefault true
+            [ fileExtensions
+                "${md.name}"

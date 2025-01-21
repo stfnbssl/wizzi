@@ -1,5 +1,6 @@
 ﻿{
     $include versions
+	$include plugin_versions
 	name "@wizzi/cli"
     version '${wzCtx.version}'
 	author

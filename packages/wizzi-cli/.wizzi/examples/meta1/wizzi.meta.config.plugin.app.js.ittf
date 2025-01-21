@@ -1,0 +1,9 @@
+module
+    kind es6
+
+    $
+        var md = {
+            name: 'app'
+        };
+
+    base-meta-plugin-config( &md )

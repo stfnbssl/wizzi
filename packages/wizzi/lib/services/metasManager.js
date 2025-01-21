@@ -2,7 +2,7 @@
     artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
     package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\lib\services\metasManager.js.ittf
-    utc time: Thu, 02 Jan 2025 12:51:28 GMT
+    utc time: Tue, 21 Jan 2025 14:15:35 GMT
 */
 var verify = require('@wizzi/utils').verify;
 const path = require('path');
@@ -37,7 +37,7 @@ const {
 class MetasManager {
     constructor() {
         this.__type = 'MetasManager';
-        this.__version = '0.8.45';
+        this.__version = '0.8.46';
         this.packagePathCache = {};
         this.metaPlugins = [];
         this.providedProductions = [];
@@ -782,7 +782,7 @@ function error(code, method, message, innerError) {
     }
     return verify.error(innerError, {
         name: ( verify.isNumber(code) ? 'Err-' + code : code ),
-        method: 'wizzi@0.8.45.metasManager.' + method,
+        method: 'wizzi@0.8.46.metasManager.' + method,
         parameter: parameter,
         sourcePath: __filename
     }, message || 'Error message unavailable');

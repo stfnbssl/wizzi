@@ -2,32 +2,16 @@ $group
     $file wizzi.config.override.js.ittf
         module
             kind es6
-            ${'$'}
-                var development = true;
             const path = require('path')
             set module.exports
                 { 
                     @ wzjobName "${'$'}{metaCtx.name}-override/job"
-                    @ wzjobPath path.join(__dirname, '.wizzi-override', 'generate.wfjob.ittf')
+                    @ wzjobPath path.join(__dirname, '.wizzi-override', 'generate.wzjob.ittf')
                     @ destPath __dirname
-                    ${'$'}if development
-                        [ plugins
-                            $if metaCtx.useWizziV08
-                                $foreach item in metaCtx.wizziV08.plugins
-                                    @ "./wizzi.plugin.${item}/index.js" 
-                            $else
-                                @ './wizzi-core/index.js' 
-                                @ './wizzi-js/index.js' 
-                                @ './wizzi-web/index.js' 
-                        $if metaCtx.useWizziV08
-                            @ pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
-                        $else
-                            @ pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.v07/packages"
-                    ${'$'}else
-                        [ plugins
-                            @ 'wizzi-core'
-                            @ 'wizzi-js'
-                            @ 'wizzi-web'
+                    [ plugins
+                        $foreach item in metaCtx.wizziV08.plugins
+                            @ "./wizzi.plugin.${item}/index.js" 
+                    @ pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
                     [ schemas
                         $if metaCtx.Schemas
                             $foreach schema in metaCtx.Schemas

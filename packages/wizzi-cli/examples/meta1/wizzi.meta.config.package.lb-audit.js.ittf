@@ -1,0 +1,10 @@
+module
+    kind es6
+
+    $
+        var md = {
+            name: 'lb-audit',
+            outputPath: 'C:/My/wizzi/stfnbssl/lavori/logbot-cybersecurity/packages/lb-audit'
+        };
+
+    base-meta-package-config( &md )

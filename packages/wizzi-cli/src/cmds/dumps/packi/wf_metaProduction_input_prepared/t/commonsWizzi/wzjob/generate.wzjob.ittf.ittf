@@ -1,0 +1,120 @@
+$group
+    ${'$'}
+        var jobCtx = {
+            ittf_root_folder: path.join(__dirname, 'root'),
+            $if metaCtx.commonsWizzi.useWzCtx
+                ittf_models_folder: path.join(__dirname, 'models'),
+            $if metaCtx.commonsWizzi.wzJob.useMeta
+                ittf_meta_folder: path.join(__dirname, 'meta'),
+            $if metaCtx.commonsWizzi.wzJob.useSrc
+                ittf_src_folder: path.join(__dirname, 'src'),
+            $if metaCtx.commonsWizzi.wzJob.useDocs
+                ittf_docs_folder: path.join(__dirname, 'docs'),
+            $if metaCtx.commonsWizzi.wzJob.usePublic
+                ittf_public_folder: path.join(__dirname, 'public'),
+            dest_folder: path.join(__dirname, '..'),
+            job_model: 'wzCtx'
+        }
+    ---
+    $if metaCtx.commonsWizzi.useWzCtx    
+        model ${'$'}{jobCtx.job_model}
+            schema json
+            src ${'$'}{jobCtx.ittf_models_folder}/wzctx.json.ittf
+        ---
+        line ittf-models
+            cwd-folder ${'$'}{jobCtx.ittf_models_folder}
+            wzjobs${'('}any_json, &jobCtx)
+        ---
+    line ittf-root
+        cwd-folder ${'$'}{jobCtx.ittf_root_folder}
+        dest-folder ${'$'}{jobCtx.dest_folder}
+
+        wzjobs${'('}any_js, &jobCtx)
+        wzjobs${'('}any_ts, &jobCtx)
+        wzjobs${'('}any_tsx, &jobCtx)
+        wzjobs${'('}any_json, &jobCtx)
+        wzjobs${'('}any_xml, &jobCtx)
+        wzjobs${'('}any_html, &jobCtx)
+        wzjobs${'('}any_css, &jobCtx)
+        wzjobs${'('}any_md, &jobCtx)
+        wzjobs${'('}any_text_no_extension, &jobCtx)
+        wzjobs${'('}.gitignore, &jobCtx)
+        $if metaCtx.useCommonsEslint
+            $if false
+                wzjobs${'('}.eslintrc, &jobCtx)
+                wzjobs${'('}.eslintignore, &jobCtx)
+            $else
+                wzjobs${'('}.eslintrc.cjs, &jobCtx)
+                wzjobs${'('}.eslintignore.cjs, &jobCtx)
+        $if metaCtx.useCommonsPrettier
+            wzjobs${'('}.prettierrc, &jobCtx)
+            wzjobs${'('}.prettierignore, &jobCtx)
+    ---
+    $if metaCtx.commonsWizzi.wzJob.useMeta
+        line ittf-meta
+            cwd-folder ${'$'}{jobCtx.ittf_meta_folder}
+            dest-folder ${'$'}{jobCtx.dest_folder}
+
+            wzjobs${'('}any_ittf_meta, &jobCtx)
+                ${'$'}if TODO
+                    model-ref xxx
+                        export-name xxx
+
+    $if metaCtx.commonsWizzi.wzJob.useSrc
+        line ittf-src
+            cwd-folder ${'$'}{jobCtx.ittf_src_folder}
+            dest-folder ${'$'}{jobCtx.dest_folder}/src
+
+            wzjobs${'('}any_js, &jobCtx)
+            wzjobs${'('}any_ts, &jobCtx)
+            wzjobs${'('}any_tsx, &jobCtx)
+            wzjobs${'('}any_css, &jobCtx)
+            wzjobs${'('}any_svg, &jobCtx)
+            wzjobs${'('}any_json, &jobCtx)
+            wzjobs${'('}any_md, &jobCtx)
+            wzjobs${'('}any_plain, &jobCtx, js)
+            wzjobs${'('}any_plain, &jobCtx, d.ts)
+            wzjobs${'('}any_plain, &jobCtx, html)
+            wzjobs${'('}any_plain, &jobCtx, css)
+            wzjobs${'('}any_plain, &jobCtx, svg)
+            wzjobs${'('}any_plain_image, &jobCtx)
+            ---   
+    $if metaCtx.commonsWizzi.wzJob.useDocs
+        line ittf-docs
+            cwd-folder ${'$'}{jobCtx.ittf_docs_folder}
+            dest-folder ${'$'}{jobCtx.dest_folder}/docs
+
+            wzjobs${'('}any_html, &jobCtx)
+            wzjobs${'('}any_pdf, &jobCtx)
+            wzjobs${'('}any_docx, &jobCtx)
+            ---   
+    
+    $if metaCtx.commonsWizzi.wzJob.usePublic        
+        line ittf-public
+            cwd-folder ${'$'}{jobCtx.ittf_public_folder}
+            dest-folder ${'$'}{jobCtx.dest_folder}/public
+
+            wzjobs${'('}any_html, &jobCtx)
+            wzjobs${'('}any_js, &jobCtx)
+            wzjobs${'('}any_css, &jobCtx)
+            wzjobs${'('}any_svg, &jobCtx)
+            wzjobs${'('}any_json, &jobCtx)
+            wzjobs${'('}any_plain, &jobCtx, html)
+            wzjobs${'('}any_plain, &jobCtx, js)
+            wzjobs${'('}any_plain, &jobCtx, css)
+            wzjobs${'('}any_plain, &jobCtx, svg)
+            wzjobs${'('}any_plain, &jobCtx, json)
+        ---
+    production
+        dest-folder ${'$'}{jobCtx.dest_folder}
+        line-ref ittf-root
+        $if metaCtx.commonsWizzi.useWzCtx
+            line-ref ittf-models
+        $if metaCtx.commonsWizzi.wzJob.useMeta
+            line-ref ittf-meta
+        $if metaCtx.commonsWizzi.wzJob.useSrc
+            line-ref ittf-src
+        $if metaCtx.commonsWizzi.wzJob.useDocs
+            line-ref ittf-docs
+        $if metaCtx.commonsWizzi.wzJob.usePublic
+            line-ref ittf-public

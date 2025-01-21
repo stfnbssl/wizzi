@@ -2,7 +2,7 @@
     artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
     package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\root\index.js.ittf
-    utc time: Thu, 02 Jan 2025 12:51:28 GMT
+    utc time: Tue, 21 Jan 2025 14:15:35 GMT
 */
 var verify = require('@wizzi/utils').verify;
 var util = require('util');
@@ -21,7 +21,7 @@ var metasManager = require('./lib/services/metasManager');
 var packiManager = require('./lib/services/packiManager');
 
 var md = module.exports = {};
-md.version = "0.8.45";
+md.version = "0.8.46";
 md.file = require('@wizzi/utils').file;
 md.verify = verify;
 md.config = require('@wizzi/utils').config;

@@ -1,0 +1,2 @@
+wzjob lb-audit/job
+   $include commonsWizzi/wzjob/generate.wzjob

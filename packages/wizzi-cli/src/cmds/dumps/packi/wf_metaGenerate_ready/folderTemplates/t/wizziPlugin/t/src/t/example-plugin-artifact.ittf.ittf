@@ -13,22 +13,14 @@ $group
             [ items
                 @ './${metaCtx.name}/index.js'
                 @ './wizzi.plugin.json/index.js'
-                $if metaCtx.useWizziV08
-                    $foreach include in schema.includes
+                $foreach include in schema.includes
+                    $if include.name != 'json'
                         @ '@wizzi/plugin.${include.name}'
-                $else
-                    $foreach include in schema.includes
-                        $if include.name == "js"
-                            @ 'wizzi-js'
-                        $elif include.name == "json"
-                            @ 'wizzi-core'
-                        $elif include.name == "css"
-                            @ 'wizzi-web'
             @ pluginsBaseFolder "C:/My/wizzi/stfnbssl/wizzi.plugins/packages"
 
         let arg = process.argv[2]
         const moduleName = arg && arg.length > 0 ? arg : 'first'
-        _ getWzCtx         
+        _ getWzCtx
             _ path.resolve
                 @ __dirname
                 @ '..'

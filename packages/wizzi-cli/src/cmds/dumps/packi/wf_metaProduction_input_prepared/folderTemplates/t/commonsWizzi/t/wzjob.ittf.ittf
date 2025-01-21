@@ -1,5 +1,32 @@
 $group
 
-    $file __dot__wizzi/generate.wfjob.ittf.ittf
-        wfjob ${metaCtx.name}/job
-            ${'$'}include commonsWizzi/wzjob/generate.wfjob
+    $if metaCtx.commonsWizzi.useWzJob
+        $file __dot__wizzi/generate.wzjob.ittf.ittf
+            wzjob ${metaCtx.name}/job
+                ${'$'}include commonsWizzi/wzjob/generate.wzjob
+
+        $if metaCtx.commonsWizzi.wzJob.useMeta
+            $file __dot__wizzi/meta/example.ittf.ittf.ittf
+                ittf
+                    ${'$'}file .wizzi/docs/meta_example.html.ittf
+                        html
+                            head
+                                @title meta example
+                            body
+                                h1 Hello Meta
+        
+        $if metaCtx.commonsWizzi.wzJob.useDocs
+            $file __dot__wizzi/docs/example.html.ittf.ittf
+                html
+                    head
+                        @title example
+                    body
+                        h1 Hello
+
+        $if metaCtx.commonsWizzi.wzJob.usePublic
+            $file __dot__wizzi/public/example.html.ittf.ittf
+                html
+                    head
+                        @title example
+                    body
+                        h1 Hello                        

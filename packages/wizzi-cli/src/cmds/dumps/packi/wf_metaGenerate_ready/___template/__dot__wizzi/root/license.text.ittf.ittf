@@ -1,2 +1,2 @@
 text 
-   $include wizziPlugin/root/license.text
+   $include commonsPackage/root/license.text

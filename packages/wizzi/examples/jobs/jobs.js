@@ -2,7 +2,7 @@
     artifact generator: C:\Users\stfnb\AppData\Roaming\npm\node_modules\@wizzi\cli\node_modules\@wizzi\plugin.js\lib\artifacts\js\module\gen\main.js
     package: @wizzi/plugin.js@0.8.9
     primary source IttfDocument: C:\My\wizzi\stfnbssl\wizzi\packages\wizzi\.wizzi\examples\jobs\jobs.js.ittf
-    utc time: Thu, 02 Jan 2025 12:51:30 GMT
+    utc time: Tue, 21 Jan 2025 14:15:37 GMT
 */
 var path = require('path');
 var fs = require('fs');
@@ -34,7 +34,6 @@ function createWizziFactory(globalContext, callback) {
 function loadMTree(ittfDocumentUri, context, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
-            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadMTree(ittfDocumentUri, context, callback)
@@ -44,7 +43,6 @@ function loadWizziModel(ittfDocumentUri, context, callback) {
     var fi = fileInfoByPath(ittfDocumentUri);
     createWizziFactory({}, function(err, wf) {
         if (err) {
-            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadModel(fi.schema, ittfDocumentUri, {
@@ -57,7 +55,6 @@ function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, ca
     var fi = fileInfoByPath(ittfDocumentUri);
     createWizziFactory({}, function(err, wf) {
         if (err) {
-            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.loadModelAndGenerateArtifact(ittfDocumentUri, {
@@ -69,7 +66,6 @@ function loadModelAndGenerateArtifact(ittfDocumentUri, context, artifactName, ca
 function executeWizziJob(ittfDocumentUri, context, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
-            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.executeJob({
@@ -88,7 +84,6 @@ function executeWizziJob(ittfDocumentUri, context, callback) {
 function executegenerateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback) {
     createWizziFactory({}, function(err, wf) {
         if (err) {
-            console.log("[31m%s[0m", err);
             return callback(err);
         }
         wf.generateModelDoms(wfschemaIttfDocumentUri, outputPackagePath, wfschemaName, mTreeBuildUpContext, callback)

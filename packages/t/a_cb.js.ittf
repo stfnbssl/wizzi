@@ -1,0 +1,12 @@
+﻿$group
+	$params result|notUsed
+
+	=>
+		param err
+		param ${result}
+		if err
+			error err
+			return
+				_ callback
+					@ err
+		$hook
