@@ -1,3 +1,0 @@
-${'$'}group 
-   ${'$'}params name, &jobCtx, ext|@@null
-       $include commonsWizzi/tfolder/wfjobs

@@ -1,7 +1,0 @@
-template root
-    $
-        var pkgPath = ''
-        var metaVer = '0_0_1'
-    $include ./commonsGit/index
-    $include ./commonsPackage/index
-    $include ./commonsWizzi/index

@@ -1,7 +1,0 @@
-ittf
-    $file .wizzi/docs/meta_example.html.ittf
-        html
-            head
-                @title meta example
-            body
-                h1 Hello Meta

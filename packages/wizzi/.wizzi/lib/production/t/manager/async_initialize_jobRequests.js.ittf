@@ -51,7 +51,7 @@
                                 _ pman.addGlobalModelRequest(globalModelInfoConfig)
 
                             foreach productionStepConfig in result.productionStepConfigs
-								log 'wizzi.production.asyncInitializeJobRequests.productionStepConfig', util.inspect(productionStepConfig, { depth: 2 })
+								# loog 'wizzi.production.asyncInitializeJobRequests.productionStepConfig', util.inspect(productionStepConfig, { depth: 2 })
 								set productionStepConfig.wzjob = wzjobIttfDocumentUri
 								if pman.options.trace
 									info 'ProductionManager.initialize.productionStepConfig', productionStepConfig.toString()

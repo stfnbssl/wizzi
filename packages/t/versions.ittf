@@ -1,4 +1,8 @@
 $group
+    $$ Hardlinked to C:\My\wizzi\stfnbssl\wizzi\packages\t\versions.ittf
+    $$ To be linked with
+    $$ New-Item -ItemType HardLink -Path "C:\My\wizzi\stfnbssl\<folder>\packages\t\versions.ittf" -Target "C:\My\wizzi\stfnbssl\wizzi\packages\t\versions.ittf"       
+
     $
         var versions = {};
         // C:\My\wizzi\stfnbssl\wizzi\packages\t\versions.ittf
@@ -10,10 +14,10 @@ $group
         versions['@wizzi/mtree@next'] = '0.8.33';
         versions['@wizzi/repo'] = '0.8.24';
         versions['@wizzi/repo@next'] = '0.8.25';
-        versions['@wizzi/factory'] = '0.8.45';
-        versions['@wizzi/factory@next'] = '0.8.46';
-        versions['wizzi-cli'] = '0.0.29';
-        versions['wizzi-cli@next'] = '0.0.30';
+        versions['@wizzi/factory'] = '0.8.46';
+        versions['@wizzi/factory@next'] = '0.8.47';
+        versions['@wizzi/cli'] = '0.8.10';
+        versions['@wizzi/cli@next'] = '0.8.11';        
         
         // OLD
         versions['isomorphic-git'] = '1.19.2';

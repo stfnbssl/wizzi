@@ -1,7 +1,0 @@
-$group
-    
-    e rect : node
-        a x
-        a y
-        a width
-        a height

@@ -1,6 +1,6 @@
 {
     "name": "@wizzi/cli",
-    "version": "",
+    "version": "0.8.11",
     "author": {
         "name": "Stefano Bassoli",
         "email": "stfn.bssl@gmail.com"
@@ -32,7 +32,7 @@
         "minimist": "^1.2.0",
         "memfs": "latest",
         "node-fetch": "^2.0.0",
-        "@wizzi/factory": "0.8.45",
+        "@wizzi/factory": "0.8.46",
         "@wizzi/utils": "0.8.25",
         "@wizzi/plugin.css": "0.8.7",
         "@wizzi/plugin.html": "0.8.9",

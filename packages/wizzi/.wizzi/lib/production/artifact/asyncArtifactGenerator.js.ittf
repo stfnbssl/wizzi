@@ -203,7 +203,7 @@
                                 @ generatingPath + ' generation did not termitate'
                     var gNum = ++g_generationsCheckCounter
                     set g_generationsCheck['timer' + gNum]
-                        _ setTimeout(checkCallback, 4000)
+                        _ setTimeout(checkCallback, 120000)
 
                     new genInfo.generator.gen
                         @ genInfo.mainSourceModel

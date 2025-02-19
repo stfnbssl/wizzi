@@ -189,6 +189,7 @@ var Runner = (function () {
                         console.log("[31m%s[0m", err);
                         return callback(err);
                     }
+                    console.log(1, modelInfo.toString())
                     AsyncModelLoader.loadMany(modelInfos, (err, mainSourceModelsOfModelCollection) => {
                         if (err) {
                             console.log("[31m%s[0m", err);
@@ -196,9 +197,11 @@ var Runner = (function () {
                         }
                         var doRunSourceModels = (ndxSourceModels) => {
                             var sourceModel = mainSourceModelsOfModelCollection[ndxSourceModels];
+                            
                             if (!sourceModel) {
                                 return doRun(ndx + 1);
                             }
+                            console.log(2, sourceModel.toString())
                             var wf = this.productionStep.getWizziFactory();
                             wf.ittfModelToFolder(sourceModel, {
                                 baseDestFolder: ""

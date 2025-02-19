@@ -1,4 +1,0 @@
-$group
-    $file t/wizzi/globals/defaultMimeTypes.js.ittf.ittf
-       ${'$'}group
-           ${'$'}include wizziMeta/tfolder/wizzi/globals/defaultMimeTypes.js
